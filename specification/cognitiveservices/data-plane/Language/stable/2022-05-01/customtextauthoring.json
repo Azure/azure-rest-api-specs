@@ -53,7 +53,7 @@
           "200": {
             "description": "The metadata of projects.",
             "schema": {
-              "$ref": "#/definitions/ProjectsMetadata"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectsMetadata"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
             "description": "The project parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions"
             }
           },
           {
@@ -105,13 +105,13 @@
           "200": {
             "description": "The metadata of the updated project, if it already exists.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
             }
           },
           "201": {
             "description": "The metadata of the created project.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -145,7 +145,7 @@
           "200": {
             "description": "The metadata of the project.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "$ref": "#/parameters/StringIndexTypeInQuery"
+            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeInQuery"
           },
           {
             "in": "query",
@@ -275,7 +275,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportedProject"
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedProject"
             }
           },
           {
@@ -327,7 +327,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
             }
           },
           {
@@ -387,7 +387,7 @@
           "200": {
             "description": "List of all deployments.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployments"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployments"
             }
           },
           "default": {
@@ -428,7 +428,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
             }
           },
           {
@@ -482,7 +482,7 @@
           "200": {
             "description": "The Deployment info.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployment"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -520,7 +520,7 @@
             "description": "The new deployment info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateDeploymentOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringCreateDeploymentOptions"
             }
           },
           {
@@ -622,7 +622,7 @@
           "200": {
             "description": "The deployment job result.",
             "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
             }
           },
           "default": {
@@ -665,7 +665,7 @@
           "200": {
             "description": "The swap deployment job result.",
             "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
             }
           },
           "default": {
@@ -708,7 +708,7 @@
           "200": {
             "description": "The status of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/ExportProjectJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringExportProjectJobState"
             }
           },
           "default": {
@@ -751,7 +751,7 @@
           "200": {
             "description": "The details of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/ImportProjectJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringImportProjectJobState"
             }
           },
           "default": {
@@ -796,7 +796,7 @@
           "200": {
             "description": "List of all trained models.",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModels"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModels"
             }
           },
           "default": {
@@ -843,7 +843,7 @@
           "200": {
             "description": "Trained model info",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModel"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -917,7 +917,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/StringIndexTypeInQuery"
+            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeInQuery"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -936,7 +936,7 @@
           "200": {
             "description": "List of the evaluation results.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResults"
+              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationResults"
             }
           },
           "default": {
@@ -983,7 +983,7 @@
           "200": {
             "description": "List of all evaluation results.",
             "schema": {
-              "$ref": "#/definitions/EvaluationSummary"
+              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
             }
           },
           "default": {
@@ -1028,7 +1028,7 @@
           "200": {
             "description": "List of the training jobs.",
             "schema": {
-              "$ref": "#/definitions/TrainingJobs"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobs"
             }
           },
           "default": {
@@ -1075,7 +1075,7 @@
           "200": {
             "description": "The training job result.",
             "schema": {
-              "$ref": "#/definitions/TrainingJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
             }
           },
           "default": {
@@ -1155,7 +1155,7 @@
           "200": {
             "description": "The project deletion job result.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeletionJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeletionJobState"
             }
           },
           "default": {
@@ -1197,7 +1197,7 @@
           "200": {
             "description": "The list of supported languages.",
             "schema": {
-              "$ref": "#/definitions/SupportedLanguages"
+              "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguages"
             }
           },
           "default": {
@@ -1227,7 +1227,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectKindInQuery"
+            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindInQuery"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -1246,7 +1246,7 @@
           "200": {
             "description": "List of all trained models.",
             "schema": {
-              "$ref": "#/definitions/TrainingConfigVersions"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersions"
             }
           },
           "default": {
@@ -1269,7 +1269,14 @@
     }
   },
   "definitions": {
-    "ConfusionMatrix": {
+    "TextAnalysisAuthoringConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
+      },
+      "x-ms-client-name": "ConfusionMatrix"
+    },
+    "TextAnalysisAuthoringConfusionMatrixEntry": {
       "required": [
         "normalizedValue",
         "rawValue"
@@ -1286,9 +1293,17 @@
           "description": "Represents raw value.",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "ConfusionMatrixEntry"
     },
-    "CreateDeploymentOptions": {
+    "TextAnalysisAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixEntry"
+      },
+      "x-ms-client-name": "ConfusionMatrixRow"
+    },
+    "TextAnalysisAuthoringCreateDeploymentOptions": {
       "required": [
         "trainedModelLabel"
       ],
@@ -1298,9 +1313,10 @@
           "description": "Represents the trained model label.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "CreateDeploymentOptions"
     },
-    "CreateProjectOptions": {
+    "TextAnalysisAuthoringCreateProjectOptions": {
       "required": [
         "projectKind",
         "storageInputContainerName",
@@ -1311,7 +1327,7 @@
       "properties": {
         "projectKind": {
           "description": "Gets or sets the new project model kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         },
         "storageInputContainerName": {
           "description": "Gets or sets the storage container name.",
@@ -1319,7 +1335,7 @@
         },
         "settings": {
           "description": "Gets or sets the project settings.",
-          "$ref": "#/definitions/ProjectSettings"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings"
         },
         "projectName": {
           "description": "Gets or sets the new project name.",
@@ -1337,117 +1353,124 @@
           "description": "Gets or sets the project language.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "CreateProjectOptions"
     },
-    "CustomMultiLabelClassificationDocumentEvaluationPrediction": {
+    "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationPrediction": {
       "required": [
         "customMultiLabelClassificationResult"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
         }
       ],
       "properties": {
         "customMultiLabelClassificationResult": {
           "description": "Represents the evaluation prediction for multi label classification.",
-          "$ref": "#/definitions/DocumentMultiLabelClassificationEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult"
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification"
+      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-client-name": "CustomMultiLabelClassificationDocumentEvaluationPrediction"
     },
-    "CustomMultiLabelClassificationEvaluationSummary": {
+    "TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary": {
       "required": [
         "customMultiLabelClassificationEvaluation"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
         }
       ],
       "properties": {
         "customMultiLabelClassificationEvaluation": {
           "description": "Contains the data related to multi label classification evaluation.",
-          "$ref": "#/definitions/MultiLabelClassificationEvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary"
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification"
+      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-client-name": "CustomMultiLabelClassificationEvaluationSummary"
     },
-    "CustomNamedEntityRecognitionDocumentEvaluationPrediction": {
+    "TextAnalysisAuthoringCustomNamedEntityRecognitionDocumentEvaluationPrediction": {
       "required": [
         "customNamedEntityRecognitionResult"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
         }
       ],
       "properties": {
         "customNamedEntityRecognitionResult": {
           "description": "Represents the evaluation prediction for named entity recognition.",
-          "$ref": "#/definitions/DocumentNamedEntityRecognitionEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult"
         }
       },
-      "x-ms-discriminator-value": "customNamedEntityRecognition"
+      "x-ms-discriminator-value": "customNamedEntityRecognition",
+      "x-ms-client-name": "CustomNamedEntityRecognitionDocumentEvaluationPrediction"
     },
-    "CustomNamedEntityRecognitionEvaluationSummary": {
+    "TextAnalysisAuthoringCustomNamedEntityRecognitionEvaluationSummary": {
       "required": [
         "customNamedEntityRecognitionEvaluation"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
         }
       ],
       "properties": {
         "customNamedEntityRecognitionEvaluation": {
           "description": "Contains the data related to extraction evaluation.",
-          "$ref": "#/definitions/NamedEntityRecognitionEvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary"
         }
       },
-      "x-ms-discriminator-value": "customNamedEntityRecognition"
+      "x-ms-discriminator-value": "customNamedEntityRecognition",
+      "x-ms-client-name": "CustomNamedEntityRecognitionEvaluationSummary"
     },
-    "CustomSingleLabelClassificationDocumentEvaluationPrediction": {
+    "TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationPrediction": {
       "required": [
         "customSingleLabelClassificationResult"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
         }
       ],
       "properties": {
         "customSingleLabelClassificationResult": {
           "description": "Represents the evaluation prediction for single label classification.",
-          "$ref": "#/definitions/DocumentSingleLabelClassificationEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult"
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification"
+      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-client-name": "CustomSingleLabelClassificationDocumentEvaluationPrediction"
     },
-    "CustomSingleLabelClassificationEvaluationSummary": {
+    "TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary": {
       "required": [
         "customSingleLabelClassificationEvaluation"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
         }
       ],
       "properties": {
         "customSingleLabelClassificationEvaluation": {
           "description": "Contains the data related to single label classification evaluation.",
-          "$ref": "#/definitions/SingleLabelClassificationEvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary"
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification"
+      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-client-name": "CustomSingleLabelClassificationEvaluationSummary"
     },
-    "DeploymentJobState": {
+    "TextAnalysisAuthoringDeploymentJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -1478,7 +1501,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -1494,9 +1517,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "DeploymentJobState"
     },
-    "DocumentEntityLabelEvaluationResult": {
+    "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
       "required": [
         "category",
         "offset",
@@ -1518,9 +1542,10 @@
           "description": "Represents the entity length.",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "DocumentEntityLabelEvaluationResult"
     },
-    "DocumentEntityRegionEvaluationResult": {
+    "TextAnalysisAuthoringDocumentEntityRegionEvaluationResult": {
       "required": [
         "expectedEntities",
         "predictedEntities",
@@ -1533,14 +1558,14 @@
           "description": "Represents the region's expected entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
           }
         },
         "predictedEntities": {
           "description": "Represents the region's predicted entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
           }
         },
         "regionOffset": {
@@ -1553,9 +1578,10 @@
           "description": "Represents the region length.",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "DocumentEntityRegionEvaluationResult"
     },
-    "DocumentEvaluationResult": {
+    "TextAnalysisAuthoringDocumentEvaluationResult": {
       "required": [
         "location",
         "language",
@@ -1573,12 +1599,13 @@
         },
         "projectKind": {
           "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         }
       },
-      "discriminator": "projectKind"
+      "discriminator": "projectKind",
+      "x-ms-client-name": "DocumentEvaluationResult"
     },
-    "DocumentMultiLabelClassificationEvaluationResult": {
+    "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
       "required": [
         "expectedClasses",
         "predictedClasses"
@@ -1599,9 +1626,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-client-name": "DocumentMultiLabelClassificationEvaluationResult"
     },
-    "DocumentNamedEntityRecognitionEvaluationResult": {
+    "TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult": {
       "required": [
         "entities"
       ],
@@ -1611,12 +1639,13 @@
           "description": "Represents the document labelled entities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentEntityRegionEvaluationResult"
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
           }
         }
-      }
+      },
+      "x-ms-client-name": "DocumentNamedEntityRecognitionEvaluationResult"
     },
-    "DocumentSingleLabelClassificationEvaluationResult": {
+    "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "required": [
         "expectedClass",
         "predictedClass"
@@ -1631,9 +1660,10 @@
           "description": "Represents the document's predicted class.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "DocumentSingleLabelClassificationEvaluationResult"
     },
-    "EntityEvaluationSummary": {
+    "TextAnalysisAuthoringEntityEvaluationSummary": {
       "required": [
         "f1",
         "precision",
@@ -1680,9 +1710,10 @@
           "description": "Represents the count of false negative",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "EntityEvaluationSummary"
     },
-    "EvaluationKind": {
+    "TextAnalysisAuthoringEvaluationKind": {
       "enum": [
         "percentage",
         "manual"
@@ -1691,14 +1722,15 @@
       "x-ms-enum": {
         "name": "EvaluationKind",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "EvaluationKind"
     },
-    "EvaluationOptions": {
+    "TextAnalysisAuthoringEvaluationOptions": {
       "type": "object",
       "properties": {
         "kind": {
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
-          "$ref": "#/definitions/EvaluationKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationKind"
         },
         "trainingSplitPercentage": {
           "format": "int32",
@@ -1710,9 +1742,10 @@
           "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "EvaluationOptions"
     },
-    "EvaluationResults": {
+    "TextAnalysisAuthoringEvaluationResults": {
       "required": [
         "value",
         "nextLink"
@@ -1723,17 +1756,17 @@
           "description": "Gets or sets the documents predictions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentEvaluationResult"
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "EvaluationResults"
     },
-    "EvaluationSummary": {
+    "TextAnalysisAuthoringEvaluationSummary": {
       "required": [
         "projectKind",
         "customNamedEntityRecognitionEvaluation",
@@ -1743,33 +1776,35 @@
       "properties": {
         "projectKind": {
           "description": "Represents the model kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         },
         "customNamedEntityRecognitionEvaluation": {
           "description": "Contains the data related to extraction evaluation.",
-          "$ref": "#/definitions/NamedEntityRecognitionEvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary"
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
         }
       },
-      "discriminator": "projectKind"
+      "discriminator": "projectKind",
+      "x-ms-client-name": "EvaluationSummary"
     },
-    "ExportedClass": {
+    "TextAnalysisAuthoringExportedClass": {
       "type": "object",
       "properties": {
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedClass"
     },
-    "ExportedCustomMultiLabelClassificationDocument": {
+    "TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument": {
       "type": "object",
       "properties": {
         "classes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedDocumentClass"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass"
           }
         },
         "location": {
@@ -1782,38 +1817,40 @@
           "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedCustomMultiLabelClassificationDocument"
     },
-    "ExportedCustomMultiLabelClassificationProjectAssets": {
+    "TextAnalysisAuthoringExportedCustomMultiLabelClassificationProjectAssets": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "properties": {
         "classes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedClass"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
           }
         },
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedCustomMultiLabelClassificationDocument"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument"
           }
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification"
+      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-client-name": "ExportedCustomMultiLabelClassificationProjectAssets"
     },
-    "ExportedCustomNamedEntityRecognitionDocument": {
+    "TextAnalysisAuthoringExportedCustomNamedEntityRecognitionDocument": {
       "type": "object",
       "properties": {
         "entities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedDocumentRegion"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentRegion"
           }
         },
         "location": {
@@ -1826,36 +1863,38 @@
           "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedCustomNamedEntityRecognitionDocument"
     },
-    "ExportedCustomNamedEntityRecognitionProjectAssets": {
+    "TextAnalysisAuthoringExportedCustomNamedEntityRecognitionProjectAssets": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "properties": {
         "entities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedEntity"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntity"
           }
         },
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedCustomNamedEntityRecognitionDocument"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomNamedEntityRecognitionDocument"
           }
         }
       },
-      "x-ms-discriminator-value": "customNamedEntityRecognition"
+      "x-ms-discriminator-value": "customNamedEntityRecognition",
+      "x-ms-client-name": "ExportedCustomNamedEntityRecognitionProjectAssets"
     },
-    "ExportedCustomSingleLabelClassificationDocument": {
+    "TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument": {
       "type": "object",
       "properties": {
         "class": {
-          "$ref": "#/definitions/ExportedDocumentClass"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass"
         },
         "location": {
           "type": "string"
@@ -1867,40 +1906,43 @@
           "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedCustomSingleLabelClassificationDocument"
     },
-    "ExportedCustomSingleLabelClassificationProjectAssets": {
+    "TextAnalysisAuthoringExportedCustomSingleLabelClassificationProjectAssets": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "properties": {
         "classes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedClass"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
           }
         },
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedCustomSingleLabelClassificationDocument"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument"
           }
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification"
+      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-client-name": "ExportedCustomSingleLabelClassificationProjectAssets"
     },
-    "ExportedDocumentClass": {
+    "TextAnalysisAuthoringExportedDocumentClass": {
       "type": "object",
       "properties": {
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedDocumentClass"
     },
-    "ExportedDocumentEntityLabel": {
+    "TextAnalysisAuthoringExportedDocumentEntityLabel": {
       "type": "object",
       "properties": {
         "category": {
@@ -1914,9 +1956,10 @@
           "format": "int32",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedDocumentEntityLabel"
     },
-    "ExportedDocumentRegion": {
+    "TextAnalysisAuthoringExportedDocumentRegion": {
       "type": "object",
       "properties": {
         "regionOffset": {
@@ -1930,20 +1973,22 @@
         "labels": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedDocumentEntityLabel"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityLabel"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportedDocumentRegion"
     },
-    "ExportedEntity": {
+    "TextAnalysisAuthoringExportedEntity": {
       "type": "object",
       "properties": {
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedEntity"
     },
-    "ExportedProject": {
+    "TextAnalysisAuthoringExportedProject": {
       "required": [
         "project-file-version",
         "stringIndexType",
@@ -1956,31 +2001,33 @@
         },
         "stringIndexType": {
           "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "#/definitions/TextAnalysisAuthoringStringIndexType"
         },
         "metadata": {
           "description": "Represents the project metadata.",
-          "$ref": "#/definitions/CreateProjectOptions"
+          "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions"
         },
         "assets": {
           "description": "Represents the project assets.",
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedProject"
     },
-    "ExportedProjectAssets": {
+    "TextAnalysisAuthoringExportedProjectAssets": {
       "required": [
         "projectKind"
       ],
       "type": "object",
       "properties": {
         "projectKind": {
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         }
       },
-      "discriminator": "projectKind"
+      "discriminator": "projectKind",
+      "x-ms-client-name": "ExportedProjectAssets"
     },
-    "ExportProjectJobState": {
+    "TextAnalysisAuthoringExportProjectJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2014,7 +2061,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2030,9 +2077,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportProjectJobState"
     },
-    "ImportProjectJobState": {
+    "TextAnalysisAuthoringImportProjectJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2063,7 +2111,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2079,9 +2127,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ImportProjectJobState"
     },
-    "JobStatus": {
+    "TextAnalysisAuthoringJobStatus": {
       "enum": [
         "unknown",
         "notStarted",
@@ -2096,9 +2145,10 @@
       "x-ms-enum": {
         "name": "JobStatus",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "JobStatus"
     },
-    "MultiLabelClassEvaluationSummary": {
+    "TextAnalysisAuthoringMultiLabelClassEvaluationSummary": {
       "required": [
         "f1",
         "precision",
@@ -2145,9 +2195,10 @@
           "description": "Represents the count of false negative",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "MultiLabelClassEvaluationSummary"
     },
-    "MultiLabelClassificationEvaluationSummary": {
+    "TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary": {
       "required": [
         "classes",
         "microF1",
@@ -2163,7 +2214,7 @@
           "description": "Represents the classes evaluation",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/MultiLabelClassEvaluationSummary"
+            "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassEvaluationSummary"
           }
         },
         "microF1": {
@@ -2196,9 +2247,10 @@
           "description": "Represents the macro recall",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "MultiLabelClassificationEvaluationSummary"
     },
-    "NamedEntityRecognitionEvaluationSummary": {
+    "TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary": {
       "required": [
         "confusionMatrix",
         "entities",
@@ -2213,19 +2265,13 @@
       "properties": {
         "confusionMatrix": {
           "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrix"
-            }
-          }
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix"
         },
         "entities": {
           "description": "Represents the entities evaluation",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/EntityEvaluationSummary"
+            "$ref": "#/definitions/TextAnalysisAuthoringEntityEvaluationSummary"
           }
         },
         "microF1": {
@@ -2258,9 +2304,10 @@
           "description": "Represents the macro recall",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "NamedEntityRecognitionEvaluationSummary"
     },
-    "ProjectDeletionJobState": {
+    "TextAnalysisAuthoringProjectDeletionJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2291,7 +2338,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2307,9 +2354,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeletionJobState"
     },
-    "ProjectDeployment": {
+    "TextAnalysisAuthoringProjectDeployment": {
       "required": [
         "deploymentName",
         "modelId",
@@ -2347,9 +2395,10 @@
           "description": "Represents model training config version.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeployment"
     },
-    "ProjectDeployments": {
+    "TextAnalysisAuthoringProjectDeployments": {
       "required": [
         "value",
         "nextLink"
@@ -2360,17 +2409,17 @@
           "description": "Gets or sets the deployments.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectDeployment"
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeployments"
     },
-    "ProjectKind": {
+    "TextAnalysisAuthoringProjectKind": {
       "enum": [
         "customSingleLabelClassification",
         "customMultiLabelClassification",
@@ -2380,9 +2429,10 @@
       "x-ms-enum": {
         "name": "ProjectKind",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "ProjectKind"
     },
-    "ProjectMetadata": {
+    "TextAnalysisAuthoringProjectMetadata": {
       "required": [
         "createdDateTime",
         "lastModifiedDateTime",
@@ -2415,7 +2465,7 @@
         },
         "projectKind": {
           "description": "Gets or sets the new project model kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         },
         "storageInputContainerName": {
           "description": "Gets or sets the storage container name.",
@@ -2423,7 +2473,7 @@
         },
         "settings": {
           "description": "Gets or sets the project settings.",
-          "$ref": "#/definitions/ProjectSettings"
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings"
         },
         "projectName": {
           "description": "Gets or sets the new project name.",
@@ -2441,12 +2491,14 @@
           "description": "Gets or sets the project language.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectMetadata"
     },
-    "ProjectSettings": {
-      "type": "object"
+    "TextAnalysisAuthoringProjectSettings": {
+      "type": "object",
+      "x-ms-client-name": "ProjectSettings"
     },
-    "ProjectsMetadata": {
+    "TextAnalysisAuthoringProjectsMetadata": {
       "required": [
         "value",
         "nextLink"
@@ -2457,17 +2509,17 @@
           "description": "Gets or sets the projects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectMetadata"
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectsMetadata"
     },
-    "ProjectTrainedModel": {
+    "TextAnalysisAuthoringProjectTrainedModel": {
       "required": [
         "label",
         "modelId",
@@ -2505,9 +2557,10 @@
           "description": "Represents the model training config version.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectTrainedModel"
     },
-    "ProjectTrainedModels": {
+    "TextAnalysisAuthoringProjectTrainedModels": {
       "required": [
         "value",
         "nextLink"
@@ -2518,17 +2571,17 @@
           "description": "Gets or sets the jobs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectTrainedModel"
+            "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectTrainedModels"
     },
-    "SingleLabelClassEvaluationSummary": {
+    "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "required": [
         "f1",
         "precision",
@@ -2575,9 +2628,10 @@
           "description": "Represents the count of false negative",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "SingleLabelClassEvaluationSummary"
     },
-    "SingleLabelClassificationEvaluationSummary": {
+    "TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary": {
       "required": [
         "confusionMatrix",
         "classes",
@@ -2592,19 +2646,13 @@
       "properties": {
         "confusionMatrix": {
           "description": "Represents the confusion matrix between two classes (the two classes can be the same). The matrix is between the class that was labelled and the class that was predicted.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrix"
-            }
-          }
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix"
         },
         "classes": {
           "description": "Represents the classes evaluation",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/SingleLabelClassEvaluationSummary"
+            "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassEvaluationSummary"
           }
         },
         "microF1": {
@@ -2637,9 +2685,10 @@
           "description": "Represents the macro recall",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "SingleLabelClassificationEvaluationSummary"
     },
-    "StringIndexType": {
+    "TextAnalysisAuthoringStringIndexType": {
       "enum": [
         "Utf16CodeUnit"
       ],
@@ -2647,9 +2696,10 @@
       "x-ms-enum": {
         "name": "StringIndexType",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "StringIndexType"
     },
-    "SubTrainingJobState": {
+    "TextAnalysisAuthoringSubTrainingJobState": {
       "required": [
         "percentComplete",
         "status"
@@ -2673,11 +2723,12 @@
         },
         "status": {
           "description": "Represents the status of the job.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         }
-      }
+      },
+      "x-ms-client-name": "SubTrainingJobState"
     },
-    "SupportedLanguage": {
+    "TextAnalysisAuthoringSupportedLanguage": {
       "required": [
         "languageName",
         "languageCode"
@@ -2692,9 +2743,10 @@
           "description": "Gets or sets the language code.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SupportedLanguage"
     },
-    "SupportedLanguages": {
+    "TextAnalysisAuthoringSupportedLanguages": {
       "required": [
         "value",
         "nextLink"
@@ -2705,17 +2757,17 @@
           "description": "The list of supported objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SupportedLanguage"
+            "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
           }
         },
         "nextLink": {
           "description": "The next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SupportedLanguages"
     },
-    "SwapDeploymentsOptions": {
+    "TextAnalysisAuthoringSwapDeploymentsOptions": {
       "required": [
         "firstDeploymentName",
         "secondDeploymentName"
@@ -2730,9 +2782,10 @@
           "description": "Represents the second deployment name.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SwapDeploymentsOptions"
     },
-    "TrainingConfigVersion": {
+    "TextAnalysisAuthoringTrainingConfigVersion": {
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
@@ -2748,9 +2801,10 @@
           "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingConfigVersion"
     },
-    "TrainingConfigVersions": {
+    "TextAnalysisAuthoringTrainingConfigVersions": {
       "required": [
         "value",
         "nextLink"
@@ -2761,17 +2815,17 @@
           "description": "Gets or sets the training config versions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrainingConfigVersion"
+            "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingConfigVersions"
     },
-    "TrainingJobOptions": {
+    "TextAnalysisAuthoringTrainingJobOptions": {
       "required": [
         "modelLabel",
         "trainingConfigVersion"
@@ -2788,11 +2842,12 @@
         },
         "evaluationOptions": {
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
-          "$ref": "#/definitions/EvaluationOptions"
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobOptions"
     },
-    "TrainingJobResult": {
+    "TextAnalysisAuthoringTrainingJobResult": {
       "required": [
         "modelLabel",
         "trainingConfigVersion",
@@ -2810,20 +2865,21 @@
         },
         "trainingStatus": {
           "description": "Represents model train status.",
-          "$ref": "#/definitions/SubTrainingJobState"
+          "$ref": "#/definitions/TextAnalysisAuthoringSubTrainingJobState"
         },
         "evaluationStatus": {
           "description": "Represents model evaluation status.",
-          "$ref": "#/definitions/SubTrainingJobState"
+          "$ref": "#/definitions/TextAnalysisAuthoringSubTrainingJobState"
         },
         "estimatedEndDateTime": {
           "format": "date-time",
           "description": "Represents the estimate end date time for training and evaluation.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobResult"
     },
-    "TrainingJobs": {
+    "TextAnalysisAuthoringTrainingJobs": {
       "required": [
         "value",
         "nextLink"
@@ -2834,17 +2890,17 @@
           "description": "Gets or sets the jobs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrainingJobState"
+            "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobs"
     },
-    "TrainingJobState": {
+    "TextAnalysisAuthoringTrainingJobState": {
       "required": [
         "result",
         "jobId",
@@ -2857,7 +2913,7 @@
       "properties": {
         "result": {
           "description": "Represents training tasks detailed result.",
-          "$ref": "#/definitions/TrainingJobResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobResult"
         },
         "jobId": {
           "description": "Gets or sets the job ID.",
@@ -2880,7 +2936,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2896,11 +2952,12 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobState"
     }
   },
   "parameters": {
-    "StringIndexTypeInQuery": {
+    "TextAnalysisAuthoringStringIndexTypeInQuery": {
       "in": "query",
       "name": "stringIndexType",
       "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -2915,7 +2972,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ProjectKindInQuery": {
+    "TextAnalysisAuthoringProjectKindInQuery": {
       "in": "query",
       "name": "projectKind",
       "description": "The project kind.",

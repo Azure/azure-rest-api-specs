@@ -53,7 +53,7 @@
           "200": {
             "description": "The metadata of projects.",
             "schema": {
-              "$ref": "#/definitions/ProjectsMetadata"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectsMetadata"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
             "description": "The project parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions"
             }
           },
           {
@@ -105,13 +105,13 @@
           "200": {
             "description": "The metadata of the updated project, if it already exists.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "201": {
             "description": "The metadata of the created project.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -145,7 +145,7 @@
           "200": {
             "description": "The metadata of the project.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -212,10 +212,10 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "$ref": "#/parameters/FormatInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringFormatInQuery"
           },
           {
-            "$ref": "#/parameters/StringIndexTypeInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringStringIndexTypeInQuery"
           },
           {
             "in": "query",
@@ -267,7 +267,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "$ref": "#/parameters/FormatInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringFormatInQuery"
           },
           {
             "in": "body",
@@ -275,7 +275,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportedProject"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProject"
             }
           },
           {
@@ -327,7 +327,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
             }
           },
           {
@@ -387,7 +387,7 @@
           "200": {
             "description": "List of all deployments.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployments"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployments"
             }
           },
           "default": {
@@ -428,7 +428,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsOptions"
             }
           },
           {
@@ -482,7 +482,7 @@
           "200": {
             "description": "The Deployment info.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployment"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -520,7 +520,7 @@
             "description": "The new deployment info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateDeploymentOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateDeploymentOptions"
             }
           },
           {
@@ -622,7 +622,7 @@
           "200": {
             "description": "The deployment job result.",
             "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
             }
           },
           "default": {
@@ -665,7 +665,7 @@
           "200": {
             "description": "The swap deployment job result.",
             "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
             }
           },
           "default": {
@@ -708,7 +708,7 @@
           "200": {
             "description": "The status of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/ExportProjectJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportProjectJobState"
             }
           },
           "default": {
@@ -751,7 +751,7 @@
           "200": {
             "description": "The details of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/ImportProjectJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringImportProjectJobState"
             }
           },
           "default": {
@@ -796,7 +796,7 @@
           "200": {
             "description": "List of all trained models.",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModels"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModels"
             }
           },
           "default": {
@@ -843,7 +843,7 @@
           "200": {
             "description": "Trained model info",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModel"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -917,7 +917,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/StringIndexTypeInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringStringIndexTypeInQuery"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -936,7 +936,7 @@
           "200": {
             "description": "List of the evaluation predictions.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResults"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationResults"
             }
           },
           "default": {
@@ -983,7 +983,7 @@
           "200": {
             "description": "List of all evaluation results.",
             "schema": {
-              "$ref": "#/definitions/EvaluationSummary"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummary"
             }
           },
           "default": {
@@ -1028,7 +1028,7 @@
           "200": {
             "description": "List of the training jobs.",
             "schema": {
-              "$ref": "#/definitions/TrainingJobs"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobs"
             }
           },
           "default": {
@@ -1075,7 +1075,7 @@
           "200": {
             "description": "The training job result.",
             "schema": {
-              "$ref": "#/definitions/TrainingJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
             }
           },
           "default": {
@@ -1155,7 +1155,7 @@
           "200": {
             "description": "The project deletion job result.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeletionJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeletionJobState"
             }
           },
           "default": {
@@ -1181,7 +1181,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectKindInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringProjectKindInQuery"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -1200,7 +1200,7 @@
           "200": {
             "description": "The list of supported languages.",
             "schema": {
-              "$ref": "#/definitions/SupportedLanguages"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguages"
             }
           },
           "default": {
@@ -1258,7 +1258,7 @@
           "200": {
             "description": "The list of supported prebuilt entities.",
             "schema": {
-              "$ref": "#/definitions/PrebuiltEntities"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntities"
             }
           },
           "default": {
@@ -1288,7 +1288,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectKindInQuery"
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringProjectKindInQuery"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -1307,7 +1307,7 @@
           "200": {
             "description": "List of config versions.",
             "schema": {
-              "$ref": "#/definitions/TrainingConfigVersions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersions"
             }
           },
           "default": {
@@ -1330,7 +1330,7 @@
     }
   },
   "definitions": {
-    "CompositionSetting": {
+    "ConversationalAnalysisAuthoringCompositionSetting": {
       "enum": [
         "returnLongestOverlap",
         "requireExactOverlap",
@@ -1341,9 +1341,17 @@
       "x-ms-enum": {
         "name": "CompositionSetting",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "CompositionSetting"
     },
-    "ConfusionMatrixEntry": {
+    "ConversationalAnalysisAuthoringConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixRow"
+      },
+      "x-ms-client-name": "ConfusionMatrix"
+    },
+    "ConversationalAnalysisAuthoringConfusionMatrixEntry": {
       "required": [
         "normalizedValue",
         "rawValue"
@@ -1360,9 +1368,17 @@
           "description": "Represents raw value.",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "ConfusionMatrixEntry"
     },
-    "ConversationExportedEntity": {
+    "ConversationalAnalysisAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixEntry"
+      },
+      "x-ms-client-name": "ConfusionMatrixRow"
+    },
+    "ConversationalAnalysisAuthoringConversationExportedEntity": {
       "required": [
         "category"
       ],
@@ -1372,20 +1388,21 @@
           "type": "string"
         },
         "compositionSetting": {
-          "$ref": "#/definitions/CompositionSetting"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringCompositionSetting"
         },
         "list": {
-          "$ref": "#/definitions/ExportedEntityList"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityList"
         },
         "prebuilts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedPrebuiltEntity"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedPrebuiltEntity"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ConversationExportedEntity"
     },
-    "ConversationExportedIntent": {
+    "ConversationalAnalysisAuthoringConversationExportedIntent": {
       "required": [
         "category"
       ],
@@ -1394,38 +1411,40 @@
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ConversationExportedIntent"
     },
-    "ConversationExportedProjectAssets": {
+    "ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "properties": {
         "intents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationExportedIntent"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedIntent"
           }
         },
         "entities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationExportedEntity"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedEntity"
           }
         },
         "utterances": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationExportedUtterance"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedUtterance"
           }
         }
       },
-      "x-ms-discriminator-value": "conversation"
+      "x-ms-discriminator-value": "conversation",
+      "x-ms-client-name": "ConversationExportedProjectAssets"
     },
-    "ConversationExportedUtterance": {
+    "ConversationalAnalysisAuthoringConversationExportedUtterance": {
       "required": [
         "text",
         "intent"
@@ -1435,7 +1454,7 @@
         "entities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedUtteranceEntityLabel"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedUtteranceEntityLabel"
           }
         },
         "text": {
@@ -1451,9 +1470,10 @@
           "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ConversationExportedUtterance"
     },
-    "CreateDeploymentOptions": {
+    "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
       "required": [
         "trainedModelLabel"
       ],
@@ -1463,9 +1483,10 @@
           "description": "Represents the trained model label.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "CreateDeploymentOptions"
     },
-    "CreateProjectOptions": {
+    "ConversationalAnalysisAuthoringCreateProjectOptions": {
       "required": [
         "projectKind",
         "projectName",
@@ -1475,11 +1496,11 @@
       "properties": {
         "projectKind": {
           "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         },
         "settings": {
           "description": "Gets or sets the project settings.",
-          "$ref": "#/definitions/ProjectSettings"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
         },
         "projectName": {
           "description": "Gets or sets the new project name.",
@@ -1497,9 +1518,10 @@
           "description": "Gets or sets the project language.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "CreateProjectOptions"
     },
-    "DeploymentJobState": {
+    "ConversationalAnalysisAuthoringDeploymentJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -1530,7 +1552,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -1546,9 +1568,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "DeploymentJobState"
     },
-    "EntitiesEvaluationSummary": {
+    "ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
       "required": [
         "confusionMatrix",
         "entities",
@@ -1563,19 +1586,13 @@
       "properties": {
         "confusionMatrix": {
           "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixEntry"
-            }
-          }
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix"
         },
         "entities": {
           "description": "Represents the entities evaluation",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/EntityEvaluationSummary"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringEntityEvaluationSummary"
           }
         },
         "microF1": {
@@ -1608,9 +1625,10 @@
           "description": "Represents the macro recall",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "EntitiesEvaluationSummary"
     },
-    "EntityEvaluationSummary": {
+    "ConversationalAnalysisAuthoringEntityEvaluationSummary": {
       "required": [
         "f1",
         "precision",
@@ -1657,9 +1675,10 @@
           "description": "Represents the count of false negative",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "EntityEvaluationSummary"
     },
-    "EvaluationKind": {
+    "ConversationalAnalysisAuthoringEvaluationKind": {
       "enum": [
         "percentage",
         "manual"
@@ -1668,14 +1687,15 @@
       "x-ms-enum": {
         "name": "EvaluationKind",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "EvaluationKind"
     },
-    "EvaluationOptions": {
+    "ConversationalAnalysisAuthoringEvaluationOptions": {
       "type": "object",
       "properties": {
         "kind": {
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
-          "$ref": "#/definitions/EvaluationKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationKind"
         },
         "trainingSplitPercentage": {
           "format": "int32",
@@ -1687,9 +1707,10 @@
           "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "EvaluationOptions"
     },
-    "EvaluationResults": {
+    "ConversationalAnalysisAuthoringEvaluationResults": {
       "required": [
         "value",
         "nextLink"
@@ -1700,17 +1721,17 @@
           "description": "Gets or sets the utterances predictions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UtteranceEvaluationResult"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEvaluationResult"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "EvaluationResults"
     },
-    "EvaluationSummary": {
+    "ConversationalAnalysisAuthoringEvaluationSummary": {
       "required": [
         "entitiesEvaluation",
         "intentsEvaluation"
@@ -1719,18 +1740,19 @@
       "properties": {
         "entitiesEvaluation": {
           "description": "Contains the data related to entities evaluation.",
-          "$ref": "#/definitions/EntitiesEvaluationSummary"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEntitiesEvaluationSummary"
         },
         "intentsEvaluation": {
           "description": "Contains the data related to intents evaluation.",
-          "$ref": "#/definitions/IntentsEvaluation"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluation"
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
         }
-      }
+      },
+      "x-ms-client-name": "EvaluationSummary"
     },
-    "ExportedCluOrchestration": {
+    "ConversationalAnalysisAuthoringExportedCluOrchestration": {
       "required": [
         "projectName",
         "deploymentName"
@@ -1743,37 +1765,40 @@
         "deploymentName": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedCluOrchestration"
     },
-    "ExportedCluOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedCluOrchestrationOptions": {
       "required": [
         "cluOrchestration"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "properties": {
         "cluOrchestration": {
-          "$ref": "#/definitions/ExportedCluOrchestration"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedCluOrchestration"
         }
       },
-      "x-ms-discriminator-value": "clu"
+      "x-ms-discriminator-value": "clu",
+      "x-ms-client-name": "ExportedCluOrchestrationOptions"
     },
-    "ExportedEntityList": {
+    "ConversationalAnalysisAuthoringExportedEntityList": {
       "type": "object",
       "properties": {
         "sublists": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedEntitySublist"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntitySublist"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportedEntityList"
     },
-    "ExportedEntityListSynonym": {
+    "ConversationalAnalysisAuthoringExportedEntityListSynonym": {
       "type": "object",
       "properties": {
         "language": {
@@ -1785,9 +1810,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportedEntityListSynonym"
     },
-    "ExportedEntitySublist": {
+    "ConversationalAnalysisAuthoringExportedEntitySublist": {
       "type": "object",
       "properties": {
         "listKey": {
@@ -1796,12 +1822,13 @@
         "synonyms": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportedEntityListSynonym"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityListSynonym"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportedEntitySublist"
     },
-    "ExportedLuisOrchestration": {
+    "ConversationalAnalysisAuthoringExportedLuisOrchestration": {
       "required": [
         "appId"
       ],
@@ -1818,38 +1845,41 @@
         "slotName": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedLuisOrchestration"
     },
-    "ExportedLuisOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
       "required": [
         "luisOrchestration"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "properties": {
         "luisOrchestration": {
-          "$ref": "#/definitions/ExportedLuisOrchestration"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration"
         }
       },
-      "x-ms-discriminator-value": "luis"
+      "x-ms-discriminator-value": "luis",
+      "x-ms-client-name": "ExportedLuisOrchestrationOptions"
     },
-    "ExportedOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
       "required": [
         "kind"
       ],
       "type": "object",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/OrchestrationKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationKind"
         }
       },
-      "discriminator": "kind"
+      "discriminator": "kind",
+      "x-ms-client-name": "ExportedOrchestrationOptions"
     },
-    "ExportedPrebuiltEntity": {
+    "ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
       "required": [
         "category"
       ],
@@ -1858,9 +1888,10 @@
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedPrebuiltEntity"
     },
-    "ExportedProject": {
+    "ConversationalAnalysisAuthoringExportedProject": {
       "required": [
         "project-file-version",
         "stringIndexType",
@@ -1873,31 +1904,33 @@
         },
         "stringIndexType": {
           "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringStringIndexType"
         },
         "metadata": {
           "description": "Represents the project metadata.",
-          "$ref": "#/definitions/CreateProjectOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions"
         },
         "assets": {
           "description": "Represents the project assets.",
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedProject"
     },
-    "ExportedProjectAssets": {
+    "ConversationalAnalysisAuthoringExportedProjectAssets": {
       "required": [
         "projectKind"
       ],
       "type": "object",
       "properties": {
         "projectKind": {
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         }
       },
-      "discriminator": "projectKind"
+      "discriminator": "projectKind",
+      "x-ms-client-name": "ExportedProjectAssets"
     },
-    "ExportedProjectFormat": {
+    "ConversationalAnalysisAuthoringExportedProjectFormat": {
       "enum": [
         "clu",
         "luis"
@@ -1906,9 +1939,10 @@
       "x-ms-enum": {
         "name": "ExportedProjectFormat",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "ExportedProjectFormat"
     },
-    "ExportedQnaOrchestration": {
+    "ConversationalAnalysisAuthoringExportedQnaOrchestration": {
       "required": [
         "projectName"
       ],
@@ -1917,26 +1951,28 @@
         "projectName": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedQnaOrchestration"
     },
-    "ExportedQnaOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedQnaOrchestrationOptions": {
       "required": [
         "qnaOrchestration"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         }
       ],
       "properties": {
         "qnaOrchestration": {
-          "$ref": "#/definitions/ExportedQnaOrchestration"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQnaOrchestration"
         }
       },
-      "x-ms-discriminator-value": "qna"
+      "x-ms-discriminator-value": "qna",
+      "x-ms-client-name": "ExportedQnaOrchestrationOptions"
     },
-    "ExportedUtteranceEntityLabel": {
+    "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
       "required": [
         "category",
         "offset",
@@ -1955,9 +1991,10 @@
           "format": "int32",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "ExportedUtteranceEntityLabel"
     },
-    "ExportProjectJobState": {
+    "ConversationalAnalysisAuthoringExportProjectJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -1991,7 +2028,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2007,9 +2044,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ExportProjectJobState"
     },
-    "ImportProjectJobState": {
+    "ConversationalAnalysisAuthoringImportProjectJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2040,7 +2078,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2056,9 +2094,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ImportProjectJobState"
     },
-    "IntentEvaluation": {
+    "ConversationalAnalysisAuthoringIntentEvaluation": {
       "required": [
         "f1",
         "precision",
@@ -2105,9 +2144,10 @@
           "description": "Represents the count of false negative",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "IntentEvaluation"
     },
-    "IntentsEvaluation": {
+    "ConversationalAnalysisAuthoringIntentsEvaluation": {
       "required": [
         "confusionMatrix",
         "intents",
@@ -2122,19 +2162,13 @@
       "properties": {
         "confusionMatrix": {
           "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixEntry"
-            }
-          }
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix"
         },
         "intents": {
           "description": "Represents the intents evaluation.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/IntentEvaluation"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentEvaluation"
           }
         },
         "microF1": {
@@ -2167,9 +2201,10 @@
           "description": "Represents the macro recall",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "IntentsEvaluation"
     },
-    "JobStatus": {
+    "ConversationalAnalysisAuthoringJobStatus": {
       "enum": [
         "unknown",
         "notStarted",
@@ -2184,46 +2219,49 @@
       "x-ms-enum": {
         "name": "JobStatus",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "JobStatus"
     },
-    "OrchestrationExportedIntent": {
+    "ConversationalAnalysisAuthoringOrchestrationExportedIntent": {
       "required": [
         "category"
       ],
       "type": "object",
       "properties": {
         "orchestration": {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         },
         "category": {
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "OrchestrationExportedIntent"
     },
-    "OrchestrationExportedProjectAssets": {
+    "ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "properties": {
         "intents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrchestrationExportedIntent"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedIntent"
           }
         },
         "utterances": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrchestrationExportedUtterance"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedUtterance"
           }
         }
       },
-      "x-ms-discriminator-value": "orchestration"
+      "x-ms-discriminator-value": "orchestration",
+      "x-ms-client-name": "OrchestrationExportedProjectAssets"
     },
-    "OrchestrationExportedUtterance": {
+    "ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
       "required": [
         "text",
         "intent"
@@ -2243,9 +2281,10 @@
           "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "OrchestrationExportedUtterance"
     },
-    "OrchestrationKind": {
+    "ConversationalAnalysisAuthoringOrchestrationKind": {
       "enum": [
         "luis",
         "clu",
@@ -2255,9 +2294,10 @@
       "x-ms-enum": {
         "name": "OrchestrationKind",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "OrchestrationKind"
     },
-    "PrebuiltEntities": {
+    "ConversationalAnalysisAuthoringPrebuiltEntities": {
       "required": [
         "value",
         "nextLink"
@@ -2268,17 +2308,17 @@
           "description": "The supported prebuilt entities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrebuiltEntity"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringPrebuiltEntity"
           }
         },
         "nextLink": {
           "description": "The next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "PrebuiltEntities"
     },
-    "PrebuiltEntity": {
+    "ConversationalAnalysisAuthoringPrebuiltEntity": {
       "required": [
         "category",
         "description",
@@ -2298,9 +2338,10 @@
           "description": "English examples for the entity.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "PrebuiltEntity"
     },
-    "ProjectDeletionJobState": {
+    "ConversationalAnalysisAuthoringProjectDeletionJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2331,7 +2372,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2347,9 +2388,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeletionJobState"
     },
-    "ProjectDeployment": {
+    "ConversationalAnalysisAuthoringProjectDeployment": {
       "required": [
         "deploymentName",
         "modelId",
@@ -2387,9 +2429,10 @@
           "description": "Represents model training config version.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeployment"
     },
-    "ProjectDeployments": {
+    "ConversationalAnalysisAuthoringProjectDeployments": {
       "required": [
         "value",
         "nextLink"
@@ -2400,17 +2443,17 @@
           "description": "Gets or sets the deployments.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectDeployment"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectDeployments"
     },
-    "ProjectKind": {
+    "ConversationalAnalysisAuthoringProjectKind": {
       "enum": [
         "conversation",
         "orchestration"
@@ -2419,9 +2462,10 @@
       "x-ms-enum": {
         "name": "ProjectKind",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "ProjectKind"
     },
-    "ProjectMetadata": {
+    "ConversationalAnalysisAuthoringProjectMetadata": {
       "required": [
         "createdDateTime",
         "lastModifiedDateTime",
@@ -2453,11 +2497,11 @@
         },
         "projectKind": {
           "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         },
         "settings": {
           "description": "Gets or sets the project settings.",
-          "$ref": "#/definitions/ProjectSettings"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
         },
         "projectName": {
           "description": "Gets or sets the new project name.",
@@ -2475,9 +2519,10 @@
           "description": "Gets or sets the project language.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectMetadata"
     },
-    "ProjectSettings": {
+    "ConversationalAnalysisAuthoringProjectSettings": {
       "required": [
         "confidenceThreshold"
       ],
@@ -2487,9 +2532,10 @@
           "format": "float",
           "type": "number"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectSettings"
     },
-    "ProjectsMetadata": {
+    "ConversationalAnalysisAuthoringProjectsMetadata": {
       "required": [
         "value",
         "nextLink"
@@ -2500,17 +2546,17 @@
           "description": "Gets or sets the projects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectMetadata"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectsMetadata"
     },
-    "ProjectTrainedModel": {
+    "ConversationalAnalysisAuthoringProjectTrainedModel": {
       "required": [
         "label",
         "modelId",
@@ -2548,9 +2594,10 @@
           "description": "Represents the model training config version.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectTrainedModel"
     },
-    "ProjectTrainedModels": {
+    "ConversationalAnalysisAuthoringProjectTrainedModels": {
       "required": [
         "value",
         "nextLink"
@@ -2561,17 +2608,17 @@
           "description": "Gets or sets the jobs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectTrainedModel"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "ProjectTrainedModels"
     },
-    "StringIndexType": {
+    "ConversationalAnalysisAuthoringStringIndexType": {
       "enum": [
         "Utf16CodeUnit"
       ],
@@ -2579,9 +2626,10 @@
       "x-ms-enum": {
         "name": "StringIndexType",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "StringIndexType"
     },
-    "SubTrainingJobState": {
+    "ConversationalAnalysisAuthoringSubTrainingJobState": {
       "required": [
         "percentComplete",
         "status"
@@ -2605,11 +2653,12 @@
         },
         "status": {
           "description": "Represents the status of the job.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         }
-      }
+      },
+      "x-ms-client-name": "SubTrainingJobState"
     },
-    "SupportedLanguage": {
+    "ConversationalAnalysisAuthoringSupportedLanguage": {
       "required": [
         "languageName",
         "languageCode"
@@ -2624,9 +2673,10 @@
           "description": "Gets or sets the language code.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SupportedLanguage"
     },
-    "SupportedLanguages": {
+    "ConversationalAnalysisAuthoringSupportedLanguages": {
       "required": [
         "value",
         "nextLink"
@@ -2637,17 +2687,17 @@
           "description": "The list of supported objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SupportedLanguage"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguage"
           }
         },
         "nextLink": {
           "description": "The next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SupportedLanguages"
     },
-    "SwapDeploymentsOptions": {
+    "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
       "required": [
         "firstDeploymentName",
         "secondDeploymentName"
@@ -2662,9 +2712,10 @@
           "description": "Represents the second deployment name.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "SwapDeploymentsOptions"
     },
-    "TrainingConfigVersion": {
+    "ConversationalAnalysisAuthoringTrainingConfigVersion": {
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
@@ -2680,9 +2731,10 @@
           "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingConfigVersion"
     },
-    "TrainingConfigVersions": {
+    "ConversationalAnalysisAuthoringTrainingConfigVersions": {
       "required": [
         "value",
         "nextLink"
@@ -2693,17 +2745,17 @@
           "description": "Gets or sets the training config versions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrainingConfigVersion"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersion"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingConfigVersions"
     },
-    "TrainingJobOptions": {
+    "ConversationalAnalysisAuthoringTrainingJobOptions": {
       "required": [
         "modelLabel",
         "trainingMode"
@@ -2720,15 +2772,16 @@
         },
         "trainingMode": {
           "description": "Represents the training mode of the training operation.",
-          "$ref": "#/definitions/TrainingMode"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode"
         },
         "evaluationOptions": {
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
-          "$ref": "#/definitions/EvaluationOptions"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobOptions"
     },
-    "TrainingJobResult": {
+    "ConversationalAnalysisAuthoringTrainingJobResult": {
       "required": [
         "modelLabel",
         "trainingConfigVersion",
@@ -2746,24 +2799,25 @@
         },
         "trainingMode": {
           "description": "Represents the training mode of the training operation.",
-          "$ref": "#/definitions/TrainingMode"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode"
         },
         "trainingStatus": {
           "description": "Represents model train status.",
-          "$ref": "#/definitions/SubTrainingJobState"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState"
         },
         "evaluationStatus": {
           "description": "Represents model evaluation status.",
-          "$ref": "#/definitions/SubTrainingJobState"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState"
         },
         "estimatedEndDateTime": {
           "format": "date-time",
           "description": "Represents the estimate end date time for training and evaluation.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobResult"
     },
-    "TrainingJobs": {
+    "ConversationalAnalysisAuthoringTrainingJobs": {
       "required": [
         "value",
         "nextLink"
@@ -2774,17 +2828,17 @@
           "description": "Gets or sets the jobs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrainingJobState"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
           }
         },
         "nextLink": {
           "description": "Gets or sets the next page link.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobs"
     },
-    "TrainingJobState": {
+    "ConversationalAnalysisAuthoringTrainingJobState": {
       "required": [
         "result",
         "jobId",
@@ -2797,7 +2851,7 @@
       "properties": {
         "result": {
           "description": "Represents training tasks detailed result.",
-          "$ref": "#/definitions/TrainingJobResult"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobResult"
         },
         "jobId": {
           "description": "Gets or sets the job ID.",
@@ -2820,7 +2874,7 @@
         },
         "status": {
           "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
           "description": "Gets or sets the warnings.",
@@ -2836,9 +2890,10 @@
             "$ref": "common.json#/definitions/Error"
           }
         }
-      }
+      },
+      "x-ms-client-name": "TrainingJobState"
     },
-    "TrainingMode": {
+    "ConversationalAnalysisAuthoringTrainingMode": {
       "enum": [
         "advanced",
         "standard"
@@ -2847,9 +2902,10 @@
       "x-ms-enum": {
         "name": "TrainingMode",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-name": "TrainingMode"
     },
-    "UtteranceEntitiesEvaluationResult": {
+    "ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
       "required": [
         "expectedEntities",
         "predictedEntities"
@@ -2860,19 +2916,20 @@
           "description": "Represents the expected entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UtteranceEntityEvaluationResult"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
           }
         },
         "predictedEntities": {
           "description": "Represents the predicted entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UtteranceEntityEvaluationResult"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult"
           }
         }
-      }
+      },
+      "x-ms-client-name": "UtteranceEntitiesEvaluationResult"
     },
-    "UtteranceEntityEvaluationResult": {
+    "ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult": {
       "required": [
         "category",
         "offset",
@@ -2894,9 +2951,10 @@
           "description": "Represents the entity length.",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-client-name": "UtteranceEntityEvaluationResult"
     },
-    "UtteranceEvaluationResult": {
+    "ConversationalAnalysisAuthoringUtteranceEvaluationResult": {
       "required": [
         "text",
         "language",
@@ -2915,15 +2973,16 @@
         },
         "entitiesResult": {
           "description": "Represents the entities results for the utterance.",
-          "$ref": "#/definitions/UtteranceEntitiesEvaluationResult"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult"
         },
         "intentsResult": {
           "description": "Represents the intents results for the utterance.",
-          "$ref": "#/definitions/UtteranceIntentsEvaluationResult"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult"
         }
-      }
+      },
+      "x-ms-client-name": "UtteranceEvaluationResult"
     },
-    "UtteranceIntentsEvaluationResult": {
+    "ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult": {
       "required": [
         "expectedIntent",
         "predictedIntent"
@@ -2938,11 +2997,12 @@
           "description": "Represents the utterance's predicted intent.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-client-name": "UtteranceIntentsEvaluationResult"
     }
   },
   "parameters": {
-    "FormatInQuery": {
+    "ConversationalAnalysisAuthoringFormatInQuery": {
       "in": "query",
       "name": "format",
       "description": "The format of the project to export. The currently supported format is `clu`.",
@@ -2957,7 +3017,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "StringIndexTypeInQuery": {
+    "ConversationalAnalysisAuthoringStringIndexTypeInQuery": {
       "in": "query",
       "name": "stringIndexType",
       "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -2972,7 +3032,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ProjectKindInQuery": {
+    "ConversationalAnalysisAuthoringProjectKindInQuery": {
       "in": "query",
       "name": "projectKind",
       "description": "The project kind to get the supported languages for.",
