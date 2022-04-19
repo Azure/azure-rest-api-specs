@@ -335,6 +335,147 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/canMigrate": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.",
+        "operationId": "Profiles_CanMigrate",
+        "x-ms-examples": {
+          "Profiles_CanMigrate": {
+            "$ref": "./examples/Profiles_CanMigrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Properties needed to check if cdn profile or classic frontdoor can be migrated.",
+            "in": "body",
+            "name": "canmigrateParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CanMigrateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanMigrateResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/migrate": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.",
+        "operationId": "Profiles_Migrate",
+        "x-ms-examples": {
+          "Profiles_Create": {
+            "$ref": "./examples/Profiles_Migrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Properties needed to migrate the profile.",
+            "in": "body",
+            "name": "migrationParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/MigrateResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationCommit": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Commit the migrated Azure Frontdoor(Standard/Premium) profile.",
+        "operationId": "Profiles_MigrationCommit",
+        "x-ms-examples": {
+          "Profiles_Create": {
+            "$ref": "./examples/Profiles_MigrationCommit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri": {
       "post": {
         "tags": [
@@ -2482,7 +2623,12 @@
             "Creating",
             "Active",
             "Deleting",
-            "Disabled"
+            "Disabled",
+            "Migrating",
+            "Migrated",
+            "PendingMigrationCommit",
+            "CommittingMigration",
+            "AbortingMigration"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2494,6 +2640,13 @@
           "readOnly": true,
           "description": "Provisioning status of the profile.",
           "type": "string"
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for profiles.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "frontDoorId": {
           "readOnly": true,
@@ -2556,6 +2709,151 @@
           "exclusiveMinimum": false
         }
       }
+    },
+    "CanMigrateResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "canMigrate": {
+          "readOnly": true,
+          "description": "Flag that says if the profile can be migrated",
+          "type": "boolean"
+        },
+        "defaultSku": {
+          "readOnly": true,
+          "description": "Recommended sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "CanMigrateDefaultSku",
+            "modelAsString": true
+          }
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "#/definitions/MigrationErrorsListResponse"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationErrorsListResponse": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "errors":{
+          "items": {
+            "$ref": "#/definitions/MigrationErrorType"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "MigrationErrorType": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource which has the problem.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextSteps": {
+          "description": "Describes what needs to be done to fix the problem",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "CanMigrateParameters": {
+      "type": "object",
+      "description": "Request body for CanMigrate operation.",
+      "properties": {
+        "ClassicResourceReference": {
+          "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
+          "$ref": "#/definitions/ResourceReference"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationParameters": {
+      "type": "object",
+      "description": "Request body for Migrate operation.",
+      "properties": {
+        "Sku": {
+          "description": "Sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationSku",
+            "modelAsString": true
+          }
+        },
+        "ClassicResourceReference": {
+          "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "ProfileName": {
+          "description": "Name of the new profile that need to be created.",
+          "type": "string"
+        },
+        "MigrationWafMappings": {
+          "description": "Waf mapping for the migrated profile",
+          "type": "array",
+          "items": {
+            "description": "List of waf mappings",
+            "$ref": "#/definitions/MigrationWafMapping"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationWafMapping": {
+      "description": "Waf mapping",
+      "type":"object",
+      "properties": {
+        "MigratedFrom": {
+          "description": "Migration From Waf policy",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "MigratedTo": {
+          "description": "Migration to Waf policy",
+          "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
+    "MigrateResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "MigratedProfileArmResourceId": {
+          "readOnly": true,
+          "description": "Arm resource id of the migrated profile",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "#/definitions/MigrationErrorsListResponse"
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "SsoUri": {
       "description": "The URI required to login to the supplemental portal from the Azure portal.",
