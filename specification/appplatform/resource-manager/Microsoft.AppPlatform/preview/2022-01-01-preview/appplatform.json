@@ -6285,6 +6285,8 @@
           "enum": [
             "Creating",
             "Updating",
+            "Starting",
+            "Stopping",
             "Deleting",
             "Deleted",
             "Succeeded",
@@ -8217,7 +8219,11 @@
           "enum": [
             "StorageAccount"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "storageType"
@@ -8301,7 +8307,11 @@
           "enum": [
             "AzureFileVolume"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "mountPath": {
           "description": "The mount path of the persistent disk.",
@@ -9551,7 +9561,8 @@
         },
         "public": {
           "description": "Indicates whether the Spring Cloud Gateway exposes endpoint.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "url": {
           "description": "URL of the Spring Cloud Gateway, exposed when 'public' is true.",
@@ -9560,7 +9571,8 @@
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "ssoProperties": {
           "$ref": "#/definitions/SsoProperties"
@@ -9980,7 +9992,8 @@
         },
         "public": {
           "description": "Indicates whether the API portal exposes endpoint.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "url": {
           "description": "URL of the API portal, exposed when 'public' is true.",
@@ -9989,7 +10002,8 @@
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "gatewayIds": {
           "description": "The array of resource Ids of gateway to integrate with API portal.",

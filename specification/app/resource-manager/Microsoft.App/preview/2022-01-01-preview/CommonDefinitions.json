@@ -261,37 +261,6 @@
         }
       }
     },
-    "Dapr": {
-      "description": "Container App Dapr configuration.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "description": "Boolean indicating if the Dapr side car is enabled",
-          "type": "boolean"
-        },
-        "appId": {
-          "description": "Dapr application identifier",
-          "type": "string"
-        },
-        "appProtocol": {
-          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
-          "enum": [
-            "http",
-            "grpc"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "appProtocol",
-            "modelAsString": true
-          }
-        },
-        "appPort": {
-          "format": "int32",
-          "description": "Tells Dapr which port your application is listening on",
-          "type": "integer"
-        }
-      }
-    },
     "DefaultErrorResponse": {
       "description": "App Service error response.",
       "type": "object",
@@ -504,10 +473,6 @@
         "scale": {
           "$ref": "#/definitions/Scale",
           "description": "Scaling properties for the Container App."
-        },
-        "dapr": {
-          "$ref": "#/definitions/Dapr",
-          "description": "Dapr configuration for the Container App."
         },
         "volumes": {
           "description": "List of volume definitions for the Container App.",

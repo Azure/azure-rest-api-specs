@@ -26,8 +26,55 @@ These are the global settings for the MediaServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-06
+tag: package-2021-11
 opt-in-extensible-enums: true
+```
+
+### Suppression
+
+```yaml
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: we are still using PUT definition for PATCH, which has location as required property. this is existing suppression added to avoid breaking change.
+
+  - suppress: DeleteOperationResponses
+    reason: Per ARM Specs, async APIs must return 202 when a response is accepted.
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].delete.responses'
+    from: AssetsAndAssetFilters.json
+
+  - suppress: RequiredReadOnlySystemData
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].patch'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationResults/{operationId}"].get'
+
+    from: AssetsAndAssetFilters.json
+
+  - suppress: RequiredReadOnlySystemData
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}"].get'
+    from: Accounts.json
+```
+
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.Media/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-06-01/Accounts.json
+  - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-11-01/streamingservice.json
 ```
 
 ### Tag: package-2021-06
