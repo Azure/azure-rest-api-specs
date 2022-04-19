@@ -22,9 +22,11 @@ To see additional help and options, run:
 
 Please familiarize yourself with the following before adding a new tag:
 
-- Discussion on negative impact of multiple _api-version_'s within a tag: [Azure/azure-sdk-for-rust#563](https://github.com/Azure/azure-sdk-for-rust/issues/563)
-- [API Spec & SDK Package Versioning Considerations](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/481/API-Spec-SDK-Package-Versioning-Considerations)
-- [Manual Process: Adding new API version](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/83/Manual-Process-Adding-new-API-version)
+* Discussion on negative impact of multiple *api-version*'s within a tag: [Azure/azure-sdk-for-rust#563](https://github.com/Azure/azure-sdk-for-rust/issues/563)
+
+* [API Spec & SDK Package Versioning Considerations](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/481/API-Spec-SDK-Package-Versioning-Considerations)
+
+* [Manual Process: Adding new API version](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/83/Manual-Process-Adding-new-API-version)
 
 ---
 
@@ -38,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2022-02-01
+tag: package-2022-02
 ```
 
 ### Suppression
@@ -232,6 +234,15 @@ directive:
   
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.Insights/stable/2022-02-01/workbooks_API.json
+```
 ### Tag: package-2022-02-01
 
 These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
@@ -311,7 +322,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
