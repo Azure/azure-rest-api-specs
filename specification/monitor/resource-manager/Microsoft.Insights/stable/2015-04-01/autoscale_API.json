@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a resource group",
         "tags": [
@@ -45,7 +45,7 @@
         "operationId": "AutoscaleSettings_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings/{autoscaleSettingName}": {
       "put": {
         "description": "Creates or updates an autoscale setting.",
         "tags": [
@@ -87,7 +87,7 @@
         "operationId": "AutoscaleSettings_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -142,7 +142,7 @@
         "operationId": "AutoscaleSettings_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -182,7 +182,7 @@
         "operationId": "AutoscaleSettings_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -222,7 +222,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a subscription",
         "tags": [
@@ -386,6 +386,10 @@
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
         },
+        "metricResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource the rule monitors."
+        },
         "timeGrain": {
           "type": "string",
           "format": "duration",
@@ -398,7 +402,8 @@
             "Average",
             "Min",
             "Max",
-            "Sum"
+            "Sum",
+            "Count"
           ],
           "x-ms-enum": {
             "name": "MetricStatisticType",
@@ -452,6 +457,9 @@
           "items": {
             "$ref": "#/definitions/ScaleRuleMetricDimension"
           },
+          "x-ms-identifiers": [
+            "DimensionName"
+          ],
           "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
         },
         "dividePerInstance": {
@@ -487,7 +495,8 @@
           "enum": [
             "ChangeCount",
             "PercentChangeCount",
-            "ExactCount"
+            "ExactCount",
+            "ServiceAllowedNextValue"
           ],
           "x-ms-enum": {
             "name": "ScaleType",
@@ -636,6 +645,9 @@
           "items": {
             "$ref": "#/definitions/ScaleRule"
           },
+          "x-ms-identifiers": [
+            "/metricTrigger/metricName"
+          ],
           "description": "the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified."
         },
         "fixedDate": {
@@ -653,11 +665,13 @@
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription administrator."
+          "description": "a value indicating whether to send email to subscription administrator.",
+          "default": false
         },
         "sendToSubscriptionCoAdministrators": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription co-administrators."
+          "description": "a value indicating whether to send email to subscription co-administrators.",
+          "default": false
         },
         "customEmails": {
           "type": "array",
@@ -710,6 +724,9 @@
           "items": {
             "$ref": "#/definitions/WebhookNotification"
           },
+          "x-ms-identifiers": [
+            "serviceUri"
+          ],
           "description": "the collection of webhook notifications."
         }
       },
@@ -726,6 +743,9 @@
           "items": {
             "$ref": "#/definitions/AutoscaleProfile"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified."
         },
         "notifications": {
@@ -733,6 +753,7 @@
           "items": {
             "$ref": "#/definitions/AutoscaleNotification"
           },
+          "x-ms-identifiers": [],
           "description": "the collection of notifications."
         },
         "enabled": {
@@ -747,6 +768,10 @@
         "targetResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource that the autoscale setting should be added to."
+        },
+        "targetResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource that the autoscale setting should be added to."
         }
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
@@ -854,14 +879,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "AutoscaleSettingNameParameter": {
       "name": "autoscaleSettingName",
       "in": "path",

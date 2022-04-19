@@ -3215,7 +3215,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete virtual machines.(Feature in Preview)"
+            "description": "Optional parameter to force delete virtual machines."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -7538,6 +7538,10 @@
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "Gets the security profile."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the VM from which the restore point was created."
         }
       },
       "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
@@ -7631,32 +7635,30 @@
       },
       "description": "Describes a data disk."
     },
-    "RestorePointProvisioningDetails": {
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the creation time of the restore point."
-        },
-        "totalUsedSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the total size of the data in all the disks which are part of the restore point."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the status of the Create restore point operation."
-        },
-        "statusMessage": {
-          "type": "string",
-          "description": "Gets the status message of the Create restore point operation."
-        }
-      },
-      "description": "Restore Point Provisioning details."
-    },
     "RestorePoint": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
+    "RestorePointProperties": {
+      "type": "object",
+      "properties": {
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        },
         "sourceMetadata": {
           "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
@@ -7681,25 +7683,13 @@
           },
           "description": "Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for more details."
         },
-        "provisioningDetails": {
-          "$ref": "#/definitions/RestorePointProvisioningDetails",
-          "readOnly": true,
-          "description": "Gets the provisioning details set by the server during Create restore point operation."
-        },
-        "excludeDisks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiEntityReference"
-          },
-          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Restore Point details."
+      "description": "The restore point properties."
     },
     "ComputeOperationListResult": {
       "properties": {
@@ -9764,7 +9754,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/linux/disks-types",
+      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/linux/disks-types",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -9818,7 +9808,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk."
+          "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk."
         },
         "diskEncryptionSet": {
           "$ref": "#/definitions/DiskEncryptionSetParameters",
@@ -10019,7 +10009,7 @@
           ],
           "x-ms-enum": {
             "name": "SecurityTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -10093,7 +10083,7 @@
         },
         "certificateUrl": {
           "type": "string",
-          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  \"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>  \"password\":\"<pfx-file-password>\"<br>}"
+          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br> \"data\":\"<Base64-encoded-certificate>\",<br> \"dataType\":\"pfx\",<br> \"password\":\"<pfx-file-password>\"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         }
       },
       "description": "Describes Protocol and thumbprint of Windows Remote Management listener"
@@ -10192,7 +10182,7 @@
       "properties": {
         "certificateUrl": {
           "type": "string",
-          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  \"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>  \"password\":\"<pfx-file-password>\"<br>}"
+          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br> \"data\":\"<Base64-encoded-certificate>\",<br> \"dataType\":\"pfx\",<br> \"password\":\"<pfx-file-password>\"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "certificateStore": {
           "type": "string",
@@ -10228,6 +10218,7 @@
           "description": "Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters."
         },
         "adminPassword": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)"
         },
@@ -10248,7 +10239,7 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
-          "description": "Specifies set of certificates that should be installed onto the virtual machine."
+          "description": "Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "allowExtensionOperations": {
           "type": "boolean",
@@ -10397,7 +10388,7 @@
     },
     "PublicIPAddressSku": {
       "properties": {
-        "publicIPAddressSkuName": {
+        "name": {
           "type": "string",
           "description": "Specify public IP sku name",
           "enum": [
@@ -10409,7 +10400,7 @@
             "modelAsString": true
           }
         },
-        "publicIPAddressSkuTier": {
+        "tier": {
           "type": "string",
           "description": "Specify public IP sku tier",
           "enum": [
@@ -10422,9 +10413,6 @@
           }
         }
       },
-      "required": [
-        "publicIPAddressSkuName"
-      ],
       "description": "Describes the public IP Sku"
     },
     "VirtualMachinePublicIPAddressConfiguration": {
@@ -11530,6 +11518,7 @@
           "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters"
         },
         "adminPassword": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)"
         },
@@ -11550,7 +11539,7 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
-          "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set."
+          "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."

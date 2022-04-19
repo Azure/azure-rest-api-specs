@@ -14,7 +14,7 @@
       }
     ]
   },
-  "basePath": "/api",
+  "basePath": "/catalog/api",
   "schemes": [
     "https"
   ],
@@ -75,6 +75,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -93,15 +99,16 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
-            "description": "An array of GUIDs of entities to create.",
+            "description": "An array of GUIDs of entities to list.",
             "required": true,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           },
           {
             "$ref": "#/parameters/minExtInfo"
@@ -118,6 +125,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -150,6 +163,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -166,7 +185,7 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
             "description": "An array of GUIDs of entities to delete.",
             "required": true,
@@ -174,7 +193,8 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           }
         ],
         "responses": {
@@ -182,6 +202,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -213,6 +239,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -245,6 +277,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -287,6 +325,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -311,6 +355,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -342,6 +392,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasClassification"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -367,6 +423,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -393,6 +455,12 @@
             "description": "An array of classifications for the given entity GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasClassifications"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -429,6 +497,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -464,6 +538,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -503,6 +583,12 @@
             "description": "AtlasEntityWithExtInfo.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -545,6 +631,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -576,6 +668,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -611,6 +709,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -655,6 +759,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -697,6 +807,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -733,6 +849,12 @@
               "items": {
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -774,6 +896,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -801,6 +929,12 @@
               "$ref": "#/definitions/AtlasEntityHeader"
             },
             "description": "AtlasEntityHeader"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -826,6 +960,9 @@
           },
           {
             "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/ignoreTermsAndCategories"
           }
         ],
         "responses": {
@@ -836,6 +973,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossary"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -867,6 +1010,12 @@
             "description": "OK. If glossary creation was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -909,6 +1058,12 @@
                 "$ref": "#/definitions/AtlasGlossaryCategory"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -942,6 +1097,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -968,6 +1129,12 @@
             "description": "OK. If glossary category exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1003,6 +1170,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1025,6 +1198,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary category deletion is successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1064,6 +1243,12 @@
             "description": "OK. If glossary category partial update was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1108,6 +1293,12 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1148,6 +1339,12 @@
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1187,6 +1384,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1216,6 +1419,12 @@
             "description": "OK. If glossary term exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1251,6 +1460,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1273,6 +1488,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term delete was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1315,6 +1536,12 @@
             "description": "OK. If glossary partial update was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1360,6 +1587,12 @@
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1400,6 +1633,12 @@
                 "$ref": "#/definitions/AtlasRelatedObjectId"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1435,6 +1674,12 @@
         "responses": {
           "204": {
             "description": "OK. If the term assignment was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1470,6 +1715,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1505,6 +1756,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1548,6 +1805,12 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1574,6 +1837,12 @@
             "description": "OK. If glossary with given guid exists.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1609,6 +1878,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1631,6 +1906,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary delete was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1670,6 +1951,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryCategory"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1711,6 +1998,12 @@
                 "$ref": "#/definitions/AtlasRelatedCategoryHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1740,6 +2033,12 @@
             "description": "OK. If glossary exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1784,6 +2083,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1827,6 +2132,12 @@
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1866,6 +2177,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1909,6 +2226,12 @@
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1957,6 +2280,12 @@
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1990,6 +2319,12 @@
             "description": "OK. Return the status of import csv operation.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2035,6 +2370,12 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2077,6 +2418,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2131,6 +2478,9 @@
           },
           "Discovery_Query_Taxonomy": {
             "$ref": "./examples/Discovery_Query_Taxonomy.json"
+          },
+          "Discovery_Query_Collection": {
+            "$ref": "./examples/Discovery_Query_Collection.json"
           }
         },
         "parameters": [
@@ -2152,6 +2502,12 @@
             "description": "OK. On successful lookup of the advanced search.",
             "schema": {
               "$ref": "#/definitions/SearchResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2189,6 +2545,57 @@
             "schema": {
               "$ref": "#/definitions/SuggestResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/browse": {
+      "post": {
+        "tags": [
+          "Discovery"
+        ],
+        "description": "Browse entities by path or entity type.",
+        "operationId": "Discovery_Browse",
+        "x-ms-examples": {
+          "Discovery_Browse_Path": {
+            "$ref": "./examples/Discovery_Browse_Path.json"
+          },
+          "Discovery_Browse_EntityType": {
+            "$ref": "./examples/Discovery_Browse_EntityType.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "browseRequest",
+            "description": "An object specifying the browse criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowseRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful get the entities to browse.",
+            "schema": {
+              "$ref": "#/definitions/BrowseResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2225,6 +2632,12 @@
             "schema": {
               "$ref": "#/definitions/AutoCompleteResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2235,7 +2648,7 @@
           "Lineage"
         ],
         "description": "Get lineage info of the entity specified by GUID.",
-        "operationId": "GetLineageGraph",
+        "operationId": "Lineage_GetLineageGraph",
         "x-ms-examples": {
           "GetLineageGraph": {
             "$ref": "./examples/GetLineageGraph.json"
@@ -2267,6 +2680,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2277,7 +2696,7 @@
           "Lineage"
         ],
         "description": "Return immediate next page lineage info about entity with pagination",
-        "operationId": "NextPageLineage",
+        "operationId": "Lineage_NextPageLineage",
         "x-ms-examples": {
           "NextPageLineage": {
             "$ref": "./examples/NextPageLineage.json"
@@ -2308,6 +2727,12 @@
             "description": "OK. If the input is valid.",
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2342,6 +2767,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2373,6 +2804,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2403,6 +2840,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipWithExtInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2425,6 +2868,12 @@
         "responses": {
           "204": {
             "description": "OK. The relationship is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2451,6 +2900,12 @@
             "description": "OK. On successful lookup of the the classification definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasClassificationDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2479,6 +2934,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasClassificationDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2505,6 +2966,12 @@
             "description": "OK. On successful lookup of the the entity definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2533,6 +3000,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntityDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2559,6 +3032,12 @@
             "description": "OK. On successful lookup of the the enum definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasEnumDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2587,6 +3066,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEnumDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2613,6 +3098,12 @@
             "description": "OK. On successful lookup of the the relationship definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2641,6 +3132,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2667,6 +3164,12 @@
             "description": "OK. On successful lookup of the the struct definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasStructDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2695,6 +3198,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasStructDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2721,6 +3230,12 @@
             "description": "OK. On successful lookup of the the type definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasTypeDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2749,6 +3264,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypeDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2771,6 +3292,12 @@
         "responses": {
           "204": {
             "description": "On successful deletion of the requested type definitions"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2807,6 +3334,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2837,6 +3370,12 @@
             "description": "OK. On successful update of requested type definitions.",
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2869,6 +3408,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2897,6 +3442,12 @@
         "responses": {
           "204": {
             "description": "OK. On successful deletion of the requested type definitions."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2931,6 +3482,12 @@
                 "$ref": "#/definitions/AtlasTypeDefHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2961,6 +3518,12 @@
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2990,6 +3553,147 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdate",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdate": {
+            "$ref": "./examples/Collection_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entity",
+            "description": "Atlas entity with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/bulk": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdateBulk",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdateBulk": {
+            "$ref": "./examples/Collection_CreateOrUpdateBulk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entities",
+            "description": "Atlas entities with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/moveHere": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Move existing entities to the target collection.",
+        "operationId": "Collection_MoveEntitiesToCollection",
+        "x-ms-examples": {
+          "Collection_MoveEntitiesToCollection": {
+            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "moveEntitiesRequest",
+            "description": "Entity guids to be moved to target collection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveEntitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4594,64 +5298,6 @@
       "title": "AtlasTypeDef",
       "description": "The definitions of type."
     },
-    "TypeStatistics": {
-      "type": "object",
-      "properties": {
-        "typeStatistics": {
-          "type": "object",
-          "description": "An map with type and corresponding statistics.",
-          "additionalProperties": {
-            "$ref": "#/definitions/TypeStatisticsExtraProperties"
-          }
-        }
-      },
-      "title": "TypeStatistics",
-      "description": "The types and corresponding statistics."
-    },
-    "TypeStatisticsExtraProperties": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The entity count of this type."
-        }
-      },
-      "title": "TypeStatisticsExtraProperties",
-      "description": "The additional properties for types and corresponding statistics."
-    },
-    "AtlasUserSavedSearch": {
-      "type": "object",
-      "title": "AtlasUserSavedSearch",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AtlasBaseModelObject"
-        },
-        {
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The name of the saved search."
-            },
-            "ownerName": {
-              "type": "string",
-              "description": "The owner name of the saved search."
-            },
-            "searchParameters": {
-              "$ref": "#/definitions/SearchParameters"
-            },
-            "searchType": {
-              "$ref": "#/definitions/SavedSearchType"
-            },
-            "uiParameters": {
-              "type": "string",
-              "description": "The UI parameters."
-            }
-          }
-        }
-      ],
-      "description": "User saved search."
-    },
     "Cardinality": {
       "type": "string",
       "title": "Cardinality",
@@ -4683,17 +5329,16 @@
       "title": "ClassificationAssociateRequest",
       "description": "The request for classification association."
     },
-    "Condition": {
-      "type": "string",
-      "title": "Condition",
-      "description": "The enum for condition.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "Condition",
-        "modelAsString": true
+    "MoveEntitiesRequest": {
+      "type": "object",
+      "properties": {
+        "entityGuids": {
+          "type": "array",
+          "description": "An array of entity guids to be moved to target collection.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "DateFormat": {
@@ -4765,54 +5410,6 @@
       },
       "title": "EntityMutationResponse",
       "description": "The mutation response of entity."
-    },
-    "EntityOperation": {
-      "type": "string",
-      "title": "EntityOperation",
-      "description": "The enum of entity operation.",
-      "enum": [
-        "CREATE",
-        "UPDATE",
-        "PARTIAL_UPDATE",
-        "DELETE"
-      ],
-      "x-ms-enum": {
-        "name": "EntityOperation",
-        "modelAsString": true
-      }
-    },
-    "FilterCriteria": {
-      "type": "object",
-      "properties": {
-        "attributeName": {
-          "type": "string",
-          "description": "The name of the attribute."
-        },
-        "attributeValue": {
-          "type": "string",
-          "description": "The value of the attribute."
-        },
-        "condition": {
-          "$ref": "#/definitions/Condition"
-        },
-        "criterion": {
-          "type": "array",
-          "description": "An array of filter criteria.",
-          "items": {
-            "$ref": "#/definitions/FilterCriteria"
-          }
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator"
-        }
-      },
-      "title": "FilterCriteria",
-      "description": "The filter criteria with attributes and condition."
-    },
-    "Format": {
-      "type": "object",
-      "title": "Format",
-      "description": "The format object."
     },
     "LineageDirection": {
       "type": "string",
@@ -4935,32 +5532,6 @@
       "title": "termGuid",
       "description": "The globally unique identifier for glossary term."
     },
-    "Operator": {
-      "type": "string",
-      "title": "Operator",
-      "description": "Supported search operations\nLogical comparison operators can only be used with numbers or dates\nIN, LIKE, startsWith, endsWith, CONTAINS can only be used with strings or text",
-      "enum": [
-        "LT",
-        "GT",
-        "LTE",
-        "GTE",
-        "EQ",
-        "NEQ",
-        "IN",
-        "LIKE",
-        "STARTS_WITH",
-        "ENDS_WITH",
-        "CONTAINS",
-        "CONTAINS_ANY",
-        "CONTAINS_ALL",
-        "IS_NULL",
-        "NOT_NULL"
-      ],
-      "x-ms-enum": {
-        "name": "Operator",
-        "modelAsString": true
-      }
-    },
     "PList": {
       "type": "object",
       "properties": {
@@ -4998,30 +5569,6 @@
       "title": "PList",
       "description": "Paginated-list, for returning search results."
     },
-    "Relation": {
-      "type": "string",
-      "title": "Relation",
-      "description": "The enum of relations.",
-      "enum": [
-        "SEE_ALSO",
-        "SYNONYMS",
-        "ANTONYMS",
-        "PREFERRED_TO_TERMS",
-        "PREFERRED_TERMS",
-        "REPLACEMENT_TERMS",
-        "REPLACED_BY",
-        "TRANSLATION_TERMS",
-        "TRANSLATED_TERMS",
-        "ISA",
-        "CLASSIFIES",
-        "VALID_VALUES",
-        "VALID_VALUES_FOR"
-      ],
-      "x-ms-enum": {
-        "name": "Relation",
-        "modelAsString": true
-      }
-    },
     "RelationshipCategory": {
       "type": "string",
       "title": "RelationshipCategory",
@@ -5054,119 +5601,6 @@
         "name": "RoundingMode",
         "modelAsString": true
       }
-    },
-    "SavedSearchType": {
-      "type": "string",
-      "title": "SavedSearchType",
-      "description": "The enum of saved search type.",
-      "enum": [
-        "BASIC",
-        "ADVANCED"
-      ],
-      "x-ms-enum": {
-        "name": "SavedSearchType",
-        "modelAsString": true
-      }
-    },
-    "SearchFilter": {
-      "type": "object",
-      "properties": {
-        "getCount": {
-          "type": "boolean",
-          "description": "Determines if get the count."
-        },
-        "maxRows": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum of rows."
-        },
-        "params": {
-          "type": "object",
-          "description": "The parameters of the search filter.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "sortBy": {
-          "type": "string",
-          "description": "The sorted by field."
-        },
-        "sortType": {
-          "$ref": "#/definitions/SortType"
-        },
-        "startIndex": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The start index of the search."
-        }
-      },
-      "title": "SearchFilter",
-      "description": "Generic filter, to specify search criteria using name/value pairs."
-    },
-    "SearchParameters": {
-      "type": "object",
-      "properties": {
-        "attributes": {
-          "type": "array",
-          "description": "Attribute values included in the results",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classification": {
-          "type": "string",
-          "description": "The classification to search."
-        },
-        "entityFilters": {
-          "$ref": "#/definitions/FilterCriteria"
-        },
-        "excludeDeletedEntities": {
-          "type": "boolean",
-          "description": "Determines if exclude deleted entities."
-        },
-        "includeClassificationAttributes": {
-          "type": "boolean",
-          "description": "Determines if include classification attributes."
-        },
-        "includeSubClassifications": {
-          "type": "boolean",
-          "description": "Determines if include sub classifications."
-        },
-        "includeSubTypes": {
-          "type": "boolean",
-          "description": "Determines if include sub types."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The limit of the search result."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset of the search."
-        },
-        "query": {
-          "type": "string",
-          "description": "The search query."
-        },
-        "tagFilters": {
-          "$ref": "#/definitions/FilterCriteria"
-        },
-        "termName": {
-          "type": "string",
-          "description": "The name of the term for search."
-        },
-        "typeName": {
-          "type": "string",
-          "description": "The name of the type for search."
-        }
-      },
-      "title": "SearchParameters",
-      "description": "The parameters used for search."
     },
     "SortType": {
       "type": "string",
@@ -5283,77 +5717,6 @@
         "modelAsString": true
       }
     },
-    "AzureCatalogUser": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "User ID of the Azure catalog user."
-        }
-      },
-      "title": "AzureCatalogUser",
-      "description": "Azure catalog user."
-    },
-    "CatalogCreationRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        },
-        "catalogId": {
-          "type": "string",
-          "description": "ID of the catalog."
-        },
-        "creatorUserId": {
-          "type": "string",
-          "description": "User ID or the creator."
-        },
-        "eventHubConnectionString": {
-          "type": "string",
-          "description": "The connection string of the Event Hubs."
-        }
-      },
-      "title": "CatalogCreationRequest",
-      "description": "Request for catalog creation."
-    },
-    "CatalogDeletionRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        }
-      },
-      "title": "CatalogDeletionRequest",
-      "description": "Request for catalog deletion."
-    },
-    "DataScanPermissionCheckRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        },
-        "userId": {
-          "type": "string",
-          "description": "User ID of the catalog."
-        }
-      },
-      "title": "DataScanPermissionCheckRequest",
-      "description": "Request for data scan permission check."
-    },
-    "DataScanPermissionCheckResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "string",
-          "description": "The result of the response."
-        }
-      },
-      "title": "DataScanPermissionCheckResponse",
-      "description": "Response for data scan permission check."
-    },
     "SuggestResult": {
       "type": "object",
       "properties": {
@@ -5366,6 +5729,24 @@
       },
       "title": "SuggestResult",
       "description": "The result item of the search suggest."
+    },
+    "BrowseResult": {
+      "type": "object",
+      "properties": {
+        "@search.count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of browse results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BrowseResultValue"
+          }
+        }
+      },
+      "title": "BrowseResult",
+      "description": "The result item of the browse request."
     },
     "SuggestResultValue": {
       "type": "object",
@@ -5421,14 +5802,14 @@
           "type": "array",
           "description": "The terms assigned to the record.",
           "items": {
-            "$ref": "#/definitions/termSearchResultValue"
+            "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
           "description": "The contacts of the record.",
           "items": {
-            "$ref": "#/definitions/contactSearchResultValue"
+            "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
@@ -5441,6 +5822,67 @@
       },
       "title": "SuggestResultValue",
       "description": "The value item of the search suggest."
+    },
+    "BrowseResultValue": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "description": "The type name of the record."
+        },
+        "id": {
+          "type": "string",
+          "description": "The GUID of the record."
+        },
+        "isLeaf": {
+          "type": "boolean",
+          "description": "If the record is a leaf entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the record."
+        },
+        "owner": {
+          "type": "array",
+          "description": "The owners of the record.",
+          "items": {
+            "$ref": "#/definitions/BrowseResultOwner"
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "The path of the record."
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The qualified name of the record."
+        }
+      },
+      "title": "BrowseResultValue",
+      "description": "The value item of the browse result."
+    },
+    "BrowseResultOwner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The GUID of the owner."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the owner."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The mail of the owner."
+        },
+        "contactType": {
+          "type": "string",
+          "description": "The contact type of the owner. The value will be Owner."
+        }
+      },
+      "title": "BrowseResultOwner",
+      "description": "The value item of the browse owner."
     },
     "SearchResult": {
       "type": "object",
@@ -5510,7 +5952,7 @@
         }
       },
       "title": "Context",
-      "description": "A facet list that consists of index fields assetType ,classification, classificationCategory, contactId, fileExtension, label, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
+      "description": "A facet list that consists of index fields assetType ,classification, contactId, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
     },
     "SearchFacetItemValue": {
       "type": "object",
@@ -5604,14 +6046,14 @@
           "type": "array",
           "description": "The terms assigned to the record.",
           "items": {
-            "$ref": "#/definitions/termSearchResultValue"
+            "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
           "description": "The contacts of the record.",
           "items": {
-            "$ref": "#/definitions/contactSearchResultValue"
+            "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
@@ -5662,7 +6104,7 @@
       },
       "title": "SearchHighlights"
     },
-    "termSearchResultValue": {
+    "TermSearchResultValue": {
       "type": "object",
       "properties": {
         "name": {
@@ -5681,7 +6123,7 @@
       "title": "Context",
       "description": "The context."
     },
-    "contactSearchResultValue": {
+    "ContactSearchResultValue": {
       "type": "object",
       "properties": {
         "id": {
@@ -5748,43 +6190,6 @@
       "title": "AutoCompleteResultValue",
       "description": "The value item of the autocomplete suggest."
     },
-    "Context": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The value of the context."
-        }
-      },
-      "title": "Context",
-      "description": "The context."
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "errorMessage": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "title": "Error",
-      "description": "The error response."
-    },
-    "AtlasError": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message"
-        }
-      },
-      "title": "AtlasError",
-      "description": "The atlas error response."
-    },
     "SearchRequest": {
       "type": "object",
       "properties": {
@@ -5795,7 +6200,7 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset. The default value is 0."
+          "description": "The offset. The default value is 0. The maximum value is 100000."
         },
         "limit": {
           "type": "integer",
@@ -5830,6 +6235,31 @@
       "title": "SearchRequest",
       "description": "The search query of advanced search request."
     },
+    "BrowseRequest": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "description": "The entity type to browse as the root level entry point."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to browse the next level child entities."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of browse items we hope to return. The maximum value is 10000."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The offset. The default value is 0. The maximum value is 100000."
+        }
+      },
+      "title": "BrowseRequest",
+      "description": "The criteria of browse request."
+    },
     "SuggestRequest": {
       "type": "object",
       "properties": {
@@ -5849,161 +6279,6 @@
       },
       "title": "SuggestRequest",
       "description": "The query of suggest request."
-    },
-    "HookNotificationType": {
-      "type": "string",
-      "enum": [
-        "TYPE_CREATE",
-        "TYPE_UPDATE",
-        "ENTITY_CREATE",
-        "ENTITY_PARTIAL_UPDATE",
-        "ENTITY_FULL_UPDATE",
-        "ENTITY_DELETE",
-        "ENTITY_CREATE_V2",
-        "ENTITY_PARTIAL_UPDATE_V2",
-        "ENTITY_FULL_UPDATE_V2",
-        "ENTITY_DELETE_V2"
-      ],
-      "x-ms-enum": {
-        "name": "HookNotificationType",
-        "modelAsString": true
-      },
-      "title": "HookNotificationType",
-      "description": "Enum of hook notification type. Different behavior will be invoked by the value."
-    },
-    "HookNotification": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        }
-      },
-      "title": "HookNotification",
-      "description": "The base class for hook notification."
-    },
-    "EntityCreateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityCreateRequestV2",
-      "description": "The class for hook notification for type ENTITY_CREATE_V2."
-    },
-    "EntityUpdateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityUpdateRequestV2",
-      "description": "The class for hook notification for type ENTITY_FULL_UPDATE_V2."
-    },
-    "EntityPartialUpdateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entityId": {
-          "$ref": "#/definitions/AtlasObjectId"
-        },
-        "entity": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityPartialUpdateRequestV2",
-      "description": "The class for hook notification for type ENTITY_PARTIAL_UPDATE_V2."
-    },
-    "EntityDeleteRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AtlasObjectId"
-          }
-        }
-      },
-      "title": "EntityDeleteRequestV2",
-      "description": "The class for hook notification for type ENTITY_DELETE_V2."
-    },
-    "RoleAssignmentEntry": {
-      "type": "object",
-      "title": "RoleAssignmentEntry",
-      "description": "A role assignment.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The object ID of the AAD user."
-        },
-        "role": {
-          "type": "string",
-          "description": "The name of the role."
-        }
-      }
-    },
-    "UpdateRoleAssignmentRequest": {
-      "type": "object",
-      "title": "UpdateRoleAssignmentRequest",
-      "description": "The request for role assignment update operations.",
-      "properties": {
-        "roleAssignmentList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentEntry"
-          }
-        }
-      }
-    },
-    "ListRoleAssignmentResponse": {
-      "type": "object",
-      "title": "ListRoleAssignmentResponse",
-      "description": "The response of listing role assignments.",
-      "properties": {
-        "roleAssignmentList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentEntry"
-          }
-        }
-      }
     },
     "ImportCSVOperation": {
       "type": "object",
@@ -6081,177 +6356,28 @@
       "title": "lastModifiedTS",
       "description": "ETag for concurrency control."
     },
-    "xml_ns0_PList": {
-      "type": "object",
-      "title": "PList",
-      "xml": {
-        "name": "PList",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "list": {
-              "type": "array",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "An array of objects.",
-              "items": {
-                "type": "object",
-                "properties": {}
-              }
-            },
-            "pageSize": {
-              "type": "integer",
-              "format": "int32",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The size of the page."
-            },
-            "sortBy": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The sorted by field."
-            },
-            "sortType": {
-              "$ref": "#/definitions/xml_ns0_sortType"
-            },
-            "startIndex": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start index of the page."
-            },
-            "totalCount": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The total count of items."
-            }
-          }
+    "ErrorResponse": {
+      "description": "An error response from the service",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "The request ID."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message."
         }
-      ],
-      "description": "Paginated-list, for returning search results."
-    },
-    "xml_ns0_searchFilter": {
-      "type": "object",
-      "title": "searchFilter",
-      "xml": {
-        "name": "searchFilter",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "getCount": {
-              "type": "boolean",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "Determines if get the count."
-            },
-            "maxRows": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The maximum of rows."
-            },
-            "params": {
-              "type": "object",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The parameter of the search.",
-              "properties": {}
-            },
-            "sortBy": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The sorted by field."
-            },
-            "sortType": {
-              "$ref": "#/definitions/xml_ns0_sortType"
-            },
-            "startIndex": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start index of the search."
-            }
-          }
-        }
-      ],
-      "description": "Generic filter, to specify search criteria using name/value pairs."
-    },
-    "xml_ns0_sortType": {
-      "type": "string",
-      "title": "sortType",
-      "description": "to specify whether the result should be sorted? If yes, whether asc or desc.",
-      "enum": [
-        "NONE",
-        "ASC",
-        "DESC"
-      ],
-      "x-ms-enum": {
-        "name": "xml_ns0_sortType",
-        "modelAsString": true
       }
-    },
-    "xml_ns0_timeBoundary": {
-      "type": "object",
-      "title": "timeBoundary",
-      "xml": {
-        "name": "timeBoundary",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "endTime": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The end of the time boundary."
-            },
-            "startTime": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start of the time boundary."
-            },
-            "timeZone": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The timezone of the time boundary."
-            }
-          }
-        }
-      ],
-      "description": "Captures time-boundary details"
     }
   },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
-      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.catalog.purview.azure.com",
+      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
@@ -6657,6 +6783,15 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
+    "ignoreTermsAndCategories": {
+      "name": "ignoreTermsAndCategories",
+      "description": "Whether ignore terms and categories",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
     "purviewAPIVersion": {
       "name": "api-version",
       "description": "Version of Purview APIs",
@@ -6691,6 +6826,14 @@
         "name": "type",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "collection": {
+      "name": "collection",
+      "description": "the collection unique name",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

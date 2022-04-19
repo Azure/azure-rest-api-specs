@@ -355,6 +355,9 @@
         "x-ms-examples": {
           "CreateEventHubEventSource": {
             "$ref": "./examples/EventSourcesCreateEventHub.json"
+          },
+          "EventSourcesCreateEventHubWithCustomEnquedTime": {
+            "$ref": "./examples/EventSourcesCreateEventHubWithCustomEnquedTime.json"
           }
         },
         "description": "Create or update an event source under the specified environment.",
@@ -1098,7 +1101,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1141,6 +1147,148 @@
               "readOnly": true
             }
           }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation, including metric specifications.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "OperationProperties",
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include metric specifications.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "description": "A list of Azure Monitoring log definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "dimensions": {
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "availabilities": {
+          "description": "Retention policies of a resource metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "x-ms-identifiers": [
+            "timeGrain"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "The specification of an Azure Monitoring log.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Log name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Log display name.",
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
         }
       }
     },
@@ -1350,7 +1498,11 @@
           "x-ms-enum": {
             "name": "EnvironmentKind",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1410,7 +1562,6 @@
       "properties": {
         "kind": {
           "type": "string",
-          "readOnly": true,
           "description": "The kind of the environment.",
           "enum": [
             "Gen1",
@@ -1429,6 +1580,9 @@
           "description": "Key-value pairs of additional properties for the environment."
         }
       },
+      "required": [
+        "kind"
+      ],
       "description": "Parameters supplied to the Update Environment operation."
     },
     "Gen1EnvironmentUpdateParameters": {
@@ -1569,6 +1723,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to partition data in the environment. Currently, only a single partition key property is supported."
         }
       },
@@ -1584,6 +1741,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to define the environment's time series id."
         },
         "storageConfiguration": {
@@ -1648,6 +1808,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to define the environment's time series id."
         },
         "storageConfiguration": {
@@ -1843,6 +2006,29 @@
         }
       }
     },
+    "IngressStartAtProperties": {
+      "type": "object",
+      "description": "An object that contains the details about the starting point in time to ingest events.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the ingressStartAt, It can be \"EarliestAvailable\", \"EventSourceCreationTime\", \"CustomEnqueuedTime\".",
+          "enum": [
+            "EarliestAvailable",
+            "EventSourceCreationTime",
+            "CustomEnqueuedTime"
+          ],
+          "x-ms-enum": {
+            "name": "IngressStartAtType",
+            "modelAsString": true
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "ISO8601 UTC datetime with seconds precision (milliseconds are optional), specifying the date and time that will be the starting point for Events to be consumed."
+        }
+      }
+    },
     "EventSourceCreateOrUpdateParameters": {
       "discriminator": "kind",
       "properties": {
@@ -1915,7 +2101,6 @@
       "properties": {
         "kind": {
           "type": "string",
-          "readOnly": true,
           "description": "The kind of the event source.",
           "enum": [
             "Microsoft.EventHub",
@@ -1934,6 +2119,9 @@
           "description": "Key-value pairs of additional properties for the event source."
         }
       },
+      "required": [
+        "kind"
+      ],
       "description": "Parameters supplied to the Update Event Source operation."
     },
     "EventHubEventSourceUpdateParameters": {
@@ -2046,6 +2234,15 @@
         "timestampPropertyName": {
           "type": "string",
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
+        },
+        "localTimestamp": {
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
+        },
+        "ingressStartAt": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IngressStartAtProperties",
+          "description": "An object that contains the details about the starting point in time to ingest events."
         }
       },
       "allOf": [
@@ -2215,10 +2412,6 @@
         "timestampPropertyName": {
           "type": "string",
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
-        },
-        "localTimestamp": {
-          "$ref": "#/definitions/LocalTimestamp",
-          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
         }
       }
     },
@@ -2314,6 +2507,9 @@
           "items": {
             "$ref": "#/definitions/ReferenceDataSetKeyProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of key properties for the reference data set."
         },
         "dataStringComparisonBehavior": {
@@ -2420,7 +2616,11 @@
       "properties": {
         "principalObjectId": {
           "type": "string",
-          "description": "The objectId of the principal in Azure Active Directory."
+          "description": "The objectId of the principal in Azure Active Directory.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "description": {
           "type": "string",
@@ -2503,6 +2703,7 @@
             "$ref": "#/definitions/CloudErrorBody",
             "description": "Describes a particular API error with an error code and a message."
           },
+          "x-ms-identifiers": [],
           "description": "Contains nested errors that are related to this error."
         }
       },

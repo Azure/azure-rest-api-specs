@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}": {
       "put": {
         "description": "Creates or updates an log search rule.",
         "tags": [
@@ -46,7 +46,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -104,7 +104,7 @@
         "operationId": "ScheduledQueryRules_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -147,7 +147,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -193,7 +193,7 @@
         "operationId": "ScheduledQueryRules_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -269,7 +269,7 @@
         "x-ms-odata": "#/definitions/LogSearchRuleResource"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -278,7 +278,7 @@
         "description": "List the Log Search rules within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -318,6 +318,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -343,6 +344,7 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -385,8 +387,10 @@
       "description": "The Log Search Rule resource."
     },
     "LogSearchRuleResourcePatch": {
+      "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -401,6 +405,7 @@
       "description": "The log search rule resource for patch operations."
     },
     "LogSearchRuleResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -541,7 +546,7 @@
         "name": "ConditionalOperator",
         "modelAsString": true
       },
-      "description": "Result Condition Evaluation criteria. Supported Values - 'GreaterThan' or 'LessThan' or 'Equal'."
+      "description": "Result Condition Evaluation criteria."
     },
     "MetricTriggerType": {
       "type": "string",
@@ -583,6 +588,7 @@
       "description": "Set value to 'ResultAccount'"
     },
     "LogSearchRule": {
+      "type": "object",
       "description": "Log Search Rule Definition",
       "properties": {
         "createdWithApiVersion": {
@@ -660,6 +666,7 @@
       ]
     },
     "LogSearchRulePatch": {
+      "type": "object",
       "description": "Log Search Rule Definition for Patching",
       "properties": {
         "enabled": {
@@ -769,6 +776,9 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Dimensions for creating metric"
         }
       },
@@ -791,6 +801,9 @@
           "items": {
             "$ref": "#/definitions/Criteria"
           },
+          "x-ms-identifiers": [
+            "metricName"
+          ],
           "description": "Criteria of Metric"
         }
       },
@@ -824,14 +837,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "RuleNameParameter": {
       "name": "ruleName",
       "in": "path",

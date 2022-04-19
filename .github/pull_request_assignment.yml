@@ -54,10 +54,21 @@
       - "specification/network/**"
     reviewers:
       - lirenhe
+      - raych1
 
 
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
+    paths: "specification/common-types/**"
+    reviewers:
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+   
+      
+- rule:
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
     reviewers:
       - raych1
       
@@ -69,7 +80,7 @@
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - zhenglaizhang
+      - raych1
       
 - rule:
     paths: "specification/signalr/**"
@@ -84,7 +95,6 @@
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - yungezz
 
 - rule:
     paths:
@@ -96,19 +106,13 @@
     paths:
       - "specification/authorization/**"
     reviewers:
-      - qianwens
+      - ruowan
 
 - rule:
     paths:
       - "specification/datafactory/**"
     reviewers:
-      - qianwens
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - weidongxu-microsoft
+      - leni-msft
 
 - rule:
     paths:
@@ -130,22 +134,10 @@
 
 - rule:
     paths:
-      - "specification/@(containerservice|containerinstance)/**"
-    reviewers:
-      - PhoenixHe-msft
-
-- rule:
-    paths:
       - "specification/mixedreality/**"
       - "specification/hdinsight/**"
     reviewers:
       - leni-msft
-
-- rule:
-    paths:
-      - "specification/portal/**"
-    reviewers:
-      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -154,30 +146,20 @@
       - weidongxu-microsoft
       
 - rule:
-    paths:
-      - "specification/testbase/**"
+    paths: 
+      - "specification/securityinsights/**"
     reviewers:
-      - PhoenixHe-msft
+      - dw511214992
       
-- rule:
-    paths:
-      - "specification/servicelinker/**"
-    reviewers:
-      - raych1
-      
-- rule:
-    paths:
-      - "specification/keyvault/**"
-    reviewers:
-      - zhenglaizhang
 
 - rule:
-    paths: 
-      - "specification/azurestack/**"
-      - "specification/automation/**"
+    paths:
+      - "specification/videoanalyzer/resource-manager/**"
+      - "specification/cognitiveservices/resource-manager/**"
+      - "specification/dataprotection/**"
     reviewers:
       - xiaoxuqi-ms
-
+      
 - rule:
     paths:
       - "documentation/**"
@@ -195,25 +177,25 @@
       - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - PhoenixHe-msft
       - raych1
-      - zhenglaizhang
 
 - rule:
     # manager-plane PR
     paths:
       - "**"
     reviewers:
-      - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
       - raych1
-      - ChenTanyi
       - akning-ms
       - leni-msft
-      - qianwens
       - ruowan
       - jianyexi
-      - zhenglaizhang
       - chunyu3
+      - changlong-liu
+      - msyyc
+      - qiaozha
+      - dw511214992
+      - honghr
+      - tianxchen-ms

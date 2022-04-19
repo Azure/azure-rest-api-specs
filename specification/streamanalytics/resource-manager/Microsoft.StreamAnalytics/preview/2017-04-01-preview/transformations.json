@@ -111,6 +111,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -171,6 +177,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -214,6 +226,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -222,6 +240,7 @@
   "definitions": {
     "Transformation": {
       "description": "A transformation object, containing all information associated with the named transformation. All transformations are contained under a streaming job.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -237,6 +256,7 @@
     },
     "TransformationProperties": {
       "description": "The properties that are associated with a transformation.",
+      "type": "object",
       "properties": {
         "streamingUnits": {
           "type": "integer",
@@ -256,6 +276,7 @@
     },
     "SubResource": {
       "description": "The base sub-resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,

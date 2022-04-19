@@ -946,6 +946,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.",
+        "x-ms-examples": {
+          "IntegrationRuntimes_OutboundNetworkDependenciesEndpoints": {
+            "$ref": "./examples/IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo": {
       "post": {
         "tags": [
@@ -4607,7 +4652,10 @@
           "description": "List of integration runtime status.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -4826,7 +4874,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5012,6 +5061,28 @@
         "hostName": {
           "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
           "type": "string"
+        },
+        "clientId": {
+          "description": "GitHub bring your own app client id.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
+        }
+      }
+    },
+    "GitHubClientSecret": {
+      "description": "Client secret information for factory's bring your own app repository configuration.",
+      "type": "object",
+      "properties": {
+        "byoaSecretAkvUrl": {
+          "description": "Bring your own app client secret AKV URL.",
+          "type": "string"
+        },
+        "byoaSecretName": {
+          "description": "Bring your own app client secret name in AKV.",
+          "type": "string"
         }
       }
     },
@@ -5038,6 +5109,10 @@
         "gitHubClientId": {
           "description": "GitHub application client ID.",
           "type": "string"
+        },
+        "gitHubClientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
         },
         "gitHubAccessTokenBaseUrl": {
           "description": "GitHub access token base URL.",
@@ -5131,6 +5206,24 @@
           "$ref": "#/definitions/EncryptionConfiguration",
           "description": "Properties to enable Customer Managed Key for the factory."
         },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FactoryUpdateProperties": {
+      "description": "Factory update resource properties.",
+      "type": "object",
+      "properties": {
         "publicNetworkAccess": {
           "description": "Whether or not public network access is allowed for the data factory.",
           "enum": [
@@ -5328,6 +5421,11 @@
         "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryUpdateProperties",
+          "description": "Properties of update the factory."
         }
       }
     },
@@ -5533,14 +5631,16 @@
           "description": "List of filters.",
           "items": {
             "$ref": "#/definitions/RunQueryFilter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "orderBy": {
           "type": "array",
           "description": "List of OrderBy option.",
           "items": {
             "$ref": "#/definitions/RunQueryOrderBy"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5655,7 +5755,10 @@
           "description": "List of pipeline runs.",
           "items": {
             "$ref": "#/definitions/PipelineRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "runId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5732,7 +5835,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of a pipeline run.",
+          "description": "The status of a pipeline run. Possible values: Queued, InProgress, Succeeded, Failed, Canceling, Cancelled",
           "type": "string",
           "readOnly": true
         },
@@ -5764,6 +5867,16 @@
           "description": "The type of the entity that started the run.",
           "type": "string",
           "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The name of the pipeline that triggered the run, if any.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The run id of the pipeline that triggered the run, if any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5779,7 +5892,10 @@
           "description": "List of activity runs.",
           "items": {
             "$ref": "#/definitions/ActivityRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "pipelineRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5875,7 +5991,10 @@
           "description": "List of trigger runs.",
           "items": {
             "$ref": "#/definitions/TriggerRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "triggerRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5972,7 +6091,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of Data Factory operations supported by the Data Factory resource provider."
+          "description": "List of Data Factory operations supported by the Data Factory resource provider.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -6040,14 +6162,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6110,14 +6238,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dimensions": {
           "description": "Defines the metric dimension.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6197,7 +6329,10 @@
           "description": "List of exposure control features.",
           "items": {
             "$ref": "#/definitions/ExposureControlRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6227,7 +6362,10 @@
           "description": "List of exposure control feature values.",
           "items": {
             "$ref": "#/definitions/ExposureControlResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6345,19 +6483,35 @@
           "description": "Data flow instance.",
           "$ref": "#/definitions/DataFlowDebugResource"
         },
+        "dataFlows": {
+          "description": "List of Data flows",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlowDebugResource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "datasets": {
           "type": "array",
           "description": "List of datasets.",
           "items": {
             "$ref": "#/definitions/DatasetDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services.",
           "items": {
             "$ref": "#/definitions/LinkedServiceDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "staging": {
           "description": "Staging info for debug session.",
@@ -6372,7 +6526,10 @@
               "description": "Source setting for data flow debug.",
               "items": {
                 "$ref": "#/definitions/DataFlowSourceSetting"
-              }
+              },
+              "x-ms-identifiers": [
+                "sourceName"
+              ]
             },
             "parameters": {
               "description": "Data flow parameters.",
@@ -6487,7 +6644,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "dataFlowName",
+            "sessionId"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -6595,7 +6756,11 @@
           "description": "Data flow reference type.",
           "enum": [
             "DataFlowReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -6604,6 +6769,10 @@
         "datasetParameters": {
           "type": "object",
           "description": "Reference data flow parameters from dataset."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Data flow parameters"
         }
       },
       "additionalProperties": {
@@ -6679,7 +6848,11 @@
           "description": "Managed Virtual Network reference type.",
           "enum": [
             "ManagedVirtualNetworkReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ManagedVirtualNetworkReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -6868,6 +7041,52 @@
           "readOnly": true
         }
       }
+    },
+    "CredentialReference": {
+      "description": "Credential reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Credential reference type.",
+          "enum": [
+            "CredentialReference"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference credential name."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "CredentialResource": {
+      "description": "Credential resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Credential.json#/definitions/Credential",
+          "description": "Properties of credentials."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {

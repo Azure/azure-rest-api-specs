@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/default",
+            "name": "default",
+            "properties": {
+              "timeInWeek": [
+                {
+                  "day": "Monday",
+                  "hourSlots": [
+                    1,
+                    2
+                  ]
+                }
+              ],
+              "notAllowedTime": [
+                {
+                  "start": "2020-11-26T03:00:00Z",
+                  "end": "2020-11-30T12:00:00Z"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

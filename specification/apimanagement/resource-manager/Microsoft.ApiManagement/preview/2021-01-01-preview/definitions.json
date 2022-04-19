@@ -3024,7 +3024,7 @@
         },
         "identityClientId": {
           "type": "string",
-          "description": "SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret."
+          "description": "Null for SystemAssignedIdentity or Client Id for UserAssignedIdentity , which will be used to access key vault secret."
         }
       },
       "description": "Create keyVault contract details."
@@ -3715,6 +3715,10 @@
         "typeName": {
           "type": "string",
           "description": "Type name defined by the schema."
+        },
+        "examples": {
+          "$ref": "#/definitions/ParameterExamplesContract",
+          "description": "Exampled defined for the parameter."
         }
       },
       "required": [
@@ -3722,6 +3726,33 @@
         "type"
       ],
       "description": "Operation parameters details."
+    },
+    "ParameterExamplesContract": {
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterExampleContract",
+        "description": "Parameter example."
+      },
+      "description": "Parameter examples."
+    },
+    "ParameterExampleContract": {
+      "description": "Parameter example.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Short description for the example"
+        },
+        "description": {
+          "type": "string",
+          "description": "Long description for the example"
+        },
+        "value": {
+          "description": "Example value. May be a primitive value, or an object."
+        },
+        "externalValue": {
+          "type": "string",
+          "description": "A URL that points to the literal example"
+        }
+      }
     },
     "PipelineDiagnosticSettings": {
       "properties": {
@@ -4687,10 +4718,6 @@
           "type": "string",
           "description": "Specifies a registered or custom content type for this representation, e.g. application/xml."
         },
-        "sample": {
-          "type": "string",
-          "description": "An example of the representation."
-        },
         "schemaId": {
           "type": "string",
           "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'."
@@ -4986,16 +5013,7 @@
       "description": "API Schema create or update contract Properties."
     },
     "SchemaDocumentProperties": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Json escaped string defining the document representing the Schema. Used for schemas other than Swagger/OpenAPI."
-        },
-        "definitions": {
-          "type": "object",
-          "description": "Types definitions. Used for Swagger/OpenAPI schemas only, null otherwise."
-        }
-      },
+      "type": "object",
       "description": "Schema Document Properties."
     },
     "SubscriptionCollection": {

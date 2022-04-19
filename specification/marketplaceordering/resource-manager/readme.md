@@ -67,6 +67,11 @@ These settings apply only when `--tag=package-2015-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2015-06-01'
 input-file:
 - Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.UnsupportedMediaTypeErrorResponse.properties.Message
+  suppress: R3016
+  reason: This requires a change in code thats in production for several years
 ```
 
 
@@ -84,6 +89,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

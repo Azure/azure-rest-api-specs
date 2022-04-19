@@ -1575,6 +1575,9 @@
           "description": "The name of the aggregation function to use.",
           "type": "string",
           "enum": [
+            "Avg",
+            "Max",
+            "Min",
             "Sum"
           ],
           "x-ms-enum": {
@@ -2626,7 +2629,8 @@
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataset"
       ]
     },
     "QueryDefinition": {
@@ -2672,7 +2676,8 @@
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataset"
       ]
     },
     "QueryTimePeriod": {
@@ -2708,10 +2713,6 @@
             "modelAsString": true
           }
         },
-        "configuration": {
-          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
-          "$ref": "#/definitions/QueryDatasetConfiguration"
-        },
         "aggregation": {
           "type": "object",
           "description": "Dictionary of aggregation expression to use in the query. The key of each item in the dictionary is the alias for the aggregated column. Query can have up to 2 aggregation clauses.",
@@ -2731,7 +2732,7 @@
         },
         "filter": {
           "type": "object",
-          "description": "Has filter expression to use in the query.",
+          "description": "The filter expression to use in the query. Please reference our Query API REST documentation for how to properly format the filter.",
           "$ref": "#/definitions/QueryFilter"
         }
       }
@@ -2806,6 +2807,9 @@
           "description": "The name of the aggregation function to use.",
           "type": "string",
           "enum": [
+            "Avg",
+            "Max",
+            "Min",
             "Sum"
           ],
           "x-ms-enum": {

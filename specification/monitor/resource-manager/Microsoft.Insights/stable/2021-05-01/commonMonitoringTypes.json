@@ -1,0 +1,102 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01",
+    "title": "Common Monitoring types"
+  },
+  "paths": {},
+  "definitions": {
+    "LocalizableString": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "MetricUnit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true
+      }
+    },
+    "ErrorContract": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "RegionParameter": {
+      "name": "region",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The region where the metrics you want reside.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamespaceParameter": {
+      "name": "metricnamespace",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Metric namespace where the metrics you want reside.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -5,23 +5,37 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.security
-  package-name: azure-mgmt-security
-  package-version: 0.1.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.security
+package-name: azure-mgmt-security
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
+
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/security/azure-mgmt-security
+
+```yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.AadConnectivityState.properties.connectivityState
+    transform: > 
+        $['x-ms-enum']['name'] = 'AadConnectivityStateEnum';
+  - from: swagger-document
+    where: $.definitions.ExternalSecuritySolutionKind.properties.kind
+    transform: > 
+        $['x-ms-enum']['name'] = 'ExternalSecuritySolutionKindEnum';
+  - from: jitNetworkAccessPolicies.json
+    where: $.definitions.JitNetworkAccessPortRule.properties.protocol
+    transform: > 
+        $['x-ms-enum']['name'] = 'protocolEnum';
+  - from: alerts.json
+    where: $.definitions.AlertSimulatorRequestProperties.properties.kind
+    transform: > 
+        $['x-ms-enum']['name'] = 'kindEnum';
 ```

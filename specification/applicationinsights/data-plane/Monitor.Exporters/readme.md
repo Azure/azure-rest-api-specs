@@ -42,3 +42,17 @@ input-file:
   - preview/2020-09-15_Preview/swagger.json
 ```
 
+```yaml
+openapi-type: data-plane
+tag: v2.1
+```
+
+### Tag: v2.1
+
+These settings apply only when `--tag=v2.1` is specified on the command line.
+
+```yaml $(tag) == 'v2.1'
+input-file:
+  - preview/v2.1/swagger.json
+```
+

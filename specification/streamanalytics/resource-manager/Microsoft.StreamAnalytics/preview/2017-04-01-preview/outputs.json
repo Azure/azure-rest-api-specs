@@ -53,6 +53,12 @@
           "Create a DocumentDB output": {
             "$ref": "./examples/Output_Create_DocumentDB.json"
           },
+          "Create an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Create_DataWarehouse.json"
+          },
+          "Create an Azure Function output": {
+            "$ref": "./examples/Output_Create_AzureFunction.json"
+          },
           "Create an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Create_EventHub_JSON.json"
           },
@@ -135,6 +141,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -156,6 +168,12 @@
           },
           "Update a DocumentDB output": {
             "$ref": "./examples/Output_Update_DocumentDB.json"
+          },
+          "Update an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Update_DataWarehouse.json"
+          },
+          "Update an Azure Function output": {
+            "$ref": "./examples/Output_Update_AzureFunction.json"
           },
           "Update an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Update_EventHub.json"
@@ -219,6 +237,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -256,6 +280,12 @@
           },
           "204": {
             "description": "The output does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -329,6 +359,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -371,6 +407,12 @@
             "description": "Successfully listed the outputs under the specified streaming job.",
             "schema": {
               "$ref": "#/definitions/OutputListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -426,6 +468,12 @@
           },
           "202": {
             "description": "The test request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -435,6 +483,7 @@
   "definitions": {
     "Output": {
       "description": "An output object, containing all information associated with the named output. All outputs are contained under a streaming job.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -450,6 +499,7 @@
     },
     "OutputProperties": {
       "description": "The properties that are associated with an output.",
+      "type": "object",
       "properties": {
         "datasource": {
           "$ref": "#/definitions/OutputDataSource",
@@ -479,6 +529,7 @@
     },
     "OutputDataSource": {
       "description": "Describes the data source that output will be written to.",
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -490,8 +541,36 @@
         "type"
       ]
     },
+    "RawOutputDatasource": {
+      "description": "Describes a raw output data source. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an output of this data source type to an existing job.",
+      "type": "object",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that are associated with a raw output. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/RawOutputDatasourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RawOutputDatasourceProperties": {
+      "description": "The properties that are associated with a raw output.",
+      "type": "object",
+      "properties": {
+        "payloadUri": {
+          "description": "The SAS URL to a blob where the output should be written. If this property is not set, output data will be written into a temporary storage, and a SAS URL to that temporary storage will be included in the result.",
+          "type": "string"
+        }
+      }
+    },
     "BlobOutputDataSource": {
       "description": "Describes a blob output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
         {
@@ -508,20 +587,16 @@
     },
     "BlobOutputDataSourceProperties": {
       "description": "The properties that are associated with a blob output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/BlobDataSourceProperties"
         }
-      ],
-      "properties": {
-        "authenticationMode": {
-          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
-          "description": "Authentication Mode."
-        }
-      }
+      ]
     },
     "AzureTableOutputDataSource": {
       "description": "Describes an Azure Table output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.Storage/Table",
       "allOf": [
         {
@@ -538,6 +613,7 @@
     },
     "AzureTableOutputDataSourceProperties": {
       "description": "The properties that are associated with an Azure Table output.",
+      "type": "object",
       "properties": {
         "accountName": {
           "type": "string",
@@ -575,6 +651,7 @@
     },
     "EventHubOutputDataSource": {
       "description": "Describes an Event Hub output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
       "allOf": [
         {
@@ -591,6 +668,7 @@
     },
     "EventHubV2OutputDataSource": {
       "description": "Describes an Event Hub output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
       "allOf": [
         {
@@ -607,6 +685,7 @@
     },
     "EventHubOutputDataSourceProperties": {
       "description": "The properties that are associated with an Event Hub output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/EventHubDataSourceProperties"
@@ -627,6 +706,7 @@
     },
     "AzureSqlDatabaseOutputDataSource": {
       "description": "Describes an Azure SQL database output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
         {
@@ -643,6 +723,7 @@
     },
     "AzureSqlDatabaseOutputDataSourceProperties": {
       "description": "The properties that are associated with an Azure SQL database output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlDatabaseDataSourceProperties"
@@ -652,6 +733,7 @@
     },
     "AzureSynapseOutputDataSource": {
       "description": "Describes an Azure Synapse output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/DataWarehouse",
       "allOf": [
         {
@@ -668,6 +750,7 @@
     },
     "AzureSynapseOutputDataSourceProperties": {
       "description": "The properties that are associated with an Azure Synapse output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSynapseDataSourceProperties"
@@ -677,6 +760,7 @@
     },
     "AzureSynapseDataSourceProperties": {
       "description": "The properties that are associated with an Azure SQL database data source.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "string",
@@ -702,6 +786,7 @@
     },
     "DocumentDbOutputDataSource": {
       "description": "Describes a DocumentDB output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.Storage/DocumentDB",
       "allOf": [
         {
@@ -718,6 +803,7 @@
     },
     "DocumentDbOutputDataSourceProperties": {
       "description": "The properties that are associated with a DocumentDB output.",
+      "type": "object",
       "properties": {
         "accountId": {
           "type": "string",
@@ -747,6 +833,7 @@
     },
     "AzureFunctionOutputDataSource": {
       "description": "Defines the metadata of AzureFunctionOutputDataSource",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.AzureFunction",
       "allOf": [
         {
@@ -763,6 +850,7 @@
     },
     "AzureFunctionOutputDataSourceProperties": {
       "description": "The properties that are associated with a DocumentDB output.",
+      "type": "object",
       "properties": {
         "functionAppName": {
           "description": "The name of your Azure Functions app.",
@@ -788,6 +876,7 @@
     },
     "ServiceBusQueueOutputDataSource": {
       "description": "Describes a Service Bus Queue output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",
       "allOf": [
         {
@@ -804,6 +893,7 @@
     },
     "ServiceBusQueueOutputDataSourceProperties": {
       "description": "The properties that are associated with a Service Bus Queue output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
@@ -831,6 +921,7 @@
     },
     "ServiceBusTopicOutputDataSource": {
       "description": "Describes a Service Bus Topic output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Topic",
       "allOf": [
         {
@@ -847,6 +938,7 @@
     },
     "ServiceBusTopicOutputDataSourceProperties": {
       "description": "The properties that are associated with a Service Bus Topic output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
@@ -874,6 +966,7 @@
     },
     "PowerBIOutputDataSource": {
       "description": "Describes a Power BI output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "PowerBI",
       "allOf": [
         {
@@ -890,6 +983,7 @@
     },
     "PowerBIOutputDataSourceProperties": {
       "description": "The properties that are associated with a Power BI output.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/OAuthBasedDataSourceProperties"
@@ -920,6 +1014,7 @@
     },
     "AzureDataLakeStoreOutputDataSource": {
       "description": "Describes an Azure Data Lake Store output data source.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.DataLake/Accounts",
       "allOf": [
         {
@@ -936,6 +1031,7 @@
     },
     "AzureDataLakeStoreOutputDataSourceProperties": {
       "description": "The properties that are associated with an Azure Data Lake Store.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/OAuthBasedDataSourceProperties"
@@ -969,6 +1065,8 @@
       }
     },
     "OutputListResult": {
+      "description": "Object containing a list of outputs under a streaming job.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -983,11 +1081,11 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      },
-      "description": "Object containing a list of outputs under a streaming job."
+      }
     },
     "AzureSqlDatabaseDataSourceProperties": {
       "description": "The properties that are associated with an Azure SQL database data source.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "string",
@@ -1025,6 +1123,7 @@
     },
     "OAuthBasedDataSourceProperties": {
       "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
+      "type": "object",
       "properties": {
         "refreshToken": {
           "type": "string",
@@ -1042,6 +1141,7 @@
     },
     "SubResource": {
       "description": "The base sub-resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,

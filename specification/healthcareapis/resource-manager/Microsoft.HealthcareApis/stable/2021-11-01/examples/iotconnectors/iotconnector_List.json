@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "api-version": "2021-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "blue",
+            "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "properties": {
+              "provisioningState": "Creating",
+              "ingestionEndpointConfiguration": {
+                "eventHubName": "MyEventHubName",
+                "consumerGroup": "ConsumerGroupA",
+                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
+              },
+              "deviceMapping": {
+                "content": {
+                  "templateType": "CollectionContent",
+                  "template": [
+                    {
+                      "templateType": "JsonPathContent",
+                      "template": {
+                        "typeName": "heartrate",
+                        "typeMatchExpression": "$..[?(@heartrate)]",
+                        "deviceIdExpression": "$.deviceid",
+                        "timestampExpression": "$.measurementdatetime",
+                        "values": [
+                          {
+                            "required": "true",
+                            "valueExpression": "$.heartrate",
+                            "valueName": "hr"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdAt": "2021-01-28T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-28T19:26:24.072Z"
+            }
+          },
+          {
+            "name": "red",
+            "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/red",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "properties": {
+              "provisioningState": "Suceeded",
+              "ingestionEndpointConfiguration": {
+                "eventHubName": "MyEventHubName",
+                "consumerGroup": "ConsumerGroupA",
+                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
+              },
+              "deviceMapping": {
+                "content": {
+                  "templateType": "CollectionContent",
+                  "template": [
+                    {
+                      "templateType": "JsonPathContent",
+                      "template": {
+                        "typeName": "steps",
+                        "typeMatchExpression": "$..[?(@steps)]",
+                        "deviceIdExpression": "$.deviceid",
+                        "timestampExpression": "$.measurementdatetime",
+                        "values": [
+                          {
+                            "required": "true",
+                            "valueExpression": "$.steps",
+                            "valueName": "steps"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdAt": "2021-01-27T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-27T19:26:24.072Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
