@@ -29,7 +29,7 @@ openapi-type: arm
 tag: package-2021-11-20-preview
 ```
 
-### Tag: package-2021-08-22-preview
+### Tag: package-2021-11-20-preview
 
 These settings apply only when `--tag=package-2021-11-20-preview` is specified on the command line.
 
