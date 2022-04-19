@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-12-01",
+    "version": "2022-02-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -1640,6 +1640,95 @@
               }
             ]
           }
+        }
+      }
+    },
+    "DeviceErasureDetails": {
+      "description": "Device erasure details with erasure completion status and erasureordestructionlog sas key",
+      "type": "object",
+      "properties": {
+        "deviceErasureStatus": {
+          "description": "Holds the device erasure completion status",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Cancelling",
+            "SucceededWithErrors",
+            "WaitingForCustomerAction",
+            "SucceededWithWarnings",
+            "WaitingForCustomerActionForKek",
+            "WaitingForCustomerActionForCleanUp",
+            "CustomerActionPerformedForCleanUp",
+            "CustomerActionPerformed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              },
+              {
+                "value": "SucceededWithErrors",
+                "description": "Stage has succeeded with errors."
+              },
+              {
+                "value": "WaitingForCustomerAction",
+                "description": "Stage is stuck until customer takes some action."
+              },
+              {
+                "value": "SucceededWithWarnings",
+                "description": "Stage has succeeded with warnings."
+              },
+              {
+                "value": "WaitingForCustomerActionForKek",
+                "description": "Stage is waiting for customer action for kek action items."
+              },
+              {
+                "value": "WaitingForCustomerActionForCleanUp",
+                "description": "Stage is waiting for customer action for clean up."
+              },
+              {
+                "value": "CustomerActionPerformedForCleanUp",
+                "description": "Stage has performed customer action for clean up."
+              },
+              {
+                "value": "CustomerActionPerformed",
+                "description": "Stage has performed customer action for clean up."
+              }
+            ]
+          }
+        },
+        "erasureOrDestructionCertificateSasKey": {
+          "description": "Shared access key to download cleanup or destruction certificate for device",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3556,6 +3645,11 @@
         "chainOfCustodySasKey": {
           "description": "Shared access key to download the chain of custody logs",
           "type": "string",
+          "readOnly": true
+        },
+        "deviceErasureDetails": {
+          "$ref": "#/definitions/DeviceErasureDetails",
+          "description": "Holds device data erasure details",
           "readOnly": true
         },
         "keyEncryptionKey": {
