@@ -3227,7 +3227,7 @@
           "type": "string"
         },
         "collectionName": {
-          "description": "The name of the cosmos DB collection in the cosmos DB database.",
+          "description": "The name of the cosmos DB sql collection in the cosmos DB database.",
           "type": "string"
         },
         "PartitionKeyName": {
@@ -3309,7 +3309,14 @@
         "source": {
           "description": "The source to which the routing rule is to be applied to. For example, DeviceMessages",
           "enum": [
-            "DeviceMessages"
+            "Invalid",
+            "DeviceMessages",
+            "TwinChangeEvents",
+            "DeviceLifecycleEvents",
+            "DeviceJobLifecycleEvents",
+            "DigitalTwinChangeEvents",
+            "DeviceConnectionStateEvents",
+            "MqttBrokerMessages"
           ],
           "type": "string",
           "x-ms-enum": {
