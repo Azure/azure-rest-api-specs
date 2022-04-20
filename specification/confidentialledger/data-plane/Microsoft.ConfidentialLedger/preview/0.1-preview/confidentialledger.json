@@ -122,12 +122,12 @@
         }
       }
     },
-    "/app/collectionIds": {
+    "/app/collections": {
       "get": {
-        "operationId": "ConfidentialLedger_GetCollectionIds",
+        "operationId": "ConfidentialLedger_GetCollections",
         "x-ms-examples": {
           "GetCollectionIds": {
-            "$ref": "./examples/ledger/GetCollectionIds.json"
+            "$ref": "./examples/ledger/GetCollections.json"
           }
         },
         "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
@@ -139,9 +139,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of collectionIds",
+            "description": "List of collections",
             "schema": {
-              "$ref": "#/definitions/CollectionIds"
+              "$ref": "#/definitions/Collections"
             }
           },
           "default": {
@@ -821,7 +821,7 @@
         }
       }
     },
-    "CollectionIds": {
+    "Collections": {
       "description": "A list of identifiers for ledger collections.",
       "required": [
         "collection"
