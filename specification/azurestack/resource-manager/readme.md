@@ -34,20 +34,32 @@ These are the global settings for the Azure Stack API.
 title: AzureStackManagementClient
 description: Azure Stack
 openapi-type: arm
-tag: package-preview-2020-06
+tag: package-preview-2022-02
 ```
 
 
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.AzureStack/preview/2022-02-01/AzureStack.json
+  - Microsoft.AzureStack/preview/2022-02-01/CustomerSubscription.json
+  - Microsoft.AzureStack/preview/2022-02-01/Product.json
+  - Microsoft.AzureStack/preview/2022-02-01/Registration.json
+```
 ### Tag: package-2016-01
 
 These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-01'
+``` yaml $(tag) == 'package-2016-01'
 input-file:
   - Microsoft.AzureStack/stable/2016-01-01/AzureStack.json
   - Microsoft.AzureStack/stable/2016-01-01/Product.json
   - Microsoft.AzureStack/stable/2016-01-01/Registration.json
 ```
+
 ### Tag: package-2017-06-01
 
 These settings apply only when `--tag=package-2017-06-01` is specified on the command line.
@@ -59,11 +71,12 @@ input-file:
 - Microsoft.AzureStack/stable/2017-06-01/Registration.json
 - Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
 ```
+
 ### Tag: package-preview-2020-06
 
 These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-06'
+``` yaml $(tag) == 'package-preview-2020-06'
 input-file:
   - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
   - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
@@ -162,5 +175,3 @@ generate-interface: true
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-
