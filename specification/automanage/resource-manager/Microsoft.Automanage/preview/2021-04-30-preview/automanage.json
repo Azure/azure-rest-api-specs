@@ -1558,7 +1558,7 @@
         "description": "Get information about a report associated with a configuration profile assignment run",
         "x-ms-examples": {
           "Get a report for a configuration profile assignment": {
-            "$ref": "./examples/getHRCPReport.json"
+            "$ref": "./examples/getHCRPReport.json"
           }
         },
         "parameters": [
@@ -1614,7 +1614,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
         "tags": [
-          "HCRPreports"
+          "HCRPReports"
         ],
         "operationId": "HCRPReports_ListByConfigurationProfileAssignments",
         "description": "Retrieve a list of reports within a given configuration profile assignment",
@@ -1669,7 +1669,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clustereName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
       "put": {
         "tags": [
           "ConfigurationProfileHCIAssignments"
@@ -1847,7 +1847,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clustereName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
       "get": {
         "tags": [
           "HCIReports"
@@ -1909,10 +1909,10 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clustereName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
         "tags": [
-          "HCIreports"
+          "HCIReports"
         ],
         "operationId": "HCIReports_ListByConfigurationProfileAssignments",
         "description": "Retrieve a list of reports within a given configuration profile assignment",
@@ -2366,7 +2366,7 @@
       "x-ms-parameter-location": "method"
     },
     "ClusterNameParameter": {
-      "name": "clustereName",
+      "name": "clusterName",
       "in": "path",
       "required": true,
       "type": "string",
