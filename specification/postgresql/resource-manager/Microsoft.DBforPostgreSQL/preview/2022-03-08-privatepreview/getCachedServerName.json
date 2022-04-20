@@ -1,214 +1,135 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2022-03-08-privatepreview",
-        "title": "PostgreSQLManagementClient",
-        "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/getCachedServerName": {
-            "post": {
-                "tags": [
-                    "GetCachedServerName"
-                ],
-                "operationId": "GetCachedServerName_Execute",
-                "x-ms-examples": {
-                    "GetCachedServerName": {
-                        "$ref": "./examples/GetCachedServerName.json"
-                    }
-                },
-                "description": "Get available cached server name for fast provisioning",
-                "parameters": [
-                    {
-                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/LocationNameParameter"
-                    },
-                    {
-                        "name": "cachedServerNameRequest",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CachedServerNameRequest"
-                        },
-                        "description": "The required parameters for get cached name available for fast provisioning."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/CachedServerName"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "CachedServerNameRequest": {
-            "type": "object",
-            "required": [
-                "version",
-                "storage",
-                "sku"
-            ],
-            "properties": {
-                "version": {
-                    "$ref": "#/definitions/ServerVersion",
-                    "description": "PostgreSQL Server version."
-                },
-                "storage": {
-                    "$ref": "#/definitions/Storage",
-                    "default": null,
-                    "description": "Storage properties of a server."
-                },
-                "sku": {
-                    "$ref": "#/definitions/Sku",
-                    "description": "The SKU (pricing tier) of the server."
-                }
-            },
-            "description": "Request from client to get available cached server name"
-        },
-        "CachedServerName": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "The name of available cached server",
-                    "readOnly": true
-                }
-            },
-            "description": "Represents a resource name of a cached server"
-        },
-        "CloudError": {
-            "x-ms-external": true,
-            "properties": {
-                "error": {
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-                }
-            },
-            "description": "An error response from the Batch service."
-        },
-        "FastProvisioningCapability": {
-            "type": "object",
-            "properties": {
-                "supportedSku": {
-                    "type": "string",
-                    "description": "Server sku name",
-                    "readOnly": true
-                },
-                "supportedStorageGb": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Max storage allowed for a server.",
-                    "readOnly": true
-                },
-                "supportedServerVersion": {
-                    "type": "string",
-                    "description": "The server versions supported by this server configuration.",
-                    "readOnly": true
-                }
-            },
-            "description": "The combination of configurations available for fast provisioning"
-        },
-        "CapabilityProperties": {
-            "properties": {
-                "zone": {
-                    "type": "string",
-                    "description": "zone name",
-                    "readOnly": true
-                },
-                "geoBackupSupported": {
-                    "type": "boolean",
-                    "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
-                    "readOnly": true
-                },
-                "zoneRedundantHaSupported": {
-                    "type": "boolean",
-                    "description": "A value indicating whether a new server in this region can support multi zone HA.",
-                    "readOnly": true
-                },
-                "zoneRedundantHaAndGeoBackupSupported": {
-                    "type": "boolean",
-                    "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
-                    "readOnly": true
-                },
-                "fastProvisioningSupported": {
-                    "type": "boolean",
-                    "description": "A value indicating whether fast provisioning feature is supported in this region",
-                    "readOnly": true
-                },
-                "supportedFlexibleServerEditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FlexibleServerEditionCapability"
-                    },
-                    "readOnly": true
-                },
-                "supportedHyperscaleNodeEditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/HyperscaleNodeEditionCapability"
-                    },
-                    "readOnly": true
-                },
-                "supportedFastProvisioningEditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FastProvisioningCapability"
-                    },
-                    "x-ms-identifiers": [],
-                    "readOnly": true
-                },
-                "status": {
-                    "type": "string",
-                    "description": "The status",
-                    "readOnly": true
-                }
-            },
-            "description": "Location capabilities."
-        }
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-08-privatepreview",
+    "title": "PostgreSQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/getCachedServerName": {
+      "post": {
+        "tags": [
+          "GetCachedServerName"
+        ],
+        "operationId": "GetCachedServerName_Execute",
+        "x-ms-examples": {
+          "GetCachedServerName": {
+            "$ref": "./examples/GetCachedServerName.json"
+          }
+        },
+        "description": "Get available cached server name for fast provisioning",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "cachedServerNameRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CachedServerNameRequest"
+            },
+            "description": "The required parameters for get cached name available for fast provisioning."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CachedServerName"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CachedServerNameRequest": {
+      "type": "object",
+      "required": [
+        "version",
+        "storage",
+        "sku"
+      ],
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "PostgreSQL Server version."
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "default": null,
+          "description": "Storage properties of a server."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        }
+      },
+      "description": "Request from client to get available cached server name"
+    },
+    "CachedServerName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of available cached server",
+          "readOnly": true
+        }
+      },
+      "description": "Represents a resource name of a cached server"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the Batch service."
+    }
+  }
 }
