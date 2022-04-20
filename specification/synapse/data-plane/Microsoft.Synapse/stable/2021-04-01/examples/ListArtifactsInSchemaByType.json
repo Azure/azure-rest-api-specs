@@ -14,94 +14,85 @@
             "name": "exampleTable",
             "type": "TABLE",
             "properties": {
-              "TableType": "MANAGED",
-              "Namespace": {
-                "SchemaName": null,
-                "DatabaseName": "exampleDatabaseName"
+              "tableType": "MANAGED",
+              "namespace": {
+                "schemaName": null,
+                "databaseName": "exampleDatabaseName"
               },
-              "Partitioning": null,
-              "StorageDescriptor": {
-                "Distribution": null,
-                "Columns": [
+              "partitioning": null,
+              "storageDescriptor": {
+                "distribution": null,
+                "columns": [
                   {
-                    "Name": "exampleColumnName1",
-                    "OriginDataTypeName": {
-                      "TypeFamily": null,
-                      "TypeName": "string",
-                      "IsTableType": false,
-                      "IsComplexType": false,
-                      "IsNullable": true,
-                      "Length": 0,
-                      "Precision": 0,
-                      "Scale": 0,
-                      "Collation": null,
-                      "Properties": null
-                    },
-                    "Description": null
+                    "name": "exampleColumnName1",
+                    "originDataTypeName": {
+                      "typeFamily": null,
+                      "typeName": "string",
+                      "isTableType": false,
+                      "isComplexType": false,
+                      "isNullable": true,
+                      "length": 0,
+                      "precision": 0,
+                      "scale": 0,
+                      "properties": null
+                    }
                   },
                   {
-                    "Name": "exampleColumnName2",
-                    "OriginDataTypeName": {
-                      "TypeFamily": null,
-                      "TypeName": "string",
-                      "IsTableType": false,
-                      "IsComplexType": false,
-                      "IsNullable": true,
-                      "Length": 0,
-                      "Precision": 0,
-                      "Scale": 0,
-                      "Collation": null,
-                      "Properties": null
-                    },
-                    "Description": null
+                    "name": "exampleColumnName2",
+                    "originDataTypeName": {
+                      "typeFamily": null,
+                      "typeName": "string",
+                      "isTableType": false,
+                      "isComplexType": false,
+                      "isNullable": true,
+                      "length": 0,
+                      "precision": 0,
+                      "scale": 0,
+                      "properties": null
+                    }
                   }
                 ],
-                "ColumnSetEntityName": "exampleColumnSetEntityNameGuid",
-                "Format": {
-                  "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
-                  "OutputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
-                  "FormatType": "textfile",
-                  "Properties": {
+                "format": {
+                  "inputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+                  "outputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
+                  "formatType": "textfile",
+                  "properties": {
                     "serialization.format": "1"
                   },
-                  "SerDeName": null,
-                  "SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+                  "serDeName": null,
+                  "serializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
                 },
-                "Source": {
-                  "Provider": null,
-                  "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/exampleTableName",
-                  "Properties": null
+                "source": {
+                  "provider": null,
+                  "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/exampleTableName",
+                  "properties": null
                 },
-                "Properties": {
+                "properties": {
                   "microsoft.catalog.internal.hive.sd.columns": "{\"columns\":[{\"name\":\"exampleColumnName1\",\"type\":\"string\"},{\"name\":\"exampleColumnName2\",\"type\":\"string\"}]}"
                 },
-                "Compressed": false,
-                "SerDeInfo": null,
-                "IsStoredAsSubdirectories": false
+                "serDeInfo": null,
+                "isStoredAsSubdirectories": false
               },
-              "Owner": "trusted-service-user",
-              "CreateTime": 1646776703,
-              "LastAccessTime": 0,
-              "Retention": 0,
-              "Temporary": false,
-              "IsRewriteEnabled": false,
-              "ViewOriginalText": null,
-              "ViewExpandedText": null,
-              "Origin": {
-                "Type": "SPARK",
-                "InstanceId": null
+              "owner": "trusted-service-user",
+              "temporary": false,
+              "isRewriteEnabled": false,
+              "viewOriginalText": null,
+              "viewExpandedText": null,
+              "origin": {
+                "type": "SPARK",
+                "instanceId": null
               },
-              "OriginObjectId": null,
-              "IsSharedEntity": false,
-              "PublishStatus": "PUBLISHED",
-              "Properties": {
+              "originObjectId": null,
+              "isSharedEntity": false,
+              "publishStatus": "PUBLISHED",
+              "properties": {
                 "spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"exampleColumnName1\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"exampleColumnName2\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
                 "transient_lastDdlTime": "1646776703",
                 "spark.sql.sources.schema.numParts": "1",
                 "spark.sql.create.version": "3.1.2.5.0-57012673"
               },
-              "ObjectVersion": 1,
-              "ObjectId": "exampleObjectIdGuid"
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid"
             },
             "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase/tables/exampleTable"
           }

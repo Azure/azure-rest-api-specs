@@ -11,23 +11,17 @@
             "name": "exampleDatabase1",
             "type": "DATABASE",
             "properties": {
-              "Origin": {
-                "Type": "SPARK"
-              },
-              "Properties": {
-                "IsSyMSCDMDatabase": true
-              },
-              "Source": {
-                "Provider": "ADLS",
-                "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase1",
-                "Properties": {
-                  "FormatType": "csv",
-                  "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+              "source": {
+                "provider": "ADLS",
+                "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase1",
+                "properties": {
+                  "formatType": "csv",
+                  "linkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
                 }
               },
-              "PublishStatus": "PUBLISHED",
-              "ObjectVersion": 1,
-              "ObjectId": "exampleObjectIdGuid1"
+              "publishStatus": "PUBLISHED",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid1"
             },
             "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase1"
           },
@@ -35,17 +29,14 @@
             "name": "exampleDatabase2",
             "type": "DATABASE",
             "properties": {
-              "Origin": {
-                "Type": "SQLOD",
-                "InstanceId": "exampleInstanceIdGuid2"
+              "origin": {
+                "type": "SQLOD",
+                "instanceId": "exampleInstanceIdGuid2"
               },
-              "Properties": {
-                "Collation": "SQL_Latin1_General_CP1_CI_AS"
-              },
-              "PublishStatus": "PUBLISHED",
-              "OriginObjectId": "exampleOriginObjectIdGuid2",
-              "ObjectVersion": 1,
-              "ObjectId": "exampleObjectIdGuid2"
+              "publishStatus": "PUBLISHED",
+              "originObjectId": "exampleOriginObjectIdGuid2",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid2"
             },
             "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase2"
           },
@@ -53,20 +44,17 @@
             "name": "exampleLakeDatabase",
             "type": "DATABASE",
             "properties": {
-              "Source": {
-                "Provider": "ADLS",
-                "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleLakeDatabase",
-                "Properties": {
-                  "FormatType": "csv",
-                  "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+              "source": {
+                "provider": "ADLS",
+                "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleLakeDatabase",
+                "properties": {
+                  "formatType": "csv",
+                  "linkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
                 }
               },
-              "Origin": {
-                "Type": "SPARK"
-              },
-              "PublishStatus": "PUBLISHED",
-              "ObjectVersion": 1,
-              "ObjectId": "exampleObjectIdGuid3"
+              "publishStatus": "PUBLISHED",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid3"
             },
             "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleLakeDatabase"
           }
