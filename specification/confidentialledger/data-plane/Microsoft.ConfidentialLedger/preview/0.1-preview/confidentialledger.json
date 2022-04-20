@@ -122,16 +122,16 @@
         }
       }
     },
-    "/app/subLedgerIds": {
+    "/app/collectionIds": {
       "get": {
-        "operationId": "ConfidentialLedger_GetSubLedgerIds",
+        "operationId": "ConfidentialLedger_GetCollectionIds",
         "x-ms-examples": {
-          "GetSubLedgerIds": {
-            "$ref": "./examples/ledger/GetSubLedgerIds.json"
+          "GetCollectionIds": {
+            "$ref": "./examples/ledger/GetCollectionIds.json"
           }
         },
-        "summary": "Retrieves a list of sub-ledgers present in the Confidential Ledger",
-        "description": "Sub-ledgers are user-created collections of ledger entries",
+        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
+        "description": "Collection ids are user-created collections of ledger entries",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -139,9 +139,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of subLedgerIds",
+            "description": "List of collectionIds",
             "schema": {
-              "$ref": "#/definitions/SubLedgerIds"
+              "$ref": "#/definitions/CollectionIds"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "$ref": "#/parameters/TransactionIdFromParameter"
@@ -210,7 +210,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "in": "body",
@@ -258,7 +258,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "$ref": "#/parameters/TransactionIdParameter"
@@ -361,7 +361,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           }
         ],
         "responses": {
@@ -601,8 +601,8 @@
           "type": "string",
           "description": "Contents of the ledger entry."
         },
-        "subLedgerId": {
-          "$ref": "#/definitions/SubLedgerId",
+        "collectionId": {
+          "$ref": "#/definitions/CollectionId",
           "readOnly": true
         },
         "transactionId": {
@@ -672,11 +672,11 @@
     "LedgerWriteResult": {
       "description": "Returned as a result of a write to the Confidential Ledger, the transaction id in the response indicates when the write will become durable.",
       "required": [
-        "subLedgerId"
+        "collectionId"
       ],
       "properties": {
-        "subLedgerId": {
-          "$ref": "#/definitions/SubLedgerId"
+        "collectionId": {
+          "$ref": "#/definitions/CollectionId"
         }
       },
       "type": "object"
@@ -810,20 +810,27 @@
       },
       "type": "object"
     },
-    "SubLedgerId": {
-      "description": "Identifier for sub-ledgers.",
-      "type": "string"
-    },
-    "SubLedgerIds": {
-      "description": "A list of identifiers for sub-ledgers.",
+    "CollectionId": {
+      "description": "Identifier for collections.",
       "required": [
-        "subLedgerIds"
+        "id"
       ],
       "properties": {
-        "subLedgerIds": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "CollectionIds": {
+      "description": "A list of identifiers for ledger collections.",
+      "required": [
+        "collection"
+      ],
+      "properties": {
+        "ledgerGroups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubLedgerId"
+            "$ref": "#/definitions/CollectionId"
           }
         }
       },
@@ -896,12 +903,12 @@
       "type": "integer",
       "description": "The commit in the consensus protocol."
     },
-    "SubLedgerIdParameter": {
-      "name": "subLedgerId",
+    "CollectionIdParameter": {
+      "name": "collectionId",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "description": "The sub-ledger id.",
+      "description": "The collection id.",
       "type": "string"
     },
     "TransactionIdParameter": {
