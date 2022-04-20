@@ -1178,7 +1178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Clusters successfully returned.",
+            "description": "A list of versions of all offering cluster types successfully returned.",
             "schema": {
               "$ref": "#/definitions/ClusterOfferingVersionsListResult"
             }
@@ -1192,6 +1192,45 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/clusterOfferingVersions/{clusterTypeName}": {
+      "get": {
+        "description": "Returns cluster type versions by type name.",
+        "operationId": "clusterOfferingVersions_GetByClusterType",
+        "x-ms-examples": {
+          "ClusterTypeVersionListResult": {
+            "$ref": "./examples/GetClusterOfferingVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterTypeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of versions of given offering cluster type successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterOfferingVersions"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -2167,6 +2206,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the HDInsight session cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterTypeNameParameter": {
+      "name": "clusterTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Hilo cluster type.",
       "x-ms-parameter-location": "method"
     }
   }
