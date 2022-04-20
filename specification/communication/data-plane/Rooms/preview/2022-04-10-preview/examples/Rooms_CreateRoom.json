@@ -31,32 +31,38 @@
   "responses": {
     "201": {
       "body": {
-        "room": {
-          "id": "999126454",
-          "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
-          "validFrom": "2021-09-07T14:00:41Z",
-          "validUntil": "2021-09-07T15:00:41Z",
-          "roomType": "open",
-          "participants": [
-            {
-              "communicationIdentifier": {
-                "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715",
-                "communicationUser": {
-                  "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715"
-                }
-              },
-              "roleId": "Presenter"
+        "id": "999126454",
+        "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
+        "validFrom": "2021-09-07T14:00:41Z",
+        "validUntil": "2021-09-07T15:00:41Z",
+        "roomType": "open",
+        "participants": [
+          {
+            "communicationIdentifier": {
+              "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715",
+              "communicationUser": {
+                "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715"
+              }
             },
-            {
-              "communicationIdentifier": {
-                "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
-                "communicationUser": {
-                  "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
-                }
-              },
-              "roleId": "Organizer"
-            }
-          ]
+            "roleId": "Presenter"
+          },
+          {
+            "communicationIdentifier": {
+              "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
+              "communicationUser": {
+                "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+              }
+            },
+            "roleId": "Organizer"
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Request is a bad request."
         }
       }
     },
@@ -76,11 +82,27 @@
         }
       }
     },
+    "412": {
+      "body": {
+        "error": {
+          "code": "PreconditionFailed",
+          "message": "Precondition failed for the request."
+        }
+      }
+    },
     "500": {
       "body": {
         "error": {
           "code": "ServiceUnavailable",
           "message": "The server is currently unable to handle the request."
+        }
+      }
+    },
+    "501": {
+      "body": {
+        "error": {
+          "code": "NotImplemented",
+          "message": "Method not implemented for the request."
         }
       }
     }
