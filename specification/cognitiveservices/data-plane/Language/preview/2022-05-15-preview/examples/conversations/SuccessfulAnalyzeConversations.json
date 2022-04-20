@@ -8,18 +8,14 @@
       "kind": "CustomConversation",
       "analysisInput": {
         "conversationItem": {
-          "language": "en-GB",
-          "text": "play a song from Phil Collins",
+          "id": "1",
           "participantId": "1",
-          "modality": "text",
-          "id": "1"
+          "text": "play In the air tonight from Phil Collins"
         }
       },
       "parameters": {
         "projectName": "{project-name}",
         "deploymentName": "{deployment-name}",
-        "verbose": true,
-        "isLoggingEnabled": false,
         "stringIndexType": "TextElement_V8"
       }
     }
@@ -29,12 +25,11 @@
       "headers": {},
       "body": {
         "kind": "CustomConversationResult",
-        "results": {
+        "result": {
           "query": "play In the air tonight from Phil Collins",
-          "detectedLanguage": "en",
           "prediction": {
             "topIntent": "PlayMusic",
-            "projectKind": "conversation",
+            "projectKind": "CustomConversation",
             "intents": [
               {
                 "category": "PlayMusic",
