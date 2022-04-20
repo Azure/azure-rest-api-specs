@@ -357,58 +357,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "BatchEndpoint"
-        ],
-        "summary": "Check that the provided endpoint name is available and valid, otherwise return result with validation issues.",
-        "operationId": "BatchEndpoints_CheckNameAvailability",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CheckNameAvailability Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/checkNameAvailability.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
       "get": {
         "tags": [
@@ -4642,58 +4590,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "OnlineEndpoint"
-        ],
-        "summary": "Check that the provided endpoint name is available and valid, otherwise return result with validation issues.",
-        "operationId": "OnlineEndpoints_CheckNameAvailability",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CheckNameAvailability Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/checkNameAvailability.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
       "get": {
         "tags": [
@@ -8648,27 +8544,6 @@
       "x-ms-discriminator-value": "Mpi",
       "additionalProperties": false
     },
-    "NameAvailabilityResult": {
-      "description": "Whether or not an endpoint name is available or not. If not available, the reason will be provided.",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Specific message for why name is unavailable. Only set when NameAvailable = false.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "nameAvailable": {
-          "description": "Whether or not an endpoint name is available or not. If it is available, it is valid and unique in the region.",
-          "default": true,
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "Reason for why name is unavailable. Only set when NameAvailable = false. For example: NameExists,Invalid.",
-          "$ref": "#/definitions/UnavailabilityReason"
-        }
-      },
-      "additionalProperties": false
-    },
     "NoneDatastoreCredentials": {
       "description": "Empty/none datastore credentials.",
       "type": "object",
@@ -10419,26 +10294,6 @@
         }
       },
       "x-ms-discriminator-value": "TruncationSelection",
-      "additionalProperties": false
-    },
-    "UnavailabilityReason": {
-      "enum": [
-        "Invalid",
-        "AlreadyExists"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "UnavailabilityReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Invalid"
-          },
-          {
-            "value": "AlreadyExists"
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "UriFileDataVersion": {
