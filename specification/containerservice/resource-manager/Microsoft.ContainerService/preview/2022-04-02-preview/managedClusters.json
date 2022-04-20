@@ -6447,7 +6447,7 @@
     },
     "TrustedAccessRole": {
       "type": "object",
-      "description": "Trusted access role definition",
+      "description": "Trusted access role definition.",
       "properties": {
         "sourceResourceType": {
           "type": "string",
@@ -6466,7 +6466,7 @@
             "$ref": "#/definitions/TrustedAccessRoleRule"
           },
           "x-ms-identifiers": [],
-          "description": "List of rules for the role"
+          "description": "List of rules for the role. This maps to 'rules' property of [Kubernetes Cluster Role](https://kubernetes.io/docs/reference/kubernetes-api/authorization-resources/cluster-role-v1/#ClusterRole)."
         }
       }
     },
@@ -6503,14 +6503,14 @@
         },
         "sourceResourceId": {
           "type": "string",
-          "description": "The resource id that allowed for trusted access."
+          "description": "The ARM resource ID of source resource that trusted access is configured for."
         },
         "roles": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "A list of roles to bind."
+          "description": "A list of roles to bind, each item is a resource type qualified role name. For example: 'Microsoft.MachineLearningServices/workspaces/reader'."
         }
       }
     },
