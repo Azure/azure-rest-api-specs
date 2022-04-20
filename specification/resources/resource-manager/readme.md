@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-changes-2022-05
+tag: package-changes-2022-05-01
 ```
 
 ``` yaml $(package-privatelinks)
@@ -70,13 +70,13 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-05
+tag: package-changes-2022-05-01
 ```
 ### Tag: package-changes-2022-05
 
-These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-changes-2022-05'
+``` yaml $(tag) == 'package-changes-2022-05-01'
 input-file:
 - Microsoft.Resources/stable/2022-05-01/changes.json
 ```
