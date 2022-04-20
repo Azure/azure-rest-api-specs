@@ -117,6 +117,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2021-04-01/symsAPI.json
 ```
 
 ### Tag: package-artifacts-composite-v2
@@ -404,7 +405,7 @@ directive:
       - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these properties.
     from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
