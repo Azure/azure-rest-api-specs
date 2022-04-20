@@ -29,19 +29,20 @@
       "headers": {},
       "body": {
         "kind": "CustomConversationResult",
-        "results": {
+        "result": {
           "query": "trains from London",
           "prediction": {
             "topIntent": "Rail",
-            "projectKind": "workflow",
+            "projectKind": "Orchestrator",
             "intents": {
               "Rail": {
                 "confidenceScore": 1,
-                "targetKind": "conversation",
-                "apiVersion": null,
+                "targetProjectKind": "CustomConversation",
                 "result": {
                   "query": "trains from London",
                   "prediction": {
+                    "topIntent": "Timetable",
+                    "projectKind": "CustomConversation",
                     "intents": [
                       {
                         "category": "Timetable",
@@ -52,23 +53,17 @@
                         "confidenceScore": 0.000314623
                       }
                     ],
-                    "entities": [],
-                    "topIntent": "Timetable",
-                    "projectKind": "conversation"
+                    "entities": []
                   }
                 }
               },
               "Tree": {
                 "confidenceScore": 0.2641529,
-                "targetKind": "conversation",
-                "apiVersion": null,
-                "result": null
+                "targetProjectKind": "QuestionAnswering"
               },
               "None": {
                 "confidenceScore": 0,
-                "targetKind": "non_linked",
-                "apiVersion": null,
-                "result": null
+                "targetProjectKind": "NonLinked"
               }
             }
           }

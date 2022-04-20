@@ -8,23 +8,18 @@
       "kind": "CustomConversation",
       "analysisInput": {
         "conversationItem": {
-          "language": "en-GB",
-          "text": "play a song from Phil Collins",
+          "text": "Ports and connectors",
           "participantId": "1",
-          "modality": "text",
           "id": "1"
         }
       },
       "parameters": {
         "projectName": "prj1",
         "deploymentName": "dep1",
-        "isLoggingEnabled": false,
-        "verbose": true,
-        "stringIndexType": "TextElement_V8",
         "directTarget": "qnaProject",
         "targetProjectParameters": {
           "qnaProject": {
-            "targetKind": "question_answering",
+            "targetProjectKind": "QuestionAnswering",
             "callingOptions": {
               "context": {
                 "previousQuery": "Meet Surface Pro 4",
@@ -34,8 +29,7 @@
               "isTest": true,
               "userId": "Default",
               "question": "Ports and connectors"
-            },
-            "apiVersion": "v5.1"
+            }
           }
         }
       }
@@ -46,16 +40,15 @@
       "headers": {},
       "body": {
         "kind": "CustomConversationResult",
-        "results": {
+        "result": {
           "query": "Ports and connectors",
           "prediction": {
-            "projectKind": "workflow",
+            "projectKind": "Orchestrator",
             "topIntent": "qnaTargetApp",
             "intents": {
               "qnaTargetApp": {
-                "targetKind": "question_answering",
-                "apiVersion": "v5.1",
-                "confidenceScore": 0.913329,
+                "targetProjectKind": "QuestionAnswering",
+                "confidenceScore": 1,
                 "result": {
                   "answers": [
                     {

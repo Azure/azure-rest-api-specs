@@ -73,14 +73,14 @@
           }
         },
         "x-ms-examples": {
-          "Arbitration result": {
-            "$ref": "./examples/conversations/Orchestrator_arbitration.json"
-          },
           "Conversation project result": {
-            "$ref": "./examples/conversations/Conversation_project.json"
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversations.json"
+          },
+          "Arbitration result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
           },
           "Orchestrator direct target result": {
-            "$ref": "./examples/conversations/Orchestrator_direct_target.json"
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
       }
@@ -298,12 +298,12 @@
       ],
       "type": "object",
       "properties": {
-        "results": {
+        "result": {
           "$ref": "#/definitions/AnalyzeConversationResult"
         }
       },
       "required": [
-        "results"
+        "result"
       ],
       "x-ms-discriminator-value": "CustomConversationResult"
     },
@@ -379,21 +379,21 @@
       "type": "object",
       "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "required": [
-        "targetKind"
+        "targetProjectKind"
       ],
-      "discriminator": "targetKind",
+      "discriminator": "targetProjectKind",
       "properties": {
-        "targetKind": {
+        "targetProjectKind": {
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "luis",
-            "conversation",
-            "question_answering",
-            "non_linked"
+            "Luis",
+            "CustomConversation",
+            "QuestionAnswering",
+            "NonLinked"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetProjectKind",
             "modelAsString": true
           }
         },
@@ -406,7 +406,7 @@
     "NoneLinkedTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of non-linked intent response.",
-      "x-ms-discriminator-value": "non_linked",
+      "x-ms-discriminator-value": "NonLinked",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -421,7 +421,7 @@
     },
     "LUISParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "luis",
+      "x-ms-discriminator-value": "Luis",
       "type": "object",
       "allOf": [
         {
@@ -475,7 +475,7 @@
     "ConversationParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Customized Conversation projects.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "CustomConversation",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -509,7 +509,7 @@
     "QuestionAnsweringParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Question Answering knowledge bases.",
-      "x-ms-discriminator-value": "question_answering",
+      "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -556,8 +556,8 @@
           "type": "string",
           "description": "The type of the project.",
           "enum": [
-            "conversation",
-            "workflow"
+            "CustomConversation",
+            "Orchestrator"
           ],
           "x-ms-enum": {
             "name": "projectKind",
@@ -573,7 +573,7 @@
     "OrchestratorPrediction": {
       "type": "object",
       "description": "This represents the prediction result of an Orchestrator project.",
-      "x-ms-discriminator-value": "workflow",
+      "x-ms-discriminator-value": "Orchestrator",
       "required": [
         "intents"
       ],
@@ -595,23 +595,23 @@
     "TargetIntentResult": {
       "type": "object",
       "description": "This is the base class of an intent prediction",
-      "discriminator": "targetKind",
+      "discriminator": "targetProjectKind",
       "required": [
         "confidenceScore",
-        "targetKind"
+        "targetProjectKind"
       ],
       "properties": {
-        "targetKind": {
+        "targetProjectKind": {
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "luis",
-            "conversation",
-            "question_answering",
-            "non_linked"
+            "Luis",
+            "CustomConversation",
+            "QuestionAnswering",
+            "NonLinked"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetProjectKind",
             "modelAsString": true
           }
         },
@@ -632,7 +632,7 @@
     "ConversationTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of Conversation project response.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "CustomConversation",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -650,8 +650,7 @@
       "type": "object",
       "description": "The response returned by a Conversation project.",
       "required": [
-        "query",
-        "prediction"
+        "query"
       ],
       "properties": {
         "query": {
@@ -671,7 +670,7 @@
     "ConversationPrediction": {
       "type": "object",
       "description": "Represents the prediction section of a Conversation project.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "CustomConversation",
       "required": [
         "intents",
         "entities"
@@ -1482,7 +1481,7 @@
     "LUISTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "luis",
+      "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1498,7 +1497,7 @@
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up a Question Answering KB response.",
-      "x-ms-discriminator-value": "question_answering",
+      "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1507,7 +1506,6 @@
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "../2021-07-15-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
           "description": "The generated answer by a Question Answering KB."
         }
       }
