@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "createArtifactsPayload": {
+      "ddls": [
+        {
+          "actionType": "CREATE",
+          "oldEntity": null,
+          "newEntity": {
+            "name": "dummyDatabase",
+            "type": "DATABASE"
+          }
+        }
+      ]
+    },
+    "validationType": "IDWValidation",
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "202": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

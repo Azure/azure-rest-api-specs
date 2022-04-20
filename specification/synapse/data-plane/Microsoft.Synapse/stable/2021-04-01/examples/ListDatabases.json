@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "items": [
+          {
+            "name": "exampleDatabase1",
+            "type": "DATABASE",
+            "properties": {
+              "source": {
+                "provider": "ADLS",
+                "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase1",
+                "properties": {
+                  "formatType": "csv",
+                  "linkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+                }
+              },
+              "publishStatus": "PUBLISHED",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid1"
+            },
+            "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase1"
+          },
+          {
+            "name": "exampleDatabase2",
+            "type": "DATABASE",
+            "properties": {
+              "origin": {
+                "type": "SQLOD",
+                "instanceId": "exampleInstanceIdGuid2"
+              },
+              "publishStatus": "PUBLISHED",
+              "originObjectId": "exampleOriginObjectIdGuid2",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid2"
+            },
+            "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase2"
+          },
+          {
+            "name": "exampleLakeDatabase",
+            "type": "DATABASE",
+            "properties": {
+              "source": {
+                "provider": "ADLS",
+                "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleLakeDatabase",
+                "properties": {
+                  "formatType": "csv",
+                  "linkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+                }
+              },
+              "publishStatus": "PUBLISHED",
+              "objectVersion": 1,
+              "objectId": "exampleObjectIdGuid3"
+            },
+            "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleLakeDatabase"
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "SyMS response error message"
+        }
+      }
+    }
+  }
+}
