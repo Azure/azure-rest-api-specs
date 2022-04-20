@@ -6094,22 +6094,12 @@
     "NetworkPluginMode": {
       "type": "string",
       "enum": [
-        "PodSubnet",
-        "NodeSubnet",
         "Overlay"
       ],
       "x-ms-enum": {
         "name": "networkPluginMode",
         "modelAsString": true,
         "values": [
-          {
-            "value": "PodSubnet",
-            "description": "Pods receive IPs from a separate VNET subnet apart from the subnet the nodes are using. See [Dynamic allocation of IPs](https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni#dynamic-allocation-of-ips-and-enhanced-subnet-support-preview) for more information."
-          },
-          {
-            "value": "NodeSubnet",
-            "description": "Pods receive IPs from the same subnet as the nodes (default behavior of Azure CNI). See [Azure CNI (advanced) networking](https://docs.microsoft.com/azure/aks/concepts-network#azure-cni-advanced-networking) for more information."
-          },
           {
             "value": "Overlay",
             "description": "Pods are given IPs from the PodCIDR address space but use Azure Routing Domains rather than Kubenet reference plugins host-local and bridge."
