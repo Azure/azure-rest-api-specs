@@ -391,7 +391,7 @@
         "description": "Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.",
         "operationId": "Profiles_Migrate",
         "x-ms-examples": {
-          "Profiles_Create": {
+          "Profiles_Migrate": {
             "$ref": "./examples/Profiles_Migrate.json"
           }
         },
@@ -428,8 +428,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationCommit": {
@@ -440,7 +439,7 @@
         "description": "Commit the migrated Azure Frontdoor(Standard/Premium) profile.",
         "operationId": "Profiles_MigrationCommit",
         "x-ms-examples": {
-          "Profiles_Create": {
+          "Profiles_MigrationCommit": {
             "$ref": "./examples/Profiles_MigrationCommit.json"
           }
         },
@@ -2746,9 +2745,11 @@
       "properties": {
         "errors": {
           "items": {
+            "description": "List of migration errors",
             "$ref": "#/definitions/MigrationErrorType"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2819,7 +2820,8 @@
           "items": {
             "description": "List of waf mappings",
             "$ref": "#/definitions/MigrationWafMapping"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-azure-resource": true
