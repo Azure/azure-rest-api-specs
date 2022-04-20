@@ -2,12 +2,13 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-network
 no-namespace-folders: true
 package-version: 1.0.0b1
+combine-operation-files: true
 ```
 
 ### Python multi-api
@@ -56,7 +57,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
-clear-output-folder: false
 perform-load: false
 ```
 

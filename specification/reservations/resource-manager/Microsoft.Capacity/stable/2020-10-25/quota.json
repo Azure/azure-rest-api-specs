@@ -103,7 +103,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -135,7 +135,7 @@
           "200": {
             "description": "OK. Returns details of the quota request.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
@@ -165,7 +165,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -197,7 +197,7 @@
           "200": {
             "description": "OK. Returns details of the quota request.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
@@ -402,6 +402,21 @@
       "description": "Quota properties.",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The quota request ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the quota request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+        },
         "properties": {
           "description": "Quota properties for the resource.",
           "$ref": "#/definitions/QuotaProperties"
@@ -414,11 +429,13 @@
       "properties": {
         "limit": {
           "description": "Quota properties.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "currentValue": {
           "description": "Current usage value for the resource.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "unit": {
@@ -513,6 +530,7 @@
         "limit": {
           "description": "Quota (resource limit).",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "name": {

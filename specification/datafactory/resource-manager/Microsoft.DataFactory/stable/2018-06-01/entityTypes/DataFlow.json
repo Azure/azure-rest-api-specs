@@ -38,7 +38,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "folder": {
           "description": "The folder that this data flow is in. If not specified, Data flow will appear at the root level.",
@@ -94,21 +95,30 @@
           "description": "List of sources in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sinks": {
           "type": "array",
           "description": "List of sinks in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "transformations": {
           "type": "array",
           "description": "List of transformations in data flow.",
           "items": {
             "$ref": "#/definitions/Transformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
@@ -149,7 +159,10 @@
           "description": "List of sources in Power Query.",
           "items": {
             "$ref": "#/definitions/PowerQuerySource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
@@ -170,21 +183,30 @@
           "description": "List of sources in Flowlet.",
           "items": {
             "$ref": "#/definitions/DataFlowSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sinks": {
           "type": "array",
           "description": "List of sinks in Flowlet.",
           "items": {
             "$ref": "#/definitions/DataFlowSink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "transformations": {
           "type": "array",
           "description": "List of transformations in Flowlet.",
           "items": {
             "$ref": "#/definitions/Transformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",

@@ -17,8 +17,8 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
 - rename-model:
-    from: 'DataBoxEdgeSku'
-    to: 'SkuForDataBoxEdge'
+    from: 'Sku'
+    to: 'SkuInfo'
 ```
 
 ### Go multi-api

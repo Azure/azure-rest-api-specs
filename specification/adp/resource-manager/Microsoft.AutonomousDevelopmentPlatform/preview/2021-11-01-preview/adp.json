@@ -878,6 +878,10 @@
           "items": {
             "$ref": "#/definitions/DataPoolLocation"
           },
+          "x-ms-identifiers": [
+            "name",
+            "encryption/keyName"
+          ],
           "description": "Gets or sets the collection of locations where Data Pool resources should be created"
         },
         "tags": {
@@ -1070,14 +1074,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "sourceMdmAccount"
+          ]
         }
       }
     },
@@ -1140,7 +1151,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1167,6 +1179,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the Resource Provider"
         },
         "nextLink": {
@@ -1205,6 +1220,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

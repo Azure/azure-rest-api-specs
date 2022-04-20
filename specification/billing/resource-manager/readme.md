@@ -56,6 +56,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
+- Microsoft.Billing/stable/2020-05-01/billingOperations.json
 ```
 
 ### Tag: package-2020-09-preview
@@ -66,6 +67,7 @@ These settings apply only when `--tag=package-2020-09-preview` is specified on t
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2020-09-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-09-01-preview/billingOperations.json
 ```
 
 ### Tag: package-2020-11-preview
@@ -76,6 +78,7 @@ These settings apply only when `--tag=package-2020-11-preview` is specified on t
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2020-11-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-11-01-preview/billingOperations.json
 ```
 
 ### Tag: package-2019-10-preview

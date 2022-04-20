@@ -28,18 +28,167 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 ```
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 title: MonitorManagementClient
 ```
 
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-09
+tag: package-2022-04
 
 directive:
   - suppress: Example Validations
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2022-04-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
+```
+
+### Tag: package-2016-03-preview-monitorlegacy
+
+These settings apply only when `--tag=package-2016-03-preview-monitorlegacy` is specified on the command line
+
+``` yaml $(tag) == 'package-2016-03-preview-monitorlegacy'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+```
+
+### Tag: package-2021-05-preview-diagnostics
+
+These settings apply only when `--tag=package-2021-05-preview-diagnostics` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-05-preview-diagnostics'
+input-file:
+- Microsoft.Insights/preview/2021-05-01-preview/autoscale_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
+- Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2021-09-01/actionGroups_API.json 
+```
+
+### Tag: package-2020-10-activityLogs
+
+These settings apply only when `--tag=package-2020-10-activityLogs` is specified on the command line
+
+``` yaml $(tag) == 'package-2020-10-activityLogs'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+directive:
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ErrorResponse"]
+  reason: Description doesn't match, the definition will be "inherit" from activityLogs_API.json
+```
+
+### Tag: package-2021-05-metrics
+
+These settings apply only when `--tag=package-2021-05-metrics` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-05-metrics'
+input-file:
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2021-05-01/metrics_API.json
+- Microsoft.Insights/stable/2021-05-01/operations_API.json
+directive:
+- from: metricBaselines_API.json
+  where: $.parameters
+  transform: delete $["MetricNamespaceParameter"]
+  reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
+- from: metricBaselines_API.json
+  where: $.parameters
+  transform: delete $["MetricNamesParameter"]
+  reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
+```
+
+### Tag: package-2021-08-scheduledqueryrules
+
+These settings apply only when `--tag=package-2021-08-scheduledqueryrules` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-08-scheduledqueryrules'
+input-file:
+- Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2021-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
+```
+
+### Tag: package-2022-02-01-preview-only
+
+These settings apply only when `--tag=package-2022-02-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
+  - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
+  - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json  
 ```
 
 ### Tag: package-2021-09
@@ -381,8 +530,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
@@ -409,8 +556,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
@@ -436,8 +581,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
@@ -462,8 +605,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-12
@@ -486,8 +627,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-09
@@ -510,8 +649,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-09-preview-only
@@ -587,8 +724,6 @@ These settings apply only when `--tag=package-2018-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2018-09-01-only'
 input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
-- Microsoft.Insights/stable/2018-09-01/baseline_API.json
-- Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
 ```
 
 ### Tag: package-2018-06-01-preview-only
@@ -637,16 +772,6 @@ These settings apply only when `--tag=package-2017-12-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2017-12-01-preview-only'
 input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
-```
-
-### Tag: package-2017-11-01-preview-only
-
-These settings apply only when `--tag=package-2017-11-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-11-01-preview-only'
-input-file:
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-05-01-preview-only
@@ -898,9 +1023,9 @@ directive:
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
-This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1. 
+This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
 
-``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09')) || $(csharp) || $(validation)
+``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09' || $(tag) == 'package-2022-02' || $(tag) == 'package-2022-04')) || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions

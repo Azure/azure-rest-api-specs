@@ -1,0 +1,548 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "EnvironmentVar": {
+      "description": "Container App container environment variable.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Environment variable name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Non-secret environment variable value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the environment variable value.",
+          "type": "string"
+        }
+      }
+    },
+    "Container": {
+      "description": "Container App container definition.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Container image tag.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Custom container name.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Container start command.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Container start command arguments.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "Container environment variables.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/ContainerResources",
+          "description": "Container resource requirements."
+        },
+        "probes": {
+          "description": "List of probes for the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "volumeMounts": {
+          "description": "Container volume mounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "volumeName"
+          ]
+        }
+      }
+    },
+    "ContainerResources": {
+      "description": "Container App container resource requirements.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "Required CPU in cores, e.g. 0.5",
+          "type": "number"
+        },
+        "memory": {
+          "description": "Required memory, e.g. \"250Mb\"",
+          "type": "string"
+        },
+        "ephemeralStorage": {
+          "description": "Ephemeral Storage, e.g. \"1Gi\"",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerAppProbe": {
+      "description": "Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.",
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
+          "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "httpGet": {
+          "description": "HTTPGet specifies the http request to perform.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead.",
+              "type": "string"
+            },
+            "httpHeaders": {
+              "description": "Custom headers to set in the request. HTTP allows repeated headers.",
+              "type": "array",
+              "items": {
+                "description": "HTTPHeader describes a custom header to be used in HTTP probes",
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "The header field name",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The header field value",
+                    "type": "string"
+                  }
+                }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "path": {
+              "description": "Path to access on the HTTP server.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "scheme": {
+              "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
+              "type": "string"
+            }
+          }
+        },
+        "initialDelaySeconds": {
+          "description": "Number of seconds after the container has started before liveness probes are initiated. Minimum value is 1. Maximum value is 60.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodSeconds": {
+          "description": "How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "successThreshold": {
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "tcpSocket": {
+          "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Optional: Host name to connect to, defaults to the pod IP.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "terminationGracePeriodSeconds": {
+          "description": "Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. Maximum value is 3600 seconds (1 hour)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeoutSeconds": {
+          "description": "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "description": "The type of probe.",
+          "enum": [
+            "liveness",
+            "readiness",
+            "startup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CustomScaleRule": {
+      "description": "Container App container Custom scaling rule.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the custom scale rule\neg: azure-servicebus, redis etc.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata properties to describe custom scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "description": "App Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "description": "Details or the error",
+              "items": {
+                "description": "Detailed errors.",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              },
+              "x-ms-identifiers": [
+                "code"
+              ]
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HttpScaleRule": {
+      "description": "Container App container Custom scaling rule.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata properties to describe http scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        }
+      }
+    },
+    "QueueScaleRule": {
+      "description": "Container App container Azure Queue based scaling rule.",
+      "type": "object",
+      "properties": {
+        "queueName": {
+          "description": "Queue name.",
+          "type": "string"
+        },
+        "queueLength": {
+          "format": "int32",
+          "description": "Queue length.",
+          "type": "integer"
+        },
+        "auth": {
+          "description": "Authentication secrets for the queue scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        }
+      }
+    },
+    "Scale": {
+      "description": "Container App scaling configurations.",
+      "type": "object",
+      "properties": {
+        "minReplicas": {
+          "format": "int32",
+          "description": "Optional. Minimum number of container replicas.",
+          "type": "integer"
+        },
+        "maxReplicas": {
+          "format": "int32",
+          "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set.",
+          "type": "integer"
+        },
+        "rules": {
+          "description": "Scaling rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ScaleRule": {
+      "description": "Container App container scaling rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Scale Rule Name",
+          "type": "string"
+        },
+        "azureQueue": {
+          "$ref": "#/definitions/QueueScaleRule",
+          "description": "Azure Queue based scaling."
+        },
+        "custom": {
+          "$ref": "#/definitions/CustomScaleRule",
+          "description": "Custom scale rule."
+        },
+        "http": {
+          "$ref": "#/definitions/HttpScaleRule",
+          "description": "HTTP requests based scaling."
+        }
+      }
+    },
+    "ScaleRuleAuth": {
+      "description": "Auth Secrets for Container App Scale Rule",
+      "type": "object",
+      "properties": {
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the auth params.",
+          "type": "string"
+        },
+        "triggerParameter": {
+          "description": "Trigger Parameter that uses the secret",
+          "type": "string"
+        }
+      }
+    },
+    "Secret": {
+      "description": "Secret definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "Template": {
+      "description": "Container App versioned application definition.\nDefines the desired state of an immutable revision.\nAny changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "revisionSuffix": {
+          "description": "User friendly suffix that is appended to the revision name",
+          "type": "string"
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scale": {
+          "$ref": "#/definitions/Scale",
+          "description": "Scaling properties for the Container App."
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Volume": {
+      "description": "Volume definitions for the Container App.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Volume name.",
+          "type": "string"
+        },
+        "storageType": {
+          "description": "Storage type for the volume. If not provided, use EmptyDir.",
+          "enum": [
+            "AzureFile",
+            "EmptyDir"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageName": {
+          "description": "Name of storage resource. No need to provide for EmptyDir.",
+          "type": "string"
+        }
+      }
+    },
+    "VolumeMount": {
+      "description": "Volume mount for the Container App.",
+      "type": "object",
+      "properties": {
+        "volumeName": {
+          "description": "This must match the Name of a Volume.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path within the container at which the volume should be mounted.Must not contain ':'.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
