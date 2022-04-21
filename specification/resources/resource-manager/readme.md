@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-resources-2021-04
+tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-privatelinks)
@@ -66,18 +66,26 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-05
+tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-03
+tag: package-changes-2022-05
+```
+### Tag: package-changes-2022-05
+
+These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-05'
+input-file:
+- Microsoft.Resources/stable/2022-05-01/changes.json
 ```
 
-### Tag: package-changes-2022-03
+### Tag: package-changes-2022-03-01-preview
 
 These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-changes-2022-03'
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
 input-file:
 - Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
@@ -351,6 +359,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2022-02
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+input-file:
+- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
 ```
 
 ### Tag: package-templatespecs-2021-05

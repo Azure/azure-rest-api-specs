@@ -8,6 +8,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-network
 no-namespace-folders: true
 package-version: 1.0.0b1
+combine-operation-files: true
 ```
 
 ### Python multi-api
