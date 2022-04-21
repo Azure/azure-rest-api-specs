@@ -55,7 +55,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
-  - repo: azure-powershell
 ```
 ## Az
 
