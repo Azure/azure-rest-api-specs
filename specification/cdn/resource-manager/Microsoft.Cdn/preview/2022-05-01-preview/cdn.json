@@ -2814,20 +2814,20 @@
           "description": "Name of the new profile that need to be created.",
           "type": "string"
         },
-        "migrationWafMappings": {
+        "migrationWebApplicationFirewallMappings": {
           "description": "Waf mapping for the migrated profile",
           "type": "array",
           "items": {
             "description": "List of waf mappings",
-            "$ref": "#/definitions/MigrationWafMapping"
+            "$ref": "#/definitions/MigrationWebApplicationFirewallMapping"
           },
           "x-ms-identifiers": []
         }
       },
       "x-ms-azure-resource": true
     },
-    "MigrationWafMapping": {
-      "description": "Waf mapping",
+    "MigrationWebApplicationFirewallMapping": {
+      "description": "Web Application Firewall Mapping ",
       "type": "object",
       "properties": {
         "migratedFrom": {
@@ -2842,9 +2842,9 @@
     },
     "MigrateResult": {
       "type": "object",
-      "description": "Result for canMigrate operation.",
+      "description": "Result for migrate operation.",
       "properties": {
-        "migratedProfileArmResourceId": {
+        "migratedProfileResourceId": {
           "readOnly": true,
           "description": "Arm resource id of the migrated profile",
           "$ref": "#/definitions/ResourceReference"
