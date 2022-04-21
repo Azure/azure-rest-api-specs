@@ -820,10 +820,7 @@
           "description": "Disk restore point Id."
         },
         "replicationStatus": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/DiskRestorePointReplicationStatus"
-          },
+          "$ref": "#/definitions/DiskRestorePointReplicationStatus",
           "description": "The disk restore point replication status information."
         }
       },
@@ -833,11 +830,13 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "object",
-          "items": {
-            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
-          },
+          "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus",
           "description": "The resource status information."
+        },
+        "completionPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replication completion percentage."
         }
       },
       "description": "The instance view of a disk restore point."
