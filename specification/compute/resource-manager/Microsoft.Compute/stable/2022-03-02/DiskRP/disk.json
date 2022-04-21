@@ -532,7 +532,8 @@
             "StandardSSD_LRS",
             "UltraSSD_LRS",
             "Premium_ZRS",
-            "StandardSSD_ZRS"
+            "StandardSSD_ZRS",
+            "PremiumV2_LRS"
           ],
           "x-ms-enum": {
             "name": "DiskStorageAccountTypes",
@@ -561,6 +562,10 @@
               {
                 "value": "StandardSSD_ZRS",
                 "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
+              },
+              {
+                "value": "PremiumV2_LRS",
+                "description": "PremiumV2 locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
               }
             ]
           },
@@ -572,7 +577,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, or StandardSSD_ZRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS."
     },
     "DiskProperties": {
       "properties": {
