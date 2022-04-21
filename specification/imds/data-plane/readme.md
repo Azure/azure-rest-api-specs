@@ -597,7 +597,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
-  - repo: azure-powershell
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
