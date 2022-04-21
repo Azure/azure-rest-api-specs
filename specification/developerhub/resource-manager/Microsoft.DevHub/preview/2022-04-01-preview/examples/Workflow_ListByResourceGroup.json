@@ -27,31 +27,33 @@
               "lastModifiedAt": "2018-04-24T16:30:55+00:00"
             },
             "properties": {
-              "repositoryOwner": "owner1",
-              "repositoryName": "repo1",
-              "branchName": "branch1",
-              "dockerfile": "repo1/images/Dockerfile",
-              "dockerBuildContext": "repo1/src/",
-              "deploymentProperties": {
-                "manifestType": "kube",
-                "overrides": {
-                  "key1": "value1"
+              "githubWorkflowProfile": {
+                "repositoryOwner": "owner1",
+                "repositoryName": "repo1",
+                "branchName": "branch1",
+                "dockerfile": "repo1/images/Dockerfile",
+                "dockerBuildContext": "repo1/src/",
+                "deploymentProperties": {
+                  "manifestType": "kube",
+                  "overrides": {
+                    "key1": "value1"
+                  }
+                },
+                "acr": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.ContainerRegistry/registries/registry1/connectedRegistries/acr1",
+                "oidcCredentials": {
+                  "azureClientId": "12345678-3456-7890-5678-012345678901",
+                  "azureTenantId": "66666666-3456-7890-5678-012345678901"
+                },
+                "aksResourceId": "/subscriptions/subscriptionId1/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+                "prURL": "https://github.com/User/repo1/pull/6567",
+                "pullNumber": 6567,
+                "prStatus": "merged",
+                "lastWorkflowRun": {
+                  "succeeded": true,
+                  "workflowRunURL": "https://github.com/User/repo1/actions/runs/1820640230",
+                  "lastRunAt": "2019-01-01T12:34:56.000Z",
+                  "authorized": false
                 }
-              },
-              "acr": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.ContainerRegistry/registries/registry1/connectedRegistries/acr1",
-              "oidcCredentials": {
-                "azureClientId": "12345678-3456-7890-5678-012345678901",
-                "azureTenantId": "66666666-3456-7890-5678-012345678901"
-              },
-              "aksResourceId": "/subscriptions/subscriptionId1/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
-              "prURL": "https://github.com/User/repo1/pull/6567",
-              "pullNumber": 6567,
-              "prStatus": "merged",
-              "lastWorkflowRun": {
-                "succeeded": true,
-                "workflowRunURL": "https://github.com/User/repo1/actions/runs/1820640230",
-                "lastRunAt": "2019-01-01T12:34:56.000Z",
-                "authorized": false
               }
             }
           }

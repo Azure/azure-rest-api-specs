@@ -57,7 +57,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -102,8 +102,8 @@
         }
       }
     },
-    "/providers/Microsoft.DevHub/githuboauth/callback": {
-      "get": {
+    "/providers/Microsoft.DevHub/githuboauthcallback": {
+      "post": {
         "tags": [
           "GitHubOAuth"
         ],
@@ -127,7 +127,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -208,7 +208,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -307,7 +307,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -347,7 +347,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -396,7 +396,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -415,7 +415,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -423,16 +423,23 @@
           "description": "Properties of a workflow.",
           "$ref": "#/definitions/WorkflowProperties",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "description": "System data",
-          "$ref": "#/definitions/SystemData"
         }
       }
     },
     "WorkflowProperties": {
       "type": "object",
       "description": "Workflow properties",
+      "properties": {
+        "githubWorkflowProfile": {
+          "description": "Profile of a github workflow.",
+          "$ref": "#/definitions/GitHubWorkflowProfile",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GitHubWorkflowProfile": {
+      "type": "object",
+      "description": "GitHub Workflow Profile",
       "properties": {
         "repositoryOwner": {
           "type": "string",
@@ -658,83 +665,6 @@
           "description": "OAuth token used to make calls to GitHub"
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of additional details about the error."
-        }
-      }
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
     },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
