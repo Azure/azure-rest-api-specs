@@ -1195,6 +1195,68 @@
           }
         }
       }
+    },
+    "/chat/threadless/messages": {
+      "post": {
+        "tags": [
+          "ThreadlessMessages"
+        ],
+        "summary": "Sends a Fire and Forget/Threadless/CPM message.",
+        "operationId": "Threadless_SendChatMessage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "sendThreadlessChatMessageRequest",
+            "description": "Details of the message to send.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendThreadlessChatMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message sent.",
+            "schema": {
+              "$ref": "#/definitions/SendThreadlessChatMessageResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1333,6 +1395,132 @@
           "example": "123456789"
         }
       }
+    },
+    "SendThreadlessChatMessageRequest": {
+      "description": "Details of the CPM message to send.",
+      "required": [
+        "type, from, to"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The from identifier that is owned by the authenticated account.",
+          "type": "string",
+          "example": "business phone number"
+        },
+        "to": {
+          "description": "The channel user identifiers of the recipient.",
+          "type": "string",
+          "example": "37:whatsapp:16315551234"
+        },
+        "type": {
+          "$ref": "#/definitions/ThreadlessChatMessageType"
+        },
+        "content": {
+          "description": "Chat message content.",
+          "type": "string",
+          "example": "Come on guys, lets go for lunch together."
+        },
+        "media": {
+          "$ref": "#/definitions/ChatMedia"
+        },
+        "template": {
+          "$ref": "#/definitions/ChatTemplate"
+        }
+      }
+    },
+    "ThreadlessChatMessageType": {
+      "description": "The threadless chat message type.",
+      "enum": [
+        "image",
+        "text",
+        "template"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ThreadlessChatMessageType",
+        "modelAsString": true
+      }
+    },
+    "ChatMedia": {
+      "description": "The media Object",
+      "required": [
+        "link"
+      ],
+      "type": "object",
+      "properties": {
+        "link": {
+          "description": "A media url for the file. Required if the type is image",
+          "type": "string",
+          "example": "https://IMAGE_URL"
+        }
+      }
+    },
+    "ChatTemplate": {
+      "description": "The template object used to create message templates.",
+      "required": [
+        "name, language, parameters"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the template.",
+          "type": "string",
+          "example": "appointment_update"
+        },
+        "language": {
+          "$ref": "#/definitions/LanguageCode"
+        },
+        "parameters": {
+          "description": "Array of parameters for the content of the message.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Friday",
+            "2424"
+          ]
+        }
+      }
+    },
+    "LanguageCode": {
+      "description": "The codes for the supported languages for message templates.",
+      "enum": [
+        "en_US",
+        "zh_CN",
+        "es_ES"
+      ],
+      "type": "string"
+    },
+    "SendThreadlessChatMessageResult": {
+      "description": "Result of the send message operation.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A server-generated message id.",
+          "type": "string",
+          "example": "123456789"
+        },
+        "status": {
+          "$ref": "#/definitions/ThreadlessChatMessageStatus"
+        }
+      }
+    },
+    "ThreadlessChatMessageStatus": {
+      "description": "The status of a threadless chat message.",
+      "enum": [
+        "Enqueued",
+        "Sent",
+        "Delivered",
+        "Read",
+        "Failed",
+        "Unknown"
+      ],
+      "type": "string"
     },
     "ChatParticipant": {
       "description": "A participant of the chat thread.",
