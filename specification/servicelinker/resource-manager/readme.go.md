@@ -5,7 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
+  clear-output-folder: trueA
 ```
 
 ``` yaml $(go) && $(track2)
@@ -20,7 +20,27 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-05-01
   - tag: package-2021-11-01-preview
+```
+
+### Tag: package-2022-05-01 and go
+
+These settings apply only when `--tag=package-2022-05-01 --go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2022-05-01' && $(go)
+namespace: servicelinker
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-05-01/$(namespace)
+directive:
+- from: swagger-document
+  where: $.definitions.TargetServiceType
+  transform: >
+    $["x-ms-enum"] = TargetServiceType
+- from: swagger-document
+  where: $.definitions.AzureResourceType
+  transform: >
+    $["x-ms-enum"] = AzureResourceType
 ```
 
 ### Tag: package-2021-11-01-preview and go
