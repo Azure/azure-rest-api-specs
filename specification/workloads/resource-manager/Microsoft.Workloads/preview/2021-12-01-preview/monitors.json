@@ -374,6 +374,9 @@
           },
           "Get properties of a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
+          },
+          "Get properties of a PrometheusHaCluster provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -434,6 +437,9 @@
           },
           "Create a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
+          },
+          "Create a PrometheusHaCluster provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create.json"
           }
         },
         "parameters": [
@@ -959,6 +965,34 @@
         }
       },
       "x-ms-discriminator-value": "Db2"
+    },
+    "PrometheusHaClusterProviderInstanceProperties": {
+      "description": "Gets or sets the PrometheusHaCluster provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "prometheusUrl": {
+          "description": "URL of the Node Exporter endpoint.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "Gets or sets the target machine name.",
+          "type": "string"
+        },
+        "sid": {
+          "description": "Gets or sets the cluster sid.",
+          "type": "string"
+        },
+        "clusterName": {
+          "description": "Gets or sets the clusterName.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "PrometheusHaCluster"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
