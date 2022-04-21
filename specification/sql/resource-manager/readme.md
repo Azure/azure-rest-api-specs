@@ -150,6 +150,20 @@ input-file:
  - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadGroups.json
 ```
+
+### Tag: package-composite-audit
+
+These settings apply only when `--tag=package-composite-audit` is specified on the command line.
+
+``` yaml $(tag) == 'package-composite-audit'
+input-file:
+- ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
+
 ### Tag: package-composite-v5
 
 These settings apply only when `--tag=package-composite-v5` is specified on the command line.
@@ -546,7 +560,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
-- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2021-11-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
