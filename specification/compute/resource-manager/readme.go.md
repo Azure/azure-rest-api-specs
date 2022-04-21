@@ -38,7 +38,7 @@ azure-arm: true
 
 directive:
   # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
-  - from: disk.json
+  - from: DiskRP/diskRPCommon.json
     where: "$.definitions.PurchasePlan"
     transform: >
       $["x-ms-client-name"] = "DiskPurchasePlan";
