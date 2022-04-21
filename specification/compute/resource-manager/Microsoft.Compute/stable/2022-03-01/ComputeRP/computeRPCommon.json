@@ -1113,6 +1113,14 @@
         "configurationReference": {
           "type": "string",
           "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided"
+        },
+        "treatFailureAsDeploymentFailure": {
+          "type": "boolean",
+          "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
         }
       },
       "required": [
