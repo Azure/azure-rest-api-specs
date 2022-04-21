@@ -375,6 +375,9 @@
           "Get properties of a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
           },
+          "Get properties of a MsSqlServer provider": {
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Get.json"
+          },
           "Get properties of a PrometheusHaCluster provider": {
             "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Get.json"
           }
@@ -437,6 +440,9 @@
           },
           "Create a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
+          },
+          "Create a MsSqlServer provider": {
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create.json"
           },
           "Create a PrometheusHaCluster provider": {
             "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create.json"
@@ -993,6 +999,43 @@
         }
       },
       "x-ms-discriminator-value": "PrometheusHaCluster"
+    },
+    "MsSqlServerProviderInstanceProperties": {
+      "description": "Gets or sets the SQL server provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "hostname": {
+          "description": "Gets or sets the SQL server host name.",
+          "type": "string"
+        },
+        "dbPort": {
+          "description": "Gets or sets the database sql port.",
+          "type": "string"
+        },
+        "dbUsername": {
+          "description": "Gets or sets the database user name.",
+          "type": "string"
+        },
+        "dbPassword": {
+          "description": "Gets or sets the database password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "dbPasswordKeyVaultUri": {
+          "description": "Gets or sets the key vault URI to secret with the database password.",
+          "type": "string"
+        },
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "MsSqlServer"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
