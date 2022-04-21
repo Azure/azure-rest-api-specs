@@ -83,16 +83,6 @@ input-file:
 - Microsoft.Cdn/stable/2019-12-31/cdn.json
 ```
 
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06'
-input-file:
-- Microsoft.Cdn/stable/2019-06-15/cdn.json
-- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
-```
-
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -106,6 +96,16 @@ directive:
       - $.paths
     suppress:
       - OperationsAPIImplementation
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-04
