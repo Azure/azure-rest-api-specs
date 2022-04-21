@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+### Tag: package-2022-02-preview 
+
+These settings apply only when `--tag=package-2022-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-preview'
+input-file:
+  - Microsoft.Advisor/preview/2022-02-01-preview/predictRecommendation.json
+```
+
 ### Tag: package-2020-07-preview
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
@@ -88,6 +97,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

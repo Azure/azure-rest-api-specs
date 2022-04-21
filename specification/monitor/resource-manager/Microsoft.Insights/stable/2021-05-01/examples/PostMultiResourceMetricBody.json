@@ -1,0 +1,379 @@
+{
+  "parameters": {
+    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
+    "region": "westus2",
+    "api-version": "2021-05-01",
+    "body": {
+      "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
+      "metricNames": "Data Disk Max Burst IOPS",
+      "metricNamespace": "microsoft.compute/virtualmachines",
+      "filter": "LUN eq '0' and Microsoft.ResourceId eq '*'",
+      "rollUpBy": "LUN",
+      "top": 10,
+      "orderBy": "count desc",
+      "aggregation": "count",
+      "interval": "PT6H",
+      "autoAdjustTimegrain": true,
+      "validateDimensions": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "cost": 4679,
+        "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
+        "interval": "PT6H",
+        "value": [
+          {
+            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Max Burst IOPS",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "Data Disk Max Burst IOPS",
+              "localizedValue": "Data Disk Max Burst IOPS"
+            },
+            "displayDescription": "Maximum IOPS Data Disk can achieve with bursting",
+            "unit": "Count",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "microsoft.resourceid",
+                      "localizedValue": "microsoft.resourceid"
+                    },
+                    "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas1/providers/Microsoft.Compute/virtualMachines/sas1-dev"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-06-08T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T13:00:00Z",
+                    "count": 413.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T19:00:00Z",
+                    "count": 72.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "microsoft.resourceid",
+                      "localizedValue": "microsoft.resourceid"
+                    },
+                    "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas2/providers/Microsoft.Compute/virtualMachines/sas2-vm"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-06-08T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T01:00:00Z",
+                    "count": 133.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T19:00:00Z",
+                    "count": 72.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "microsoft.resourceid",
+                      "localizedValue": "microsoft.resourceid"
+                    },
+                    "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas3/providers/Microsoft.Compute/virtualMachines/sas3-vm"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-06-08T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T01:00:00Z",
+                    "count": 78.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T19:00:00Z",
+                    "count": 72.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "microsoft.resourceid",
+                      "localizedValue": "microsoft.resourceid"
+                    },
+                    "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas4/providers/Microsoft.Compute/virtualMachines/sas4-vm"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-06-08T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T19:00:00Z",
+                    "count": 72.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "microsoft.resourceid",
+                      "localizedValue": "microsoft.resourceid"
+                    },
+                    "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas5/providers/Microsoft.Compute/virtualMachines/sas5-vm-asc"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-06-08T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-09T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-10T19:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T01:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T07:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T13:00:00Z",
+                    "count": 72.0
+                  },
+                  {
+                    "timeStamp": "2021-06-11T19:00:00Z",
+                    "count": 72.0
+                  }
+                ]
+              }
+            ],
+            "errorCode": "Success"
+          }
+        ],
+        "namespace": "microsoft.compute/virtualmachines",
+        "resourceregion": "westus2"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Missing required region params"
+        }
+      }
+    }
+  }
+}

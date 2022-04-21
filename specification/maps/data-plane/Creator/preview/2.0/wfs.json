@@ -25,15 +25,21 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
-    "AzureKey": {
+    "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
       "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
       "in": "header"
     }
   },
@@ -44,12 +50,15 @@
       ]
     },
     {
-      "AzureKey": []
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
     }
   ],
   "responses": {},
   "parameters": {
-    "WFSApiVersionV2": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -76,8 +85,14 @@
     },
     "Bbox": {
       "name": "bbox",
+      "x-ms-client-name": "boundingBox",
       "in": "query",
-      "type": "string",
+      "type": "array",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
       "description": "Only features that have a geometry that intersects the supplied bounding box are selected.\n* Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2\nThe coordinate reference system of the values is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`.\nFor WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).",
       "x-ms-parameter-location": "method"
     },
@@ -113,7 +128,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -123,7 +138,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/LandingPageResponse"
+              "$ref": "#/definitions/LandingPageResult"
             }
           },
           "default": {
@@ -135,10 +150,10 @@
     "/wfs/datasets/{datasetId}/conformance": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.",
-        "operationId": "WFS_GetConformance",
+        "operationId": "WFS_ListConformance",
         "x-ms-examples": {
           "GetConformance": {
-            "$ref": "./examples/wfs/WFS_GetConformance.json"
+            "$ref": "./examples/wfs/WFS_ListConformance.json"
           }
         },
         "parameters": [
@@ -146,7 +161,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -156,7 +171,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/ConformanceResponse"
+              "$ref": "#/definitions/ConformanceResult"
             }
           },
           "default": {
@@ -179,7 +194,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -212,7 +227,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -225,7 +240,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionInfo"
+              "$ref": "#/definitions/Collection"
             }
           },
           "default": {
@@ -248,7 +263,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -261,7 +276,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionDefinitionResponse"
+              "$ref": "#/definitions/CollectionDefinition"
             }
           },
           "default": {
@@ -284,7 +299,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -326,7 +341,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -342,7 +357,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FeatureResponse"
+              "$ref": "#/definitions/FeatureResult"
             }
           },
           "default": {
@@ -360,7 +375,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "dataset.json#/parameters/DatasetId"
@@ -384,7 +399,7 @@
     }
   },
   "definitions": {
-    "LandingPageResponse": {
+    "LandingPageResult": {
       "type": "object",
       "required": [
         "links"
@@ -397,12 +412,12 @@
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           }
         }
       }
     },
-    "ConformanceResponse": {
+    "ConformanceResult": {
       "type": "object",
       "required": [
         "conformsTo"
@@ -423,7 +438,7 @@
         }
       }
     },
-    "WfsEndpointLink": {
+    "WFSEndpointLink": {
       "description": "Links to other WFS endpoints",
       "type": "object",
       "required": [
@@ -445,6 +460,7 @@
           "example": "application/geo+json"
         },
         "hreflang": {
+          "x-ms-client-name": "hrefLang",
           "description": "A hint indicating what the language of the result of dereferencing the link should be.",
           "type": "string",
           "example": "en"
@@ -469,7 +485,7 @@
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           },
           "example": [
             {
@@ -496,12 +512,12 @@
           "description": "All the collections in a given dataset.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CollectionInfo"
+            "$ref": "#/definitions/Collection"
           }
         }
       }
     },
-    "CollectionInfo": {
+    "Collection": {
       "type": "object",
       "required": [
         "name",
@@ -530,7 +546,7 @@
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           },
           "example": [
             {
@@ -549,7 +565,7 @@
         }
       }
     },
-    "CollectionDefinitionResponse": {
+    "CollectionDefinition": {
       "description": "collection of GeoJSON features",
       "type": "object",
       "required": [
@@ -643,23 +659,22 @@
           }
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "description": "attributes of the collection used",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DefinitionProperties"
+            "$ref": "#/definitions/DefinitionProperty"
           }
         },
         "links": {
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           }
         }
       }
     },
-    "DefinitionProperties": {
+    "DefinitionProperty": {
       "type": "object",
       "required": [
         "name",
@@ -684,16 +699,34 @@
     },
     "ExtendedGeoJsonFeatureCollection": {
       "description": "A valid `GeoJSON FeatureCollection` object type extended with numberReturned and links array. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "x-ms-discriminator-value": "FeatureCollection",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollectionData"
         },
         {
           "$ref": "#/definitions/ExtendedGeoJsonFeatureCollectionData"
         }
-      ]
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type: FeatureCollection.",
+          "type": "string",
+          "enum": [
+            "FeatureCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "FeatureCollection",
+                "description": "`GeoJSON FeatureCollection` object."
+              }
+            ]
+          }
+        }
+      }
     },
     "ExtendedGeoJsonFeatureCollectionData": {
       "type": "object",
@@ -709,12 +742,12 @@
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           }
         }
       }
     },
-    "FeatureResponse": {
+    "FeatureResult": {
       "type": "object",
       "required": [
         "feature"
@@ -730,7 +763,7 @@
           "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/WFSEndpointLink"
           }
         }
       }

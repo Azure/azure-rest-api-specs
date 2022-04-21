@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSqlServerSqlDbSyncTaskInput": {
+      "type": "object",
+      "description": "Input for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations",
+      "properties": {
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlDbSyncDatabaseInput"
+          }
+        },
+        "validationOptions": {
+          "description": "Validation options",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationValidationOptions"
+        }
+      },
+      "required": [
+        "selectedDatabases"
+      ],
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/SqlMigrationTaskInput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServer": {
+          "type": "string",
+          "description": "Source server name",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServer": {
+          "type": "string",
+          "description": "Target server name",
+          "readOnly": true
+        },
+        "databaseCount": {
+          "type": "integer",
+          "description": "Count of databases",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "migrationState": {
+          "$ref": "./TasksCommon.json#/definitions/SyncDatabaseMigrationReportingState",
+          "description": "Migration state that this database is in",
+          "readOnly": true
+        },
+        "incomingChanges": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of incoming changes",
+          "readOnly": true
+        },
+        "appliedChanges": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of applied changes",
+          "readOnly": true
+        },
+        "cdcInsertCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc inserts",
+          "readOnly": true
+        },
+        "cdcDeleteCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc deletes",
+          "readOnly": true
+        },
+        "cdcUpdateCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc updates",
+          "readOnly": true
+        },
+        "fullLoadCompletedTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables completed in full load",
+          "readOnly": true
+        },
+        "fullLoadLoadingTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables loading in full load",
+          "readOnly": true
+        },
+        "fullLoadQueuedTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables queued in full load",
+          "readOnly": true
+        },
+        "fullLoadErroredTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables errored in full load",
+          "readOnly": true
+        },
+        "initializationCompleted": {
+          "type": "boolean",
+          "description": "Indicates if initial load (full load) has been completed",
+          "readOnly": true
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "CDC apply latency",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutputTableLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TableLevelOutput",
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Name of the table",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "cdcInsertCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of applied inserts",
+          "readOnly": true
+        },
+        "cdcUpdateCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of applied updates",
+          "readOnly": true
+        },
+        "cdcDeleteCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of applied deletes",
+          "readOnly": true
+        },
+        "fullLoadEstFinishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Estimate to finish full load",
+          "readOnly": true
+        },
+        "fullLoadStartedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Full load start time",
+          "readOnly": true
+        },
+        "fullLoadEndedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Full load end time",
+          "readOnly": true
+        },
+        "fullLoadTotalRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of rows applied in full load",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/SyncTableMigrationState",
+          "description": "Current state of the table migration",
+          "readOnly": true
+        },
+        "totalChangesApplied": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of applied changes",
+          "readOnly": true
+        },
+        "dataErrorsCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of data errors occurred",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time on target",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbSyncTaskOutputDatabaseError": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelErrorOutput",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/SyncMigrationDatabaseErrorEvent"
+          },
+          "description": "List of error events."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+        }
+      ]
+    }
+  }
+}

@@ -30,6 +30,17 @@ openapi-type: arm
 tag: package-2021-07-01
 ```
 
+### Tag: package-2022-01-01-preview
+
+These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceSkus.json
+```
+
 ### Tag: package-2021-07-01
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
@@ -219,8 +230,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

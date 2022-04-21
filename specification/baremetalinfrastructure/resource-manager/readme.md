@@ -26,7 +26,16 @@ These are the global settings for the BareMetalInfrastructure API.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-08-06-preview
+tag: package-2021-08-09
+```
+
+### Tag: package-2021-08-09
+
+These settings apply only when `--tag=package-2021-08-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-09'
+input-file:
+  - Microsoft.BareMetalInfrastructure/stable/2021-08-09/baremetalinfrastructure.json
 ```
 
 ### Tag: package-2020-08-06-preview
@@ -52,6 +61,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

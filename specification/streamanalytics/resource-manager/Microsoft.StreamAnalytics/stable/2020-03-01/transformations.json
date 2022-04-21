@@ -264,8 +264,12 @@
           "description": "Specifies the number of streaming units that the streaming job uses."
         },
         "validStreamingUnits": {
-          "type": "integer",
-          "format": "int32",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the number of streaming units that the streaming job can use."
+          },
           "description": "Specifies the valid streaming units a streaming job can scale to."
         },
         "query": {

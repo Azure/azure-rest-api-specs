@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataLakeAnalytics.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataLakeAnalytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for DataLakeAnalytics, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-11
+tag: package-preview-2019-11
 ```
 
 
+### Tag: package-preview-2019-11
+
+These settings apply only when `--tag=package-preview-2019-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-11'
+input-file:
+  - Microsoft.DataLakeAnalytics/preview/2019-11-01-preview/account.json
+```
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -49,6 +57,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
@@ -63,8 +72,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -74,16 +83,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
   - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -101,20 +110,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-```yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-datalake-analytics
-  clear-output-folder: true
-  no-namespace-folders: true
-  namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -166,8 +162,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
