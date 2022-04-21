@@ -3507,6 +3507,10 @@
         "disableAutomaticRollback": {
           "type": "boolean",
           "description": "Whether OS image rollback feature should be disabled. Default value is false."
+        },
+        "useRollingUpgradePolicy": {
+          "type": "boolean",
+          "description": "Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Default value is false. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS."
         }
       },
       "description": "The configuration parameters used for performing automatic OS upgrade."
@@ -3815,6 +3819,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "./computeRPCommon.json#/definitions/DeleteOption",
+          "description": "Specifies whether OS Disk should be deleted or detached upon VMSS Flex deletion (This feature is available for VMSS with Flexible OrchestrationMode only). <br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VMSS Flex VM is deleted.<br><br> **Detach** If this value is used, the OS disk is retained after VMSS Flex VM is deleted. <br><br> The default value is set to **Delete**. For an Ephemeral OS Disk, the default value is set to **Delete**. User cannot change the delete option for Ephemeral OS Disk."
         }
       },
       "required": [
@@ -3851,6 +3859,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "./computeRPCommon.json#/definitions/DeleteOption",
+          "description": "Specifies whether OS Disk should be deleted or detached upon VMSS Flex deletion (This feature is available for VMSS with Flexible OrchestrationMode only). <br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VMSS Flex VM is deleted.<br><br> **Detach** If this value is used, the OS disk is retained after VMSS Flex VM is deleted. <br><br> The default value is set to **Delete**. For an Ephemeral OS Disk, the default value is set to **Delete**. User cannot change the delete option for Ephemeral OS Disk."
         }
       },
       "description": "Describes virtual machine scale set operating system disk Update Object. This should be used for Updating VMSS OS Disk."
@@ -3896,6 +3908,10 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
+        },
+        "deleteOption": {
+          "$ref": "./computeRPCommon.json#/definitions/DeleteOption",
+          "description": "Specifies whether data disk should be deleted or detached upon VMSS Flex deletion (This feature is available for VMSS with Flexible OrchestrationMode only).<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when the VMSS Flex VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VMSS Flex VM is deleted.<br><br> The default value is set to **Delete**."
         }
       },
       "required": [
@@ -5398,6 +5414,10 @@
             "type": "string"
           },
           "description": "The virtual machine zones."
+        },
+        "identity": {
+          "$ref": "./virtualMachine.json#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
         }
       },
       "allOf": [

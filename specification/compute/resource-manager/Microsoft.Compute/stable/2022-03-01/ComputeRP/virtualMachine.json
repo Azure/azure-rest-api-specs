@@ -595,6 +595,9 @@
           "Create a Windows vm with a patch setting patchMode of AutomaticByOS.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModeOfAutomaticByOS.json"
           },
+          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and AutomaticByPlatformSettings.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithAutomaticByPlatformSettings.json"
+          },
           "Create a Windows vm with patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModesOfAutomaticByPlatform.json"
           },
@@ -612,6 +615,9 @@
           },
           "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithPatchSettingModeOfImageDefault.json"
+          },
+          "Create a Linux vm with a patch setting patchMode of AutomaticByPlatform and AutomaticByPlatformSettings.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithAutomaticByPlatformSettings.json"
           },
           "Create a Linux vm with a patch setting assessmentMode of ImageDefault.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithPatchSettingAssessmentModeOfImageDefault.json"
@@ -2007,7 +2013,7 @@
       },
       "allOf": [
         {
-          "$ref": "../common.json#/definitions/Resource"
+          "$ref": "../common.json#/definitions/ResourceWithOptionalLocation"
         }
       ],
       "description": "Describes a Virtual Machine Extension."
