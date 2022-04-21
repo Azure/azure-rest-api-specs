@@ -1,0 +1,148 @@
+{
+  "parameters": {
+    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testinstance",
+    "api-version": "2021-08-01-preview",
+    "parameters": {
+      "tags": {
+        "tagKey1": "TagValue1"
+      },
+      "location": "Japan East",
+      "sku": {
+        "name": "GP_Gen5",
+        "tier": "GeneralPurpose"
+      },
+      "properties": {
+        "administratorLogin": "dummylogin",
+        "administratorLoginPassword": "PLACEHOLDER",
+        "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+        "vCores": 8,
+        "storageSizeInGB": 1024,
+        "licenseType": "LicenseIncluded",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "dnsZonePartner": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "publicDataEndpointEnabled": false,
+        "proxyOverride": "Redirect",
+        "minimalTlsVersion": "1.2",
+        "timezoneId": "UTC",
+        "instancePoolId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/pool1",
+        "maintenanceConfigurationId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+        "requestedBackupStorageRedundancy": "Geo",
+        "administrators": {
+          "principalType": "User",
+          "login": "bob@contoso.com",
+          "sid": "00000011-1111-2222-2222-123456789111",
+          "tenantId": "00000011-1111-2222-2222-123456789111",
+          "azureADOnlyAuthentication": true
+        },
+        "servicePrincipal": {
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5",
+          "tier": "GeneralPurpose",
+          "capacity": 8,
+          "family": "Gen5"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "provisioningState": "Creating",
+          "vCores": 8,
+          "storageSizeInGB": 1024,
+          "licenseType": "LicenseIncluded",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Redirect",
+          "minimalTlsVersion": "1.2",
+          "dnsZone": "1b4e2caff2530",
+          "timezoneId": "UTC",
+          "instancePoolId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/pool1",
+          "maintenanceConfigurationId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo",
+          "administrators": {
+            "principalType": "User",
+            "login": "bob@contoso.com",
+            "sid": "00000011-1111-2222-2222-123456789111",
+            "tenantId": "00000011-1111-2222-2222-123456789111",
+            "azureADOnlyAuthentication": true
+          },
+          "servicePrincipal": {
+            "principalId": "00000011-1111-2222-2222-123456789111",
+            "clientId": "00000011-1111-2222-2222-123456789111",
+            "tenantId": "00000011-1111-2222-2222-123456789111",
+            "type": "SystemAssigned"
+          }
+        },
+        "location": "japaneast",
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5",
+          "tier": "GeneralPurpose",
+          "capacity": 8,
+          "family": "Gen5"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "provisioningState": "Creating",
+          "vCores": 8,
+          "storageSizeInGB": 1024,
+          "licenseType": "LicenseIncluded",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Redirect",
+          "minimalTlsVersion": "1.2",
+          "dnsZone": "1b4e2caff2530",
+          "timezoneId": "UTC",
+          "instancePoolId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/pool1",
+          "maintenanceConfigurationId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo",
+          "administrators": {
+            "principalType": "User",
+            "login": "bob@contoso.com",
+            "sid": "00000011-1111-2222-2222-123456789111",
+            "tenantId": "00000011-1111-2222-2222-123456789111",
+            "azureADOnlyAuthentication": true
+          },
+          "servicePrincipal": {
+            "principalId": "00000011-1111-2222-2222-123456789111",
+            "clientId": "00000011-1111-2222-2222-123456789111",
+            "tenantId": "00000011-1111-2222-2222-123456789111",
+            "type": "SystemAssigned"
+          }
+        },
+        "location": "japaneast",
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances"
+      }
+    },
+    "202": {}
+  }
+}

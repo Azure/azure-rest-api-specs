@@ -25,16 +25,7 @@
         "operationId": "Provider_GetAvailableStacks",
         "parameters": [
           {
-            "name": "osTypeSelected",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "WindowsFunctions",
-              "LinuxFunctions",
-              "All"
-            ]
+            "$ref": "#/parameters/osTypeSelectedParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -69,15 +60,7 @@
         "operationId": "Provider_GetFunctionAppStacks",
         "parameters": [
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -124,15 +107,7 @@
             "type": "string"
           },
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -179,15 +154,7 @@
             "type": "string"
           },
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -264,15 +231,7 @@
         "operationId": "Provider_GetWebAppStacks",
         "parameters": [
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -312,16 +271,7 @@
         "operationId": "Provider_GetAvailableStacksOnPrem",
         "parameters": [
           {
-            "name": "osTypeSelected",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "WindowsFunctions",
-              "LinuxFunctions",
-              "All"
-            ]
+            "$ref": "#/parameters/osTypeSelectedParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1094,6 +1044,39 @@
       "description": "API Version",
       "required": true,
       "type": "string"
+    },
+    "osTypeSelectedParameter": {
+      "name": "osTypeSelected",
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "Windows",
+        "Linux",
+        "WindowsFunctions",
+        "LinuxFunctions",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderOsTypeSelected",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "stackOsTypeParameter": {
+      "name": "stackOsType",
+      "in": "query",
+      "description": "Stack OS Type",
+      "type": "string",
+      "enum": [
+        "Windows",
+        "Linux",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderStackOsType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
