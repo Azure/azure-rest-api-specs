@@ -257,7 +257,7 @@ input-file:
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json 
 - Microsoft.Compute/stable/2021-07-01/skus.json
-- Microsoft.Compute/stable/2021-08-01/disk.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
 - Microsoft.Compute/stable/2021-10-01/gallery.json
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
 - Microsoft.Compute/stable/2021-07-01/communityGallery.json
