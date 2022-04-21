@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language - Custom Text Authoring APIs (2022-05-01)",
+    "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
     "version": "2022-05-01",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
@@ -65,7 +65,7 @@
         },
         "x-ms-examples": {
           "Successful List Projects": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulListProjects.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListProjects.json"
           }
         },
         "x-ms-pageable": {
@@ -90,7 +90,7 @@
           },
           {
             "in": "body",
-            "name": "createProjectOptions",
+            "name": "body",
             "description": "The project parameters.",
             "required": true,
             "schema": {
@@ -123,7 +123,7 @@
         },
         "x-ms-examples": {
           "Successful Create Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulCreateProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCreateProject.json"
           }
         }
       },
@@ -157,7 +157,7 @@
         },
         "x-ms-examples": {
           "Successful Get Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetProject.json"
           }
         }
       },
@@ -177,7 +177,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Successfully triggered the project deletion operation.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -194,7 +194,7 @@
         },
         "x-ms-examples": {
           "Successful Delete Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulDeleteProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -212,19 +212,14 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeInQuery"
-          },
-          {
-            "in": "query",
-            "name": "format",
-            "description": "The format of the project to export. The currently supported format is `JSON`.",
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeQueryParameter"
           },
           {
             "in": "query",
             "name": "assetKind",
             "description": "Kind of asset to export.",
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -232,7 +227,7 @@
         ],
         "responses": {
           "202": {
-            "description": "",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -249,7 +244,7 @@
         },
         "x-ms-examples": {
           "Successful Export Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulExportProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulExportProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -271,7 +266,7 @@
           },
           {
             "in": "body",
-            "name": "exportedProject",
+            "name": "body",
             "description": "The project data to import.",
             "required": true,
             "schema": {
@@ -284,7 +279,7 @@
         ],
         "responses": {
           "202": {
-            "description": "operation-location header for the status of the job.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -301,7 +296,7 @@
         },
         "x-ms-examples": {
           "Successful Import Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulImportProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulImportProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -323,7 +318,7 @@
           },
           {
             "in": "body",
-            "name": "trainingJobOptions",
+            "name": "body",
             "description": "The training input parameters.",
             "required": true,
             "schema": {
@@ -336,7 +331,7 @@
         ],
         "responses": {
           "202": {
-            "description": "operation-location header for the status of the job.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -353,7 +348,7 @@
         },
         "x-ms-examples": {
           "Successful Train Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulTrainProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulTrainProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -399,7 +394,7 @@
         },
         "x-ms-examples": {
           "Successful List Deployments": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulListDeployments.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -424,7 +419,7 @@
           },
           {
             "in": "body",
-            "name": "swapDeploymentsOptions",
+            "name": "body",
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
@@ -437,7 +432,7 @@
         ],
         "responses": {
           "202": {
-            "description": "operation-location header for the status of the job.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -454,7 +449,7 @@
         },
         "x-ms-examples": {
           "Successful Swap Deployments": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulSwapDeployments.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulSwapDeployments.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -494,7 +489,7 @@
         },
         "x-ms-examples": {
           "Successful Get Deployment": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetDeployment.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeployment.json"
           }
         }
       },
@@ -516,7 +511,7 @@
           },
           {
             "in": "body",
-            "name": "createDeploymentOptions",
+            "name": "body",
             "description": "The new deployment info.",
             "required": true,
             "schema": {
@@ -529,7 +524,7 @@
         ],
         "responses": {
           "202": {
-            "description": "operation-location header for the status of the job.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -546,7 +541,7 @@
         },
         "x-ms-examples": {
           "Successful Deploy Project": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulDeployProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -570,7 +565,7 @@
         ],
         "responses": {
           "202": {
-            "description": "operation-location header for the status of the job.",
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
                 "description": "The location of the status API for monitoring the created job.",
@@ -587,7 +582,7 @@
         },
         "x-ms-examples": {
           "Successful Delete Deployment": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulDeleteDeployment.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeployment.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -608,11 +603,7 @@
             "$ref": "common.json#/parameters/DeploymentNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -634,7 +625,7 @@
         },
         "x-ms-examples": {
           "Successful Get Deployment Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetDeploymentStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
           }
         }
       }
@@ -651,11 +642,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -677,7 +664,7 @@
         },
         "x-ms-examples": {
           "Successful Get Swap Deployments Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetSwapDeploymentsStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSwapDeploymentsStatus.json"
           }
         }
       }
@@ -694,11 +681,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -720,7 +703,7 @@
         },
         "x-ms-examples": {
           "Successful Get Export Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetExportStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportStatus.json"
           }
         }
       }
@@ -737,11 +720,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -763,7 +742,7 @@
         },
         "x-ms-examples": {
           "Successful Get Import Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetImportStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetImportStatus.json"
           }
         }
       }
@@ -808,7 +787,7 @@
         },
         "x-ms-examples": {
           "Successful List Models": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulListModels.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListModels.json"
           }
         },
         "x-ms-pageable": {
@@ -829,11 +808,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "trainedModelLabel",
-            "description": "The trained model name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -855,7 +830,7 @@
         },
         "x-ms-examples": {
           "Successful Get Model": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetModel.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModel.json"
           }
         }
       },
@@ -870,11 +845,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "trainedModelLabel",
-            "description": "The trained model name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -893,7 +864,7 @@
         },
         "x-ms-examples": {
           "Successful Delete Model": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulDeleteModel.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteModel.json"
           }
         }
       }
@@ -910,14 +881,10 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "trainedModelLabel",
-            "description": "The trained model name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
           },
           {
-            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeInQuery"
+            "$ref": "#/parameters/TextAnalysisAuthoringStringIndexTypeQueryParameter"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -948,7 +915,7 @@
         },
         "x-ms-examples": {
           "Successful Get Model Evaluation": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetModelEvaluation.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModelEvaluation.json"
           }
         },
         "x-ms-pageable": {
@@ -959,7 +926,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model (E.g. F1, Precision, Recall, ..etc).",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "operationId": "TextAnalysisAuthoring_GetModelEvaluationSummary",
         "produces": [
           "application/json"
@@ -969,11 +936,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "trainedModelLabel",
-            "description": "The trained model name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -995,7 +958,7 @@
         },
         "x-ms-examples": {
           "Successful Get Model Evaluation Summary": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetModelEvaluationSummary.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModelEvaluationSummary.json"
           }
         }
       }
@@ -1040,7 +1003,7 @@
         },
         "x-ms-examples": {
           "Successful List Training Jobs": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulListTrainingJobs.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListTrainingJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -1061,11 +1024,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -1087,7 +1046,7 @@
         },
         "x-ms-examples": {
           "Successful Get Train Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetTrainStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetTrainStatus.json"
           }
         }
       }
@@ -1104,11 +1063,7 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -1127,7 +1082,7 @@
         },
         "x-ms-examples": {
           "Successful Cancel Training Job": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulCancelTrainingJob.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCancelTrainingJob.json"
           }
         }
       }
@@ -1141,11 +1096,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -1167,7 +1118,7 @@
         },
         "x-ms-examples": {
           "Successful Get Project Deletion Status": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetProjectDeletionStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetProjectDeletionStatus.json"
           }
         }
       }
@@ -1209,7 +1160,7 @@
         },
         "x-ms-examples": {
           "Successful Supported Languages": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetSupportedLanguages.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedLanguages.json"
           }
         },
         "x-ms-pageable": {
@@ -1227,7 +1178,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindInQuery"
+            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindQueryParameter"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -1258,7 +1209,7 @@
         },
         "x-ms-examples": {
           "Successful Get Supported Training Config Versions": {
-            "$ref": "./examples/textanalysisauthoring/SuccessfulGetSupportedTrainingConfigVersions.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         },
         "x-ms-pageable": {
@@ -1350,7 +1301,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language.",
+          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         }
       },
@@ -1471,53 +1422,12 @@
       "x-ms-client-name": "CustomSingleLabelClassificationEvaluationSummary"
     },
     "TextAnalysisAuthoringDeploymentJobState": {
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "expirationDateTime",
-        "status"
-      ],
       "type": "object",
-      "properties": {
-        "jobId": {
-          "description": "Gets or sets the job ID.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the created time.",
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the last updated time.",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the expiration time.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
-        },
-        "warnings": {
-          "description": "Gets or sets the warnings.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
-        },
-        "errors": {
-          "description": "Gets or sets the errors.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
         }
-      },
+      ],
       "x-ms-client-name": "DeploymentJobState"
     },
     "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
@@ -1594,7 +1504,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the document language.",
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         },
         "projectKind": {
@@ -1812,6 +1722,7 @@
           "type": "string"
         },
         "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -1858,6 +1769,7 @@
           "type": "string"
         },
         "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -1901,6 +1813,7 @@
           "type": "string"
         },
         "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -2029,59 +1942,29 @@
       "x-ms-client-name": "ExportedProjectAssets"
     },
     "TextAnalysisAuthoringExportProjectJobState": {
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "expirationDateTime",
-        "status"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
       "properties": {
         "resultUrl": {
           "type": "string"
-        },
-        "jobId": {
-          "description": "Gets or sets the job ID.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the created time.",
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the last updated time.",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the expiration time.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
-        },
-        "warnings": {
-          "description": "Gets or sets the warnings.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
-        },
-        "errors": {
-          "description": "Gets or sets the errors.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
         }
       },
       "x-ms-client-name": "ExportProjectJobState"
     },
     "TextAnalysisAuthoringImportProjectJobState": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "ImportProjectJobState"
+    },
+    "TextAnalysisAuthoringJobState": {
       "required": [
         "jobId",
         "createdDateTime",
@@ -2129,7 +2012,7 @@
           }
         }
       },
-      "x-ms-client-name": "ImportProjectJobState"
+      "x-ms-client-name": "JobState"
     },
     "TextAnalysisAuthoringJobStatus": {
       "enum": [
@@ -2309,53 +2192,12 @@
       "x-ms-client-name": "NamedEntityRecognitionEvaluationSummary"
     },
     "TextAnalysisAuthoringProjectDeletionJobState": {
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "expirationDateTime",
-        "status"
-      ],
       "type": "object",
-      "properties": {
-        "jobId": {
-          "description": "Gets or sets the job ID.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the created time.",
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the last updated time.",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the expiration time.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
-        },
-        "warnings": {
-          "description": "Gets or sets the warnings.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
-        },
-        "errors": {
-          "description": "Gets or sets the errors.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
         }
-      },
+      ],
       "x-ms-client-name": "ProjectDeletionJobState"
     },
     "TextAnalysisAuthoringProjectDeployment": {
@@ -2490,7 +2332,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language.",
+          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
           "type": "string"
         }
       },
@@ -2909,62 +2751,25 @@
     },
     "TextAnalysisAuthoringTrainingJobState": {
       "required": [
-        "result",
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "expirationDateTime",
-        "status"
+        "result"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
       "properties": {
         "result": {
           "description": "Represents training tasks detailed result.",
           "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobResult"
-        },
-        "jobId": {
-          "description": "Gets or sets the job ID.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the created time.",
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the last updated time.",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the expiration time.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Gets or sets the job status.",
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
-        },
-        "warnings": {
-          "description": "Gets or sets the warnings.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
-        },
-        "errors": {
-          "description": "Gets or sets the errors.",
-          "type": "array",
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          }
         }
       },
       "x-ms-client-name": "TrainingJobState"
     }
   },
   "parameters": {
-    "TextAnalysisAuthoringStringIndexTypeInQuery": {
+    "TextAnalysisAuthoringStringIndexTypeQueryParameter": {
       "in": "query",
       "name": "stringIndexType",
       "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -2979,7 +2784,23 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "TextAnalysisAuthoringProjectKindInQuery": {
+    "TextAnalysisAuthoringJobIdPathParameter": {
+      "in": "path",
+      "name": "jobId",
+      "description": "The job ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TextAnalysisAuthoringTrainedModelLabelPathParameter": {
+      "in": "path",
+      "name": "trainedModelLabel",
+      "description": "The trained model label.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TextAnalysisAuthoringProjectKindQueryParameter": {
       "in": "query",
       "name": "projectKind",
       "description": "The project kind.",
