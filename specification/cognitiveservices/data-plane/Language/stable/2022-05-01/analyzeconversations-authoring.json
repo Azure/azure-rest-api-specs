@@ -1189,7 +1189,7 @@
           {
             "in": "query",
             "name": "language",
-            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
             "type": "string",
             "x-ms-parameter-location": "method"
           },
@@ -1303,7 +1303,7 @@
         "values": [
           {
             "value": "returnLongestOverlap",
-            "description": "When 2 or more components are found in the text and overlap, the component with the longest set of characters is returned."
+            "description": "When two or more components are found in the text and overlap, the component with the longest set of characters is returned."
           },
           {
             "value": "requireExactOverlap",
@@ -1315,7 +1315,7 @@
           },
           {
             "value": "combineComponents",
-            "description": "When 2 or more components are found in the text and overlap, the components's spans are merged together into one span combining all of them."
+            "description": "When two or more components are found in the text and overlap, the components's spans are merged together into one span combining all of them."
           }
         ]
       },
@@ -1328,7 +1328,8 @@
       },
       "x-ms-client-name": "ConfusionMatrix"
     },
-    "ConversationalAnalysisAuthoringConfusionMatrixEntry": {
+    "ConversationalAnalysisAuthoringConfusionMatrixCell": {
+      "description": "Represents a cell in a confusion matrix.",
       "required": [
         "normalizedValue",
         "rawValue"
@@ -1346,31 +1347,36 @@
           "type": "number"
         }
       },
-      "x-ms-client-name": "ConfusionMatrixEntry"
+      "x-ms-client-name": "ConfusionMatrixCell"
     },
     "ConversationalAnalysisAuthoringConfusionMatrixRow": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixEntry"
+        "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrixCell"
       },
       "x-ms-client-name": "ConfusionMatrixRow"
     },
     "ConversationalAnalysisAuthoringConversationExportedEntity": {
+      "description": "Represents an entity with its components.",
       "required": [
         "category"
       ],
       "type": "object",
       "properties": {
         "category": {
+          "description": "The category of the entity.",
           "type": "string"
         },
         "compositionSetting": {
+          "description": "The behavior to follow when the entity's components overlap with each other.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringCompositionSetting"
         },
         "list": {
+          "description": "The list component of the entity.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityList"
         },
         "prebuilts": {
+          "description": "The prebuilt entities components.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedPrebuiltEntity"
@@ -1380,18 +1386,21 @@
       "x-ms-client-name": "ConversationExportedEntity"
     },
     "ConversationalAnalysisAuthoringConversationExportedIntent": {
+      "description": "Represents an exported intent of a conversational project.",
       "required": [
         "category"
       ],
       "type": "object",
       "properties": {
         "category": {
+          "description": "The intent category.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ConversationExportedIntent"
     },
     "ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
+      "description": "Represents the exported assets of a conversational project.",
       "type": "object",
       "allOf": [
         {
@@ -1400,18 +1409,21 @@
       ],
       "properties": {
         "intents": {
+          "description": "The intents defined in the project.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedIntent"
           }
         },
         "entities": {
+          "description": "The entities defined in the project.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedEntity"
           }
         },
         "utterances": {
+          "description": "The utterances defined in the project.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringConversationExportedUtterance"
@@ -1422,6 +1434,7 @@
       "x-ms-client-name": "ConversationExportedProjectAssets"
     },
     "ConversationalAnalysisAuthoringConversationExportedUtterance": {
+      "description": "Represents an exported utterance for a conversational project.",
       "required": [
         "text",
         "intent"
@@ -1429,19 +1442,22 @@
       "type": "object",
       "properties": {
         "entities": {
+          "description": "Represents the entity labels of the utterance.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedUtteranceEntityLabel"
           }
         },
         "text": {
+          "description": "The utterance text.",
           "type": "string"
         },
         "language": {
-          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "intent": {
+          "description": "The intent of the utterance.",
           "type": "string"
         },
         "dataset": {
@@ -1452,6 +1468,7 @@
       "x-ms-client-name": "ConversationExportedUtterance"
     },
     "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
+      "description": "Represents the options for creating or updating a project deployment.",
       "required": [
         "trainedModelLabel"
       ],
@@ -1465,6 +1482,7 @@
       "x-ms-client-name": "CreateDeploymentOptions"
     },
     "ConversationalAnalysisAuthoringCreateProjectOptions": {
+      "description": "Represents the options used to create or update a project.",
       "required": [
         "projectKind",
         "projectName",
@@ -1477,29 +1495,30 @@
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         },
         "settings": {
-          "description": "Gets or sets the project settings.",
+          "description": "The project settings.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
         },
         "projectName": {
-          "description": "Gets or sets the new project name.",
+          "description": "The new project name.",
           "type": "string"
         },
         "multilingual": {
-          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "description": "Whether the project would be used for multiple languages or not.",
           "type": "boolean"
         },
         "description": {
-          "description": "Gets or sets the new project description.",
+          "description": "The project description.",
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
       "x-ms-client-name": "CreateProjectOptions"
     },
     "ConversationalAnalysisAuthoringDeploymentJobState": {
+      "description": "Represents the state of a deployment job.",
       "type": "object",
       "allOf": [
         {
@@ -1509,6 +1528,7 @@
       "x-ms-client-name": "DeploymentJobState"
     },
     "ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
+      "description": "Represents the evaluation result summary for the project's entities.",
       "required": [
         "confusionMatrix",
         "entities",
@@ -1526,7 +1546,7 @@
           "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix"
         },
         "entities": {
-          "description": "Represents the entities evaluation",
+          "description": "Represents the entities evaluation summary.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringEntityEvaluationSummary"
@@ -1566,6 +1586,7 @@
       "x-ms-client-name": "EntitiesEvaluationSummary"
     },
     "ConversationalAnalysisAuthoringEntityEvaluationSummary": {
+      "description": "Represents the evaluation result for an entity.",
       "required": [
         "f1",
         "precision",
@@ -1623,11 +1644,22 @@
       "type": "string",
       "x-ms-enum": {
         "name": "EvaluationKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "percentage",
+            "description": "Split the data into training and test sets according to user-defined percentages."
+          },
+          {
+            "value": "manual",
+            "description": "Split the data according to the chosen dataset for every example in the data."
+          }
+        ]
       },
       "x-ms-client-name": "EvaluationKind"
     },
     "ConversationalAnalysisAuthoringEvaluationOptions": {
+      "description": "Represents the options used running the evaluation.",
       "type": "object",
       "properties": {
         "kind": {
@@ -1648,6 +1680,7 @@
       "x-ms-client-name": "EvaluationOptions"
     },
     "ConversationalAnalysisAuthoringEvaluationResults": {
+      "description": "Represent a list of utterances' evaluation results.",
       "required": [
         "value",
         "nextLink"
@@ -1655,14 +1688,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the utterances predictions.",
+          "description": "The utterances evaluation results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringUtteranceEvaluationResult"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -1670,6 +1703,7 @@
       "x-ms-client-name": "EvaluationResults"
     },
     "ConversationalAnalysisAuthoringEvaluationSummary": {
+      "description": "Represents the evaluation result summary.",
       "required": [
         "entitiesEvaluation",
         "intentsEvaluation"
@@ -1682,15 +1716,17 @@
         },
         "intentsEvaluation": {
           "description": "Contains the data related to intents evaluation.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluation"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluationSummary"
         },
         "evaluationOptions": {
+          "description": "The options that were used while running the evaluation.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
         }
       },
       "x-ms-client-name": "EvaluationSummary"
     },
     "ConversationalAnalysisAuthoringExportedCluOrchestration": {
+      "description": "Defines the orchestration details for a Conversational project target.",
       "required": [
         "projectName",
         "deploymentName"
@@ -1698,15 +1734,18 @@
       "type": "object",
       "properties": {
         "projectName": {
+          "description": "The name of the targeted project.",
           "type": "string"
         },
         "deploymentName": {
+          "description": "The name of the targeted deployment.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportedCluOrchestration"
     },
     "ConversationalAnalysisAuthoringExportedCluOrchestrationOptions": {
+      "description": "Represents the orchestration options for a Conversational project target.",
       "required": [
         "cluOrchestration"
       ],
@@ -1718,6 +1757,7 @@
       ],
       "properties": {
         "cluOrchestration": {
+          "description": "The Conversational project target details.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedCluOrchestration"
         }
       },
@@ -1725,9 +1765,11 @@
       "x-ms-client-name": "ExportedCluOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedEntityList": {
+      "description": "Represents a list component of an entity.",
       "type": "object",
       "properties": {
         "sublists": {
+          "description": "The sub-lists of the list component.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntitySublist"
@@ -1737,13 +1779,15 @@
       "x-ms-client-name": "ExportedEntityList"
     },
     "ConversationalAnalysisAuthoringExportedEntityListSynonym": {
+      "description": "Represents a list of synonyms inside a list component",
       "type": "object",
       "properties": {
         "language": {
-          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "values": {
+          "description": "The list of synonyms.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1753,12 +1797,15 @@
       "x-ms-client-name": "ExportedEntityListSynonym"
     },
     "ConversationalAnalysisAuthoringExportedEntitySublist": {
+      "description": "Represents a sub-list inside a list component.",
       "type": "object",
       "properties": {
         "listKey": {
+          "description": "The key of the sub-list.",
           "type": "string"
         },
         "synonyms": {
+          "description": "The phrases of that correspond to the sub-list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityListSynonym"
@@ -1768,6 +1815,7 @@
       "x-ms-client-name": "ExportedEntitySublist"
     },
     "ConversationalAnalysisAuthoringExportedLuisOrchestration": {
+      "description": "Defines the orchestration details for a LUIS application target.",
       "required": [
         "appId"
       ],
@@ -1775,19 +1823,23 @@
       "properties": {
         "appId": {
           "format": "uuid",
+          "description": "The LUIS application ID.",
           "type": "string",
           "example": "00000000-0000-0000-0000-000000000000"
         },
         "appVersion": {
+          "description": "The targeted version Id.",
           "type": "string"
         },
         "slotName": {
+          "description": "The targeted slot name.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportedLuisOrchestration"
     },
     "ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
+      "description": "Represents the orchestration options for a LUIS application target.",
       "required": [
         "luisOrchestration"
       ],
@@ -1799,6 +1851,7 @@
       ],
       "properties": {
         "luisOrchestration": {
+          "description": "The LUIS application target details.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration"
         }
       },
@@ -1806,12 +1859,14 @@
       "x-ms-client-name": "ExportedLuisOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
+      "description": "Represents the options used to define the orchestration behavior of an intent.",
       "required": [
         "kind"
       ],
       "type": "object",
       "properties": {
         "kind": {
+          "description": "The kind of the target used in the orchestration flow.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationKind"
         }
       },
@@ -1819,18 +1874,21 @@
       "x-ms-client-name": "ExportedOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
+      "description": "Represents an exported prebuilt entity component",
       "required": [
         "category"
       ],
       "type": "object",
       "properties": {
         "category": {
+          "description": "The prebuilt entity category.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportedPrebuiltEntity"
     },
     "ConversationalAnalysisAuthoringExportedProject": {
+      "description": "Represents an exported project.",
       "required": [
         "project-file-version",
         "stringIndexType",
@@ -1839,6 +1897,7 @@
       "type": "object",
       "properties": {
         "project-file-version": {
+          "description": "The version of the exported file.",
           "type": "string"
         },
         "stringIndexType": {
@@ -1857,12 +1916,14 @@
       "x-ms-client-name": "ExportedProject"
     },
     "ConversationalAnalysisAuthoringExportedProjectAssets": {
+      "description": "Represents the assets of an exported project.",
       "required": [
         "projectKind"
       ],
       "type": "object",
       "properties": {
         "projectKind": {
+          "description": "The type of project containing the assets.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         }
       },
@@ -1877,23 +1938,36 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ExportedProjectFormat",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "clu",
+            "description": "Specifies the format for a conversational project."
+          },
+          {
+            "value": "luis",
+            "description": "Specifies the format for an application that was exported from LUIS."
+          }
+        ]
       },
       "x-ms-client-name": "ExportedProjectFormat"
     },
     "ConversationalAnalysisAuthoringExportedQnaOrchestration": {
+      "description": "Defines the orchestration details for a Question Answering project target.",
       "required": [
         "projectName"
       ],
       "type": "object",
       "properties": {
         "projectName": {
+          "description": "The name of the target project.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportedQnaOrchestration"
     },
     "ConversationalAnalysisAuthoringExportedQnaOrchestrationOptions": {
+      "description": "Represents the orchestration options for a Question Answering project target.",
       "required": [
         "qnaOrchestration"
       ],
@@ -1905,6 +1979,7 @@
       ],
       "properties": {
         "qnaOrchestration": {
+          "description": "The Question Answering project details.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQnaOrchestration"
         }
       },
@@ -1912,6 +1987,7 @@
       "x-ms-client-name": "ExportedQnaOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
+      "description": "Represents an entity label for an utterance.",
       "required": [
         "category",
         "offset",
@@ -1920,20 +1996,24 @@
       "type": "object",
       "properties": {
         "category": {
+          "description": "The category of the entity label.",
           "type": "string"
         },
         "offset": {
           "format": "int32",
+          "description": "Start position for the entity text.",
           "type": "integer"
         },
         "length": {
           "format": "int32",
+          "description": "Length for the entity text.",
           "type": "integer"
         }
       },
       "x-ms-client-name": "ExportedUtteranceEntityLabel"
     },
     "ConversationalAnalysisAuthoringExportProjectJobState": {
+      "description": "Represents the state of an export job.",
       "type": "object",
       "allOf": [
         {
@@ -1942,12 +2022,14 @@
       ],
       "properties": {
         "resultUrl": {
+          "description": "The URL to use in order to download the exported project.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportProjectJobState"
     },
     "ConversationalAnalysisAuthoringImportProjectJobState": {
+      "description": "Represents the state of an import job.",
       "type": "object",
       "allOf": [
         {
@@ -1956,7 +2038,8 @@
       ],
       "x-ms-client-name": "ImportProjectJobState"
     },
-    "ConversationalAnalysisAuthoringIntentEvaluation": {
+    "ConversationalAnalysisAuthoringIntentEvaluationSummary": {
+      "description": "The evaluation summary for an intent.",
       "required": [
         "f1",
         "precision",
@@ -2004,9 +2087,10 @@
           "type": "integer"
         }
       },
-      "x-ms-client-name": "IntentEvaluation"
+      "x-ms-client-name": "IntentEvaluationSummary"
     },
-    "ConversationalAnalysisAuthoringIntentsEvaluation": {
+    "ConversationalAnalysisAuthoringIntentsEvaluationSummary": {
+      "description": "Represents the evaluation summary for the project's intents.",
       "required": [
         "confusionMatrix",
         "intents",
@@ -2024,10 +2108,10 @@
           "$ref": "#/definitions/ConversationalAnalysisAuthoringConfusionMatrix"
         },
         "intents": {
-          "description": "Represents the intents evaluation.",
+          "description": "Represents the intents evaluation summary.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentEvaluation"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentEvaluationSummary"
           }
         },
         "microF1": {
@@ -2061,50 +2145,50 @@
           "type": "number"
         }
       },
-      "x-ms-client-name": "IntentsEvaluation"
+      "x-ms-client-name": "IntentsEvaluationSummary"
     },
     "ConversationalAnalysisAuthoringJobState": {
+      "description": "Represents a job's state.",
       "required": [
         "jobId",
         "createdDateTime",
         "lastUpdatedDateTime",
-        "expirationDateTime",
         "status"
       ],
       "type": "object",
       "properties": {
         "jobId": {
-          "description": "Gets or sets the job ID.",
+          "description": "The job ID.",
           "type": "string"
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the created time.",
+          "description": "The creation date time of the job.",
           "type": "string"
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the last updated time.",
+          "description": "The last date time the job was updated.",
           "type": "string"
         },
         "expirationDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the expiration time.",
+          "description": "The expiration date time of the job.",
           "type": "string"
         },
         "status": {
-          "description": "Gets or sets the job status.",
+          "description": "The job status.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         },
         "warnings": {
-          "description": "Gets or sets the warnings.",
+          "description": "The warnings that were encountered while executing the job.",
           "type": "array",
           "items": {
-            "$ref": "common.json#/definitions/Error"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringWarning"
           }
         },
         "errors": {
-          "description": "Gets or sets the errors.",
+          "description": "The errors encountered while executing the job.",
           "type": "array",
           "items": {
             "$ref": "common.json#/definitions/Error"
@@ -2115,7 +2199,6 @@
     },
     "ConversationalAnalysisAuthoringJobStatus": {
       "enum": [
-        "unknown",
         "notStarted",
         "running",
         "succeeded",
@@ -2132,21 +2215,25 @@
       "x-ms-client-name": "JobStatus"
     },
     "ConversationalAnalysisAuthoringOrchestrationExportedIntent": {
+      "description": "Represents an exported intent for an orchestration project.",
       "required": [
         "category"
       ],
       "type": "object",
       "properties": {
         "orchestration": {
+          "description": "Specifies the behavior of this intent in the orchestration flow.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedOrchestrationOptions"
         },
         "category": {
+          "description": "The intent category.",
           "type": "string"
         }
       },
       "x-ms-client-name": "OrchestrationExportedIntent"
     },
     "ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
+      "description": "Represents the assets of an orchestration project.",
       "type": "object",
       "allOf": [
         {
@@ -2155,12 +2242,14 @@
       ],
       "properties": {
         "intents": {
+          "description": "Represents the intents of the project.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedIntent"
           }
         },
         "utterances": {
+          "description": "Represents the utterances of the project.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationExportedUtterance"
@@ -2171,6 +2260,7 @@
       "x-ms-client-name": "OrchestrationExportedProjectAssets"
     },
     "ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
+      "description": "Represents an utterance of an orchestration project.",
       "required": [
         "text",
         "intent"
@@ -2178,13 +2268,15 @@
       "type": "object",
       "properties": {
         "text": {
+          "description": "The utterance text.",
           "type": "string"
         },
         "language": {
-          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "intent": {
+          "description": "The intent of the utterance.",
           "type": "string"
         },
         "dataset": {
@@ -2208,6 +2300,7 @@
       "x-ms-client-name": "OrchestrationKind"
     },
     "ConversationalAnalysisAuthoringPrebuiltEntities": {
+      "description": "Represents a list of the retrieved supported prebuilt entities.",
       "required": [
         "value",
         "nextLink"
@@ -2230,6 +2323,7 @@
       "x-ms-client-name": "PrebuiltEntities"
     },
     "ConversationalAnalysisAuthoringPrebuiltEntity": {
+      "description": "Represents a supported prebuilt entity.",
       "required": [
         "category",
         "description",
@@ -2253,6 +2347,7 @@
       "x-ms-client-name": "PrebuiltEntity"
     },
     "ConversationalAnalysisAuthoringProjectDeletionJobState": {
+      "description": "Represents the state of a project deletion job.",
       "type": "object",
       "allOf": [
         {
@@ -2262,6 +2357,7 @@
       "x-ms-client-name": "ProjectDeletionJobState"
     },
     "ConversationalAnalysisAuthoringProjectDeployment": {
+      "description": "Represents a project deployment.",
       "required": [
         "deploymentName",
         "modelId",
@@ -2303,6 +2399,7 @@
       "x-ms-client-name": "ProjectDeployment"
     },
     "ConversationalAnalysisAuthoringProjectDeployments": {
+      "description": "Represents a list of retrieved deployments.",
       "required": [
         "value",
         "nextLink"
@@ -2310,14 +2407,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the deployments.",
+          "description": "The list of retrieved deployments.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2332,11 +2429,22 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProjectKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "value": "orchestration",
+            "description": "A project to connect and orchestrate CLU, Custom question answering and LUIS projects together in one single project."
+          }
+        ]
       },
       "x-ms-client-name": "ProjectKind"
     },
     "ConversationalAnalysisAuthoringProjectMetadata": {
+      "description": "Represents the metadata of a project.",
       "required": [
         "createdDateTime",
         "lastModifiedDateTime",
@@ -2371,29 +2479,30 @@
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
         },
         "settings": {
-          "description": "Gets or sets the project settings.",
+          "description": "The project settings.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
         },
         "projectName": {
-          "description": "Gets or sets the new project name.",
+          "description": "The new project name.",
           "type": "string"
         },
         "multilingual": {
-          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "description": "Whether the project would be used for multiple languages or not.",
           "type": "boolean"
         },
         "description": {
-          "description": "Gets or sets the new project description.",
+          "description": "The project description.",
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ProjectMetadata"
     },
     "ConversationalAnalysisAuthoringProjectSettings": {
+      "description": "Represents the settings used to define the project behavior.",
       "required": [
         "confidenceThreshold"
       ],
@@ -2401,12 +2510,14 @@
       "properties": {
         "confidenceThreshold": {
           "format": "float",
+          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\".",
           "type": "number"
         }
       },
       "x-ms-client-name": "ProjectSettings"
     },
     "ConversationalAnalysisAuthoringProjectsMetadata": {
+      "description": "Represents a list of retrieved projects' metadata.",
       "required": [
         "value",
         "nextLink"
@@ -2414,14 +2525,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the projects.",
+          "description": "The list of projects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2429,6 +2540,7 @@
       "x-ms-client-name": "ProjectsMetadata"
     },
     "ConversationalAnalysisAuthoringProjectTrainedModel": {
+      "description": "Represents a trained model.",
       "required": [
         "label",
         "modelId",
@@ -2440,36 +2552,37 @@
       "type": "object",
       "properties": {
         "label": {
-          "description": "Represents trained model label.",
+          "description": "The trained model label.",
           "type": "string"
         },
         "modelId": {
-          "description": "Represents the ID of this model.",
+          "description": "The model ID.",
           "type": "string"
         },
         "lastTrainedDateTime": {
           "format": "date-time",
-          "description": "Represents trained model last trained time.",
+          "description": "The last trained date time of the model.",
           "type": "string"
         },
         "lastTrainingDurationInSeconds": {
           "format": "int32",
-          "description": "Represents trained model last training duration in seconds.",
+          "description": "The duration of the model's last training request in seconds.",
           "type": "integer"
         },
         "modelExpirationDate": {
           "format": "date",
-          "description": "Represents model expiration date.",
+          "description": "The model expiration date.",
           "type": "string"
         },
         "modelTrainingConfigVersion": {
-          "description": "Represents the model training config version.",
+          "description": "The model training config version.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ProjectTrainedModel"
     },
     "ConversationalAnalysisAuthoringProjectTrainedModels": {
+      "description": "Represents a list of retrieved trained models.",
       "required": [
         "value",
         "nextLink"
@@ -2477,14 +2590,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the jobs.",
+          "description": "The list of retrieved jobs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2498,11 +2611,18 @@
       "type": "string",
       "x-ms-enum": {
         "name": "StringIndexType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
       },
       "x-ms-client-name": "StringIndexType"
     },
     "ConversationalAnalysisAuthoringSubTrainingJobState": {
+      "description": "Represents the detailed state of a training sub-operation.",
       "required": [
         "percentComplete",
         "status"
@@ -2525,13 +2645,14 @@
           "type": "string"
         },
         "status": {
-          "description": "Represents the status of the job.",
+          "description": "Represents the status of the sub-operation.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus"
         }
       },
       "x-ms-client-name": "SubTrainingJobState"
     },
     "ConversationalAnalysisAuthoringSupportedLanguage": {
+      "description": "Represents a supported language.",
       "required": [
         "languageName",
         "languageCode"
@@ -2539,17 +2660,18 @@
       "type": "object",
       "properties": {
         "languageName": {
-          "description": "Gets or sets the language name.",
+          "description": "The language name.",
           "type": "string"
         },
         "languageCode": {
-          "description": "Gets or sets the language code.",
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
       "x-ms-client-name": "SupportedLanguage"
     },
     "ConversationalAnalysisAuthoringSupportedLanguages": {
+      "description": "Represents a list of retrieved languages.",
       "required": [
         "value",
         "nextLink"
@@ -2557,7 +2679,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of supported objects.",
+          "description": "The list of the languages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringSupportedLanguage"
@@ -2572,6 +2694,7 @@
       "x-ms-client-name": "SupportedLanguages"
     },
     "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
+      "description": "Represents the options for swapping two deployments together.",
       "required": [
         "firstDeploymentName",
         "secondDeploymentName"
@@ -2590,6 +2713,7 @@
       "x-ms-client-name": "SwapDeploymentsOptions"
     },
     "ConversationalAnalysisAuthoringTrainingConfigVersion": {
+      "description": "Represents a training config version.",
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
@@ -2597,18 +2721,19 @@
       "type": "object",
       "properties": {
         "trainingConfigVersion": {
-          "description": "Represents the training config version.",
+          "description": "Represents the version of the config.",
           "type": "string"
         },
         "modelExpirationDate": {
           "format": "date",
-          "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
+          "description": "Represents the training config version expiration date.",
           "type": "string"
         }
       },
       "x-ms-client-name": "TrainingConfigVersion"
     },
     "ConversationalAnalysisAuthoringTrainingConfigVersions": {
+      "description": "Represents a list of training config versions.",
       "required": [
         "value",
         "nextLink"
@@ -2616,14 +2741,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the training config versions.",
+          "description": "The list of the training config versions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersion"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2631,6 +2756,7 @@
       "x-ms-client-name": "TrainingConfigVersions"
     },
     "ConversationalAnalysisAuthoringTrainingJobOptions": {
+      "description": "Represents the options for starting a new training job.",
       "required": [
         "modelLabel",
         "trainingMode"
@@ -2638,7 +2764,7 @@
       "type": "object",
       "properties": {
         "modelLabel": {
-          "description": "Represents training model label.",
+          "description": "Represents the output model label.",
           "type": "string"
         },
         "trainingConfigVersion": {
@@ -2646,7 +2772,7 @@
           "type": "string"
         },
         "trainingMode": {
-          "description": "Represents the training mode of the training operation.",
+          "description": "Represents the mode of the training operation.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode"
         },
         "evaluationOptions": {
@@ -2657,6 +2783,7 @@
       "x-ms-client-name": "TrainingJobOptions"
     },
     "ConversationalAnalysisAuthoringTrainingJobResult": {
+      "description": "Represents the output of a training job.",
       "required": [
         "modelLabel",
         "trainingConfigVersion",
@@ -2673,11 +2800,11 @@
           "type": "string"
         },
         "trainingMode": {
-          "description": "Represents the training mode of the training operation.",
+          "description": "Represents the mode of the training operation.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode"
         },
         "trainingStatus": {
-          "description": "Represents model train status.",
+          "description": "Represents the model training status.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringSubTrainingJobState"
         },
         "evaluationStatus": {
@@ -2686,13 +2813,14 @@
         },
         "estimatedEndDateTime": {
           "format": "date-time",
-          "description": "Represents the estimate end date time for training and evaluation.",
+          "description": "Represents the estimated end date time for training and evaluation.",
           "type": "string"
         }
       },
       "x-ms-client-name": "TrainingJobResult"
     },
     "ConversationalAnalysisAuthoringTrainingJobs": {
+      "description": "Represents a list of retrieved training jobs.",
       "required": [
         "value",
         "nextLink"
@@ -2700,14 +2828,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the jobs.",
+          "description": "The list of jobs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobState"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2715,6 +2843,7 @@
       "x-ms-client-name": "TrainingJobs"
     },
     "ConversationalAnalysisAuthoringTrainingJobState": {
+      "description": "Represents the state of a training job.",
       "required": [
         "result"
       ],
@@ -2740,11 +2869,22 @@
       "type": "string",
       "x-ms-enum": {
         "name": "TrainingMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "advanced",
+            "description": "Trains using fine-tuned neural network transformer models. Can train multilingual projects."
+          },
+          {
+            "value": "standard",
+            "description": "Faster training times for quicker iterations."
+          }
+        ]
       },
       "x-ms-client-name": "TrainingMode"
     },
     "ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
+      "description": "Represents the comparison between the expcted and predicted entities for an utterance.",
       "required": [
         "expectedEntities",
         "predictedEntities"
@@ -2769,6 +2909,7 @@
       "x-ms-client-name": "UtteranceEntitiesEvaluationResult"
     },
     "ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult": {
+      "description": "Represents the evaluation output of an entity label or prediction.",
       "required": [
         "category",
         "offset",
@@ -2794,6 +2935,7 @@
       "x-ms-client-name": "UtteranceEntityEvaluationResult"
     },
     "ConversationalAnalysisAuthoringUtteranceEvaluationResult": {
+      "description": "Represents the evaluation result for an utterance.",
       "required": [
         "text",
         "language",
@@ -2807,7 +2949,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "entitiesResult": {
@@ -2822,6 +2964,7 @@
       "x-ms-client-name": "UtteranceEvaluationResult"
     },
     "ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult": {
+      "description": "Represents the comparison between the expected and the predicted intent for an utterance.",
       "required": [
         "expectedIntent",
         "predictedIntent"
@@ -2838,6 +2981,25 @@
         }
       },
       "x-ms-client-name": "UtteranceIntentsEvaluationResult"
+    },
+    "ConversationalAnalysisAuthoringWarning": {
+      "description": "Represents a warning that was encountered while executing the request.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The warning code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The warning message.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "Warning"
     }
   },
   "parameters": {
@@ -2852,7 +3014,17 @@
       ],
       "x-ms-enum": {
         "name": "ExportedProjectFormat",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "clu",
+            "description": "Specifies the format for a conversational project."
+          },
+          {
+            "value": "luis",
+            "description": "Specifies the format for an application that was exported from LUIS."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -2867,7 +3039,13 @@
       ],
       "x-ms-enum": {
         "name": "StringIndexType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -2899,7 +3077,17 @@
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "value": "orchestration",
+            "description": "A project to connect and orchestrate CLU, Custom question answering and LUIS projects together in one single project."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     }

@@ -1227,7 +1227,8 @@
       },
       "x-ms-client-name": "ConfusionMatrix"
     },
-    "TextAnalysisAuthoringConfusionMatrixEntry": {
+    "TextAnalysisAuthoringConfusionMatrixCell": {
+      "description": "Represents a cell in a confusion matrix.",
       "required": [
         "normalizedValue",
         "rawValue"
@@ -1245,16 +1246,17 @@
           "type": "number"
         }
       },
-      "x-ms-client-name": "ConfusionMatrixEntry"
+      "x-ms-client-name": "ConfusionMatrixCell"
     },
     "TextAnalysisAuthoringConfusionMatrixRow": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixEntry"
+        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
       },
       "x-ms-client-name": "ConfusionMatrixRow"
     },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
+      "description": "Represents the options for creating or updating a project deployment.",
       "required": [
         "trainedModelLabel"
       ],
@@ -1289,19 +1291,19 @@
           "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings"
         },
         "projectName": {
-          "description": "Gets or sets the new project name.",
+          "description": "The new project name.",
           "type": "string"
         },
         "multilingual": {
-          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "description": "Whether the project would be used for multiple languages or not.",
           "type": "boolean"
         },
         "description": {
-          "description": "Gets or sets the new project description.",
+          "description": "The project description.",
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
@@ -1422,6 +1424,7 @@
       "x-ms-client-name": "CustomSingleLabelClassificationEvaluationSummary"
     },
     "TextAnalysisAuthoringDeploymentJobState": {
+      "description": "Represents the state of a deployment job.",
       "type": "object",
       "allOf": [
         {
@@ -1504,7 +1507,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "projectKind": {
@@ -1631,11 +1634,22 @@
       "type": "string",
       "x-ms-enum": {
         "name": "EvaluationKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "percentage",
+            "description": "Split the data into training and test sets according to user-defined percentages."
+          },
+          {
+            "value": "manual",
+            "description": "Split the data according to the chosen dataset for every example in the data."
+          }
+        ]
       },
       "x-ms-client-name": "EvaluationKind"
     },
     "TextAnalysisAuthoringEvaluationOptions": {
+      "description": "Represents the options used running the evaluation.",
       "type": "object",
       "properties": {
         "kind": {
@@ -1663,14 +1677,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the documents predictions.",
+          "description": "THe list of documents evaluation results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -1722,7 +1736,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -1769,7 +1783,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -1813,7 +1827,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         },
         "dataset": {
@@ -1942,6 +1956,7 @@
       "x-ms-client-name": "ExportedProjectAssets"
     },
     "TextAnalysisAuthoringExportProjectJobState": {
+      "description": "Represents the state of an export job.",
       "type": "object",
       "allOf": [
         {
@@ -1950,12 +1965,14 @@
       ],
       "properties": {
         "resultUrl": {
+          "description": "The URL to use in order to download the exported project.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ExportProjectJobState"
     },
     "TextAnalysisAuthoringImportProjectJobState": {
+      "description": "Represents the state of an import job.",
       "type": "object",
       "allOf": [
         {
@@ -1965,47 +1982,47 @@
       "x-ms-client-name": "ImportProjectJobState"
     },
     "TextAnalysisAuthoringJobState": {
+      "description": "Represents a job's state.",
       "required": [
         "jobId",
         "createdDateTime",
         "lastUpdatedDateTime",
-        "expirationDateTime",
         "status"
       ],
       "type": "object",
       "properties": {
         "jobId": {
-          "description": "Gets or sets the job ID.",
+          "description": "The job ID.",
           "type": "string"
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the created time.",
+          "description": "The creation date time of the job.",
           "type": "string"
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the last updated time.",
+          "description": "The last date time the job was updated.",
           "type": "string"
         },
         "expirationDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the expiration time.",
+          "description": "The expiration date time of the job.",
           "type": "string"
         },
         "status": {
-          "description": "Gets or sets the job status.",
+          "description": "The job status.",
           "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         },
         "warnings": {
-          "description": "Gets or sets the warnings.",
+          "description": "The warnings that were encountered while executing the job.",
           "type": "array",
           "items": {
-            "$ref": "common.json#/definitions/Error"
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
           }
         },
         "errors": {
-          "description": "Gets or sets the errors.",
+          "description": "The errors encountered while executing the job.",
           "type": "array",
           "items": {
             "$ref": "common.json#/definitions/Error"
@@ -2016,7 +2033,6 @@
     },
     "TextAnalysisAuthoringJobStatus": {
       "enum": [
-        "unknown",
         "notStarted",
         "running",
         "succeeded",
@@ -2192,6 +2208,7 @@
       "x-ms-client-name": "NamedEntityRecognitionEvaluationSummary"
     },
     "TextAnalysisAuthoringProjectDeletionJobState": {
+      "description": "Represents the state of a project deletion job.",
       "type": "object",
       "allOf": [
         {
@@ -2201,6 +2218,7 @@
       "x-ms-client-name": "ProjectDeletionJobState"
     },
     "TextAnalysisAuthoringProjectDeployment": {
+      "description": "Represents a project deployment.",
       "required": [
         "deploymentName",
         "modelId",
@@ -2242,6 +2260,7 @@
       "x-ms-client-name": "ProjectDeployment"
     },
     "TextAnalysisAuthoringProjectDeployments": {
+      "description": "Represents a list of retrieved deployments.",
       "required": [
         "value",
         "nextLink"
@@ -2249,14 +2268,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the deployments.",
+          "description": "The list of retrieved deployments.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2320,19 +2339,19 @@
           "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings"
         },
         "projectName": {
-          "description": "Gets or sets the new project name.",
+          "description": "The new project name.",
           "type": "string"
         },
         "multilingual": {
-          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "description": "Whether the project would be used for multiple languages or not.",
           "type": "boolean"
         },
         "description": {
-          "description": "Gets or sets the new project description.",
+          "description": "The project description.",
           "type": "string"
         },
         "language": {
-          "description": "Gets or sets the project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK) \"es\" for Spanish etc.",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
@@ -2350,14 +2369,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the projects.",
+          "description": "The list of projects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2365,6 +2384,7 @@
       "x-ms-client-name": "ProjectsMetadata"
     },
     "TextAnalysisAuthoringProjectTrainedModel": {
+      "description": "Represents a trained model.",
       "required": [
         "label",
         "modelId",
@@ -2376,36 +2396,37 @@
       "type": "object",
       "properties": {
         "label": {
-          "description": "Represents trained model label.",
+          "description": "The trained model label.",
           "type": "string"
         },
         "modelId": {
-          "description": "Represents the ID of this model.",
+          "description": "The model ID.",
           "type": "string"
         },
         "lastTrainedDateTime": {
           "format": "date-time",
-          "description": "Represents trained model last trained time.",
+          "description": "The last trained date time of the model.",
           "type": "string"
         },
         "lastTrainingDurationInSeconds": {
           "format": "int32",
-          "description": "Represents trained model last training duration in seconds.",
+          "description": "The duration of the model's last training request in seconds.",
           "type": "integer"
         },
         "modelExpirationDate": {
           "format": "date",
-          "description": "Represents model expiration date.",
+          "description": "The model expiration date.",
           "type": "string"
         },
         "modelTrainingConfigVersion": {
-          "description": "Represents the model training config version.",
+          "description": "The model training config version.",
           "type": "string"
         }
       },
       "x-ms-client-name": "ProjectTrainedModel"
     },
     "TextAnalysisAuthoringProjectTrainedModels": {
+      "description": "Represents a list of retrieved trained models.",
       "required": [
         "value",
         "nextLink"
@@ -2413,14 +2434,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the jobs.",
+          "description": "The list of retrieved jobs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2541,11 +2562,18 @@
       "type": "string",
       "x-ms-enum": {
         "name": "StringIndexType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
       },
       "x-ms-client-name": "StringIndexType"
     },
     "TextAnalysisAuthoringSubTrainingJobState": {
+      "description": "Represents the detailed state of a training sub-operation.",
       "required": [
         "percentComplete",
         "status"
@@ -2568,13 +2596,14 @@
           "type": "string"
         },
         "status": {
-          "description": "Represents the status of the job.",
+          "description": "Represents the status of the sub-operation.",
           "$ref": "#/definitions/TextAnalysisAuthoringJobStatus"
         }
       },
       "x-ms-client-name": "SubTrainingJobState"
     },
     "TextAnalysisAuthoringSupportedLanguage": {
+      "description": "Represents a supported language.",
       "required": [
         "languageName",
         "languageCode"
@@ -2582,17 +2611,18 @@
       "type": "object",
       "properties": {
         "languageName": {
-          "description": "Gets or sets the language name.",
+          "description": "The language name.",
           "type": "string"
         },
         "languageCode": {
-          "description": "Gets or sets the language code.",
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": "string"
         }
       },
       "x-ms-client-name": "SupportedLanguage"
     },
     "TextAnalysisAuthoringSupportedLanguages": {
+      "description": "Represents a list of retrieved languages.",
       "required": [
         "value",
         "nextLink"
@@ -2600,7 +2630,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of supported objects.",
+          "description": "The list of the languages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
@@ -2615,6 +2645,7 @@
       "x-ms-client-name": "SupportedLanguages"
     },
     "TextAnalysisAuthoringSwapDeploymentsOptions": {
+      "description": "Represents the options for swapping two deployments together.",
       "required": [
         "firstDeploymentName",
         "secondDeploymentName"
@@ -2633,6 +2664,7 @@
       "x-ms-client-name": "SwapDeploymentsOptions"
     },
     "TextAnalysisAuthoringTrainingConfigVersion": {
+      "description": "Represents a training config version.",
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
@@ -2640,18 +2672,19 @@
       "type": "object",
       "properties": {
         "trainingConfigVersion": {
-          "description": "Represents the training config version.",
+          "description": "Represents the version of the config.",
           "type": "string"
         },
         "modelExpirationDate": {
           "format": "date",
-          "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
+          "description": "Represents the training config version expiration date.",
           "type": "string"
         }
       },
       "x-ms-client-name": "TrainingConfigVersion"
     },
     "TextAnalysisAuthoringTrainingConfigVersions": {
+      "description": "Represents a list of training config versions.",
       "required": [
         "value",
         "nextLink"
@@ -2659,14 +2692,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the training config versions.",
+          "description": "The list of the training config versions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2735,14 +2768,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the jobs.",
+          "description": "The list of jobs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
           }
         },
         "nextLink": {
-          "description": "Gets or sets the next page link.",
+          "description": "The next page link.",
           "type": "string",
           "x-nullable": true
         }
@@ -2766,6 +2799,25 @@
         }
       },
       "x-ms-client-name": "TrainingJobState"
+    },
+    "TextAnalysisAuthoringWarning": {
+      "description": "Represents a warning that was encountered while executing the request.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The warning code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The warning message.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "Warning"
     }
   },
   "parameters": {
@@ -2780,7 +2832,13 @@
       ],
       "x-ms-enum": {
         "name": "StringIndexType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
