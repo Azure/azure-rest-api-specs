@@ -1777,6 +1777,10 @@
             "name": "WindowsPatchAssessmentMode",
             "modelAsString": true
           }
+        },
+        "automaticByPlatformSettings": {
+          "$ref": "#/definitions/WindowsVMGuestPatchAutomaticByPlatformSettings",
+          "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Windows."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Windows."
@@ -1806,9 +1810,53 @@
             "name": "LinuxPatchAssessmentMode",
             "modelAsString": true
           }
+        },
+        "automaticByPlatformSettings": {
+          "$ref": "#/definitions/LinuxVMGuestPatchAutomaticByPlatformSettings",
+          "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Linux."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Linux."
+    },
+    "WindowsVMGuestPatchAutomaticByPlatformSettings": {
+      "type": "object",
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation operations.",
+          "enum": [
+            "Unknown",
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsVMGuestPatchAutomaticByPlatformRebootSetting",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Windows patch settings."
+    },
+    "LinuxVMGuestPatchAutomaticByPlatformSettings": {
+      "type": "object",
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation operations.",
+          "enum": [
+            "Unknown",
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxVMGuestPatchAutomaticByPlatformRebootSetting",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Linux patch settings."
     }
   }
 }
