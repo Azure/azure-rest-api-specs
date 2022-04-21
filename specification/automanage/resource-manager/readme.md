@@ -79,7 +79,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
@@ -89,6 +88,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_automanage']
+  - repo: azure-powershell
 ```
 
 ## Python
