@@ -1859,19 +1859,19 @@
       "properties": {
         "publisherUri": {
           "type": "string",
-          "description": "Community gallery publisher uri"
+          "description": "The link to the publisher website. Visible to all users."
         },
         "publisherContact": {
           "type": "string",
-          "description": "Community gallery publisher contact email"
+          "description": "Community gallery publisher support email. The email address of the publisher. Visible to all users."
         },
         "eula": {
           "type": "string",
-          "description": "End-user license agreement for community gallery"
+          "description": "End-user license agreement for community gallery image."
         },
         "publicNamePrefix": {
           "type": "string",
-          "description": "Community gallery public name prefix"
+          "description": "The prefix of the gallery name that will be displayed publicly. Visible to all users."
         },
         "communityGalleryEnabled": {
           "readOnly": true,
@@ -2888,6 +2888,7 @@
       "x-ms-azure-resource": true
     },
     "GalleryProvisioningState": {
+      "readOnly": true,
       "type": "string",
       "title": "The current state of the gallery or gallery artifact.",
       "description": "The provisioning state, which only appears in the response.",
