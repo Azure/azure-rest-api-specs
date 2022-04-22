@@ -34,9 +34,21 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-03
+tag: package-2022-03
 ```
 
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.ContainerService/stable/2022-03-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
 
 ### Tag: package-preview-2022-03
 
@@ -758,7 +770,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -770,6 +781,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
