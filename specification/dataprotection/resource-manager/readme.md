@@ -149,6 +149,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
+  - repo: azure-powershell
 ```
 
 ## C#
