@@ -62,6 +62,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js connectedvmware/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go
