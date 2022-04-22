@@ -52,6 +52,12 @@
           },
           "Create a stream IoT Hub input with Avro serialization": {
             "$ref": "./examples/Input_Create_Stream_IoTHub_Avro.json"
+          },
+          "Create a Gateway Message Bus input": {
+            "$ref": "./examples/Input_Create_GatewayMessageBus.json"
+          },
+          "Create an Event Grid input": {
+            "$ref": "./examples/Input_Create_EventGrid.json"
           }
         },
         "parameters": [
@@ -466,6 +472,10 @@
         "partitionKey": {
           "type": "string",
           "description": "partitionKey Describes a key in the input data which is used for partitioning the input data"
+        },
+        "watermarkSettings": {
+          "$ref": "#/definitions/InputWatermarkProperties",
+          "description": "Settings which determine whether to read watermark events."
         }
       },
       "required": [
@@ -597,6 +607,11 @@
         "consumerGroupName": {
           "type": "string",
           "description": "The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub. If not specified, the input uses the Event Hub’s default consumer group."
+        },
+        "prefetchCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of messages that the message receiver can simultaneously request."
         }
       }
     },
@@ -700,7 +715,29 @@
           "$ref": "#/definitions/BlobDataSourceProperties"
         }
       ],
-      "properties": {}
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "The name of the blob input."
+        },
+        "deltaPathPattern": {
+          "type": "string",
+          "description": "The path pattern of the delta snapshot."
+        },
+        "sourcePartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The partition count of the blob input data source. Range 1 - 256."
+        },
+        "fullSnapshotRefreshRate": {
+          "type": "string",
+          "description": "The refresh interval of the blob input data source."
+        },
+        "deltaSnapshotRefreshRate": {
+          "type": "string",
+          "description": "The interval that the user generates a delta snapshot of this reference blob input data source."
+        }
+      }
     },
     "RawReferenceInputDataSource": {
       "description": "Describes a raw input data source that contains reference data. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input of this data source type to an existing job.",
@@ -778,6 +815,10 @@
           "type": "string",
           "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.",
           "x-ms-secret": true
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
@@ -816,6 +857,11 @@
         "eventHubName": {
           "type": "string",
           "description": "The name of the Event Hub. Required on PUT (CreateOrReplace) requests."
+        },
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The partition count of the event hub data source. Range 1 - 256."
         }
       }
     },
@@ -1179,10 +1225,6 @@
           "type": "string",
           "x-ms-secret": true
         },
-        "table": {
-          "description": "This element is associated with the datasource element. The name of the table in the Azure SQL database..",
-          "type": "string"
-        },
         "refreshType": {
           "type": "object",
           "description": "Indicates the type of data refresh option.",
@@ -1199,7 +1241,108 @@
         "deltaSnapshotQuery": {
           "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSource": {
+      "description": "Describes a blob input data source that contains stream data.",
+      "type": "object",
+      "x-ms-discriminator-value": "GatewayMessageBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayMessageBusStreamInputDataSourceProperties",
+          "description": "The properties that are associated with a gateway message bus input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus input containing stream data.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayMessageBusSourceProperties"
+        }
+      ]
+    },
+    "GatewayMessageBusSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus datasource.",
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "The name of the Service Bus topic."
+        }
+      }
+    },
+    "EventGridStreamInputDataSource": {
+      "description": "Describes an event grid input data source that contains stream data.",
+      "type": "object",
+      "x-ms-discriminator-value": "Microsoft.EventGrid/EventSubscriptions",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridStreamInputDataSourceProperties",
+          "description": "The properties that are associated with an event grid input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventGridStreamInputDataSourceProperties": {
+      "description": "The properties that are associated with an event grid input containing stream data.",
+      "type": "object",
+      "properties": {
+        "subscriber": {
+          "type": "object",
+          "description": "Subscribers for the Event Grid. Currently only EventHub Subscriber is supported.",
+          "$ref": "#/definitions/EventHubV2StreamInputDataSource"
+        },
+        "schema": {
+          "type": "object",
+          "description": "Indicates the Event Grid schema type.",
+          "$ref": "#/definitions/EventGridEventSchemaType"
+        },
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "description": "A list of one or more Azure Storage accounts. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-identifiers": []
+        },
+        "eventTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Event Type."
+          },
+          "description": "List of Event Types that are supported by the Event Grid adapter."
+        }
+      }
+    },
+    "EventGridEventSchemaType": {
+      "type": "string",
+      "description": "Supported Event Grid schema types.",
+      "enum": [
+        "EventGridEventSchema",
+        "CloudEventSchema"
+      ],
+      "x-ms-enum": {
+        "name": "EventGridEventSchemaType",
+        "modelAsString": true
       }
     },
     "RefreshType": {
@@ -1212,6 +1355,28 @@
       ],
       "x-ms-enum": {
         "name": "RefreshType",
+        "modelAsString": true
+      }
+    },
+    "InputWatermarkProperties": {
+      "type": "object",
+      "description": "Settings which determine whether to read watermark events.",
+      "properties": {
+        "watermarkMode": {
+          "$ref": "#/definitions/InputWatermarkMode",
+          "description": "The input watermark mode."
+        }
+      }
+    },
+    "InputWatermarkMode": {
+      "type": "string",
+      "description": "The input watermark mode.",
+      "enum": [
+        "None",
+        "ReadWatermark"
+      ],
+      "x-ms-enum": {
+        "name": "InputWatermarkMode",
         "modelAsString": true
       }
     }
