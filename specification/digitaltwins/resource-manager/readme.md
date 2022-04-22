@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 input-file:
   - Microsoft.DigitalTwins/stable/2022-05-31/digitaltwins.json
 ```
+
 ### Tag: package-2021-06-30-preview
 
 These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
