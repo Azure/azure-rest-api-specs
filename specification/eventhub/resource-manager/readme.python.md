@@ -17,7 +17,7 @@ modelerfour:
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2021-11
