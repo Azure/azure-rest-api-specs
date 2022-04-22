@@ -87,58 +87,33 @@
         }
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
+    "ProxyResource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "type": "object",
-      "readOnly": true,
       "properties": {
-        "createdBy": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "The identity that created the resource."
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
-        "createdByType": {
+        "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The name of the resource"
         },
-        "createdAt": {
+        "type": {
+          "readOnly": true,
           "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
+          "description": "The type of the resource. E.g. \"Microsoft.EventHub/Namespaces\" or \"Microsoft.EventHub/Namespaces/EventHubs\""
         },
-        "lastModifiedBy": {
+        "location": {
           "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
