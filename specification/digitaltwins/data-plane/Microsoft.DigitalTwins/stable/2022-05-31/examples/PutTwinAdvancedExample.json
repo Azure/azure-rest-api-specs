@@ -5,7 +5,10 @@
     "If-None-Match": "*",
     "twin": {
       "$metadata": {
-        "$model": "dtmi:com:example:interfaces:interfaceName;1"
+        "$model": "dtmi:com:example:interfaces:interfaceName;1",
+        "property1": {
+          "sourceTime": "2022-05-31T12:00:01.000125009Z"
+        }
       },
       "property1": 1,
       "property2": {
@@ -13,7 +16,11 @@
         "subProperty2": "some other value"
       },
       "component1": {
-        "$metadata": {},
+        "$metadata": {
+          "componentProperty": {
+            "sourceTime": "2022-05-31T12:00:00.000125009Z"
+          }
+        },
         "componentProperty": "some value"
       }
     }
@@ -25,7 +32,8 @@
         "$metadata": {
           "$model": "dtmi:com:example:interfaces:interfaceName;1",
           "property1": {
-            "lastUpdateTime": "2020-05-23T21:44:02Z"
+            "lastUpdateTime": "2020-05-23T21:44:02Z",
+            "sourceTime": "2022-05-31T12:00:01.000125009Z"
           },
           "property2": {
             "lastUpdateTime": "2020-05-23T21:44:02Z"
@@ -39,7 +47,8 @@
         "component1": {
           "$metadata": {
             "componentProperty": {
-              "lastUpdateTime": "2020-05-23T21:44:02Z"
+              "lastUpdateTime": "2020-05-23T21:44:02Z",
+              "sourceTime": "2022-05-31T12:00:00.000125009Z"
             }
           }
         }
