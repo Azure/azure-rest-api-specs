@@ -115,6 +115,9 @@
           },
           {
             "$ref": "#/parameters/GitHubOAuthCodeParameter"
+          },
+          {
+            "$ref": "#/parameters/GitHubOAuthStateParameter"
           }
         ],
         "responses": {
@@ -475,9 +478,7 @@
           "title": "The Kubernetes namespace the application is deployed to"
         },
         "acr": {
-          "type": "string",
-          "description": "The Azure Container Registry the application container will be pushed to.",
-          "title": "The Azure Container Registry resource."
+          "$ref": "#/definitions/ACR"
         },
         "oidcCredentials": {
           "type": "object",
@@ -646,6 +647,24 @@
         }
       }
     },
+    "ACR": {
+      "type": "object",
+      "description": "Information on the azure container registry",
+      "properties": {
+        "acrSubscriptionId": {
+          "type": "string",
+          "description": "ACR subscription id"
+        },
+        "acrResourceGroup": {
+          "type": "string",
+          "description": "ACR resource group"
+        },
+        "acrRegistryName": {
+          "type": "string",
+          "description": "ACR registry"
+        }
+      }
+    },
     "GitHubAuthURLResponse": {
       "type": "object",
       "description": "URL used to authorize the Developer Hub GitHub App",
@@ -791,6 +810,14 @@
       "required": true,
       "type": "string",
       "description": "The code response from authenticating the GitHub App.",
+      "x-ms-parameter-location": "client"
+    },
+    "GitHubOAuthStateParameter": {
+      "name": "gitHubOAuthState",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The state response from authenticating the GitHub App.",
       "x-ms-parameter-location": "client"
     }
   }
