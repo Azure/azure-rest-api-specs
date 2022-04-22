@@ -1,0 +1,1013 @@
+{
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Video Analyzer",
+    "description": "Azure Video Analyzer resource provider API definition.",
+    "version": "2021-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "definitions": {
+    "VideoStreaming": {
+      "properties": {
+        "archiveBaseUrl": {
+          "type": "string",
+          "description": "Video streaming base URL for the video archive. When present, archived video can be played through the Azure Video Analyzer player. Alternatively, this URL can be used with compatible DASH or HLS players by appending the following to the base URL:\r\n\r\n  - HLSv4:     /manifest(format=m3u8-aapl).m3u8\r\n  - HLS CMAF:  /manifest(format=m3u8-cmaf)\r\n  - DASH CMAF: /manifest(format=mpd-time-cmaf)\r\n\r\nMoreover, an ongoing video recording can be played in \"live mode\" with latencies which are approximately double of the chosen video segment length."
+        }
+      },
+      "type": "object",
+      "description": "Video streaming holds information about video streaming URLs."
+    },
+    "VideoFlags": {
+      "properties": {
+        "canStream": {
+          "type": "boolean",
+          "description": "Value indicating whether or not the video can be streamed. Only \"archive\" type videos can be streamed."
+        },
+        "hasData": {
+          "type": "boolean",
+          "description": "Value indicating whether or not there has ever been data recorded or uploaded into the video. Newly created videos have this value set to false."
+        },
+        "isRecording": {
+          "type": "boolean",
+          "description": "Value indicating whether or not the video is currently being referenced be an active live pipeline. The fact that is being referenced, doesn't necessarily indicate that data is being received. For example, video recording may be gated on events or camera may not be accessible at the time."
+        }
+      },
+      "type": "object",
+      "required": [
+        "canStream",
+        "hasData",
+        "isRecording"
+      ],
+      "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state."
+    },
+    "VideoMediaInfo": {
+      "properties": {
+        "segmentLength": {
+          "type": "string",
+          "description": "Video segment length indicates the length of individual video files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Contains information about the video and audio content."
+    },
+    "VideoStreamingToken": {
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The streaming token expiration date in ISO8601 format (eg. 2021-01-01T00:00:00Z).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "token": {
+          "type": "string",
+          "description": "The streaming token value to be added to the video streaming URL as the value for a \"token\" query string parameter. The token is specific to a single video.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Video streaming token grants access to the video streaming URLs which can be used by an compatible HLS or DASH player."
+    },
+    "VideoProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Archive"
+          ],
+          "x-ms-enum": {
+            "name": "VideoType",
+            "values": [
+              {
+                "value": "Archive",
+                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. Finally, there is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Type of the video archive. Different archive formats provide different capabilities.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "flags": {
+          "$ref": "#/definitions/VideoFlags",
+          "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state.",
+          "readOnly": true
+        },
+        "streaming": {
+          "$ref": "#/definitions/VideoStreaming",
+          "description": "Video streaming holds information about video streaming URLs.",
+          "readOnly": true
+        },
+        "mediaInfo": {
+          "$ref": "#/definitions/VideoMediaInfo",
+          "description": "Contains information about the video and audio content.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Application level properties for the video resource."
+    },
+    "AuthenticationBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base class for access policies authentication methods."
+    },
+    "TokenClaim": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the claim which must be present on the token."
+        },
+        "value": {
+          "type": "string",
+          "description": "Expected value of the claim to be present on the token."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Properties for expected token claims."
+    },
+    "JwtAuthentication": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.JwtAuthentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationBase"
+        }
+      ],
+      "properties": {
+        "issuers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of expected token issuers. Token issuer is valid if it matches at least one of the given values."
+        },
+        "audiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of expected token audiences. Token audience is valid if it matches at least one of the given values."
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenClaim"
+          },
+          "description": "List of additional token claims to be validated. Token must contains all claims and respective values for it to be valid."
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenKey"
+          },
+          "description": "List of keys which can be used to validate access tokens. Having multiple keys allow for seamless key rotation of the token signing key. Token signature must match exactly one key."
+        }
+      },
+      "type": "object",
+      "description": "Properties for access validation based on JSON Web Tokens (JWT)."
+    },
+    "TokenKey": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "kid": {
+          "type": "string",
+          "description": "JWT token key id. Validation keys are looked up based on the key id present on the JWT token header."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type",
+        "kid"
+      ],
+      "description": "Key properties for JWT token validation."
+    },
+    "RsaTokenKey": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.RsaTokenKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenKey"
+        }
+      ],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": [
+            "RS256",
+            "RS384",
+            "RS512"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyRsaAlgo",
+            "values": [
+              {
+                "value": "RS256",
+                "description": "RS256"
+              },
+              {
+                "value": "RS384",
+                "description": "RS384"
+              },
+              {
+                "value": "RS512",
+                "description": "RS512"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "RSA algorithm to be used: RS256, RS384 or RS512."
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA public key modulus."
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public key exponent."
+        }
+      },
+      "type": "object",
+      "required": [
+        "alg",
+        "n",
+        "e"
+      ],
+      "description": "Required validation properties for tokens generated with RSA algorithm."
+    },
+    "EccTokenKey": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EccTokenKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenKey"
+        }
+      ],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": [
+            "ES256",
+            "ES384",
+            "ES512"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyEccAlgo",
+            "values": [
+              {
+                "value": "ES256",
+                "description": "ES265"
+              },
+              {
+                "value": "ES384",
+                "description": "ES384"
+              },
+              {
+                "value": "ES512",
+                "description": "ES512"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Elliptical curve algorithm to be used: ES256, ES384 or ES512."
+        },
+        "x": {
+          "type": "string",
+          "description": "X coordinate."
+        },
+        "y": {
+          "type": "string",
+          "description": "Y coordinate."
+        }
+      },
+      "type": "object",
+      "required": [
+        "alg",
+        "x",
+        "y"
+      ],
+      "description": "Required validation properties for tokens generated with Elliptical Curve algorithm."
+    },
+    "AccessPolicyProperties": {
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "Reader"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyRole",
+            "values": [
+              {
+                "value": "Reader",
+                "description": "Reader role allows for read-only operations to be performed through the client APIs."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Defines the access level granted by this policy.",
+          "x-nullable": true
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationBase",
+          "description": "Authentication method to be used when validating client API access."
+        }
+      },
+      "type": "object",
+      "description": "Application level properties for the access policy resource."
+    },
+    "VideoEntity": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VideoProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The representation of a single video in a Video Analyzer account."
+    },
+    "AccessPolicyEntity": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPolicyProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Policy that determines how a video can be accessed."
+    },
+    "VideoEntityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoEntity"
+          },
+          "description": "A collection of VideoEntity items."
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of VideoEntity items."
+    },
+    "AccessPolicyEntityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyEntity"
+          },
+          "description": "A collection of AccessPolicyEntity items."
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of AccessPolicyEntity items."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
+      "get": {
+        "summary": "List all existing video resources.",
+        "description": "List all existing video resources in the specified account.",
+        "operationId": "Videos_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntityCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Lists video entities.": {
+            "$ref": "examples/video-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
+      "get": {
+        "summary": "Retrieves a video resource.",
+        "description": "Retrieves an existing video resource within an account with a given name.",
+        "operationId": "Videos_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the video to retrieve."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets a video entity.": {
+            "$ref": "examples/video-get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or updates a video resource.",
+        "description": "Creates a new video resource or updates an existing one in an account.",
+        "operationId": "Videos_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the video to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Register video entity.": {
+            "$ref": "examples/video-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a video resource.",
+        "description": "Deletes an existing video resource and its underlying data. This operation is irreversible.",
+        "operationId": "Videos_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the video to delete."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Deletes a video entity.": {
+            "$ref": "examples/video-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates the properties of a video resource.",
+        "description": "Updates individual properties of an existing video resource.",
+        "operationId": "Videos_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the video to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update video entity.": {
+            "$ref": "examples/video-patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listStreamingToken": {
+      "post": {
+        "summary": "Generates a streaming token for video playback.",
+        "description": "Generates a streaming token used for authenticating video playback.",
+        "operationId": "Videos_ListStreamingToken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoStreamingToken"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the video to generate a token for playback."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Generate a streaming token for media endpoint authorization.": {
+            "$ref": "examples/video-listStreamingToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
+      "get": {
+        "summary": "List access policy resources.",
+        "description": "List all existing access policy resources for the specified account.",
+        "operationId": "AccessPolicies_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntityCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Lists access policy entities.": {
+            "$ref": "examples/access-policy-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "summary": "Retrieves an access policy resource.",
+        "description": "Retrieves an existing access policy resource from an account by name.",
+        "operationId": "AccessPolicies_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy to retrieve."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets an access policy entity.": {
+            "$ref": "examples/access-policy-get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates or updates an access policy.",
+        "description": "Creates a new access policy resource or updates an existing one.",
+        "operationId": "AccessPolicies_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Register access policy entity.": {
+            "$ref": "examples/access-policy-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an access policy.",
+        "description": "Deletes an existing access policy resource.",
+        "operationId": "AccessPolicies_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy to delete."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Deletes an access policy entity.": {
+            "$ref": "examples/access-policy-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an existing access policy.",
+        "description": "Updates individual properties of an existing access policy resource.",
+        "operationId": "AccessPolicies_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update access policy entity.": {
+            "$ref": "examples/access-policy-patch.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AzureVideoAnalyzerAccountName": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure Video Analyzer account name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the location": {
+            "$ref": "./examples/Locations/Get.json"
+          }
+        },
+        "description": "Gets the location",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationsResourceEntity"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the list of locations": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Gets the list of locations",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocationList": {
+      "description": "List of locations",
+      "properties": {
+        "value": {
+          "description": "Array of locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationsResourceEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    },
+    "LocationsResourceEntity": {
+      "type": "object",
+      "description": "Location Resource Entity",
+      "properties": {
+        "properties": {
+          "description": "Location Properties",
+          "$ref": "#/definitions/LocationAdminProperties",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "Entity tag of the resource",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LocationAdminProperties": {
+      "description": "Location Admin Properties",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "the location name",
+          "title": "location",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

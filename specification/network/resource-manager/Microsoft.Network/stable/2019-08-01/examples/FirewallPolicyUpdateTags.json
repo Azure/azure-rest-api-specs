@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "firewallPolicyName": "firewallPolicy",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-08-01",
+    "subscriptionId": "subid",
+    "firewallPolicyParameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "name": "firewallPolicy",
+        "type": "Microsoft.Network/firewallPolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "threatIntelMode": "Deny"
+        }
+      }
+    }
+  }
+}

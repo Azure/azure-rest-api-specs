@@ -282,7 +282,7 @@
         ],
         "description": "Updating a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceCreateOrUpdate": {
+          "Update spatial anchors account": {
             "$ref": "./examples/SpatialAnchorsAccount/Patch.json"
           }
         },
@@ -482,7 +482,7 @@
       "properties": {
         "nameAvailable": {
           "description": "if name Available",
-          "$ref": "#/definitions/NameAvailability"
+          "type": "boolean"
         },
         "reason": {
           "description": "Resource Name To Verify",
@@ -531,6 +531,10 @@
         "display": {
           "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Whether or not this is a data plane operation",
+          "type": "boolean"
         }
       }
     },
@@ -560,18 +564,6 @@
           "description": "Description of operation",
           "type": "string"
         }
-      }
-    },
-    "NameAvailability": {
-      "description": "Whether or not the name is available.",
-      "type": "string",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "NameAvailability",
-        "modelAsString": true
       }
     },
     "NameUnavailableReason": {
@@ -615,6 +607,10 @@
           "x-ms-client-flatten": true,
           "description": "Property bag.",
           "$ref": "#/definitions/SpatialAnchorsAccountProperties"
+        },
+        "identity": {
+          "description": "The identity associated with this account",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       }
     },

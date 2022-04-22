@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
+    "region": "westus2",
+    "timespan": "2021-06-10T02:23:16.129Z/2021-06-12T02:23:16.129Z",
+    "metricnames": "Data Disk Max Burst IOPS",
+    "metricnamespace": "microsoft.compute/virtualmachines",
+    "$filter": "LUN eq '0'",
+    "resulttype": "metadata",
+    "api-version": "2021-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2021-06-10T02:23:16Z/2021-06-12T02:23:16Z",
+        "interval": "PT1M",
+        "value": [
+          {
+            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Read Bytes/sec",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "Data Disk Read Bytes/sec",
+              "localizedValue": "Data Disk Read Bytes/Sec"
+            },
+            "displayDescription": "Bytes/Sec read from a single disk during monitoring period",
+            "unit": "BytesPerSecond",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "lun",
+                      "localizedValue": "lun"
+                    },
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "lun",
+                      "localizedValue": "lun"
+                    },
+                    "value": "1"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "namespace": "microsoft.compute/virtualmachines",
+        "resourceregion": "westus2"
+      }
+    }
+  }
+}

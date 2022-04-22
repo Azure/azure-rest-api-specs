@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "resourceGroup",
+    "api-version": "2020-10-30-preview",
+    "enterprisePolicyName": "enterprisePolicy",
+    "parameters": {
+      "tags": {
+        "Organization": "Administration"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "East US",
+      "kind": "Lockbox"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "name": "enterprisePolicy",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "location": "East US",
+        "kind": "Lockbox",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "identity": {
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId",
+          "type": "SystemAssigned"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "enterprisePolicy",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "location": "East US",
+        "kind": "Lockbox",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "identity": {
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId",
+          "type": "SystemAssigned"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        }
+      }
+    }
+  }
+}

@@ -2,11 +2,24 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+```yaml $(go) && !$(track2)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: security
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/security/armsecurity
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+directive:
+- from: swagger-document
+  where: '$.paths.*[?(@.operationId.startsWith("Connectors_"))]'
+  transform: >
+    $["operationId"] = $["operationId"].replace("Connectors_", "AccountConnectors_");
 ```
 
 ### Common Go settings

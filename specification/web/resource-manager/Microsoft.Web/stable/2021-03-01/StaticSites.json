@@ -1,0 +1,3692 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01",
+    "title": "StaticSites API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/previewStaticSiteWorkflowFile": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Generates a preview workflow file for the static site",
+        "description": "Description for Generates a preview workflow file for the static site",
+        "operationId": "StaticSites_PreviewWorkflow",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location where you plan to create the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSitesWorkflowPreviewRequest",
+            "in": "body",
+            "description": "A JSON representation of the StaticSitesWorkflowPreviewRequest properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSitesWorkflowPreviewRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSitesWorkflowPreview"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generates a preview workflow file for the static site": {
+            "$ref": "./examples/GenerateStaticSiteWorkflowPreview.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSites": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Get all Static Sites for a subscription.",
+        "description": "Description for Get all Static Sites for a subscription.",
+        "operationId": "StaticSites_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all static sites in a subscription": {
+            "$ref": "./examples/GetAllStaticSites.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets all static sites in the specified resource group.",
+        "description": "Description for Gets all static sites in the specified resource group.",
+        "operationId": "StaticSites_GetStaticSitesByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get static sites for a resource group": {
+            "$ref": "./examples/GetStaticSites.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of a static site.",
+        "description": "Description for Gets the details of a static site.",
+        "operationId": "StaticSites_GetStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details for a static site": {
+            "$ref": "./examples/GetStaticSite.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates a new static site in an existing resource group, or updates an existing static site.",
+        "description": "Description for Creates a new static site in an existing resource group, or updates an existing static site.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the staticsite properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes a static site.",
+        "description": "Description for Deletes a static site.",
+        "operationId": "StaticSites_DeleteStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a static site": {
+            "$ref": "./examples/DeleteStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates a new static site in an existing resource group, or updates an existing static site.",
+        "description": "Description for Creates a new static site in an existing resource group, or updates an existing static site.",
+        "operationId": "StaticSites_UpdateStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the staticsite properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSitePatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a static site": {
+            "$ref": "./examples/PatchStaticSite.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the list of users of a static site.",
+        "description": "Description for Gets the list of users of a static site.",
+        "operationId": "StaticSites_ListStaticSiteUsers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "description": "The auth provider for the users.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List users for a static site": {
+            "$ref": "./examples/ListStaticSiteUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes the user entry from the static site.",
+        "description": "Description for Deletes the user entry from the static site.",
+        "operationId": "StaticSites_DeleteStaticSiteUser",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the staticsite.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "description": "The auth provider for this user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "description": "The user id of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a user for a static site": {
+            "$ref": "./examples/DeleteStaticSiteUser.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Updates a user entry with the listed roles",
+        "description": "Description for Updates a user entry with the listed roles",
+        "operationId": "StaticSites_UpdateStaticSiteUser",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "description": "The auth provider for this user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "description": "The user id of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteUser properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a user for a static site": {
+            "$ref": "./examples/UpdateStaticSiteUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets all static site builds for a particular static site.",
+        "description": "Description for Gets all static site builds for a particular static site.",
+        "operationId": "StaticSites_GetStaticSiteBuilds",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBuildCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all builds for a static site": {
+            "$ref": "./examples/GetStaticSiteBuilds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of a static site build.",
+        "description": "Description for Gets the details of a static site build.",
+        "operationId": "StaticSites_GetStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBuildARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a static site build": {
+            "$ref": "./examples/GetStaticSiteBuild.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes a static site build.",
+        "description": "Description for Deletes a static site build.",
+        "operationId": "StaticSites_DeleteStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a static site build": {
+            "$ref": "./examples/DeleteStaticSiteBuild.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/config/appsettings": {
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates or updates the app settings of a static site build.",
+        "description": "Description for Creates or updates the app settings of a static site build.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteBuildAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "The dictionary containing the static site app settings to update.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site build.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/config/functionappsettings": {
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates or updates the function app settings of a static site build.",
+        "description": "Description for Creates or updates the function app settings of a static site build.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteBuildFunctionAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "The dictionary containing the static site function app settings to update.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site build.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildFunctionAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/functions": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the functions of a particular static site build.",
+        "description": "Description for Gets the functions of a particular static site build.",
+        "operationId": "StaticSites_ListStaticSiteBuildFunctions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteFunctionOverviewCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the functions of a particular static site build": {
+            "$ref": "./examples/ListStaticSiteBuildFunctions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/listAppSettings": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the application settings of a static site build.",
+        "description": "Description for Gets the application settings of a static site build.",
+        "operationId": "StaticSites_ListStaticSiteBuildAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get app settings of a static site build": {
+            "$ref": "./examples/ListStaticSiteBuildAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/listFunctionAppSettings": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the application settings of a static site build.",
+        "description": "Description for Gets the application settings of a static site build.",
+        "operationId": "StaticSites_ListStaticSiteBuildFunctionAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get function app settings of a static site build": {
+            "$ref": "./examples/ListStaticSiteBuildFunctionAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/userProvidedFunctionApps": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of the user provided function apps registered with a static site build",
+        "description": "Description for Gets the details of the user provided function apps registered with a static site build",
+        "operationId": "StaticSites_GetUserProvidedFunctionAppsForStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function apps registered with a static site build.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppsForStaticSiteBuild.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/userProvidedFunctionApps/{functionAppName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of the user provided function app registered with a static site build",
+        "description": "Description for Gets the details of the user provided function app registered with a static site build",
+        "operationId": "StaticSites_GetUserProvidedFunctionAppForStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app registered with the static site build.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function app registered with a static site build.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppForStaticSiteBuild.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Register a user provided function app with a static site build",
+        "description": "Description for Register a user provided function app with a static site build",
+        "operationId": "StaticSites_RegisterUserProvidedFunctionAppWithStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app to register with the static site build.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserProvidedFunctionEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the user provided function app properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          {
+            "name": "isForced",
+            "in": "query",
+            "description": "Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register a user provided function app with a static site build": {
+            "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSiteBuild.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Detach the user provided function app from the static site build",
+        "description": "Description for Detach the user provided function app from the static site build",
+        "operationId": "StaticSites_DetachUserProvidedFunctionAppFromStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app registered with the static site build.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detach the user provided function app from the static site build.": {
+            "$ref": "./examples/DetachUserProvidedFunctionAppFromStaticSiteBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/zipdeploy": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deploys zipped content to a specific environment of a static site.",
+        "description": "Description for Deploys zipped content to a specific environment of a static site.",
+        "operationId": "StaticSites_CreateZipDeploymentForStaticSiteBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteZipDeploymentEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteZipDeploymentARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deploy a site from a zipped package to a particular static site build": {
+            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/appsettings": {
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates or updates the app settings of a static site.",
+        "description": "Description for Creates or updates the app settings of a static site.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "The dictionary containing the static site app settings to update.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the app settings of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/functionappsettings": {
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates or updates the function app settings of a static site.",
+        "description": "Description for Creates or updates the function app settings of a static site.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteFunctionAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "The dictionary containing the static site function app settings to update.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteFunctionAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/createUserInvitation": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates an invitation link for a user with the role",
+        "description": "Description for Creates an invitation link for a user with the role",
+        "operationId": "StaticSites_CreateUserRolesInvitationLink",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserRolesInvitationEnvelope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserInvitationRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserInvitationResponseResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an invitation link for a user for a static site": {
+            "$ref": "./examples/CreateUserRolesInvitationLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/customDomains": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets all static site custom domains for a particular static site.",
+        "description": "Description for Gets all static site custom domains for a particular static site.",
+        "operationId": "StaticSites_ListStaticSiteCustomDomains",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site resource to search in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainOverviewCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List custom domains for a static site": {
+            "$ref": "./examples/GetStaticSiteCustomDomains.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/customDomains/{domainName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets an existing custom domain for a particular static site.",
+        "description": "Description for Gets an existing custom domain for a particular static site.",
+        "operationId": "StaticSites_GetStaticSiteCustomDomain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site resource to search in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "The custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get custom domain for a static site": {
+            "$ref": "./examples/GetStaticSiteCustomDomain.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates a new static site custom domain in an existing resource group and static site.",
+        "description": "Description for Creates a new static site custom domain in an existing resource group and static site.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteCustomDomain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "The custom domain to create.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteCustomDomainRequestPropertiesEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the static site custom domain request properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a custom domain for a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteCustomDomain.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes a custom domain.",
+        "description": "Description for Deletes a custom domain.",
+        "operationId": "StaticSites_DeleteStaticSiteCustomDomain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "The custom domain to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a custom domain for a static site": {
+            "$ref": "./examples/DeleteStaticSiteCustomDomain.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/customDomains/{domainName}/validate": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Validates a particular custom domain can be added to a static site.",
+        "description": "Description for Validates a particular custom domain can be added to a static site.",
+        "operationId": "StaticSites_ValidateCustomDomainCanBeAddedToStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "The custom domain to validate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteCustomDomainRequestPropertiesEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the static site custom domain request properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a custom domain for a static site": {
+            "$ref": "./examples/ValidateStaticSiteCustomDomain.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/detach": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Detaches a static site.",
+        "description": "Description for Detaches a static site.",
+        "operationId": "StaticSites_DetachStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site to detach.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detach a static site": {
+            "$ref": "./examples/DetachStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/functions": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the functions of a static site.",
+        "description": "Description for Gets the functions of a static site.",
+        "operationId": "StaticSites_ListStaticSiteFunctions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteFunctionOverviewCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the functions of a static site": {
+            "$ref": "./examples/ListStaticSiteFunctions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/listAppSettings": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the application settings of a static site.",
+        "description": "Description for Gets the application settings of a static site.",
+        "operationId": "StaticSites_ListStaticSiteAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get app settings of a static site": {
+            "$ref": "./examples/ListStaticSiteAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/listConfiguredRoles": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Lists the roles configured for the static site.",
+        "description": "Description for Lists the roles configured for the static site.",
+        "operationId": "StaticSites_ListStaticSiteConfiguredRoles",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StringList"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the configured roles for a static site": {
+            "$ref": "./examples/ListStaticSiteConfiguredRoles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/listFunctionAppSettings": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the application settings of a static site.",
+        "description": "Description for Gets the application settings of a static site.",
+        "operationId": "StaticSites_ListStaticSiteFunctionAppSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get function app settings of a static site": {
+            "$ref": "./examples/ListStaticSiteFunctionAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Lists the secrets for an existing static site.",
+        "description": "Description for Lists the secrets for an existing static site.",
+        "operationId": "StaticSites_ListStaticSiteSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List secrets for a static site": {
+            "$ref": "./examples/ListStaticSiteSecrets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the list of private endpoint connections associated with a static site",
+        "description": "Description for Gets the list of private endpoint connections associated with a static site",
+        "operationId": "StaticSites_GetPrivateEndpointConnectionList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of private endpoint connections associated with a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets a private endpoint connection",
+        "description": "Description for Gets a private endpoint connection",
+        "operationId": "StaticSites_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Approves or rejects a private endpoint connection",
+        "description": "Description for Approves or rejects a private endpoint connection",
+        "operationId": "StaticSites_ApproveOrRejectPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "description": "Request body.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes a private endpoint connection",
+        "description": "Description for Deletes a private endpoint connection",
+        "operationId": "StaticSites_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the private link resources",
+        "description": "Description for Gets the private link resources",
+        "operationId": "StaticSites_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/resetapikey": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Resets the api key for an existing static site.",
+        "description": "Description for Resets the api key for an existing static site.",
+        "operationId": "StaticSites_ResetStaticSiteApiKey",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resetPropertiesEnvelope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteResetPropertiesARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset the api key for a static site": {
+            "$ref": "./examples/ResetStaticSiteApiKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of the user provided function apps registered with a static site",
+        "description": "Description for Gets the details of the user provided function apps registered with a static site",
+        "operationId": "StaticSites_GetUserProvidedFunctionAppsForStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function apps registered with a static site.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppsForStaticSite.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps/{functionAppName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the details of the user provided function app registered with a static site",
+        "description": "Description for Gets the details of the user provided function app registered with a static site",
+        "operationId": "StaticSites_GetUserProvidedFunctionAppForStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app registered with the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function app registered with a static site.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppForStaticSite.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Register a user provided function app with a static site",
+        "description": "Description for Register a user provided function app with a static site",
+        "operationId": "StaticSites_RegisterUserProvidedFunctionAppWithStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app to register with the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserProvidedFunctionEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the user provided function app properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          {
+            "name": "isForced",
+            "in": "query",
+            "description": "Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register a user provided function app with a static site": {
+            "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Detach the user provided function app from the static site",
+        "description": "Description for Detach the user provided function app from the static site",
+        "operationId": "StaticSites_DetachUserProvidedFunctionAppFromStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the function app registered with the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detach the user provided function app from the static site.": {
+            "$ref": "./examples/DetachUserProvidedFunctionAppFromStaticSite.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/zipdeploy": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deploys zipped content to a static site.",
+        "description": "Description for Deploys zipped content to a static site.",
+        "operationId": "StaticSites_CreateZipDeploymentForStaticSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteZipDeploymentEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteZipDeploymentARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deploy a site from a zipped package": {
+            "$ref": "./examples/StaticSiteZipDeploy.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ArmPlan": {
+      "description": "The plan object in Azure Resource Manager, represents a marketplace plan.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher.",
+          "type": "string"
+        },
+        "product": {
+          "description": "The product.",
+          "type": "string"
+        },
+        "promotionCode": {
+          "description": "The promotion code.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of product.",
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "RemotePrivateEndpointConnection resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "./CommonDefinitions.json#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResponseMessageEnvelope[RemotePrivateEndpointConnection]": {
+      "description": "Message envelope that contains the common Azure resource manager properties and the resource provider specific content.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this\nvalue for GET requests only.\nFor example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource e.g \"Microsoft.Web/sites\".",
+          "type": "string"
+        },
+        "location": {
+          "description": "Geographical region resource belongs to e.g. SouthCentralUS, SouthEastAsia.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags associated with resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ArmPlan",
+          "description": "Azure resource manager plan."
+        },
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Resource specific properties."
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
+          "description": "SKU description of the resource."
+        },
+        "status": {
+          "description": "Azure-AsyncOperation Status info.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
+          "description": "Azure-AsyncOperation Error info."
+        },
+        "identity": {
+          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity",
+          "description": "MSI resource"
+        },
+        "zones": {
+          "description": "Logical Availability Zones the service is hosted in",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StaticSite": {
+      "description": "A static site.",
+      "type": "object",
+      "properties": {
+        "defaultHostname": {
+          "description": "The default autogenerated hostname for the static site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "repositoryUrl": {
+          "description": "URL for the repository of the static site.",
+          "type": "string"
+        },
+        "branch": {
+          "description": "The target branch in the repository.",
+          "type": "string"
+        },
+        "customDomains": {
+          "description": "The custom domains associated with this static site.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "repositoryToken": {
+          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.",
+          "type": "string"
+        },
+        "buildProperties": {
+          "$ref": "#/definitions/StaticSiteBuildProperties",
+          "description": "Build properties to configure on the repository."
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseMessageEnvelope[RemotePrivateEndpointConnection]"
+          },
+          "readOnly": true
+        },
+        "stagingEnvironmentPolicy": {
+          "description": "State indicating whether staging environments are allowed or not allowed for a static web app.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StagingEnvironmentPolicy",
+            "modelAsString": false
+          }
+        },
+        "allowConfigFileUpdates": {
+          "description": "<code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "templateProperties": {
+          "$ref": "#/definitions/StaticSiteTemplateOptions",
+          "description": "Template options for generating a new repository."
+        },
+        "contentDistributionEndpoint": {
+          "description": "The content distribution endpoint for the static site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "keyVaultReferenceIdentity": {
+          "description": "Identity to use for Key Vault Reference authentication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userProvidedFunctionApps": {
+          "description": "User provided function apps registered with the static site",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteUserProvidedFunctionApp"
+          },
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The provider that submitted the last deployment to the primary environment of the static site.",
+          "type": "string"
+        },
+        "enterpriseGradeCdnStatus": {
+          "description": "State indicating the status of the enterprise grade CDN serving traffic to the static web app.",
+          "enum": [
+            "Enabled",
+            "Enabling",
+            "Disabled",
+            "Disabling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnterpriseGradeCdnStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StaticSiteARMResource": {
+      "description": "Static Site ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSite",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription"
+        },
+        "identity": {
+          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "StaticSiteBuildARMResource": {
+      "description": "Static Site Build ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteBuildARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "buildId": {
+              "description": "An identifier for the static site build.",
+              "type": "string",
+              "readOnly": true
+            },
+            "sourceBranch": {
+              "description": "The source branch.",
+              "type": "string",
+              "readOnly": true
+            },
+            "pullRequestTitle": {
+              "description": "The title of a pull request that a static site build is related to.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostname": {
+              "description": "The hostname for a static site build.",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdTimeUtc": {
+              "format": "date-time",
+              "description": "When this build was created.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastUpdatedOn": {
+              "format": "date-time",
+              "description": "When this build was updated.",
+              "type": "string",
+              "readOnly": true
+            },
+            "status": {
+              "description": "The status of the static site build.",
+              "enum": [
+                "WaitingForDeployment",
+                "Uploading",
+                "Deploying",
+                "Ready",
+                "Failed",
+                "Deleting",
+                "Detached"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "BuildStatus",
+                "modelAsString": true
+              }
+            },
+            "userProvidedFunctionApps": {
+              "description": "User provided function apps registered with the static site build",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StaticSiteUserProvidedFunctionApp"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteBuildCollection": {
+      "description": "Collection of static site builds.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteBuildARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteBuildProperties": {
+      "description": "Build properties for the static site.",
+      "type": "object",
+      "properties": {
+        "appLocation": {
+          "description": "The path to the app code within the repository.",
+          "type": "string"
+        },
+        "apiLocation": {
+          "description": "The path to the api code within the repository.",
+          "type": "string"
+        },
+        "appArtifactLocation": {
+          "description": "Deprecated: The path of the app artifacts after building (deprecated in favor of OutputLocation)",
+          "type": "string"
+        },
+        "outputLocation": {
+          "description": "The output path of the app after building.",
+          "type": "string"
+        },
+        "appBuildCommand": {
+          "description": "A custom command to run during deployment of the static content application.",
+          "type": "string"
+        },
+        "apiBuildCommand": {
+          "description": "A custom command to run during deployment of the Azure Functions API application.",
+          "type": "string"
+        },
+        "skipGithubActionWorkflowGeneration": {
+          "description": "Skip Github Action workflow generation.",
+          "type": "boolean"
+        },
+        "githubActionSecretNameOverride": {
+          "description": "Github Action secret name override.",
+          "type": "string"
+        }
+      }
+    },
+    "StaticSiteCollection": {
+      "description": "Collection of static sites.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteCustomDomainOverviewARMResource": {
+      "description": "Static Site Custom Domain Overview ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteCustomDomainOverviewARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "domainName": {
+              "description": "The domain name for the static site custom domain.",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdOn": {
+              "format": "date-time",
+              "description": "The date and time on which the custom domain was created for the static site.",
+              "type": "string",
+              "readOnly": true
+            },
+            "status": {
+              "description": "The status of the custom domain",
+              "enum": [
+                "RetrievingValidationToken",
+                "Validating",
+                "Adding",
+                "Ready",
+                "Failed",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CustomDomainStatus",
+                "modelAsString": true
+              }
+            },
+            "validationToken": {
+              "description": "The TXT record validation token",
+              "type": "string",
+              "readOnly": true
+            },
+            "errorMessage": {
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteCustomDomainOverviewCollection": {
+      "description": "Collection of static site custom domains.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteCustomDomainRequestPropertiesARMResource": {
+      "description": "Static Site Custom Domain Request Properties ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "validationMethod": {
+              "description": "Validation method for adding a custom domain",
+              "default": "cname-delegation",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteFunctionOverviewARMResource": {
+      "description": "Static Site Function Overview ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteFunctionOverviewARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "functionName": {
+              "description": "The name for the function",
+              "type": "string",
+              "readOnly": true
+            },
+            "triggerType": {
+              "description": "The trigger type of the function",
+              "enum": [
+                "HttpTrigger",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "TriggerTypes",
+                "modelAsString": true
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteFunctionOverviewCollection": {
+      "description": "Collection of static site functions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteFunctionOverviewARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSitePatchResource": {
+      "description": "ARM resource for a static site when patching",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSite",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteResetPropertiesARMResource": {
+      "description": "Static Site Reset Properties ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteResetPropertiesARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "repositoryToken": {
+              "description": "The token which proves admin privileges to the repository.",
+              "type": "string"
+            },
+            "shouldUpdateRepository": {
+              "description": "Determines whether the repository should be updated with the new properties.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteTemplateOptions": {
+      "description": "Template Options for the static site.",
+      "type": "object",
+      "properties": {
+        "templateRepositoryUrl": {
+          "description": "URL of the template repository. The newly generated repository will be based on this one.",
+          "type": "string"
+        },
+        "owner": {
+          "description": "Owner of the newly generated repository.",
+          "type": "string"
+        },
+        "repositoryName": {
+          "description": "Name of the newly generated repository.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the newly generated repository.",
+          "type": "string"
+        },
+        "isPrivate": {
+          "description": "Whether or not the newly generated repository is a private repository. Defaults to false (i.e. public).",
+          "type": "boolean"
+        }
+      }
+    },
+    "StaticSiteUserARMResource": {
+      "description": "Static Site User ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteUserARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "The identity provider for the static site user.",
+              "type": "string",
+              "readOnly": true
+            },
+            "userId": {
+              "description": "The user id for the static site user.",
+              "type": "string",
+              "readOnly": true
+            },
+            "displayName": {
+              "description": "The display name for the static site user.",
+              "type": "string",
+              "readOnly": true
+            },
+            "roles": {
+              "description": "The roles for the static site user, in free-form string format",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteUserCollection": {
+      "description": "Collection of static site custom users.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteUserARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteUserInvitationRequestResource": {
+      "description": "Static sites user roles invitation resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteUserInvitationRequestResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "domain": {
+              "description": "The domain name for the static site custom domain.",
+              "type": "string"
+            },
+            "provider": {
+              "description": "The identity provider for the static site user.",
+              "type": "string"
+            },
+            "userDetails": {
+              "description": "The user id for the static site user.",
+              "type": "string"
+            },
+            "roles": {
+              "description": "The roles for the static site user, in free-form string format",
+              "type": "string"
+            },
+            "numHoursToExpiration": {
+              "format": "int32",
+              "description": "The number of hours the sas token stays valid",
+              "type": "integer"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteUserInvitationResponseResource": {
+      "description": "Static sites user roles invitation link resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteUserInvitationResponseResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "expiresOn": {
+              "format": "date-time",
+              "description": "The expiration time of the invitation",
+              "type": "string",
+              "readOnly": true
+            },
+            "invitationUrl": {
+              "description": "The url for the invitation link",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteUserProvidedFunctionApp": {
+      "description": "A static site user provided function.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteUserProvidedFunctionApp resource specific properties",
+          "type": "object",
+          "properties": {
+            "functionAppResourceId": {
+              "description": "The resource id of the function app registered with the static site",
+              "type": "string"
+            },
+            "functionAppRegion": {
+              "description": "The region of the function app registered with the static site",
+              "type": "string"
+            },
+            "createdOn": {
+              "format": "date-time",
+              "description": "The date and time on which the function app was registered with the static site.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteUserProvidedFunctionAppARMResource": {
+      "description": "Static Site User Provided Function App ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteUserProvidedFunctionAppARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "functionAppResourceId": {
+              "description": "The resource id of the function app registered with the static site",
+              "type": "string"
+            },
+            "functionAppRegion": {
+              "description": "The region of the function app registered with the static site",
+              "type": "string"
+            },
+            "createdOn": {
+              "format": "date-time",
+              "description": "The date and time on which the function app was registered with the static site.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteUserProvidedFunctionAppsCollection": {
+      "description": "Collection of static site user provided function apps.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteZipDeployment": {
+      "description": "A static site zip deployment.",
+      "type": "object",
+      "properties": {
+        "appZipUrl": {
+          "description": "URL for the zipped app content",
+          "type": "string"
+        },
+        "apiZipUrl": {
+          "description": "URL for the zipped api content",
+          "type": "string"
+        },
+        "deploymentTitle": {
+          "description": "A title to label the deployment",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider submitting this deployment",
+          "type": "string"
+        },
+        "functionLanguage": {
+          "description": "The language of the api content, if it exists",
+          "type": "string"
+        }
+      }
+    },
+    "StaticSiteZipDeploymentARMResource": {
+      "description": "Static site zip deployment ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSiteZipDeployment",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSitesWorkflowPreview": {
+      "description": "Preview for the Static Site Workflow to be generated",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSitesWorkflowPreview resource specific properties",
+          "type": "object",
+          "properties": {
+            "path": {
+              "description": "The path for the workflow file to be generated",
+              "type": "string",
+              "readOnly": true
+            },
+            "contents": {
+              "description": "The contents for the workflow file to be generated",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSitesWorkflowPreviewRequest": {
+      "description": "Request entity for previewing the Static Site workflow",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSitesWorkflowPreviewRequest resource specific properties",
+          "type": "object",
+          "properties": {
+            "repositoryUrl": {
+              "description": "URL for the repository of the static site.",
+              "type": "string"
+            },
+            "branch": {
+              "description": "The target branch in the repository.",
+              "type": "string"
+            },
+            "buildProperties": {
+              "$ref": "#/definitions/StaticSiteBuildProperties",
+              "description": "Build properties to configure on the repository."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StringList": {
+      "description": "String list resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "List of string resources.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

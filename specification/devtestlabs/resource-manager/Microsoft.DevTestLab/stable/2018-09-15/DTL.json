@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/ProviderOperationResult"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -143,11 +149,22 @@
               "$ref": "#/definitions/OperationResult"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
           "default": {
             "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
           }
         }
       }
@@ -209,7 +226,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Schedule"
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "GlobalSchedules_ListBySubscription": {
+            "$ref": "./examples/GlobalSchedules_ListBySubscription.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs": {
@@ -347,7 +369,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ArtifactSource"
+        "x-ms-odata": "#/definitions/ArtifactSource",
+        "x-ms-examples": {
+          "ArtifactSources_List": {
+            "$ref": "./examples/ArtifactSources_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates": {
@@ -424,7 +451,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ArmTemplate"
+        "x-ms-odata": "#/definitions/ArmTemplate",
+        "x-ms-examples": {
+          "ArmTemplates_List": {
+            "$ref": "./examples/ArmTemplates_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
@@ -484,6 +516,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ArmTemplates_Get": {
+            "$ref": "./examples/ArmTemplates_Get.json"
           }
         }
       }
@@ -562,7 +599,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Artifact"
+        "x-ms-odata": "#/definitions/Artifact",
+        "x-ms-examples": {
+          "Artifacts_List": {
+            "$ref": "./examples/Artifacts_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}": {
@@ -622,6 +664,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Get": {
+            "$ref": "./examples/Artifacts_Get.json"
           }
         }
       }
@@ -687,6 +734,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Artifacts_GenerateArmTemplate": {
+            "$ref": "./examples/Artifacts_GenerateArmTemplate.json"
+          }
         }
       }
     },
@@ -740,6 +792,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Get": {
+            "$ref": "./examples/ArtifactSources_Get.json"
           }
         }
       },
@@ -802,6 +859,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_CreateOrUpdate": {
+            "$ref": "./examples/ArtifactSources_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -847,6 +909,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Delete": {
+            "$ref": "./examples/ArtifactSources_Delete.json"
           }
         }
       },
@@ -903,6 +970,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Update": {
+            "$ref": "./examples/ArtifactSources_Update.json"
+          }
         }
       }
     },
@@ -956,6 +1028,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Costs_Get": {
+            "$ref": "./examples/Costs_Get.json"
           }
         }
       },
@@ -1017,6 +1094,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Costs_CreateOrUpdate": {
+            "$ref": "./examples/Costs_CreateOrUpdate.json"
           }
         }
       }
@@ -1088,7 +1170,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/CustomImage"
+        "x-ms-odata": "#/definitions/CustomImage",
+        "x-ms-examples": {
+          "CustomImages_List": {
+            "$ref": "./examples/CustomImages_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}": {
@@ -1141,6 +1228,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CustomImages_Get": {
+            "$ref": "./examples/CustomImages_Get.json"
           }
         }
       },
@@ -1204,6 +1296,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CustomImages_CreateOrUpdate": {
+            "$ref": "./examples/CustomImages_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1252,6 +1349,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CustomImages_Delete": {
+            "$ref": "./examples/CustomImages_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1308,6 +1410,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CustomImages_Update": {
+            "$ref": "./examples/CustomImages_Update.json"
           }
         }
       }
@@ -1379,7 +1486,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Formula"
+        "x-ms-odata": "#/definitions/Formula",
+        "x-ms-examples": {
+          "Formulas_List": {
+            "$ref": "./examples/Formulas_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}": {
@@ -1432,6 +1544,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Formulas_Get": {
+            "$ref": "./examples/Formulas_Get.json"
           }
         }
       },
@@ -1495,6 +1612,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Formulas_CreateOrUpdate": {
+            "$ref": "./examples/Formulas_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1540,6 +1662,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Formulas_Delete": {
+            "$ref": "./examples/Formulas_Delete.json"
           }
         }
       },
@@ -1595,6 +1722,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Formulas_Update": {
+            "$ref": "./examples/Formulas_Update.json"
           }
         }
       }
@@ -1666,7 +1798,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/GalleryImage"
+        "x-ms-odata": "#/definitions/GalleryImage",
+        "x-ms-examples": {
+          "GalleryImages_List": {
+            "$ref": "./examples/GalleryImages_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels": {
@@ -1736,7 +1873,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/NotificationChannel"
+        "x-ms-odata": "#/definitions/NotificationChannel",
+        "x-ms-examples": {
+          "NotificationChannels_List": {
+            "$ref": "./examples/NotificationChannels_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}": {
@@ -1789,6 +1931,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationChannels_Get": {
+            "$ref": "./examples/NotificationChannels_Get.json"
           }
         }
       },
@@ -1851,6 +1998,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "NotificationChannels_CreateOrUpdate": {
+            "$ref": "./examples/NotificationChannels_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -1896,6 +2048,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationChannels_Delete": {
+            "$ref": "./examples/NotificationChannels_Delete.json"
           }
         }
       },
@@ -1952,6 +2109,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "NotificationChannels_Update": {
+            "$ref": "./examples/NotificationChannels_Update.json"
+          }
         }
       }
     },
@@ -2005,6 +2167,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationChannels_Notify": {
+            "$ref": "./examples/NotificationChannels_Notify.json"
           }
         }
       }
@@ -2062,6 +2229,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PolicySets_EvaluatePolicies": {
+            "$ref": "./examples/PolicySets_EvaluatePolicies.json"
           }
         }
       }
@@ -2140,7 +2312,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Policy"
+        "x-ms-odata": "#/definitions/Policy",
+        "x-ms-examples": {
+          "Policies_List": {
+            "$ref": "./examples/Policies_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}": {
@@ -2200,6 +2377,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get": {
+            "$ref": "./examples/Policies_Get.json"
           }
         }
       },
@@ -2269,6 +2451,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate": {
+            "$ref": "./examples/Policies_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2321,6 +2508,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Delete": {
+            "$ref": "./examples/Policies_Delete.json"
           }
         }
       },
@@ -2383,6 +2575,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Update": {
+            "$ref": "./examples/Policies_Update.json"
           }
         }
       }
@@ -2454,7 +2651,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Schedule"
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "Schedules_List": {
+            "$ref": "./examples/Schedules_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}": {
@@ -2507,6 +2709,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get.json"
           }
         }
       },
@@ -2569,6 +2776,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Schedules_CreateOrUpdate": {
+            "$ref": "./examples/Schedules_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2614,6 +2826,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Delete": {
+            "$ref": "./examples/Schedules_Delete.json"
           }
         }
       },
@@ -2670,6 +2887,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Schedules_Update": {
+            "$ref": "./examples/Schedules_Update.json"
+          }
         }
       }
     },
@@ -2717,6 +2939,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Execute": {
+            "$ref": "./examples/Schedules_Execute.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2770,6 +2997,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Schedules_ListApplicable": {
+            "$ref": "./examples/Schedules_ListApplicable.json"
+          }
         }
       }
     },
@@ -2817,6 +3049,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceRunners_Get": {
+            "$ref": "./examples/ServiceRunners_Get.json"
           }
         }
       },
@@ -2879,6 +3116,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServiceRunners_CreateOrUpdate": {
+            "$ref": "./examples/ServiceRunners_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2924,6 +3166,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceRunners_Delete": {
+            "$ref": "./examples/ServiceRunners_Delete.json"
           }
         }
       }
@@ -2995,7 +3242,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/User"
+        "x-ms-odata": "#/definitions/User",
+        "x-ms-examples": {
+          "Users_List": {
+            "$ref": "./examples/Users_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{name}": {
@@ -3048,6 +3300,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Users_Get": {
+            "$ref": "./examples/Users_Get.json"
           }
         }
       },
@@ -3111,6 +3368,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Users_CreateOrUpdate": {
+            "$ref": "./examples/Users_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -3159,6 +3421,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Users_Delete": {
+            "$ref": "./examples/Users_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3215,6 +3482,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Users_Update": {
+            "$ref": "./examples/Users_Update.json"
           }
         }
       }
@@ -3293,7 +3565,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Disk"
+        "x-ms-odata": "#/definitions/Disk",
+        "x-ms-examples": {
+          "Disks_List": {
+            "$ref": "./examples/Disks_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{name}": {
@@ -3353,6 +3630,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Disks_Get": {
+            "$ref": "./examples/Disks_Get.json"
           }
         }
       },
@@ -3423,6 +3705,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disks_CreateOrUpdate": {
+            "$ref": "./examples/Disks_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -3478,6 +3765,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Disks_Delete": {
+            "$ref": "./examples/Disks_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3541,6 +3833,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Disks_Update": {
+            "$ref": "./examples/Disks_Update.json"
           }
         }
       }
@@ -3607,6 +3904,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disks_Attach": {
+            "$ref": "./examples/Disks_Attach.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -3670,6 +3972,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Disks_Detach": {
+            "$ref": "./examples/Disks_Detach.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3749,7 +4056,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DtlEnvironment"
+        "x-ms-odata": "#/definitions/DtlEnvironment",
+        "x-ms-examples": {
+          "Environments_List": {
+            "$ref": "./examples/Environments_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments/{name}": {
@@ -3809,6 +4121,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Get": {
+            "$ref": "./examples/Environments_Get.json"
           }
         }
       },
@@ -3879,6 +4196,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Environments_CreateOrUpdate": {
+            "$ref": "./examples/Environments_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -3934,6 +4256,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Delete": {
+            "$ref": "./examples/Environments_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3997,6 +4324,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Update": {
+            "$ref": "./examples/Environments_Update.json"
           }
         }
       }
@@ -4075,7 +4407,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Secret"
+        "x-ms-odata": "#/definitions/Secret",
+        "x-ms-examples": {
+          "Secrets_List": {
+            "$ref": "./examples/Secrets_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{name}": {
@@ -4135,6 +4472,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Secrets_Get": {
+            "$ref": "./examples/Secrets_Get.json"
           }
         }
       },
@@ -4205,6 +4547,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Secrets_CreateOrUpdate": {
+            "$ref": "./examples/Secrets_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -4257,6 +4604,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Secrets_Delete": {
+            "$ref": "./examples/Secrets_Delete.json"
           }
         }
       },
@@ -4319,6 +4671,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Secrets_Update": {
+            "$ref": "./examples/Secrets_Update.json"
           }
         }
       }
@@ -4397,7 +4754,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ServiceFabric"
+        "x-ms-odata": "#/definitions/ServiceFabric",
+        "x-ms-examples": {
+          "ServiceFabrics_List": {
+            "$ref": "./examples/ServiceFabrics_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{name}": {
@@ -4457,6 +4819,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabrics_Get": {
+            "$ref": "./examples/ServiceFabrics_Get.json"
           }
         }
       },
@@ -4527,6 +4894,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServiceFabrics_CreateOrUpdate": {
+            "$ref": "./examples/ServiceFabrics_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -4582,6 +4954,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabrics_Delete": {
+            "$ref": "./examples/ServiceFabrics_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4646,6 +5023,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServiceFabrics_Update": {
+            "$ref": "./examples/ServiceFabrics_Update.json"
+          }
         }
       }
     },
@@ -4700,6 +5082,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabrics_ListApplicableSchedules": {
+            "$ref": "./examples/ServiceFabrics_ListApplicableSchedules.json"
           }
         }
       }
@@ -4757,6 +5144,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServiceFabrics_Start": {
+            "$ref": "./examples/ServiceFabrics_Start.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -4811,6 +5203,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabrics_Stop": {
+            "$ref": "./examples/ServiceFabrics_Stop.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4897,7 +5294,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Schedule"
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "ServiceFabricSchedules_List": {
+            "$ref": "./examples/ServiceFabricSchedules_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/schedules/{name}": {
@@ -4964,6 +5366,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabricSchedules_Get": {
+            "$ref": "./examples/ServiceFabricSchedules_Get.json"
           }
         }
       },
@@ -5040,6 +5447,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServiceFabricSchedules_CreateOrUpdate": {
+            "$ref": "./examples/ServiceFabricSchedules_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -5099,6 +5511,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabricSchedules_Delete": {
+            "$ref": "./examples/ServiceFabricSchedules_Delete.json"
           }
         }
       },
@@ -5169,6 +5586,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServiceFabricSchedules_Update": {
+            "$ref": "./examples/ServiceFabricSchedules_Update.json"
+          }
         }
       }
     },
@@ -5230,6 +5652,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceFabricSchedules_Execute": {
+            "$ref": "./examples/ServiceFabricSchedules_Execute.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -5606,6 +6033,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "VirtualMachines_AddDataDisk": {
+            "$ref": "./examples/VirtualMachines_AddDataDisk.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -5662,6 +6094,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ApplyArtifacts": {
+            "$ref": "./examples/VirtualMachines_ApplyArtifacts.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -5776,6 +6213,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "VirtualMachines_DetachDataDisk": {
+            "$ref": "./examples/VirtualMachines_DetachDataDisk.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -5876,6 +6318,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ListApplicableSchedules": {
+            "$ref": "./examples/VirtualMachines_ListApplicableSchedules.json"
           }
         }
       }
@@ -6205,6 +6652,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "VirtualMachines_TransferDisks": {
+            "$ref": "./examples/VirtualMachines_TransferDisks.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -6336,7 +6788,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Schedule"
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "VirtualMachineSchedules_List": {
+            "$ref": "./examples/VirtualMachineSchedules_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}": {
@@ -6396,6 +6853,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_Get": {
+            "$ref": "./examples/VirtualMachineSchedules_Get.json"
           }
         }
       },
@@ -6465,6 +6927,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_CreateOrUpdate": {
+            "$ref": "./examples/VirtualMachineSchedules_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -6517,6 +6984,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_Delete": {
+            "$ref": "./examples/VirtualMachineSchedules_Delete.json"
           }
         }
       },
@@ -6580,6 +7052,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_Update": {
+            "$ref": "./examples/VirtualMachineSchedules_Update.json"
+          }
         }
       }
     },
@@ -6634,6 +7111,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_Execute": {
+            "$ref": "./examples/VirtualMachineSchedules_Execute.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -7319,6 +7801,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Labs_ExportResourceUsage": {
+            "$ref": "./examples/Labs_ExportResourceUsage.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -7425,6 +7912,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Labs_ImportVirtualMachine": {
+            "$ref": "./examples/Labs_ImportVirtualMachine.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -7469,6 +7961,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Labs_ListVhds": {
+            "$ref": "./examples/Labs_ListVhds.json"
+          }
         }
       }
     },
@@ -7532,7 +8029,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Schedule"
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "GlobalSchedules_ListByResourceGroup": {
+            "$ref": "./examples/GlobalSchedules_ListByResourceGroup.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}": {
@@ -7578,6 +8080,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Get": {
+            "$ref": "./examples/GlobalSchedules_Get.json"
           }
         }
       },
@@ -7633,6 +8140,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_CreateOrUpdate": {
+            "$ref": "./examples/GlobalSchedules_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -7671,6 +8183,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Delete": {
+            "$ref": "./examples/GlobalSchedules_Delete.json"
           }
         }
       },
@@ -7720,6 +8237,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Update": {
+            "$ref": "./examples/GlobalSchedules_Update.json"
+          }
         }
       }
     },
@@ -7760,6 +8282,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Execute": {
+            "$ref": "./examples/GlobalSchedules_Execute.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -7813,6 +8340,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GlobalSchedules_Retarget": {
+            "$ref": "./examples/GlobalSchedules_Retarget.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     }
@@ -7845,13 +8377,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApplicableSchedulePropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "ApplicableScheduleProperties": {
       "description": "Properties of a schedules applicable to a virtual machine.",
@@ -7870,16 +8396,7 @@
     "ApplicableSchedulePropertiesFragment": {
       "description": "Properties of a schedules applicable to a virtual machine.",
       "type": "object",
-      "properties": {
-        "labVmsShutdown": {
-          "$ref": "#/definitions/ScheduleFragment",
-          "description": "The auto-shutdown schedule, if one has been set at the lab or lab resource level."
-        },
-        "labVmsStartup": {
-          "$ref": "#/definitions/ScheduleFragment",
-          "description": "The auto-startup schedule, if one has been set at the lab or lab resource level."
-        }
-      }
+      "properties": {}
     },
     "ApplyArtifactsRequest": {
       "description": "Request body for applying artifacts to a virtual machine.",
@@ -7961,16 +8478,7 @@
     "ArmTemplateParameterPropertiesFragment": {
       "description": "Properties of an Azure Resource Manager template parameter.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the template parameter.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the template parameter.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ArmTemplateProperties": {
       "description": "Properties of an Azure Resource Manager template.",
@@ -8064,22 +8572,7 @@
     "ArtifactDeploymentStatusPropertiesFragment": {
       "description": "Properties of an artifact deployment.",
       "type": "object",
-      "properties": {
-        "deploymentStatus": {
-          "description": "The deployment status of the artifact.",
-          "type": "string"
-        },
-        "artifactsApplied": {
-          "format": "int32",
-          "description": "The total count of the artifacts that were successfully applied.",
-          "type": "integer"
-        },
-        "totalArtifacts": {
-          "format": "int32",
-          "description": "The total count of the artifacts that were tentatively applied.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "ArtifactInstallProperties": {
       "description": "Properties of an artifact.",
@@ -8122,40 +8615,7 @@
     "ArtifactInstallPropertiesFragment": {
       "description": "Properties of an artifact.",
       "type": "object",
-      "properties": {
-        "artifactId": {
-          "description": "The artifact's identifier.",
-          "type": "string"
-        },
-        "artifactTitle": {
-          "description": "The artifact's title.",
-          "type": "string"
-        },
-        "parameters": {
-          "description": "The parameters of the artifact.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArtifactParameterPropertiesFragment"
-          }
-        },
-        "status": {
-          "description": "The status of the artifact.",
-          "type": "string"
-        },
-        "deploymentStatusMessage": {
-          "description": "The status message from the deployment.",
-          "type": "string"
-        },
-        "vmExtensionStatusMessage": {
-          "description": "The status message from the virtual machine extension.",
-          "type": "string"
-        },
-        "installTime": {
-          "format": "date-time",
-          "description": "The time that the artifact starts to install on the virtual machine.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ArtifactList": {
       "description": "The response of a list operation.",
@@ -8191,16 +8651,7 @@
     "ArtifactParameterPropertiesFragment": {
       "description": "Properties of an artifact parameter.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the artifact parameter.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the artifact parameter.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ArtifactProperties": {
       "description": "Properties of an artifact.",
@@ -8276,13 +8727,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArtifactSourcePropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "ArtifactSourceList": {
       "description": "The response of a list operation.",
@@ -8317,7 +8762,8 @@
           "description": "The artifact source's type.",
           "enum": [
             "VsoGit",
-            "GitHub"
+            "GitHub",
+            "StorageAccount"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8374,56 +8820,7 @@
     "ArtifactSourcePropertiesFragment": {
       "description": "Properties of an artifact source.",
       "type": "object",
-      "properties": {
-        "displayName": {
-          "description": "The artifact source's display name.",
-          "type": "string"
-        },
-        "uri": {
-          "description": "The artifact source's URI.",
-          "type": "string"
-        },
-        "sourceType": {
-          "description": "The artifact source's type.",
-          "enum": [
-            "VsoGit",
-            "GitHub"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SourceControlType",
-            "modelAsString": true
-          }
-        },
-        "folderPath": {
-          "description": "The folder containing artifacts.",
-          "type": "string"
-        },
-        "armTemplateFolderPath": {
-          "description": "The folder containing Azure Resource Manager templates.",
-          "type": "string"
-        },
-        "branchRef": {
-          "description": "The artifact source's branch reference.",
-          "type": "string"
-        },
-        "securityToken": {
-          "description": "The security token to authenticate to the artifact source.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Indicates if the artifact source is enabled (values: Enabled, Disabled).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "AttachDiskProperties": {
       "description": "Properties of the disk to attach.",
@@ -8441,7 +8838,7 @@
       "properties": {
         "diskSizeGiB": {
           "format": "int32",
-          "description": "Size of the disk to be attached in GibiBytes.",
+          "description": "Size of the disk to be attached in Gibibytes.",
           "type": "integer"
         },
         "diskName": {
@@ -8466,30 +8863,7 @@
     "AttachNewDataDiskOptionsFragment": {
       "description": "Properties to attach new disk to the Virtual Machine.",
       "type": "object",
-      "properties": {
-        "diskSizeGiB": {
-          "format": "int32",
-          "description": "Size of the disk to be attached in GibiBytes.",
-          "type": "integer"
-        },
-        "diskName": {
-          "description": "The name of the disk to be attached.",
-          "type": "string"
-        },
-        "diskType": {
-          "description": "The storage type for the disk (i.e. Standard, Premium).",
-          "enum": [
-            "Standard",
-            "Premium",
-            "StandardSSD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "BulkCreationParameters": {
       "description": "Parameters for creating multiple virtual machines as a single action.",
@@ -8505,13 +8879,7 @@
     "BulkCreationParametersFragment": {
       "description": "Parameters for creating multiple virtual machines as a single action.",
       "type": "object",
-      "properties": {
-        "instanceCount": {
-          "format": "int32",
-          "description": "The number of virtual machine instances to create.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "CloudError": {
       "description": "Error from a REST request.",
@@ -8576,25 +8944,7 @@
     "ComputeDataDiskFragment": {
       "description": "A data disks attached to a virtual machine.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "Gets data disk name.",
-          "type": "string"
-        },
-        "diskUri": {
-          "description": "When backed by a blob, the URI of underlying blob.",
-          "type": "string"
-        },
-        "managedDiskId": {
-          "description": "When backed by managed disk, this is the ID of the compute disk resource.",
-          "type": "string"
-        },
-        "diskSizeGiB": {
-          "format": "int32",
-          "description": "Gets data disk size in GiB.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "ComputeVmInstanceViewStatus": {
       "description": "Status information about a virtual machine.",
@@ -8617,20 +8967,7 @@
     "ComputeVmInstanceViewStatusFragment": {
       "description": "Status information about a virtual machine.",
       "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets the status Code.",
-          "type": "string"
-        },
-        "displayStatus": {
-          "description": "Gets the short localizable label for the status.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Gets the message associated with the status.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ComputeVmProperties": {
       "description": "Properties of a virtual machine returned by the Microsoft.Compute API.",
@@ -8678,45 +9015,7 @@
     "ComputeVmPropertiesFragment": {
       "description": "Properties of a virtual machine returned by the Microsoft.Compute API.",
       "type": "object",
-      "properties": {
-        "statuses": {
-          "description": "Gets the statuses of the virtual machine.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputeVmInstanceViewStatusFragment"
-          }
-        },
-        "osType": {
-          "description": "Gets the OS type of the virtual machine.",
-          "type": "string"
-        },
-        "vmSize": {
-          "description": "Gets the size of the virtual machine.",
-          "type": "string"
-        },
-        "networkInterfaceId": {
-          "description": "Gets the network interface ID of the virtual machine.",
-          "type": "string"
-        },
-        "osDiskId": {
-          "description": "Gets OS disk blob uri for the virtual machine.",
-          "type": "string"
-        },
-        "dataDiskIds": {
-          "description": "Gets data disks blob uri for the virtual machine.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dataDisks": {
-          "description": "Gets all data disks attached to the virtual machine.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputeDataDiskFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "CostThresholdProperties": {
       "description": "Properties of a cost threshold item.",
@@ -8787,13 +9086,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CustomImagePropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "CustomImageList": {
       "description": "The response of a list operation.",
@@ -8906,74 +9199,12 @@
     "CustomImagePropertiesCustomFragment": {
       "description": "Properties for creating a custom image from a VHD.",
       "type": "object",
-      "properties": {
-        "imageName": {
-          "description": "The image name.",
-          "type": "string"
-        },
-        "sysPrep": {
-          "description": "Indicates whether sysprep has been run on the VHD.",
-          "type": "boolean"
-        },
-        "osType": {
-          "description": "The OS type of the custom image (i.e. Windows, Linux)",
-          "enum": [
-            "Windows",
-            "Linux",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CustomImageOsType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "CustomImagePropertiesFragment": {
       "description": "Properties of a custom image.",
       "type": "object",
-      "properties": {
-        "vm": {
-          "$ref": "#/definitions/CustomImagePropertiesFromVmFragment",
-          "description": "The virtual machine from which the image is to be created."
-        },
-        "vhd": {
-          "$ref": "#/definitions/CustomImagePropertiesCustomFragment",
-          "description": "The VHD from which the image is to be created."
-        },
-        "description": {
-          "description": "The description of the custom image.",
-          "type": "string"
-        },
-        "author": {
-          "description": "The author of the custom image.",
-          "type": "string"
-        },
-        "managedImageId": {
-          "description": "The Managed Image Id backing the custom image.",
-          "type": "string"
-        },
-        "managedSnapshotId": {
-          "description": "The Managed Snapshot Id backing the custom image.",
-          "type": "string"
-        },
-        "dataDiskStorageInfo": {
-          "description": "Storage information about the data disks present in the custom image",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataDiskStorageTypeInfoFragment"
-          }
-        },
-        "customImagePlan": {
-          "$ref": "#/definitions/CustomImagePropertiesFromPlanFragment",
-          "description": "Storage information about the plan related to this custom image"
-        },
-        "isPlanAuthorized": {
-          "description": "Whether or not the custom images underlying offer/plan has been enabled for programmatic deployment",
-          "type": "boolean"
-        }
-      }
+      "properties": {}
     },
     "CustomImagePropertiesFromPlan": {
       "description": "Properties for plan on a custom image.",
@@ -8996,20 +9227,7 @@
     "CustomImagePropertiesFromPlanFragment": {
       "description": "Properties for plan on a custom image.",
       "type": "object",
-      "properties": {
-        "id": {
-          "description": "The id of the plan, equivalent to name of the plan",
-          "type": "string"
-        },
-        "publisher": {
-          "description": "The publisher for the plan from the marketplace image the custom image is derived from",
-          "type": "string"
-        },
-        "offer": {
-          "description": "The offer for the plan from the marketplace image the custom image is derived from",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "CustomImagePropertiesFromVm": {
       "description": "Properties for creating a custom image from a virtual machine.",
@@ -9032,20 +9250,7 @@
     "CustomImagePropertiesFromVmFragment": {
       "description": "Properties for creating a custom image from a virtual machine.",
       "type": "object",
-      "properties": {
-        "sourceVmId": {
-          "description": "The source vm identifier.",
-          "type": "string"
-        },
-        "windowsOsInfo": {
-          "$ref": "#/definitions/WindowsOsInfoFragment",
-          "description": "The Windows OS information of the VM."
-        },
-        "linuxOsInfo": {
-          "$ref": "#/definitions/LinuxOsInfoFragment",
-          "description": "The Linux OS information of the VM."
-        }
-      }
+      "properties": {}
     },
     "DataDiskProperties": {
       "description": "Request body for adding a new or existing data disk to a virtual machine.",
@@ -9077,29 +9282,7 @@
     "DataDiskPropertiesFragment": {
       "description": "Request body for adding a new or existing data disk to a virtual machine.",
       "type": "object",
-      "properties": {
-        "attachNewDataDiskOptions": {
-          "$ref": "#/definitions/AttachNewDataDiskOptionsFragment",
-          "description": "Specifies options to attach a new disk to the virtual machine."
-        },
-        "existingLabDiskId": {
-          "description": "Specifies the existing lab disk id to attach to virtual machine.",
-          "type": "string"
-        },
-        "hostCaching": {
-          "description": "Caching option for a data disk (i.e. None, ReadOnly, ReadWrite).",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HostCachingOptions",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "DataDiskStorageTypeInfo": {
       "description": "Storage information about the data disks present in the custom image",
@@ -9127,25 +9310,7 @@
     "DataDiskStorageTypeInfoFragment": {
       "description": "Storage information about the data disks present in the custom image",
       "type": "object",
-      "properties": {
-        "lun": {
-          "description": "Disk Lun",
-          "type": "string"
-        },
-        "storageType": {
-          "description": "Disk Storage Type",
-          "enum": [
-            "Standard",
-            "Premium",
-            "StandardSSD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "DayDetails": {
       "description": "Properties of a daily schedule.",
@@ -9160,12 +9325,7 @@
     "DayDetailsFragment": {
       "description": "Properties of a daily schedule.",
       "type": "object",
-      "properties": {
-        "time": {
-          "description": "The time of day the schedule will occur.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "DetachDataDiskProperties": {
       "description": "Request body for detaching data disk from a virtual machine.",
@@ -9214,13 +9374,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiskPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "DiskList": {
       "description": "The response of a list operation.",
@@ -9258,7 +9412,7 @@
         },
         "diskSizeGiB": {
           "format": "int32",
-          "description": "The size of the disk in GibiBytes.",
+          "description": "The size of the disk in Gibibytes.",
           "type": "integer"
         },
         "leasedByLabVmId": {
@@ -9271,6 +9425,10 @@
         },
         "diskUri": {
           "description": "When backed by a blob, the URI of underlying blob.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "When backed by a blob, the storage account where the blob is.",
           "type": "string"
         },
         "createdDate": {
@@ -9302,46 +9460,7 @@
     "DiskPropertiesFragment": {
       "description": "Properties of a disk.",
       "type": "object",
-      "properties": {
-        "diskType": {
-          "description": "The storage type for the disk (i.e. Standard, Premium).",
-          "enum": [
-            "Standard",
-            "Premium",
-            "StandardSSD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "diskSizeGiB": {
-          "format": "int32",
-          "description": "The size of the disk in GibiBytes.",
-          "type": "integer"
-        },
-        "leasedByLabVmId": {
-          "description": "The resource ID of the VM to which this disk is leased.",
-          "type": "string"
-        },
-        "diskBlobName": {
-          "description": "When backed by a blob, the name of the VHD blob without extension.",
-          "type": "string"
-        },
-        "diskUri": {
-          "description": "When backed by a blob, the URI of underlying blob.",
-          "type": "string"
-        },
-        "hostCaching": {
-          "description": "The host caching policy of the disk (i.e. None, ReadOnly, ReadWrite).",
-          "type": "string"
-        },
-        "managedDiskId": {
-          "description": "When backed by managed disk, this is the ID of the compute disk resource.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "DtlEnvironment": {
       "description": "An environment, which is essentially an ARM template deployment.",
@@ -9370,13 +9489,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnvironmentPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "DtlEnvironmentList": {
       "description": "The response of a list operation.",
@@ -9415,19 +9528,7 @@
     "EnvironmentDeploymentPropertiesFragment": {
       "description": "Properties of an environment deployment.",
       "type": "object",
-      "properties": {
-        "armTemplateId": {
-          "description": "The Azure Resource Manager template's identifier.",
-          "type": "string"
-        },
-        "parameters": {
-          "description": "The parameters of the Azure Resource Manager template.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArmTemplateParameterPropertiesFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "EnvironmentProperties": {
       "description": "Properties of an environment.",
@@ -9466,16 +9567,7 @@
     "EnvironmentPropertiesFragment": {
       "description": "Properties of an environment.",
       "type": "object",
-      "properties": {
-        "deploymentProperties": {
-          "$ref": "#/definitions/EnvironmentDeploymentPropertiesFragment",
-          "description": "The deployment properties of the environment."
-        },
-        "armTemplateDisplayName": {
-          "description": "The display name of the Azure Resource Manager template that produced the environment.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "EvaluatePoliciesProperties": {
       "description": "Properties for evaluating a policy set.",
@@ -9546,20 +9638,7 @@
     "EventFragment": {
       "description": "An event to be notified for.",
       "type": "object",
-      "properties": {
-        "eventName": {
-          "description": "The event type for which this notification is enabled (i.e. AutoShutdown, Cost)",
-          "enum": [
-            "AutoShutdown",
-            "Cost"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NotificationChannelEventType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "ExportResourceUsageParameters": {
       "description": "The parameters of the export operation.",
@@ -9593,16 +9672,7 @@
     "ExternalSubnetFragment": {
       "description": "Subnet information as returned by the Microsoft.Network API.",
       "type": "object",
-      "properties": {
-        "id": {
-          "description": "Gets or sets the identifier.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Gets or sets the name.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "Formula": {
       "description": "A formula for creating a VM, specifying an image base and other parameters",
@@ -9631,13 +9701,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FormulaPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "FormulaList": {
       "description": "The response of a list operation.",
@@ -9666,7 +9730,8 @@
         },
         "author": {
           "description": "The author of the formula.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "osType": {
           "description": "The OS type of the formula.",
@@ -9701,28 +9766,7 @@
     "FormulaPropertiesFragment": {
       "description": "Properties of a formula.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the formula.",
-          "type": "string"
-        },
-        "author": {
-          "description": "The author of the formula.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "The OS type of the formula.",
-          "type": "string"
-        },
-        "formulaContent": {
-          "$ref": "#/definitions/LabVirtualMachineCreationParameterFragment",
-          "description": "The content of the formula."
-        },
-        "vm": {
-          "$ref": "#/definitions/FormulaPropertiesFromVmFragment",
-          "description": "Information about a VM from which a formula is to be created."
-        }
-      }
+      "properties": {}
     },
     "FormulaPropertiesFromVm": {
       "description": "Information about a VM from which a formula is to be created.",
@@ -9737,12 +9781,7 @@
     "FormulaPropertiesFromVmFragment": {
       "description": "Information about a VM from which a formula is to be created.",
       "type": "object",
-      "properties": {
-        "labVmId": {
-          "description": "The identifier of the VM from which a formula is to be created.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "GalleryImage": {
       "description": "A gallery image.",
@@ -9849,28 +9888,7 @@
     "GalleryImageReferenceFragment": {
       "description": "The reference information for an Azure Marketplace image.",
       "type": "object",
-      "properties": {
-        "offer": {
-          "description": "The offer of the gallery image.",
-          "type": "string"
-        },
-        "publisher": {
-          "description": "The publisher of the gallery image.",
-          "type": "string"
-        },
-        "sku": {
-          "description": "The SKU of the gallery image.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "The OS type of the gallery image.",
-          "type": "string"
-        },
-        "version": {
-          "description": "The version of the gallery image.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "GenerateArmTemplateRequest": {
       "description": "Parameters for generating an ARM template for deploying artifacts.",
@@ -9939,13 +9957,7 @@
     "HourDetailsFragment": {
       "description": "Properties of an hourly schedule.",
       "type": "object",
-      "properties": {
-        "minute": {
-          "format": "int32",
-          "description": "Minutes of the hour the schedule will run.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "IdentityProperties": {
       "description": "Properties of a managed identity",
@@ -9953,7 +9965,17 @@
       "properties": {
         "type": {
           "description": "Managed identity.",
-          "type": "string"
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
         },
         "principalId": {
           "description": "The principal id of resource identity.",
@@ -10014,30 +10036,7 @@
     "InboundNatRuleFragment": {
       "description": "A rule for NAT - exposing a VM's port (backendPort) on the public IP address using a load balancer.",
       "type": "object",
-      "properties": {
-        "transportProtocol": {
-          "description": "The transport protocol for the endpoint.",
-          "enum": [
-            "Tcp",
-            "Udp"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TransportProtocol",
-            "modelAsString": true
-          }
-        },
-        "frontendPort": {
-          "format": "int32",
-          "description": "The external endpoint port of the inbound connection. Possible values range between 1 and 65535, inclusive. If unspecified, a value will be allocated automatically.",
-          "type": "integer"
-        },
-        "backendPort": {
-          "format": "int32",
-          "description": "The port to which the external traffic will be redirected.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "Lab": {
       "description": "A lab.",
@@ -10103,37 +10102,7 @@
     "LabAnnouncementPropertiesFragment": {
       "description": "Properties of a lab's announcement banner",
       "type": "object",
-      "properties": {
-        "title": {
-          "description": "The plain text title for the lab announcement",
-          "type": "string"
-        },
-        "markdown": {
-          "description": "The markdown text (if any) that this lab displays in the UI. If left empty/null, nothing will be shown.",
-          "type": "string"
-        },
-        "enabled": {
-          "description": "Is the lab announcement active/enabled at this time?",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "The time at which the announcement expires (null for never)",
-          "type": "string"
-        },
-        "expired": {
-          "description": "Has this announcement expired?",
-          "type": "boolean"
-        }
-      }
+      "properties": {}
     },
     "LabCost": {
       "description": "A cost item.",
@@ -10262,13 +10231,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LabPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "LabList": {
       "description": "The response of a list operation.",
@@ -10318,6 +10281,7 @@
         },
         "labStorageType": {
           "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.",
+          "default": "Premium",
           "enum": [
             "Standard",
             "Premium",
@@ -10423,74 +10387,7 @@
     "LabPropertiesFragment": {
       "description": "Properties of a lab.",
       "type": "object",
-      "properties": {
-        "labStorageType": {
-          "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.",
-          "enum": [
-            "Standard",
-            "Premium",
-            "StandardSSD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "mandatoryArtifactsResourceIdsLinux": {
-          "description": "The ordered list of artifact resource IDs that should be applied on all Linux VM creations by default, prior to the artifacts specified by the user.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "mandatoryArtifactsResourceIdsWindows": {
-          "description": "The ordered list of artifact resource IDs that should be applied on all Windows VM creations by default, prior to the artifacts specified by the user.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "premiumDataDisks": {
-          "description": "The setting to enable usage of premium data disks.\r\nWhen its value is 'Enabled', creation of standard or premium data disks is allowed.\r\nWhen its value is 'Disabled', only creation of standard data disks is allowed.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PremiumDataDisk",
-            "modelAsString": true
-          }
-        },
-        "environmentPermission": {
-          "description": "The access rights to be granted to the user when provisioning an environment",
-          "enum": [
-            "Reader",
-            "Contributor"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnvironmentPermission",
-            "modelAsString": true
-          }
-        },
-        "announcement": {
-          "$ref": "#/definitions/LabAnnouncementPropertiesFragment",
-          "description": "The properties of any lab announcement associated with this lab"
-        },
-        "support": {
-          "$ref": "#/definitions/LabSupportPropertiesFragment",
-          "description": "The properties of any lab support message associated with this lab"
-        },
-        "extendedProperties": {
-          "description": "Extended properties of the lab used for experimental features",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
+      "properties": {}
     },
     "LabResourceCostProperties": {
       "description": "The properties of a resource cost item.",
@@ -10560,24 +10457,7 @@
     "LabSupportPropertiesFragment": {
       "description": "Properties of a lab's support banner",
       "type": "object",
-      "properties": {
-        "enabled": {
-          "description": "Is the lab support banner active/enabled at this time?",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        },
-        "markdown": {
-          "description": "The markdown text (if any) that this lab displays in the UI. If left empty/null, nothing will be shown.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "LabVhd": {
       "description": "Properties of a VHD in the lab.",
@@ -10654,28 +10534,7 @@
     "LabVirtualMachineCreationParameterFragment": {
       "description": "Properties for creating a virtual machine.",
       "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LabVirtualMachineCreationParameterPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "The name of the virtual machine or environment",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location of the new virtual machine or environment",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
+      "properties": {}
     },
     "LabVirtualMachineCreationParameterProperties": {
       "description": "Properties for virtual machine creation.",
@@ -10691,18 +10550,11 @@
         },
         "ownerObjectId": {
           "description": "The object identifier of the owner of the virtual machine.",
+          "default": "dynamicValue",
           "type": "string"
         },
         "ownerUserPrincipalName": {
           "description": "The user principal name of the virtual machine owner.",
-          "type": "string"
-        },
-        "createdByUserId": {
-          "description": "The object identifier of the creator of the virtual machine.",
-          "type": "string"
-        },
-        "createdByUser": {
-          "description": "The email address of creator of the virtual machine.",
           "type": "string"
         },
         "createdDate": {
@@ -10710,16 +10562,8 @@
           "description": "The creation date of the virtual machine.",
           "type": "string"
         },
-        "computeId": {
-          "description": "The resource identifier (Microsoft.Compute) of the virtual machine.",
-          "type": "string"
-        },
         "customImageId": {
           "description": "The custom image identifier of the virtual machine.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "The OS type of the virtual machine.",
           "type": "string"
         },
         "size": {
@@ -10732,19 +10576,17 @@
         },
         "password": {
           "description": "The password of the virtual machine administrator.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "sshKey": {
           "description": "The SSH key of the virtual machine administrator.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "isAuthenticationWithSshKey": {
           "description": "Indicates whether this virtual machine uses an SSH key for authentication.",
           "type": "boolean"
-        },
-        "fqdn": {
-          "description": "The fully-qualified domain name of the virtual machine.",
-          "type": "string"
         },
         "labSubnetName": {
           "description": "The lab subnet name of the virtual machine.",
@@ -10756,6 +10598,7 @@
         },
         "disallowPublicIpAddress": {
           "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+          "default": false,
           "type": "boolean"
         },
         "artifacts": {
@@ -10764,10 +10607,6 @@
           "items": {
             "$ref": "#/definitions/ArtifactInstallProperties"
           }
-        },
-        "artifactDeploymentStatus": {
-          "$ref": "#/definitions/ArtifactDeploymentStatusProperties",
-          "description": "The artifact deployment status for the virtual machine."
         },
         "galleryImageReference": {
           "$ref": "#/definitions/GalleryImageReference",
@@ -10788,24 +10627,13 @@
         },
         "allowClaim": {
           "description": "Indicates whether another user can take ownership of the virtual machine",
+          "default": false,
           "type": "boolean"
         },
         "storageType": {
           "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
+          "default": "labStorageType",
           "type": "string"
-        },
-        "virtualMachineCreationSource": {
-          "description": "Tells source of creation of lab virtual machine. Output property only.",
-          "enum": [
-            "FromCustomImage",
-            "FromGalleryImage",
-            "FromSharedGalleryImage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "VirtualMachineCreationSource",
-            "modelAsString": true
-          }
         },
         "environmentId": {
           "description": "The resource ID of the environment that contains this virtual machine, if any.",
@@ -10824,166 +10652,13 @@
           "items": {
             "$ref": "#/definitions/ScheduleCreationParameter"
           }
-        },
-        "lastKnownPowerState": {
-          "description": "Last known compute power state captured in DTL",
-          "type": "string"
         }
       }
     },
     "LabVirtualMachineCreationParameterPropertiesFragment": {
       "description": "Properties for virtual machine creation.",
       "type": "object",
-      "properties": {
-        "bulkCreationParameters": {
-          "$ref": "#/definitions/BulkCreationParametersFragment",
-          "description": "The number of virtual machine instances to create."
-        },
-        "notes": {
-          "description": "The notes of the virtual machine.",
-          "type": "string"
-        },
-        "ownerObjectId": {
-          "description": "The object identifier of the owner of the virtual machine.",
-          "type": "string"
-        },
-        "ownerUserPrincipalName": {
-          "description": "The user principal name of the virtual machine owner.",
-          "type": "string"
-        },
-        "createdByUserId": {
-          "description": "The object identifier of the creator of the virtual machine.",
-          "type": "string"
-        },
-        "createdByUser": {
-          "description": "The email address of creator of the virtual machine.",
-          "type": "string"
-        },
-        "createdDate": {
-          "format": "date-time",
-          "description": "The creation date of the virtual machine.",
-          "type": "string"
-        },
-        "computeId": {
-          "description": "The resource identifier (Microsoft.Compute) of the virtual machine.",
-          "type": "string"
-        },
-        "customImageId": {
-          "description": "The custom image identifier of the virtual machine.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "The OS type of the virtual machine.",
-          "type": "string"
-        },
-        "size": {
-          "description": "The size of the virtual machine.",
-          "type": "string"
-        },
-        "userName": {
-          "description": "The user name of the virtual machine.",
-          "type": "string"
-        },
-        "password": {
-          "description": "The password of the virtual machine administrator.",
-          "type": "string"
-        },
-        "sshKey": {
-          "description": "The SSH key of the virtual machine administrator.",
-          "type": "string"
-        },
-        "isAuthenticationWithSshKey": {
-          "description": "Indicates whether this virtual machine uses an SSH key for authentication.",
-          "type": "boolean"
-        },
-        "fqdn": {
-          "description": "The fully-qualified domain name of the virtual machine.",
-          "type": "string"
-        },
-        "labSubnetName": {
-          "description": "The lab subnet name of the virtual machine.",
-          "type": "string"
-        },
-        "labVirtualNetworkId": {
-          "description": "The lab virtual network identifier of the virtual machine.",
-          "type": "string"
-        },
-        "disallowPublicIpAddress": {
-          "description": "Indicates whether the virtual machine is to be created without a public IP address.",
-          "type": "boolean"
-        },
-        "artifacts": {
-          "description": "The artifacts to be installed on the virtual machine.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArtifactInstallPropertiesFragment"
-          }
-        },
-        "artifactDeploymentStatus": {
-          "$ref": "#/definitions/ArtifactDeploymentStatusPropertiesFragment",
-          "description": "The artifact deployment status for the virtual machine."
-        },
-        "galleryImageReference": {
-          "$ref": "#/definitions/GalleryImageReferenceFragment",
-          "description": "The Microsoft Azure Marketplace image reference of the virtual machine."
-        },
-        "planId": {
-          "description": "The id of the plan associated with the virtual machine image",
-          "type": "string"
-        },
-        "networkInterface": {
-          "$ref": "#/definitions/NetworkInterfacePropertiesFragment",
-          "description": "The network interface properties."
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "The expiration date for VM.",
-          "type": "string"
-        },
-        "allowClaim": {
-          "description": "Indicates whether another user can take ownership of the virtual machine",
-          "type": "boolean"
-        },
-        "storageType": {
-          "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
-          "type": "string"
-        },
-        "virtualMachineCreationSource": {
-          "description": "Tells source of creation of lab virtual machine. Output property only.",
-          "enum": [
-            "FromCustomImage",
-            "FromGalleryImage",
-            "FromSharedGalleryImage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "VirtualMachineCreationSource",
-            "modelAsString": true
-          }
-        },
-        "environmentId": {
-          "description": "The resource ID of the environment that contains this virtual machine, if any.",
-          "type": "string"
-        },
-        "dataDiskParameters": {
-          "description": "New or existing data disks to attach to the virtual machine after creation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataDiskPropertiesFragment"
-          }
-        },
-        "scheduleParameters": {
-          "description": "Virtual Machine schedules to be created",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScheduleCreationParameterFragment"
-          }
-        },
-        "lastKnownPowerState": {
-          "description": "Last known compute power state captured in DTL",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "LabVirtualMachineFragment": {
       "description": "A virtual machine.",
@@ -10993,13 +10668,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LabVirtualMachinePropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "LabVirtualMachineList": {
       "description": "The response of a list operation.",
@@ -11028,6 +10697,7 @@
         },
         "ownerObjectId": {
           "description": "The object identifier of the owner of the virtual machine.",
+          "default": "dynamicValue",
           "type": "string"
         },
         "ownerUserPrincipalName": {
@@ -11036,11 +10706,13 @@
         },
         "createdByUserId": {
           "description": "The object identifier of the creator of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdByUser": {
           "description": "The email address of creator of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdDate": {
           "format": "date-time",
@@ -11049,7 +10721,8 @@
         },
         "computeId": {
           "description": "The resource identifier (Microsoft.Compute) of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "customImageId": {
           "description": "The custom image identifier of the virtual machine.",
@@ -11057,7 +10730,8 @@
         },
         "osType": {
           "description": "The OS type of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "size": {
           "description": "The size of the virtual machine.",
@@ -11069,11 +10743,13 @@
         },
         "password": {
           "description": "The password of the virtual machine administrator.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "sshKey": {
           "description": "The SSH key of the virtual machine administrator.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "isAuthenticationWithSshKey": {
           "description": "Indicates whether this virtual machine uses an SSH key for authentication.",
@@ -11081,7 +10757,8 @@
         },
         "fqdn": {
           "description": "The fully-qualified domain name of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "labSubnetName": {
           "description": "The lab subnet name of the virtual machine.",
@@ -11093,6 +10770,7 @@
         },
         "disallowPublicIpAddress": {
           "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+          "default": false,
           "type": "boolean"
         },
         "artifacts": {
@@ -11104,7 +10782,8 @@
         },
         "artifactDeploymentStatus": {
           "$ref": "#/definitions/ArtifactDeploymentStatusProperties",
-          "description": "The artifact deployment status for the virtual machine."
+          "description": "The artifact deployment status for the virtual machine.",
+          "readOnly": true
         },
         "galleryImageReference": {
           "$ref": "#/definitions/GalleryImageReference",
@@ -11135,10 +10814,12 @@
         },
         "allowClaim": {
           "description": "Indicates whether another user can take ownership of the virtual machine",
+          "default": false,
           "type": "boolean"
         },
         "storageType": {
           "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
+          "default": "labStorageType",
           "type": "string"
         },
         "virtualMachineCreationSource": {
@@ -11149,6 +10830,7 @@
             "FromSharedGalleryImage"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "VirtualMachineCreationSource",
             "modelAsString": true
@@ -11174,7 +10856,8 @@
         },
         "lastKnownPowerState": {
           "description": "Last known compute power state captured in DTL",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning status of the resource.",
@@ -11191,152 +10874,7 @@
     "LabVirtualMachinePropertiesFragment": {
       "description": "Properties of a virtual machine.",
       "type": "object",
-      "properties": {
-        "notes": {
-          "description": "The notes of the virtual machine.",
-          "type": "string"
-        },
-        "ownerObjectId": {
-          "description": "The object identifier of the owner of the virtual machine.",
-          "type": "string"
-        },
-        "ownerUserPrincipalName": {
-          "description": "The user principal name of the virtual machine owner.",
-          "type": "string"
-        },
-        "createdByUserId": {
-          "description": "The object identifier of the creator of the virtual machine.",
-          "type": "string"
-        },
-        "createdByUser": {
-          "description": "The email address of creator of the virtual machine.",
-          "type": "string"
-        },
-        "createdDate": {
-          "format": "date-time",
-          "description": "The creation date of the virtual machine.",
-          "type": "string"
-        },
-        "computeId": {
-          "description": "The resource identifier (Microsoft.Compute) of the virtual machine.",
-          "type": "string"
-        },
-        "customImageId": {
-          "description": "The custom image identifier of the virtual machine.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "The OS type of the virtual machine.",
-          "type": "string"
-        },
-        "size": {
-          "description": "The size of the virtual machine.",
-          "type": "string"
-        },
-        "userName": {
-          "description": "The user name of the virtual machine.",
-          "type": "string"
-        },
-        "password": {
-          "description": "The password of the virtual machine administrator.",
-          "type": "string"
-        },
-        "sshKey": {
-          "description": "The SSH key of the virtual machine administrator.",
-          "type": "string"
-        },
-        "isAuthenticationWithSshKey": {
-          "description": "Indicates whether this virtual machine uses an SSH key for authentication.",
-          "type": "boolean"
-        },
-        "fqdn": {
-          "description": "The fully-qualified domain name of the virtual machine.",
-          "type": "string"
-        },
-        "labSubnetName": {
-          "description": "The lab subnet name of the virtual machine.",
-          "type": "string"
-        },
-        "labVirtualNetworkId": {
-          "description": "The lab virtual network identifier of the virtual machine.",
-          "type": "string"
-        },
-        "disallowPublicIpAddress": {
-          "description": "Indicates whether the virtual machine is to be created without a public IP address.",
-          "type": "boolean"
-        },
-        "artifacts": {
-          "description": "The artifacts to be installed on the virtual machine.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArtifactInstallPropertiesFragment"
-          }
-        },
-        "artifactDeploymentStatus": {
-          "$ref": "#/definitions/ArtifactDeploymentStatusPropertiesFragment",
-          "description": "The artifact deployment status for the virtual machine."
-        },
-        "galleryImageReference": {
-          "$ref": "#/definitions/GalleryImageReferenceFragment",
-          "description": "The Microsoft Azure Marketplace image reference of the virtual machine."
-        },
-        "planId": {
-          "description": "The id of the plan associated with the virtual machine image",
-          "type": "string"
-        },
-        "networkInterface": {
-          "$ref": "#/definitions/NetworkInterfacePropertiesFragment",
-          "description": "The network interface properties."
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "The expiration date for VM.",
-          "type": "string"
-        },
-        "allowClaim": {
-          "description": "Indicates whether another user can take ownership of the virtual machine",
-          "type": "boolean"
-        },
-        "storageType": {
-          "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
-          "type": "string"
-        },
-        "virtualMachineCreationSource": {
-          "description": "Tells source of creation of lab virtual machine. Output property only.",
-          "enum": [
-            "FromCustomImage",
-            "FromGalleryImage",
-            "FromSharedGalleryImage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "VirtualMachineCreationSource",
-            "modelAsString": true
-          }
-        },
-        "environmentId": {
-          "description": "The resource ID of the environment that contains this virtual machine, if any.",
-          "type": "string"
-        },
-        "dataDiskParameters": {
-          "description": "New or existing data disks to attach to the virtual machine after creation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataDiskPropertiesFragment"
-          }
-        },
-        "scheduleParameters": {
-          "description": "Virtual Machine schedules to be created",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScheduleCreationParameterFragment"
-          }
-        },
-        "lastKnownPowerState": {
-          "description": "Last known compute power state captured in DTL",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "LinuxOsInfo": {
       "description": "Information about a Linux OS.",
@@ -11360,21 +10898,7 @@
     "LinuxOsInfoFragment": {
       "description": "Information about a Linux OS.",
       "type": "object",
-      "properties": {
-        "linuxOsState": {
-          "description": "The state of the Linux OS (i.e. NonDeprovisioned, DeprovisionRequested, DeprovisionApplied).",
-          "enum": [
-            "NonDeprovisioned",
-            "DeprovisionRequested",
-            "DeprovisionApplied"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LinuxOsState",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "NetworkInterfaceProperties": {
       "description": "Properties of a network interface.",
@@ -11421,44 +10945,7 @@
     "NetworkInterfacePropertiesFragment": {
       "description": "Properties of a network interface.",
       "type": "object",
-      "properties": {
-        "virtualNetworkId": {
-          "description": "The resource ID of the virtual network.",
-          "type": "string"
-        },
-        "subnetId": {
-          "description": "The resource ID of the sub net.",
-          "type": "string"
-        },
-        "publicIpAddressId": {
-          "description": "The resource ID of the public IP address.",
-          "type": "string"
-        },
-        "publicIpAddress": {
-          "description": "The public IP address.",
-          "type": "string"
-        },
-        "privateIpAddress": {
-          "description": "The private IP address.",
-          "type": "string"
-        },
-        "dnsName": {
-          "description": "The DNS name.",
-          "type": "string"
-        },
-        "rdpAuthority": {
-          "description": "The RdpAuthority property is a server DNS host name or IP address followed by the service port number for RDP (Remote Desktop Protocol).",
-          "type": "string"
-        },
-        "sshAuthority": {
-          "description": "The SshAuthority property is a server DNS host name or IP address followed by the service port number for SSH.",
-          "type": "string"
-        },
-        "sharedPublicIpAddressConfiguration": {
-          "$ref": "#/definitions/SharedPublicIpAddressConfigurationFragment",
-          "description": "The configuration for sharing a public IP address across multiple virtual machines."
-        }
-      }
+      "properties": {}
     },
     "NotificationChannel": {
       "description": "A notification.",
@@ -11487,13 +10974,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NotificationChannelPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "NotificationChannelList": {
       "description": "The response of a list operation.",
@@ -11560,31 +11041,7 @@
     "NotificationChannelPropertiesFragment": {
       "description": "Properties of a schedule.",
       "type": "object",
-      "properties": {
-        "webHookUrl": {
-          "description": "The webhook URL to send notifications to.",
-          "type": "string"
-        },
-        "emailRecipient": {
-          "description": "The email recipient to send notifications to (can be a list of semi-colon separated email addresses).",
-          "type": "string"
-        },
-        "notificationLocale": {
-          "description": "The locale to use when sending a notification (fallback for unsupported languages is EN).",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of notification.",
-          "type": "string"
-        },
-        "events": {
-          "description": "The list of event for which this notification is enabled.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EventFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "NotificationSettings": {
       "description": "Notification settings for a schedule.",
@@ -11592,6 +11049,7 @@
       "properties": {
         "status": {
           "description": "If notifications are enabled for this schedule (i.e. Enabled, Disabled).",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -11624,37 +11082,7 @@
     "NotificationSettingsFragment": {
       "description": "Notification settings for a schedule.",
       "type": "object",
-      "properties": {
-        "status": {
-          "description": "If notifications are enabled for this schedule (i.e. Enabled, Disabled).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        },
-        "timeInMinutes": {
-          "format": "int32",
-          "description": "Time in minutes before event at which notification will be sent.",
-          "type": "integer"
-        },
-        "webhookUrl": {
-          "description": "The webhook URL to which the notification will be sent.",
-          "type": "string"
-        },
-        "emailRecipient": {
-          "description": "The email recipient to send notifications to (can be a list of semi-colon separated email addresses).",
-          "type": "string"
-        },
-        "notificationLocale": {
-          "description": "The locale to use when sending a notification (fallback for unsupported languages is EN).",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "NotifyParameters": {
       "description": "Properties for generating a Notification.",
@@ -11749,13 +11177,18 @@
             "ResetContent",
             "PartialContent",
             "MultipleChoices",
+            "Ambiguous",
             "MovedPermanently",
+            "Moved",
+            "Found",
             "Redirect",
             "SeeOther",
+            "RedirectMethod",
             "NotModified",
             "UseProxy",
             "Unused",
             "TemporaryRedirect",
+            "RedirectKeepVerb",
             "BadRequest",
             "Unauthorized",
             "PaymentRequired",
@@ -11860,13 +11293,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PolicyPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "PolicyList": {
       "description": "The response of a list operation.",
@@ -11966,64 +11393,7 @@
     "PolicyPropertiesFragment": {
       "description": "Properties of a Policy.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the policy.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the policy.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyStatus",
-            "modelAsString": true
-          }
-        },
-        "factName": {
-          "description": "The fact name of the policy (e.g. LabVmCount, LabVmSize, MaxVmsAllowedPerLab, etc.",
-          "enum": [
-            "UserOwnedLabVmCount",
-            "UserOwnedLabPremiumVmCount",
-            "LabVmCount",
-            "LabPremiumVmCount",
-            "LabVmSize",
-            "GalleryImage",
-            "UserOwnedLabVmCountInSubnet",
-            "LabTargetCost",
-            "EnvironmentTemplate",
-            "ScheduleEditPermission"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyFactName",
-            "modelAsString": true
-          }
-        },
-        "factData": {
-          "description": "The fact data of the policy.",
-          "type": "string"
-        },
-        "threshold": {
-          "description": "The threshold of the policy (i.e. a number for MaxValuePolicy, and a JSON array of values for AllowedValuesPolicy).",
-          "type": "string"
-        },
-        "evaluatorType": {
-          "description": "The evaluator type of the policy (i.e. AllowedValuesPolicy, MaxValuePolicy).",
-          "enum": [
-            "AllowedValuesPolicy",
-            "MaxValuePolicy"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyEvaluatorType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "PolicySetResult": {
       "description": "Result of a policy set evaluation.",
@@ -12082,25 +11452,7 @@
     "PortFragment": {
       "description": "Properties of a network port.",
       "type": "object",
-      "properties": {
-        "transportProtocol": {
-          "description": "Protocol type of the port.",
-          "enum": [
-            "Tcp",
-            "Udp"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TransportProtocol",
-            "modelAsString": true
-          }
-        },
-        "backendPort": {
-          "format": "int32",
-          "description": "Backend port of the target virtual machine.",
-          "type": "integer"
-        }
-      }
+      "properties": {}
     },
     "ProviderOperationResult": {
       "description": "Result of the request to list REST API operations",
@@ -12221,7 +11573,8 @@
         },
         "location": {
           "description": "The location of the new virtual machine or environment",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "description": "The tags of the resource.",
@@ -12235,28 +11588,7 @@
     "ScheduleCreationParameterFragment": {
       "description": "Properties for creating a schedule.",
       "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScheduleCreationParameterPropertiesFragment",
-          "description": "The properties of the schedule.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "The name of the virtual machine or environment",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location of the new virtual machine or environment",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
+      "properties": {}
     },
     "ScheduleCreationParameterProperties": {
       "description": "Properties for schedule creation.",
@@ -12264,6 +11596,7 @@
       "properties": {
         "status": {
           "description": "The status of the schedule (i.e. Enabled, Disabled)",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -12307,48 +11640,7 @@
     "ScheduleCreationParameterPropertiesFragment": {
       "description": "Properties for schedule creation.",
       "type": "object",
-      "properties": {
-        "status": {
-          "description": "The status of the schedule (i.e. Enabled, Disabled)",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        },
-        "taskType": {
-          "description": "The task type of the schedule (e.g. LabVmsShutdownTask, LabVmAutoStart).",
-          "type": "string"
-        },
-        "weeklyRecurrence": {
-          "$ref": "#/definitions/WeekDetailsFragment",
-          "description": "If the schedule will occur only some days of the week, specify the weekly recurrence."
-        },
-        "dailyRecurrence": {
-          "$ref": "#/definitions/DayDetailsFragment",
-          "description": "If the schedule will occur once each day of the week, specify the daily recurrence."
-        },
-        "hourlyRecurrence": {
-          "$ref": "#/definitions/HourDetailsFragment",
-          "description": "If the schedule will occur multiple times a day, specify the hourly recurrence."
-        },
-        "timeZoneId": {
-          "description": "The time zone ID (e.g. Pacific Standard time).",
-          "type": "string"
-        },
-        "notificationSettings": {
-          "$ref": "#/definitions/NotificationSettingsFragment",
-          "description": "Notification settings."
-        },
-        "targetResourceId": {
-          "description": "The resource ID to which the schedule belongs",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ScheduleFragment": {
       "description": "A schedule.",
@@ -12358,13 +11650,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SchedulePropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "ScheduleList": {
       "description": "The response of a list operation.",
@@ -12389,6 +11675,7 @@
       "properties": {
         "status": {
           "description": "The status of the schedule (i.e. Enabled, Disabled)",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -12448,48 +11735,7 @@
     "SchedulePropertiesFragment": {
       "description": "Properties of a schedule.",
       "type": "object",
-      "properties": {
-        "status": {
-          "description": "The status of the schedule (i.e. Enabled, Disabled)",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnableStatus",
-            "modelAsString": true
-          }
-        },
-        "taskType": {
-          "description": "The task type of the schedule (e.g. LabVmsShutdownTask, LabVmAutoStart).",
-          "type": "string"
-        },
-        "weeklyRecurrence": {
-          "$ref": "#/definitions/WeekDetailsFragment",
-          "description": "If the schedule will occur only some days of the week, specify the weekly recurrence."
-        },
-        "dailyRecurrence": {
-          "$ref": "#/definitions/DayDetailsFragment",
-          "description": "If the schedule will occur once each day of the week, specify the daily recurrence."
-        },
-        "hourlyRecurrence": {
-          "$ref": "#/definitions/HourDetailsFragment",
-          "description": "If the schedule will occur multiple times a day, specify the hourly recurrence."
-        },
-        "timeZoneId": {
-          "description": "The time zone ID (e.g. Pacific Standard time).",
-          "type": "string"
-        },
-        "notificationSettings": {
-          "$ref": "#/definitions/NotificationSettingsFragment",
-          "description": "Notification settings."
-        },
-        "targetResourceId": {
-          "description": "The resource ID to which the schedule belongs",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "Secret": {
       "description": "A secret.",
@@ -12518,13 +11764,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecretPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "SecretList": {
       "description": "The response of a list operation.",
@@ -12566,12 +11806,7 @@
     "SecretPropertiesFragment": {
       "description": "Properties of a secret.",
       "type": "object",
-      "properties": {
-        "value": {
-          "description": "The value of the secret for secret creation.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ServiceFabric": {
       "description": "A Service Fabric.",
@@ -12600,13 +11835,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServiceFabricPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "ServiceFabricList": {
       "description": "The response of a list operation.",
@@ -12657,16 +11886,7 @@
     "ServiceFabricPropertiesFragment": {
       "description": "Properties of a service fabric.",
       "type": "object",
-      "properties": {
-        "externalServiceFabricId": {
-          "description": "The backing service fabric resource's id",
-          "type": "string"
-        },
-        "environmentId": {
-          "description": "The resource id of the environment under which the service fabric resource is present",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "ServiceRunner": {
       "description": "A container for a managed identity to execute DevTest lab services.",
@@ -12680,6 +11900,23 @@
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "The identity of the resource."
+        }
+      }
+    },
+    "ServiceRunnerList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRunner"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
         }
       }
     },
@@ -12699,15 +11936,7 @@
     "SharedPublicIpAddressConfigurationFragment": {
       "description": "Properties of a virtual machine that determine how it is connected to a load balancer.",
       "type": "object",
-      "properties": {
-        "inboundNatRules": {
-          "description": "The incoming NAT rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InboundNatRuleFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "ShutdownNotificationContent": {
       "description": "The contents of a shutdown notification. Webhooks can use this type to deserialize the request body when they get notified of an imminent shutdown.",
@@ -12797,29 +12026,7 @@
     "SubnetFragment": {
       "description": "Subnet information.",
       "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The resource ID of the subnet.",
-          "type": "string"
-        },
-        "labSubnetName": {
-          "description": "The name of the subnet as seen in the lab.",
-          "type": "string"
-        },
-        "allowPublicIp": {
-          "description": "The permission policy of the subnet for allowing public IP addresses (i.e. Allow, Deny)).",
-          "enum": [
-            "Default",
-            "Deny",
-            "Allow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UsagePermissionType",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     },
     "SubnetOverride": {
       "description": "Property overrides on a subnet of a virtual network.",
@@ -12872,50 +12079,7 @@
     "SubnetOverrideFragment": {
       "description": "Property overrides on a subnet of a virtual network.",
       "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The resource ID of the subnet.",
-          "type": "string"
-        },
-        "labSubnetName": {
-          "description": "The name given to the subnet within the lab.",
-          "type": "string"
-        },
-        "useInVmCreationPermission": {
-          "description": "Indicates whether this subnet can be used during virtual machine creation (i.e. Allow, Deny).",
-          "enum": [
-            "Default",
-            "Deny",
-            "Allow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UsagePermissionType",
-            "modelAsString": true
-          }
-        },
-        "usePublicIpAddressPermission": {
-          "description": "Indicates whether public IP addresses can be assigned to virtual machines on this subnet (i.e. Allow, Deny).",
-          "enum": [
-            "Default",
-            "Deny",
-            "Allow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UsagePermissionType",
-            "modelAsString": true
-          }
-        },
-        "sharedPublicIpAddressConfiguration": {
-          "$ref": "#/definitions/SubnetSharedPublicIpAddressConfigurationFragment",
-          "description": "Properties that virtual machines on this subnet will share."
-        },
-        "virtualNetworkPoolName": {
-          "description": "The virtual network pool associated with this subnet.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "SubnetSharedPublicIpAddressConfiguration": {
       "description": "Configuration for public IP address sharing.",
@@ -12933,15 +12097,7 @@
     "SubnetSharedPublicIpAddressConfigurationFragment": {
       "description": "Configuration for public IP address sharing.",
       "type": "object",
-      "properties": {
-        "allowedPorts": {
-          "description": "Backend ports that virtual machines on this subnet are allowed to expose",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PortFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "TargetCostProperties": {
       "description": "Properties of a cost target.",
@@ -13032,13 +12188,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UserPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "UserIdentity": {
       "description": "Identity attributes of a lab user.",
@@ -13069,28 +12219,7 @@
     "UserIdentityFragment": {
       "description": "Identity attributes of a lab user.",
       "type": "object",
-      "properties": {
-        "principalName": {
-          "description": "Set to the principal name / UPN of the client JWT making the request.",
-          "type": "string"
-        },
-        "principalId": {
-          "description": "Set to the principal Id of the client JWT making the request. Service principal will not have the principal Id.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "Set to the tenant ID of the client JWT making the request.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "Set to the object Id of the client JWT making the request. Not all users have object Id. For CSP (reseller) scenarios for example, object Id is not available.",
-          "type": "string"
-        },
-        "appId": {
-          "description": "Set to the app Id of the client JWT making the request.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "UserList": {
       "description": "The response of a list operation.",
@@ -13142,16 +12271,7 @@
     "UserPropertiesFragment": {
       "description": "Properties of a lab user profile.",
       "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/UserIdentityFragment",
-          "description": "The identity of the user."
-        },
-        "secretStore": {
-          "$ref": "#/definitions/UserSecretStoreFragment",
-          "description": "The secret store of the user."
-        }
-      }
+      "properties": {}
     },
     "UserSecretStore": {
       "description": "Properties of a user's secret store.",
@@ -13170,16 +12290,7 @@
     "UserSecretStoreFragment": {
       "description": "Properties of a user's secret store.",
       "type": "object",
-      "properties": {
-        "keyVaultUri": {
-          "description": "The URI of the user's Key vault.",
-          "type": "string"
-        },
-        "keyVaultId": {
-          "description": "The ID of the user's Key vault.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "VirtualNetwork": {
       "description": "A virtual network.",
@@ -13205,13 +12316,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkPropertiesFragment",
-          "description": "The properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "properties": {}
     },
     "VirtualNetworkList": {
       "description": "The response of a list operation.",
@@ -13285,30 +12390,7 @@
     "VirtualNetworkPropertiesFragment": {
       "description": "Properties of a virtual network.",
       "type": "object",
-      "properties": {
-        "allowedSubnets": {
-          "description": "The allowed subnets of the virtual network.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubnetFragment"
-          }
-        },
-        "description": {
-          "description": "The description of the virtual network.",
-          "type": "string"
-        },
-        "externalProviderResourceId": {
-          "description": "The Microsoft.Network resource identifier of the virtual network.",
-          "type": "string"
-        },
-        "subnetOverrides": {
-          "description": "The subnet overrides of the virtual network.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubnetOverrideFragment"
-          }
-        }
-      }
+      "properties": {}
     },
     "WeekDetails": {
       "description": "Properties of a weekly schedule.",
@@ -13330,19 +12412,7 @@
     "WeekDetailsFragment": {
       "description": "Properties of a weekly schedule.",
       "type": "object",
-      "properties": {
-        "weekdays": {
-          "description": "The days of the week for which the schedule is set (e.g. Sunday, Monday, Tuesday, etc.).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "time": {
-          "description": "The time of the day the schedule will occur.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "WindowsOsInfo": {
       "description": "Information about a Windows OS.",
@@ -13366,21 +12436,7 @@
     "WindowsOsInfoFragment": {
       "description": "Information about a Windows OS.",
       "type": "object",
-      "properties": {
-        "windowsOsState": {
-          "description": "The state of the Windows OS (i.e. NonSysprepped, SysprepRequested, SysprepApplied).",
-          "enum": [
-            "NonSysprepped",
-            "SysprepRequested",
-            "SysprepApplied"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WindowsOsState",
-            "modelAsString": true
-          }
-        }
-      }
+      "properties": {}
     }
   },
   "parameters": {

@@ -1,0 +1,1175 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "f34b22a3-2202-4fb1-b040-1332bd928c84",
+    "resourceGroup": "testResourceGroup",
+    "integrationServiceEnvironmentName": "testIntegrationServiceEnvironment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "name": "azurefile",
+              "connectionParameters": {
+                "accountName": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Azure Storage Account name",
+                    "description": "Name of the storage account the connector should use.",
+                    "tooltip": "Provide the storage account name",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                },
+                "accessKey": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Azure Storage Account Access Key",
+                    "description": "Specify a valid primary/secondary storage account access key.",
+                    "tooltip": "Specify a valid primary/secondary storage account access key.",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#804998"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/azurefile"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://powerappsconnectorsdf.blob.core.windows.net/officialicons/azurefile/icon_1.0.1216.1605.png",
+                "displayName": "Azure File Storage",
+                "description": "Microsoft Azure Storage provides a massively scalable, durable, and highly available storage for data on the cloud, and serves as the data storage solution for modern applications. Connect to File Storage to perform various operations such as create, update, get and delete on files in your Azure Storage account.",
+                "releaseTag": "Preview",
+                "tier": "Standard"
+              },
+              "capabilities": [
+                "blob"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "tes-ise-ga",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/azurefile",
+            "name": "azurefile",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "azuretables",
+              "connectionParameters": {
+                "storageaccount": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Storage Account Name",
+                    "description": "The name of your storage account",
+                    "tooltip": "Provide the name of the storage account used for tables as it appears in the Azure portal",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                },
+                "sharedkey": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Shared Storage Key",
+                    "description": "The shared storage key of your storage account",
+                    "tooltip": "Provide a shared storage key for the storage account used for tables as it appears in the Azure portal",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#804998"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/azuretables"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://powerappsconnectorsdf.blob.core.windows.net/officialicons/azuretables/icon_1.0.1216.1605.png",
+                "displayName": "Azure Table Storage",
+                "description": "Azure Table storage is a service that stores structured NoSQL data in the cloud, providing a key/attribute store with a schemaless design. Sign into your Storage account to create, update, and query tables and more.",
+                "releaseTag": "Production",
+                "tier": "Standard"
+              },
+              "capabilities": [
+                "actions"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/azuretables",
+            "name": "azuretables",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "eventhubs",
+              "connectionParameters": {
+                "connectionString": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Connection String",
+                    "description": "Azure Event Hubs Connection String",
+                    "tooltip": "Provide Azure Event Hubs Connection String",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#c4d5ff"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/eventhubs"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://connectoricons-df.azureedge.net/eventhubs/icon_1.0.1228.1637.png",
+                "displayName": "Event Hubs",
+                "description": "Connect to Azure Event Hubs to send and receive events.",
+                "releaseTag": "Production",
+                "tier": "Standard"
+              },
+              "capabilities": [
+                "actions"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/eventhubs",
+            "name": "eventhubs",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "mq",
+              "connectionParameters": {
+                "server": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Server",
+                    "description": "The host name and port the MQ server is running on (host:port).",
+                    "tooltip": "Server:Port",
+                    "constraints": {
+                      "tabIndex": 1,
+                      "required": "true",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "queueManager": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Queue Manager name",
+                    "description": "The name of the Queue Manager to connect to.",
+                    "tooltip": "Queue Manager name",
+                    "constraints": {
+                      "tabIndex": 2,
+                      "required": "true",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "channel": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Channel name",
+                    "description": "The channel to connect to the Queue Manager on.",
+                    "tooltip": "Channel name",
+                    "constraints": {
+                      "tabIndex": 3,
+                      "required": "true",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "queue": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Default queue name",
+                    "description": "The name of the default queue, may be overriden.",
+                    "tooltip": "Default queue name",
+                    "constraints": {
+                      "tabIndex": 4,
+                      "required": "true",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "effectiveUserName": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Connect As",
+                    "description": "The user name to use when connecting to MQ.",
+                    "tooltip": "Connect As",
+                    "constraints": {
+                      "tabIndex": 5,
+                      "clearText": true,
+                      "required": "true",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "authType": {
+                  "type": "string",
+                  "allowedValues": [
+                    {
+                      "value": "basic"
+                    },
+                    {
+                      "value": "anonymous"
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "Authentication",
+                    "description": "Authentication type to connect to your Queue Manager",
+                    "tooltip": "Authentication type to connect to your Queue Manager",
+                    "constraints": {
+                      "tabIndex": 6,
+                      "required": "true",
+                      "allowedValues": [
+                        {
+                          "text": "Basic",
+                          "value": "basic"
+                        },
+                        {
+                          "text": "Anonymous",
+                          "value": "anonymous"
+                        }
+                      ],
+                      "capability": []
+                    }
+                  }
+                },
+                "username": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Username",
+                    "description": "Username credential",
+                    "tooltip": "Username credential",
+                    "constraints": {
+                      "tabIndex": 7,
+                      "clearText": true,
+                      "required": "false",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "password": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Password",
+                    "description": "Password credential",
+                    "tooltip": "Password credential",
+                    "constraints": {
+                      "tabIndex": 8,
+                      "required": "false",
+                      "capability": [
+                        "cloud"
+                      ]
+                    }
+                  }
+                },
+                "enableSSL": {
+                  "type": "bool",
+                  "uiDefinition": {
+                    "displayName": "Enable SSL?",
+                    "description": "Enable SSL? (True/False)",
+                    "tooltip": "Specify if SSL needs to be enabled",
+                    "constraints": {
+                      "tabIndex": 9,
+                      "required": "false",
+                      "capability": []
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#466BB0"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/mq"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://powerappsconnectorsdf.blob.core.windows.net/officialicons/mq/icon_1.0.1216.1605.png",
+                "displayName": "MQ",
+                "description": "Microsoft Connector for MQ integrates Azure applications with resources stored in an IBM WebSphere MQ server. Supports message send and receive operations.",
+                "releaseTag": "Production",
+                "tier": "Enterprise"
+              },
+              "capabilities": [
+                "actions",
+                "cloud"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/mq",
+            "name": "mq",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "sap",
+              "connectionParameters": {
+                "client": {
+                  "type": "int",
+                  "uiDefinition": {
+                    "displayName": "Client",
+                    "description": "The SAP client ID to connect to the SAP system.",
+                    "tooltip": "The SAP backend's client (or 'Mandant') into which to log in. It is a number ranging from 000 to 999.",
+                    "constraints": {
+                      "tabIndex": 2,
+                      "required": "true",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "authType": {
+                  "type": "string",
+                  "defaultValue": "basic",
+                  "allowedValues": [
+                    {
+                      "value": "basic"
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "Authentication Type",
+                    "description": "Authentication type to connect to the SAP System. Must be basic (username and password).",
+                    "tooltip": "Authentication type to connect to the SAP System.",
+                    "constraints": {
+                      "tabIndex": 3,
+                      "required": "true",
+                      "allowedValues": [
+                        {
+                          "text": "Basic",
+                          "value": "basic"
+                        }
+                      ],
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "username": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "SAP Username",
+                    "description": "The username to be used for log in to the SAP System.",
+                    "tooltip": "The username to be used for log in to the SAP System.",
+                    "constraints": {
+                      "tabIndex": 4,
+                      "clearText": true,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "password": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "SAP Password",
+                    "description": "The password to be used for log in to the SAP System.",
+                    "tooltip": "The password to be used for log in to the SAP System.",
+                    "constraints": {
+                      "tabIndex": 5,
+                      "clearText": false,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "logonType": {
+                  "type": "string",
+                  "defaultValue": "Group",
+                  "allowedValues": [
+                    {
+                      "value": "ApplicationServer",
+                      "uiDefinition": {
+                        "displayName": "Application Server (Type A)",
+                        "description": "Application Server Logon (Type A)"
+                      }
+                    },
+                    {
+                      "value": "Group",
+                      "uiDefinition": {
+                        "displayName": "Group (Type B aka Message Server)",
+                        "description": "Group Logon (Type B aka Message Server)"
+                      }
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "Logon Type",
+                    "description": "The type of logon to the SAP System, either Application Server Logon (Type A) or Group Logon (Type B aka Message Server).",
+                    "tooltip": "The type of logon to the SAP System.",
+                    "constraints": {
+                      "tabIndex": 6,
+                      "required": "true",
+                      "allowedValues": [
+                        {
+                          "text": "Application Server",
+                          "value": "ApplicationServer"
+                        },
+                        {
+                          "text": "Group",
+                          "value": "Group"
+                        }
+                      ],
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "appServerHost": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "AS Host",
+                    "description": "The hostname of the SAP Application Server. ",
+                    "tooltip": "The hostname of the specific SAP Application Server to connect to.",
+                    "constraints": {
+                      "tabIndex": 7,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "ApplicationServer"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "appServerService": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "AS Service",
+                    "description": "The service name or port number of the SAP Application Server.",
+                    "tooltip": "The service name or port numbe of the specific SAP Application Server to connect to (Optional for connection type (Logon) A - Application Server).",
+                    "constraints": {
+                      "tabIndex": 8,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "ApplicationServer"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "systemNumber": {
+                  "type": "int",
+                  "uiDefinition": {
+                    "displayName": "AS System Number",
+                    "description": "The SAP System’s System Number. It is a number ranging from 00 to 99.",
+                    "tooltip": "The SAP System’s System Number. It is a number ranging from 00 to 99 (Mandatory if connection type (Logon) is A - Application Server).",
+                    "constraints": {
+                      "tabIndex": 9,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "ApplicationServer"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "messageServerHost": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "MS Server Host",
+                    "description": "The hostname of the SAP Message Server aka R3 System Name.",
+                    "tooltip": "The hostname of the SAP System’s Message Server (central instance) aka R3 System Name (Mandatory if connection type (Logon) is B - Message Server (Group)).",
+                    "constraints": {
+                      "tabIndex": 10,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "Group"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "messageServerService": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "MS Service Name or Port Number",
+                    "description": "The service name or port number of the Message Server.",
+                    "tooltip": "The Service Name (as defined in etc/services) or the Port Number under which the Message Server is listening for load-balancing requests (Mandatory if connection type (Logon) is B - Message Server (Group) and System ID is not present)",
+                    "constraints": {
+                      "tabIndex": 11,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "Group"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "systemID": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "MS System ID",
+                    "description": "The System ID of the SAP system.",
+                    "tooltip": "The SAP system’s three-letter system ID (Mandatory if connection type (Logon) is B - Message Server (Group) and Message Server Service is not present)",
+                    "constraints": {
+                      "tabIndex": 12,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "Group"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "logonGroup": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "MS Logon Group",
+                    "description": "The Logon Group for the SAP System.",
+                    "tooltip": "The Logon Group for the SAP System, from which the Message Server shall select an Application Server (Only available if connection type (Logon) is B - Message Server (Group))",
+                    "constraints": {
+                      "tabIndex": 13,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ],
+                      "dependencies": {
+                        "LogonType": {
+                          "values": [
+                            "Group"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "safeTyping": {
+                  "type": "bool",
+                  "uiDefinition": {
+                    "displayName": "Safe Typing",
+                    "description": "Use strong types if false, otherwise use string as safe type.",
+                    "tooltip": "Enables safe typing, which treats types as string instead of strong types (e.g. Date, Time, Datetime), relaxing type and value validations.",
+                    "constraints": {
+                      "tabIndex": 14,
+                      "required": "false",
+                      "capability": [
+                        "integrationServiceEnvironment"
+                      ]
+                    }
+                  }
+                },
+                "useSnc": {
+                  "type": "bool",
+                  "defaultValue": "false",
+                  "uiDefinition": {
+                    "displayName": "Use SNC",
+                    "description": "When selected, the connections will be secured with SNC.",
+                    "tooltip": "When selected, the connections will be secured with SNC",
+                    "constraints": {
+                      "tabIndex": 15,
+                      "capability": []
+                    }
+                  }
+                },
+                "sncLibraryPath": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "SNC Library",
+                    "description": "Name or path of the SNC library to be used.",
+                    "tooltip": "Name or path of the SNC library to be used. Path can be absolute path or relative to the NCo library",
+                    "constraints": {
+                      "tabIndex": 16,
+                      "required": "false",
+                      "capability": [],
+                      "dependencies": {
+                        "UseSnc": {
+                          "values": [
+                            "true"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "sncSso": {
+                  "type": "string",
+                  "defaultValue": "On",
+                  "allowedValues": [
+                    {
+                      "value": "On"
+                    },
+                    {
+                      "value": "Off"
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "SNC SSO",
+                    "description": "The SNC SSO specifies whether to use SNC identity or credentials provided on RFC level.",
+                    "tooltip": "The SNC SSO specifies whether to use SNC identity or credentials provided on RFC level.",
+                    "constraints": {
+                      "tabIndex": 17,
+                      "required": "false",
+                      "allowedValues": [
+                        {
+                          "text": "Logon using the SNC identity",
+                          "value": "On"
+                        },
+                        {
+                          "text": "Logon with the username/password information provided on RFC level",
+                          "value": "Off"
+                        }
+                      ],
+                      "capability": [],
+                      "dependencies": {
+                        "UseSnc": {
+                          "values": [
+                            "true"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "sncMyName": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "SNC My Name",
+                    "description": "Identity to be used for this particular destination/server (optional).",
+                    "tooltip": "The installed SNC solution usually knows its own SNC name. Only for solutions supporting 'multiple identities', you may need to specify the identity to be used for this particular destination/server (optional)",
+                    "constraints": {
+                      "tabIndex": 18,
+                      "required": "false",
+                      "capability": [],
+                      "dependencies": {
+                        "UseSnc": {
+                          "values": [
+                            "true"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "sncPartnerName": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "SNC Partner Name",
+                    "description": "The backend's SNC name (Required when Logon Type is Application Server).",
+                    "tooltip": "The backend's SNC name (Required when Logon Type is Application Server)",
+                    "constraints": {
+                      "tabIndex": 19,
+                      "required": "false",
+                      "capability": [],
+                      "dependencies": {
+                        "UseSnc": {
+                          "values": [
+                            "true"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "sncQop": {
+                  "type": "string",
+                  "defaultValue": "Default",
+                  "allowedValues": [
+                    {
+                      "value": "Authentication"
+                    },
+                    {
+                      "value": "Integrity"
+                    },
+                    {
+                      "value": "Privacy"
+                    },
+                    {
+                      "value": "Default"
+                    },
+                    {
+                      "value": "Maximum"
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "SNC Quality of Protection",
+                    "description": "Quality of Service to be used for SNC communication of this particular destination/server.",
+                    "tooltip": "Quality of Service to be used for SNC communication of this particular destination/server",
+                    "constraints": {
+                      "tabIndex": 20,
+                      "required": "false",
+                      "allowedValues": [
+                        {
+                          "text": "Authentication only",
+                          "value": "Authentication"
+                        },
+                        {
+                          "text": "Authentication and integrity protection",
+                          "value": "Integrity"
+                        },
+                        {
+                          "text": "Authentication, integrity and privacy protection (encryption)",
+                          "value": "Privacy"
+                        },
+                        {
+                          "text": "Default protection",
+                          "value": "Default"
+                        },
+                        {
+                          "text": "Maximum protection",
+                          "value": "Maximum"
+                        }
+                      ],
+                      "capability": [],
+                      "dependencies": {
+                        "UseSnc": {
+                          "values": [
+                            "true"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "deploymentParameters": {
+                  "packageContentLink": {
+                    "type": "blob",
+                    "isRequired": true,
+                    "displayName": "SAP package",
+                    "description": "Upload package containing SAP NCo components and optionally SNC components.",
+                    "visibility": "Default"
+                  },
+                  "redisCacheConnectionString": {
+                    "type": "string",
+                    "isRequired": true,
+                    "displayName": "Redis connection string",
+                    "description": "Redis connection string",
+                    "visibility": "Internal"
+                  }
+                },
+                "source": "marketplace",
+                "brandColor": "#99e7ff"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/sap"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://connectoricons-df.azureedge.net/sap/icon_1.0.1224.1629.png",
+                "displayName": "SAP",
+                "description": "SAP connector is part of Microsoft’s hybrid integration platform. Use this connector to run SAP based applications side by side with Logic Apps to connect with On-Premise Line of Business systems.",
+                "releaseTag": "Production",
+                "tier": "Enterprise"
+              },
+              "capabilities": [
+                "actions",
+                "triggers",
+                "integrationServiceEnvironment"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/sap",
+            "name": "sap",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "servicebus",
+              "connectionParameters": {
+                "connectionString": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Connection String",
+                    "description": "Azure Service Bus Connection String",
+                    "tooltip": "Provide Azure Service Bus Connection String",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#c4d5ff"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/servicebus"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://powerappsconnectorsdf.blob.core.windows.net/officialicons/servicebus/icon_1.0.1216.1605.png",
+                "displayName": "Service Bus",
+                "description": "Connect to Azure Service Bus to send and receive messages. You can perform actions such as send to queue, send to topic, receive from queue, receive from subscription, etc.",
+                "releaseTag": "Production",
+                "tier": "Standard"
+              },
+              "capabilities": [
+                "actions"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/servicebus",
+            "name": "servicebus",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          },
+          {
+            "properties": {
+              "name": "si3270",
+              "connectionParameters": {
+                "integrationAccountId": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Integration Account ID",
+                    "description": "Integration Account ID",
+                    "tooltip": "Provide Resource ID for the integration account",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                },
+                "integrationAccountUrl": {
+                  "type": "securestring",
+                  "uiDefinition": {
+                    "displayName": "Integration Account SAS URL",
+                    "description": "Integration Account SAS URL",
+                    "tooltip": "Provide SAS URL for the integration account",
+                    "constraints": {
+                      "required": "true"
+                    }
+                  }
+                },
+                "server": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Server",
+                    "description": "The name of the host running a TN 3270 server.",
+                    "tooltip": "Server",
+                    "constraints": {
+                      "tabIndex": 1,
+                      "required": "true"
+                    }
+                  }
+                },
+                "port": {
+                  "type": "int",
+                  "defaultValue": 23,
+                  "uiDefinition": {
+                    "displayName": "Port",
+                    "description": "Specifies the port for the TN 3270 server.",
+                    "tooltip": "Specifies the port for the TN 3270 server",
+                    "constraints": {
+                      "tabIndex": 2,
+                      "required": "false"
+                    }
+                  }
+                },
+                "deviceType": {
+                  "type": "string",
+                  "defaultValue": "IBM-3278-2",
+                  "allowedValues": [
+                    {
+                      "value": "IBM-3278-2"
+                    },
+                    {
+                      "value": "IBM-3278-2-E"
+                    },
+                    {
+                      "value": "IBM-3279-2"
+                    },
+                    {
+                      "value": "IBM-3279-2-E"
+                    },
+                    {
+                      "value": "IBM-3278-3"
+                    },
+                    {
+                      "value": "IBM-3278-3-E"
+                    },
+                    {
+                      "value": "IBM-3279-3"
+                    },
+                    {
+                      "value": "IBM-3279-3-E"
+                    },
+                    {
+                      "value": "IBM-3278-4"
+                    },
+                    {
+                      "value": "IBM-3278-4-E"
+                    },
+                    {
+                      "value": "IBM-3279-4"
+                    },
+                    {
+                      "value": "IBM-3279-4-E"
+                    },
+                    {
+                      "value": "IBM-3278-5"
+                    },
+                    {
+                      "value": "IBM-3278-5-E"
+                    },
+                    {
+                      "value": "IBM-3279-5"
+                    },
+                    {
+                      "value": "IBM-3279-5-E"
+                    }
+                  ],
+                  "uiDefinition": {
+                    "displayName": "Device Type",
+                    "description": "The 3270 model to use.",
+                    "tooltip": "Device Type",
+                    "constraints": {
+                      "tabIndex": 3,
+                      "required": "false",
+                      "allowedValues": [
+                        {
+                          "text": "IBM-3278-2",
+                          "value": "IBM-3278-2"
+                        },
+                        {
+                          "text": "IBM-3278-2-E",
+                          "value": "IBM-3278-2-E"
+                        },
+                        {
+                          "text": "IBM-3279-2",
+                          "value": "IBM-3279-2"
+                        },
+                        {
+                          "text": "IBM-3279-2-E",
+                          "value": "IBM-3279-2-E"
+                        },
+                        {
+                          "text": "IBM-3278-3",
+                          "value": "IBM-3278-3"
+                        },
+                        {
+                          "text": "IBM-3278-3-E",
+                          "value": "IBM-3278-3-E"
+                        },
+                        {
+                          "text": "IBM-3279-3",
+                          "value": "IBM-3279-3"
+                        },
+                        {
+                          "text": "IBM-3279-3-E",
+                          "value": "IBM-3279-3-E"
+                        },
+                        {
+                          "text": "IBM-3278-4",
+                          "value": "IBM-3278-4"
+                        },
+                        {
+                          "text": "IBM-3278-4-E",
+                          "value": "IBM-3278-4-E"
+                        },
+                        {
+                          "text": "IBM-3279-4",
+                          "value": "IBM-3279-4"
+                        },
+                        {
+                          "text": "IBM-3279-4-E",
+                          "value": "IBM-3279-4-E"
+                        },
+                        {
+                          "text": "IBM-3278-5",
+                          "value": "IBM-3278-5"
+                        },
+                        {
+                          "text": "IBM-3278-5-E",
+                          "value": "IBM-3278-5-E"
+                        },
+                        {
+                          "text": "IBM-3279-5",
+                          "value": "IBM-3279-5"
+                        },
+                        {
+                          "text": "IBM-3279-5-E",
+                          "value": "IBM-3279-5-E"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "codePage": {
+                  "type": "int",
+                  "defaultValue": 37,
+                  "uiDefinition": {
+                    "displayName": "Code Page",
+                    "description": "Specifies the code page of the host.",
+                    "tooltip": "Code Page",
+                    "constraints": {
+                      "tabIndex": 4,
+                      "required": "false"
+                    }
+                  }
+                },
+                "logicalUnitName": {
+                  "type": "string",
+                  "uiDefinition": {
+                    "displayName": "Logical Unit Name",
+                    "description": "The name of specific logical unit to request from the TN 3270 server.",
+                    "tooltip": "Logical Unit Name",
+                    "constraints": {
+                      "tabIndex": 5,
+                      "required": "false"
+                    }
+                  }
+                },
+                "useSsl": {
+                  "type": "bool",
+                  "defaultValue": "false",
+                  "uiDefinition": {
+                    "displayName": "Enable SSL?",
+                    "description": "Enable SSL? (True/False)",
+                    "tooltip": "Specify if SSL needs to be enabled",
+                    "constraints": {
+                      "tabIndex": 6,
+                      "required": "false"
+                    }
+                  }
+                },
+                "validateCertificate": {
+                  "type": "bool",
+                  "defaultValue": "false",
+                  "uiDefinition": {
+                    "displayName": "Validate host ssl certificate?",
+                    "description": "Validate host ssl certificate? (True/False)",
+                    "tooltip": "Specify if host ssl certificate should be validated",
+                    "constraints": {
+                      "tabIndex": 7,
+                      "required": "false"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "source": "marketplace",
+                "brandColor": "#59b4d9",
+                "connectionType": "integrationAccount"
+              },
+              "runtimeUrls": [
+                "https://flow-yticlpbiumhig-cqsn-apim-runtime.brazilus.environments.microsoftazurelogicapps.net/apim/si3270"
+              ],
+              "generalInformation": {
+                "iconUrl": "https://connectoricons-df.azureedge.net/si3270/icon_1.0.1228.1636.png",
+                "displayName": "IBM 3270",
+                "description": "Microsoft Connector for 3270 integrates Azure applications with resources available via TN 3270 Screen Scraping.",
+                "releaseTag": "Preview",
+                "tier": "Enterprise"
+              },
+              "capabilities": [
+                "actions"
+              ],
+              "integrationServiceEnvironment": {
+                "name": "testIntegrationServiceEnvironment",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+                "type": "Microsoft.Logic/integrationServiceEnvironments"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/si3270",
+            "name": "si3270",
+            "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+            "location": "brazilsouth"
+          }
+        ]
+      }
+    }
+  }
+}

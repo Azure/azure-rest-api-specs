@@ -1,0 +1,662 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a Kafka Restproxy Api lists.",
+    "version": "v1",
+    "title": "Kafka Restproxy APIs",
+    "contact": {
+      "name": "HDInsight"
+    }
+  },
+  "host": "clustername-kafkarest.azurehdinsight.net",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "v1consumer",
+      "description": "Consume records"
+    },
+    {
+      "name": "v1metadata",
+      "description": "Get the metadata of topic and partition"
+    },
+    {
+      "name": "v1producer",
+      "description": "Produce records"
+    },
+    {
+      "name": "v1status",
+      "description": "Get Kafka Restproxy status"
+    },
+    {
+      "name": "v1topics",
+      "description": "Manage Kafka topics"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/consumer/topics/{topic}/partitions/{partition}/offsets/{offset}": {
+      "get": {
+        "tags": [
+          "v1consumer"
+        ],
+        "summary": "Consume records using a simple consumer",
+        "description": "Consume records from one partition of a topic beginning with a specific offset. By default count is 1. It can read maximum of 6 megabytes of data at once",
+        "operationId": "Consumer_ConsumeTopicInPartitionWithOffset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "description": "Topic to consume the records from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partition",
+            "in": "path",
+            "description": "Partition ID to consume the records from",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "offset",
+            "in": "path",
+            "description": "Offset to start from",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Number of records to consume (optional). By default count is 1. It returns either count of records or 6 megabytes of data, which is smaller.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConsumeRecord"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/brokers": {
+      "get": {
+        "tags": [
+          "v1metadata"
+        ],
+        "summary": "Get a list of Kafka brokers",
+        "description": "Get a list of Kafka brokers with hostname, port, and broker id",
+        "operationId": "Metadata_GetBrokers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/BrokerResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics": {
+      "get": {
+        "tags": [
+          "v1metadata"
+        ],
+        "summary": "Get a list of Kafka topics",
+        "description": "Get a list of Kafka topics. If it is a newly created topic, please wait a few seconds for it to show up.",
+        "operationId": "Metadata_GetTopics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TopicListResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics/{topic}/partitions": {
+      "get": {
+        "tags": [
+          "v1metadata"
+        ],
+        "summary": "Get metadata about all partitions for a specific topic",
+        "description": "Get metadata about all partitions for a specific topic with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
+        "operationId": "Metadata_GetTopicPartitions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "description": "Name of the topic",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TopicMetadaResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics/{topic}/partitions/{partition}": {
+      "get": {
+        "tags": [
+          "v1metadata"
+        ],
+        "summary": "Get metadata about a specific Kafka topic-partition",
+        "description": "Get metadata about a specific Kafka topic-partition with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
+        "operationId": "Metadata_GetMetadataForPartition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "description": "Name of the topic",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partition",
+            "in": "path",
+            "description": "Partition ID to get metadata for",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetadataResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/producer/topics/{topic}": {
+      "post": {
+        "tags": [
+          "v1producer"
+        ],
+        "summary": "Produce records",
+        "description": "Produce records to a topic in Kafka. If producing records to a newly created topic, please wait a few seconds for the topic to show up.",
+        "operationId": "Producer_ProduceMessageToTopic",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "description": "Topic to produce the records to",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "ProducerRecords",
+            "description": "List of producer records to produce in one request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProducerRecords"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/status": {
+      "get": {
+        "tags": [
+          "v1status"
+        ],
+        "summary": "Check the status of Kafka Rest proxy server",
+        "description": "Check the status of Kafka Rest proxy server",
+        "operationId": "Admin_CheckRestProxyStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/v1/topics/{topic}": {
+      "put": {
+        "tags": [
+          "v1topics"
+        ],
+        "summary": "Create a topic",
+        "description": "Create a topic in Kafka with topic configuration",
+        "operationId": "Admin_CreateTopic",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "description": "Name of the topic to be created",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "TopicCreationRecord",
+            "description": "A description for a topic to be created",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TopicCreationRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConsumeRecord": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for consumer record",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for consumer record",
+          "readOnly": true
+        },
+        "partition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Partition ID for consumer record",
+          "readOnly": true
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Offset for consumer record",
+          "readOnly": true
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp for consumer record",
+          "readOnly": true
+        },
+        "timestampType": {
+          "type": "string",
+          "description": "Timestamp type for consumer record such as log append time or create time",
+          "readOnly": true
+        }
+      },
+      "description": "List of consumer records"
+    },
+    "ProducerRecords": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "description": "List of producer records",
+          "items": {
+            "$ref": "#/definitions/ProducerRecord"
+          }
+        }
+      },
+      "description": "List of producer records to produce in one request"
+    },
+    "ProducerRecord": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Value for producer record"
+        },
+        "key": {
+          "type": "object",
+          "description": "Key for producer record"
+        },
+        "partition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Partition ID for producer record"
+        }
+      },
+      "description": "A producer record"
+    },
+    "BrokerResponse": {
+      "type": "object",
+      "properties": {
+        "brokers": {
+          "type": "array",
+          "description": "List of Kafka broker endpoints",
+          "items": {
+            "$ref": "#/definitions/BrokerEndpoint"
+          }
+        }
+      },
+      "description": "List of Kafka broker endpoints"
+    },
+    "PartitionMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "partition_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Partition ID"
+        },
+        "earliest_offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Earliest offset for the topic-partition"
+        },
+        "latest_offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Latest offset for the topic-partition"
+        },
+        "leader": {
+          "description": "Leader broker endpoint for the topic-partition",
+          "$ref": "#/definitions/BrokerEndpoint"
+        },
+        "replicas": {
+          "type": "array",
+          "description": "List of replica broker endpoints for the topic-partition",
+          "items": {
+            "$ref": "#/definitions/BrokerEndpoint"
+          }
+        },
+        "isr": {
+          "type": "array",
+          "description": "List of broker endpoints of in-sync replicas for the topic-partition",
+          "items": {
+            "$ref": "#/definitions/BrokerEndpoint"
+          }
+        }
+      },
+      "description": "Metadata information about a topic-partition"
+    },
+    "TopicListResponse": {
+      "type": "object",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "description": "List of topic names",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "List of topics"
+    },
+    "TopicMetadaResponse": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Name of the topic"
+        },
+        "partitions": {
+          "type": "array",
+          "description": "List of partition metadata",
+          "items": {
+            "$ref": "#/definitions/PartitionMetadataResponse"
+          }
+        }
+      },
+      "description": "Metadata about a specific topic"
+    },
+    "BrokerEndpoint": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "HostName for Kafka broker endpoint"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for Kafka broker endpoint"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Broker ID for Kafka broker endpoint"
+        },
+        "rack": {
+          "type": "string",
+          "description": "Rack ID for Kafka broker endpoint"
+        }
+      },
+      "description": "Kafka broker endpoint"
+    },
+    "TopicCreationRecord": {
+      "type": "object",
+      "properties": {
+        "partition_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Partition count for the topic"
+        },
+        "replication_factor": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replication factor for the topic"
+        },
+        "topic_properties": {
+          "type": "object",
+          "description": "Topic level configuration override for the topic",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "description": "A description for a topic to be created"
+    }
+  }
+}

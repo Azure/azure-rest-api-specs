@@ -1,0 +1,389 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs": {
+      "get": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_ListByNamespace",
+        "x-ms-examples": {
+          "EventHubsListAll": {
+            "$ref": "./examples/EventHubs/EHEventHubListByNameSpace.json"
+          }
+        },
+        "description": "Gets all the Event Hubs in a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Event Hubs.",
+            "schema": {
+              "$ref": "#/definitions/EventHubListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}": {
+      "put": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_CreateOrUpdate",
+        "x-ms-examples": {
+          "EventHubCreate": {
+            "$ref": "./examples/EventHubs/EHEventHubCreate.json"
+          }
+        },
+        "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Eventhub"
+            },
+            "description": "Parameters supplied to create an Event Hub resource."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Eventhub"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_Delete",
+        "x-ms-examples": {
+          "EventHubDelete": {
+            "$ref": "./examples/EventHubs/EHEventHubDelete.json"
+          }
+        },
+        "description": "Deletes an Event Hub from the specified Namespace and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_Get",
+        "x-ms-examples": {
+          "EventHubGet": {
+            "$ref": "./examples/EventHubs/EHEventHubGet.json"
+          }
+        },
+        "description": "Gets an Event Hubs description for the specified Event Hub.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Event Hub description.",
+            "schema": {
+              "$ref": "#/definitions/Eventhub"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CaptureDescription": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A value that indicates whether capture description is enabled. "
+        },
+        "encoding": {
+          "type": "string",
+          "description": "Enumerates the possible values for the encoding format of capture description. Note: 'AvroDeflate' will be deprecated in New API Version",
+          "enum": [
+            "Avro",
+            "AvroDeflate"
+          ],
+          "x-ms-enum": {
+            "name": "EncodingCaptureDescription",
+            "modelAsString": false
+          }
+        },
+        "intervalInSeconds": {
+          "format": "int32",
+          "type": "integer",
+          "maximum": 900,
+          "minimum": 60,
+          "description": "The time window allows you to set the frequency with which the capture to Azure Blobs will happen, value should between 60 to 900 seconds"
+        },
+        "sizeLimitInBytes": {
+          "format": "int32",
+          "type": "integer",
+          "maximum": 524288000,
+          "minimum": 10485760,
+          "description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 to 524288000 bytes"
+        },
+        "destination": {
+          "$ref": "#/definitions/Destination",
+          "description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)"
+        },
+        "skipEmptyArchives": {
+          "type": "boolean",
+          "description": "A value that indicates whether to Skip Empty Archives"
+        }
+      },
+      "description": "Properties to configure capture description for eventhub"
+    },
+    "Eventhub": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "partitionIds": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Current number of shards on the Event Hub."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Event Hub was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            },
+            "messageRetentionInDays": {
+              "format": "int64",
+              "type": "integer",
+              "minimum": 1,
+              "description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
+            },
+            "partitionCount": {
+              "format": "int64",
+              "type": "integer",
+              "minimum": 1,
+              "description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
+            },
+            "status": {
+              "type": "string",
+              "description": "Enumerates the possible values for the status of the Event Hub.",
+              "enum": [
+                "Active",
+                "Disabled",
+                "Restoring",
+                "SendDisabled",
+                "ReceiveDisabled",
+                "Creating",
+                "Deleting",
+                "Renaming",
+                "Unknown"
+              ],
+              "x-ms-enum": {
+                "name": "EntityStatus",
+                "modelAsString": false
+              }
+            },
+            "captureDescription": {
+              "$ref": "#/definitions/CaptureDescription",
+              "description": "Properties of capture description"
+            }
+          },
+          "description": "Properties supplied to the Create Or Update Event Hub operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get Event Hub operation"
+    },
+    "EventHubListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Eventhub"
+          },
+          "description": "Result of the List EventHubs operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
+        }
+      },
+      "description": "The result of the List EventHubs operation."
+    },
+    "Destination": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for capture destination"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "storageAccountResourceId": {
+              "type": "string",
+              "description": "Resource id of the storage account to be used to create the blobs"
+            },
+            "blobContainer": {
+              "type": "string",
+              "description": "Blob container Name"
+            },
+            "archiveNameFormat": {
+              "type": "string",
+              "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
+            }
+          },
+          "description": "Properties describing the storage account, blob container and archive name format for capture destination"
+        }
+      },
+      "description": "Capture storage details for capture description"
+    }
+  },
+  "parameters": {}
+}

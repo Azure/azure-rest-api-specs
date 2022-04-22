@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2021-05-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "properties": {
+        "restorePointInTime": "2021-06-24T00:00:37.467Z",
+        "createMode": "PointInTimeRestore",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/sourceserver"
+      },
+      "sku": {
+        "name": "Standard_D14_v2",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "num": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "adminuser",
+          "storage": {
+            "storageSizeGB": 20,
+            "iops": 360,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.database.mysql.azure.com",
+          "availabilityZone": "1",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "None",
+          "replicaCapacity": 10,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          }
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "num": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "adminuser",
+          "storage": {
+            "storageSizeGB": 20,
+            "iops": 360,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.database.mysql.azure.com",
+          "availabilityZone": "1",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "None",
+          "replicaCapacity": 10,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          }
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "num": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

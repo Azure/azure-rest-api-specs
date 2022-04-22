@@ -1,0 +1,112 @@
+{
+  "title": "Resource Change Details Query",
+  "description": "A resource change details query.",
+  "parameters": {
+    "api-version": "2020-04-01-preview",
+    "parameters": {
+      "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+      "changeId": "53dc0515-b86b-4bc2-979b-e4694ab4a556"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeId": "53dc0515-b86b-4bc2-979b-e4694ab4a556",
+        "beforeSnapshot": {
+          "timestamp": "2018-10-31T01:32:05.993Z",
+          "content": {
+            "sku": {
+              "name": "Standard_LRS",
+              "tier": "Standard"
+            },
+            "kind": "Storage",
+            "id": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+            "name": "mystorageaccount",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "networkAcls": {
+                "bypass": "AzureServices",
+                "virtualNetworkRules": [],
+                "ipRules": [],
+                "defaultAction": "Allow"
+              },
+              "supportsHttpsTrafficOnly": false,
+              "encryption": {
+                "services": {
+                  "file": {
+                    "enabled": true,
+                    "lastEnabledTime": "2018-07-27T18:37:21.8333895Z"
+                  },
+                  "blob": {
+                    "enabled": true,
+                    "lastEnabledTime": "2018-07-27T18:37:21.8333895Z"
+                  }
+                },
+                "keySource": "Microsoft.Storage"
+              },
+              "provisioningState": "Succeeded",
+              "creationTime": "2018-07-27T18:37:21.7708872Z",
+              "primaryEndpoints": {
+                "blob": "https://mystorageaccount.blob.core.windows.net/",
+                "queue": "https://mystorageaccount.queue.core.windows.net/",
+                "table": "https://mystorageaccount.table.core.windows.net/",
+                "file": "https://mystorageaccount.file.core.windows.net/"
+              },
+              "primaryLocation": "westus",
+              "statusOfPrimary": "available"
+            }
+          }
+        },
+        "afterSnapshot": {
+          "timestamp": "2018-10-31T01:54:24.42Z",
+          "content": {
+            "sku": {
+              "name": "Standard_LRS",
+              "tier": "Standard"
+            },
+            "kind": "Storage",
+            "id": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+            "name": "mystorageaccount",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "networkAcls": {
+                "bypass": "AzureServices",
+                "virtualNetworkRules": [],
+                "ipRules": [],
+                "defaultAction": "Allow"
+              },
+              "supportsHttpsTrafficOnly": true,
+              "encryption": {
+                "services": {
+                  "file": {
+                    "enabled": true,
+                    "lastEnabledTime": "2018-07-27T18:37:21.8333895Z"
+                  },
+                  "blob": {
+                    "enabled": true,
+                    "lastEnabledTime": "2018-07-27T18:37:21.8333895Z"
+                  }
+                },
+                "keySource": "Microsoft.Storage"
+              },
+              "provisioningState": "Succeeded",
+              "creationTime": "2018-07-27T18:37:21.7708872Z",
+              "primaryEndpoints": {
+                "blob": "https://mystorageaccount.blob.core.windows.net/",
+                "queue": "https://mystorageaccount.queue.core.windows.net/",
+                "table": "https://mystorageaccount.table.core.windows.net/",
+                "file": "https://mystorageaccount.file.core.windows.net/"
+              },
+              "primaryLocation": "westus",
+              "statusOfPrimary": "available"
+            }
+          }
+        }
+      }
+    }
+  }
+}

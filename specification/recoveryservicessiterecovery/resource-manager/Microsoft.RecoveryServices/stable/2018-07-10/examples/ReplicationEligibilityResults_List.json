@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2018-07-10",
+    "virtualMachineName": "testVm2",
+    "resourceGroupName": "testRg1",
+    "subscriptionId": "d90d145a-4cdd-45a3-b2c4-971d69775278"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.RecoveryServices/replicationEligibilityResults",
+            "id": "/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default",
+            "properties": {
+              "clientRequestId": "a62c81df-e26e-47ea-ab4b-f1fcc1e5b135",
+              "errors": [
+                {
+                  "code": "AzureVmIsNotInDesiredProvisioningState",
+                  "message": "Azure virtual machine with Id (/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2) is with provisioning state 'failed'. To enable replication, VM's provisioning state should be 'succeeded'.",
+                  "possibleCauses": "Virtual machine is not in desired state.",
+                  "recommendedAction": "\n      Ensure that the VM's provisioning state is 'succeeded'.\n      Refer to https://aka.ms/a2a-vm-state-issues to troubleshoot VM provisioning state issues.\n    ",
+                  "status": "Error"
+                },
+                {
+                  "code": "AzureVmIsNotInDesiredPowerState",
+                  "message": "Azure virtual machine with Id (/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2) is with power status 'deallocated'. To enable replication, VM's power status should be 'running'.",
+                  "possibleCauses": "Virtual machine is not in desired state.",
+                  "recommendedAction": "\n      Ensure that the VM's power status is 'running'.\n      You can check the power status in 'VM > Settings > Properties > Status' in Azure portal.\n    ",
+                  "status": "Error"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

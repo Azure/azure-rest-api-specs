@@ -1,0 +1,199 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "targetCost",
+    "labCost": {
+      "properties": {
+        "currencyCode": "USD",
+        "startDateTime": "2020-12-01T00:00:00Z",
+        "endDateTime": "2020-12-31T23:59:59Z",
+        "targetCost": {
+          "costThresholds": [
+            {
+              "thresholdId": "00000000-0000-0000-0000-000000000001",
+              "displayOnChart": "Disabled",
+              "sendNotificationWhenExceeded": "Disabled",
+              "percentageThreshold": {
+                "thresholdValue": 25
+              }
+            },
+            {
+              "thresholdId": "00000000-0000-0000-0000-000000000002",
+              "displayOnChart": "Enabled",
+              "sendNotificationWhenExceeded": "Enabled",
+              "percentageThreshold": {
+                "thresholdValue": 50
+              }
+            },
+            {
+              "thresholdId": "00000000-0000-0000-0000-000000000003",
+              "displayOnChart": "Disabled",
+              "sendNotificationWhenExceeded": "Disabled",
+              "percentageThreshold": {
+                "thresholdValue": 75
+              }
+            },
+            {
+              "thresholdId": "00000000-0000-0000-0000-000000000004",
+              "displayOnChart": "Disabled",
+              "sendNotificationWhenExceeded": "Disabled",
+              "percentageThreshold": {
+                "thresholdValue": 100
+              }
+            },
+            {
+              "thresholdId": "00000000-0000-0000-0000-000000000005",
+              "displayOnChart": "Disabled",
+              "sendNotificationWhenExceeded": "Disabled",
+              "percentageThreshold": {
+                "thresholdValue": 125
+              }
+            }
+          ],
+          "target": 100,
+          "cycleStartDateTime": "2020-12-01T00:00:00.000Z",
+          "cycleEndDateTime": "2020-12-31T00:00:00.000Z",
+          "cycleType": "CalendarMonth",
+          "status": "Enabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "targetCost": {
+            "costThresholds": [
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 25.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 50.0
+                },
+                "displayOnChart": "Enabled",
+                "sendNotificationWhenExceeded": "Enabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 75.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 100.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 125.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              }
+            ],
+            "status": "Enabled",
+            "target": 100,
+            "cycleStartDateTime": "2020-12-01T00:00:00+00:00",
+            "cycleEndDateTime": "2020-12-31T23:59:59+00:00",
+            "cycleType": "CalendarMonth"
+          },
+          "currencyCode": "USD",
+          "startDateTime": "2020-12-01T00:00:00Z",
+          "endDateTime": "2020-12-31T23:59:59Z",
+          "createdDate": "2020-12-23T22:43:54.7253204+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "targetCost": {
+            "costThresholds": [
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 25.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 50.0
+                },
+                "displayOnChart": "Enabled",
+                "sendNotificationWhenExceeded": "Enabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 75.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 100.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              },
+              {
+                "thresholdId": "00000000-0000-0000-0000-000000000001",
+                "percentageThreshold": {
+                  "thresholdValue": 125.0
+                },
+                "displayOnChart": "Disabled",
+                "sendNotificationWhenExceeded": "Disabled",
+                "notificationSent": "0001-01-01T00:00:00.0000000"
+              }
+            ],
+            "status": "Enabled",
+            "target": 100,
+            "cycleStartDateTime": "2020-12-01T00:00:00+00:00",
+            "cycleEndDateTime": "2020-12-31T23:59:59+00:00",
+            "cycleType": "CalendarMonth"
+          },
+          "currencyCode": "USD",
+          "startDateTime": "2020-12-01T00:00:00Z",
+          "endDateTime": "2020-12-31T23:59:59Z",
+          "createdDate": "2020-12-23T22:43:54.7253204+00:00",
+          "provisioningState": "Creating",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      }
+    }
+  }
+}

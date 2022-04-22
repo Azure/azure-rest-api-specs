@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d",
+    "resourceGroupName": "TestResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "description": "HTTP 200 (OK) if the operation was successful.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+            "name": "TestDomainService.com",
+            "type": "Microsoft.AAD/DomainServices",
+            "location": "West US",
+            "tags": {
+              "Owner": "jicha"
+            },
+            "etag": "W/\"datetime'2017-04-10T04%3A42%3A19.7067387Z'\"",
+            "properties": {
+              "version": 2,
+              "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+              "domainName": "TestDomainService.com",
+              "deploymentId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "replicaSets": [
+                {
+                  "replicaSetId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+                  "location": "West US",
+                  "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c",
+                  "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS",
+                  "domainControllerIpAddress": [
+                    "10.0.0.1",
+                    "10.0.0.2"
+                  ],
+                  "externalAccessIpAddress": "13.64.148.151",
+                  "serviceStatus": "Running",
+                  "healthLastEvaluated": "2018-02-15T21:43:21Z",
+                  "healthMonitors": [
+                    {
+                      "id": "AADDS501",
+                      "name": "Backup",
+                      "details": "Last backed up on Tue, 18 Sep 2018 03:37:04 GMT"
+                    },
+                    {
+                      "id": "AADDS500",
+                      "name": "Synchronization with Azure AD",
+                      "details": "Synchronized on Tue, 18 Sep 2018 16:47:57 GMT."
+                    }
+                  ],
+                  "healthAlerts": [
+                    {
+                      "id": "AADDS104",
+                      "name": "The managed domain is experiencing a network error",
+                      "issue": "Microsoft is unable to reach the domain controllers for this managed domain. This may happen if a network security group (NSG) configured on your virtual network blocks access to the managed domain. Another possible reason is if there is a user defined route that blocks incoming traffic from the internet.",
+                      "severity": "2",
+                      "raised": "2018-09-18T01:55:40.7834289Z",
+                      "lastDetected": "2018-09-18T17:46:39.2697888Z",
+                      "resolutionUri": "https://aka.ms/aadds-neterr"
+                    }
+                  ]
+                }
+              ],
+              "ldapsSettings": {
+                "ldaps": "Enabled",
+                "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+                "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+                "certificateNotAfter": "2018-02-15T21:43:21Z",
+                "externalAccess": "Enabled"
+              },
+              "domainSecuritySettings": {
+                "ntlmV1": "Enabled",
+                "tlsV1": "Disabled",
+                "syncNtlmPasswords": "Enabled"
+              },
+              "filteredSync": "Enabled",
+              "notificationSettings": {
+                "notifyGlobalAdmins": "Enabled",
+                "notifyDcAdmins": "Enabled",
+                "additionalRecipients": [
+                  "jicha@microsoft.com",
+                  "caalmont@microsoft.com"
+                ]
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

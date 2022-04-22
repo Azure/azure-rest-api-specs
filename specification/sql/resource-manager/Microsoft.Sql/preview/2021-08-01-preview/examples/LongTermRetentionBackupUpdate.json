@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "locationName": "japaneast",
+    "longTermRetentionServerName": "testserver",
+    "longTermRetentionDatabaseName": "testDatabase",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000",
+    "api-version": "2021-08-01-preview",
+    "parameters": {
+      "properties": {
+        "requestedBackupStorageRedundancy": "Geo"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/japanEast/longTermRetentionBackupOperationResults/a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+        "name": "a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+        "type": "Microsoft.Sql/locations/longTermRetentionBackupOperationResults",
+        "properties": {
+          "requestId": "a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+          "fromBackupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/japanEast/longTermRetentionServers/testserver/longterRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000",
+          "operationType": "UpdateBackup",
+          "status": "Succeeded",
+          "targetBackupStorageRedundancy": "Geo"
+        }
+      }
+    },
+    "202": {}
+  }
+}

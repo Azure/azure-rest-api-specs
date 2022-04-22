@@ -129,6 +129,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1264,7 +1269,7 @@
       }
     },
     "OperationServiceSpecificationDefinition": {
-      "description": "The definition of Azure Monitoring metrics list.",
+      "description": "The definition of Azure Monitoring list.",
       "type": "object",
       "properties": {
         "metricSpecifications": {
@@ -1570,6 +1575,7 @@
       "properties": {
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
@@ -1588,6 +1594,7 @@
       "properties": {
         "type": {
           "description": "The type of trust policy.",
+          "default": "Notary",
           "enum": [
             "Notary"
           ],
@@ -1599,6 +1606,7 @@
         },
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
@@ -1617,7 +1625,8 @@
       "properties": {
         "days": {
           "format": "int32",
-          "description": "The number of days to retain manifest before it expires.",
+          "description": "The number of days to retain an untagged manifest after which it gets purged.",
+          "default": 7,
           "type": "integer"
         },
         "lastUpdatedTime": {
@@ -1628,6 +1637,7 @@
         },
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
@@ -1987,14 +1997,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
@@ -2056,14 +2068,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",

@@ -128,7 +128,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -171,7 +171,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -210,7 +210,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -246,7 +246,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -315,7 +315,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -386,7 +386,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -432,7 +432,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -477,7 +477,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -513,7 +513,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -919,7 +919,7 @@
         "value"
       ]
     },
-    "errorResponse": {
+    "AlertsManagementErrorResponse": {
       "description": "An error response from the service.",
       "x-ms-external": true,
       "properties": {
@@ -1027,6 +1027,16 @@
       "type": "object",
       "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
+    },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
     },
     "essentials": {
       "type": "object",
@@ -1172,6 +1182,13 @@
           "type": "string",
           "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },
