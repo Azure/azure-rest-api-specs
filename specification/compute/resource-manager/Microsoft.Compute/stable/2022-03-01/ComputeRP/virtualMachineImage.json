@@ -698,12 +698,9 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/VmImagesInEdgeZoneListResult"
             }
-          },
+          },        
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -977,6 +974,25 @@
         }
       ],
       "description": "Describes a Virtual Machine Image."
+    },
+    "VmImagesInEdgeZoneListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineImageResource"
+          },
+          "description": "The list of VMImages in EdgeZone"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of VMImages in Edgezone. Call ListNext() with this URI to fetch the next page of VmImages."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List VmImages in EdgeZone operation response."
     }
   }
 }
