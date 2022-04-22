@@ -1766,6 +1766,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/uploadImage": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "Template_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_UploadImage": {
+            "$ref": "./examples/Template_UploadImage.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/previewImage": {
       "post": {
         "tags": [
@@ -1823,6 +1881,177 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "TemplateAccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_List": {
+            "$ref": "./examples/TemplateAccessPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "TemplateAccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_Get": {
+            "$ref": "./examples/TemplateAccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "TemplateAccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_Update": {
+            "$ref": "./examples/TemplateAccessPolicy_Update.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1873,6 +2102,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -1994,6 +2226,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -2024,6 +2259,10 @@
       "properties": {
         "base64Image": {
           "description": "The base-64 encoded contents of the image.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the image. For example, \"icon\", \"background\", etc.",
           "type": "string"
         }
       }
@@ -2245,6 +2484,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -2356,6 +2598,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
