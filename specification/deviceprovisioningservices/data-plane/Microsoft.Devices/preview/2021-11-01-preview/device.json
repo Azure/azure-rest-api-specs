@@ -29,6 +29,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "The device registration ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
@@ -39,12 +46,6 @@
             "name": "certificateId",
             "in": "path",
             "description": "Certificate ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "idScope",
-            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -87,6 +88,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "The device registration ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
@@ -97,12 +105,6 @@
             "name": "operationId",
             "in": "path",
             "description": "Operation ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "idScope",
-            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -164,6 +166,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "Registration ID.",
@@ -174,12 +183,6 @@
             "name": "operationId",
             "in": "path",
             "description": "Operation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "idScope",
-            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -242,6 +245,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "The device registration ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
@@ -256,12 +266,6 @@
             "schema": {
               "$ref": "#/definitions/CertificateIssuanceRequest"
             }
-          },
-          {
-            "name": "idScope",
-            "in": "path",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -298,7 +302,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/{idScope}/registrations/{registrationId}": {
@@ -317,6 +324,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "Registration ID.",
@@ -331,12 +345,6 @@
             "schema": {
               "$ref": "#/definitions/DeviceRegistration"
             }
-          },
-          {
-            "name": "idScope",
-            "in": "path",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -380,6 +388,13 @@
         ],
         "parameters": [
           {
+            "name": "idScope",
+            "in": "path",
+            "description": "The service assigned ID scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "registrationId",
             "in": "path",
             "description": "The registration ID is alphanumeric, lowercase, and may contain hyphens.",
@@ -394,12 +409,6 @@
             "schema": {
               "$ref": "#/definitions/DeviceRegistration"
             }
-          },
-          {
-            "name": "idScope",
-            "in": "path",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
