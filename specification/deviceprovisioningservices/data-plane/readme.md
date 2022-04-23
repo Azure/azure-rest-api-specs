@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the Azure Iot Hub API.
 
 ``` yaml
-openapi-type: arm
+openapi-type: data-plane
 tag: package-2021-11-01-preview
 ```
 
