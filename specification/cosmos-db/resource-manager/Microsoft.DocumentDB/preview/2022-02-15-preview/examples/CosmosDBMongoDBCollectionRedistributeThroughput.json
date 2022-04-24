@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-02-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName",
+    "redistributeThroughputParameters": {
+      "properties": {
+        "resource": {
+          "throughputPolicy": "custom",
+          "targetPhysicalPartitionThroughputInfo": [
+            {
+              "id": "0",
+              "throughput": 5000
+            },
+            {
+              "id": "1",
+              "throughput": 5000
+            }
+          ],
+          "sourcePhysicalPartitionThroughputInfo": [
+            {
+              "id": "2",
+              "throughput": 5000
+            },
+            {
+              "id": "3"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {}
+  }
+}
