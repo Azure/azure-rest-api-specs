@@ -125,15 +125,12 @@
     },
     "/{resourceUri}/query": {
       "post": {
-        "operationId": "Query_Execute",
+        "operationId": "Resource_Query_Execute",
         "summary": "Execute an Analytics query using resource URI",
-        "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
-            "$ref": "examples/oms-post-example.json"
-          },
-          "cross-workspace": {
-            "$ref": "examples/oms-post-cross-workspace-example.json"
+            "$ref": "examples/oms-post-resource-centric-example.json"
           }
         },
         "parameters": [
