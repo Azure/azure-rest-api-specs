@@ -27,7 +27,7 @@ These are the global settings for the graphservice.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-07-19-privatepreview
+tag: package-2022-04-18-privatepreview
 ```
 
 ### Tag: package-2021-07-19-privatepreview
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2021-07-19-privatepreview` is spec
 ```yaml $(tag) == 'package-2021-07-19-privatepreview'
 input-file:
   - Microsoft.Graph/preview/2021-07-19-privatepreview/graphservice.json
+```
+
+### Tag: package-2022-04-18-privatepreview
+
+These settings apply only when `--tag=package-2022-04-18-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-18-privatepreview'
+input-file:
+  - Microsoft.Graph/preview/2022-04-18-privatepreview/graphservice.json
 ```
 
 ---
