@@ -165,8 +165,8 @@
           "itemName": "entries",
           "nextLinkName": "@nextLink"
         },
-        "summary": "Gets ledger entries from a sub-ledger corresponding to a range.",
-        "description": "A sub-ledger id may optionally be specified. Only entries in the specified (or default) sub-ledger will be returned.",
+        "summary": "Gets ledger entries from a collection corresponding to a range.",
+        "description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -204,7 +204,7 @@
           }
         },
         "summary": "Writes a ledger entry.",
-        "description": "A sub-ledger id may optionally be specified.",
+        "description": "A collection id may optionally be specified.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -251,7 +251,7 @@
             "$ref": "./examples/ledger/GetLedgerEntry.json"
           }
         },
-        "summary": "Gets the ledger entry at the specified transaction id. A sub-ledger id may optionally be specified to indicate the sub-ledger from which to fetch the value.",
+        "summary": "Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.",
         "description": "To return older ledger entries, the relevant sections of the ledger must be read from disk and validated. To prevent blocking within the enclave, the response will indicate whether the entry is ready and part of the response, or if the loading is still ongoing.",
         "parameters": [
           {
@@ -355,7 +355,7 @@
           }
         },
         "summary": "Gets the current value available in the ledger.",
-        "description": "A sub-ledger id may optionally be specified.",
+        "description": "A collection id may optionally be specified.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
