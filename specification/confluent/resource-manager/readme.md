@@ -85,6 +85,15 @@ input-file:
 - Microsoft.Confluent/stable/2021-12-01/confluent.json
 ```
 
+### Tag: package-2022-04-10-preview
+
+These settings apply only when `--tag=package-2022-04-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-10-preview'
+input-file:
+- Microsoft.Confluent/preview/2022-04-10-preview/confluent.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
