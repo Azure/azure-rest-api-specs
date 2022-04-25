@@ -1269,6 +1269,219 @@
         "operationId": "StorageTarget_Invalidate"
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/addPrimingJob": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "description": "Object containing the definition of a priming job.",
+            "in": "body",
+            "name": "primingjob",
+            "schema": {
+              "$ref": "#/definitions/PrimingJob"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The priming job is being created and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddPrimingJob": {
+            "$ref": "./examples/AddPrimingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "PrimingJobs"
+        ],
+        "description": "Create a priming job. This operation is only allowed when the cache is healthy.",
+        "operationId": "AddPrimingJob"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/removePrimingJob/{primingJobId}": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrimingJobIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started priming job deletion."
+          },
+          "204": {
+            "description": "The priming job is being deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RemovePrimingJob": {
+            "$ref": "./examples/RemovePrimingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "PrimingJobs"
+        ],
+        "description": "Schedule a priming job for deletion.",
+        "operationId": "PrimingJobs_Remove{PrimingJobId}"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/pausePrimingJob/{primingJobId}": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrimingJobIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Priming job is being paused."
+          },
+          "204": {
+            "description": "The priming job is paused."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PausePrimingJob": {
+            "$ref": "./examples/PausePrimingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "PrimingJobs"
+        ],
+        "description": "Schedule a priming job to be paused.",
+        "operationId": "PrimingJobs_Pause{PrimingJobId}"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/resumePrimingJob/{primingJobId}": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrimingJobIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Priming job is being resumed."
+          },
+          "204": {
+            "description": "The priming job is running."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResumePrimingJob": {
+            "$ref": "./examples/ResumePrimingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "PrimingJobs"
+        ],
+        "description": "Resumes a paused priming job.",
+        "operationId": "PrimingJobs_Resume{PrimingJobId}"
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
       "post": {
         "produces": [
@@ -1319,6 +1532,63 @@
         ],
         "description": "Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.",
         "operationId": "Caches_UpgradeFirmware"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/spaceAllocation": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "description": "List containing storage target cache space percentage allocations.",
+            "in": "body",
+            "name": "spaceAllocationParameter",
+            "schema": {
+              "$ref": "#/definitions/SpaceAllocationParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Storage target space allocations are updating."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SpaceAllocation_Post": {
+            "$ref": "./examples/SpaceAllocation_Post.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "Caches"
+        ],
+        "description": "Update cache space allocation.",
+        "operationId": "Caches_SpaceAllocation"
       }
     }
   },
@@ -1374,6 +1644,16 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/MetricSpecification"
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
+                },
+                "logSpecifications": {
+                  "description": "Details about operations related to logs.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/LogSpecification"
                   },
                   "x-ms-identifiers": [
                     "name"
@@ -1602,6 +1882,10 @@
               "$ref": "#/definitions/CacheUpgradeStatus",
               "readOnly": true
             },
+            "upgradeSettings": {
+              "description": "Upgrade settings of the Cache.",
+              "$ref": "#/definitions/CacheUpgradeSettings"
+            },
             "networkSettings": {
               "$ref": "#/definitions/CacheNetworkSettings",
               "description": "Specifies network settings of the cache."
@@ -1628,6 +1912,14 @@
                 "read",
                 "create"
               ]
+            },
+            "primingJobs": {
+              "$ref": "#/definitions/PrimingJobList",
+              "description": "Specifies the priming jobs defined in the cache."
+            },
+            "spaceAllocation": {
+              "$ref": "#/definitions/SpaceAllocationList",
+              "description": "Specifies the space allocation percentage for each storage target in the cache."
             }
           },
           "type": "object"
@@ -2077,7 +2369,10 @@
             "Stopping",
             "Stopped",
             "Upgrading",
-            "Flushing"
+            "Flushing",
+            "WaitingForKey",
+            "StartFailed",
+            "UpgradeFailed"
           ],
           "x-ms-enum": {
             "name": "HealthStateType",
@@ -2154,6 +2449,22 @@
           "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "CacheUpgradeSettings": {
+      "description": "Cache Upgrade Settings.",
+      "properties": {
+        "upgradeScheduleEnabled":{
+          "description": "True if the user chooses to select an installation time between now and firmwareUpdateDeadline. Else the firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",              
+          "type": "boolean"
+
+        },
+        "scheduledTime": {
+          "description": "When upgradeScheduleEnabled is true, this field holds the user-chosen upgrade time. At the user-chosen time, the firmware update will automatically be installed on the cache.",
+          "format": "date-time",
+          "type": "string"
         }
       },
       "type": "object"
@@ -2292,6 +2603,14 @@
         "blobNfs": {
           "description": "Properties when targetType is blobNfs.",
           "$ref": "#/definitions/BlobNfsTarget"
+        },
+        "allocationPercentage": {
+          "description": "The percentage of cache space allocated for this storage target",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "readOnly": true
         }
       }
     },
@@ -2699,6 +3018,20 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Details about operation related to logs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the log."
+        }
+      }
+    },
     "MetricDimension": {
       "type": "object",
       "description": "Specifications of the Dimension of metrics.",
@@ -2720,6 +3053,120 @@
           "type": "boolean"
         }
       }
+    },
+    "PrimingJob": {
+      "description": "A priming job instance.",
+      "properties": {
+        "primingJobName": {
+          "description": "The priming job name.",
+          "$ref": "#/definitions/ResourceName",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "primingManifestUrl": {
+          "description": "The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.",
+          "$ref": "#/definitions/URLString",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "primingJobId": {
+          "description": "The unique identifier of the priming job.",
+          "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+          "readOnly": true,
+          "type": "string"
+        },
+        "primingJobState": {
+          "description": "The state of the priming operation.",
+          "enum": [
+            "Queued",
+            "Running",
+            "Paused",
+            "Complete"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrimingJobState",
+            "modelAsString": true
+          }
+        },
+        "primingJobStatus": {
+          "description": "The status code of the priming job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "primingJobDetails": {
+          "description": "The job details or error information if any.",
+          "type": "string",
+          "readOnly": true
+        },
+        "primingJobPercentComplete": {
+          "description": "The current progress of the priming job, as a percentage.",
+          "type": "number",
+          "format": "double",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "primingJobName",
+        "primingManifestUrl"
+      ],
+      "type": "object"
+    },
+    "PrimingJobList": {
+      "description": "The list of priming jobs defined for the cache.",
+      "items": {
+        "$ref": "#/definitions/PrimingJob"
+      },
+      "type": "array",
+      "x-ms-identifiers": [
+        "primingJobId"
+      ],
+      "readOnly": true
+    },
+    "SpaceAllocationList": {
+      "description": "List of storage target space allocations.",
+      "items": {
+        "$ref": "#/definitions/StorageTargetSpaceAllocation"
+      },
+      "type": "array",
+      "x-ms-identifiers": [
+        "name"
+      ],
+      "readOnly": true
+    },
+    "SpaceAllocationParameter": {
+      "description": "List of storage target space allocations.",
+      "items": {
+        "$ref": "#/definitions/StorageTargetSpaceAllocation"
+      },
+      "type": "array",
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "StorageTargetSpaceAllocation": {
+      "description": "Storage Target space allocation properties.",
+      "properties": {
+        "name": {
+          "description": "Name of the storage target.",
+          "$ref": "#/definitions/ResourceName"
+        },
+        "allocationPercentage": {
+          "description": "The percentage of cache space allocated for this storage target",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
@@ -2758,6 +3205,15 @@
       "description": "Name of Storage Target.",
       "in": "path",
       "name": "storageTargetName",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrimingJobIdParameter": {
+      "description": "Unique identifier of the priming job.",
+      "in": "path",
+      "name": "primingJobId",
       "pattern": "^[-0-9a-zA-Z_]{1,80}$",
       "required": true,
       "type": "string",

@@ -67,6 +67,10 @@
             }
           ]
         },
+        "upgradeSettings":{
+          "upgradeScheduleEnabled": true,
+          "scheduledTime" :"2022-04-26T18:25:43.511Z"
+        },
         "directoryServicesSettings": {
           "activeDirectory": {
             "primaryDnsIpAddress": "192.0.2.10",
@@ -184,6 +188,10 @@
               }
             ]
           },
+          "upgradeSettings":{
+            "upgradeScheduleEnabled": true,
+            "scheduledTime" :"2022-04-26T18:25:43.511Z"
+          },          
           "directoryServicesSettings": {
             "activeDirectory": {
               "primaryDnsIpAddress": "192.0.2.10",
@@ -206,7 +214,39 @@
               "caCertificateURI": "",
               "usernameDownloaded": "Yes"
             }
-          }
+          },
+          "primingJobs" : [
+            {
+              "primingJobName": "contosoJob1",
+              "primingJobId": "00000000000_0000000000",
+              "primingJobState": "Complete",
+              "primingJobStatus": "success",
+              "primingJobDetails": "Files: Cached=635, Failed=0, Excluded=80, Data=346030 bytes, Directories: Cached=1003, Failed=0, Excluded=0",
+              "primingJobPercentComplete": 100.0
+            },
+            {
+              "primingJobName": "contosoJob2",
+              "primingJobId": "11111111111_1111111111",
+              "primingJobState": "Queued",
+              "primingJobStatus": "",
+              "primingJobDetails": "",
+              "primingJobPercentComplete": 0.0
+            }
+          ],
+          "spaceAllocation": [
+            {
+              "name": "st1",
+              "allocationPercentage": 25
+            },
+            {
+              "name": "st2",
+              "allocationPercentage": 50
+            },
+            {
+              "name": "st3",
+              "allocationPercentage": 25
+            }
+          ]
         },
         "sku": {
           "name": "Standard_2G"
