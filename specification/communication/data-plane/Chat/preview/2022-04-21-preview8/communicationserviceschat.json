@@ -1271,13 +1271,13 @@
         }
       }
     },
-    "/chat/threadless/messages": {
+    "/chat/broadcast": {
       "post": {
         "tags": [
-          "ThreadlessMessages"
+          "BroadcastMessages"
         ],
-        "summary": "Sends a Fire and Forget/Threadless/CPM message.",
-        "operationId": "Threadless_SendChatMessage",
+        "summary": "Sends a broadcast/Fire and Forget/Threadless/CPM message.",
+        "operationId": "Broadcast_SendChatMessage",
         "consumes": [
           "application/json"
         ],
@@ -1286,20 +1286,22 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
-            "name": "sendThreadlessChatMessageRequest",
-            "description": "Details of the message to send.",
+            "name": "sendBroadcastChatMessageRequest",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendThreadlessChatMessageRequest"
+              "$ref": "#/definitions/SendBroadcastChatMessageRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Message sent.",
+            "description": "Broadcast Message sent.",
             "schema": {
-              "$ref": "#/definitions/SendThreadlessChatMessageResult"
+              "$ref": "#/definitions/SendBroadcastChatMessageResult"
             }
           },
           "401": {
@@ -1471,8 +1473,8 @@
         }
       }
     },
-    "SendThreadlessChatMessageRequest": {
-      "description": "Details of the CPM message to send.",
+    "SendBroadcastChatMessageRequest": {
+      "description": "Details of the broadcast chat message to send.",
       "required": [
         "type, from, to"
       ],
@@ -1489,10 +1491,10 @@
           "example": "37:whatsapp:16315551234"
         },
         "type": {
-          "$ref": "#/definitions/ThreadlessChatMessageType"
+          "$ref": "#/definitions/BroadcastChatMessageType"
         },
         "content": {
-          "description": "Chat message content.",
+          "description": "Broadcasr chat message content.",
           "type": "string",
           "example": "Come on guys, lets go for lunch together."
         },
@@ -1504,8 +1506,8 @@
         }
       }
     },
-    "ThreadlessChatMessageType": {
-      "description": "The threadless chat message type.",
+    "BroadcastChatMessageType": {
+      "description": "The broadcast chat message type.",
       "enum": [
         "image",
         "text",
@@ -1513,7 +1515,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ThreadlessChatMessageType",
+        "name": "BroadcastChatMessageType",
         "modelAsString": true
       }
     },
@@ -1568,8 +1570,8 @@
       ],
       "type": "string"
     },
-    "SendThreadlessChatMessageResult": {
-      "description": "Result of the send message operation.",
+    "SendBroadcastChatMessageResult": {
+      "description": "Result of the send broadcast chat message operation.",
       "required": [
         "id"
       ],
@@ -1581,12 +1583,12 @@
           "example": "123456789"
         },
         "status": {
-          "$ref": "#/definitions/ThreadlessChatMessageStatus"
+          "$ref": "#/definitions/BroadcastChatMessageStatus"
         }
       }
     },
-    "ThreadlessChatMessageStatus": {
-      "description": "The status of a threadless chat message.",
+    "BroadcastChatMessageStatus": {
+      "description": "The status of a broadcast message.",
       "enum": [
         "Enqueued",
         "Sent",
