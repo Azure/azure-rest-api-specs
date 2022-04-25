@@ -167,6 +167,7 @@ These settings apply only when `--tag=9.0` is specified on the command line.
 input-file:
 - Microsoft.ServiceFabric/stable/9.0/servicefabric.json
 ---
+```
 
 # Code Generation
 
