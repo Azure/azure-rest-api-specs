@@ -56,7 +56,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkAssociationProperties"
+              "$ref": "#/definitions/PrivateLinkAssociationObject"
             },
             "description": "Parameters supplied to create the private link association."
           }
@@ -64,6 +64,12 @@
         "responses": {
           "200": {
             "description": "Ok - Returns information about the new private link association.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociation"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new private link association.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkAssociation"
             }
@@ -78,6 +84,43 @@
         "x-ms-examples": {
           "Create a private link association, associate scope to rmpl.": {
             "$ref": "./examples/PutPrivateLinkAssociation.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateLinkAssociation"
+        ],
+        "operationId": "PrivateLinkAssociation_Get",
+        "description": "Get a single private link association",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkAssociationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single private link association.": {
+            "$ref": "./examples/GetPrivateLinkAssociation.json"
           }
         }
       },
@@ -124,7 +167,7 @@
         "tags": [
           "PrivateLinkAssociation"
         ],
-        "operationId": "PrivateLinkAssociation_Get",
+        "operationId": "PrivateLinkAssociation_List",
         "description": "Get a private link association for a management group scope",
         "parameters": [
           {
@@ -150,7 +193,7 @@
         },
         "x-ms-examples": {
           "Get a private link association for a MG scope.": {
-            "$ref": "./examples/GetPrivateLinkAssociation.json"
+            "$ref": "./examples/ListPrivateLinkAssociation.json"
           }
         }
       }
@@ -171,7 +214,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -193,7 +236,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "OK. Returns information about the Resource Management Private Link.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLink"
+            }
+          },
+          "201": {
+            "description": "Created. Returns information about the Resource Management Private Link.",
             "schema": {
               "$ref": "#/definitions/ResourceManagementPrivateLink"
             }
@@ -226,7 +275,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -272,7 +321,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -335,13 +384,67 @@
         },
         "x-ms-examples": {
           "Delete a Resource Management Private Link.": {
-            "$ref": "./examples/ListResourceManagementPrivateLink.json"
+            "$ref": "./examples/ListSubscriptionResourceManagementPrivateLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks": {
+      "get": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_ListByResourceGroup",
+        "description": "Get all the resource management private links in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns an array of private links.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Resource Management Private Link.": {
+            "$ref": "./examples/ListResourceGroupResourceManagementPrivateLink.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "PrivateLinkAssociationObject": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkAssociationProperties",
+          "description": "The properties of the PrivateLinkAssociation."
+        }
+      }
+    },
     "PrivateLinkAssociationProperties": {
       "type": "object",
       "properties": {

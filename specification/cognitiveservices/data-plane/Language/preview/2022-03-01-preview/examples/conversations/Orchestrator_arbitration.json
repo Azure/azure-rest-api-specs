@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-03-01-preview",
+    "body": {
+      "kind": "CustomConversation",
+      "analysisInput": {
+        "conversationItem": {
+          "participantId": "1",
+          "id": "1",
+          "modality": "text",
+          "language": "en-GB",
+          "text": "How do I integrate QnA Maker and LUIS?"
+        }
+      },
+      "parameters": {
+        "projectName": "{project-name}",
+        "deploymentName": "{deployment-name}",
+        "verbose": true,
+        "isLoggingEnabled": false,
+        "stringIndexType": "TextElement_V8"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "CustomConversationResult",
+        "results": {
+          "query": "trains from London",
+          "prediction": {
+            "topIntent": "Rail",
+            "projectKind": "workflow",
+            "intents": {
+              "Rail": {
+                "confidenceScore": 1,
+                "targetKind": "conversation",
+                "apiVersion": null,
+                "result": {
+                  "query": "trains from London",
+                  "prediction": {
+                    "intents": [
+                      {
+                        "category": "Timetable",
+                        "confidenceScore": 0.99968535
+                      },
+                      {
+                        "category": "Locomotive",
+                        "confidenceScore": 0.000314623
+                      }
+                    ],
+                    "entities": [],
+                    "topIntent": "Timetable",
+                    "projectKind": "conversation"
+                  }
+                }
+              },
+              "Tree": {
+                "confidenceScore": 0.2641529,
+                "targetKind": "conversation",
+                "apiVersion": null,
+                "result": null
+              },
+              "None": {
+                "confidenceScore": 0,
+                "targetKind": "non_linked",
+                "apiVersion": null,
+                "result": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

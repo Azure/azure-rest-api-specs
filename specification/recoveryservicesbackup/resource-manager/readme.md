@@ -40,7 +40,7 @@ tag: package-passivestamp-2021-11-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2022-01
+tag: package-2022-02
 ```
 
 ### Validations
@@ -54,6 +54,14 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-02-01/bms.json
+```
 
 ### Tag: package-2022-01
 
@@ -302,6 +310,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_backup']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -315,7 +324,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/recoveryservicesbackup/Generated
   clear-output-folder: true
 ```
 

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "api-version": "2022-02-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5M",
+                "retention": "P2D"
+              },
+              {
+                "timeGrain": "PT1H",
+                "retention": "P14D"
+              },
+              {
+                "timeGrain": "P1D",
+                "retention": "P60D"
+              }
+            ],
+            "primaryAggregationType": "Total",
+            "unit": "Count",
+            "resourceUri": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+            "name": {
+              "value": "Total Requests",
+              "localizedValue": "Total Requests"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

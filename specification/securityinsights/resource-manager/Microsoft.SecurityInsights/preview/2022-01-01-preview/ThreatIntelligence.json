@@ -481,7 +481,7 @@
       "name": "ThreatIntelligenceProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
       },
       "x-ms-parameter-location": "method"
     },
@@ -491,7 +491,7 @@
       "name": "ThreatIntelligenceReplaceTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
       },
       "x-ms-parameter-location": "method"
     },
@@ -538,7 +538,8 @@
           "items": {
             "$ref": "#/definitions/ThreatIntelligenceInformation"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object",
@@ -550,12 +551,15 @@
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
       "description": "Threat intelligence information object.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
       "discriminator": "kind",
       "type": "object",
       "required": [
@@ -578,41 +582,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceIndicatorModelForRequestBody": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
-        }
-      ],
-      "description": "Threat intelligence indicator entity used in request body.",
-      "properties": {
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
-          "description": "Threat Intelligence Entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceResourceKind": {
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "type": "object"
     },
     "ThreatIntelligenceResourceInnerKind": {
       "description": "The kind of the threat intelligence entity",
@@ -645,7 +614,8 @@
             "description": "tag",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "lastUpdatedTimeUtc": {
           "description": "Last updated time in UTC",
@@ -669,7 +639,8 @@
             "description": "Indicator type of a threat intelligence entity",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "pattern": {
           "description": "Pattern of a threat intelligence entity",
@@ -689,7 +660,8 @@
             "description": "Kill chain phase",
             "$ref": "#/definitions/ThreatIntelligenceKillChainPhase"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "parsedPattern": {
           "description": "Parsed patterns",
@@ -697,7 +669,8 @@
             "description": "Parsed pattern",
             "$ref": "#/definitions/ThreatIntelligenceParsedPattern"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "externalId": {
           "description": "External ID of threat intelligence entity",
@@ -721,7 +694,8 @@
             "description": "external_reference",
             "$ref": "#/definitions/ThreatIntelligenceExternalReference"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "granularMarkings": {
           "description": "Granular Markings",
@@ -729,7 +703,8 @@
             "description": "Granular marking",
             "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "labels": {
           "description": "Labels  of threat intelligence entity",
@@ -737,7 +712,8 @@
             "description": "label",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "revoked": {
           "description": "Is threat intelligence entity revoked",
@@ -754,7 +730,8 @@
             "description": "Threat intelligence entity object marking reference",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "language": {
           "description": "Language of threat intelligence entity",
@@ -766,7 +743,8 @@
             "description": "Threat type",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "validFrom": {
           "description": "Valid from",
@@ -819,7 +797,8 @@
             "description": "Pattern type key",
             "$ref": "#/definitions/ThreatIntelligenceParsedPatternTypeValue"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -856,7 +835,8 @@
             "description": "granular marking model selector",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -926,7 +906,8 @@
             "description": "Sort By",
             "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "Sources of threat intelligence indicators",
@@ -934,7 +915,8 @@
             "description": "Source",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "patternTypes": {
           "description": "Pattern types",
@@ -942,7 +924,8 @@
             "description": "Pattern type",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "threatTypes": {
           "description": "Threat types of threat intelligence indicators",
@@ -950,7 +933,8 @@
             "description": "Threat type of a threat intelligence indicator",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "ids": {
           "description": "Ids of threat intelligence indicators",
@@ -958,7 +942,8 @@
             "description": "Id of a threat intelligence indicator",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "keywords": {
           "description": "Keywords for searching threat intelligence indicators",
@@ -966,7 +951,8 @@
             "description": "keyword for searching threat intelligence indicators",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "skipToken": {
           "description": "Skip token.",
@@ -1022,7 +1008,8 @@
             "description": "parameter",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -1035,7 +1022,8 @@
           "items": {
             "$ref": "#/definitions/ThreatIntelligenceMetrics"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1066,7 +1054,8 @@
             "description": "parameter",
             "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "patternTypeMetrics": {
           "description": "Pattern type metrics",
@@ -1074,7 +1063,8 @@
             "description": "parameter",
             "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "sourceMetrics": {
           "description": "Source metrics",
@@ -1082,7 +1072,8 @@
             "description": "parameter",
             "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"

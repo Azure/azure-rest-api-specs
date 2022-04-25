@@ -3,7 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-containerregistry
@@ -16,7 +16,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python) && $(multiapi)
 clear-output-folder: true
 batch:
 
@@ -39,7 +39,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -274,7 +273,7 @@ output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregis
 ```
 
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 directive:
   - from: swagger-document
     where: $.definitions.BuildStepProperties
