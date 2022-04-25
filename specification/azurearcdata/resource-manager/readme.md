@@ -79,6 +79,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js azurearcdata/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go

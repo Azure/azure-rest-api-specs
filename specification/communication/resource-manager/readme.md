@@ -110,6 +110,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_vsonline']
+  - repo: azure-powershell
 ```
 
 ## Python

@@ -139,6 +139,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

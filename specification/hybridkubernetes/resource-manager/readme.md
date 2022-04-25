@@ -76,6 +76,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridkubernetes']
+  - repo: azure-powershell
 ```
 
 ## Go
