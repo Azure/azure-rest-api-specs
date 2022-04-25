@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-02-01-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "body": {
+      "displayName": "Extracting Location & US Region",
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "text": "I had a wonderful trip to Seattle last week."
+          },
+          {
+            "id": "2",
+            "language": "en",
+            "text": "I'm flying to NYC tomorrow. See you there."
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "kind": "EntityRecognition",
+          "taskName": "Recognize Entities",
+          "parameters": {
+            "modelVersion": "latest"
+          }
+        },
+        {
+          "kind": "CustomEntityRecognition",
+          "taskName": "Recognize US Regions",
+          "parameters": {
+            "projectName": "MyProject",
+            "deploymentName": "MyDeployment"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/language/analyze-text/jobs/{jobId}"
+      }
+    }
+  }
+}

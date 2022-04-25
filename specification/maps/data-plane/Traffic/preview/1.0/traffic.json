@@ -18,15 +18,21 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
-    "AzureKey": {
+    "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
       "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
       "in": "header"
     }
   },
@@ -37,7 +43,10 @@
       ]
     },
     {
-      "AzureKey": []
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
     }
   ],
   "responses": {},
@@ -99,7 +108,7 @@
   "paths": {
     "/traffic/flow/tile/{format}": {
       "get": {
-        "description": "__Traffic Flow Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "description": "__Traffic Flow Tile__\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
         "operationId": "Traffic_GetTrafficFlowTile",
         "x-ms-examples": {
           "Request tile depicting the traffic flow": {
@@ -200,7 +209,7 @@
     },
     "/traffic/flow/segment/{format}": {
       "get": {
-        "description": "__Traffic Flow Segment__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
+        "description": "__Traffic Flow Segment__\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
         "operationId": "Traffic_GetTrafficFlowSegment",
         "x-ms-examples": {
           "Request traffic flow segment information": {
@@ -306,7 +315,7 @@
     },
     "/traffic/incident/tile/{format}": {
       "get": {
-        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
+        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
         "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
           "Request a tile depicting a traffic incident": {
@@ -405,7 +414,7 @@
     },
     "/traffic/incident/detail/{format}": {
       "get": {
-        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
+        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
         "operationId": "Traffic_GetTrafficIncidentDetail",
         "x-ms-examples": {
           "Request information about a traffic incident": {
@@ -570,7 +579,7 @@
     },
     "/traffic/incident/viewport/{format}": {
       "get": {
-        "description": "__Traffic Incident Viewport__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
+        "description": "__Traffic Incident Viewport__\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
         "operationId": "Traffic_GetTrafficIncidentViewport",
         "x-ms-examples": {
           "Request traffic incident information for the selected viewport": {

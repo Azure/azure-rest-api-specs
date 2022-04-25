@@ -409,7 +409,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkspaceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId",
+            "principalId"
+          ]
         },
         "createdBy": {
           "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
@@ -833,7 +837,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         },
         "innererror": {
           "description": "Inner error details if they exist.",
@@ -910,6 +918,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
         },
         "nextLink": {

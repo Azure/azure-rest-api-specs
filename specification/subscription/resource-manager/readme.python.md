@@ -6,7 +6,6 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 
 ``` yaml $(python)
-python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.subscription
@@ -15,11 +14,7 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/subscription/azure-mgmt-subscription/azure/mgmt/subscription
-```
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/subscription/azure-mgmt-subscription
 ```

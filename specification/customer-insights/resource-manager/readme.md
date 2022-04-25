@@ -69,6 +69,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customer_insights']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 

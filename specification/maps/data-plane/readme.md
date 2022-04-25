@@ -38,7 +38,7 @@ directive:
     from: timezone.json
     reason: It will break existing clients if we change the name
 
-```
+``` 
 
 
 ### Tag: package-preview-2.0
@@ -55,7 +55,6 @@ input-file:
   - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
@@ -77,7 +76,6 @@ input-file:
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json

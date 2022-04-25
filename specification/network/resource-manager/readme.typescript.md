@@ -15,7 +15,6 @@ typescript:
 typescript:
   package-name: "@azure/arm-network"
   output-folder: "$(typescript-sdks-folder)/sdk/network/arm-network"
-  clear-output-folder: true
 ```
 
 ### Profile: profile-hybrid-2019-03-01
@@ -26,7 +25,6 @@ These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is 
 typescript:
   package-name: "@azure/arm-network-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/network/arm-network-profile-2019-03-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2019-03-01
 ```
@@ -39,7 +37,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-network-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/network/arm-network-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:
