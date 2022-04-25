@@ -612,6 +612,10 @@
             "NotSpecified",
             "Internal"
           ],
+          "x-ms-enum": {
+            "name": "WorkloadMonitorActionType",
+            "modelAsString": true
+          },
           "description": "Defines the action type of workload operation.",
           "type": "string"
         },
@@ -648,7 +652,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL to get to the next set of results, if there are any.",
@@ -681,7 +686,8 @@
           "items": {
             "$ref": "#/definitions/Error"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "innerError": {
           "description": "Object containing more specific information than  the current object about the error.",
@@ -738,11 +744,6 @@
     "Monitor": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "description": "Resource system data",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MonitorProperties",

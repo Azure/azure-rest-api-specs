@@ -14,15 +14,3 @@ python-sdk-output-folder: "$(az-output-folder)/azext_workloads/vendored_sdks/wor
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
-
-
-
-This is for command modules that already in azure cli main repo. 
-``` yaml $(az) && $(target-mode) == 'core'
-az:
-  extensions: workloads
-  namespace: azure.mgmt.workloads
-  package-name: azure-mgmt-workloads
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/workloads
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/workloads"
-``` 
