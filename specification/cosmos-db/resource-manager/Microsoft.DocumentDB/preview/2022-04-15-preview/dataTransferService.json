@@ -69,6 +69,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successful CreateJob response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
           "201": {
             "description": "Successful CreateJob response",
             "schema": {
@@ -400,6 +406,21 @@
           "readOnly": true,
           "type": "string",
           "description": "Job Status"
+        },
+        "percentageComplete": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Percentage of completion."
+        },
+        "processedCount": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Processed Count."
+        },
+        "totalCount": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Total Count."
         },
         "percentageComplete": {
           "readOnly": true,
