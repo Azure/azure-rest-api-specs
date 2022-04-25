@@ -30,13 +30,19 @@
     label: ARMChangeRequested
     onUnlabeledAddLabels:
         - WaitForARMFeedback
+        - ARMReview
     
 - rule:
     type: label
     label: WaitForARMFeedback
     onLabeledRemoveLabels:
         - ARMChangeRequested
-    
+
+- rule:
+    type: label
+    label: ARMSignedOff
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
     
 - rule:
     type: PROpen
