@@ -30,16 +30,19 @@
             "required": true,
             "type": "string",
             "enum": [
+              "ActiveUsersTrend",
               "AssetFilesAggregation",
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
+              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
-              "TopSearchedKeywords"
+              "TopSearchedKeywords",
+              "Tags"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -118,16 +121,19 @@
             "required": true,
             "type": "string",
             "enum": [
+              "ActiveUsersTrend",
               "AssetFilesAggregation",
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
+              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
-              "TopSearchedKeywords"
+              "TopSearchedKeywords",
+              "Tags"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -226,16 +232,19 @@
             "required": true,
             "type": "string",
             "enum": [
+              "ActiveUsersTrend",
               "AssetFilesAggregation",
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
+              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
-              "TopSearchedKeywords"
+              "TopSearchedKeywords",
+              "Tags"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -397,49 +406,6 @@
           }
         }
       }
-    },
-    "/assets/snapshots/tags": {
-      "get": {
-        "tags": [
-          "Assets"
-        ],
-        "summary": "List tags of a snapshot",
-        "description": "List tags of a snapshot",
-        "operationId": "AssetSnapshotsTags_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/TagsSnapshot"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Insights Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssetSnapshotsTags_List": {
-            "$ref": "./examples/AssetSnapshotsTags_List.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -451,16 +417,19 @@
       "properties": {
         "kind": {
           "enum": [
+            "ActiveUsersTrend",
             "AssetFilesAggregation",
             "AssetDistribution",
             "DataEstateHealth",
             "FilesWithoutResourceSet",
+            "GapAndTrend",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
             "MostViewedAssets",
             "NetNewAssetsDistribution",
-            "TopSearchedKeywords"
+            "TopSearchedKeywords",
+            "Tags"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -533,16 +502,19 @@
       "properties": {
         "kind": {
           "enum": [
+            "ActiveUsersTrend",
             "AssetFilesAggregation",
             "AssetDistribution",
             "DataEstateHealth",
             "FilesWithoutResourceSet",
+            "GapAndTrend",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
             "MostViewedAssets",
             "NetNewAssetsDistribution",
-            "TopSearchedKeywords"
+            "TopSearchedKeywords",
+            "Tags"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -706,60 +678,6 @@
           "items": {
             "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
           }
-        }
-      }
-    },
-    "TagsSnapshotRecord": {
-      "type": "object",
-      "properties": {
-        "sourceType": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "group": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "subscriptions": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "sources": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "files": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "tables": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "snapshotTime": {
-          "type": "string"
-        }
-      }
-    },
-    "TagsSnapshot": {
-      "type": "object",
-      "properties": {
-        "snapshotTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TagsSnapshotRecord"
-          }
-        },
-        "nextLink": {
-          "type": "string"
         }
       }
     },
@@ -950,6 +868,51 @@
         }
       },
       "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    },
+    "ActiveUsersTrendDataPoint": {
+      "type": "object",
+      "properties": {
+        "assetEditsUserCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "datamapPopulationUserCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "searchAndBrowseUserCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalUserCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "timePoint": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ActiveUsersTrendSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "activeUsersTrendPerDateRange": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ActiveUsersTrendDataPoint"
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ActiveUsersTrend"
     },
     "AllAssetsDistributionSnapshotRecord": {
       "type": "object",
@@ -1251,6 +1214,45 @@
         }
       },
       "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    },
+    "TagsSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "tagType": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "subscriptions": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sources": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "files": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "tables": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Tags"
     },
     "TopSearchedKeywordsSnapshotRecord": {
       "type": "object",
