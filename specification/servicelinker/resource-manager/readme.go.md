@@ -33,14 +33,14 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 namespace: servicelinker
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-05-01/$(namespace)
 directive:
-- from: swagger-document
-  where: $.definitions.TargetServiceType.x-ms-enum
+- from: servicelinker.json
+  where: $.definitions.TargetServiceType["x-ms-enum"]
   transform: >
-    $["x-ms-client-name"] = TargetServiceType
-- from: swagger-document
-  where: $.definitions.AzureResourceType.x-ms-enum
+    $["name"] = "TargetServiceType";
+- from: servicelinker.json
+  where: $.definitions.AzureResourceType["x-ms-enum"]
   transform: >
-    $["x-ms-client-name"] = AzureResourceType
+    $["name"] = "AzureResourceType";
 ```
 
 ### Tag: package-2021-11-01-preview and go
