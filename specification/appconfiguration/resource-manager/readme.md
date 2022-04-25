@@ -35,7 +35,7 @@ These settings apply only when `--tag=2022-05-01` is specified on the command li
 
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
-- Microsoft.AppConfiguration/stable/22022-05-01/appconfiguration.json
+- Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json
 ```
 
 ### Tag: package-2021-10-01-preview
