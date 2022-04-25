@@ -1099,6 +1099,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/promote": {
+      "post": {
+        "description": "Promotes the replica server group.",
+        "tags": [
+          "ServerGroupOperations"
+        ],
+        "operationId": "ServerGroups_Promote",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Promote the replica server group": {
+            "$ref": "./examples/ServerGroupPromote.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/checkNameAvailability": {
       "post": {
         "description": "Check the availability of name for resource",
@@ -1222,7 +1265,8 @@
         "Stopping",
         "Stopped",
         "Updating",
-        "Provisioning"
+        "Provisioning",
+        "NeedsAttention"
       ],
       "x-ms-enum": {
         "name": "ServerState",
@@ -1240,7 +1284,8 @@
         "FailingOver",
         "Healthy",
         "RemovingStandby",
-        "NotSync"
+        "NotSync",
+        "NeedsAttention"
       ],
       "x-ms-enum": {
         "name": "ServerHaState",
