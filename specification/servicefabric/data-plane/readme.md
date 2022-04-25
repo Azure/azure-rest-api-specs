@@ -160,13 +160,12 @@ input-file:
 - Microsoft.ServiceFabric/stable/8.2/servicefabric.json
 ```
 
-### Tag: 8.0
+### Tag: 9.0
 These settings apply only when `--tag=9.0` is specified on the command line.
 
 ``` yaml $(tag) == '9.0'
 input-file:
 - Microsoft.ServiceFabric/stable/9.0/servicefabric.json
-```
 ---
 
 # Code Generation

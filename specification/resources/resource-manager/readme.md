@@ -26,6 +26,11 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
+tag: package-changes-2022-05
+```
+
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
@@ -37,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2021-07
+tag: package-policy-2021-06
 ```
 
 ``` yaml $(package-resources)
@@ -61,25 +66,28 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-05
+tag: package-templatespecs-2022-02
 ```
 
-### Tag: package-policy-2021-07
+``` yaml $(package-changes)
+tag: package-changes-2022-05
+```
+### Tag: package-changes-2022-05
 
-These settings apply only when `--tag=package-policy-2021-07` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-policy-2021-07'
+``` yaml $(tag) == 'package-changes-2022-05'
 input-file:
-- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
-- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
-- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
-- Microsoft.Authorization/stable/2021-07-01/policyExemptions.json
-- Microsoft.Authorization/stable/2021-07-01/policyPricings.json
+- Microsoft.Resources/stable/2022-05-01/changes.json
+```
 
-# Needed when there is more than one input file
-override-info:
-  title: PolicyClient
+### Tag: package-changes-2022-03-01-preview
+
+These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
+input-file:
+- Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
 
 ### Tag: package-policy-2021-06
@@ -351,6 +359,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2022-02
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+input-file:
+- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
 ```
 
 ### Tag: package-templatespecs-2021-05
@@ -688,10 +705,6 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: policy exemption under an extension resource with Microsoft.Management
-  - suppress: UniqueResourcePaths
-    from: policyPricings.json
-    where: $.paths
-    reason: policy pricing under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -712,17 +725,9 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
-  - suppress: OperationsAPIImplementation
-    from: policyPricings.json
-    where: $.paths
-    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
-    reason: Currently systemData is not allowed
-  - suppress: BodyTopLevelProperties
-    from: policyPricings.json
-    where: $.definitions.PolicyPricing.properties
     reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: resources.json
@@ -861,6 +866,16 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListBySubscription
+    from: changes.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: RequiredReadOnlySystemData
+    from: changes.json
+    reason: System Metadata from a change resource perspective is irrelevant
 ```
 
 ---
@@ -882,6 +897,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 ## Python
 
@@ -910,6 +926,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-changes: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
