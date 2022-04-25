@@ -89,7 +89,48 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/pause": {
+      "get": {
+        "operationId": "DataTransferJobs_Get",
+        "description": "Get a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobGet": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Transfer Job Properties retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/pause": {
       "post": {
         "operationId": "DataTransferJobs_Pause",
         "description": "Pause a Data Transfer Job.",
@@ -129,8 +170,9 @@
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/resume": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/resume": {
       "post": {
         "operationId": "DataTransferJobs_Resume",
         "description": "Resumes a Data Transfer Job.",
@@ -170,8 +212,9 @@
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/cancel": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/cancel": {
       "post": {
         "operationId": "DataTransferJobs_Cancel",
         "description": "Cancels a Data Transfer Job.",
@@ -200,46 +243,6 @@
         "responses": {
           "200": {
             "description": "Successful Cancel Job response",
-            "schema": {
-              "$ref": "#/definitions/DataTransferJobGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DataTransferJobs_Get",
-        "description": "Get a Data Transfer Job.",
-        "x-ms-examples": {
-          "CosmosDBDataTransferJobGet": {
-            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/JobNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Data Transfer Job Properties retrieved successfully",
             "schema": {
               "$ref": "#/definitions/DataTransferJobGetResults"
             }
@@ -421,11 +424,6 @@
           "readOnly": true,
           "type": "number",
           "description": "Total Count."
-        },
-        "percentageComplete": {
-          "readOnly": true,
-          "type": "number",
-          "description": "Percentage of completion."
         },
         "lastUpdatedUtcTime": {
           "readOnly": true,
