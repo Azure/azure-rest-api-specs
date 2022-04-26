@@ -102,6 +102,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_providerhub']
   - repo: azure-sdk-for-net
+  - repo: azure-powershell
 ```
 
 ## CSharp

@@ -156,7 +156,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-csharp
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
@@ -169,6 +168,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_desktop_virtualization']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

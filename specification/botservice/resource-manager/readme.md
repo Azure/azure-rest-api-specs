@@ -142,6 +142,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-js
+  - repo: azure-powershell
 ```
 
 ## Suppression
