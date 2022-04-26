@@ -182,7 +182,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01-legacy/sql.core_legacy.json
 - Microsoft.Sql/stable/2014-04-01-legacy/usages_legacy.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/BlobAuditing.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseColumns.json
