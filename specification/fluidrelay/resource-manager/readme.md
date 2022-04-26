@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-03
+tag: package-2022-04-21
 ```
 
 ### Tag: package-2021-03-01-preview
@@ -110,6 +110,15 @@ These settings apply only when `--tag=package-2022-04-03` is specified on the co
 ```yaml $(tag) == 'package-2022-04-03'
 input-file:
   - Microsoft.FluidRelay/stable/2022-04-03/fluidrelay.json
+```
+
+### Tag: package-2022-04-21
+
+These settings apply only when `--tag=package-2022-04-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-21'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-04-21/fluidrelay.json
 ```
 
 ---
