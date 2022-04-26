@@ -3624,7 +3624,12 @@
         "kubernetesVersion": {
           "type": "string",
           "title": "The version of Kubernetes the Managed Cluster is running.",
-          "description": "When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
+          "description": "Both full Kubernetes version (e.g. 1.20.13) and Kubernetes version only containing major and minor versions (e.g. 1.20) are supported. When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. If only major and minor version is used for upgrade, only higher minor version will trigger upgrade, e.g. 1.14.x -> 1.14 will not trigger upgrade, but 1.14.x -> 1.15 will trigger upgrade. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
+        },
+        "currentKubernetesVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of Kubernetes the Managed Cluster is running. If a specific Kubernetes version is specified in kubernetesVersion, currentKubernetesVersion is the same as kubernetesVersion. For example, kubernetesVersion: 1.20.13, currentKubernetesVersion: 1.20.13. If only major and minor versions are used in kubernetesVersion, then currentKubernetesVersion will be the latest GA patch version picked by the service. For example, kubernetesVersion: 1.20, currentKubernetesVersion: 1.20.13."
         },
         "dnsPrefix": {
           "type": "string",
