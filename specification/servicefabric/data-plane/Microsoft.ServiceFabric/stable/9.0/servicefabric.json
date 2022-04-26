@@ -3,7 +3,7 @@
   "info": {
     "title": "Service Fabric Client APIs",
     "description": "Service Fabric REST Client APIs allows management of Service Fabric clusters, applications and services.",
-    "version": "8.2"
+    "version": "9.0"
   },
   "host": "localhost:19080",
   "schemes": [
@@ -1597,6 +1597,47 @@
         }
       }
     },
+    "/ApplicationTypes/{applicationTypeName}/$/UpdateArmMetadata": {
+      "post": {
+        "operationId": "UpdateApplicationTypeArmMetadata",
+        "summary": "Updates the Arm Metadata for a specific Application Type.",
+        "description": "Updates the Arm Metadata for a specific Application Type. Is able to be called immediately after the provision app type API is called.  ",
+        "tags": [
+          "ApplicationType"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationTypeNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationTypeVersionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion_9-0_RequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/TimeoutOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ForceArmMetadataUpdateOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationTypeArmMetadataUpdateDescriptionRequiredBodyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful update will return 200 status code."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/FabricError"
+            }
+          }
+        }
+      }
+    },
     "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes": {
       "get": {
         "summary": "Gets the list containing the information about service types that are supported by a provisioned application type in a Service Fabric cluster.",
@@ -2652,6 +2693,44 @@
         }
       }
     },
+    "/Applications/{applicationId}/$/UpdateArmMetadata": {
+      "post": {
+        "operationId": "UpdateApplicationArmMetadata",
+        "summary": "Updates the Arm Metadata for a specific Application.",
+        "description": "Updates the Arm Metadata for a specific Application. Is able to be called immediately after the create app API is called.  ",
+        "tags": [
+          "ApplicationType"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion_9-0_RequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/TimeoutOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ForceArmMetadataUpdateOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationArmMetadataUpdateDescriptionRequiredBodyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful update will return 200 status code."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/FabricError"
+            }
+          }
+        }
+      }
+    },
     "/Applications/{applicationId}/$/GetServices": {
       "get": {
         "summary": "Gets the information about all services belonging to the application specified by the application ID.",
@@ -3168,6 +3247,44 @@
             "schema": {
               "$ref": "#/definitions/UnplacedReplicaInformation"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/FabricError"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceId}/$/UpdateArmMetadata": {
+      "post": {
+        "operationId": "UpdateServiceArmMetadata",
+        "summary": "Updates the Arm Metadata for a specific service.",
+        "description": "Updates the Arm Metadata for a specific service.  ",
+        "tags": [
+          "Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion_9-0_RequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/TimeoutOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ForceArmMetadataUpdateOptionalQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ServiceArmMetadataUpdateDescriptionRequiredBodyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful update will return 200 status code."
           },
           "default": {
             "description": "The detailed error response.",
@@ -9957,7 +10074,7 @@
     },
     "FabricErrorCodes": {
       "type": "string",
-      "description": "Defines the fabric error codes that be returned as part of the error object in response to Service Fabric API operations that are not successful. Following are the error code values that can be returned for a specific HTTP status code.\n\n  - Possible values of the error code for HTTP status code 400 (Bad Request)\n    - \"FABRIC_E_INVALID_PARTITION_KEY\"\n    - \"FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_ADDRESS\"\n    - \"FABRIC_E_APPLICATION_NOT_UPGRADING\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_FABRIC_NOT_UPGRADING\"\n    - \"FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_CONFIGURATION\"\n    - \"FABRIC_E_INVALID_NAME_URI\"\n    - \"FABRIC_E_PATH_TOO_LONG\"\n    - \"FABRIC_E_KEY_TOO_LARGE\"\n    - \"FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED\"\n    - \"FABRIC_E_INVALID_ATOMIC_GROUP\"\n    - \"FABRIC_E_VALUE_EMPTY\"\n    - \"FABRIC_E_BACKUP_IS_ENABLED\"\n    - \"FABRIC_E_RESTORE_SOURCE_TARGET_PARTITION_MISMATCH\"\n    - \"FABRIC_E_INVALID_FOR_STATELESS_SERVICES\"\n    - \"FABRIC_E_INVALID_SERVICE_SCALING_POLICY\"\n    - \"E_INVALIDARG\"\n\n  - Possible values of the error code for HTTP status code 404 (Not Found)\n    - \"FABRIC_E_NODE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND\"\n    - \"FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND\"\n    - \"FABRIC_E_PARTITION_NOT_FOUND\"\n    - \"FABRIC_E_REPLICA_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST\"\n    - \"FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND\"\n    - \"FABRIC_E_DIRECTORY_NOT_FOUND\"\n    - \"FABRIC_E_FABRIC_VERSION_NOT_FOUND\"\n    - \"FABRIC_E_FILE_NOT_FOUND\"\n    - \"FABRIC_E_NAME_DOES_NOT_EXIST\"\n    - \"FABRIC_E_PROPERTY_DOES_NOT_EXIST\"\n    - \"FABRIC_E_ENUMERATION_COMPLETED\"\n    - \"FABRIC_E_SERVICE_MANIFEST_NOT_FOUND\"\n    - \"FABRIC_E_KEY_NOT_FOUND\"\n    - \"FABRIC_E_HEALTH_ENTITY_NOT_FOUND\"\n    - \"FABRIC_E_BACKUP_NOT_ENABLED\"\n    - \"FABRIC_E_BACKUP_POLICY_NOT_EXISTING\"\n    - \"FABRIC_E_FAULT_ANALYSIS_SERVICE_NOT_EXISTING\"\n    - \"FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR\"\n\n  - Possible values of the error code for HTTP status code 409 (Conflict)\n    - \"FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_SERVICE_ALREADY_EXISTS\"\n    - \"FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_TYPE_IN_USE\"\n    - \"FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS\"\n    - \"FABRIC_E_FABRIC_VERSION_IN_USE\"\n    - \"FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_NAME_ALREADY_EXISTS\"\n    - \"FABRIC_E_NAME_NOT_EMPTY\"\n    - \"FABRIC_E_PROPERTY_CHECK_FAILED\"\n    - \"FABRIC_E_SERVICE_METADATA_MISMATCH\"\n    - \"FABRIC_E_SERVICE_TYPE_MISMATCH\"\n    - \"FABRIC_E_HEALTH_STALE_REPORT\"\n    - \"FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED\"\n    - \"FABRIC_E_NODE_HAS_NOT_STOPPED_YET\"\n    - \"FABRIC_E_INSTANCE_ID_MISMATCH\"\n    - \"FABRIC_E_BACKUP_IN_PROGRESS\"\n    - \"FABRIC_E_RESTORE_IN_PROGRESS\"\n    - \"FABRIC_E_BACKUP_POLICY_ALREADY_EXISTING\"\n\n  - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 500 (Internal Server Error)\n    - \"FABRIC_E_NODE_IS_UP\"\n    - \"E_FAIL\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_VOLUME_ALREADY_EXISTS\"\n    - \"FABRIC_E_VOLUME_NOT_FOUND\"\n    - \"SerializationError\"\n\n  - Possible values of the error code for HTTP status code 503 (Service Unavailable)\n    - \"FABRIC_E_NO_WRITE_QUORUM\"\n    - \"FABRIC_E_NOT_PRIMARY\"\n    - \"FABRIC_E_NOT_READY\"\n    - \"FABRIC_E_RECONFIGURATION_PENDING\"\n    - \"FABRIC_E_SERVICE_OFFLINE\"\n    - \"E_ABORT\"\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 504 (Gateway Timeout)\n    - \"FABRIC_E_COMMUNICATION_ERROR\"\n    - \"FABRIC_E_OPERATION_NOT_COMPLETE\"\n    - \"FABRIC_E_TIMEOUT\"",
+      "description": "Defines the fabric error codes that be returned as part of the error object in response to Service Fabric API operations that are not successful. Following are the error code values that can be returned for a specific HTTP status code.\n\n  - Possible values of the error code for HTTP status code 400 (Bad Request)\n    - \"FABRIC_E_INVALID_PARTITION_KEY\"\n    - \"FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_ADDRESS\"\n    - \"FABRIC_E_APPLICATION_NOT_UPGRADING\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_FABRIC_NOT_UPGRADING\"\n    - \"FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_CONFIGURATION\"\n    - \"FABRIC_E_INVALID_NAME_URI\"\n    - \"FABRIC_E_PATH_TOO_LONG\"\n    - \"FABRIC_E_KEY_TOO_LARGE\"\n    - \"FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED\"\n    - \"FABRIC_E_INVALID_ATOMIC_GROUP\"\n    - \"FABRIC_E_VALUE_EMPTY\"\n    - \"FABRIC_E_BACKUP_IS_ENABLED\"\n    - \"FABRIC_E_RESTORE_SOURCE_TARGET_PARTITION_MISMATCH\"\n    - \"FABRIC_E_INVALID_FOR_STATELESS_SERVICES\"\n    - \"FABRIC_E_INVALID_SERVICE_SCALING_POLICY\"\n    - \"E_INVALIDARG\"\n\n  - Possible values of the error code for HTTP status code 404 (Not Found)\n    - \"FABRIC_E_NODE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND\"\n    - \"FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND\"\n    - \"FABRIC_E_PARTITION_NOT_FOUND\"\n    - \"FABRIC_E_REPLICA_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST\"\n    - \"FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND\"\n    - \"FABRIC_E_DIRECTORY_NOT_FOUND\"\n    - \"FABRIC_E_FABRIC_VERSION_NOT_FOUND\"\n    - \"FABRIC_E_FILE_NOT_FOUND\"\n    - \"FABRIC_E_NAME_DOES_NOT_EXIST\"\n    - \"FABRIC_E_PROPERTY_DOES_NOT_EXIST\"\n    - \"FABRIC_E_ENUMERATION_COMPLETED\"\n    - \"FABRIC_E_SERVICE_MANIFEST_NOT_FOUND\"\n    - \"FABRIC_E_KEY_NOT_FOUND\"\n    - \"FABRIC_E_HEALTH_ENTITY_NOT_FOUND\"\n    - \"FABRIC_E_BACKUP_NOT_ENABLED\"\n    - \"FABRIC_E_BACKUP_POLICY_NOT_EXISTING\"\n    - \"FABRIC_E_FAULT_ANALYSIS_SERVICE_NOT_EXISTING\"\n    - \"FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR\"\n\n  - Possible values of the error code for HTTP status code 409 (Conflict)\n    - \"FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_SERVICE_ALREADY_EXISTS\"\n    - \"FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_TYPE_IN_USE\"\n    - \"FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS\"\n    - \"FABRIC_E_FABRIC_VERSION_IN_USE\"\n    - \"FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_NAME_ALREADY_EXISTS\"\n    - \"FABRIC_E_NAME_NOT_EMPTY\"\n    - \"FABRIC_E_PROPERTY_CHECK_FAILED\"\n    - \"FABRIC_E_SERVICE_METADATA_MISMATCH\"\n    - \"FABRIC_E_SERVICE_TYPE_MISMATCH\"\n    - \"FABRIC_E_HEALTH_STALE_REPORT\"\n    - \"FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED\"\n    - \"FABRIC_E_NODE_HAS_NOT_STOPPED_YET\"\n    - \"FABRIC_E_INSTANCE_ID_MISMATCH\"\n    - \"FABRIC_E_BACKUP_IN_PROGRESS\"\n    - \"FABRIC_E_RESTORE_IN_PROGRESS\"\n    - \"FABRIC_E_BACKUP_POLICY_ALREADY_EXISTING\"\n\n  - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 500 (Internal Server Error)\n    - \"FABRIC_E_NODE_IS_UP\"\n    - \"E_FAIL\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_VOLUME_ALREADY_EXISTS\"\n    - \"FABRIC_E_VOLUME_NOT_FOUND\"\n    - \"SerializationError\"\n    - \"FABRIC_E_CERTIFICATE_NOT_FOUND\"\n\n  - Possible values of the error code for HTTP status code 503 (Service Unavailable)\n    - \"FABRIC_E_NO_WRITE_QUORUM\"\n    - \"FABRIC_E_NOT_PRIMARY\"\n    - \"FABRIC_E_NOT_READY\"\n    - \"FABRIC_E_RECONFIGURATION_PENDING\"\n    - \"FABRIC_E_SERVICE_OFFLINE\"\n    - \"E_ABORT\"\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 504 (Gateway Timeout)\n    - \"FABRIC_E_COMMUNICATION_ERROR\"\n    - \"FABRIC_E_OPERATION_NOT_COMPLETE\"\n    - \"FABRIC_E_TIMEOUT\"",
       "enum": [
         "FABRIC_E_INVALID_PARTITION_KEY",
         "FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR",
@@ -10042,7 +10159,8 @@
         "FABRIC_E_VOLUME_ALREADY_EXISTS",
         "FABRIC_E_VOLUME_NOT_FOUND",
         "SerializationError",
-        "FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR"
+        "FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR",
+        "FABRIC_E_CERTIFICATE_NOT_FOUND"
       ],
       "x-ms-enum": {
         "name": "FabricErrorCodes",
@@ -10299,6 +10417,9 @@
           },
           {
             "value": "FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR"
+          },
+          {
+            "value": "FABRIC_E_CERTIFICATE_NOT_FOUND"
           }
         ]
       }
@@ -10320,7 +10441,7 @@
       "properties": {
         "Code": {
           "$ref": "#/definitions/FabricErrorCodes",
-          "description": "Defines the fabric error codes that be returned as part of the error object in response to Service Fabric API operations that are not successful. Following are the error code values that can be returned for a specific HTTP status code.\n\n  - Possible values of the error code for HTTP status code 400 (Bad Request)\n    - \"FABRIC_E_INVALID_PARTITION_KEY\"\n    - \"FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_ADDRESS\"\n    - \"FABRIC_E_APPLICATION_NOT_UPGRADING\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_FABRIC_NOT_UPGRADING\"\n    - \"FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_CONFIGURATION\"\n    - \"FABRIC_E_INVALID_NAME_URI\"\n    - \"FABRIC_E_PATH_TOO_LONG\"\n    - \"FABRIC_E_KEY_TOO_LARGE\"\n    - \"FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED\"\n    - \"FABRIC_E_INVALID_ATOMIC_GROUP\"\n    - \"FABRIC_E_VALUE_EMPTY\"\n    - \"FABRIC_E_BACKUP_IS_ENABLED\"\n    - \"FABRIC_E_RESTORE_SOURCE_TARGET_PARTITION_MISMATCH\"\n    - \"FABRIC_E_INVALID_FOR_STATELESS_SERVICES\"\n    - \"FABRIC_E_INVALID_SERVICE_SCALING_POLICY\"\n    - \"E_INVALIDARG\"\n\n  - Possible values of the error code for HTTP status code 404 (Not Found)\n    - \"FABRIC_E_NODE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND\"\n    - \"FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND\"\n    - \"FABRIC_E_PARTITION_NOT_FOUND\"\n    - \"FABRIC_E_REPLICA_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST\"\n    - \"FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND\"\n    - \"FABRIC_E_DIRECTORY_NOT_FOUND\"\n    - \"FABRIC_E_FABRIC_VERSION_NOT_FOUND\"\n    - \"FABRIC_E_FILE_NOT_FOUND\"\n    - \"FABRIC_E_NAME_DOES_NOT_EXIST\"\n    - \"FABRIC_E_PROPERTY_DOES_NOT_EXIST\"\n    - \"FABRIC_E_ENUMERATION_COMPLETED\"\n    - \"FABRIC_E_SERVICE_MANIFEST_NOT_FOUND\"\n    - \"FABRIC_E_KEY_NOT_FOUND\"\n    - \"FABRIC_E_HEALTH_ENTITY_NOT_FOUND\"\n    - \"FABRIC_E_BACKUP_NOT_ENABLED\"\n    - \"FABRIC_E_BACKUP_POLICY_NOT_EXISTING\"\n    - \"FABRIC_E_FAULT_ANALYSIS_SERVICE_NOT_EXISTING\"\n    - \"FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR\"\n\n  - Possible values of the error code for HTTP status code 409 (Conflict)\n    - \"FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_SERVICE_ALREADY_EXISTS\"\n    - \"FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_TYPE_IN_USE\"\n    - \"FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS\"\n    - \"FABRIC_E_FABRIC_VERSION_IN_USE\"\n    - \"FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_NAME_ALREADY_EXISTS\"\n    - \"FABRIC_E_NAME_NOT_EMPTY\"\n    - \"FABRIC_E_PROPERTY_CHECK_FAILED\"\n    - \"FABRIC_E_SERVICE_METADATA_MISMATCH\"\n    - \"FABRIC_E_SERVICE_TYPE_MISMATCH\"\n    - \"FABRIC_E_HEALTH_STALE_REPORT\"\n    - \"FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED\"\n    - \"FABRIC_E_NODE_HAS_NOT_STOPPED_YET\"\n    - \"FABRIC_E_INSTANCE_ID_MISMATCH\"\n    - \"FABRIC_E_BACKUP_IN_PROGRESS\"\n    - \"FABRIC_E_RESTORE_IN_PROGRESS\"\n    - \"FABRIC_E_BACKUP_POLICY_ALREADY_EXISTING\"\n\n  - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 500 (Internal Server Error)\n    - \"FABRIC_E_NODE_IS_UP\"\n    - \"E_FAIL\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_VOLUME_ALREADY_EXISTS\"\n    - \"FABRIC_E_VOLUME_NOT_FOUND\"\n    - \"SerializationError\"\n\n  - Possible values of the error code for HTTP status code 503 (Service Unavailable)\n    - \"FABRIC_E_NO_WRITE_QUORUM\"\n    - \"FABRIC_E_NOT_PRIMARY\"\n    - \"FABRIC_E_NOT_READY\"\n    - \"FABRIC_E_RECONFIGURATION_PENDING\"\n    - \"FABRIC_E_SERVICE_OFFLINE\"\n    - \"E_ABORT\"\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 504 (Gateway Timeout)\n    - \"FABRIC_E_COMMUNICATION_ERROR\"\n    - \"FABRIC_E_OPERATION_NOT_COMPLETE\"\n    - \"FABRIC_E_TIMEOUT\""
+          "description": "Defines the fabric error codes that be returned as part of the error object in response to Service Fabric API operations that are not successful. Following are the error code values that can be returned for a specific HTTP status code.\n\n  - Possible values of the error code for HTTP status code 400 (Bad Request)\n    - \"FABRIC_E_INVALID_PARTITION_KEY\"\n    - \"FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_ADDRESS\"\n    - \"FABRIC_E_APPLICATION_NOT_UPGRADING\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_FABRIC_NOT_UPGRADING\"\n    - \"FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_CONFIGURATION\"\n    - \"FABRIC_E_INVALID_NAME_URI\"\n    - \"FABRIC_E_PATH_TOO_LONG\"\n    - \"FABRIC_E_KEY_TOO_LARGE\"\n    - \"FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED\"\n    - \"FABRIC_E_INVALID_ATOMIC_GROUP\"\n    - \"FABRIC_E_VALUE_EMPTY\"\n    - \"FABRIC_E_BACKUP_IS_ENABLED\"\n    - \"FABRIC_E_RESTORE_SOURCE_TARGET_PARTITION_MISMATCH\"\n    - \"FABRIC_E_INVALID_FOR_STATELESS_SERVICES\"\n    - \"FABRIC_E_INVALID_SERVICE_SCALING_POLICY\"\n    - \"E_INVALIDARG\"\n\n  - Possible values of the error code for HTTP status code 404 (Not Found)\n    - \"FABRIC_E_NODE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND\"\n    - \"FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND\"\n    - \"FABRIC_E_PARTITION_NOT_FOUND\"\n    - \"FABRIC_E_REPLICA_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST\"\n    - \"FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND\"\n    - \"FABRIC_E_DIRECTORY_NOT_FOUND\"\n    - \"FABRIC_E_FABRIC_VERSION_NOT_FOUND\"\n    - \"FABRIC_E_FILE_NOT_FOUND\"\n    - \"FABRIC_E_NAME_DOES_NOT_EXIST\"\n    - \"FABRIC_E_PROPERTY_DOES_NOT_EXIST\"\n    - \"FABRIC_E_ENUMERATION_COMPLETED\"\n    - \"FABRIC_E_SERVICE_MANIFEST_NOT_FOUND\"\n    - \"FABRIC_E_KEY_NOT_FOUND\"\n    - \"FABRIC_E_HEALTH_ENTITY_NOT_FOUND\"\n    - \"FABRIC_E_BACKUP_NOT_ENABLED\"\n    - \"FABRIC_E_BACKUP_POLICY_NOT_EXISTING\"\n    - \"FABRIC_E_FAULT_ANALYSIS_SERVICE_NOT_EXISTING\"\n    - \"FABRIC_E_IMAGEBUILDER_RESERVED_DIRECTORY_ERROR\"\n\n  - Possible values of the error code for HTTP status code 409 (Conflict)\n    - \"FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_SERVICE_ALREADY_EXISTS\"\n    - \"FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_TYPE_IN_USE\"\n    - \"FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS\"\n    - \"FABRIC_E_FABRIC_VERSION_IN_USE\"\n    - \"FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_NAME_ALREADY_EXISTS\"\n    - \"FABRIC_E_NAME_NOT_EMPTY\"\n    - \"FABRIC_E_PROPERTY_CHECK_FAILED\"\n    - \"FABRIC_E_SERVICE_METADATA_MISMATCH\"\n    - \"FABRIC_E_SERVICE_TYPE_MISMATCH\"\n    - \"FABRIC_E_HEALTH_STALE_REPORT\"\n    - \"FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED\"\n    - \"FABRIC_E_NODE_HAS_NOT_STOPPED_YET\"\n    - \"FABRIC_E_INSTANCE_ID_MISMATCH\"\n    - \"FABRIC_E_BACKUP_IN_PROGRESS\"\n    - \"FABRIC_E_RESTORE_IN_PROGRESS\"\n    - \"FABRIC_E_BACKUP_POLICY_ALREADY_EXISTING\"\n\n  - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 500 (Internal Server Error)\n    - \"FABRIC_E_NODE_IS_UP\"\n    - \"E_FAIL\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_VOLUME_ALREADY_EXISTS\"\n    - \"FABRIC_E_VOLUME_NOT_FOUND\"\n    - \"SerializationError\"\n    - \"FABRIC_E_CERTIFICATE_NOT_FOUND\"\n\n  - Possible values of the error code for HTTP status code 503 (Service Unavailable)\n    - \"FABRIC_E_NO_WRITE_QUORUM\"\n    - \"FABRIC_E_NOT_PRIMARY\"\n    - \"FABRIC_E_NOT_READY\"\n    - \"FABRIC_E_RECONFIGURATION_PENDING\"\n    - \"FABRIC_E_SERVICE_OFFLINE\"\n    - \"E_ABORT\"\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n\n  - Possible values of the error code for HTTP status code 504 (Gateway Timeout)\n    - \"FABRIC_E_COMMUNICATION_ERROR\"\n    - \"FABRIC_E_OPERATION_NOT_COMPLETE\"\n    - \"FABRIC_E_TIMEOUT\""
         },
         "Message": {
           "type": "string",
@@ -10692,6 +10813,10 @@
         "ManagedApplicationIdentity": {
           "$ref": "#/definitions/ManagedApplicationIdentityDescription",
           "description": "Managed application identity description."
+        },
+        "ApplicationMetadata": {
+          "$ref": "#/definitions/ApplicationMetadata",
+          "description": "Metadata associated with a specific application."
         }
       }
     },
@@ -10817,6 +10942,15 @@
         "UnhealthyEvaluations": {
           "$ref": "#/definitions/UnhealthyEvaluations",
           "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy ApplicationHealthEvaluation that impacted the aggregated health."
+        }
+      }
+    },
+    "ApplicationMetadata": {
+      "description": "Metadata associated with a specific application.",
+      "properties": {
+        "ArmMetadata": {
+          "$ref": "#/definitions/ArmMetadata",
+          "description": "Common ArmMetadata associated with Service Fabric Entities."
         }
       }
     },
@@ -10967,6 +11101,10 @@
         "ApplicationTypeDefinitionKind": {
           "$ref": "#/definitions/ApplicationTypeDefinitionKind",
           "description": "The mechanism used to define a Service Fabric application type."
+        },
+        "ApplicationTypeMetadata": {
+          "$ref": "#/definitions/ApplicationTypeMetadata",
+          "description": "Metadata associated with a specific application type."
         }
       }
     },
@@ -10992,6 +11130,19 @@
         "Manifest": {
           "type": "string",
           "description": "The XML manifest as a string."
+        }
+      }
+    },
+    "ApplicationTypeMetadata": {
+      "description": "Metadata associated with a specific application type.",
+      "properties": {
+        "ApplicationTypeProvisionTimestamp": {
+          "type": "string",
+          "description": "The timestamp when the application type was provisioned."
+        },
+        "ArmMetadata": {
+          "$ref": "#/definitions/ArmMetadata",
+          "description": "Common ArmMetadata associated with Service Fabric Entities."
         }
       }
     },
@@ -11222,6 +11373,15 @@
           "type": "boolean",
           "description": "Indicates whether this upgrade is node-by-node.",
           "default": false
+        }
+      }
+    },
+    "ArmMetadata": {
+      "description": "Common ArmMetadata associated with Service Fabric Entities.",
+      "properties": {
+        "ArmResourceId": {
+          "type": "string",
+          "description": "A string containing the ArmResourceId."
         }
       }
     },
@@ -14883,6 +15043,15 @@
       "type": "string",
       "description": "The name of the service manifest."
     },
+    "ServiceMetadata": {
+      "description": "Metadata associated with a specific service.",
+      "properties": {
+        "ArmMetadata": {
+          "$ref": "#/definitions/ArmMetadata",
+          "description": "Common ArmMetadata associated with Service Fabric Entities."
+        }
+      }
+    },
     "ServiceTypeName": {
       "type": "string",
       "description": "Name of the service type as specified in the service manifest."
@@ -14922,6 +15091,10 @@
         "IsServiceGroup": {
           "description": "Whether the service is in a service group.",
           "type": "boolean"
+        },
+        "ServiceMetadata": {
+          "$ref": "#/definitions/ServiceMetadata",
+          "description": "Metadata associated with a specific service."
         }
       },
       "required": [
@@ -16732,6 +16905,10 @@
         "InstanceId": {
           "$ref": "#/definitions/CodePackageInstanceId",
           "description": "The instance ID for current running entry point. For a code package setup entry point (if specified) runs first and after it finishes main entry point is started. Each time entry point executable is run, its instance id will change."
+        },
+        "ContainerId": {
+          "type": "string",
+          "description": "The container ID of the entry point. Only valid for container hosts."
         }
       }
     },
@@ -27753,6 +27930,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.0-preview"
@@ -27762,7 +27940,6 @@
       "description": "The version of the API. This parameter is required and its value must be '\"6.0-preview'.",
       "x-ms-enum": {
         "name": "ApiVersion_6-0-Preview_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.0-preview",
@@ -27775,6 +27952,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.0"
@@ -27784,7 +27962,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.0'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accept any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0, but if the runtime is 6.1, in order to make it easier to write the clients, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-0_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.0",
@@ -27797,6 +27974,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.1"
@@ -27806,7 +27984,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.1'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accept any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0, but if the runtime is 6.1, in order to make it easier to write the clients, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-1_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.1",
@@ -27819,6 +27996,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.2"
@@ -27828,7 +28006,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.2'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-2_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.2",
@@ -27841,6 +28018,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.2-preview"
@@ -27850,7 +28028,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.2-preview'.",
       "x-ms-enum": {
         "name": "ApiVersion_6-2-Preview_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.2-preview",
@@ -27863,6 +28040,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.3"
@@ -27872,7 +28050,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.3'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-3_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.3",
@@ -27885,6 +28062,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.3-preview"
@@ -27894,7 +28072,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.3-preview'.",
       "x-ms-enum": {
         "name": "ApiVersion_6-3-Preview_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.3-preview",
@@ -27907,6 +28084,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.4"
@@ -27916,7 +28094,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.4'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-4_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.4",
@@ -27929,6 +28106,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "6.5"
@@ -27938,7 +28116,6 @@
       "description": "The version of the API. This parameter is required and its value must be '6.5'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_6-5_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "6.5",
@@ -27951,6 +28128,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "7.0"
@@ -27960,7 +28138,6 @@
       "description": "The version of the API. This parameter is required and its value must be '7.0'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_7-0_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "7.0",
@@ -27973,6 +28150,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "7.2"
@@ -27982,7 +28160,6 @@
       "description": "The version of the API. This parameter is required and its value must be '7.2'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_7-2_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "7.2",
@@ -27995,6 +28172,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "8.0"
@@ -28004,7 +28182,6 @@
       "description": "The version of the API. This parameter is required and its value must be '8.0'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_8-0_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "8.0",
@@ -28017,6 +28194,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "8.1"
@@ -28026,7 +28204,6 @@
       "description": "The version of the API. This parameter is required and its value must be '8.1'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_8-1_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "8.1",
@@ -28039,6 +28216,7 @@
       "name": "api-version",
       "in": "query",
       "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
       "type": "string",
       "enum": [
         "8.2"
@@ -28048,13 +28226,44 @@
       "description": "The version of the API. This parameter is required and its value must be '8.2'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
       "x-ms-enum": {
         "name": "ApiVersion_8-2_RequiredQueryParam",
-        "modelAsString": true,
         "values": [
           {
             "value": "8.2",
             "description": "The 8.2 version of the API."
           }
         ]
+      }
+    },
+    "ApiVersion_9-0_RequiredQueryParam": {
+      "name": "api-version",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-ms-api-version": false,
+      "type": "string",
+      "enum": [
+        "9.0"
+      ],
+      "required": true,
+      "default": "9.0",
+      "description": "The version of the API. This parameter is required and its value must be '9.0'.\n\nService Fabric REST API version is based on the runtime version in which the API was introduced or was changed. Service Fabric runtime supports more than one version of the API. This version is the latest supported version of the API. If a lower API version is passed, the returned response may be different from the one documented in this specification.\n\nAdditionally the runtime accepts any version that is higher than the latest supported version up to the current version of the runtime. So if the latest API version is 6.0 and the runtime is 6.1, the runtime will accept version 6.1 for that API. However the behavior of the API will be as per the documented 6.0 version.",
+      "x-ms-enum": {
+        "name": "ApiVersion_9-0_RequiredQueryParam",
+        "values": [
+          {
+            "value": "9.0",
+            "description": "The 9.0 version of the API."
+          }
+        ]
+      }
+    },
+    "ApplicationArmMetadataUpdateDescriptionRequiredBodyParam": {
+      "name": "ApplicationArmMetadataUpdateDescription",
+      "in": "body",
+      "description": "The Arm metadata to be associated with a specific application",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/ArmMetadata"
       }
     },
     "ApplicationDefinitionKindFilterOptionalQueryParam": {
@@ -28134,6 +28343,16 @@
       "type": "string",
       "required": true,
       "description": "The version of the application type."
+    },
+    "ApplicationTypeArmMetadataUpdateDescriptionRequiredBodyParam": {
+      "name": "ApplicationTypeArmMetadataUpdateDescription",
+      "in": "body",
+      "description": "The Arm metadata to be associated with a specific application type",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/ArmMetadata"
+      }
     },
     "ProvisionApplicationTypeDescriptionBaseRequiredBodyParam": {
       "name": "ProvisionApplicationTypeDescriptionBaseRequiredBodyParam",
@@ -28492,6 +28711,16 @@
       "required": false,
       "default": 0
     },
+    "ServiceArmMetadataUpdateDescriptionRequiredBodyParam": {
+      "name": "ServiceArmMetadataUpdateDescription",
+      "in": "body",
+      "description": "The Arm metadata to be associated with a specific service",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/ArmMetadata"
+      }
+    },
     "ServiceIdRequiredPathParam": {
       "name": "serviceId",
       "in": "path",
@@ -28592,6 +28821,14 @@
       "type": "boolean",
       "required": false,
       "description": "Remove a Service Fabric application or service forcefully without going through the graceful shutdown sequence. This parameter can be used to forcefully delete an application or service for which delete is timing out due to issues in the service code that prevents graceful close of replicas."
+    },
+    "ForceArmMetadataUpdateOptionalQueryParam": {
+      "name": "Force",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "type": "boolean",
+      "required": false,
+      "description": "Force parameter used to prevent accidental Arm metadata update."
     },
     "DeactivationIntentDescriptionRequiredBodyParam": {
       "name": "DeactivationIntentDescription",
