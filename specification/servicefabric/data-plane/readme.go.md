@@ -85,3 +85,12 @@ These settings apply only when `--tag=8.2 --go` is specified on the command line
 ``` yaml $(tag) == '8.2' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/8.2/$(namespace)
 ```
+
+### Tag: 9.0 and go
+
+These settings apply only when `--tag=9.0 --go` is specified on the command line.
+
+``` yaml $(tag) == '9.0' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/9.0/$(namespace)
+
+```
