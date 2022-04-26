@@ -374,6 +374,12 @@
           },
           "Get properties of a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
+          },
+          "Get properties of a MsSqlServer provider": {
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Get.json"
+          },
+          "Get properties of a PrometheusHaCluster provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -434,6 +440,12 @@
           },
           "Create a Db2 provider": {
             "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
+          },
+          "Create a MsSqlServer provider": {
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create.json"
+          },
+          "Create a PrometheusHaCluster provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create.json"
           }
         },
         "parameters": [
@@ -865,6 +877,10 @@
           "description": "Gets or sets the database sql port.",
           "type": "string"
         },
+        "instanceNumber": {
+          "description": "Gets or sets the database instance number.",
+          "type": "string"
+        },
         "dbUsername": {
           "description": "Gets or sets the database user name.",
           "type": "string"
@@ -873,6 +889,18 @@
           "description": "Gets or sets the database password.",
           "type": "string",
           "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "description": "Gets or sets the key vault URI to secret with the database password.",
+          "type": "string"
+        },
+        "dbSslCertificateUri": {
+          "description": "Gets or sets the blob URI to SSL certificate for the DB.",
+          "type": "string"
+        },
+        "sslHostNameInCertificate": {
+          "description": "Gets or sets the hostname(s) in the SSL certificate.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "SapHana"
@@ -904,6 +932,31 @@
           "items": {
             "type": "string"
           }
+        },
+        "sapUsername": {
+          "description": "Gets or sets the SAP user name.",
+          "type": "string"
+        },
+        "sapPassword": {
+          "description": "Sets the SAP password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "sapPasswordUri": {
+          "description": "Gets or sets the key vault URI to secret with the SAP password.",
+          "type": "string"
+        },
+        "sapClientId": {
+          "description": "Gets or sets the SAP Client ID.",
+          "type": "string"
+        },
+        "sapPortNumber": {
+          "description": "Gets or sets the SAP HTTP port number.",
+          "type": "string"
+        },
+        "sapSslCertificateUri": {
+          "description": "Gets or sets the blob URI to SSL certificate for the SAP system.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "SapNetWeaver"
@@ -954,12 +1007,81 @@
           "type": "string",
           "x-ms-secret": true
         },
+        "dbPasswordUri": {
+          "description": "Gets or sets the key vault URI to secret with the database password.",
+          "type": "string"
+        },
         "sapSid": {
           "description": "Gets or sets the SAP System Identifier",
           "type": "string"
         }
       },
       "x-ms-discriminator-value": "Db2"
+    },
+    "PrometheusHaClusterProviderInstanceProperties": {
+      "description": "Gets or sets the PrometheusHaCluster provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "prometheusUrl": {
+          "description": "URL of the Node Exporter endpoint.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "Gets or sets the target machine name.",
+          "type": "string"
+        },
+        "sid": {
+          "description": "Gets or sets the cluster sid.",
+          "type": "string"
+        },
+        "clusterName": {
+          "description": "Gets or sets the clusterName.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "PrometheusHaCluster"
+    },
+    "MsSqlServerProviderInstanceProperties": {
+      "description": "Gets or sets the SQL server provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "hostname": {
+          "description": "Gets or sets the SQL server host name.",
+          "type": "string"
+        },
+        "dbPort": {
+          "description": "Gets or sets the database sql port.",
+          "type": "string"
+        },
+        "dbUsername": {
+          "description": "Gets or sets the database user name.",
+          "type": "string"
+        },
+        "dbPassword": {
+          "description": "Gets or sets the database password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "dbPasswordKeyVaultUri": {
+          "description": "Gets or sets the key vault URI to secret with the database password.",
+          "type": "string"
+        },
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "MsSqlServer"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
