@@ -1,0 +1,33 @@
+﻿{
+  "summary": "Obtains the device operation status.",
+  "operationId": "Device_OperationStatusLookup",
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "idScope": "contoso-id-scope",
+    "registrationId": "contoso-registration-id",
+    "operationId": "85ea2852-ebfb-4632-960b-165c6695b4ea"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "retry-after": 10,
+        "location": "https://global.azure-devices-provisioning.net/contoso-id-scope/devices/contoso-registration-id/operations/85ea2852-ebfb-4632-960b-165c6695b4ea"
+      },
+      "body": {
+        "operationId": "85ea2852-ebfb-4632-960b-165c6695b4ea",
+        "status": "running",
+        "createdDateTimeUtc": "2021-11-01T00:00:00",
+        "lastActionDateTimeUtc": "2021-11-01T00:01:00"
+      }
+    },
+    "200": {
+      "body": {
+        "operationId": "85ea2852-ebfb-4632-960b-165c6695b4ea",
+        "status": "succeeded",
+        "createdDateTimeUtc": "2021-11-01T00:00:00",
+        "lastActionDateTimeUtc": "2021-11-01T00:01:10",
+        "resourceLocation": "https://global.azure-devices-provisioning.net/contoso-id-scope/devices/contoso-registration-id/certificates/f679fd5a-a570-4d4b-b640-81753d47f820"
+      }
+    }
+  }
+}

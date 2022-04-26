@@ -1,0 +1,27 @@
+﻿{
+  "summary": "API to issue certificates for IoT devices.",
+  "operationId": "CertificateIssuance_IssueCertificate",
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "idScope": "contoso-id-scope",
+    "registrationId": "contoso-registration-id",
+    "request": {
+      "certificateType": "serverCertificate",
+      "csr": "-----BEGIN CERTIFICATE REQUEST-----MIIBJzCBzQIBADAvMS0wKwYDVQQDDCQ3ZDVhZmNiMC04NGI4LTQyYzYtYWJkYS0yYTQ0MTI3N2Q0MzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARBafB5bAi8DKq8F0UFsuEy+y6AHpk8YvIGE5g4ReeZIOSQ30obp4tFB7IdJQawTq3YKp1zOv5c8G19aykuGosSoDwwOgYJKoZIhvcNAQkOMS0wKzAMBgNVHRMBAf8EAjAAMBsGA1UdEQQUMBKCCmNvbnN0by5jb22HBAoAAAEwCgYIKoZIzj0EAwIDSQAwRgIhAKgIRbM0o4dWuXaQfJAD1WzM+FtowB3zRUAnrGYdRHJmAiEA/NzniwfySRO8/6Fr04y24ZesbqwWET8OOXuRn7KPlTk=-----END CERTIFICATE REQUEST-----"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "retry-after": 10,
+        "location": "https://global.azure-devices-provisioning.net/contoso-id-scope/devices/contoso-registration-id/operations/85ea2852-ebfb-4632-960b-165c6695b4ea"
+      },
+      "body": {
+        "operationId": "85ea2852-ebfb-4632-960b-165c6695b4ea",
+        "status": "running",
+        "createdDateTimeUtc": "2021-11-01T00:00:00",
+        "lastActionDateTimeUtc": "2021-11-01T00:01:00"
+      }
+    }
+  }
+}
