@@ -593,6 +593,9 @@
           },
           "Create Managed Cluster with Dedicated Host Group": {
             "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
+          },
+          "Create Managed Cluster with CustomCATrust enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnableCustomCATrust.json"
           }
         }
       },
@@ -1097,6 +1100,9 @@
           },
           "Create Agent Pool with Dedicated Host Group": {
             "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
+          },
+          "Create Agent Pool with CustomCATrust enabled": {
+            "$ref": "./examples/AgentPoolsCreate_EnableCustomCATrust.json"
           }
         }
       },
@@ -3277,6 +3283,10 @@
           "type": "boolean",
           "title": "Whether each node is allocated its own public IP.",
           "description": "Some scenarios may require nodes in a node pool to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. For more information see [assigning a public IP per node](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#assign-a-public-ip-per-node-for-your-node-pools). The default is false."
+        },
+        "enableCustomCATrust": {
+          "type": "boolean",
+          "description": "Whether to enable Custom CA Trust feature."
         },
         "nodePublicIPPrefixID": {
           "type": "string",
