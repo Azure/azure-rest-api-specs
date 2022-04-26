@@ -94,13 +94,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource Updated. Returns the network security perimeter.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeter"
-            }
-          },
-          "201": {
-            "description": "Resource Created. Returns the network security perimeter.",
+            "description": "Resource created. Returns the network security perimeter.",
             "schema": {
               "$ref": "#/definitions/NetworkSecurityPerimeter"
             }
@@ -840,15 +834,6 @@
           "200": {
             "description": "Delete Succeed."
           },
-          "202": {
-            "description": "Delete in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "Request successful. The resource does not exist."
           },
@@ -861,7 +846,7 @@
         },
         "x-ms-examples": {
           "NspAssociationDelete": {
-            "$ref": "./examples/NspAssociationDelete.json"
+            "$ref": "./examples/NspAssociationProxyDelete.json"
           }
         }
       }
@@ -988,18 +973,12 @@
             "schema": {
               "$ref": "#/definitions/CheckMembers"
             },
-            "description": "Parameter supplied to create or update the network security perimeter check members."
+            "description": "Parameter supplied to create the network security perimeter check members."
           }
         ],
         "responses": {
           "200": {
             "description": "Resource Updated. Returns the network security perimeter.",
-            "schema": {
-              "$ref": "#/definitions/CheckMembers"
-            }
-          },
-          "201": {
-            "description": "Resource Created. Returns the network security perimeter.",
             "schema": {
               "$ref": "#/definitions/CheckMembers"
             }
@@ -1044,12 +1023,6 @@
         "responses": {
           "200": {
             "description": "Resource Updated. Returns the network security perimeter.",
-            "schema": {
-              "$ref": "#/definitions/QueryNSPReqRes"
-            }
-          },
-          "201": {
-            "description": "Resource Created. Returns the network security perimeter.",
             "schema": {
               "$ref": "#/definitions/QueryNSPReqRes"
             }
@@ -1113,12 +1086,6 @@
               "$ref": "#/definitions/NspAccessRuleReconcile"
             }
           },
-          "201": {
-            "description": "Reconcile NSP access rule.",
-            "schema": {
-              "$ref": "#/definitions/NspAccessRuleReconcile"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1127,7 +1094,7 @@
           }
         },
         "x-ms-examples": {
-          "NspAccessRulePut": {
+          "NspAccessRuleReconcile": {
             "$ref": "./examples/NspAccessRuleReconcile.json"
           }
         }
