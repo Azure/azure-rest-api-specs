@@ -2559,6 +2559,227 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/trustedAccessRoles": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoles_List",
+        "summary": "List supported trusted access roles.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleListResult"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List trusted access roles": {
+            "$ref": "./examples/TrustedAccessRoles_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/trustedAccessRoleBindings": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_List",
+        "summary": "List trusted access role bindings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBindingListResult"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List trusted access role bindings": {
+            "$ref": "./examples/TrustedAccessRoleBindings_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/trustedAccessRoleBindings/{trustedAccessRoleBindingName}": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_Get",
+        "summary": "Get a trusted access role binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBinding"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a trusted access role binding": {
+            "$ref": "./examples/TrustedAccessRoleBindings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_CreateOrUpdate",
+        "summary": "Create or update a trusted access role binding",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          },
+          {
+            "name": "trustedAccessRoleBinding",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBinding"
+            },
+            "description": "A trusted access role binding"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBinding"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a trusted access role binding": {
+            "$ref": "./examples/TrustedAccessRoleBindings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_Delete",
+        "summary": "Delete a trusted access role binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a trusted access role binding": {
+            "$ref": "./examples/TrustedAccessRoleBindings_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6211,6 +6432,152 @@
     "CapacityReservationGroupID": {
       "description": "Capacity Reservation Group ID for AgentPool to associate",
       "type": "string"
+    },
+    "TrustedAccessRoleRule": {
+      "type": "object",
+      "description": "Rule for trusted access role",
+      "properties": {
+        "verbs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed verbs"
+        },
+        "apiGroups": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed apiGroups"
+        },
+        "resources": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed resources"
+        },
+        "resourceNames": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed names"
+        },
+        "nonResourceURLs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed nonResourceURLs"
+        }
+      }
+    },
+    "TrustedAccessRole": {
+      "type": "object",
+      "description": "Trusted access role definition.",
+      "properties": {
+        "sourceResourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type of Azure resource"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of role, name is unique under a source resource type"
+        },
+        "rules": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRoleRule"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of rules for the role. This maps to 'rules' property of [Kubernetes Cluster Role](https://kubernetes.io/docs/reference/kubernetes-api/authorization-resources/cluster-role-v1/#ClusterRole)."
+        }
+      }
+    },
+    "TrustedAccessRoleListResult": {
+      "type": "object",
+      "description": "List of trusted access roles",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRole"
+          },
+          "x-ms-identifiers": [
+            "sourceResourceType",
+            "name"
+          ],
+          "description": "Role list"
+        }
+      }
+    },
+    "TrustedAccessRoleBindingProperties": {
+      "type": "object",
+      "description": "Properties for trusted access role binding",
+      "required": [
+        "sourceResourceId",
+        "roles"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current provisioning state of trusted access role binding."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of source resource that trusted access is configured for."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of roles to bind, each item is a resource type qualified role name. For example: 'Microsoft.MachineLearningServices/workspaces/reader'."
+        }
+      }
+    },
+    "TrustedAccessRoleBinding": {
+      "type": "object",
+      "description": "Defines binding between a resource and role",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TrustedAccessRoleBindingProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrustedAccessRoleBindingListResult": {
+      "type": "object",
+      "description": "List of trusted access role bindings",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRoleBinding"
+          },
+          "description": "Role binding list"
+        }
+      }
     }
   },
   "parameters": {
@@ -6273,6 +6640,16 @@
       "required": false,
       "type": "boolean",
       "description": "ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget",
+      "x-ms-parameter-location": "method"
+    },
+    "TrustedAccessRoleBindingNameParameter": {
+      "name": "trustedAccessRoleBindingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of trusted access role binding.",
+      "minLength": 1,
+      "maxLength": 36,
       "x-ms-parameter-location": "method"
     }
   }
