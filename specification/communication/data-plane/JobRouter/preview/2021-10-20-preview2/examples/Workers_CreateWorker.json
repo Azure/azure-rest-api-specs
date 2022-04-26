@@ -2,48 +2,49 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2021-10-20_preview2",
-    "routerWorker": {
-      "totalCapacity": 100,
+    "workerId": "WorkerId",
+    "patch": {
+      "totalCapacity": 10,
       "queueAssignments": {
         "MainQueue": {},
-        "SecondaryQueue": {}
+        "SecondaryQueue": null
       },
       "labels": {},
       "tags": {},
       "channelConfigurations": {
         "CustomChatChannel": {
-          "capacityCostPerJob": 10
+          "capacityCostPerJob": 11
         },
         "CustomVoiceChannel": {
-          "capacityCostPerJob": 100
+          "capacityCostPerJob": 10
         }
       },
-      "availableForOffers": true
+      "availableForOffers": false
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "system-generate-worker-id",
-        "state": "active",
+        "id": "WorkerId",
+        "state": "inactive",
         "queueAssignments": {
-          "MainQueue": {},
-          "SecondaryQueue": {}
+          "MainQueue": {}
         },
-        "totalCapacity": 100,
+        "totalCapacity": 10,
         "labels": {},
+        "tags": {},
         "channelConfigurations": {
           "CustomChatChannel": {
-            "capacityCostPerJob": 10
+            "capacityCostPerJob": 11
           },
           "CustomVoiceChannel": {
-            "capacityCostPerJob": 100
+            "capacityCostPerJob": 10
           }
         },
         "offers": [],
         "assignedJobs": [],
         "loadRatio": 0,
-        "availableForOffers": true
+        "availableForOffers": false
       }
     }
   }
