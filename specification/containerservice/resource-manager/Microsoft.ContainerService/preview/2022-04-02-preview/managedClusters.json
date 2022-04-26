@@ -1056,6 +1056,9 @@
           "Create Agent Pool with OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_OSSKU.json"
           },
+          "Create Agent Pool with Windows OSSKU": {
+            "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
+          },
           "Create Agent Pool with GPUMIG": {
             "$ref": "./examples/AgentPoolsCreate_GPUMIG.json"
           },
@@ -5102,13 +5105,15 @@
       "type": "string",
       "enum": [
         "Ubuntu",
-        "CBLMariner"
+        "CBLMariner",
+        "Windows2019",
+        "Windows2022"
       ],
       "x-ms-enum": {
         "name": "OSSKU",
         "modelAsString": true
       },
-      "description": "Specifies an OS SKU. This value must not be specified if OSType is Windows."
+      "description": "Specifies the OS SKU used by the agent pool. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated."
     },
     "ScaleSetPriority": {
       "type": "string",
