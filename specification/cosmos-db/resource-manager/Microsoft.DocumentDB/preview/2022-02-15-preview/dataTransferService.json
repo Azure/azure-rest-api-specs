@@ -69,7 +69,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful CreateJob response",
             "schema": {
               "$ref": "#/definitions/DataTransferJobGetResults"
@@ -111,6 +111,132 @@
         "responses": {
           "200": {
             "description": "The Data Transfer Job Properties retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/pause": {
+      "post": {
+        "operationId": "DataTransferJobs_Pause",
+        "description": "Pause a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobPause": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobPause.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Pause Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/resume": {
+      "post": {
+        "operationId": "DataTransferJobs_Resume",
+        "description": "Resumes a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobCreate": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobResume.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Resume Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/cancel": {
+      "post": {
+        "operationId": "DataTransferJobs_Cancel",
+        "description": "Cancels a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobCreate": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Cancel Job response",
             "schema": {
               "$ref": "#/definitions/DataTransferJobGetResults"
             }
@@ -278,10 +404,15 @@
           "type": "string",
           "description": "Job Status"
         },
-        "percentageComplete": {
+        "processedCount": {
           "readOnly": true,
           "type": "number",
-          "description": "Percentage of completion."
+          "description": "Processed Count."
+        },
+        "totalCount": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Total Count."
         },
         "lastUpdatedUtcTime": {
           "readOnly": true,
