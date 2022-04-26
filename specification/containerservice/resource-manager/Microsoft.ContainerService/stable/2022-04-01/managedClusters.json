@@ -2671,6 +2671,7 @@
           "description": "Both patch version <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are supported. When <major.minor> is specified, the latest supported GA patch version is chosen automatically. Updating the cluster with the same <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not trigger an upgrade, even if a newer patch version is available. As a best practice, you should upgrade all node pools in an AKS cluster to the same Kubernetes version. The node pool version must have the same major version as the control plane. The node pool minor version must be within two minor versions of the control plane version. The node pool version cannot be greater than the control plane version. For more information see [upgrading a node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool)."
         },
         "currentOrchestratorVersion": {
+          "readOnly": true,
           "type": "string",
           "title": "The version of Kubernetes running on the Agent Pool.",
           "description": "If a specific Kubernetes version is specified in orchestratorVersion, this field will be exactly equal to it. For example, orchestratorVersion: 1.20.13, currentOrchestratorVersion: 1.20.13. If only major and minor versions are specified in orchestratorVersion, then this field will be the latest GA patch version version picked by the service. For example, orchestratorVersion: 1.20, currentOrchestratorVersion: 1.20.13."
