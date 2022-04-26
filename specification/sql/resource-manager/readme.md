@@ -268,15 +268,14 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
-- ./Microsoft.Sql/preview/2021-05-01-preview/DistributedAvailabilityGroups.json
-- ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustCertificates.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ServerTrustCertificates.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
-- ./Microsoft.Sql/preview/2021-08-01-preview/IPv6FirewallRules.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedDatabaseSensitivityLabels.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/SensitivityLabels.json
-
+- ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1790,6 +1789,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ### C#

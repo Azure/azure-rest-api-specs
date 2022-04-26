@@ -130,6 +130,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Python
