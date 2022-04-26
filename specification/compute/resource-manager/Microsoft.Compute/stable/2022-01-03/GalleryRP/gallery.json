@@ -1771,17 +1771,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/GalleryProvisioningState"
         },
         "sharingProfile": {
           "$ref": "#/definitions/SharingProfile"
@@ -1869,19 +1859,19 @@
       "properties": {
         "publisherUri": {
           "type": "string",
-          "description": "Community gallery publisher uri"
+          "description": "The link to the publisher website. Visible to all users."
         },
         "publisherContact": {
           "type": "string",
-          "description": "Community gallery publisher contact email"
+          "description": "Community gallery publisher support email. The email address of the publisher. Visible to all users."
         },
         "eula": {
           "type": "string",
-          "description": "Community gallery publisher eula"
+          "description": "End-user license agreement for community gallery image."
         },
         "publicNamePrefix": {
           "type": "string",
-          "description": "Community gallery public name prefix"
+          "description": "The prefix of the gallery name that will be displayed publicly. Visible to all users."
         },
         "communityGalleryEnabled": {
           "readOnly": true,
@@ -2068,17 +2058,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery Application Version.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/GalleryProvisioningState"
         },
         "replicationStatus": {
           "readOnly": true,
@@ -2250,17 +2230,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery image definition.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/GalleryProvisioningState"
         },
         "features": {
           "type": "array",
@@ -2318,17 +2288,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery image version.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/GalleryProvisioningState"
         },
         "storageProfile": {
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
@@ -2926,6 +2886,24 @@
         "operationType"
       ],
       "x-ms-azure-resource": true
+    },
+    "GalleryProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "title": "The current state of the gallery or gallery artifact.",
+      "description": "The provisioning state, which only appears in the response.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Failed",
+        "Succeeded",
+        "Deleting",
+        "Migrating"
+      ],
+      "x-ms-enum": {
+        "name": "GalleryProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
