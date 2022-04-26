@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor",
+    "tagsParameter": {
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor",
+        "name": "mySapMonitor",
+        "type": "Microsoft.Workloads/workloads",
+        "location": "westus",
+        "tags": {
+          "testkey": "testvalue"
+        },
+        "systemData": {
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "errors": [
+            {
+              "code": "0000",
+              "message": "Error message",
+              "target": "",
+              "details": "Error details",
+              "innerError": "Error stack trace"
+            }
+          ],
+          "appLocation": "eastus",
+          "routingPreference": "RouteAll",
+          "managedResourceGroupConfiguration": {
+            "name": "myManagedRg"
+          },
+          "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+          "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi"
+        }
+      }
+    }
+  }
+}
