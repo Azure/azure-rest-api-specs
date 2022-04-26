@@ -4813,244 +4813,46 @@
       }
     },
     "ScheduleBase": {
-      "description": "Base definition of a schedule",
-      "required": [
-        "scheduleType"
-      ],
       "type": "object",
       "properties": {
-        "endTime": {
-          "format": "date-time",
-          "description": "Specifies end time of schedule in ISO 8601 format.\r\nIf not present, the schedule will run indefinitely",
+        "id": {
           "type": "string",
           "x-nullable": true
         },
-        "scheduleStatus": {
-          "description": "Specifies the schedule's status",
-          "default": "Enabled",
+        "provisioningStatus": {
+          "$ref": "#/definitions/ScheduleProvisioningState"
+        },
+        "status": {
           "$ref": "#/definitions/ScheduleStatus"
-        },
-        "scheduleType": {
-          "description": "[Required] Specifies the schedule type",
-          "$ref": "#/definitions/ScheduleType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Specifies start time of schedule in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format.",
-          "default": "UTC",
-          "type": "string",
-          "x-nullable": true
         }
       },
-      "discriminator": "scheduleType"
+      "additionalProperties": false
     },
-    "ScheduleType": {
-      "description": "Enum to describe type of schedule",
+    "ScheduleProvisioningState": {
       "enum": [
-        "Cron",
-        "Recurrence"
+        "Completed",
+        "Provisioning",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ScheduleType",
+        "name": "ScheduleProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "value": "Cron",
-            "description": "Cron schedule type"
+            "value": "Completed"
           },
           {
-            "value": "Recurrence",
-            "description": "Recurrence schedule type"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "CronSchedule": {
-      "description": "Cron schedule definition",
-      "required": [
-        "expression"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
-      "properties": {
-        "expression": {
-          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Cron",
-      "additionalProperties": false
-    },
-    "RecurrenceSchedule": {
-      "description": "Recurrence schedule definition",
-      "required": [
-        "frequency",
-        "interval"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
-      "properties": {
-        "frequency": {
-          "description": "[Required] Specifies frequency with with which to trigger schedule",
-          "$ref": "#/definitions/RecurrenceFrequency"
-        },
-        "interval": {
-          "format": "int32",
-          "description": "[Required] Specifies schedule interval in conjunction with frequency",
-          "type": "integer"
-        },
-        "pattern": {
-          "description": "Specifies the recurrence schedule pattern",
-          "$ref": "#/definitions/RecurrencePattern",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Recurrence",
-      "additionalProperties": false
-    },
-    "RecurrenceFrequency": {
-      "description": "Enum to describe the frequency of a recurrence schedule",
-      "enum": [
-        "Minute",
-        "Hour",
-        "Day",
-        "Week",
-        "Month"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RecurrenceFrequency",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Minute",
-            "description": "Minute frequency"
+            "value": "Provisioning"
           },
           {
-            "value": "Hour",
-            "description": "Hour frequency"
-          },
-          {
-            "value": "Day",
-            "description": "Day frequency"
-          },
-          {
-            "value": "Week",
-            "description": "Week frequency"
-          },
-          {
-            "value": "Month",
-            "description": "Month frequency"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "RecurrencePattern": {
-      "description": "Recurrence schedule pattern definition",
-      "required": [
-        "hours",
-        "minutes"
-      ],
-      "type": "object",
-      "properties": {
-        "hours": {
-          "description": "[Required] List of hours for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "minutes": {
-          "description": "[Required] List of minutes for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "weekdays": {
-          "description": "List of weekdays for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Weekday"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "Weekday": {
-      "description": "Enum of weekdays",
-      "enum": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Weekday",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Monday",
-            "description": "Monday weekday"
-          },
-          {
-            "value": "Tuesday",
-            "description": "Tuesday weekday"
-          },
-          {
-            "value": "Wednesday",
-            "description": "Wednesday weekday"
-          },
-          {
-            "value": "Thursday",
-            "description": "Thursday weekday"
-          },
-          {
-            "value": "Friday",
-            "description": "Friday weekday"
-          },
-          {
-            "value": "Saturday",
-            "description": "Saturday weekday"
-          },
-          {
-            "value": "Sunday",
-            "description": "Sunday weekday"
+            "value": "Failed"
           }
         ]
       },
       "additionalProperties": false
     },
     "ScheduleStatus": {
-      "description": "Enum to describe status of schedule",
       "enum": [
         "Enabled",
         "Disabled"
@@ -5061,12 +4863,10 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Enabled",
-            "description": "Schedule is enabled"
+            "value": "Enabled"
           },
           {
-            "value": "Disabled",
-            "description": "Schedule is disabled"
+            "value": "Disabled"
           }
         ]
       },
