@@ -3624,7 +3624,7 @@
         "kubernetesVersion": {
           "type": "string",
           "title": "The version of Kubernetes the Managed Cluster is running.",
-          "description": "Both full Kubernetes version (e.g. 1.20.13) and Kubernetes version only containing major and minor versions (e.g. 1.20) are supported. When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. If only major and minor version is used for upgrade, only higher minor version will trigger upgrade, e.g. 1.14.x -> 1.14 will not trigger upgrade, but 1.14.x -> 1.15 will trigger upgrade. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
+          "description": "Both patch version <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are supported. When <major.minor> is specified, the latest supported GA patch version is chosen automatically. Updating the cluster with the same <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not trigger an upgrade, even if a newer patch version is available. When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
         },
         "currentKubernetesVersion": {
           "readOnly": true,
