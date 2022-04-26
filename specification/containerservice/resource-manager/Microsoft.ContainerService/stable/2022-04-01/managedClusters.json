@@ -3630,7 +3630,7 @@
           "readOnly": true,
           "type": "string",
           "title": "The version of Kubernetes the Managed Cluster is running.",
-          "description": "If a specific Kubernetes version is specified in kubernetesVersion, currentKubernetesVersion is the same as kubernetesVersion. For example, kubernetesVersion: 1.20.13, currentKubernetesVersion: 1.20.13. If only major and minor versions are used in kubernetesVersion, then currentKubernetesVersion will be the latest GA patch version picked by the service. For example, kubernetesVersion: 1.20, currentKubernetesVersion: 1.20.13."
+          "description": "If kubernetesVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If kubernetesVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
         },
         "dnsPrefix": {
           "type": "string",
