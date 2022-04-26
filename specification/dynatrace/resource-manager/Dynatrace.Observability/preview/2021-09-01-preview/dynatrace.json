@@ -1161,6 +1161,9 @@
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SSODetailsRequestParameter"
           }
         ],
         "responses": {
@@ -2249,6 +2252,16 @@
         }
       }
     },
+    "SSODetailsRequest": {
+      "description": "Request for getting sso details for a user",
+      "type": "object",
+      "properties": {
+        "userPrincipal": {
+          "type": "string",
+          "description": "user principal id of the user"
+        }
+      }
+    },
     "SSODetailsResponse": {
       "type": "object",
       "properties": {
@@ -2270,6 +2283,13 @@
             "type": "string"
           },
           "description": "array of Aad(azure active directory) domains"
+        },
+        "adminUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of admin user emails."
         }
       },
       "description": "SSO details from the Dynatrace partner"
@@ -2420,6 +2440,15 @@
       "description": "The details of the linkable environment request.",
       "schema": {
         "$ref": "#/definitions/LinkableEnvironmentRequest"
+      }
+    },
+    "SSODetailsRequestParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "description": "The details of the get sso details request.",
+      "schema": {
+        "$ref": "#/definitions/SSODetailsRequest"
       }
     }
   }
