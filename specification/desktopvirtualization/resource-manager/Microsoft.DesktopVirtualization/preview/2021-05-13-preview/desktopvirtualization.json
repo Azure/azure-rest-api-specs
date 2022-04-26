@@ -1648,6 +1648,15 @@
             "schema": {
               "$ref": "#/definitions/SessionHostConfiguration"
             }
+          },
+          {
+            "name": "sessionHostSubsetConfiguration",
+            "description": "Object containing SessionHostSubsetConfiguration definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostSubsetConfiguration"
+            }
           }
         ],
         "responses": {
@@ -1806,6 +1815,142 @@
             "description": "Successfully retrieved host pool in resource group.",
             "schema": {
               "$ref": "#/definitions/SessionHostConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostSubsetConfigurations/default": {
+      "get": {
+        "tags": [
+          "SessionHostSubsetConfiguration"
+        ],
+        "operationId": "SessionHostSubsetConfigurations_Get",
+        "description": "Get a SessionHostSubsetConfiguration.",
+        "x-ms-examples": {
+          "SessionHostSubsetConfigurations_Get": {
+            "$ref": "./examples/SessionHostSubsetConfigurations_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostSubsetConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved subset configuration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostSubsetConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SessionHostSubsetConfiguration"
+        ],
+        "operationId": "SessionHostSubsetConfigurations_Delete",
+        "description": "Remove a SessionHostSubsetConfiguration.",
+        "x-ms-examples": {
+          "SessionHostSubsetConfigurations_Delete": {
+            "$ref": "./examples/SessionHostSubsetConfigurations_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostSubsetConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed subset configuration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostSubsetConfiguration"
+            }
+          },
+          "204": {
+            "description": "Subset configuration does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostSubsetConfigurations": {
+      "get": {
+        "tags": [
+          "SessionHostSubsetConfiguration"
+        ],
+        "operationId": "SessionHostSubsetConfigurations_ListByHostPool",
+        "description": "List sessionHostSubsetConfigurations.",
+        "x-ms-examples": {
+          "SessionHostSubsetConfigurations_ListByHostPool": {
+            "$ref": "./examples/SessionHostSubsetConfigurations_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved subset configuration in host pool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostSubsetConfigurationList"
             }
           },
           "default": {
@@ -4332,6 +4477,11 @@
           "description": "Detailed properties for SessionHostConfiguration",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SessionHostConfigurationProperties"
+        },
+        "subsetConfigurationProperties": {
+          "description": "Detailed properties for SessionHostSubsetConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostSubsetConfigurationProperties"
         }
       }
     },
@@ -4417,6 +4567,11 @@
           "description": "Detailed properties for SessionHostConfigurationPatch",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SessionHostConfigurationPatchProperties"
+        },
+        "subsetConfigurationProperties": {
+          "description": "Detailed properties for SessionHostSubsetConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostSubsetConfigurationPatchProperties"
         }
       }
     },
@@ -4879,6 +5034,298 @@
         "passwordKeyVaultSecretName": {
           "type": "string",
           "description": "The keyvault secret name the password is stored in."
+        }
+      }
+    },
+    "SessionHostSubsetConfigurationList": {
+      "type": "object",
+      "title": "SessionHostSubsetConfigurationList",
+      "description": "List of SessionHostSubsetConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHostSubsetConfiguration definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostSubsetConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionHostSubsetConfiguration": {
+      "type": "object",
+      "description": "Represents a SessionHostSubsetConfiguration definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostSubsetConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostSubsetConfigurationProperties"
+        }
+      }
+    },
+    "SessionHostSubsetConfigurationProperties": {
+      "description": "Session host subset configurations of HostPool.",
+      "type": "object",
+      "required": [
+        "vmResourceGroup",
+        "vmLocation",
+        "vmNamePrefix",
+        "networkInfo"
+      ],
+      "properties": {
+        "subsetConfigurationProvisioningState": {
+          "description": "Provisioning state of the Session Host Configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "subsetConfigurationVersion": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when session host configuration was last modified and something was changed.",
+          "readOnly": true
+        },
+        "vmTags": {
+          "type": "string",
+          "description": "The tags associated with the session host"
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The name of the Resource Group that the session host should be created in"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The name of the Location where the session host should be located"
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names"
+        },
+        "availabilityInfo": {
+          "$ref": "#/definitions/AvailabilityInfoPatchProperties",
+          "description": "Availability information."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoPatchProperties",
+          "description": "Network information."
+        }
+      }
+    },
+    "SessionHostSubsetConfigurationPatch": {
+      "type": "object",
+      "description": "Represents a SessionHostSubsetConfigurationPatch definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostSubsetConfigurationPatch",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostSubsetConfigurationPatchProperties"
+        }
+      }
+    },
+    "SessionHostSubsetConfigurationPatchProperties": {
+      "description": "Session host custom configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "customConfigurationProvisioningState": {
+          "description": "Provisioning state of the Session Host Configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "customConfigurationVersion": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when session host configuration was last modified and something was changed.",
+          "readOnly": true
+        },
+        "vmTags": {
+          "type": "string",
+          "description": "The tags associated with the session host"
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The name of the Resource Group that the session host should be created in"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The name of the Location where the session host should be located"
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names"
+        },
+        "availabilityInfo": {
+          "$ref": "#/definitions/AvailabilityInfoProperties",
+          "description": "Availability information."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        }
+      }
+    },
+    "AvailabilityInfoProperties": {
+      "description": "Availability information.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "availabilityType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Zone",
+            "Set"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineAvailabilityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No infrastructure redundancy required."
+              },
+              {
+                "value": "Zone",
+                "description": "Individual zone to be used for availability redundancy."
+              },
+              {
+                "value": "Set",
+                "description": "Set of redundancy zones to be used for availability redundancy."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        },
+        "availabilityZones": {
+          "type":"integer",
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "faultDomainCount": {
+          "type": "string",
+          "description": "Number of Fault Domains to have for the session host. Virtual machines in the same fault domain share a common power source and physical network switch."
+        }
+      }
+    },
+    "AvailabilityInfoPatchProperties": {
+      "description": "Availability information.",
+      "type": "object",
+      "properties": {
+        "availabilityType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Zone",
+            "Set"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineAvailabilityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No infrastructure redundancy required."
+              },
+              {
+                "value": "Zone",
+                "description": "Individual zone to be used for availability redundancy."
+              },
+              {
+                "value": "Set",
+                "description": "Set of redundancy zones to be used for availability redundancy."
+              }
+            ]
+          },
+          "description": "The availability type used by virtual machine in hostpool session host."
+        },
+        "availabilityZones": {
+          "type":"integer",
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "faultDomainCount": {
+          "type": "string",
+          "description": "Number of Fault Domains to have for the session host. Virtual machines in the same fault domain share a common power source and physical network switch."
+        }
+      }
+    },
+    "NetworkInfoProperties": {
+      "description": "Network information.",
+      "type": "object",
+      "required": [
+        "subnetId",
+        "securityGroupId"
+      ],
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Id of the subnet for the session host to be joined to."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "Id for the security group of the session host."
+        }
+      }
+    },
+    "NetworkInfoPatchProperties": {
+      "description": "Network information.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Id of the subnet for the session host to be joined to."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "Id for the security group of the session host."
         }
       }
     },
@@ -7340,6 +7787,16 @@
       "type": "string",
       "description": "The location of the operation result.",
       "maxLength": 24,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "SessionHostSubsetConfigurationNameParameter": {
+      "name": "sessionHostSubsetConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the session host subset configuration within the specified host pool",
+      "maxLength": 64,
       "minLength": 1,
       "x-ms-parameter-location": "method"
     }

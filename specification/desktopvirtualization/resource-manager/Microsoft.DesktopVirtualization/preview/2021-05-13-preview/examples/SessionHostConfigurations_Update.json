@@ -45,6 +45,23 @@
           "passwordKeyVaultSecretName": "PasswordName"
         }
       }
+    },
+    "SessionHostSubsetConfiguration": {
+      "properties": {
+        "vmTags": "{\"Department\":\"myDepartment\", \"Team\":\"myTeam\"}",
+        "vmResourceGroup": "resourceGroup2",
+        "vmLocation": "eastus2",
+        "vmNamePrefix": "westus2-vm",
+        "availabilityInfo": {
+          "type": "AvailabilityZone",
+          "availabilityZones": "[1,3]",
+          "faultDomainCount": "2"
+        },
+        "networkInfo": {
+          "subnetId": "/subscriptions/.../resourceGroups/.../providers/Microsoft.Network/virtualNetworks/.../subnets/subnet1",
+          "securityGroupId": "/subscriptions/.../resourceGroups/.../provider s/Microsoft.Network/networkSecurityGroups/nsg1"
+        }
+      }
     }
   },
   "responses": {
