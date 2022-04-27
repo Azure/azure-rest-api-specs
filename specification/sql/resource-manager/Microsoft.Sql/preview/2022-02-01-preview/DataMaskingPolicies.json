@@ -70,6 +70,78 @@
             "$ref": "./examples/DataMaskingPolicyGet.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "DataMaskingPolicies"
+        ],
+        "description": "Creates or updates a database data masking policy.",
+        "operationId": "DataMaskingPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for creating or updating a data masking policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created database data masking policy.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          },
+          "201": {
+            "description": "Successfully created database data masking policy..",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update data masking policy max": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMax.json"
+          },
+          "Create or update data masking policy min.": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMin.json"
+          }
+        }
       }
     }
   },

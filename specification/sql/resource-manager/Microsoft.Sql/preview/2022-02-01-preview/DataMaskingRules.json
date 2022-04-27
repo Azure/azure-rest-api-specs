@@ -74,6 +74,93 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
+      "put": {
+        "tags": [
+          "DataMaskingRules"
+        ],
+        "description": "Creates or updates a database data masking rule.",
+        "operationId": "DataMaskingRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "description": "The name of the data masking rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating a data masking rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set a database data masking rule.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          },
+          "201": {
+            "description": "Successfully created a database data masking rule.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update data masking rule for default max.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
+          },
+          "Create/Update data masking rule for default min.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
+          },
+          "Create/Update data masking rule for numbers.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
+          },
+          "Create/Update data masking rule for text.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
