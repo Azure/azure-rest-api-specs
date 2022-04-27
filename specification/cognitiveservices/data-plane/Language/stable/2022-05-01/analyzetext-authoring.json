@@ -1331,7 +1331,7 @@
       "properties": {
         "customEntityRecognitionResult": {
           "description": "Represents the evaluation prediction for entity recognition.",
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult"
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult"
         }
       },
       "x-ms-discriminator-value": "CustomEntityRecognition",
@@ -1340,7 +1340,7 @@
     "TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary": {
       "description": "Represents the evaluation summary for a custom entity recognition project.",
       "required": [
-        "customNamedEntityRecognitionEvaluation"
+        "customEntityRecognitionEvaluation"
       ],
       "type": "object",
       "allOf": [
@@ -1349,9 +1349,9 @@
         }
       ],
       "properties": {
-        "customNamedEntityRecognitionEvaluation": {
+        "customEntityRecognitionEvaluation": {
           "description": "Contains the data related to extraction evaluation.",
-          "$ref": "#/definitions/TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary"
+          "$ref": "#/definitions/TextAnalysisAuthoringEntityRecognitionEvaluationSummary"
         }
       },
       "x-ms-discriminator-value": "CustomEntityRecognition",
@@ -1473,6 +1473,23 @@
       },
       "x-ms-client-name": "DocumentEntityLabelEvaluationResult"
     },
+    "TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult": {
+      "description": "Represents the entity recognition evaluation result for a document.",
+      "required": [
+        "entities"
+      ],
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "Represents the document labelled entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
+          }
+        }
+      },
+      "x-ms-client-name": "DocumentEntityRecognitionEvaluationResult"
+    },
     "TextAnalysisAuthoringDocumentEntityRegionEvaluationResult": {
       "description": "Represents the evaluation comparison between the expected and predicted entities of a document region.",
       "required": [
@@ -1560,23 +1577,6 @@
       },
       "x-ms-client-name": "DocumentMultiLabelClassificationEvaluationResult"
     },
-    "TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult": {
-      "description": "Represents the entity recognition evaluation result for a document.",
-      "required": [
-        "entities"
-      ],
-      "type": "object",
-      "properties": {
-        "entities": {
-          "description": "Represents the document labelled entities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
-          }
-        }
-      },
-      "x-ms-client-name": "DocumentNamedEntityRecognitionEvaluationResult"
-    },
     "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "description": "Represents the comparison between the expected and predicted class that result from an evaluation operation.",
       "required": [
@@ -1646,6 +1646,64 @@
         }
       },
       "x-ms-client-name": "EntityEvaluationSummary"
+    },
+    "TextAnalysisAuthoringEntityRecognitionEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom entity recognition project.",
+      "required": [
+        "confusionMatrix",
+        "entities",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix"
+        },
+        "entities": {
+          "description": "Represents the entities evaluation",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TextAnalysisAuthoringEntityEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall",
+          "type": "number"
+        }
+      },
+      "x-ms-client-name": "EntityRecognitionEvaluationSummary"
     },
     "TextAnalysisAuthoringEvaluationKind": {
       "enum": [
@@ -2204,64 +2262,6 @@
         }
       },
       "x-ms-client-name": "MultiLabelClassificationEvaluationSummary"
-    },
-    "TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary": {
-      "description": "Represents the evaluation summary for a custom entity recognition project.",
-      "required": [
-        "confusionMatrix",
-        "entities",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
-      ],
-      "type": "object",
-      "properties": {
-        "confusionMatrix": {
-          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix"
-        },
-        "entities": {
-          "description": "Represents the entities evaluation",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/TextAnalysisAuthoringEntityEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "format": "float",
-          "description": "Represents the micro F1",
-          "type": "number"
-        },
-        "microPrecision": {
-          "format": "float",
-          "description": "Represents the micro precision",
-          "type": "number"
-        },
-        "microRecall": {
-          "format": "float",
-          "description": "Represents the micro recall",
-          "type": "number"
-        },
-        "macroF1": {
-          "format": "float",
-          "description": "Represents the macro F1",
-          "type": "number"
-        },
-        "macroPrecision": {
-          "format": "float",
-          "description": "Represents the macro precision",
-          "type": "number"
-        },
-        "macroRecall": {
-          "format": "float",
-          "description": "Represents the macro recall",
-          "type": "number"
-        }
-      },
-      "x-ms-client-name": "NamedEntityRecognitionEvaluationSummary"
     },
     "TextAnalysisAuthoringProjectDeletionJobState": {
       "description": "Represents the state of a project deletion job.",
