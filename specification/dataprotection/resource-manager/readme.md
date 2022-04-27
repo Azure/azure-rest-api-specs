@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-preview-2022-02
+tag: package-preview-2022-03
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -47,14 +47,23 @@ message-format: json
 ```
 
 
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.DataProtection/preview/2022-03-31-preview/dataprotection.json
+```
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.DataProtection/preview/2022-02-01-preview/dataprotection.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -118,6 +127,15 @@ input-file:
 - Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
 ```
 
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+- Microsoft.DataProtection/stable/2022-03-01/dataprotection.json
+```
+
 ---
 
 # Code Generation
@@ -139,6 +157,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
+  - repo: azure-powershell
 ```
 
 ## C#

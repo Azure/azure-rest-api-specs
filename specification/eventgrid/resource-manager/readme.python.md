@@ -18,4 +18,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid/azure/mgmt/eventgrid
 ```
-
