@@ -13,7 +13,7 @@
       "in": "path",
       "required": true,
       "minLength": 1,
-      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
       "x-ms-parameter-location": "method"
     },
     "statusId": {
@@ -718,6 +718,18 @@
         "status": {
           "description": "The status of the action.",
           "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start time of the action.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the end time of the action.",
           "readOnly": true
         },
         "targets": {

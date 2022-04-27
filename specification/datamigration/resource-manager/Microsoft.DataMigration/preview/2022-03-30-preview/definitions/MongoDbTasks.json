@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MongoDbCancelCommand": {
+      "x-ms-discriminator-value": "cancel",
+      "type": "object",
+      "description": "Properties for the command that cancels a migration in whole or in part",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/MongoDbCommandInput",
+          "description": "Command input"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Commands.json#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MongoDbClusterInfo": {
+      "type": "object",
+      "description": "Describes a MongoDB data source",
+      "properties": {
+        "databases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDbDatabaseInfo"
+          },
+          "description": "A list of non-system databases in the cluster"
+        },
+        "supportsSharding": {
+          "type": "boolean",
+          "description": "Whether the cluster supports sharded collections"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of data source",
+          "enum": [
+            "BlobContainer",
+            "CosmosDb",
+            "MongoDb"
+          ],
+          "x-ms-enum": {
+            "name": "MongoDbClusterType",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the data source in the form x.y.z (e.g. 3.6.7). Not used if Type is BlobContainer."
+        }
+      },
+      "required": [
+        "databases",
+        "supportsSharding",
+        "type",
+        "version"
+      ]
+    },
+    "MongoDbCollectionInfo": {
+      "type": "object",
+      "description": "Describes a supported collection within a MongoDB database",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database containing the collection"
+        },
+        "isCapped": {
+          "type": "boolean",
+          "description": "Whether the collection is a capped collection (i.e. whether it has a fixed size and acts like a circular buffer)"
+        },
+        "isSystemCollection": {
+          "type": "boolean",
+          "description": "Whether the collection is system collection"
+        },
+        "isView": {
+          "type": "boolean",
+          "description": "Whether the collection is a view of another collection"
+        },
+        "shardKey": {
+          "$ref": "#/definitions/MongoDbShardKeyInfo",
+          "description": "The shard key on the collection, or null if the collection is not sharded"
+        },
+        "supportsSharding": {
+          "type": "boolean",
+          "description": "Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary."
+        },
+        "viewOf": {
+          "type": "string",
+          "description": "The name of the collection that this is a view of, if IsView is true"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbObjectInfo"
+        }
+      ],
+      "required": [
+        "databaseName",
+        "isCapped",
+        "isSystemCollection",
+        "isView",
+        "supportsSharding"
+      ]
+    },
+    "MongoDbCollectionProgress": {
+      "x-ms-discriminator-value": "Collection",
+      "type": "object",
+      "description": "Describes the progress of a collection",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbProgress"
+        }
+      ]
+    },
+    "MongoDbCollectionSettings": {
+      "type": "object",
+      "description": "Describes how an individual MongoDB collection should be migrated",
+      "properties": {
+        "canDelete": {
+          "type": "boolean",
+          "description": "Whether the migrator is allowed to drop the target collection in the course of performing a migration. The default is true."
+        },
+        "shardKey": {
+          "$ref": "#/definitions/MongoDbShardKeySetting"
+        },
+        "targetRUs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The RUs that should be configured on a CosmosDB target, or null to use the default. This has no effect on non-CosmosDB targets."
+        }
+      }
+    },
+    "MongoDbCommandInput": {
+      "type": "object",
+      "description": "Describes the input to the 'cancel' and 'restart' MongoDB migration commands",
+      "properties": {
+        "objectName": {
+          "type": "string",
+          "description": "The qualified name of a database or collection to act upon, or null to act upon the entire migration"
+        }
+      }
+    },
+    "MongoDbDatabaseInfo": {
+      "type": "object",
+      "description": "Describes a database within a MongoDB data source",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDbCollectionInfo"
+          },
+          "description": "A list of supported collections in a MongoDB database"
+        },
+        "supportsSharding": {
+          "type": "boolean",
+          "description": "Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbObjectInfo"
+        }
+      ],
+      "required": [
+        "collections",
+        "supportsSharding"
+      ]
+    },
+    "MongoDbDatabaseProgress": {
+      "x-ms-discriminator-value": "Database",
+      "type": "object",
+      "description": "Describes the progress of a database",
+      "properties": {
+        "collections": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MongoDbCollectionProgress"
+          },
+          "description": "The progress of the collections in the database. The keys are the unqualified names of the collections"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbProgress"
+        }
+      ]
+    },
+    "MongoDbDatabaseSettings": {
+      "type": "object",
+      "description": "Describes how an individual MongoDB database should be migrated",
+      "properties": {
+        "collections": {
+          "type": "object",
+          "description": "The collections on the source database to migrate to the target. The keys are the unqualified names of the collections.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MongoDbCollectionSettings"
+          }
+        },
+        "targetRUs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The RUs that should be configured on a CosmosDB target, or null to use the default, or 0 if throughput should not be provisioned for the database. This has no effect on non-CosmosDB targets."
+        }
+      },
+      "required": [
+        "collections"
+      ]
+    },
+    "MongoDbError": {
+      "type": "object",
+      "description": "Describes an error or warning that occurred during a MongoDB migration",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The non-localized, machine-readable code that describes the error or warning"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the error or warning has occurred"
+        },
+        "message": {
+          "type": "string",
+          "description": "The localized, human-readable message that describes the error or warning"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of error or warning",
+          "enum": [
+            "Error",
+            "ValidationError",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "MongoDbErrorType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MongoDbFinishCommand": {
+      "x-ms-discriminator-value": "finish",
+      "type": "object",
+      "description": "Properties for the command that finishes a migration in whole or in part",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/MongoDbFinishCommandInput",
+          "description": "Command input"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Commands.json#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MongoDbFinishCommandInput": {
+      "type": "object",
+      "description": "Describes the input to the 'finish' MongoDB migration command",
+      "properties": {
+        "immediate": {
+          "type": "boolean",
+          "description": "If true, replication for the affected objects will be stopped immediately. If false, the migrator will finish replaying queued events before finishing the replication."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbCommandInput"
+        }
+      ],
+      "required": [
+        "immediate"
+      ]
+    },
+    "MongoDbMigrationSettings": {
+      "type": "object",
+      "description": "Describes how a MongoDB data migration should be performed",
+      "properties": {
+        "boostRUs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The RU limit on a CosmosDB target that collections will be temporarily increased to (if lower) during the initial copy of a migration, from 10,000 to 1,000,000, or 0 to use the default boost (which is generally the maximum), or null to not boost the RUs. This setting has no effect on non-CosmosDB targets."
+        },
+        "databases": {
+          "type": "object",
+          "description": "The databases on the source cluster to migrate to the target. The keys are the names of the databases.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MongoDbDatabaseSettings"
+          }
+        },
+        "replication": {
+          "type": "string",
+          "description": "Describes how changes will be replicated from the source to the target. The default is OneTime.",
+          "enum": [
+            "Disabled",
+            "OneTime",
+            "Continuous"
+          ],
+          "x-ms-enum": {
+            "name": "MongoDbReplication",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "$ref": "./Common.json#/definitions/MongoDbConnectionInfo",
+          "description": "Settings used to connect to the source cluster"
+        },
+        "target": {
+          "$ref": "./Common.json#/definitions/MongoDbConnectionInfo",
+          "description": "Settings used to connect to the target cluster"
+        },
+        "throttling": {
+          "$ref": "#/definitions/MongoDbThrottlingSettings",
+          "description": "Settings used to limit the resource usage of the migration"
+        }
+      },
+      "required": [
+        "databases",
+        "source",
+        "target"
+      ]
+    },
+    "MongoDbProgress": {
+      "type": "object",
+      "description": "Base class for MongoDB migration outputs",
+      "properties": {
+        "bytesCopied": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of document bytes copied during the Copying stage"
+        },
+        "documentsCopied": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents copied during the Copying stage"
+        },
+        "elapsedTime": {
+          "type": "string",
+          "description": "The elapsed time in the format [ddd.]hh:mm:ss[.fffffff] (i.e. TimeSpan format)"
+        },
+        "errors": {
+          "type": "object",
+          "description": "The errors and warnings that have occurred for the current object. The keys are the error codes.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MongoDbError"
+          }
+        },
+        "eventsPending": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of oplog events awaiting replay"
+        },
+        "eventsReplayed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of oplog events replayed so far"
+        },
+        "lastEventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last oplog event received, or null if no oplog event has been received yet"
+        },
+        "lastReplayTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last oplog event replayed, or null if no oplog event has been replayed yet"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the progress object. For a collection, this is the unqualified collection name. For a database, this is the database name. For the overall migration, this is null."
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The qualified name of the progress object. For a collection, this is the database-qualified name. For a database, this is the database name. For the overall migration, this is null."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "The type of progress object",
+          "enum": [
+            "Migration",
+            "Database",
+            "Collection"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "ValidatingInput",
+            "Initializing",
+            "Restarting",
+            "Copying",
+            "InitialReplay",
+            "Replaying",
+            "Finalizing",
+            "Complete",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "MongoDbMigrationState",
+            "modelAsString": true
+          }
+        },
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of document bytes on the source at the beginning of the Copying stage, or -1 if the total size was unknown"
+        },
+        "totalDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of documents on the source at the beginning of the Copying stage, or -1 if the total count was unknown"
+        }
+      },
+      "required": [
+        "bytesCopied",
+        "documentsCopied",
+        "elapsedTime",
+        "errors",
+        "eventsPending",
+        "eventsReplayed",
+        "resultType",
+        "state",
+        "totalBytes",
+        "totalDocuments"
+      ],
+      "discriminator": "resultType"
+    },
+    "MongoDbMigrationProgress": {
+      "x-ms-discriminator-value": "Migration",
+      "type": "object",
+      "description": "Describes the progress of the overall migration",
+      "properties": {
+        "databases": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MongoDbDatabaseProgress"
+          },
+          "description": "The progress of the databases in the migration. The keys are the names of the databases"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDbProgress"
+        }
+      ]
+    },
+    "MongoDbObjectInfo": {
+      "type": "object",
+      "description": "Describes a database or collection within a MongoDB data source",
+      "properties": {
+        "averageDocumentSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The average document size, or -1 if the average size is unknown"
+        },
+        "dataSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The estimated total data size, in bytes, or -1 if the size is unknown."
+        },
+        "documentCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The estimated total number of documents, or -1 if the document count is unknown"
+        },
+        "name": {
+          "type": "string",
+          "description": "The unqualified name of the database or collection"
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The qualified name of the database or collection. For a collection, this is the database-qualified name."
+        }
+      },
+      "required": [
+        "averageDocumentSize",
+        "dataSize",
+        "documentCount",
+        "name",
+        "qualifiedName"
+      ]
+    },
+    "MongoDbRestartCommand": {
+      "x-ms-discriminator-value": "restart",
+      "type": "object",
+      "description": "Properties for the command that restarts a migration in whole or in part",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/MongoDbCommandInput",
+          "description": "Command input"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Commands.json#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MongoDbShardKeyField": {
+      "type": "object",
+      "description": "Describes a field reference within a MongoDB shard key",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field"
+        },
+        "order": {
+          "type": "string",
+          "description": "The field ordering",
+          "enum": [
+            "Forward",
+            "Reverse",
+            "Hashed"
+          ],
+          "x-ms-enum": {
+            "name": "MongoDbShardKeyOrder",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "order"
+      ]
+    },
+    "MongoDbShardKeyInfo": {
+      "type": "object",
+      "description": "Describes a MongoDB shard key",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDbShardKeyField"
+          },
+          "description": "The fields within the shard key"
+        },
+        "isUnique": {
+          "type": "boolean",
+          "description": "Whether the shard key is unique"
+        }
+      },
+      "required": [
+        "fields",
+        "isUnique"
+      ]
+    },
+    "MongoDbShardKeySetting": {
+      "type": "object",
+      "description": "Describes a MongoDB shard key",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDbShardKeyField"
+          },
+          "description": "The fields within the shard key"
+        },
+        "isUnique": {
+          "type": "boolean",
+          "description": "Whether the shard key is unique"
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    },
+    "MongoDbThrottlingSettings": {
+      "type": "object",
+      "description": "Specifies resource limits for the migration",
+      "properties": {
+        "minFreeCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of CPU time that the migrator will try to avoid using, from 0 to 100"
+        },
+        "minFreeMemoryMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of megabytes of RAM that the migrator will try to avoid using"
+        },
+        "maxParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of work items (e.g. collection copies) that will be processed in parallel"
+        }
+      }
+    }
+  }
+}
