@@ -75,7 +75,6 @@ swagger-to-sdk:
 
   #should be azure-sdk-for-net-track2, but SDK has not yet onboarded
   #manually generate for now with track2
-  - repo: azure-sdk-for-net
 ```
 ## Python
 

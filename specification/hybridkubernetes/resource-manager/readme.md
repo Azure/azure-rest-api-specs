@@ -79,7 +79,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-ruby
-  - repo: azure-sdk-for-net
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridkubernetes']
   - repo: azure-resource-manager-schemas

@@ -172,7 +172,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
