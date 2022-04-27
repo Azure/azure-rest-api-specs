@@ -173,7 +173,10 @@
             "description": "*** Error Responses: ***\n\n * 404 ResourceNotFound - The requested resource was not found."
           },
           "201": {
-            "description": "Updated the Geo backup policy is in progress."
+            "description": "Updated the Geo backup policy is in progress.",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
           }
         },
         "x-ms-examples": {
@@ -194,6 +197,16 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Backup policy location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of geo backup policy.  This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
           "description": "Resource properties.",
@@ -234,7 +247,6 @@
             "Disabled"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "GeoBackupPolicyState",
             "modelAsString": false
