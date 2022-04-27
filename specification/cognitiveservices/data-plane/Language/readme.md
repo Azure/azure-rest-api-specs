@@ -29,6 +29,8 @@ These settings apply only when `--tag=release_2022_05_01` is specified on the co
 ``` yaml $(tag) == 'release_2022_05_01'
 input-file:
   - stable/2022-05-01/textanalytics.json
+  - stable/2022-05-01/analyzetext-authoring.json
+  - stable/2022-05-01/analyzeconversations-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
