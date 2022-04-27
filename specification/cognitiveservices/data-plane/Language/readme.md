@@ -20,6 +20,9 @@ openapi-type: data-plane
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
+  - suppress: R3016
+    where: $.definitions.CurrencyResolution.properties.ISO4217
+    reason: ISO should be upper case.
 ```
 
 ### Release 2022-05-01
@@ -29,6 +32,7 @@ These settings apply only when `--tag=release_2022_05_01` is specified on the co
 ``` yaml $(tag) == 'release_2022_05_01'
 input-file:
   - stable/2022-05-01/textanalytics.json
+  - stable/2022-05-01/analyzetext-authoring.json
   - stable/2022-05-01/analyzeconversations-authoring.json
   - stable/2022-05-01/analyzeconversations.json
 title:
