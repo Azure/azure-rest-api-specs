@@ -1115,7 +1115,7 @@
           "ReservedInstances"
         ],
         "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
-        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id.",
+        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id. The Reservation usage details can be viewed only by certain enterprise roles. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1178,7 +1178,7 @@
           "ReservedInstances"
         ],
         "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
-        "description": "Generates the reservations details report for provided date range asynchronously by billing profile.",
+        "description": "Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -2541,8 +2541,9 @@
       "type": "object",
       "properties": {
         "reportUrl": {
-          "description": "The URL to download the generated report.",
-          "type": "string"
+          "description": "The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity",
+          "type": "string",
+          "$ref": "#/definitions/ReservationReportSchema"
         },
         "validUntil": {
           "description": "The time at which report URL becomes invalid.",
@@ -2684,6 +2685,27 @@
         "operator",
         "values"
       ]
+    },
+    "ReservationReportSchema": {
+      "description": "The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity",
+      "type": "string",
+      "enum": [
+        "InstanceFlexibilityGroup",
+        "InstanceFlexibilityRatio",
+        "InstanceId",
+        "Kind",
+        "ReservationId",
+        "ReservationOrderId",
+        "ReservedHours",
+        "SkuName",
+        "TotalReservedQuantity",
+        "UsageDate",
+        "UsedHours"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationReportSchema",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
