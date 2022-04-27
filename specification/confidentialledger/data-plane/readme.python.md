@@ -32,9 +32,9 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
-  - tag: package-2022-20-04-preview-ledger
+  - tag: package-2022-04-20-preview-ledger
   - multiapiscriptledger: true
-  - tag: package-2022-20-04-preview-identity
+  - tag: package-2022-04-20-preview-identity
   - multiapiscriptidentity: true
 ```
 
