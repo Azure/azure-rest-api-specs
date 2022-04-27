@@ -163,6 +163,7 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/WorkloadGroups.json
   - Microsoft.Sql/preview/2022-02-01-preview/DataMaskingPolicies.json
   - Microsoft.Sql/preview/2022-02-01-preview/DataMaskingRules.json
+  - Microsoft.Sql/preview/2022-02-01-preview/GeoBackupPolicies.json
 ```
 ### Tag: package-preview-2021-11
 
