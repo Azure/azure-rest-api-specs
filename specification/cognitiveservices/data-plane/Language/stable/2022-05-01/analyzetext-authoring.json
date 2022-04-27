@@ -1070,8 +1070,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The job was successfully canceled."
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the job cancellation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1084,7 +1090,8 @@
           "Successful Cancel Training Job": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulCancelTrainingJob.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
@@ -1310,6 +1317,46 @@
       },
       "x-ms-client-name": "CreateProjectOptions"
     },
+    "TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult": {
+      "description": "Represents the document evaluation result for a custom named entity recognition project.",
+      "required": [
+        "customNamedEntityRecognitionResult"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "properties": {
+        "customNamedEntityRecognitionResult": {
+          "description": "Represents the evaluation prediction for named entity recognition.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult"
+        }
+      },
+      "x-ms-discriminator-value": "CustomEntityRecognition",
+      "x-ms-client-name": "CustomEntityRecognitionDocumentEvaluationResult"
+    },
+    "TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom named entity recognition project.",
+      "required": [
+        "customNamedEntityRecognitionEvaluation"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
+        }
+      ],
+      "properties": {
+        "customNamedEntityRecognitionEvaluation": {
+          "description": "Contains the data related to extraction evaluation.",
+          "$ref": "#/definitions/TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary"
+        }
+      },
+      "x-ms-discriminator-value": "CustomEntityRecognition",
+      "x-ms-client-name": "CustomEntityRecognitionEvaluationSummary"
+    },
     "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
       "description": "Represents the document evaluation result for a custom multi-label classification project.",
       "required": [
@@ -1327,7 +1374,7 @@
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult"
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-discriminator-value": "CustomMultiLabelClassification",
       "x-ms-client-name": "CustomMultiLabelClassificationDocumentEvaluationResult"
     },
     "TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary": {
@@ -1347,48 +1394,8 @@
           "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary"
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-discriminator-value": "CustomMultiLabelClassification",
       "x-ms-client-name": "CustomMultiLabelClassificationEvaluationSummary"
-    },
-    "TextAnalysisAuthoringCustomNamedEntityRecognitionDocumentEvaluationResult": {
-      "description": "Represents the document evaluation result for a custom named entity recognition project.",
-      "required": [
-        "customNamedEntityRecognitionResult"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "properties": {
-        "customNamedEntityRecognitionResult": {
-          "description": "Represents the evaluation prediction for named entity recognition.",
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentNamedEntityRecognitionEvaluationResult"
-        }
-      },
-      "x-ms-discriminator-value": "customNamedEntityRecognition",
-      "x-ms-client-name": "CustomNamedEntityRecognitionDocumentEvaluationResult"
-    },
-    "TextAnalysisAuthoringCustomNamedEntityRecognitionEvaluationSummary": {
-      "description": "Represents the evaluation summary for a custom named entity recognition project.",
-      "required": [
-        "customNamedEntityRecognitionEvaluation"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "properties": {
-        "customNamedEntityRecognitionEvaluation": {
-          "description": "Contains the data related to extraction evaluation.",
-          "$ref": "#/definitions/TextAnalysisAuthoringNamedEntityRecognitionEvaluationSummary"
-        }
-      },
-      "x-ms-discriminator-value": "customNamedEntityRecognition",
-      "x-ms-client-name": "CustomNamedEntityRecognitionEvaluationSummary"
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult": {
       "description": "Represents the document evaluation result for a custom single-label classification project.",
@@ -1407,7 +1414,7 @@
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult"
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-discriminator-value": "CustomSingleLabelClassification",
       "x-ms-client-name": "CustomSingleLabelClassificationDocumentEvaluationResult"
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary": {
@@ -1427,7 +1434,7 @@
           "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary"
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-discriminator-value": "CustomSingleLabelClassification",
       "x-ms-client-name": "CustomSingleLabelClassificationEvaluationSummary"
     },
     "TextAnalysisAuthoringDeploymentJobState": {
@@ -1736,6 +1743,59 @@
       },
       "x-ms-client-name": "ExportedClass"
     },
+    "TextAnalysisAuthoringExportedCustomEntityRecognitionDocument": {
+      "description": "Represents an exported document for a custom named entity recognition project.",
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "The list of entity labels belonging to the document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentRegion"
+          }
+        },
+        "location": {
+          "description": "The location of the document in the storage.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCustomEntityRecognitionDocument"
+    },
+    "TextAnalysisAuthoringExportedCustomEntityRecognitionProjectAssets": {
+      "description": "Represents the exported assets for a named entity recognition project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "entities": {
+          "description": "The list of entities belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntity"
+          }
+        },
+        "documents": {
+          "description": "The list of documents belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomEntityRecognitionDocument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "CustomEntityRecognition",
+      "x-ms-client-name": "ExportedCustomEntityRecognitionProjectAssets"
+    },
     "TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument": {
       "description": "Represents an exported document of a custom multi-label classification project.",
       "type": "object",
@@ -1786,61 +1846,8 @@
           }
         }
       },
-      "x-ms-discriminator-value": "customMultiLabelClassification",
+      "x-ms-discriminator-value": "CustomMultiLabelClassification",
       "x-ms-client-name": "ExportedCustomMultiLabelClassificationProjectAssets"
-    },
-    "TextAnalysisAuthoringExportedCustomNamedEntityRecognitionDocument": {
-      "description": "Represents an exported document for a custom named entity recognition project.",
-      "type": "object",
-      "properties": {
-        "entities": {
-          "description": "The list of entity labels belonging to the document.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentRegion"
-          }
-        },
-        "location": {
-          "description": "The location of the document in the storage.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        },
-        "dataset": {
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
-        }
-      },
-      "x-ms-client-name": "ExportedCustomNamedEntityRecognitionDocument"
-    },
-    "TextAnalysisAuthoringExportedCustomNamedEntityRecognitionProjectAssets": {
-      "description": "Represents the exported assets for a named entity recognition project.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "properties": {
-        "entities": {
-          "description": "The list of entities belonging to the project.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntity"
-          }
-        },
-        "documents": {
-          "description": "The list of documents belonging to the project.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomNamedEntityRecognitionDocument"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "customNamedEntityRecognition",
-      "x-ms-client-name": "ExportedCustomNamedEntityRecognitionProjectAssets"
     },
     "TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument": {
       "description": "Represents an exported document for a custom single-label classification project.",
@@ -1889,7 +1896,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "customSingleLabelClassification",
+      "x-ms-discriminator-value": "CustomSingleLabelClassification",
       "x-ms-client-name": "ExportedCustomSingleLabelClassificationProjectAssets"
     },
     "TextAnalysisAuthoringExportedDocumentClass": {
@@ -2333,9 +2340,9 @@
     },
     "TextAnalysisAuthoringProjectKind": {
       "enum": [
-        "customSingleLabelClassification",
-        "customMultiLabelClassification",
-        "customNamedEntityRecognition"
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification",
+        "CustomEntityRecognition"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2343,15 +2350,15 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "customSingleLabelClassification",
+            "value": "CustomSingleLabelClassification",
             "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
-            "value": "customMultiLabelClassification",
+            "value": "CustomMultiLabelClassification",
             "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
-            "value": "customNamedEntityRecognition",
+            "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]
@@ -2937,24 +2944,24 @@
       "required": true,
       "type": "string",
       "enum": [
-        "customSingleLabelClassification",
-        "customMultiLabelClassification",
-        "customNamedEntityRecognition"
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification",
+        "CustomEntityRecognition"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
         "modelAsString": true,
         "values": [
           {
-            "value": "customSingleLabelClassification",
+            "value": "CustomSingleLabelClassification",
             "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
-            "value": "customMultiLabelClassification",
+            "value": "CustomMultiLabelClassification",
             "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
-            "value": "customNamedEntityRecognition",
+            "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]

@@ -2147,52 +2147,6 @@
       },
       "type": "object"
     },
-    "JobMetadata": {
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "jobId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "lastUpdateDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "partiallySucceeded",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "State"
-          }
-        }
-      },
-      "required": [
-        "jobId",
-        "lastUpdateDateTime",
-        "createdDateTime",
-        "status"
-      ],
-      "type": "object"
-    },
     "JobState": {
       "properties": {
         "displayName": {
@@ -2207,10 +2161,9 @@
           "type": "string"
         },
         "jobId": {
-          "format": "uuid",
           "type": "string"
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "format": "date-time",
           "type": "string"
         },
@@ -2219,14 +2172,14 @@
             "notStarted",
             "running",
             "succeeded",
-            "partiallySucceeded",
+            "partiallyCompleted",
             "failed",
             "cancelled",
             "cancelling"
           ],
           "type": "string",
           "x-ms-enum": {
-            "modelAsString": false,
+            "modelAsString": true,
             "name": "State"
           }
         },
@@ -2242,7 +2195,7 @@
       },
       "required": [
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "createdDateTime",
         "status"
       ]
@@ -2319,7 +2272,7 @@
             "cancelling"
           ],
           "x-ms-enum": {
-            "modelAsString": false,
+            "modelAsString": true,
             "name": "State"
           }
         }
