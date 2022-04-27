@@ -35,14 +35,14 @@
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
-              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
               "TopSearchedKeywords",
-              "Tags"
+              "Tags",
+              "TrendsAndGaps"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -126,14 +126,14 @@
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
-              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
               "TopSearchedKeywords",
-              "Tags"
+              "Tags",
+              "TrendsAndGaps"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -237,14 +237,14 @@
               "AssetDistribution",
               "DataEstateHealth",
               "FilesWithoutResourceSet",
-              "GapAndTrend",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
               "MostViewedAssets",
               "NetNewAssetsDistribution",
               "TopSearchedKeywords",
-              "Tags"
+              "Tags",
+              "TrendsAndGaps"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -422,14 +422,14 @@
             "AssetDistribution",
             "DataEstateHealth",
             "FilesWithoutResourceSet",
-            "GapAndTrend",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
             "MostViewedAssets",
             "NetNewAssetsDistribution",
             "TopSearchedKeywords",
-            "Tags"
+            "Tags",
+            "TrendsAndGaps"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -507,14 +507,14 @@
             "AssetDistribution",
             "DataEstateHealth",
             "FilesWithoutResourceSet",
-            "GapAndTrend",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
             "MostViewedAssets",
             "NetNewAssetsDistribution",
             "TopSearchedKeywords",
-            "Tags"
+            "Tags",
+            "TrendsAndGaps"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1156,6 +1156,54 @@
         }
       },
       "x-ms-discriminator-value": "FilesWithoutResourceSet"
+    },
+    "TrendsAndGapsDataPoint": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "unclassifiedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "uncuratedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "unassignedDataOwnerAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "timePoint": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "TrendsAndGapsSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "collectionName": {
+          "type": "string"
+        },
+        "trend": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TrendsAndGapsDataPoint"
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "TrendsAndGaps"
     },
     "MostViewedAssetsSnapshotRecord": {
       "type": "object",
