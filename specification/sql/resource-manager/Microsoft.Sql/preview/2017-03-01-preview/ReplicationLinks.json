@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-11-01-preview",
+    "version": "2017-03-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,143 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks": {
-      "get": {
-        "tags": [
-          "ReplicationLinks"
-        ],
-        "description": "Gets a list of replication links on database.",
-        "operationId": "ReplicationLinks_ListByDatabase",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of replication links.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationLinkListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List replication links on server on database.": {
-            "$ref": "./examples/ReplicationLinkListByDatabase.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}": {
-      "get": {
-        "tags": [
-          "ReplicationLinks"
-        ],
-        "description": "Gets a replication link.",
-        "operationId": "ReplicationLinks_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "linkId",
-            "in": "path",
-            "description": "The name of the replication link.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified replication link.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationLink"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-examples": {
-          "Gets the replication link.": {
-            "$ref": "./examples/ReplicationLinkGet.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ReplicationLinks"
-        ],
-        "description": "Deletes the replication link.",
-        "operationId": "ReplicationLinks_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "linkId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the replication link."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-examples": {
-          "Delete replication link on server": {
-            "$ref": "./examples/ReplicationLinkDelete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover": {
       "post": {
         "tags": [
@@ -258,48 +121,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/replicationLinks": {
-      "get": {
-        "tags": [
-          "ReplicationLinks"
-        ],
-        "description": "Gets a list of replication links.",
-        "operationId": "ReplicationLinks_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of replication links.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationLinkListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List replication links on server": {
-            "$ref": "./examples/ReplicationLinkListByServer.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -316,25 +137,6 @@
           "$ref": "#/definitions/ReplicationLinkProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ReplicationLinkListResult": {
-      "description": "A list of replication links.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReplicationLink"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
