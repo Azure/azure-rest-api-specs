@@ -311,61 +311,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/actionGroups/{actionGroupName}/providers/Microsoft.Insights/createNotifications": {
-      "post": {
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "description": "Send test notifications to a set of provided receivers",
-        "operationId": "ActionGroups_CreateNotificationsAtActionGroupResourceLevel",
-        "x-ms-examples": {
-          "Create notifications at resource group level": {
-            "$ref": "./examples/postTestNotificationsAtActionGroupResourceLevel.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ActionGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "notificationRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NotificationRequestBody"
-            },
-            "description": "The notification request body which includes the contact details"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The notification succeeded",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "The location header that has the polling uri."
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred while sending the test notifications",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/notificationStatus/{notificationId}": {
       "get": {
         "description": "Get the test notifications by the notification id",
@@ -417,48 +362,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NotificationIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The notification details",
-            "schema": {
-              "$ref": "#/definitions/TestNotificationDetailsResponse"
-            }
-          },
-          "default": {
-            "description": "An error occurred while sending the test notifications",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/actionGroups/{actionGroupName}/providers/Microsoft.Insights/notificationStatus/{notificationId}": {
-      "get": {
-        "description": "Get the test notifications by the notification id",
-        "operationId": "ActionGroups_GetTestNotificationsAtActionGroupResourceLevel",
-        "x-ms-examples": {
-          "Get notification details at resource group level": {
-            "$ref": "./examples/getTestNotificationsAtActionGroupResourceLevel.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
             "$ref": "#/parameters/NotificationIdParameter"
