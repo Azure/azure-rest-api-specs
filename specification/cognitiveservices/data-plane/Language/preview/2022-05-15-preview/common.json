@@ -188,7 +188,7 @@
             "cancelling"
           ],
           "x-ms-enum": {
-            "modelAsString": false,
+            "modelAsString": true,
             "name": "TaskState"
           }
         }
@@ -247,10 +247,9 @@
           "type": "string"
         },
         "jobId": {
-          "format": "uuid",
           "type": "string"
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "format": "date-time",
           "type": "string"
         },
@@ -259,14 +258,14 @@
             "notStarted",
             "running",
             "succeeded",
-            "partiallySucceeded",
+            "partiallyCompleted",
             "failed",
             "cancelled",
             "cancelling"
           ],
           "type": "string",
           "x-ms-enum": {
-            "modelAsString": false,
+            "modelAsString": true,
             "name": "JobState"
           }
         },
@@ -282,7 +281,7 @@
       },
       "required": [
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "createdDateTime",
         "status"
       ]
