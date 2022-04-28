@@ -53,15 +53,25 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 ```yaml $(tag) == 'package-2022-04'
 input-file:
   - Microsoft.DataProtection/stable/2022-04-01/dataprotection.json
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.DataProtection/preview/2022-03-31-preview/dataprotection.json
 ```
+
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.DataProtection/preview/2022-02-01-preview/dataprotection.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -125,7 +135,6 @@ input-file:
 - Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
 ```
 
-
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -156,6 +165,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
+  - repo: azure-powershell
 ```
 
 ## C#
