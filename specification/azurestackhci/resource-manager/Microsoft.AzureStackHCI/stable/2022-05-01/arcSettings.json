@@ -166,6 +166,55 @@
           }
         }
       },
+      "patch": {
+        "operationId": "ArcSettings_Update",
+        "description": "Update ArcSettings for HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "name": "arcSetting",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            },
+            "description": "ArcSettings parameters that needs to be updated"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Patch ArcSetting": {
+          "$ref": "./examples/PatchArcSetting.json"
+        }
+      },
       "delete": {
         "operationId": "ArcSettings_Delete",
         "description": "Delete ArcSetting resource details of HCI Cluster.",
@@ -427,6 +476,12 @@
             "$ref": "#/definitions/PerNodeState"
           },
           "readOnly": true
+        },
+        "connectivityProperties": {
+          "description": "contains connectivity related configuration for ARC resources",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ArcConnectivityProperties"
         }
       }
     },
@@ -468,6 +523,17 @@
           "readOnly": true
         }
       }
+    },
+    "ArcConnectivityProperties": {
+      "description": "Connectivity related configuration required by arc server.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True indicates ARC connectivity is enabled"
+        }
+      },
+      "additionalProperties": false
     },
     "PasswordCredential": {
       "type": "object",
