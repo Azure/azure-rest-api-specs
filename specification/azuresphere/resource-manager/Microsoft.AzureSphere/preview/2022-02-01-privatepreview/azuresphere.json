@@ -246,6 +246,130 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceInsights": {
+      "post": {
+        "operationId": "Catalogs_ListDeviceInsights",
+        "summary": "List device insights for a catalog.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response to the action call to list device insights for a catalog.",
+            "schema": {
+              "$ref": "#/definitions/AzureSpherePage_DeviceInsight"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "Catalogs"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Retrieves list of device insights": {
+            "$ref": "./examples/PostListDeviceInsightsCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceGroups": {
+      "post": {
+        "operationId": "Catalogs_ListDeviceGroups",
+        "summary": "List device groups for a catalog.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response to the action call to list device groups for a catalog.",
+            "schema": {
+              "$ref": "#/definitions/AzureSpherePage_Device"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "Catalogs"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Retrieves device groups for given catalog": {
+            "$ref": "./examples/PostListDeviceGroupsCatalog.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}": {
       "get": {
         "operationId": "Catalogs_Get",
@@ -3441,16 +3565,17 @@
         "modelAsString": true
       }
     },
-    "AzureSpherePage_Device": {
+    "AzureSpherePage_DeviceInsight": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Device"
+            "$ref": "#/definitions/DeviceInsight"
           },
           "description": "List of elements",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -3467,6 +3592,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeviceGroup"
+          },
+          "description": "List of elements",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A link to be used in the next page call.",
+          "readOnly": true
+        }
+      },
+      "description": "Azure Sphere page of elements."
+    },
+    "AzureSpherePage_Device": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
           },
           "description": "List of elements",
           "readOnly": true
@@ -3844,6 +3988,57 @@
         }
       },
       "description": "Image identifier with the component identifier."
+    },
+    "DeviceInsight": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID"
+        },
+        "description": {
+          "type": "string",
+          "description": "Event description"
+        },
+        "startTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event start timestamp"
+        },
+        "endTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event end timestamp"
+        },
+        "eventCategory": {
+          "type": "string",
+          "description": "Event category"
+        },
+        "eventClass": {
+          "type": "string",
+          "description": "Event class"
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Event type"
+        },
+        "eventCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Event count"
+        }
+      },
+      "description": "Device insight report.",
+      "required": [
+        "deviceId",
+        "description",
+        "startTimestampUtc",
+        "endTimestampUtc",
+        "eventCategory",
+        "eventClass",
+        "eventType",
+        "eventCount"
+      ]
     },
     "CatalogProperties": {
       "type": "object",

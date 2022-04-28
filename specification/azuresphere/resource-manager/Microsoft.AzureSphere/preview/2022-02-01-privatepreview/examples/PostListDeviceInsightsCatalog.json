@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "$top": 10,
+    "api-version": "2022-02-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The list of device insights for the catalog retrieved successfully.",
+      "body": {
+        "value": [
+          {
+            "description": "eventDescription1",
+            "deviceId": "eventIdentifier1",
+            "startTimestampUtc": "2021-09-30T21:51:39.2698729Z",
+            "endTimestampUtc": "2021-09-30T23:54:21.9608729Z",
+            "eventCategory": "eventCategory1",
+            "eventClass": "eventClass1",
+            "eventType": "eventType1",
+            "eventCount": 1
+          },
+          {
+            "description": "eventDescription2",
+            "deviceId": "eventIdentifier2",
+            "startTimestampUtc": "2022-02-06T12:41:39.2698729Z",
+            "endTimestampUtc": "2022-02-07T17:34:12.5098621Z",
+            "eventCategory": "eventCategory2",
+            "eventClass": "eventClass2",
+            "eventType": "eventType2",
+            "eventCount": 1
+          }
+        ],
+        "nextLink": "link/to/nextPage"
+      }
+    }
+  }
+}
