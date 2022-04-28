@@ -161,7 +161,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "UpgradePreference",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No preference on when this App Service Environment will be upgraded"
+              },
+              {
+                "value": "Early",
+                "description": "This App Service Environment will be upgraded before others in the same region that have Upgrade Preference 'Late'"
+              },
+              {
+                "value": "Late",
+                "description": "This App Service Environment will be upgraded after others in the same region that have Upgrade Preference 'Early'"
+              },
+              {
+                "value": "Manual",
+                "description": "ASEv3 only. Once an upgrade is available, this App Service Environment will wait 14 days for the upgrade to be manually initiated. After 14 days the upgrade will begin automatically"
+              }
+            ]
           }
         },
         "dedicatedHostCount": {
@@ -176,10 +194,29 @@
         "networkingConfiguration": {
           "$ref": "#/definitions/AseV3NetworkingConfiguration"
         },
-        "upgradeAvailable": {
-          "description": "Whether an upgrade is available for this hosting environment",
-          "type": "boolean",
-          "readOnly": true
+        "upgradeAvailability": {
+          "description": "Whether an upgrade is available for this App Service Environment.",
+          "default": "None",
+          "enum": [
+              "None",
+              "Ready"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "upgradeAvailability",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "There is not an upgrade available"
+              },
+              {
+                "value": "Ready",
+                "description": "An upgrade is ready to be manually initiated. 14 days after notification the upgrade will begin automatically"
+              }
+            ]
+          }
         }
       }
     },
