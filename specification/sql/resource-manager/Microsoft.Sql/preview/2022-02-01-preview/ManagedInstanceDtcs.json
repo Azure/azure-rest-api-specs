@@ -19,20 +19,16 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc": {
       "get": {
         "tags": [
-          "ManagedInstanceDTCs"
+          "ManagedInstanceDtcs"
         ],
         "description": "Gets a list of the managed instance DTC settings.",
-        "operationId": "ManagedInstanceDTCs_ListByManagedInstance",
+        "operationId": "ManagedInstanceDtcs_ListByManagedInstance",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
-            "in": "path",
-            "description": "The name of the managed instance.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -45,7 +41,7 @@
           "200": {
             "description": "Successfully retrieved the specified managed instance DTC settings.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceDTCListResult"
+              "$ref": "#/definitions/ManagedInstanceDtcListResult"
             }
           },
           "default": {
@@ -65,25 +61,21 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc/{dtcName}": {
       "get": {
         "tags": [
-          "ManagedInstanceDTCs"
+          "ManagedInstanceDtcs"
         ],
         "description": "Gets the managed instance DTC settings.",
-        "operationId": "ManagedInstanceDTCs_Get",
+        "operationId": "ManagedInstanceDtcs_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
-            "in": "path",
-            "description": "The name of the managed instance.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "name": "dtcName",
             "in": "path",
-            "description": "Name of the DTC instance used.",
+            "description": "The name of the managed instance DTC.",
             "required": true,
             "type": "string",
             "enum": [
@@ -105,11 +97,11 @@
           "200": {
             "description": "Successfully retrieved the specified managed instance DTC settings.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceDTC"
+              "$ref": "#/definitions/ManagedInstanceDtc"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -120,25 +112,21 @@
       },
       "put": {
         "tags": [
-          "ManagedInstanceDTCs"
+          "ManagedInstanceDtcs"
         ],
         "description": "Updates the managed instance DTC settings.",
-        "operationId": "ManagedInstanceDTCs_CreateOrUpdate",
+        "operationId": "ManagedInstanceDtcs_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
-            "in": "path",
-            "description": "The name of the managed instance.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "name": "dtcName",
             "in": "path",
-            "description": "Name of the DTC instance used.",
+            "description": "The name of the managed instance DTC.",
             "required": true,
             "type": "string",
             "enum": [
@@ -152,10 +140,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Settings of the DTC tied to the Managed instance.",
+            "description": "Managed instance DTC settings.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceDTC"
+              "$ref": "#/definitions/ManagedInstanceDtc"
             }
           },
           {
@@ -169,11 +157,78 @@
           "200": {
             "description": "Successfully updated DTC settings.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceDTC"
+              "$ref": "#/definitions/ManagedInstanceDtc"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Applying DTC settings is in progress"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates the managed instance DTC settings with all optional parameters specified.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateMax.json"
+          },
+          "Updates the managed instance DTC settings by enabling DTC.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateEnableDtc.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Patches the managed instance DTC settings.",
+        "operationId": "ManagedInstanceDtcs_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "dtcName",
+            "in": "path",
+            "description": "The name of the managed instance DTC.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "DtcName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Managed instance DTC settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated DTC settings.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Applying DTC settings is in progress"
@@ -192,7 +247,7 @@
     }
   },
   "definitions": {
-    "ManagedInstanceDTC": {
+    "ManagedInstanceDtc": {
       "description": "SQL Managed Instance DTC",
       "type": "object",
       "allOf": [
@@ -202,13 +257,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagedInstanceDTCProperties",
+          "$ref": "#/definitions/ManagedInstanceDtcProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ManagedInstanceDTCListResult": {
+    "ManagedInstanceDtcListResult": {
       "description": "A list of managed instance's DTCs.",
       "type": "object",
       "properties": {
@@ -216,7 +271,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedInstanceDTC"
+            "$ref": "#/definitions/ManagedInstanceDtc"
           },
           "readOnly": true
         },
@@ -227,7 +282,7 @@
         }
       }
     },
-    "ManagedInstanceDTCProperties": {
+    "ManagedInstanceDtcProperties": {
       "description": "The properties of managed instance DTC.",
       "type": "object",
       "properties": {
@@ -236,7 +291,7 @@
           "type": "boolean"
         },
         "securitySettings": {
-          "$ref": "#/definitions/ManagedInstanceDTCSecuritySettings",
+          "$ref": "#/definitions/ManagedInstanceDtcSecuritySettings",
           "description": "Security settings of managed instance DTC."
         },
         "externalDnsSuffixSearchList": {
@@ -253,12 +308,12 @@
         }
       }
     },
-    "ManagedInstanceDTCSecuritySettings": {
+    "ManagedInstanceDtcSecuritySettings": {
       "description": "The Transaction Manager Communication Settings of the DTC tied to managed instance.",
       "type": "object",
       "properties": {
         "transactionManagerCommunicationSettings": {
-          "$ref": "#/definitions/ManagedInstanceDTCTransactionManagerCommunicationSettings",
+          "$ref": "#/definitions/ManagedInstanceDtcTransactionManagerCommunicationSettings",
           "description": "Transaction Manager communication settings of managed instance DTC."
         },
         "xaTransactionsEnabled": {
@@ -271,7 +326,7 @@
         }
       }
     },
-    "ManagedInstanceDTCTransactionManagerCommunicationSettings": {
+    "ManagedInstanceDtcTransactionManagerCommunicationSettings": {
       "description": "The Transaction Manager Communication Settings of the DTC tied to managed instance.",
       "type": "object",
       "properties": {
@@ -290,7 +345,16 @@
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
