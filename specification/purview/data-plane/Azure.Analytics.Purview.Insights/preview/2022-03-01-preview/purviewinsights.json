@@ -77,6 +77,9 @@
           "AssetSnapshots_List": {
             "$ref": "./examples/AssetSnapshots_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -110,9 +113,7 @@
             "name": "top",
             "description": "The maximum number of entries that should be returned.",
             "type": "integer",
-            "format": "int32",
-            "maximum": 1000,
-            "minimum": 1
+            "format": "int32"
           },
           {
             "in": "query",
@@ -361,6 +362,9 @@
           "AssetTagsTimeSeries_List": {
             "$ref": "./examples/AssetTagsTimeSeries_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -404,6 +408,9 @@
           "AssetFilesAggregationTimeSeries_List": {
             "$ref": "./examples/AssetFilesAggregationTimeSeries_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -678,6 +685,9 @@
           "items": {
             "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
