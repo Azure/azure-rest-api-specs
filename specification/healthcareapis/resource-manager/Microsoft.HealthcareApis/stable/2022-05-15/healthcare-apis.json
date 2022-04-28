@@ -3350,6 +3350,10 @@
           "description": "Dicom Service authentication configuration.",
           "$ref": "#/definitions/DicomServiceAuthenticationConfiguration"
         },
+        "corsConfiguration": {
+          "description": "Dicom Service Cors configuration.",
+          "$ref": "#/definitions/CorsConfiguration"
+        },
         "serviceUrl": {
           "description": "The url of the Dicom Services.",
           "type": "string",
@@ -3669,7 +3673,7 @@
         },
         "corsConfiguration": {
           "description": "Fhir Service Cors configuration.",
-          "$ref": "#/definitions/FhirServiceCorsConfiguration"
+          "$ref": "#/definitions/CorsConfiguration"
         },
         "exportConfiguration": {
           "description": "Fhir Service export configuration.",
@@ -3792,7 +3796,7 @@
         }
       }
     },
-    "FhirServiceCorsConfiguration": {
+    "CorsConfiguration": {
       "description": "The settings for the CORS configuration of the service instance.",
       "type": "object",
       "properties": {
