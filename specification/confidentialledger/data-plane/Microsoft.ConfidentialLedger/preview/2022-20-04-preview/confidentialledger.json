@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1-preview",
+    "version": "2022-04-20-preview",
     "title": "ConfidentialLedgerClient",
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
@@ -122,6 +122,37 @@
         }
       }
     },
+    "/app/collections": {
+      "get": {
+        "operationId": "ConfidentialLedger_GetCollections",
+        "x-ms-examples": {
+          "GetCollectionIds": {
+            "$ref": "./examples/ledger/GetCollections.json"
+          }
+        },
+        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
+        "description": "Collection ids are user-created collections of ledger entries",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of collections",
+            "schema": {
+              "$ref": "#/definitions/CollectionArray"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
     "/app/transactions": {
       "get": {
         "operationId": "ConfidentialLedger_GetLedgerEntries",
@@ -132,16 +163,16 @@
         },
         "x-ms-pageable": {
           "itemName": "entries",
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "nextLink"
         },
-        "summary": "Gets ledger entries from a sub-ledger corresponding to a range.",
-        "description": "A sub-ledger id may optionally be specified. Only entries in the specified (or default) sub-ledger will be returned.",
+        "summary": "Gets ledger entries from a collection corresponding to a range.",
+        "description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "$ref": "#/parameters/TransactionIdFromParameter"
@@ -173,13 +204,13 @@
           }
         },
         "summary": "Writes a ledger entry.",
-        "description": "A sub-ledger id may optionally be specified.",
+        "description": "A collection id may optionally be specified.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "in": "body",
@@ -220,14 +251,14 @@
             "$ref": "./examples/ledger/GetLedgerEntry.json"
           }
         },
-        "summary": "Gets the ledger entry at the specified transaction id. A sub-ledger id may optionally be specified to indicate the sub-ledger from which to fetch the value.",
+        "summary": "Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.",
         "description": "To return older ledger entries, the relevant sections of the ledger must be read from disk and validated. To prevent blocking within the enclave, the response will indicate whether the entry is ready and part of the response, or if the loading is still ongoing.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
             "$ref": "#/parameters/TransactionIdParameter"
@@ -324,13 +355,13 @@
           }
         },
         "summary": "Gets the current value available in the ledger.",
-        "description": "A sub-ledger id may optionally be specified.",
+        "description": "A collection id may optionally be specified.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubLedgerIdParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           }
         ],
         "responses": {
@@ -570,8 +601,8 @@
           "type": "string",
           "description": "Contents of the ledger entry."
         },
-        "subLedgerId": {
-          "$ref": "#/definitions/SubLedgerId",
+        "collectionId": {
+          "$ref": "#/definitions/Collection",
           "readOnly": true
         },
         "transactionId": {
@@ -641,11 +672,11 @@
     "LedgerWriteResult": {
       "description": "Returned as a result of a write to the Confidential Ledger, the transaction id in the response indicates when the write will become durable.",
       "required": [
-        "subLedgerId"
+        "collectionId"
       ],
       "properties": {
-        "subLedgerId": {
-          "$ref": "#/definitions/SubLedgerId"
+        "collectionId": {
+          "$ref": "#/definitions/Collection"
         }
       },
       "type": "object"
@@ -680,7 +711,7 @@
         "state": {
           "$ref": "#/definitions/LedgerQueryState"
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "Path from which to retrieve the next page of results.",
           "type": "string"
         },
@@ -689,38 +720,79 @@
         }
       }
     },
+    "Pem": {
+      "type": "string"
+    },
+    "PemArray": {
+      "items": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "array"
+    },
     "ReceiptContents": {
-      "description": "A receipt certifying the transaction at the specified id.",
-      "required": [
-        "leaf",
-        "nodeId",
-        "proof",
-        "root",
-        "signature"
-      ],
-      "type": "object",
       "properties": {
-        "leaf": {
-          "description": "Merkle tree leaf for this transaction.",
+        "cert": {
           "type": "string"
+        },
+        "leaf": {
+          "type": "string"
+        },
+        "leafComponents": {
+          "$ref": "#/definitions/ReceiptLeafComponents"
         },
         "nodeId": {
-          "description": "Id of the node returning the receipt.",
-          "$ref": "#/definitions/EntityId"
+          "type": "string"
         },
         "proof": {
-          "description": "Merkle proof.",
-          "$ref": "#/definitions/MerkleProof"
+          "$ref": "#/definitions/ReceiptElementArray"
         },
         "root": {
-          "description": "Root of the Merkle tree at the time the transaction was recorded.",
           "type": "string"
         },
+        "serviceEndorsements": {
+          "$ref": "#/definitions/PemArray"
+        },
         "signature": {
-          "description": "Signature by the node, with its certificate, over the Merkle root.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "signature",
+        "proof",
+        "nodeId"
+      ],
+      "type": "object"
+    },
+    "ReceiptElement": {
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReceiptElementArray": {
+      "items": {
+        "$ref": "#/definitions/ReceiptElement"
+      },
+      "type": "array"
+    },
+    "ReceiptLeafComponents": {
+      "properties": {
+        "claimsDigest": {
+          "type": "string"
+        },
+        "commitEvidence": {
+          "type": "string"
+        },
+        "writeSetDigest": {
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "RoleAssignment": {
       "description": "Object for assigning a role to a user.",
@@ -738,9 +810,23 @@
       },
       "type": "object"
     },
-    "SubLedgerId": {
-      "description": "Identifier for sub-ledgers.",
-      "type": "string"
+    "Collection": {
+      "description": "Identifier for collections.",
+      "required": [
+        "collectionId"
+      ],
+      "properties": {
+        "collectionId": {
+          "type": "string"
+        }
+      }
+    },
+    "CollectionArray": {
+      "description": "A list of identifiers for ledger collections.",
+      "items": {
+        "$ref": "#/definitions/Collection"
+      },
+      "type": "array"
     },
     "TransactionId": {
       "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
@@ -809,12 +895,12 @@
       "type": "integer",
       "description": "The commit in the consensus protocol."
     },
-    "SubLedgerIdParameter": {
-      "name": "subLedgerId",
+    "CollectionIdParameter": {
+      "name": "collectionId",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "description": "The sub-ledger id.",
+      "description": "The collection id.",
       "type": "string"
     },
     "TransactionIdParameter": {
