@@ -279,7 +279,7 @@
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "LUIS",
+            "Luis",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -313,7 +313,7 @@
     },
     "LUISParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "LUIS",
+      "x-ms-discriminator-value": "Luis",
       "type": "object",
       "allOf": [
         {
@@ -497,7 +497,7 @@
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "LUIS",
+            "Luis",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -1373,7 +1373,7 @@
     "LUISTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "LUIS",
+      "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
