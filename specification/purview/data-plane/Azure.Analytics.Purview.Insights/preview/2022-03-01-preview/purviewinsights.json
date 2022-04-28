@@ -423,6 +423,7 @@
       "type": "object",
       "properties": {
         "kind": {
+          "description": "Kind of asset",
           "enum": [
             "ActiveUsersTrend",
             "AssetFilesAggregation",
@@ -456,32 +457,40 @@
       "properties": {
         "snapshotTime": {
           "format": "date-time",
+          "description": "The snapshot time.",
           "type": "string"
         },
         "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SnapshotRecord"
           }
         },
         "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         }
       }
     },
     "ErrorModel": {
+      "description": "Default error model",
       "type": "object",
       "properties": {
         "code": {
+          "description": "Gets or sets the error code.",
           "type": "string"
         },
         "message": {
+          "description": "Gets or sets the messages.",
           "type": "string"
         },
         "target": {
+          "description": "Gets or sets the target.",
           "type": "string"
         },
         "details": {
+          "description": "Gets or sets the details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorModel"
@@ -490,9 +499,11 @@
       }
     },
     "ErrorResponseModel": {
+      "description": "Default error response model",
       "type": "object",
       "properties": {
         "error": {
+          "description": "Gets or sets the error.",
           "allOf": [
             {
               "$ref": "#/definitions/ErrorModel"
@@ -508,6 +519,7 @@
       "type": "object",
       "properties": {
         "kind": {
+          "description": "Kind of asset",
           "enum": [
             "ActiveUsersTrend",
             "AssetFilesAggregation",
@@ -541,57 +553,68 @@
       "properties": {
         "snapshotTime": {
           "format": "date-time",
+          "description": "The snapshot time.",
           "type": "string"
         },
         "totalResultCount": {
           "format": "int64",
+          "description": "Total result count.",
           "type": "integer"
         },
         "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DetailsRecord"
           }
         },
         "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         }
       }
     },
     "AssetInsightsDetailsFilters": {
+      "description": "API response structure for filters on asset insights details page\r\nTODO : Check with UX if we need to emit a snapshot time for this API",
       "type": "object",
       "properties": {
         "classifications": {
+          "description": "Classifications on the asset",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "classificationCategories": {
+          "description": "Classification categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "collectionNames": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "dataOwners": {
+          "description": "Asset data owners",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "instances": {
+          "description": "Instance[SQL server/Blob account]",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "sourceTypes": {
+          "description": "Data Source Types",
           "type": "array",
           "items": {
             "type": "string"
@@ -633,12 +656,14 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagsTimesSeriesRecord"
           }
         },
         "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         }
       }
@@ -681,12 +706,14 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
           }
         },
         "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         }
       }
@@ -700,42 +727,51 @@
       ],
       "properties": {
         "assetDisplayName": {
+          "description": "Asset display name",
           "type": "string"
         },
         "classifications": {
+          "description": "Classifications on the asset",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "classificationCategories": {
+          "description": "Classification categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "dataOwners": {
+          "description": "Asset data owners",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "guid": {
+          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
           "type": "string"
         },
         "instance": {
+          "description": "Instance[SQL server/Blob account]",
           "type": "string"
         },
         "objectType": {
           "type": "string"
         },
         "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
           "type": "string"
         },
         "sourceType": {
+          "description": "Data Source Type",
           "type": "string"
         }
       },
@@ -750,36 +786,45 @@
       ],
       "properties": {
         "assetDisplayName": {
+          "description": "Asset display name",
           "type": "string"
         },
         "classifications": {
+          "description": "Classifications on the asset",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "dataOwners": {
+          "description": "Asset data owners",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "guid": {
+          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
           "type": "string"
         },
         "description": {
+          "description": "Asset description",
           "type": "string"
         },
         "instance": {
+          "description": "Instance[SQL server/Blob account]",
           "type": "string"
         },
         "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
           "type": "string"
         },
         "sourceType": {
+          "description": "Data Source Type",
           "type": "string"
         }
       },
@@ -794,36 +839,43 @@
       ],
       "properties": {
         "classifications": {
+          "description": "Classifications on the asset",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "classificationCategories": {
+          "description": "Classification categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "count": {
+          "description": "Asset Count\r\nTODO : Check with OT implementation if it's easier/possible to calculate the counts for all possible variants\r\nOr we should have list of deleted asset names in the dataset that we can filter on to claculate the count",
           "type": "string"
         },
         "dataOwners": {
+          "description": "Asset data owners",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "instance": {
+          "description": "Instance[SQL server/Blob account]",
           "type": "string"
         },
         "objectType": {
           "type": "string"
         },
         "sourceType": {
+          "description": "Data Source Type",
           "type": "string"
         }
       },
@@ -838,42 +890,51 @@
       ],
       "properties": {
         "assetDisplayName": {
+          "description": "Asset display name",
           "type": "string"
         },
         "classifications": {
+          "description": "Classifications on the asset",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "classificationCategories": {
+          "description": "Classification categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "dataOwners": {
+          "description": "Asset data owners",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "guid": {
+          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
           "type": "string"
         },
         "instance": {
+          "description": "Instance[SQL server/Blob account]",
           "type": "string"
         },
         "objectType": {
           "type": "string"
         },
         "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
           "type": "string"
         },
         "sourceType": {
+          "description": "Data Source Type",
           "type": "string"
         }
       },
@@ -884,22 +945,27 @@
       "properties": {
         "assetEditsUserCount": {
           "format": "int64",
+          "description": "Count of distinct users making asset edits",
           "type": "integer"
         },
         "datamapPopulationUserCount": {
           "format": "int64",
+          "description": "Count of distinct users populating the datamap",
           "type": "integer"
         },
         "searchAndBrowseUserCount": {
           "format": "int64",
+          "description": "Count of distinct users doing serach and browse activities",
           "type": "integer"
         },
         "totalUserCount": {
           "format": "int64",
+          "description": "Number of all active users",
           "type": "integer"
         },
         "timePoint": {
           "format": "date-time",
+          "description": "Time for the data point",
           "type": "string"
         }
       }
@@ -913,6 +979,7 @@
       ],
       "properties": {
         "activeUsersTrendPerDateRange": {
+          "description": "date range to data points map",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -933,23 +1000,29 @@
       ],
       "properties": {
         "classification": {
+          "description": "Asset Classification",
           "type": "string"
         },
         "classificationCategory": {
+          "description": "Classification category",
           "type": "string"
         },
         "collectionName": {
+          "description": "Collection to which the asset belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "count": {
           "format": "int64",
+          "description": "Asset count",
           "type": "integer"
         },
         "dataOwnerAssigned": {
+          "description": "Is data owner assigned",
           "type": "boolean"
         },
         "unclassifiedCount": {
           "format": "int64",
+          "description": "Count of unclassified assets",
           "type": "integer"
         }
       },
@@ -964,22 +1037,27 @@
       ],
       "properties": {
         "collectionName": {
+          "description": "Collection to which the asset belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "count": {
           "format": "int64",
+          "description": "Count of all assets",
           "type": "integer"
         },
         "fullyCurated": {
           "format": "int64",
+          "description": "Count of fully curated assets",
           "type": "integer"
         },
         "partiallyCurated": {
           "format": "int64",
+          "description": "Count of partially curated assets",
           "type": "integer"
         },
         "notCurated": {
           "format": "int64",
+          "description": "Count of not curated assets",
           "type": "integer"
         }
       },
@@ -1071,38 +1149,47 @@
       ],
       "properties": {
         "collectionName": {
+          "description": "The collection name",
           "type": "string"
         },
         "total": {
           "format": "int64",
+          "description": "The total number of assets in this collection.",
           "type": "integer"
         },
         "financialClassifiedAssets": {
           "format": "int64",
+          "description": "The count of financial classified assets.",
           "type": "integer"
         },
         "fullyCuratedAssets": {
           "format": "int64",
+          "description": "The count of fully curated assets",
           "type": "integer"
         },
         "dataOwnerAssigned": {
           "format": "int64",
+          "description": "The count of assets with data owner assigned.",
           "type": "integer"
         },
         "netNewAssets": {
           "format": "int64",
+          "description": "The count of net new assets.",
           "type": "integer"
         },
         "staleAssets": {
           "format": "int64",
+          "description": "The count of staled assets.",
           "type": "integer"
         },
         "unclassified": {
           "format": "int64",
+          "description": "The count of unclassified assets.",
           "type": "integer"
         },
         "updated": {
           "format": "int64",
+          "description": "The count of updated assets.",
           "type": "integer"
         }
       },
@@ -1117,23 +1204,29 @@
       ],
       "properties": {
         "classification": {
+          "description": "Asset Classification",
           "type": "string"
         },
         "classificationCategory": {
+          "description": "Classification category",
           "type": "string"
         },
         "collectionName": {
+          "description": "Collection to which the asset belongs\r\nThis is the 6 character unique collection name/id",
           "type": "string"
         },
         "count": {
           "format": "int64",
+          "description": "Asset count",
           "type": "integer"
         },
         "dataOwnerAssigned": {
+          "description": "Is data owner assigned",
           "type": "boolean"
         },
         "unclassifiedCount": {
           "format": "int64",
+          "description": "Count of unclassified assets",
           "type": "integer"
         }
       },
@@ -1172,22 +1265,27 @@
       "properties": {
         "total": {
           "format": "int64",
+          "description": "The total number of assets in this collection.",
           "type": "integer"
         },
         "unclassifiedAssets": {
           "format": "int64",
+          "description": "The count of unclassified assets.",
           "type": "integer"
         },
         "uncuratedAssets": {
           "format": "int64",
+          "description": "The count of uncurated assets",
           "type": "integer"
         },
         "unassignedDataOwnerAssets": {
           "format": "int64",
+          "description": "The count of assets without data owner assigned.",
           "type": "integer"
         },
         "timePoint": {
           "format": "date-time",
+          "description": "The time point at which this datapoint was calculated.",
           "type": "string"
         }
       }
@@ -1201,9 +1299,11 @@
       ],
       "properties": {
         "collectionName": {
+          "description": "The collection name",
           "type": "string"
         },
         "trend": {
+          "description": "The dictionary of trending by different date ranges.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1224,19 +1324,24 @@
       ],
       "properties": {
         "assetDisplayName": {
+          "description": "Asset display name",
           "type": "string"
         },
         "curationLevel": {
+          "description": "Asset curation level [Full, Partial, Uncurated]",
           "type": "string"
         },
         "guid": {
+          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
           "type": "string"
         },
         "numberOfViews": {
           "format": "int64",
+          "description": "Number of views for the asset",
           "type": "integer"
         },
         "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
           "type": "string"
         }
       },
@@ -1251,23 +1356,29 @@
       ],
       "properties": {
         "classification": {
+          "description": "Asset Classification",
           "type": "string"
         },
         "classificationCategory": {
+          "description": "Classification category",
           "type": "string"
         },
         "collectionName": {
+          "description": "Collection to which the asset belongs\r\nTODO : [sichaudh] Check whether the UI needs us to populate parent collection for each collection",
           "type": "string"
         },
         "count": {
           "format": "int64",
+          "description": "Asset count",
           "type": "integer"
         },
         "dataOwnerAssigned": {
+          "description": "Is data owner assigned",
           "type": "boolean"
         },
         "unclassifiedCount": {
           "format": "int64",
+          "description": "Count of unclassified assets",
           "type": "integer"
         }
       },
@@ -1282,15 +1393,19 @@
       ],
       "properties": {
         "sourceType": {
+          "description": "The data source type.",
           "type": "string"
         },
         "tagType": {
+          "description": "The type of tag.",
           "type": "string"
         },
         "group": {
+          "description": "The classification group.",
           "type": "string"
         },
         "name": {
+          "description": "The tag name.",
           "type": "string"
         },
         "subscriptions": {
@@ -1299,14 +1414,17 @@
         },
         "sources": {
           "format": "int32",
+          "description": "The number of data sources with tags.",
           "type": "integer"
         },
         "files": {
           "format": "int64",
+          "description": "The number of files with tags.",
           "type": "integer"
         },
         "tables": {
           "format": "int64",
+          "description": "The number of tables with tags.",
           "type": "integer"
         }
       },
@@ -1322,12 +1440,15 @@
       "properties": {
         "numberOfSearches": {
           "format": "int64",
+          "description": "Number of searches for the search term",
           "type": "integer"
         },
         "searchTerm": {
+          "description": "Search term",
           "type": "string"
         },
         "searchWithResults": {
+          "description": "Search produced results or not",
           "type": "boolean"
         }
       },
