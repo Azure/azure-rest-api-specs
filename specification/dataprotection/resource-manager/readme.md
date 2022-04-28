@@ -53,6 +53,7 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 ```yaml $(tag) == 'package-2022-04'
 input-file:
   - Microsoft.DataProtection/stable/2022-04-01/dataprotection.json
+```
 
 ### Tag: package-preview-2022-03
 
