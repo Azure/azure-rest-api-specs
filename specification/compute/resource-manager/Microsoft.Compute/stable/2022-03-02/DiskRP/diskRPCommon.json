@@ -415,7 +415,20 @@
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Indicates the error code if the background copy of a resource created via the CopyStart operation fails."
+          "description": "Indicates the error code if the background copy of a resource created via the CopyStart operation fails.",
+          "enum": [
+            "CopySourceNotFound"
+          ],
+          "x-ms-enum": {
+            "name": "CopyCompletionError",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CopySourceNotFound",
+                "description": "Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress."
+              }
+            ]
+          }
         },
         "errorMessage": {
           "type": "string",
