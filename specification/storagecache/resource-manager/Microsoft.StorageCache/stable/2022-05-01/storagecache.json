@@ -1269,7 +1269,7 @@
         "operationId": "StorageTarget_Invalidate"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/addPrimingJob": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/startPrimingJob": {
       "post": {
         "consumes": [
           "application/json"
@@ -1301,7 +1301,17 @@
         ],
         "responses": {
           "202": {
-            "description": "The priming job is being created and will complete asynchronously."
+            "description": "The priming job is being created and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1311,8 +1321,8 @@
           }
         },
         "x-ms-examples": {
-          "AddPrimingJob": {
-            "$ref": "./examples/AddPrimingJob.json"
+          "StartPrimingJob": {
+            "$ref": "./examples/StartPrimingJob.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1323,10 +1333,10 @@
           "PrimingJobs"
         ],
         "description": "Create a priming job. This operation is only allowed when the cache is healthy.",
-        "operationId": "AddPrimingJob"
+        "operationId": "StartPrimingJob"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/removePrimingJob/{primingJobId}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stopPrimingJob": {
       "post": {
         "produces": [
           "application/json"
@@ -1345,12 +1355,27 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrimingJobIdParameter"
+            "description": "Object containing the priming job ID.",
+            "in": "body",
+            "name": "primingjobid",
+            "schema": {
+              "$ref": "#/definitions/PrimingJobIdParameter"
+            }
           }
         ],
         "responses": {
           "202": {
-            "description": "Started priming job deletion."
+            "description": "Started priming job deletion.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The priming job is being deleted."
@@ -1363,8 +1388,8 @@
           }
         },
         "x-ms-examples": {
-          "RemovePrimingJob": {
-            "$ref": "./examples/RemovePrimingJob.json"
+          "StopPrimingJob": {
+            "$ref": "./examples/StopPrimingJob.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1375,10 +1400,10 @@
           "PrimingJobs"
         ],
         "description": "Schedule a priming job for deletion.",
-        "operationId": "PrimingJobs_Remove{PrimingJobId}"
+        "operationId": "StopPrimingJob"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/pausePrimingJob/{primingJobId}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/pausePrimingJob": {
       "post": {
         "produces": [
           "application/json"
@@ -1397,12 +1422,27 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrimingJobIdParameter"
+            "description": "Object containing the priming job ID.",
+            "in": "body",
+            "name": "primingjobid",
+            "schema": {
+              "$ref": "#/definitions/PrimingJobIdParameter"
+            }
           }
         ],
         "responses": {
           "202": {
-            "description": "Priming job is being paused."
+            "description": "Priming job is being paused.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The priming job is paused."
@@ -1427,10 +1467,10 @@
           "PrimingJobs"
         ],
         "description": "Schedule a priming job to be paused.",
-        "operationId": "PrimingJobs_Pause{PrimingJobId}"
+        "operationId": "PausePrimingJob"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/resumePrimingJob/{primingJobId}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/resumePrimingJob": {
       "post": {
         "produces": [
           "application/json"
@@ -1449,12 +1489,27 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrimingJobIdParameter"
+            "description": "Object containing the priming job ID.",
+            "in": "body",
+            "name": "primingjobid",
+            "schema": {
+              "$ref": "#/definitions/PrimingJobIdParameter"
+            }
           }
         ],
         "responses": {
           "202": {
-            "description": "Priming job is being resumed."
+            "description": "Priming job is being resumed.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The priming job is running."
@@ -1479,7 +1534,7 @@
           "PrimingJobs"
         ],
         "description": "Resumes a paused priming job.",
-        "operationId": "PrimingJobs_Resume{PrimingJobId}"
+        "operationId": "ResumePrimingJob"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
@@ -1566,7 +1621,17 @@
         ],
         "responses": {
           "202": {
-            "description": "Storage target space allocations are updating."
+            "description": "Error response describing why the operation failed.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3129,6 +3194,20 @@
       ],
       "readOnly": true
     },
+    "PrimingJobIdParameter": {
+      "description": "Object containing the priming job ID.",
+      "properties": {
+        "primingJobId": {
+          "description": "The unique identifier of the priming job.",
+          "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "primingJobId"
+      ],
+      "type": "object"
+    },
     "SpaceAllocationList": {
       "description": "List of storage target space allocations.",
       "items": {
@@ -3204,15 +3283,6 @@
       "description": "Name of Storage Target.",
       "in": "path",
       "name": "storageTargetName",
-      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PrimingJobIdParameter": {
-      "description": "Unique identifier of the priming job.",
-      "in": "path",
-      "name": "primingJobId",
       "pattern": "^[-0-9a-zA-Z_]{1,80}$",
       "required": true,
       "type": "string",
