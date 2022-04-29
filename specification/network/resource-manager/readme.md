@@ -37,7 +37,7 @@ These settings apply only when `--tag=2022-02-preview` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02-preview'
 input-file:
-  - Microsoft.Network/preview/2022-02-01-preview/applicationGatewayWafDynamicManifest.json
+  - Microsoft.Network/preview/2022-05-01-preview/applicationGatewayWafDynamicManifest.json
   - Microsoft.Network/preview/2022-02-01-preview/network.json
   - Microsoft.Network/preview/2022-02-01-preview/networkManager.json
   - Microsoft.Network/preview/2022-02-01-preview/networkManagerActiveConfiguration.json
