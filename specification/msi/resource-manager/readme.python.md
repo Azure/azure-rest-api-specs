@@ -30,14 +30,14 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/
 perform-load: false
 ```
 
-### Tag: package-2019-09-preview and python
+### Tag: package-preview-2021-09 and python
 
 These settings apply only when `--tag=package-preview-2021-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-preview-2021-09'
-namespace: azure.mgmt.msi.v2019_09_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2019_09_01_preview
+namespace: azure.mgmt.msi.v2021_09_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2021_09_01_preview
 ```
 
 ### Tag: package-2018-11-30 and python
