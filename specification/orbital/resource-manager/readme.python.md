@@ -16,3 +16,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/orbital/azure-mgmt-orbital/azure/mgmt/orbital
 ```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
