@@ -21,6 +21,12 @@
         ],
         "parameters": [
           {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
+            "type": "string"
+          },
+          {
             "in": "query",
             "name": "skip",
             "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
@@ -58,15 +64,19 @@
           "Get PhoneNumber Search Result": {
             "$ref": "./examples/GetCountries.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "phoneNumberCountries"
         }
       }
     },
-    "/availablePhoneNumbers/countries/{countryCode}/cities": {
+    "/availablePhoneNumbers/countries/{countryCode}/localities": {
       "get": {
         "tags": [
           "Browse for available countries, cities and area codes"
         ],
-        "summary": "Gets the list of cities with available phone numbers.",
+        "summary": "Gets the list of cities or towns with available phone numbers.",
         "operationId": "PhoneNumbers_ListAvailableCities",
         "consumes": [
           "application/json"
@@ -75,6 +85,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "countryCode",
@@ -103,7 +119,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PhoneNumberCities"
+              "$ref": "#/definitions/PhoneNumberLocalities"
             }
           },
           "default": {
@@ -117,10 +133,14 @@
           "Get PhoneNumber Search Result": {
             "$ref": "./examples/GetCities.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "phoneNumberLocalities"
         }
       }
     },
-    "/availablePhoneNumbers/countries/{countryCode}/areacodes": {
+    "/availablePhoneNumbers/countries/{countryCode}/areaCodes": {
       "get": {
         "tags": [
           "Browse for available countries, cities and area codes"
@@ -179,15 +199,15 @@
           },
           {
             "in": "query",
-            "name": "city",
-            "description": "The name of city in which to search for the area code. This is required if the number type is Geographic.",
+            "name": "locality",
+            "description": "The name of locality or town in which to search for the area code. This is required if the number type is Geographic.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "administrativeDivision",
             "description": "The name of the state or province in which to search for the area code.",
-            "type": "integer"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -211,6 +231,10 @@
           "Get PhoneNumber Search Result": {
             "$ref": "./examples/GetAreaCodes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "areaCodes"
         }
       }
     },
@@ -652,6 +676,12 @@
         ],
         "parameters": [
           {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
+            "type": "string"
+          },
+          {
             "in": "path",
             "name": "phoneNumber",
             "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
@@ -747,6 +777,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
+            "type": "string"
+          },
           {
             "in": "query",
             "name": "skip",
@@ -868,12 +904,12 @@
         "capabilities": {
           "$ref": "#/definitions/PhoneNumberCapabilities"
         },
-        "city": {
-          "description": "Optionally for geographic phone number type, the city of the desired phone numbers.",
+        "locality": {
+          "description": "Optionally for geographic phone number type, the locality of the desired phone numbers.",
           "type": "string"
         },
-        "state": {
-          "description": "Optionally for geographic phone number type, the state or province of the desired phone numbers.",
+        "administrativeDivision": {
+          "description": "TODO",
           "type": "string"
         },
         "areaCode": {
@@ -1236,8 +1272,8 @@
         }
       }
     },
-    "PhoneNumberCity": {
-      "description": "Represents a city.",
+    "PhoneNumberLocality": {
+      "description": "Represents a locality or town.",
       "required": [
         "name",
         "localizedName"
@@ -1245,40 +1281,58 @@
       "type": "object",
       "properties": {
         "localizedName": {
-          "description": "Represents the localized name of the city.",
+          "description": "Represents the localized name of the locality.",
           "type": "string"
         },
         "name": {
-          "description": "Represents the name of the city",
+          "description": "Represents the name of the locality",
           "type": "string"
         },
         "localizedAdministrativeDivisionName": {
-          "description": "Represents the localized name of the administrative division of the city. e.g. state or province localized name.",
+          "description": "Represents the localized name of the administrative division of the locality. e.g. state or province localized name.",
           "type": "string"
         },
         "administrativeDivision": {
-          "description": "Represents the name of the admnistrative division of the city. e.g. state or province name.",
+          "description": "Represents the name of the admnistrative division of the locality. e.g. state or province name.",
           "type": "string"
         },
         "abbreviatedAdministrativeDivisionName": {
-          "description": "Represents the abbreviated name of the admnistrative division of the city. e.g. state or province abbreviation.",
+          "description": "Represents the abbreviated name of the admnistrative division of the locality. e.g. state or province abbreviation.",
           "type": "string"
         }
       }
     },
-    "PhoneNumberCities": {
-      "description": "Represents a wrapper around a list of cities.",
+    "PhoneNumberLocalities": {
+      "description": "Represents a wrapper around a list of cities or towns.",
       "type": "object",
       "properties": {
         "cities": {
-          "description": "Represents the underlying list of cities.",
+          "description": "Represents the underlying list of cities or town.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PhoneNumberCity"
+            "$ref": "#/definitions/PhoneNumberLocality"
           }
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberAdministrativeDivision": {
+      "description": "Represents an administrative division, e.g. state or province.",
+      "required": [
+        "name",
+        "localizedName"
+      ],
+      "type": "object",
+      "properties": {
+        "localizedName": {
+          "description": "Represents the localized name of the administrative division of the locality. e.g. state or province localized name.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Represents the abbreviated name of the admnistrative division of the locality. e.g. state or province abbreviation.",
           "type": "string"
         }
       }
