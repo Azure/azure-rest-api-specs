@@ -86,13 +86,17 @@
         "description": "Retrieves detail of a provider port.",
         "parameters": [
           {
+            "name": "providerport",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the provider port."
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/ProviderPortParameter"
           }
         ],
         "responses": {
