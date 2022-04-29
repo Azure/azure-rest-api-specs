@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-preview-2022-04
 ```
 
-
 ### Tag: package-preview-2022-04
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-04'
+``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.Devices/preview/2022-04-30-preview/iothub.json
 ```
+
 ### Tag: package-2021-07-02
 
 These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
@@ -313,3 +313,13 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    where: $.definitions.FallbackRouteProperties.properties.source
+    from: iothub.json
+    reason: False positive.
+```
