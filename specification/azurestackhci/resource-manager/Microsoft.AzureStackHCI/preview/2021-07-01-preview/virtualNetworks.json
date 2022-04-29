@@ -451,14 +451,14 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/MOCVirtualNetworkStatus"
+          "$ref": "#/definitions/VirtualNetworkStatus"
         }
       },
-      "description": "MOCVirtualNetworkSpec defines the desired state of MOCVirtualNetwork"
+      "description": "VirtualNetworkSpec defines the desired state of VirtualNetwork"
     },
-    "MOCVirtualNetworkStatus": {
+    "VirtualNetworkStatus": {
       "type": "object",
-      "description": "MOCVirtualNetworkStatus defines the desired state of MOCVirtualNetwork",
+      "description": "VirtualNetworkStatus defines the observed state of VirtualNetwork",
       "x-ms-client-flatten": true,
       "properties": {
         "errorCode": {
@@ -503,11 +503,11 @@
         },
         "start": {
           "type": "string",
-          "description": "First IP of the pool"
+          "description": "First IP in the pool"
         },
         "end": {
           "type": "string",
-          "description": "Last IP of the pool"
+          "description": "Last IP in the pool"
         },
         "info": {
           "$ref": "#/definitions/IPPoolInfo"
