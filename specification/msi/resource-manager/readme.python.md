@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-preview-2021-09 --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-preview-2021-09'
-namespace: azure.mgmt.msi.v2021_09_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2021_09_01_preview
+namespace: azure.mgmt.msi.v2021_09_30_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2021_09_30_preview
 ```
 
 ### Tag: package-2018-11-30 and python
