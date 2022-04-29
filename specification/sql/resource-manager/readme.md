@@ -295,9 +295,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
-- Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
-- Microsoft.Sql/stable/2014-04-01/dataMasking.json
-- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
