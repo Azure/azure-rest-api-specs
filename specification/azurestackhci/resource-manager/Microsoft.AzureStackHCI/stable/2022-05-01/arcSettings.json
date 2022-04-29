@@ -187,7 +187,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ArcSetting"
+              "$ref": "#/definitions/ArcSettingsPatch"
             },
             "description": "ArcSettings parameters that needs to be updated"
           },
@@ -378,6 +378,37 @@
           "description": "Link to the next set of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ArcSettingsPatch": {
+      "description": "ArcSetting details to update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "ArcSettings properties.",
+          "$ref": "#/definitions/ArcSettingsPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcSettingsPatchProperties": {
+      "description": "ArcSettings properties.",
+      "type": "object",
+      "properties": {
+        "connectivityProperties": {
+          "description": "contains connectivity related configuration for ARC resources",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ArcConnectivityProperties"
+          }
         }
       }
     },
