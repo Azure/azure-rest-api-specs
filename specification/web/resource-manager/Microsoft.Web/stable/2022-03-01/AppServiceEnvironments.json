@@ -747,6 +747,81 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/migrate": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Migrate an App Service Environment between ASE versions.",
+        "operationId": "AppServiceEnvironments_Migrate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "description": "Specify <code>Validation</code> to validate, <code>PreMigratation</code> to generate new IP addresses and <code>FullMigration</code> to migrate the ASE.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationOptionsEnvelope",
+            "in": "body",
+            "description": "Additional options and configurations that will be applied to the App Service Environment during migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AseMigrationOptions"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Failed validation",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "App Service Environment not found",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+		"x-ms-examples": {
+          "Migrate to App Service Environment v3": {
+            "$ref": "./examples/AppServiceEnvironments_Migrate.json"
+        }				   
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools": {
       "get": {
         "tags": [
@@ -2445,6 +2520,63 @@
           "description": "Core resource properties",
           "type": "object",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+   "AseMigrationOptions": {
+      "description": "Extra options and configurations that will be applied to an ASE during migration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseMigrationOptions resource specific properties",
+          "type": "object",
+          "properties": {
+            "customDnsSuffixConfiguration": {
+              "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+            },
+            "zoneRedundant": {
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomDnsSuffixConfiguration": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Degraded",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CustomDnsSuffixProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "provisioningDetails": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsSuffix": {
+          "type": "string"
+        },
+        "certificateUrl": {
+          "type": "string"
+        },
+        "keyVaultReferenceIdentity": {
+          "description": "The user-assigned identity to use for resolving the key vault certificate reference.\nIf not specified, the system-assigned ASE identity will be used if available.",
+          "type": "string"
         }
       }
     },
