@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Cognitive Language Service - Question Answering - Authoring",
+    "title": "Microsoft Cognitive Language Service - Question Answering - /authoring",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
     "version": "2022-05-01"
   },
@@ -27,7 +27,7 @@
     ]
   },
   "paths": {
-    "authoring/query-knowledgebases/projects": {
+    "/authoring/query-knowledgebases/projects": {
       "get": {
         "summary": "Gets all projects for a user.",
         "operationId": "QuestionAnsweringProjects_ListProjects",
@@ -71,12 +71,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectsListProjects.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectsListProjects.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}": {
       "get": {
         "summary": "Get the requested project metadata.",
         "operationId": "QuestionAnsweringProjects_GetProjectDetails",
@@ -110,7 +110,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetProject.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulGetProject.json"
           }
         }
       },
@@ -162,7 +162,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulCreateProject.json"
           }
         }
       },
@@ -201,13 +201,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulDeleteProject.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulDeleteProject.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Project delete job.",
         "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
@@ -241,12 +241,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeleteJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectDeleteJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/:export": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project metadata and assets.",
         "operationId": "QuestionAnsweringProjects_Export",
@@ -294,13 +294,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitExportJob.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectSubmitExportJob.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Export job, once job completes, returns the project metadata, and assets.",
         "operationId": "QuestionAnsweringProjects_GetExportStatus",
@@ -337,12 +337,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectExportJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectExportJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/:import": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project assets.",
         "operationId": "QuestionAnsweringProjects_Import",
@@ -392,13 +392,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitImportJob.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectSubmitImportJob.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Import job.",
         "operationId": "QuestionAnsweringProjects_GetImportStatus",
@@ -435,12 +435,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectImportJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectImportJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
         "summary": "Deploy project to production.",
         "operationId": "QuestionAnsweringProjects_DeployProject",
@@ -479,13 +479,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitDeployJob.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectSubmitDeployJob.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Deploy job.",
         "operationId": "QuestionAnsweringProjects_GetDeployStatus",
@@ -525,12 +525,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeployJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectDeployJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/deployments": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments": {
       "get": {
         "summary": "List all deployments of a project.",
         "operationId": "QuestionAnsweringProjects_ListDeployments",
@@ -577,12 +577,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectListDeployments.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulProjectListDeployments.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/synonyms": {
+    "/authoring/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "summary": "Gets all the synonyms of a project.",
         "operationId": "QuestionAnsweringProjects_GetSynonyms",
@@ -629,7 +629,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSynonyms.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulGetSynonyms.json"
           }
         }
       },
@@ -672,12 +672,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSynonyms.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateSynonyms.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/sources": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "summary": "Gets all the sources of a project.",
         "operationId": "QuestionAnsweringProjects_GetSources",
@@ -724,7 +724,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSources.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulGetSources.json"
           }
         }
       },
@@ -772,13 +772,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSources.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateSources.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update sources job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
@@ -815,12 +815,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateSourcesJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/qnas": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "summary": "Gets all the QnAs of a project.",
         "operationId": "QuestionAnsweringProjects_GetQnas",
@@ -870,7 +870,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetQnas.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulGetQnas.json"
           }
         }
       },
@@ -918,13 +918,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnas.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateQnas.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update QnAs job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
@@ -961,12 +961,12 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnasJobStatus.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateQnasJobStatus.json"
           }
         }
       }
     },
-    "authoring/query-knowledgebases/projects/{projectName}/feedback": {
+    "/authoring/query-knowledgebases/projects/{projectName}/feedback": {
       "post": {
         "summary": "Update Active Learning feedback.",
         "operationId": "QuestionAnsweringProjects_AddFeedback",
@@ -1006,7 +1006,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateActiveLearningFeedback.json"
+            "$ref": "./examples/questionanswering//authoring/SuccessfulUpdateActiveLearningFeedback.json"
           }
         }
       }
