@@ -70,7 +70,7 @@
       }
     },
     "/providers/Microsoft.DevHub/githuboauth": {
-      "get": {
+      "post": {
         "tags": [
           "GitHubOAuth"
         ],
@@ -85,13 +85,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GitHubAuthURLResponse"
+              "$ref": "#/definitions/GitHubOAuthInfoResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -103,7 +103,7 @@
       }
     },
     "/providers/Microsoft.DevHub/githuboauthcallback": {
-      "post": {
+      "get": {
         "tags": [
           "GitHubOAuth"
         ],
@@ -122,10 +122,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GitHubAuthTokenResponse"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -166,7 +163,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -256,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -515,6 +512,9 @@
         },
         "lastWorkflowRun": {
           "$ref": "#/definitions/WorkflowRun"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus"
         }
       }
     },
@@ -621,6 +621,33 @@
       },
       "description": "Determines the type of manifests within the repository."
     },
+    "AuthorizationStatus": {
+      "type": "string",
+      "enum": [
+        "Authorized",
+        "NotFound",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Authorized",
+            "description": "Requests authorized successfully"
+          },
+          {
+            "value": "NotFound",
+            "description": "Requests returned NotFound response"
+          },
+          {
+            "value": "Error",
+            "description": "Requests returned other error response"
+          }
+        ]
+      },
+      "description": "Determines the authorization status of requests."
+    },
     "WorkflowRun": {
       "type": "object",
       "properties": {
@@ -639,11 +666,6 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp of the last workflow run."
-        },
-        "authorized": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Describes if the caller was authorized to fetch the latest workflow run."
         }
       }
     },
@@ -665,76 +687,17 @@
         }
       }
     },
-    "GitHubAuthURLResponse": {
+    "GitHubOAuthInfoResponse": {
       "type": "object",
       "description": "URL used to authorize the Developer Hub GitHub App",
       "properties": {
         "authURL": {
           "type": "string",
           "description": "URL for authorizing the Developer Hub GitHub App"
-        }
-      }
-    },
-    "GitHubAuthTokenResponse": {
-      "type": "object",
-      "description": "Response containing OAuth token from GitHub",
-      "properties": {
+        },
         "token": {
           "type": "string",
           "description": "OAuth token used to make calls to GitHub"
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC timestamp of resource creation."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
         }
       }
     },
@@ -805,7 +768,7 @@
       "x-ms-parameter-location": "method"
     },
     "GitHubOAuthCodeParameter": {
-      "name": "gitHubOAuthCode",
+      "name": "code",
       "in": "query",
       "required": true,
       "type": "string",
@@ -813,7 +776,7 @@
       "x-ms-parameter-location": "client"
     },
     "GitHubOAuthStateParameter": {
-      "name": "gitHubOAuthState",
+      "name": "state",
       "in": "query",
       "required": true,
       "type": "string",
