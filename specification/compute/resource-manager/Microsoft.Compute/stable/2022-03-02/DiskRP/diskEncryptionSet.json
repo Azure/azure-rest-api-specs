@@ -90,6 +90,9 @@
           },
           "Create a disk encryption set with key vault from a different subscription.": {
             "$ref": "./examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json"
+          },
+          "Create a disk encryption set with key vault from a different tenant.": {
+            "$ref": "./examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -411,6 +414,10 @@
           "readOnly": true,
           "$ref": "../common.json#/definitions/ApiError",
           "description": "The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed."
+        },
+        "federatedClientId": {
+          "type": "string",
+          "description": "Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property."
         }
       }
     },
@@ -420,6 +427,8 @@
           "type": "string",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "x-ms-enum": {
@@ -437,6 +446,26 @@
           "readOnly": true,
           "type": "string",
           "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the disk encryption set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks."
