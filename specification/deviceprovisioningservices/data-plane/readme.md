@@ -37,12 +37,6 @@ input-file:
   - Microsoft.Devices/preview/2021-11-01-preview/device.json
 ```
 
-### Tag: package-service-2021-11-01-preview
-```yaml $(tag) == 'package-service-2021-11-01-preview'
-input-file:
-  - Microsoft.Devices/preview/2021-11-01-preview/service.json
-```
-
 ### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
