@@ -397,6 +397,9 @@
           },
           "Put a node type with auto-scale parameters": {
             "$ref": "./examples/NodeTypePutOperationAutoScale_example.json"
+          },
+          "Put an stateless node type with temporary disk for service fabric": {
+            "$ref": "./examples/NodeTypePutOperationStateless_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -684,8 +687,7 @@
       "type": "object",
       "required": [
         "isPrimary",
-        "vmInstanceCount",
-        "dataDiskSizeGB"
+        "vmInstanceCount"
       ],
       "properties": {
         "isPrimary": {
@@ -702,7 +704,7 @@
         "dataDiskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Disk size for each vm in the node type in GBs."
+          "description": "Disk size for the managed disk attached to the vms on the node type in GBs."
         },
         "dataDiskType": {
           "$ref": "#/definitions/DiskType",
@@ -825,6 +827,10 @@
         "useDefaultPublicLoadBalancer": {
           "type": "boolean",
           "description": "Specifies whether the use public load balancer. If not specified and the node type doesn't have its own frontend configuration, it will be attached to the default load balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is true, then the frontend has to be an Internal Load Balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is false or not set, then the custom load balancer must include a public load balancer to provide outbound connectivity."
+        },
+        "useTempDataDisk": {
+          "type": "boolean",
+          "description": "Specifies whether to use the temporary disk for the service fabric data root, in which case no managed data disk will be attached and the temporary disk will be used. It is only allowed for stateless node types."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."

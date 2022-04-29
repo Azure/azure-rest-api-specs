@@ -1,0 +1,1644 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01-preview",
+    "title": "EducationManagementClient",
+    "description": "Education client provides access to education resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Education/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "description": "Lists all of the available Microsoft.Education API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Education/grants": {
+      "get": {
+        "tags": [
+          "Grants"
+        ],
+        "x-ms-examples": {
+          "GrantList": {
+            "$ref": "./examples/GrantList.json"
+          },
+          "GrantListIncludeAllocatedBudget": {
+            "$ref": "./examples/GrantListIncludeAllocatedBudget.json"
+          }
+        },
+        "operationId": "Grants_List",
+        "description": "Get a list of grants that Microsoft has provided.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of Grants",
+            "schema": {
+              "$ref": "#/definitions/GrantListResponse"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants": {
+      "get": {
+        "tags": [
+          "Grants"
+        ],
+        "x-ms-examples": {
+          "GrantList": {
+            "$ref": "./examples/GrantDefaultList.json"
+          },
+          "GrantListIncludeAllocatedBudget": {
+            "$ref": "./examples/GrantDefaultListIncludeAllocatedBudget.json"
+          }
+        },
+        "operationId": "Grant_List",
+        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of Grants",
+            "schema": {
+              "$ref": "#/definitions/GrantListResponse"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default": {
+      "get": {
+        "tags": [
+          "Grants"
+        ],
+        "x-ms-examples": {
+          "Grant": {
+            "$ref": "./examples/Grant.json"
+          },
+          "GrantIncludeAllocatedBudget": {
+            "$ref": "./examples/GrantIncludeAllocatedBudget.json"
+          }
+        },
+        "operationId": "Get_Grant",
+        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Grant detail",
+            "schema": {
+              "$ref": "#/definitions/GrantDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/labs": {
+      "get": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "LabList": {
+            "$ref": "./examples/LabList.json"
+          },
+          "LabListIncludeBudget": {
+            "$ref": "./examples/LabListIncludeBudget.json"
+          }
+        },
+        "operationId": "Labs_List",
+        "description": "Get a list of labs associated with the provided billing account name and billing profile name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeBudgetsParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeDeletedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lab details.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs": {
+      "get": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "LabListWithInvoiceSectionName": {
+            "$ref": "./examples/LabListWithInvoiceSectionName.json"
+          },
+          "LabListWithInvoiceSectionNameIncludeBudget": {
+            "$ref": "./examples/LabListWithInvoiceSectionNameIncludeBudget.json"
+          }
+        },
+        "operationId": "Lab_List",
+        "description": "Get the details for a specific lab associated with the provided billing account name, billing profile name, and invoice section name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeBudgetsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lab details.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default": {
+      "get": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "Lab": {
+            "$ref": "./examples/Lab.json"
+          },
+          "LabIncludeBudget": {
+            "$ref": "./examples/LabIncludeBudget.json"
+          }
+        },
+        "operationId": "Get_Lab",
+        "description": "Get the details for a specific lab associated with the provided billing account name, billing profile name, and invoice section name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeBudgetsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lab details.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "DeleteLab": {
+            "$ref": "./examples/DeleteLab.json"
+          }
+        },
+        "operationId": "Delete_Lab",
+        "description": "Delete a specific lab associated with the provided billing account name, billing profile name, and invoice section name. Note all students must be removed from the lab in order to delete the lab.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lab deleted"
+          },
+          "204": {
+            "description": "lab does not exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "CreateLab": {
+            "$ref": "./examples/CreateLab.json"
+          }
+        },
+        "operationId": "Create_Lab",
+        "description": "Create a new lab or update a previously created lab.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            },
+            "description": "Request parameters that are provided to create lab resource."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Accepted. Lab details.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "200": {
+            "description": "Normal response to get lab details.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/generateInviteCode": {
+      "post": {
+        "tags": [
+          "Labs"
+        ],
+        "x-ms-examples": {
+          "CreateLab": {
+            "$ref": "./examples/GenerateInviteCode.json"
+          }
+        },
+        "operationId": "Generate_InviteCode",
+        "description": "Generate invite code for a lab",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlyUpdateStudentCountParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteCodeGenerateRequest"
+            },
+            "description": "Request parameters that are provided to generate invite code."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lab detail.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/joinRequests": {
+      "get": {
+        "tags": [
+          "JoinRequest"
+        ],
+        "x-ms-examples": {
+          "JoinRequestList": {
+            "$ref": "./examples/JoinRequestList.json"
+          }
+        },
+        "operationId": "JoinRequests_List",
+        "description": "get student join requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeDeniedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "invite request list.",
+            "schema": {
+              "$ref": "#/definitions/JoinRequestList"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}": {
+      "get": {
+        "tags": [
+          "JoinRequest"
+        ],
+        "x-ms-examples": {
+          "JoinRequest": {
+            "$ref": "./examples/JoinRequest.json"
+          }
+        },
+        "operationId": "JoinRequest_Get",
+        "description": "get student join requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JoinRequestNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "invite request.",
+            "schema": {
+              "$ref": "#/definitions/JoinRequestDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}/approve": {
+      "post": {
+        "tags": [
+          "JoinRequest"
+        ],
+        "x-ms-examples": {
+          "JoinRequestApprove": {
+            "$ref": "./examples/JoinRequestApproveAndDeny.json"
+          }
+        },
+        "operationId": "Approve_Invite",
+        "description": "Approve student joining the redeemable lab",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JoinRequestNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Join request approved"
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}/deny": {
+      "post": {
+        "tags": [
+          "JoinRequest"
+        ],
+        "x-ms-examples": {
+          "JoinRequestDeny": {
+            "$ref": "./examples/JoinRequestApproveAndDeny.json"
+          }
+        },
+        "operationId": "Deny_Invite",
+        "description": "Deny student joining the redeemable lab",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JoinRequestNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Join request denied"
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Education/redeemInvitationCode": {
+      "post": {
+        "tags": [
+          "JoinRequest"
+        ],
+        "x-ms-examples": {
+          "RedeemCode": {
+            "$ref": "./examples/RedeemCode.json"
+          }
+        },
+        "operationId": "Redeem_Invite",
+        "description": "Redeem invite code to join a redeemable lab",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedeemRequest"
+            },
+            "description": "Request parameters to provide redeem code."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "code redeemed"
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "x-ms-examples": {
+          "StudentList": {
+            "$ref": "./examples/StudentList.json"
+          }
+        },
+        "operationId": "Students_List",
+        "description": "Get a list of details about students that are associated with the specified lab.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeDeletedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Student details.",
+            "schema": {
+              "$ref": "#/definitions/StudentListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "x-ms-examples": {
+          "Student": {
+            "$ref": "./examples/Student.json"
+          }
+        },
+        "operationId": "Get_Student",
+        "description": "Get the details for a specific student in the specified lab by student alias",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/studentAliasParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "student detail.",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Students"
+        ],
+        "x-ms-examples": {
+          "DeleteLab": {
+            "$ref": "./examples/DeleteStudent.json"
+          }
+        },
+        "operationId": "Delete_Student",
+        "description": "Delete the specified student based on the student alias.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/studentAliasParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "student deleted"
+          },
+          "204": {
+            "description": "student does not exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "x-ms-examples": {
+          "Student": {
+            "$ref": "./examples/CreateStudent.json"
+          }
+        },
+        "operationId": "Create_Student",
+        "description": "Create and add a new student to the specified lab or update the details of an existing student in a lab. Note the student must have a valid tenant to accept the lab after they have been added to lab.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/studentAliasParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            },
+            "description": "Request parameters that are provided to update student properties."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created student detail.",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "200": {
+            "description": "Successfully updated student detail.",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Education/studentLabs": {
+      "get": {
+        "tags": [
+          "StudentLabs"
+        ],
+        "x-ms-examples": {
+          "StudentLabList": {
+            "$ref": "./examples/StudentLabList.json"
+          }
+        },
+        "operationId": "StudentLabs_List",
+        "description": "Get a list of all labs associated with the caller of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lab details.",
+            "schema": {
+              "$ref": "#/definitions/StudentLabListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Education/studentLabs/{studentLabName}": {
+      "get": {
+        "tags": [
+          "StudentLabs"
+        ],
+        "x-ms-examples": {
+          "StudentLab": {
+            "$ref": "./examples/StudentLab.json"
+          }
+        },
+        "operationId": "Get_StudentLab",
+        "description": "Get the details for a specified lab associated with the student lab.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/StudentLabNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lab details.",
+            "schema": {
+              "$ref": "#/definitions/StudentLabDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "LabDetails": {
+      "description": "Lab details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabProperties",
+          "description": "Get lab response properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LabProperties": {
+      "description": "Lab detail result properties.",
+      "type": "object",
+      "required": [
+        "displayName",
+        "budgetPerStudent",
+        "description",
+        "expirationDate"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "Lab Display Name",
+          "type": "string"
+        },
+        "budgetPerStudent": {
+          "$ref": "#/definitions/Amount",
+          "description": "Default monetary cap for each student in this lab",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detail description of this lab"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Default expiration date for each student in this lab"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Lab creation date",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this lab",
+          "enum": [
+            "Active",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "LabStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "maxStudentCount": {
+          "type": "number",
+          "description": "the total number of students that can be accepted to the lab.",
+          "readOnly": true
+        },
+        "invitationCode": {
+          "type": "string",
+          "description": "invitation code for redeemable lab",
+          "readOnly": true
+        },
+        "totalBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Total budget",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        },
+        "totalAllocatedBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Total allocated budget",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "StudentDetails": {
+      "description": "Student details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentProperties",
+          "description": "Get student response properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StudentProperties": {
+      "description": "Student detail properties",
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "role",
+        "budget",
+        "expirationDate"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last Name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Student Email",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Student",
+            "Admin"
+          ],
+          "x-ms-enum": {
+            "name": "Student role",
+            "modelAsString": true
+          },
+          "description": "Student Role"
+        },
+        "budget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Student Budget"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date this student is set to expire from the lab."
+        },
+        "status": {
+          "type": "string",
+          "description": "Student Lab Status",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Expired",
+            "Pending",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "Student Lab Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date student was added to the lab",
+          "readOnly": true
+        },
+        "subscriptionAlias": {
+          "type": "string",
+          "description": "Subscription alias"
+        },
+        "subscriptionInviteLastSentDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "subscription invite last sent date"
+        }
+      }
+    },
+    "StudentLabDetails": {
+      "description": "Student lab details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentLabProperties",
+          "description": "Student lab properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StudentLabProperties": {
+      "description": "Student lab detail properties",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Student lab Display Name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detail description of this lab",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date the lab will expire and by default will be the expiration date for each student in this lab",
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Student",
+            "Admin"
+          ],
+          "x-ms-enum": {
+            "name": "Student role",
+            "modelAsString": true
+          },
+          "description": "Student Role",
+          "readOnly": true
+        },
+        "budget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Student Budget",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Student Lab Status",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Expired",
+            "Pending",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "Student Lab Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User Added Date",
+          "readOnly": true
+        },
+        "labScope": {
+          "type": "string",
+          "description": "Lab Scope. /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
+          "readOnly": true
+        }
+      }
+    },
+    "StudentLabListResult": {
+      "description": "List of labs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of labs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StudentLabDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabListResult": {
+      "description": "List of labs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of labs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/LabDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StudentListResult": {
+      "description": "List of students.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of students.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StudentDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GrantListResponse": {
+      "description": "List of Grants info.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of labs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GrantDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GrantDetails": {
+      "description": "Grant details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GrantDetailProperties",
+          "description": "Grant detail properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GrantDetailProperties": {
+      "description": "Grant detail properties",
+      "type": "object",
+      "properties": {
+        "offerCap": {
+          "$ref": "#/definitions/Amount",
+          "description": "Offer Cap",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Grant Effective Date",
+          "readOnly": true
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Grant Offer Type",
+          "enum": [
+            "Student",
+            "Academic"
+          ],
+          "x-ms-enum": {
+            "name": "Grant type",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration Date",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Grant status",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "Grant status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allocatedBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "allocated budget",
+          "readOnly": true
+        }
+      }
+    },
+    "Amount": {
+      "description": "The amount.",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The type of currency being used for the value.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Amount value.",
+          "type": "number"
+        }
+      }
+    },
+    "JoinRequestList": {
+      "description": "list of join requests.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of requests.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JoinRequestDetails"
+          }
+        },
+        "nextLink": {
+          "description": "the link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JoinRequestDetails": {
+      "description": "join requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JoinRequestProperties",
+          "description": "join request properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JoinRequestProperties": {
+      "description": "Join request properties.",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last Name"
+        },
+        "email": {
+          "type": "string",
+          "description": "join request email"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Denied"
+          ],
+          "x-ms-enum": {
+            "name": "Join request status",
+            "modelAsString": true
+          },
+          "description": "Join request status"
+        }
+      }
+    },
+    "RedeemRequest": {
+      "description": "redeem request.",
+      "type": "object",
+      "required": [
+        "redeemCode",
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "redeemCode": {
+          "type": "string",
+          "description": "redeem code"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "first name of requester"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "last name of requester"
+        }
+      }
+    },
+    "InviteCodeGenerateRequest": {
+      "description": "invite code generate request.",
+      "type": "object",
+      "properties": {
+        "maxStudentCount": {
+          "type": "number",
+          "description": "the total number of students that can be accepted to the lab."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2021-12-01-preview"
+    },
+    "studentAliasParameter": {
+      "name": "studentAlias",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Student alias."
+    },
+    "StudentLabNameParameter": {
+      "name": "studentLabName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Student lab name."
+    },
+    "BillingAccountNameParameter": {
+      "name": "billingAccountName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Billing account name."
+    },
+    "BillingProfileNameParameter": {
+      "name": "billingProfileName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Billing profile name."
+    },
+    "InvoiceSectionNameParameter": {
+      "name": "invoiceSectionName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Invoice section name."
+    },
+    "IncludeAllocatedBudgetParameter": {
+      "name": "includeAllocatedBudget",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "type": "boolean",
+      "description": "May be used to include information about budget that has been allocated."
+    },
+    "IncludeBudgetsParameter": {
+      "name": "includeBudget",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "type": "boolean",
+      "description": "May be used to include budget information."
+    },
+    "IncludeDeletedParameter": {
+      "name": "includeDeleted",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "type": "boolean",
+      "description": "May be used to show deleted items."
+    },
+    "JoinRequestNameParameter": {
+      "name": "joinRequestName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Join name"
+    },
+    "IncludeDeniedParameter": {
+      "name": "includeDenied",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "type": "boolean",
+      "description": "Include denied"
+    },
+    "OnlyUpdateStudentCountParameter": {
+      "name": "onlyUpdateStudentCountParameter",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "type": "boolean",
+      "description": "set this flag to true if you want to update student count without generating a new invite code"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

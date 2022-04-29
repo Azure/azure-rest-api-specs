@@ -1270,7 +1270,10 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/MetricSpecification"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               }
             }
@@ -1291,6 +1294,9 @@
           "items": {
             "$ref": "#/definitions/ApiOperation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "type": "array"
         }
       },
@@ -1319,6 +1325,7 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [],
           "type": "array"
         },
         "message": {
@@ -1646,6 +1653,9 @@
           "items": {
             "$ref": "#/definitions/NfsAccessPolicy"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "type": "array"
         }
       }
@@ -1829,7 +1839,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NfsAccessRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1971,7 +1982,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Condition"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "timestamp"
+          ]
         }
       }
     },
@@ -2100,7 +2115,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NamespaceJunction"
-          }
+          },
+          "x-ms-identifiers": [
+            "namespacePath"
+          ]
         },
         "targetType": {
           "description": "Type of the Storage Target.",
@@ -2248,6 +2266,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "type": "array"
         },
         "locations": {
@@ -2263,6 +2284,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "type": "array"
         },
         "name": {
@@ -2274,6 +2298,9 @@
           "items": {
             "$ref": "#/definitions/Restriction"
           },
+          "x-ms-identifiers": [
+            "type"
+          ],
           "description": "The restrictions preventing this SKU from being used. This is empty if there are no restrictions."
         }
       },
@@ -2355,6 +2382,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ],
           "type": "array"
         }
       }
@@ -2439,6 +2470,9 @@
           "items": {
             "$ref": "#/definitions/UsageModel"
           },
+          "x-ms-identifiers": [
+            "modelName"
+          ],
           "type": "array"
         }
       },
@@ -2497,7 +2531,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "internalName"
+          ]
         }
       }
     },

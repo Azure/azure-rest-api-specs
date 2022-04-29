@@ -583,7 +583,7 @@
           "200": {
             "description": "If resource is retrieved successfully, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/BotChannel"
+              "$ref": "#/definitions/ListChannelWithKeysResponse"
             }
           },
           "default": {
@@ -1456,7 +1456,8 @@
         },
         "kind": {
           "$ref": "#/definitions/Kind",
-          "description": "Required. Gets or sets the Kind of the resource."
+          "description": "Required. Gets or sets the Kind of the resource.",
+          "x-nullable": true
         },
         "etag": {
           "type": "string",
@@ -1562,6 +1563,24 @@
           "readOnly": true,
           "description": "The bot's endpoint version"
         },
+        "allSettings": {
+          "description": "Contains resource all settings defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "description": "Contains resource parameters defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "manifestUrl": {
+          "type": "string",
+          "description": "The bot's manifest url"
+        },
         "msaAppType": {
           "type": "string",
           "description": "Microsoft App Type for the bot",
@@ -1634,13 +1653,33 @@
           "type": "string",
           "description": "The CMK Url"
         },
-        "isIsolated": {
+        "cmekEncryptionStatus": {
+          "type": "string",
+          "description": "The CMK encryption status",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Whether the bot is in an isolated network",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
+        },
+        "isStreamingSupported": {
           "type": "boolean",
-          "description": "Whether the bot is in an isolated network"
+          "description": "Whether the bot is streaming supported",
+          "default": false
         },
         "isDeveloperAppInsightsApiKeySet": {
           "type": "boolean",
-          "description": "Whether the bot is developerAppInsightsApiKey set"
+          "description": "Whether the bot is developerAppInsightsApiKey set",
+          "readOnly": true
         },
         "migrationToken": {
           "type": "string",
@@ -1654,6 +1693,10 @@
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
+        },
+        "storageResourceId": {
+          "type": "string",
+          "description": "The storage resourceId for the bot"
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -1670,6 +1713,15 @@
         "appPasswordHint": {
           "type": "string",
           "description": "The hint (e.g. keyVault secret resourceId) on how to fetch the app secret"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
+        },
+        "publishingCredentials": {
+          "type": "string",
+          "description": "Publishing credentials of the resource"
         }
       },
       "description": "The parameters to provide for the Bot.",
@@ -1696,6 +1748,37 @@
       },
       "description": "The list of  bot service operation response."
     },
+    "ListChannelWithKeysResponse": {
+      "type": "object",
+      "description": "The ARM channel of list channel with keys operation response.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BotChannel"
+        }
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/Channel",
+          "description": "The set of properties specific to bot channel resource"
+        },
+        "setting": {
+          "$ref": "#/definitions/ChannelSettings",
+          "description": "Channel settings"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
+        },
+        "entityTag": {
+          "type": "string",
+          "description": "Entity tag of the resource"
+        },
+        "changedTime": {
+          "type": "string",
+          "description": "Changed time of the resource"
+        }
+      }
+    },
     "BotChannel": {
       "type": "object",
       "description": "Bot channel resource definition",
@@ -1711,6 +1794,51 @@
         }
       }
     },
+    "ChannelSettings": {
+      "type": "object",
+      "description": "Channel settings definition",
+      "properties": {
+        "extensionKey1": {
+          "type": "string",
+          "description": "The extensionKey1"
+        },
+        "extensionKey2": {
+          "type": "string",
+          "description": "The extensionKey2"
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Site"
+          },
+          "description": "The list of sites"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The channel id"
+        },
+        "channelDisplayName": {
+          "type": "string",
+          "description": "The channel display name"
+        },
+        "botId": {
+          "type": "string",
+          "description": "The bot id"
+        },
+        "botIconUrl": {
+          "type": "string",
+          "description": "The bot icon url"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        }
+      }
+    },
     "Channel": {
       "type": "object",
       "description": "Channel definition",
@@ -1722,7 +1850,18 @@
         },
         "etag": {
           "type": "string",
-          "description": "Entity Tag of the resource"
+          "description": "Entity Tag of the resource",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string",
+          "default": "global"
         }
       },
       "required": [
@@ -1742,10 +1881,6 @@
         "properties": {
           "$ref": "#/definitions/AlexaChannelProperties",
           "description": "The set of properties specific to Alexa channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -1789,14 +1924,6 @@
         "properties": {
           "$ref": "#/definitions/FacebookChannelProperties",
           "description": "The set of properties specific to bot facebook channel"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -1870,14 +1997,6 @@
         "properties": {
           "$ref": "#/definitions/EmailChannelProperties",
           "description": "The set of properties specific to email channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1915,14 +2034,6 @@
         "properties": {
           "$ref": "#/definitions/MsTeamsChannelProperties",
           "description": "The set of properties specific to Microsoft Teams channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1943,6 +2054,14 @@
         "incomingCallRoute": {
           "type": "string",
           "description": "Webhook for Microsoft Teams channel calls"
+        },
+        "deploymentEnvironment": {
+          "type": "string",
+          "description": "Deployment environment for Microsoft Teams channel calls"
+        },
+        "acceptedTerms": {
+          "type": "boolean",
+          "description": "Whether this channel accepted terms"
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -1963,10 +2082,6 @@
         "properties": {
           "$ref": "#/definitions/SkypeChannelProperties",
           "description": "The set of properties specific to Skype channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2072,14 +2187,6 @@
         "properties": {
           "$ref": "#/definitions/WebChatChannelProperties",
           "description": "The set of properties specific to Web Chat channel resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2116,14 +2223,6 @@
         "properties": {
           "$ref": "#/definitions/DirectLineChannelProperties",
           "description": "The set of properties specific to Direct Line channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -2156,14 +2255,6 @@
         "properties": {
           "$ref": "#/definitions/TelegramChannelProperties",
           "description": "The set of properties specific to Telegram channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -2201,10 +2292,6 @@
         "properties": {
           "$ref": "#/definitions/SmsChannelProperties",
           "description": "The set of properties specific to Sms channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2252,14 +2339,6 @@
         "properties": {
           "$ref": "#/definitions/SlackChannelProperties",
           "description": "The set of properties specific to Slack channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -2399,14 +2478,6 @@
         "properties": {
           "$ref": "#/definitions/DirectLineSpeechChannelProperties",
           "description": "The set of properties specific to DirectLine Speech channel resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2497,7 +2568,8 @@
         },
         "isWebchatPreviewEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for preview versions of Webchat"
+          "description": "Whether this site is enabled for preview versions of Webchat",
+          "default": false
         }
       },
       "required": [
@@ -2573,6 +2645,28 @@
         "siteName"
       ]
     },
+    "Site": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebChatSite"
+        },
+        {
+          "$ref": "#/definitions/DirectLineSite"
+        }
+      ],
+      "properties": {
+        "isTokenEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is token enabled for channel"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity Tag"
+        }
+      },
+      "description": "A site for the channel"
+    },
     "SiteInfo": {
       "properties": {
         "siteName": {
@@ -2617,13 +2711,22 @@
         },
         "value": {
           "type": "string",
-          "description": "Value associated with the Connection Setting Parameter."
+          "description": "Value associated with the Connection Setting Parameter.",
+          "x-nullable": true
         }
       },
       "description": "Extra Parameter in a Connection Setting Properties to indicate service provider specific properties"
     },
     "ConnectionSettingProperties": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id associated with the Connection Setting."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name associated with the Connection Setting."
+        },
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
@@ -2656,6 +2759,10 @@
           "items": {
             "$ref": "#/definitions/ConnectionSettingParameter"
           }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
         }
       },
       "description": "Properties for a Connection Setting Item"
@@ -2740,6 +2847,23 @@
           "type": "string",
           "description": "Default Name for the Service Provider",
           "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Meta data for the Service Provider",
+          "readOnly": true,
+          "properties": {
+            "constraints": {
+              "description": "the constraints of the bot meta data.",
+              "type": "object",
+              "properties": {
+                "required": {
+                  "description": "Whether required the constraints of the bot meta data.",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
         }
       },
       "description": "Extra Parameters specific to each Service Provider"
@@ -3058,7 +3182,8 @@
         "DirectLineChannel",
         "SmsChannel",
         "LineChannel",
-        "DirectLineSpeechChannel"
+        "DirectLineSpeechChannel",
+        "OutlookChannel"
       ],
       "x-ms-enum": {
         "name": "channelName",
@@ -3102,6 +3227,9 @@
           },
           {
             "value": "DirectLineSpeechChannel"
+          },
+          {
+            "value": "OutlookChannel"
           }
         ]
       },

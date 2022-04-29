@@ -2208,13 +2208,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         },
         "additionalInfo": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TypedErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
@@ -2363,6 +2369,9 @@
           "items": {
             "$ref": "#/definitions/Error"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         },
         "innerError": {
@@ -2799,7 +2808,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingMetric"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredFeatures": {
           "type": "array",
@@ -3086,13 +3096,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthorizationActionMapping"
-          }
+          },
+          "x-ms-identifiers": [
+            "original"
+          ]
         },
         "linkedAccessChecks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedAccessCheck"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultApiVersion": {
           "type": "string"
@@ -3101,19 +3115,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoggingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "throttlingRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "endpoints": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "marketplaceType": {
           "enum": [
@@ -3149,13 +3166,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "serviceTreeInfos": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
           "allOf": [
@@ -3184,13 +3203,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedLocationOptions"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "linkedOperationRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedOperationRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceDeletionPolicy": {
           "enum": [
@@ -3234,7 +3255,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceAccessPolicy": {
           "enum": [
@@ -3246,7 +3268,8 @@
         },
         "resourceAccessRoles": {
           "type": "array",
-          "items": {}
+          "items": {},
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3309,7 +3332,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "namespace": {
           "type": "string"
@@ -3358,7 +3382,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceType"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "management": {
           "allOf": [
@@ -3371,14 +3398,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderCapabilities"
-          }
+          },
+          "x-ms-identifiers": [
+            "quotaId"
+          ]
         },
         "metadata": {},
         "globalNotificationEndpoints": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "reRegisterSubscriptionMetadata": {
           "allOf": [
@@ -3460,7 +3491,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "notificationDestination"
+          ]
         },
         "provisioningState": {
           "enum": [
@@ -3611,7 +3645,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3622,7 +3659,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The URL to get to the next set of results, if there are any.",
@@ -3652,7 +3692,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LightHouseAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "managedByTenantId": {
           "type": "string"
@@ -3666,7 +3707,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "providerAuthentication": {
           "allOf": [
@@ -3737,7 +3779,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateOverrideAction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "softDeleteTTL": {
           "format": "duration",
@@ -3782,7 +3825,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "namespace": {
           "type": "string"
@@ -3838,7 +3882,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderCapabilities"
-          }
+          },
+          "x-ms-identifiers": [
+            "quotaId"
+          ]
         },
         "metadata": {},
         "templateDeploymentOptions": {
@@ -4004,7 +4051,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceTypeExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "endpointUri"
+          ]
         },
         "timeout": {
           "format": "duration",
@@ -4138,7 +4188,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceTypeEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "extensionOptions": {
           "allOf": [
@@ -4160,7 +4211,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SwaggerSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "swaggerSpecFolderUri"
+          ]
         },
         "allowedUnauthorizedActions": {
           "type": "array",
@@ -4172,13 +4226,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthorizationActionMapping"
-          }
+          },
+          "x-ms-identifiers": [
+            "original"
+          ]
         },
         "linkedAccessChecks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedAccessCheck"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultApiVersion": {
           "type": "string"
@@ -4187,13 +4245,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoggingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "throttlingRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredFeatures": {
           "type": "array",
@@ -4270,7 +4330,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
           "allOf": [
@@ -4283,7 +4344,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "templateDeploymentOptions": {
           "allOf": [
@@ -4296,7 +4358,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedLocationOptions"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceMovePolicy": {
           "allOf": [
@@ -4380,7 +4443,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4403,7 +4469,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuZoneDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "extendedLocations": {
           "type": "array",
@@ -4502,7 +4569,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
         },
         "requiredQuotaIds": {
           "type": "array",
@@ -4527,13 +4597,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCost"
-          }
+          },
+          "x-ms-identifiers": [
+            "meterId"
+          ]
         },
         "capabilities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4547,7 +4621,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuSetting"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "enum": [
