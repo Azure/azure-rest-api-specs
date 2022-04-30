@@ -36,16 +36,6 @@ tag: package-flexibleserver-2021-06
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
 ```
-### Tag: package-flexibleserver-2022-01-20-preview
-
-These settings apply only when `--tag=package-flexibleserver-2022-01-20-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-```
 
 ### Tag: package-2021-06-15-privatepreview
 
@@ -55,6 +45,17 @@ These settings apply only when `--tag=package-2021-06-15-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
+```
+
+### Tag: package-flexibleserver-2022-01-20-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-01-20-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
@@ -270,3 +271,5 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+
