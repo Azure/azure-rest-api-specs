@@ -37,6 +37,17 @@ tag: package-flexibleserver-2021-06
 tag: package-2020-01-01
 ```
 
+### Tag: package-flexibleserver-2022-01-20-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-01-20-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
+```
+
 ### Tag: package-2021-06-15-privatepreview
 
 These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
