@@ -270,5 +270,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-
