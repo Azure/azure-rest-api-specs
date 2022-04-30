@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sjName",
+    "outputName": "dwOutput",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.Sql/Server/Database",
+          "properties": {
+            "table": "differentTable"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "f489d6f3-fcd5-4bcb-b642-81e987ee16d6"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/outputs/dwOutput",
+        "name": "dwOutput",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/DataWarehouse",
+            "properties": {
+              "table": "differentTable",
+              "server": "asatestserver",
+              "database": "zhayaSQLpool",
+              "user": "tolladmin"
+            }
+          }
+        }
+      }
+    }
+  }
+}

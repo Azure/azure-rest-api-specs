@@ -1,0 +1,416 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics Query Packs",
+    "description": "Azure Log Analytics API reference for Query Packs management.",
+    "version": "2019-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/queryPacks": {
+      "get": {
+        "description": "Gets a list of all Log Analytics QueryPacks within a subscription.",
+        "operationId": "QueryPacks_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "A list containing 0 or more Log Analytics QueryPack definitions.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPacksList": {
+            "$ref": "./examples/QueryPacksList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks": {
+      "get": {
+        "description": "Gets a list of Log Analytics QueryPacks within a resource group.",
+        "operationId": "QueryPacks_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "A list containing 0 or more Log Analytics QueryPack definitions.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPackListByResourceGroup": {
+            "$ref": "./examples/QueryPacksListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}": {
+      "delete": {
+        "description": "Deletes a Log Analytics QueryPack.",
+        "operationId": "QueryPacks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request when deleting a Log Analytics QueryPack."
+          },
+          "204": {
+            "description": "The specified QueryPack does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "QueryPacksDelete": {
+            "$ref": "./examples/QueryPacksDelete.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns a Log Analytics QueryPack.",
+        "operationId": "QueryPacks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An Log Analytics QueryPack definition.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPack"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPackGet": {
+            "$ref": "./examples/QueryPacksGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates (or updates) a Log Analytics QueryPack. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
+        "operationId": "QueryPacks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "LogAnalyticsQueryPackPayload",
+            "description": "Properties that need to be specified to create or update a Log Analytics QueryPack.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPack"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request when creating or updating a Log Analytics QueryPack. The updated QueryPack is returned.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPack"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPackCreate": {
+            "$ref": "./examples/QueryPacksCreate.json"
+          },
+          "QueryPackUpdate": {
+            "$ref": "./examples/QueryPacksUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing QueryPack's tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "QueryPacks_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "QueryPackTags",
+            "description": "Updated tag information to set into the QueryPack instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updating the Log Analytics QueryPack's tags was successful. QueryPack tags are updated and returned with the rest of the QueryPack's object properties.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPack"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPackUpdateTagsOnly": {
+            "$ref": "./examples/QueryPacksUpdateTagsOnly.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QueryPacksResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "TagsResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a QueryPack instance."
+    },
+    "LogAnalyticsQueryPack": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties that define a Log Analytics QueryPack resource.",
+          "$ref": "#/definitions/LogAnalyticsQueryPackProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryPacksResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "An Log Analytics QueryPack definition."
+    },
+    "LogAnalyticsQueryPackProperties": {
+      "type": "object",
+      "description": "Properties that define a Log Analytics QueryPack resource.",
+      "properties": {
+        "queryPackId": {
+          "type": "string",
+          "description": "The unique ID of your application. This field cannot be changed.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Log Analytics QueryPack, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "timeModified": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last modified date of the Log Analytics QueryPack, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this QueryPack: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogAnalyticsQueryPackListResult": {
+      "type": "object",
+      "description": "Describes the list of Log Analytics QueryPack resources.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Log Analytics QueryPack definitions.",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsQueryPack"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPacks where returned in the result set."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "queryPackName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Log Analytics QueryPack resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

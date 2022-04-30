@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "simName": "testSim",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSim",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sim/testSim",
+        "type": "Microsoft.MobileNetwork/sims",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "configurationState": "Complete",
+          "integratedCircuitCardIdentifier": "8900000000000000000",
+          "internationalMobileSubscriberIdentity": "00000",
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          },
+          "deviceType": "Video camera",
+          "simPolicy": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+          },
+          "staticIpConfiguration": [
+            {
+              "attachedDataNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
+              },
+              "slice": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+              },
+              "staticIp": {
+                "ipv4Address": "2.4.0.1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

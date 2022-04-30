@@ -57,7 +57,7 @@ _This will keep the spec cleaner and easy to manage._
 
 ## Structure of the extension
 - **How the extension would look in the swagger spec?**
-  - JSON schema for the extension can be found [here](https://github.com/Azure/autorest/blob/master/packages/libs/autorest-schemas/swagger-extensions.json#L1903-L1916).
+  - JSON schema for the extension can be found [here](https://github.com/Azure/autorest/blob/main/packages/libs/autorest-schemas/swagger-extensions.json#L1844-L1858).
 ```json5
 {
   "info": { ... },
@@ -79,7 +79,7 @@ _This will keep the spec cleaner and easy to manage._
 }
 ```
 - **Skeleton/Schema of the example provided in an individual example (json) file**
-  - The JSON schema for the content to be provided in the example file can be found [here](https://github.com/Azure/autorest/blob/master/packages/libs/autorest-schemas/example-schema.json).
+  - The JSON schema for the content to be provided in the example file can be found [here](https://github.com/Azure/autorest/blob/main/packages/libs/autorest-schemas/example-schema.json).
 ```json5
 "x-ms-examples": {
   "example-name": { //Name of the example/scenario.  It is free-form text and should succinctly describe the scenario.

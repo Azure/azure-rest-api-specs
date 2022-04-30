@@ -850,64 +850,6 @@
         }
       }
     },
-    "/keys/{key-name}/{key-version}/export": {
-      "post": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "export",
-        "summary": "Exports a key.",
-        "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key to get."
-          },
-          {
-            "name": "key-version",
-            "required": true,
-            "in": "path",
-            "type": "string",
-            "description": "Adding the version parameter retrieves a specific version of a key."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/KeyExportParameters"
-            },
-            "description": "The parameters for the key export operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A key bundle containing the key and its attributes.",
-            "schema": {
-              "$ref": "#/definitions/KeyBundle"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Export": {
-            "$ref": "./examples/export-example.json"
-          }
-        }
-      }
-    },
     "/keys/{key-name}/{key-version}/release": {
       "post": {
         "tags": [
@@ -947,7 +889,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A key bundle containing the key and its attributes.",
+            "description": "A JWS containing the key, its attributes, the result of the key release, and information about the request.",
             "schema": {
               "$ref": "#/definitions/KeyReleaseResult"
             }
@@ -1301,10 +1243,15 @@
           "type": "string",
           "default": "application/json; charset=utf-8"
         },
+        "immutable": {
+          "description": "Defines the mutability state of the policy. Once marked immutable, this flag cannot be reset and the policy cannot be changed under any circumstances.",
+          "type": "boolean"
+        },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
           "type": "string",
-          "format": "base64url"
+          "format": "base64url",
+          "x-ms-client-name": "encodedPolicy"
         }
       }
     },
@@ -1840,7 +1787,8 @@
         "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The attestation assertion for the target of the key release."
+          "description": "The attestation assertion for the target of the key release.",
+          "x-ms-client-name": "targetAttestationToken"
         },
         "nonce": {
           "type": "string",
@@ -2232,11 +2180,11 @@
       "properties": {
         "timeAfterCreate": {
           "type": "string",
-          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\" "
+          "description": "Time after creation to attempt to rotate. It only applies to rotate. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\" "
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\""
+          "description": "Time before expiry to attempt to rotate or notify. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\""
         }
       },
       "description": "A condition to be satisfied for an action to be executed."

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoCluster",
+    "databaseName": "KustoDatabase8",
+    "api-version": "2022-02-01",
+    "parameters": {
+      "dataConnectionName": "dataConnectionTest",
+      "properties": {
+        "kind": "EventGrid",
+        "properties": {
+          "consumerGroup": "$Default",
+          "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1",
+          "eventGridResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount/providers/Microsoft.EventGrid/eventSubscriptions/eventSubscriptionTest",
+          "tableName": "TestTable",
+          "mappingRuleName": "TestMapping",
+          "dataFormat": "JSON",
+          "storageAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
+          "ignoreFirstRecord": false,
+          "blobStorageEventType": "Microsoft.Storage.BlobCreated",
+          "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+          "databaseRouting": "Single"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "errorMessage": "Database does not exist"
+        }
+      ]
+    },
+    "202": {}
+  }
+}

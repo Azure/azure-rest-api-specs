@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "managedInstanceName": "managedInstance",
+    "databaseName": "testdb",
+    "restoreDetailsName": "Default",
+    "api-version": "2021-08-01-preview",
+    "parameters": {
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "Restoring",
+          "currentRestoringFileName": "full_0",
+          "percentCompleted": 0.0,
+          "unrestorableFiles": [],
+          "numberOfFilesDetected": 26,
+          "lastUploadedFileName": "log2_3",
+          "lastUploadedFileTime": "2018-06-15T11:38:33Z"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/databases/testdb/restoreDetails/current",
+        "name": "current",
+        "type": "Microsoft.Sql/managedInstances/databases/restoreDetails"
+      }
+    }
+  }
+}

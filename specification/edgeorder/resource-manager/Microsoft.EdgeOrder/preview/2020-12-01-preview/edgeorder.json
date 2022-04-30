@@ -354,7 +354,7 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Lists order at subscription level.",
+        "description": "Lists order item at subscription level.",
         "operationId": "ListOrderItemsAtSubscriptionLevel",
         "consumes": [
           "application/json"
@@ -377,16 +377,23 @@
             "type": "string"
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of order.",
+            "description": "$skipToken is supported on Get list of order items, which provides the next page in the list of order items.",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Order item object",
+            "description": "List of Order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResourceList"
             }
@@ -554,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Address object.",
+            "description": "Address resource object.",
             "schema": {
               "$ref": "#/definitions/AddressResource"
             }
@@ -832,7 +839,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
             "required": false,
             "type": "string"
           },
@@ -897,7 +904,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
             "required": false,
             "type": "string"
           }
@@ -1781,6 +1788,11 @@
           "description": "Management Resource Id",
           "type": "string",
           "readOnly": true
+        },
+        "managementResourceTenantId": {
+          "description": "Management Resource Tenant ID",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1887,7 +1899,7 @@
       "type": "object",
       "properties": {
         "doubleEncryptionStatus": {
-          "description": "Defines secondary layer of software-based encryption enablement.",
+          "description": "Double encryption status as entered by the customer. It is compulsory to give this parameter if the 'Deny' or 'Disabled' policy is configured.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1906,8 +1918,7 @@
                 "description": "Double encryption is enabled"
               }
             ]
-          },
-          "default": "Disabled"
+          }
         }
       }
     },
@@ -1948,6 +1959,32 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ForwardShippingDetails": {
+      "description": "Forward shipment details.",
+      "type": "object",
+      "properties": {
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "carrierDisplayName": {
+          "description": "Carrier Name for display purpose. Not to be used for any processing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingId": {
+          "description": "TrackingId of the package",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingUrl": {
+          "description": "TrackingUrl of the package.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2298,12 +2335,12 @@
           "description": "Customer notification Preferences"
         },
         "forwardShippingDetails": {
-          "$ref": "#/definitions/ShippingDetails",
+          "$ref": "#/definitions/ForwardShippingDetails",
           "description": "Forward Package Shipping details",
           "readOnly": true
         },
         "reverseShippingDetails": {
-          "$ref": "#/definitions/ShippingDetails",
+          "$ref": "#/definitions/ReverseShippingDetails",
           "description": "Reverse Package Shipping details",
           "readOnly": true
         },
@@ -2321,7 +2358,7 @@
           "readOnly": true
         },
         "cancellationStatus": {
-          "description": "Describes whether the orderItem is cancellable or not.",
+          "description": "Describes whether the order item is cancellable or not.",
           "enum": [
             "Cancellable",
             "CancellableWithFee",
@@ -2377,7 +2414,7 @@
           "readOnly": true
         },
         "returnStatus": {
-          "description": "Describes whether the orderItem is returnable or not.",
+          "description": "Describes whether the order item is returnable or not.",
           "enum": [
             "Returnable",
             "ReturnableWithFee",
@@ -2406,7 +2443,16 @@
         },
         "managementRpDetails": {
           "$ref": "#/definitions/ResourceProviderDetails",
-          "description": "parent RP details",
+          "description": "Parent RP details - this returns only the first or default parent RP from the entire list",
+          "readOnly": true
+        },
+        "managementRpDetailsList": {
+          "description": "List of parent RP details supported for configuration.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDetails"
+          },
           "readOnly": true
         },
         "error": {
@@ -2737,7 +2783,31 @@
         "count": {
           "format": "int32",
           "description": "Quantity of the product",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
+        },
+        "productDoubleEncryptionStatus": {
+          "description": "Double encryption status of the configuration. Read-only field.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DoubleEncryptionStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Double encryption is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "Double encryption is enabled"
+              }
+            ]
+          }
         },
         "deviceDetails": {
           "description": "list of device details",
@@ -2854,6 +2924,14 @@
             "$ref": "#/definitions/ProductLine"
           },
           "readOnly": true
+        },
+        "resourceProviderDetails": {
+          "description": "Contains details related to resource provider",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDetails"
+          }
         }
       }
     },
@@ -2962,7 +3040,13 @@
     "ResourceProviderDetails": {
       "description": "Management RP details",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "resourceProviderNamespace": {
+          "description": "Resource provider namespace",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ReturnOrderItemDetails": {
       "description": "Return order item request body",
@@ -2978,6 +3062,46 @@
         "returnReason": {
           "description": "Return Reason.",
           "type": "string"
+        },
+        "serviceTag": {
+          "description": "Service tag (located on the bottom-right corner of the device)",
+          "type": "string"
+        },
+        "shippingBoxRequired": {
+          "description": "Shipping Box required",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "ReverseShippingDetails": {
+      "description": "Reverse shipment details.",
+      "type": "object",
+      "properties": {
+        "sasKeyForLabel": {
+          "description": "SAS key to download the reverse shipment label of the package.",
+          "type": "string",
+          "readOnly": true
+        },
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "carrierDisplayName": {
+          "description": "Carrier Name for display purpose. Not to be used for any processing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingId": {
+          "description": "TrackingId of the package",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingUrl": {
+          "description": "TrackingUrl of the package.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
