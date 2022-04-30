@@ -165,6 +165,7 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/DataMaskingRules.json
   - Microsoft.Sql/preview/2022-02-01-preview/GeoBackupPolicies.json
   - Microsoft.Sql/preview/2022-02-01-preview/RecoverableDatabases.json
+  - Microsoft.Sql/preview/2022-02-01-preview/ServerUsages.json
 ```
 ### Tag: package-preview-2021-11
 
@@ -299,7 +300,11 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01-legacy/sql.core_legacy.json
+<<<<<<< HEAD
 - Microsoft.Sql/stable/2014-04-01-legacy/usages_legacy.json
+=======
+- ./Microsoft.Sql/preview/2020-11-01-preview/BlobAuditing.json
+>>>>>>> 34816bd8d2... add ServerUsages API
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseColumns.json
@@ -411,6 +416,11 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceDtcs.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DataMaskingPolicies.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DataMaskingRules.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/GeoBackupPolicies.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/RecoverableDatabases.json
+- Microsoft.Sql/preview/2022-02-01-preview/ServerUsages.json
 
 # Needed when there is more than one input file
 override-info:
