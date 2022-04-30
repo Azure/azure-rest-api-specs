@@ -58,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{recoverableDatabaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}": {
       "get": {
         "tags": [
           "RecoverableDatabases"
@@ -73,11 +73,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "recoverableDatabaseName",
-            "in": "path",
-            "description": "The name of the database.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -170,6 +166,14 @@
     }
   },
   "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
