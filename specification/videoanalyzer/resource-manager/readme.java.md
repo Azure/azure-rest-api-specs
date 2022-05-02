@@ -10,6 +10,8 @@ namespace: com.microsoft.azure.management.videoanalyzer
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 2
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-videoanalyzer
+
+service-name: Video Analyzer
 ```
 
 ### Java multi-api

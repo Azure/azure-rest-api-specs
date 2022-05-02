@@ -418,6 +418,82 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Metadata_List",
+        "description": "Gets the list of metadata entities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata/{name}": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Metadata_GetEntity",
+        "description": "Gets the list of metadata entities.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of metadata entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_GetEntity.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -456,7 +532,9 @@
                 "ServiceIssue",
                 "PlannedMaintenance",
                 "HealthAdvisory",
-                "RCA"
+                "RCA",
+                "EmergingIssues",
+                "SecurityAdvisory"
               ],
               "x-ms-enum": {
                 "name": "EventTypeValues",
@@ -516,6 +594,7 @@
               "description": "Level of event.",
               "enum": [
                 "Critical",
+                "Error",
                 "Warning",
                 "Informational"
               ],
@@ -605,13 +684,21 @@
               "type": "boolean",
               "description": "Tells if we want to enable or disable Microsoft Support for this event."
             },
+            "description": {
+              "type": "string",
+              "description": "Contains the communication message for the event, that could include summary, root cause and other details."
+            },
+            "platformInitiated": {
+              "type": "boolean",
+              "description": "Is true if the event is platform initiated."
+            },
             "enableChatWithUs": {
               "type": "boolean",
               "description": "Tells if we want to enable or disable Microsoft Support for this event."
             },
             "priority": {
               "type": "integer",
-              "description": "Priority level of the event."
+              "description": "Priority level of the event. Has value from 0 to 23. 0 is the highest priority. Service issue events have higher priority followed by planned maintenance and health advisory. Critical events have higher priority followed by error, warning and informational. Furthermore, active events have higher priority than resolved."
             },
             "lastUpdateTime": {
               "type": "string",

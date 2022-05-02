@@ -221,96 +221,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/onboard": {
-      "post": {
-        "x-ms-examples": {
-          "Onboard workspace": {
-            "$ref": "./examples/settings/Onboard.json"
-          }
-        },
-        "tags": [
-          "Settings"
-        ],
-        "description": "Onboards workspace to sentinel.",
-        "operationId": "ProductSettings_OnboardWorkspace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/OnboardingRequest"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OnboardingRequest"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/offboard": {
-      "post": {
-        "x-ms-examples": {
-          "Onboard workspace": {
-            "$ref": "./examples/settings/Offboard.json"
-          }
-        },
-        "tags": [
-          "Settings"
-        ],
-        "description": "Offboards workspace from sentinel.",
-        "operationId": "ProductSettings_OffboardWorkspace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -325,6 +235,7 @@
           "type": "array"
         }
       },
+      "type": "object",
       "required": [
         "value"
       ]
@@ -340,6 +251,7 @@
         "kind": {
           "description": "The kind of the setting",
           "enum": [
+            "Anomalies",
             "EyesOn",
             "EntityAnalytics",
             "Ueba"
@@ -355,6 +267,34 @@
         "kind"
       ],
       "discriminator": "kind",
+      "type": "object"
+    },
+    "Anomalies": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AnomaliesSettingsProperties",
+          "description": "Anomalies properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Anomalies"
+    },
+    "AnomaliesSettingsProperties": {
+      "description": "Anomalies property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
       "type": "object"
     },
     "EyesOn": {
@@ -432,6 +372,7 @@
     },
     "UebaProperties": {
       "description": "Ueba property bag.",
+      "type": "object",
       "properties": {
         "dataSources": {
           "description": "The relevant data sources that enriched by ueba",
@@ -456,29 +397,6 @@
         "name": "UebaDataSources"
       }
     },
-    "OnboardingRequest": {
-      "description": "Onboarding request properties",
-      "properties": {
-        "customerManagedKey": {
-          "description": "Flag that indicates if the user wants CMK",
-          "type": "boolean"
-        },
-        "eyesOn": {
-          "description": "Flag that indicates if the user wants EyesOn",
-          "type": "boolean"
-        },
-        "sku": {
-          "description": "The pricing tier of the solution",
-          "$ref": "#/definitions/Sku"
-        },
-        "entityAnalytics": {
-          "description": "flag that indicates if the user wants EntityAnalytics",
-          "$ref": "#/definitions/EntityAnalyticsOnboardingParameters",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "Sku": {
       "description": "The pricing tier of the solution",
       "properties": {
@@ -499,20 +417,6 @@
           "type": "integer",
           "format": "int32"
         }
-      }
-    },
-    "EntityAnalyticsOnboardingParameters": {
-      "description": "The onboarding request entity analytics parameters",
-      "properties": {
-        "enabled": {
-          "description": "A flag indicates that the user wants entity analytics",
-          "type": "boolean"
-        },
-        "uebaDataSources": {
-          "description": "The data source be profiled by ueba engine",
-          "$ref": "#/definitions/UebaProperties",
-          "x-ms-client-flatten": true
-        }
       },
       "type": "object"
     }
@@ -529,7 +433,7 @@
       "x-ms-parameter-location": "method"
     },
     "SettingsName": {
-      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
+      "description": "The setting name. Supports - Anomalies, EyesOn, EntityAnalytics, Ueba",
       "in": "path",
       "name": "settingsName",
       "required": true,
@@ -571,16 +475,6 @@
       "name": "operationalInsightsResourceProvider",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OnboardingRequest": {
-      "description": "The onboarding request parameters",
-      "in": "body",
-      "name": "onboardingRequest",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/OnboardingRequest"
-      },
       "x-ms-parameter-location": "method"
     }
   }

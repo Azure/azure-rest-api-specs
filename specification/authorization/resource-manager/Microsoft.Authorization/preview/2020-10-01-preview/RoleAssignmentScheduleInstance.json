@@ -58,7 +58,7 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -110,7 +110,7 @@
             "description": "The name (hash of schedule name + time) of the role assignment schedule to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -155,6 +155,7 @@
           "description": "Returns role assignment schedule instances belonging to a specific role assignment schedule."
         }
       },
+      "type": "object",
       "description": "Role assignment schedule instance filter"
     },
     "RoleAssignmentScheduleInstanceProperties": {
@@ -178,17 +179,11 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
             "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone",
             "Device"
           ],
           "x-ms-enum": {
-            "name": "PrincipalType",
+            "name": "principalType",
             "modelAsString": true
           }
         },
@@ -294,6 +289,7 @@
           "$ref": "#/definitions/ExpandedProperties"
         }
       },
+      "type": "object",
       "description": "Role assignment schedule properties with scope."
     },
     "RoleAssignmentScheduleInstance": {
@@ -319,6 +315,7 @@
           "description": "Role assignment schedule instance properties."
         }
       },
+      "type": "object",
       "description": "Information about current or upcoming role assignment schedule instance"
     },
     "RoleAssignmentScheduleInstanceListResult": {
@@ -335,6 +332,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role assignment schedule instance list operation result."
     },
     "CloudError": {
@@ -344,6 +342,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
@@ -358,6 +357,7 @@
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "ExpandedProperties": {
@@ -420,16 +420,8 @@
             }
           }
         }
-      }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
+      },
+      "type": "object"
     }
   }
 }

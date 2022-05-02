@@ -28,18 +28,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server containing the replication link.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database containing the replication link.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -52,7 +44,7 @@
           "200": {
             "description": "Successfully retrieved the list of replication links.",
             "schema": {
-              "$ref": "#/definitions/ReplicationLinksListResult"
+              "$ref": "#/definitions/ReplicationLinkListResult"
             }
           },
           "default": {
@@ -69,7 +61,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{replicationLinkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}": {
       "get": {
         "tags": [
           "ReplicationLinks"
@@ -81,21 +73,13 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server containing the replication link.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database containing the replication link.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "replicationLinkName",
+            "name": "linkId",
             "in": "path",
             "description": "The name of the replication link.",
             "required": true,
@@ -138,11 +122,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server containing the replication link.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -155,7 +135,7 @@
           "200": {
             "description": "Successfully retrieved the list of replication links.",
             "schema": {
-              "$ref": "#/definitions/ReplicationLinksListResult"
+              "$ref": "#/definitions/ReplicationLinkListResult"
             }
           },
           "default": {
@@ -174,7 +154,7 @@
     }
   },
   "definitions": {
-    "ReplicationLinksListResult": {
+    "ReplicationLinkListResult": {
       "description": "A list of replication links.",
       "type": "object",
       "properties": {
@@ -214,13 +194,35 @@
         },
         "role": {
           "description": "Local replication role.",
+          "enum": [
+            "Primary",
+            "Secondary",
+            "NonReadableSecondary",
+            "Source",
+            "Copy"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
         },
         "partnerRole": {
           "description": "Partner replication role.",
+          "enum": [
+            "Primary",
+            "Secondary",
+            "NonReadableSecondary",
+            "Source",
+            "Copy"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
         },
         "replicationMode": {
           "description": "Replication mode.",
@@ -241,8 +243,18 @@
         },
         "replicationState": {
           "description": "Replication state (PENDING, SEEDING, CATCHUP, SUSPENDED).",
+          "enum": [
+            "PENDING",
+            "SEEDING",
+            "CATCH_UP",
+            "SUSPENDED"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationState",
+            "modelAsString": true
+          }
         },
         "isTerminationAllowed": {
           "description": "Whether the user is currently allowed to terminate the link.",
@@ -251,8 +263,16 @@
         },
         "linkType": {
           "description": "Link type (GEO, NAMED).",
+          "enum": [
+            "GEO",
+            "NAMED"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReplicationLinkType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -273,7 +293,24 @@
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",

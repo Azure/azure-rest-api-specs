@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2021-02-01
   - tag: package-2021-02-01-preview
   - tag: package-2020-12-01
   - tag: package-2020-09-01-preview
@@ -21,6 +22,16 @@ batch:
   - tag: package-2019-07
   - tag: package-2019-03
 ```
+### Tag: package-2021-02-01 and ruby
+
+These settings apply only when `--tag=package-2021-02-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2021-02-01' && $(ruby)
+namespace: "Azure::DataBoxEdge::Mgmt::V2021_02-01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_databoxedge/lib
+```
+
 ### Tag: package-2021-02-01-preview and ruby
 
 These settings apply only when `--tag=package-2021-02-01-preview --ruby` is specified on the command line.

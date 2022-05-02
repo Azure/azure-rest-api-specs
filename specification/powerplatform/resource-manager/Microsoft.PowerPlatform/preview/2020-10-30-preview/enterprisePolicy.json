@@ -294,7 +294,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -339,7 +339,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -381,7 +381,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -407,6 +407,10 @@
           "$ref": "#/definitions/EnterprisePolicyIdentity",
           "description": "The identity of the EnterprisePolicy."
         },
+        "kind": {
+          "$ref": "#/definitions/EnterprisePolicyKind",
+          "description": "The kind (type) of Enterprise Policy."
+        },
         "properties": {
           "$ref": "#/definitions/Properties",
           "description": "The properties that define configuration for the enterprise policy",
@@ -416,7 +420,10 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource."
         }
-      }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "PatchEnterprisePolicy": {
       "type": "object",
@@ -431,6 +438,10 @@
         "identity": {
           "$ref": "#/definitions/EnterprisePolicyIdentity",
           "description": "The identity of the EnterprisePolicy."
+        },
+        "kind": {
+          "$ref": "#/definitions/EnterprisePolicyKind",
+          "description": "The kind (type) of Enterprise Policy."
         },
         "properties": {
           "$ref": "#/definitions/Properties",
@@ -524,6 +535,20 @@
         "NotConfigured"
       ]
     },
+    "EnterprisePolicyKind": {
+      "type": "string",
+      "description": "The Kind (type) of Enterprise Policy",
+      "x-ms-enum": {
+        "name": "EnterprisePolicyKind",
+        "modelAsString": true
+      },
+      "enum": [
+        "Lockbox",
+        "PrivateEndpoint",
+        "Encryption",
+        "NetworkInjection"
+      ]
+    },
     "KeyVaultProperties": {
       "type": "object",
       "description": "Settings concerning key vault encryption for a configuration store.",
@@ -539,6 +564,7 @@
       }
     },
     "keyProperties": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The identifier of the key vault key used to encrypt data.",
@@ -559,6 +585,10 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkProperties"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
         }
       },
       "description": "A list of private link resources"
@@ -588,6 +618,7 @@
       }
     },
     "EnterprisePolicyList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -595,6 +626,10 @@
             "$ref": "#/definitions/EnterprisePolicy"
           },
           "description": "Result of the list EnterprisePolicy operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
         }
       },
       "description": "The response of the list EnterprisePolicy operation."

@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "timespan": "2021-04-21T02:08:45.416Z/2021-04-24T02:08:45.416Z",
+    "metric": "BlobCapacity",
+    "metricNamespace": "microsoft.storage/storageaccounts/blobservices",
+    "$filter": "Tier eq '*'",
+    "resulttype": "metadata",
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
+    "api-version": "2017-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2021-04-21T02:08:45Z/2021-04-24T02:08:45Z",
+        "interval": "PT1H",
+        "value": [
+          {
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "BlobCapacity",
+              "localizedValue": "Blob Capacity"
+            },
+            "displayDescription": "The amount of storage used by the storage account’s Blob service in bytes.",
+            "unit": "Bytes",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Cool"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Archive"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Standard"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Untiered"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Hot"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "code": "BadRequest",
+        "message": "Failed to find metric configuration for provider: Microsoft.Storage, resource Type: storageAccounts/blobServices, metric: BlobCsdapacity, Valid metrics: BlobCapacity,BlobCount,ContainerCount,IndexCapacity,Transactions,Ingress,Egress,SuccessServerLatency,SuccessE2ELatency,Availability"
+      }
+    }
+  }
+}

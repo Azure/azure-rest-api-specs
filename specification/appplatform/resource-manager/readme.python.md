@@ -4,21 +4,11 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python) && !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-appplatform
-  clear-output-folder: true
-  no-namespace-folders: true
-```
-``` yaml $(python) && $(track2)
-python-mode: create
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appplatform
+package-version: 6.1.0
 clear-output-folder: true
 no-namespace-folders: true
 ```
@@ -27,26 +17,62 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && !$(track2)
-batch:
-  - tag: package-preview-2020-11
-  - tag: package-2020-07
-  - tag: package-2019-05-01-preview
-```
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python) && $(multiapi)
 clear-output-folder: true
 batch:
+  - tag: package-preview-2022-03
+  - tag: package-preview-2022-01
+  - tag: package-preview-2021-09
+  - tag: package-preview-2021-06
   - tag: package-preview-2020-11
   - tag: package-2020-07
-  - tag: package-2019-05-01-preview
   - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/
-clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-preview-2022-03 and python
+
+These settings apply only when `--tag=package-preview-2022-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-03' && $(python)
+namespace: azure.mgmt.appplatform.v2022_03_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2022_03_01_preview
+```
+
+### Tag: package-preview-2022-01 and python
+
+These settings apply only when `--tag=package-preview-2022-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-01' && $(python)
+namespace: azure.mgmt.appplatform.v2022_01_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2022_01_01_preview
+```
+
+### Tag: package-preview-2021-09 and python
+
+These settings apply only when `--tag=package-preview-2021-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-09' && $(python)
+namespace: azure.mgmt.appplatform.v2021_09_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2021_09_01_preview
+```
+
+### Tag: package-preview-2021-06 and python
+
+These settings apply only when `--tag=package-preview-2021-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-06' && $(python)
+namespace: azure.mgmt.appplatform.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2021_06_01_preview
 ```
 
 ### Tag: package-preview-2020-11 and python
@@ -54,12 +80,7 @@ perform-load: false
 These settings apply only when `--tag=package-preview-2020-11 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2020-11' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.appplatform.v2020_11_01_preview
-  output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_11_01_preview
-```
-``` yaml $(tag) == 'package-preview-2020-11' && $(python) && $(track2)
+``` yaml $(tag) == 'package-preview-2020-11' && $(python)
 namespace: azure.mgmt.appplatform.v2020_11_01_preview
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_11_01_preview
 ```
@@ -69,28 +90,7 @@ output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mg
 These settings apply only when `--tag=package-2020-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-07' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.appplatform.v2020_07_01
-  output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_07_01
-```
-``` yaml $(tag) == 'package-2020-07' && $(python) && $(track2)
+``` yaml $(tag) == 'package-2020-07' && $(python)
 namespace: azure.mgmt.appplatform.v2020_07_01
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_07_01
-```
-
-### Tag: package-2019-05-01-preview and python
-
-These settings apply only when `--tag=package-2019-05-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-05-01-preview' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.appplatform.v2019_05_01_preview
-  output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2019_05_01_preview
-```
-
-``` yaml $(tag) == 'package-2019-05-01-preview' && $(python) && $(track2)
-namespace: azure.mgmt.appplatform.v2019_05_01_preview
-output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2019_05_01_preview
 ```

@@ -26,18 +26,23 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
+tag: package-changes-2022-03-01-preview
+```
+
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
-tag: package-features-2015-12
+tag: package-features-2021-07
 ```
 
 ``` yaml $(package-locks)
-tag: package-locks-2016-09
+tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-09
+tag: package-policy-2021-06
 ```
 
 ``` yaml $(package-resources)
@@ -61,10 +66,60 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-03-preview
+tag: package-templatespecs-2022-02
 ```
 
+``` yaml $(package-changes)
+tag: package-changes-2022-03-01-preview
+```
+
+### Tag: package-changes-2022-03-01-preview
+
+These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
+input-file:
+- Microsoft.Resources/preview/2022-03-01-preview/changes.json
+```
+
+### Tag: package-policy-2021-06
+
+These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2021-06'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-privatelinks-2020-05
+
+These settings apply only when `--tag=package-privatelinks-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-privatelinks-2020-05'
+input-file:
+- Microsoft.Authorization/stable/2020-05-01/privateLinks.json
+```
+
+### Tag: package-locks-2020-05
+
+These settings apply only when `--tag=package-locks-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2020-05'
+input-file:
+- Microsoft.Authorization/stable/2020-05-01/locks.json
+```
+
+
 ### Tag: package-resources-2021-04
+
 
 These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
 
@@ -89,6 +144,15 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+### Tag: package-locks-2017-04
+
+These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2017-04'
+input-file:
+- Microsoft.Authorization/stable/2017-04-01/locks.json
+```
+
 
 ### Tag: package-preview-2020-08
 
@@ -126,6 +190,20 @@ These settings apply only when `--tag=package-deploymentscripts-2019-10-preview`
 ``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
 input-file:
 - Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+```
+
+### Tag: package-features-2021-07
+
+These settings apply only when `--tag=package-features-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-features-2021-07'
+input-file:
+- Microsoft.Features/stable/2021-07-01/features.json
+- Microsoft.Features/stable/2021-07-01/SubscriptionFeatureRegistration.json
+
+# Needed when there is more than one input file
+override-info:
+  title: FeatureClient
 ```
 
 ### Tag: package-features-2015-12
@@ -273,6 +351,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2022-02
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+input-file:
+- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
 ```
 
 ### Tag: package-templatespecs-2021-05
@@ -615,6 +702,10 @@ directive:
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: privateLinks.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyDefinitions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
@@ -755,6 +846,28 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: RequiredReadOnlySystemData
+    from: privateLinks.json
+    reason: We do not yet support system data
+  - from: SubscriptionFeatureRegistration.json
+    suppress: R4009
+    reason: Currently systemData is not allowed
+  - from: Subscriptions.json
+    suppress: OperationsAPIImplementation
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: privateLinks.json
+    reason: The resource is managed in a management group level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListBySubscription
+    from: changes.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: RequiredReadOnlySystemData
+    from: changes.json
+    reason: System Metadata from a change resource perspective is irrelevant
 ```
 
 ---
@@ -769,19 +882,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
@@ -813,6 +917,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-changes: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01

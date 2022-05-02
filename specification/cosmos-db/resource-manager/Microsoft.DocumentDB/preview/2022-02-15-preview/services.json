@@ -1,0 +1,624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2022-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services": {
+      "get": {
+        "x-ms-examples": {
+          "CosmosDBServicesList": {
+            "$ref": "./examples/CosmosDBServicesList.json"
+          }
+        },
+        "operationId": "Service_List",
+        "description": "Gets the status of service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ServiceResource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services/{serviceName}": {
+      "put": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceCreate": {
+            "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
+          },
+          "SqlDedicatedGatewayServiceCreate": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
+          },
+          "GraphAPIComputeServiceCreate": {
+            "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
+          },
+          "MaterializedViewsBuilderServiceCreate": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceCreate.json"
+          }
+        },
+        "operationId": "Service_Create",
+        "description": "Creates a service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceCreateUpdateParameters"
+            },
+            "description": "The Service resource parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service status.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "202": {
+            "description": "The job will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceGet": {
+            "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
+          },
+          "GraphAPIComputeServiceGet": {
+            "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
+          },
+          "SqlDedicatedGatewayServiceGet": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+          },
+          "MaterializedViewsBuilderServiceGet": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceGet.json"
+          }
+        },
+        "operationId": "Service_Get",
+        "description": "Gets the status of service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ServiceResource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceDelete": {
+            "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
+          },
+          "SqlDedicatedGatewayServiceDelete": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
+          },
+          "GraphAPIComputeServiceDelete": {
+            "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
+          },
+          "MaterializedViewsBuilderServiceDelete": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceDelete.json"
+          }
+        },
+        "operationId": "Service_Delete",
+        "description": "Deletes service with the given serviceName.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The job will complete asynchronously."
+          },
+          "204": {
+            "description": "The response for service deletion."
+          },
+          "200": {
+            "description": "The response for service deletion."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceResourceProperties": {
+      "description": "Services response resource.",
+      "type": "object",
+      "discriminator": "serviceType",
+      "properties": {
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last state change (ISO-8601 format)."
+        },
+        "instanceSize": {
+          "$ref": "#/definitions/ServiceResourceInstanceSize"
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "serviceType": {
+          "$ref": "#/definitions/ServiceType"
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ServiceResourceStatus"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "serviceType"
+      ]
+    },
+    "ServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for ServiceResource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      }
+    },
+    "ServiceResourceCreateUpdateProperties": {
+      "description": "Properties in ServiceResourceCreateUpdateParameters.",
+      "type": "object",
+      "properties": {
+        "instanceSize": {
+          "$ref": "#/definitions/ServiceResourceInstanceSize"
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "serviceType": {
+          "$ref": "#/definitions/ServiceType"
+        }
+      }
+    },
+    "ServiceResource": {
+      "description": "Properties for the database account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      }
+    },
+    "ServiceResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceResource"
+          },
+          "description": "List of Service Resource and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Service Resource and their properties."
+    },
+    "DataTransferServiceResource": {
+      "description": "Describes the service response property.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/DataTransferServiceResourceProperties"
+        }
+      }
+    },
+    "DataTransferServiceResourceProperties": {
+      "description": "Properties for DataTransferServiceResource.",
+      "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/DataTransferRegionalServiceResource"
+          }
+        }
+      }
+    },
+    "SqlDedicatedGatewayServiceResource": {
+      "description": "Describes the service response property for SqlDedicatedGateway.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceProperties"
+        }
+      }
+    },
+    "SqlDedicatedGatewayServiceResourceProperties": {
+      "description": "Properties for SqlDedicatedGatewayServiceResource.",
+      "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "sqlDedicatedGatewayEndpoint": {
+          "type": "string",
+          "description": "SqlDedicatedGateway endpoint for the service."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/SqlDedicatedGatewayRegionalServiceResource"
+          }
+        }
+      }
+    },
+    "GraphAPIComputeServiceResource": {
+      "description": "Describes the service response property for GraphAPICompute.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/GraphAPIComputeServiceResourceProperties"
+        }
+      }
+    },
+    "GraphAPIComputeServiceResourceProperties": {
+      "description": "Properties for GraphAPIComputeServiceResource.",
+      "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "graphApiComputeEndpoint": {
+          "type": "string",
+          "description": "GraphAPICompute endpoint for the service."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/GraphAPIComputeRegionalServiceResource"
+          }
+        }
+      }
+    },
+    "MaterializedViewsBuilderServiceResource": {
+      "description": "Describes the service response property for MaterializedViewsBuilder.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/MaterializedViewsBuilderServiceResourceProperties"
+        }
+      }
+    },
+    "MaterializedViewsBuilderServiceResourceProperties": {
+      "description": "Properties for MaterializedViewsBuilderServiceResource.",
+      "type": "object",
+      "x-ms-discriminator-value": "MaterializedViewsBuilder",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/MaterializedViewsBuilderRegionalServiceResource"
+          }
+        }
+      }
+    },
+    "RegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional service name."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ServiceResourceStatus"
+        }
+      }
+    },
+    "SqlDedicatedGatewayRegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ],
+      "properties": {
+        "sqlDedicatedGatewayEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional endpoint for SqlDedicatedGateway."
+        }
+      }
+    },
+    "GraphAPIComputeRegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ],
+      "properties": {
+        "graphApiComputeEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional endpoint for GraphAPICompute."
+        }
+      }
+    },
+    "DataTransferRegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ]
+    },
+    "MaterializedViewsBuilderRegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ]
+    },
+    "ServiceResourceStatus": {
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Running",
+        "Updating",
+        "Deleting",
+        "Error",
+        "Stopped"
+      ],
+      "readOnly": true,
+      "description": "Describes the status of a service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServiceStatus"
+      }
+    },
+    "ServiceResourceInstanceSize": {
+      "type": "string",
+      "enum": [
+        "Cosmos.D4s",
+        "Cosmos.D8s",
+        "Cosmos.D16s"
+      ],
+      "description": "Instance type for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServiceSize"
+      }
+    },
+    "ServiceType": {
+      "type": "string",
+      "enum": [
+        "SqlDedicatedGateway",
+        "DataTransfer",
+        "GraphAPICompute",
+        "MaterializedViewsBuilder"
+      ],
+      "description": "ServiceType for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServiceType"
+      }
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "serviceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB service name.",
+      "minLength": 3,
+      "maxLength": 50
+    }
+  }
+}

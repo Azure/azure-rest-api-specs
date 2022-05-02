@@ -1,4 +1,4 @@
-## Ruby
+# Ruby
 
 These settings apply only when `--ruby` is specified on the command line.
 
@@ -8,7 +8,7 @@ package-version: "0.16.0"
 azure-arm: true
 ```
 
-### Ruby multi-api
+## Ruby multi-api
 
 ``` yaml $(ruby) && $(multiapi)
 batch:

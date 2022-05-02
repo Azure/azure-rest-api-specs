@@ -165,7 +165,7 @@
         },
         "recursive": {
           "description": "Is this event for a recursive delete operation.",
-          "type": "boolean"
+          "type": "string"
         },
         "sequencer": {
           "description": "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name.",
@@ -387,6 +387,41 @@
         "storageDiagnostics": {
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "type": "object"
+        }
+      }
+    },
+    "StorageBlobInventoryPolicyCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event.",
+      "type": "object",
+      "properties": {
+        "scheduleDateTime": {
+          "description": "The time at which inventory policy was scheduled.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "The account name for which inventory policy is registered.",
+          "type": "string"
+        },
+        "ruleName": {
+          "description": "The rule name for inventory policy.",
+          "type": "string"
+        },
+        "policyRunStatus": {
+          "description": "The status of inventory run, it can be Succeeded/PartiallySucceeded/Failed.",
+          "type": "string"
+        },
+        "policyRunStatusMessage": {
+          "description": "The status message for inventory run.",
+          "type": "string"
+        },
+        "policyRunId": {
+          "description": "The policy run id for inventory run.",
+          "type": "string"
+        },
+        "manifestBlobUrl": {
+          "description": "The blob URL for manifest file for inventory run.",
+          "type": "string"
         }
       }
     }

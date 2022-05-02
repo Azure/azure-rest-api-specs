@@ -25,26 +25,301 @@ These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
 openapi-type: data-plane
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(package-spark)
-tag: package-spark-2019-11-01-preview
+tag: package-spark-2020-12-01
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-2019-06-01-preview
+tag: package-artifacts-composite-v4
 ```
 
 ``` yaml $(package-access-control)
-tag: package-access-control-2020-08-01-preview
+tag: package-access-control-2020-12-01
 ```
 
 ``` yaml $(package-vnet)
-tag: package-vnet-2019-06-01-preview
+tag: package-vnet-2020-12-01
 ```
 
 ``` yaml $(package-monitoring)
-tag: package-monitoring-2019-11-01-preview
+tag: package-monitoring-2020-12-01
+```
+### Tag: package-artifacts-composite-v4
+
+These settings apply only when `--tag=package-artifacts-composite-v4` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v4'
+input-file:
+  - Microsoft.Synapse/preview/2021-12-01-preview/linkConnections.json
+  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-composite-v3
+
+These settings apply only when `--tag=package-artifacts-composite-v3` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v3'
+input-file:
+  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-composite-v2
+
+These settings apply only when `--tag=package-artifacts-composite-v2` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v2'
+input-file:
+  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-composite-v1
+
+These settings apply only when `--tag=package-artifacts-composite-v1` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v1'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-2021-06-01-preview
+
+These settings apply only when `--tag=package-artifacts-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-2021-06-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/artifacts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPools.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/dataflows.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/datasets.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/gitintegration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntimes.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/linkedServices.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/notebooks.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/pipelines.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkJobDefinitions.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlScripts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/triggers.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/LinkedService.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Notebook.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Pipeline.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SqlScript.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Trigger.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+```
+
+### Tag: package-vnet-2021-06-01-preview
+
+These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-vnet-2021-06-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
+```
+
+### Tag: package-kql-script-2021-06-preview
+
+These settings apply only when `--tag=package-kql-script-2021-06-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. KQL script API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-kql-script-2021-06-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
+```
+
+### Tag: package-link-connection-2021-12-01-preview
+
+These settings apply only when `--tag=package-link-connection-2021-12-01-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Link connection API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-link-connection-2021-12-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-12-01-preview/linkConnections.json
+```
+
+### Tag: package-artifacts-2020-12-01
+
+These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/operations.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-monitoring-2020-12-01
+
+These settings apply only when `--tag=package-monitoring-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-monitoring-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/monitoring.json
+```
+
+### Tag: package-access-control-2020-12-01
+
+These settings apply only when `--tag=package-access-control-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/checkAccessSynapseRbac.json
+  - Microsoft.Synapse/stable/2020-12-01/roleAssignments.json
+  - Microsoft.Synapse/stable/2020-12-01/roleDefinitions.json
+```
+
+### Tag: package-vnet-2020-12-01
+
+These settings apply only when `--tag=package-vnet-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-vnet-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/managedPrivateEndpoints.json
+```
+
+### Tag: package-spark-2020-12-01
+
+These settings apply only when `--tag=package-spark-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-spark-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/sparkJob.json
 ```
 
 ### Tag: package-spark-2019-11-01-preview
@@ -139,6 +414,12 @@ directive:
       - $.definitions.NotebookKernelSpec.properties.display_name
       - $.definitions.NotebookMetadata.properties.language_info
       - $.definitions.Notebook.properties.nbformat_minor
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: checkAccessSynapseRbac.json
+    where:
+      - $.definitions.CheckPrincipalAccessResponse.properties.AccessDecisions
 ```
 
 ---
@@ -174,6 +455,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -208,4 +493,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

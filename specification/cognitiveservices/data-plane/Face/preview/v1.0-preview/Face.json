@@ -1048,7 +1048,7 @@
     },
     "/detect": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
@@ -1972,6 +1972,22 @@
         "parameters": [
           {
             "$ref": "#/parameters/returnRecognitionModel"
+          },
+          {
+            "name": "start",
+            "description": "Starting large face list id to return (used to list a range of large face lists).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "description": "Number of large face lists to return starting with the large face list id indicated by the 'start' parameter.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -2492,7 +2508,7 @@
           "200": {
             "description": "A successful call returns the operation's status.",
             "schema": {
-              "$ref": "#/definitions/AsyncStatus"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -2582,6 +2598,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/PersonCreationResponse"
             }
@@ -2665,7 +2687,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2766,6 +2794,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
@@ -2864,7 +2898,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3029,7 +3069,13 @@
             "description": "Success"
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3076,7 +3122,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3149,7 +3201,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3364,7 +3422,7 @@
     },
     "/detect?overload=stream": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithStream",
         "parameters": [
           {
@@ -3670,6 +3728,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
@@ -3960,6 +4024,19 @@
         "mask": {
           "description": "Properties describing the presence of a mask on a given face.",
           "$ref": "#/definitions/Mask"
+        },
+        "qualityForRecognition": {
+          "type": "string",
+          "description": "Properties describing the overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on.",
+          "x-ms-enum": {
+            "name": "QualityForRecognition",
+            "modelAsString": false
+          },
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ]
         }
       }
     },
@@ -4443,10 +4520,10 @@
         },
         "maxNumOfCandidatesReturned": {
           "type": "integer",
-          "description": "The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1).",
+          "description": "The range of maxNumOfCandidatesReturned is between 1 and 100 (default is 1).",
           "default": 1,
           "minimum": 1,
-          "maximum": 5
+          "maximum": 100
         },
         "confidenceThreshold": {
           "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",
@@ -4575,7 +4652,8 @@
       "description": "Face list object.",
       "type": "object",
       "required": [
-        "faceListId"
+        "faceListId",
+        "name"
       ],
       "properties": {
         "faceListId": {
@@ -4584,16 +4662,25 @@
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
+        },
         "persistedFaces": {
           "description": "Persisted faces within the face list.",
           "$ref": "#/definitions/PersistedFaces"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "FaceLists": {
       "type": "array",
@@ -4605,7 +4692,8 @@
     "PersonGroup": {
       "type": "object",
       "required": [
-        "personGroupId"
+        "personGroupId",
+        "name"
       ],
       "description": "Person group object.",
       "properties": {
@@ -4614,13 +4702,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "PersonGroups": {
       "type": "array",
@@ -4694,7 +4791,8 @@
       "description": "Large face list object.",
       "type": "object",
       "required": [
-        "largeFaceListId"
+        "largeFaceListId",
+        "name"
       ],
       "properties": {
         "largeFaceListId": {
@@ -4702,13 +4800,22 @@
           "description": "LargeFaceListId of the target large face list.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargeFaceLists": {
       "type": "array",
@@ -4720,7 +4827,8 @@
     "LargePersonGroup": {
       "type": "object",
       "required": [
-        "largePersonGroupId"
+        "largePersonGroupId",
+        "name"
       ],
       "description": "Large person group object.",
       "properties": {
@@ -4729,13 +4837,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargePersonGroups": {
       "type": "array",
@@ -4813,6 +4930,26 @@
       "minimum": 0,
       "maximum": 1
     },
+    "NameAndUserDataContractForCreation": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
     "NameAndUserDataContract": {
       "type": "object",
       "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
@@ -4839,7 +4976,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NameAndUserDataContract"
+          "$ref": "#/definitions/NameAndUserDataContractForCreation"
         }
       ]
     },
@@ -4913,7 +5050,7 @@
         "createdTime",
         "lastUpdateTime"
       ],
-      "description": "Snapshot object.",
+      "description": "Snapshot object. The Snapshot API will move your data outside the geo you select for your resource to West US, West Europe and Southeast Asia.",
       "properties": {
         "id": {
           "type": "string",
@@ -5014,48 +5151,6 @@
         }
       }
     },
-    "OperationStatus": {
-      "type": "object",
-      "required": [
-        "status",
-        "createdTime"
-      ],
-      "description": "Operation status object. Operation refers to the asynchronous backend task including taking a snapshot and applying a snapshot.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field \"message\" to check the failure reason.",
-          "x-ms-enum": {
-            "name": "OperationStatusType",
-            "modelAsString": false
-          },
-          "enum": [
-            "notstarted",
-            "running",
-            "succeeded",
-            "failed"
-          ]
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the time when the operation (take or apply a snapshot) is requested. E.g. 2018-12-25T11:41:02.2331413Z."
-        },
-        "lastActionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last time the operation (take or apply a snapshot) is actively migrating data. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z."
-        },
-        "resourceLocation": {
-          "type": "string",
-          "description": "When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field."
-        },
-        "message": {
-          "type": "string",
-          "description": "Show failure message when operation fails (omitted when operation succeeds)."
-        }
-      }
-    },
     "PersistedFaceResponse": {
       "type": "object",
       "properties": {
@@ -5075,31 +5170,46 @@
         "succeeded",
         "failed"
       ],
-      "type": "string"
+      "type": "string",
+      "description": "Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field \"message\" to check the failure reason.",
+      "x-ms-enum": {
+        "name": "OperationStatusType",
+        "modelAsString": false
+      }
     },
-    "AsyncStatus": {
+    "OperationStatus": {
       "type": "object",
+      "required": [
+        "status",
+        "createdTime"
+      ],
+      "description": "Operation status object. Operation refers to an asynchronous backend task.",
       "properties": {
         "status": {
           "$ref": "#/definitions/AsyncOperationStatus"
         },
         "createdTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the time when the operation is requested. E.g. 2018-12-25T11:41:02.2331413Z."
         },
         "lastActionTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the last time the operation is actively running. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z."
         },
         "finishedTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the time when the operation finished. E.g. 2018-12-25T11:41:02.2331413Z."
         },
         "resourceLocation": {
-          "type": "string"
+          "type": "string",
+          "description": "When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Show failure message when operation fails (omitted when operation succeeds)."
         }
       }
     },
@@ -5306,7 +5416,7 @@
     "returnFaceAttributes": {
       "name": "returnFaceAttributes",
       "in": "query",
-      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, and noise. While 'detection_02' does not support any attributes and 'detection_03' only supports mask. Note that each face attribute analysis has additional computational and time cost.",
+      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and qualityForRecognition. While 'detection_02' does not support any attributes and 'detection_03' only supports mask and qualityForRecognition. Additionally, qualityForRecognition is only supported when the 'recognitionModel' is specified as 'recognition_03' or 'recognition_04'. Note that each face attribute analysis has additional computational and time cost.",
       "type": "array",
       "x-ms-parameter-location": "method",
       "required": false,
@@ -5333,7 +5443,8 @@
           "blur",
           "exposure",
           "noise",
-          "mask"
+          "mask",
+          "qualityForRecognition"
         ]
       }
     },

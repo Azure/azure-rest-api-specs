@@ -2184,14 +2184,6 @@
         "description": "Gets all resource providers for a subscription.",
         "parameters": [
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of results to return. If null is passed returns all deployments."
-          },
-          {
             "name": "$expand",
             "in": "query",
             "required": false,
@@ -2237,14 +2229,6 @@
         "operationId": "Providers_ListAtTenantScope",
         "description": "Gets all resource providers for the tenant.",
         "parameters": [
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of results to return. If null is passed returns all providers."
-          },
           {
             "name": "$expand",
             "in": "query",
@@ -2848,14 +2832,14 @@
         ],
         "operationId": "Resources_MoveResources",
         "summary": "Moves resources from one resource group to another resource group.",
-        "description": "The resources to move must be in the same source resource group. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes. ",
+        "description": "The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes. ",
         "parameters": [
           {
             "name": "sourceResourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group containing the resources to move.",
+            "description": "The name of the resource group from the source subscription containing the resources to be moved.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -2900,14 +2884,14 @@
         ],
         "operationId": "Resources_ValidateMoveResources",
         "summary": "Validates whether resources can be moved from one resource group to another resource group.",
-        "description": "This operation checks whether the specified resources can be moved to the target. The resources to move must be in the same source resource group. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.",
+        "description": "This operation checks whether the specified resources can be moved to the target. The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.",
         "parameters": [
           {
             "name": "sourceResourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group containing the resources to validate for move.",
+            "description": "The name of the resource group from the source subscription containing the resources to be validated for move.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -2958,7 +2942,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'. When you filter by a tag name and value, the tags for each resource are not returned in the results.<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
+            "description": "The filter to apply on the operation.<br><br>Filter comparison operators include `eq` (equals) and `ne` (not equals) and may be used with the following properties: `location`, `resourceType`, `name`, `resourceGroup`, `identity`, `identity/principalId`, `plan`, `plan/publisher`, `plan/product`, `plan/name`, `plan/version`, and `plan/promotionCode`.<br><br>For example, to filter by a resource type, use `$filter=resourceType eq 'Microsoft.Network/virtualNetworks'`<br><br><br>`substringof(value, property)` can  be used to filter for substrings of the following currently-supported properties: `name` and `resourceGroup`<br><br>For example, to get all resources with 'demo' anywhere in the resource name, use `$filter=substringof('demo', name)`<br><br>Multiple substring operations can also be combined using `and`/`or` operators.<br><br>Note that any truncated number of results queried via `$top` may also not be compatible when using a filter.<br><br><br>Resources can be filtered by tag names and values. For example, to filter for a tag name and value, use `$filter=tagName eq 'tag1' and tagValue eq 'Value1'`. Note that when resources are filtered by tag name and value, <b>the original tags for each resource will not be returned in the results.</b> Any list of additional properties queried via `$expand` may also not be compatible when filtering by tag names/values. <br><br>For tag names only, resources can be filtered by prefix using the following syntax: `$filter=startswith(tagName, 'depart')`. This query will return all resources with a tag name prefixed by the phrase `depart` (i.e.`department`, `departureDate`, `departureTime`, etc.)<br><br><br>Note that some properties can be combined when filtering resources, which include the following: `substringof() and/or resourceType`, `plan and plan/publisher and plan/name`, and `identity and identity/principalId`."
           },
           {
             "name": "$expand",
@@ -2973,7 +2957,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resource groups."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4924,6 +4908,7 @@
           "items": {
             "$ref": "#/definitions/AliasPath"
           },
+          "x-ms-identifiers": [],
           "description": "The paths for an alias."
         },
         "type": {
@@ -5007,6 +4992,10 @@
           "items": {
             "$ref": "#/definitions/ProviderExtendedLocation"
           },
+          "x-ms-identifiers": [
+            "location",
+            "type"
+          ],
           "description": "The location mappings that are supported by this resource type."
         },
         "aliases": {
@@ -5014,6 +5003,9 @@
           "items": {
             "$ref": "#/definitions/Alias"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The aliases that are supported by this resource type."
         },
         "apiVersions": {
@@ -5028,12 +5020,25 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ApiProfile"
           },
+          "x-ms-identifiers": [
+            "apiVersion",
+            "profileVersion"
+          ],
           "description": "The API profiles for the resource provider."
         },
         "capabilities": {
@@ -5078,6 +5083,9 @@
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "description": "The collection of provider resource types."
         },
         "providerAuthorizationConsentState": {
@@ -5417,6 +5425,9 @@
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "description": "An array of resource types."
         },
         "nextLink": {
@@ -6136,6 +6147,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Microsoft.Resources operations."
         },
         "nextLink": {
@@ -6217,6 +6231,9 @@
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "Nested property changes."
         }
       },
@@ -6297,6 +6314,9 @@
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "The predicted changes to resource properties."
         }
       }
@@ -6309,6 +6329,10 @@
           "items": {
             "$ref": "#/definitions/WhatIfChange"
           },
+          "x-ms-identifiers": [
+            "resourceId",
+            "changeType"
+          ],
           "description": "List of resource changes predicted by What-If operation."
         }
       }
@@ -6464,6 +6488,7 @@
           "items": {
             "$ref": "#/definitions/Permission"
           },
+          "x-ms-identifiers": [],
           "description": "Role definition permissions."
         },
         "scopes": {
@@ -6515,6 +6540,7 @@
           "items": {
             "$ref": "#/definitions/ProviderPermission"
           },
+          "x-ms-identifiers": [],
           "description": "An array of provider permissions."
         },
         "nextLink": {
@@ -6576,6 +6602,21 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -6603,7 +6644,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The Microsoft Azure subscription ID."
     },
     "DeploymentNameParameter": {
       "name": "deploymentName",
