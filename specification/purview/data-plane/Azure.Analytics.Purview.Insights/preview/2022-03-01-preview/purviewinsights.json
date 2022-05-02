@@ -417,6 +417,7 @@
   },
   "definitions": {
     "SnapshotRecord": {
+      "description": "Snapshot record",
       "required": [
         "kind"
       ],
@@ -447,12 +448,14 @@
         },
         "snapshotTime": {
           "format": "date-time",
+          "description": "The Snapshot time",
           "type": "string"
         }
       },
       "discriminator": "kind"
     },
     "Snapshots": {
+      "description": "Snapshots",
       "type": "object",
       "properties": {
         "snapshotTime": {
@@ -549,6 +552,7 @@
       "discriminator": "kind"
     },
     "Details": {
+      "description": "Asset details",
       "type": "object",
       "properties": {
         "snapshotTime": {
@@ -575,7 +579,7 @@
       }
     },
     "AssetInsightsDetailsFilters": {
-      "description": "API response structure for filters on asset insights details page\r\nTODO : Check with UX if we need to emit a snapshot time for this API",
+      "description": "API response structure for filters on asset insights details page",
       "type": "object",
       "properties": {
         "classifications": {
@@ -653,6 +657,7 @@
       }
     },
     "TagsTimeSeries": {
+      "description": "Tags time series",
       "type": "object",
       "properties": {
         "value": {
@@ -703,6 +708,7 @@
       }
     },
     "FilesAggregationTimeSeries": {
+      "description": "Files aggregation time series",
       "type": "object",
       "properties": {
         "value": {
@@ -719,6 +725,7 @@
       }
     },
     "AllAssetsDistributionDetailsRecord": {
+      "description": "All assets distribution details",
       "type": "object",
       "allOf": [
         {
@@ -756,14 +763,15 @@
           }
         },
         "guid": {
-          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
           "type": "string"
         },
         "instance": {
-          "description": "Instance[SQL server/Blob account]",
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
           "type": "string"
         },
         "objectType": {
+          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
           "type": "string"
         },
         "qualifiedName": {
@@ -778,6 +786,7 @@
       "x-ms-discriminator-value": "AllAssetsDistribution"
     },
     "AssetCurationDistributionDetailsRecord": {
+      "description": "Asset curation distribution details",
       "type": "object",
       "allOf": [
         {
@@ -808,7 +817,7 @@
           }
         },
         "guid": {
-          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
           "type": "string"
         },
         "description": {
@@ -816,7 +825,7 @@
           "type": "string"
         },
         "instance": {
-          "description": "Instance[SQL server/Blob account]",
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
           "type": "string"
         },
         "qualifiedName": {
@@ -831,6 +840,7 @@
       "x-ms-discriminator-value": "AssetCurationDistribution"
     },
     "DeletedAssetsDistributionDetailsRecord": {
+      "description": "Deleted assets distribution details",
       "type": "object",
       "allOf": [
         {
@@ -857,7 +867,7 @@
           "type": "string"
         },
         "count": {
-          "description": "Asset Count\r\nTODO : Check with OT implementation if it's easier/possible to calculate the counts for all possible variants\r\nOr we should have list of deleted asset names in the dataset that we can filter on to claculate the count",
+          "description": "Asset Count",
           "type": "string"
         },
         "dataOwners": {
@@ -868,10 +878,11 @@
           }
         },
         "instance": {
-          "description": "Instance[SQL server/Blob account]",
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
           "type": "string"
         },
         "objectType": {
+          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
           "type": "string"
         },
         "sourceType": {
@@ -882,6 +893,7 @@
       "x-ms-discriminator-value": "DeletedAssetsDistribution"
     },
     "NetNewAssetsDistributionDetailsRecord": {
+      "description": "Net new assets distribution details",
       "type": "object",
       "allOf": [
         {
@@ -919,14 +931,15 @@
           }
         },
         "guid": {
-          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
           "type": "string"
         },
         "instance": {
-          "description": "Instance[SQL server/Blob account]",
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
           "type": "string"
         },
         "objectType": {
+          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
           "type": "string"
         },
         "qualifiedName": {
@@ -955,7 +968,7 @@
         },
         "searchAndBrowseUserCount": {
           "format": "int64",
-          "description": "Count of distinct users doing serach and browse activities",
+          "description": "Count of distinct users doing search and browse activities",
           "type": "integer"
         },
         "totalUserCount": {
@@ -971,6 +984,7 @@
       }
     },
     "ActiveUsersTrendSnapshotRecord": {
+      "description": "Active users trend snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -992,6 +1006,7 @@
       "x-ms-discriminator-value": "ActiveUsersTrend"
     },
     "AllAssetsDistributionSnapshotRecord": {
+      "description": "All assets distribution snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1029,6 +1044,7 @@
       "x-ms-discriminator-value": "AllAssetsDistribution"
     },
     "AssetCurationDistributionSnapshotRecord": {
+      "description": "Asset curation distribution snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1064,6 +1080,7 @@
       "x-ms-discriminator-value": "AssetCurationDistribution"
     },
     "AssetDistributionSnapshotRecord": {
+      "description": "Asset distribution snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1094,6 +1111,7 @@
       "x-ms-discriminator-value": "AssetDistribution"
     },
     "AssetFilesAggregationSnapshotRecord": {
+      "description": "Asset files aggregation snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1141,6 +1159,7 @@
       "x-ms-discriminator-value": "AssetFilesAggregation"
     },
     "DataEstateHealthSnapshotRecord": {
+      "description": "Data estate health snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1179,7 +1198,7 @@
         },
         "staleAssets": {
           "format": "int64",
-          "description": "The count of staled assets.",
+          "description": "The count of stale assets.",
           "type": "integer"
         },
         "unclassified": {
@@ -1196,6 +1215,7 @@
       "x-ms-discriminator-value": "DataEstateHealth"
     },
     "DeletedAssetsDistributionSnapshotRecord": {
+      "description": "Deleted assets distribution snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1233,6 +1253,7 @@
       "x-ms-discriminator-value": "DeletedAssetsDistribution"
     },
     "FilesWithoutResourceSetSnapshotRecord": {
+      "description": "Files without resource set snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1261,6 +1282,7 @@
       "x-ms-discriminator-value": "FilesWithoutResourceSet"
     },
     "TrendsAndGapsDataPoint": {
+      "description": "Trends and gaps data point",
       "type": "object",
       "properties": {
         "total": {
@@ -1291,6 +1313,7 @@
       }
     },
     "TrendsAndGapsSnapshotRecord": {
+      "description": "Trends and gaps snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1316,6 +1339,7 @@
       "x-ms-discriminator-value": "TrendsAndGaps"
     },
     "MostViewedAssetsSnapshotRecord": {
+      "description": "Most viewed assets snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1332,7 +1356,7 @@
           "type": "string"
         },
         "guid": {
-          "description": "Asset guid -> Needed by UX to uniquely identify assets in the catalog for editing",
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
           "type": "string"
         },
         "numberOfViews": {
@@ -1348,6 +1372,7 @@
       "x-ms-discriminator-value": "MostViewedAssets"
     },
     "NetNewAssetsDistributionSnapshotRecord": {
+      "description": "Net new assets distribution snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1364,7 +1389,7 @@
           "type": "string"
         },
         "collectionName": {
-          "description": "Collection to which the asset belongs\r\nTODO : [sichaudh] Check whether the UI needs us to populate parent collection for each collection",
+          "description": "Collection to which the asset belongs",
           "type": "string"
         },
         "count": {
@@ -1385,6 +1410,7 @@
       "x-ms-discriminator-value": "NetNewAssetsDistribution"
     },
     "TagsSnapshotRecord": {
+      "description": "Tags snapshot record",
       "type": "object",
       "allOf": [
         {
@@ -1410,6 +1436,7 @@
         },
         "subscriptions": {
           "format": "int32",
+          "description": "The number of subscriptions.",
           "type": "integer"
         },
         "sources": {
@@ -1431,6 +1458,7 @@
       "x-ms-discriminator-value": "Tags"
     },
     "TopSearchedKeywordsSnapshotRecord": {
+      "description": "Top searched keywords snapshot record",
       "type": "object",
       "allOf": [
         {
