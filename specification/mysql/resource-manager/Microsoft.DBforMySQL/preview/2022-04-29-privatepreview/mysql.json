@@ -1392,7 +1392,7 @@
             "$ref": "./examples/PerformMigrationAssessment.json"
           }
         },
-        "description": "Perfroms Migration Assessment for a single server",
+        "description": "Performs Migration Assessment for a single server",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -2498,6 +2498,24 @@
         }
       },
       "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for name being unavailable."
+        }
+      },
+      "description": "Represents a resource name availability."
     },
     "MigrationAssessmentRequest": {
       "type": "object",
