@@ -127,7 +127,6 @@
     },
     "AcsChatMessageDeletedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -719,6 +718,7 @@
     },
     "AcsChatEventInThreadBaseProperties": {
       "description": "Schema of common properties of all thread-level chat events",
+      "type": "object",
       "properties": {
         "transactionId": {
           "description": "The transaction id will be used as co-relation vector",
@@ -732,6 +732,7 @@
     },
     "AcsChatEventBaseProperties": {
       "description": "Schema of common properties of all chat events",
+      "type": "object",
       "properties": {
         "recipientCommunicationIdentifier": {
           "description": "The communication identifier of the target user",
@@ -790,13 +791,11 @@
         },
         "segmentsSucceeded": {
           "description": "Number of segments that were successfully delivered",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "segmentsFailed": {
           "description": "Number of segments whose delivery failed",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         }
       }
     },
