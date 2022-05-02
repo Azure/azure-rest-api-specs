@@ -1608,6 +1608,7 @@
   },
   "definitions": {
     "AcceptJobOfferResponse": {
+      "description": "Response containing Id's for the worker, job, and assignment from an accepted offer",
       "required": [
         "assignmentId",
         "jobId",
@@ -1751,6 +1752,7 @@
       "type": "object"
     },
     "ChannelConfiguration": {
+      "description": "Represents the capacity a job in this channel will consume from a worker",
       "required": [
         "capacityCostPerJob"
       ],
@@ -2192,6 +2194,7 @@
       "x-ms-discriminator-value": "expression-rule"
     },
     "JobAssignment": {
+      "description": "Assigns a job to a worker",
       "required": [
         "assignTime",
         "id"
@@ -2257,6 +2260,7 @@
       "discriminator": "kind"
     },
     "JobOffer": {
+      "description": "An offer of an assignment of work to a worker",
       "required": [
         "capacityCost",
         "id",
@@ -2406,6 +2410,7 @@
       "x-ms-discriminator-value": "manual-reclassify"
     },
     "PagedClassificationPolicy": {
+      "description": "A classification policy returned from a pageable list",
       "type": "object",
       "properties": {
         "id": {
@@ -2437,6 +2442,7 @@
       }
     },
     "PagedDistributionPolicy": {
+      "description": "A distribution policy returned from a pageable list",
       "required": [
         "mode",
         "offerTtlSeconds"
@@ -2463,6 +2469,7 @@
       }
     },
     "PagedExceptionPolicy": {
+      "description": "An exception policy returned from a pageable list",
       "type": "object",
       "properties": {
         "id": {
@@ -2484,6 +2491,7 @@
       }
     },
     "PagedJob": {
+      "description": "A job returned from a pageable list",
       "type": "object",
       "properties": {
         "id": {
@@ -2584,6 +2592,7 @@
       }
     },
     "PagedQueue": {
+      "description": "A queue returned from a pageable list",
       "required": [
         "distributionPolicyId"
       ],
@@ -2614,6 +2623,7 @@
       }
     },
     "PagedWorker": {
+      "description": "A worker returned from a pageable list",
       "required": [
         "totalCapacity"
       ],
@@ -2826,6 +2836,7 @@
       "x-ms-discriminator-value": "queue-length"
     },
     "QueueSelector": {
+      "description": "Describes a condition that must be met against a set of labels for queue selection",
       "required": [
         "key",
         "labelOperator"
@@ -2861,6 +2872,7 @@
       }
     },
     "QueueSelectorAttachment": {
+      "description": "An attachment of label selectors to resolve a queue to a job from a classification policy",
       "required": [
         "kind"
       ],
@@ -2906,6 +2918,7 @@
       }
     },
     "QueueWeightedAllocation": {
+      "description": "Contains the weight percentage and label selectors to be applied if selected for weighted distributions.",
       "required": [
         "labelSelectors",
         "weight"
@@ -2958,6 +2971,7 @@
       "type": "object"
     },
     "ReclassifyJobResponse": {
+      "description": "Response payload from reclassifying a job",
       "type": "object"
     },
     "RoundRobinMode": {
@@ -3090,6 +3104,7 @@
       "discriminator": "kind"
     },
     "RouterWorker": {
+      "description": "An entity for jobs to be routed to",
       "required": [
         "totalCapacity"
       ],
@@ -3167,6 +3182,7 @@
       }
     },
     "RuleEngineQueueSelector": {
+      "description": "Attaches labels to a worker when a RouterRule is resolved",
       "required": [
         "rule"
       ],
@@ -3188,6 +3204,7 @@
       "x-ms-discriminator-value": "rule-engine"
     },
     "RuleEngineWorkerSelector": {
+      "description": "Attaches labels to a worker when a RouterRule is resolved",
       "required": [
         "rule"
       ],
@@ -3383,6 +3400,7 @@
       "x-ms-discriminator-value": "weighted-allocation-worker-selector"
     },
     "WorkerAssignment": {
+      "description": "The assignment for a worker to a job",
       "required": [
         "assignTime",
         "capacityCost",
@@ -3431,6 +3449,7 @@
       }
     },
     "WorkerSelector": {
+      "description": "Describes a condition that must be met against a set of labels for worker selection",
       "required": [
         "key",
         "labelOperator"
@@ -3475,6 +3494,7 @@
       }
     },
     "WorkerSelectorAttachment": {
+      "description": "An attachment which attaches WorkerSelectors to workers",
       "required": [
         "kind"
       ],
@@ -3488,6 +3508,7 @@
       "discriminator": "kind"
     },
     "WorkerWeightedAllocation": {
+      "description": " Contains the weight percentage and label selectors to be applied if selected for weighted distributions.",
       "required": [
         "labelSelectors",
         "weight"
