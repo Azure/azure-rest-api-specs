@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for MySql.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for MySql, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for MySql, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the MySql API.
 
 ``` yaml
@@ -36,18 +36,9 @@ tag: package-flexibleserver-2021-05-01
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2022-04
+tag: package-2020-01-01
 ```
 
-
-### Tag: package-preview-2022-04
-
-These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-04'
-input-file:
-  - Microsoft.DBforMySQL/preview/2022-04-29-privatepreview/mysql.json
-```
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -56,6 +47,7 @@ These settings apply only when `--tag=package-2017-12-01-preview` is specified o
 input-file:
 - Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
 ```
+
 
 ### Tag: package-2017-12-01
 
@@ -67,6 +59,7 @@ input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
+
 ### Tag: package-2018-06-01-privatepreview
 
 These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
@@ -77,6 +70,7 @@ input-file:
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
+
 
 ### Tag: package-2018-06-01
 
@@ -91,6 +85,7 @@ input-file:
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 ```
+
 
 ### Tag: package-2020-01-01-privatepreview
 
@@ -153,8 +148,16 @@ input-file:
 - Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
 ```
 
-## Suppression
+### Tag: package-flexibleserver-2022-04-29-privatepreview
 
+These settings apply only when `--tag=package-flexibleserver-2022-04-29-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-04-29-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2022-04-29-privatepreview/mysql.json
+```
+
+## Suppression
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
@@ -165,8 +168,8 @@ directive:
 ```
 
 ---
-
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -179,12 +182,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
+
 
 ### C#
 
@@ -211,3 +213,5 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+
