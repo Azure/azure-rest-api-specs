@@ -321,5 +321,5 @@ directive:
   - suppress: UniqueXmsEnumName
     where: $.definitions.FallbackRouteProperties.properties.source
     from: iothub.json
-    reason: False positive.
+    reason: Ensure non-breaking change.
 ```
