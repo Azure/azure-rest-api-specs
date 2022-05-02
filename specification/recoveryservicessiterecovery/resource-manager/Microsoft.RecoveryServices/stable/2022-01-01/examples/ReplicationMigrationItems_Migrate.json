@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01",
+    "migrationItemName": "virtualmachine1",
+    "protectionContainerName": "vmwareContainer1",
+    "fabricName": "vmwarefabric1",
+    "resourceName": "migrationvault",
+    "resourceGroupName": "resourcegroup1",
+    "subscriptionId": "cb53d0c3-bd59-4721-89bc-06916a9147ef",
+    "migrateInput": {
+      "properties": {
+        "providerSpecificDetails": {
+          "instanceType": "VMwareCbt",
+          "performShutdown": "true"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1",
+        "name": "virtualmachine1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems",
+        "properties": {
+          "machineName": "vm-0520-2",
+          "migrationState": "Replicating",
+          "migrationStateDescription": "Ready to migrate",
+          "testMigrateState": "None",
+          "testMigrateStateDescription": "None",
+          "policyFriendlyName": "vmwarepolicy1",
+          "policyId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1",
+          "allowedOperations": [
+            "Migrate",
+            "DisableMigration",
+            "TestMigrate",
+            "TestMigrateCleanup"
+          ],
+          "currentJob": {
+            "jobName": "None",
+            "jobId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None",
+            "startTime": "2017-04-26T06:37:50.8082715Z"
+          },
+          "providerSpecificDetails": {
+            "instanceType": "VMwareCbt"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

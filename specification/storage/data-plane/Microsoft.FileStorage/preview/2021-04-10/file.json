@@ -2805,6 +2805,9 @@
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
           }
         ],
         "responses": {
@@ -2872,6 +2875,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -5325,6 +5333,12 @@
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
+          },
+          {
+            "$ref": "#/parameters/FileContentType"
           }
         ],
         "responses": {
@@ -5392,6 +5406,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -6388,7 +6407,7 @@
       "description": "Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key."
     },
     "FileCopyIgnoreReadOnly": {
-      "name": "x-ms-file-copy-ignore-read-only",
+      "name": "x-ms-file-copy-ignore-readonly",
       "x-ms-client-name": "ignoreReadOnly",
       "in": "header",
       "required": false,

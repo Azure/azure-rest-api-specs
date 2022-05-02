@@ -5,7 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.edgeorder
@@ -20,7 +20,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 batch:
   - tag: package-2020-12-preview
   - tag: package-2021-12
@@ -29,7 +29,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/
-clear-output-folder: false
 perform-load: false
 ```
 ### Tag: package-2020-12-preview and python
@@ -37,7 +36,7 @@ perform-load: false
 These settings apply only when `--tag=package-2020-12-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-12-preview' && $(python) && $(track2)
+``` yaml $(tag) == 'package-2020-12-preview' && $(python)
 namespace: azure.mgmt.edgeorder.v2020_12_01_preview
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2020_12_01_preview
 ```
@@ -47,7 +46,7 @@ output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/e
 These settings apply only when `--tag=package-2021-12 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-12' && $(python) && $(track2)
+``` yaml $(tag) == 'package-2021-12' && $(python)
 namespace: azure.mgmt.edgeorder.v2021_12_01
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2021_12_01
 ```

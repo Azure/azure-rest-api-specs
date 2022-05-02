@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "api-version": "2021-12-01",
+    "$filter": "startTime eq '2016-01-01 00:00:00 AM' and endTime eq '2017-11-29 00:00:00 AM'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+            "properties": {
+              "jobType": "AzureIaaSVMJob",
+              "duration": "PT12.4272909S",
+              "virtualMachineVersion": "Compute",
+              "entityFriendlyName": "testvm",
+              "backupManagementType": "AzureIaasVM",
+              "operation": "Backup",
+              "status": "InProgress",
+              "startTime": "2017-08-03T05:31:07.014604Z",
+              "activityId": "00000000-0000-0000-0000-000000000000"
+            }
+          },
+          {
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+            "properties": {
+              "jobType": "AzureIaaSVMJob",
+              "duration": "PT31.3066291S",
+              "virtualMachineVersion": "Compute",
+              "entityFriendlyName": "testvm",
+              "backupManagementType": "AzureIaasVM",
+              "operation": "ConfigureBackup",
+              "status": "Completed",
+              "startTime": "2017-08-03T05:30:32.4487085Z",
+              "endTime": "2017-08-03T05:31:03.7553376Z",
+              "activityId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs?api-version=2017-07-01&%24filter=startTime+eq+%272016-01-01+00%3a00%3a00+AM%27+and+endTime+eq+%272017-11-29+00%3a00%3a00+AM%27&%24skiptoken=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-16%22%3f%3e%0d%0a%3cContinuationToken%3e%0d%0a++%3cContinuationToken%3e%0d%0a++++%3cVersion%3e2.0%3c%2fVersion%3e%0d%0a++++%3cType%3eTable%3c%2fType%3e%0d%0a++++%3cNextPartitionKey%3e1!28!NzI5MTk0OTM1MDkwNjEwODQzMA--%3c%2fNextPartitionKey%3e%0d%0a++++%3cNextRowKey%3e1!108!am9ic3N0YXJ0dGltZWluZGV4XzBfMjUxODkxNDYzNTI2NjE5Nzg5OF8wXzYwOWZkM2JmLTU4MzctNDFkYi1iMjExLTY1MzliNDNlZjM1OA--%3c%2fNextRowKey%3e%0d%0a++++%3cTargetLocation%3ePrimary%3c%2fTargetLocation%3e%0d%0a++%3c%2fContinuationToken%3e%0d%0a%3c%2fContinuationToken%3e"
+      }
+    }
+  }
+}
