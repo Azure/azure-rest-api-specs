@@ -1493,14 +1493,17 @@
         },
         "storage": {
           "$ref": "#/definitions/Storage",
+          "default": null,
           "description": "Storage properties of a server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
+          "default": null,
           "description": "Backup properties of a server."
         },
         "network": {
           "$ref": "#/definitions/Network",
+          "default": null,
           "description": "Network properties of a server.",
           "x-ms-mutability": [
             "create",
@@ -1509,10 +1512,12 @@
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
+          "default": null,
           "description": "High availability properties of a server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
+          "default": null,
           "description": "Maintenance window properties of a server.",
           "x-ms-mutability": [
             "update",
@@ -1536,6 +1541,7 @@
         },
         "availabilityZone": {
           "type": "string",
+          "default": "",
           "description": "availability zone information of the server.",
           "x-ms-mutability": [
             "create",
@@ -1559,13 +1565,6 @@
             "create",
             "update"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "The properties of a server."
@@ -1598,24 +1597,36 @@
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
+          "x-ms-secret": true,
           "format": "password",
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login.",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "storage": {
           "$ref": "#/definitions/Storage",
+          "default": null,
           "description": "Storage properties of a server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
+          "default": null,
           "description": "Backup properties of a server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
+          "default": null,
           "description": "High availability properties of a server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window properties of a server."
+          "default": null,
+          "description": "Maintenance window properties of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -1717,10 +1728,12 @@
         "backupRetentionDays": {
           "type": "integer",
           "format": "int32",
+          "default": 7,
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
           "type": "string",
+          "default": "Disabled",
           "description": "A value indicating whether Geo-Redundant backup is enabled on the server.",
           "enum": [
             "Enabled",
@@ -1761,6 +1774,7 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "default": "",
           "description": "delegated subnet arm resource id.",
           "x-ms-mutability": [
             "create",
@@ -1769,6 +1783,7 @@
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
+          "default": "",
           "description": "private dns zone arm resource id.",
           "x-ms-mutability": [
             "create",
@@ -1782,6 +1797,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "Disabled",
           "description": "The HA mode for the server.",
           "enum": [
             "Disabled",
@@ -1812,6 +1828,7 @@
         },
         "standbyAvailabilityZone": {
           "type": "string",
+          "default": "",
           "description": "availability zone information of the standby."
         }
       },
@@ -1823,21 +1840,25 @@
       "properties": {
         "customWindow": {
           "type": "string",
+          "default": "Disabled",
           "description": "indicates whether custom window is enabled or disabled"
         },
         "startHour": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "start hour for maintenance window"
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "start minute for maintenance window"
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "day of week for maintenance window"
         }
       }
@@ -1997,6 +2018,31 @@
         "source": {
           "type": "string",
           "description": "Source of the configuration."
+        },
+        "isDynamicConfig": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration dynamic or static."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration read-only or not."
+        },
+        "isConfigPendingRestart": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration is pending restart or not."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration unit."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration documentation link."
         }
       },
       "description": "The properties of a configuration."
@@ -2143,19 +2189,36 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Error Message."
+          "description": "Error Message.",
+          "readOnly": true
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "description": "Indicates whether the resource name is available.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "name of the PostgreSQL server."
+          "description": "name of the PostgreSQL server.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "type of the server"
+          "description": "type of the server",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The name availability reason.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       },
       "description": "Represents a resource name availability."
@@ -2195,14 +2258,6 @@
     }
   },
   "parameters": {
-    "BackupNameParameter": {
-      "name": "backupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the backup.",
-      "x-ms-parameter-location": "method"
-    },
     "LocationNameParameter": {
       "name": "locationName",
       "in": "path",
