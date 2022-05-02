@@ -566,6 +566,7 @@
         "tags": [
           "Jobs"
         ],
+        "summary": "Upserts a job.",
         "operationId": "JobRouter_UpsertJob",
         "consumes": [
           "application/merge-patch+json"
@@ -577,6 +578,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Id of the job",
             "required": true,
             "type": "string"
           },
@@ -586,6 +588,7 @@
           {
             "in": "body",
             "name": "patch",
+            "description": "Model of job properties to be created or patched. See also: https://datatracker.ietf.org/doc/html/rfc7386",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RouterJob"
@@ -669,7 +672,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "",
+            "description": "Id of the job",
             "required": true,
             "type": "string"
           },
@@ -724,6 +727,7 @@
           {
             "in": "body",
             "name": "reclassifyJobRequest",
+            "description": "Request object for reclassifying a job",
             "schema": {
               "$ref": "#/definitions/ReclassifyJobRequest"
             }
@@ -1151,7 +1155,7 @@
         "tags": [
           "Queues"
         ],
-        "summary": "Updates a queue.",
+        "summary": "Upserts a queue.",
         "operationId": "JobRouter_UpsertQueue",
         "consumes": [
           "application/merge-patch+json"
@@ -1163,6 +1167,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Id of the queue",
             "required": true,
             "type": "string"
           },
@@ -1378,7 +1383,7 @@
         "tags": [
           "Workers"
         ],
-        "summary": "Updates a worker.",
+        "summary": "Upserts a worker.",
         "operationId": "JobRouter_UpsertWorker",
         "consumes": [
           "application/merge-patch+json"
