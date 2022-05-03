@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "databaseName": "exampleDatabase",
+    "artifactType": "TABLE",
+    "artifactName": "exampleArtifactName",
+    "createArtifactsPayload": {
+      "name": "exampleTableName",
+      "type": "TABLE",
+      "properties": {
+        "source": {
+          "provider": "ADLS",
+          "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/tables/exampleTableName",
+          "properties": {
+            "formatType": "csv",
+            "linkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+          }
+        }
+      }
+    },
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entityName": "exampleTableName",
+        "ddlType": "CREATE",
+        "entityType": "TABLE",
+        "publishStatus": "PUBLISHED",
+        "objectVersion": 1,
+        "originObjectId": "1111",
+        "objectId": "exampleObjectIdGuid"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "SyMS response error message"
+        }
+      }
+    }
+  }
+}
