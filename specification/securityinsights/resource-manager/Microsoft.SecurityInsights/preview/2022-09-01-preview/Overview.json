@@ -90,7 +90,7 @@
           "Overview"
         ],
         "description": "Gets a specific overview section.",
-        "operationId": "Overview_Get",
+        "operationId": "overview_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -134,7 +134,8 @@
           "items": {
             "$ref": "#/definitions/OverviewSection"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -253,7 +254,6 @@
       "properties":{
         "incidentsByStatus": {
           "description": "Aggregation of all incidents by status: 'New', 'Active', 'Closed'",
-          "properties":{},
           "$ref": "#/definitions/IncidentsByStatus"
         },
         "incidentsBySeverity": {
@@ -272,13 +272,14 @@
           },
           "type":"object"
         },
-        "IncidentsStatusByCreationTime": {
+        "incidentsStatusByCreationTime": {
           "description": "A series of incidents by status",
           "items": {
             "$ref": "#/definitions/IncidentsByStatus",
             "description": "Aggregation of all incidents by status in a specific time"
           },
-          "type":"array"
+          "type":"array",
+          "x-ms-identifiers": []
         },
         "meanTimeToAck": {
           "description": "The mean time it took to acknowledge an incident",
@@ -304,7 +305,7 @@
       "properties":{
         "activeConnectors": {
           "description": "A dictionary of all active connectors",
-          "additionalPropertied":{
+          "additionalProperties":{
             "description": "Connector name",
             "type": "string"
           },
@@ -336,7 +337,7 @@
         },
         "unhealthyConnectors": {
           "description": "A dictionary of all unhealthy connectors",
-          "additionalPropertied":{
+          "additionalProperties":{
             "description": "Connector name",
             "type": "string"
           },

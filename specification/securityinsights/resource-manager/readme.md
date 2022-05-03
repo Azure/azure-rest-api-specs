@@ -49,6 +49,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/Metadata.json
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/OfficeConsents.json
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Overview.json
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/Settings.json
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/SourceControls.json
   - Microsoft.SecurityInsights/preview/2022-09-01-preview/ThreatIntelligence.json
