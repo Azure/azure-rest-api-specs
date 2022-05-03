@@ -69,14 +69,20 @@
         }
       }
     },
-    "/providers/Microsoft.DevHub/githuboauth": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth": {
       "post": {
         "tags": [
           "GitHubOAuth"
         ],
         "operationId": "GitHubOAuth",
-        "summary": "Gets a URL to authenticate users with the Developer Hub GitHub App.",
+        "summary": "Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -100,9 +106,7 @@
             "$ref": "./examples/GitHubOAuth.json"
           }
         }
-      }
-    },
-    "/providers/Microsoft.DevHub/githuboauthcallback": {
+      },
       "get": {
         "tags": [
           "GitHubOAuth"
@@ -110,6 +114,12 @@
         "operationId": "GitHubOAuthCallback",
         "summary": "Callback URL to hit once authenticated with GitHub App to retrieve the OAuth token.",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
