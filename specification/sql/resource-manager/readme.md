@@ -46,7 +46,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
-- Microsoft.Sql/stable/2014-04-01-legacy/replicationLinks_legacy.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01-legacy/sql.core_legacy.json
@@ -150,7 +149,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
