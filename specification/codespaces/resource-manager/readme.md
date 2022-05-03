@@ -27,100 +27,107 @@ These are the global settings for the codespaces.
 ---
 ```yaml
 openapi-type: arm
-tag: package-2020-06-16-alpha
+openapi-subtype: rpaas
+tag: package-2022-02-24-privatepreview,package-2020-06-16-privatepreview
 ```
-
+---
+### Tag: package-2022-02-24-alpha
+These settings apply only when `--tag=package-2022-02-24-alpha` is specified on the command line.
+```yaml $(tag) == 'package-2022-02-24-alpha'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2022-02-24-alpha
+input-file:
+  - Microsoft.Codespaces/preview/2022-02-24-alpha/codespaces.json
+```
+---
+### Tag: package-2022-02-24-beta
+These settings apply only when `--tag=package-2022-02-24-beta` is specified on the command line.
+```yaml $(tag) == 'package-2022-02-24-beta'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2022-02-24-beta
+input-file:
+  - Microsoft.Codespaces/preview/2022-02-24-beta/codespaces.json
+```
+---
+### Tag: package-2022-02-24-privatepreview
+These settings apply only when `--tag=package-2022-02-24-privatepreview` is specified on the command line.
+```yaml $(tag) == 'package-2022-02-24-privatepreview'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2022-02-24-privatepreview
+input-file:
+  - Microsoft.Codespaces/preview/2022-02-24-privatepreview/codespaces.json
+```
+---
 ### Tag: package-2020-07-10-alpha
-
 These settings apply only when `--tag=package-2020-07-10-alpha` is specified on the command line.
 
 ```yaml $(tag) == 'package-2020-07-10-alpha'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-07-10-alpha
 input-file:
   - Microsoft.Codespaces/preview/2020-07-10-alpha/codespaces.json
 ```
-
 ---
-```yaml
-openapi-type: arm
-tag: package-2020-07-10-beta
-```
-
 ### Tag: package-2020-07-10-beta
-
 These settings apply only when `--tag=package-2020-07-10-beta` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-07-10-beta'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-07-10-beta
 input-file:
   - Microsoft.Codespaces/preview/2020-07-10-beta/codespaces.json
 ```
-
-
 ---
-```yaml
-openapi-type: arm
-tag: package-2020-07-10-privatepreview
-```
-
 ### Tag: package-2020-07-10-privatepreview
-
 These settings apply only when `--tag=package-2020-07-10-privatepreview` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-07-10-privatepreview'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-07-10-privatepreview
 input-file:
   - Microsoft.Codespaces/preview/2020-07-10-privatepreview/codespaces.json
 ```
 ---
 ### Tag: package-2020-06-16
-
 These settings apply only when `--tag=package-2020-06-16` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-06-16'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-06-16
 input-file:
   - Microsoft.Codespaces/stable/2020-06-16/codespaces.json
 ```
-
 ---
-```yaml
-openapi-type: arm
-tag: package-2020-06-16-alpha
-```
-
 ### Tag: package-2020-06-16-alpha
-
 These settings apply only when `--tag=package-2020-06-16-alpha` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-06-16-alpha'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-06-16-alpha
 input-file:
   - Microsoft.Codespaces/preview/2020-06-16-alpha/codespaces.json
 ```
-
 ---
-```yaml
-openapi-type: arm
-tag: package-2020-06-16-beta
-```
-
 ### Tag: package-2020-06-16-beta
-
 These settings apply only when `--tag=package-2020-06-16-beta` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-06-16-beta'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-06-16-beta
 input-file:
   - Microsoft.Codespaces/preview/2020-06-16-beta/codespaces.json
 ```
-
-
 ---
-```yaml
-openapi-type: arm
-tag: package-2020-06-16-privatepreview
-```
-
-### Tag: package-2020-06-01-privatepreview
-
+### Tag: package-2020-06-16-privatepreview
 These settings apply only when `--tag=package-2020-06-16-privatepreview` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-06-16-privatepreview'
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2020-06-16-privatepreview
 input-file:
   - Microsoft.Codespaces/preview/2020-06-16-privatepreview/codespaces.json
 ```
