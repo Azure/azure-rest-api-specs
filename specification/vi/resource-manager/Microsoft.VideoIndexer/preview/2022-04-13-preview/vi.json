@@ -3,7 +3,7 @@
   "info": {
     "version": "2022-04-13-preview",
     "title": "vi",
-    "description": "Microsoft Azure Video Analyzer for Media"
+    "description": "Microsoft Azure Video Indexer"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,7 +39,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available Azure Video Analyzer for Media provider operations.",
+        "description": "Lists all of the available Azure Video Indexer provider operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List operations": {
@@ -124,7 +124,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_List",
-        "description": "List all Azure Video Analyzer for Media accounts available under the subscription",
+        "description": "List all Azure Video Indexer accounts available under the subscription",
         "x-ms-examples": {
           "List accounts": {
             "$ref": "./examples/ViAccountsList.json"
@@ -163,7 +163,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_ListByResourceGroup",
-        "description": "List all Azure Video Analyzer for Media accounts available under the resource group",
+        "description": "List all Azure Video Indexer accounts available under the resource group",
         "x-ms-examples": {
           "List accounts by resource group": {
             "$ref": "./examples/ViAccountsListByResourceGroup.json"
@@ -205,7 +205,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_Get",
-        "description": "Gets the properties of an Azure Video Analyzer for Media account.",
+        "description": "Gets the properties of an Azure Video Indexer account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -222,7 +222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
+            "description": "The Azure Video Indexer account properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -246,7 +246,7 @@
         ],
         "operationId": "Accounts_Update",
         "x-ms-long-running-operation": false,
-        "description": "Updates the properties of an existing Azure Video Analyzer for Media account.",
+        "description": "Updates the properties of an existing Azure Video Indexer account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -263,7 +263,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the current Azure Video Analyzer for Media account.",
+            "description": "The parameters to provide for the current Azure Video Indexer account.",
             "schema": {
               "$ref": "#/definitions/AccountPatch"
             }
@@ -336,7 +336,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_CreateOrUpdate",
-        "description": "Creates or updates an Azure Video Analyzer for Media account.",
+        "description": "Creates or updates an Azure Video Indexer account.",
         "x-ms-long-running-operation": false,
         "parameters": [
           {
@@ -354,7 +354,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the Azure Video Analyzer for Media account.",
+            "description": "The parameters to provide for the Azure Video Indexer account.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -440,7 +440,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_Delete",
-        "description": "Delete an Azure Video Analyzer for Media account.",
+        "description": "Delete an Azure Video Indexer account.",
         "x-ms-long-running-operation": false,
         "parameters": [
           {
@@ -458,13 +458,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Video Analyzer for Media account was successfully deleted."
+            "description": "The Azure Video Indexer account was successfully deleted."
           },
           "202": {
-            "description": "The Azure Video Analyzer for Media account will be deleted asynchronously."
+            "description": "The Azure Video Indexer account will be deleted asynchronously."
           },
           "204": {
-            "description": "The Azure Video Analyzer for Media account does not exist."
+            "description": "The Azure Video Indexer account does not exist."
           },
           "500": {
             "description": "Internal Server Error",
@@ -493,7 +493,7 @@
           "Accounts"
         ],
         "operationId": "UserClassicAccounts_List",
-        "description": "Lists all Azure Video Analyzer for Media classic accounts",
+        "description": "Lists all Azure Video Indexer classic accounts",
         "x-ms-examples": {
           "List accounts": {
             "$ref": "./examples/ViListUserClassicAccounts.json"
@@ -539,7 +539,7 @@
           "Accounts"
         ],
         "operationId": "ClassicAccounts_GetDetails",
-        "description": "Gets the properties of an Azure Video Analyzer for Media Classic account.",
+        "description": "Gets the properties of an Azure Video Indexer Classic account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
@@ -553,7 +553,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
+            "description": "The Azure Video Indexer account properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/ClassicAccount"
             }
@@ -606,7 +606,7 @@
           "AccessToken"
         ],
         "operationId": "Generate_AccessToken",
-        "description": "Generate an Azure Video Analyzer for Media access token.",
+        "description": "Generate an Azure Video Indexer access token.",
         "x-ms-examples": {
           "Generate accessToken for video contributor #1": {
             "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken1.json"
@@ -664,7 +664,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Video Analyzer for Media account's access token properties were retrieved successfully.",
+            "description": "The Azure Video Indexer account's access token properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/AccessToken"
             }
@@ -727,7 +727,7 @@
       }
     },
     "Account": {
-      "description": "An Azure Video Analyzer for Media account.",
+      "description": "An Azure Video Indexer account.",
       "type": "object",
       "properties": {
         "properties": {
@@ -753,7 +753,7 @@
     },
     "AccountPatch": {
       "type": "object",
-      "description": "Azure Video Analyzer for Media account",
+      "description": "Azure Video Indexer account",
       "properties": {
         "properties": {
           "description": "List of account properties",
@@ -772,7 +772,7 @@
       ]
     },
     "AccountPropertiesForPutRequest": {
-      "description": "Azure Video Analyzer for Media account properties",
+      "description": "Azure Video Indexer account properties",
       "type": "object",
       "properties": {
         "tenantId": {
@@ -823,7 +823,7 @@
       }
     },
     "AccountPropertiesForPatchRequest": {
-      "description": "Azure Video Analyzer for Media account properties",
+      "description": "Azure Video Indexer account properties",
       "type": "object",
       "properties": {
         "tenantId": {
@@ -953,7 +953,7 @@
       }
     },
     "AccessToken": {
-      "description": "Azure Video Analyzer for Media access token.",
+      "description": "Azure Video Indexer access token.",
       "type": "object",
       "properties": {
         "accessToken": {
@@ -985,7 +985,7 @@
       "type": "object"
     },
     "ClassicAccountSlim": {
-      "description": "An Azure Video Analyzer for Media classic account.",
+      "description": "An Azure Video Indexer classic account.",
       "type": "object",
       "properties": {
         "name": {
@@ -1009,7 +1009,7 @@
       }
     },
     "ClassicAccount": {
-      "description": "An Azure Video Analyzer for Media classic account.",
+      "description": "An Azure Video Indexer classic account.",
       "type": "object",
       "properties": {
         "name": {
@@ -1038,7 +1038,7 @@
       }
     },
     "ClassicAccountProperties": {
-      "description": "Azure Video Analyzer for Media classic account properties",
+      "description": "Azure Video Indexer classic account properties",
       "type": "object",
       "properties": {
         "mediaServices": {
@@ -1049,7 +1049,7 @@
       }
     },
     "ClassicAccountMediaServices": {
-      "description": "Azure Video Analyzer for Media classic account properties",
+      "description": "Azure Video Indexer classic account properties",
       "type": "object",
       "properties": {
         "aadApplicationId": {
@@ -1134,7 +1134,7 @@
           "description": "Resource provider of the operation",
           "readOnly": true,
           "type": "string",
-          "example": "Microsoft Azure Video Analyzer for Media"
+          "example": "Microsoft Azure Video Indexer"
         },
         "resource": {
           "description": "Resource of the operation",
@@ -1270,7 +1270,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure Video Analyzer for Media account.",
+      "description": "The name of the Azure Video Indexer account.",
       "pattern": "^[A-Za-z0-9-]+$",
       "maxLength": 50,
       "minLength": 3,
