@@ -704,7 +704,7 @@
           "Jobs"
         ],
         "summary": "Reclassify a job.",
-        "operationId": "JobRouter_ReclassifyJob",
+        "operationId": "JobRouter_ReclassifyJobAction",
         "consumes": [
           "application/json",
           "text/json",
@@ -748,7 +748,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a job": {
+          "Reclassify a job": {
             "$ref": "./examples/Jobs_ReclassifyJob.json"
           }
         }
@@ -837,6 +837,7 @@
             "in": "body",
             "name": "completeJobRequest",
             "description": "Request model for completing job",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CompleteJobRequest"
             },
@@ -892,6 +893,7 @@
             "in": "body",
             "name": "closeJobRequest",
             "description": "Request model for closing job",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CloseJobRequest"
             },
@@ -2047,10 +2049,6 @@
     },
     "DistributionPolicy": {
       "description": "Policy governing how jobs are distributed to workers",
-      "required": [
-        "mode",
-        "offerTtlSeconds"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2452,10 +2450,6 @@
     },
     "PagedDistributionPolicy": {
       "description": "A distribution policy returned from a pageable list",
-      "required": [
-        "mode",
-        "offerTtlSeconds"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2602,9 +2596,6 @@
     },
     "PagedQueue": {
       "description": "A queue returned from a pageable list",
-      "required": [
-        "distributionPolicyId"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2633,9 +2624,6 @@
     },
     "PagedWorker": {
       "description": "A worker returned from a pageable list",
-      "required": [
-        "totalCapacity"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3117,9 +3105,6 @@
     },
     "RouterWorker": {
       "description": "An entity for jobs to be routed to",
-      "required": [
-        "totalCapacity"
-      ],
       "type": "object",
       "properties": {
         "id": {
