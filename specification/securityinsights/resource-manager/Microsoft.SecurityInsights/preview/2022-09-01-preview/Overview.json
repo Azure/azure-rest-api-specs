@@ -165,9 +165,7 @@
     },
     "SectionData": {
       "description": "The data this section holds",
-      "properties":{
-
-      },
+      "properties": {},
       "type": "object"
     },
     "AnalyticsSectionData": {
@@ -177,14 +175,14 @@
           "$ref": "#/definitions/SectionData"
         }
       ],
-      "properties":{
+      "properties": {
         "alertRulesByStatus": {
           "description": "User alert rules aggregated by rule status: 'Enabled', 'Disabled' or 'Auto-disabled'",
-          "additionalProperties":{
-            "description":"The value of a given status",
+          "additionalProperties": {
+            "description": "The value of a given status",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         }
       },
       "type": "object"
@@ -196,43 +194,43 @@
           "$ref": "#/definitions/SectionData"
         }
       ],
-      "properties":{
+      "properties": {
         "actionsPerformedByAutomation": {
           "description": "Aggregation of all actions performed by the user automation rules",
-          "additionalProperties":{
-            "description":"The value of a given action",
+          "additionalProperties": {
+            "description": "The value of a given action",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         },
         "activeAutomationRules": {
           "description": "The amount of active automation rules the user have",
-          "type":"string"
+          "type": "string"
         },
         "timeSavedByAutomation": {
           "description": "The mean time it took to close an incident via automation rule vs the mean time without",
-          "additionalProperties":{
-            "description":"The mean time for automation and without automation",
+          "additionalProperties": {
+            "description": "The mean time for automation and without automation",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         },
         "closedIncidentsByAutomation": {
           "description": "The total amount of incidents that were closed by automation rule",
-          "type":"string"
+          "type": "string"
         }
       },
       "type": "object"
     },
-    "IncidentsByStatus":{
-      "additionalProperties":{
-        "description":"The amount of incidents with a given status",
+    "IncidentsByStatus": {
+      "additionalProperties": {
+        "description": "The amount of incidents with a given status",
         "type": "string"
       },
-      "type":"object"
+      "type": "object"
     },
-    "MeanTimeToAction":{
-      "properties":{
+    "MeanTimeToAction": {
+      "properties": {
         "value": {
           "description": "The mean time it took to perform this action",
           "type": "string"
@@ -242,7 +240,7 @@
           "type": "string"
         }
       },
-      "type":"object"
+      "type": "object"
     },
     "IncidentsSectionData": {
       "description": "Incidents overview section data",
@@ -251,26 +249,26 @@
           "$ref": "#/definitions/SectionData"
         }
       ],
-      "properties":{
+      "properties": {
         "incidentsByStatus": {
           "description": "Aggregation of all incidents by status: 'New', 'Active', 'Closed'",
           "$ref": "#/definitions/IncidentsByStatus"
         },
         "incidentsBySeverity": {
           "description": "Aggregation of all incidents by severity: 'High', 'Medium', 'Low', 'Informational', ...",
-          "additionalProperties":{
-            "description":"The amount of incidents with a given severity",
+          "additionalProperties": {
+            "description": "The amount of incidents with a given severity",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         },
         "closedIncidentsClassification": {
           "description": "Aggregation of all closed incidents by closed classification reason: 'TruePositive', 'FalsePositive', 'BenignPositive', 'Undetermined', ...",
-          "additionalProperties":{
-            "description":"The amount of closed incidents with a given closed classification reason",
+          "additionalProperties": {
+            "description": "The amount of closed incidents with a given closed classification reason",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         },
         "incidentsStatusByCreationTime": {
           "description": "A series of incidents by status",
@@ -278,7 +276,7 @@
             "$ref": "#/definitions/IncidentsByStatus",
             "description": "Aggregation of all incidents by status in a specific time"
           },
-          "type":"array",
+          "type": "array",
           "x-ms-identifiers": []
         },
         "meanTimeToAck": {
@@ -292,8 +290,8 @@
       },
       "type": "object"
     },
-    "IngestedEventCount":{
-      "type":"string"
+    "IngestedEventCount": {
+      "type": "string"
     },
     "DataConnectorsSectionData": {
       "description": "Data connectors overview section data",
@@ -302,10 +300,10 @@
           "$ref": "#/definitions/SectionData"
         }
       ],
-      "properties":{
+      "properties": {
         "activeConnectors": {
           "description": "A dictionary of all active connectors",
-          "additionalProperties":{
+          "additionalProperties": {
             "description": "Connector name",
             "type": "string"
           },
@@ -313,31 +311,31 @@
         },
         "anomaliesVolume": {
           "description": "A series of anomaly ingested events",
-          "items":{
+          "items": {
             "$ref": "#/definitions/IngestedEventCount",
             "description": "The amount of record and their ingested time as string"
           },
-          "type":"array"
+          "type": "array"
         },
         "tiByType": {
           "description": "Aggregation of all threat intelligence ingested events by type: 'URL', 'IP', 'Email', 'Other', ...",
-          "additionalProperties":{
-            "description":"The amount of events of a given type",
+          "additionalProperties": {
+            "description": "The amount of events of a given type",
             "type": "string"
           },
-          "type":"object"
+          "type": "object"
         },
         "totalVolume": {
           "description": "A series of all ingested events",
-          "items":{
+          "items": {
             "$ref": "#/definitions/IngestedEventCount",
             "description": "The amount of record and their ingested time as string"
           },
-          "type":"array"
+          "type": "array"
         },
         "unhealthyConnectors": {
           "description": "A dictionary of all unhealthy connectors",
-          "additionalProperties":{
+          "additionalProperties": {
             "description": "Connector name",
             "type": "string"
           },
