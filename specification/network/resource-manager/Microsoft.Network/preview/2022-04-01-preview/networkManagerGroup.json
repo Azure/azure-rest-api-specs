@@ -320,11 +320,17 @@
         "description": "Returns an operation result.",
         "operationId": "NetworkManagerGroupOperationResults_Get",
         "responses": {
-          "200": {
-            "description": "The request was successful; response contains the operation result.",
-            "schema": {
-              "$ref": "./networkManager.json#/definitions/OperationResult"
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
             }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
           },
           "default": {
             "description": "The default error response.",
@@ -556,11 +562,17 @@
         "description": "Returns an operation result.",
         "operationId": "StaticMemberOperationResults_Get",
         "responses": {
-          "200": {
-            "description": "The request was successful; response contains the operation result.",
-            "schema": {
-              "$ref": "./networkManager.json#/definitions/OperationResult"
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
             }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
           },
           "default": {
             "description": "The default error response.",

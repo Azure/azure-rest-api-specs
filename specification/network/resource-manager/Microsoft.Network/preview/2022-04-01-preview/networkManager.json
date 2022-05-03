@@ -219,14 +219,20 @@
           "OperationResults"
         ],
         "summary": "Get a network manager operation result.",
-        "description": "Returns an operation result.",
+        "description": "Gets an operation result.",
         "operationId": "NetworkManagerOperationResults_Get",
         "responses": {
-          "200": {
-            "description": "The request was successful; response contains the operation result.",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
             }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
           },
           "default": {
             "description": "The default error response.",
@@ -788,79 +794,6 @@
         }
       },
       "description": "Effective Virtual Networks Parameter."
-    },
-    "OperationResult": {
-      "description": "Operation Result Entity.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "description": "ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "readOnly": true,
-          "description": "Name of the resource.",
-          "type": "string"
-        },
-        "status": {
-          "description": "status of the Operation result.",
-          "$ref": "#/definitions/OperationResultStatus"
-        },
-        "startTime": {
-          "description": "The deployment start time",
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
-          "description": "The deployment end time",
-          "type": "string",
-          "format": "date-time"
-        },
-        "percentComplete": {
-          "type": "number",
-          "format": "double",
-          "minimum": 0,
-          "maximum": 100,
-          "description": "Percentage completed."
-        },
-        "error": {
-          "description": "Error information. Only show when status is failed or canceled",
-          "$ref": "#/definitions/OperationResultError"
-        }
-      }
-    },
-    "OperationResultError": {
-      "description": "Specifies the error information of the Operation result.",
-      "tyrpe": "object",
-      "properties": {
-        "code": {
-          "description": "Error Code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationResultStatus": {
-      "description": "Specifies the state of the Operation result.",
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Deploying",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "OperationResultStatus"
-      }
     }
   },
   "parameters": {
