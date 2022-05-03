@@ -1,0 +1,367 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/overview": {
+      "post": {
+        "x-ms-examples": {
+          "Get all overview sections.": {
+            "$ref": "./examples/overview/GetAllOverviewSections.json"
+          }
+        },
+        "tags": [
+          "Overview"
+        ],
+        "description": "List of all the section in the overview",
+        "operationId": "Overview_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OverviewList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/overview/{sectionName}": {
+      "post": {
+        "x-ms-examples": {
+          "Get Analytics overview section.": {
+            "$ref": "./examples/overview/GetAnalyticsOverview.json"
+          }
+        },
+        "tags": [
+          "Overview"
+        ],
+        "description": "Gets a specific overview section.",
+        "operationId": "Overview_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OverviewSection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OverviewList": {
+      "description": "List of all overview sections.",
+      "properties": {
+        "value": {
+          "description": "Array of sections.",
+          "items": {
+            "$ref": "#/definitions/OverviewSection"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "OverviewSection": {
+      "description": "A specific overview section.",
+      "properties": {
+        "data": {
+          "description": "The data this section holds",
+          "$ref": "#/definitions/SectionData"
+        },
+        "dataQueryTime": {
+          "description": "The last time this data was calculated",
+          "type": "string",
+          "readOnly": true
+        },
+        "isFromCache": {
+          "description": "Indicates if the data came from cache or not",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SectionData": {
+      "description": "The data this section holds",
+      "properties":{
+
+      },
+      "type": "object"
+    },
+    "AnalyticsSectionData": {
+      "description": "Analytics overview section data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SectionData"
+        }
+      ],
+      "properties":{
+        "alertRulesByStatus": {
+          "description": "User alert rules aggregated by rule status: 'Enabled', 'Disabled' or 'Auto-disabled'",
+          "additionalProperties":{
+            "description":"The value of a given status",
+            "type": "string"
+          },
+          "type":"object"
+        }
+      },
+      "type": "object"
+    },
+    "AutomationSectionData": {
+      "description": "Automation overview section data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SectionData"
+        }
+      ],
+      "properties":{
+        "actionsPerformedByAutomation": {
+          "description": "Aggregation of all actions performed by the user automation rules",
+          "additionalProperties":{
+            "description":"The value of a given action",
+            "type": "string"
+          },
+          "type":"object"
+        },
+        "activeAutomationRules": {
+          "description": "The amount of active automation rules the user have",
+          "type":"string"
+        },
+        "timeSavedByAutomation": {
+          "description": "The mean time it took to close an incident via automation rule vs the mean time without",
+          "additionalProperties":{
+            "description":"The mean time for automation and without automation",
+            "type": "string"
+          },
+          "type":"object"
+        },
+        "closedIncidentsByAutomation": {
+          "description": "The total amount of incidents that were closed by automation rule",
+          "type":"string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentsByStatus":{
+      "additionalProperties":{
+        "description":"The amount of incidents with a given status",
+        "type": "string"
+      },
+      "type":"object"
+    },
+    "MeanTimeToAction":{
+      "properties":{
+        "value": {
+          "description": "The mean time it took to perform this action",
+          "type": "string"
+        },
+        "trend": {
+          "description": "The diff between the mean time in current period of time to the previous one",
+          "type": "string"
+        }
+      },
+      "type":"object"
+    },
+    "IncidentsSectionData": {
+      "description": "Incidents overview section data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SectionData"
+        }
+      ],
+      "properties":{
+        "incidentsByStatus": {
+          "description": "Aggregation of all incidents by status: 'New', 'Active', 'Closed'",
+          "properties":{},
+          "$ref": "#/definitions/IncidentsByStatus"
+        },
+        "incidentsBySeverity": {
+          "description": "Aggregation of all incidents by severity: 'High', 'Medium', 'Low', 'Informational', ...",
+          "additionalProperties":{
+            "description":"The amount of incidents with a given severity",
+            "type": "string"
+          },
+          "type":"object"
+        },
+        "closedIncidentsClassification": {
+          "description": "Aggregation of all closed incidents by closed classification reason: 'TruePositive', 'FalsePositive', 'BenignPositive', 'Undetermined', ...",
+          "additionalProperties":{
+            "description":"The amount of closed incidents with a given closed classification reason",
+            "type": "string"
+          },
+          "type":"object"
+        },
+        "IncidentsStatusByCreationTime": {
+          "description": "A series of incidents by status",
+          "items": {
+            "$ref": "#/definitions/IncidentsByStatus",
+            "description": "Aggregation of all incidents by status in a specific time"
+          },
+          "type":"array"
+        },
+        "meanTimeToAck": {
+          "description": "The mean time it took to acknowledge an incident",
+          "$ref": "#/definitions/MeanTimeToAction"
+        },
+        "meanTimeToClose": {
+          "description": "The mean time it took to close an incident",
+          "$ref": "#/definitions/MeanTimeToAction"
+        }
+      },
+      "type": "object"
+    },
+    "IngestedEventCount":{
+      "type":"string"
+    },
+    "DataConnectorsSectionData": {
+      "description": "Data connectors overview section data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SectionData"
+        }
+      ],
+      "properties":{
+        "activeConnectors": {
+          "description": "A dictionary of all active connectors",
+          "additionalPropertied":{
+            "description": "Connector name",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "anomaliesVolume": {
+          "description": "A series of anomaly ingested events",
+          "items":{
+            "$ref": "#/definitions/IngestedEventCount",
+            "description": "The amount of record and their ingested time as string"
+          },
+          "type":"array"
+        },
+        "tiByType": {
+          "description": "Aggregation of all threat intelligence ingested events by type: 'URL', 'IP', 'Email', 'Other', ...",
+          "additionalProperties":{
+            "description":"The amount of events of a given type",
+            "type": "string"
+          },
+          "type":"object"
+        },
+        "totalVolume": {
+          "description": "A series of all ingested events",
+          "items":{
+            "$ref": "#/definitions/IngestedEventCount",
+            "description": "The amount of record and their ingested time as string"
+          },
+          "type":"array"
+        },
+        "unhealthyConnectors": {
+          "description": "A dictionary of all unhealthy connectors",
+          "additionalPropertied":{
+            "description": "Connector name",
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "SectionName": {
+      "description": "The section name. Supports - Analytics, Incidents, DataConnectors, Automation",
+      "in": "path",
+      "name": "sectionName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SectionNameParameter": {
+      "description": "The section name. Supports - Analytics, Incidents, DataConnectors, Automation",
+      "in": "query",
+      "name": "sections",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
