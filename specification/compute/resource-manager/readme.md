@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Compute.
 
-
 The compute RP comprises of small services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,21 +21,20 @@ To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Compute API.
 
 ``` yaml
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-12-01
-
+tag: package-2022-03
 directive:
   - where:
       - $.definitions.VirtualMachine.properties
@@ -216,10 +215,10 @@ directive:
       - TrackedResourcePatchOperation
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
   - where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get'
     suppress:
       - D5001
-    reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
+    reason: 'The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.'
   - where:
       - $.definitions.RestorePoint
     suppress:
@@ -235,6 +234,15 @@ directive:
       - RequiredPropertiesMissingInResourceModel
 ```
 
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.Compute/stable/2022-03-02/disk.json
+```
 ### Tag: package-2021-12-01
 
 These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
@@ -330,6 +338,7 @@ input-file:
 ### Tag: package-2021-10-01-only
 
 These settings apply only when `--tag=package-2021-10-01-only` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2021-10-01-only'
 input-file:
 - Microsoft.Compute/stable/2021-10-01/gallery.json
@@ -492,6 +501,7 @@ input-file:
 ```
 
 ### Tag: package-2020-09-30
+
 These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-09-30'
@@ -1017,10 +1027,9 @@ input-file:
 - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -1061,5 +1070,3 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
-
-
