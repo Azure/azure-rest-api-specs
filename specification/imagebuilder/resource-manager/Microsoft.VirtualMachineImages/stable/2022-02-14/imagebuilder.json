@@ -621,7 +621,7 @@
     },
     "ImageTemplateManagedImageSource": {
       "type": "object",
-      "description": "Describes an image source that is a managed image in customer subscription.",
+      "description": "Describes an image source that is a managed image in customer subscription. This image must reside in the same subscription and region as the Image Builder template.",
       "x-ms-discriminator-value": "ManagedImage",
       "allOf": [
         {
@@ -656,6 +656,95 @@
       "required": [
         "imageVersionId"
       ]
+    },
+    "ImageTemplateInVMValidator": {
+      "description": "Describes a unit of in-VM validation of image",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of validation you want to use on the Image. For example, \"Shell\" can be shell validation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly Name to provide context on what this validation step does"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ImageTemplateShellValidator": {
+      "description": "Runs the specified shell script during the validation phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "x-ms-discriminator-value": "Shell",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the shell script to be run for validation. It can be a github link, Azure Storage URI, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "default": "",
+          "description": "SHA256 checksum of the shell script provided in the scriptUri field"
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageTemplatePowerShellValidator": {
+      "description": "Runs the specified PowerShell script during the validation phase (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "x-ms-discriminator-value": "PowerShell",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the PowerShell script to be run for validation. It can be a github link, Azure Storage URI, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "default": "",
+          "description": "SHA256 checksum of the power shell script provided in the scriptUri field above"
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runElevated": {
+          "type": "boolean",
+          "default": false,
+          "description": "If specified, the PowerShell script will be run with elevated privileges"
+        },
+        "runAsSystem": {
+          "type": "boolean",
+          "default": false,
+          "description": "If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true."
+        },
+        "validExitCodes": {
+          "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
     },
     "ImageTemplateCustomizer": {
       "type": "object",
@@ -750,6 +839,7 @@
         },
         "updateLimit": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)"
         }
@@ -795,7 +885,8 @@
           "type": "array",
           "description": "Valid exit codes for the PowerShell script. [Default: 0]",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           }
         }
       }
@@ -964,35 +1055,36 @@
         "proxyVmSize": {
           "type": "string",
           "default": "",
-          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2 for Gen1 images and Standard_D2ds_v4 for Gen2 images)."
+          "description": "Size of the proxy virtual machine used to pass traffic to the build VM and validation VM. Omit or specify empty string to use the default (Standard_A1_v2)."
         }
       }
     },
     "ImageTemplateVmProfile": {
       "type": "object",
-      "description": "Describes the virtual machine used to build, customize and capture images",
+      "description": "Describes the virtual machines used to build and validate images",
       "properties": {
         "vmSize": {
           "type": "string",
           "default": "",
-          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D2ds_v4)."
+          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2 for Gen1 images and Standard_D2ds_v4 for Gen2 images)."
         },
         "osDiskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "default": 0,
           "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size."
         },
         "userAssignedIdentities": {
           "type": "array",
-          "description": "Optional array of resource IDs of user assigned managed identities to be configured on the build VM. This may include the identity of the image template.",
+          "description": "Optional array of resource IDs of user assigned managed identities to be configured on the build VM and validation VM. This may include the identity of the image template.",
           "items": {
             "type": "string"
           }
         },
         "vnetConfig": {
           "$ref": "#/definitions/VirtualNetworkConfig",
-          "description": "Optional configuration of the virtual network to use to deploy the build virtual machine in. Omit if no specific virtual network needs to be used."
+          "description": "Optional configuration of the virtual network to use to deploy the build VM and validation VM in. Omit if no specific virtual network needs to be used."
         }
       }
     },
@@ -1025,8 +1117,12 @@
             "BadCustomizerType",
             "UnsupportedCustomizerType",
             "NoCustomizerScript",
+            "BadValidatorType",
+            "UnsupportedValidatorType",
+            "NoValidatorScript",
             "BadDistributeType",
             "BadSharedImageDistribute",
+            "BadStagingResourceGroup",
             "ServerError",
             "Other"
           ],
@@ -1078,6 +1174,7 @@
             "Queued",
             "Building",
             "Customizing",
+            "Validating",
             "Distributing"
           ],
           "x-ms-enum": {
@@ -1107,6 +1204,28 @@
           },
           "description": "Specifies the properties used to describe the customization steps of the image, like Image source etc"
         },
+        "validate": {
+          "description": "Configuration options and list of validations to be performed on the resulting image.",
+          "properties": {
+            "continueDistributeOnFailure": {
+              "type": "boolean",
+              "default": false,
+              "description": "If validation fails and this field is set to false, output image(s) will not be distributed. This is the default behavior. If validation fails and this field is set to true, output image(s) will still be distributed. Please use this option with caution as it may result in bad images being distributed for use. In either case (true or false), the end to end image run will be reported as having failed in case of a validation failure. [Note: This field has no effect if validation succeeds.]"
+            },
+            "sourceValidationOnly": {
+              "type": "boolean",
+              "default": false,
+              "description": "If this field is set to true, the image specified in the 'source' section will directly be validated. No separate build will be run to generate and then validate a customized image."
+            },
+            "inVMValidations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageTemplateInVMValidator"
+              },
+              "description": "List of validations to be performed."
+            }
+          }
+        },
         "distribute": {
           "type": "array",
           "items": {
@@ -1131,14 +1250,24 @@
         },
         "buildTimeoutInMinutes": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 960,
           "default": 0,
-          "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (4 hours)."
+          "description": "Maximum duration to wait while building the image template (includes all customizations, validations, and distributions). Omit or specify 0 to use the default (4 hours)."
         },
         "vmProfile": {
           "$ref": "#/definitions/ImageTemplateVmProfile",
           "description": "Describes how virtual machine is set up to build images"
+        },
+        "stagingResourceGroup": {
+          "type": "string",
+          "description": "The staging resource group id in the same subscription as the image template that will be used to build the image. If this field is empty, a resource group with a random name will be created. If the resource group specified in this field doesn't exist, it will be created with the same name. If the resource group specified exists, it must be empty and in the same region as the image template. The resource group created will be deleted during template deletion if this field is empty or the resource group specified doesn't exist, but if the resource group specified exists the resources created in the resource group will be deleted during template deletion and the resource group itself will remain."
+        },
+        "exactStagingResourceGroup": {
+          "type": "string",
+          "description": "The staging resource group id in the same subscription as the image template that will be used to build the image. This read-only field differs from 'stagingResourceGroup' only if the value specified in the 'stagingResourceGroup' field is empty.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1214,15 +1343,11 @@
         "identity": {
           "$ref": "#/definitions/ImageTemplateIdentity",
           "description": "The identity of the image template, if configured."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
@@ -1251,7 +1376,7 @@
       "description": "Represents an output that was created by running an image template.",
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1278,29 +1403,6 @@
           "description": "The continuation token."
         }
       }
-    },
-    "SubResource": {
-      "type": "object",
-      "description": "The Sub Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "Operation": {
       "title": "A REST API operation",
