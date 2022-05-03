@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-blockchain"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-blockchain"
-  clear-output-folder: true
   generate-metadata: true
 ```

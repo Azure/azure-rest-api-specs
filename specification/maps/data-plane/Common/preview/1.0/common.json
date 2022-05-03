@@ -64,7 +64,7 @@
         }
       }
     },
-    "BatchRequestBody": {
+    "BatchRequest": {
       "description": "This type represents the request body for the Batch service.",
       "type": "object",
       "properties": {
@@ -72,25 +72,29 @@
           "description": "The list of queries to process.",
           "type": "array",
           "items": {
-            "description": "Batch Query object",
-            "type": "object",
-            "properties": {
-              "query": {
-                "description": "Partial query string.",
-                "type": "string",
-                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
-              }
-            }
+            "$ref": "#/definitions/BatchRequestItem"
           }
         }
       }
     },
-    "BatchResponse": {
+    "BatchRequestItem": {
+      "description": "Batch request object",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "This parameter contains a query string used to perform an unstructured geocoding operation. The query string will be passed verbatim to the search API for processing.",
+          "type": "string",
+          "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
+        }
+      }
+    },
+    "BatchResult": {
       "description": "This object is returned from a successful Batch service call. Extend with 'batchItems' property.",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary for the batch request",
+          "description": "Summary of the results for the batch request",
+          "x-ms-client-name": "BatchSummary",
           "type": "object",
           "readOnly": true,
           "properties": {
@@ -108,13 +112,13 @@
         }
       }
     },
-    "BatchItem": {
+    "BatchResultItem": {
       "description": "An item returned from Batch API. Extend with 'response' property.",
       "type": "object",
       "properties": {
         "statusCode": {
           "description": "HTTP request status code.",
-          "type": "number",
+          "type": "integer",
           "readOnly": true,
           "example": 200
         }
@@ -150,6 +154,16 @@
           "type": "number",
           "format": "double"
         }
+      }
+    },
+    "BoundingBox": {
+      "x-ms-client-name": "boundingBox",
+      "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "number",
+        "format": "double"
       }
     },
     "GeoJsonPosition": {
@@ -718,24 +732,91 @@
         ]
       }
     },
+    "PositionLatitudeAbbreviated": {
+      "name": "lat",
+      "x-ms-client-name": "Latitude",
+      "description": "The latitude of the location being passed.  Example: 48.36.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
+      }
+    },
+    "PositionLongitudeAbbreviated": {
+      "name": "lon",
+      "x-ms-client-name": "Longitude",
+      "description": "The longitude of the location being passed.  Example: -124.63.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
+      }
+    },
     "xTileIndex": {
       "name": "x",
-      "x-ms-client-name": "xTileIndex",
       "in": "query",
       "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
     },
     "yTileIndex": {
       "name": "y",
-      "x-ms-client-name": "yTileIndex",
       "in": "query",
       "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "zTileIndex": {
+      "name": "zoom",
+      "x-ms-client-name": "z",
+      "in": "query",
+      "description": "Zoom level for the desired tile. \n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "IncludeText": {
+      "name": "text",
+      "x-ms-client-name": "includeText",
+      "in": "query",
+      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "x-ms-enum": {
+        "name": "IncludeText",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "yes",
+            "description": "Include all textual data in response."
+          },
+          {
+            "value": "no",
+            "description": "Exclude textual data from response. Only images and country names will be in response."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   },

@@ -160,51 +160,6 @@
         "referenceName"
       ]
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "x-ms-client-flatten": true,
-          "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Property name/path in request associated with error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Array with additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "TriggerDependencyProvisioningStatus": {
       "description": "Defines the response of a provision trigger dependency operation.",
       "type": "object",
@@ -471,6 +426,10 @@
         "datasetParameters": {
           "type": "object",
           "description": "Reference data flow parameters from dataset."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Data flow parameters"
         }
       },
       "additionalProperties": {
@@ -772,8 +731,8 @@
           }
         },
         "referenceName": {
-          "type": "string",
-          "description": "Reference notebook name."
+          "type": "object",
+          "description": "Reference notebook name. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -824,6 +783,31 @@
         "referenceName": {
           "type": "string",
           "description": "Reference SQL pool name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "BigDataPoolParametrizationReference": {
+      "description": "Big data pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Big data pool reference type.",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
         }
       },
       "required": [

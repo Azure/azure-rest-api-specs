@@ -152,6 +152,9 @@
               "$ref": "#/definitions/UsageDetailsListResult"
             }
           },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -620,7 +623,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
       "get": {
         "tags": [
           "Balances"
@@ -775,7 +778,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservationSummaries"
@@ -972,7 +975,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservationDetails"
@@ -1059,7 +1062,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -1119,7 +1122,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -1149,6 +1152,9 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeParameter"
           },
           {
             "$ref": "#/parameters/regionParameter"
@@ -1422,6 +1428,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "PriceSheetForBillingPeriod": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1646,7 +1657,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingProfile",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Azure credits for a billing account or a billing profile. The API is only supported for Microsoft Customer Agreements (MCA) billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1691,7 +1702,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingAccount",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1713,6 +1724,61 @@
           {
             "name": "$filter",
             "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Lots"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.Consumption/lots": {
+      "get": {
+        "tags": [
+          "Lots"
+        ],
+        "operationId": "Lots_ListByCustomer",
+        "description": "Lists all Azure credits for a customer. The API is only supported for Microsoft Partner  Agreements (MPA) billing accounts.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "LotsListByCustomer": {
+            "$ref": "./examples/LotsListByCustomer.json"
+          },
+          "LotsListByCustomerWithFilter": {
+            "$ref": "./examples/LotsListByCustomerWithFilters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/customerIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2126,6 +2192,16 @@
           "description": "Retail price for the resource.",
           "type": "number",
           "format": "decimal",
+          "readOnly": true
+        },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
           "readOnly": true
         },
         "pricingModel": {
@@ -2857,6 +2933,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "adjustmentDetails": {
@@ -2878,6 +2957,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -3122,10 +3204,6 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "etag": {
-          "type": "string",
-          "description": "Resource etag."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3253,7 +3331,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReservationRecommendationDetailsCalculatedSavingsProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
@@ -3391,6 +3470,8 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
@@ -3465,8 +3546,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3474,9 +3554,43 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "LegacySingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription id associated with single scoped recommendation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
+    },
+    "LegacySharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
     },
     "SkuProperty": {
       "description": "The Sku property",
@@ -3596,6 +3710,9 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "skuName": {
@@ -3717,7 +3834,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -3859,6 +3975,24 @@
           "description": "The billing frequency, which can be either one-time or recurring.",
           "type": "string",
           "readOnly": true
+        },
+        "billingMonth": {
+          "description": "The billing month(yyyyMMdd), on which the event initiated.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "monetaryCommitment": {
+          "description": "The monetary commitment amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "overage": {
+          "description": "The overage amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
         }
       }
     },
@@ -3938,7 +4072,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -4100,11 +4237,8 @@
           "items": {
             "$ref": "#/definitions/BudgetFilterProperties"
           },
+          "x-ms-identifiers": [],
           "minItems": 0
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/BudgetFilterProperties"
         },
         "dimensions": {
           "description": "Has comparison expression for a dimension",
@@ -4248,13 +4382,45 @@
           "description": "The type of threshold",
           "type": "string",
           "enum": [
-            "Actual"
+            "Actual",
+            "Forecasted"
           ],
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
           },
           "default": "Actual"
+        },
+        "locale": {
+          "description": "Language in which the recipient will receive the notification",
+          "type": "string",
+          "enum": [
+            "en-us",
+            "ja-jp",
+            "zh-cn",
+            "de-de",
+            "es-es",
+            "fr-fr",
+            "it-it",
+            "ko-kr",
+            "pt-br",
+            "ru-ru",
+            "zh-tw",
+            "cs-cz",
+            "pl-pl",
+            "tr-tr",
+            "da-dk",
+            "en-gb",
+            "hu-hu",
+            "nb-no",
+            "nl-nl",
+            "pt-pt",
+            "sv-se"
+          ],
+          "x-ms-enum": {
+            "name": "CultureCode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -4289,7 +4455,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PriceSheetProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "meterId"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -4473,7 +4642,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4801,7 +4970,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4968,7 +5137,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5365,7 +5534,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationsSummariesParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5374,7 +5543,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5383,7 +5552,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5392,7 +5561,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5401,7 +5570,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationTransactionsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5420,6 +5589,14 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerIdParameter": {
+      "name": "customerId",
+      "in": "path",
+      "description": "Customer ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
