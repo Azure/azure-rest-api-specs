@@ -272,4 +272,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles"].get["x-ms-examples"]'
     from: networkexperiment.json
     reason: 'not related to changes. '
+  - suppress: UniqueXmsExample
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}"].patch["x-ms-examples"]'
+    from: networkexperiment.json
+    reason: 'Not related to my changes. '
 ```
