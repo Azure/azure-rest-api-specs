@@ -658,6 +658,7 @@
       ]
     },
     "ImageTemplateInVMValidator": {
+      "type": "object",
       "description": "Describes a unit of in-VM validation of image",
       "discriminator": "type",
       "properties": {
@@ -675,6 +676,7 @@
       ]
     },
     "ImageTemplateShellValidator": {
+      "type": "object",
       "description": "Runs the specified shell script during the validation phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
       "x-ms-discriminator-value": "Shell",
       "allOf": [
@@ -702,6 +704,7 @@
       }
     },
     "ImageTemplatePowerShellValidator": {
+      "type": "object",
       "description": "Runs the specified PowerShell script during the validation phase (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
       "x-ms-discriminator-value": "PowerShell",
       "allOf": [
