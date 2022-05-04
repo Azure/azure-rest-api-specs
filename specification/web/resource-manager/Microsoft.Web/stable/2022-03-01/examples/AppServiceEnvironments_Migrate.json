@@ -4,9 +4,20 @@
     "resourceGroupName": "test-rg",
     "name": "test-ase",
 	  "phase": "FullMigration",
-    "api-version": "2022-03-01"
+    "api-version": "2022-03-01",
+    "migrationOptionsEnvelope": {
+      "properties": {
+        "zoneRedundant": true
+      }
+    }
   },
   "responses": {
+    "200" : {
+      "headers": {},
+      "body": {
+        "value": []
+      }
+    },
     "202": {
       "headers": {
         "x-ms-routing-request-id": "NORTHCENTRALUS:20220408T212612Z:79bd0bce-5524-4fd1-ada0-1d8c86263d17",
