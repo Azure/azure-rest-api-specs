@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManager",
     "description": "The Microsoft Azure Virtual Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2022-02-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -133,6 +133,15 @@
           "200": {
             "description": "Delete Succeed."
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. The resource does not exist."
           },
@@ -142,6 +151,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "NetworkManagersDelete": {
@@ -183,6 +196,58 @@
         "x-ms-examples": {
           "NetworkManagesPatch": {
             "$ref": "./examples/NetworkManagerPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager operation result.",
+        "description": "Gets an operation result.",
+        "operationId": "NetworkManagerOperationResults_Get",
+        "responses": {
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getNetworkManagerOperationResult": {
+            "$ref": "./examples/NetworkManagerOperationResultGet.json"
           }
         }
       }
@@ -746,6 +811,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the network manager.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationResultIdParameter": {
+      "name": "operationResultId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of operation Result.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {

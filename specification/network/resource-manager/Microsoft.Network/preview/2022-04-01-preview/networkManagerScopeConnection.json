@@ -3,7 +3,7 @@
   "info": {
     "title": "ScopeConnections",
     "description": "The Microsoft Azure Virtual Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2022-02-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -131,6 +131,15 @@
           "200": {
             "description": "Delete Succeed."
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. The resource does not exist."
           },
@@ -140,6 +149,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete Network Manager Scope Connection": {
