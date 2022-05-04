@@ -154,6 +154,7 @@ These settings apply only when `--tag=package-flexibleserver-2022-04-29-privatep
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-04-29-privatepreview'
 input-file:
+- Microsoft.DBforMySQL/preview/2021-05-01-preview/mysql.json
 - Microsoft.DBforMySQL/preview/2022-04-29-privatepreview/Migrations.json
 ```
 
