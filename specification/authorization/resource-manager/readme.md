@@ -102,7 +102,6 @@ input-file:
   - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
   - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
   - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
-  - Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
   - Microsoft.Authorization/preview/2021-11-16-preview/authorization-AccessReviewCalls.json
   - Microsoft.Authorization/preview/2022-01-01-preview/authorization-RoleAssignmentsCalls.json
   - Microsoft.Authorization/preview/2022-01-01-preview/common-types.json
