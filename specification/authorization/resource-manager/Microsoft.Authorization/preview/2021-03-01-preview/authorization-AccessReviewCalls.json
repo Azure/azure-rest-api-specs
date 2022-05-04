@@ -80,7 +80,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccessReviewsFilterParameter"
@@ -129,7 +129,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -170,7 +170,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -220,7 +220,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -263,7 +263,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -303,7 +303,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccessReviewsFilterParameter"
@@ -359,7 +359,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -409,7 +409,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -456,7 +456,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -503,7 +503,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -550,7 +550,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -597,7 +597,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccessReviewsFilterParameter"
@@ -639,7 +639,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -682,7 +682,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1049,7 +1049,6 @@
   "definitions": {
     "AccessReviewScheduleDefinition": {
       "x-ms-azure-resource": true,
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1075,7 +1074,6 @@
       "description": "Access Review Schedule Definition."
     },
     "AccessReviewScheduleDefinitionProperties": {
-      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1133,9 +1131,6 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
-          "x-ms-identifiers": [
-            "principalId"
-          ],
           "description": "This is the collection of reviewers."
         },
         "backupReviewers": {
@@ -1143,9 +1138,6 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
-          "x-ms-identifiers": [
-            "principalId"
-          ],
           "description": "This is the collection of backup reviewers."
         },
         "reviewersType": {
@@ -1173,7 +1165,6 @@
       "description": "Access Review."
     },
     "AccessReviewInstance": {
-      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1200,7 +1191,6 @@
       "description": "Access Review Instance."
     },
     "AccessReviewInstanceProperties": {
-      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -1240,7 +1230,6 @@
       "description": "Access Review Instance properties."
     },
     "AccessReviewScheduleSettings": {
-      "type": "object",
       "properties": {
         "mailNotificationsEnabled": {
           "type": "boolean",
@@ -1293,7 +1282,6 @@
       "description": "Settings of an Access Review."
     },
     "AccessReviewDefaultSettings": {
-      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1320,7 +1308,6 @@
       "description": "Access Review Default Settings."
     },
     "AccessReviewRecurrenceSettings": {
-      "type": "object",
       "properties": {
         "pattern": {
           "x-ms-client-flatten": true,
@@ -1336,7 +1323,6 @@
       "description": "Recurrence Settings of an Access Review Schedule Definition."
     },
     "AccessReviewRecurrencePattern": {
-      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1359,7 +1345,6 @@
       "description": "Recurrence Pattern of an Access Review Schedule Definition."
     },
     "AccessReviewRecurrenceRange": {
-      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1395,7 +1380,6 @@
       "description": "Recurrence Range of an Access Review Schedule Definition."
     },
     "AccessReviewScope": {
-      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1443,7 +1427,6 @@
       "description": "Descriptor for what needs to be reviewed"
     },
     "AccessReviewReviewer": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1466,7 +1449,6 @@
       "description": "Descriptor for what needs to be reviewed"
     },
     "AccessReviewDecision": {
-      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1493,7 +1475,6 @@
       "description": "Access Review."
     },
     "AccessReviewDecisionProperties": {
-      "type": "object",
       "properties": {
         "principal": {
           "readOnly": true,
@@ -1591,7 +1572,6 @@
       "description": "Approval Step."
     },
     "AccessReviewDecisionResource": {
-      "type": "object",
       "discriminator": "type",
       "required": [
         "type"
@@ -1622,7 +1602,6 @@
       "description": "Target of the decision."
     },
     "AccessReviewDecisionIdentity": {
-      "type": "object",
       "discriminator": "type",
       "required": [
         "type"
@@ -1654,7 +1633,6 @@
       "description": "Target of the decision."
     },
     "AccessReviewDecisionUserIdentity": {
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AccessReviewDecisionIdentity"
@@ -1675,7 +1653,6 @@
       "description": "User Decision Target"
     },
     "AccessReviewDecisionServicePrincipalIdentity": {
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AccessReviewDecisionIdentity"
@@ -1696,7 +1673,6 @@
       "description": "Service Principal Decision Target"
     },
     "AccessReviewActorIdentity": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1730,7 +1706,6 @@
       "description": "Details of the actor identity"
     },
     "AccessReviewScheduleDefinitionListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1747,7 +1722,6 @@
       "description": "List of Access Review Schedule Definitions."
     },
     "AccessReviewInstanceListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1764,7 +1738,6 @@
       "description": "List of Access Review Instances."
     },
     "AccessReviewDecisionListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1864,10 +1837,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
@@ -1877,6 +1847,13 @@
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
