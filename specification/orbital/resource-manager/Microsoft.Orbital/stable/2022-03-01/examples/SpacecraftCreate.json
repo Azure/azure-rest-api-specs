@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "spacecraftName": "AQUA",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "noradId": "27424",
+        "titleLine": "(AQUA)",
+        "tleLine1": "1 27424U 02022A   20195.59202355  .00000039  00000-0  18634-4 0  9991",
+        "tleLine2": "2 27424  98.2098 135.8486 0000176  28.4050 144.5909 14.57108832967671",
+        "links": [
+          {
+            "name": "S_RHCP_UL",
+            "centerFrequencyMHz": 2106.4063,
+            "bandwidthMHz": 0.036,
+            "direction": "uplink",
+            "polarization": "RHCP"
+          },
+          {
+            "name": "X_RHCP_DL",
+            "centerFrequencyMHz": 8125,
+            "bandwidthMHz": 150,
+            "direction": "downlink",
+            "polarization": "RHCP"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-03-01"
+      },
+      "body": {
+        "name": "AQUA",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/spacecrafts/AQUA",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Updating",
+          "noradId": "27424",
+          "titleLine": "AQUA",
+          "tleLine1": "1 27424U 02022A   20195.59202355  .00000039  00000-0  18634-4 0  9991",
+          "tleLine2": "2 27424  98.2098 135.8486 0000176  28.4050 144.5909 14.57108832967671",
+          "links": [
+            {
+              "name": "S_RHCP_UL",
+              "centerFrequencyMHz": 2106.4063,
+              "bandwidthMHz": 0.036,
+              "direction": "uplink",
+              "polarization": "RHCP",
+              "authorizations": [
+                {
+                  "groundStation": "Microsoft_Quincy",
+                  "expirationDate": "2020-07-16"
+                }
+              ]
+            },
+            {
+              "name": "X_RHCP_DL",
+              "centerFrequencyMHz": 8125,
+              "bandwidthMHz": 150,
+              "direction": "downlink",
+              "polarization": "RHCP",
+              "authorizations": [
+                {
+                  "groundStation": "Microsoft_Gavle",
+                  "expirationDate": "2020-07-16"
+                }
+              ]
+            }
+          ]
+        },
+        "type": "Microsoft.Orbital/spacecrafts"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-03-01"
+      },
+      "body": {
+        "name": "AQUA",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/spacecrafts/AQUA",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "noradId": "27424",
+          "titleLine": "AQUA",
+          "tleLine1": "1 27424U 02022A   20195.59202355  .00000039  00000-0  18634-4 0  9991",
+          "tleLine2": "2 27424  98.2098 135.8486 0000176  28.4050 144.5909 14.57108832967671",
+          "links": [
+            {
+              "name": "S_RHCP_UL",
+              "centerFrequencyMHz": 2106.4063,
+              "bandwidthMHz": 0.036,
+              "direction": "uplink",
+              "polarization": "RHCP",
+              "authorizations": []
+            },
+            {
+              "name": "XRHCP_DL",
+              "centerFrequencyMHz": 8125,
+              "bandwidthMHz": 150,
+              "direction": "downlink",
+              "polarization": "RHCP",
+              "authorizations": []
+            }
+          ]
+        },
+        "type": "Microsoft.Orbital/spacecrafts"
+      }
+    }
+  }
+}
