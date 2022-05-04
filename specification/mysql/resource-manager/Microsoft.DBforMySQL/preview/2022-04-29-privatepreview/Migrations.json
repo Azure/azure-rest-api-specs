@@ -39,7 +39,7 @@
         "tags": [
           "MigrationAssessment"
         ],
-        "operationId": "MigrationAssessment_Read",
+        "operationId": "PerformMigrationAssessment_Read",
         "x-ms-examples": {
           "PerformMigrationAssessment": {
             "$ref": "./examples/PerformMigrationAssessment.json"
@@ -113,14 +113,16 @@
           "items": {
             "$ref": "#/definitions/AssessmentSummaryItem"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "replicaAssessmentReports": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MigrationAssessmentResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Represents a resource name availability."
