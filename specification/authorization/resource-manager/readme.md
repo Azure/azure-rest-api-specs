@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-2022-01-01-preview
 ```
 
 ### Suppression
@@ -83,24 +83,31 @@ directive:
 ```
 
 
-### Tag: package-preview-2022-01
+### Tag: package-2022-01-01-preview
 
-These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+```yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - Microsoft.Authorization/preview/2022-01-01-preview/EligibleChildResources.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleAssignmentSchedule.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleAssignmentScheduleInstance.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleAssignmentScheduleRequest.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleEligibilitySchedule.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleEligibilityScheduleInstance.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleEligibilityScheduleRequest.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleManagementPolicy.json
-  - Microsoft.Authorization/preview/2022-01-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+  - Microsoft.Authorization/preview/2021-11-16-preview/authorization-AccessReviewCalls.json
   - Microsoft.Authorization/preview/2022-01-01-preview/authorization-RoleAssignmentsCalls.json
   - Microsoft.Authorization/preview/2022-01-01-preview/common-types.json
 ```
+
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
