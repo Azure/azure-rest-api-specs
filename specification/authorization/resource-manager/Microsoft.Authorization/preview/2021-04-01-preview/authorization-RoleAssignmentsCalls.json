@@ -388,6 +388,9 @@
           },
           {
             "$ref": "#/parameters/TenantIdQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationSkipToken"
           }
         ],
         "responses": {
@@ -803,6 +806,15 @@
       "required": false,
       "type": "string",
       "description": "Tenant ID for cross-tenant request",
+      "x-ms-parameter-location": "method"
+    },
+    "PaginationSkipToken": {
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.",
+      "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     }
   }
