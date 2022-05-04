@@ -423,6 +423,18 @@
               "$ref": "#/definitions/StaticMember"
             }
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -694,6 +706,16 @@
         "resourceId": {
           "type": "string",
           "description": "Resource Id."
+        },
+        "region": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource region."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
         }
       },
       "description": "Properties of static member."
