@@ -1,13 +1,14 @@
 {
+  "title": "Get Azure Virtual Network Manager user configuration Operation Result",
   "parameters": {
     "api-version": "2022-04-01-preview",
-    "subscriptionId": "subId",
+    "subscriptionId": "subscriptionC",
     "resourceGroupName": "rg1",
-    "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestSecurityConfig",
     "ruleCollectionName": "testRuleCollection",
-    "ruleName": "SampleUserRule",
-    "force": false
+    "ruleName": "SampleAdminRule",
+    "operationResultId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "202": {
@@ -15,7 +16,6 @@
         "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleRG/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-04-01-preview"
       }
     },
-    "200": {},
     "204": {}
   }
 }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SecurityUserConfiguration",
-    "version": "2022-02-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -186,6 +186,15 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -196,9 +205,68 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete network manager security user configuration": {
             "$ref": "./examples/NetworkManagerSecurityUserConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security user configuration operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityUserConfigurationOperationResults_Get",
+        "responses": {
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityUserConfigurationOperationResult": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationOperationResultGet.json"
           }
         }
       }
@@ -362,6 +430,15 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -372,9 +449,71 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes a user rule collection": {
             "$ref": "./examples/NetworkManagerUserRuleCollectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security user rule collection operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityUserRuleCollectionOperationResults_Get",
+        "responses": {
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityUserRuleCollectionOperationResult": {
+            "$ref": "./examples/NetworkManagerUserRuleCollectionOperationResultGet.json"
           }
         }
       }
@@ -550,6 +689,15 @@
           "200": {
             "description": "Delete Succeed."
           },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -560,9 +708,74 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete a user rule": {
             "$ref": "./examples/NetworkManagerUserRuleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationsRuleParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security user rule operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityUserRuleOperationResults_Get",
+        "responses": {
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The operation does not exist or is completed."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityUserRuleOperationResult": {
+            "$ref": "./examples/NetworkManagerUserRuleOperationResultGet.json"
           }
         }
       }
