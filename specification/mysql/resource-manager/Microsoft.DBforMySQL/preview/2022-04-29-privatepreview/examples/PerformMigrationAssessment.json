@@ -1,833 +1,142 @@
 {
     "parameters": {
-      "api-version": "2022-04-29-privatepreview",
-      "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-      "resourceGroups": "test_resourceGroup",
-      "MigrationAssessmentRequest": {
-            "sourceServerResourceId":"/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
-      }
-      
+        "api-version": "2022-04-29-privatepreview",
+        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "resourceGroups": "test_resourceGroup",
+        "MigrationAssessmentRequest": {
+            "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
+        }
     },
     "responses": {
-      "200": {
-        "body": {
-            "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
-            "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
-            "targetServerDetails": {
-                "serverSpecs": {
-                    "sku": {
-                        "name": "Standard_D2ds_v4",
-                        "tier": "GeneralPurpose"
-                    },
-                    "properties.administratorLogin": "cloudsa",
-                    "properties.version": "5.7",
-                    "properties.storage": {
-                        "storageSizeGB": 120,
-                        "iops": 360,
-                        "autoGrow": "False"
-                    },
-                    "properties.backup": {
-                        "backupRetentionDays": 7,
-                        "geoRedundantBackup": "False"
-                    },
-                    "properties.network": {
-                        "publicNetworkAccess": "Disabled"
-                    },
-                    "tags": {},
-                    "location": "southeastasia",
-                    "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
-                },
-                "serverParameters": [
-                    {
-                        "properties.value": "ON",
-                        "name": "require_secure_transport"
-                    },
-                    {
-                        "properties.value": "",
-                        "name": "aad_audience"
-                    },
-                    {
-                        "properties.value": "1800",
-                        "name": "aad_min_fetch_signature_sec"
-                    },
-                    {
-                        "properties.value": "",
-                        "name": "aad_tenant_id"
-                    },
-                    {
-                        "properties.value": "https://sts.windows.net",
-                        "name": "aad_token_endpoint"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "accept_thread_priority"
-                    },
-                    {
-                        "properties.value": "1000",
-                        "name": "allowed_ip_cache_size"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "audit_pii_login_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "azure_background_start"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "azure_ia_enabled"
-                    },
-                    {
-                        "properties.value": "C:\\\\work\\\\azure_ip_address.csv",
-                        "name": "azure_ip_address_file"
-                    },
-                    {
-                        "properties.value": "C:\\\\work\\\\primary_ca.pem",
-                        "name": "azure_primary_server_ca_file"
-                    },
-                    {
-                        "properties.value": "C:\\\\work\\\\primary_info",
-                        "name": "azure_primary_server_info_file"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "azure_replication_enabled"
-                    },
-                    {
-                        "properties.value": "400",
-                        "name": "back_log",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "1048576",
-                        "name": "binlog_cache_size",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "86400",
-                        "name": "binlog_expire_logs_seconds",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "1000",
-                        "name": "binlog_group_commit_sync_delay",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "binlog_gtid_simple_ignore"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "binlog_index_doublewrite"
-                    },
-                    {
-                        "properties.value": "4194304",
-                        "name": "binlog_init_cache_size"
-                    },
-                    {
-                        "properties.value": "30",
-                        "name": "binlog_sum_size_for_stop_pct_max"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "binlog_thd_synclock_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "bypass_firewall_rule_from_socket_option_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "database_tablespace_limitation_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "deactivate_idle_server_disabled"
-                    },
-                    {
-                        "properties.value": "604800",
-                        "name": "deactivate_idle_server_expiration_in_seconds"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "dir_cache_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "dir_cache_init_load_enabled",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "",
-                        "name": "disabled_storage_engines",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "error_log_file_enabled"
-                    },
-                    {
-                        "properties.value": "c:\\\\work\\\\serverlogs\\\\mysql-error-sourcesterlingserver-2022012812.log",
-                        "name": "error_log_file_path"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "expire_logs_disabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "file_close_and_delete_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "file_close_async_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "firewall_rule_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "flush",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "frm_type_from_tdc"
-                    },
-                    {
-                        "properties.value": "c:\\\\work\\\\serverlogs\\\\mysql-general-sourcesterlingserver-2022012812.log",
-                        "name": "general_log_file",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "have_schannel"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_aggressive_pc"
-                    },
-                    {
-                        "properties.value": "32",
-                        "name": "innodb_aio_write_slots"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_avoid_logwrite"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_bufdump_bsize"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_buffer_pool_dump_at_shutdown",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_buffer_pool_load_at_startup",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "3758096384",
-                        "name": "innodb_buffer_pool_size",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_bufload_async"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_bufload_intr_detect"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_bufload_throttle"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_chunk_write_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_delay_datasync"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_delay_logwrite"
-                    },
-                    {
-                        "properties.value": "10",
-                        "name": "innodb_dirty_page_fflush"
-                    },
-                    {
-                        "properties.value": "C:\\\\work\\\\diskcache.data",
-                        "name": "innodb_disk_buffer_pool_filename",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_diskfull_wa_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_dynamic_page_cleaners"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_fast0ext_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_fast_init_buffer_pool"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_file_per_table",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_filesize_update_interval"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_flush_data_file_before_checkpoint"
-                    },
-                    {
-                        "properties.value": "async_unbuffered",
-                        "name": "innodb_flush_method",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "1",
-                        "name": "innodb_flush_neighbors",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_force_pacing"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_harness_checkpoint"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_ignore_fsctl_set_sparse"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_ignore_fsctl_set_zero_data"
-                    },
-                    {
-                        "properties.value": "100",
-                        "name": "innodb_inflight_syncio"
-                    },
-                    {
-                        "properties.value": "360",
-                        "name": "innodb_io_capacity_calibceil"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_io_capacity_calibrate"
-                    },
-                    {
-                        "properties.value": "2048000",
-                        "name": "innodb_io_hosed_threshold"
-                    },
-                    {
-                        "properties.value": "2048000",
-                        "name": "innodb_io_throttled_threshold"
-                    },
-                    {
-                        "properties.value": "8",
-                        "name": "innodb_keybsize_min"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_list_dir_files_name_only"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_log_flush_shallow_check"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_log_write_backoff"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_log_wrlock_retrymax"
-                    },
-                    {
-                        "properties.value": "60",
-                        "name": "innodb_logbo_dpage_timelim"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_logbo_red_modsync_maxp"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_logwr_modsync_backoff"
-                    },
-                    {
-                        "properties.value": "2000",
-                        "name": "innodb_min_tsc_freq"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_oldest_lsn_cache"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_page_cleaner_priority"
-                    },
-                    {
-                        "properties.value": "4",
-                        "name": "innodb_page_cleaners_enforced"
-                    },
-                    {
-                        "properties.value": "4",
-                        "name": "innodb_purge_threads",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "4",
-                        "name": "innodb_read_io_threads_enforced"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_read_throttle_hint"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_shutdown_clean_memory"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_skip_check_fts_orphaned_tables"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "innodb_skip_check_ibd"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_standalone_systmp"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "innodb_sync_log_slots"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp\\\\ibtmp1:12M:autoextend",
-                        "name": "innodb_temp_data_file_path",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp",
-                        "name": "innodb_tmpdir",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_undolog_init_mt"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_use_enforced"
-                    },
-                    {
-                        "properties.value": "4",
-                        "name": "innodb_write_io_threads_enforced"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "innodb_write_throttle_hint"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "list_dir_files_name_only"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "log_bin_trust_function_creators",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "FILE",
-                        "name": "log_output",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "1",
-                        "name": "log_warnings"
-                    },
-                    {
-                        "properties.value": "120",
-                        "name": "login_bucket_reset_time"
-                    },
-                    {
-                        "properties.value": "20",
-                        "name": "login_bucket_update_time"
-                    },
-                    {
-                        "properties.value": "300",
-                        "name": "max_connections",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "max_databases"
-                    },
-                    {
-                        "properties.value": "2147483647",
-                        "name": "max_login_bucket_limit"
-                    },
-                    {
-                        "properties.value": "30",
-                        "name": "max_super_acl_connections"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "max_tablespaces"
-                    },
-                    {
-                        "properties.value": "4294967295",
-                        "name": "max_write_lock_count",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "mem_table_binlog_dml_disabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "mts_crash_safety_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "myisam_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "nonblocking_socket_enabled"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "outbound_use_schannel"
-                    },
-                    {
-                        "properties.value": "azure_superuser",
-                        "name": "performance_schema_az_digest_exclude_user"
-                    },
-                    {
-                        "properties.value": "512",
-                        "name": "performance_schema_az_digests_size"
-                    },
-                    {
-                        "properties.value": "1024",
-                        "name": "performance_schema_az_max_sql_text_length"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "performance_schema_consumer_az_statements_digest"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "performance_schema_expand_query_sample"
-                    },
-                    {
-                        "properties.value": "60",
-                        "name": "performance_schema_max_digest_sample_age"
-                    },
-                    {
-                        "properties.value": "15",
-                        "name": "query_store_capture_interval"
-                    },
-                    {
-                        "properties.value": "NONE",
-                        "name": "query_store_capture_mode"
-                    },
-                    {
-                        "properties.value": "NO",
-                        "name": "query_store_capture_utility_queries"
-                    },
-                    {
-                        "properties.value": "7",
-                        "name": "query_store_retention_period_in_days"
-                    },
-                    {
-                        "properties.value": "NONE",
-                        "name": "query_store_wait_sampling_capture_mode"
-                    },
-                    {
-                        "properties.value": "30",
-                        "name": "query_store_wait_sampling_frequency"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "redirect_enabled"
-                    },
-                    {
-                        "properties.value": "ce4e2a36c5b1",
-                        "name": "redirect_flag"
-                    },
-                    {
-                        "properties.value": "ce4e2a36c5b1.tr2.southeastasia1-h.worker.orcasql-seas1-h.mscds.com",
-                        "name": "redirect_server_host"
-                    },
-                    {
-                        "properties.value": "16002",
-                        "name": "redirect_server_port"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp\\\\relaylogs\\\\relay_bin",
-                        "name": "relay_log",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp\\\\relaylogs\\\\relay_bin.index",
-                        "name": "relay_log_index",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "5",
-                        "name": "scrub_hash_length"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "scrub_user_info"
-                    },
-                    {
-                        "properties.value": "331154589",
-                        "name": "server_id",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "session_track_gtids"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "sha224_enabled"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "shared_memory"
-                    },
-                    {
-                        "properties.value": "MYSQL",
-                        "name": "shared_memory_base_name"
-                    },
-                    {
-                        "properties.value": "500",
-                        "name": "shutdown_wait_connection_timeout"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "skip_check_performance_schema_on_start"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "skip_check_system_table_on_start"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp",
-                        "name": "slave_load_tmpdir",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "0",
-                        "name": "slave_parallel_workers",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "slave_preserve_commit_order",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "c:\\\\work\\\\serverlogs\\\\mysql-slow-sourcesterlingserver-2022042512.log",
-                        "name": "slow_query_log_file",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "",
-                        "name": "sql_mode",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "ON",
-                        "name": "sql_require_primary_key",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "",
-                        "name": "stopped_replica_users"
-                    },
-                    {
-                        "properties.value": "2000",
-                        "name": "table_definition_cache",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "2000",
-                        "name": "table_open_cache",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "1",
-                        "name": "table_open_cache_instances",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "tcp_linger"
-                    },
-                    {
-                        "properties.value": "10",
-                        "name": "tcp_linger_timeout"
-                    },
-                    {
-                        "properties.value": "11",
-                        "name": "thread_cache_size",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "30000",
-                        "name": "thread_pool_batch_max_time"
-                    },
-                    {
-                        "properties.value": "10000",
-                        "name": "thread_pool_batch_wait_timeout"
-                    },
-                    {
-                        "properties.value": "65535",
-                        "name": "thread_pool_max_threads"
-                    },
-                    {
-                        "properties.value": "1",
-                        "name": "thread_pool_min_threads"
-                    },
-                    {
-                        "properties.value": "OFF",
-                        "name": "threat_detection_enabled"
-                    },
-                    {
-                        "properties.value": "SYSTEM",
-                        "name": "time_zone",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "C:\\\\temp",
-                        "name": "tmpdir",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    },
-                    {
-                        "properties.value": "180",
-                        "name": "wait_timeout",
-                        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                    }
-                ],
-                "firewallRules": [],
-                "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
-            },
-            "summary": [
-                {
-                    "featureName": "TLSVersion",
-                    "isBlocker": false,
-                    "isUserInputRequired": false,
-                    "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
-                },
-                {
-                    "featureName": "SslEnforcement",
-                    "isBlocker": false,
-                    "isUserInputRequired": false,
-                    "message": "Flexible server supports encrypted connections using Transport Layer Security (TLS 1.2). Flexible server will deny all connections with lower TLS version. To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version."
-                },
-                {
-                    "featureName": "ServerParameters",
-                    "isBlocker": false,
-                    "isUserInputRequired": false,
-                    "message": "The following server parameters were set only in the single server, now they have been added to the flexible server: aad_audience,aad_min_fetch_signature_sec,aad_tenant_id,aad_token_endpoint,accept_thread_priority,allowed_ip_cache_size,audit_pii_login_enabled,azure_background_start,azure_ia_enabled,azure_ip_address_file,azure_primary_server_ca_file,azure_primary_server_info_file,azure_replication_enabled,binlog_gtid_simple_ignore,binlog_index_doublewrite,binlog_init_cache_size,binlog_sum_size_for_stop_pct_max,binlog_thd_synclock_enabled,bypass_firewall_rule_from_socket_option_enabled,database_tablespace_limitation_enabled,deactivate_idle_server_disabled,deactivate_idle_server_expiration_in_seconds,dir_cache_enabled,error_log_file_enabled,error_log_file_path,expire_logs_disabled,file_close_and_delete_enabled,file_close_async_enabled,firewall_rule_enabled,frm_type_from_tdc,have_schannel,innodb_aggressive_pc,innodb_aio_write_slots,innodb_avoid_logwrite,innodb_bufdump_bsize,innodb_bufload_async,innodb_bufload_intr_detect,innodb_bufload_throttle,innodb_chunk_write_enabled,innodb_delay_datasync,innodb_delay_logwrite,innodb_dirty_page_fflush,innodb_diskfull_wa_enabled,innodb_dynamic_page_cleaners,innodb_fast0ext_enabled,innodb_fast_init_buffer_pool,innodb_filesize_update_interval,innodb_flush_data_file_before_checkpoint,innodb_force_pacing,innodb_harness_checkpoint,innodb_ignore_fsctl_set_sparse,innodb_ignore_fsctl_set_zero_data,innodb_inflight_syncio,innodb_io_capacity_calibceil,innodb_io_capacity_calibrate,innodb_io_hosed_threshold,innodb_io_throttled_threshold,innodb_keybsize_min,innodb_list_dir_files_name_only,innodb_log_flush_shallow_check,innodb_log_write_backoff,innodb_log_wrlock_retrymax,innodb_logbo_dpage_timelim,innodb_logbo_red_modsync_maxp,innodb_logwr_modsync_backoff,innodb_min_tsc_freq,innodb_oldest_lsn_cache,innodb_page_cleaner_priority,innodb_page_cleaners_enforced,innodb_read_io_threads_enforced,innodb_read_throttle_hint,innodb_shutdown_clean_memory,innodb_skip_check_fts_orphaned_tables,innodb_skip_check_ibd,innodb_standalone_systmp,innodb_sync_log_slots,innodb_undolog_init_mt,innodb_use_enforced,innodb_write_io_threads_enforced,innodb_write_throttle_hint,list_dir_files_name_only,log_warnings,login_bucket_reset_time,login_bucket_update_time,max_databases,max_login_bucket_limit,max_super_acl_connections,max_tablespaces,mem_table_binlog_dml_disabled,mts_crash_safety_enabled,myisam_enabled,nonblocking_socket_enabled,outbound_use_schannel,performance_schema_az_digest_exclude_user,performance_schema_az_digests_size,performance_schema_az_max_sql_text_length,performance_schema_consumer_az_statements_digest,performance_schema_expand_query_sample,performance_schema_max_digest_sample_age,query_store_capture_interval,query_store_capture_mode,query_store_capture_utility_queries,query_store_retention_period_in_days,query_store_wait_sampling_capture_mode,query_store_wait_sampling_frequency,redirect_enabled,redirect_flag,redirect_server_host,redirect_server_port,scrub_hash_length,scrub_user_info,session_track_gtids,sha224_enabled,shared_memory,shared_memory_base_name,shutdown_wait_connection_timeout,skip_check_performance_schema_on_start,skip_check_system_table_on_start,stopped_replica_users,tcp_linger,tcp_linger_timeout,thread_pool_batch_max_time,thread_pool_batch_wait_timeout,thread_pool_max_threads,thread_pool_min_threads,threat_detection_enabled."
-                },
-                {
-                    "featureName": "ServerParameters",
-                    "isBlocker": false,
-                    "isUserInputRequired": false,
-                    "message": "The following server parameters had values different from the flexible server default values, now they have been updated on the flexible server: Name: back_log;Orig: 783;New: 400,Name: binlog_cache_size;Orig: 8388608;New: 1048576,Name: binlog_expire_logs_seconds;Orig: 0;New: 86400,Name: binlog_group_commit_sync_delay;Orig: 0;New: 1000,Name: dir_cache_init_load_enabled;Orig: ON;New: OFF,Name: disabled_storage_engines;Orig: MyISAM,MRG_MyISAM,BLACKHOLE,FEDEATED,ARCHIVE;New: ,Name: flush;Orig: OFF;New: ON,Name: general_log_file;Orig: /app/work/serverlogs/mysql-general-raganesa-mig-m-1-2021100619.log;New: c:\\\\work\\\\serverlogs\\\\mysql-general-sourcesterlingserver-2022012812.log,Name: innodb_buffer_pool_dump_at_shutdown;Orig: ON;New: OFF,Name: innodb_buffer_pool_load_at_startup;Orig: ON;New: OFF,Name: innodb_buffer_pool_size;Orig: 5368709120;New: 3758096384,Name: innodb_disk_buffer_pool_filename;Orig: /app/work/diskcache.data;New: C:\\\\work\\\\diskcache.data,Name: innodb_file_per_table;Orig: ON;New: OFF,Name: innodb_flush_method;Orig: fsync;New: async_unbuffered,Name: innodb_flush_neighbors;Orig: 0;New: 1,Name: innodb_purge_threads;Orig: 1;New: 4,Name: innodb_temp_data_file_path;Orig: ibtmp1:12M:autoextend;New: C:\\\\temp\\\\ibtmp1:12M:autoextend,Name: innodb_tmpdir;Orig: /app/work/temp;New: C:\\\\temp,Name: log_bin_trust_function_creators;Orig: ON;New: OFF,Name: log_output;Orig: NONE;New: FILE,Name: max_connections;Orig: 683;New: 300,Name: max_write_lock_count;Orig: 18446744073709551615;New: 4294967295,Name: relay_log;Orig: /app/work/relaylogs/relay_bin;New: C:\\\\temp\\\\relaylogs\\\\relay_bin,Name: relay_log_index;Orig: /app/work/relaylogs/relay_bin.index;New: C:\\\\temp\\\\relaylogs\\\\relay_bin.index,Name: require_secure_transport;Orig: ON;New: OFF,Name: server_id;Orig: 2246969966;New: 331154589,Name: slave_load_tmpdir;Orig: /app/work/temp;New: C:\\\\temp,Name: slave_parallel_workers;Orig: 4;New: 0,Name: slave_preserve_commit_order;Orig: ON;New: OFF,Name: slow_query_log_file;Orig: /app/work/serverlogs/mysql-slow-raganesa-mig-m-1-2021100619.log;New: c:\\\\work\\\\serverlogs\\\\mysql-slow-sourcesterlingserver-2022042512.log,Name: sql_mode;Orig: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER;New: ,Name: sql_require_primary_key;Orig: OFF;New: ON,Name: table_definition_cache;Orig: 2400;New: 2000,Name: table_open_cache;Orig: 2400;New: 2000,Name: table_open_cache_instances;Orig: 16;New: 1,Name: thread_cache_size;Orig: 14;New: 11,Name: time_zone;Orig: +00:00;New: SYSTEM,Name: tmpdir;Orig: /app/work/temp;New: C:\\\\temp,Name: wait_timeout;Orig: 28800;New: 180."
-                }
-            ],
-            "replicaAssessmentReports": [
-                {
-                    "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
-                    "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
-                    "targetServerDetails": {
-                        "serverSpecs": {
-                            "sku": {
-                                "name": "Standard_D2ds_v4",
-                                "tier": "GeneralPurpose"
-                            },
-                            "properties.administratorLogin": "cloudsa",
-                            "properties.version": "5.7",
-                            "properties.storage": {
+        "200": {
+            "body": {
+                "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
+                "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+                "targetServerDetails": {
+                    "serverSpecs": {
+                        "sku": {
+                            "name": "Standard_D2ds_v4",
+                            "tier": "GeneralPurpose"
+                        },
+                        "properties": {
+                            "administratorLogin": "cloudsa",
+                            "version": "5.7",
+                            "storage": {
                                 "storageSizeGB": 120,
                                 "iops": 360,
-                                "autoGrow": "True"
+                                "autoGrow": "False"
                             },
-                            "properties.backup": {
+                            "backup": {
                                 "backupRetentionDays": 7,
                                 "geoRedundantBackup": "False"
                             },
-                            "properties.network": {
+                            "network": {
                                 "publicNetworkAccess": "Disabled"
-                            },
-                            "tags": {},
-                            "location": "southeastasia",
-                            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
-                        },
-                        "serverParameters": [
-                            {
-                                "properties.value": "ON",
-                                "name": "require_secure_transport"
                             }
-                        ],
-                        "firewallRules": [],
-                        "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+                        },
+                        "tags": {},
+                        "location": "southeastasia",
+                        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
                     },
-                    "summary": [
+                    "serverParameters": [
                         {
-                            "featureName": "ReplicationRole",
-                            "isBlocker": false,
-                            "isUserInputRequired": false,
-                            "message": "This is a replica server and should not be migrated on its own. The migration of this server should be done as part of the replication master server."
+                            "properties": {
+                                "value": "ON"
+                            },
+                            "name": "require_secure_transport"
                         },
                         {
-                            "featureName": "TLSVersion",
-                            "isBlocker": false,
-                            "isUserInputRequired": false,
-                            "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+                            "properties": {
+                                "value": "2000"
+                            },
+                            "name": "table_definition_cache",
+                            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
                         },
                         {
-                            "featureName": "SslEnforcement",
-                            "isBlocker": false,
-                            "isUserInputRequired": false,
-                            "message": "Flexible server supports encrypted connections using Transport Layer Security (TLS 1.2). Flexible server will deny all connections with lower TLS version. To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version."
+                            "properties": {
+                                "value": "2000"
+                            },
+                            "name": "table_open_cache",
+                            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
                         }
                     ],
-                    "replicaAssessmentReports": []
-                }
-            ]
+                    "firewallRules": [
+                        {
+                            "properties": {
+                                "startIpAddress": "0.0.0.0",
+                                "endIpAddress": "255.255.255.254"
+                            },
+                            "name": "AllowAll"
+                        }
+                    ],
+                    "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+                },
+                "summary": [
+                    {
+                        "featureName": "TLSVersion",
+                        "severity": "Warning",
+                        "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+                    }
+                ],
+                "replicaAssessmentReports": [
+                    {
+                        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
+                        "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+                        "targetServerDetails": {
+                            "serverSpecs": {
+                                "sku": {
+                                    "name": "Standard_D2ds_v4",
+                                    "tier": "GeneralPurpose"
+                                },
+                                "properties": {
+                                    "administratorLogin": "cloudsa",
+                                    "version": "5.7",
+                                    "storage": {
+                                        "storageSizeGB": 120,
+                                        "iops": 360,
+                                        "autoGrow": "True"
+                                    },
+                                    "backup": {
+                                        "backupRetentionDays": 7,
+                                        "geoRedundantBackup": "False"
+                                    },
+                                    "network": {
+                                        "publicNetworkAccess": "Disabled"
+                                    }
+                                },
+                                "tags": {},
+                                "location": "southeastasia",
+                                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
+                            },
+                            "serverParameters": [
+                                {
+                                    "properties": {
+                                        "value": "ON"
+                                    },
+                                    "name": "require_secure_transport"
+                                }
+                            ],
+                            "firewallRules": [
+                                {
+                                    "properties": {
+                                        "startIpAddress": "0.0.0.0",
+                                        "endIpAddress": "255.255.255.254"
+                                    },
+                                    "name": "AllowAll"
+                                }
+                            ],
+                            "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+                        },
+                        "summary": [
+                            {
+                                "featureName": "TLSVersion",
+                                "severity": "Warning",
+                                "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+                            }
+                        ]
+                    }
+                ]
+            }
         }
-      }
     }
-  }
-  
+}
