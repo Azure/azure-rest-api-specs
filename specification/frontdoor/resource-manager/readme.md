@@ -268,4 +268,8 @@ directive:
     where: $.definitions.WebApplicationFirewallPolicy
     from: webapplicationfirewall.json
     reason: We don't have the api list all the WebApplicationFirewallPolicies by Subscription till now.
+  - suppress: UniqueXmsExample
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles"].get["x-ms-examples"]'
+    from: networkexperiment.json
+    reason: 'not related to changes. '
 ```
