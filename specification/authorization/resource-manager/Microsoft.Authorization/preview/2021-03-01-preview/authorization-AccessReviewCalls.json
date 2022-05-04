@@ -1133,6 +1133,9 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "This is the collection of reviewers."
         },
         "backupReviewers": {
@@ -1140,6 +1143,9 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],          
           "description": "This is the collection of backup reviewers."
         },
         "reviewersType": {
@@ -1724,6 +1730,7 @@
       "description": "Details of the actor identity"
     },
     "AccessReviewScheduleDefinitionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1857,7 +1864,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
