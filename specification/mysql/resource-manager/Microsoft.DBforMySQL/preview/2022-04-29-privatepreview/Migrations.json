@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroups}/providers/Microsoft.DBforMySQL/performMigrationAssessment": {
       "post": {
         "tags": [
-          "MigrationAssessment"
+          "PerformMigrationAssessment"
         ],
-        "operationId": "PerformMigrationAssessment_Read",
+        "operationId": "MigrationAssessment_PerformMigrationAssessment",
         "x-ms-examples": {
           "PerformMigrationAssessment": {
             "$ref": "./examples/PerformMigrationAssessment.json"
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "MigrationAssessmentRequest",
@@ -667,6 +667,7 @@
       }
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -684,14 +685,6 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for the request."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroups",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
