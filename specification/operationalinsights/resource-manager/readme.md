@@ -27,7 +27,7 @@ These are the global settings for the OperationalInsights API.
 ```yaml !$(python) || !$(track2)
 title: OperationalInsightsManagementClient
 ```
-```yaml $(python) && $(track2)
+```yaml $(python)
 title: LogAnalyticsManagementClient
 ```
 

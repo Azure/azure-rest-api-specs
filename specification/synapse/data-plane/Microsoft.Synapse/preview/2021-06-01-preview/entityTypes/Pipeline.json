@@ -5719,10 +5719,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         }
       },
       "required": [
@@ -6488,6 +6485,44 @@
       },
       "required": [
         "waitTimeInSeconds"
+      ]
+    },
+    "FailActivity": {
+      "x-ms-discriminator-value": "Fail",
+      "type": "object",
+      "description": "This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Fail activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FailActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "FailActivityTypeProperties": {
+      "description": "Fail activity properties.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The error message that surfaced in the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "errorCode": {
+          "description": "The error code that categorizes the error type of the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "message",
+        "errorCode"
       ]
     },
     "UntilActivity": {
