@@ -179,6 +179,56 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Patch a specific policy for tags update.",
+        "operationId": "Policies_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Policy tags to be patched.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates specific policy": {
+            "$ref": "./examples/WafPolicyPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -363,6 +413,13 @@
         }
       },
       "type": "object"
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Policy tags."
     },
     "WebApplicationFirewallPolicyList": {
       "description": "Defines a list of WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
