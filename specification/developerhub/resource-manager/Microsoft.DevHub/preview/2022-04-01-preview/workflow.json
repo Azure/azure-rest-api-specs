@@ -351,8 +351,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "$ref": "#/definitions/DeleteWorkflowResponse"
+          },
           "204": {
-            "description": "NoContent"
+            "description": "Successfully deleted the resource"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -724,6 +727,16 @@
         }
       },
       "description": "Tags object for patch operations."
+    },
+    "DeleteWorkflowResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "delete status message"
+        }
+      },
+      "description": "delete response if content must be provided on delete operation"
     }
   },
   "parameters": {
