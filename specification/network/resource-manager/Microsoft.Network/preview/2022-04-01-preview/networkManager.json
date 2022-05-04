@@ -287,6 +287,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/NetworkManagerCommit"
             }
@@ -297,6 +303,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "NetworkManageCommitPost": {
