@@ -31,18 +31,18 @@ openapi-type: arm
 tag: package-2020-11
 ```
 
-
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11'
+``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.Network/stable/2020-11-01/network.json
   - Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - Microsoft.Network/stable/2020-05-01/frontdoor.json
   - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -260,4 +260,12 @@ directive:
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
 
+## Suppression
 
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    where: $.definitions.WebApplicationFirewallPolicy
+    from: webapplicationfirewall.json
+    reason: We don't have the api list all the WebApplicationFirewallPolicies by Subscription till now.
+```
