@@ -51,7 +51,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -639,6 +639,7 @@
       "description": "The properties of a configuration."
     },
     "Configuration": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
@@ -664,16 +665,19 @@
         "name": "ServerVersion",
         "modelAsString": true
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The resource management error response."
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
