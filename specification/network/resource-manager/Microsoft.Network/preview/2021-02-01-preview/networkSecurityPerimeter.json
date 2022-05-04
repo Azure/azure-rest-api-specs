@@ -1528,9 +1528,17 @@
           "description": "Private link resource Id."
         },
         "isMember": {
-          "readOnly": true,
           "type": "string",
-          "description": "yes/no, if it is member or not."
+          "readOnly": true,
+          "description": "yes/no, if it is member or not.",
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "x-ms-enum": {
+            "name": "isMember",
+            "modelAsString": true
+          }
         },
         "profile": {
           "readOnly": true,
