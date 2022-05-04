@@ -599,7 +599,7 @@
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassification"
     },
-    "CustomSingleLabelClassificationResult": {
+    "CustomLabelClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -608,7 +608,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/SingleClassificationDocumentResult"
+                "$ref": "#/definitions/ClassificationDocumentResult"
               }
             ]
           }
@@ -621,22 +621,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "SingleClassificationDocumentResult": {
-      "type": "object",
-      "properties": {
-        "class": {
-          "$ref": "#/definitions/ClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "class"
       ]
     },
     "ClassificationResult": {
@@ -681,31 +665,7 @@
       ],
       "x-ms-discriminator-value": "CustomMultiLabelClassification"
     },
-    "CustomMultiLabelClassificationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/MultiClassificationDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "MultiClassificationDocumentResult": {
+    "ClassificationDocumentResult": {
       "type": "object",
       "properties": {
         "class": {
@@ -2386,7 +2346,7 @@
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationResult"
+          "$ref": "#/definitions/CustomLabelClassificationResult"
         }
       },
       "allOf": [
@@ -2403,7 +2363,7 @@
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomMultiLabelClassificationResult"
+          "$ref": "#/definitions/CustomLabelClassificationResult"
         }
       },
       "allOf": [
