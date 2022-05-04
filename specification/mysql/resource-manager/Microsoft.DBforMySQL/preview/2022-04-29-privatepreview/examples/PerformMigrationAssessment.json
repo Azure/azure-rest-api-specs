@@ -1,142 +1,142 @@
 {
-    "parameters": {
-        "api-version": "2022-04-29-privatepreview",
-        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "resourceGroups": "test_resourceGroup",
-        "MigrationAssessmentRequest": {
-            "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
-                "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
-                "targetServerDetails": {
-                    "serverSpecs": {
-                        "sku": {
-                            "name": "Standard_D2ds_v4",
-                            "tier": "GeneralPurpose"
-                        },
-                        "properties": {
-                            "administratorLogin": "cloudsa",
-                            "version": "5.7",
-                            "storage": {
-                                "storageSizeGB": 120,
-                                "iops": 360,
-                                "autoGrow": "False"
-                            },
-                            "backup": {
-                                "backupRetentionDays": 7,
-                                "geoRedundantBackup": "False"
-                            },
-                            "network": {
-                                "publicNetworkAccess": "Disabled"
-                            }
-                        },
-                        "tags": {},
-                        "location": "southeastasia",
-                        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
-                    },
-                    "serverParameters": [
-                        {
-                            "properties": {
-                                "value": "ON"
-                            },
-                            "name": "require_secure_transport"
-                        },
-                        {
-                            "properties": {
-                                "value": "2000"
-                            },
-                            "name": "table_definition_cache",
-                            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                        },
-                        {
-                            "properties": {
-                                "value": "2000"
-                            },
-                            "name": "table_open_cache",
-                            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-                        }
-                    ],
-                    "firewallRules": [
-                        {
-                            "properties": {
-                                "startIpAddress": "0.0.0.0",
-                                "endIpAddress": "255.255.255.254"
-                            },
-                            "name": "AllowAll"
-                        }
-                    ],
-                    "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
-                },
-                "summary": [
-                    {
-                        "featureName": "TLSVersion",
-                        "severity": "Warning",
-                        "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
-                    }
-                ],
-                "replicaAssessmentReports": [
-                    {
-                        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
-                        "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
-                        "targetServerDetails": {
-                            "serverSpecs": {
-                                "sku": {
-                                    "name": "Standard_D2ds_v4",
-                                    "tier": "GeneralPurpose"
-                                },
-                                "properties": {
-                                    "administratorLogin": "cloudsa",
-                                    "version": "5.7",
-                                    "storage": {
-                                        "storageSizeGB": 120,
-                                        "iops": 360,
-                                        "autoGrow": "True"
-                                    },
-                                    "backup": {
-                                        "backupRetentionDays": 7,
-                                        "geoRedundantBackup": "False"
-                                    },
-                                    "network": {
-                                        "publicNetworkAccess": "Disabled"
-                                    }
-                                },
-                                "tags": {},
-                                "location": "southeastasia",
-                                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
-                            },
-                            "serverParameters": [
-                                {
-                                    "properties": {
-                                        "value": "ON"
-                                    },
-                                    "name": "require_secure_transport"
-                                }
-                            ],
-                            "firewallRules": [
-                                {
-                                    "properties": {
-                                        "startIpAddress": "0.0.0.0",
-                                        "endIpAddress": "255.255.255.254"
-                                    },
-                                    "name": "AllowAll"
-                                }
-                            ],
-                            "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
-                        },
-                        "summary": [
-                            {
-                                "featureName": "TLSVersion",
-                                "severity": "Warning",
-                                "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
+  "parameters": {
+    "api-version": "2022-04-29-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroups": "test_resourceGroup",
+    "MigrationAssessmentRequest": {
+      "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
+        "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+        "targetServerDetails": {
+          "serverSpecs": {
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "GeneralPurpose"
+            },
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "version": "5.7",
+              "storage": {
+                "storageSizeGB": 120,
+                "iops": 360,
+                "autoGrow": "False"
+              },
+              "backup": {
+                "backupRetentionDays": 7,
+                "geoRedundantBackup": "False"
+              },
+              "network": {
+                "publicNetworkAccess": "Disabled"
+              }
+            },
+            "tags": {},
+            "location": "southeastasia",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
+          },
+          "serverParameters": [
+            {
+              "properties": {
+                "value": "ON"
+              },
+              "name": "require_secure_transport"
+            },
+            {
+              "properties": {
+                "value": "2000"
+              },
+              "name": "table_definition_cache",
+              "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+            },
+            {
+              "properties": {
+                "value": "2000"
+              },
+              "name": "table_open_cache",
+              "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+            }
+          ],
+          "firewallRules": [
+            {
+              "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "255.255.255.254"
+              },
+              "name": "AllowAll"
+            }
+          ],
+          "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+        },
+        "summary": [
+          {
+            "featureName": "TLSVersion",
+            "severity": "Warning",
+            "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+          }
+        ],
+        "replicaAssessmentReports": [
+          {
+            "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
+            "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+            "targetServerDetails": {
+              "serverSpecs": {
+                "sku": {
+                  "name": "Standard_D2ds_v4",
+                  "tier": "GeneralPurpose"
+                },
+                "properties": {
+                  "administratorLogin": "cloudsa",
+                  "version": "5.7",
+                  "storage": {
+                    "storageSizeGB": 120,
+                    "iops": 360,
+                    "autoGrow": "True"
+                  },
+                  "backup": {
+                    "backupRetentionDays": 7,
+                    "geoRedundantBackup": "False"
+                  },
+                  "network": {
+                    "publicNetworkAccess": "Disabled"
+                  }
+                },
+                "tags": {},
+                "location": "southeastasia",
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
+              },
+              "serverParameters": [
+                {
+                  "properties": {
+                    "value": "ON"
+                  },
+                  "name": "require_secure_transport"
+                }
+              ],
+              "firewallRules": [
+                {
+                  "properties": {
+                    "startIpAddress": "0.0.0.0",
+                    "endIpAddress": "255.255.255.254"
+                  },
+                  "name": "AllowAll"
+                }
+              ],
+              "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+            },
+            "summary": [
+              {
+                "featureName": "TLSVersion",
+                "severity": "Warning",
+                "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }
