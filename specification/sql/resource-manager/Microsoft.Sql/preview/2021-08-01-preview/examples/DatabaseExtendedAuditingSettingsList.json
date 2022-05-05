@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "blobauditingtest-6852",
+    "serverName": "blobauditingtest-2080",
+    "databaseName": "testdb",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/extendedAuditingSettings/default",
+            "name": "default",
+            "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
+            "properties": {
+              "state": "Disabled",
+              "storageEndpoint": "",
+              "retentionDays": 0,
+              "auditActionsAndGroups": [],
+              "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "isStorageSecondaryKeyInUse": false,
+              "predicateExpression": "statement = 'select 1'",
+              "isAzureMonitorTargetEnabled": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}

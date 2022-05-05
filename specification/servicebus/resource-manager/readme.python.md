@@ -3,7 +3,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-servicebus
@@ -16,7 +16,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2021-06-preview
@@ -29,7 +29,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -83,7 +82,7 @@ namespace: azure.mgmt.servicebus.v2015_08_01
 output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2015_08_01
 ```
 
-``` yaml $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

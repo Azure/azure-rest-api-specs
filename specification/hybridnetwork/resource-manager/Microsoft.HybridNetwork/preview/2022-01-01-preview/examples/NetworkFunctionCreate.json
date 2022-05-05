@@ -1,0 +1,182 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "networkFunctionName": "testNf",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "device": {
+          "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/devices/testDevice"
+        },
+        "skuName": "testSku",
+        "skuType": "SDWAN",
+        "vendorName": "testVendor",
+        "managedApplicationParameters": {},
+        "networkFunctionUserConfigurations": [
+          {
+            "roleName": "testRole",
+            "userDataParameters": {},
+            "networkInterfaces": [
+              {
+                "networkInterfaceName": "nic1",
+                "macAddress": "",
+                "vmSwitchType": "Management",
+                "ipConfigurations": [
+                  {
+                    "ipAllocationMethod": "Dynamic",
+                    "ipAddress": "",
+                    "subnet": "",
+                    "gateway": "",
+                    "ipVersion": "IPv4",
+                    "dnsServers": null
+                  }
+                ]
+              },
+              {
+                "networkInterfaceName": "nic2",
+                "macAddress": "DC-97-F8-79-16-7D",
+                "vmSwitchType": "Wan",
+                "ipConfigurations": [
+                  {
+                    "ipAllocationMethod": "Dynamic",
+                    "ipAddress": "",
+                    "subnet": "",
+                    "gateway": "",
+                    "ipVersion": "IPv4",
+                    "dnsServers": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+        "name": "testNf",
+        "type": "Microsoft.HybridNetwork/networkFunctions",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "device": {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/devices/testDevice"
+          },
+          "skuName": "testSku",
+          "skuType": "SDWAN",
+          "vendorName": "testVendor",
+          "serviceKey": "testServiceKey",
+          "vendorProvisioningState": "NotProvisioned",
+          "managedApplication": {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/testServiceKey"
+          },
+          "managedApplicationParameters": {},
+          "networkFunctionUserConfigurations": [
+            {
+              "roleName": "testRole",
+              "userDataParameters": {},
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "nic1",
+                  "macAddress": "",
+                  "vmSwitchType": "Management",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                },
+                {
+                  "networkInterfaceName": "nic2",
+                  "macAddress": "DC-97-F8-79-16-7D",
+                  "vmSwitchType": "Wan",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+        "name": "testNf",
+        "type": "Microsoft.HybridNetwork/networkFunctions",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "device": {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/devices/testDevice"
+          },
+          "skuName": "testSku",
+          "skuType": "SDWAN",
+          "vendorName": "testVendor",
+          "serviceKey": "testServiceKey",
+          "vendorProvisioningState": "NotProvisioned",
+          "managedApplication": {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/testServiceKey"
+          },
+          "managedApplicationParameters": {},
+          "networkFunctionUserConfigurations": [
+            {
+              "roleName": "testRole",
+              "userDataParameters": {},
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "nic1",
+                  "macAddress": "",
+                  "vmSwitchType": "Management",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                },
+                {
+                  "networkInterfaceName": "nic2",
+                  "macAddress": "DC-97-F8-79-16-7D",
+                  "vmSwitchType": "Wan",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
