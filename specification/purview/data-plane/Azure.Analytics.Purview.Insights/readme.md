@@ -1,4 +1,4 @@
-# Azure Purview
+# Microsoft Purview
     
 > see https://aka.ms/autorest
 

@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "MicrosoftAzurePurviewInsightsClient",
-    "description": "Creates a Microsoft.Azure.Purview.Insights management client.",
+    "title": "MicrosoftPurviewInsightsClient",
+    "description": "Creates a Microsoft.Purview.Insights management client.",
     "version": "2022-03-01-preview"
   },
   "host": "purview.azure.com",
@@ -416,313 +416,57 @@
     }
   },
   "definitions": {
-    "SnapshotRecord": {
-      "description": "Snapshot record",
-      "required": [
-        "kind"
+    "ActiveUsersTrendDataPoint": {
+      "type": "object",
+      "properties": {
+        "assetEditsUserCount": {
+          "format": "int64",
+          "description": "Count of distinct users making asset edits",
+          "type": "integer"
+        },
+        "datamapPopulationUserCount": {
+          "format": "int64",
+          "description": "Count of distinct users populating the datamap",
+          "type": "integer"
+        },
+        "searchAndBrowseUserCount": {
+          "format": "int64",
+          "description": "Count of distinct users doing search and browse activities",
+          "type": "integer"
+        },
+        "totalUserCount": {
+          "format": "int64",
+          "description": "Number of all active users",
+          "type": "integer"
+        },
+        "timePoint": {
+          "format": "date-time",
+          "description": "Time for the data point",
+          "type": "string"
+        }
+      }
+    },
+    "ActiveUsersTrendSnapshotRecord": {
+      "description": "Active users trend snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
       ],
-      "type": "object",
       "properties": {
-        "kind": {
-          "description": "Kind of asset",
-          "enum": [
-            "ActiveUsersTrend",
-            "AssetFilesAggregation",
-            "AssetDistribution",
-            "DataEstateHealth",
-            "FilesWithoutResourceSet",
-            "AllAssetsDistribution",
-            "AssetCurationDistribution",
-            "DeletedAssetsDistribution",
-            "MostViewedAssets",
-            "NetNewAssetsDistribution",
-            "TopSearchedKeywords",
-            "Tags",
-            "TrendsAndGaps"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetType",
-            "modelAsString": true
-          }
-        },
-        "snapshotTime": {
-          "format": "date-time",
-          "description": "The Snapshot time",
-          "type": "string"
-        }
-      },
-      "discriminator": "kind"
-    },
-    "Snapshots": {
-      "description": "Snapshots",
-      "type": "object",
-      "properties": {
-        "snapshotTime": {
-          "format": "date-time",
-          "description": "The snapshot time.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SnapshotRecord"
-          }
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorModel": {
-      "description": "Default error model",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets or sets the error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Gets or sets the messages.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Gets or sets the target.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Gets or sets the details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorModel"
-          }
-        }
-      }
-    },
-    "ErrorResponseModel": {
-      "description": "Default error response model",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Gets or sets the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorModel"
+        "activeUsersTrendPerDateRange": {
+          "description": "date range to data points map",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ActiveUsersTrendDataPoint"
             }
-          ]
-        }
-      }
-    },
-    "DetailsRecord": {
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "description": "Kind of asset",
-          "enum": [
-            "ActiveUsersTrend",
-            "AssetFilesAggregation",
-            "AssetDistribution",
-            "DataEstateHealth",
-            "FilesWithoutResourceSet",
-            "AllAssetsDistribution",
-            "AssetCurationDistribution",
-            "DeletedAssetsDistribution",
-            "MostViewedAssets",
-            "NetNewAssetsDistribution",
-            "TopSearchedKeywords",
-            "Tags",
-            "TrendsAndGaps"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetType",
-            "modelAsString": true
           }
-        },
-        "snapshotTime": {
-          "format": "date-time",
-          "type": "string"
         }
       },
-      "discriminator": "kind"
-    },
-    "Details": {
-      "description": "Asset details",
-      "type": "object",
-      "properties": {
-        "snapshotTime": {
-          "format": "date-time",
-          "description": "The snapshot time.",
-          "type": "string"
-        },
-        "totalResultCount": {
-          "format": "int64",
-          "description": "Total result count.",
-          "type": "integer"
-        },
-        "value": {
-          "description": "Collection of items of type results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetailsRecord"
-          }
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        }
-      }
-    },
-    "AssetInsightsDetailsFilters": {
-      "description": "API response structure for filters on asset insights details page",
-      "type": "object",
-      "properties": {
-        "classifications": {
-          "description": "Classifications on the asset",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classificationCategories": {
-          "description": "Classification categories",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "collectionNames": {
-          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dataOwners": {
-          "description": "Asset data owners",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "instances": {
-          "description": "Instance[SQL server/Blob account]",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sourceTypes": {
-          "description": "Data Source Types",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TagValuesByTime": {
-      "type": "object",
-      "properties": {
-        "time": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sources": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "TagsTimesSeriesRecord": {
-      "type": "object",
-      "properties": {
-        "sourceType": {
-          "type": "string"
-        },
-        "tagType": {
-          "type": "string"
-        },
-        "series": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TagValuesByTime"
-          }
-        }
-      }
-    },
-    "TagsTimeSeries": {
-      "description": "Tags time series",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of items of type results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TagsTimesSeriesRecord"
-          }
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        }
-      }
-    },
-    "FileTypeValuesByTime": {
-      "type": "object",
-      "properties": {
-        "time": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "count": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "bytes": {
-          "format": "int64",
-          "type": "integer"
-        }
-      }
-    },
-    "FilesAggregationTimesSeriesRecord": {
-      "type": "object",
-      "properties": {
-        "sourceType": {
-          "type": "string"
-        },
-        "fileType": {
-          "type": "string"
-        },
-        "series": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileTypeValuesByTime"
-          }
-        }
-      }
-    },
-    "FilesAggregationTimeSeries": {
-      "description": "Files aggregation time series",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of items of type results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
-          }
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        }
-      }
+      "x-ms-discriminator-value": "ActiveUsersTrend"
     },
     "AllAssetsDistributionDetailsRecord": {
       "description": "All assets distribution details",
@@ -796,6 +540,44 @@
       },
       "x-ms-discriminator-value": "AllAssetsDistribution"
     },
+    "AllAssetsDistributionSnapshotRecord": {
+      "description": "All assets distribution snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "classification": {
+          "description": "Asset Classification",
+          "type": "string"
+        },
+        "classificationCategory": {
+          "description": "Classification category",
+          "type": "string"
+        },
+        "collectionName": {
+          "description": "Collection to which the asset belongs\r\nThis is the 6 character unique collection name/id",
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "description": "Asset count",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "description": "Is data owner assigned",
+          "type": "boolean"
+        },
+        "unclassifiedCount": {
+          "format": "int64",
+          "description": "Count of unclassified assets",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "AllAssetsDistribution"
+    },
     "AssetCurationDistributionDetailsRecord": {
       "description": "Asset curation distribution details",
       "type": "object",
@@ -860,232 +642,6 @@
         }
       },
       "x-ms-discriminator-value": "AssetCurationDistribution"
-    },
-    "DeletedAssetsDistributionDetailsRecord": {
-      "description": "Deleted assets distribution details",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DetailsRecord"
-        }
-      ],
-      "properties": {
-        "classifications": {
-          "description": "Classifications on the asset",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classificationCategories": {
-          "description": "Classification categories",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classificationSources": {
-          "description": "Sources for the classifications on the asset - Datascan, Manual, etc.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "collectionName": {
-          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
-          "type": "string"
-        },
-        "count": {
-          "description": "Asset Count",
-          "type": "string"
-        },
-        "dataOwners": {
-          "description": "Asset data owners",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "instance": {
-          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
-          "type": "string"
-        },
-        "objectType": {
-          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
-          "type": "string"
-        },
-        "reasonForUnclassified": {
-          "description": "Reason for an asset being unclassified",
-          "type": "string"
-        },
-        "sourceType": {
-          "description": "Data Source Type",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "DeletedAssetsDistribution"
-    },
-    "NetNewAssetsDistributionDetailsRecord": {
-      "description": "Net new assets distribution details",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DetailsRecord"
-        }
-      ],
-      "properties": {
-        "assetDisplayName": {
-          "description": "Asset display name",
-          "type": "string"
-        },
-        "classifications": {
-          "description": "Classifications on the asset",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classificationCategories": {
-          "description": "Classification categories",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classificationSources": {
-          "description": "Sources for the classifications on the asset - Datascan, Manual, etc.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "collectionName": {
-          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
-          "type": "string"
-        },
-        "dataOwners": {
-          "description": "Asset data owners",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "guid": {
-          "description": "Asset guid - used to uniquely identify assets in the catalog",
-          "type": "string"
-        },
-        "instance": {
-          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
-          "type": "string"
-        },
-        "objectType": {
-          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
-          "type": "string"
-        },
-        "qualifiedName": {
-          "description": "Asset FQN[Fully Qualified Name]",
-          "type": "string"
-        },
-        "reasonForUnclassified": {
-          "description": "Reason for an asset being unclassified",
-          "type": "string"
-        },
-        "sourceType": {
-          "description": "Data Source Type",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "NetNewAssetsDistribution"
-    },
-    "ActiveUsersTrendDataPoint": {
-      "type": "object",
-      "properties": {
-        "assetEditsUserCount": {
-          "format": "int64",
-          "description": "Count of distinct users making asset edits",
-          "type": "integer"
-        },
-        "datamapPopulationUserCount": {
-          "format": "int64",
-          "description": "Count of distinct users populating the datamap",
-          "type": "integer"
-        },
-        "searchAndBrowseUserCount": {
-          "format": "int64",
-          "description": "Count of distinct users doing search and browse activities",
-          "type": "integer"
-        },
-        "totalUserCount": {
-          "format": "int64",
-          "description": "Number of all active users",
-          "type": "integer"
-        },
-        "timePoint": {
-          "format": "date-time",
-          "description": "Time for the data point",
-          "type": "string"
-        }
-      }
-    },
-    "ActiveUsersTrendSnapshotRecord": {
-      "description": "Active users trend snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "activeUsersTrendPerDateRange": {
-          "description": "date range to data points map",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ActiveUsersTrendDataPoint"
-            }
-          }
-        }
-      },
-      "x-ms-discriminator-value": "ActiveUsersTrend"
-    },
-    "AllAssetsDistributionSnapshotRecord": {
-      "description": "All assets distribution snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "classification": {
-          "description": "Asset Classification",
-          "type": "string"
-        },
-        "classificationCategory": {
-          "description": "Classification category",
-          "type": "string"
-        },
-        "collectionName": {
-          "description": "Collection to which the asset belongs\r\nThis is the 6 character unique collection name/id",
-          "type": "string"
-        },
-        "count": {
-          "format": "int64",
-          "description": "Asset count",
-          "type": "integer"
-        },
-        "dataOwnerAssigned": {
-          "description": "Is data owner assigned",
-          "type": "boolean"
-        },
-        "unclassifiedCount": {
-          "format": "int64",
-          "description": "Count of unclassified assets",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "AllAssetsDistribution"
     },
     "AssetCurationDistributionSnapshotRecord": {
       "description": "Asset curation distribution snapshot record",
@@ -1202,6 +758,54 @@
       },
       "x-ms-discriminator-value": "AssetFilesAggregation"
     },
+    "AssetInsightsDetailsFilters": {
+      "description": "API response structure for filters on asset insights details page",
+      "type": "object",
+      "properties": {
+        "classifications": {
+          "description": "Classifications on the asset",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "description": "Classification categories",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionNames": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataOwners": {
+          "description": "Asset data owners",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instances": {
+          "description": "Instance[SQL server/Blob account]",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceTypes": {
+          "description": "Data Source Types",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DataEstateHealthSnapshotRecord": {
       "description": "Data estate health snapshot record",
       "type": "object",
@@ -1263,6 +867,70 @@
       },
       "x-ms-discriminator-value": "DataEstateHealth"
     },
+    "DeletedAssetsDistributionDetailsRecord": {
+      "description": "Deleted assets distribution details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "classifications": {
+          "description": "Classifications on the asset",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "description": "Classification categories",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationSources": {
+          "description": "Sources for the classifications on the asset - Datascan, Manual, etc.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
+          "type": "string"
+        },
+        "count": {
+          "description": "Asset Count",
+          "type": "string"
+        },
+        "dataOwners": {
+          "description": "Asset data owners",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instance": {
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
+          "type": "string"
+        },
+        "objectType": {
+          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
+          "type": "string"
+        },
+        "reasonForUnclassified": {
+          "description": "Reason for an asset being unclassified",
+          "type": "string"
+        },
+        "sourceType": {
+          "description": "Data Source Type",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DeletedAssetsDistribution"
+    },
     "DeletedAssetsDistributionSnapshotRecord": {
       "description": "Deleted assets distribution snapshot record",
       "type": "object",
@@ -1301,6 +969,154 @@
       },
       "x-ms-discriminator-value": "DeletedAssetsDistribution"
     },
+    "Details": {
+      "description": "Asset details",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetailsRecord"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "description": "The snapshot time.",
+          "type": "string"
+        },
+        "totalResultCount": {
+          "format": "int64",
+          "description": "Total result count.",
+          "type": "integer"
+        }
+      }
+    },
+    "DetailsRecord": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of asset",
+          "enum": [
+            "ActiveUsersTrend",
+            "AssetFilesAggregation",
+            "AssetDistribution",
+            "DataEstateHealth",
+            "FilesWithoutResourceSet",
+            "AllAssetsDistribution",
+            "AssetCurationDistribution",
+            "DeletedAssetsDistribution",
+            "MostViewedAssets",
+            "NetNewAssetsDistribution",
+            "TopSearchedKeywords",
+            "Tags",
+            "TrendsAndGaps"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          }
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Gets or sets the target.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "Default error response model",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "FileTypeValuesByTime": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "bytes": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "FilesAggregationTimeSeries": {
+      "description": "Files aggregation time series",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "FilesAggregationTimesSeriesRecord": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileTypeValuesByTime"
+          }
+        }
+      }
+    },
     "FilesWithoutResourceSetSnapshotRecord": {
       "description": "Files without resource set snapshot record",
       "type": "object",
@@ -1329,6 +1145,329 @@
         }
       },
       "x-ms-discriminator-value": "FilesWithoutResourceSet"
+    },
+    "MostViewedAssetsSnapshotRecord": {
+      "description": "Most viewed assets snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "description": "Asset display name",
+          "type": "string"
+        },
+        "curationLevel": {
+          "description": "Asset curation level [Full, Partial, Uncurated]",
+          "type": "string"
+        },
+        "guid": {
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
+          "type": "string"
+        },
+        "numberOfViews": {
+          "format": "int64",
+          "description": "Number of views for the asset",
+          "type": "integer"
+        },
+        "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "MostViewedAssets"
+    },
+    "NetNewAssetsDistributionDetailsRecord": {
+      "description": "Net new assets distribution details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "description": "Asset display name",
+          "type": "string"
+        },
+        "classifications": {
+          "description": "Classifications on the asset",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "description": "Classification categories",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationSources": {
+          "description": "Sources for the classifications on the asset - Datascan, Manual, etc.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "description": "Collection to which the assets belongs\r\nThis is the 6 character unique collection name/id",
+          "type": "string"
+        },
+        "dataOwners": {
+          "description": "Asset data owners",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guid": {
+          "description": "Asset guid - used to uniquely identify assets in the catalog",
+          "type": "string"
+        },
+        "instance": {
+          "description": "Instance/account to which the asset belongs[azure blob account, sql server, etc.]",
+          "type": "string"
+        },
+        "objectType": {
+          "description": "Object Type of the asset. Every atlas entity type is mapped to an object type",
+          "type": "string"
+        },
+        "qualifiedName": {
+          "description": "Asset FQN[Fully Qualified Name]",
+          "type": "string"
+        },
+        "reasonForUnclassified": {
+          "description": "Reason for an asset being unclassified",
+          "type": "string"
+        },
+        "sourceType": {
+          "description": "Data Source Type",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    },
+    "NetNewAssetsDistributionSnapshotRecord": {
+      "description": "Net new assets distribution snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "classification": {
+          "description": "Asset Classification",
+          "type": "string"
+        },
+        "classificationCategory": {
+          "description": "Classification category",
+          "type": "string"
+        },
+        "collectionName": {
+          "description": "Collection to which the asset belongs",
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "description": "Asset count",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "description": "Is data owner assigned",
+          "type": "boolean"
+        },
+        "unclassifiedCount": {
+          "format": "int64",
+          "description": "Count of unclassified assets",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    },
+    "SnapshotRecord": {
+      "description": "Snapshot record",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of asset",
+          "enum": [
+            "ActiveUsersTrend",
+            "AssetFilesAggregation",
+            "AssetDistribution",
+            "DataEstateHealth",
+            "FilesWithoutResourceSet",
+            "AllAssetsDistribution",
+            "AssetCurationDistribution",
+            "DeletedAssetsDistribution",
+            "MostViewedAssets",
+            "NetNewAssetsDistribution",
+            "TopSearchedKeywords",
+            "Tags",
+            "TrendsAndGaps"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          }
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "description": "The Snapshot time",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "Snapshots": {
+      "description": "Snapshots",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnapshotRecord"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "description": "The snapshot time.",
+          "type": "string"
+        }
+      }
+    },
+    "TagValuesByTime": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sources": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TagsSnapshotRecord": {
+      "description": "Tags snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "sourceType": {
+          "description": "The data source type.",
+          "type": "string"
+        },
+        "tagType": {
+          "description": "The type of tag.",
+          "type": "string"
+        },
+        "group": {
+          "description": "The classification group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The tag name.",
+          "type": "string"
+        },
+        "subscriptions": {
+          "format": "int32",
+          "description": "The number of subscriptions.",
+          "type": "integer"
+        },
+        "sources": {
+          "format": "int32",
+          "description": "The number of data sources with tags.",
+          "type": "integer"
+        },
+        "files": {
+          "format": "int64",
+          "description": "The number of files with tags.",
+          "type": "integer"
+        },
+        "tables": {
+          "format": "int64",
+          "description": "The number of tables with tags.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Tags"
+    },
+    "TagsTimeSeries": {
+      "description": "Tags time series",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsTimesSeriesRecord"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "TagsTimesSeriesRecord": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "tagType": {
+          "type": "string"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagValuesByTime"
+          }
+        }
+      }
+    },
+    "TopSearchedKeywordsSnapshotRecord": {
+      "description": "Top searched keywords snapshot record",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "numberOfSearches": {
+          "format": "int64",
+          "description": "Number of searches for the search term",
+          "type": "integer"
+        },
+        "searchTerm": {
+          "description": "Search term",
+          "type": "string"
+        },
+        "searchWithResults": {
+          "description": "Search produced results or not",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "TopSearchedKeywords"
     },
     "TrendsAndGapsDataPoint": {
       "description": "Trends and gaps data point",
@@ -1386,150 +1525,6 @@
         }
       },
       "x-ms-discriminator-value": "TrendsAndGaps"
-    },
-    "MostViewedAssetsSnapshotRecord": {
-      "description": "Most viewed assets snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "assetDisplayName": {
-          "description": "Asset display name",
-          "type": "string"
-        },
-        "curationLevel": {
-          "description": "Asset curation level [Full, Partial, Uncurated]",
-          "type": "string"
-        },
-        "guid": {
-          "description": "Asset guid - used to uniquely identify assets in the catalog",
-          "type": "string"
-        },
-        "numberOfViews": {
-          "format": "int64",
-          "description": "Number of views for the asset",
-          "type": "integer"
-        },
-        "qualifiedName": {
-          "description": "Asset FQN[Fully Qualified Name]",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "MostViewedAssets"
-    },
-    "NetNewAssetsDistributionSnapshotRecord": {
-      "description": "Net new assets distribution snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "classification": {
-          "description": "Asset Classification",
-          "type": "string"
-        },
-        "classificationCategory": {
-          "description": "Classification category",
-          "type": "string"
-        },
-        "collectionName": {
-          "description": "Collection to which the asset belongs",
-          "type": "string"
-        },
-        "count": {
-          "format": "int64",
-          "description": "Asset count",
-          "type": "integer"
-        },
-        "dataOwnerAssigned": {
-          "description": "Is data owner assigned",
-          "type": "boolean"
-        },
-        "unclassifiedCount": {
-          "format": "int64",
-          "description": "Count of unclassified assets",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "NetNewAssetsDistribution"
-    },
-    "TagsSnapshotRecord": {
-      "description": "Tags snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "sourceType": {
-          "description": "The data source type.",
-          "type": "string"
-        },
-        "tagType": {
-          "description": "The type of tag.",
-          "type": "string"
-        },
-        "group": {
-          "description": "The classification group.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The tag name.",
-          "type": "string"
-        },
-        "subscriptions": {
-          "format": "int32",
-          "description": "The number of subscriptions.",
-          "type": "integer"
-        },
-        "sources": {
-          "format": "int32",
-          "description": "The number of data sources with tags.",
-          "type": "integer"
-        },
-        "files": {
-          "format": "int64",
-          "description": "The number of files with tags.",
-          "type": "integer"
-        },
-        "tables": {
-          "format": "int64",
-          "description": "The number of tables with tags.",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "Tags"
-    },
-    "TopSearchedKeywordsSnapshotRecord": {
-      "description": "Top searched keywords snapshot record",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SnapshotRecord"
-        }
-      ],
-      "properties": {
-        "numberOfSearches": {
-          "format": "int64",
-          "description": "Number of searches for the search term",
-          "type": "integer"
-        },
-        "searchTerm": {
-          "description": "Search term",
-          "type": "string"
-        },
-        "searchWithResults": {
-          "description": "Search produced results or not",
-          "type": "boolean"
-        }
-      },
-      "x-ms-discriminator-value": "TopSearchedKeywords"
     }
   },
   "parameters": {
