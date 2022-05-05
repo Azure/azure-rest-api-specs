@@ -978,7 +978,7 @@
         "operationId": "GuestConfigurationAssignmentReportsVMSS_List",
         "description": "List all reports for the VMSS guest configuration assignment, latest report first.",
         "x-ms-examples": {
-          "List all guest configuration assignments for VMSS": {
+          "List all reports for the VMSS guest configuration assignment with latest report first": {
             "$ref": "./examples/listAllVMSSGuestConfigurationAssignmentReports.json"
           }
         },
@@ -1009,6 +1009,9 @@
             "schema": {
               "$ref": "#/definitions/GuestConfigurationAssignmentReportList"
             }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
