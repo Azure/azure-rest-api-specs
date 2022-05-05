@@ -79,7 +79,7 @@
           "Arbitration result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
           },
-          "Orchestrator direct target result": {
+          "Orchestration direct target result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
@@ -186,7 +186,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
       "enum": [
-        "CustomConversation"
+        "Conversation"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskKind",
@@ -197,7 +197,7 @@
       "type": "string",
       "description": "Enumeration of supported conversational task results",
       "enum": [
-        "CustomConversationResult"
+        "ConversationResult"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskResultsKind",
@@ -228,7 +228,7 @@
         }
       }
     },
-    "CustomConversationalTask": {
+    "ConversationalTask": {
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -240,18 +240,18 @@
           "$ref": "#/definitions/ConversationAnalysisOptions"
         },
         "parameters": {
-          "$ref": "#/definitions/CustomConversationTaskParameters"
+          "$ref": "#/definitions/ConversationTaskParameters"
         }
       },
-      "x-ms-discriminator-value": "CustomConversation",
+      "x-ms-discriminator-value": "Conversation",
       "required": [
         "analysisInput",
         "parameters"
       ]
     },
-    "CustomConversationTaskParameters": {
+    "ConversationTaskParameters": {
       "type": "object",
-      "description": "Input parameters necessary for a CustomConversation task.",
+      "description": "Input parameters necessary for a Conversation task.",
       "properties": {
         "projectName": {
           "type": "string",
@@ -289,8 +289,8 @@
         "deploymentName"
       ]
     },
-    "CustomConversationalTaskResult": {
-      "description": "The results of a CustomConversation task.",
+    "ConversationalTaskResult": {
+      "description": "The results of a Conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
@@ -305,7 +305,7 @@
       "required": [
         "result"
       ],
-      "x-ms-discriminator-value": "CustomConversationResult"
+      "x-ms-discriminator-value": "ConversationResult"
     },
     "ConversationItemBase": {
       "type": "object",
@@ -388,7 +388,7 @@
           "description": "The type of a target service.",
           "enum": [
             "Luis",
-            "CustomConversation",
+            "Conversation",
             "QuestionAnswering",
             "NonLinked"
           ],
@@ -475,7 +475,7 @@
     "ConversationParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Customized Conversation projects.",
-      "x-ms-discriminator-value": "CustomConversation",
+      "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -556,8 +556,8 @@
           "type": "string",
           "description": "The type of the project.",
           "enum": [
-            "CustomConversation",
-            "Orchestrator"
+            "Conversation",
+            "Orchestration"
           ],
           "x-ms-enum": {
             "name": "projectKind",
@@ -570,10 +570,10 @@
         }
       }
     },
-    "OrchestratorPrediction": {
+    "OrchestrationPrediction": {
       "type": "object",
-      "description": "This represents the prediction result of an Orchestrator project.",
-      "x-ms-discriminator-value": "Orchestrator",
+      "description": "This represents the prediction result of an Orchestration project.",
+      "x-ms-discriminator-value": "Orchestration",
       "required": [
         "intents"
       ],
@@ -606,7 +606,7 @@
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
             "Luis",
-            "CustomConversation",
+            "Conversation",
             "QuestionAnswering",
             "NonLinked"
           ],
@@ -632,7 +632,7 @@
     "ConversationTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of Conversation project response.",
-      "x-ms-discriminator-value": "CustomConversation",
+      "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -670,7 +670,7 @@
     "ConversationPrediction": {
       "type": "object",
       "description": "Represents the prediction section of a Conversation project.",
-      "x-ms-discriminator-value": "CustomConversation",
+      "x-ms-discriminator-value": "Conversation",
       "required": [
         "intents",
         "entities"
@@ -1658,7 +1658,7 @@
         "text"
       ],
       "x-ms-enum": {
-        "name": "Modality",
+        "name": "InputModality",
         "modelAsString": true
       }
     },
