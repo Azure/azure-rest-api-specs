@@ -276,4 +276,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}"].patch["x-ms-examples"]'
     from: networkexperiment.json
     reason: 'Not related to my changes. '
+  - suppress: PatchInOperationName
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].patch.operationId'
+    from: webapplicationfirewall.json
+    reason: 'policies_Patch is different from policies_Update, probably it''s better to use policies_Patch here. '
 ```
