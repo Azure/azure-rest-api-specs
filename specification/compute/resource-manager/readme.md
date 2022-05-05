@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2022-03
+tag: package-2022-03-02
 directive:
   - where:
       - $.definitions.VirtualMachine.properties
@@ -235,14 +235,31 @@ directive:
 ```
 
 
-### Tag: package-2022-03
+### Tag: package-2022-03-02
 
-These settings apply only when `--tag=package-2022-03` is specified on the command line.
+These settings apply only when `--tag=package-2022-03-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+```yaml $(tag) == 'package-2022-03-02'
 input-file:
-  - Microsoft.Compute/stable/2022-03-02/disk.json
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-03-02/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
+
+### Tag: package-2022-03-02-only
+
+These settings apply only when `--tag=package-2022-03-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-02-only'
+input-file:
+- Microsoft.Compute/stable/2022-03-02/disk.json
+```
+
 ### Tag: package-2021-12-01
 
 These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
