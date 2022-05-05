@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-2022-01-preview
 ```
 
 ### Suppression
@@ -149,6 +149,27 @@ input-file:
 - Microsoft.EventHub/stable/2021-11-01/consumergroups.json
 - Microsoft.EventHub/stable/2021-11-01/CheckNameAvailability.json
 - Microsoft.EventHub/stable/2021-11-01/SchemaRegistry.json
+```
+
+### Tag: package-2022-01-preview
+
+These settings apply only when `--tag=package-2022-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-preview'
+input-file:
+- Microsoft.EventHub/preview/2022-01-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2022-01-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2022-01-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2022-01-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2022-01-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2022-01-01-preview/AuthorizationRules.json
+- Microsoft.EventHub/preview/2022-01-01-preview/CheckNameAvailability.json
+- Microsoft.EventHub/preview/2022-01-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2022-01-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2022-01-01-preview/operations.json
+- Microsoft.EventHub/preview/2022-01-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2022-01-01-preview/SchemaRegistry.json
+- Microsoft.EventHub/preview/2022-01-01-preview/ApplicationGroups.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
