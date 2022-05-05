@@ -280,4 +280,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].patch.operationId'
     from: webapplicationfirewall.json
     reason: 'policies_Patch is different from policies_Update, probably it''s better to use policies_Patch here. '
+  - suppress: PathResourceTypeNameCamelCase
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/PreconfiguredEndpoints"]'
+    from: networkexperiment.json
+    reason: Not related to my changes.
 ```
