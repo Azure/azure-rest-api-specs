@@ -1076,8 +1076,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The job was successfully canceled."
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the job cancellation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1090,7 +1096,8 @@
           "Successful Cancel Training Job": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulCancelTrainingJob.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
@@ -1430,7 +1437,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "Conversation",
       "x-ms-client-name": "ConversationExportedProjectAssets"
     },
     "ConversationalAnalysisAuthoringConversationExportedUtterance": {
@@ -1725,7 +1732,7 @@
       },
       "x-ms-client-name": "EvaluationSummary"
     },
-    "ConversationalAnalysisAuthoringExportedCluOrchestration": {
+    "ConversationalAnalysisAuthoringExportedConversationOrchestration": {
       "description": "Defines the orchestration details for a Conversational project target.",
       "required": [
         "projectName",
@@ -1742,12 +1749,12 @@
           "type": "string"
         }
       },
-      "x-ms-client-name": "ExportedCluOrchestration"
+      "x-ms-client-name": "ExportedConversationOrchestration"
     },
-    "ConversationalAnalysisAuthoringExportedCluOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions": {
       "description": "Represents the orchestration options for a Conversational project target.",
       "required": [
-        "cluOrchestration"
+        "conversationOrchestration"
       ],
       "type": "object",
       "allOf": [
@@ -1756,13 +1763,13 @@
         }
       ],
       "properties": {
-        "cluOrchestration": {
+        "conversationOrchestration": {
           "description": "The Conversational project target details.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedCluOrchestration"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedConversationOrchestration"
         }
       },
-      "x-ms-discriminator-value": "clu",
-      "x-ms-client-name": "ExportedCluOrchestrationOptions"
+      "x-ms-discriminator-value": "Conversation",
+      "x-ms-client-name": "ExportedConversationOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedEntityList": {
       "description": "Represents a list component of an entity.",
@@ -1855,22 +1862,22 @@
           "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration"
         }
       },
-      "x-ms-discriminator-value": "luis",
+      "x-ms-discriminator-value": "Luis",
       "x-ms-client-name": "ExportedLuisOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedOrchestrationOptions": {
       "description": "Represents the options used to define the orchestration behavior of an intent.",
       "required": [
-        "kind"
+        "targetProjectKind"
       ],
       "type": "object",
       "properties": {
-        "kind": {
+        "targetProjectKind": {
           "description": "The kind of the target used in the orchestration flow.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationTargetProjectKind"
         }
       },
-      "discriminator": "kind",
+      "discriminator": "targetProjectKind",
       "x-ms-client-name": "ExportedOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedPrebuiltEntity": {
@@ -1932,8 +1939,8 @@
     },
     "ConversationalAnalysisAuthoringExportedProjectFormat": {
       "enum": [
-        "clu",
-        "luis"
+        "Conversation",
+        "Luis"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1941,18 +1948,18 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "clu",
+            "value": "Conversation",
             "description": "Specifies the format for a conversational project."
           },
           {
-            "value": "luis",
+            "value": "Luis",
             "description": "Specifies the format for an application that was exported from LUIS."
           }
         ]
       },
       "x-ms-client-name": "ExportedProjectFormat"
     },
-    "ConversationalAnalysisAuthoringExportedQnaOrchestration": {
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration": {
       "description": "Defines the orchestration details for a Question Answering project target.",
       "required": [
         "projectName"
@@ -1964,12 +1971,12 @@
           "type": "string"
         }
       },
-      "x-ms-client-name": "ExportedQnaOrchestration"
+      "x-ms-client-name": "ExportedQuestionAnsweringOrchestration"
     },
-    "ConversationalAnalysisAuthoringExportedQnaOrchestrationOptions": {
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions": {
       "description": "Represents the orchestration options for a Question Answering project target.",
       "required": [
-        "qnaOrchestration"
+        "questionAnsweringOrchestration"
       ],
       "type": "object",
       "allOf": [
@@ -1978,13 +1985,13 @@
         }
       ],
       "properties": {
-        "qnaOrchestration": {
+        "questionAnsweringOrchestration": {
           "description": "The Question Answering project details.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQnaOrchestration"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration"
         }
       },
-      "x-ms-discriminator-value": "qna",
-      "x-ms-client-name": "ExportedQnaOrchestrationOptions"
+      "x-ms-discriminator-value": "QuestionAnswering",
+      "x-ms-client-name": "ExportedQuestionAnsweringOrchestrationOptions"
     },
     "ConversationalAnalysisAuthoringExportedUtteranceEntityLabel": {
       "description": "Represents an entity label for an utterance.",
@@ -2256,7 +2263,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "orchestration",
+      "x-ms-discriminator-value": "Orchestration",
       "x-ms-client-name": "OrchestrationExportedProjectAssets"
     },
     "ConversationalAnalysisAuthoringOrchestrationExportedUtterance": {
@@ -2286,18 +2293,18 @@
       },
       "x-ms-client-name": "OrchestrationExportedUtterance"
     },
-    "ConversationalAnalysisAuthoringOrchestrationKind": {
+    "ConversationalAnalysisAuthoringOrchestrationTargetProjectKind": {
       "enum": [
-        "luis",
-        "clu",
-        "qna"
+        "Luis",
+        "Conversation",
+        "QuestionAnswering"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "OrchestrationKind",
+        "name": "OrchestrationTargetProjectKind",
         "modelAsString": true
       },
-      "x-ms-client-name": "OrchestrationKind"
+      "x-ms-client-name": "OrchestrationTargetProjectKind"
     },
     "ConversationalAnalysisAuthoringPrebuiltEntities": {
       "description": "Represents a list of the retrieved supported prebuilt entities.",
@@ -2423,8 +2430,8 @@
     },
     "ConversationalAnalysisAuthoringProjectKind": {
       "enum": [
-        "conversation",
-        "orchestration"
+        "Conversation",
+        "Orchestration"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2432,12 +2439,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "conversation",
+            "value": "Conversation",
             "description": "A project to build natural language into apps, bots, and IoT devices."
           },
           {
-            "value": "orchestration",
-            "description": "A project to connect and orchestrate CLU, Custom question answering and LUIS projects together in one single project."
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
           }
         ]
       },
@@ -3009,19 +3016,19 @@
       "description": "The format of the exported project file to use.",
       "type": "string",
       "enum": [
-        "clu",
-        "luis"
+        "Conversation",
+        "Luis"
       ],
       "x-ms-enum": {
         "name": "ExportedProjectFormat",
         "modelAsString": true,
         "values": [
           {
-            "value": "clu",
+            "value": "Conversation",
             "description": "Specifies the format for a conversational project."
           },
           {
-            "value": "luis",
+            "value": "Luis",
             "description": "Specifies the format for an application that was exported from LUIS."
           }
         ]
@@ -3072,20 +3079,20 @@
       "required": true,
       "type": "string",
       "enum": [
-        "conversation",
-        "orchestration"
+        "Conversation",
+        "Orchestration"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
         "modelAsString": true,
         "values": [
           {
-            "value": "conversation",
+            "value": "Conversation",
             "description": "A project to build natural language into apps, bots, and IoT devices."
           },
           {
-            "value": "orchestration",
-            "description": "A project to connect and orchestrate CLU, Custom question answering and LUIS projects together in one single project."
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
           }
         ]
       },
