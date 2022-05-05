@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for AnalysisServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for AnalysisServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for AnalysisServices, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-08
+tag: package-preview-2022-05
 ```
 
 
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.AnalysisServices/preview/2022-05-05.011/analysisservices.json
+```
 ### Tag: package-2017-08
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
@@ -67,8 +75,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -88,7 +96,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -183,8 +190,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
