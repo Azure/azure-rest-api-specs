@@ -1,0 +1,780 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BackupSolutionsClient",
+    "version": "2022-04-01-preview",
+    "description": "BackupSolutionsClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.BackupSolutions/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.BackupSolutions REST API operations.",
+        "x-ms-examples": {
+          "List Solutions operations": {
+            "$ref": "./examples/listBackupSolutionsOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BackupSolutions/vmwareApplications/{vmwareApplicationName}": {
+      "get": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_Get",
+        "description": "Gets VMwareApplication resource.",
+        "x-ms-examples": {
+          "Gets a VMware application": {
+            "$ref": "./examples/getVMwareApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMWareApplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns VMware application resource.",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_Delete",
+        "description": "Deletes VMware application resource.",
+        "x-ms-examples": {
+          "Delete VMware application": {
+            "$ref": "./examples/deleteVMwareApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMWareApplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_CreateOrUpdate",
+        "description": "Creates a new VMwareApplication resource.",
+        "x-ms-examples": {
+          "Create or update VMwareApplication": {
+            "$ref": "./examples/createOrUpdateVMwareApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMWareApplicationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMwareApplication"
+            },
+            "description": "Parameters supplied to the create or update a VMware application."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplication"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_Update",
+        "description": "Updates an existing VMware application.",
+        "x-ms-examples": {
+          "Update managed application": {
+            "$ref": "./examples/updateVmwareApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMWareApplicationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            },
+            "description": "Parameters supplied to update an existing VMware application."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the VMware application, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BackupSolutions/vmwareApplications": {
+      "get": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_ListByResourceGroup",
+        "description": "Gets all the VMwareApplications within a resource group.",
+        "x-ms-examples": {
+          "Lists VMwareApplications by resource group": {
+            "$ref": "./examples/listVMWareApplicationsResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of VMwareApplications.",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BackupSolutions/vmwareApplications": {
+      "get": {
+        "tags": [
+          "VMwareApplications"
+        ],
+        "operationId": "VMwareApplications_ListBySubscription",
+        "description": "Gets all the VMwareApplications within a subscription.",
+        "x-ms-examples": {
+          "Lists VMwareApplications": {
+            "$ref": "./examples/listVMWareApplicationsResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of VMwareApplications.",
+            "schema": {
+              "$ref": "#/definitions/VMwareApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VMwareApplication": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMwareApplicationProperties",
+          "description": "The VMware application properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ],
+      "description": "Defines a VMwareApplication resource."
+    },
+    "VMwareApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/managedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state."
+        },
+        "arcVMwareEnvironment": {
+          "$ref": "#/definitions/ArcVMwareEnvironment",
+          "description": "Source VMware Environment."
+        },
+        "backupClusterProperties": {
+          "$ref": "#/definitions/BackupClusterProperties",
+          "description": "Backup Cluster properties"
+        },
+        "propertyBag": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional Properties"
+        }
+      },
+      "description": "Properties of VMware application.",
+      "required": [
+        "arcVMwareEnvironment",
+        "backupClusterProperties"
+      ]
+    },
+    "BackupClusterProperties": {
+      "description": "Base class for Backup Cluster properties",
+      "discriminator": "objectType",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node count",
+          "default": 1
+        }
+      },
+      "required": [
+        "objectType"
+      ],
+      "title": "BackupClusterProperties",
+      "type": "object"
+    },
+    "ProvisionedClusterProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupClusterProperties"
+        }
+      ],
+      "description": "Provisioned Cluster Properties",
+      "properties": {
+        "name": {
+          "description": "Name of the provisioned cluster",
+          "type": "string"
+        },
+        "managementApplianceResourceId": {
+          "description": "Resource Id of the management appliance",
+          "type": "string"
+        },
+        "dhcpNetworkSegmentName": {
+          "description": "DHCP Network segment name",
+          "type": "string"
+        },
+        "dhcpControlPlaneIp": {
+          "description": "Control Plane IP",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dhcpNetworkSegmentName",
+        "dhcpControlPlaneIp",
+        "objectType"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "ProvisionedClusterProperties"
+    },
+    "ArcVMwareEnvironment": {
+      "description": "Defines an Arc VMware environment.",
+      "type": "object",
+      "properties": {
+        "customLocation": {
+          "description": "Fully qualified custom location resource id of the Arc VMware environment.",
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareResource"
+          },
+          "description": "List of Vmware resources deployed in a custom location.",
+          "x-ms-identifiers": []
+        }
+      },
+      "title": "ArcVMwareEnvironment",
+      "required": [
+        "customLocation",
+        "resources"
+      ]
+    },
+    "VMwareResource": {
+      "description": "Base class for VMwareResource",
+      "discriminator": "objectType",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectType"
+      ],
+      "title": "VMwareResource",
+      "type": "object"
+    },
+    "VMwarevCenterResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VMwareResource"
+        }
+      ],
+      "description": "Configuration for a VMware vCenter resource.",
+      "type": "object",
+      "properties": {
+        "vCenterResourceId": {
+          "description": "Fully qualified resource id of Arc vCenter resource.",
+          "type": "string"
+        },
+        "fqdn": {
+          "description": "FQDN of the vCenter.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "Port of the vCenter.",
+          "maximum": 65535,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "credentials": {
+          "$ref": "#/definitions/vCenterCredentials",
+          "description": "vCenter credentials required for backup operations."
+        },
+        "kind": {
+          "$ref": "#/definitions/vCenterKind",
+          "description": "Kind of the vCenter resource. Eg: AVS"
+        }
+      },
+      "required": [
+        "vCenterResourceId",
+        "credentials",
+        "objectType"
+      ],
+      "x-ms-discriminator-value": "VMwarevCenterResource"
+    },
+    "vCenterCredentials": {
+      "description": "Username / Password Credentials required for backup and restore operations.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "User Name for vCenter.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password for vCenter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "vCenterKind": {
+      "description": "Kind of the VCenter.",
+      "enum": [
+        "AVS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "vCenterKind",
+        "modelAsString": true
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedResourceIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "userAssignedResourceIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      },
+      "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
+    },
+    "VMwareApplicationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareApplication"
+          },
+          "description": "The array of managed VMwareApplications.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of managed VMwareApplications."
+    },
+    "ProvisioningState": {
+      "description": "Provisioning state of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Created"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.BackupSolutions operations",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "type": "object",
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.BackupSolutions",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Localized friendly description for the operation",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.BackupSolutions operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.BackupSolutions operations.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "managedResourceGroupConfiguration": {
+      "description": "Managed resource group configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
+        }
+      }
+    },
+    "ResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object containing updates for patch operations."
+    }
+  },
+  "parameters": {
+    "VMWareApplicationNameParameter": {
+      "name": "vmwareApplicationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the VMWare application.",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
