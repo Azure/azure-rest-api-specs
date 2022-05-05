@@ -352,10 +352,10 @@
         }
       }
     },
-    "/providers/Microsoft.ApiSecurity/apiCollections": {
-      "post": {
-        "description": "Upon user requesting collections for a list of subscriptions, return the collections data to UI",
-        "summary": "Upon user requesting collections for a list of subscriptions, return the collections data to UI",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apiCollections": {
+      "get": {
+        "description": "Upon user requesting collections for a subscription, return the collections data to UI",
+        "summary": "Upon user requesting collections for a subscription, return the collections data to UI",
         "tags": [
           "ApiCollections"
         ],
@@ -366,6 +366,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "api-version",
             "in": "query",
@@ -385,14 +388,6 @@
             "default": 20,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiCollectionsRequest"
-            }
           }
         ],
         "responses": {
@@ -423,10 +418,10 @@
         }
       }
     },
-    "/providers/Microsoft.ApiSecurity/apiCollectionsMeta": {
-      "post": {
-        "description": "Upon user requesting collection details for a subscription, return the collection details data to UI",
-        "summary": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apiCollectionsMeta": {
+      "get": {
+        "description": "Upon user requesting metadata of collections for a subscription, return the metadata of the matched collections to UI",
+        "summary": "Upon user requesting metadata of collections for a subscription, return the metadata of the matched collections to UI",
         "tags": [
           "ApiCollections"
         ],
@@ -438,18 +433,13 @@
         },
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiCollectionsMetaRequest"
-            }
           }
         ],
         "responses": {
@@ -480,10 +470,10 @@
         }
       }
     },
-    "/providers/Microsoft.ApiSecurity/apiCollections/{apiCollectionId}/apiCollectionDetails": {
-      "post": {
-        "description": "Upon user requesting collection details for a subscription, return the collection details data to UI",
-        "summary": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apiCollections/{apiCollectionId}/apiCollectionDetails": {
+      "get": {
+        "description": "Upon user requesting collection details for a collection in a subscription, return the collection details data to UI",
+        "summary": "Upon user requesting collection details for a collection in a subscription, return the collection details data to UI",
         "tags": [
           "ApiCollections"
         ],
@@ -494,6 +484,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "apiCollectionId",
             "in": "path",
@@ -519,14 +512,6 @@
             "default": 20,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiCollectionDetailsRequest"
-            }
           }
         ],
         "responses": {
@@ -623,54 +608,6 @@
           "$ref": "#/definitions/JsonValueKind"
         }
       }
-    },
-    "ApiCollectionDetailsRequest": {
-      "title": "ApiCollectionDetailsRequest",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "a subscription Id of customer",
-          "type": "string",
-          "format": "uuid"
-        }
-      },
-      "required": [
-        "subscriptionId"
-      ]
-    },
-    "ApiCollectionsRequest": {
-      "title": "ApiCollectionsRequest",
-      "type": "object",
-      "properties": {
-        "subscriptionIds": {
-          "description": "list of subscription Ids of customer",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "required": [
-        "subscriptionIds"
-      ]
-    },
-    "ApiCollectionsMetaRequest": {
-      "title": "ApiCollectionsMetaRequest",
-      "type": "object",
-      "properties": {
-        "subscriptionIds": {
-          "description": "list of subscription Ids of customer",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "required": [
-        "subscriptionIds"
-      ]
     },
     "ApimApiEvent": {
       "title": "ApimApiEvent",
