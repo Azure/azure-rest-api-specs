@@ -37,15 +37,12 @@ These settings apply only when `--tag=package-stable-2022-05` is specified on th
 ```yaml $(tag) == 'package-stable-2022-05'
 input-file:
   - Microsoft.DocumentDB/stable/2022-05-15/cosmos-db.json
-  - Microsoft.DocumentDB/stable/2022-05-15/dataTransferService.json
   - Microsoft.DocumentDB/stable/2022-05-15/managedCassandra.json
-  - Microsoft.DocumentDB/stable/2022-05-15/mongorbac.json
   - Microsoft.DocumentDB/stable/2022-05-15/notebook.json
   - Microsoft.DocumentDB/stable/2022-05-15/privateEndpointConnection.json
   - Microsoft.DocumentDB/stable/2022-05-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2022-05-15/rbac.json
   - Microsoft.DocumentDB/stable/2022-05-15/restorable.json
-  - Microsoft.DocumentDB/stable/2022-05-15/services.json
 ```
 
 ### Tag: package-preview-2022-02
