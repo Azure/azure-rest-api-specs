@@ -57,6 +57,15 @@ directive:
     where: $.definitions.UserMetricsModel
 ```
 
+### Tag: package-2022-04-preview-only
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+- Microsoft.Network/preview/2022-04-01/trafficmanager.json
+```
+
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
