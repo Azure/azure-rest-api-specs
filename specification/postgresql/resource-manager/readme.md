@@ -69,6 +69,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Migrations.json
 ```
 
 ### Tag: package-2021-04-10-privatepreview
