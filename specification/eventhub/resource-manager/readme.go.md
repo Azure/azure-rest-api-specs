@@ -26,7 +26,7 @@ batch:
   - tag: package-2018-01-preview
   - tag: package-2021-01-preview
   - tag: package-2021-11  
-  - tag: package-2022-01-01-preview
+  - tag: package-2022-01-preview
 ```
 
 ### Tag: package-2017-04 and go
