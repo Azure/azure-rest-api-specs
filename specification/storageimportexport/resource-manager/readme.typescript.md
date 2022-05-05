@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-storageimportexport"
   output-folder: "$(typescript-sdks-folder)/sdk/storageimportexport/arm-storageimportexport"
-  clear-output-folder: true
   override-client-name: StorageImportExportManagementClient
   generate-metadata: true
 ```

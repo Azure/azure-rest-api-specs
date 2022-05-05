@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "availabilityGroupListenerName": "agl-test",
+    "api-version": "2021-11-01-preview",
+    "parameters": {
+      "properties": {
+        "availabilityGroupName": "ag-test",
+        "loadBalancerConfigurations": [
+          {
+            "privateIpAddress": {
+              "ipAddress": "10.1.0.112",
+              "subnetResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+            },
+            "loadBalancerResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb-test",
+            "probePort": 59983,
+            "sqlVirtualMachineInstances": [
+              "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+              "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3"
+            ]
+          }
+        ],
+        "port": 1433
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "loadBalancerConfigurations": [
+            {
+              "privateIpAddress": {
+                "ipAddress": "10.1.0.113",
+                "subnetResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+              },
+              "sqlVirtualMachineInstances": [
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3"
+              ]
+            }
+          ],
+          "port": 1433
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup/availabilityGroupListeners/agl-test",
+        "name": "agl-test",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/availabilityGroupListeners"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Provisioning",
+          "loadBalancerConfigurations": [
+            {
+              "privateIpAddress": {
+                "ipAddress": "10.1.0.112",
+                "subnetResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+              },
+              "sqlVirtualMachineInstances": [
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3"
+              ]
+            }
+          ],
+          "port": 1433
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup/availabilityGroupListeners/agl-test",
+        "name": "agl-test",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/availabilityGroupListeners"
+      }
+    }
+  }
+}
