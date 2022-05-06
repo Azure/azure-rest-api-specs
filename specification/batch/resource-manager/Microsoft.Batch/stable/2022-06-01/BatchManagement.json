@@ -3,7 +3,7 @@
   "info": {
     "title": "BatchManagementClient",
     "description": "The Batch Management Client.",
-    "version": "2022-01-01"
+    "version": "2022-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1985,6 +1985,67 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "operationId": "PrivateEndpointConnection_Delete",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "description": "Deletes the specified private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools": {
@@ -2552,6 +2613,16 @@
             "$ref": "#/definitions/AuthenticationMode"
           },
           "description": "List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane."
+        },
+        "publicNetworkAccess": {
+          "title": "The network access type for accessing Azure Batch account.",
+          "description": "If not specified, the default value is 'enabled'.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "networkProfile": {
+          "title": "Network profile for Batch account, which contains network rule settings for each endpoint.",
+          "description": "The network profile only takes effect when publicNetworkAccess is enabled.",
+          "$ref": "#/definitions/NetworkProfile"
         }
       },
       "description": "The properties of a Batch account."
@@ -2576,6 +2647,11 @@
           "title": "The network access type for accessing Azure Batch account.",
           "description": "If not specified, the default value is 'enabled'.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "networkProfile": {
+          "title": "Network profile for Batch account, which contains network rule settings for each endpoint.",
+          "description": "The network profile only takes effect when publicNetworkAccess is enabled.",
+          "$ref": "#/definitions/NetworkProfile"
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
@@ -2766,6 +2842,11 @@
           "readOnly": true,
           "description": "The account endpoint used to interact with the Batch service."
         },
+        "nodeManagementEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The endpoint used by compute node to connect to the Batch node management service."
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -2822,11 +2903,16 @@
           "$ref": "#/definitions/KeyVaultReference"
         },
         "publicNetworkAccess": {
-          "readOnly": true,
           "x-nullable": true,
           "title": "The network interface type for accessing Azure Batch service and Batch account operations.",
           "description": "If not specified, the default value is 'enabled'.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "networkProfile": {
+          "x-nullable": true,
+          "title": "Network profile for Batch account, which contains network rule settings for each endpoint.",
+          "description": "The network profile only takes effect when publicNetworkAccess is enabled.",
+          "$ref": "#/definitions/NetworkProfile"
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -2861,7 +2947,7 @@
           "x-nullable": true,
           "type": "integer",
           "format": "int32",
-          "title": "The Spot/low-priority core quota for the Batch account.",
+          "title": "The low-priority core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamily": {
@@ -2871,9 +2957,6 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
@@ -2881,7 +2964,7 @@
           "x-nullable": false,
           "type": "boolean",
           "title": "A value indicating whether core quotas per Virtual Machine family are enforced for this account",
-          "description": "Batch is transitioning its core quota system for dedicated cores to be enforced per Virtual Machine family. During this transitional phase, the dedicated core quota per Virtual Machine family may not yet be enforced. If this flag is false, dedicated core quota is enforced via the old dedicatedCoreQuota property on the account and does not consider Virtual Machine family. If this flag is true, dedicated core quota is enforced via the dedicatedCoreQuotaPerVMFamily property on the account, and the old dedicatedCoreQuota does not apply."
+          "description": "If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family."
         },
         "poolQuota": {
           "readOnly": true,
@@ -3307,6 +3390,91 @@
         ]
       }
     },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "accountAccess": {
+          "$ref": "#/definitions/EndpointAccessProfile",
+          "description": "Network access profile for batchAccount endpoint (Batch account data plane API)."
+        },
+        "nodeManagementAccess": {
+          "$ref": "#/definitions/EndpointAccessProfile",
+          "description": "Network access profile for nodeManagement endpoint (Batch service managing compute nodes for Batch pools)."
+        }
+      },
+      "description": "Network profile for Batch account, which contains network rule settings for each endpoint."
+    },
+    "EndpointAccessProfile": {
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "title": "The default action when there is no IPRule matched.",
+          "description": "Default action for endpoint access. It is only applicable when publicNetworkAccess is enabled.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointAccessDefaultAction",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Allow",
+                "description": "Allow client access."
+              },
+              {
+                "value": "Deny",
+                "description": "Deny client access."
+              }
+            ]
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          },
+          "description": "Array of IP ranges to filter client IP address."
+        }
+      },
+      "description": "Network access profile for Batch endpoint.",
+      "required": [
+        "defaultAction"
+      ]
+    },
+    "IPRule": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action when client IP address is matched.",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "IPRuleAction",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Allow",
+                "description": "Allow access for the matched client IP address."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "title": "The IP address or IP address range to filter",
+          "description": "IPv4 address, or IPv4 address range in CIDR format."
+        }
+      },
+      "description": "Rule to filter client IP address.",
+      "required": [
+        "action",
+        "value"
+      ]
+    },
     "PoolAllocationMode": {
       "type": "string",
       "description": "The allocation mode for creating pools in the Batch account.",
@@ -3553,10 +3721,6 @@
           "items": {
             "$ref": "#/definitions/DeleteCertificateError"
           },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -3678,32 +3842,57 @@
           "x-nullable": false,
           "title": "The provisioning state of the private endpoint connection.",
           "enum": [
-            "Succeeded",
+            "Creating",
             "Updating",
-            "Failed"
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Cancelled"
           ],
           "x-ms-enum": {
             "name": "PrivateEndpointConnectionProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "Succeeded",
-                "description": "The connection status is final and is ready for use if Status is Approved."
+                "value": "Creating",
+                "description": "The connection is creating."
               },
               {
                 "value": "Updating",
                 "description": "The user has requested that the connection status be updated, but the update operation has not yet completed. You may not reference the connection when connecting the Batch account."
               },
               {
+                "value": "Deleting",
+                "description": "The connection is deleting."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The connection status is final and is ready for use if Status is Approved."
+              },
+              {
                 "value": "Failed",
                 "description": "The user requested that the connection be updated and it failed. You may retry the update operation."
+              },
+              {
+                "value": "Cancelled",
+                "description": "The user has cancelled the connection creation."
               }
             ]
           }
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
+          "readOnly": true,
           "title": "The ARM resource identifier of the private endpoint."
+        },
+        "groupIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "title": "The group id of the private endpoint connection.",
+          "description": "The value has one and only one group id."
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
@@ -3901,7 +4090,7 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
+          "title": "The number of low-priority compute nodes currently in the pool.",
           "readOnly": true
         },
         "scaleSettings": {
@@ -3957,9 +4146,6 @@
           "items": {
             "$ref": "#/definitions/UserAccount"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "The list of user accounts to be created on each node in the pool."
         },
         "metadata": {
@@ -3967,9 +4153,6 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "A list of name-value pairs associated with the pool as metadata.",
           "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
@@ -4012,7 +4195,6 @@
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
-          "x-ms-identifiers": [],
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
         }
@@ -4131,7 +4313,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
+          "title": "The desired number of low-priority compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
@@ -4280,7 +4462,6 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
-          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4306,7 +4487,6 @@
           "items": {
             "$ref": "#/definitions/AutoScaleRunError"
           },
-          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4361,9 +4541,6 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "x-ms-identifiers": [
-            "lun"
-          ],
           "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them."
         },
@@ -4392,10 +4569,6 @@
           "items": {
             "$ref": "#/definitions/VMExtension"
           },
-          "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
           "title": "The virtual machine extension for the pool.",
           "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
         },
@@ -4505,9 +4678,6 @@
           "items": {
             "$ref": "#/definitions/ContainerRegistry"
           },
-          "x-ms-identifiers": [
-            "registryServers"
-          ],
           "title": "Additional private registries from which containers can be pulled.",
           "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
         }
@@ -4803,9 +4973,6 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "x-ms-identifiers": [
-            "httpUrl"
-          ],
           "title": "A list of files that the Batch service will download to the compute node before running the command line."
         },
         "environmentSettings": {
@@ -4813,9 +4980,6 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "A list of environment variable settings for the start task."
         },
         "userIdentity": {
@@ -4827,7 +4991,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the task may be retried.",
-          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)."
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
         },
         "waitForSuccess": {
           "type": "boolean",
@@ -5175,7 +5339,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -5209,7 +5373,7 @@
               },
               {
                 "value": "job",
-                "description": "Dynamic VNet assignment is done per-job. Don't use this option unless your batch account has been approved to use this feature."
+                "description": "Dynamic VNet assignment is done per-job. If this value is set, the network configuration subnet ID must also be set. This feature requires approval before use, please contact support"
               }
             ]
           }
@@ -5276,7 +5440,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of Spot/low-priority compute nodes in the pool."
+          "title": "The desired number of low-priority compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -5299,7 +5463,6 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
-          "x-ms-identifiers": [],
           "title": "Details of any errors encountered while performing the last resize on the pool.",
           "description": "This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady."
         }
@@ -5315,9 +5478,6 @@
           "items": {
             "$ref": "#/definitions/InboundNatPool"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
           "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
@@ -5381,8 +5541,7 @@
           "description": "The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -5529,10 +5688,6 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -5573,9 +5728,6 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "description": "A collection of capabilities which this SKU supports."
         }
       },
@@ -5589,9 +5741,6 @@
           "items": {
             "$ref": "#/definitions/SupportedSku"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "description": "The list of SKUs available for the Batch service in the location."
         },
         "nextLink": {
@@ -5660,9 +5809,6 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
@@ -5914,7 +6060,6 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
-          "x-ms-identifiers": [],
           "description": "The collection of outbound network dependency endpoints returned by the listing operation."
         },
         "nextLink": {
@@ -5938,9 +6083,6 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
-          "x-ms-identifiers": [
-            "domainName"
-          ],
           "description": "The endpoints for this service to which the Batch service makes outbound calls."
         }
       },
@@ -5965,7 +6107,6 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
-          "x-ms-identifiers": [],
           "description": "The list of connection details for this endpoint."
         }
       },
@@ -6030,12 +6171,12 @@
       "x-ms-parameter-location": "method"
     },
     "DetectorIdParameter": {
-      "name": "detectorId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the detector.",
-      "x-ms-parameter-location": "method"
+        "name": "detectorId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the detector.",
+        "x-ms-parameter-location": "method"
     },
     "PoolNameParameter": {
       "name": "poolName",
