@@ -1408,8 +1408,40 @@
             "name": "BackupStorageVersion",
             "modelAsString": true
           }
+        },
+        "redundancySettings": {
+          "description": "The redundancy settings of the resource.",
+          "type": "object",
+          "properties": {
+            "standardTierStorageRedundancy":{
+              "description": "The storage redundancy setting for the Vault",
+              "enum": [
+                "GeoRedundant",
+                "LocallyRedundant",
+                "ZoneRedundant"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "standardTierStorageRedundancy",
+                "modelAsString": true
+              }
+            },
+            "crossRegionRestore": {
+              "description": "Showing whether cross region restore is enabled or not",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "crossRegionRestore",
+                "modelAsString": true
+              }
+            }
+          }
         }
-      }
     },
     "IdentityData": {
       "required": [
