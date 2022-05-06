@@ -7,18 +7,18 @@
       "properties": {
         "targetService": {
           "type": "AzureResource",
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
         },
         "authInfo": {
           "authType": "secret",
           "name": "name",
-          "secret": "secret"
+          "secretInfo": {
+            "secretType": "keyVaultSecretUri",
+            "value": "https://vault-name.vault.azure.net/secrets/secret-name/00000000000000000000000000000000"
+          }
         },
         "vNetSolution": {
           "type": "serviceEndpoint"
-        },
-        "secretStore": {
-          "keyVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/test-kv"
         }
       }
     }
@@ -37,12 +37,9 @@
           "vNetSolution": {
             "type": "serviceEndpoint"
           },
-          "secretStore": {
-            "keyVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/test-kv"
-          },
           "targetService": {
             "type": "AzureResource",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
           }
         }
       }
@@ -60,12 +57,9 @@
           "vNetSolution": {
             "type": "serviceEndpoint"
           },
-          "secretStore": {
-            "keyVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/test-kv"
-          },
           "targetService": {
             "type": "AzureResource",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
           }
         }
       }
