@@ -79,7 +79,7 @@
           "Arbitration result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
           },
-          "Orchestration direct target result": {
+          "Orchestrator direct target result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
@@ -347,7 +347,7 @@
       "additionalProperties": true
     },
     "TextConversationItem": {
-      "description": "The text modality of an input conversation.",
+      "description": "The text modality input conversation item.",
       "allOf": [
         {
           "$ref": "#/definitions/ConversationItemBase"
@@ -355,7 +355,7 @@
       ],
       "properties": {
         "text": {
-          "description": "The single input query",
+          "description": "The text input",
           "type": "string"
         }
       },
@@ -387,7 +387,7 @@
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "Luis",
+            "LUIS",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -421,7 +421,7 @@
     },
     "LUISParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "Luis",
+      "x-ms-discriminator-value": "LUIS",
       "type": "object",
       "allOf": [
         {
@@ -605,7 +605,7 @@
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "Luis",
+            "LUIS",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -1481,7 +1481,7 @@
     "LUISTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "Luis",
+      "x-ms-discriminator-value": "LUIS",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
