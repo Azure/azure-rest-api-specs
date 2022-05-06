@@ -4269,69 +4269,6 @@
         }
       }
     },
-    "regionInfo": {
-      "description": "Provides region specific information.",
-      "type": "object",
-      "properties": {
-        "storageToNetworkProximity": {
-          "title": "Storage to Network Proximity",
-          "description": "Provides storage to network proximity information in the region.",
-          "type": "string",
-          "enum": [
-            "Default",
-            "T1",
-            "T2",
-            "T1AndT2"
-          ],
-          "x-ms-enum": {
-            "name": "RegionStorageToNetworkProximity",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Default",
-                "description": "Basic network connectivity."
-              },
-              {
-                "value": "T1",
-                "description": "Standard T1 network connectivity."
-              },
-              {
-                "value": "T2",
-                "description": "Standard T2 network connectivity."
-              },
-              {
-                "value": "T1AndT2",
-                "description": "Standard T1 and T2 network connectivity."
-              }
-            ]
-          },
-          "example": "T2"
-        },
-        "availabilityZoneMappings": {
-          "title": "Logical availability zone mappings.",
-          "description": "Provides logical availability zone mappings for the subscription for a region.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "availabilityZone": {
-                "description": "Logical availability zone.",
-                "type": "string",
-                "example": "1"
-              },
-              "isAvailable": {
-                "description": "Available availability zone",
-                "type": "boolean",
-                "example": true
-              }
-            }
-          },
-          "x-ms-identifiers": [
-            "availabilityZone"
-          ]
-        }
-      }
-    },
     "ResourceNameAvailabilityRequest": {
       "description": "Resource name availability request content.",
       "required": [
