@@ -28,17 +28,6 @@ directive:
 
 These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_05_15_preview'
-input-file:
-  - preview/2022-05-15-preview/textanalytics.json
-  - preview/2022-05-15-preview/analyzeconversations.json
-  - preview/2022-05-15-preview/analyzetext-authoring.json
-  - preview/2022-05-15-preview/analyzeconversations-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
 ```
 ### Release 2022-05-01
 
