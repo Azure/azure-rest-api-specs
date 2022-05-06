@@ -118,6 +118,9 @@
           "Create a managed disk with ssd zrs account type.": {
             "$ref": "./examples/diskExamples/Disk_Create_WithSSDZRSAccountType.json"
           },
+          "Create a managed disk with premium v2 account type.": {
+            "$ref": "./examples/diskExamples/Disk_Create_WithPremiumV2_LRSAccountType.json"
+          },
           "Create a managed disk with security profile": {
             "$ref": "./examples/diskExamples/Disk_Create_WithSecurityProfile.json"
           },
@@ -129,6 +132,15 @@
           },
           "Create a confidential VM supported disk encrypted with customer managed key": {
             "$ref": "./examples/diskExamples/Disk_Create_ConfidentialVMSupportedDiskEncryptedWithCMK.json"
+          },
+          "Create a managed disk from an Azure Compute Gallery image.": {
+            "$ref": "./examples/diskExamples/Disk_Create_FromAnAzureComputeGalleryImage.json"
+          },
+          "Create a managed disk from an Azure Compute Gallery direct shared image.": {
+            "$ref": "./examples/diskExamples/Disk_Create_FromAnAzureComputeGalleryDirectSharedImage.json"
+          },
+          "Create a managed disk from an Azure Compute Gallery community image.": {
+            "$ref": "./examples/diskExamples/Disk_Create_FromAnAzureComputeGalleryCommunityImage.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -532,7 +544,8 @@
             "StandardSSD_LRS",
             "UltraSSD_LRS",
             "Premium_ZRS",
-            "StandardSSD_ZRS"
+            "StandardSSD_ZRS",
+            "PremiumV2_LRS"
           ],
           "x-ms-enum": {
             "name": "DiskStorageAccountTypes",
@@ -561,6 +574,10 @@
               {
                 "value": "StandardSSD_ZRS",
                 "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
+              },
+              {
+                "value": "PremiumV2_LRS",
+                "description": "Premium SSD v2 locally redundant storage. Best for production and performance-sensitive workloads that consistently require low latency and high IOPS and throughput."
               }
             ]
           },
@@ -572,7 +589,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, or StandardSSD_ZRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS."
     },
     "DiskProperties": {
       "properties": {
