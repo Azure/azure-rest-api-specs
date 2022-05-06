@@ -1271,13 +1271,13 @@
         }
       }
     },
-    "/chat/broadcast": {
+    "/chat/notifications": {
       "post": {
         "tags": [
-          "BroadcastMessages"
+          "Notificationts"
         ],
-        "summary": "Sends a broadcast/Fire and Forget/Threadless/CPM message.",
-        "operationId": "Broadcast_SendChatMessage",
+        "summary": "Sends a Cross-platform messaging notification.",
+        "operationId": "CrossPlatformMessaging_SendNotification",
         "consumes": [
           "application/json"
         ],
@@ -1290,18 +1290,18 @@
           },
           {
             "in": "body",
-            "name": "sendBroadcastChatMessageRequest",
+            "name": "sendNotificationRequest",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendBroadcastChatMessageRequest"
+              "$ref": "#/definitions/sendNotificationRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Broadcast Message sent.",
+            "description": "Cross-platform messaging notification sent.",
             "schema": {
-              "$ref": "#/definitions/SendBroadcastChatMessageResult"
+              "$ref": "#/definitions/SendNotificationResult"
             }
           },
           "401": {
@@ -1473,8 +1473,8 @@
         }
       }
     },
-    "SendBroadcastChatMessageRequest": {
-      "description": "Details of the broadcast chat message to send.",
+    "sendNotificationRequest": {
+      "description": "Details of the Cross-platform messaging notification to send.",
       "required": [
         "type, from, to"
       ],
@@ -1491,7 +1491,7 @@
           "example": "37:whatsapp:16315551234"
         },
         "type": {
-          "$ref": "#/definitions/BroadcastChatMessageType"
+          "$ref": "#/definitions/NotificationType"
         },
         "content": {
           "description": "Broadcasr chat message content.",
@@ -1506,8 +1506,8 @@
         }
       }
     },
-    "BroadcastChatMessageType": {
-      "description": "The broadcast chat message type.",
+    "NotificationType": {
+      "description": "The cross-platform messaging notification type.",
       "enum": [
         "image",
         "text",
@@ -1515,7 +1515,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "BroadcastChatMessageType",
+        "name": "NotificationType",
         "modelAsString": true
       }
     },
@@ -1563,8 +1563,8 @@
         }
       }
     },
-    "SendBroadcastChatMessageResult": {
-      "description": "Result of the send broadcast chat message operation.",
+    "SendNotificationResult": {
+      "description": "Result of the send cross-platform messaging notification operation.",
       "required": [
         "id"
       ],
