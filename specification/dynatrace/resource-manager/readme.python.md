@@ -9,6 +9,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-dynatrace
 namespace: azure.mgmt.dynatrace
 package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
 ``` yaml $(python)
