@@ -28,17 +28,12 @@ directive:
 
 These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
 
-```
-### Release 2022-05-01
-
-These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_05_01'
+``` yaml $(tag) == 'release_2022_05_15_preview'
 input-file:
-  - stable/2022-05-01/textanalytics.json
-  - stable/2022-05-01/analyzetext-authoring.json
-  - stable/2022-05-01/analyzeconversations-authoring.json
-  - stable/2022-05-01/analyzeconversations.json
+  - preview/2022-05-15-preview/textanalytics.json
+  - preview/2022-05-15-preview/analyzeconversations.json
+  - preview/2022-05-15-preview/analyzetext-authoring.json
+  - preview/2022-05-15-preview/analyzeconversations-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
