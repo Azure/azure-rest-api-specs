@@ -1499,10 +1499,10 @@
           "example": "Come on guys, lets go for lunch together."
         },
         "media": {
-          "$ref": "#/definitions/ChatMedia"
+          "$ref": "#/definitions/NotificationMedia"
         },
         "template": {
-          "$ref": "#/definitions/ChatTemplate"
+          "$ref": "#/definitions/NotificationTemplate"
         }
       }
     },
@@ -1519,7 +1519,7 @@
         "modelAsString": true
       }
     },
-    "ChatMedia": {
+    "NotificationMedia": {
       "description": "The media Object",
       "required": [
         "link"
@@ -1533,8 +1533,8 @@
         }
       }
     },
-    "ChatTemplate": {
-      "description": "The template object used to create message templates.",
+    "NotificationTemplate": {
+      "description": "The template object used to create notification templates.",
       "required": [
         "name, language, parameters"
       ],
@@ -1546,12 +1546,12 @@
           "example": "appointment_update"
         },
         "language": {
-          "description": "The codes for the supported languages for message templates.",
+          "description": "The codes for the supported languages for notification templates.",
           "type": "string",
           "example": "en_US"
         },
         "parameters": {
-          "description": "Array of parameters for the content of the message.",
+          "description": "Array of parameters for the content of the notification.",
           "type": "array",
           "items": {
             "type": "string"
