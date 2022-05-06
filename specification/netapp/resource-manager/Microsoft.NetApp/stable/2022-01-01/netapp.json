@@ -292,43 +292,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfo": {
-      "get": {
-        "summary": "Describes region specific information.",
-        "description": "Provides storage to network proximity and logical zone mapping information.",
-        "tags": [
-          "NetApp Resource"
-        ],
-        "operationId": "NetAppResource_QueryRegionInfo",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/location"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/regionInfo"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "RegionInfo_Query": {
-            "$ref": "examples/RegionInfo.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a subscription",
