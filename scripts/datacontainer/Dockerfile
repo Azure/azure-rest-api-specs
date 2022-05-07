@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM mcr.microsoft.com/oss/mirror/docker.io/library/ubuntu:20.04
 
 RUN apk update && \
     apk add git
