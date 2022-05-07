@@ -6564,7 +6564,17 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "The current provisioning state of trusted access role binding."
+          "description": "The current provisioning state of trusted access role binding.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedAccessRoleBindingProvisioningState",
+            "modelAsString": true
+          }
         },
         "sourceResourceId": {
           "type": "string",
