@@ -30,6 +30,17 @@ openapi-type: arm
 tag: package-2021-07-01
 ```
 
+### Tag: package-2022-02-01-preview
+
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/workspaceFeatures.json
+```
+
 ### Tag: package-2022-01-01-preview
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
