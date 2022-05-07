@@ -140,7 +140,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/vmHostPayload": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getVMHostPayload": {
       "post": {
         "operationId": "Monitors_GetVMHostPayload",
         "summary": "Returns the payload that needs to be passed in the request body for installing Dynatrace agent on a VM.",
@@ -181,105 +181,6 @@
           },
           "Monitors_GetVMHostPayload_MinimumSet_Gen": {
             "$ref": "./examples/Monitors_GetVMHostPayload_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/vmHostUpdate": {
-      "post": {
-        "operationId": "Monitors_ListVmHostUpdate",
-        "summary": "Sending request to update the collection when Dynatrace agent has been installed on a VM for a given monitor.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VMHostUpdateParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VMResourcesListResponse"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "Monitors"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Monitors_ListVmHostUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_ListVmHostUpdate_MaximumSet_Gen.json"
-          },
-          "Monitors_ListVmHostUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_ListVmHostUpdate_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listVMHosts": {
-      "post": {
-        "operationId": "Monitors_ListVMHosts",
-        "summary": "List the compute resources currently being monitored by the Dynatrace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VMResourcesListResponse"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "Monitors"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Monitors_ListVMHosts_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_ListVMHosts_MaximumSet_Gen.json"
-          },
-          "Monitors_ListVMHosts_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_ListVMHosts_MinimumSet_Gen.json"
           }
         }
       }
@@ -1303,46 +1204,6 @@
       },
       "description": "Response of payload to be passed while installing VM agent."
     },
-    "VMHostUpdateRequest": {
-      "type": "object",
-      "properties": {
-        "vmResourceIds": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMResources"
-          },
-          "x-cadl-name": "VMResources[]",
-          "description": "VM resource ID on which agent is installed/deleted"
-        },
-        "state": {
-          "$ref": "#/definitions/VMHostUpdateState",
-          "description": "Specifies the state of the operation - install/ delete."
-        }
-      },
-      "description": "Request of a list VM Host Update Operation."
-    },
-    "VMResourcesListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMResources"
-          },
-          "x-cadl-name": "VMResources[]",
-          "description": "The items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "description": "Response of a list VM Host Update Operation.",
-      "required": [
-        "value",
-        "nextLink"
-      ]
-    },
     "VMHostsListResponse": {
       "type": "object",
       "properties": {
@@ -1667,24 +1528,6 @@
       },
       "description": "Details of resource being monitored by Dynatrace monitor resource"
     },
-    "VMResources": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/virtualMachineId",
-          "description": "VM resource ID on which agent is installed"
-        },
-        "agentVersion": {
-          "type": "string",
-          "description": "Version of the Dynatrace agent installed on the VM."
-        },
-        "enableLogAnalytics": {
-          "type": "string",
-          "description": "Whether the log analytics is enabled for VM or not"
-        }
-      },
-      "description": "VM Resource Ids"
-    },
     "VMInfo": {
       "type": "object",
       "properties": {
@@ -1797,18 +1640,6 @@
       ],
       "x-ms-enum": {
         "name": "LogModule",
-        "modelAsString": true
-      }
-    },
-    "VMHostUpdateState": {
-      "type": "string",
-      "description": "Various states of the updating vm extension on resource",
-      "enum": [
-        "Install",
-        "Delete"
-      ],
-      "x-ms-enum": {
-        "name": "VMHostUpdateState",
         "modelAsString": true
       }
     },
@@ -2094,11 +1925,6 @@
         "name": "SendingLogsStatus",
         "modelAsString": true
       }
-    },
-    "virtualMachineId": {
-      "type": "string",
-      "pattern": "\\/subscriptions\\/[a-z0-9\\-]+\\/resourceGroups\\/[^\\/]+\\/providers\\/Microsoft\\.Compute\\/virtualMachines\\/[^\\/]+",
-      "description": "A virtual machine reference"
     },
     "LiftrResourceCategories": {
       "type": "string",
@@ -2405,16 +2231,6 @@
       "required": true,
       "description": "Monitor resource name",
       "type": "string"
-    },
-    "VMHostUpdateParameter": {
-      "x-ms-parameter-location": "method",
-      "name": "request",
-      "in": "body",
-      "required": true,
-      "description": "The details of the VMHost update request.",
-      "schema": {
-        "$ref": "#/definitions/VMHostUpdateRequest"
-      }
     },
     "RuleSetNameParameter": {
       "x-ms-parameter-location": "method",
