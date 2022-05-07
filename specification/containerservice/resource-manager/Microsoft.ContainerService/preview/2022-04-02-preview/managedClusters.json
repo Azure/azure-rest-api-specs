@@ -2601,6 +2601,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List trusted access roles": {
             "$ref": "./examples/TrustedAccessRoles_List.json"
@@ -2642,6 +2645,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List trusted access role bindings": {
@@ -2727,8 +2733,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/TrustedAccessRoleBinding"
             }
@@ -6539,6 +6545,11 @@
             "name"
           ],
           "description": "Role list"
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6596,6 +6607,11 @@
             "$ref": "#/definitions/TrustedAccessRoleBinding"
           },
           "description": "Role binding list"
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
