@@ -48,7 +48,7 @@
         "operationId": "EntityQueryTemplates_List",
         "parameters": [
           {
-            "$ref": "#/parameters/EntityQueryTemplateKind"
+            "$ref": "#/parameters/EntityQueryTemplateKindEnum"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -129,7 +129,7 @@
     }
   },
   "definitions": {
-    "EntityQueryTemplateKind": {
+    "EntityQueryTemplateKindEnum": {
       "description": "The kind of the entity query template.",
       "enum": [
         "Activity"
@@ -176,7 +176,7 @@
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/EntityQueryTemplateKind",
+          "$ref": "#/definitions/EntityQueryTemplateKindEnum",
           "description": "the entity query template kind"
         }
       },
@@ -236,7 +236,8 @@
           "items": {
             "$ref": "#/definitions/DataTypeDefinitions"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "inputEntityType": {
           "$ref": "./common/EntityTypes.json#/definitions/EntityInnerType",
@@ -289,7 +290,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "EntityQueryTemplateKind": {
+    "EntityQueryTemplateKindEnum": {
       "description": "The entity template query kind we want to fetch",
       "in": "query",
       "name": "kind",
@@ -297,6 +298,16 @@
       "enum": [
         "Activity"
       ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityQueryTemplateKind",
+        "values": [
+          {
+            "description": "activity",
+            "value": "Activity"
+          }
+        ]
+      },
       "type": "string",
       "x-ms-parameter-location": "method"
     }

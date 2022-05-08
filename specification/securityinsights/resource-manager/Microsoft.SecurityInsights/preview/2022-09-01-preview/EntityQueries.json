@@ -48,7 +48,7 @@
         "operationId": "EntityQueries_List",
         "parameters": [
           {
-            "$ref": "#/parameters/EntityQueryKind"
+            "$ref": "#/parameters/EntityQueryKindEnum"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -227,7 +227,7 @@
     }
   },
   "definitions": {
-    "CustomEntityQueryKind": {
+    "CustomEntityQueryKindEnum": {
       "description": "The kind of the entity query that supports put request.",
       "enum": [
         "Activity"
@@ -293,7 +293,7 @@
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/CustomEntityQueryKind",
+          "$ref": "#/definitions/CustomEntityQueryKindEnum",
           "description": "the entity query kind"
         }
       },
@@ -481,7 +481,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "EntityQueryKind": {
+    "EntityQueryKindEnum": {
       "description": "The entity query kind we want to fetch",
       "in": "query",
       "name": "kind",
@@ -490,6 +490,20 @@
         "Expansion",
         "Activity"
       ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityQueryKind",
+        "values": [
+          {
+            "description": "expansion",
+            "value": "Expansion"
+          },
+          {
+            "description": "activity",
+            "value": "Activity"
+          }
+        ]
+      },
       "type": "string",
       "x-ms-parameter-location": "method"
     },

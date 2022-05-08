@@ -697,7 +697,8 @@
           "items": {
             "$ref": "#/definitions/EntityInsightItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -755,14 +756,16 @@
               "items": {
                 "$ref": "./common/EntityTypes.json#/definitions/Entity"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             },
             "edges": {
               "description": "Array of edges that connects the entity to the list of entities.",
               "items": {
                 "$ref": "#/definitions/EntityEdges"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             }
           },
           "type": "object"
@@ -800,6 +803,7 @@
         },
         "chartQueryResults": {
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "Query results for table insights query.",
           "items": {
             "$ref": "#/definitions/InsightsTableResult",
@@ -855,7 +859,8 @@
           "items": {
             "$ref": "#/definitions/EntityTimelineItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -954,6 +959,7 @@
         "dataTypes": {
           "description": "Data types for template",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "properties": {
               "dataType": {
@@ -990,6 +996,7 @@
       "properties": {
         "columns": {
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "Columns Metadata of the table",
           "items": {
             "properties": {
@@ -1061,6 +1068,7 @@
           "properties": {
             "columnsDefinitions": {
               "type": "array",
+              "x-ms-identifiers": [],
               "description": "List of insight column definitions.",
               "items": {
                 "properties": {
@@ -1092,6 +1100,7 @@
             },
             "queriesDefinitions": {
               "type": "array",
+              "x-ms-identifiers": [],
               "description": "List of insight queries definitions.",
               "items": {
                 "properties": {
@@ -1109,6 +1118,7 @@
                   },
                   "linkColumnsDefinitions": {
                     "type": "array",
+                    "x-ms-identifiers": [],
                     "description": "Insight column header.",
                     "items": {
                       "properties": {
@@ -1186,9 +1196,10 @@
         "errors": {
           "description": "information about the failed queries",
           "items": {
-            "$ref": "#/definitions/GetInsightsError"
+            "$ref": "#/definitions/GetInsightsErrorEnum"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1196,7 +1207,7 @@
       ],
       "type": "object"
     },
-    "GetInsightsError": {
+    "GetInsightsErrorEnum": {
       "description": "GetInsights Query Errors.",
       "properties": {
         "kind": {
@@ -1204,7 +1215,17 @@
           "type": "string",
           "enum": [
             "Insight"
-          ]
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GetInsightsError",
+            "values": [
+              {
+                "description": "insight",
+                "value": "Insight"
+              }
+            ]
+          }
         },
         "queryId": {
           "description": "the query id",
@@ -1329,14 +1350,16 @@
           "items": {
             "$ref": "#/definitions/TimelineAggregation"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "errors": {
           "description": "information about the failure queries",
           "items": {
             "$ref": "#/definitions/TimelineError"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
