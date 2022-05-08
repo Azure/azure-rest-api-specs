@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10-01-preview
+tag: package-2022-05-01
+```
+
+### Tag: package-2022-05-01
+
+These settings apply only when `--tag=2022-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01'
+input-file:
+- Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json
 ```
 
 ### Tag: package-2021-10-01-preview
@@ -103,7 +112,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
@@ -115,6 +123,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

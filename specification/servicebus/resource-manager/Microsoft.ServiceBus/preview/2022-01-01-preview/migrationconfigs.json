@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
+      "get": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_List",
+        "x-ms-examples": {
+          "MigrationConfigurationsList": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationList.json"
+          }
+        },
+        "description": "Gets all migrationConfigurations",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of migrationConfigurations for servicebus namespace",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}": {
+      "put": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_CreateAndStartMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsStartMigration": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json"
+          }
+        },
+        "description": "Creates Migration configuration and starts migration of entities from Standard to Premium namespace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            },
+            "description": "Parameters required to create Migration Configuration"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migration Config successfully created",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            }
+          },
+          "201": {
+            "description": "Migration Config creation request received"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Delete",
+        "x-ms-examples": {
+          "MigrationConfigurationsDelete": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationDelete.json"
+          }
+        },
+        "description": "Deletes a MigrationConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Migration Config request accepted"
+          },
+          "204": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Get",
+        "x-ms-examples": {
+          "MigrationConfigurationsGet": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationGet.json"
+          }
+        },
+        "description": "Retrieves Migration Config",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Migration Config)",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade": {
+      "post": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_CompleteMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsCompleteMigration": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json"
+          }
+        },
+        "description": "This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any entities created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "upgrade operation of Migration Config is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert": {
+      "post": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Revert",
+        "x-ms-examples": {
+          "MigrationConfigurationsRevert": {
+            "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationRevert.json"
+          }
+        },
+        "description": "This operation reverts Migration",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MigrationConfig Revert operation is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MigrationConfigProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of Migration Configuration "
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
+            },
+            "targetNamespace": {
+              "type": "string",
+              "description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration"
+            },
+            "postMigrationName": {
+              "type": "string",
+              "description": "Name to access Standard Namespace after migration"
+            },
+            "migrationState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "State in which Standard to Premium Migration is, possible values : Unknown, Reverting, Completing, Initiating, Syncing, Active"
+            }
+          },
+          "required": [
+            "targetNamespace",
+            "postMigrationName"
+          ],
+          "description": "Properties required to the Create Migration Configuration"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Single item in List or Get Migration Config operation"
+    },
+    "MigrationConfigListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationConfigProperties"
+          },
+          "description": "List of Migration Configs"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations"
+        }
+      },
+      "description": "The result of the List migrationConfigurations operation."
+    }
+  },
+  "parameters": {}
+}
