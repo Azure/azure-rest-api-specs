@@ -28,7 +28,25 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-pure-2020-03
+```
+
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
+
+This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2021-10-01-preview version.
+
+```yaml $(tag) == 'package-2021-10-preview'
+input-file:
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/functions.json
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/inputs.json
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/outputs.json
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/streamingjobs.json
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/subscriptions.json
+  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/transformations.json
+  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
+  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```
 
 ### Tag: package-2020-03-preview
@@ -62,6 +80,8 @@ input-file:
 - Microsoft.StreamAnalytics/stable/2020-03-01/transformations.json
 - Microsoft.StreamAnalytics/stable/2020-03-01/functions.json
 - Microsoft.StreamAnalytics/stable/2020-03-01/subscriptions.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/clusters.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/privateEndpoints.json
 ```
 
 ### Tag: package-pure-2020-03-preview
@@ -121,6 +141,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

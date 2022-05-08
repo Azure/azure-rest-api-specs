@@ -11,7 +11,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/appplatform/armappplatform
+module-name: sdk/resourcemanager/appplatform/armappplatform
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -21,10 +21,20 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-preview-2021-09
   - tag: package-preview-2021-06
   - tag: package-preview-2020-11
   - tag: package-2020-07
   - tag: package-2019-05-01-preview
+```
+
+### Tag: package-preview-2021-09 and go
+
+These settings apply only when `--tag=package-preview-2021-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-09-01-preview/$(namespace)
 ```
 
 ### Tag: package-preview-2021-06 and go

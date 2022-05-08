@@ -137,6 +137,95 @@
           "$ref": "#/definitions/ErrorDetail"
         }
       }
+    },
+    "OperationResource": {
+      "type": "object",
+      "description": "An operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "status": {
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "description": "Operation status",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Operation properties",
+          "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "description": "Errors from the operation"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "description": "Completion percentage of the operation"
+        }
+      }
+    },
+    "LibraryInfo": {
+      "type": "object",
+      "description": "Library/package information of a Big Data pool powered by Apache Spark",
+      "title": "Information about a library/package created at the workspace level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage blob path of library."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Storage blob container name."
+        },
+        "uploadedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the library."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the library."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
+        }
+      }
     }
   },
   "parameters": {

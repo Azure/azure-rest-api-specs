@@ -1,0 +1,795 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pipelines": {
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_GetPipelinesByWorkspace",
+        "x-ms-examples": {
+          "Pipelines_ListByWorkspace": {
+            "$ref": "./examples/Pipelines_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists pipelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/pipelines/{pipelineName}": {
+      "put": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_CreateOrUpdatePipeline",
+        "x-ms-examples": {
+          "Pipelines_Create": {
+            "$ref": "./examples/Pipelines_Create.json"
+          },
+          "Pipelines_Update": {
+            "$ref": "./examples/Pipelines_Update.json"
+          }
+        },
+        "description": "Creates or updates a pipeline.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the pipeline entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "pipeline",
+            "description": "Pipeline resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_GetPipeline",
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "./examples/Pipelines_Get.json"
+          }
+        },
+        "description": "Gets a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the pipeline entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_DeletePipeline",
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "./examples/Pipelines_Delete.json"
+          }
+        },
+        "description": "Deletes a pipeline.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/rename": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_RenamePipeline",
+        "x-ms-examples": {
+          "Pipelines_Rename": {
+            "$ref": "./examples/Pipelines_Rename.json"
+          }
+        },
+        "description": "Renames a pipeline.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/createRun": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_CreatePipelineRun",
+        "x-ms-examples": {
+          "Pipelines_CreateRun": {
+            "$ref": "./examples/Pipelines_CreateRun.json"
+          }
+        },
+        "description": "Creates a run of a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "referencePipelineRunId",
+            "description": "The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the rerun will start from this activity. If not specified, all activities will run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/ParameterValueSpecification"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/CreateRunResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryPipelineRuns": {
+      "post": {
+        "operationId": "PipelineRun_QueryPipelineRunsByWorkspace",
+        "x-ms-examples": {
+          "PipelineRuns_QueryByWorkspace": {
+            "$ref": "./examples/PipelineRuns_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query pipeline runs in the workspace based on input filter conditions.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelineruns/{runId}": {
+      "get": {
+        "operationId": "PipelineRun_GetPipelineRun",
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        },
+        "description": "Get a pipeline run by its run ID.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "artifacts.json#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/pipelineruns/{runId}/queryActivityruns": {
+      "post": {
+        "operationId": "PipelineRun_QueryActivityRuns",
+        "x-ms-examples": {
+          "ActivityRuns_QueryByPipelineRun": {
+            "$ref": "./examples/ActivityRuns_QueryByPipelineRun.json"
+          }
+        },
+        "description": "Query activity runs based on input filter conditions.",
+        "tags": [
+          "activityruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "artifacts.json#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the activity runs.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ActivityRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelineruns/{runId}/cancel": {
+      "post": {
+        "operationId": "PipelineRun_CancelPipelineRun",
+        "x-ms-examples": {
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
+          }
+        },
+        "description": "Cancel a pipeline run by its run ID.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "artifacts.json#/parameters/runId"
+          },
+          {
+            "name": "isRecursive",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pipeline run has been canceled successfully. "
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PipelineListResponse": {
+      "description": "A list of pipeline resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipelines.",
+          "items": {
+            "$ref": "#/definitions/PipelineResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineResource": {
+      "description": "Pipeline resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline",
+          "description": "Properties of the pipeline."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CreateRunResponse": {
+      "description": "Response body with a run identifier.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "PipelineRunsQueryResponse": {
+      "description": "A list pipeline runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipeline runs.",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "Information about a pipeline run.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "Indicates if the recovered pipeline run is the latest in its group.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The pipeline name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The full or partial list of parameter name, value pair used in the pipeline run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "invokedBy": {
+          "description": "Entity that started the pipeline run.",
+          "$ref": "#/definitions/PipelineRunInvokedBy",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "description": "The last updated timestamp for the pipeline run event in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runStart": {
+          "description": "The start time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runEnd": {
+          "description": "The end time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "durationInMs": {
+          "description": "The duration of a pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message from a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineRunInvokedBy": {
+      "description": "Provides entity name and id that started the pipeline run.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the entity that started the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the entity that started the run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invokedByType": {
+          "description": "The type of the entity that started the run.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ActivityRunsQueryResponse": {
+      "description": "A list activity runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of activity runs.",
+          "items": {
+            "$ref": "#/definitions/ActivityRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "ActivityRun": {
+      "description": "Information about an activity run in a pipeline.",
+      "type": "object",
+      "properties": {
+        "pipelineName": {
+          "description": "The name of the pipeline.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The id of the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityName": {
+          "description": "The name of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityType": {
+          "description": "The type of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunId": {
+          "description": "The id of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkedServiceName": {
+          "description": "The name of the compute linked service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunStart": {
+          "description": "The start time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "activityRunEnd": {
+          "description": "The end time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of the activity run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "input": {
+          "description": "The input for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "output": {
+          "description": "The output for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The error if any from the activity run.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "pipelineName": {
+      "name": "pipelineName",
+      "description": "The pipeline name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

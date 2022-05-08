@@ -796,7 +796,24 @@
         },
         "state": {
           "type": "string",
-          "description": "The batch state"
+          "description": "The batch state",
+          "enum": [
+            "not_started",
+            "starting",
+            "idle",
+            "busy",
+            "shutting_down",
+            "error",
+            "dead",
+            "killed",
+            "success",
+            "running",
+            "recovering"
+          ],
+          "x-ms-enum": {
+            "name": "LivyStates",
+            "modelAsString": true
+          }
         },
         "log": {
           "x-ms-client-name": "logLines",
@@ -1252,7 +1269,25 @@
           "x-nullable": true
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "description": "The session state.",
+          "enum": [
+            "not_started",
+            "starting",
+            "idle",
+            "busy",
+            "shutting_down",
+            "error",
+            "dead",
+            "killed",
+            "success",
+            "running",
+            "recovering"
+          ],
+          "x-ms-enum": {
+            "name": "LivyStates",
+            "modelAsString": true
+          }
         },
         "log": {
           "x-ms-client-name": "logLines",
@@ -1445,7 +1480,19 @@
           "type": "string"
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "waiting",
+            "running",
+            "available",
+            "error",
+            "cancelling",
+            "cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "LivyStatementStates",
+            "modelAsString": true
+          }
         },
         "output": {
           "$ref": "#/definitions/SparkStatementOutput",

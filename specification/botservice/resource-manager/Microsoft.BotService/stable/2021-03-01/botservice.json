@@ -1185,6 +1185,14 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Entity zones",
+          "readOnly": true
         }
       }
     },
@@ -1278,9 +1286,48 @@
           "readOnly": true,
           "description": "The bot's endpoint version"
         },
+        "allSettings": {
+          "description": "Contains resource all settings defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "description": "Contains resource parameters defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "manifestUrl": {
+          "type": "string",
+          "description": "The bot's manifest url"
+        },
+        "msaAppType": {
+          "type": "string",
+          "description": "Microsoft App Type for the bot",
+          "enum": [
+            "UserAssignedMSI",
+            "SingleTenant",
+            "MultiTenant"
+          ],
+          "x-ms-enum": {
+            "name": "msaAppType",
+            "modelAsString": true
+          }
+        },
         "msaAppId": {
           "type": "string",
           "description": "Microsoft App Id for the bot"
+        },
+        "msaAppTenantId": {
+          "type": "string",
+          "description": "Microsoft App Tenant Id for the bot"
+        },
+        "msaAppMSIResourceId": {
+          "type": "string",
+          "description": "Microsoft App Managed Identity Resource Id for the bot"
         },
         "configuredChannels": {
           "type": "array",
@@ -1329,13 +1376,60 @@
           "type": "string",
           "description": "The CMK Url"
         },
-        "isIsolated": {
+        "cmekEncryptionStatus": {
+          "type": "string",
+          "description": "The CMK encryption status"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether the bot is in an isolated network",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
+        },
+        "isStreamingSupported": {
           "type": "boolean",
-          "description": "Whether the bot is in an isolated network"
+          "description": "Whether the bot is streaming supported"
+        },
+        "isDeveloperAppInsightsApiKeySet": {
+          "type": "boolean",
+          "description": "Whether the bot is developerAppInsightsApiKey set"
+        },
+        "migrationToken": {
+          "type": "string",
+          "description": "Token used to migrate non Azure bot to azure subscription",
+          "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
         },
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
+        },
+        "openWithHint": {
+          "type": "string",
+          "description": "The hint to browser (e.g. protocol handler) on how to open the bot for authoring"
+        },
+        "appPasswordHint": {
+          "type": "string",
+          "description": "The hint (e.g. keyVault secret resourceId) on how to fetch the app secret"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
+        },
+        "publishingCredentials": {
+          "type": "string",
+          "description": "Publishing credentials of the resource"
         }
       },
       "description": "The parameters to provide for the Bot.",
@@ -1385,6 +1479,10 @@
         "channelName": {
           "type": "string",
           "description": "The channel name"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
         }
       },
       "required": [
@@ -1404,6 +1502,15 @@
         "properties": {
           "$ref": "#/definitions/AlexaChannelProperties",
           "description": "The set of properties specific to Alexa channel resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1557,6 +1664,18 @@
         "properties": {
           "$ref": "#/definitions/MsTeamsChannelProperties",
           "description": "The set of properties specific to Microsoft Teams channel resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
         }
       }
     },
@@ -1573,6 +1692,18 @@
         "isEnabled": {
           "type": "boolean",
           "description": "Whether this channel is enabled for the bot"
+        },
+        "incomingCallRoute": {
+          "type": "string",
+          "description": "Webhook for Microsoft Teams channel calls"
+        },
+        "deploymentEnvironment": {
+          "type": "string",
+          "description": "Deployment environment for Microsoft Teams channel calls"
+        },
+        "acceptedTerms": {
+          "type": "boolean",
+          "description": "Whether this channel accepted terms"
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -1593,6 +1724,10 @@
         "properties": {
           "$ref": "#/definitions/SkypeChannelProperties",
           "description": "The set of properties specific to Skype channel resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -1629,6 +1764,10 @@
         "callingWebHook": {
           "type": "string",
           "description": "Calling web hook for Skype channel"
+        },
+        "incomingCallRoute": {
+          "type": "string",
+          "description": "Incoming call route for Skype channel"
         },
         "isEnabled": {
           "type": "boolean",
@@ -1694,6 +1833,18 @@
         "properties": {
           "$ref": "#/definitions/WebChatChannelProperties",
           "description": "The set of properties specific to Web Chat channel resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -1730,6 +1881,18 @@
         "properties": {
           "$ref": "#/definitions/DirectLineChannelProperties",
           "description": "The set of properties specific to Direct Line channel resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
         }
       }
     },
@@ -1741,6 +1904,10 @@
             "$ref": "#/definitions/DirectLineSite"
           },
           "description": "The list of Direct Line sites"
+        },
+        "DirectLineEmbedCode": {
+          "type": "string",
+          "description": "Direct Line embed code of the resource"
         }
       },
       "description": "The parameters to provide for the Direct Line channel."
@@ -2065,7 +2232,7 @@
           "type": "boolean",
           "description": "Whether this site is enabled for DirectLine channel"
         },
-        "enablePreview": {
+        "isWebchatPreviewEnabled": {
           "type": "boolean",
           "description": "Whether this site is enabled for preview versions of Webchat"
         }
@@ -2073,7 +2240,7 @@
       "required": [
         "siteName",
         "isEnabled",
-        "enablePreview"
+        "isWebchatPreviewEnabled"
       ],
       "description": "A site for the Webchat channel"
     },
@@ -2122,6 +2289,10 @@
         "isSecureSiteEnabled": {
           "type": "boolean",
           "description": "Whether this site is enabled for authentication with Bot Framework."
+        },
+        "isBlockUserUploadEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for block user upload."
         },
         "trustedOrigins": {
           "type": "array",
@@ -2222,6 +2393,10 @@
           "items": {
             "$ref": "#/definitions/ConnectionSettingParameter"
           }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
         }
       },
       "description": "Properties for a Connection Setting Item"
@@ -2306,6 +2481,23 @@
           "type": "string",
           "description": "Default Name for the Service Provider",
           "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Meta data for the Service Provider",
+          "readOnly": true,
+          "properties": {
+            "constraints": {
+              "description": "the constraints of the bot meta data.",
+              "type": "object",
+              "properties": {
+                "required": {
+                  "description": "Whether required the constraints of the bot meta data.",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
         }
       },
       "description": "Extra Parameters specific to each Service Provider"

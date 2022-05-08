@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579",
+    "parameters": {
+      "metric": "ActualCost",
+      "invoiceId": "M1234567"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/operationResults/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Consumption/operationResult",
+        "properties": {
+          "downloadUrl": "https://ccmreportstorageeastus.blob.core.windows.net/armreports/20201207/00000000-0000-0000-0000-000000000000?sv=2020-05-31&sr=b&sig=abcd",
+          "validTill": "2020-12-08T05:55:59.4394737Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/Microsoft.CostManagement/operationResults/ad0d632f-1186-41fe-89f9-ae29e198d223?api-version=2021-10-01",
+        "Azure-Consumption-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/Microsoft.CostManagement/operationStatus/ad0d632f-1186-41fe-89f9-ae29e198d223?api-version=2021-10-01",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

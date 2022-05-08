@@ -17,6 +17,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
 batch:
+  - tag: package-2021-10-01-only
+  - tag: package-2021-09-01-only
   - tag: package-2021-08-01-only
   - tag: package-2021-07-01-only
   - tag: package-2021-05-01-only
@@ -51,6 +53,25 @@ batch:
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
 clear-output-folder: false
 perform-load: false
+```
+### Tag: package-2021-10-01-only and python
+
+These settings apply only when `--tag=package-2021-10-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-10-01-only' && $(python)
+namespace: azure.mgmt.containerservice.v2021_10_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_10_01
+```
+
+### Tag: package-2021-09-01-only and python
+
+These settings apply only when `--tag=package-2021-09-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-09-01-only' && $(python)
+namespace: azure.mgmt.containerservice.v2021_09_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_09_01
 ```
 
 ### Tag: package-2021-08-01-only and python
@@ -321,4 +342,11 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-09-preview-only' && $(python)
 namespace: azure.mgmt.containerservice.v2019_09_30_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_09_30_preview
+```
+
+``` yaml $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.ManagedClusterLoadBalancerProfile.properties.managedOutboundIPs.properties["countIPv6"]
+    transform: $["x-ms-client-name"] = "count_ipv6"
 ```
