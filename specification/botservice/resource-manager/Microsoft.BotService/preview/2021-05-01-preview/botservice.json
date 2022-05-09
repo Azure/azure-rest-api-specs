@@ -1556,7 +1556,8 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "The bot's endpoint"
+          "description": "The bot's endpoint",
+          "x-nullable": true
         },
         "endpointVersion": {
           "type": "string",
@@ -1657,6 +1658,10 @@
           "type": "string",
           "description": "The CMK encryption status",
           "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Tenant Id for the bot"
         },
         "publicNetworkAccess": {
           "description": "Whether the bot is in an isolated network",
@@ -2010,6 +2015,10 @@
           "type": "string",
           "description": "The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty."
         },
+        "authMethod": {
+          "type": "string",
+          "description": "The authMethod for the bot"
+        },
         "isEnabled": {
           "type": "boolean",
           "description": "Whether this channel is enabled for the bot"
@@ -2043,7 +2052,7 @@
           "type": "boolean",
           "description": "Enable calling for Microsoft Teams channel"
         },
-        "callingWebHook": {
+        "callingWebhook": {
           "type": "string",
           "description": "Webhook for Microsoft Teams channel calls"
         },
@@ -2234,6 +2243,14 @@
             "$ref": "#/definitions/DirectLineSite"
           },
           "description": "The list of Direct Line sites"
+        },
+        "extensionKey1": {
+          "type": "string",
+          "description": "The extensionKey1"
+        },
+        "extensionKey2": {
+          "type": "string",
+          "description": "The extensionKey2"
         },
         "DirectLineEmbedCode": {
           "type": "string",
@@ -2483,6 +2500,10 @@
     },
     "DirectLineSpeechChannelProperties": {
       "properties": {
+        "cognitiveServiceResourceId": {
+          "type": "string",
+          "description": "The cognitive service id with this channel registration."
+        },
         "cognitiveServiceRegion": {
           "type": "string",
           "description": "The cognitive service region with this channel registration."
@@ -2509,11 +2530,7 @@
           "description": "Make this a default bot for chosen cognitive service account."
         }
       },
-      "description": "The parameters to provide for the DirectLine Speech channel.",
-      "required": [
-        "cognitiveServiceRegion",
-        "cognitiveServiceSubscriptionKey"
-      ]
+      "description": "The parameters to provide for the DirectLine Speech channel."
     },
     "ChannelResponseList": {
       "properties": {
@@ -2533,6 +2550,30 @@
       "description": "The list of bot service channel operation response."
     },
     "WebChatSite": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Site"
+        }
+      ],
+      "required": [
+        "isWebchatPreviewEnabled"
+      ],
+      "description": "A site for the Webchat channel"
+    },
+    "DirectLineSite": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Site"
+        }
+      ],
+      "description": "A site for the Direct Line channel",
+      "required": [
+        "isV1Enabled",
+        "isV3Enabled"
+      ]
+    },
+    "Site": {
+      "type": "object",
       "properties": {
         "siteId": {
           "type": "string",
@@ -2566,52 +2607,34 @@
           "type": "boolean",
           "description": "Whether this site is enabled for DirectLine channel"
         },
-        "isWebchatPreviewEnabled": {
+        "isTokenEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for preview versions of Webchat",
-          "default": false
-        }
-      },
-      "required": [
-        "siteName",
-        "isEnabled",
-        "isWebchatPreviewEnabled"
-      ],
-      "description": "A site for the Webchat channel"
-    },
-    "DirectLineSite": {
-      "properties": {
-        "siteId": {
-          "x-ms-mutability": [
-            "read"
-          ],
-          "type": "string",
-          "description": "Site Id",
-          "readOnly": true
+          "description": "Whether this site is token enabled for channel"
         },
-        "siteName": {
-          "type": "string",
-          "description": "Site name"
-        },
-        "key": {
-          "x-ms-mutability": [
-            "read"
-          ],
-          "type": "string",
-          "description": "Primary key. Value only returned through POST to the action Channel List API, otherwise empty.",
-          "readOnly": true
-        },
-        "key2": {
-          "x-ms-mutability": [
-            "read"
-          ],
-          "type": "string",
-          "description": "Secondary key. Value only returned through POST to the action Channel List API, otherwise empty.",
-          "readOnly": true
-        },
-        "isEnabled": {
+        "isEndpointParametersEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for DirectLine channel."
+          "description": "Whether this site is EndpointParameters enabled for channel"
+        },
+        "isDetailedLoggingEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is disabled detailed logging for"
+        },
+        "isBlockUserUploadEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for block user upload.",
+          "x-nullable": true
+        },
+        "isNoStorageEnabled": {
+          "type": "boolean",
+          "description": "Whether this no-storage site is disabled detailed logging for"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity Tag"
+        },
+        "appId": {
+          "type": "string",
+          "description": "DirectLine application id"
         },
         "isV1Enabled": {
           "type": "boolean",
@@ -2625,46 +2648,23 @@
           "type": "boolean",
           "description": "Whether this site is enabled for authentication with Bot Framework."
         },
-        "isBlockUserUploadEnabled": {
-          "type": "boolean",
-          "description": "Whether this site is enabled for block user upload."
-        },
         "trustedOrigins": {
           "type": "array",
           "description": "List of Trusted Origin URLs for this site. This field is applicable only if isSecureSiteEnabled is True.",
           "items": {
             "type": "string"
           }
+        },
+        "isWebchatPreviewEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for preview versions of Webchat",
+          "default": false
         }
       },
-      "description": "A site for the Direct Line channel",
       "required": [
-        "isV1Enabled",
-        "isV3Enabled",
         "isEnabled",
         "siteName"
-      ]
-    },
-    "Site": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WebChatSite"
-        },
-        {
-          "$ref": "#/definitions/DirectLineSite"
-        }
       ],
-      "properties": {
-        "isTokenEnabled": {
-          "type": "boolean",
-          "description": "Whether this site is token enabled for channel"
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Entity Tag"
-        }
-      },
       "description": "A site for the channel"
     },
     "SiteInfo": {
@@ -3183,7 +3183,9 @@
         "SmsChannel",
         "LineChannel",
         "DirectLineSpeechChannel",
-        "OutlookChannel"
+        "OutlookChannel",
+        "Omnichannel",
+        "TelephonyChannel"
       ],
       "x-ms-enum": {
         "name": "channelName",
