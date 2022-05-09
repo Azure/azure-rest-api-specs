@@ -670,7 +670,7 @@
           "properties": {
             "cloudRoleArn": {
               "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+              "description": "The cloud role ARN in AWS for this feature used for provisioning resources"
             }
           }
         },
@@ -680,7 +680,7 @@
           "properties": {
             "cloudRoleArn": {
               "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+              "description": "The cloud role ARN in AWS for this feature used for reading data"
             }
           }
         },
@@ -690,7 +690,7 @@
           "properties": {
             "cloudRoleArn": {
               "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+              "description": "The cloud role ARN in AWS used by CloudWatch to transfer data into Kinesis"
             }
           }
         },
@@ -700,9 +700,21 @@
           "properties": {
             "cloudRoleArn": {
               "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+              "description": "The cloud role ARN in AWS used by Kinesis to transfer data into S3"
             }
           }
+        },
+        "autoProvisioning": {
+          "type": "boolean",
+          "description": "Is audit logs pipeline auto provisioning enabled"
+        },
+        "kubeAuditRetentionTime": {
+          "type": "integer",
+          "description": "The retention time of kube audit logs set on the CloudWatch log group",
+        },
+        "scubaExternalId": {
+          "type": "string",
+          "description": "The externalId used by the data reader to prevent the confused deputy attack",
         }
       }
     },
