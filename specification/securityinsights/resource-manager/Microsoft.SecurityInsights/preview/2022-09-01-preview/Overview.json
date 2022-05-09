@@ -127,20 +127,11 @@
   },
   "definitions": {
     "OverviewList": {
-      "description": "List of all overview sections.",
-      "properties": {
-        "value": {
-          "description": "Array of sections.",
-          "items": {
-            "$ref": "#/definitions/OverviewSection"
-          },
-          "type": "array",
-          "x-ms-identifiers": []
-        }
+      "description": "A dictionary of all overview sections, where the keys are the sections name.",
+      "additionalProperties": {
+        "description": "The value of a given section",
+        "$ref": "#/definitions/OverviewSection"
       },
-      "required": [
-        "value"
-      ],
       "type": "object"
     },
     "OverviewSection": {
