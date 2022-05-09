@@ -50,6 +50,79 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "OperationalState": {
+      "type": "string",
+      "description": "Operational state for the resource.",
+      "enum": [
+        "Configuring",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "operationalState"
+      }
+    },
+    "AnnotationResource": {
+      "type": "object",
+      "description": "Switch configuration entries require a description to discern between configuration groups.",
+      "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "Switch configuration description."
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "ReachabilityState": {
+      "type": "string",
+      "description": "Generic network reachability state.",
+      "enum": [
+        "Reachable",
+        "Unreachable"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "reachabilityState"
+      }
+    },
+    "EnabledDisabledState": {
+      "type": "string",
+      "description": "EnabledDisabledState state for the resource.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "enabledDisabledState"
+      }
+    },
+    "FailedSucceededState": {
+      "type": "string",
+      "description": "FailedSucceeded state for the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "FailedSucceededState"
+      }
     }
   },
   "parameters": {}

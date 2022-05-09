@@ -55,7 +55,7 @@
           "200": {
             "description": "Operation details.",
             "schema": {
-              "$ref": "#/definitions/operationsList"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -72,69 +72,6 @@
       }
     }
   },
-  "definitions": {
-    "operation": {
-      "type": "object",
-      "description": "Operation provided by provider",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is data action or not.",
-          "type": "boolean"
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name"
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name"
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name"
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation"
-            }
-          }
-        }
-      }
-    },
-    "operationsList": {
-      "type": "object",
-      "description": "Lists the operations available.",
-      "properties": {
-        "nextLink": {
-          "description": "Url to follow for getting next page of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "description": "Operation.",
-            "$ref": "#/definitions/operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

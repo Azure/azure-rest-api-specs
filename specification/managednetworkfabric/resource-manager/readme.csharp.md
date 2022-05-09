@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.ManagedNetworkFabric
-  output-folder: $(csharp-sdks-folder)/managednetworkfabric/management/Microsoft.NetworkFabric/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/managednetworkfabric/management/Microsoft.ManagedNetworkFabric/GeneratedProtocol
 ```

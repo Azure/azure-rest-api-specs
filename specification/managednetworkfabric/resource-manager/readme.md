@@ -1,8 +1,8 @@
-# arcopenstack
+# ManagedNetworkFabric
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for openstack.
+This is the AutoRest configuration file for Managed Network Fabric.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the openstack.
+These are the global settings for the Managed Network Fabric.
 
 ```yaml
 openapi-type: arm
@@ -39,6 +39,7 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/common.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/Operations.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricControllers.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabrics.json
 ```
 
 ---
@@ -52,7 +53,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

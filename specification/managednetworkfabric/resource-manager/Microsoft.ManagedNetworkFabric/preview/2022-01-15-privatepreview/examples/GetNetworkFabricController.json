@@ -13,9 +13,38 @@
         "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
         "location": "westus",
         "tags": {
-          "tag1": "tagvalue"
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
         },
         "properties": {
+          "expressRouteConnections": [
+            {
+              "expressRouteCircuitId": "circuit1"
+            },
+            {
+              "expressRouteCircuitId": "circuit2"
+            }
+          ],
+          "ipv4AddressSpaces": [
+            "10.0.0.1/32",
+            "10.0.0.2/32"
+          ],
+          "ipv6AddressSpaces": [
+            "fc00::/8",
+            "fc01::/8"
+          ],
+          "operationalState": "Configuring",
+          "expressRouteConnectionStatus": [
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            },
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Disconnected"
+            }
+          ],
           "provisioningState": "Succeeded"
         }
       }

@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2022-01-15-privatepreview",
-    "subscriptionId": "a5015e1c-867f-4533-8541-85cd470d0cfb",
+    "subscriptionId": "subscriptionId",
     "resourceGroupName": "avladuwestus2rg",
     "networkFabricControllerName": "testNetworkFabricController1",
     "body": {
@@ -23,20 +23,12 @@
           }
         ],
         "ipv4AddressSpaces": [
-          {
-            "ipv4AddressSpace": "10.0.0.1/32"
-          },
-          {
-            "ipv4AddressSpace": "10.0.0.2/32"
-          }
+          "10.0.0.1/32",
+          "10.0.0.2/32"
         ],
         "ipv6AddressSpaces": [
-          {
-            "ipV6AddressSpace": "fc00::/8"
-          },
-          {
-            "ipV6AddressSpace": "fc01::/8"
-          }
+          "fc00::/8",
+          "fc01::/8"
         ]
       }
     }
@@ -44,7 +36,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
         "name": "testNetworkFabricController1",
         "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
         "location": "westus",
@@ -63,20 +55,12 @@
             }
           ],
           "ipv4AddressSpaces": [
-            {
-              "ipv4AddressSpace": "10.0.0.1/32"
-            },
-            {
-              "ipv4AddressSpace": "10.0.0.2/32"
-            }
+            "10.0.0.1/32",
+            "10.0.0.2/32"
           ],
           "ipv6AddressSpaces": [
-            {
-              "ipV6AddressSpace": "fc00::/8"
-            },
-            {
-              "ipV6AddressSpace": "fc01::/8"
-            }
+            "fc00::/8",
+            "fc01::/8"
           ],
           "operationalState": "Configuring",
           "expressRouteConnectionStatus": [
@@ -86,16 +70,19 @@
             },
             {
               "expressRouteCircuitId": "circuit1",
-              "expressRouteStatus": "Disconnected"
+              "expressRouteStatus": "Connected"
             }
           ],
           "provisioningState": "Succeeded"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.ManagedNetworkFabric/locations/WESTUS/operationStatuses/9497bac1-985b-48d7-bd58-fa93c6706409*78904F7DBB8B83E7F3599400DD94C4EFBBDCA5976D65290560AE4717E4DB4D72?api-version=2022-01-15-privatepreview"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
         "name": "testNetworkFabricController1",
         "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
         "location": "westus",
@@ -105,8 +92,38 @@
           "additionalProp3": "string"
         },
         "properties": {
+          "expressRouteConnections": [
+            {
+              "expressRouteCircuitId": "circuit1"
+            },
+            {
+              "expressRouteCircuitId": "circuit2"
+            }
+          ],
+          "ipv4AddressSpaces": [
+            "10.0.0.1/32",
+            "10.0.0.2/32"
+          ],
+          "ipv6AddressSpaces": [
+            "fc00::/8",
+            "fc01::/8"
+          ],
+          "operationalState": "Configuring",
+          "expressRouteConnectionStatus": [
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            },
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            }
+          ],
           "provisioningState": "Succeeded"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.ManagedNetworkFabric/locations/WESTUS/operationStatuses/9497bac1-985b-48d7-bd58-fa93c6706409*78904F7DBB8B83E7F3599400DD94C4EFBBDCA5976D65290560AE4717E4DB4D72?api-version=2022-01-15-privatepreview"
       }
     }
   }
