@@ -894,6 +894,11 @@
       "description": "The Find Target Resource Group operation response.",
       "type": "object",
       "properties": {
+        "matchingResourceSyncRule": {
+          "description": "The matching resource sync rule is the particular resource sync rule that matched the match expressions and labels and had lowest priority. This is the rule responsible for mapping the target resource to the target resource group.",
+          "type": "string",
+          "readOnly": true
+        },
         "targetResourceGroup": {
           "description": "The target resource group of matching resource sync rule. The labels from the request will be used to find out matching resource sync rule against the selector property of the resource sync rule. The one with highest priority will be returned if there are multiple matching rules.",
           "type": "string",
@@ -974,10 +979,10 @@
     },
     "customLocationOperationsList": {
       "description": "Lists of Custom Locations operations.",
-      "type": "object",
       "required": [
         "value"
       ],
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Next page of operations.",
@@ -1057,8 +1062,7 @@
       "items": {
         "$ref": "#/definitions/matchExpressionsProperties",
         "description": "The list of matchExpressions."
-      },
-      "x-ms-identifiers": []
+      }
     },
     "matchExpressionsProperties": {
       "description": "Resource Sync Rules matchExpression property definition.",
