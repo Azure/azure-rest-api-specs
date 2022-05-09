@@ -803,7 +803,9 @@
             }
           },
           "x-ms-identifiers": [
-            "id"
+            "apiVersion",
+            "resourceType",
+            "resourceProviderNamespace"
           ]
         }
       }
@@ -823,7 +825,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/EnabledResourceType"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -924,7 +929,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/customLocation"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -998,7 +1006,7 @@
             "$ref": "#/definitions/customLocationOperation"
           },
           "x-ms-identifiers": [
-            "id"
+            "name"
           ]
         }
       }
@@ -1031,7 +1039,10 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "displayName": {
           "description": "Display name for the Custom Locations location.",
@@ -1068,7 +1079,8 @@
       "items": {
         "$ref": "#/definitions/matchExpressionsProperties",
         "description": "The list of matchExpressions."
-      }
+      },
+      "x-ms-identifiers": []
     },
     "matchExpressionsProperties": {
       "description": "Resource Sync Rules matchExpression property definition.",
@@ -1087,7 +1099,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1171,7 +1184,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/resourceSyncRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
