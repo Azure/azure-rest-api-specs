@@ -12,6 +12,6 @@ python:
   clear-output-folder: true
   namespace: Microsoft.Azure.IotCentral.Stable
   package-name: iotcentral
-  package-version: 2022-05-31-ga
+  package-version: 2022-05-31
   output-folder: $(python-sdks-folder)/iotcentral/generated
 ```
