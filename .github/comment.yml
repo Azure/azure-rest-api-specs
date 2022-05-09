@@ -70,6 +70,12 @@
     onLabeledRemoveLabels:
         - WaitForARMFeedback
         - ARMChangesRequested
+
+- rule:
+    type: label
+    label: ARMChangesRequested
+    onLabeledRemovedLabels:
+        - WaitForARMFeedback
         
 - rule:
     type: unlabeled
