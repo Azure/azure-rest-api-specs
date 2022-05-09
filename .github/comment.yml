@@ -6,6 +6,7 @@
     booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
     onCheckedLabels:
       - WaitForARMFeedback
+      - ARMReview
     onCheckedComments: "Hi, @${PRAuthor} your PR are labelled with <b> WaitForARMFeedback</b>. A notification email will be sent out shortly afterwards to notify ARM review board(armapireview@microsoft.com)."
 
 - rule:
@@ -56,4 +57,24 @@
       - "update existing version to fix swagger quality issue in s360"
     onCheckedLabels:
       - FixS360
+      
+- rule:
+    type: label
+    label: WaitForARMFeedback
+    onLabeledRemoveLabels:
+        - ARMChangesRequested
+        
+- rule:
+    type: label
+    label: ARMSignedOff
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
+        - ARMChangesRequested
+        
+- rule:
+    type: unlabeled
+    label: ARMChangesRequested
+    onUnlabeledAddLabels:
+        - WaitForARMFeedback
+        - ARMReview
 
