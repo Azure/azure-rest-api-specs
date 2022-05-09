@@ -7,7 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-msi
+package-name: azure-mgmt-demo
 package-version: 1.0.0b1
 no-namespace-folders: true
 ```
@@ -26,7 +26,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/
+output-folder: $(python-sdks-folder)/demo/azure-mgmt-demo/azure/mgmt/demo/
 perform-load: false
 ```
 
@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-preview-2021-09-30 --python` is sp
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-preview-2021-09-30'
-namespace: azure.mgmt.msi.v2021_09_30_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2021_09_30_preview
+namespace: azure.mgmt.demo.v2021_09_30_preview
+output-folder: $(python-sdks-folder)/demo/azure-mgmt-demo/azure/mgmt/demo/v2021_09_30_preview
 ```
 
 ### Tag: package-2018-11-30 and python
@@ -46,6 +46,6 @@ These settings apply only when `--tag=package-2018-11-30 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-11-30'
-namespace: azure.mgmt.msi.v2018_11_30
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2018_11_30
+namespace: azure.mgmt.demo.v2018_11_30
+output-folder: $(python-sdks-folder)/demo/azure-mgmt-demo/azure/mgmt/demo/v2018_11_30
 ```
