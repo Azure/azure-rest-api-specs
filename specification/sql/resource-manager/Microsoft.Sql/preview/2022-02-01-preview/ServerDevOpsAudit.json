@@ -45,7 +45,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-pageable": {
@@ -94,7 +94,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-examples": {
@@ -147,7 +147,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditSettingsCreateRequest - The create server DevOps audit policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidServerDevOpsAuditSettingsName - Invalid server DevOps policy name.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDevOpsAuditSettingsInProgress - Set server DevOps audit is already in progress."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditSettingsCreateRequest - The create server DevOps audit policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidServerDevOpsAuditSettingsName - Invalid server DevOps policy name.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 ServerDevOpsAuditSettingsInProgress - Set server DevOps audit is already in progress."
           },
           "202": {
             "description": "Updating the audit DevOps settings is in progress."
@@ -218,6 +218,10 @@
       "properties": {
         "isAzureMonitorTargetEnabled": {
           "description": "Specifies whether DevOps audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure DevOps audit, Diagnostic Settings with 'DevOpsOperationsAudit' diagnostic logs category on the master database should be also created.\r\n\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/master/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
+          "type": "boolean"
+        },
+        "isManagedIdentityInUse": {
+          "description": "Specifies whether Managed Identity is used to access blob storage",
           "type": "boolean"
         },
         "state": {
