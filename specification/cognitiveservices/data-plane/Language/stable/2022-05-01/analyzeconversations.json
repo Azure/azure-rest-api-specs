@@ -279,7 +279,7 @@
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "LUIS",
+            "Luis",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -311,9 +311,9 @@
         }
       }
     },
-    "LUISParameters": {
+    "LuisParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "LUIS",
+      "x-ms-discriminator-value": "Luis",
       "type": "object",
       "allOf": [
         {
@@ -329,12 +329,12 @@
         "callingOptions": {
           "type": "object",
           "description": "This customizes how the service calls LUIS Generally Available projects.",
-          "$ref": "#/definitions/LUISCallingOptions"
+          "$ref": "#/definitions/LuisCallingOptions"
         }
       },
       "additionalProperties": true
     },
-    "LUISCallingOptions": {
+    "LuisCallingOptions": {
       "description": "This customizes how the service calls LUIS Generally Available projects.",
       "type": "object",
       "properties": {
@@ -497,7 +497,7 @@
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "LUIS",
+            "Luis",
             "Conversation",
             "QuestionAnswering",
             "NonLinked"
@@ -1370,10 +1370,10 @@
       "type": "string",
       "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
-    "LUISTargetIntentResult": {
+    "LuisTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "LUIS",
+      "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
