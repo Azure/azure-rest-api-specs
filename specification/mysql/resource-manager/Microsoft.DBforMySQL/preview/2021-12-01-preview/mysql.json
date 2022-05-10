@@ -1455,6 +1455,103 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/assessForMigration": {
+      "post": {
+        "tags": [
+          "AssessForMigration"
+        ],
+        "operationId": "MigrationAssessment_AssessForMigration",
+        "x-ms-examples": {
+          "PerformMigrationAssessment": {
+            "$ref": "./examples/AssessForMigration.json"
+          }
+        },
+        "description": "Performs Migration Assessment for a single server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "MigrationAssessmentRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationAssessmentRequest"
+            },
+            "description": "The required parameters for performing a migration assessment on a single server"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationAssessmentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/cutoverMigration": {
+      "post": {
+        "tags": [
+          "CutoverMigration"
+        ],
+        "operationId": "Migration_CutoverMigration",
+        "x-ms-examples": {
+          "CutoverMigration": {
+            "$ref": "./examples/CutoverMigration.json"
+          }
+        },
+        "description": "Performs cutover to migrate from single server to flex server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "CutoverMigrationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CutoverMigrationRequest"
+            },
+            "description": "The required parameters for performing a migration cutover on a flexible server"
+          }
+        ],
+        "responses": {
+            "202": {
+              "description": "Accepted"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/CloudError"
+              }
+            }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -2652,6 +2749,117 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "CutoverMigrationRequest": {
+      "type": "object",
+      "properties": {
+        "dnsChangeMode": {
+          "type": "string",
+          "enum": [
+            "Update",
+            "Revert",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "DnsChangeMode",
+            "modelAsString": true
+          },
+          "description": "The DNS Mode"
+        }
+      }    
+    },
+    "MigrationAssessmentRequest": {
+      "type": "object",
+      "properties": {
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Source Server Resource Id to verify and perform migration assessment on."
+        }
+      },
+      "description": "Request from client to perform migration assessment on their single server"
+    },
+    "MigrationAssessmentResource": {
+      "type": "object",
+      "properties": {
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Source Server Resource Id to verify and perform migration assessment on."
+        },
+        "targetPlatformProviderId": {
+          "type": "string",
+          "description": "Target platform(Flexible Server) provider ID"
+        },
+        "targetServerDetails": {
+          "$ref": "#/definitions/TargetServerDetails"
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentSummaryItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "replicaAssessmentReports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationAssessmentResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "assessmentReportCompletionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Assessment report completion date"
+        }
+      },
+      "description": "Represents a resource name availability."
+    },
+    "TargetServerDetails": {
+      "type": "object",
+      "properties": {
+        "serverSpecs": {
+          "$ref": "#/definitions/Server",
+          "readOnly": true
+        },
+        "serverParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "readOnly": true
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "readOnly": true
+        },
+        "platformProviderId": {
+          "type": "string",
+          "description": "Platform(Flexible Server) provider ID"
+        }
+      }
+    },
+    "AssessmentSummaryItem": {
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "Migration assessment Feature Name"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the Feature (eg:Information, Warning, Blocker)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message explaining the severity"
+        }
+      }
     }
   },
   "parameters": {
