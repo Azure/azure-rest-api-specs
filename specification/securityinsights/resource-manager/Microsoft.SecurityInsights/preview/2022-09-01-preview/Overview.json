@@ -154,10 +154,46 @@
       },
       "type": "object"
     },
+    "OverviewSectionKindEnum": {
+      "description": "The overview supported section kinds",
+      "enum": [
+        "Analytics",
+        "Incidents",
+        "DataConnectors",
+        "Automation"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "OverviewSectionKind",
+        "values": [
+          {
+            "value": "Analytics"
+          },
+          {
+            "value": "Incidents"
+          },
+          {
+            "value": "DataConnectors"
+          },
+          {
+            "value": "Automation"
+          }
+        ]
+      }
+    },
     "SectionData": {
       "description": "The data this section holds",
-      "properties": {},
-      "type": "object"
+      "properties": {
+        "kind": {
+          "description": "The section kind",
+          "$ref": "#/definitions/OverviewSectionKindEnum"
+        }
+      },
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "AnalyticsSectionData": {
       "description": "Analytics overview section data",
@@ -176,7 +212,8 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "Analytics"
     },
     "AutomationSectionData": {
       "description": "Automation overview section data",
@@ -211,7 +248,8 @@
           "type": "string"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "Automation"
     },
     "IncidentsByStatus": {
       "additionalProperties": {
@@ -279,7 +317,8 @@
           "$ref": "#/definitions/MeanTimeToAction"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "Incidents"
     },
     "IngestedEventCount": {
       "type": "string"
@@ -333,7 +372,8 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "DataConnectors"
     }
   },
   "parameters": {
