@@ -44,6 +44,8 @@ input-file:
   - Microsoft.Network/stable/2022-05-01/examples/WafPolicyGet.json
   - Microsoft.Network/stable/2022-05-01/examples/WafPolicyPatch.json
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-05-01/frontdoor.json
+  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2020-11
