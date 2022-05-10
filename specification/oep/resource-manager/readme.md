@@ -27,7 +27,7 @@ These are the global settings for the oep.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-06-01-preview
+tag: package-2022-04-04-preview
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -39,6 +39,27 @@ input-file:
   - Microsoft.OpenEnergyPlatform/preview/2021-06-01-preview/oep.json
 ```
 
+### Tag: package-2022-04-04-preview
+
+These settings apply only when `--tag=package-2022-04-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-04-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2022-04-04-preview/oep.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: oep.json
+    where: $.definitions.DataPartitionsList
+    reason: DataPartitionsList is a proxy resource
+  - suppress: BodyTopLevelProperties
+    from: oep.json
+    where: $.definitions.DataPartitionsList.properties
+    reason: DataPartitionsList is a proxy resource
+```    
 ---
 
 # Code Generation
@@ -55,7 +76,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
-  - repo: azure-powershell
 ```
 ## Az
 

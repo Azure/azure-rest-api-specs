@@ -2520,6 +2520,12 @@
           "202": {
             "description": "The retrieve throughput distribution for SQL container operation will complete asynchronously."
           },
+          "200": {
+            "description": "The retrieve throughput distribution for SQL container operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2574,6 +2580,12 @@
         "responses": {
           "202": {
             "description": "The redistribution throughput for SQL container operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The redistribution throughput for SQL container operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3461,7 +3473,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
-        "operationId": "MongoDBResources_SqlContainerRetrieveThroughputDistribution",
+        "operationId": "MongoDBResources_MongoDBContainerRetrieveThroughputDistribution",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionRetrieveThroughputDistribution": {
             "$ref": "./examples/CosmosDBMongoDBCollectionRetrieveThroughputDistribution.json"
@@ -3504,6 +3516,12 @@
         "responses": {
           "202": {
             "description": "The retrieve throughput distribution for MongoDB container operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The retrieve throughput distribution for MongoDB container operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3559,6 +3577,12 @@
         "responses": {
           "202": {
             "description": "The redistribution throughput for MongoDB container operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The redistribution throughput for MongoDB container operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -8613,6 +8637,49 @@
       "required": [
         "id"
       ]
+    },
+    "PhysicalPartitionThroughputInfoResult": {
+      "description": "An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object",
+          "$ref": "#/definitions/PhysicalPartitionThroughputInfoResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "PhysicalPartitionThroughputInfoResultProperties": {
+      "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "properties of physical partition throughput info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoProperties"
+            }
+          ]
+        }
+      }
+    },
+    "PhysicalPartitionThroughputInfoProperties": {
+      "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object",
+      "type": "object",
+      "properties": {
+        "physicalPartitionThroughputInfo": {
+          "type": "array",
+          "description": "Array of physical partition throughput info objects",
+          "items": {
+            "$ref": "#/definitions/PhysicalPartitionThroughputInfoResource"
+          }
+        }
+      }
     },
     "PhysicalPartitionThroughputInfoResource": {
       "type": "object",
