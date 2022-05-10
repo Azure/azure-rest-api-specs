@@ -2218,7 +2218,8 @@
           "items": {
             "$ref": "#/definitions/ConfigurationForBatchUpdate"
           },
-          "description": "The list of server configurations."
+          "description": "The list of server configurations.",
+          "x-ms-identifiers": []
         }
       },
       "description": "A list of server configurations to update."
@@ -2259,7 +2260,8 @@
           "items": {
             "$ref": "#/definitions/DelegatedSubnetUsage"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Virtual network subnet usage data."
@@ -2307,7 +2309,8 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Server version capabilities."
@@ -2361,7 +2364,8 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "supportedServerVersions": {
           "description": "A list of supported server versions.",
@@ -2369,7 +2373,8 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Server edition capabilities."
@@ -2404,7 +2409,8 @@
           "items": {
             "$ref": "#/definitions/ServerEditionCapability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Location capabilities."
@@ -2418,7 +2424,8 @@
           "items": {
             "$ref": "#/definitions/CapabilityProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
@@ -2531,7 +2538,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).",
@@ -2540,6 +2548,7 @@
       }
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -2604,7 +2613,8 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Source Server Name of the Single to Flex migration"
+      "description": "Source Server Name of the Single to Flex migration",
+      "x-ms-parameter-location": "method"
     }
   }
 }
