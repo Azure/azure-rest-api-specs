@@ -217,6 +217,20 @@
           "format": "duration",
           "readOnly": true,
           "description": "The duration left for the subscriptions free trial period - in ISO 8601 format (e.g. P3Y6M4DT12H30M5S)."
+        },
+        "deprecated": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "(optional) will return true if the pricing bundle is deprecated"
+        },
+        "replacedBy": {
+          "type": "array",
+          "readOnly": true,
+          "description": "(optional) List of pricing bundles which replace the deprecated bundle, if deprecated is true",
+          "items": {
+            "type": "string",
+            "description": "The name of the pricing bundles which replace the deprecated bundle."
+          }
         }
       },
       "required": [

@@ -170,9 +170,11 @@
       "type": "object",
       "description": "Microsoft Defender for Cloud is provided in two pricing tiers: free and standard, with the standard tier available with a trial period. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
       "properties": {
-        "x-ms-client-flatten": true,
-        "description": "Pricing data",
-        "$ref": "#/definitions/PricingProperties"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Pricing data",
+          "$ref": "#/definitions/PricingProperties"
+        }
       },
       "allOf": [
         {
