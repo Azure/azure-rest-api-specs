@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages": {
       "get": {
         "tags": [
           "ManagedEnvironmentsStorages"
@@ -31,7 +31,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "envName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -62,7 +62,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages/{name}": {
       "get": {
         "tags": [
           "ManagedEnvironmentsStorages"
@@ -78,14 +78,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "envName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "name",
             "in": "path",
             "description": "Name of the storage.",
             "required": true,
@@ -130,14 +130,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "envName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "name",
             "in": "path",
             "description": "Name of the storage.",
             "required": true,
@@ -191,14 +191,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "envName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "name",
             "in": "path",
             "description": "Name of the storage.",
             "required": true,
