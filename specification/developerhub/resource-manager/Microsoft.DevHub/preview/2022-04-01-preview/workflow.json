@@ -740,6 +740,17 @@
         }
       },
       "description": "delete response if content must be provided on delete operation"
+    },
+    "GitHubOAuthCallRequest": {
+      "type": "object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "required": false,
+          "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
+        }
+      },
+      "description": "GitHubOAuth request object"
     }
   },
   "parameters": {
@@ -808,14 +819,6 @@
       "required": true,
       "type": "string",
       "description": "The state response from authenticating the GitHub App.",
-      "x-ms-parameter-location": "client"
-    },
-    "GitHubOAuthRedirectParameter": {
-      "name": "redirectUrl",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The URL the client will redirect to on successful authentication",
       "x-ms-parameter-location": "client"
     }
   }
