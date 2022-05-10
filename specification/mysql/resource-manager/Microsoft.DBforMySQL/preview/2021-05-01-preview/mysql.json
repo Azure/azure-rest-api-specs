@@ -265,9 +265,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MigrationSourceSingleServerName"
           }
         ],
         "responses": {
@@ -1689,8 +1686,7 @@
             "Default",
             "PointInTimeRestore",
             "Replica",
-            "GeoRestore",
-            "Migrate"
+            "GeoRestore"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -2598,13 +2594,6 @@
       "type": "string",
       "description": "The name of the backup.",
       "x-ms-parameter-location": "method"
-    },
-    "MigrationSourceSingleServerName": {
-      "name": "migrationSourceSingleServerName",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Source Server Name of the Single to Flex migration"
     }
   }
 }
