@@ -113,7 +113,13 @@
             "type": "integer",
             "format": "int32",
             "default": 100
-          }
+          },
+          {
+            "in": "query",
+            "name": "administrativeDivision",
+            "description": "An optional parameter for the name of the state or province in which to search for the area code.",
+            "type": "string"
+          },
         ],
         "responses": {
           "200": {
@@ -131,7 +137,7 @@
         },
         "x-ms-examples": {
           "Get PhoneNumber Search Result": {
-            "$ref": "./examples/GetCities.json"
+            "$ref": "./examples/GetLocalities.json"
           }
         },
         "x-ms-pageable": {
