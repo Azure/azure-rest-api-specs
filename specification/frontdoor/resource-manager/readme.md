@@ -31,6 +31,20 @@ openapi-type: arm
 tag: package-2020-11
 ```
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Network/stable/2022-05-01/examples/WafListManagedRuleSets.json
+  - Microsoft.Network/stable/2022-05-01/examples/WafListPolicies.json
+  - Microsoft.Network/stable/2022-05-01/examples/WafPolicyCreateOrUpdate.json
+  - Microsoft.Network/stable/2022-05-01/examples/WafPolicyDelete.json
+  - Microsoft.Network/stable/2022-05-01/examples/WafPolicyGet.json
+  - Microsoft.Network/stable/2022-05-01/examples/WafPolicyPatch.json
+  - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
+```
 
 ### Tag: package-2020-11
 
