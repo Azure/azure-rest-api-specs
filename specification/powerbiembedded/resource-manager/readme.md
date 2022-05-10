@@ -62,6 +62,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_powerbi_embedded']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 

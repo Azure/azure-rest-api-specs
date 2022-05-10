@@ -86,6 +86,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Az

@@ -45,7 +45,7 @@
               "name": "testcontainerApp0",
               "probes": [
                 {
-                  "type": "liveness",
+                  "type": "Liveness",
                   "httpGet": {
                     "path": "/health",
                     "port": 8080,
@@ -113,9 +113,13 @@
               ],
               "traffic": [
                 {
-                  "weight": 100,
-                  "revisionName": "testcontainerApp0-ab1234",
-                  "label": "production"
+                  "weight": 80,
+                  "revisionName": "testcontainerApp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "label": "staging"
                 }
               ]
             },
@@ -136,7 +140,7 @@
                 },
                 "probes": [
                   {
-                    "type": "liveness",
+                    "type": "Liveness",
                     "httpGet": {
                       "path": "/health",
                       "port": 8080,
@@ -190,9 +194,13 @@
               "transport": "auto",
               "traffic": [
                 {
-                  "weight": 100,
-                  "revisionName": "testcontainerApp0-ab1234",
-                  "label": "production"
+                  "weight": 80,
+                  "revisionName": "testcontainerApp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "label": "staging"
                 }
               ]
             },
@@ -213,7 +221,7 @@
                 },
                 "probes": [
                   {
-                    "type": "liveness",
+                    "type": "Liveness",
                     "httpGet": {
                       "path": "/health",
                       "port": 8080,
