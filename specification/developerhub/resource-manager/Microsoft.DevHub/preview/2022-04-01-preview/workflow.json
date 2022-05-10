@@ -87,7 +87,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/GitHubOAuthCallRequest"
+            "name": "parameters",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthCallRequest"
+            }
           }
         ],
         "responses": {
