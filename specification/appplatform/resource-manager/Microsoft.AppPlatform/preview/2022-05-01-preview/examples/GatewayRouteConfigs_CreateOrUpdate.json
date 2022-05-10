@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "gatewayName": "default",
+    "routeConfigName": "myRouteConfig",
+    "gatewayRouteConfigResource": {
+      "properties": {
+        "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myApp",
+        "openApi": {
+          "uri": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json"
+        },
+        "routes": [
+          {
+            "title": "myApp route config",
+            "ssoEnabled": true,
+            "predicates": [
+              "Path=/api5/customer/**"
+            ],
+            "filters": [
+              "StripPrefix=2",
+              "RateLimit=1,1s"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myApp",
+          "openApi": {
+            "uri": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json"
+          },
+          "routes": [
+            {
+              "title": "myApp route config",
+              "ssoEnabled": true,
+              "predicates": [
+                "Path=/api5/customer/**"
+              ],
+              "filters": [
+                "StripPrefix=2",
+                "RateLimit=1,1s"
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/gateways/routeConfigs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/gateways/default/routeConfigs/myRouteConfig",
+        "name": "myRouteConfig"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myApp",
+          "openApi": {
+            "uri": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json"
+          },
+          "routes": [
+            {
+              "title": "myApp route config",
+              "ssoEnabled": true,
+              "predicates": [
+                "Path=/api5/customer/**"
+              ],
+              "filters": [
+                "StripPrefix=2",
+                "RateLimit=1,1s"
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/gateways/routeConfigs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/gateways/default/routeConfigs/myRouteConfig",
+        "name": "myRouteConfig"
+      }
+    }
+  }
+}
