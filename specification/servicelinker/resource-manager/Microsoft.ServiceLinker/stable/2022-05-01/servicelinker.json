@@ -297,7 +297,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateResult"
+              "$ref": "#/definitions/ValidateOperationResult"
             }
           },
           "202": {
@@ -863,6 +863,25 @@
         }
       }
     },
+    "ValidateOperationResult": {
+      "description": "The validation operation result for a linker.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The validation result detail.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ValidateResult"
+        },
+        "resourceId": {
+          "description": "Validated linker id.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Validation operation status.",
+          "type": "string"
+        }
+      }
+    },
     "ValidateResult": {
       "description": "The validation result for a linker.",
       "type": "object",
@@ -926,7 +945,7 @@
           "type": "string",
           "enum": [
             "success",
-            "failed",
+            "failure",
             "warning"
           ],
           "x-ms-enum": {
