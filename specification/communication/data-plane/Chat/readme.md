@@ -106,6 +106,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-chat-2021-10-01-preview7
+
+These settings apply only when `--tag=2021-10-01-preview7` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2021-10-01-preview7'
+input-file:
+  - preview/2021-10-01-preview7/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
 ---
 
 # Code Generation
@@ -145,6 +156,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 add-credential: true
 generate-as-internal: >
     AzureCommunicationChatClient=ChatClientInternal
+    AzureCommunicationChatClientOptions=AzureCommunicationChatClientOptionsInternal
+    AddChatParticipantsRequest=AddChatParticipantsRequestInternal
     CreateChatThreadResult=CreateChatThreadResultInternal
     CreateChatThreadRequest=CreateChatThreadRequestInternal
     ChatMessage=ChatMessageInternal
@@ -152,6 +165,8 @@ generate-as-internal: >
     ChatParticipant=ChatParticipantInternal
     ChatMessageReadReceipt=ChatMessageReadReceiptInternal
     ChatThreadProperties=ChatThreadPropertiesInternal
+    CommunicationIdentifierModel=CommunicationIdentifierModelInternal
+    UpdateChatThreadRequest=UpdateChatThreadRequestInternal
 directive:
 # Rename CommunicationError to ChatError
 - from: swagger-document

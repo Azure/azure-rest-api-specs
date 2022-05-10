@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-azurestack"
   output-folder: "$(typescript-sdks-folder)/sdk/azurestack/arm-azurestack"
-  clear-output-folder: true
   generate-metadata: true
 ```

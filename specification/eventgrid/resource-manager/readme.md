@@ -26,7 +26,34 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-preview
+tag: package-2021-10-preview
+```
+
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-preview'
+input-file:
+- Microsoft.EventGrid/preview/2021-10-15-preview/EventGrid.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+- Microsoft.EventGrid/stable/2021-12-01/EventGrid.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsApiResponseSchema
+    from: EventGrid.json
+    reason: Error is complaining about a section that already exists in all previous stable and preview swaggers.
 ```
 
 ### Tag: package-2021-06-preview
@@ -193,6 +220,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_grid']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

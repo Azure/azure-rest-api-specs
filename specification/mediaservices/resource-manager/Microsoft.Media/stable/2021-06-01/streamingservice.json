@@ -1321,6 +1321,9 @@
           "items": {
             "$ref": "#/definitions/LiveEventEndpoint"
           },
+          "x-ms-identifiers": [
+            "url"
+          ],
           "description": "The input endpoints for the live event."
         }
       },
@@ -1353,6 +1356,9 @@
           "items": {
             "$ref": "#/definitions/IPRange"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The IP allow list."
         }
       },
@@ -1377,6 +1383,9 @@
           "items": {
             "$ref": "#/definitions/LiveEventEndpoint"
           },
+          "x-ms-identifiers": [
+            "url"
+          ],
           "description": "The endpoints for preview. Do not share the preview URL with the live event audience."
         },
         "accessControl": {
@@ -1521,7 +1530,8 @@
           "description": "Provides a mechanism to select the audio track in the input live feed, to which speech-to-text transcription is applied. This property is reserved for future use, any value set on this property will be ignored.",
           "items": {
             "$ref": "#/definitions/LiveEventInputTrackSelection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "outputTranscriptionTrack": {
           "type": "object",
@@ -1585,6 +1595,9 @@
           "items": {
             "$ref": "#/definitions/LiveEventTranscription"
           },
+          "x-ms-identifiers": [
+            "language"
+          ],
           "description": "Live transcription settings for the live event. See https://go.microsoft.com/fwlink/?linkid=2133742 for more information about the live transcription feature."
         },
         "provisioningState": {
@@ -1764,6 +1777,9 @@
           "items": {
             "$ref": "#/definitions/AkamaiSignatureHeaderAuthenticationKey"
           },
+          "x-ms-identifiers": [
+            "identifier"
+          ],
           "description": "authentication key list"
         }
       },

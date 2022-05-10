@@ -893,6 +893,16 @@
         }
       }
     },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
+    },
     "alertProperties": {
       "type": "object",
       "description": "An alert created in alert management service.",
@@ -995,6 +1005,11 @@
             "modelAsString": true
           }
         },
+        "alertRule": {
+          "type": "string",
+          "description": "Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.",
+          "readOnly": true
+        },
         "sourceCreatedId": {
           "type": "string",
           "description": "Unique Id created by monitor service",
@@ -1031,6 +1046,13 @@
           "type": "object",
           "description": "More details which are contextual to the monitor service.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },

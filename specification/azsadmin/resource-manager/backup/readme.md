@@ -33,9 +33,9 @@ These settings apply only when `--tag=package-2018-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-09-01'
 input-file:
-    - Microsoft.Backup.Admin/preview/2018-09-01/Backup.json
-    - Microsoft.Backup.Admin/preview/2018-09-01/BackupLocations.json
-    - Microsoft.Backup.Admin/preview/2018-09-01/Backups.json
+    - Microsoft.Backup.Admin/stable/2018-09-01/Backup.json
+    - Microsoft.Backup.Admin/stable/2018-09-01/BackupLocations.json
+    - Microsoft.Backup.Admin/stable/2018-09-01/Backups.json
 ```
 
 ---
@@ -64,9 +64,9 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Backup.Admin/preview/2018-09-01/Backup.json
-  - $(this-folder)/Microsoft.Backup.Admin/preview/2018-09-01/BackupLocations.json
-  - $(this-folder)/Microsoft.Backup.Admin/preview/2018-09-01/Backups.json
+  - $(this-folder)/Microsoft.Backup.Admin/stable/2018-09-01/Backup.json
+  - $(this-folder)/Microsoft.Backup.Admin/stable/2018-09-01/BackupLocations.json
+  - $(this-folder)/Microsoft.Backup.Admin/stable/2018-09-01/Backups.json
 
 ``` 
 If there are files that should not be in the `all-api-versions` set,  
