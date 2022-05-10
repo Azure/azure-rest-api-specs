@@ -28,7 +28,7 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2020-11
+tag: package-2022-05
 ```
 
 ### Tag: package-2022-05
