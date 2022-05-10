@@ -186,7 +186,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
       "enum": [
-        "Conversation"
+        "conversation"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskKind",
@@ -197,7 +197,7 @@
       "type": "string",
       "description": "Enumeration of supported conversational task results",
       "enum": [
-        "ConversationResult"
+        "conversationResult"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskResultsKind",
@@ -243,7 +243,7 @@
           "$ref": "#/definitions/ConversationTaskParameters"
         }
       },
-      "x-ms-discriminator-value": "Conversation",
+      "x-ms-discriminator-value": "conversation",
       "required": [
         "analysisInput",
         "parameters"
@@ -305,7 +305,7 @@
       "required": [
         "result"
       ],
-      "x-ms-discriminator-value": "ConversationResult"
+      "x-ms-discriminator-value": "conversationResult"
     },
     "ConversationItemBase": {
       "type": "object",
@@ -387,10 +387,10 @@
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "Luis",
-            "Conversation",
-            "QuestionAnswering",
-            "NonLinked"
+            "luis",
+            "conversation",
+            "questionAnswering",
+            "nonLinked"
           ],
           "x-ms-enum": {
             "name": "targetProjectKind",
@@ -403,10 +403,10 @@
         }
       }
     },
-    "NoneLinkedTargetIntentResult": {
+    "NonLinkedTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of non-linked intent response.",
-      "x-ms-discriminator-value": "NonLinked",
+      "x-ms-discriminator-value": "nonLinked",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -419,9 +419,9 @@
         }
       }
     },
-    "LUISParameters": {
+    "luisParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "Luis",
+      "x-ms-discriminator-value": "luis",
       "type": "object",
       "allOf": [
         {
@@ -437,13 +437,13 @@
         "callingOptions": {
           "type": "object",
           "description": "This customizes how the service calls LUIS Generally Available projects.",
-          "$ref": "#/definitions/LUISCallingOptions"
+          "$ref": "#/definitions/luisCallingOptions"
         }
       },
       "additionalProperties": true
     },
-    "LUISCallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available projects.",
+    "luisCallingOptions": {
+      "description": "This customizes how the service calls luis Generally Available projects.",
       "type": "object",
       "properties": {
         "verbose": {
@@ -475,7 +475,7 @@
     "ConversationParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Customized Conversation projects.",
-      "x-ms-discriminator-value": "Conversation",
+      "x-ms-discriminator-value": "conversation",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -509,7 +509,7 @@
     "QuestionAnsweringParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Question Answering knowledge bases.",
-      "x-ms-discriminator-value": "QuestionAnswering",
+      "x-ms-discriminator-value": "questionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -556,8 +556,8 @@
           "type": "string",
           "description": "The type of the project.",
           "enum": [
-            "Conversation",
-            "Orchestration"
+            "conversation",
+            "orchestration"
           ],
           "x-ms-enum": {
             "name": "projectKind",
@@ -573,7 +573,7 @@
     "OrchestrationPrediction": {
       "type": "object",
       "description": "This represents the prediction result of an Orchestration project.",
-      "x-ms-discriminator-value": "Orchestration",
+      "x-ms-discriminator-value": "orchestration",
       "required": [
         "intents"
       ],
@@ -605,10 +605,10 @@
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "Luis",
-            "Conversation",
-            "QuestionAnswering",
-            "NonLinked"
+            "luis",
+            "conversation",
+            "questionAnswering",
+            "nonLinked"
           ],
           "x-ms-enum": {
             "name": "targetProjectKind",
@@ -632,7 +632,7 @@
     "ConversationTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of Conversation project response.",
-      "x-ms-discriminator-value": "Conversation",
+      "x-ms-discriminator-value": "conversation",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -670,7 +670,7 @@
     "ConversationPrediction": {
       "type": "object",
       "description": "Represents the prediction section of a Conversation project.",
-      "x-ms-discriminator-value": "Conversation",
+      "x-ms-discriminator-value": "conversation",
       "required": [
         "intents",
         "entities"
@@ -1478,10 +1478,10 @@
       "type": "string",
       "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
-    "LUISTargetIntentResult": {
+    "luisTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "Luis",
+      "x-ms-discriminator-value": "luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1497,7 +1497,7 @@
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up a Question Answering KB response.",
-      "x-ms-discriminator-value": "QuestionAnswering",
+      "x-ms-discriminator-value": "questionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"

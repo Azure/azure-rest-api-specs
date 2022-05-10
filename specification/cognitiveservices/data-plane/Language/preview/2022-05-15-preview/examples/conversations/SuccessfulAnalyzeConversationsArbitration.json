@@ -5,7 +5,7 @@
     "Content-Type": "application/json",
     "api-version": "2022-05-15-preview",
     "body": {
-      "kind": "Conversation",
+      "kind": "conversation",
       "analysisInput": {
         "conversationItem": {
           "participantId": "1",
@@ -28,21 +28,21 @@
     "200": {
       "headers": {},
       "body": {
-        "kind": "ConversationResult",
+        "kind": "conversationResult",
         "result": {
           "query": "trains from London",
           "prediction": {
             "topIntent": "Rail",
-            "projectKind": "Orchestration",
+            "projectKind": "orchestration",
             "intents": {
               "Rail": {
                 "confidenceScore": 1,
-                "targetProjectKind": "Conversation",
+                "targetProjectKind": "conversation",
                 "result": {
                   "query": "trains from London",
                   "prediction": {
                     "topIntent": "Timetable",
-                    "projectKind": "Conversation",
+                    "projectKind": "conversation",
                     "intents": [
                       {
                         "category": "Timetable",
@@ -59,11 +59,11 @@
               },
               "Tree": {
                 "confidenceScore": 0.2641529,
-                "targetProjectKind": "QuestionAnswering"
+                "targetProjectKind": "questionAnswering"
               },
               "None": {
                 "confidenceScore": 0,
-                "targetProjectKind": "NonLinked"
+                "targetProjectKind": "nonLinked"
               }
             }
           }
