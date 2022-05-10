@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-11-01",
+    "version": "2022-05-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -46,10 +46,10 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -91,10 +91,10 @@
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -131,10 +131,10 @@
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "description": "Policy to be created.",
@@ -179,6 +179,56 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Patch a specific policy for tags update.",
+        "operationId": "Policies_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Policy tags to be patched.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches specific policy": {
+            "$ref": "./examples/WafPolicyPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -193,10 +243,10 @@
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -227,10 +277,10 @@
         "operationId": "ManagedRuleSets_List",
         "parameters": [
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -278,7 +328,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -363,6 +413,10 @@
         }
       },
       "type": "object"
+    },
+    "Tags": {
+      "type": "object",
+      "description": "Policy key value pair tags."
     },
     "WebApplicationFirewallPolicyList": {
       "description": "Defines a list of WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
@@ -730,7 +784,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -946,6 +1000,38 @@
           "description": "Resource ID."
         }
       }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Common resource representation.",
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -957,6 +1043,20 @@
       "maxLength": 128,
       "x-ms-parameter-location": "method",
       "description": "The name of the Web Application Firewall Policy."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
