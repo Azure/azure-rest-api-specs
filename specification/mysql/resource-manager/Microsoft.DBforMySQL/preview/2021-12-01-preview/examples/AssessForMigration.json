@@ -12,6 +12,13 @@
         "body": {
           "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
           "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+          "summary": [
+            {
+              "featureName": "TLSVersion",
+              "severity": "Warning",
+              "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+            }
+          ],
           "targetServerDetails": {
             "serverSpecs": {
               "sku": {
@@ -71,17 +78,17 @@
             ],
             "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
           },
-          "summary": [
-            {
-              "featureName": "TLSVersion",
-              "severity": "Warning",
-              "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
-            }
-          ],
           "replicaAssessmentReports": [
             {
               "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
               "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+              "summary": [
+                {
+                  "featureName": "TLSVersion",
+                  "severity": "Warning",
+                  "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+                }
+              ],
               "targetServerDetails": {
                 "serverSpecs": {
                   "sku": {
@@ -126,14 +133,7 @@
                   }
                 ],
                 "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
-              },
-              "summary": [
-                {
-                  "featureName": "TLSVersion",
-                  "severity": "Warning",
-                  "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
-                }
-              ]
+              }
             }
           ],
           "assessmentReportCompletionDateTime": "2021-06-15T16:05:19.902522+00:00"
