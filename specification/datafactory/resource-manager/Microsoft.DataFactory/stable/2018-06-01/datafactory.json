@@ -4987,6 +4987,16 @@
         "type": "object"
       }
     },
+    "PurviewConfiguration": {
+      "description": "Purview configuration.",
+      "type": "object",
+      "properties": {
+        "purviewResourceId": {
+          "description": "Purview resource id.",
+          "type": "string"
+        }
+      }
+    },
     "FactoryRepoConfiguration": {
       "description": "Factory's git repo information.",
       "type": "object",
@@ -5193,6 +5203,10 @@
           "description": "Version of the factory.",
           "type": "string",
           "readOnly": true
+        },
+        "purviewConfiguration": {
+          "$ref": "#/definitions/PurviewConfiguration",
+          "description": "Purview information of the factory."
         },
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
