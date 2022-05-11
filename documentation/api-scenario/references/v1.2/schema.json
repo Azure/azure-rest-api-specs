@@ -94,13 +94,26 @@
                   }
                 },
                 "then": {
-                  "properties": {
-                    "type": {},
-                    "value": {
-                      "type": "string"
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "prefix": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
                     }
-                  },
-                  "additionalProperties": false
+                  ]
                 }
               },
               {
@@ -311,9 +324,11 @@
     },
     "StepRestBase": {
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/StepBase"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
       "properties": {
         "outputVariables": {
           "type": "object",
@@ -369,8 +384,16 @@
                     "type": "string"
                   }
                 },
-                "body":{
-                  "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                "body": {
+                  "type": [
+                    "object",
+                    "number",
+                    "array",
+                    "integer",
+                    "string",
+                    "boolean",
+                    "null"
+                  ]
                 }
               }
             }
