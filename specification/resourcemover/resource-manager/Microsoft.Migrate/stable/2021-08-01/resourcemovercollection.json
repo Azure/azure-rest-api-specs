@@ -1388,7 +1388,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Summary"
-          }
+          },
+          "x-ms-identifiers": [
+            "item"
+          ]
         }
       }
     },
@@ -1800,7 +1803,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDiscovery"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "Gets or sets the value of next link.",
@@ -1841,6 +1847,7 @@
           "items": {
             "$ref": "#/definitions/MoveResourceErrorBody"
           },
+          "x-ms-identifiers": [],
           "description": "A list of additional details about the error."
         }
       },
@@ -2008,7 +2015,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubnetResourceSettings"
-          }
+          },
+          "x-ms-identifiers": [
+            "/networkSecurityGroup/sourceArmResourceId"
+          ]
         }
       },
       "x-ms-discriminator-value": "Microsoft.Network/virtualNetworks"
@@ -2062,7 +2072,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NicIpConfigurationResourceSettings"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "enableAcceleratedNetworking": {
           "description": "Gets or sets a value indicating whether accelerated networking is enabled.",
@@ -2150,14 +2163,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceArmResourceId"
+          ]
         },
         "loadBalancerNatRules": {
           "description": "Gets or sets the references of the load balancer NAT rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerNatRuleReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceArmResourceId"
+          ]
         },
         "publicIp": {
           "$ref": "#/definitions/PublicIpReference"
@@ -2232,7 +2251,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NsgSecurityRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "x-ms-discriminator-value": "Microsoft.Network/networkSecurityGroups"
@@ -2297,14 +2319,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LBFrontendIPConfigurationResourceSettings"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "backendAddressPools": {
           "description": "Gets or sets the backend address pools of the load balancer.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LBBackendAddressPoolResourceSettings"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "zones": {
           "description": "Gets or sets the csv list of zones common for all frontend IP configurations. Note this is given\r\n precedence only if frontend IP configurations settings are not present.",
@@ -2482,6 +2508,7 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [],
           "description": "A list of additional details about the error."
         }
       },
@@ -2548,7 +2575,8 @@
           "description": "The error details.",
           "items": {
             "$ref": "#/definitions/OperationStatusError"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "readOnly": true,
@@ -2556,7 +2584,8 @@
           "description": "The additional info.",
           "items": {
             "$ref": "#/definitions/OperationErrorAdditionalInfo"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

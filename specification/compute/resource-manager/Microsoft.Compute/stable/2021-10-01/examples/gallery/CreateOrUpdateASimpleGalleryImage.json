@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-10-01",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImage": {
+      "location": "West US",
+      "properties": {
+        "osType": "Windows",
+        "osState": "Generalized",
+        "hyperVGeneration": "V1",
+        "identifier": {
+          "publisher": "myPublisherName",
+          "offer": "myOfferName",
+          "sku": "mySkuName"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myGalleryImageName"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "West US",
+        "name": "myGalleryImageName"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myGalleryImageName"
+      }
+    }
+  }
+}

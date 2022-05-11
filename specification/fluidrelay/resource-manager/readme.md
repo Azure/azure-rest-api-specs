@@ -67,6 +67,24 @@ input-file:
   - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json
 ```
 
+### Tag: package-2022-02-15
+
+These settings apply only when `--tag=package-2022-02-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-15'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-02-15/fluidrelay.json
+```
+
+### Tag: package-2022-04-21
+
+These settings apply only when `--tag=package-2022-04-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-21'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-04-21/fluidrelay.json
+```
+
 ---
 
 # Code Generation
@@ -85,6 +103,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_fluidrelay']
+  - repo: azure-powershell
 ```
 
 ## Go

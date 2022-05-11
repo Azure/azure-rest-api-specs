@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-08-01
+tag: package-2022-03-01
 
 directive:
   - where:
@@ -224,8 +224,7 @@ directive:
       - $.definitions.RestorePoint
     suppress:
       - NestedResourcesMustHaveListOperation
-    reason:
-      - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
+    reason: CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
   - where:
       - $.definitions.SubResourceWithColocationStatus.properties
     suppress:
@@ -234,6 +233,109 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+```
+
+### Tag: package-2022-03-01
+
+These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-01'
+input-file:
+- Microsoft.Compute/stable/2022-03-01/common.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/computeRPCommon.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineExtensionImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/availabilitySet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/proximityPlacementGroup.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/dedicatedHost.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/image.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/restorePoint.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json 
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2022-03-01-only
+
+These settings apply only when `--tag=package-2022-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-01-only'
+input-file:
+- Microsoft.Compute/stable/2022-03-01/common.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/computeRPCommon.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineExtensionImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/availabilitySet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/proximityPlacementGroup.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/dedicatedHost.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/image.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/restorePoint.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json 
+```
+
+### Tag: package-2021-12-01
+
+These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01'
+input-file:
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-12-01-only
+
+These settings apply only when `--tag=package-2021-12-01-oly` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-12-01/disk.json
+```
+
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-01'
+input-file:
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-08-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-11-01-only
+
+These settings apply only when `--tag=package-2021-11-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
 ```
 
 ### Tag: package-2021-08-01-only
@@ -259,6 +361,30 @@ input-file:
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
 - Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.Compute/stable/2021-07-01/compute.json
+- Microsoft.Compute/stable/2021-07-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-10-01-only
+
+These settings apply only when `--tag=package-2021-10-01-only` is specified on the command line.
+``` yaml $(tag) == 'package-2021-10-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-10-01/gallery.json
 ```
 
 ### Tag: package-2021-07-01
@@ -297,12 +423,13 @@ These settings apply only when `--tag=2021-06-01-preview` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-- Microsoft.Compute/stable/2021-03-01/compute.json
-- Microsoft.Compute/stable/2021-03-01/runCommands.json
-- Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
-- Microsoft.Compute/stable/2020-09-30/gallery.json
-- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 - Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
 ```
@@ -965,6 +1092,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

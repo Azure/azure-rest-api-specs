@@ -13,7 +13,7 @@
       "in": "path",
       "required": true,
       "minLength": 1,
-      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
       "x-ms-parameter-location": "method"
     },
     "statusId": {
@@ -81,6 +81,9 @@
           "items": {
             "$ref": "#/definitions/step"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of steps.",
           "minItems": 1
         },
@@ -139,6 +142,9 @@
           "items": {
             "$ref": "#/definitions/branch"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "minItems": 1
         }
       },
@@ -163,6 +169,9 @@
           "items": {
             "$ref": "#/definitions/action"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "minItems": 1
         }
       },
@@ -226,7 +235,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/keyValuePair"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "selectorId": {
           "type": "string",
@@ -260,7 +272,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/keyValuePair"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "selectorId": {
           "type": "string",
@@ -483,14 +498,14 @@
           "type": "string",
           "readOnly": true
         },
-        "failedDateUtc": {
+        "targetFailedTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the failed date time.",
           "readOnly": true,
           "x-nullable": true
         },
-        "completedDateUtc": {
+        "targetCompletedTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the completed date time.",
@@ -587,25 +602,25 @@
           "type": "string",
           "readOnly": true
         },
-        "createdDateUtc": {
+        "createdDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the created date time.",
           "readOnly": true
         },
-        "lastActionDateUtc": {
+        "lastActionDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the last action date time.",
           "readOnly": true
         },
-        "startDateUtc": {
+        "startDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the start date time.",
           "readOnly": true
         },
-        "stopDateUtc": {
+        "stopDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
@@ -621,6 +636,9 @@
               "items": {
                 "$ref": "#/definitions/stepStatus"
               },
+              "x-ms-identifiers": [
+                "stepName"
+              ],
               "readOnly": true
             }
           },
@@ -632,12 +650,12 @@
       "description": "Model that represents the a list of branches and branch statuses.",
       "type": "object",
       "properties": {
-        "name": {
+        "stepName": {
           "description": "The name of the step.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "stepId": {
           "description": "The id of the step.",
           "type": "string",
           "readOnly": true
@@ -653,6 +671,9 @@
           "items": {
             "$ref": "#/definitions/branchStatus"
           },
+          "x-ms-identifiers": [
+            "branchName"
+          ],
           "readOnly": true
         }
       }
@@ -661,12 +682,12 @@
       "description": "Model that represents the a list of actions and action statuses.",
       "type": "object",
       "properties": {
-        "name": {
+        "branchName": {
           "description": "The name of the branch status.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "branchId": {
           "description": "The id of the branch status.",
           "type": "string",
           "readOnly": true
@@ -682,6 +703,9 @@
           "items": {
             "$ref": "#/definitions/actionStatus"
           },
+          "x-ms-identifiers": [
+            "actionId"
+          ],
           "readOnly": true
         }
       }
@@ -690,12 +714,12 @@
       "type": "object",
       "description": "Model that represents the an action and its status.",
       "properties": {
-        "name": {
+        "actionName": {
           "description": "The name of the action status.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "actionId": {
           "description": "The id of the action status.",
           "type": "string",
           "readOnly": true
@@ -705,12 +729,25 @@
           "type": "string",
           "readOnly": true
         },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start time of the action.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the end time of the action.",
+          "readOnly": true
+        },
         "targets": {
           "description": "The array of targets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/experimentExecutionActionTargetDetailsProperties"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

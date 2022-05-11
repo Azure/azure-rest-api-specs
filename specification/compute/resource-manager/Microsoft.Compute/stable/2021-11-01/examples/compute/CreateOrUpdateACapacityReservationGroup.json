@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-11-01",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [
+        "1",
+        "2"
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myCapacityReservationGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    },
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "name": "myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  }
+}

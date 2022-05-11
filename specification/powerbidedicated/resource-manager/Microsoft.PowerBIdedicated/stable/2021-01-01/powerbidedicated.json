@@ -628,7 +628,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -935,6 +938,9 @@
           "items": {
             "$ref": "#/definitions/CapacitySku"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The collection of available SKUs for new resources"
         }
       }
@@ -948,6 +954,9 @@
           "items": {
             "$ref": "#/definitions/SkuDetailsForExistingResource"
           },
+          "x-ms-identifiers": [
+            "/sku/name"
+          ],
           "description": "The collection of available SKUs for existing resources"
         }
       }
@@ -1030,14 +1039,20 @@
           "description": "Metric specifications for exposing performance metrics to shoebox.",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "logSpecifications": {
           "type": "array",
           "description": "Log specifications for exposing diagnostic logs to shoebox.",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1089,7 +1104,10 @@
                 "description": "Localizable dimension of the metric"
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
