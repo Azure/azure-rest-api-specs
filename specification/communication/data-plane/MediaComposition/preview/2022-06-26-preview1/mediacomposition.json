@@ -1,0 +1,942 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Media Composition Service",
+    "description": "Azure Communication Media Composition Service",
+    "version": "2022-03-31-preview"
+  },
+  "paths": {
+    "/mediaCompositions/{mediaCompositionId}": {
+      "get": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MediaCompositionBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get Media Composition": {
+            "$ref": "./examples/MediaComposition_GetMediaComposition.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MediaCompositionBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MediaCompositionBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create new Media Composition": {
+            "$ref": "./examples/MediaComposition_CreateMediaComposition.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MediaCompositionBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MediaCompositionBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update Media Composition - Change source": {
+            "$ref": "./examples/MediaComposition_UpdateMediaComposition.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Delete Media Composition": {
+            "$ref": "./examples/MediaComposition_DeleteMediaComposition.json"
+          }
+        }
+      }
+    },
+    "/mediaCompositions/{mediaCompositionId}/start": {
+      "post": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Start",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CompositionStreamState"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Start Media Composition": {
+            "$ref": "./examples/MediaComposition_StartMediaComposition.json"
+          }
+        }
+      }
+    },
+    "/mediaCompositions/{mediaCompositionId}/stop": {
+      "post": {
+        "tags": [
+          "MediaComposition"
+        ],
+        "operationId": "MediaComposition_Stop",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mediaCompositionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CompositionStreamState"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Stop Media Composition": {
+            "$ref": "./examples/MediaComposition_StopMediaComposition.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AudiencePosition": {
+      "format": "int32",
+      "enum": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "type": "integer"
+    },
+    "AutoGridLayoutOptions": {
+      "required": [
+        "inputIds"
+      ],
+      "type": "object",
+      "properties": {
+        "inputIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trackDominantSpeaker": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CommunicationCallIdentifierModel": {
+      "type": "object",
+      "properties": {
+        "call": {
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationError": {
+      "$ref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions#/CommunicationError"
+    },
+    "CommunicationErrorResponse": {
+      "$ref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "CommunicationUserIdentifierModel": {
+      "$ref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions#/CommunicationUserIdentifierModel"
+    },
+    "CompositionStreamState": {
+      "enum": [
+        "notStarted",
+        "running",
+        "stopped"
+      ],
+      "type": "string"
+    },
+    "GridLayoutOptions": {
+      "required": [
+        "columns",
+        "inputIds",
+        "rows"
+      ],
+      "type": "object",
+      "properties": {
+        "rows": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "columns": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inputIds": { }
+      }
+    },
+    "GroupCall": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string"
+        }
+      }
+    },
+    "InputGroup": {
+      "required": [
+        "inputIds"
+      ],
+      "type": "object",
+      "properties": {
+        "inputIds": { },
+        "position": {
+          "$ref": "#/definitions/Position"
+        },
+        "width": { },
+        "height": { },
+        "rows": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "columns": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "layer": {
+          "type": "string"
+        }
+      }
+    },
+    "Layer": {
+      "required": [
+        "zIndex"
+      ],
+      "type": "object",
+      "properties": {
+        "zIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "visibility": {
+          "$ref": "#/definitions/LayerVisibility"
+        }
+      }
+    },
+    "LayerVisibility": {
+      "format": "int32",
+      "enum": [
+        "visible",
+        "hidden"
+      ],
+      "type": "integer"
+    },
+    "Layout": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "grid": {
+          "$ref": "#/definitions/GridLayoutOptions"
+        },
+        "autoGrid": {
+          "$ref": "#/definitions/AutoGridLayoutOptions"
+        },
+        "presenter": {
+          "$ref": "#/definitions/PresenterLayoutOptions"
+        },
+        "presentation": {
+          "$ref": "#/definitions/PresentationLayoutOptions"
+        },
+        "layers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Layer"
+          }
+        },
+        "inputGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InputGroup"
+          }
+        },
+        "placeholderImageUri": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/LayoutType"
+        }
+      }
+    },
+    "LayoutType": {
+      "format": "int32",
+      "enum": [
+        "custom",
+        "grid",
+        "autoGrid",
+        "presentation",
+        "presenter"
+      ],
+      "type": "integer"
+    },
+    "MediaCompositionBody": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "layout": {
+          "$ref": "#/definitions/Layout"
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaInput"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaOutput"
+          }
+        },
+        "streamState": {
+          "$ref": "#/definitions/CompositionStreamState"
+        }
+      }
+    },
+    "MediaInput": {
+      "type": "object",
+      "properties": {
+        "groupCall": {
+          "$ref": "#/definitions/GroupCall"
+        },
+        "room": {
+          "$ref": "#/definitions/GroupCall"
+        },
+        "teamsMeeting": {
+          "$ref": "#/definitions/TeamsMeeting"
+        },
+        "rtmp": {
+          "$ref": "#/definitions/RtmpStream"
+        },
+        "srt": {
+          "$ref": "#/definitions/SrtStream"
+        },
+        "participant": {
+          "$ref": "#/definitions/Participant"
+        },
+        "activePresenter": {
+          "$ref": "#/definitions/CommunicationCallIdentifierModel"
+        },
+        "dominantSpeaker": {
+          "$ref": "#/definitions/CommunicationCallIdentifierModel"
+        },
+        "screenShare": {
+          "$ref": "#/definitions/CommunicationCallIdentifierModel"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "kind": {
+          "$ref": "#/definitions/MediaInputType"
+        }
+      }
+    },
+    "MediaInputType": {
+      "format": "int32",
+      "enum": [
+        "groupCall",
+        "room",
+        "teamsMeeting",
+        "srt",
+        "rtmp",
+        "participant",
+        "screenShare",
+        "dominantSpeaker",
+        "activePresenter",
+        "image"
+      ],
+      "type": "integer"
+    },
+    "MediaOutput": {
+      "type": "object",
+      "properties": {
+        "groupCall": {
+          "$ref": "#/definitions/GroupCall"
+        },
+        "room": {
+          "$ref": "#/definitions/GroupCall"
+        },
+        "teamsMeeting": {
+          "$ref": "#/definitions/TeamsMeeting"
+        },
+        "rtmp": {
+          "$ref": "#/definitions/RtmpStream"
+        },
+        "srt": {
+          "$ref": "#/definitions/SrtStream"
+        },
+        "kind": {
+          "$ref": "#/definitions/MediaOutputType"
+        }
+      }
+    },
+    "MediaOutputType": {
+      "format": "int32",
+      "enum": [
+        "groupCall",
+        "room",
+        "teamsMeeting",
+        "srt",
+        "rtmp"
+      ],
+      "type": "integer"
+    },
+    "Participant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+        },
+        "placeholderImageUri": {
+          "type": "string"
+        },
+        "call": {
+          "type": "string"
+        }
+      }
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "y": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "PresentationLayoutOptions": {
+      "required": [
+        "audienceIds",
+        "presenterId"
+      ],
+      "type": "object",
+      "properties": {
+        "presenterId": {
+          "type": "string"
+        },
+        "audienceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audiencePosition": {
+          "$ref": "#/definitions/AudiencePosition"
+        }
+      }
+    },
+    "PresenterLayoutOptions": {
+      "required": [
+        "presenterId",
+        "supportId"
+      ],
+      "type": "object",
+      "properties": {
+        "presenterId": {
+          "type": "string"
+        },
+        "supportId": {
+          "type": "string"
+        },
+        "supportPosition": {
+          "$ref": "#/definitions/SupportPosition"
+        },
+        "supportAspectRatio": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "height": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "RtmpMode": {
+      "format": "int32",
+      "enum": [
+        "push",
+        "pull"
+      ],
+      "type": "integer"
+    },
+    "RtmpStream": {
+      "type": "object",
+      "properties": {
+        "enableSsl": {
+          "type": "boolean"
+        },
+        "streamKey": {
+          "type": "string"
+        },
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "streamUrl": {
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/definitions/RtmpMode"
+        }
+      }
+    },
+    "SrtStream": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "streamUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportPosition": {
+      "format": "int32",
+      "enum": [
+        "topLeft",
+        "topRight",
+        "bottomLeft",
+        "bottomRight"
+      ],
+      "type": "integer"
+    },
+    "TeamsMeeting": {
+      "type": "object",
+      "properties": {
+        "teamsJoinUrl": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
