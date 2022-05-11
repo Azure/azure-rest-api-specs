@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-2022-03
 opt-in-extensible-enums: true
 ```
 
