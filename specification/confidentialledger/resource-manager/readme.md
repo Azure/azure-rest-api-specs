@@ -48,13 +48,13 @@ input-file:
   - Microsoft.ConfidentialLedger/preview/2021-05-13-preview/confidentialledger.json
 ```
 
-### Tag: package-2022-05-11-rc
+### Tag: package-2022-05-11
 
-These settings apply only when `--tag=package-2022-05-11-rc` is specified on the command line.
+These settings apply only when `--tag=package-2022-05-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05-11-rc'
+```yaml $(tag) == 'package-2022-05-11'
 input-file:
-  - Microsoft.ConfidentialLedger/stable/2022-05-11-rc/confidentialledger.json
+  - Microsoft.ConfidentialLedger/stable/2022-05-11/confidentialledger.json
 ```
 
 ---
