@@ -43,6 +43,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2022-05-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2022-05-15/rbac.json
   - Microsoft.DocumentDB/stable/2022-05-15/restorable.json
+  - Microsoft.DocumentDB/stable/2022-05-15/services.json
 ```
 
 ### Tag: package-preview-2022-02
