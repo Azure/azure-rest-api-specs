@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingAccountId": "100",
+    "enrollmentAccountId": "456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456",
+    "exportName": "TestExport",
+    "parameters": {
+      "properties": {
+        "schedule": {
+          "status": "Active",
+          "recurrence": "Weekly",
+          "recurrencePeriod": {
+            "from": "2020-06-01T00:00:00Z",
+            "to": "2020-10-31T00:00:00Z"
+          }
+        },
+        "format": "Csv",
+        "deliveryInfo": {
+          "destination": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+            "container": "exports",
+            "rootFolderPath": "ad-hoc"
+          }
+        },
+        "definition": {
+          "type": "ActualCost",
+          "timeframe": "MonthToDate",
+          "dataSet": {
+            "granularity": "Daily",
+            "configuration": {
+              "columns": [
+                "Date",
+                "MeterId",
+                "ResourceId",
+                "ResourceLocation",
+                "Quantity"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "properties": {
+          "schedule": {
+            "status": "Active",
+            "recurrence": "Weekly",
+            "recurrencePeriod": {
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
+            }
+          },
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ActualCost",
+            "timeframe": "MonthToDate",
+            "dataSet": {
+              "granularity": "Daily",
+              "configuration": {
+                "columns": [
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "properties": {
+          "schedule": {
+            "status": "Active",
+            "recurrence": "Weekly",
+            "recurrencePeriod": {
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
+            }
+          },
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ActualCost",
+            "timeframe": "MonthToDate",
+            "dataSet": {
+              "granularity": "Daily",
+              "configuration": {
+                "columns": [
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
