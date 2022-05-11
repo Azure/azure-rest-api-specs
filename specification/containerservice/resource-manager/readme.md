@@ -34,9 +34,48 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-02
+tag: package-preview-2022-04
 ```
 
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.ContainerService/preview/2022-04-02-preview/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.ContainerService/stable/2022-03-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.ContainerService/preview/2022-03-02-preview/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
 
 ### Tag: package-2022-02
 
@@ -745,7 +784,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -757,6 +795,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

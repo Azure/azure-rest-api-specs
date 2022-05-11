@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "api-version": "2022-03-01",
+    "$expand": "virtualMachines/$ref"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{capacityReservationName}",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "location": "West US",
+            "properties": {
+              "reservationId": "{GUID}",
+              "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_DS1_v2",
+              "capacity": 4
+            },
+            "zones": [
+              "1"
+            ]
+          },
+          {
+            "name": "{capacityReservationName}",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "location": "West US",
+            "properties": {
+              "reservationId": "{GUID}",
+              "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_A1_v2",
+              "capacity": 4
+            },
+            "zones": [
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
