@@ -59,7 +59,10 @@
       openapiHub: https://openapihub.test.azure-devex-tools.com
       to: test-repo-billy/azure-rest-api-specs/master
     onLabeledComments: "Hi @${PRAuthor},Your PR is approved. Congratulations. </br>  <li> Since your PR is in private repo (azure-rest-api-specs-pr),  there won’t be PR merge. If you want to publish the PR to public repo (Azure/azure-rest-api-specs) and get it merged, pls use [OpenAPIHub Publish PR](${openapiHub}/tools/publishpullrequest?pr=${owner}/${repo}/${PRNumber}&to=${to}).</li> <li> For further guidance on how to proceed.  Please refer to this [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**)</li>"
-
+    onLabeledTeamsTitle: "Your PR is approved."
+    onLabeledTeamsMessage: "Hi @${PRAuthor},Your PR is approved. Congratulations."
+    
+    
 - rule:
     type: label
     label: NewApiVersionRequired
