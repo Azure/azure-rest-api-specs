@@ -31,7 +31,7 @@ vanilla: true
 
 ### Tag: package-2022-04-20-preview-ledger
 
-These settings apply only when `--tag=package-0.1-preview-ledger` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-20-preview-ledger` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-20-preview-ledger'
 input-file:
@@ -40,7 +40,7 @@ input-file:
 
 ### Tag: package-2022-04-20-preview-identity
 
-These settings apply only when `--tag=package-0.1-preview-identity` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-20-preview-identity` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-20-preview-identity'
 input-file:
