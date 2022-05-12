@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2022-05-12` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-12'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2022-05-12/confidentialledger.json
+  - Microsoft.ConfidentialLedger/stable/2022-05-12/confidentialledger.json
 ```
 
 ---
