@@ -413,9 +413,6 @@
               }
             }
           },
-          "202": {
-            "description": "Asynchronous Success"
-          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -507,9 +504,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "Asynchronous Success"
           },
           "default": {
             "description": "Default response.",
@@ -1069,9 +1063,6 @@
               }
             }
           },
-          "202": {
-            "description": "Asynchronous Success"
-          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -1444,7 +1435,8 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "The error details."
+          "description": "The error details.",
+          "required": true
         }
       }
     },
@@ -1454,12 +1446,14 @@
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "required": true
         },
         "message": {
           "description": "A human-readable representation of the error.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "required": true
         },
         "details": {
           "description": "Internal error details.",
@@ -1552,7 +1546,7 @@
       "description": "The requested API version.",
       "required": true,
       "type": "string",
-      "minLength": 10
+      "minLength": 1
     },
     "max-items-per-page": {
       "name": "max-items-per-page",
