@@ -7140,6 +7140,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autoscaleSettings is required, but not both."
         },
         "autoscaleSettings": {
@@ -7164,6 +7165,7 @@
       "properties": {
         "maxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents maximum throughput container can scale up to."
         },
         "autoUpgradePolicy": {
@@ -7172,6 +7174,7 @@
         },
         "targetMaxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents target maximum throughput container can scale up to once offer is no longer in pending state.",
           "readOnly": true
         }
@@ -7200,6 +7203,7 @@
         },
         "incrementPercent": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents the percentage by which throughput can increase every time throughput policy kicks in."
         }
       }
@@ -7211,6 +7215,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Value of the Cosmos DB resource throughput or autoscaleSettings. Use the ThroughputSetting resource when retrieving offer details."
         },
         "autoscaleSettings": {
@@ -7251,6 +7256,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Default time to live"
         },
         "uniqueKeyPolicy": {
@@ -7372,7 +7378,8 @@
         },
         "precision": {
           "description": "The precision of the index. -1 is maximum precision.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "kind": {
           "description": "Indicates the type of index.",
@@ -7656,6 +7663,7 @@
         },
         "analyticalStorageTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Analytical TTL."
         }
       },
@@ -7707,7 +7715,8 @@
       "properties": {
         "expireAfterSeconds": {
           "description": "Expire after seconds",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "unique": {
           "description": "Is unique or not",
@@ -7751,6 +7760,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Time to live of the Cosmos DB Cassandra table"
         },
         "schema": {
@@ -7759,6 +7769,7 @@
         },
         "analyticalStorageTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Analytical TTL."
         }
       },
@@ -7862,6 +7873,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Default time to live"
         },
         "uniqueKeyPolicy": {
@@ -7874,6 +7886,7 @@
         },
         "analyticalStorageTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Analytical TTL."
         }
       },
@@ -7886,6 +7899,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Request Units per second. For example, \"throughput\": 10000."
         },
         "autoscaleSettings": {
@@ -7900,6 +7914,7 @@
       "properties": {
         "maxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents maximum throughput, the resource can scale up to."
         }
       }
