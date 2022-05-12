@@ -27,7 +27,7 @@ These are the global settings for the confidentialledger.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-05-11-stable
+tag: package-2022-05-11
 ```
 
 ### Tag: package-2020-12-01-preview
