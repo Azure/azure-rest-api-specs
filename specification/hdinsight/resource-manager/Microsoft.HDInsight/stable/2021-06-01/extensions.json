@@ -1,0 +1,683 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "version": "2021-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/clustermonitoring": {
+      "put": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Enables the Operations Management Suite (OMS) on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/EnableLinuxClusterMonitoring.json"
+          }
+        },
+        "operationId": "Extensions_EnableMonitoring",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterMonitoringRequest"
+            },
+            "description": "The Operations Management Suite (OMS) workspace parameters."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/GetLinuxClusterMonitoringStatus.json"
+          }
+        },
+        "operationId": "Extensions_GetMonitoringStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClusterMonitoringResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Disables the Operations Management Suite (OMS) on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/DisableLinuxClusterMonitoring.json"
+          }
+        },
+        "operationId": "Extensions_DisableMonitoring",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/azureMonitor": {
+      "put": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Enables the Azure Monitor on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/EnableLinuxClusterAzureMonitor.json"
+          }
+        },
+        "operationId": "Extensions_EnableAzureMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorRequest"
+            },
+            "description": "The Log Analytics workspace parameters."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the status of Azure Monitor on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/GetLinuxClusterAzureMonitorStatus.json"
+          }
+        },
+        "operationId": "Extensions_GetAzureMonitorStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Disables the Azure Monitor on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/DisableLinuxClusterAzureMonitor.json"
+          }
+        },
+        "operationId": "Extensions_DisableAzureMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}": {
+      "put": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Creates an HDInsight cluster extension.",
+        "operationId": "Extensions_Create",
+        "x-ms-examples": {
+          "Create a monitoring extension on Hadoop Linux cluster": {
+            "$ref": "./examples/CreateExtension.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "description": "The cluster extensions create request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the extension properties for the specified HDInsight cluster extension.",
+        "x-ms-examples": {
+          "Get an extension": {
+            "$ref": "./examples/GetExtension.json"
+          }
+        },
+        "operationId": "Extensions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClusterMonitoringResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Deletes the specified extension for HDInsight cluster.",
+        "x-ms-examples": {
+          "Delete an extension": {
+            "$ref": "./examples/DeleteExtension.json"
+          }
+        },
+        "operationId": "Extensions_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}/azureAsyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the async operation status.",
+        "operationId": "Extensions_GetAzureAsyncOperationStatus",
+        "x-ms-examples": {
+          "Gets the azure async operation status.": {
+            "$ref": "./examples/GetExtensionCreationAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Extension": {
+      "type": "object",
+      "description": "Cluster monitoring extensions.",
+      "properties": {
+        "workspaceId": {
+          "description": "The workspace ID for the cluster monitoring extension.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The certificate for the cluster monitoring extensions.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterMonitoringResponse": {
+      "type": "object",
+      "description": "The cluster monitoring status response.",
+      "properties": {
+        "clusterMonitoringEnabled": {
+          "description": "The status of the monitor on the HDInsight cluster.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The workspace ID of the monitor on the HDInsight cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterMonitoringRequest": {
+      "type": "object",
+      "description": "The cluster monitor parameters.",
+      "properties": {
+        "workspaceId": {
+          "description": "The cluster monitor workspace ID.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The cluster monitor workspace key.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureMonitorRequest": {
+      "type": "object",
+      "description": "The azure monitor parameters.",
+      "properties": {
+        "workspaceId": {
+          "description": "The Log Analytics workspace ID.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The Log Analytics workspace key.",
+          "type": "string"
+        },
+        "selectedConfigurations": {
+          "description": "The selected configurations.",
+          "$ref": "#/definitions/AzureMonitorSelectedConfigurations"
+        }
+      }
+    },
+    "AzureMonitorResponse": {
+      "type": "object",
+      "description": "The azure monitor status response.",
+      "properties": {
+        "clusterMonitoringEnabled": {
+          "description": "The status of the monitor on the HDInsight cluster.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The workspace ID of the monitor on the HDInsight cluster.",
+          "type": "string"
+        },
+        "selectedConfigurations": {
+          "description": "The selected configurations.",
+          "$ref": "#/definitions/AzureMonitorSelectedConfigurations"
+        }
+      }
+    },
+    "AzureMonitorSelectedConfigurations": {
+      "type": "object",
+      "description": "The selected configurations for azure monitor.",
+      "properties": {
+        "configurationVersion": {
+          "description": "The configuration version.",
+          "type": "string"
+        },
+        "globalConfigurations": {
+          "description": "The global configurations of selected configurations.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tableList": {
+          "description": "The table list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorTableConfiguration"
+          }
+        }
+      }
+    },
+    "AzureMonitorTableConfiguration": {
+      "type": "object",
+      "description": "The table configuration for the Log Analytics integration.",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtensionNameParameter": {
+      "name": "extensionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster extension.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

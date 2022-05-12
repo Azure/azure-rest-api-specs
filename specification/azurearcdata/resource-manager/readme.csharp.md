@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace:  Microsoft.Azure.Management.AzureArcData
-  output-folder: $(csharp-sdks-folder)/resources/Microsoft.Azure.Management.AzureArcData/src/Generated
+  output-folder: $(csharp-sdks-folder)/azurearcdata/Microsoft.Azure.Management.AzureArcData/src/Generated
 ```

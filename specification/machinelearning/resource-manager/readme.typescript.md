@@ -11,13 +11,10 @@ batch:
   - package-commitmentPlans: true
     package-name: "@azure/arm-commitmentplans"
     output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-commitmentplans
-    clear-output-folder: true
   - package-webservices: true
     package-name: "@azure/arm-webservices"
     output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-webservices
-    clear-output-folder: true
   - package-workspaces: true
     package-name: "@azure/arm-workspaces"
     output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-workspaces
-    clear-output-folder: true
 ```

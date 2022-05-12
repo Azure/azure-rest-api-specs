@@ -277,27 +277,41 @@
       "description": "The sql database's properties.",
       "type": "object",
       "properties": {
+        "status": {
+          "description": "The status of the database.",
+          "enum": [
+            "Online",
+            "Restoring",
+            "RecoveryPending",
+            "Recovering",
+            "Suspect",
+            "Offline",
+            "Standby",
+            "Shutdown",
+            "EmergencyMode",
+            "AutoClosed",
+            "Copying",
+            "Creating",
+            "Inaccessible",
+            "OfflineSecondary",
+            "Pausing",
+            "Paused",
+            "Resuming",
+            "Scaling",
+            "OfflineChangingDwPerformanceTiers",
+            "OnlineChangingDwPerformanceTiers",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DatabaseStatus",
+            "modelAsString": true
+          }
+        },
         "collation": {
           "description": "The collation of the database.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "storageRedundancy": {
-          "description": "Storage redundancy of the database.",
-          "enum": [
-            "Geo",
-            "GeoZone",
-            "Local",
-            "Zone"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SqlDatabaseStorageRedundancyType",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -309,10 +323,43 @@
           "type": "string",
           "readOnly": true
         },
-        "status": {
-          "description": "Status of the database.",
+        "storageRedundancy": {
+          "description": "The storage redundancy of the database.",
+          "enum": [
+            "Local",
+            "Geo",
+            "Zone",
+            "GeoZone"
+          ],
           "type": "string",
-          "readOnly": true
+          "x-ms-enum": {
+            "name": "StorageRedundancy",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dataRetention": {
+          "$ref": "#/definitions/SqlDatabaseDataRetention",
+          "description": "Sql database data retention."
+        }
+      }
+    },
+    "SqlDatabaseDataRetention": {
+      "description": "Sql database data retention.",
+      "type": "object",
+      "properties": {
+        "retentionPeriod": {
+          "format": "duration",
+          "description": "Specifies the data retention period (ISO8601 format).",
+          "type": "string"
+        },
+        "dropRetentionPeriod": {
+          "format": "duration",
+          "description": "Specifies the dropped database retention period (ISO8601 format).",
+          "type": "string"
         }
       }
     },

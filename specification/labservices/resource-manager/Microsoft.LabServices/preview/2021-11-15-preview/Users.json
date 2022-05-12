@@ -1,0 +1,527 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services users."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users for a lab.",
+        "description": "Returns a list of all users for a lab.",
+        "operationId": "Users_ListByLab",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all users for the given lab.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsers"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listUser": {
+            "$ref": "./examples/Users/listUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users/{userName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/UserNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get a lab user.",
+        "description": "Returns the properties of a lab user.",
+        "operationId": "Users_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getUser": {
+            "$ref": "./examples/Users/getUser.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create or update a lab user.",
+        "description": "Operation to create or update a lab user.",
+        "operationId": "Users_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user was updated successfully; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "201": {
+            "description": "The user was created successfully; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "202": {
+            "description": "The user was updated successfully and has a long running operation; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "putUser": {
+            "$ref": "./examples/Users/putUser.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a lab user.",
+        "description": "Operation to update a lab user.",
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "Users_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user was updated successfully; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "202": {
+            "description": "The user was updated successfully and has a long running operation; response contains the lab user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "patchUser": {
+            "$ref": "./examples/Users/patchUser.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Deletes a user resource.",
+        "description": "Operation to delete a user resource.",
+        "operationId": "Users_Delete",
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "204": {
+            "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "deleteUser": {
+            "$ref": "./examples/Users/deleteUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users/{userName}/invite": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/UserNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Invite a user to a lab.",
+        "description": "Operation to invite a user to a lab.",
+        "operationId": "Users_Invite",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "inviteUser": {
+            "$ref": "./examples/Users/inviteUser.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "description": "User of a lab that can register for and use virtual machines within the lab.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the user resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "User resource properties",
+          "$ref": "#/definitions/UserProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedUsers": {
+      "description": "Paged list of users.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of user results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of image results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserUpdate": {
+      "description": "User of a lab that can register for and use virtual machines within the lab. Used for updates.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "User resource properties",
+          "$ref": "#/definitions/UserUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UserUpdateProperties": {
+      "description": "User resource properties used for updates.",
+      "type": "object",
+      "properties": {
+        "additionalUsageQuota": {
+          "description": "The amount of usage quota time the user gets in addition to the lab usage quota.",
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    },
+    "UserProperties": {
+      "description": "User resource properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the user resource.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the user, for example user's full name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "email": {
+          "description": "Email address of the user.",
+          "$ref": "LabServices.json#/definitions/emailAddress",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "registrationState": {
+          "description": "State of the user's registration within the lab.",
+          "$ref": "#/definitions/RegistrationState",
+          "readOnly": true
+        },
+        "invitationState": {
+          "description": "State of the invitation message for the user.",
+          "$ref": "#/definitions/InvitationState",
+          "readOnly": true
+        },
+        "invitationSent": {
+          "description": "Date and time when the invitation message was sent to the user.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "totalUsage": {
+          "description": "How long the user has used their virtual machines in this lab.",
+          "type": "string",
+          "format": "duration",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "RegistrationState": {
+      "type": "string",
+      "enum": [
+        "NotRegistered",
+        "Registered"
+      ],
+      "description": "The user lab registration state.",
+      "x-ms-enum": {
+        "name": "RegistrationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Registered",
+            "description": "User has not yet registered with the lab."
+          },
+          {
+            "value": "NotRegistered",
+            "description": "User has registered with the lab."
+          }
+        ]
+      }
+    },
+    "InvitationState": {
+      "type": "string",
+      "enum": [
+        "NotSent",
+        "Sending",
+        "Sent",
+        "Failed"
+      ],
+      "description": "The lab user invitation state.",
+      "x-ms-enum": {
+        "name": "InvitationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotSent",
+            "description": "The invitation has not been sent."
+          },
+          {
+            "value": "Sending",
+            "description": "Currently sending the invitation."
+          },
+          {
+            "value": "Sent",
+            "description": "The invitation has been successfully sent."
+          },
+          {
+            "value": "Failed",
+            "description": "There was an error while sending the invitation."
+          }
+        ]
+      }
+    },
+    "InviteBody": {
+      "description": "Body for a user invite request",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Custom text for the invite email.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "UserNameParameter": {
+      "name": "userName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+      "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "customproviders"
   output-folder: "$(typescript-sdks-folder)/packages/customproviders"
-  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
