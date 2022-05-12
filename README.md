@@ -115,46 +115,41 @@ If several services with the same or different versioning cycle decide to packag
 .
 \---specification
 |    +---compute
-|    |   +---resource-manager
-|    |   |   \---readme.md
-|    |   +---compute
-|    |   |   \---resource-manager
-|    |   |       \---stable
-|    |   |            \---2021-11-01
-|    |   |                +---compute.json
-|    |   |                +---runCommands.json
-|    |   |                \---examples
-|    |   +---sku
-|    |   |   \---resource-manager
-|    |   |       \---stable
-|    |   |            \---2021-07-01
-|    |   |                +---skus.json
-|    |   |                \---examples
-|    |   +---disk
-|    |   |   \---resource-manager
-|    |   |       +---stable
-|    |   |            \---2021-12-01
-|    |   |                +---disk.json
-|    |   |                \---examples
-|    |   +---gallery
-|    |   |   \---resource-manager
-|    |   |       +---stable
-|    |   |            \---2021-10-01
-|    |   |                +---gallery.json
-|    |   |                \---examples
-|    |   +---sharedgallery
-|    |   |   \---resource-manager
-|    |   |       +---stable
-|    |   |            \---2021-07-01
-|    |   |                +---sharedGallery.json
-|    |   |                +---communityGallery.json
-|    |   |                \---examples
-|    |   \---cloudService
-|    |       \---resource-manager
-|    |           +---stable
-|    |                \---2021-03-01
-|    |                    +---cloudService.json
-|    |                    \---examples
+|    |   \---resource-manager
+|    |      +---Microsoft.Compute
+|    |      |     +---compute
+|    |      |     |   \---stable
+|    |      |     |        \---2021-11-01
+|    |      |     |              +---compute.json
+|    |      |     |              +---runCommands.json
+|    |      |     |              \---examples
+|    |      |     +---sku
+|    |      |     |   \---stable
+|    |      |     |         \---2021-07-01
+|    |      |     |              +---skus.json
+|    |      |     |              \---examples
+|    |      |     +---disk
+|    |      |     |  \---stable
+|    |      |     |          \---2021-12-01
+|    |      |     |              +---disk.json
+|    |      |     |              \---examples
+|    |      |     +---gallery
+|    |      |     |   \---stable
+|    |      |     |         \---2021-10-01
+|    |      |     |              +---gallery.json
+|    |      |     |              \---examples
+|    |      |     +---sharedgallery
+|    |      |     |   \---stable
+|    |      |     |        \---2021-07-01
+|    |      |     |            +---sharedGallery.json
+|    |      |     |            +---communityGallery.json
+|    |      |     |            \---examples
+|    |      |     \---cloudService
+|    |      |         \---stable
+|    |      |              \---2021-03-01
+|    |      |                   +---cloudService.json
+|    |      |                   \---examples
+|    |       \---readme.md
 ```
 
 ### common-types
