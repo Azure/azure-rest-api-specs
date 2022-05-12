@@ -1162,9 +1162,6 @@
     "JobMetadata": {
       "description": "Represents the job metadata.",
       "properties": {
-        "displayName": {
-          "type": "string"
-        },
         "createdDateTime": {
           "description": "The creation date time of the job.",
           "format": "date-time",
@@ -1187,9 +1184,6 @@
         "status": {
           "description": "The job status.",
           "$ref": "#/definitions/JobStatus"
-        },
-        "nextLink": {
-          "type": "string"
         }
       },
       "required": [
@@ -1229,10 +1223,14 @@
       ]
     },
     "Errors": {
-      "errors": {
-        "type": "array",
-        "items": {
-          "$ref": "common.json#/definitions/Error"
+      "description": "Collection of Error types.",
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/definitions/Error"
+          }
         }
       }
     },
