@@ -432,8 +432,13 @@
             },
             "trafficWeight": {
               "format": "int32",
-              "description": "Traffic weight assigned to this revision",
+              "description": "(DEPRECATED - Use traffic.weight property instead) Traffic weight assigned to this revision",
               "type": "integer",
+              "readOnly": true
+            },
+            "traffic": {
+              "$ref": "#/definitions/RevisionTraffic",
+              "description": "Revision traffic details.",
               "readOnly": true
             },
             "provisioningError": {
@@ -473,6 +478,28 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RevisionTraffic": {
+      "description": "Traffic weight assigned to a revision",
+      "type": "object",
+      "properties": {
+        "weight": {
+          "format": "int32",
+          "description": "Traffic weight assigned to a revision",
+          "type": "integer",
+          "readOnly": true
+        },
+        "label": {
+          "description": "Traffic label assigned to a revision",
+          "type": "string",
+          "readOnly": true
+        },
+        "labelFqdn": {
+          "description": "Fully qualified domain name of a labelled revision",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
