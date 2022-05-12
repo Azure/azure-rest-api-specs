@@ -88,6 +88,7 @@ input-file:
   - Microsoft.Network/stable/2022-01-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2022-01-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2022-01-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2022-01-01/expressRouteProviderPort.json
 ```
 ### Tag: package-2022-02-preview
 
