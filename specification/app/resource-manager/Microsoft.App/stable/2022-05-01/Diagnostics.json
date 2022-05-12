@@ -65,7 +65,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors/{detectorName}": {
       "get": {
         "tags": [
           "ContainerApps",
@@ -88,7 +88,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "detectorName",
             "in": "path",
             "description": "Name of the Container App Detector.",
             "required": true,
@@ -177,7 +177,7 @@
         "x-ms-odata": "#/definitions/Revision"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/{revisionName}": {
       "get": {
         "tags": [
           "ContainerApps",
@@ -200,7 +200,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "revisionName",
             "in": "path",
             "description": "Name of the Container App Revision.",
             "required": true,
@@ -231,7 +231,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/detectorproperties/rootApi/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/rootApi/": {
       "get": {
         "tags": [
           "ContainerApps",
@@ -247,7 +247,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -282,7 +282,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}/detectors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectors": {
       "get": {
         "tags": [
           "ManagedEnvironments",
@@ -299,7 +299,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -330,7 +330,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}/detectors/{detectorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectors/{detectorName}": {
       "get": {
         "tags": [
           "ManagedEnvironments",
@@ -347,7 +347,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -385,7 +385,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}/detectorproperties/rootApi/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorproperties/rootApi/": {
       "get": {
         "tags": [
           "ManagedEnvironments",
@@ -402,7 +402,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
