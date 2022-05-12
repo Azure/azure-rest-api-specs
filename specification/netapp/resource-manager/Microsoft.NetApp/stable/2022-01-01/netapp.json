@@ -292,6 +292,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfo": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides storage to network proximity and logical zone mapping information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResource_QueryRegionInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfo_Query": {
+            "$ref": "examples/RegionInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a subscription",
@@ -4229,6 +4266,69 @@
         "message": {
           "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.",
           "type": "string"
+        }
+      }
+    },
+    "regionInfo": {
+      "description": "Provides region specific information.",
+      "type": "object",
+      "properties": {
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information in the region.",
+          "type": "string",
+          "enum": [
+            "Default",
+            "T1",
+            "T2",
+            "T1AndT2"
+          ],
+          "x-ms-enum": {
+            "name": "RegionStorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Basic network connectivity."
+              },
+              {
+                "value": "T1",
+                "description": "Standard T1 network connectivity."
+              },
+              {
+                "value": "T2",
+                "description": "Standard T2 network connectivity."
+              },
+              {
+                "value": "T1AndT2",
+                "description": "Standard T1 and T2 network connectivity."
+              }
+            ]
+          },
+          "example": "T2"
+        },
+        "availabilityZoneMappings": {
+          "title": "Logical availability zone mappings.",
+          "description": "Provides logical availability zone mappings for the subscription for a region.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "availabilityZone": {
+                "description": "Logical availability zone.",
+                "type": "string",
+                "example": "1"
+              },
+              "isAvailable": {
+                "description": "Available availability zone",
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "x-ms-identifiers": [
+            "availabilityZone"
+          ]
         }
       }
     },
