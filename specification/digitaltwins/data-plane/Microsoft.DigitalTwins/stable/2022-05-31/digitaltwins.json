@@ -41,7 +41,7 @@
             "name": "models",
             "in": "body",
             "description": "An array of models to add.",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "array",
               "minItems": 1,
@@ -1184,6 +1184,7 @@
             "name": "eventRoute",
             "description": "The event route data",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/EventRoute"
             }
@@ -1268,6 +1269,7 @@
         "value": {
           "description": "The EventRoute objects.",
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/EventRoute"
           }
@@ -1281,6 +1283,7 @@
     "NonPagedDigitalTwinsModelDataCollection": {
       "description": "A collection of DigitalTwinsModelData objects.",
       "type": "array",
+      "required": true,
       "items": {
         "$ref": "#/definitions/DigitalTwinsModelData"
       }
@@ -1292,6 +1295,7 @@
         "value": {
           "description": "The DigitalTwinsModelData objects.",
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/DigitalTwinsModelData"
           }
@@ -1350,6 +1354,7 @@
         "value": {
           "description": "The relationship objects.",
           "type": "array",
+          "required": true,
           "items": {
             "description": "The relationship JSON document.",
             "type": "object"
@@ -1367,6 +1372,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/IncomingRelationship"
           }
