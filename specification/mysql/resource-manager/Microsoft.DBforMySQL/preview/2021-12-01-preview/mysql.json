@@ -2776,7 +2776,7 @@
           "description": "Source Server Resource Id to verify and perform migration assessment on."
         }
       },
-      "description": "Request from client to perform migration assessment on their single server"
+      "description": "Request from client to perform migration assessment"
     },
     "MigrationAssessmentResource": {
       "type": "object",
@@ -2812,7 +2812,7 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Assessment report completion date"
+          "description": "Assessment report completion date time"
         }
       },
       "description": "Represents a resource name availability."
@@ -2820,7 +2820,7 @@
     "TargetServerDetails": {
       "type": "object",
       "properties": {
-        "serverSpecs": {
+        "serverResource": {
           "$ref": "#/definitions/Server",
           "readOnly": true
         },
