@@ -835,6 +835,28 @@
       "description": "Resource reference properties.",
       "x-ms-azure-resource": true
     },
+    "ProxyResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        }
+      }
+    },
     "CloudErrorBody": {
       "type": "object",
       "x-ms-external": true,
