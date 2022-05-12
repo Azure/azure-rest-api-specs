@@ -755,94 +755,129 @@
     "CustomHostnameAnalysisResult": {
       "description": "Custom domain analysis.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "CustomHostnameAnalysisResult resource specific properties",
+        "hostName": {
+          "description": "Host name that was analyzed",
+          "type": "string",
+          "readOnly": true
+        },
+        "isHostnameAlreadyVerified": {
+          "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "customDomainVerificationTest": {
+          "description": "DNS verification test result.",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DnsVerificationTestResult",
+            "modelAsString": false
+          }
+        },
+        "customDomainVerificationFailureInfo": {
+          "description": "Raw failure information if DNS verification fails.",
           "type": "object",
           "properties": {
-            "hostName": {
-              "description": "Host name that was analyzed",
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
               "type": "string",
               "readOnly": true
             },
-            "isHostnameAlreadyVerified": {
-              "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "customDomainVerificationTest": {
-              "description": "DNS verification test result.",
-              "enum": [
-                "Passed",
-                "Failed",
-                "Skipped"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "DnsVerificationTestResult",
-                "modelAsString": false
-              }
-            },
-            "customDomainVerificationFailureInfo": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
-              "description": "Raw failure information if DNS verification fails.",
-              "readOnly": true
-            },
-            "hasConflictOnManagedEnvironment": {
-              "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "conflictingContainerAppResourceId": {
-              "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
+            "message": {
+              "description": "Detailed error description and debugging information.",
               "type": "string",
               "readOnly": true
             },
-            "cNameRecords": {
-              "description": "CName records visible for this hostname.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
             },
-            "txtRecords": {
-              "description": "TXT records visible for this hostname.",
+            "details": {
               "type": "array",
+              "description": "Details or the error",
               "items": {
-                "type": "string"
-              }
-            },
-            "aRecords": {
-              "description": "A records visible for this hostname.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "alternateCNameRecords": {
-              "description": "Alternate CName records visible for this hostname.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "alternateTxtRecords": {
-              "description": "Alternate TXT records visible for this hostname.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+                "description": "Detailed errors.",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              },
+              "x-ms-identifiers": [
+                "code"
+              ]
             }
           },
-          "x-ms-client-flatten": true
+          "readOnly": true
+        },
+        "hasConflictOnManagedEnvironment": {
+          "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "conflictingContainerAppResourceId": {
+          "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cNameRecords": {
+          "description": "CName records visible for this hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "txtRecords": {
+          "description": "TXT records visible for this hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aRecords": {
+          "description": "A records visible for this hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternateCNameRecords": {
+          "description": "Alternate CName records visible for this hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternateTxtRecords": {
+          "description": "Alternate TXT records visible for this hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "x-ms-client-flatten": true
     }
   },
   "securityDefinitions": {
