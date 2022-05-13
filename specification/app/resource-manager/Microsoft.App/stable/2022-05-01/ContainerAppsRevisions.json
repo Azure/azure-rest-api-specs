@@ -432,13 +432,19 @@
             },
             "trafficWeight": {
               "format": "int32",
-              "description": "(DEPRECATED - Use traffic.weight property instead) Traffic weight assigned to this revision",
+              "description": "Traffic weight assigned to this revision",
               "type": "integer",
               "readOnly": true
             },
-            "traffic": {
-              "$ref": "#/definitions/RevisionTraffic",
-              "description": "Revision traffic details.",
+            "trafficLabels": {
+              "description": "Traffic labels associated with this revision",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RevisionTraffic"
+              },
+              "x-ms-identifiers": [
+                "label"
+              ],
               "readOnly": true
             },
             "provisioningError": {
@@ -485,12 +491,6 @@
       "description": "Traffic weight assigned to a revision",
       "type": "object",
       "properties": {
-        "weight": {
-          "format": "int32",
-          "description": "Traffic weight assigned to a revision",
-          "type": "integer",
-          "readOnly": true
-        },
         "label": {
           "description": "Traffic label assigned to a revision",
           "type": "string",
