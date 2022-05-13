@@ -8,14 +8,14 @@ python:
   clear-output-folder: true
   license-header: MICROSOFT_MIT_NO_VERSION
   no-namespace-folders: true
-  package-version: "2022-05-13"
+  package-version: "0.1"
 ```
 
 ```yaml $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
 package-name: azure-confidentialledger
-package-version: "2022-05-13"
+package-version: "1.0.0"
 payload-flattening-threshold: 2
 ```
 
@@ -27,15 +27,6 @@ Generate all API versions currently shipped for this package
 batch:
   - tag: package-0.1-preview-ledger
   - tag: package-0.1-preview-identity
-```
-
-```yaml $(multiapi) && $(track2)
-clear-output-folder: true
-batch:
-  - tag: package-2022-04-20-preview-ledger
-  - multiapiscriptledger: true
-  - tag: package-2022-04-20-preview-identity
-  - multiapiscriptidentity: true
 ```
 
 ```yaml $(multiapi) && $(track2)
@@ -101,7 +92,7 @@ output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger
 
 These settings apply only when `--tag=package-2022-05-13-identity --python` is specified on the command line.
 ```yaml $(tag) == 'package-2022-05-13-identity'
-namespace: azure.confidentialledger._generated/_generated_identity.v2022_05_13
+namespace: azure.confidentialledger
 output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_identity/v2022_05_13
 ```
 
@@ -109,6 +100,6 @@ output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger
 
 These settings apply only when `--tag=package-2022-05-13-ledger --python` is specified on the command line.
 ```yaml $(tag) == 'package-2022-05-13-ledger'
-namespace: azure.confidentialledger._generated/_generated_ledger.v2022_05_13
+namespace: azure.confidentialledger
 output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_ledger/v2022_05_13
 ```
