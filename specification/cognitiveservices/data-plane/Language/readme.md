@@ -6,9 +6,9 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of the Language API is 2022-07-01-preview.
+The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
 
-The current stable release of the Language API is 2021-05-01.
+The current stable release of Question Answering is 2021-10-01.
 
 ```yaml
 tag: release_2022_03_01_preview
