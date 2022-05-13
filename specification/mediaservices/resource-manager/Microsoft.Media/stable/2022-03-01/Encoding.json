@@ -125,6 +125,143 @@
       "type": "object",
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
+    "AV1Layer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AV1VideoLayer"
+        }
+      ],
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer with the AV1 video codec.",
+      "properties": {
+        "bufferWindow": {
+          "description": "The VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S).",
+          "format": "duration",
+          "type": "string"
+        },
+        "crf": {
+          "description": "The value of CRF to be used when encoding this layer. This setting takes effect when RateControlMode of video codec is set at CRF mode. The range of CRF value is between 0 and 63, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default value is 32.",
+          "format": "float",
+          "type": "number"
+        },
+        "level": {
+          "description": "We currently support Level up to 6.3. The value can be Auto, or a number that matches the AV1 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer.",
+          "type": "string"
+        },
+        "profile": {
+          "description": "We currently support Main. Default is Auto.",
+          "enum": [
+            "Auto",
+            "Main"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AV1VideoProfile",
+            "values": [
+              {
+                "description": "Tells the encoder to automatically determine the appropriate AV1 profile.",
+                "value": "Auto"
+              },
+              {
+                "description": "Main profile",
+                "value": "Main"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "AV1Video": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Video"
+        }
+      ],
+      "description": "Describes all the properties for encoding a video with the AV1 codec.",
+      "properties": {
+        "complexity": {
+          "description": "Tells the encoder how to choose its encoding settings.  Quality will provide for a higher compression ratio but at a higher cost and longer compute time.  Speed will produce a relatively larger file but is faster and more economical. The default value is Balanced.",
+          "enum": [
+            "Speed",
+            "Balanced",
+            "Quality"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AV1Complexity",
+            "values": [
+              {
+                "description": "Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrificed to decrease encoding time.",
+                "value": "Speed"
+              },
+              {
+                "description": "Tells the encoder to use settings that achieve a balance between speed and quality.",
+                "value": "Balanced"
+              },
+              {
+                "description": "Tells the encoder to use settings that are optimized to produce higher quality output at the expense of slower overall encode time.",
+                "value": "Quality"
+              }
+            ]
+          }
+        },
+        "layers": {
+          "description": "The collection of output AV1 layers to be produced by the encoder.",
+          "items": {
+            "$ref": "#/definitions/AV1Layer"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "sceneChangeDetection": {
+          "description": "Specifies whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video.",
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "#Microsoft.Media.AV1Video"
+    },
+    "AV1VideoLayer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer"
+        }
+      ],
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer.",
+      "properties": {
+        "bitrate": {
+          "description": "The average bitrate in bits per second at which to encode the input video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this value should be 3000000 This is a required field.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "frameRate": {
+          "description": "The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video.",
+          "type": "string"
+        },
+        "maxBitrate": {
+          "description": "The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "bitrate"
+      ],
+      "type": "object"
+    },
+    "DDAudio": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Audio"
+        }
+      ],
+      "description": "Describes Dolby Digital Audio Codec (AC3) audio encoding settings. The current implementation for Dolby Digital Audio support are: Audio channel numbers at 1((mono), 2(stereo), 6(5.1side); Audio sampling frequency rates at: 32K/44.1K/48K Hz; Audio bitrate values as AC3 specification supports: 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000, 384000, 448000, 512000, 576000, 640000 bps.",
+      "properties": {},
+      "type": "object",
+      "x-ms-discriminator-value": "#Microsoft.Media.DDAudio"
+    },
     "Layer": {
       "properties": {
         "width": {
@@ -851,7 +988,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string \"Audio\" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -1400,6 +1537,7 @@
             "H264SingleBitrate1080p",
             "AdaptiveStreaming",
             "AACGoodQualityAudio",
+            "DDGoodQualityAudio",
             "ContentAwareEncodingExperimental",
             "ContentAwareEncoding",
             "CopyAllBitrateNonInterleaved",
@@ -1410,7 +1548,12 @@
             "H265AdaptiveStreaming",
             "H265SingleBitrate720p",
             "H265SingleBitrate1080p",
-            "H265SingleBitrate4K"
+            "H265SingleBitrate4K",
+            "AV1ContentAwareEncoding",
+            "AV1AdaptiveStreaming",
+            "AV1SingleBitrate720p",
+            "AV1SingleBitrate1080p",
+            "AV1SingleBitrate4K"
           ],
           "x-ms-enum": {
             "name": "EncoderNamedPreset",
@@ -1433,7 +1576,11 @@
               },
               {
                 "value": "AACGoodQualityAudio",
-                "description": "Produces a single MP4 file containing only stereo audio encoded at 192 kbps."
+                "description": "Produces a single MP4 file containing only AAC stereo audio encoded at 192 kbps."
+              },
+              {
+                "value": "DDGoodQualityAudio",
+                "description": "Produces a single MP4 file containing only DD(Digital Dolby) stereo audio encoded at 192 kbps."
               },
               {
                 "value": "ContentAwareEncodingExperimental",
@@ -1476,8 +1623,28 @@
                 "description": "Produces an MP4 file where the video is encoded with H.265 codec at 3500 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               },
               {
-                "value": "H265SingleBitrate4K",
-                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
+                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.",
+                "value": "H265SingleBitrate4K"
+              },
+              {
+                "description": "Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content, the service performs an initial lightweight analysis of the input content, and uses the results to determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. This preset is particularly effective for low and medium complexity videos, where the output files will be at lower bitrates but at a quality that still delivers a good experience to viewers. The output will contain MP4 files with video and audio interleaved.",
+                "value": "AV1ContentAwareEncoding"
+              },
+              {
+                "description": "Produces a set of GOP aligned MP4 files with AV1 video and stereo AAC audio. Auto-generates a bitrate ladder based on the input resolution, bitrate and frame rate. The auto-generated preset will never exceed the input resolution. For example, if the input is 720p, output will remain 720p at best.",
+                "value": "AV1AdaptiveStreaming"
+              },
+              {
+                "description": "Produces an MP4 file where the video is encoded with AV1 codec at 1800 kbps and a picture height of 720 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.",
+                "value": "AV1SingleBitrate720p"
+              },
+              {
+                "description": "Produces an MP4 file where the video is encoded with AV1 codec at 3500 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.",
+                "value": "AV1SingleBitrate1080p"
+              },
+              {
+                "description": "Produces an MP4 file where the video is encoded with AV1 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.",
+                "value": "AV1SingleBitrate4K"
               }
             ],
             "modelAsString": true
@@ -2097,7 +2264,8 @@
             "UploadTransientError",
             "ConfigurationUnsupported",
             "ContentMalformed",
-            "ContentUnsupported"
+            "ContentUnsupported",
+            "IdentityUnsupported"
           ],
           "x-ms-enum": {
             "name": "JobErrorCode",
@@ -2137,6 +2305,10 @@
               {
                 "value": "ContentUnsupported",
                 "description": "There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files."
+              },
+              {
+                "description": "There was an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support.",
+                "value": "IdentityUnsupported"
               }
             ],
             "modelAsString": true
@@ -2157,7 +2329,8 @@
             "Download",
             "Upload",
             "Configuration",
-            "Content"
+            "Content",
+            "Account"
           ],
           "x-ms-enum": {
             "name": "JobErrorCategory",
@@ -2181,6 +2354,10 @@
               {
                 "value": "Content",
                 "description": "The error is related to data in the input files."
+              },
+              {
+                "description": "The error is related to account information.",
+                "value": "Account"
               }
             ],
             "modelAsString": true
@@ -3227,7 +3404,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The version of the API to be used with the client request."
+      "description": "The Version of the API to be used with the client request."
     }
   }
 }
