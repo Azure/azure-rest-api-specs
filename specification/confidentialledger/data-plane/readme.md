@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2022-05-13-ledger` is specified on
 
 ```yaml $(tag) == 'package-package-2022-05-13-ledger'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/package-2022-05-13/confidentialledger.json
+  - Microsoft.ConfidentialLedger/stable/package-2022-05-13/confidentialledger.json
 ```
 
 ### Tag: package-2022-05-13-identity
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-package-2022-05-13-identity` is sp
 
 ```yaml $(tag) == 'package-package-2022-05-13-identity'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/package-2022-05-13/identityservice.json
+  - Microsoft.ConfidentialLedger/stable/package-2022-05-13/identityservice.json
 ```
 
 ### Tag: package-2022-04-20-preview-ledger
