@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
+The current preview release of Language is 2022-07-01-preview.
 
-The current stable release of Question Answering is 2021-10-01.
+<!-- The current stable release of Language is 2022-05-01. -->
 
 ```yaml
-tag: release_2022_03_01_preview
+tag: release_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -20,88 +20,31 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-### Release 2022-03-01-preview
+### Preview Release
 
-These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_03_01_preview'
+``` yaml
 input-file:
-  - preview/2022-03-01-preview/textanalytics.json
-  - preview/2022-03-01-preview/analyzeconversations.json
+  - preview/analyzetext.json
+  - preview/analyzetext-authoring.json
+  - preview/analyzeconversations.json
+  - preview/analyzeconversations-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2022-02-01-preview
+<!-- ### Stable Release
 
-These settings apply only when `--tag=release_2022_02_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_02_01_preview'
+``` yaml
 input-file:
-- preview/2022-02-01-preview/textanalytics.json
+  - stable/analyzetext.json
+  - ...
 title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
-```
-
-### Release 2021-11-01-preview
-
-These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_11_01_preview'
-input-file:
-- preview/2021-11-01-preview/textanalytics.json
-- preview/2021-11-01-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-10-01
-
-These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_10_01'
-input-file: 
-  - stable/2021-10-01/questionanswering.json
-  - stable/2021-10-01/questionanswering-authoring.json
-title: 
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-07-15-preview
-
-These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_07_15_preview'
-input-file:
-- preview/2021-07-15-preview/questionanswering.json
-- preview/2021-07-15-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-05-01-preview
-
-These settings apply only when `--tag=release_2021_05_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_05_01_preview'
-input-file:
-- preview/2021-05-01-preview/questionanswering.json
-- preview/2021-05-01-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
+``` -->
 
 ## Swagger to SDK
 
