@@ -47,15 +47,6 @@ input-file:
   - Microsoft.ConfidentialLedger/stable/2022-05-13/identityservice.json
 ```
 
-### Tag: package-2022-05-13-common
-
-These settings apply only when `--tag=package-2022-05-13-common` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-05-13-common'
-input-file:
-  - Microsoft.ConfidentialLedger/stable/2022-05-13/common.json
-```
-
 ### Tag: package-2022-04-20-preview-ledger
 
 These settings apply only when `--tag=package-2022-04-20-preview-ledger` is specified on the command line.
