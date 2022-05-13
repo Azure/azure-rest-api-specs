@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2022-04-29-preview",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksClusters/hybridAksClusterName",
+            "name": "HybridAksClusterName",
+            "type": "Microsoft.NetworkCloud/hybridAksClusters",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+            },
+            "properties": {
+              "hybridAksProvisionedClusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.HybridContainerService/provisionedClusters/hybridAksClusterName",
+              "hybridAksManagementDomainId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksManagementDomains/hybridAksManagementDomainName",
+              "workloadNetworkIds": [
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/workloadNetworks/workloadNetworkName"
+              ],
+              "controlPlaneCount": 4,
+              "workerCount": 8,
+              "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+              "hybridAksVirtualMachineIds": [
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksVirtualMachines/hybridAksVirtualMachineName1",
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksVirtualMachines/hybridAksVirtualMachineName2"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

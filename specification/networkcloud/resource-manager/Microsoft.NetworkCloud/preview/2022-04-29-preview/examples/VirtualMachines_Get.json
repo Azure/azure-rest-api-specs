@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2022-04-29-preview",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "virtualMachineName": "virtualMachineName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName",
+        "name": "virtualMachineName",
+        "type": "Microsoft.NetworkCloud/virtualMachines",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "vmImage": "myacr.azurecr.io/foobar:latest",
+          "cpuCores": 2,
+          "memorySizeGB": 8,
+          "diskSizeGB": 120,
+          "networkAttachments": [
+            {
+              "workloadNetworkId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/WorkloadNetwork/workloadNetworkName",
+              "ipAllocationMethod": "Dynamic",
+              "ipv4Address": "127.0.0.1",
+              "ipv6Address": "0:0:0:0:0:FFFF:7F00:0001",
+              "macAddress": "bf:1c:29:31:31:1f"
+            }
+          ],
+          "placementHints": [
+            {
+              "key": "placementKey",
+              "value": "placementValue"
+            }
+          ],
+          "userData": "dXNlckRhdGVTYW1wbGU=",
+          "networkData": "bmV0d29ya0RhdGVTYW1wbGU=",
+          "sshKey": "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA0TqlveKKlc2MFvEmuXJiLGBsY1t4ML4uiRADGSZlnc+7Ugv3h+MCjkkwOKiOdsNo8k4KSBIG5GcQfKYOOd17AJvqCL6cGQbaLuqv0a64jeDm8oO8/xN/IM0oKw7rMr/2oAJOgIsfeXPkRxWWic9AVIS++H5Qi2r7bUFX+cqFsyUCAwEAAQ==",
+          "provisioningState": "Succeeded",
+          "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "powerState": "On",
+          "bareMetalMachineId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName"
+        }
+      }
+    }
+  }
+}
