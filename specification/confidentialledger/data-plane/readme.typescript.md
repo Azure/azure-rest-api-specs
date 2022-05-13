@@ -5,7 +5,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ```yaml $(typescript)
 typescript:
-  azure-arm: true
+  azure-arm: false
   package-name: "confidentialledger"
   output-folder: "$(typescript-sdks-folder)/packages/confidentialledger"
   payload-flattening-threshold: 1

@@ -17,6 +17,7 @@ no-namespace-folders: true
 package-name: azure-confidentialledger
 package-version: 1.0.0
 payload-flattening-threshold: 2
+multiapiscript: true
 ```
 
 ### Python multi-api
