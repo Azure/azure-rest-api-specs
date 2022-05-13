@@ -20,31 +20,19 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-### Preview Release
+### Release
 
 ``` yaml
 input-file:
-  - preview/analyzetext.json
-  - preview/analyzetext-authoring.json
-  - preview/analyzeconversations.json
-  - preview/analyzeconversations-authoring.json
+  - analyzetext.json
+  - analyzetext-authoring.json
+  - analyzeconversations.json
+  - analyzeconversations-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
 ```
-
-<!-- ### Stable Release
-
-``` yaml
-input-file:
-  - stable/analyzetext.json
-  - ...
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-``` -->
 
 ## Swagger to SDK
 
