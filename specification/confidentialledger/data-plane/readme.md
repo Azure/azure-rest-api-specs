@@ -100,15 +100,10 @@ swagger-to-sdk:
       version: "3.0.6320"
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_confidentialledger']
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
