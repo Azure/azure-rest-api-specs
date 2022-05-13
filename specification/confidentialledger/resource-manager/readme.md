@@ -27,7 +27,7 @@ These are the global settings for the confidentialledger.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-05-13-preview
+tag: package-2022-05-13
 ```
 
 ### Tag: package-2020-12-01-preview
@@ -52,7 +52,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-05-13` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05-13-preview'
+```yaml $(tag) == 'package-2022-05-13'
 input-file:
   - Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json
 ```
