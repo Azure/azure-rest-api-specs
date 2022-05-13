@@ -33,13 +33,3 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: Microsoft.ConfidentialLedger
 output-folder: $(ruby-sdks-folder)/confidentialledger
 ```
-
-### Tag: package-2022-05-12 and ruby
-
-These settings apply only when `--tag=package-package-2022-05-12 --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-```yaml $(tag) == 'package-package-2022-05-12' && $(ruby)
-namespace: Microsoft.ConfidentialLedger
-output-folder: $(ruby-sdks-folder)/confidentialledger
-```
