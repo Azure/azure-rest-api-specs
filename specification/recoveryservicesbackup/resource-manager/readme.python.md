@@ -17,8 +17,19 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 clear-output-folder: true
 batch:
+  - tag: package-2022-03
   - tag: package-passivestamp-2021-11-15
   - tag: package-2021-12
+```
+
+### Tag: package-2022-03 and python
+
+These settings apply only when `--tag=package-2022-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-03'
+namespace: azure.mgmt.recoveryservicesbackup.activestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
 ```
 
 ### Tag: package-passivestamp-2021-11-15 and python
