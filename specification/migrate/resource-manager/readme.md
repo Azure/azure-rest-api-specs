@@ -136,6 +136,14 @@ input-file:
 - Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+- Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
+
 ## Suppression
 
 ``` yaml
