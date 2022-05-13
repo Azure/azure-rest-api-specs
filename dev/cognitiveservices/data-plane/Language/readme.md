@@ -11,7 +11,7 @@ The current preview release of Language is 2022-07-01-preview.
 <!-- The current stable release of Language is 2022-05-01. -->
 
 ```yaml
-tag: 
+tag: release_2022-07-01-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -22,7 +22,7 @@ directive:
 
 ### Release
 
-``` yaml $(tag) == ''
+``` yaml $(tag) == 'release_2022-07-01-preview'
 input-file:
   - analyzetext.json
   - analyzetext-authoring.json
