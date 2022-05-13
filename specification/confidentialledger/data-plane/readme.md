@@ -33,18 +33,27 @@ vanilla: true
 
 These settings apply only when `--tag=package-2022-05-13-ledger` is specified on the command line.
 
-```yaml $(tag) == 'package-package-2022-05-13-ledger'
+```yaml $(tag) == 'package-2022-05-13-ledger'
 input-file:
   - Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json
 ```
 
 ### Tag: package-2022-05-13-identity
 
-These settings apply only when `--tag=package-package-2022-05-13-identity` is specified on the command line.
+These settings apply only when `--tag=package-2022-05-13-identity` is specified on the command line.
 
-```yaml $(tag) == 'package-package-2022-05-13-identity'
+```yaml $(tag) == 'package-2022-05-13-identity'
 input-file:
   - Microsoft.ConfidentialLedger/stable/2022-05-13/identityservice.json
+```
+
+### Tag: package-2022-05-13-common
+
+These settings apply only when `--tag=package-2022-05-13-common` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-13-common'
+input-file:
+  - Microsoft.ConfidentialLedger/stable/2022-05-13/common.json
 ```
 
 ### Tag: package-2022-04-20-preview-ledger
