@@ -8,14 +8,14 @@ python:
   clear-output-folder: true
   license-header: MICROSOFT_MIT_NO_VERSION
   no-namespace-folders: true
-  package-version: "0.1"
+  package-version: 0.1
 ```
 
 ```yaml $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
 package-name: azure-confidentialledger
-package-version: "1.0.0"
+package-version: 1.0.0
 payload-flattening-threshold: 2
 ```
 

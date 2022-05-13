@@ -5,11 +5,11 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ```yaml $(csharp)
 csharp:
-  azure-arm: true
+  azure-arm: false
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.ConfidentialLedger
-  output-folder: $(csharp-sdks-folder)/confidentialledger/management/Microsoft.ConfidentialLedger/GeneratedProtocol
+  namespace: Azure.Security.ConfidentialLedger
+  output-folder: $(csharp-sdks-folder)/confidentialledger/Azure.Security.ConfidentialLedger/GeneratedProtocol
 ```
