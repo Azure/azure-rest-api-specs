@@ -413,6 +413,9 @@
               }
             }
           },
+          "202": {
+            "description": "Asynchronous Success"
+          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -1265,11 +1268,13 @@
     "EventRouteCollection": {
       "description": "A collection of EventRoute objects.",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "description": "The EventRoute objects.",
           "type": "array",
-          "required": true,
           "items": {
             "$ref": "#/definitions/EventRoute"
           }
@@ -1283,7 +1288,6 @@
     "NonPagedDigitalTwinsModelDataCollection": {
       "description": "A collection of DigitalTwinsModelData objects.",
       "type": "array",
-      "required": true,
       "items": {
         "$ref": "#/definitions/DigitalTwinsModelData"
       }
@@ -1291,11 +1295,13 @@
     "PagedDigitalTwinsModelDataCollection": {
       "description": "A collection of DigitalTwinsModelData objects.",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "description": "The DigitalTwinsModelData objects.",
           "type": "array",
-          "required": true,
           "items": {
             "$ref": "#/definitions/DigitalTwinsModelData"
           }
@@ -1350,11 +1356,13 @@
     "RelationshipCollection": {
       "description": "A collection of relationships which relate digital twins together.",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "description": "The relationship objects.",
           "type": "array",
-          "required": true,
           "items": {
             "description": "The relationship JSON document.",
             "type": "object"
@@ -1369,10 +1377,12 @@
     "IncomingRelationshipCollection": {
       "description": "A collection of incoming relationships which relate digital twins together.",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
-          "required": true,
           "items": {
             "$ref": "#/definitions/IncomingRelationship"
           }
@@ -1422,6 +1432,9 @@
     "QueryResult": {
       "description": "The results of a query operation and an optional continuation token.",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "description": "The query results.",
@@ -1438,6 +1451,9 @@
     },
     "ErrorResponse": {
       "description": "Error response.",
+      "required": [
+        "error"
+      ],
       "properties": {
         "error": {
           "$ref": "#/definitions/Error",
@@ -1448,6 +1464,10 @@
     },
     "Error": {
       "description": "Error definition.",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
