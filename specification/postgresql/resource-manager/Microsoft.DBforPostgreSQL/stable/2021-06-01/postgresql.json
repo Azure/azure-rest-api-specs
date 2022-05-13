@@ -1046,6 +1046,16 @@
     "VirtualNetworkSubnetUsageResult": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
         "delegatedSubnetsUsage": {
           "type": "array",
           "items": {
@@ -1307,6 +1317,14 @@
           "items": {
             "$ref": "#/definitions/HyperscaleNodeEditionCapability"
           },
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
           "readOnly": true
         },
         "status": {
