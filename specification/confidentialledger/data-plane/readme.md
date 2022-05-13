@@ -29,7 +29,7 @@ openapi-type: data-plane
 vanilla: true
 ```
 
-### Tag: package-2022-05-13
+### Tag: package-2022-05-13-ledger
 
 These settings apply only when `--tag=package-2022-05-13-ledger` is specified on the command line.
 
@@ -38,7 +38,7 @@ input-file:
   - Microsoft.ConfidentialLedger/preview/package-2022-05-13/confidentialledger.json
 ```
 
-### Tag: package-package-2022-05-13-identity
+### Tag: package-2022-05-13-identity
 
 These settings apply only when `--tag=package-package-2022-05-13-identity` is specified on the command line.
 
