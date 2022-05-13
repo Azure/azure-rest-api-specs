@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
