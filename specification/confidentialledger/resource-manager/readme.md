@@ -48,6 +48,15 @@ input-file:
   - Microsoft.ConfidentialLedger/preview/2021-05-13-preview/confidentialledger.json
 ```
 
+### Tag: package-2022-05-13
+
+These settings apply only when `--tag=package-2022-05-13` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05-13-preview'
+input-file:
+  - Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json
+```
+
 ---
 
 # Code Generation
@@ -65,7 +74,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_confidentialledger']
   - repo: azure-cli-extensions
@@ -79,10 +87,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 
