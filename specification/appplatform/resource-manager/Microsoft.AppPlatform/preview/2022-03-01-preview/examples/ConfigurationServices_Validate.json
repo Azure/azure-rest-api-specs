@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "configurationServiceName": "default",
+    "settings": {
+      "gitProperty": {
+        "repositories": [
+          {
+            "name": "fake",
+            "uri": "https://github.com/fake-user/fake-repository",
+            "patterns": [
+              "app/dev"
+            ],
+            "label": "master"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "gitPropertyValidationResult": {
+          "isValid": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2022-03-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-03-01-preview"
+      },
+      "body": {
+        "gitPropertyValidationResult": {
+          "isValid": true
+        }
+      }
+    }
+  }
+}

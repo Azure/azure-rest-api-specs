@@ -360,6 +360,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Python

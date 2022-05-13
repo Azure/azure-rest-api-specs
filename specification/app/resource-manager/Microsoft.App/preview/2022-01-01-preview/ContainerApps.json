@@ -150,7 +150,7 @@
           "ContainerApps"
         ],
         "summary": "Create or update a Container App.",
-        "description": "Description for Create or update a Container App.",
+        "description": "Create or update a Container App.",
         "operationId": "ContainerApps_CreateOrUpdate",
         "parameters": [
           {
@@ -211,7 +211,7 @@
           "ContainerApps"
         ],
         "summary": "Delete a Container App.",
-        "description": "Description for Delete a Container App.",
+        "description": "Delete a Container App.",
         "operationId": "ContainerApps_Delete",
         "parameters": [
           {
@@ -427,8 +427,8 @@
         "activeRevisionsMode": {
           "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active. If no value if provided, this is the default</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode</item></list>",
           "enum": [
-            "multiple",
-            "single"
+            "Multiple",
+            "Single"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -449,6 +449,10 @@
           "x-ms-identifiers": [
             "server"
           ]
+        },
+        "dapr": {
+          "$ref": "#/definitions/Dapr",
+          "description": "Dapr configuration for the Container App."
         }
       }
     },
@@ -559,6 +563,37 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "Dapr": {
+      "description": "Container App Dapr configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Boolean indicating if the Dapr side car is enabled",
+          "type": "boolean"
+        },
+        "appId": {
+          "description": "Dapr application identifier",
+          "type": "string"
+        },
+        "appProtocol": {
+          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
+          "enum": [
+            "http",
+            "grpc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "appProtocol",
+            "modelAsString": true
+          }
+        },
+        "appPort": {
+          "format": "int32",
+          "description": "Tells Dapr which port your application is listening on",
+          "type": "integer"
         }
       }
     },
@@ -697,6 +732,10 @@
     "CustomDomain": {
       "description": "Custom Domain of a Container App",
       "type": "object",
+      "required": [
+        "name",
+        "certificateId"
+      ],
       "properties": {
         "name": {
           "description": "Hostname.",

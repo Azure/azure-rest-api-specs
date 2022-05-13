@@ -2,12 +2,14 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource
 package-version: 1.0.0b1
 no-namespace-folders: true
+reformat-next-link: false
+combine-operation-files: true
 ```
 
 ### Python multi-api
@@ -15,7 +17,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
@@ -66,10 +68,20 @@ batch:
   - tag: package-deploymentscripts-2020-10
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
+  - tag: package-templatespecs-2022-02
   - tag: package-templatespecs-2021-05
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
+  - tag: package-changes-2022-05
+  - multiapiscript-changes: true
+```
+
+```yaml $(multiapiscript-changes)
+package-name: azure-mgmt-resource#changes
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes
+perform-load: false
 ```
 
 ```yaml $(multiapiscript-privatelinks)
@@ -137,6 +149,16 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
+### Tag: package-changes-2022-05 and python
+
+These settings apply only when `--tag=package-changes-2022-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-changes-2022-05'
+namespace: azure.mgmt.resource.changes.v2022_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_05_01
+```
+
 ### Tag: package-privatelinks-2020-05 and python
 
 These settings apply only when `--tag=package-privatelinks-2020-05 --python` is specified on the command line.
@@ -145,9 +167,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-privatelinks-2020-05'
 namespace: azure.mgmt.resource.privatelinks.v2020_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
-python:
-  namespace: azure.mgmt.resource.privatelinks.v2020_05_01
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
 ```
 
 ### Tag: package-features-2021-07 and python
@@ -158,9 +177,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-features-2021-07'
 namespace: azure.mgmt.resource.features.v2021_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
-python:
-  namespace: azure.mgmt.resource.features.v2021_07_01
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
 ```
 
 ### Tag: package-features-2015-12 and python
@@ -573,7 +589,17 @@ namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```
 
-``` yaml $(python) && $(track2)
+### Tag: package-templatespecs-2022-02 and python
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+namespace: azure.mgmt.resource.templatespecs.v2022_02_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2022_02_01
+```
+
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

@@ -69,6 +69,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_confidentialledger']
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Go
