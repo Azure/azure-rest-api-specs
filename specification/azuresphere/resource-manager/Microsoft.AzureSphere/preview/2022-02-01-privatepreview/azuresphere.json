@@ -336,6 +336,14 @@
             "type": "string"
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListDeviceGroupsRequest"
+            }
+          },
+          {
             "$ref": "#/parameters/TopParameter"
           },
           {
@@ -3209,6 +3217,16 @@
       },
       "description": "Response to the action call to bulk claim devices."
     },
+    "ListDeviceGroupsRequest": {
+      "type": "object",
+      "properties": {
+        "deviceGroupName": {
+          "type": "string",
+          "description": "Device Group name."
+        }
+      },
+      "description": "Request of the action to list device groups for a catalog."
+    },
     "Catalog": {
       "type": "object",
       "properties": {
@@ -4105,6 +4123,11 @@
         "uriMessage": {
           "type": "string",
           "description": "Message for uri of the image"
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadataResponse",
+          "description": "Metadata for the image",
+          "readOnly": true
         }
       },
       "description": "Properties of the image",
@@ -4123,9 +4146,9 @@
         "deployedImages": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Image"
           },
-          "x-adl-name": "string[]",
+          "x-adl-name": "Microsoft.AzureSphere.Image[]",
           "description": "Images deployed",
           "readOnly": true
         },
@@ -4187,6 +4210,26 @@
         "chipSku": {
           "type": "string",
           "description": "SKU of the chip",
+          "readOnly": true
+        },
+        "lastAvailableOsVersion": {
+          "type": "string",
+          "description": "OS version available for installation when update requested",
+          "readOnly": true
+        },
+        "lastInstalledOsVersion": {
+          "type": "string",
+          "description": "OS version running on device when update requested",
+          "readOnly": true
+        },
+        "lastOsUpdateUtc": {
+          "type": "string",
+          "description": "Time when update requested and new OS version available",
+          "readOnly": true
+        },
+        "lastUpdateRequestUtc": {
+          "type": "string",
+          "description": "Time when update was last requested",
           "readOnly": true
         }
       },
