@@ -70,6 +70,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_deviceupdate']
+  - repo: azure-powershell
 ```
 
 ## CSharp

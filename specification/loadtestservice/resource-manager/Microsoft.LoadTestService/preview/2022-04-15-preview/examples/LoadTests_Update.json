@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2022-04-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "loadTestName": "myLoadTest",
+    "LoadTestResourcePatchRequestBody": {
+      "tags": {
+        "Team": "Dev Exp",
+        "Division": "LT"
+      },
+      "properties": {
+        "description": "This is new load test resource",
+        "encryption": {
+          "identity": {
+            "type": "SystemAssigned",
+            "resourceId": null
+          },
+          "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "properties": {
+          "description": "This is new load test resource",
+          "dataPlaneURI": "https://myLoadTest.00000000-0000-0000-0000-000000000000.cnt-dp.domain.com",
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "identity": {
+              "type": "SystemAssigned",
+              "resourceId": null
+            },
+            "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
+        "name": "myLoadTest",
+        "type": "Microsoft.LoadTestService/loadTests",
+        "tags": {
+          "Team": "Dev Exp",
+          "Division": "LT"
+        },
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    },
+    "202": {}
+  }
+}
