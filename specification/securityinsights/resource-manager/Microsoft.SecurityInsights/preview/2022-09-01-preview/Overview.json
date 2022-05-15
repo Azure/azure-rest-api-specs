@@ -92,9 +92,9 @@
     "OverviewSection": {
       "description": "A specific overview section.",
       "properties": {
-        "data": {
-          "description": "The data this section holds",
-          "$ref": "#/definitions/SectionData"
+        "sectionKind": {
+          "description": "The section kind",
+          "$ref": "#/definitions/OverviewSectionKindEnum"
         },
         "dataQueryTime": {
           "description": "The last time this data was calculated",
@@ -137,29 +137,26 @@
         ]
       }
     },
-    "SectionData": {
-      "description": "The data this section holds",
-      "properties": {
-        "kind": {
-          "description": "The section kind",
-          "$ref": "#/definitions/OverviewSectionKindEnum"
-        }
-      },
-      "type": "object",
-      "required": [
-        "kind"
-      ]
-    },
-    "AnalyticsSectionData": {
+    "AnalyticsSection": {
       "description": "Analytics overview section data",
       "allOf": [
         {
-          "$ref": "#/definitions/SectionData"
+          "$ref": "#/definitions/OverviewSection"
         }
       ],
       "properties": {
+        "data": {
+          "type": "object",
+          "$ref": "#/definitions/AnalyticsSectionData"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Analytics"
+    },
+    "AnalyticsSectionData": {
+      "description": "User alert rules aggregated by rule status: 'Enabled', 'Disabled' or 'Auto-disabled'",
+      "properties": {
         "alertRulesByStatus": {
-          "description": "User alert rules aggregated by rule status: 'Enabled', 'Disabled' or 'Auto-disabled'",
           "additionalProperties": {
             "description": "The value of a given status",
             "type": "string"
@@ -167,16 +164,25 @@
           "type": "object"
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "Analytics"
+      "type": "object"
     },
-    "AutomationSectionData": {
+    "AutomationSection": {
       "description": "Automation overview section data",
       "allOf": [
         {
-          "$ref": "#/definitions/SectionData"
+          "$ref": "#/definitions/OverviewSection"
         }
       ],
+      "properties": {
+        "data": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationSectionData"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Automation"
+    },
+    "AutomationSectionData": {
       "properties": {
         "actionsPerformedByAutomation": {
           "description": "Aggregation of all actions performed by the user automation rules",
@@ -203,8 +209,7 @@
           "type": "string"
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "Automation"
+      "type": "object"
     },
     "IncidentsByStatus": {
       "additionalProperties": {
@@ -226,13 +231,23 @@
       },
       "type": "object"
     },
-    "IncidentsSectionData": {
+    "IncidentsSection": {
       "description": "Incidents overview section data",
       "allOf": [
         {
-          "$ref": "#/definitions/SectionData"
+          "$ref": "#/definitions/OverviewSection"
         }
       ],
+      "properties": {
+        "data": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentsSectionData"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Incidents"
+    },
+    "IncidentsSectionData": {
       "properties": {
         "incidentsByStatus": {
           "description": "Aggregation of all incidents by status: 'New', 'Active', 'Closed'",
@@ -272,19 +287,28 @@
           "$ref": "#/definitions/MeanTimeToAction"
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "Incidents"
+      "type": "object"
     },
     "IngestedEventCount": {
       "type": "string"
     },
-    "DataConnectorsSectionData": {
+    "DataConnectorsSection": {
       "description": "Data connectors overview section data",
       "allOf": [
         {
-          "$ref": "#/definitions/SectionData"
+          "$ref": "#/definitions/OverviewSection"
         }
       ],
+      "properties": {
+        "data": {
+          "type": "object",
+          "$ref": "#/definitions/DataConnectorsSectionData"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "DataConnectors"
+    },
+    "DataConnectorsSectionData": {
       "properties": {
         "activeConnectors": {
           "description": "A dictionary of all active connectors",
@@ -327,8 +351,7 @@
           "type": "object"
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "DataConnectors"
+      "type": "object"
     }
   },
   "parameters": {
