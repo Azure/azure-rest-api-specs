@@ -78,51 +78,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/overview/{sectionName}": {
-      "post": {
-        "x-ms-examples": {
-          "Get Analytics overview section.": {
-            "$ref": "./examples/overview/GetAnalyticsOverview.json"
-          }
-        },
-        "tags": [
-          "Overview"
-        ],
-        "description": "Gets a specific overview section.",
-        "operationId": "overview_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/SectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OverviewSection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -377,14 +332,6 @@
     }
   },
   "parameters": {
-    "SectionName": {
-      "description": "The section name. Supports - Analytics, Incidents, DataConnectors, Automation",
-      "in": "path",
-      "name": "sectionName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "SectionNameParameter": {
       "description": "The section name. Supports - Analytics, Incidents, DataConnectors, Automation",
       "in": "query",
