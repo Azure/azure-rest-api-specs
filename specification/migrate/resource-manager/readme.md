@@ -143,6 +143,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
 - Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
+```
 
 ## Suppression
 
