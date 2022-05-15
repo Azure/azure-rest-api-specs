@@ -1308,6 +1308,7 @@
         },
         "sqsUrls": {
           "description": "The AWS sqs urls for the connector.",
+          "x-ms-identifiers": [],
           "type": "array",
           "items": {
             "description": "AWS sqs url.",
@@ -2133,6 +2134,7 @@
         },
         "graphQueries": {
           "description": "The graph query to show the current data status",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2144,6 +2146,7 @@
         },
         "sampleQueries": {
           "description": "The sample queries for the connector",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2155,6 +2158,7 @@
         },
         "dataTypes": {
           "description": "Data types to check for last data received",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2166,6 +2170,7 @@
         },
         "connectivityCriteria": {
           "description": "Define the way the connector check connectivity",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2185,6 +2190,7 @@
         },
         "instructionSteps": {
           "description": "Instruction steps to enable the connector",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2212,6 +2218,7 @@
     "DataConnectorConnectBody": {
       "description": "Represents Codeless API Polling data connector.",
       "type": "object",
+      "x-ms-identifiers": [],
       "properties": {
         "kind": {
           "description": "The authentication kind used to poll the data",
@@ -2229,6 +2236,18 @@
         "apiKey": {
           "type": "string",
           "description": "The API key of the audit server."
+        },
+        "dataCollectionEndpoint": {
+          "type": "string",
+          "description": "Used in v2 logs connector. Represents the data collection ingestion endpoint in log analytics."
+        },
+        "dataCollectionRuleImmutableId": {
+          "type": "string",
+          "description": "Used in v2 logs connector. The data collection rule immutable id, the rule defines the transformation and data destination."
+        },
+        "outputStream": {
+          "type": "string",
+          "description": "Used in v2 logs connector. The stream we are sending the data to."
         },
         "clientSecret": {
           "type": "string",
@@ -2254,6 +2273,7 @@
         "requestConfigUserInputValues": {
           "type": "array",
           "description": "",
+          "x-ms-identifiers": [],
           "items": {
             "type": "object"
           }
@@ -2331,6 +2351,7 @@
       "properties": {
         "eventsJsonPaths": {
           "description": "Describes the path we should extract the data in the response",
+          "x-ms-identifiers": [],
           "items": {
             "type": "string"
           },
@@ -2540,10 +2561,12 @@
     },
     "Permissions": {
       "description": "Permissions required for the connector",
+      "x-ms-identifiers": [],
       "type": "object",
       "properties": {
         "resourceProvider": {
           "description": "Resource provider permissions required for the connector",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2555,6 +2578,7 @@
         },
         "customs": {
           "description": "Customs permissions required for the connector",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2650,6 +2674,7 @@
         },
         "instructions": {
           "description": "Instruction step details",
+          "x-ms-identifiers": [],
           "items": {
             "allOf": [
               {
@@ -2753,6 +2778,7 @@
         },
         "value": {
           "description": "Queries for checking connectivity",
+          "x-ms-identifiers": [],
           "type": "array",
           "items": {
             "description": "checking connectivity query",
