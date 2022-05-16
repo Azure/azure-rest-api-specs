@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Media Composition Service",
     "description": "Azure Communication Media Composition Service",
-    "version": "2022-03-31-preview"
+    "version": "2022-06-26-preview"
   },
   "paths": {
     "/mediaCompositions/{mediaCompositionId}": {
@@ -409,6 +409,11 @@
             },
             "x-ms-error-response": true
           }
+        },
+        "x-ms-examples": {
+          "Update Media Composition - Change source": {
+            "$ref": "./examples/MediaComposition_StartMediaComposition.json"
+          }
         }
       }
     },
@@ -483,6 +488,11 @@
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update Media Composition - Change source": {
+            "$ref": "./examples/MediaComposition_StopMediaComposition.json"
           }
         }
       }
@@ -801,7 +811,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
         },
         "placeholderImageUri": {
           "type": "string"
