@@ -1732,6 +1732,263 @@
         }
       }
     },
+    "/aliases": {
+      "post": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Create",
+        "x-ms-examples": {
+          "SearchServiceCreateAlias": {
+            "$ref": "./examples/SearchServiceCreateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Alias"
+        },
+        "parameters": [
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_List",
+        "x-ms-examples": {
+          "SearchServiceListAliases": {
+            "$ref": "./examples/SearchServiceListAliases.json"
+          }
+        },
+        "description": "Lists all aliases available for a search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/List-Aliases"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListAliasesResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/aliases('{aliasName}')": {
+      "put": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_CreateOrUpdate",
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateAlias": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias or updates an alias if it already exists.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Update-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Delete",
+        "x-ms-examples": {
+          "SearchServiceDeleteAlias": {
+            "$ref": "./examples/SearchServiceDeleteAlias.json"
+          }
+        },
+        "description": "Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Delete-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to delete."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Get",
+        "x-ms-examples": {
+          "SearchServiceGetAlias": {
+            "$ref": "./examples/SearchServiceGetAlias.json"
+          }
+        },
+        "description": "Retrieves an alias definition.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Get-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/servicestats": {
       "get": {
         "tags": [
@@ -3078,6 +3335,7 @@
       }
     },
     "LexicalNormalizer": {
+      "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
           "type": "string",
@@ -7550,6 +7808,34 @@
       ],
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
     },
+    "SearchAlias": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name of the index this alias maps to. Only one index name may be specified."
+        },
+        "@odata.etag": {
+          "x-ms-client-name": "ETag",
+          "type": "string",
+          "description": "The ETag of the alias."
+        }
+      },
+      "required": [
+        "name",
+        "indexes"
+      ],
+      "description": "Represents an index alias, which describes a mapping from the alias name to an index. The alias name can be used in place of the index name for supported operations."
+    },
     "GetIndexStatisticsResult": {
       "properties": {
         "documentCount": {
@@ -7589,6 +7875,23 @@
         "value"
       ],
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
+    },
+    "ListAliasesResult": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "Aliases",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAlias"
+          },
+          "description": "The aliases in the Search service."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases."
     },
     "SearchIndexerSkillset": {
       "properties": {
@@ -9986,6 +10289,11 @@
     },
     "ServiceCounters": {
       "properties": {
+        "aliasesCount": {
+          "x-ms-client-name": "aliasCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of aliases."
+        },
         "documentCount": {
           "x-ms-client-name": "documentCounter",
           "$ref": "#/definitions/ResourceCounter",
