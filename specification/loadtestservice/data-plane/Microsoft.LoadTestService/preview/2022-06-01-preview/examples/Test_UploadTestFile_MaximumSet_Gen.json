@@ -1,94 +1,93 @@
 {
   "parameters": {
-    "fileId": "__9-_",
-    "fileType": 24,
-    "api-version": "2022-06-01-preview",
-    "undefined": "_n"
+    "fileId": "92345678-1234-1111-1234-123456789012",
+    "fileType": 22,
+    "api-version": "2022-06-01-preview"
   },
   "responses": {
     "201": {
       "body": {
-        "testId": "aaaaaaaaaaaaaaaaaaa",
-        "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "displayName": "aaaaaaaaaaaaaaaaaaaaa",
-        "resourceId": "aaaaaa",
+        "testId": "12345678-1234-1234-1234-123456789012",
+        "description": "sample description",
+        "displayName": "sampledisplayname",
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/sampleprovider/sampleresourcetype/sampleresourcename",
         "loadTestConfig": {
-          "engineInstances": 20,
+          "engineInstances": 6,
           "splitAllCSVs": true
         },
         "passFailCriteria": {
           "passFailMetrics": {
-            "key2331": {
-              "clientmetric": "aaaaaa",
-              "aggregate": "aaaaaaaaaaaa",
-              "condition": "aaaaaaa",
-              "value": 28,
-              "action": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "pfmetric1": {
+              "clientmetric": "response_time_ms",
+              "aggregate": "percentage",
+              "condition": ">",
+              "value": "value",
+              "action": "continue",
               "actualValue": 10,
-              "result": "aaaaaaaa"
+              "result": "passed"
             }
           }
         },
-        "createdDateTime": "2022-05-14T12:27:51.069Z",
-        "createdBy": "aaaaaaaaaa",
-        "lastModifiedDateTime": "2022-05-14T12:27:51.069Z",
-        "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "createdBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "elon-musk@microsoft.com",
         "inputArtifacts": {
           "configUrl": {
-            "url": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "fileId": "aaaaaaaaaaaa",
-            "filename": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "url": "http://dummyurl.com/file.jmx",
+            "fileId": "92345678-1234-1111-1234-123456789012",
+            "filename": "sample.jmx",
             "fileType": 22,
-            "expireTime": "2022-05-14T12:27:51.069Z",
-            "validationStatus": "aaaaaaaaaaaaaaaaaaaaaa"
+            "expireTime": "2021-12-05T16:43:46.072Z",
+            "validationStatus": "VALIDATION_SUCCESS"
           },
           "testScriptUrl": {
-            "url": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "fileId": "aaaaaaaaaaaa",
-            "filename": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "url": "http://dummyurl.com/file.jmx",
+            "fileId": "92345678-1234-1111-1234-123456789012",
+            "filename": "sample.jmx",
             "fileType": 22,
-            "expireTime": "2022-05-14T12:27:51.069Z",
-            "validationStatus": "aaaaaaaaaaaaaaaaaaaaaa"
+            "expireTime": "2021-12-05T16:43:46.072Z",
+            "validationStatus": "VALIDATION_SUCCESS"
           },
           "userPropUrl": {
-            "url": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "fileId": "aaaaaaaaaaaa",
-            "filename": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "url": "http://dummyurl.com/file.jmx",
+            "fileId": "92345678-1234-1111-1234-123456789012",
+            "filename": "sample.jmx",
             "fileType": 22,
-            "expireTime": "2022-05-14T12:27:51.069Z",
-            "validationStatus": "aaaaaaaaaaaaaaaaaaaaaa"
+            "expireTime": "2021-12-05T16:43:46.072Z",
+            "validationStatus": "VALIDATION_SUCCESS"
           },
           "inputArtifactsZipFileurl": {
-            "url": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "fileId": "aaaaaaaaaaaa",
-            "filename": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "url": "http://dummyurl.com/file.jmx",
+            "fileId": "92345678-1234-1111-1234-123456789012",
+            "filename": "sample.jmx",
             "fileType": 22,
-            "expireTime": "2022-05-14T12:27:51.069Z",
-            "validationStatus": "aaaaaaaaaaaaaaaaaaaaaa"
+            "expireTime": "2021-12-05T16:43:46.072Z",
+            "validationStatus": "VALIDATION_SUCCESS"
           },
           "additionalUrls": [
             {
-              "url": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "fileId": "aaaaaaaaaaaa",
-              "filename": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "url": "http://dummyurl.com/file.jmx",
+              "fileId": "92345678-1234-1111-1234-123456789012",
+              "filename": "sample.jmx",
               "fileType": 22,
-              "expireTime": "2022-05-14T12:27:51.069Z",
-              "validationStatus": "aaaaaaaaaaaaaaaaaaaaaa"
+              "expireTime": "2021-12-05T16:43:46.072Z",
+              "validationStatus": "VALIDATION_SUCCESS"
             }
           ]
         },
         "secrets": {
-          "key3581": {
-            "value": "aaaaaaaaaaaaaaaaaaaaaa",
-            "type": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+          "secret1": {
+            "value": "value",
+            "type": "sample type"
           }
         },
         "environmentVariables": {
-          "key1722": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+          "envvar1": "sampletext"
         },
-        "subnetId": "aa",
-        "keyvaultReferenceIdentityType": "aaaaaa",
-        "keyvaultReferenceIdentityId": "aaaaaaaaa"
+        "subnetId": "192.255.192.255",
+        "keyvaultReferenceIdentityType": "UserAssigned",
+        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/sampleprovider/sampleresourcetype/sampleresourcename"
       }
     }
   }
