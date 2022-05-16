@@ -633,17 +633,7 @@
       }
     },
     "ContentBodyOrConnection": {
-      "oneOf": [
-        { "$ref": "#/definitions/ContentBody" },
-        { "$ref": "#/definitions/Connection" }
-      ]
-    },
-    "ContentBody": {
-      "description": "The content to upload",
-      "type": "object"
-    },
-    "Connection": {
-      "description": "Connection information for accessing customer's content",
+      "description": "The content or connection information to upload",
       "type": "object",
       "properties": {
         "type": {
@@ -674,6 +664,10 @@
           "type": "string"
         }
       }
+    },
+    "ContentBody": {
+      "description": "The content to upload",
+      "type": "object"
     },
     "LongRunningOperationResult": {
       "description": "The response model for a Long-Running Operations API.",
