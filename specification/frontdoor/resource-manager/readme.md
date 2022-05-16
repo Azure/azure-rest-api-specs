@@ -278,4 +278,8 @@ directive:
     where: $.definitions.WebApplicationFirewallPolicy
     from: webapplicationfirewall.json
     reason: 'We don''t have Top Level list resource by subscription api yet. '
+  - suppress: PathResourceTypeNameCamelCase
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"]'
+    from: webapplicationfirewall.json
+    reason: The resource type name FrontDoorWebApplicationFirewallPolicies was already defined for all the versions.
 ```
