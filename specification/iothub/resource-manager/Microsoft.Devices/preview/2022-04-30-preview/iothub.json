@@ -2514,7 +2514,8 @@
         },
         "connectionString": {
           "description": "The connection string for the Azure Storage account to which files are uploaded.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "containerName": {
           "description": "The name of the root container where you upload files. The container need not exist but should be creatable using the connectionString specified.",
@@ -2939,7 +2940,8 @@
         },
         "connectionString": {
           "description": "The connection string of the service bus queue endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the service bus queue endpoint. It must include the protocol sb://",
@@ -2993,7 +2995,8 @@
         },
         "connectionString": {
           "description": "The connection string of the service bus topic endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the service bus topic endpoint. It must include the protocol sb://",
@@ -3047,7 +3050,8 @@
         },
         "connectionString": {
           "description": "The connection string of the event hub endpoint. ",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the event hub endpoint. It must include the protocol sb://",
@@ -3101,7 +3105,8 @@
         },
         "connectionString": {
           "description": "The connection string of the storage account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the storage endpoint. It must include the protocol https://",
@@ -3216,11 +3221,13 @@
         },
         "primaryKey": {
           "description": "The primary key of the cosmos DB account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "description": "The secondary key of the cosmos DB account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "databaseName": {
           "description": "The name of the cosmos DB database in the cosmos DB account.",
