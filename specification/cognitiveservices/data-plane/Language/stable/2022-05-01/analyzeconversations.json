@@ -76,10 +76,10 @@
           "Conversation project result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversations.json"
           },
-          "Arbitration result": {
+          "Orchestration result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
           },
-          "Orchestrator direct target result": {
+          "Orchestration direct target result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
@@ -409,8 +409,8 @@
       ],
       "properties": {
         "callingOptions": {
-          "type": "object",
-          "description": "The options sent to a Question Answering KB."
+          "description": "The options sent to a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersOptions"
         }
       }
     },
@@ -1362,7 +1362,7 @@
         "More"
       ],
       "x-ms-enum": {
-        "name": "Modifier",
+        "name": "TemporalModifier",
         "modelAsString": true
       }
     },
@@ -1397,8 +1397,8 @@
       ],
       "properties": {
         "result": {
-          "type": "object",
-          "description": "The generated answer by a Question Answering KB."
+          "description": "The generated answer by a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersResult"
         }
       }
     },
