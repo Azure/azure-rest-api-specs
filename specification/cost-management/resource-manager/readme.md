@@ -31,18 +31,36 @@ azure-validator: false
 ```
 
 ---
+### Tag: package-preview-2022-02
 
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+```
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -285,6 +303,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_costmanagement']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

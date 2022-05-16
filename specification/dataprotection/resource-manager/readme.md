@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataProtection.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataProtection, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,28 +15,28 @@ To build the SDK for DataProtection, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataProtection API.
 
 ``` yaml
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2021-07
+tag: package-2022-04
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
-
 license-header: MICROSOFT_MIT
 ```
 
 ### Validations
+
 Run validations when `--validate` is specified on command line
 
 ``` yaml $(validate)
@@ -44,6 +44,42 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.DataProtection/stable/2022-04-01/dataprotection.json
+```
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.DataProtection/preview/2022-03-31-preview/dataprotection.json
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.DataProtection/preview/2022-02-01-preview/dataprotection.json
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.DataProtection/stable/2022-01-01/dataprotection.json
 ```
 
 ### Tag: package-2021-10-preview
@@ -100,9 +136,18 @@ input-file:
 - Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
 ```
 
----
-# Code Generation
+### Tag: package-2022-03
 
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+- Microsoft.DataProtection/stable/2022-03-01/dataprotection.json
+```
+
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -121,15 +166,15 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
+  - repo: azure-powershell
 ```
-
 
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
@@ -150,4 +195,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-

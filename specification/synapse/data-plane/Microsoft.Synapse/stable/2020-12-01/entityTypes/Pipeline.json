@@ -5749,10 +5749,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         }
       },
       "required": [
@@ -6516,6 +6513,44 @@
         "waitTimeInSeconds"
       ]
     },
+    "FailActivity": {
+      "x-ms-discriminator-value": "Fail",
+      "type": "object",
+      "description": "This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Fail activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FailActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "FailActivityTypeProperties": {
+      "description": "Fail activity properties.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The error message that surfaced in the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "errorCode": {
+          "description": "The error code that categorizes the error type of the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "message",
+        "errorCode"
+      ]
+    },
     "UntilActivity": {
       "x-ms-discriminator-value": "Until",
       "description": "This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.",
@@ -7074,6 +7109,10 @@
         "runConcurrently": {
           "description": "Concurrent run setting used for data flow execution. Allows sinks with the same save order to be processed concurrently. Type: boolean (or Expression with resultType boolean)",
           "type": "object"
+        },
+        "sourceStagingConcurrency": {
+          "description": "Specify number of parallel staging for sources applicable to the sink. Type: integer (or Expression with resultType integer)",
+          "type": "object"
         }
       },
       "required": [
@@ -7354,6 +7393,10 @@
           "description": "Synapse notebook reference.",
           "$ref": "../artifacts.json#/definitions/SynapseNotebookReference"
         },
+        "sparkPool": {
+          "description": "The name of the big data pool which will be used to execute the notebook.",
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference"
+        },
         "parameters": {
           "description": "Notebook parameters.",
           "type": "object",
@@ -7401,6 +7444,41 @@
           "items": {
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "file": {
+          "type": "object",
+          "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "className": {
+          "type": "object",
+          "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "files": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "targetBigDataPool": {
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference",
+          "description": "The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide."
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the spark job definition you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
+          "type": "integer"
         }
       },
       "required": [
