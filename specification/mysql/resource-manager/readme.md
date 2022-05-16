@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-preview-2022-05-01-privatepreview`
 
 ```yaml $(tag) == 'package-preview-2022-05-01-privatepreview'
 input-file:
-  - Microsoft.DBforMySQL/preview/2022-05-01-privatepreview/migration.json
+  - Microsoft.DBforMySQL/preview/2022-05-01-privatepreview/Migration.json
 ```
 ### Tag: package-2017-12-01-preview
 
