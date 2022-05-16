@@ -5516,7 +5516,7 @@
           }
         },
         "customHttpsProvisioningState": {
-          "description": "Provisioning status of Custom Https of the custom domain.",
+          "description": "Provisioning status of the custom domain.",
           "readOnly": true,
           "enum": [
             "Enabling",
@@ -5927,12 +5927,13 @@
         },
         "unit": {
           "type": "string",
-          "description": "An enum describing the unit of measurement.",
+          "readOnly": true,
+          "description": "Unit of the usage. e.g. count.",
           "enum": [
             "count"
           ],
           "x-ms-enum": {
-            "name": "UsageUnit",
+            "name": "ResourceUsageUnit",
             "modelAsString": true
           }
         },
