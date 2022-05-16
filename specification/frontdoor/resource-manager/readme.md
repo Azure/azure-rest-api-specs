@@ -31,16 +31,16 @@ openapi-type: arm
 tag: package-2022-05
 ```
 
-
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.Network/stable/2022-05-01/network.json
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
@@ -268,4 +268,18 @@ directive:
     where: [$.definitions.ValidateCustomDomainOutput.properties.customDomainValidated]
     suppress: EnumInsteadOfBoolean
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    where: $.definitions.WebApplicationFirewallPolicy
+    from: webapplicationfirewall.json
+    reason: 'We don''t have Top Level list resource by subscription api yet. '
+  - suppress: PathResourceTypeNameCamelCase
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"]'
+    from: webapplicationfirewall.json
+    reason: The resource type name FrontDoorWebApplicationFirewallPolicies was already defined for all the versions.
 ```
