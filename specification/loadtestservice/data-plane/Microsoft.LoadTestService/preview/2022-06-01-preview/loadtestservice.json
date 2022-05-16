@@ -233,67 +233,6 @@
         }
       }
     },
-    "/file/{fileId}:validate": {
-      "post": {
-        "tags": [
-          "File"
-        ],
-        "summary": "Validate input file. File name must be a valid URL character ^[a-z0-9_-]*$. File size can't be more than 50 MB.",
-        "operationId": "File_FileValidate",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "fileId",
-            "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "formData",
-            "name": "file",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The file is validated ",
-            "schema": {
-              "$ref": "#/definitions/FileValidateResponse"
-            }
-          },
-          "default": {
-            "description": "Load Test Service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FileValidate": {
-            "$ref": "./examples/FileValidate.json"
-          }
-        }
-      }
-    },
     "/serverMetricsConfig/{name}": {
       "patch": {
         "tags": [
@@ -1831,20 +1770,6 @@
         "expireTime": {
           "format": "date-time",
           "description": "Expiry time of the file",
-          "type": "string"
-        }
-      }
-    },
-    "FileValidateResponse": {
-      "description": "File validation response",
-      "type": "object",
-      "properties": {
-        "valid": {
-          "description": "File is valid or not",
-          "type": "boolean"
-        },
-        "error": {
-          "description": "In case file is not valid then error message",
           "type": "string"
         }
       }
