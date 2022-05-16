@@ -6,27 +6,17 @@
     "version": "2022-05-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/deployedResources/{deployedResourceName}": {
       "get": {
-        "tags": [
-          "DeployedResource"
-        ],
+        "tags": [ "DeployedResource" ],
         "summary": "Gets the deployed resource.",
         "description": "Gets the details of the deployed resource.",
         "operationId": "DeployedResource_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -75,15 +65,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/deployedResources": {
       "get": {
-        "tags": [
-          "DeployedResource"
-        ],
+        "tags": [ "DeployedResource" ],
         "summary": "Lists the deployed resources.",
         "description": "Gets the list of deployed resources in the given migrateDataCenter.",
         "operationId": "DeployedResource_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -128,15 +114,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}": {
       "get": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Gets the MigrateAgent.",
         "description": "Gets the details of the migrateDataCenter agent.",
         "operationId": "MigrateAgent_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -183,18 +165,12 @@
         }
       },
       "put": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Puts the MigrateAgent.",
         "description": "Creates the migrateDataCenter agent.",
         "operationId": "MigrateAgent_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -265,18 +241,12 @@
         }
       },
       "patch": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Updates the MigrateAgent.",
         "description": "Updates the migrateDataCenter agent.",
         "operationId": "MigrateAgent_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -341,15 +311,11 @@
         }
       },
       "delete": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Deletes the MigrateAgent.",
         "description": "Deletes the migrateDataCenter agent.",
         "operationId": "MigrateAgent_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -408,15 +374,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents": {
       "get": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Lists the MigrateAgents.",
         "description": "Gets the list of migrateDataCenter agents in the given migrateDataCenter.",
         "operationId": "MigrateAgent_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -458,15 +420,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}/refresh": {
       "post": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Refreshes the MigrateAgent.",
         "description": "Refreshes the migrateDataCenter agent.",
         "operationId": "MigrateAgent_Refresh",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -522,15 +480,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "MigrateAgent"
-        ],
+        "tags": [ "MigrateAgent" ],
         "summary": "Gets the MigrateAgent operation status.",
         "description": "Tracks the results of an asynchronous operation on the migrateDataCenter agent.",
         "operationId": "MigrateAgentOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -586,15 +540,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}": {
       "get": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Gets the migrate data center.",
         "description": "Gets the details of the migrate data center.",
         "operationId": "MigrateDataCenter_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -634,18 +584,12 @@
         }
       },
       "put": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Puts the migrateDataCenter.",
         "description": "Creates the migrateDataCenter.",
         "operationId": "MigrateDataCenter_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -709,18 +653,12 @@
         }
       },
       "patch": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Updates the migrateDataCenter.",
         "description": "Performs update on the migrateDataCenter.",
         "operationId": "MigrateDataCenter_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -778,15 +716,11 @@
         }
       },
       "delete": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Deletes the migrateDataCenter.",
         "description": "Removes the migrateDataCenter.",
         "operationId": "MigrateDataCenter_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -838,15 +772,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/migrateDataCenters": {
       "get": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Lists the migrateDataCenters.",
         "description": "Gets the list of migrateDataCenters in the given subscription.",
         "operationId": "MigrateDataCenter_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -887,15 +817,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters": {
       "get": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Lists the migrateDataCenters.",
         "description": "Gets the list of migrateDataCenters in the given subscription and resource group.",
         "operationId": "MigrateDataCenter_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -939,15 +865,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/statistics": {
       "get": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Gets the migrateDataCenter statistics.",
         "description": "Gets the statistics for the migrateDataCenter.",
         "operationId": "MigrateDataCenterStatistics_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -989,15 +911,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "MigrateDataCenter"
-        ],
+        "tags": [ "MigrateDataCenter" ],
         "summary": "Gets the migrateDataCenter operation status.",
         "description": "Tracks the results of an asynchronous operation on the migrateDataCenter.",
         "operationId": "MigrateDataCenterOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1052,15 +970,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs/{workflowName}": {
       "get": {
-        "tags": [
-          "Workflow"
-        ],
+        "tags": [ "Workflow" ],
         "summary": "Gets the workflow.",
         "description": "Gets the details of the job.",
         "operationId": "Workflow_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1109,15 +1023,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs": {
       "get": {
-        "tags": [
-          "Workflow"
-        ],
+        "tags": [ "Workflow" ],
         "summary": "Lists the workflows.",
         "description": "Gets the list of jobs in the given migrateDataCenter.",
         "operationId": "Workflow_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1174,15 +1084,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs/{workflowName}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "Workflow"
-        ],
+        "tags": [ "Workflow" ],
         "summary": "Gets the workflow operation status.",
         "description": "Tracks the results of an asynchronous operation on the job.",
         "operationId": "WorkflowOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1238,15 +1144,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}": {
       "get": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Gets the workload deployment.",
         "description": "Gets the details of the workload deployment.",
         "operationId": "WorkloadDeployment_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1293,18 +1195,12 @@
         }
       },
       "put": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Puts the workload deployment.",
         "description": "Creates the workload deployment.",
         "operationId": "WorkloadDeployment_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1375,18 +1271,12 @@
         }
       },
       "patch": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Updates the workload deployment.",
         "description": "Performs update on the workload deployment.",
         "operationId": "WorkloadDeployment_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1451,15 +1341,11 @@
         }
       },
       "delete": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Deletes the workload deployment.",
         "description": "Removes the workload deployment.",
         "operationId": "WorkloadDeployment_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1524,15 +1410,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments": {
       "get": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Lists the workload deployments.",
         "description": "Gets the list of workload deployments in the given migrateDataCenter.",
         "operationId": "WorkloadDeployment_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1577,15 +1459,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/getSecrets": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Gets the workload deployment secrets.",
         "description": "Gets the secrets of the workload deployment.",
         "operationId": "WorkloadDeployment_GetSecretConfigurations",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1634,18 +1512,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/buildContainerImage": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Build container image.",
         "description": "Performs the build container image action on the workload deployment.",
         "operationId": "WorkloadDeployment_BuildContainerImage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1709,18 +1581,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/testMigrate": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Performs test migrate.",
         "description": "Performs the test migrate on the workload deployment.",
         "operationId": "WorkloadDeployment_TestMigrate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1784,18 +1650,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/testMigrateCleanup": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Performs test migrate cleanup.",
         "description": "Performs the test migrate cleanup on the workload deployment.",
         "operationId": "WorkloadDeployment_TestMigrateCleanup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1859,18 +1719,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/migrate": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Performs migrate.",
         "description": "Performs migrate on the workload deployment.",
         "operationId": "WorkloadDeployment_Migrate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1934,15 +1788,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/completeMigration": {
       "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Performs complete migrate.",
         "description": "Performs the complete migrate on the workload deployment.",
         "operationId": "WorkloadDeployment_MigrateComplete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1998,15 +1848,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
+        "tags": [ "WorkloadDeployment" ],
         "summary": "Gets the workload deployment operation status.",
         "description": "Tracks the results of an asynchronous operation on the workload deployment.",
         "operationId": "WorkloadDeploymentOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2062,15 +1908,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances/{workloadInstanceName}": {
       "get": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Gets the workload instance.",
         "description": "Gets the details of the workload instance.",
         "operationId": "WorkloadInstance_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2117,18 +1959,12 @@
         }
       },
       "put": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Puts the workload instance.",
         "description": "Creates the workload instance in the given migrateDataCenter.",
         "operationId": "WorkloadInstance_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2199,18 +2035,12 @@
         }
       },
       "patch": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Updates the workload instance.",
         "description": "Updates the workload instance in the given migrateDataCenter.",
         "operationId": "WorkloadInstance_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2275,15 +2105,11 @@
         }
       },
       "delete": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Deletes the workload instance.",
         "description": "Deletes the workload instance in the given migrateDataCenter.",
         "operationId": "WorkloadInstance_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2342,15 +2168,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances": {
       "get": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Lists the workload instances.",
         "description": "Gets the list of workload instances in the given migrateDataCenter.",
         "operationId": "WorkloadInstance_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2395,15 +2217,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances/{workloadInstanceName}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "WorkloadInstance"
-        ],
+        "tags": [ "WorkloadInstance" ],
         "summary": "Gets the workload instance operation status.",
         "description": "Tracks the results of an asynchronous operation on the workload instance.",
         "operationId": "WorkloadInstanceOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2453,6 +2271,35 @@
         "x-ms-examples": {
           "WorkloadInstanceOperationStatus_Get": {
             "$ref": "./examples/WorkloadInstanceOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of operations.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
@@ -2517,10 +2364,7 @@
         },
         "loadBalancerType": {
           "description": "Gets or sets the load balancer type.",
-          "enum": [
-            "Private",
-            "Public"
-          ],
+          "enum": [ "Private", "Public" ],
           "type": "string",
           "x-ms-enum": {
             "name": "LoadBalancerType",
@@ -2764,6 +2608,24 @@
         }
       }
     },
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
     "AzureFileShareHydrationProfile": {
       "description": "Azure file share profile for hydration of application folders not mounted on\r\nthe container file system.",
       "type": "object",
@@ -2790,6 +2652,11 @@
       "description": "Binding for a web application.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the application binding.",
+          "type": "string",
+          "readOnly": true
+        },
         "port": {
           "description": "Gets or sets the application port.",
           "type": "string"
@@ -2855,6 +2722,11 @@
       "description": "Class for container image properties.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the container image.",
+          "type": "string",
+          "readOnly": true
+        },
         "dockerfile": {
           "description": "Gets or sets the dockerfile for the container image.",
           "type": "string"
@@ -2980,7 +2852,7 @@
       "description": "Class for deployed resource properties.",
       "type": "object",
       "properties": {
-        "deployedResourceId": {
+        "id": {
           "description": "Gets or sets the deployed resource id.",
           "type": "string",
           "readOnly": true
@@ -3019,6 +2891,11 @@
       "description": "Second level entity for virtual directories.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the directory path.",
+          "type": "string",
+          "readOnly": true
+        },
         "virtual": {
           "description": "Gets or sets the virtual path for the directory.",
           "type": "string"
@@ -3033,6 +2910,11 @@
       "description": "Error model.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the error.",
+          "type": "string",
+          "readOnly": true
+        },
         "code": {
           "description": "Gets or sets the error code.",
           "type": "string",
@@ -3075,6 +2957,11 @@
       "description": "Health error model.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id.",
+          "type": "string",
+          "readOnly": true
+        },
         "affectedResourceType": {
           "description": "Gets or sets the type of affected resource type.",
           "type": "string"
@@ -3266,6 +3153,11 @@
       "description": "IISApplication details.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the application.",
+          "type": "string",
+          "readOnly": true
+        },
         "applicationPoolName": {
           "description": "Gets or sets the application pool name.",
           "type": "string"
@@ -3298,6 +3190,11 @@
       "description": "IIS virtual application details.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the application.",
+          "type": "string",
+          "readOnly": true
+        },
         "isVirtualDirectory": {
           "description": "Gets a value indicating whether the application corresponds to a directory.",
           "type": "boolean",
@@ -3481,6 +3378,11 @@
       "description": "Inner health error model.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id.",
+          "type": "string",
+          "readOnly": true
+        },
         "code": {
           "description": "Gets or sets the error code.",
           "type": "string",
@@ -3598,9 +3500,7 @@
     },
     "MigrateAgentModelCustomProperties": {
       "description": "MigrateAgent model custom properties.",
-      "required": [
-        "instanceType"
-      ],
+      "required": [ "instanceType" ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -3608,7 +3508,8 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType"
+      "discriminator": "instanceType",
+      "x-ms-discriminator-value": "TestFabricExtension"
     },
     "MigrateAgentModelProperties": {
       "description": "MigrateAgent model properties.",
@@ -3873,6 +3774,11 @@
       "description": "Migrate properties of the workload deployment.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id.",
+          "type": "string",
+          "readOnly": true
+        },
         "workloadDeploymentName": {
           "description": "Gets or sets the workload deployment name.",
           "type": "string",
@@ -3937,14 +3843,59 @@
         }
       }
     },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
     "OperatingSystemDetails": {
       "type": "object",
       "properties": {
         "os": {
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": [ "Windows", "Linux" ],
           "type": "string",
           "x-ms-enum": {
             "name": "OperatingSystemType",
@@ -4082,10 +4033,7 @@
       "properties": {
         "storageAccessType": {
           "description": "Gets or sets the target storage access type.",
-          "enum": [
-            "Shared",
-            "Exclusive"
-          ],
+          "enum": [ "Shared", "Exclusive" ],
           "type": "string",
           "x-ms-enum": {
             "name": "TargetStorageAccessType",
@@ -4094,10 +4042,7 @@
         },
         "storageProjectionType": {
           "description": "Gets or sets the target projection type.",
-          "enum": [
-            "ContainerFileSystem",
-            "PersistentVolume"
-          ],
+          "enum": [ "ContainerFileSystem", "PersistentVolume" ],
           "type": "string",
           "x-ms-enum": {
             "name": "TargetStorageProjectionType",
@@ -4106,9 +4051,7 @@
         },
         "hydrationStorageProviderType": {
           "description": "Gets or sets the storage provider type on the target.\r\nApplicable when StorageProjectionType is not ContainerFileSystem.",
-          "enum": [
-            "AzureFileShare"
-          ],
+          "enum": [ "AzureFileShare" ],
           "type": "string",
           "x-ms-enum": {
             "name": "TargetHydrationStorageProviderType",
@@ -4136,6 +4079,11 @@
       "description": "Task model.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the task.",
+          "type": "string",
+          "readOnly": true
+        },
         "taskName": {
           "description": "Gets or sets the task name.",
           "type": "string",
@@ -4277,6 +4225,11 @@
       "description": "Class for web application configurations.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the application configuration.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Gets or sets the configuration name.",
           "type": "string"
@@ -4352,6 +4305,11 @@
       "description": "Framework specific data for a web application.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the unique id corresponding to the application framework.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Gets or sets Name of the framework.",
           "type": "string"
@@ -4421,9 +4379,7 @@
     },
     "WorkflowModelCustomProperties": {
       "description": "Workflow model custom properties.",
-      "required": [
-        "instanceType"
-      ],
+      "required": [ "instanceType" ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -4439,7 +4395,8 @@
           "readOnly": true
         }
       },
-      "discriminator": "instanceType"
+      "discriminator": "instanceType",
+      "x-ms-discriminator-value": "SampleWorkflow"
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
@@ -4641,9 +4598,7 @@
     },
     "WorkloadDeploymentModelCustomProperties": {
       "description": "Workload deployment model custom properties.",
-      "required": [
-        "instanceType"
-      ],
+      "required": [ "instanceType" ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -4659,7 +4614,8 @@
           }
         }
       },
-      "discriminator": "instanceType"
+      "discriminator": "instanceType",
+      "x-ms-discriminator-value": "IISAKSWorkloadDeployment"
     },
     "WorkloadDeploymentModelProperties": {
       "description": "Workload deployment model properties.",
@@ -4879,11 +4835,7 @@
         },
         "replicationHealth": {
           "description": "Gets or sets workload deployment replication health.",
-          "enum": [
-            "Normal",
-            "Warning",
-            "Critical"
-          ],
+          "enum": [ "Normal", "Warning", "Critical" ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4992,17 +4944,12 @@
     },
     "WorkloadInstanceModelCustomProperties": {
       "description": "Workload instance model custom properties.",
-      "required": [
-        "instanceType"
-      ],
+      "required": [ "instanceType" ],
       "type": "object",
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "IISWorkload",
-            "ApacheTomcatWorkload"
-          ],
+          "enum": [ "IISWorkload", "ApacheTomcatWorkload" ],
           "type": "string",
           "x-ms-enum": {
             "name": "WorkloadType",
@@ -5010,7 +4957,8 @@
           }
         }
       },
-      "discriminator": "instanceType"
+      "discriminator": "instanceType",
+      "x-ms-discriminator-value": "IISWorkload"
     },
     "WorkloadInstanceModelProperties": {
       "description": "Workload instance model properties.",
@@ -5044,11 +4992,7 @@
         },
         "replicationHealth": {
           "description": "Gets or sets the replication health of the workload instance.",
-          "enum": [
-            "Normal",
-            "Warning",
-            "Critical"
-          ],
+          "enum": [ "Normal", "Warning", "Critical" ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5121,10 +5065,7 @@
         },
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "IISWorkload",
-            "ApacheTomcatWorkload"
-          ],
+          "enum": [ "IISWorkload", "ApacheTomcatWorkload" ],
           "type": "string",
           "x-ms-enum": {
             "name": "WorkloadType",
@@ -5163,11 +5104,7 @@
         },
         "replicationHealth": {
           "description": "Gets or sets the replication health of the workload instance.",
-          "enum": [
-            "Normal",
-            "Warning",
-            "Critical"
-          ],
+          "enum": [ "Normal", "Warning", "Critical" ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5280,9 +5217,7 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "tags": [
@@ -5312,4 +5247,3 @@
     }
   ]
 }
-
