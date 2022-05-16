@@ -39,6 +39,15 @@ input-file:
   - Microsoft.AppComplianceAutomation/preview/2022-05-10-privatepreview/appcomplianceautomation.json
 ```
 
+### Tag: package-2022-05-10-beta
+
+These settings apply only when `--tag=package-2022-05-10-beta` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-10-beta'
+input-file:
+  - Microsoft.AppComplianceAutomation/preview/2022-05-10-beta/appcomplianceautomation.json
+```
+
 ---
 
 # Code Generation
