@@ -13,7 +13,7 @@
           "fefd759d-7fe8-4f83-8b6d-aeebe0f491fe": {
             "clientmetric": "response_time_ms",
             "aggregate": "percentage",
-            "condition": "<",
+            "condition": ">",
             "value": 20,
             "action": "continue"
           }
@@ -49,7 +49,7 @@
             "fefd759d-7fe8-4f83-8b6d-aeebe0f491fe": {
               "clientmetric": "response_time_ms",
               "aggregate": "percentage",
-              "condition": "<",
+              "condition": ">",
               "value": 20,
               "action": "continue",
               "actualValue": 10,
@@ -63,47 +63,38 @@
         "lastModifiedBy": "elon-musk@microsoft.com",
         "inputArtifacts": {
           "configUrl": {
-            "url": "http://dummyurl.com/file.jmx",
+            "url": "https://dummyurl.com/configresource",
             "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "filename": "config.yaml",
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
           "testScriptUrl": {
-            "url": "http://dummyurl.com/file.jmx",
-            "fileId": "92345678-1234-1111-1234-123456789012",
+            "url": "https://dummyurl.com/testscriptresource",
+            "fileId": "92345678-1234-1111-1234-123456789011",
             "filename": "sample.jmx",
-            "fileType": 22,
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
             "validationStatus": "VALIDATION_SUCCESS"
           },
           "userPropUrl": {
-            "url": "http://dummyurl.com/file.jmx",
-            "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "url": "https://dummyurl.com/userpropresource",
+            "fileId": "92345678-1234-1111-1234-123456789013",
+            "filename": "user.properties",
+            "fileType": 1,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
           "inputArtifactsZipFileurl": {
-            "url": "http://dummyurl.com/file.jmx",
+            "url": "https://dummyurl.com/inputartifactzipresource",
             "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "filename": "inputartifacts.zip",
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
-          "additionalUrls": [
-            {
-              "url": "http://dummyurl.com/file.jmx",
-              "fileId": "92345678-1234-1111-1234-123456789012",
-              "filename": "sample.jmx",
-              "fileType": 22,
-              "expireTime": "2021-12-05T16:43:46.072Z",
-              "validationStatus": "VALIDATION_SUCCESS"
-            }
-          ]
+          "additionalUrls": []
         },
         "secrets": {
           "secret1": {
@@ -116,7 +107,7 @@
         },
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Network/virtualNetworks/samplenetworkresource/subnets/AAAAA0A0A0",
         "keyvaultReferenceIdentityType": "UserAssigned",
-        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/sampleprovider/sampleresourcetype/sampleresourcename"
+        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
       }
     },
     "201": {
@@ -134,7 +125,7 @@
             "fefd759d-7fe8-4f83-8b6d-aeebe0f491fe": {
               "clientmetric": "response_time_ms",
               "aggregate": "percentage",
-              "condition": "<",
+              "condition": ">",
               "value": 20,
               "action": "continue",
               "actualValue": 10,
@@ -148,47 +139,38 @@
         "lastModifiedBy": "elon-musk@microsoft.com",
         "inputArtifacts": {
           "configUrl": {
-            "url": "http://dummyurl.com/file.jmx",
+            "url": "https://dummyurl.com/configresource",
             "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "filename": "config.yaml",
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
           "testScriptUrl": {
-            "url": "http://dummyurl.com/file.jmx",
-            "fileId": "92345678-1234-1111-1234-123456789012",
+            "url": "https://dummyurl.com/testscriptresource",
+            "fileId": "92345678-1234-1111-1234-123456789011",
             "filename": "sample.jmx",
-            "fileType": 22,
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
             "validationStatus": "VALIDATION_SUCCESS"
           },
           "userPropUrl": {
-            "url": "http://dummyurl.com/file.jmx",
-            "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "url": "https://dummyurl.com/userpropresource",
+            "fileId": "92345678-1234-1111-1234-123456789013",
+            "filename": "user.properties",
+            "fileType": 1,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
           "inputArtifactsZipFileurl": {
-            "url": "http://dummyurl.com/file.jmx",
+            "url": "https://dummyurl.com/inputartifactzipresource",
             "fileId": "92345678-1234-1111-1234-123456789012",
-            "filename": "sample.jmx",
-            "fileType": 22,
+            "filename": "inputartifacts.zip",
+            "fileType": 2,
             "expireTime": "2021-12-05T16:43:46.072Z",
-            "validationStatus": "VALIDATION_SUCCESS"
+            "validationStatus": ""
           },
-          "additionalUrls": [
-            {
-              "url": "http://dummyurl.com/file.jmx",
-              "fileId": "92345678-1234-1111-1234-123456789012",
-              "filename": "sample.jmx",
-              "fileType": 22,
-              "expireTime": "2021-12-05T16:43:46.072Z",
-              "validationStatus": "VALIDATION_SUCCESS"
-            }
-          ]
+          "additionalUrls": []
         },
         "secrets": {
           "secret1": {
@@ -201,7 +183,7 @@
         },
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Network/virtualNetworks/samplenetworkresource/subnets/AAAAA0A0A0",
         "keyvaultReferenceIdentityType": "UserAssigned",
-        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/sampleprovider/sampleresourcetype/sampleresourcename"
+        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
       }
     }
   }
