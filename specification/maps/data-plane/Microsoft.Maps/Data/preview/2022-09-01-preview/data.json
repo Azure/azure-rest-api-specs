@@ -221,7 +221,7 @@
             "description": "The content or connection information to upload",
             "required": true,
             "schema": {
-              "type": "#/definitions/ContentBodyOrConnection"
+              "$ref": "#/definitions/ContentBodyOrConnection"
             }
           }
         ],
@@ -647,24 +647,31 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "Data type",
+          "description": "Connection type",
+          "type": "string",
           "enum": ["AzureBlobFile"],
-          "required": true
+          "x-ms-enum": {
+            "name": "ConnectionTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlobFile",
+                "description": "Connection to Azure Blob File"
+              }
+            ]
+          }
         },
         "msiClientId": {
           "description": "ClientId of MSI. Use system assigned identity if not provided",
-          "type": "string",
-          "required": false
+          "type": "string"
         },
         "linkedResource": {
           "description": "The linked resource",
-          "type": "string",
-          "required": false
+          "type": "string"
         },
         "blobPath": {
           "description": "The path to the blob file",
-          "type": "string",
-          "required": true
+          "type": "string"
         }
       }
     },
