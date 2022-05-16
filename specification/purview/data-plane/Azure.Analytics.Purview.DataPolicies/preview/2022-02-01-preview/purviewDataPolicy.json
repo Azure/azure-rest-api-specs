@@ -8,58 +8,7 @@
     "application/json"
   ],
   "paths": {
-    "/dataPolicies/{policyName}/scopes": {
-      "get": {
-        "tags": [
-          "DataPolicyBinding"
-        ],
-        "description": "Gets a data policy binding",
-        "operationId": "DataPolicyBinding_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyName",
-            "description": "Name of the policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DataPolicyBindingList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Policy Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "values"
-        },
-        "x-ms-examples": {
-          "DataPolicyBinding_List": {
-            "$ref": "./examples/DataPolicyBinding_List.json"
-          }
-        }
-      },
+    "/dataPolicies/{policyName}/scopes/{datasource}": {
       "put": {
         "tags": [
           "DataPolicyBinding"
@@ -77,6 +26,13 @@
             "in": "path",
             "name": "policyName",
             "description": "Name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "datasource",
+            "description": "The datasource.",
             "required": true,
             "type": "string"
           },
@@ -125,6 +81,9 @@
         ],
         "description": "Deletes a data policy binding",
         "operationId": "DataPolicyBinding_Delete",
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -134,7 +93,7 @@
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "datasource",
             "description": "Name of the datasource associated with the binding to be deleted.",
             "required": true,
@@ -142,6 +101,15 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The policyBinding.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataPolicyBinding"
+            }
           }
         ],
         "responses": {
@@ -164,6 +132,59 @@
         "x-ms-examples": {
           "DataPolicyBinding_Delete": {
             "$ref": "./examples/DataPolicyBinding_Delete.json"
+          }
+        }
+      }
+    },
+    "/dataPolicies/{policyName}/scopes": {
+      "get": {
+        "tags": [
+          "DataPolicyBinding"
+        ],
+        "description": "Lists data bindings for a policy.",
+        "operationId": "DataPolicyBinding_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyBindingList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "DataPolicyBinding_List": {
+            "$ref": "./examples/DataPolicyBinding_List.json"
           }
         }
       }
@@ -205,7 +226,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName": "values"
+          "itemName": "value"
         },
         "x-ms-examples": {
           "DataPolicyRoles_List": {
@@ -225,6 +246,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "Filter the policies.",
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/api-version"
           }
@@ -251,7 +278,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName": "values"
+          "itemName": "value"
         },
         "x-ms-examples": {
           "DataPolicy_List": {
@@ -380,7 +407,7 @@
           {
             "in": "path",
             "name": "policyName",
-            "description": "Name of an existing policy that needs to be fetched.",
+            "description": "Id of an existing policy that needs to be fetched.",
             "required": true,
             "type": "string"
           },
@@ -422,11 +449,11 @@
       "type": "object",
       "properties": {
         "attributeName": {
-          "description": "The name of the attribute being declared.",
+          "description": "AttributeName",
           "type": "string"
         },
         "attributeValueIncludes": {
-          "description": "The value for the attribute",
+          "description": "Value for attribute",
           "type": "string"
         },
         "attributeValueIncludedIn": {
@@ -481,7 +508,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "DecisionRuleKind",
+            "name": "Kind",
             "modelAsString": true
           }
         },
@@ -542,7 +569,7 @@
         }
       }
     },
-    "DataFabricPolicyContentDetails": {
+    "DataPolicyContent": {
       "type": "object",
       "properties": {
         "policyType": {
@@ -550,9 +577,15 @@
         }
       }
     },
-    "DataFabricPolicyContent": {
+    "DataPolicy": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -573,21 +606,7 @@
           "$ref": "#/definitions/CollectionReference"
         },
         "policyDetails": {
-          "$ref": "#/definitions/DataFabricPolicyContentDetails"
-        }
-      }
-    },
-    "DataPolicy": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataFabricPolicyContent"
-        },
-        "name": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
+          "$ref": "#/definitions/DataPolicyContent"
         }
       }
     },
@@ -634,11 +653,11 @@
     },
     "DataPolicyList": {
       "required": [
-        "values"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "values": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataPolicy"
@@ -646,10 +665,6 @@
         },
         "nextLink": {
           "type": "string"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -657,24 +672,15 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The provisioning state of role",
-          "enum": [
-            "Deprecated",
-            "Provisioned",
-            "New"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "description": "The provisioningState of role",
+          "type": "string"
         },
         "roleType": {
           "description": "The type of role",
           "type": "string"
         },
-        "displayName": {
-          "description": "The display name of role",
+        "friendlyName": {
+          "description": "The friendly name of role",
           "type": "string"
         },
         "description": {
@@ -688,7 +694,7 @@
           "$ref": "#/definitions/DnfCondition"
         },
         "version": {
-          "format": "int32",
+          "format": "int64",
           "description": "The version of role",
           "type": "integer"
         }
@@ -716,11 +722,11 @@
     },
     "DataPolicyRoleList": {
       "required": [
-        "values"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "values": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataPolicyRole"
@@ -735,35 +741,30 @@
         }
       }
     },
-    "DataPolicyBindingProperties": {
+    "DataPolicyBinding": {
       "type": "object",
       "properties": {
+        "type": {
+          "description": "The type of reference",
+          "default": "DataSourceReference",
+          "type": "string"
+        },
+        "referenceName": {
+          "description": "The name of data source",
+          "type": "string"
+        },
         "systemData": {
           "$ref": "#/definitions/SystemData"
         }
       }
     },
-    "DataPolicyBinding": {
-      "required": [
-        "datasource"
-      ],
-      "type": "object",
-      "properties": {
-        "datasource": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/DataPolicyBindingProperties"
-        }
-      }
-    },
     "DataPolicyBindingList": {
       "required": [
-        "values"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "values": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataPolicyBinding"
@@ -771,10 +772,6 @@
         },
         "nextLink": {
           "type": "string"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     }
