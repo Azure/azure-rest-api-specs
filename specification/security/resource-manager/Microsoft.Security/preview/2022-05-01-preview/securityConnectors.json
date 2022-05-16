@@ -727,18 +727,18 @@
         "enableContainerVulnerabilityAssessment": {
           "type": "boolean",
           "description": "Enable container vulnerability assessment feature"
-        }
+        },
         "autoProvisioning": {
           "type": "boolean",
           "description": "Is audit logs pipeline auto provisioning enabled"
         },
         "kubeAuditRetentionTime": {
           "type": "integer",
-          "description": "The retention time of kube audit logs set on the CloudWatch log group",
+          "description": "The retention time of kube audit logs set on the CloudWatch log group"
         },
         "scubaExternalId": {
           "type": "string",
-          "description": "The externalId used by the data reader to prevent the confused deputy attack",
+          "description": "The externalId used by the data reader to prevent the confused deputy attack"
         }
       }
     },
@@ -854,7 +854,43 @@
               }
             }
           }
-        }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "cloudRoleArn": {
+                  "type": "string",
+                  "description": "The cloud role ARN in AWS for this feature"
+                },
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode. Can be either 'Default'",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "type",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "description": "VM tags that indicates that VM should not be scanned",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }        
       }
     },
     "defenderFoDatabasesAwsOffering": {
