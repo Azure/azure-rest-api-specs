@@ -291,61 +291,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/operationResults/{operationResultId}": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkGroupNameParameter"
-        },
-        {
-          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "OperationResults"
-        ],
-        "summary": "Get a network manager group operation result.",
-        "description": "Returns an operation result.",
-        "operationId": "NetworkManagerGroupOperationResults_Get",
-        "responses": {
-          "202": {
-            "description": "Accepted and will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Request successful. The operation does not exist or is completed."
-          },
-          "default": {
-            "description": "The default error response.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "getNetworkManagerGroupOperationResult": {
-            "$ref": "./examples/NetworkManagerGroupOperationResultGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}": {
       "parameters": [
         {
@@ -526,64 +471,6 @@
         "x-ms-examples": {
           "StaticMembersList": {
             "$ref": "./examples/NetworkManagerStaticMemberList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}/operationResults/{operationResultId}": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/StaticMemberNameParameter"
-        },
-        {
-          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "OperationResults"
-        ],
-        "summary": "Get a network manager static member operation result.",
-        "description": "Returns an operation result.",
-        "operationId": "StaticMemberOperationResults_Get",
-        "responses": {
-          "202": {
-            "description": "Accepted and will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Request successful. The operation does not exist or is completed."
-          },
-          "default": {
-            "description": "The default error response.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "getNetworkManagerStaticMemberOperationResult": {
-            "$ref": "./examples/NetworkManagerStaticMemberOperationResultGet.json"
           }
         }
       }
