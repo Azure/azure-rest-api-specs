@@ -108,9 +108,6 @@
         "x-ms-examples": {
           "UpdateClusterExample": {
             "$ref": "./examples/UpdateClusterExample.json"
-          },
-          "UpdateClusterPrivateLinkExample": {
-            "$ref": "./examples/UpdateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -143,19 +140,12 @@
               "$ref": "#/definitions/ConnectedCluster"
             }
           },
-          "202": {
-            "description": "Resource patch request accepted"
-          },
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -725,24 +715,7 @@
     },
     "ConnectedClusterPatchProperties": {
       "type": "object",
-      "properties": {
-        "privateLinkState": {
-          "type": "string",
-          "description": "Property which describes the state of private link on a connected cluster resource.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateLinkState",
-            "modelAsString": true
-          }
-        },
-        "privateLinkScopeResourceId": {
-          "type": "string",
-          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
-        }
-      },
+      "properties": {},
       "description": "Properties which can be patched on the connected cluster resource."
     },
     "HybridConnectionConfig": {
