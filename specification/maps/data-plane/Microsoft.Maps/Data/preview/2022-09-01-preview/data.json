@@ -221,7 +221,13 @@
             "description": "The content or connection information to upload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContentBodyOrConnection"
+              "type": "object",
+              "description": "The content or connection information to upload",
+              "properties": {
+                "connection": {
+                  "$ref": "#/definitions/Connection"
+                }
+              }
             }
           }
         ],
@@ -632,8 +638,8 @@
         }
       }
     },
-    "ContentBodyOrConnection": {
-      "description": "The content or connection information to upload",
+    "Connection": {
+      "description": "The connection information to upload. Upload the whole body if not provided",
       "type": "object",
       "properties": {
         "type": {
@@ -665,10 +671,6 @@
         }
       },
       "required": ["type", "blobPath"]
-    },
-    "ContentBody": {
-      "description": "The content to upload",
-      "type": "object"
     },
     "LongRunningOperationResult": {
       "description": "The response model for a Long-Running Operations API.",
