@@ -221,28 +221,7 @@
             "description": "The content or connection information to upload",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The content or connection information to upload",
-              "allOf": [
-                {
-                  "type": "object",
-                  "description": "The connection information to upload",
-                  "properties": {
-                    "connection": {
-                      "$ref": "#/definitions/Connection"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "The content to upload",
-                  "properties": {
-                    "geojson": {
-                      "$ref": "../../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/definitions/UploadBody"
             }
           }
         ],
@@ -691,6 +670,18 @@
         "type",
         "blobPath"
       ]
+    },
+    "UploadBody": {
+      "type": "object",
+      "description": "The content or connection information to upload",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/Connection"
+        },
+        "content": {
+          "$ref": "../../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
+        }
+      }
     },
     "LongRunningOperationResult": {
       "description": "The response model for a Long-Running Operations API.",
