@@ -64,19 +64,20 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "systemData": {}
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Policies in a Resource Group": {
+          "Get all Policies in a Resource Group": {
             "$ref": "./examples/WafListPolicies.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -170,7 +171,8 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "systemData": {}
         },
         "x-ms-examples": {
           "Creates specific policy": {
@@ -300,7 +302,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Policies in a Resource Group": {
+          "List Policies ManagedRuleSets in a Resource Group": {
             "$ref": "./examples/WafListManagedRuleSets.json"
           }
         }
@@ -680,6 +682,8 @@
           "type": "string"
         },
         "ruleSetAction": {
+          "description": "Defines the rule set action.",
+          "title": "ruleSetAction",
           "$ref": "#/definitions/ManagedRuleSetActionType"
         },
         "exclusions": {

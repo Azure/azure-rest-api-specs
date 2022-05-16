@@ -38,36 +38,56 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
+      "description": "Error properties",
+      "title": "ErrorDetails",
       "properties": {
         "code": {
+          "description": "Code",
+          "title": "Code",
           "type": "string"
         },
         "target": {
+          "description": "Target",
+          "title": "Target",
           "type": "string"
         },
         "message": {
+          "description": "Message",
+          "title": "Message",
           "type": "string"
         }
       }
     },
     "Error": {
+      "description": "Error",
+      "title": "Error",
       "properties": {
         "code": {
+          "description": "Code",
+          "title": "Code",
           "type": "string"
         },
         "message": {
+          "description": "Message",
+          "title": "Message",
           "type": "string"
         },
         "target": {
+          "description": "Target",
+          "title": "Target",
           "type": "string"
         },
         "details": {
+          "description": "Details",
+          "title": "Details",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           }
         },
         "innerError": {
+          "description": "InnerError",
+          "title": "InnerError",
           "type": "string"
         }
       }
@@ -88,6 +108,8 @@
           }
         },
         "error": {
+          "description": "error",
+          "title": "error",
           "$ref": "#/definitions/Error"
         }
       },
