@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -273,7 +273,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoorWebApplicationFirewallManagedRuleSets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets": {
       "get": {
         "tags": [
           "WebApplicationFirewallManagedRuleSets"
@@ -469,8 +469,7 @@
         },
         "customBlockResponseStatusCode": {
           "description": "If the action type is block, customer can override the response status code.",
-          "type": "integer",
-          "format": "int64"
+          "type": "integer"
         },
         "customBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
@@ -957,22 +956,18 @@
       }
     },
     "ErrorResponse": {
+      "description": "Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
       "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            }
-          }
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
