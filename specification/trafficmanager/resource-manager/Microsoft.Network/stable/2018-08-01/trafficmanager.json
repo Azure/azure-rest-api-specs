@@ -963,8 +963,16 @@
     "DeleteOperationResult": {
       "type":"object",
       "properties": {
-        "boolean": {
-          "type": "boolean",
+        "result": {
+          "type": "string",
+          "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "Result",
+              "modelAsString": false
+            },
           "x-ms-client-name": "operationResult",
           "readOnly": true,
           "description": "The result of the operation or request."
