@@ -195,7 +195,7 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
             "description": "FrontdoorWebApplicationFirewallPolicy parameters to be patched.",
@@ -257,6 +257,12 @@
           },
           "204": {
             "description": "No Content. The request has been accepted but the policy was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -267,7 +273,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoorWebApplicationFirewallManagedRuleSets": {
       "get": {
         "tags": [
           "WebApplicationFirewallManagedRuleSets"
@@ -463,7 +469,8 @@
         },
         "customBlockResponseStatusCode": {
           "description": "If the action type is block, customer can override the response status code.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "customBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
