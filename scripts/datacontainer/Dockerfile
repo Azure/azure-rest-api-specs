@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/oss/mirror/docker.io/library/ubuntu:20.04
+FROM mcr.microsoft.com/cbl-mariner/distroless/base:1.0
 
 RUN apk update && \
     apk add git
