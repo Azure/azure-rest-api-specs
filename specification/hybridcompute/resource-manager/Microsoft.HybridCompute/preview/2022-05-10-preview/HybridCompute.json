@@ -1136,8 +1136,11 @@
       "type": "object",
       "properties": {
         "resources" : {
-          "$ref": "#/definitions/MachineExtensionsListResult",
-          "description": "extensions affliated to the machine"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          },
+          "description": "The list of extensions affliated to the machine"
         },
         "properties": {
           "$ref": "#/definitions/MachineProperties",
