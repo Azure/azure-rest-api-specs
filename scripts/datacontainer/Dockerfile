@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM mcr.microsoft.com/cbl-mariner/distroless/base:1.0
 
 RUN apk update && \
     apk add git
