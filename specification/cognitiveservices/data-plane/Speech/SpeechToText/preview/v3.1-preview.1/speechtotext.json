@@ -61,7 +61,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'```</li></ul>",
             "type": "string"
           }
         ],
@@ -581,7 +581,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
             "type": "string"
           }
         ],
@@ -725,7 +725,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
             "type": "string"
           }
         ],
@@ -1398,7 +1398,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
             "type": "string"
           }
         ],
@@ -1517,7 +1517,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
             "type": "string"
           }
         ],
@@ -1799,7 +1799,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
             "type": "string"
           }
         ],
@@ -1807,7 +1807,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedModels"
+              "$ref": "#/definitions/PaginatedCustomModels"
             },
             "headers": {
               "Retry-After": {
@@ -1852,7 +1852,7 @@
             "description": "The details of the new model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/CustomModel"
             }
           }
         ],
@@ -1860,7 +1860,7 @@
           "201": {
             "description": "The response contains information about the entity as payload and its location as header.",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/CustomModel"
             },
             "headers": {
               "Location": {
@@ -1907,7 +1907,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available base models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available base models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
             "type": "string"
           }
         ],
@@ -1915,7 +1915,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedModels"
+              "$ref": "#/definitions/PaginatedBaseModels"
             }
           },
           "default": {
@@ -1960,7 +1960,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/CustomModel"
             },
             "headers": {
               "Retry-After": {
@@ -2021,7 +2021,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/CustomModel"
             },
             "headers": {
               "Retry-After": {
@@ -2104,7 +2104,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/BaseModel"
             }
           },
           "default": {
@@ -2158,7 +2158,7 @@
           "201": {
             "description": "The response contains information about the entity as payload and its location as header.",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/CustomModel"
             },
             "headers": {
               "Location": {
@@ -2301,7 +2301,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
             "type": "string"
           }
         ],
@@ -2442,7 +2442,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available projects.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, locale.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My test'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available projects.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, locale.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My test'```</li></ul>",
             "type": "string"
           }
         ],
@@ -2681,7 +2681,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
             "type": "string"
           }
         ],
@@ -2744,7 +2744,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
             "type": "string"
           }
         ],
@@ -2807,7 +2807,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
             "type": "string"
           }
         ],
@@ -2870,7 +2870,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
             "type": "string"
           }
         ],
@@ -2878,7 +2878,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedModels"
+              "$ref": "#/definitions/PaginatedCustomModels"
             },
             "headers": {
               "Retry-After": {
@@ -2933,7 +2933,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties but self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
             "type": "string"
           }
         ],
@@ -3022,7 +3022,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties but self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
             "type": "string"
           }
         ],
@@ -3294,7 +3294,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'```</li></ul>",
             "type": "string"
           }
         ],
@@ -3404,7 +3404,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'test'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'test'```</li></ul>",
             "type": "string"
           }
         ],
@@ -3761,6 +3761,97 @@
     }
   },
   "definitions": {
+    "BaseModel": {
+      "title": "BaseModel",
+      "required": [
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/BaseModelLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/BaseModelProperties"
+        },
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the object.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BaseModelDeprecationDates": {
+      "title": "BaseModelDeprecationDates",
+      "type": "object",
+      "properties": {
+        "adaptationDateTime": {
+          "format": "date-time",
+          "description": "The date when adaptation becomes deprecated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transcriptionDateTime": {
+          "format": "date-time",
+          "description": "The date when transcription becomes deprecated.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BaseModelLinks": {
+      "title": "BaseModelLinks",
+      "type": "object",
+      "properties": {
+        "manifest": {
+          "format": "uri",
+          "description": "The location to get a manifest for this model to be used in the on-prem container. See operation \"Models_GetCustomModelManifest\" for more details.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BaseModelProperties": {
+      "title": "BaseModelProperties",
+      "type": "object",
+      "properties": {
+        "deprecationDates": {
+          "$ref": "#/definitions/BaseModelDeprecationDates"
+        },
+        "capabilities": {
+          "description": "The capabilities of the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapabilities"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "Component": {
       "title": "Component",
       "type": "object",
@@ -3785,6 +3876,146 @@
         }
       }
     },
+    "CustomModel": {
+      "title": "CustomModel",
+      "required": [
+        "displayName",
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "links": {
+          "$ref": "#/definitions/CustomModelLinks"
+        },
+        "properties": {
+          "$ref": "#/definitions/CustomModelProperties"
+        },
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the object.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "text": {
+          "description": "The text used to adapt this language model.",
+          "type": "string"
+        },
+        "baseModel": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "datasets": {
+          "description": "Datasets used for adaptation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityReference"
+          }
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string"
+        },
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomModelDeprecationDates": {
+      "title": "CustomModelDeprecationDates",
+      "type": "object",
+      "properties": {
+        "transcriptionDateTime": {
+          "format": "date-time",
+          "description": "The date when transcription becomes deprecated.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomModelLinks": {
+      "title": "CustomModelLinks",
+      "type": "object",
+      "properties": {
+        "copyTo": {
+          "format": "uri",
+          "description": "The location to the model copy action. See operation \"Models_CopyTo\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "files": {
+          "format": "uri",
+          "description": "The location to get all files of this entity. See operation \"Models_ListFiles\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manifest": {
+          "format": "uri",
+          "description": "The location to get a manifest for this model to be used in the on-prem container. See operation \"Models_GetCustomModelManifest\" for more details.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomModelProperties": {
+      "title": "CustomModelProperties",
+      "type": "object",
+      "properties": {
+        "customModelWeightPercent": {
+          "format": "int32",
+          "description": "The weight of custom model between 1 (1% custom model and 99% base model) and 100 (100% custom model and 0% base model).\r\nWhen this property is not set, the service chooses a suitable value (get the model to retrieve the selected weight).\r\nStart without using this property. If needed, choose a larger (or smaller) weight to increase (or decrease) the impact of the custom model.",
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "deprecationDates": {
+          "$ref": "#/definitions/CustomModelDeprecationDates"
+        },
+        "capabilities": {
+          "description": "The capabilities of the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapabilities"
+          },
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
+        }
+      }
+    },
     "Dataset": {
       "title": "Dataset",
       "required": [
@@ -3795,7 +4026,7 @@
       "type": "object",
       "properties": {
         "links": {
-          "$ref": "#/definitions/Links"
+          "$ref": "#/definitions/DatasetLinks"
         },
         "properties": {
           "$ref": "#/definitions/DatasetProperties"
@@ -3866,7 +4097,7 @@
       "type": "string",
       "x-ms-enum": {
         "name": "DatasetKind",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "Language",
@@ -3889,6 +4120,18 @@
             "description": "A language markdown data import."
           }
         ]
+      }
+    },
+    "DatasetLinks": {
+      "title": "DatasetLinks",
+      "type": "object",
+      "properties": {
+        "files": {
+          "format": "uri",
+          "description": "The location to get all files of this entity. See operation \"Datasets_ListFiles\" for more details.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "DatasetLocales": {
@@ -4310,6 +4553,9 @@
     },
     "DiarizationProperties": {
       "title": "DiarizationProperties",
+      "required": [
+        "speakers"
+      ],
       "type": "object",
       "properties": {
         "speakers": {
@@ -4323,14 +4569,14 @@
       "properties": {
         "minCount": {
           "format": "int32",
-          "description": "A hint for the minimum number of speakers for diarization. Specify 0 if unknown. Must be smaller than or equal to the maxSpeakers property. The default value is 1.",
-          "minimum": 0,
+          "description": "A hint for the minimum number of speakers for diarization. Must be smaller than or equal to the maxSpeakers property.",
+          "minimum": 1,
           "type": "integer"
         },
         "maxCount": {
           "format": "int32",
-          "description": "A hint for the maximum number of speakers for diarization. Specify 0 if unknown. Must be larger than or equal to the minSpeakers property. The default value is 2.",
-          "minimum": 0,
+          "description": "The maximum number of speakers for diarization. Must be less than 36 and larger than or equal to the minSpeakers property.",
+          "minimum": 1,
           "type": "integer"
         }
       }
@@ -4443,7 +4689,7 @@
         },
         "logs": {
           "format": "uri",
-          "description": "The audio and transcription logs for this endpoint.",
+          "description": "The audio and transcription logs for this endpoint.  See operation \"Endpoints_ListLogs\" for more details.",
           "type": "string",
           "readOnly": true
         }
@@ -4678,7 +4924,7 @@
           "$ref": "#/definitions/EntityReference"
         },
         "links": {
-          "$ref": "#/definitions/Links"
+          "$ref": "#/definitions/EvaluationLinks"
         },
         "properties": {
           "$ref": "#/definitions/EvaluationProperties"
@@ -4725,6 +4971,18 @@
         "locale": {
           "description": "The locale of the contained data.",
           "type": "string"
+        }
+      }
+    },
+    "EvaluationLinks": {
+      "title": "EvaluationLinks",
+      "type": "object",
+      "properties": {
+        "files": {
+          "format": "uri",
+          "description": "The location to get all files of this entity. See operation \"Evaluations_ListFiles\" for more details.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5066,91 +5324,6 @@
         }
       }
     },
-    "Links": {
-      "title": "Links",
-      "type": "object",
-      "properties": {
-        "files": {
-          "format": "uri",
-          "description": "The location to get all files of this entity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Model": {
-      "title": "Model",
-      "required": [
-        "displayName",
-        "locale"
-      ],
-      "type": "object",
-      "properties": {
-        "project": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "links": {
-          "$ref": "#/definitions/ModelLinks"
-        },
-        "properties": {
-          "$ref": "#/definitions/ModelProperties"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "The display name of the object.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the object.",
-          "type": "string"
-        },
-        "text": {
-          "description": "The text used to adapt this language model.",
-          "type": "string"
-        },
-        "baseModel": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "datasets": {
-          "description": "Datasets used for adaptation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityReference"
-          }
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "type": "string"
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ModelCapabilities": {
       "title": "ModelCapabilities",
       "description": "Capabilities the model has.",
@@ -5207,22 +5380,6 @@
         }
       }
     },
-    "ModelDeprecationDates": {
-      "title": "ModelDeprecationDates",
-      "type": "object",
-      "properties": {
-        "adaptationDateTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "transcriptionDateTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ModelFile": {
       "title": "ModelFile",
       "type": "object",
@@ -5235,30 +5392,6 @@
         "contentUrl": {
           "format": "uri",
           "description": "The url to retrieve the content of this file.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ModelLinks": {
-      "title": "ModelLinks",
-      "type": "object",
-      "properties": {
-        "manifest": {
-          "format": "uri",
-          "description": "The location to get a manifest for this model to be used in the on-prem container.",
-          "type": "string",
-          "readOnly": true
-        },
-        "copyTo": {
-          "format": "uri",
-          "description": "The location to the model copy action.",
-          "type": "string",
-          "readOnly": true
-        },
-        "files": {
-          "format": "uri",
-          "description": "The location to get all files of this entity.",
           "type": "string",
           "readOnly": true
         }
@@ -5292,37 +5425,6 @@
         }
       }
     },
-    "ModelProperties": {
-      "title": "ModelProperties",
-      "type": "object",
-      "properties": {
-        "customModelWeight": {
-          "format": "int32",
-          "description": "The weight of custom model between 1 (1% custom model and 99% base model) and 100 (100% custom model and 0% base model).\r\nDefault value (20, i.e. 20%) is used when this property is not set.",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "capabilities": {
-          "description": "The capabilities of the model.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelCapabilities"
-          },
-          "readOnly": true
-        },
-        "deprecationDates": {
-          "$ref": "#/definitions/ModelDeprecationDates"
-        },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/EntityError"
-        }
-      }
-    },
     "ModelUpdate": {
       "title": "ModelUpdate",
       "type": "object",
@@ -5344,6 +5446,46 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "PaginatedBaseModels": {
+      "title": "PaginatedBaseModels",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseModel"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "format": "uri",
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PaginatedCustomModels": {
+      "title": "PaginatedCustomModels",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomModel"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "format": "uri",
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5416,26 +5558,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
-          },
-          "readOnly": true
-        },
-        "@nextLink": {
-          "format": "uri",
-          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PaginatedModels": {
-      "title": "PaginatedModels",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Model"
           },
           "readOnly": true
         },
@@ -5593,31 +5715,31 @@
       "properties": {
         "evaluations": {
           "format": "uri",
-          "description": "The location to get a list of all evaluations of this project.",
+          "description": "The location to get a list of all evaluations of this project. See operation \"Projects_ListEvaluations\" for more details.",
           "type": "string",
           "readOnly": true
         },
         "datasets": {
           "format": "uri",
-          "description": "The location to get a list of all datasets of this project.",
+          "description": "The location to get a list of all datasets of this project. See operation \"Projects_ListDatasets\" for more details.",
           "type": "string",
           "readOnly": true
         },
         "models": {
           "format": "uri",
-          "description": "The location to get a list of all models of this project.",
+          "description": "The location to get a list of all models of this project. See operation \"Projects_ListModels\" for more details.",
           "type": "string",
           "readOnly": true
         },
         "endpoints": {
           "format": "uri",
-          "description": "The location to get a list of all endpoints of this project.",
+          "description": "The location to get a list of all endpoints of this project. See operation \"Projects_ListEndpoints\" for more details.",
           "type": "string",
           "readOnly": true
         },
         "transcriptions": {
           "format": "uri",
-          "description": "The location to get a list of all transcriptions of this project.",
+          "description": "The location to get a list of all transcriptions of this project. See operation \"Projects_ListTranscriptions\" for more details.",
           "type": "string",
           "readOnly": true
         }
@@ -5778,7 +5900,7 @@
       "type": "object",
       "properties": {
         "links": {
-          "$ref": "#/definitions/Links"
+          "$ref": "#/definitions/TranscriptionLinks"
         },
         "properties": {
           "$ref": "#/definitions/TranscriptionProperties"
@@ -5847,12 +5969,24 @@
         }
       }
     },
+    "TranscriptionLinks": {
+      "title": "TranscriptionLinks",
+      "type": "object",
+      "properties": {
+        "files": {
+          "format": "uri",
+          "description": "The location to get all files of this entity. See operation \"Transcriptions_ListFiles\" for more details.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TranscriptionProperties": {
       "title": "TranscriptionProperties",
       "type": "object",
       "properties": {
         "diarizationEnabled": {
-          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.\r\nIf only this field is set to true and the improved diarization system is not enabled by specifying\r\n`DiarizationProperties`, a basic diarization engine will distinguish between two speakers. No extra\r\ncharges are applied in this case. The improved diarization system provides diarization for a configurable\r\nrange of speakers. It can be configured in the `DiarizationProperties` field.\r\n            \r\nDEPRECATED: The basic diarization system is deprecated and will be removed along with the `diarizationEnabled` setting in the next major version of the API.",
+          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.\r\nIf only this field is set to true and the improved diarization system is not enabled by specifying\r\n`DiarizationProperties`, a basic diarization system will distinguish between up to two speakers. No\r\nextra charges are applied in this case. The improved diarization system provides diarization for a\r\nconfigurable range of speakers. It can be configured in the `DiarizationProperties` field.\r\n            \r\nDEPRECATED: The basic diarization system is deprecated and will be removed along with the\r\n`diarizationEnabled` setting in the next major version of the API.",
           "type": "boolean"
         },
         "wordLevelTimestampsEnabled": {
@@ -6092,13 +6226,13 @@
       "properties": {
         "ping": {
           "format": "uri",
-          "description": "The URL that can be used to trigger the sending of a ping event to the registered URL of a web hook registration.",
+          "description": "The URL that can be used to trigger the sending of a ping event to the registered URL of a web hook registration. See operation \"WebHooks_Ping\" for more details.",
           "type": "string",
           "readOnly": true
         },
         "test": {
           "format": "uri",
-          "description": "The URL that can be used sending test events to the registered URL of a web hook registration.",
+          "description": "The URL that can be used sending test events to the registered URL of a web hook registration. See operation \"WebHooks_Test\" for more details.",
           "type": "string",
           "readOnly": true
         }
@@ -6166,9 +6300,9 @@
     }
   },
   "parameters": {
-    "endpoint": {
+    "Endpoint": {
       "in": "path",
-      "name": "endpoint",
+      "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "required": true,
       "type": "string",
@@ -6226,11 +6360,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.1-preview.1",
+    "hostTemplate": "{Endpoint}/speechtotext/v3.1-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/endpoint"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   }
