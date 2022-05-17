@@ -133,7 +133,7 @@
           "Service"
         ],
         "operationId": "Services_CreateOrUpdate",
-        "description": "Creates or updates a Service.",
+        "description": "Creates or updates a service.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -195,7 +195,7 @@
           "Service"
         ],
         "operationId": "Services_UpdateTags",
-        "description": "Update service tags.",
+        "description": "Updates service tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -246,7 +246,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/services": {
       "get": {
         "tags": [
-          "Service"
+          "Services"
         ],
         "operationId": "Services_ListByMobileNetwork",
         "description": "Gets all the services in a mobile network.",
@@ -324,18 +324,18 @@
           "$ref": "./common.json#/definitions/ProvisioningState"
         },
         "servicePrecedence": {
-          "description": "A precedence value that is used to decide between services when identifying the QoS values to use for a particular Sim. A lower value means a higher priority. This value should be unique among all services configured in the Mobile Network.",
+          "description": "A precedence value that is used to decide between services when identifying the QoS values to use for a particular SIM. A lower value means a higher priority. This value should be unique among all services configured in the mobile network.",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
           "maximum": 255
         },
         "serviceQosPolicy": {
-          "description": "The QoS policy to use for packets matching this service. This can be overridden for particular flows using the ruleQosPolicy field in a PccRuleConfiguration. If this field is null then the UE's simPolicy will define the QoS settings.",
+          "description": "The QoS policy to use for packets matching this service. This can be overridden for particular flows using the ruleQosPolicy field in a PccRuleConfiguration. If this field is null then the UE's SIM policy will define the QoS settings.",
           "$ref": "#/definitions/QosPolicy"
         },
         "pccRules": {
-          "description": "The set of PCC Rules that make up this service.",
+          "description": "The set of data flow policy rules that make up this service.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PccRuleConfiguration"
@@ -353,33 +353,33 @@
       ]
     },
     "PccRuleConfiguration": {
-      "description": "PCC rule configuration",
+      "description": "Data flow policy rule configuration",
       "type": "object",
       "properties": {
         "ruleName": {
-          "description": "The name of the rule. This must be unique within the parent Service. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
+          "description": "The name of the rule. This must be unique within the parent service. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
           "type": "string",
           "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
           "maxLength": 64
         },
         "rulePrecedence": {
-          "description": "A precedence value that is used to decide between PCC Rules when identifying the QoS values to use for a particular Sim. A lower value means a higher priority. This value should be unique among all PCC Rules configured in the Mobile Network.",
+          "description": "A precedence value that is used to decide between data flow policy rules when identifying the QoS values to use for a particular SIM. A lower value means a higher priority. This value should be unique among all data flow policy rules configured in the mobile network.",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
           "maximum": 255
         },
         "ruleQosPolicy": {
-          "description": "The QoS policy to use for packets matching this rule. If this field is null then the Service will define the QoS settings.",
+          "description": "The QoS policy to use for packets matching this rule. If this field is null then the parent service will define the QoS settings.",
           "$ref": "#/definitions/PccRuleQosPolicy"
         },
         "trafficControl": {
-          "description": "Determines whether flows that match this PCC Rule are permitted.",
+          "description": "Determines whether flows that match this data flow policy rule are permitted.",
           "$ref": "#/definitions/TrafficControlPermission",
           "default": "Enabled"
         },
         "serviceDataFlowTemplates": {
-          "description": "The set of service data flow templates to use for this PCC Rule.",
+          "description": "The set of data flow templates to use for this data flow policy rule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceDataFlowTemplate"
@@ -398,11 +398,11 @@
       ]
     },
     "ServiceDataFlowTemplate": {
-      "description": "Service data flow (SDF) template",
+      "description": "Data flow template",
       "type": "object",
       "properties": {
         "templateName": {
-          "description": "The name of the SDF template. This must be unique within the parent PccRuleConfiguration. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
+          "description": "The name of the data flow template. This must be unique within the parent data flow policy rule. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
           "type": "string",
           "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
           "maxLength": 64
@@ -422,7 +422,7 @@
           "uniqueItems": true
         },
         "remoteIpList": {
-          "description": "The remote IP address(es) to which UEs will connect for this flow. If you want to allow connections on any IP address, use the value `any`. Otherwise, you must provide each of the remote IP addresses to which Fusion Core will connect for this flow. You must provide each IP address in CIDR notation, including the netmask (for example, 192.0.2.54/24).",
+          "description": "The remote IP address(es) to which UEs will connect for this flow. If you want to allow connections on any IP address, use the value `any`. Otherwise, you must provide each of the remote IP addresses to which the packet core instance will connect for this flow. You must provide each IP address in CIDR notation, including the netmask (for example, 192.0.2.54/24).",
           "type": "array",
           "items": {
             "type": "string",
@@ -458,7 +458,7 @@
           "items": {
             "$ref": "#/definitions/Service"
           },
-          "description": "A list of Services."
+          "description": "A list of services."
         },
         "nextLink": {
           "type": "string",
@@ -466,14 +466,14 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for Services API service call."
+      "description": "Response for services API service call."
     },
     "QosPolicy": {
       "description": "QoS policy",
       "type": "object",
       "properties": {
         "5qi": {
-          "description": "QoS Flow 5G QoS Indicator value.  The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. This must not be a standardized 5QI value selecting a GBR (Guaranteed Bit Rate) QoS.  The illegal GBR 5QI values are: 1, 2, 3, 4, 65, 66, 67, 71, 72, 73, 74, 75, 76, 82, 83, 84, and 85. See 3GPP TS23.501 section 5.7.2.1 for a full description of the 5Qi parameter, and table 5.7.4-1 for the definition of which are the GBR 5QI values.",
+          "description": "QoS Flow 5G QoS Indicator value.  The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. This must not be a standardized 5QI value corresponding to a GBR (guaranteed bit rate) QoS Flow.",
           "$ref": "./ts29571.json#/definitions/5QiPriorityLevel",
           "default": 9
         },
@@ -483,17 +483,17 @@
           "default": 9
         },
         "preemptionCapability": {
-          "description": "QoS Flow preemption capability.  The Preemption Capability of a QoS Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.",
+          "description": "QoS Flow preemption capability.  The preemption capability of a QoS Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.",
           "$ref": "./ts29571.json#/definitions/PreemptionCapability",
           "default": "NotPreempt"
         },
         "preemptionVulnerability": {
-          "description": "QoS Flow preemption vulnerability.  The Preemption Vulnerability of a QoS Flow controls whether it can be preempted by QoS Flow with a higher priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.",
+          "description": "QoS Flow preemption vulnerability.  The preemption vulnerability of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.",
           "$ref": "./ts29571.json#/definitions/PreemptionVulnerability",
           "default": "Preemptable"
         },
         "maximumBitRate": {
-          "description": "The Maximum Bit Rate (MBR) for all service data flows that use this PCC Rule or Service.",
+          "description": "The maximum bit rate (MBR) for all service data flows that use this data flow policy rule or service.",
           "$ref": "./ts29571.json#/definitions/Ambr"
         }
       },
@@ -502,11 +502,11 @@
       ]
     },
     "PccRuleQosPolicy": {
-      "description": "PCC rule QoS policy",
+      "description": "Data flow policy rule QoS policy",
       "type": "object",
       "properties": {
         "guaranteedBitRate": {
-          "description": "The Guaranteed Bit Rate (GBR) for all service data flows that use this PCC Rule. This is an optional setting. If you do not provide a value, there will be no GBR set for the PCC Rule that uses this QoS definition.",
+          "description": "The guaranteed bit rate (GBR) for all service data flows that use this data flow policy rule. This is an optional setting. If you do not provide a value, there will be no GBR set for the data flow policy rule that uses this QoS definition.",
           "$ref": "./ts29571.json#/definitions/Ambr"
         }
       },

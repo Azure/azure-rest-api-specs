@@ -37,10 +37,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/dataNetworks/{dataNetworkName}": {
       "delete": {
         "tags": [
-          "DataNetworks"
+          "DataNetwork"
         ],
         "operationId": "DataNetworks_Delete",
-        "description": "Deletes the specified mobile network dataNetwork.",
+        "description": "Deletes the specified data network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -76,7 +76,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete mobile network dataNetwork": {
+          "Delete data network": {
             "$ref": "./examples/DataNetworkDelete.json"
           }
         },
@@ -87,10 +87,10 @@
       },
       "get": {
         "tags": [
-          "DataNetworks"
+          "DataNetwork"
         ],
         "operationId": "DataNetworks_Get",
-        "description": "Gets information about the specified mobile network dataNetwork.",
+        "description": "Gets information about the specified data network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting mobile network dataNetwork resource.",
+            "description": "Request successful. The operation returns the resulting data network resource.",
             "schema": {
               "$ref": "#/definitions/DataNetwork"
             }
@@ -123,17 +123,17 @@
           }
         },
         "x-ms-examples": {
-          "Get mobile network dataNetwork": {
+          "Get data network": {
             "$ref": "./examples/DataNetworkGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "DataNetworks"
+          "DataNetwork"
         ],
         "operationId": "DataNetworks_CreateOrUpdate",
-        "description": "Creates or updates a mobile network dataNetwork.",
+        "description": "Creates or updates a data network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -157,18 +157,18 @@
             "schema": {
               "$ref": "#/definitions/DataNetwork"
             },
-            "description": "Parameters supplied to the create or update mobile network dataNetwork operation."
+            "description": "Parameters supplied to the create or update data network operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting mobile network dataNetwork resource.",
+            "description": "Update successful. The operation returns the resulting data network resource.",
             "schema": {
               "$ref": "#/definitions/DataNetwork"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting mobile network dataNetwork resource.",
+            "description": "Create successful. The operation returns the resulting data network resource.",
             "schema": {
               "$ref": "#/definitions/DataNetwork"
             }
@@ -181,7 +181,7 @@
           }
         },
         "x-ms-examples": {
-          "Create mobile network dataNetwork": {
+          "Create data network": {
             "$ref": "./examples/DataNetworkCreate.json"
           }
         },
@@ -192,10 +192,10 @@
       },
       "patch": {
         "tags": [
-          "DataNetworks"
+          "DataNetwork"
         ],
         "operationId": "DataNetworks_UpdateTags",
-        "description": "Update data network tags.",
+        "description": "Updates data network tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -249,7 +249,7 @@
           "DataNetworks"
         ],
         "operationId": "DataNetworks_ListByMobileNetwork",
-        "description": "Lists all dataNetworks in the mobile network.",
+        "description": "Lists all data networks in the mobile network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -266,7 +266,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "description": "Request successful. The operation returns a list of data network resources.",
             "schema": {
               "$ref": "#/definitions/DataNetworkListResult"
             }
@@ -279,7 +279,7 @@
           }
         },
         "x-ms-examples": {
-          "List mobile network dataNetworks in a mobile network": {
+          "List data networks in a mobile network": {
             "$ref": "./examples/DataNetworkListByMobileNetwork.json"
           }
         },
@@ -335,7 +335,7 @@
           "items": {
             "$ref": "#/definitions/DataNetwork"
           },
-          "description": "A list of data networks in a resource group."
+          "description": "A list of data networks."
         },
         "nextLink": {
           "type": "string",
