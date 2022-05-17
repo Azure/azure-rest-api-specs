@@ -60,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05'
+```yaml $(tag) == 'package-2020-05'
 input-file:
 - Microsoft.Network/stable/2020-05-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
