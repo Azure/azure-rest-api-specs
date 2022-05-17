@@ -55,3 +55,14 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscrip
 batch:
  - tag: package-2016-06-01
  ```
+
+ ### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
+output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
+batch:
+ - tag: package-2016-06-01
+ ```

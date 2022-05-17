@@ -1,0 +1,1368 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities": {
+      "get": {
+        "x-ms-examples": {
+          "Get all entities.": {
+            "$ref": "./examples/entities/GetEntities.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Gets all entities.",
+        "operationId": "Entities_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an account entity.": {
+            "$ref": "./examples/entities/GetAccountEntityById.json"
+          },
+          "Get a host entity.": {
+            "$ref": "./examples/entities/GetHostEntityById.json"
+          },
+          "Get a file entity.": {
+            "$ref": "./examples/entities/GetFileEntityById.json"
+          },
+          "Get a security alert entity.": {
+            "$ref": "./examples/entities/GetSecurityAlertEntityById.json"
+          },
+          "Get a file hash entity.": {
+            "$ref": "./examples/entities/GetFileHashEntityById.json"
+          },
+          "Get a malware entity.": {
+            "$ref": "./examples/entities/GetMalwareEntityById.json"
+          },
+          "Get a security group entity.": {
+            "$ref": "./examples/entities/GetSecurityGroupEntityById.json"
+          },
+          "Get an azure resource entity.": {
+            "$ref": "./examples/entities/GetAzureResourceEntityById.json"
+          },
+          "Get a cloud application entity.": {
+            "$ref": "./examples/entities/GetCloudApplicationEntityById.json"
+          },
+          "Get a process entity.": {
+            "$ref": "./examples/entities/GetProcessEntityById.json"
+          },
+          "Get a dns entity.": {
+            "$ref": "./examples/entities/GetDnsEntityById.json"
+          },
+          "Get an ip entity.": {
+            "$ref": "./examples/entities/GetIpEntityById.json"
+          },
+          "Get a registry key entity.": {
+            "$ref": "./examples/entities/GetRegistryKeyEntityById.json"
+          },
+          "Get a registry value entity.": {
+            "$ref": "./examples/entities/GetRegistryValueEntityById.json"
+          },
+          "Get a url entity.": {
+            "$ref": "./examples/entities/GetUrlEntityById.json"
+          },
+          "Get an IoT device entity.": {
+            "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
+          },
+          "Get a mailCluster entity.": {
+            "$ref": "./examples/entities/GetMailClusterEntityById.json"
+          },
+          "Get a mailbox entity.": {
+            "$ref": "./examples/entities/GetMailboxEntityById.json"
+          },
+          "Get a mailMessage entity.": {
+            "$ref": "./examples/entities/GetMailMessageEntityById.json"
+          },
+          "Get a submissionMail entity.": {
+            "$ref": "./examples/entities/GetSubmissionMailEntityById.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Gets an entity.",
+        "operationId": "Entities_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/EntityTypes.json#/definitions/Entity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an entity": {
+            "$ref": "./examples/entities/expand/PostExpandEntity.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Expands an entity.",
+        "operationId": "Entities_Expand",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getTimeline": {
+      "post": {
+        "x-ms-examples": {
+          "Entity timeline": {
+            "$ref": "./examples/entities/timeline/PostTimelineEntity.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Timeline for an entity.",
+        "operationId": "EntitiesGetTimeline_list",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityTimelineRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityTimelineResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
+      "get": {
+        "x-ms-examples": {
+          "Get Entity Query": {
+            "$ref": "./examples/entities/GetQueries.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Get Insights and Activities for an entity.",
+        "operationId": "Entities_Queries",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryKindParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetQueriesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getInsights": {
+      "post": {
+        "x-ms-examples": {
+          "Entity Insight": {
+            "$ref": "./examples/entities/insights/PostGetInsights.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Execute Insights for an entity.",
+        "operationId": "Entities_GetInsights",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/GetInsightsEntityQueriesRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityGetInsightsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all relations of an entity.": {
+            "$ref": "./examples/entities/relations/GetAllEntityRelations.json"
+          }
+        },
+        "tags": [
+          "EntityRelations"
+        ],
+        "description": "Gets all relations of an entity.",
+        "operationId": "EntitiesRelations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/RelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "./common/RelationTypes.json#/definitions/Relation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an entity relation.": {
+            "$ref": "./examples/entities/relations/GetEntityRelationByName.json"
+          }
+        },
+        "tags": [
+          "EntityRelations"
+        ],
+        "description": "Gets an entity relation.",
+        "operationId": "EntityRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "EntityExpandRequestBody": {
+      "description": "The parameters required to execute an expand operation on the given entity.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityExpandParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EntityId": {
+      "description": "entity ID",
+      "in": "path",
+      "name": "entityId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityTimelineRequestBody": {
+      "description": "The parameters required to execute an timeline operation on the given entity.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityTimelineParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKindParam": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityItemQueryKind",
+        "values": [
+          {
+            "description": "insight",
+            "value": "Insight"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetInsightsEntityQueriesRequestBody": {
+      "description": "The parameters required to execute insights on the given entity.",
+      "name": "parameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityGetInsightsParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ActivityTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents Activity timeline item.",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The activity query id."
+        },
+        "bucketStartTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket start time."
+        },
+        "bucketEndTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket end time."
+        },
+        "firstActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the first activity in the grouping bucket."
+        },
+        "lastActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the last activity in the grouping bucket."
+        },
+        "content": {
+          "type": "string",
+          "description": "The activity timeline content."
+        },
+        "title": {
+          "type": "string",
+          "description": "The activity timeline title."
+        }
+      },
+      "required": [
+        "queryId",
+        "bucketStartTimeUTC",
+        "bucketEndTimeUTC",
+        "firstActivityTimeUTC",
+        "lastActivityTimeUTC",
+        "content",
+        "title"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "BookmarkTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents bookmark timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The bookmark azure resource id."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The bookmark display name."
+        },
+        "notes": {
+          "type": "string",
+          "description": "The notes of the bookmark"
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark start time."
+        },
+        "eventTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark event time."
+        },
+        "createdBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "azureResourceId"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "EntityGetInsightsParameters": {
+      "description": "The parameters required to execute insights operation on the given entity.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addDefaultExtendedTimeRange": {
+          "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
+          "type": "boolean"
+        },
+        "insightQueryIds": {
+          "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
+          "type": "array",
+          "items": {
+            "description": "Insight Query Id (GUID)",
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "EntityGetInsightsResponse": {
+      "description": "The Get Insights result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/GetInsightsResultsMetadata",
+          "description": "The metadata from the get insights operation results."
+        },
+        "value": {
+          "description": "The insights result values.",
+          "items": {
+            "$ref": "#/definitions/EntityInsightItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EntityEdges": {
+      "description": "The edge that connects the entity to the other entity.",
+      "properties": {
+        "targetEntityId": {
+          "description": "The target entity Id.",
+          "type": "string"
+        },
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EntityExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given entity.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EntityExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "./common/EntityTypes.json#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "./common/EntityTypes.json#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of edges that connects the entity to the list of entities.",
+              "items": {
+                "$ref": "#/definitions/EntityEdges"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EntityInsightItem": {
+      "description": "Entity insight Item.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The query id of the insight"
+        },
+        "queryTimeInterval": {
+          "type": "object",
+          "description": "The Time interval that the query actually executed on.",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query start time"
+            },
+            "endTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query end time"
+            }
+          }
+        },
+        "tableQueryResults": {
+          "$ref": "#/definitions/InsightsTableResult",
+          "description": "Query results for table insights query."
+        },
+        "chartQueryResults": {
+          "type": "array",
+          "description": "Query results for table insights query.",
+          "items": {
+            "$ref": "#/definitions/InsightsTableResult",
+            "description": "Query results for table insights query."
+          }
+        }
+      }
+    },
+    "EntityList": {
+      "description": "List of all the entities.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of entities.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entities.",
+          "items": {
+            "$ref": "./common/EntityTypes.json#/definitions/Entity"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "EntityTimelineItem": {
+      "description": "Entity timeline Item.",
+      "discriminator": "kind",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityTimelineKind",
+          "description": "The entity query kind type."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityTimelineResponse": {
+      "description": "The entity timeline result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/TimelineResultsMetadata",
+          "description": "The metadata from the timeline operation results."
+        },
+        "value": {
+          "description": "The timeline result values.",
+          "items": {
+            "$ref": "#/definitions/EntityTimelineItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EntityTimelineKind": {
+      "description": "The entity query kind",
+      "enum": [
+        "Activity",
+        "Bookmark",
+        "SecurityAlert"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityTimelineKind",
+        "values": [
+          {
+            "description": "activity",
+            "value": "Activity"
+          },
+          {
+            "description": "bookmarks",
+            "value": "Bookmark"
+          },
+          {
+            "description": "security alerts",
+            "value": "SecurityAlert"
+          }
+        ]
+      }
+    },
+    "EntityTimelineParameters": {
+      "description": "The parameters required to execute s timeline operation on the given entity.",
+      "properties": {
+        "kinds": {
+          "description": "Array of timeline Item kinds.",
+          "items": {
+            "$ref": "#/definitions/EntityTimelineKind"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "numberOfBucket": {
+          "description": "The number of bucket for timeline queries aggregation.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "type": "object",
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "EntityQueryItem": {
+      "description": "An abstract Query item for entity",
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "id": {
+          "description": "Query Template ARM ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Query Template ARM Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "ARM Type",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind",
+          "type": "string",
+          "description": "The kind of the entity query"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityQueryItemProperties": {
+      "description": "An properties abstract Query item for entity",
+      "type": "object",
+      "properties": {
+        "dataTypes": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "properties": {
+              "dataType": {
+                "description": "Data type name",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "inputEntityType": {
+          "description": "The type of the entity",
+          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerType"
+        },
+        "requiredInputFieldsSets": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
+        }
+      }
+    },
+    "InsightsTableResult": {
+      "type": "object",
+      "description": "Query results for table insights query.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Columns Metadata of the table",
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "the type of the colum"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the colum"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "Rows data of the table",
+          "items": {
+            "type": "array",
+            "description": "Single row of data",
+            "items": {
+              "type": "string",
+              "description": "Cell in the table"
+            }
+          }
+        }
+      }
+    },
+    "InsightQueryItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/InsightQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "InsightQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The insight display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The insight description."
+        },
+        "baseQuery": {
+          "type": "string",
+          "description": "The base query of the insight."
+        },
+        "tableQuery": {
+          "type": "object",
+          "description": "The insight table query.",
+          "properties": {
+            "columnsDefinitions": {
+              "type": "array",
+              "description": "List of insight column definitions.",
+              "items": {
+                "properties": {
+                  "header": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "description": "Insights Column type.",
+                    "enum": [
+                      "Number",
+                      "String",
+                      "Date",
+                      "Entity"
+                    ],
+                    "x-ms-enum": {
+                      "modelAsString": true,
+                      "name": "outputType"
+                    }
+                  },
+                  "supportDeepLink": {
+                    "type": "boolean",
+                    "description": "Is query supports deep-link."
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "queriesDefinitions": {
+              "type": "array",
+              "description": "List of insight queries definitions.",
+              "items": {
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "summarize": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "linkColumnsDefinitions": {
+                    "type": "array",
+                    "description": "Insight column header.",
+                    "items": {
+                      "properties": {
+                        "projectedName": {
+                          "type": "string",
+                          "description": "Insight Link Definition Projected Name."
+                        },
+                        "Query": {
+                          "type": "string",
+                          "description": "Insight Link Definition Query."
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "chartQuery": {
+          "type": "object",
+          "description": "The insight chart query."
+        },
+        "additionalQuery": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The insight query."
+            },
+            "text": {
+              "type": "string",
+              "description": "The insight text."
+            }
+          }
+        },
+        "defaultTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "The padding for the start time of the query."
+            },
+            "afterRange": {
+              "type": "string",
+              "description": "The padding for the end time of the query."
+            }
+          }
+        },
+        "referenceTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "Additional query time for looking back."
+            }
+          }
+        }
+      },
+      "type": "object"
+    },
+    "GetInsightsResultsMetadata": {
+      "description": "Get Insights result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the insights request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "errors": {
+          "description": "information about the failed queries",
+          "items": {
+            "$ref": "#/definitions/GetInsightsError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "GetInsightsError": {
+      "description": "GetInsights Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "type": "string",
+          "enum": [
+            "Insight"
+          ]
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+    "GetQueriesResponse": {
+      "description": "Retrieve queries for entity result operation response.",
+      "properties": {
+        "value": {
+          "description": "The query result values.",
+          "items": {
+            "$ref": "#/definitions/EntityQueryItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SecurityAlertTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents security alert timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The alert azure resource id."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The alert product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The alert description."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The alert name."
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The alert severity."
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert start time."
+        },
+        "timeGenerated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert generated time."
+        },
+        "alertType": {
+          "type": "string",
+          "description": "The name of the alert type."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "displayName",
+        "severity",
+        "endTimeUtc",
+        "startTimeUtc",
+        "timeGenerated",
+        "alertType"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityAlert"
+    },
+    "TimelineError": {
+      "description": "Timeline Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "$ref": "#/definitions/EntityTimelineKind"
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+    "TimelineResultsMetadata": {
+      "description": "Expansion result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the timeline request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "aggregations": {
+          "description": "timeline aggregation per kind",
+          "items": {
+            "$ref": "#/definitions/TimelineAggregation"
+          },
+          "type": "array"
+        },
+        "errors": {
+          "description": "information about the failure queries",
+          "items": {
+            "$ref": "#/definitions/TimelineError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount",
+        "aggregations"
+      ],
+      "type": "object"
+    },
+    "TimelineAggregation": {
+      "description": "timeline aggregation information per kind",
+      "properties": {
+        "count": {
+          "description": "the total items found for a kind",
+          "type": "integer",
+          "format": "int32"
+        },
+        "kind": {
+          "description": "the query kind",
+          "$ref": "#/definitions/EntityTimelineKind"
+        }
+      },
+      "required": [
+        "kind",
+        "count"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "5931a75ae4bbd512a88c680b",
+    "tagDescriptionId": "tagId1",
+    "parameters": {
+      "properties": {
+        "description": "Some description that will be displayed for operation's tag if the tag is assigned to operation of the API",
+        "externalDocsUrl": "http://some.url/additionaldoc",
+        "externalDocsDescription": "Description of the external docs resource"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5931a75ae4bbd512a88c680b/tagDescriptions/tagId1",
+        "type": "Microsoft.ApiManagement/service/apis/tagDescriptions",
+        "name": "tagId1",
+        "properties": {
+          "tagId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+          "displayName": "tag1",
+          "description": "Some description that will be displayed for operation's tag if the tag is assigned to operation of the API",
+          "externalDocsDescription": "some additional info",
+          "externalDocsUrl": "http://some_url.com"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5931a75ae4bbd512a88c680b/tagDescriptions/tagId1",
+        "type": "Microsoft.ApiManagement/service/apis/tagDescriptions",
+        "name": "tagId1",
+        "properties": {
+          "tagId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+          "displayName": "tag1",
+          "description": "Some description that will be displayed for operation's tag if the tag is assigned to operation of the API",
+          "externalDocsDescription": "some additional info",
+          "externalDocsUrl": "http://some_url.com"
+        }
+      }
+    }
+  }
+}

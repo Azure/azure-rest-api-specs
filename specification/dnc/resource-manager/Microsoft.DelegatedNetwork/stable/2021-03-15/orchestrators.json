@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-15",
+    "title": "DNC",
+    "description": "DNC web api provides way to create, get and delete dnc controller"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestrators/{resourceName}": {
+      "get": {
+        "description": "Gets details about the orchestrator instance.",
+        "x-ms-examples": {
+          "Get details of a orchestratorInstance": {
+            "$ref": "./examples/getOrchestrator.json"
+          }
+        },
+        "tags": [
+          "OrchestratorInstance"
+        ],
+        "operationId": "OrchestratorInstanceService_GetDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create a orchestrator instance",
+        "x-ms-examples": {
+          "Create orchestrator instance": {
+            "$ref": "./examples/putOrchestrator.json"
+          }
+        },
+        "tags": [
+          "OrchestratorInstance"
+        ],
+        "operationId": "OrchestratorInstanceService_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orchestrator"
+            },
+            "description": "OrchestratorInstance type parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrator"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the Orchestrator Instance",
+        "x-ms-examples": {
+          "Delete Orchestrator Instance": {
+            "$ref": "./examples/deleteOrchestrator.json"
+          }
+        },
+        "tags": [
+          "OrchestratorInstance"
+        ],
+        "operationId": "OrchestratorInstanceService_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Update Orchestrator Instance",
+        "x-ms-examples": {
+          "update Orchestrator Instance": {
+            "$ref": "./examples/patchOrchestrator.json"
+          }
+        },
+        "tags": [
+          "OrchestratorInstance"
+        ],
+        "operationId": "OrchestratorInstanceService_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrchestratorResourceUpdateParameters"
+            },
+            "description": "OrchestratorInstance update parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/orchestrators": {
+      "get": {
+        "tags": [
+          "OrchestratorInstanceList"
+        ],
+        "description": "Get all the orchestratorInstance resources in a subscription.",
+        "operationId": "OrchestratorInstanceService_ListBySubscription",
+        "x-ms-examples": {
+          "Get orchestratorInstance resources by subscription": {
+            "$ref": "./examples/orchestratorInstanceListBySub.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the orchestratorInstance in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrators"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestrators": {
+      "get": {
+        "tags": [
+          "OrchestratorInstanceList"
+        ],
+        "description": "Get all the OrchestratorInstances resources in a resource group.",
+        "operationId": "OrchestratorInstanceService_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get OrchestratorInstance resources by resource group": {
+            "$ref": "./examples/orchestratorInstanceListByRG.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the orchestratorInstances in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/Orchestrators"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OrchestratorResource": {
+      "description": "Represents an instance of a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "Kubernetes"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestratorKind",
+            "modelAsString": true
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/OrchestratorIdentity",
+          "description": "The identity of the orchestrator"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "OrchestratorResourceUpdateParameters": {
+      "description": "Parameters for updating a resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      }
+    },
+    "Orchestrators": {
+      "description": "An array of OrchestratorInstance resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Orchestrator"
+          },
+          "description": "An array of OrchestratorInstance resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of orchestrators.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Orchestrator": {
+      "description": "Represents an instance of a orchestrator.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrchestratorResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrchestratorResourceProperties",
+          "description": "Properties of the provision operation request."
+        }
+      }
+    },
+    "OrchestratorResourceProperties": {
+      "description": "Properties of orchestrator",
+      "type": "object",
+      "properties": {
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource guid."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestratorInstanceState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of orchestratorInstance resource."
+        },
+        "orchestratorAppId": {
+          "description": "AAD ID used with apiserver",
+          "type": "string"
+        },
+        "orchestratorTenantId": {
+          "description": "TenantID of server App ID",
+          "type": "string"
+        },
+        "clusterRootCA": {
+          "description": "RootCA certificate of kubernetes cluster base64 encoded",
+          "type": "string"
+        },
+        "apiServerEndpoint": {
+          "description": "K8s APIServer url. Either one of apiServerEndpoint or privateLinkResourceId can be specified",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "private link arm resource id. Either one of apiServerEndpoint or privateLinkResourceId can be specified",
+          "type": "string"
+        },
+        "controllerDetails": {
+          "$ref": "./common-types.json#/definitions/controllerDetails",
+          "description": "Properties of the controller."
+        }
+      },
+      "required": [
+        "controllerDetails"
+      ]
+    },
+    "OrchestratorIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the system assigned identity which is used by orchestrator."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the system assigned identity which is used by orchestrator."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for orchestrator cluster. Type 'SystemAssigned' will use an implicitly created identity orchestrator clusters",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "resourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource. It must be a minimum of 3 characters, and a maximum of 63."
+    },
+    "ForceDeleteParameter": {
+      "name": "forceDelete",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Force delete resource",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

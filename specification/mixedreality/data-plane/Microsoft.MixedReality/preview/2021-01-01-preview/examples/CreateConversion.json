@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "endpoint": "https://remoterendering.eastus.mixedreality.azure.com",
+    "api-version": "2021-01-01-preview",
+    "account_id": "30ea64bd-100f-4bf0-adc9-29fa45d4880c",
+    "conversion_id": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+    "body": {
+      "settings": {
+        "inputLocation": {
+          "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arrinput",
+          "blobPrefix": "models/",
+          "relativeInputAssetPath": "house.fbx"
+        },
+        "outputLocation": {
+          "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arroutput",
+          "blobPrefix": "conversionOutput/fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+          "outputAssetFilename": "convertedHouse.arrAsset"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "id": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+        "creationTime": "2021-01-01T11:11:11.111Z",
+        "settings": {
+          "inputLocation": {
+            "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arrinput",
+            "blobPrefix": "models/",
+            "relativeInputAssetPath": "house.fbx"
+          },
+          "outputLocation": {
+            "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arroutput",
+            "blobPrefix": "conversionOutput/fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+            "outputAssetFilename": "convertedHouse.arrAsset"
+          }
+        },
+        "status": "NotStarted",
+        "error": null
+      }
+    },
+    "200": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "id": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+        "creationTime": "2021-01-01T11:11:11.111Z",
+        "settings": {
+          "inputLocation": {
+            "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arrinput",
+            "blobPrefix": "models/",
+            "relativeInputAssetPath": "house.fbx"
+          },
+          "outputLocation": {
+            "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arroutput",
+            "blobPrefix": "conversionOutput/fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+            "outputAssetFilename": "convertedHouse.arrAsset"
+          }
+        },
+        "status": "NotStarted",
+        "error": null
+      }
+    },
+    "400": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "The request was malformed."
+        }
+      }
+    },
+    "409": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "error": {
+          "code": "Conflict",
+          "message": "A resource already exists under the given ID."
+        }
+      }
+    },
+    "401": {
+      "headers": {
+        "WWW-Authenticate": "Bearer error=\"invalid_token\"",
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "403": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 15,
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "500": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred."
+        }
+      }
+    }
+  }
+}
