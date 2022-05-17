@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Azure.Management.ConfidentialLedger
-  output-folder: $(csharp-sdks-folder)/confidentialledger/Azure.Management.ConfidentialLedger/GeneratedProtocol
+  namespace: Azure.ResourceManager.ConfidentialLedger
+  output-folder: $(csharp-sdks-folder)/confidentialledger/Azure.ResourceManager.ConfidentialLedger/GeneratedProtocol
 ```
