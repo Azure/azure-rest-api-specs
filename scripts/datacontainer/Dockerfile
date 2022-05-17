@@ -1,7 +1,8 @@
 FROM mcr.microsoft.com/cbl-mariner/distroless/base:1.0
 
 RUN apk update && \
-    apk add git
+    apk add git && \
+    apk add bash
 
 RUN mkdir -p /usr/data/specrepo/
 COPY .git /usr/data/specrepo/.git
