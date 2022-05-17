@@ -1135,16 +1135,17 @@
     "Machine": {
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "Hybrid Compute Machine properties"
+        },
         "resources" : {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MachineExtension"
           },
           "description": "The list of extensions affliated to the machine"
-        },
-        "properties": {
-          "$ref": "#/definitions/MachineProperties",
-          "description": "Hybrid Compute Machine properties"
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
