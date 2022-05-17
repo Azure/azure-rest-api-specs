@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-[[ServiceName]]
-namespace: azure.mgmt.[[ServiceName]]
-package-version: 1.0.0b1
+package-name: azure-mgmt-cosmosdb
+namespace: azure.mgmt.cosmosdb
+package-version: 6.0.0
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/azure/mgmt/[[ServiceName]]
+output-folder: $(python-sdks-folder)/cosmosdb/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb
 ```
