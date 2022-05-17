@@ -5,6 +5,10 @@
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "version": "2022-06-01-preview"
   },
+  "host": "{dataPlaneURL}",
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/appcomponents/{name}": {
       "patch": {
@@ -70,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "AppComponent_CreateOrUpdateAppComponents_MaximumSet_Gen": {
-            "$ref": "./examples/AppComponent_CreateOrUpdateAppComponents_MaximumSet_Gen.json"
+          "CreateOrUpdateAppComponents": {
+            "$ref": "./examples/CreateOrUpdateAppComponents.json"
           }
         }
       },
@@ -117,8 +121,8 @@
           }
         },
         "x-ms-examples": {
-          "AppComponent_DeleteAppComponent_MaximumSet_Gen": {
-            "$ref": "./examples/AppComponent_DeleteAppComponent_MaximumSet_Gen.json"
+          "DeleteAppComponent": {
+            "$ref": "./examples/DeleteAppComponent.json"
           }
         }
       },
@@ -167,8 +171,8 @@
           }
         },
         "x-ms-examples": {
-          "AppComponent_GetAppComponentByName_MaximumSet_Gen": {
-            "$ref": "./examples/AppComponent_GetAppComponentByName_MaximumSet_Gen.json"
+          "GetAppComponentByName": {
+            "$ref": "./examples/GetAppComponentByName.json"
           }
         }
       }
@@ -223,69 +227,8 @@
           }
         },
         "x-ms-examples": {
-          "AppComponent_GetAppComponent_MaximumSet_Gen": {
-            "$ref": "./examples/AppComponent_GetAppComponent_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/file/{fileId}:validate": {
-      "post": {
-        "tags": [
-          "File"
-        ],
-        "summary": "Validate input file. File name must be a valid URL character ^[a-z0-9_-]*$. File size can't be more than 50 MB.",
-        "operationId": "File_FileValidate",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "fileId",
-            "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "formData",
-            "name": "file",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The file is validated ",
-            "schema": {
-              "$ref": "#/definitions/FileValidateResponse"
-            }
-          },
-          "default": {
-            "description": "Load Test Service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "File_FileValidate_MaximumSet_Gen": {
-            "$ref": "./examples/File_FileValidate_MaximumSet_Gen.json"
+          "GetAppComponent": {
+            "$ref": "./examples/GetAppComponent.json"
           }
         }
       }
@@ -354,8 +297,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_CreateOrUpdateServerMetricsConfig_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_CreateOrUpdateServerMetricsConfig_MaximumSet_Gen.json"
+          "CreateOrUpdateServerMetricsConfig": {
+            "$ref": "./examples/CreateOrUpdateServerMetricsConfig.json"
           }
         }
       },
@@ -404,8 +347,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_GetServerMetricsByName_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_GetServerMetricsByName_MaximumSet_Gen.json"
+          "GetServerMetricsByName": {
+            "$ref": "./examples/GetServerMetricsByName.json"
           }
         }
       },
@@ -451,8 +394,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_DeleteServerMetrics_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_DeleteServerMetrics_MaximumSet_Gen.json"
+          "DeleteServerMetrics": {
+            "$ref": "./examples/DeleteServerMetrics.json"
           }
         }
       }
@@ -507,8 +450,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_GetServerMetrics_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_GetServerMetrics_MaximumSet_Gen.json"
+          "GetServerMetrics": {
+            "$ref": "./examples/GetServerMetrics.json"
           }
         }
       }
@@ -549,8 +492,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_GetServerDefaultMetrics_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_GetServerDefaultMetrics_MaximumSet_Gen.json"
+          "GetServerDefaultMetrics": {
+            "$ref": "./examples/GetServerDefaultMetrics.json"
           }
         }
       }
@@ -591,8 +534,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerMetrics_ListSupportedResourceType_MaximumSet_Gen": {
-            "$ref": "./examples/ServerMetrics_ListSupportedResourceType_MaximumSet_Gen.json"
+          "ListSupportedResourceType": {
+            "$ref": "./examples/ListSupportedResourceType.json"
           }
         }
       }
@@ -657,8 +600,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_CreateOrUpdateTest_MaximumSet_Gen": {
-            "$ref": "./examples/Test_CreateOrUpdateTest_MaximumSet_Gen.json"
+          "CreateOrUpdateTest": {
+            "$ref": "./examples/CreateOrUpdateTest.json"
           }
         }
       },
@@ -700,8 +643,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_DeleteLoadTest_MaximumSet_Gen": {
-            "$ref": "./examples/Test_DeleteLoadTest_MaximumSet_Gen.json"
+          "DeleteLoadTest": {
+            "$ref": "./examples/DeleteLoadTest.json"
           }
         }
       },
@@ -746,8 +689,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_GetLoadTest_MaximumSet_Gen": {
-            "$ref": "./examples/Test_GetLoadTest_MaximumSet_Gen.json"
+          "GetLoadTest": {
+            "$ref": "./examples/GetLoadTest.json"
           }
         }
       }
@@ -828,8 +771,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_ListLoadTestSearch_MaximumSet_Gen": {
-            "$ref": "./examples/Test_ListLoadTestSearch_MaximumSet_Gen.json"
+          "ListLoadTestSearch": {
+            "$ref": "./examples/ListLoadTestSearch.json"
           }
         }
       }
@@ -901,8 +844,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_UploadTestFile_MaximumSet_Gen": {
-            "$ref": "./examples/Test_UploadTestFile_MaximumSet_Gen.json"
+          "UploadTestFile": {
+            "$ref": "./examples/UploadTestFile.json"
           }
         }
       },
@@ -957,8 +900,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_GetTestFile_MaximumSet_Gen": {
-            "$ref": "./examples/Test_GetTestFile_MaximumSet_Gen.json"
+          "GetTestFile": {
+            "$ref": "./examples/GetTestFile.json"
           }
         }
       },
@@ -1010,8 +953,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_DeleteTestFile_MaximumSet_Gen": {
-            "$ref": "./examples/Test_DeleteTestFile_MaximumSet_Gen.json"
+          "DeleteTestFile": {
+            "$ref": "./examples/DeleteTestFile.json"
           }
         }
       }
@@ -1058,8 +1001,8 @@
           }
         },
         "x-ms-examples": {
-          "Test_GetAllTestFiles_MaximumSet_Gen": {
-            "$ref": "./examples/Test_GetAllTestFiles_MaximumSet_Gen.json"
+          "GetAllTestFiles": {
+            "$ref": "./examples/GetAllTestFiles.json"
           }
         }
       }
@@ -1107,8 +1050,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_DeleteTestRun_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_DeleteTestRun_MaximumSet_Gen.json"
+          "DeleteTestRun": {
+            "$ref": "./examples/DeleteTestRun.json"
           }
         }
       },
@@ -1175,8 +1118,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_CreateAndUpdateTest_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_CreateAndUpdateTest_MaximumSet_Gen.json"
+          "CreateAndUpdateTestRun": {
+            "$ref": "./examples/CreateAndUpdateTestRun.json"
           }
         }
       },
@@ -1225,8 +1168,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_GetTestRun_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_GetTestRun_MaximumSet_Gen.json"
+          "GetTestRun": {
+            "$ref": "./examples/GetTestRun.json"
           }
         }
       }
@@ -1287,8 +1230,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_GetTestRunFile_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_GetTestRunFile_MaximumSet_Gen.json"
+          "GetTestRunFile": {
+            "$ref": "./examples/GetTestRunFile.json"
           }
         }
       }
@@ -1299,7 +1242,7 @@
           "TestRun"
         ],
         "summary": "Get all test runs with given filters",
-        "operationId": "TestRun_GetAppTestRunsSearch",
+        "operationId": "TestRun_ListTestRunsSearch",
         "produces": [
           "application/json"
         ],
@@ -1380,8 +1323,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_GetAppTestRunsSearch_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_GetAppTestRunsSearch_MaximumSet_Gen.json"
+          "ListTestRunsSearch": {
+            "$ref": "./examples/ListTestRunsSearch.json"
           }
         }
       }
@@ -1432,8 +1375,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_StopTestRun_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_StopTestRun_MaximumSet_Gen.json"
+          "StopTestRun": {
+            "$ref": "./examples/StopTestRun.json"
           }
         }
       }
@@ -1496,8 +1439,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_GetTestRunClientMetrics_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_GetTestRunClientMetrics_MaximumSet_Gen.json"
+          "GetTestRunClientMetrics": {
+            "$ref": "./examples/GetTestRunClientMetrics.json"
           }
         }
       }
@@ -1548,8 +1491,8 @@
           }
         },
         "x-ms-examples": {
-          "TestRun_GetTestRunClientMetricsFilters_MaximumSet_Gen": {
-            "$ref": "./examples/TestRun_GetTestRunClientMetricsFilters_MaximumSet_Gen.json"
+          "GetTestRunClientMetricsFilters": {
+            "$ref": "./examples/GetTestRunClientMetricsFilters.json"
           }
         }
       }
@@ -1764,8 +1707,10 @@
       }
     },
     "FileType": {
+      "description": "Integer representation of the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS)",
       "format": "int32",
       "enum": [
+        0,
         1,
         2
       ],
@@ -1827,20 +1772,6 @@
         "expireTime": {
           "format": "date-time",
           "description": "Expiry time of the file",
-          "type": "string"
-        }
-      }
-    },
-    "FileValidateResponse": {
-      "description": "File validation response",
-      "type": "object",
-      "properties": {
-        "valid": {
-          "description": "File is valid or not",
-          "type": "boolean"
-        },
-        "error": {
-          "description": "In case file is not valid then error message",
           "type": "string"
         }
       }
@@ -2256,8 +2187,8 @@
             "$ref": "#/definitions/TestModel"
           }
         },
-        "continuationToken": {
-          "description": "Continuation token for list of resources in case of paginated results, if applicable",
+        "nextLink": {
+          "description": "Link for the next list of resources in case of paginated results, if applicable",
           "type": "string"
         }
       }
@@ -2412,8 +2343,8 @@
             "$ref": "#/definitions/TestRunModel"
           }
         },
-        "continuationToken": {
-          "description": "Continuation token for list of resources in case of paginated results, if applicable",
+        "nextLink": {
+          "description": "Link for the next list of resources in case of paginated results, if applicable",
           "type": "string"
         }
       }
