@@ -15,7 +15,7 @@
         "tags": [
           "AppComponent"
         ],
-        "summary": "Associate app component (an azure resource model) to a test model or test run",
+        "summary": "Associate an App Component (Azure resource) to a test or test run.",
         "operationId": "AppComponent_CreateOrUpdateAppComponents",
         "consumes": [
           "application/merge-patch+json"
@@ -27,7 +27,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for app component name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -40,7 +40,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "App component model",
+            "description": "App Component model.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AppComponentsMap"
@@ -49,19 +49,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The app component were updated",
+            "description": "The App Component is updated.",
             "schema": {
               "$ref": "#/definitions/AppComponentsMap"
             }
           },
           "201": {
-            "description": "The app component were created",
+            "description": "The app component is created.",
             "schema": {
               "$ref": "#/definitions/AppComponentsMap"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -83,7 +83,7 @@
         "tags": [
           "AppComponent"
         ],
-        "summary": "Delete app component",
+        "summary": "Delete an App Component.",
         "operationId": "AppComponent_DeleteAppComponent",
         "produces": [
           "application/json"
@@ -92,7 +92,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for app component name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -105,10 +105,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The app component is deleted"
+            "description": "The App Component is deleted."
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -130,7 +130,7 @@
         "tags": [
           "AppComponent"
         ],
-        "summary": "Get App components for a given appComponentName in query param.",
+        "summary": "Get App Component details by App Component name.",
         "operationId": "AppComponent_GetAppComponentByName",
         "produces": [
           "application/json"
@@ -139,7 +139,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for app component name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -152,13 +152,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested app components",
+            "description": "The requested App Components.",
             "schema": {
               "$ref": "#/definitions/AppComponentsMap"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -182,7 +182,7 @@
         "tags": [
           "AppComponent"
         ],
-        "summary": "Get App components for a test model or a test run of given name in query param.",
+        "summary": "Get App Components for a test or a test run by its name.",
         "operationId": "AppComponent_GetAppComponent",
         "produces": [
           "application/json"
@@ -191,7 +191,7 @@
           {
             "in": "query",
             "name": "testRunId",
-            "description": "Required testRunId, if testId is not provided",
+            "description": "[Required, if testId is not provided] Test run Id.",
             "type": "string",
             "maxLength": 50,
             "minLength": 2,
@@ -208,13 +208,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested app components",
+            "description": "Requested App Components.",
             "schema": {
               "$ref": "#/definitions/AppComponentsMap"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -238,7 +238,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Associate server metrics config to a test model or test run",
+        "summary": "Configure server metrics for a test or test run",
         "operationId": "ServerMetrics_CreateOrUpdateServerMetricsConfig",
         "consumes": [
           "application/merge-patch+json"
@@ -250,7 +250,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for server metric name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -263,7 +263,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Server metrics config model",
+            "description": "Server metrics configuration model",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerMetricsModel"
@@ -272,19 +272,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The server metrics were updated",
+            "description": "The server metrics are updated.",
             "schema": {
               "$ref": "#/definitions/ServerMetricsModel"
             }
           },
           "201": {
-            "description": "The server metrics were created",
+            "description": "The server metrics are created.",
             "schema": {
               "$ref": "#/definitions/ServerMetricsModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -306,7 +306,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Get server metrics config for a given name in query param.",
+        "summary": "Get server metrics configuration by its name.",
         "operationId": "ServerMetrics_GetServerMetricsByName",
         "produces": [
           "application/json"
@@ -315,7 +315,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for server metric name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -328,13 +328,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested server metrics",
+            "description": "Requested server metrics",
             "schema": {
               "$ref": "#/definitions/ServerMetricsModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -356,7 +356,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Delete server metrics config by given name",
+        "summary": "Delete server metrics configuration by its name",
         "operationId": "ServerMetrics_DeleteServerMetrics",
         "produces": [
           "application/json"
@@ -365,7 +365,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique identifier for server metric name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -378,10 +378,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The server metrics config is deleted"
+            "description": "The server metrics configuration is deleted."
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -405,7 +405,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Get server metrics config for a test model or test run of given name in query param.",
+        "summary": "Get server metrics configuration for a test or test run by its name.",
         "operationId": "ServerMetrics_GetServerMetrics",
         "produces": [
           "application/json"
@@ -414,7 +414,7 @@
           {
             "in": "query",
             "name": "testRunId",
-            "description": "Required testRunId, if testId is not provided",
+            "description": "[Required, if testId is not provided] Test run Id.",
             "type": "string",
             "maxLength": 50,
             "minLength": 2,
@@ -431,13 +431,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested server metrics",
+            "description": "Requested server metrics",
             "schema": {
               "$ref": "#/definitions/ServerMetricsModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -461,7 +461,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Get all default server metrics config with supported resource type",
+        "summary": "Get all default server metrics configuration for supported resource types.",
         "operationId": "ServerMetrics_GetServerDefaultMetrics",
         "produces": [
           "application/json"
@@ -473,13 +473,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested server default metrics",
+            "description": "The requested default server metrics",
             "schema": {
               "$ref": "#/definitions/DefaultServerMetricsConfigListModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -503,7 +503,7 @@
         "tags": [
           "ServerMetrics"
         ],
-        "summary": "Get all supported resource types for app components(azure resource types)",
+        "summary": "Get all supported resource types for App Components(Azure resource types).",
         "operationId": "ServerMetrics_ListSupportedResourceType",
         "produces": [
           "application/json"
@@ -521,7 +521,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -545,7 +545,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Creates/Updates a new load test. Test name must be a valid URL character ^[a-z0-9_-]*$",
+        "summary": "Create a new test or Update an existing test.",
         "operationId": "Test_CreateOrUpdateTest",
         "consumes": [
           "application/merge-patch+json"
@@ -575,19 +575,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The loadtest was updated",
+            "description": "The test is updated.",
             "schema": {
               "$ref": "#/definitions/TestModel"
             }
           },
           "201": {
-            "description": "The loadtest was created",
+            "description": "The test is created.",
             "schema": {
               "$ref": "#/definitions/TestModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -609,7 +609,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Delete a test with given name. Test name must be a valid URL character ^[a-z0-9_-]*$",
+        "summary": "Delete a test by its name.",
         "operationId": "Test_DeleteLoadTest",
         "produces": [
           "application/json"
@@ -630,7 +630,7 @@
             "description": "The test is deleted"
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -652,7 +652,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get load test model of given test name",
+        "summary": "Get load test details by test name",
         "operationId": "Test_GetLoadTest",
         "produces": [
           "application/json"
@@ -676,7 +676,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -700,7 +700,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get all load tests for a given Fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
+        "summary": "Get all load tests by the fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
         "operationId": "Test_ListLoadTestSearch",
         "produces": [
           "application/json"
@@ -709,39 +709,39 @@
           {
             "in": "query",
             "name": "orderBy",
-            "description": "Sort on one of the field - lastModifiedDateTime, displayName, createdBy in (field asc/desc) format. eg: displayName asc",
+            "description": "Sort on one of the field - lastModifiedDateTime, displayName, createdBy in (field asc/desc) format. eg: displayName asc.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "search",
-            "description": "Filter search based on searchable fields- testId, createdBy.",
+            "description": "Filter search based on searchable fields - testId, createdBy.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "lastUpdatedStartTime",
-            "description": "Start DateTime(Iso8601Literal format) of the last updated time range to filter tests.",
+            "description": "Start DateTime(ISO 8601 literal format) of the last updated time range to filter tests.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "lastUpdatedEndTime",
-            "description": "End DateTime(Iso8601Literal format) of the last updated time range to filter tests.",
+            "description": "End DateTime(ISO 8601 literal format) of the last updated time range to filter tests.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "continuationToken",
-            "description": "Continuation token to get then next page of response",
+            "description": "Continuation token to get the next page of response.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
-            "description": "No of results in response",
+            "description": "Number of results in response.",
             "type": "integer",
             "format": "int32",
             "default": 50
@@ -752,13 +752,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested loadtests",
+            "description": "The requested load tests",
             "schema": {
               "$ref": "#/definitions/TestModelResourceList"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -782,7 +782,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Upload input file for a given test name. File name must be a valid URL character ^[a-z0-9_-]*$. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten.",
+        "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten.",
         "operationId": "Test_UploadTestFile",
         "consumes": [
           "multipart/form-data"
@@ -794,7 +794,7 @@
           {
             "in": "path",
             "name": "fileId",
-            "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -825,13 +825,13 @@
         ],
         "responses": {
           "201": {
-            "description": "The test artifact was uploaded",
+            "description": "The test artifact is uploaded.",
             "schema": {
               "$ref": "#/definitions/TestModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -853,7 +853,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get test file with given file name.",
+        "summary": "Get test file by the file name.",
         "operationId": "Test_GetTestFile",
         "produces": [
           "application/json"
@@ -887,7 +887,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -909,7 +909,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Delete file of given file name for a test. File name must be a valid URL character ^[a-z0-9_-]*$",
+        "summary": "Delete file by the file name for a test.",
         "operationId": "Test_DeleteTestFile",
         "produces": [
           "application/json"
@@ -937,10 +937,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The requested artifact is deleted"
+            "description": "The requested file is deleted"
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -982,13 +982,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested test files urls",
+            "description": "The URLs for the requested test files",
             "schema": {
               "$ref": "#/definitions/FileUrlList"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1012,7 +1012,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Delete a test run with given name. Test run name must be a valid URL character ^[a-z0-9_-]*$",
+        "summary": "Delete a test run by its name.",
         "operationId": "TestRun_DeleteTestRun",
         "produces": [
           "application/json"
@@ -1021,7 +1021,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1034,10 +1034,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The test run is deleted"
+            "description": "The test run is deleted."
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1059,7 +1059,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Create and start new test run of the given name, test run name must be a valid URL character ^[a-z0-9_-]*$",
+        "summary": "Create and start a new test run with the given name.",
         "operationId": "TestRun_CreateAndUpdateTest",
         "consumes": [
           "application/merge-patch+json"
@@ -1071,7 +1071,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1081,7 +1081,7 @@
           {
             "in": "query",
             "name": "oldTestRunId",
-            "description": "Existing testRunId to re run new test",
+            "description": "Existing test run Id that should be rerun.",
             "type": "string"
           },
           {
@@ -1099,13 +1099,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The test run is updated",
+            "description": "The test run is updated.",
             "schema": {
               "$ref": "#/definitions/TestRunModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1127,7 +1127,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get test run of given name.",
+        "summary": "Get test run details by name.",
         "operationId": "TestRun_GetTestRun",
         "produces": [
           "application/json"
@@ -1136,7 +1136,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of load test run, must be a valid URL character ^[a-z0-9_-]*$",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1149,13 +1149,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested test run",
+            "description": "The requested test run details",
             "schema": {
               "$ref": "#/definitions/TestRunModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1179,7 +1179,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get testrun file with given file name.",
+        "summary": "Get test run file by file name.",
         "operationId": "TestRun_GetTestRunFile",
         "produces": [
           "application/json"
@@ -1188,7 +1188,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of load test run, must be a valid URL character ^[a-z0-9_-]*$",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1211,13 +1211,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested testrun file url",
+            "description": "The URL for the requested test run file",
             "schema": {
               "$ref": "#/definitions/FileUrlPath"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1250,13 +1250,13 @@
           {
             "in": "query",
             "name": "orderBy",
-            "description": "Sort on one of the field - status, displayName, executedDateTime in (field asc/desc) format. eg: displayName asc",
+            "description": "Sort on one of the field - status, displayName, executedDateTime in (field asc/desc) format. eg: displayName asc.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "continuationToken",
-            "description": "Continuation token to get then next page of response",
+            "description": "Continuation token to get the next page of response.",
             "type": "string"
           },
           {
@@ -1268,27 +1268,27 @@
           {
             "in": "query",
             "name": "executionFrom",
-            "description": "The end DateTime(Iso8601Literal format) of test-run execution time filter range.",
+            "description": "The end DateTime(ISO 8601 literal format) of test-run execution time filter range.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "executionTo",
-            "description": "The start DateTime(Iso8601Literal format) of test-run execution time filter range.",
+            "description": "The start DateTime(ISO 8601 literal format) of test-run execution time filter range.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "status",
-            "description": "Comma separated list of test run status, value can be -  \"ACCEPTED\", \"NOTSTARTED\",\"PROVISIONING\",\"PROVISIONED\",\"CONFIGURING\",\n\"CONFIGURED\",\"EXECUTING\",\"EXECUTED\",\"DEPROVISIONING\",\"DEPROVISIONED\",\"DONE\",\"CANCELLED\",\"FAILED\"",
+            "description": "Comma separated list of test run status, value can be -  \"ACCEPTED\", \"NOTSTARTED\",\"PROVISIONING\",\"PROVISIONED\",\"CONFIGURING\",\n\"CONFIGURED\",\"EXECUTING\",\"EXECUTED\",\"DEPROVISIONING\",\"DEPROVISIONED\",\"DONE\",\"CANCELLED\",\"FAILED\".",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
-            "description": "No of results in response",
+            "description": "Number of results in response.",
             "type": "integer",
             "format": "int32",
             "default": 50
@@ -1310,7 +1310,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1334,7 +1334,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Stop test run of given name.",
+        "summary": "Stop test run by name.",
         "operationId": "TestRun_StopTestRun",
         "produces": [
           "application/json"
@@ -1343,7 +1343,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the load test run, must be a valid URL character ^[a-z0-9_-]*$",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1356,13 +1356,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested test run is stopped. Call GET /testruns/{testRunId} to check the status",
+            "description": "The requested test run is stopped. Call GET /testruns/{testRunId} to check the status.",
             "schema": {
               "$ref": "#/definitions/TestRunModel"
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1386,7 +1386,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get all client metrics for a given load test run",
+        "summary": "Get all client metrics for a load test run.",
         "operationId": "TestRun_GetTestRunClientMetrics",
         "consumes": [
           "application/json"
@@ -1398,7 +1398,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name of the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1426,7 +1426,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1450,7 +1450,7 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get all client metrics supported filters list for a given load test run",
+        "summary": "Get all filters that are supported for client metrics for a given load test run",
         "operationId": "TestRun_GetTestRunClientMetricsFilters",
         "produces": [
           "application/json"
@@ -1459,7 +1459,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique identifier for load test run name, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name for load test run, must be a valid URL character ^[a-z0-9_-]*$",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1478,7 +1478,7 @@
             }
           },
           "default": {
-            "description": "Load Test Service error response.",
+            "description": "Load Testing service error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
@@ -1500,7 +1500,7 @@
   },
   "definitions": {
     "AppComponent": {
-      "description": "The Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "type": "object",
       "properties": {
         "resourceId": {
@@ -1523,12 +1523,12 @@
           "readOnly": true
         },
         "resourceGroup": {
-          "description": "Resource group name of Azure resource",
+          "description": "Resource group name of the Azure resource",
           "type": "string",
           "readOnly": true
         },
         "subscriptionId": {
-          "description": "Subscription Id of Azure resource",
+          "description": "Subscription Id of the Azure resource",
           "type": "string",
           "readOnly": true
         },
@@ -1539,19 +1539,19 @@
       }
     },
     "AppComponentsMap": {
-      "description": "App components model",
+      "description": "App Components model",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "Load test resource id",
+          "description": "Azure Load Testing resource Id",
           "type": "string",
           "readOnly": true
         },
         "testId": {
-          "description": "[Required if testRunId is not given] Load test unique identifier",
+          "description": "[Required, if testRunId is not given] Load test unique identifier",
           "type": "string"
         },
         "testRunId": {
@@ -1717,19 +1717,19 @@
       "type": "integer"
     },
     "FileUrl": {
-      "description": "FileUrl Model",
+      "description": "FileUrl Model.",
       "type": "object",
       "properties": {
         "url": {
-          "description": "File url",
+          "description": "File URL.",
           "type": "string"
         },
         "fileId": {
-          "description": "File unique identifier",
+          "description": "File unique identifier.",
           "type": "string"
         },
         "filename": {
-          "description": "Name of the file",
+          "description": "Name of the file.",
           "type": "string"
         },
         "fileType": {
@@ -1750,7 +1750,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of file urls",
+          "description": "List of file URLs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileUrl"
@@ -1762,16 +1762,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Path of the file",
+          "description": "Path of the file.",
           "type": "string"
         },
         "url": {
-          "description": "url of the file",
+          "description": "URL of the file.",
           "type": "string"
         },
         "expireTime": {
           "format": "date-time",
-          "description": "Expiry time of the file",
+          "description": "Expiry time of the file.",
           "type": "string"
         }
       }
@@ -1780,14 +1780,14 @@
       "type": "object",
       "properties": {
         "requestSamplerValues": {
-          "description": "List of request sampler for the test run, for which client metrics can be filtered",
+          "description": "List of request sampler for the test run, for which client metrics can be filtered.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "errorFiltersValues": {
-          "description": "List of errors occurred for the test run, for which client metrics can be filtered",
+          "description": "List of errors occurred for the test run, for which client metrics can be filtered.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1796,7 +1796,7 @@
       }
     },
     "InputTestArtifacts": {
-      "description": "The input artifacts for the test",
+      "description": "The input artifacts for the test.",
       "type": "object",
       "properties": {
         "configUrl": {
@@ -1812,7 +1812,7 @@
           "$ref": "#/definitions/FileUrl"
         },
         "additionalUrls": {
-          "description": "The input artifacts file { name : url } map for the test run",
+          "description": "The input artifacts file { name : url } map for the test run.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileUrl"
@@ -1823,16 +1823,16 @@
       "readOnly": true
     },
     "LoadTestConfig": {
-      "description": "The load test configuration",
+      "description": "The load test configuration.",
       "type": "object",
       "properties": {
         "engineInstances": {
           "format": "int32",
-          "description": "The number of engine instances to execute load test. Supported values are in range of 1-50. Required for creating a new Test.",
+          "description": "The number of engine instances to execute load test. Supported values are in range of 1-45. Required for creating a new test.",
           "type": "integer"
         },
         "splitAllCSVs": {
-          "description": "Whether all the input CSV files need to be split evenly accross all engines.",
+          "description": "Whether all the input CSV files should be split evenly across all engines.",
           "type": "boolean"
         }
       }
@@ -1849,7 +1849,7 @@
       }
     },
     "OutputTestArtifacts": {
-      "description": "The output artifacts for the test run",
+      "description": "The output artifacts for the test run.",
       "required": [
         "logsUrl",
         "resultUrl"
@@ -1865,11 +1865,11 @@
       }
     },
     "PassFailCriteria": {
-      "description": "Pass fail criteria for a test",
+      "description": "Pass fail criteria for a test.",
       "type": "object",
       "properties": {
         "passFailMetrics": {
-          "description": "Map of id and pass fail metrics { id  : pass fail metrics }",
+          "description": "Map of id and pass fail metrics { id  : pass fail metrics }.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/PassFailMetric"
@@ -1881,11 +1881,11 @@
       "type": "object",
       "properties": {
         "clientmetric": {
-          "description": "The client metric on which the criteria should be applied. Allowed values - ‘response_time_ms’ , ‘latency’, ‘error’ ",
+          "description": "The client metric on which the criteria should be applied. Allowed values - ‘response_time_ms’ , ‘latency’, ‘error’.",
           "type": "string"
         },
         "aggregate": {
-          "description": "The aggregation function to be applied on the client metric. Allowed functions - ‘percentage’ - for error metric , ‘avg’ - for response_time_ms and latency metric ",
+          "description": "The aggregation function to be applied on the client metric. Allowed functions - ‘percentage’ - for error metric , ‘avg’ - for response_time_ms and latency metric.",
           "type": "string"
         },
         "condition": {
@@ -1894,28 +1894,28 @@
         },
         "value": {
           "format": "double",
-          "description": "The value to compare with the client metric. Allowed values - ‘error : [0.0 , 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms",
+          "description": "The value to compare with the client metric. Allowed values - ‘error : [0.0 , 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.",
           "type": "number"
         },
         "action": {
-          "description": "Either ‘stop’ or ‘continue’ after the threshold is met. Default is ‘continue’",
+          "description": "Either ‘stop’ or ‘continue’ after the threshold is met. Default is ‘continue’.",
           "type": "string"
         },
         "actualValue": {
           "format": "double",
-          "description": "The actual value of the client metric for the test run ",
+          "description": "The actual value of the client metric for the test run.",
           "type": "number",
           "readOnly": true
         },
         "result": {
-          "description": "Outcome of the testRun. possible outcome - ‘passed’ , ‘failed’ , ‘undetermined’ ",
+          "description": "Outcome of the test run. possible outcome - ‘passed’ , ‘failed’ , ‘undetermined’.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ResourceMetricModel": {
-      "description": "Associated metric definition for particular metrics of the azure resource ( Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition)",
+      "description": "Associated metric definition for particular metrics of the azure resource ( Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "required": [
         "aggregation",
         "metricnamespace",
@@ -1926,35 +1926,35 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique identifier for metric",
+          "description": "Unique identifier for metric.",
           "type": "string",
           "readOnly": true
         },
         "resourceId": {
-          "description": "Azure resource id",
+          "description": "Azure resource Id.",
           "type": "string"
         },
         "metricnamespace": {
-          "description": "Metric name space",
+          "description": "Metric name space.",
           "type": "string"
         },
         "displayDescription": {
-          "description": "Metric description",
+          "description": "Metric description.",
           "type": "string"
         },
         "name": {
           "$ref": "#/definitions/ServerMetricName"
         },
         "aggregation": {
-          "description": "Metric aggregation",
+          "description": "Metric aggregation.",
           "type": "string"
         },
         "unit": {
-          "description": "Metric unit",
+          "description": "Metric unit.",
           "type": "string"
         },
         "resourceType": {
-          "description": "Azure resource type",
+          "description": "Azure resource type.",
           "type": "string"
         }
       }
@@ -1963,7 +1963,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The value of the secret. of type== akv-secret-uri or secret-value",
+          "description": "The value of the secret, of type AKV_SECRET_URI or SECRET_VALUE",
           "type": "string"
         },
         "type": {
@@ -1976,7 +1976,7 @@
       "type": "object",
       "properties": {
         "activeUsers": {
-          "description": "Active users time series data",
+          "description": "Active users time series data.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1986,7 +1986,7 @@
           }
         },
         "responseTime": {
-          "description": "Response time, time series data",
+          "description": "Response time, time series data.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1996,7 +1996,7 @@
           }
         },
         "throughput": {
-          "description": "Throughput time series data",
+          "description": "Throughput time series data.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -2006,7 +2006,7 @@
           }
         },
         "errors": {
-          "description": "Errors time series data",
+          "description": "Errors time series data.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -2018,7 +2018,7 @@
       }
     },
     "ServerMetricName": {
-      "description": "Metric name object",
+      "description": "Metric name object.",
       "required": [
         "localizedValue",
         "value"
@@ -2026,34 +2026,34 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Metric name value",
+          "description": "Metric name value.",
           "type": "string"
         },
         "localizedValue": {
-          "description": "Metric localized name",
+          "description": "Metric localized name.",
           "type": "string"
         }
       }
     },
     "ServerMetricsModel": {
-      "description": "Server metrics config model",
+      "description": "Server metrics config model.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Server metrics config name",
+          "description": "Server metrics config name.",
           "type": "string",
           "readOnly": true
         },
         "testId": {
-          "description": "[Required if testRunId is not given] Load test unique identifier",
+          "description": "[Required, if testRunId is not given] Load test unique identifier",
           "type": "string"
         },
         "testRunId": {
-          "description": "[Required if testId is not given] Load test run unique identifier",
+          "description": "[Required, if testId is not given] Load test run unique identifier",
           "type": "string"
         },
         "metrics": {
-          "description": "Metrics map {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id)",
+          "description": "Metrics map {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id).",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetricModel"
@@ -2062,7 +2062,7 @@
       }
     },
     "SupportedResourceType": {
-      "description": "Supported azure resource types for app component like Microsoft.LoadTestService/loadtests, Microsoft.ClassicCompute, Microsoft.ClassicStorage etc. (Refer for full list of available resource types in azure : https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types, some of them we are supporting for server side metrics configuration)",
+      "description": "Supported azure resource types for App Component like Microsoft.LoadTestService/loadtests, Microsoft.ClassicCompute, Microsoft.ClassicStorage etc. (Refer for full list of available resource types in azure : https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types, some of them we are supporting for server side metrics configuration).",
       "type": "object",
       "properties": {
         "value": {
@@ -2092,25 +2092,25 @@
       "type": "object",
       "properties": {
         "testId": {
-          "description": "Unique test name as identifier",
+          "description": "Unique test name as identifier.",
           "maxLength": 50,
           "minLength": 2,
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "The test description",
+          "description": "The test description.",
           "maxLength": 100,
           "type": "string"
         },
         "displayName": {
-          "description": "Display name of a test ",
+          "description": "Display name of a test.",
           "maxLength": 50,
           "minLength": 2,
           "type": "string"
         },
         "resourceId": {
-          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
+          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
           "type": "string",
           "readOnly": true
         },
@@ -2122,23 +2122,23 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The created DateTime(Iso8601Literal format) of the test model",
+          "description": "The created DateTime(ISO 8601 literal format) of the test model.",
           "type": "string",
           "readOnly": true
         },
         "createdBy": {
-          "description": "The user that created the test model",
+          "description": "The user that created the test model.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedDateTime": {
           "format": "date-time",
-          "description": "The last Modified DateTime(Iso8601Literal format) of the test model",
+          "description": "The last Modified DateTime(ISO 8601 literal format) of the test model.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "The user that last modified the test model",
+          "description": "The user that last modified the test model.",
           "type": "string",
           "readOnly": true
         },
@@ -2146,29 +2146,29 @@
           "$ref": "#/definitions/InputTestArtifacts"
         },
         "secrets": {
-          "description": "Secrets of higher importance , which are stored in a key-vault typically. Allowed secret type: AKV_SECRET_URI",
+          "description": "Secrets which are typically stored in a key-vault. Allowed secret type: AKV_SECRET_URI.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SecretMetadata"
           }
         },
         "environmentVariables": {
-          "description": "Secrets of relatively lesser importance , which are defined as a set of <name,value> pairs.",
+          "description": "Environment variables which are defined as a set of <name,value> pairs.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "subnetId": {
-          "description": "Subnet ID on which the load test instances should run",
+          "description": "Subnet ID on which the load test instances should run.",
           "type": "string"
         },
         "keyvaultReferenceIdentityType": {
-          "description": "Type of the managed identity referencing the Key vault",
+          "description": "Type of the managed identity referencing the Key vault.",
           "type": "string"
         },
         "keyvaultReferenceIdentityId": {
-          "description": "Resource Id of the managed identity referencing the Key vault",
+          "description": "Resource Id of the managed identity referencing the Key vault.",
           "type": "string"
         }
       }
@@ -2198,46 +2198,46 @@
       "type": "object",
       "properties": {
         "testRunId": {
-          "description": "Unique test run name as identifier",
+          "description": "Unique test run name as identifier.",
           "type": "string",
           "readOnly": true
         },
         "displayName": {
-          "description": "Display name of a testRun ",
+          "description": "Display name of a test run.",
           "maxLength": 50,
           "minLength": 2,
           "type": "string"
         },
         "testId": {
-          "description": "Associated testId",
+          "description": "Associated test Id.",
           "maxLength": 50,
           "minLength": 2,
           "type": "string"
         },
         "resourceId": {
-          "description": "Load test resource Id",
+          "description": "Load test resource Id.",
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "The test run description",
+          "description": "The test run description.",
           "maxLength": 100,
           "type": "string"
         },
         "status": {
-          "description": "The test run status",
+          "description": "The test run status.",
           "type": "string",
           "readOnly": true
         },
         "startDateTime": {
           "format": "date-time",
-          "description": "The test run start DateTime(Iso8601Literal format)",
+          "description": "The test run start DateTime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
         "endDateTime": {
           "format": "date-time",
-          "description": "The test run end DateTime(Iso8601Literal format)",
+          "description": "The test run end DateTime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
@@ -2245,7 +2245,7 @@
           "$ref": "#/definitions/LoadTestConfig"
         },
         "testResult": {
-          "description": "Test result for pass/Fail criteria used during the test run. possible outcome - ‘Passed’ , ‘Failed’ , ‘Not Applicable’",
+          "description": "Test result for pass/Fail criteria used during the test run. possible outcome - ‘Passed’ , ‘Failed’ , ‘Not Applicable’.",
           "type": "string",
           "readOnly": true
         },
@@ -2263,12 +2263,12 @@
         },
         "vusers": {
           "format": "int32",
-          "description": "No of virtual users, for which test has been run",
+          "description": "Number of virtual users, for which test has been run.",
           "type": "integer",
           "readOnly": true
         },
         "testRunStatistics": {
-          "description": "Testrun statistics",
+          "description": "Test run statistics",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatisticsModel"
@@ -2277,40 +2277,40 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The created DateTime(Iso8601Literal format) of the test run",
+          "description": "The created DateTime(ISO 8601 literal format) of the test run.",
           "type": "string",
           "readOnly": true
         },
         "createdBy": {
-          "description": "The user that created the test run",
+          "description": "The user that created the test run.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedDateTime": {
           "format": "date-time",
-          "description": "The last updated  DateTime(Iso8601Literal format) of the test run",
+          "description": "The last updated  DateTime(ISO 8601 literal format) of the test run.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "The user that updated the test run",
+          "description": "The user that updated the test run.",
           "type": "string",
           "readOnly": true
         },
         "portalUrl": {
-          "description": "Portal url ",
+          "description": "Portal url.",
           "type": "string",
           "readOnly": true
         },
         "secrets": {
-          "description": "Secrets of higher importance , which are stored in a key-vault typically. Allowed secret types: AKV_SECRET_URI/SECRET_VALUE",
+          "description": "Secrets which are typically stored in a key-vault. Allowed secret types: AKV_SECRET_URI/SECRET_VALUE",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SecretMetadata"
           }
         },
         "environmentVariables": {
-          "description": "Secrets of relatively lesser importance , which are defined as a set of <name,value> pairs.",
+          "description": "Environment variables which are defined as a set of <name,value> pairs.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2318,12 +2318,12 @@
         },
         "duration": {
           "format": "int64",
-          "description": "Test run duration in milliseconds",
+          "description": "Test run duration in milliseconds.",
           "type": "integer",
           "readOnly": true
         },
         "subnetId": {
-          "description": "Subnet ID on which the load test instances should run",
+          "description": "Subnet ID on which the load test instances should run.",
           "type": "string",
           "readOnly": true
         }
@@ -2350,89 +2350,89 @@
       }
     },
     "TestRunStatisticsModel": {
-      "description": "Test run statistics",
+      "description": "Test run statistics.",
       "type": "object",
       "properties": {
         "transaction": {
-          "description": "Transaction name",
+          "description": "Transaction name.",
           "type": "string",
           "readOnly": true
         },
         "sampleCount": {
           "format": "double",
-          "description": "Sampler count",
+          "description": "Sampler count.",
           "type": "number",
           "readOnly": true
         },
         "errorCount": {
           "format": "double",
-          "description": "Error count",
+          "description": "Error count.",
           "type": "number",
           "readOnly": true
         },
         "errorPct": {
           "format": "double",
-          "description": "Error percentage",
+          "description": "Error percentage.",
           "type": "number",
           "readOnly": true
         },
         "meanResTime": {
           "format": "double",
-          "description": "Mean response time",
+          "description": "Mean response time.",
           "type": "number",
           "readOnly": true
         },
         "medianResTime": {
           "format": "double",
-          "description": "Median response time",
+          "description": "Median response time.",
           "type": "number",
           "readOnly": true
         },
         "maxResTime": {
           "format": "double",
-          "description": "Max response time",
+          "description": "Max response time.",
           "type": "number",
           "readOnly": true
         },
         "minResTime": {
           "format": "double",
-          "description": "Minimum response time",
+          "description": "Minimum response time.",
           "type": "number",
           "readOnly": true
         },
         "pct1ResTime": {
           "format": "double",
-          "description": "90 percentile response time",
+          "description": "90 percentile response time.",
           "type": "number",
           "readOnly": true
         },
         "pct2ResTime": {
           "format": "double",
-          "description": "95 percentile response time",
+          "description": "95 percentile response time.",
           "type": "number",
           "readOnly": true
         },
         "pct3ResTime": {
           "format": "double",
-          "description": "99 percentile response time",
+          "description": "99 percentile response time.",
           "type": "number",
           "readOnly": true
         },
         "throughput": {
           "format": "double",
-          "description": "Throughput",
+          "description": "Throughput.",
           "type": "number",
           "readOnly": true
         },
         "receivedKBytesPerSec": {
           "format": "double",
-          "description": "Received network bytes",
+          "description": "Received network bytes.",
           "type": "number",
           "readOnly": true
         },
         "sentKBytesPerSec": {
           "format": "double",
-          "description": "Send network bytes",
+          "description": "Sent network bytes.",
           "type": "number",
           "readOnly": true
         }
@@ -2444,12 +2444,12 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "start DateTime(Iso8601Literal format) for the requested client metrics filter",
+          "description": "start DateTime(ISO 8601 literal format) for the requested client metrics filter.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "description": "end DateTime(Iso8601Literal format) for the requested client metrics filter",
+          "description": "end DateTime(ISO 8601 literal format) for the requested client metrics filter.",
           "type": "string"
         }
       }
@@ -2459,12 +2459,12 @@
       "properties": {
         "timestamp": {
           "format": "date-time",
-          "description": "Timestamp(Iso8601Literal format)",
+          "description": "Timestamp(ISO 8601 literal format).",
           "type": "string"
         },
         "value": {
           "format": "double",
-          "description": "Value at timestamp",
+          "description": "Value at timestamp.",
           "type": "number"
         }
       }
@@ -2474,11 +2474,11 @@
     "ApiVersion": {
       "in": "query",
       "name": "api-version",
-      "description": "Api version",
+      "description": "API version",
       "required": true
     },
     "TestId": {
-      "description": "Unique identifier for load test name, must be a valid URL character ^[a-z0-9_-]*$",
+      "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
       "type": "string",
       "maxLength": 50,
       "minLength": 2,
