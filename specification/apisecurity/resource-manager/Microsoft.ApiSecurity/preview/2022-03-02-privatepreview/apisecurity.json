@@ -725,10 +725,6 @@
           "format": "uuid",
           "readOnly": true
         },
-        "webhook": {
-          "description": "webhook registered at Event Grid by CAS RP",
-          "type": "string"
-        },
         "apis": {
           "description": "list of the URIs of API endpoints that CAS RP is interested in their traffic during initial onboarding with APIM",
           "type": "array",
@@ -757,7 +753,7 @@
           "format": "double"
         },
         "subscribedApimApiEvents": {
-          "description": "list of APIM API events that CAS RP is interested to subscribe via webhook",
+          "description": "list of APIM API events that CAS RP is interested to subscribe",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApimApiEvent"
@@ -780,10 +776,6 @@
           "format": "uuid",
           "readOnly": true
         },
-        "webhook": {
-          "description": "webhook registered at Event Grid by CAS RP",
-          "type": "string"
-        },
         "apis": {
           "description": "list of the URIs of API endpoints that CAS RP is interested in their traffic during initial onboarding with APIM",
           "type": "array",
@@ -812,7 +804,7 @@
           "format": "double"
         },
         "subscribedApimApiEvents": {
-          "description": "list of APIM API events that CAS RP is interested to subscribe via webhook",
+          "description": "list of APIM API events that CAS RP is interested to subscribe",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApimApiEvent"
@@ -844,9 +836,6 @@
       "title": "ApiCollectionDocumentProperties",
       "type": "object",
       "properties": {
-        "accountId": {
-          "type": "string"
-        },
         "subscriptionId": {
           "type": "string"
         },
@@ -947,6 +936,27 @@
       "title": "ApiCollectionsMetaResponse",
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiCollectionsMetaProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ApiCollectionsMetaProperties": {
+      "title": "ApiCollectionsMetaProperties",
+      "type": "object",
+      "properties": {
         "numberOfApimResources": {
           "type": "integer",
           "format": "int32"
@@ -959,36 +969,6 @@
           "type": "integer",
           "format": "int32"
         }
-      }
-    },
-    "PiiDataClassificationItem": {
-      "title": "PiiDataClassificationItem",
-      "description": "enum to describe the classification of an API endpoint",
-      "example": "NAME",
-      "type": "string",
-      "enum": [
-        "NAME",
-        "STREET_ADDR",
-        "EMAIL_ADDR",
-        "PHONE_NUMBER",
-        "IP_ADDR",
-        "MAC_ADDR",
-        "SSN",
-        "PASSPORT_NUMBER",
-        "DRIVER_LICENSE",
-        "STATE_ID",
-        "TAX_PAYER_ID",
-        "PATIENT_ID",
-        "FINANCIAL_ACC",
-        "CREDIT_CARD_NUMBER",
-        "DEBIT_CARD_NUMBER",
-        "VIN_NUMBER",
-        "COOKIE",
-        "LOCATION_DATA"
-      ],
-      "x-ms-enum": {
-        "name": "PiiDataClassificationItem",
-        "modelAsString": true
       }
     },
     "ApiCollectionDetailsDocumentProperties": {
@@ -1016,7 +996,8 @@
           "description": "Array of suspected PII classifications that API endpoint belongs to",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PiiDataClassificationItem"
+            "type": "string",
+            "description": "a suspected PII classification"
           }
         }
       }
