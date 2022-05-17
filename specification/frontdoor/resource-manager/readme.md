@@ -285,4 +285,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"]'
     from: webapplicationfirewall.json
     reason: The resource type name FrontDoorWebApplicationFirewallPolicies was already defined for all the versions.
+  - suppress: INVALID_TYPE
+    where: $.definitions.Resource.properties.tags.additionalProperties
+    from: network.json
+    reason: 'Same as version in 2020-11-01, will not change since it will involves breaking change. '
 ```
