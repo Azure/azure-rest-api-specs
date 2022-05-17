@@ -386,7 +386,7 @@
     },
 	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes": {
       "post": {
-        "operationId": "AzureFirewall_ListLearnedPrefixes",
+        "operationId": "AzureFirewalls_ListLearnedPrefixes",
         "description": "Retrieves a list of all IP prefixes that azure firewall has learned to not SNAT.",
         "parameters": [
           {
@@ -397,7 +397,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "firewallName",
+            "name": "azureFirewallName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1138,7 +1138,7 @@
     },
 	"IPPrefixesList": {
       "properties": {
-        "IPPrefixes": {
+        "ipPrefixes": {
           "type": "string",
           "description": "IP Prefix value."
         }
