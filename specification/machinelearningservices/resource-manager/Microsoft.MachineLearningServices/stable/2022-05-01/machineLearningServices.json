@@ -3124,13 +3124,15 @@
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The sku of the workspace."
+          "description": "The sku of the workspace.",
+          "x-nullable": true
         }
       }
     },
@@ -3177,7 +3179,8 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the Machine Learning compute."
+          "description": "The description of the Machine Learning compute.",
+          "x-nullable": true
         },
         "createdOn": {
           "type": "string",
@@ -3193,7 +3196,8 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "ARM resource id of the underlying compute"
+          "description": "ARM resource id of the underlying compute",
+          "x-nullable": true
         },
         "provisioningErrors": {
           "type": "array",
@@ -3204,7 +3208,8 @@
           "x-ms-identifiers": [
             "/error/code"
           ],
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "isAttachedCompute": {
           "type": "boolean",
@@ -3241,7 +3246,8 @@
           "properties": {
             "clusterFqdn": {
               "description": "Cluster full qualified domain name",
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             },
             "systemServices": {
               "type": "array",
@@ -3252,17 +3258,20 @@
               "x-ms-identifiers": [
                 "publicIpAddress"
               ],
-              "readOnly": true
+              "readOnly": true,
+              "x-nullable": true
             },
             "agentCount": {
               "description": "Number of agents",
               "type": "integer",
               "format": "int32",
-              "minimum": 0
+              "minimum": 0,
+              "x-nullable": true
             },
             "agentVmSize": {
               "description": "Agent virtual machine size",
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             },
             "clusterPurpose": {
               "description": "Intended usage of the cluster",
@@ -3285,7 +3294,8 @@
             },
             "aksNetworkingConfiguration": {
               "description": "AKS networking configuration for vnet",
-              "$ref": "#/definitions/AksNetworkingConfiguration"
+              "$ref": "#/definitions/AksNetworkingConfiguration",
+              "x-nullable": true
             },
             "loadBalancerType": {
               "description": "Load Balancer Type",
@@ -3302,7 +3312,8 @@
             },
             "loadBalancerSubnet": {
               "description": "Load Balancer Subnet",
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             }
           }
         }
@@ -3337,16 +3348,19 @@
         "relayConnectionString": {
           "description": "Relay connection string.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "serviceBusConnectionString": {
           "description": "ServiceBus connection string.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "extensionPrincipalId": {
           "description": "Extension principal-id.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "extensionInstanceReleaseTrain": {
           "description": "Extension instance release train.",
@@ -3423,7 +3437,8 @@
         "userAccountCredentials": {
           "title": "User account credentials.",
           "description": "Credentials for an administrator user account that will be created on each compute node.",
-          "$ref": "#/definitions/UserAccountCredentials"
+          "$ref": "#/definitions/UserAccountCredentials",
+          "x-nullable": true
         },
         "subnet": {
           "title": "Subnet.",
@@ -3451,6 +3466,7 @@
           "readOnly": true,
           "title": "Allocation state.",
           "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
+          "x-nullable": true,
           "enum": [
             "Steady",
             "Resizing"
@@ -3472,6 +3488,7 @@
           "title": "Errors.",
           "description": "Collection of errors encountered by various compute nodes during node setup.",
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -3484,30 +3501,35 @@
           "readOnly": true,
           "format": "int32",
           "title": "Current node count.",
-          "description": "The number of compute nodes currently assigned to the compute."
+          "description": "The number of compute nodes currently assigned to the compute.",
+          "x-nullable": true
         },
         "targetNodeCount": {
           "type": "integer",
           "readOnly": true,
           "format": "int32",
           "title": "Target node count.",
-          "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
+          "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.",
+          "x-nullable": true
         },
         "nodeStateCounts": {
           "title": "Node state counts.",
           "description": "Counts of various node states on the compute.",
           "readOnly": true,
-          "$ref": "#/definitions/NodeStateCounts"
+          "$ref": "#/definitions/NodeStateCounts",
+          "x-nullable": true
         },
         "enableNodePublicIp": {
           "type": "boolean",
           "default": true,
           "title": "Enable node public IP.",
-          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.",
+          "x-nullable": true
         },
         "propertyBag": {
           "type": "object",
-          "description": "A property bag containing additional properties."
+          "description": "A property bag containing additional properties.",
+          "x-nullable": true
         }
       }
     },
@@ -3544,7 +3566,8 @@
         "subnet": {
           "title": "Subnet.",
           "description": "Virtual network subnet resource ID the compute nodes belong to.",
-          "$ref": "#/definitions/ResourceId"
+          "$ref": "#/definitions/ResourceId",
+          "x-nullable": true
         },
         "applicationSharingPolicy": {
           "type": "string",
@@ -3562,7 +3585,8 @@
         },
         "sshSettings": {
           "description": "Specifies policy and settings for SSH access.",
-          "$ref": "#/definitions/ComputeInstanceSshSettings"
+          "$ref": "#/definitions/ComputeInstanceSshSettings",
+          "x-nullable": true
         },
         "connectivityEndpoints": {
           "readOnly": true,
@@ -3607,6 +3631,7 @@
           "title": "Compute Instance Authorization type.",
           "description": "The Compute Instance Authorization type. Available values are personal (default).",
           "default": "personal",
+          "x-nullable": true,
           "enum": [
             "personal"
           ],
@@ -3618,20 +3643,24 @@
         "personalComputeInstanceSettings": {
           "title": "Personal Compute Instance settings.",
           "description": "Settings for a personal compute instance.",
-          "$ref": "#/definitions/PersonalComputeInstanceSettings"
+          "$ref": "#/definitions/PersonalComputeInstanceSettings",
+          "x-nullable": true
         },
         "setupScripts": {
           "description": "Details of customized scripts to execute for setting up the cluster.",
-          "$ref": "#/definitions/SetupScripts"
+          "$ref": "#/definitions/SetupScripts",
+          "x-nullable": true
         },
         "lastOperation": {
           "description": "The last operation on ComputeInstance.",
           "$ref": "#/definitions/ComputeInstanceLastOperation",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "schedules": {
           "description": "The list of schedules to be applied on the computes.",
           "$ref": "#/definitions/ComputeSchedules",
+          "x-nullable": true,
           "readOnly": true
         },
         "enableNodePublicIp": {
@@ -3643,6 +3672,7 @@
           "type": "array",
           "readOnly": true,
           "description": "Describes informations of containers on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
@@ -3654,6 +3684,7 @@
           "type": "array",
           "readOnly": true,
           "description": "Describes informations of dataDisks on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
@@ -3663,6 +3694,7 @@
           "type": "array",
           "readOnly": true,
           "description": "Describes informations of dataMounts on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
@@ -3760,7 +3792,8 @@
         },
         "administratorAccount": {
           "description": "Admin credentials for master node of the cluster",
-          "$ref": "#/definitions/VirtualMachineSshCredentials"
+          "$ref": "#/definitions/VirtualMachineSshCredentials",
+          "x-nullable": true
         }
       }
     },
@@ -3948,20 +3981,24 @@
         "cert": {
           "description": "Cert data",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "key": {
           "description": "Key data",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "cname": {
           "description": "CNAME of the cert",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "leafDomainLabel": {
           "description": "Leaf domain label of public endpoint",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "overwriteExistingDomain": {
           "description": "Indicates whether to overwrite existing domain label.",
@@ -4771,7 +4808,8 @@
       "properties": {
         "runtime": {
           "type": "string",
-          "description": "Runtime of compute instance."
+          "description": "Runtime of compute instance.",
+          "x-nullable": true
         }
       }
     },
@@ -5096,12 +5134,14 @@
         "publicIpAddress": {
           "type": "string",
           "readOnly": true,
-          "description": "Public IP Address of this ComputeInstance."
+          "description": "Public IP Address of this ComputeInstance.",
+          "x-nullable": true
         },
         "privateIpAddress": {
           "type": "string",
           "readOnly": true,
-          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed)."
+          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).",
+          "x-nullable": true
         }
       }
     },
@@ -5113,7 +5153,8 @@
         "userName": {
           "type": "string",
           "readOnly": true,
-          "description": "Name of the user."
+          "description": "Name of the user.",
+          "x-nullable": true
         },
         "userOrgId": {
           "type": "string",
@@ -5123,7 +5164,8 @@
         "userId": {
           "type": "string",
           "readOnly": true,
-          "description": "Uniquely identifies the user within his/her organization."
+          "description": "Uniquely identifies the user within his/her organization.",
+          "x-nullable": true
         }
       }
     },
@@ -5519,6 +5561,7 @@
         "nodeSelector": {
           "type": "object",
           "description": "Node Selector",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
