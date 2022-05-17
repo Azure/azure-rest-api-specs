@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "devCenter": "{devCenter}",
+    "devCenterDnsSuffix": "devcenters.fidalgo.azure.net",
+    "projectName": "{projectName}",
+    "api-version": "2022-03-01-preview",
+    "poolName": "{poolName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "LargeDevWorkStationPool",
+        "location": "centralus",
+        "osType": "Windows",
+        "hardwareProfile": {
+          "vCPUs": 8,
+          "memoryGB": 32
+        },
+        "storageProfile": {
+          "osDisk": {
+            "diskSizeGB": 1024
+          }
+        },
+        "imageReference": {
+          "name": "DevImage",
+          "version": "1.0.0",
+          "publishedDate": "2022-03-01T00:13:23.323Z"
+        }
+      }
+    }
+  }
+}

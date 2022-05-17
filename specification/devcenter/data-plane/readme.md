@@ -26,6 +26,8 @@ These are the global settings for the devcenter.
 
 ```yaml
 openapi-type: data-plane
+openapi-subtype: providerHub
+azure-arm: false
 tag: package-2022-03-01-preview
 ```
 
@@ -36,4 +38,5 @@ These settings apply only when `--tag=package-2022-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-03-01-preview'
 input-file:
   - Microsoft.DevCenter/preview/2022-03-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2022-03-01-preview/devbox.json
 ```
