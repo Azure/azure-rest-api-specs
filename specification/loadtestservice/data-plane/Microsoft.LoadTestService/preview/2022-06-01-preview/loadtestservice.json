@@ -201,11 +201,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -426,11 +422,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -562,12 +554,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           },
           {
             "in": "body",
@@ -625,12 +612,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -670,12 +652,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -821,12 +798,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           },
           {
             "in": "formData",
@@ -885,12 +857,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -943,12 +910,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -990,12 +952,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -1315,11 +1272,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "oneOf": {
-              "$ref": "#/parameters/TestId"
-            }
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -2498,7 +2451,19 @@
       "description": "API version",
       "required": true
     },
-    "TestId": {
+    "TestIdQueryParameter": {
+      "in": "query",
+      "name": "testId",
+      "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 2,
+      "pattern": "^[a-z0-9_-]*$"
+    },
+    "TestIdPathParameter": {
+      "in": "path",
+      "name": "testId",
+      "required": true,
       "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
       "type": "string",
       "maxLength": 50,
