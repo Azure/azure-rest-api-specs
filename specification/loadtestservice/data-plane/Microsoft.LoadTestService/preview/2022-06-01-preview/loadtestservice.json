@@ -35,7 +35,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "body",
@@ -100,7 +104,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -147,7 +155,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -198,12 +210,20 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "query",
             "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -258,7 +278,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "body",
@@ -323,7 +347,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -373,7 +401,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -421,12 +453,20 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "query",
             "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -468,7 +508,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -510,7 +554,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -555,13 +603,21 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "in": "body",
@@ -616,13 +672,21 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -659,13 +723,21 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -747,7 +819,11 @@
             "default": 50
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -808,13 +884,21 @@
             "format": "int32"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "in": "formData",
@@ -870,13 +954,21 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -926,13 +1018,21 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -971,13 +1071,21 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "path",
             "name": "testId",
             "required": true,
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1029,7 +1137,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -1085,7 +1197,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "body",
@@ -1144,7 +1260,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -1206,7 +1326,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -1294,12 +1418,20 @@
             "default": 50
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "query",
             "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1351,7 +1483,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
@@ -1406,7 +1542,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           },
           {
             "in": "body",
@@ -1467,7 +1607,11 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "API version",
+            "required": true
           }
         ],
         "responses": {
