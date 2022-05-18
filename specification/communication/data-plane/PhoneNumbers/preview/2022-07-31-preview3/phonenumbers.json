@@ -36,7 +36,7 @@
           },
           {
             "in": "query",
-            "name": "top",
+            "name": "maxPageSize",
             "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
             "type": "integer",
             "format": "int32",
@@ -108,7 +108,7 @@
           },
           {
             "in": "query",
-            "name": "top",
+            "name": "maxPageSize",
             "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
             "type": "integer",
             "format": "int32",
@@ -177,7 +177,7 @@
           },
           {
             "in": "query",
-            "name": "top",
+            "name": "maxPageSize",
             "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
             "type": "integer",
             "format": "int32",
@@ -292,7 +292,7 @@
           },
           {
             "in": "query",
-            "name": "top",
+            "name": "maxPageSize",
             "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
             "type": "integer",
             "format": "int32",
@@ -915,7 +915,7 @@
           "type": "string"
         },
         "administrativeDivision": {
-          "description": "TODO",
+          "description": "The administrative division name to search for phone numbers, e.g. state or province.",
           "type": "string"
         },
         "areaCode": {
@@ -1281,7 +1281,6 @@
     "PhoneNumberLocality": {
       "description": "Represents a locality or town.",
       "required": [
-        "name",
         "localizedName"
       ],
       "type": "object",
@@ -1290,21 +1289,10 @@
           "description": "Represents the localized name of the locality.",
           "type": "string"
         },
-        "name": {
-          "description": "Represents the name of the locality",
-          "type": "string"
-        },
-        "localizedAdministrativeDivisionName": {
-          "description": "Represents the localized name of the administrative division of the locality. e.g. state or province localized name.",
-          "type": "string"
-        },
         "administrativeDivision": {
-          "description": "Represents the name of the admnistrative division of the locality. e.g. state or province name.",
-          "type": "string"
-        },
-        "abbreviatedAdministrativeDivisionName": {
-          "description": "Represents the abbreviated name of the admnistrative division of the locality. e.g. state or province abbreviation.",
-          "type": "string"
+          "description": "Represents the name of the admnistrative division of the locality. e.g. state or province.",
+          "type": "object",
+          "$ref": "#/definitions/PhoneNumberAdministrativeDivision"
         }
       }
     },
@@ -1312,8 +1300,8 @@
       "description": "Represents a wrapper around a list of cities or towns.",
       "type": "object",
       "properties": {
-        "cities": {
-          "description": "Represents the underlying list of cities or town.",
+        "phoneNumberLocalities": {
+          "description": "Represents the underlying list of localities, e.g. cities or town.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PhoneNumberLocality"
@@ -1326,7 +1314,7 @@
       }
     },
     "PhoneNumberAdministrativeDivision": {
-      "description": "Represents an administrative division, e.g. state or province.",
+      "description": "Represents an administrative division. e.g. state or province.",
       "required": [
         "name",
         "localizedName"
@@ -1337,8 +1325,8 @@
           "description": "Represents the localized name of the administrative division of the locality. e.g. state or province localized name.",
           "type": "string"
         },
-        "name": {
-          "description": "Represents the abbreviated name of the admnistrative division of the locality. e.g. state or province abbreviation.",
+        "abbreviatedName": {
+          "description": "Represents the abbreviated name of the administrative division of the locality. e.g. state or province abbreviation such as WA (Washington)",
           "type": "string"
         }
       }
