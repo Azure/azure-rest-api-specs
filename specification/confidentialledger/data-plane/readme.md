@@ -58,17 +58,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    autorest_options:
-      use: "@autorest/python@5.1.0-preview.4"
-      version: "3.0.6320"
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_confidentialledger']
 ```
 
 ## Go
