@@ -40,13 +40,13 @@ tag: package-2020-01-01
 ```
 
 
-### Tag: package-preview-2022-05-01-privatepreview
+### Tag: package-preview-2022-06-01-privatepreview
 
-These settings apply only when `--tag=package-preview-2022-05-01-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-06-01-privatepreview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05-01-privatepreview'
+```yaml $(tag) == 'package-preview-2022-06-01-privatepreview'
 input-file:
-  - Microsoft.DBforMySQL/preview/2022-05-01-privatepreview/Migration.json
+  - Microsoft.DBforMySQL/preview/2022-06-01-privatepreview/Migration.json
 ```
 ### Tag: package-2017-12-01-preview
 
