@@ -309,24 +309,18 @@
         "provisioningState": {
           "description": "Provisioning state of managed instance DTC.",
           "enum": [
-            "Creating",
-            "Deleting",
-            "Updating",
-            "Unknown",
+            "Created",
+            "InProgress",
             "Succeeded",
             "Failed",
-            "Accepted",
-            "Created",
-            "Deleted",
-            "Unrecognized",
-            "Running",
-            "Canceled",
-            "NotSpecified",
-            "Registering",
-            "TimedOut"
+            "Canceled"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
