@@ -3466,7 +3466,6 @@
           "readOnly": true,
           "title": "Allocation state.",
           "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
-          "x-nullable": true,
           "enum": [
             "Steady",
             "Resizing"
@@ -4210,13 +4209,15 @@
           "readOnly": true,
           "type": "string",
           "title": "Private IP address.",
-          "description": "Private IP address of the compute node."
+          "description": "Private IP address of the compute node.",
+          "x-nullable": true
         },
         "publicIpAddress": {
           "readOnly": true,
           "type": "string",
           "title": "Public IP address.",
-          "description": "Public IP address of the compute node."
+          "description": "Public IP address of the compute node.",
+          "x-nullable": true
         },
         "port": {
           "readOnly": true,
@@ -4246,7 +4247,8 @@
           "readOnly": true,
           "type": "string",
           "title": "Run ID.",
-          "description": "ID of the Experiment running on the node, if any else null."
+          "description": "ID of the Experiment running on the node, if any else null.",
+          "x-nullable": true
         }
       }
     },
@@ -4302,7 +4304,8 @@
         },
         "imagePullSecretName": {
           "type": "string",
-          "description": "Image registry pull secret."
+          "description": "Image registry pull secret.",
+          "x-nullable": true
         }
       }
     },
@@ -5563,7 +5566,8 @@
           "description": "Node Selector",
           "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "resources": {
