@@ -1475,21 +1475,23 @@
     "AppComponent": {
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "type": "object",
+      "required": [
+        "resourceId",
+        "resourceName",
+        "resourceType"
+      ],
       "properties": {
         "resourceId": {
           "description": "Fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "resourceName": {
           "description": "Azure resource name",
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "resourceType": {
           "description": "Azure resource type",
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "displayName": {
           "description": "Azure resource display name",
