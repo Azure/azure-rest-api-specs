@@ -298,6 +298,72 @@
         }
       },
       "description": "Represents a Assessment summary item"
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      },
+      "description": "Display metadata associated with the operation."
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation or action."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
+        }
+      },
+      "description": "REST API operation definition."
+    },
+    "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
