@@ -792,7 +792,8 @@
             "in": "query",
             "name": "fileType",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Integer representation of the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS)."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -804,7 +805,8 @@
             "in": "formData",
             "name": "file",
             "required": true,
-            "type": "file"
+            "type": "file",
+            "description": "The file to be uploaded."
           }
         ],
         "responses": {
@@ -2451,6 +2453,7 @@
       "required": true
     },
     "TestIdQueryParameter": {
+      "x-ms-parameter-location":"method",
       "in": "query",
       "name": "testId",
       "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
@@ -2460,6 +2463,7 @@
       "pattern": "^[a-z0-9_-]*$"
     },
     "TestIdPathParameter": {
+      "x-ms-parameter-location":"method",
       "in": "path",
       "name": "testId",
       "required": true,
