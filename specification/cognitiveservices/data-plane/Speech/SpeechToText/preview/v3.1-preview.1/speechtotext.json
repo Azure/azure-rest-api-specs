@@ -3764,7 +3764,8 @@
     "BaseModel": {
       "title": "BaseModel",
       "required": [
-        "displayName"
+        "displayName",
+        "locale"
       ],
       "type": "object",
       "properties": {
@@ -3779,6 +3780,10 @@
           "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string"
         },
         "displayName": {
           "description": "The display name of the object.",
@@ -3899,6 +3904,10 @@
           "type": "string",
           "readOnly": true
         },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string"
+        },
         "displayName": {
           "description": "The display name of the object.",
           "type": "string"
@@ -3935,10 +3944,6 @@
           "items": {
             "$ref": "#/definitions/EntityReference"
           }
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "type": "string"
         },
         "customProperties": {
           "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
