@@ -311,6 +311,15 @@ input-file:
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 ```
 
+### Tag: package-2022-02-22
+
+These settings apply only when `--tag=package-2022-02-22` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-22'
+input-file:
+- Microsoft.Automation/stable/2022-02-22/hybridRunbookWorkerGroup.json
+```
+
 ---
 ## Suppression
 ``` yaml
