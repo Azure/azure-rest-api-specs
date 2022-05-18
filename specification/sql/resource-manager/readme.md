@@ -276,6 +276,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 
 # Needed when there is more than one input file
 override-info:
