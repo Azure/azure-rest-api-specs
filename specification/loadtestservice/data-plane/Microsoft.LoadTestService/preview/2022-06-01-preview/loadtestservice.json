@@ -201,9 +201,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -424,9 +422,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -558,10 +554,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           },
           {
             "in": "body",
@@ -619,10 +612,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -662,10 +652,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -811,10 +798,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           },
           {
             "in": "formData",
@@ -873,10 +857,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -929,10 +910,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -974,10 +952,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "path",
-            "name": "testId",
-            "required": true,
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -1297,9 +1272,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "in": "query",
-            "name": "testId",
-            "$ref": "#/parameters/TestId"
+            "$ref": "#/parameters/TestIdQueryParameter"
           }
         ],
         "responses": {
@@ -1502,16 +1475,19 @@
     "AppComponent": {
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "type": "object",
+      "required": [
+        "resourceId",
+        "resourceName",
+        "resourceType"
+      ],
       "properties": {
         "resourceId": {
           "description": "Fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "resourceName": {
           "description": "Azure resource name",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "resourceType": {
           "description": "Azure resource type",
@@ -1519,8 +1495,7 @@
         },
         "displayName": {
           "description": "Azure resource display name",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "resourceGroup": {
           "description": "Resource group name of the Azure resource",
@@ -1850,10 +1825,6 @@
     },
     "OutputTestArtifacts": {
       "description": "The output artifacts for the test run.",
-      "required": [
-        "logsUrl",
-        "resultUrl"
-      ],
       "type": "object",
       "properties": {
         "resultUrl": {
@@ -2078,6 +2049,7 @@
         "inputArtifacts"
       ],
       "type": "object",
+      "readOnly": true,
       "properties": {
         "inputArtifacts": {
           "$ref": "#/definitions/InputTestArtifacts"
@@ -2473,11 +2445,24 @@
   "parameters": {
     "ApiVersion": {
       "in": "query",
+      "type": "string",
       "name": "api-version",
       "description": "API version",
       "required": true
     },
-    "TestId": {
+    "TestIdQueryParameter": {
+      "in": "query",
+      "name": "testId",
+      "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 2,
+      "pattern": "^[a-z0-9_-]*$"
+    },
+    "TestIdPathParameter": {
+      "in": "path",
+      "name": "testId",
+      "required": true,
       "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
       "type": "string",
       "maxLength": 50,
