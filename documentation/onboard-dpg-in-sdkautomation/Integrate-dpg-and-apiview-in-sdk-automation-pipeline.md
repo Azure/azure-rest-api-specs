@@ -12,7 +12,7 @@ __Description:__
 2. SDK Automation Pipeline Framework checks whether there is a branch named `dpg/<prNumber>` in sdk repository. If yes, the branch `dpg/<prNumber>` will be used as base branch to generate SDK. Otherwise, `main` branch will be used as base branch.
    1. `<prNumber>` is the swagger PR number.
    2. If there is branch `dpg/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
-3. SDK automation script finds the corresponding `autorest.md` or `README.md` in sdk repository. If there is no `autorest.md` or `README.md` founded, the pipeline finishes.
+3. SDK automation script finds the corresponding `autorest.md` or `README.md` in sdk repository. If there is no `autorest.md` or `README.md` founded, please output `{"packages": []}` in `generateOutput.json`, then the pipeline finishes and skipp the following steps.
    1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding `autorest.md` and `README.md`.
    2. We will only use `require` to include swagger readme.md in `autorest.md` or `README.md`, and `input-file` should not be used in `autorest.md` or `README.md`.(.Net SDK may be an exception because existing HLC dataplane sdk may already use input-file).
 4. SDK automation script modifies the founded `autorest.md` or `README.md`.
@@ -21,6 +21,6 @@ __Description:__
       require:
         - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
       ```
-5. SDK automation script Generate SDK with the modified `autorest.md` or `README.md`.
+5. SDK automation script generates SDK with the modified `autorest.md` or `README.md`.
 6. SDK Automation Pipeline Framework creates ApiView based on the generated SDK.
 7. Add comments about the sdk generation result and created ApiView to swagger PR.

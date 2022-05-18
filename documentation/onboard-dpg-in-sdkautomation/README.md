@@ -2,7 +2,7 @@
 
 Service Onboarding DPG with Swagger CI pipeline can help you get generated SDK and ApiView during the procedure of creating swagger PR.
 
-This Document describes the process of onboarding DPG with SDK automation pipeline. This document is targeting for service team. 
+This Document describes the process of how to onboard DPG with SDK automation pipeline. __This document is targeting for service team.__ 
 
 *If you want to go through details of pipeline implementation, please go to [Integrate DPG and ApiView in SDK Automation Pipeline](Integrate-dpg-and-apiview-in-sdk-automation-pipeline.md).*
 
@@ -26,3 +26,16 @@ __Description:__
     1. Swagger PR CI creates a PR for generated SDK, and you can find it in comment `[Swagger Generation Artifacts]->[sdk-repository-name]->[Preview SDK changes]`. For example: `[Swagger Generation Artifacts]->[azure-sdk-for-js]->[Preview SDK changes]`.
     2. About what manual changes you need to do, please refer to [Next Steps After Generating Codes](./next-steps-after-generating-codes.md).
 11. Create a PR to sdk repository and ask SDK owner to review it.
+
+## FAQ
+1. I don't have permission to create branch in sdk repository. Who can I ask for help?
+    
+    __Answer__: Please ask sdk owners for help. SDK owner list:
+   1. .Net: chunyu3, pshao25, fengzhou-msft.
+   2. Java: weidongxu-microsoft, haolingdong-msft
+   3. Python: msyyc, changlong-liu
+   4. JS: qiaozha, MaryGao
+   
+2. What should I do when I encounter error in generating SDK in swagger PR CI pipeline?
+   
+    __Answer__: Please check the comment [Swagger Generation Artifacts] and the error message of failed pipeline. If you find the error messages ask you to fix `autorest.md`/`README.md`/swagger, please fix it. If you cannot understand error message, please ask sdk owners for help.
