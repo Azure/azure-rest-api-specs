@@ -6285,9 +6285,24 @@
         "hubRoutingPreference": {
           "$ref": "#/definitions/HubRoutingPreference",
           "description": "The hubRoutingPreference of this VirtualHub."
+        },
+        "virtualRouterAutoScaleConfiguration": {
+          "$ref": "#/definitions/VirtualRouterAutoScaleConfiguration",
+          "description": "The VirtualHub Router autoscale configuration."
         }
       },
       "description": "Parameters for VirtualHub."
+    },
+    "VirtualRouterAutoScaleConfiguration": {
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The minimum number of scale units for VirtualHub Router."
+        }
+      },
+      "description": "The VirtualHub Router autoscale configuration."
     },
     "PreferredRoutingGateway": {
       "type": "string",
