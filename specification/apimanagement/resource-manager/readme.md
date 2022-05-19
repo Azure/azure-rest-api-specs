@@ -49,6 +49,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimapisByTags.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimapiversionsets.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimauthorizationproviders.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimbackends.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimcaches.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimcertificates.json
@@ -101,7 +102,6 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimapisByTags.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimapiversionsets.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimauthorizationservers.json
-  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimauthorizationproviders.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimbackends.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimcaches.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimcertificates.json
