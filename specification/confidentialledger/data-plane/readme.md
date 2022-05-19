@@ -15,7 +15,7 @@ Please look to the files `Microsoft.ConfidentialLedger/stable/2022-05-13/confide
 
 These settings apply only when `--tag=package-0.1-preview-ledger` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04-20-preview-ledger'
+```yaml $(tag) == 'package-0.1-preview-ledger'
 input-file:
   - Microsoft.ConfidentialLedger/preview/0.1-preview/confidentialledger.json
 ```
@@ -24,7 +24,7 @@ input-file:
 
 These settings apply only when `--tag=package-0.1-preview-identity` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04-20-preview-identity'
+```yaml $(tag) == 'package-0.1-preview-identity'
 input-file:
   - Microsoft.ConfidentialLedger/preview/0.1-preview/identityservice.json
 ```
