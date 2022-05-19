@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for web test based alerting.",
+    "description": "Azure Application Insights client for web tests.",
     "version": "2022-06-15"
   },
   "host": "management.azure.com",
@@ -40,7 +40,7 @@
           "Operations"
         ],
         "summary": "List available operations.",
-        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "description": "List the available operations supported by the resource provider.",
         "operationId": "Operations_List",
         "consumes": [],
         "produces": [
@@ -165,7 +165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Adding the Application Insights web test was successful. Web test properties are updated and returned.",
+            "description": "Successfully created or updated an Application Insights web test.",
             "schema": {
               "$ref": "#/definitions/WebTest"
             }
@@ -174,9 +174,6 @@
         "x-ms-examples": {
           "webTestCreate": {
             "$ref": "./examples/WebTestCreate.json"
-          },
-          "webTestCreateBasic": {
-            "$ref": "./examples/WebTestCreateBasic.json"
           },
           "webTestCreateStandard": {
             "$ref": "./examples/WebTestCreateStandard.json"
@@ -463,12 +460,11 @@
         "Kind": {
           "x-ms-client-name": "WebTestKind",
           "type": "string",
-          "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
+          "description": "The kind of web test this is, valid choices are ping, multistep and standard.",
           "default": "ping",
           "enum": [
             "ping",
             "multistep",
-            "basic",
             "standard"
           ],
           "x-ms-enum": {
