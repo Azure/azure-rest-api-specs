@@ -1,16 +1,19 @@
 {
   "parameters": {
     "api-version": "2022-05-01",
-    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/13579",
+    "scope": "providers/Microsoft.Billing/enrollmentAccounts/1234",
     "parameters": {
       "metric": "ActualCost",
-      "invoiceId": "M1234567"
+      "timePeriod": {
+        "start": "2020-03-01",
+        "end": "2020-03-15"
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/13579/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000",
+        "id": "providers/Microsoft.Billing/enrollmentAccounts/1234/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000",
         "name": "00000000-0000-0000-0000-000000000000",
         "status": "Completed",
         "manifest": {
@@ -20,10 +23,13 @@
           "byteCount": 32741,
           "compressData": false,
           "requestContext": {
-            "requestScope": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/13579",
+            "requestScope": "providers/Microsoft.Billing/enrollmentAccounts/1234",
             "requestBody": {
               "metric": "ActualCost",
-              "billingPeriod": "202205"
+              "timePeriod": {
+                "start": "2020-03-01",
+                "end": "2020-03-15"
+              }
             }
           },
           "blobs": [
@@ -38,7 +44,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/customers/13579/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000?api-version=2022-05-01",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/enrollmentAccounts/1234/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000?api-version=2022-05-01",
         "Retry-After": "60"
       }
     }
