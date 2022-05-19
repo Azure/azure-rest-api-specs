@@ -1271,13 +1271,13 @@
         }
       }
     },
-    "/chat/notifications": {
+    "/chat/messages:send": {
       "post": {
         "tags": [
-          "Notificationts"
+          "ThreadlessMessages"
         ],
-        "summary": "Sends a Cross-platform messaging notification.",
-        "operationId": "CrossPlatformMessaging_SendNotification",
+        "summary": "Sends a threadless Cross-platform message.",
+        "operationId": "CrossPlatformMessaging_SendMessage",
         "consumes": [
           "application/json"
         ],
@@ -1286,22 +1286,28 @@
         ],
         "parameters": [
           {
+            "in": "header",
+            "name": "repeatability-request-id",
+            "description": "A client-generated identifier for the request.",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
-            "name": "sendNotificationRequest",
+            "name": "sendThreadlessMessageRequest",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sendNotificationRequest"
+              "$ref": "#/definitions/sendThreadlessMessageRequest"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "Cross-platform messaging notification sent.",
+            "description": "Cross-platform threadless message accepted.",
             "schema": {
-              "$ref": "#/definitions/SendNotificationResult"
+              "$ref": "#/definitions/SendThreadlessMessageResult"
             }
           },
           "401": {
@@ -1473,8 +1479,8 @@
         }
       }
     },
-    "sendNotificationRequest": {
-      "description": "Details of the Cross-platform messaging notification to send.",
+    "sendThreadlessMessageRequest": {
+      "description": "Details of the Cross-platform threadless message to send.",
       "required": [
         "type, from, to"
       ],
@@ -1491,35 +1497,35 @@
           "example": "37:whatsapp:16315551234"
         },
         "type": {
-          "$ref": "#/definitions/NotificationType"
+          "$ref": "#/definitions/ThreadlessMessageType"
         },
         "content": {
-          "description": "Broadcasr chat message content.",
+          "description": "Threadless message content.",
           "type": "string",
           "example": "Come on guys, lets go for lunch together."
         },
         "media": {
-          "$ref": "#/definitions/NotificationMedia"
+          "$ref": "#/definitions/Media"
         },
         "template": {
-          "$ref": "#/definitions/NotificationTemplate"
+          "$ref": "#/definitions/Template"
         }
       }
     },
-    "NotificationType": {
-      "description": "The cross-platform messaging notification type.",
+    "ThreadlessMessageType": {
+      "description": "The cross-platform threadless message type.",
       "enum": [
+        "template",
         "image",
-        "text",
-        "template"
+        "text"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "NotificationType",
+        "name": "ThreadlessMessageType",
         "modelAsString": true
       }
     },
-    "NotificationMedia": {
+    "Media": {
       "description": "The media Object",
       "required": [
         "link"
@@ -1533,8 +1539,8 @@
         }
       }
     },
-    "NotificationTemplate": {
-      "description": "The template object used to create notification templates.",
+    "Template": {
+      "description": "The template object used to create templates.",
       "required": [
         "name, language, parameters"
       ],
@@ -1546,12 +1552,12 @@
           "example": "appointment_update"
         },
         "language": {
-          "description": "The codes for the supported languages for notification templates.",
+          "description": "The codes for the supported languages for templates.",
           "type": "string",
           "example": "en_US"
         },
         "parameters": {
-          "description": "Array of parameters for the content of the notification.",
+          "description": "Array of parameters for the content of the template.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1563,10 +1569,11 @@
         }
       }
     },
-    "SendNotificationResult": {
-      "description": "Result of the send cross-platform messaging notification operation.",
+    "SendThreadlessMessageResult": {
+      "description": "Result of the send cross-platform threadless message operation.",
       "required": [
-        "id"
+        "id",
+        "status"
       ],
       "type": "object",
       "properties": {
@@ -1574,6 +1581,11 @@
           "description": "A server-generated message id.",
           "type": "string",
           "example": "123456789"
+        },
+        "status": {
+          "description": "Status of the threadless message",
+          "type": "string",
+          "example": "enqueued"
         }
       }
     },
