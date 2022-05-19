@@ -559,6 +559,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/firmwares/{firmwareId}/generateBinaryHardeningSummary": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmware_GenerateBinaryHardeningSummary",
+        "description": "The operation to list the binary hardening summary percentages for a firmware.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware group."
+          },
+          {
+            "name": "firmwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of firmware."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BinaryHardeningSummary"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate binary hardening list": {
+            "$ref": "./examples/PostGenerateBinaryHardeningSummary.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/firmwares/{firmwareId}/generateBinaryHardeningDetails": {
       "post": {
         "tags": [
@@ -663,6 +713,14 @@
             "modelAsString": true
           }
         },
+        "statusMessages": {
+          "type": "array",
+          "description": "A list of errors or other messages generated during firmware analysis",
+          "items": {
+            "$ref": "#/definitions/StatusMessage"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "description": "Provisioning state of the resource.",
           "type": "string",
@@ -720,6 +778,16 @@
         }
       }
     },
+    "StatusMessage": {
+      "type": "object",
+      "description": "Error status data",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error or status message"
+        }
+      }
+    },
     "UrlData": {
       "type": "object",
       "properties": {
@@ -737,6 +805,12 @@
       "properties": {
         "extractedSize": {
           "description": "Extracted firmware file size.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "fileSize": {
+          "description": "Firmware file size.",
           "type": "integer",
           "format": "int64",
           "x-nullable": true
@@ -761,6 +835,12 @@
         },
         "analysisTimeSeconds": {
           "description": "Time used for analysis",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "rootFileSystems": {
+          "description": "Root file systems found count.",
           "type": "integer",
           "format": "int64",
           "x-nullable": true
@@ -828,7 +908,10 @@
           "items": {
             "$ref": "#/definitions/Component"
           },
-          "description": "The list of component."
+          "description": "The list of components.",
+          "x-ms-identifiers": [
+            "componentId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -930,9 +1013,55 @@
           "description": "class for binary hardening.",
           "type": "string",
           "x-nullable": true
+        },
+        "runpath": {
+          "description": "The runpath of the uploaded firmware.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "rpath": {
+          "description": "The rpath of the uploaded firmware.",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "description": "Binary hardening of a firmware."
+    },
+    "BinaryHardeningSummary": {
+      "type": "object",
+      "properties": {
+        "nx": {
+          "description": "NX summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pie": {
+          "description": "PIE summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "relro": {
+          "description": "RELRO summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "canary": {
+          "description": "Canary summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "stripped": {
+          "description": "Stripped summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "description": "Binary hardening summary percentages."
     },
     "BinaryHardeningList": {
       "type": "object",
@@ -944,7 +1073,10 @@
           "items": {
             "$ref": "#/definitions/BinaryHardening"
           },
-          "description": "The list of binary hardening result."
+          "description": "The list of binary hardening results.",
+          "x-ms-identifiers": [
+            "binaryHardeningId"
+          ]
         },
         "nextLink": {
           "type": "string",
