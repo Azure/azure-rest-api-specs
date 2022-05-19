@@ -596,6 +596,9 @@
           },
           "Create Managed Cluster with CustomCATrust enabled": {
             "$ref": "./examples/ManagedClustersCreate_EnableCustomCATrust.json"
+          },
+          "Create Managed Cluster with or without auto reconciliation": {
+            "$ref": "./examples/ManagedClustersCreate_DisableAutoReconcile.json"
           }
         }
       },
@@ -4435,6 +4438,10 @@
           },
           "title": "PublicNetworkAccess of the managedCluster",
           "description": "Allow or deny public network access for AKS"
+        },
+        "autoReconcileProfile": {
+          "$ref": "#/definitions/ManagedClusterAutoReconcileProfile",
+          "description": "Auto reconcile profile for the managed cluster."
         }
       },
       "description": "Properties of the managed cluster."
@@ -6657,6 +6664,33 @@
           "readOnly": true
         }
       }
+    },
+    "ManagedClusterAutoReconcileProfile": {
+      "type": "object",
+      "properties": {
+        "disable": {
+          "type": "boolean",
+          "description": "Whether a client wants to disable the auto managed cluster reconciliation. The default value is false.",
+          "default": false
+        },
+        "MaxRetryCount": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 10,
+          "minimum": 1,
+          "description": "The maximum count for reconciliation. The default value is 3.",
+          "default": 3
+        },
+        "MaxRetryTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 1000,
+          "minimum": 1,
+          "description": "The maximum duration in minutes for reconciliation. The default value is 200.",
+          "default": 200
+        }
+      },
+      "description": "Auto reconciliation settings for the managed cluster."
     }
   },
   "parameters": {
@@ -6733,3 +6767,5 @@
     }
   }
 }
+
+
