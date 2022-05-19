@@ -155,10 +155,10 @@
     },
     "/app/transactions": {
       "get": {
-        "operationId": "ConfidentialLedger_GetLedgerEntries",
+        "operationId": "ConfidentialLedger_ListLedgerEntries",
         "x-ms-examples": {
           "GetLedgerEntries": {
-            "$ref": "./examples/ledger/GetLedgerEntries.json"
+            "$ref": "./examples/ledger/ListLedgerEntries.json"
           }
         },
         "x-ms-pageable": {
@@ -216,6 +216,7 @@
             "in": "body",
             "name": "entry",
             "description": "Ledger entry.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/LedgerEntry"
             }
@@ -449,6 +450,7 @@
         },
         "summary": "Adds a user or updates a user's fields.",
         "description": "A JSON merge patch is applied for existing users",
+        "consumes": ["application/merge-patch+json"],
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
