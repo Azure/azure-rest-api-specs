@@ -8,7 +8,7 @@
     "application/json"
   ],
   "paths": {
-    "/dataPolicies/{policyName}/scopes/{datasource}": {
+    "/dataPolicies/{policyName}/scopes/{scope}": {
       "put": {
         "tags": [
           "DataPolicyBinding"
@@ -31,8 +31,8 @@
           },
           {
             "in": "path",
-            "name": "datasource",
-            "description": "The datasource.",
+            "name": "scope",
+            "description": "Name of the scope associated with the binding to be created..",
             "required": true,
             "type": "string"
           },
@@ -94,8 +94,8 @@
           },
           {
             "in": "path",
-            "name": "datasource",
-            "description": "Name of the datasource associated with the binding to be deleted.",
+            "name": "scope",
+            "description": "Name of the scope associated with the binding to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -293,7 +293,7 @@
           "DataPolicy"
         ],
         "description": "Updates a data policy",
-        "operationId": "DataPolicy_CreateOrUpdate",
+        "operationId": "DataPolicy_CreateOrReplace",
         "consumes": [
           "application/json"
         ],
@@ -348,8 +348,8 @@
           }
         },
         "x-ms-examples": {
-          "DataPolicy_CreateOrUpdate": {
-            "$ref": "./examples/DataPolicy_CreateOrUpdate.json"
+          "DataPolicy_CreateOrReplace": {
+            "$ref": "./examples/DataPolicy_CreateOrReplace.json"
           }
         }
       },
@@ -668,9 +668,21 @@
         }
       }
     },
-    "DataPolicyRoleProperties": {
+    "DataPolicyRole": {
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The Id of role",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of role",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of role",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "The provisioningState of role",
           "type": "string"
@@ -697,26 +709,6 @@
           "format": "int64",
           "description": "The version of role",
           "type": "integer"
-        }
-      }
-    },
-    "DataPolicyRole": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Id of role",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of role",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of role",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/DataPolicyRoleProperties"
         }
       }
     },
@@ -797,7 +789,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://purview.azure.net/.default": "impersonate your user account"
       },
       "description": "Azure Active Directory OAuth2 Flow."
     }
