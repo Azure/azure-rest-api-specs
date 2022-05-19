@@ -74,7 +74,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests": {
       "get": {
-        "description": "Get all Application Insights web tests defined within a specified resource group.",
+        "description": "Get all Application Insights web tests defined for the specified resource group.",
         "operationId": "WebTests_ListByResourceGroup",
         "parameters": [
           {
@@ -184,7 +184,7 @@
         }
       },
       "patch": {
-        "description": "Creates or updates an Application Insights web test definition.",
+        "description": "Updates the tags associated with an Application Insights web test.",
         "operationId": "WebTests_UpdateTags",
         "parameters": [
           {
@@ -201,7 +201,7 @@
           },
           {
             "name": "WebTestTags",
-            "description": "Updated tag information to set into the web test instance.",
+            "description": "Updated tag information to associate with the web test resource.",
             "in": "body",
             "required": true,
             "schema": {
@@ -257,7 +257,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/webtests": {
       "get": {
-        "description": "Get all Application Insights web test alerts definitions within a subscription.",
+        "description": "Get all Application Insights web test definitions for the specified subscription.",
         "operationId": "WebTests_List",
         "parameters": [
           {
