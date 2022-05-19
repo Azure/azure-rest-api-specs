@@ -813,7 +813,7 @@
           "201": {
             "description": "The test artifact is uploaded.",
             "schema": {
-              "$ref": "#/definitions/FileUrlPath"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -866,7 +866,7 @@
           "200": {
             "description": "The requested test file url",
             "schema": {
-              "$ref": "#/definitions/FileUrlPath"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -1190,7 +1190,7 @@
           "200": {
             "description": "The URL for the requested test run file",
             "schema": {
-              "$ref": "#/definitions/FileUrlPath"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -1744,24 +1744,6 @@
           "items": {
             "$ref": "#/definitions/FileUrl"
           }
-        }
-      }
-    },
-    "FileUrlPath": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Path of the file.",
-          "type": "string"
-        },
-        "url": {
-          "description": "URL of the file.",
-          "type": "string"
-        },
-        "expireTime": {
-          "format": "date-time",
-          "description": "Expiry time of the file.",
-          "type": "string"
         }
       }
     },
