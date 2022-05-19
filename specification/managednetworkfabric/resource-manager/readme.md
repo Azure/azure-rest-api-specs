@@ -40,6 +40,11 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/Operations.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricControllers.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabrics.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDevices.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRacks.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L2IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L3IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/RoutePolicies.json
 ```
 
 ---
@@ -53,6 +58,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

@@ -51,6 +51,12 @@
         "x-ms-examples": {
           "CreateNetworkFabric": {
             "$ref": "./examples/CreateNetworkFabric.json"
+          },
+          "NetworkFabrics_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Create_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_Create_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Create_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -124,6 +130,12 @@
         "x-ms-examples": {
           "GetNetworkFabric": {
             "$ref": "./examples/GetNetworkFabric.json"
+          },
+          "NetworkFabrics_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Get_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_Get_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Get_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -175,6 +187,12 @@
         "x-ms-examples": {
           "UpdateNetworkFabric": {
             "$ref": "./examples/UpdateNetworkFabric.json"
+          },
+          "NetworkFabrics_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Update_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_Update_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Update_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -245,6 +263,12 @@
         "x-ms-examples": {
           "DeleteNetworkFabric": {
             "$ref": "./examples/DeleteNetworkFabric.json"
+          },
+          "NetworkFabrics_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Delete_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Delete_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -302,6 +326,12 @@
         "x-ms-examples": {
           "ListByResourceGroupNetworkFabric": {
             "$ref": "./examples/ListByResourceGroupNetworkFabric.json"
+          },
+          "NetworkFabrics_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -342,6 +372,12 @@
         "x-ms-examples": {
           "ListBySubscriptionNetworkFabric": {
             "$ref": "./examples/ListBySubscriptionNetworkFabric.json"
+          },
+          "NetworkFabrics_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -371,222 +407,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/provision": {
-      "post": {
-        "tags": [
-          "NetworkFabrics"
-        ],
-        "operationId": "NetworkFabrics_Provision",
-        "description": "Provision the NetworkFabric.",
-        "summary": "Implements the operation to provision a NetworkFabric.",
-        "x-ms-examples": {
-          "ProvisionNetworkFabric": {
-            "$ref": "./examples/GenericActionNetworkFabric.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "networkFabricName",
-            "description": "Name of the NetworkFabric.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/deprovision": {
-      "post": {
-        "tags": [
-          "NetworkFabrics"
-        ],
-        "operationId": "NetworkFabrics_Deprovision",
-        "description": "Deprovision the NetworkFabric.",
-        "summary": "Implements the operation to deprovision a NetworkFabric.",
-        "x-ms-examples": {
-          "DeprovisionNetworkFabric": {
-            "$ref": "./examples/GenericActionNetworkFabric.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "networkFabricName",
-            "description": "Name of the NetworkFabric.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/deferControl": {
-      "post": {
-        "tags": [
-          "NetworkFabrics"
-        ],
-        "operationId": "NetworkFabrics_DeferControl",
-        "description": "DeferControl the NetworkFabric.",
-        "summary": "Implements the operation to defer control to the manual manager of the NetworkFabric. No action (other than takeControl) can be performed after the control is deferred.",
-        "x-ms-examples": {
-          "DeferControlNetworkFabric": {
-            "$ref": "./examples/GenericActionNetworkFabric.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "networkFabricName",
-            "description": "Name of the NetworkFabric.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/takeControl": {
-      "post": {
-        "tags": [
-          "NetworkFabrics"
-        ],
-        "operationId": "NetworkFabrics_TakeControl",
-        "description": "TakeControl of the NetworkFabric.",
-        "summary": "Implements the operation to take back control from the manual manager of the NetworkFabric. No actions can be performed on the Network Fabric as long as the control is not taken back.",
-        "x-ms-examples": {
-          "TakeControlNetworkFabric": {
-            "$ref": "./examples/GenericActionNetworkFabric.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "networkFabricName",
-            "description": "Name of the NetworkFabric.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/validateConfiguration": {
       "post": {
         "tags": [
@@ -598,6 +418,12 @@
         "x-ms-examples": {
           "ValidateConfigurationNetworkFabric": {
             "$ref": "./examples/GenericActionNetworkFabric.json"
+          },
+          "NetworkFabrics_validateConfiguration_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_validateConfiguration_MaximumSet_Gen.json"
+          },
+          "NetworkFabrics_validateConfiguration_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_validateConfiguration_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -773,10 +599,40 @@
       "properties": {
         "racks": {
           "type": "array",
-          "description": "Rack Azure resource IDs from this Network Fabric. The number of racks allowed depends on the Network Fabric SKU.",
+          "description": "NetworkRack Azure resource IDs from this Network Fabric. The number of racks allowed depends on the Network Fabric SKU.",
           "items": {
-            "description": "Rack Azure resource ID.",
+            "description": "NetworkRack Azure resource ID.",
             "type": "string"
+          }
+        },
+        "l2IsolationDomains": {
+          "type": "array",
+          "description": "L2IsolationDomain Azure resource IDs from this Network Fabric.",
+          "items": {
+            "description": "L2IsolationDomain Azure resource ID.",
+            "type": "string"
+          }
+        },
+        "l3IsolationDomains": {
+          "type": "array",
+          "description": "L3IsolationDomain Azure resource IDs from this Network Fabric.",
+          "items": {
+            "description": "L3IsolationDomain Azure resource ID.",
+            "type": "string"
+          }
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState state for the desired action on the resource.",
+          "enum": [
+            "Provision",
+            "Deprovision",
+            "DeferredControl",
+            "TakeControl"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AdministrativeState"
           }
         }
       }
@@ -1037,8 +893,6 @@
         "Deprovisioning",
         "Deprovisioned",
         "ErrorDeprovisioning",
-        "ValidationPassed",
-        "ValidationFailed",
         "DeferredControl"
       ],
       "x-ms-enum": {

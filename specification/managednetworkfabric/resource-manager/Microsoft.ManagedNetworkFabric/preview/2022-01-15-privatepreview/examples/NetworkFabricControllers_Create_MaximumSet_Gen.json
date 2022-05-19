@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "rgnetworkfabriccontrollers",
+    "api-version": "2022-01-15-privatepreview",
+    "networkFabricControllerName": "aaaaaaaaa",
+    "body": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "expressRouteConnections": [
+          {
+            "expressRouteCircuitId": "circuit1",
+            "expressRouteAuthorizationKey": "authkey1"
+          },
+          {
+            "expressRouteCircuitId": "circuit2",
+            "expressRouteAuthorizationKey": "authkey2"
+          }
+        ],
+        "ipv4AddressSpaces": [
+          "10.0.0.1/32",
+          "10.0.0.2/32"
+        ],
+        "ipv6AddressSpaces": [
+          "fc00::/8",
+          "fc01::/8"
+        ],
+        "managedResourceGroupConfiguration": {
+          "name": "aaaaaaaaaaaaa",
+          "location": "aaaaaaaaaa"
+        },
+        "operationalState": "Configuring",
+        "annotation": "aaaaaa"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "expressRouteConnections": [
+            {
+              "expressRouteCircuitId": "circuit1"
+            },
+            {
+              "expressRouteCircuitId": "circuit2"
+            }
+          ],
+          "ipv4AddressSpaces": [
+            "10.0.0.1/32",
+            "10.0.0.2/32"
+          ],
+          "ipv6AddressSpaces": [
+            "fc00::/8",
+            "fc01::/8"
+          ],
+          "managedResourceGroupConfiguration": {
+            "name": "aaaaaaaaaaaaa",
+            "location": "aaaaaaaaaa"
+          },
+          "expressRouteConnectionStatus": [
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            },
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            }
+          ],
+          "operationalState": "Configuring",
+          "provisioningState": "Succeeded",
+          "annotation": "aaaaaa"
+        },
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
+        "name": "testNetworkFabricController1",
+        "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "aaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-05-16T12:52:02.559Z",
+          "lastModifiedBy": "aaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-16T12:52:02.560Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "expressRouteConnections": [
+            {
+              "expressRouteCircuitId": "circuit1"
+            },
+            {
+              "expressRouteCircuitId": "circuit2"
+            }
+          ],
+          "ipv4AddressSpaces": [
+            "10.0.0.1/32",
+            "10.0.0.2/32"
+          ],
+          "ipv6AddressSpaces": [
+            "fc00::/8",
+            "fc01::/8"
+          ],
+          "managedResourceGroupConfiguration": {
+            "name": "aaaaaaaaaaaaa",
+            "location": "aaaaaaaaaa"
+          },
+          "expressRouteConnectionStatus": [
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            },
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            }
+          ],
+          "operationalState": "Configuring",
+          "provisioningState": "Succeeded",
+          "annotation": "aaaaaa"
+        },
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
+        "name": "testNetworkFabricController1",
+        "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "aaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-05-16T12:52:02.559Z",
+          "lastModifiedBy": "aaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-16T12:52:02.560Z"
+        }
+      }
+    }
+  }
+}

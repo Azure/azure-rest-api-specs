@@ -1,0 +1,1644 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2022-01-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomain/{l3IsolationDomainName}": {
+      "put": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Create",
+        "summary": "Create L3 Isolation Domain.",
+        "description": "Implements L3 Isolation Domain PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Create_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Create_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_Create_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Get",
+        "summary": "Gets a L3 Isolation Domain.",
+        "description": "Implements L3 Isolation Domain GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Get_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Get_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_Get_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Update",
+        "summary": "Updates a L3 Isolation Domain.",
+        "description": "API to update certain properties of the L3 Isolation Domain resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "L3 Isolation Domain properties to update.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Update_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Update_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_Update_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Delete",
+        "summary": "Deletes a L3 Isolation Domain.",
+        "description": "Implements L3 Isolation Domain DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Delete_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomain": {
+      "get": {
+        "operationId": "L3IsolationDomains_ListByResourceGroup",
+        "summary": "List L3IsolationDomains by resource group.",
+        "description": "Implements L3IsolationDomains list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all L3IsolationDomains under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomain": {
+      "get": {
+        "operationId": "L3IsolationDomains_ListBySubscription",
+        "summary": "List L3IsolationDomains by subscription.",
+        "description": "Implements L3IsolationDomains list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all L3IsolationDomains under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "L3IsolationDomains_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southboundNetworks/{southboundNetworkName}": {
+      "put": {
+        "tags": [
+          "SouthboundNetworks"
+        ],
+        "operationId": "SouthboundNetworks_Create",
+        "summary": "Create SouthboundNetwork.",
+        "description": "Implements SouthboundNetwork PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "southboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the SouthboundNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SouthboundNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Create_MaximumSet_Gen.json"
+          },
+          "SouthboundNetworks_Create_MinimumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SouthboundNetworks"
+        ],
+        "operationId": "SouthboundNetworks_Get",
+        "summary": "Gets a SouthboundNetworks.",
+        "description": "Implements SouthboundNetworks GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "southboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the SouthboundNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SouthboundNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Get_MaximumSet_Gen.json"
+          },
+          "SouthboundNetworks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SouthboundNetworks"
+        ],
+        "operationId": "SouthboundNetworks_Update",
+        "summary": "Updates a SouthboundNetworks.",
+        "description": "API to update certain properties of the SouthboundNetworks resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "southboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the SouthboundNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "NorthBoundNetwork properties to update. Only annotations are supported.",
+            "schema": {
+              "$ref": "#/definitions/SouthBoundNetworkPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SouthboundNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Update_MaximumSet_Gen.json"
+          },
+          "SouthboundNetworks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SouthboundNetworks"
+        ],
+        "operationId": "SouthboundNetworks_Delete",
+        "summary": "Deletes a SouthboundNetworks.",
+        "description": "Implements SouthboundNetworks DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "southboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the SouthboundNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SouthboundNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Delete_MaximumSet_Gen.json"
+          },
+          "SouthboundNetworks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/SouthboundNetworks_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southboundNetworks": {
+      "get": {
+        "operationId": "SouthBoundNetworks_ListByResourceGroup",
+        "summary": "List all South Bound Networks within an isolation domain.",
+        "description": "Implements South Bound Networks list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkInterfaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/SouthboundNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SouthBoundNetworks_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/SouthBoundNetworks_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "SouthBoundNetworks_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/SouthBoundNetworks_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northboundNetworks/{northboundNetworkName}": {
+      "put": {
+        "tags": [
+          "NorthboundNetworks"
+        ],
+        "operationId": "NorthboundNetworks_Create",
+        "summary": "Create NorthboundNetwork.",
+        "description": "Implements NorthboundNetwork PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "northboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NorthboundNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NorthboundNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NorthboundNetworks_Create_MaximumSet_Gen.json"
+          },
+          "NorthboundNetworks_Create_MinimumSet_Gen": {
+            "$ref": "./examples/NorthboundNetworks_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NorthBoundNetworks"
+        ],
+        "operationId": "NorthBoundNetworks_Get",
+        "summary": "Gets a NorthBoundNetworks.",
+        "description": "Implements NorthBoundNetworks GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "northboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NorthboundNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NorthBoundNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Get_MaximumSet_Gen.json"
+          },
+          "NorthBoundNetworks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NorthBoundNetworks"
+        ],
+        "operationId": "NorthBoundNetworks_Update",
+        "summary": "Updates a NorthBoundNetworks.",
+        "description": "API to update certain properties of the NorthBoundNetworks resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "northboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NorthboundNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "NorthBoundNetwork properties to update. Only annotations are supported.",
+            "schema": {
+              "$ref": "#/definitions/NorthBoundNetworkPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NorthBoundNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Update_MaximumSet_Gen.json"
+          },
+          "NorthBoundNetworks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NorthBoundNetworks"
+        ],
+        "operationId": "NorthBoundNetworks_Delete",
+        "summary": "Deletes a NorthBoundNetworks.",
+        "description": "Implements NorthBoundNetworks DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "northboundNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NorthboundNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NorthBoundNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Delete_MaximumSet_Gen.json"
+          },
+          "NorthBoundNetworks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northboundNetworks": {
+      "get": {
+        "operationId": "NorthBoundNetworks_ListByResourceGroup",
+        "summary": "List all North Bound Networks within an isolation domain.",
+        "description": "Implements North Bound Networks list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkInterfaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NorthboundNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NorthBoundNetworks_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "NorthBoundNetworks_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/NorthBoundNetworks_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "L3IsolationDomainProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "L3 Isolation Domain description."
+        },
+        "southbound": {
+          "type": "object",
+          "description": "Southbound configuration.",
+          "properties": {
+            "importRoutePolicyId": {
+              "type": "string",
+              "description": "importRoutePolicy resource id."
+            },
+            "exportRoutePolicyId": {
+              "type": "string",
+              "description": "exportRoutePolicy resource id."
+            },
+            "administrativeState": {
+              "type": "string",
+              "description": "administrativeState of the network interface. Example: up | down."
+            },
+            "operationalState": {
+              "type": "string",
+              "description": "state. Example: Enabled | Disabled.",
+              "readOnly": true
+            }
+          }
+        },
+        "northbound": {
+          "type": "object",
+          "description": "Northbound configuration.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ],
+          "properties": {
+            "importRoutePolicyId": {
+              "type": "string",
+              "description": "importRoutePolicy resource id."
+            },
+            "exportRoutePolicyId": {
+              "type": "string",
+              "description": "exportRoutePolicy resource id."
+            },
+            "optionBConfiguration": {
+              "type": "object",
+              "description": "optionBConfiguration configuration.",
+              "properties": {
+                "importRouteTargets": {
+                  "type": "array",
+                  "description": "List with integer importRouteTargets.",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "importRouteTarget value."
+                  }
+                },
+                "exportRouteTargets": {
+                  "type": "array",
+                  "description": "List with integer exportRouteTargets.",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "exportRouteTarget value."
+                  }
+                },
+                "administrativeState": {
+                  "type": "string",
+                  "description": "administrativeState of the network interface. Example: up | down."
+                },
+                "operationalState": {
+                  "type": "string",
+                  "description": "state. Example: Enabled | Disabled.",
+                  "readOnly": true
+                }
+              }
+            }
+          }
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState of the network interface. Example: up | down."
+        },
+        "operationalState": {
+          "type": "string",
+          "description": "state. Example: Enabled | Disabled.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "L3IsolationDomainProperties define the resource properties."
+    },
+    "L3IsolationDomainPatchProperties": {
+      "type": "object",
+      "properties": {},
+      "description": "L3IsolationDomainPatchProperties define the patch resource properties."
+    },
+    "L3IsolationDomain": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/L3IsolationDomainProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The L3IsolationDomain resource definition."
+    },
+    "L3IsolationDomainPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/L3IsolationDomainPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The L3IsolationDomain patch resource definition."
+    },
+    "L3IsolationDomainsListResult": {
+      "type": "object",
+      "description": "List of L3IsolationDomains.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of L3IsolationDomain resources.",
+          "items": {
+            "$ref": "#/definitions/L3IsolationDomain"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SouthboundNetwork": {
+      "description": "Defines the SouthboundNetwork item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/SouthboundNetworkProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NorthboundNetwork": {
+      "description": "Defines the NorthboundNetwork item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NorthboundNetworkProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NorthboundNetworksList": {
+      "type": "object",
+      "description": "List of NorthboundNetworks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NorthboundNetworks resources.",
+          "items": {
+            "$ref": "#/definitions/NorthboundNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SouthboundNetworksList": {
+      "type": "object",
+      "description": "List of SouthboundNetworks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SouthboundNetworks resources.",
+          "items": {
+            "$ref": "#/definitions/SouthboundNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "NorthBoundNetworkPatch": {
+      "type": "object",
+      "description": "The NorthBoundNetwork patch resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "North Bound Network Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      }
+    },
+    "SouthBoundNetworkPatch": {
+      "type": "object",
+      "description": "The SouthBoundNetwork patch resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "South Bound Network Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      }
+    },
+    "NorthboundNetworkProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vlanId. Example: 200."
+        },
+        "fabricASN": {
+          "type": "integer",
+          "format": "int32",
+          "description": "fabricASN. Example: 12076."
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int32",
+          "description": "peerASN. Example: 12076."
+        },
+        "ipv4Prefix": {
+          "type": "string",
+          "description": "ipv4Prefix. Example: 123.0.0.0/30."
+        },
+        "ipv6Prefix": {
+          "type": "string",
+          "description": "ipv6Prefix. Example: 3FFE:FFFF:0:CD30::/126."
+        },
+        "bfdConfiguration": {
+          "type": "object",
+          "properties": {
+            "operationalState": {
+              "type": "string",
+              "description": "state. Example: Enabled | Disabled.",
+              "readOnly": true
+            },
+            "administrativeState": {
+              "type": "string",
+              "description": "state. Example: Enabled | Disabled."
+            },
+            "interval": {
+              "type": "integer",
+              "format": "int32",
+              "description": "interval in seconds. Example: 300."
+            },
+            "multiplier": {
+              "type": "integer",
+              "format": "int32",
+              "description": "multiplier. Example: 3."
+            }
+          }
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState of the network interface. Example: up | down."
+        },
+        "operationalState": {
+          "type": "string",
+          "description": "state. Example: Enabled | Disabled.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "NorthboundNetworkProperties define the resource properties."
+    },
+    "SouthboundNetworkProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vlanId. Example: 200."
+        },
+        "stretchedVlan": {
+          "type": "boolean",
+          "description": "Whether the southbound vlan is a stretched vlan."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "mtu. Example: 9000."
+        },
+        "connectedIPv4Subnets": {
+          "type": "array",
+          "description": "List with object connectedIPv4Subnets.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "connectedIPv4Subnet model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the connectedIPv4Subnet."
+              },
+              "gateway": {
+                "type": "string",
+                "description": "gateway of the connectedIPv4Subnet."
+              }
+            }
+          }
+        },
+        "connectedIPv6Subnets": {
+          "type": "array",
+          "description": "List with object connectedIPv6Subnets.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "connectedIPv6Subnet model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the connectedIPv6Subnet."
+              },
+              "gateway": {
+                "type": "string",
+                "description": "gateway of the connectedIPv6Subnet."
+              }
+            }
+          }
+        },
+        "staticIpv4Routes": {
+          "type": "array",
+          "description": "List with object staticIpv4Routes.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "staticIpv4Route model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the staticIpv4Route."
+              },
+              "nextHop": {
+                "type": "array",
+                "description": "List of next hop ipv4 addresses.",
+                "items": {
+                  "type": "string",
+                  "description": "Next Hop IPv4 address."
+                }
+              }
+            }
+          }
+        },
+        "staticIpv6Routes": {
+          "type": "array",
+          "description": "List with object staticIpv6Routes.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "staticIpv6Route model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the staticIpv6Route."
+              },
+              "nextHop": {
+                "type": "array",
+                "description": "List of next hop ipv6 addresses.",
+                "items": {
+                  "type": "string",
+                  "description": "Next Hop IPv6 address."
+                }
+              }
+            }
+          }
+        },
+        "bgpConfiguration": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource",
+              "description": "Common properties for annotated type."
+            }
+          ],
+          "properties": {
+            "bfdConfiguration": {
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "./common.json#/definitions/AnnotationResource",
+                  "description": "Common properties for annotated type."
+                }
+              ],
+              "properties": {
+                "operationalState": {
+                  "type": "string",
+                  "description": "state. Example: Enabled | Disabled.",
+                  "readOnly": true
+                },
+                "administrativeState": {
+                  "type": "string",
+                  "description": "state. Example: Enabled | Disabled."
+                },
+                "interval": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "interval in seconds. Example: 300."
+                },
+                "multiplier": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "multiplier. Example: 3."
+                }
+              }
+            },
+            "fabricASN": {
+              "type": "integer",
+              "format": "int32",
+              "description": "fabricASN. Example: 12076."
+            },
+            "peerASN": {
+              "type": "integer",
+              "format": "int32",
+              "description": "peerASN. Example: 12076."
+            },
+            "ipv4Prefix": {
+              "type": "string",
+              "description": "ipv4Prefix. Example: 123.0.0.0/30."
+            },
+            "ipv6Prefix": {
+              "type": "string",
+              "description": "ipv6Prefix. Example: 3FFE:FFFF:0:CD30::/126."
+            },
+            "ipv4NeighborAddress": {
+              "type": "array",
+              "description": "List with stringified ipv4NeighborAddresses.",
+              "x-ms-identifiers": [
+                "address"
+              ],
+              "items": {
+                "type": "object",
+                "description": "ipv4NeighborAddress model.",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "ip address of the ipv4NeighborAddress."
+                  },
+                  "operationalState": {
+                    "type": "string",
+                    "description": "operationalState of the ipv4NeighborAddress.",
+                    "readOnly": true
+                  }
+                }
+              }
+            },
+            "ipv6NeighborAddress": {
+              "type": "array",
+              "description": "List with stringified ipv6NeighborAddress.",
+              "x-ms-identifiers": [
+                "address"
+              ],
+              "items": {
+                "type": "object",
+                "description": "ipv6NeighborAddress model.",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "ip address of the ipv6NeighborAddress."
+                  },
+                  "operationalState": {
+                    "type": "string",
+                    "description": "operationalState of the ipv6NeighborAddress.",
+                    "readOnly": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState of the network interface. Example: up | down."
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "SouthboundNetworkProperties define the resource properties."
+    }
+  },
+  "parameters": {}
+}

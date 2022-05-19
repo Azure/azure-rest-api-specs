@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "rgnetworkfabriccontrollers",
+    "api-version": "2022-01-15-privatepreview",
+    "networkFabricControllerName": "aaaaaaaaaaaaaaaaaa",
+    "body": {
+      "tags": {},
+      "properties": {
+        "ipv4AddressSpaces": [
+          "10.0.0.1/32",
+          "10.0.0.2/32"
+        ],
+        "expressRouteConnections": [
+          {
+            "expressRouteCircuitId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+            "expressRouteAuthorizationKey": "aaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "ipv6AddressSpaces": [
+          "aaaaaaaaaaaaaaa"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "expressRouteConnections": [
+            {
+              "expressRouteCircuitId": "aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            {
+              "expressRouteCircuitId": "circuit2"
+            }
+          ],
+          "ipv4AddressSpaces": [
+            "10.0.0.1/32",
+            "10.0.0.2/32"
+          ],
+          "ipv6AddressSpaces": [
+            "aaaaaaaaaaaaaaa",
+            "fc01::/8"
+          ],
+          "managedResourceGroupConfiguration": {
+            "name": "aaaaaaaaaaaaa",
+            "location": "aaaaaaaaaa"
+          },
+          "expressRouteConnectionStatus": [
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            },
+            {
+              "expressRouteCircuitId": "circuit1",
+              "expressRouteStatus": "Connected"
+            }
+          ],
+          "operationalState": "Configuring",
+          "provisioningState": "Succeeded",
+          "annotation": "aaaaaa"
+        },
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
+        "name": "testNetworkFabricController1",
+        "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "aaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-05-16T12:52:02.559Z",
+          "lastModifiedBy": "aaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-16T12:52:02.560Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

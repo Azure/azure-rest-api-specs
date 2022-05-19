@@ -1,0 +1,920 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2022-01-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}": {
+      "put": {
+        "tags": [
+          "NetworkDevices"
+        ],
+        "operationId": "NetworkDevices_Create",
+        "summary": "Create Network Device.",
+        "description": "Implements Network Device PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Device"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevice"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Create_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_Create_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkDevices"
+        ],
+        "operationId": "NetworkDevices_Get",
+        "summary": "Gets a Network Device.",
+        "description": "Implements Network Device GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Device"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkDevices_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Get_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_Get_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkDevices"
+        ],
+        "operationId": "NetworkDevices_Update",
+        "summary": "Updates a Network Device.",
+        "description": "API to update certain properties of the Network Device resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Device"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Device properties to update.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevicePatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevice"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Update_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_Update_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkDevices"
+        ],
+        "operationId": "NetworkDevices_Delete",
+        "summary": "Deletes a Network Device.",
+        "description": "Implements Network Device DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Device"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Delete_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices": {
+      "get": {
+        "operationId": "NetworkDevices_ListByResourceGroup",
+        "summary": "List NetworkDevices by resource group.",
+        "description": "Implements NetworkDevices list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkDevices under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevicesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkDevices": {
+      "get": {
+        "operationId": "NetworkDevices_ListBySubscription",
+        "summary": "List NetworkDevices by subscription.",
+        "description": "Implements NetworkDevices list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkDevices under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDevicesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "NetworkDevices_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}/networkInterfaces/{networkInterfaceName}": {
+      "put": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_Create",
+        "summary": "Create NetworkInterface.",
+        "description": "Implements NetworkInterface PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkDevice"
+          },
+          {
+            "in": "path",
+            "name": "networkInterfaceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkInterface"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkInterfaces_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Create_MaximumSet_Gen.json"
+          },
+          "NetworkInterfaces_Create_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_Get",
+        "summary": "Gets a NetworkInterface.",
+        "description": "Implements NetworkInterface GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkDevice"
+          },
+          {
+            "in": "path",
+            "name": "networkInterfaceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkInterfaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkInterfaces_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Get_MaximumSet_Gen.json"
+          },
+          "NetworkInterfaces_Get_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_Update",
+        "summary": "Updates a NetworkInterface.",
+        "description": "API to update certain properties of the NetworkInterface resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkDevice"
+          },
+          {
+            "in": "path",
+            "name": "networkInterfaceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkInterfaceName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "NetworkInterface properties to update. Only tags are supported.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfacePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkInterfaces_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Update_MaximumSet_Gen.json"
+          },
+          "NetworkInterfaces_Update_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_Delete",
+        "summary": "Deletes a NetworkInterface.",
+        "description": "Implements NetworkInterface DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkDevice"
+          },
+          {
+            "in": "path",
+            "name": "networkInterfaceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkInterfaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkInterfaces_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Delete_MaximumSet_Gen.json"
+          },
+          "NetworkInterfaces_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}/networkInterfaces": {
+      "get": {
+        "operationId": "NetworkInterfaces_ListByResourceGroup",
+        "summary": "List all Network Interfaces that are available using an Network Device.",
+        "description": "Implements Network Interfaces list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkDeviceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkDevice."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkInterfaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfacesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkInterfaces_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "NetworkInterfaces_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkInterfaces_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkInterfaceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "physicalIdentifier": {
+          "type": "string",
+          "description": "physicalIdentifier of the network interface.",
+          "readOnly": true
+        },
+        "operationalState": {
+          "type": "string",
+          "description": "operationalState of the network interface.",
+          "readOnly": true
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState of the network interface. Example: up | down."
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "NetworkInterfaceProperties define the resource properties."
+    },
+    "NetworkDevicePatchableProperties": {
+      "title": "Network Device updatable properties",
+      "type": "object",
+      "properties": {
+        "networkDeviceSku": {
+          "type": "string",
+          "description": "Network Device SKU name."
+        },
+        "networkDeviceRole": {
+          "type": "string",
+          "description": "networkDeviceRole is the device role: Example: CE | ToR."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "deviceName will be used for internal device naming."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "serialNumber is required to be entered by the user."
+        }
+      }
+    },
+    "NetworkDevicePatchParameters": {
+      "type": "object",
+      "description": "The NetworkDevicePatchParameters resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Network Device Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            },
+            {
+              "$ref": "#/definitions/NetworkDevicePatchableProperties"
+            }
+          ]
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkDeviceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/NetworkDevicePatchableProperties",
+          "description": "Common patchable properties for Network Device."
+        }
+      ],
+      "properties": {
+        "powerState": {
+          "description": "Gets the powerState state of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationalState": {
+          "description": "Gets the operational state of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "networkDeviceSku",
+        "networkDeviceRole",
+        "serialNumber"
+      ],
+      "description": "NetworkDeviceProperties define the resource properties."
+    },
+    "NetworkDevice": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The NetworkDevice resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkDeviceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkInterface": {
+      "description": "Defines the NetworkInterface item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkInterfaceProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NetworkInterfacePatch": {
+      "type": "object",
+      "description": "The NetworkInterfacePatch resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Network Interface Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      }
+    },
+    "NetworkDevicesListResult": {
+      "type": "object",
+      "description": "List of NetworkDevices.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkDevice resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkDevice"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "NetworkInterfacesList": {
+      "type": "object",
+      "description": "List of NetworkInterfaces.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkInterfaces resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

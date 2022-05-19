@@ -11,9 +11,8 @@ go:
 
 ```yaml $(go) && $(track2)
 azure-arm: true
-license-header: MICROSOFT_APACHE_NO_VERSION
-namespace: managednetworkfabric
-module-name: sdk/$(namespace)/arm$(namespace)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/managednetworkfabric/armmanagednetworkfabric
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 ```
