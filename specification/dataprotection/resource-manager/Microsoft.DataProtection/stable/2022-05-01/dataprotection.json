@@ -4968,17 +4968,17 @@
           "readOnly": true,
           "type": "string"
         },
+        "type": {
+          "description": "Proxy Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "readOnly": true,
+          "type": "string"
+        },
         "tags": {
           "additionalProperties": {
             "type": "string"
           },
           "description": "Proxy Resource tags.",
           "type": "object"
-        },
-        "type": {
-          "description": "Proxy Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "readOnly": true,
-          "type": "string"
         },
         "systemData": {
           "$ref": "#/definitions/systemData"
@@ -6121,7 +6121,8 @@
           "description": "Gets or sets the type.",
           "enum": [
             "GeoRedundant",
-            "LocallyRedundant"
+            "LocallyRedundant",
+            "ZoneRedundant"
           ],
           "type": "string",
           "x-ms-enum": {
