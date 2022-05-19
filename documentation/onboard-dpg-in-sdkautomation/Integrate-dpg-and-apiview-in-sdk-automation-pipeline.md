@@ -23,6 +23,7 @@ __Description:__
       require:
         - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
       ```
+   2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated same as `require` block.
 5. SDK automation script generates SDK with the modified `autorest.md` or `README.md`.
 6. SDK Automation Pipeline Framework creates ApiView based on the generated SDK.
 7. Add comments about the sdk generation result and created ApiView to swagger PR.
