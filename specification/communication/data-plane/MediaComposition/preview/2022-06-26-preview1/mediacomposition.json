@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Media Composition Service",
     "description": "Azure Communication Media Composition Service",
-    "version": "2022-06-26-preview"
+    "version": "2022-06-26-preview1"
   },
   "paths": {
     "/mediaCompositions/{mediaCompositionId}": {
@@ -167,12 +167,12 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "Create new Media Composition": {
             "$ref": "./examples/MediaComposition_CreateMediaComposition.json"
           }
-        },
-        "x-ms-azure-resource": true
+        }
       },
       "patch": {
         "tags": [
@@ -412,7 +412,7 @@
           }
         },
         "x-ms-examples": {
-          "Start Media Composition - Change source": {
+          "Start Media Composition": {
             "$ref": "./examples/MediaComposition_StartMediaComposition.json"
           }
         }
@@ -492,7 +492,7 @@
           }
         },
         "x-ms-examples": {
-          "Stop Media Composition - Change source": {
+          "Stop Media Composition": {
             "$ref": "./examples/MediaComposition_StopMediaComposition.json"
           }
         }
@@ -501,6 +501,7 @@
   },
   "definitions": {
     "AudiencePosition": {
+      "description": "Position of the audience streams",
       "enum": [
         "top",
         "right",
@@ -510,35 +511,69 @@
       "type": "string",
       "x-ms-enum": {
         "name": "AudiencePosition",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AutoGridLayoutOptions": {
+      "description": "Configure the autogrid layout",
       "required": [
         "inputIds"
       ],
       "type": "object",
       "properties": {
         "inputIds": {
+          "description": "Input ids to be included in the layout",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "trackDominantSpeaker": {
+        "highlightDominantSpeaker": {
+          "description": "Toggle dominant speaker highlighting",
           "type": "boolean"
         }
       }
     },
     "CommunicationCallIdentifierModel": {
+      "description": "Identifies a teams meeting or group call defined in inputs",
+      "required": [
+        "call"
+      ],
       "type": "object",
       "properties": {
         "call": {
+          "description": "The id of the teams meeting or call",
           "type": "string"
         }
       }
     },
+    "CommunicationIdentifierModel": {
+      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
+      "type": "object",
+      "properties": {
+        "communicationUser": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+        },
+        "microsoftTeamsUser": {
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel"
+        }
+      }
+    },
+    "CommunicationUserIdentifierModel": {
+      "description": "A user that got created with an Azure Communication Services resource.",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Id of the communication user."
+        }
+      }
+    },
     "CompositionStreamState": {
+      "description": "State of the composition stream",
       "enum": [
         "notStarted",
         "running",
@@ -547,10 +582,34 @@
       "type": "string",
       "x-ms-enum": {
         "name": "CompositionStreamState",
-        "modelAsString": false
+        "modelAsString": true
+      }
+    },
+    "CustomLayoutOptions": {
+      "description": "Configure custom layout",
+      "required": [
+        "inputGroups"
+      ],
+      "type": "object",
+      "properties": {
+        "layers": {
+          "description": "Configure layer to control the z-position of input groups",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Layer"
+          }
+        },
+        "inputGroups": {
+          "description": "Configure input groups of the layout",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InputGroup"
+          }
+        }
       }
     },
     "GridLayoutOptions": {
+      "description": "Configure the grid layout",
       "required": [
         "columns",
         "inputIds",
@@ -560,57 +619,82 @@
       "properties": {
         "rows": {
           "format": "int32",
+          "description": "Number of rows",
           "type": "integer"
         },
         "columns": {
           "format": "int32",
+          "description": "Number of columns",
           "type": "integer"
         },
-        "inputIds": {}
+        "inputIds": {
+          "description": "Input ids to be included in the layout."
+        }
       }
     },
     "GroupCall": {
+      "description": "Group call to be used as an input or output",
+      "required": [
+        "id"
+      ],
       "type": "object",
       "properties": {
         "id": {
+          "description": "Group call identifier",
           "type": "string"
         }
       }
     },
     "Image": {
+      "description": "An image input",
+      "required": [
+        "uri"
+      ],
       "type": "object",
       "properties": {
         "uri": {
+          "description": "Url of the image file",
           "type": "string"
         }
       }
     },
     "InputGroup": {
+      "description": "Configure input group to be used in custom layouts",
       "required": [
         "inputIds"
       ],
       "type": "object",
       "properties": {
-        "inputIds": {},
+        "inputIds": {
+          "description": "Input ids to be included in the layout."
+        },
         "position": {
           "$ref": "#/definitions/Position"
         },
-        "width": {},
-        "height": {},
+        "width": {
+          "description": "The width of the input group container. Can be a number or percentage string"
+        },
+        "height": {
+          "description": "The height of the input group container. Can be a number or percentage string"
+        },
         "rows": {
           "format": "int32",
+          "description": "Number of rows",
           "type": "integer"
         },
         "columns": {
           "format": "int32",
+          "description": "Number of columns",
           "type": "integer"
         },
         "layer": {
+          "description": "The layer this input group should appear on",
           "type": "string"
         }
       }
     },
     "Layer": {
+      "description": "Configure layer to control the z-position of input groups",
       "required": [
         "zIndex"
       ],
@@ -618,6 +702,7 @@
       "properties": {
         "zIndex": {
           "format": "int32",
+          "description": "The z position of the layer",
           "type": "integer"
         },
         "visibility": {
@@ -626,6 +711,7 @@
       }
     },
     "LayerVisibility": {
+      "description": "The visibility of the layer",
       "enum": [
         "visible",
         "hidden"
@@ -633,10 +719,11 @@
       "type": "string",
       "x-ms-enum": {
         "name": "LayerVisibility",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "Layout": {
+      "description": "Configure a layout",
       "type": "object",
       "properties": {
         "resolution": {
@@ -654,19 +741,11 @@
         "presentation": {
           "$ref": "#/definitions/PresentationLayoutOptions"
         },
-        "layers": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Layer"
-          }
-        },
-        "inputGroups": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/InputGroup"
-          }
+        "custom": {
+          "$ref": "#/definitions/CustomLayoutOptions"
         },
         "placeholderImageUri": {
+          "description": "Set global placeholder image",
           "type": "string"
         },
         "kind": {
@@ -675,6 +754,7 @@
       }
     },
     "LayoutType": {
+      "description": "Kind of layout",
       "enum": [
         "custom",
         "grid",
@@ -685,25 +765,29 @@
       "type": "string",
       "x-ms-enum": {
         "name": "LayoutType",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "MediaCompositionBody": {
+      "description": "Body of a media composition",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Id of the media composition",
           "type": "string"
         },
         "layout": {
           "$ref": "#/definitions/Layout"
         },
         "inputs": {
+          "description": "Inputs used in the composition",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/MediaInput"
           }
         },
         "outputs": {
+          "description": "Outputs used in the composition",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/MediaOutput"
@@ -715,6 +799,7 @@
       }
     },
     "MediaInput": {
+      "description": "Media input to be used in the composition",
       "type": "object",
       "properties": {
         "groupCall": {
@@ -753,6 +838,7 @@
       }
     },
     "MediaInputType": {
+      "description": "Kind of media input",
       "enum": [
         "groupCall",
         "room",
@@ -768,10 +854,11 @@
       "type": "string",
       "x-ms-enum": {
         "name": "MediaInputType",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "MediaOutput": {
+      "description": "Media output to be used by the composition",
       "type": "object",
       "properties": {
         "groupCall": {
@@ -795,6 +882,7 @@
       }
     },
     "MediaOutputType": {
+      "description": "Kind of media output",
       "enum": [
         "groupCall",
         "room",
@@ -805,37 +893,64 @@
       "type": "string",
       "x-ms-enum": {
         "name": "MediaOutputType",
-        "modelAsString": false
+        "modelAsString": true
+      }
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "description": "\"A Microsoft Teams user.",
+      "required": [
+        "userId"
+      ],
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "The Id of the Microsoft Teams user",
+          "type": "string"
+        }
       }
     },
     "Participant": {
+      "required": [
+        "call",
+        "id"
+      ],
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel"
         },
         "placeholderImageUri": {
+          "description": "Image url to be used if participant has no video stream",
           "type": "string"
         },
         "call": {
+          "description": "The id of the teams meeting or call",
           "type": "string"
         }
       }
     },
     "Position": {
+      "description": "The (x,y) position on scene or input group",
+      "required": [
+        "x",
+        "y"
+      ],
       "type": "object",
       "properties": {
         "x": {
           "format": "int32",
+          "description": "The x-position",
           "type": "integer"
         },
         "y": {
           "format": "int32",
+          "description": "The y-position",
           "type": "integer"
         }
       }
     },
     "PresentationLayoutOptions": {
+      "description": "Configure the presentation layout",
       "required": [
         "audienceIds",
         "presenterId"
@@ -843,9 +958,11 @@
       "type": "object",
       "properties": {
         "presenterId": {
+          "description": "Id of the presenter input",
           "type": "string"
         },
         "audienceIds": {
+          "description": "Input ids to be included in the audience of layout",
           "type": "array",
           "items": {
             "type": "string"
@@ -857,6 +974,7 @@
       }
     },
     "PresenterLayoutOptions": {
+      "description": "Configure the presenter layout",
       "required": [
         "presenterId",
         "supportId"
@@ -864,9 +982,11 @@
       "type": "object",
       "properties": {
         "presenterId": {
+          "description": "Id of the presenter input",
           "type": "string"
         },
         "supportId": {
+          "description": "Id of the support input",
           "type": "string"
         },
         "supportPosition": {
@@ -874,24 +994,33 @@
         },
         "supportAspectRatio": {
           "format": "double",
+          "description": "Aspect ratio of the support stream.",
           "type": "number"
         }
       }
     },
     "Resolution": {
+      "description": "The dimensions of the scene or objects in the scene",
+      "required": [
+        "height",
+        "width"
+      ],
       "type": "object",
       "properties": {
         "width": {
           "format": "int32",
+          "description": "Width of the object",
           "type": "integer"
         },
         "height": {
           "format": "int32",
+          "description": "Height of the object",
           "type": "integer"
         }
       }
     },
     "RtmpMode": {
+      "description": "Rtmp mode",
       "enum": [
         "push",
         "pull"
@@ -899,22 +1028,27 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RtmpMode",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "RtmpStream": {
+      "description": "Rtmp stream to be used as an input or output",
+      "required": [
+        "resolution",
+        "streamKey",
+        "streamUrl"
+      ],
       "type": "object",
       "properties": {
-        "enableSsl": {
-          "type": "boolean"
-        },
         "streamKey": {
+          "description": "Stream key of the stream",
           "type": "string"
         },
         "resolution": {
           "$ref": "#/definitions/Resolution"
         },
         "streamUrl": {
+          "description": "The url of the stream",
           "type": "string"
         },
         "mode": {
@@ -923,17 +1057,24 @@
       }
     },
     "SrtStream": {
+      "description": "Srt stream to be used as an input or output",
+      "required": [
+        "resolution",
+        "streamUrl"
+      ],
       "type": "object",
       "properties": {
         "resolution": {
           "$ref": "#/definitions/Resolution"
         },
         "streamUrl": {
+          "description": "The url of the stream",
           "type": "string"
         }
       }
     },
     "SupportPosition": {
+      "description": "Position of the support stream",
       "enum": [
         "topLeft",
         "topRight",
@@ -943,14 +1084,19 @@
       "type": "string",
       "x-ms-enum": {
         "name": "SupportPosition",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "TeamsMeeting": {
+      "description": "A Teams meeting to be used as an input or output",
+      "required": [
+        "teamsJoinUrl"
+      ],
       "type": "object",
       "properties": {
         "teamsJoinUrl": {
           "format": "uri",
+          "description": "The url from Teams to join the meeting",
           "type": "string"
         }
       }
