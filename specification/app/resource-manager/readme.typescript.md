@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-app"
-  output-folder: "$(typescript-sdks-folder)/sdk/app/arm-app"
+  package-name: "@azure/arm-containerapp"
+  output-folder: "$(typescript-sdks-folder)/sdk/containerapp/arm-containerapp"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
