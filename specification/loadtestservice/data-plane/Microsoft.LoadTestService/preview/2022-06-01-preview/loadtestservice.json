@@ -779,6 +779,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$.",
@@ -797,9 +800,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TestIdPathParameter"
           },
           {
             "in": "formData",
@@ -846,6 +846,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
@@ -857,9 +860,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -899,6 +899,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
@@ -910,9 +913,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -1658,8 +1658,8 @@
         }
       }
     },
-    "ErrorResponseBody": {
-      "description": "The definition of an error object.",
+    "Error": {
+      "description": "Error from a REST request.",
       "type": "object",
       "properties": {
         "code": {
@@ -1680,6 +1680,15 @@
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           }
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "The definition of an error object.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
         }
       }
     },
@@ -2480,10 +2489,11 @@
   "securityDefinitions": {
     "oauth2": {
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://loadtest.azure-dev.com/.default": "OAuth2 scope for Azure Load Test Service"
       }
     }
   }
