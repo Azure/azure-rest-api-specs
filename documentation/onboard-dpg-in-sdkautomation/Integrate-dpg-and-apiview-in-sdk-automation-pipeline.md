@@ -14,7 +14,9 @@ __Description:__
    2. If there is branch `dpg/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
 3. SDK automation script finds the corresponding `autorest.md` or `README.md` in sdk repository. If there is no `autorest.md` or `README.md` founded, please output `{"packages": []}` in `generateOutput.json`, then the pipeline finishes and skipp the following steps.
    1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding `autorest.md` and `README.md`.
-   2. We will only use `require` to include swagger readme.md in `autorest.md` or `README.md`, and `input-file` should not be used in `autorest.md` or `README.md`.(.Net SDK may be an exception because existing HLC dataplane sdk may already use input-file).
+   2. We will only use `require` to include swagger readme.md in `autorest.md` or `README.md`, and `input-file` should not be used in `autorest.md` or `README.md` in most times, but there are some exceptions:
+      1. .Net SDK may continue to use `input-file` because existing HLC dataplane sdk may already use `input-file`.
+      2. Multi-Client for Java, Python and JS cannot use `readme.md` in swagger directly because they use `batch` task, so using `input-file` is better.
 4. SDK automation script modifies the founded `autorest.md` or `README.md`.
    1. Change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
       ```yaml
