@@ -38,7 +38,7 @@ input-file:
   - Microsoft.ConfidentialLedger/preview/2022-04-20-preview/confidentialledger.json
 ```
 
-### Tag: package-0.1-preview-identity
+### Tag: package-2022-20-04-preview-identity
 
 These settings apply only when `--tag=package-2022-20-04-preview-identity` is specified on the command line.
 
