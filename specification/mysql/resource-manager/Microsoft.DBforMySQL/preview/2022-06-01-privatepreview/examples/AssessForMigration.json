@@ -1,379 +1,143 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "MySQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
-    "version": "2022-06-01-privatepreview"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/providers/Microsoft.DBforMySQL/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "description": "Lists all of the available REST API operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/assessForMigration": {
-      "post": {
-        "tags": [
-          "AssessForMigration"
-        ],
-        "operationId": "AssessForMigration_Assess",
-        "x-ms-examples": {
-          "PerformMigrationAssessment": {
-            "$ref": "./examples/AssessForMigration.json"
-          }
-        },
-        "description": "Performs Migration Assessment for a single server",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "MigrationAssessmentRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MigrationAssessmentRequest"
-            },
-            "description": "The required parameters for performing a migration assessment on a single server"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MigrationAssessmentResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/cutoverMigration": {
-      "post": {
-        "tags": [
-          "CutoverMigration"
-        ],
-        "operationId": "CutoverMigration_Cutover",
-        "x-ms-examples": {
-          "CutoverMigration": {
-            "$ref": "./examples/CutoverMigration.json"
-          }
-        },
-        "description": "Performs cutover to migrate from single server to flex server",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "CutoverMigrationRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CutoverMigrationRequest"
-            },
-            "description": "The required parameters for performing a migration cutover on a flexible server"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    }
-  },
-  "definitions": {
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The resource management error response."
-        }
-      },
-      "description": "An error response from the Batch service."
-    },
-    "CutoverMigrationRequest": {
-      "type": "object",
-      "description": "Cutover migration request",
-      "properties": {
-        "dnsChangeMode": {
-          "type": "string",
-          "enum": [
-            "Update",
-            "Revert",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "DnsChangeMode",
-            "modelAsString": true
-          },
-          "description": "The DNS Mode"
-        }
-      }
-    },
-    "MigrationAssessmentRequest": {
-      "type": "object",
-      "properties": {
-        "sourceServerResourceId": {
-          "type": "string",
-          "description": "Source Server Resource Id to verify and perform migration assessment on."
-        }
-      },
-      "description": "Request from client to perform migration assessment"
-    },
-    "MigrationAssessmentResource": {
-      "type": "object",
-      "properties": {
-        "sourceServerResourceId": {
-          "type": "string",
-          "description": "Source Server Resource Id to verify and perform migration assessment on."
-        },
-        "targetPlatformProviderId": {
-          "type": "string",
-          "description": "Target platform(Flexible Server) provider ID"
-        },
-        "targetServerDetails": {
-          "$ref": "#/definitions/TargetServerDetails"
-        },
-        "summary": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssessmentSummaryItem"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [],
-          "description": "Represents a summary of Migration Assessment"
-        },
-        "replicaAssessmentReports": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MigrationAssessmentResource"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [],
-          "description": "Represents Migration assessment resource of replica servers"
-        },
-        "assessmentReportCompletionDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Assessment report completion date time"
-        }
-      },
-      "description": "Represents a resource name availability."
-    },
-    "TargetServerDetails": {
-      "type": "object",
-      "properties": {
-        "serverResource": {
-          "$ref": "../../stable/2021-05-01/mysql.json#/definitions/Server",
-          "readOnly": true,
-          "description": "Represents resource properties of target server"
-        },
-        "serverParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "../../stable/2021-05-01/mysql.json#/definitions/Configuration"
-          },
-          "readOnly": true,
-          "description": "Represents server parameters of target server"
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "../../stable/2021-05-01/mysql.json#/definitions/FirewallRule"
-          },
-          "readOnly": true,
-          "description": "Represents firewall rules of target server"
-        },
-        "platformProviderId": {
-          "type": "string",
-          "description": "Platform(Flexible Server) provider ID"
-        }
-      },
-      "description": "Represents Target Server details"
-    },
-    "AssessmentSummaryItem": {
-      "type": "object",
-      "properties": {
-        "featureName": {
-          "type": "string",
-          "description": "Migration assessment Feature Name"
-        },
-        "severity": {
-          "type": "string",
-          "description": "Severity of the Feature (eg:Information, Warning, Blocker)"
-        },
-        "message": {
-          "type": "string",
-          "description": "Message explaining the severity"
-        }
-      },
-      "description": "Represents a Assessment summary item"
-    },
-    "OperationDisplay": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Operation resource provider name."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource on which the operation is performed."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Localized friendly name for the operation."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description."
-        }
-      },
-      "description": "Display metadata associated with the operation."
-    },
-    "Operation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation being performed on this particular object."
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "The localized display information for this particular operation or action."
-        },
-        "origin": {
-          "type": "string",
-          "description": "The intended executor of the operation."
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "x-ms-client-flatten": false,
-          "description": "Additional descriptions for the operation."
-        }
-      },
-      "description": "REST API operation definition."
-    },
-    "OperationListResult": {
-      "description": "A list of resource provider operations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of available operation details",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).",
-          "type": "string"
-        }
-      }
-    }
-  },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
+    "api-version": "2022-06-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "test_resourceGroup",
+    "MigrationAssessmentRequest": {
+      "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
+        "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+        "summary": [
+          {
+            "featureName": "TLSVersion",
+            "severity": "Warning",
+            "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+          }
+        ],
+        "targetServerDetails": {
+          "serverResource": {
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "GeneralPurpose"
+            },
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "version": "5.7",
+              "storage": {
+                "storageSizeGB": 120,
+                "iops": 360,
+                "autoGrow": "False"
+              },
+              "backup": {
+                "backupRetentionDays": 7,
+                "geoRedundantBackup": "False"
+              },
+              "network": {
+                "publicNetworkAccess": "Disabled"
+              }
+            },
+            "tags": {},
+            "location": "southeastasia",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
+          },
+          "serverParameters": [
+            {
+              "properties": {
+                "value": "ON"
+              },
+              "name": "require_secure_transport"
+            },
+            {
+              "properties": {
+                "value": "2000"
+              },
+              "name": "table_definition_cache",
+              "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+            },
+            {
+              "properties": {
+                "value": "2000"
+              },
+              "name": "table_open_cache",
+              "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+            }
+          ],
+          "firewallRules": [
+            {
+              "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "255.255.255.254"
+              },
+              "name": "AllowAll"
+            }
+          ],
+          "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+        },
+        "replicaAssessmentReports": [
+          {
+            "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
+            "targetPlatformProviderId": "/Microsoft.DBforMySQL/flexibleServers",
+            "summary": [
+              {
+                "featureName": "TLSVersion",
+                "severity": "Warning",
+                "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+              }
+            ],
+            "targetServerDetails": {
+              "serverResource": {
+                "sku": {
+                  "name": "Standard_D2ds_v4",
+                  "tier": "GeneralPurpose"
+                },
+                "properties": {
+                  "administratorLogin": "cloudsa",
+                  "version": "5.7",
+                  "storage": {
+                    "storageSizeGB": 120,
+                    "iops": 360,
+                    "autoGrow": "True"
+                  },
+                  "backup": {
+                    "backupRetentionDays": 7,
+                    "geoRedundantBackup": "False"
+                  },
+                  "network": {
+                    "publicNetworkAccess": "Disabled"
+                  }
+                },
+                "tags": {},
+                "location": "southeastasia",
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
+              },
+              "serverParameters": [
+                {
+                  "properties": {
+                    "value": "ON"
+                  },
+                  "name": "require_secure_transport"
+                }
+              ],
+              "firewallRules": [
+                {
+                  "properties": {
+                    "startIpAddress": "0.0.0.0",
+                    "endIpAddress": "255.255.255.254"
+                  },
+                  "name": "AllowAll"
+                }
+              ],
+              "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+            }
+          }
+        ],
+        "assessmentReportCompletionDateTime": "2021-06-15T16:05:19.902522+00:00"
+      }
     }
   }
 }
