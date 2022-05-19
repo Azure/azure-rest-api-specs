@@ -938,12 +938,6 @@
               "$ref": "#/definitions/DeleteOperationResult"
             }
           },
-          "204": {
-            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteOperationResult"
-            }
-          },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
@@ -961,18 +955,9 @@
   },
   "definitions": {
     "DeleteOperationResult": {
-      "type": "object",
       "properties": {
-        "result": {
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "Result",
-            "modelAsString": false
-          },
+        "boolean": {
+          "type": "boolean",
           "x-ms-client-name": "operationResult",
           "readOnly": true,
           "description": "The result of the operation or request."
@@ -981,7 +966,6 @@
       "description": "The result of the request or operation."
     },
     "EndpointProperties": {
-      "type": "object",
       "properties": {
         "targetResourceId": {
           "type": "string",
@@ -1070,13 +1054,11 @@
               },
               "scope": {
                 "type": "integer",
-                "description": "Block size (number of leading bits in the subnet mask).",
-                "format": "int32"
+                "description": "Block size (number of leading bits in the subnet mask)."
               }
             },
             "description": "Subnet first address, scope, and/or last address."
           },
-          "x-ms-identifiers": [],
           "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints."
         },
         "customHeaders": {
@@ -1095,14 +1077,12 @@
             },
             "description": "Custom header name and value."
           },
-          "x-ms-identifiers": [],
           "description": "List of custom headers."
         }
       },
       "description": "Class representing a Traffic Manager endpoint properties."
     },
     "HeatMapModel": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1118,7 +1098,6 @@
       "description": "Class representing a Traffic Manager HeatMap."
     },
     "UserMetricsModel": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1134,17 +1113,14 @@
       "description": "Class representing Traffic Manager User Metrics."
     },
     "QueryExperience": {
-      "type": "object",
       "properties": {
         "endpointId": {
           "type": "integer",
-          "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to.",
-          "format": "int32"
+          "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
         },
         "queryCount": {
           "type": "integer",
-          "description": "The number of queries originating from this location.",
-          "format": "int32"
+          "description": "The number of queries originating from this location."
         },
         "latency": {
           "type": "number",
@@ -1159,7 +1135,6 @@
       "description": "Class representing a Traffic Manager HeatMap query experience properties."
     },
     "TrafficFlow": {
-      "type": "object",
       "properties": {
         "sourceIp": {
           "type": "string",
@@ -1180,14 +1155,12 @@
           "description": "The query experiences produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/QueryExperience"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
     },
     "HeatMapProperties": {
-      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -1204,22 +1177,19 @@
           "description": "The endpoints used in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/HeatMapEndpoint"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "trafficFlows": {
           "type": "array",
           "description": "The traffic flows produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/TrafficFlow"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "description": "Class representing a Traffic Manager HeatMap properties."
     },
     "HeatMapEndpoint": {
-      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1227,14 +1197,12 @@
         },
         "endpointId": {
           "type": "integer",
-          "description": "A number uniquely identifying this endpoint in query experiences.",
-          "format": "int32"
+          "description": "A number uniquely identifying this endpoint in query experiences."
         }
       },
       "description": "Class which is a sparse representation of a Traffic Manager endpoint."
     },
     "Endpoint": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1250,7 +1218,6 @@
       "description": "Class representing a Traffic Manager endpoint."
     },
     "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1264,7 +1231,6 @@
       "description": "Parameters supplied to check Traffic Manager name operation."
     },
     "DnsConfig": {
-      "type": "object",
       "properties": {
         "relativeName": {
           "type": "string",
@@ -1284,7 +1250,6 @@
       "description": "Class containing DNS settings in a Traffic Manager profile."
     },
     "MonitorConfig": {
-      "type": "object",
       "properties": {
         "profileMonitorStatus": {
           "type": "string",
@@ -1354,7 +1319,6 @@
             },
             "description": "Custom header name and value."
           },
-          "x-ms-identifiers": [],
           "description": "List of custom headers."
         },
         "expectedStatusCodeRanges": {
@@ -1364,25 +1328,21 @@
             "properties": {
               "min": {
                 "type": "integer",
-                "description": "Min status code.",
-                "format": "int32"
+                "description": "Min status code."
               },
               "max": {
                 "type": "integer",
-                "description": "Max status code.",
-                "format": "int32"
+                "description": "Max status code."
               }
             },
             "description": "Min and max value of a status code range."
           },
-          "x-ms-identifiers": [],
           "description": "List of expected status code ranges."
         }
       },
       "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
     },
     "ProfileProperties": {
-      "type": "object",
       "properties": {
         "profileStatus": {
           "type": "string",
@@ -1469,7 +1429,6 @@
       }
     },
     "Profile": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1485,7 +1444,6 @@
       "description": "Class representing a Traffic Manager profile."
     },
     "ProfileListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1498,7 +1456,6 @@
       "description": "The list Traffic Manager profiles operation response."
     },
     "TrafficManagerNameAvailability": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1524,7 +1481,6 @@
       "description": "Class representing a Traffic Manager Name Availability response."
     },
     "Region": {
-      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1539,14 +1495,12 @@
           "items": {
             "$ref": "#/definitions/Region"
           },
-          "x-ms-identifiers": [],
           "description": "The list of Regions grouped under this Region in the Geographic Hierarchy."
         }
       },
       "description": "Class representing a region in the Geographic hierarchy used with the Geographic traffic routing method."
     },
     "GeographicHierarchyProperties": {
-      "type": "object",
       "properties": {
         "geographicHierarchy": {
           "$ref": "#/definitions/Region",
@@ -1556,7 +1510,6 @@
       "description": "Class representing the properties of the Geographic hierarchy used with the Geographic traffic routing method."
     },
     "TrafficManagerGeographicHierarchy": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1572,7 +1525,6 @@
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
     },
     "UserMetricsProperties": {
-      "type": "object",
       "properties": {
         "key": {
           "type": "string",
@@ -1583,7 +1535,6 @@
     },
     "Resource": {
       "description": "The core properties of ARM resources",
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1602,7 +1553,6 @@
     },
     "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource",
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1670,7 +1620,6 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "x-ms-identifiers": [],
           "description": "Error details"
         }
       },
