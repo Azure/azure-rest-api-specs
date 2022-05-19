@@ -55,7 +55,7 @@
       "description": "Can be anything: string, number, array, object, etc. (except `null`)"
     },
     "ApiToken": {
-      "description": "The access token definition.",
+      "description": "The API access token definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
@@ -81,6 +81,7 @@
       }
     },
     "ApiTokenCollection": {
+      "description": "The paged results of API tokens.",
       "type": "object",
       "properties": {
         "value": {
@@ -114,6 +115,7 @@
       "discriminator": "type"
     },
     "Collection": {
+      "description": "The paged results of entities.",
       "type": "object",
       "properties": {
         "value": {
@@ -177,6 +179,7 @@
       }
     },
     "DeviceCollection": {
+      "description": "The paged results of devices.",
       "type": "object",
       "properties": {
         "value": {
@@ -231,6 +234,7 @@
       }
     },
     "DeviceCommandCollection": {
+      "description": "The paged results of device command executions.",
       "type": "object",
       "properties": {
         "value": {
@@ -314,6 +318,7 @@
       ]
     },
     "DeviceGroupCollection": {
+      "description": "The paged results of device groups.",
       "type": "object",
       "properties": {
         "value": {
@@ -390,6 +395,7 @@
       ]
     },
     "DeviceTemplateCollection": {
+      "description": "The paged results of device templates.",
       "type": "object",
       "properties": {
         "value": {
@@ -428,15 +434,20 @@
       ]
     },
     "Error": {
+      "description": "The response error definition",
       "type": "object",
       "properties": {
         "error": {
           "description": "Error details for current request.",
           "$ref": "#/definitions/ErrorDetails"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ErrorDetails": {
+      "description": "The detail information of the error.",
       "type": "object",
       "properties": {
         "code": {
@@ -455,7 +466,11 @@
           "type": "string",
           "description": "The time that error request failed."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "FileUpload": {
       "description": "The file upload configuration definition.",
@@ -613,6 +628,7 @@
       ]
     },
     "RoleCollection": {
+      "description": "The paged results of roles.",
       "type": "object",
       "properties": {
         "value": {
@@ -706,6 +722,7 @@
       ]
     },
     "TpmAttestation": {
+      "description": "The attestation of TPM.",
       "x-ms-discriminator-value": "tpm",
       "allOf": [
         {
@@ -748,6 +765,7 @@
       "discriminator": "type"
     },
     "UserCollection": {
+      "description": "The paged results of users.",
       "type": "object",
       "properties": {
         "value": {
@@ -1105,7 +1123,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1283,7 +1301,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1465,7 +1483,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1623,7 +1641,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1979,7 +1997,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2437,7 +2455,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2612,7 +2630,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2775,7 +2793,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2923,7 +2941,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -3103,7 +3121,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -3373,7 +3391,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-merge-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
