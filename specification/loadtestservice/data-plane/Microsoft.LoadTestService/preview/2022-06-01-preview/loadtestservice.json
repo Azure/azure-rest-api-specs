@@ -779,6 +779,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$.",
@@ -799,9 +802,6 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/TestIdPathParameter"
-          },
-          {
             "in": "formData",
             "name": "file",
             "required": true,
@@ -813,7 +813,7 @@
           "201": {
             "description": "The test artifact is uploaded.",
             "schema": {
-              "$ref": "#/definitions/TestModel"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -846,6 +846,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
@@ -857,16 +860,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The requested test file url",
             "schema": {
-              "$ref": "#/definitions/FileUrlPath"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -899,6 +899,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
             "in": "path",
             "name": "fileId",
             "description": "Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$",
@@ -910,9 +913,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TestIdPathParameter"
           }
         ],
         "responses": {
@@ -1190,7 +1190,7 @@
           "200": {
             "description": "The URL for the requested test run file",
             "schema": {
-              "$ref": "#/definitions/FileUrlPath"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -1658,8 +1658,8 @@
         }
       }
     },
-    "ErrorResponseBody": {
-      "description": "The definition of an error object.",
+    "Error": {
+      "description": "Error from a REST request.",
       "type": "object",
       "properties": {
         "code": {
@@ -1680,6 +1680,15 @@
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           }
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "The definition of an error object.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
         }
       }
     },
@@ -1735,24 +1744,6 @@
           "items": {
             "$ref": "#/definitions/FileUrl"
           }
-        }
-      }
-    },
-    "FileUrlPath": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Path of the file.",
-          "type": "string"
-        },
-        "url": {
-          "description": "URL of the file.",
-          "type": "string"
-        },
-        "expireTime": {
-          "format": "date-time",
-          "description": "Expiry time of the file.",
-          "type": "string"
         }
       }
     },
@@ -2456,7 +2447,7 @@
       "required": true
     },
     "TestIdQueryParameter": {
-      "x-ms-parameter-location":"method",
+      "x-ms-parameter-location": "method",
       "in": "query",
       "name": "testId",
       "description": "Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.",
@@ -2466,7 +2457,7 @@
       "pattern": "^[a-z0-9_-]*$"
     },
     "TestIdPathParameter": {
-      "x-ms-parameter-location":"method",
+      "x-ms-parameter-location": "method",
       "in": "path",
       "name": "testId",
       "required": true,
@@ -2480,10 +2471,11 @@
   "securityDefinitions": {
     "oauth2": {
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://loadtest.azure-dev.com/.default": "OAuth2 scope for Azure Load Test Service"
       }
     }
   }
