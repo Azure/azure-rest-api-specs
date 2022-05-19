@@ -1,0 +1,61 @@
+{
+  "title": "Resource History Management Group scoped Query",
+  "description": "A resource history query scoped to a list of management groups.",
+  "parameters": {
+    "api-version": "2021-06-01-preview",
+    "request": {
+      "managementGroups": [
+        "e927f598-c1d4-4f72-8541-95d83a6a4ac8",
+        "ProductionMG"
+      ],
+      "query": "where name =~ 'cpu-utilization' | project id, name, properties",
+      "options": {
+        "interval": {
+          "start": "2020-11-12T01:00:00.0000000Z",
+          "end": "2020-11-12T01:25:00.0000000Z"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "snapshots": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "properties",
+              "type": "object"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/a7f33fdb-e646-4f15-89aa-3a360210861e/resourceGroups/meya-test-rg/providers/Microsoft.Compute/virtualMachines/meya-win-eus/providers/Microsoft.WorkloadMonitor/monitors/cpu-utilization",
+              "cpu-utilization",
+              {
+                "monitorName": "",
+                "currentStateFirstObservedTimestamp": ""
+              }
+            ],
+            [
+              "/subscriptions/a7f33fdb-e646-4f15-89aa-3a360210861e/resourceGroups/meya-test-rg/providers/Microsoft.Compute/virtualMachines/meya-win-eus/providers/Microsoft.WorkloadMonitor/monitors/cpu-utilization",
+              "cpu-utilization",
+              {
+                "monitorName": "test",
+                "currentStateFirstObservedTimestamp": ""
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

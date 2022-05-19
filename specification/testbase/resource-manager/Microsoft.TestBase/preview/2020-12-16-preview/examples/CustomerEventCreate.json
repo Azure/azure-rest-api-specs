@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "customerEventName": "WeeklySummary",
+    "api-version": "2020-12-16-preview",
+    "parameters": {
+      "properties": {
+        "eventName": "WeeklySummary",
+        "receivers": [
+          {
+            "receiverType": "UserObjects",
+            "receiverValue": {
+              "userObjectReceiverValue": {
+                "userObjectIds": [
+                  "245245245245325",
+                  "365365365363565"
+                ]
+              }
+            }
+          },
+          {
+            "receiverType": "DistributionGroup",
+            "receiverValue": {
+              "distributionGroupListReceiverValue": {
+                "distributionGroups": [
+                  "test@microsoft.com"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "WeeklySummary",
+        "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/customerEvents/WeeklySummary",
+        "type": "Microsoft.TestBase/testBaseAccounts/customerEvents",
+        "properties": {
+          "eventName": "WeeklySummary",
+          "receivers": [
+            {
+              "receiverType": "UserObjects",
+              "receiverValue": {
+                "userObjectReceiverValue": {
+                  "userObjectIds": [
+                    "245245245245325",
+                    "365365365363565"
+                  ]
+                }
+              }
+            },
+            {
+              "receiverType": "DistributionGroup",
+              "receiverValue": {
+                "distributionGroupListReceiverValue": {
+                  "distributionGroups": [
+                    "test@microsoft.com"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/customerEvents/WeeklySummary/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2020-12-16-preview"
+      },
+      "body": {
+        "name": "WeeklySummary",
+        "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/customerEvents/WeeklySummary",
+        "type": "Microsoft.TestBase/testBaseAccounts/customerEvents",
+        "properties": {
+          "eventName": "WeeklySummary",
+          "receivers": [
+            {
+              "receiverType": "UserObjects",
+              "receiverValue": {
+                "userObjectReceiverValue": {
+                  "userObjectIds": [
+                    "245245245245325",
+                    "365365365363565"
+                  ]
+                }
+              }
+            },
+            {
+              "receiverType": "DistributionGroup",
+              "receiverValue": {
+                "distributionGroupListReceiverValue": {
+                  "distributionGroups": [
+                    "test@microsoft.com"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

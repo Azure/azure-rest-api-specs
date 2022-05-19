@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "resourceGroupName": "TestRG",
+    "vcoreName": "testvcore",
+    "api-version": "2021-01-01",
+    "vCoreParameters": {
+      "sku": {
+        "name": "AutoScale",
+        "tier": "AutoScale",
+        "capacity": 0
+      },
+      "tags": {
+        "testKey": "testValue"
+      },
+      "location": "West US",
+      "properties": {
+        "capacityObjectId": "a28f00bd-5330-4572-88f1-fa883e074785",
+        "capacityLimit": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/autoScaleVCores/testvcore",
+        "name": "testvcore",
+        "location": "West US",
+        "type": "Microsoft.PowerBIDedicated/autoScaleVCores",
+        "sku": {
+          "name": "AutoScale",
+          "tier": "AutoScale",
+          "capacity": 0
+        },
+        "properties": {
+          "capacityObjectId": "a28f00bd-5330-4572-88f1-fa883e074785",
+          "capacityLimit": 10,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "testKey": "testValue"
+        },
+        "systemData": {
+          "createdBy": "app1",
+          "createdByType": "Application",
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "app1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z"
+        }
+      }
+    }
+  }
+}
