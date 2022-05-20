@@ -4435,6 +4435,9 @@
           },
           "title": "PublicNetworkAccess of the managedCluster",
           "description": "Allow or deny public network access for AKS"
+        },
+        "workloadAutoScalerProfile": {
+          "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfile"
         }
       },
       "description": "Properties of the managed cluster."
@@ -6657,6 +6660,28 @@
           "readOnly": true
         }
       }
+    },
+    "ManagedClusterWorkloadAutoScalerProfile": {
+      "type": "object",
+      "description": "Workload Auto-scaler profile for the container service cluster.",
+      "properties": {
+        "keda": {
+          "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfileKeda"
+        }
+      }
+    },
+    "ManagedClusterWorkloadAutoScalerProfileKeda": {
+      "type": "object",
+      "description": "KEDA (Kubernetes Event-driven Autoscaling) settings for the workload auto-scaler profile.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable KEDA."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     }
   },
   "parameters": {
