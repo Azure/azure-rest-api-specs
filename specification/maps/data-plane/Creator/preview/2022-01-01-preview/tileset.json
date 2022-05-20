@@ -102,7 +102,7 @@
   "paths": {
     "/tilesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an optional request body as [tileset configuration](https://aka.ms/am-creator-tileset-configuration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/v2/dataset/create).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an optional request body as [tileset configuration](rest/api/maps/tileset/create?#tilesetconfiguration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Tileset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -413,7 +413,7 @@
       }
     },
     "TilesetConfiguration": {
-      "description": "A tileset configuration object.",
+      "description": "Tileset configuration top-level fields. A tileset configuration is a JSON object that must contain the following top-level fields:",
       "type": "object",
       "required": [
         "version",
@@ -421,11 +421,11 @@
       ],
       "properties": {
         "version": {
-          "description": "The version of Azure Maps Tiling service configuration reference that the configuration uses. Currently only version '1.0' is allowed",
+          "description": "The version of Azure Maps Tiling service configuration reference that the tileset configuration uses. Currently only version '1.0' is allowed. Using any version other the current version or a previous version will result in an error.",
           "type": "integer"
         },
         "layers": {
-          "description": "The names of the layers and their configuration options.",
+          "description": "The names of the layers and their configuration options. The configuration layers object contains key-value pairs associating the names of tile layers with their configuration. For each key-value pair, the key is the name of the layer, and the value is a LayerObject containing the configuration and options for the layer. Each layer must have a name. This is the unique identifier for the layer of data in your final tileset. In any tileset, each layer name must be unique. The layer name must be a string with only underscores (_) and alphanumeric characters. The corresponding LayerObject for each layer name describes how that vector tile layer should be created. It specifies which feature classes to retrieve feature data, the precision of the data through zoom levels, and how to transform features and render them into tiles.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/LayerObject"
@@ -464,14 +464,14 @@
       ],
       "properties": {
         "featureClasses": {
-          "description": "The list of featureClasses that will be used to build the layer.",
+          "description": "The list of feature classes that will be used to build the layer. The valid feature classes can be found in its ontology definition. For example, [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology)",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "filter": {
-          "description": "Removes features that do not match a pattern. Refer [MapLibre filter expression](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers/#filter)",
+          "description": "Removes features that do not match a pattern. Refer to [MapLibre filter expression](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers/#filter)",
           "type": "object"
         }
       }
