@@ -155,6 +155,15 @@
           },
           {
             "$ref": "#/parameters/DescriptionMapConfiguration"
+          },
+          {
+            "name": "CreateContent",
+            "in": "body",
+            "description": "The configuration file used to create the map configuration. If JSON data format is provided, then the request body should follow [MapConfiguration specification](/rest/api/documentation-preview/map-configuration/create?#mapconfiguration). If ZIP data format is provided, you should also provide the thumbnail images referenced in the configuration JSON file.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapConfiguration"
+            }
           }
         ],
         "responses": {
@@ -354,30 +363,22 @@
           "type": "number",
           "readOnly": true
         },
-        "name": {
-          "description": "The name for the style.",
+        "description": {
+          "description": "The description the caller provided when creating the map configuration. Maximum length 1024 characters.",
           "type": "string",
           "readOnly": true
         },
-        "displayName": {
-          "description": "The display name for the style.",
+        "defaultStyle": {
+          "description": "The default style for the map configuration. The value can be one of the 'name' field in styles array.",
           "type": "string",
           "readOnly": true
         },
-        "theme": {
-          "description": "The theme for the style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "thumbnail": {
-          "description": "The thumbnail for the style.",
-          "type": "object",
-          "readOnly": true
-        },
-        "url": {
-          "description": "The url for the style.",
-          "type": "object",
-          "readOnly": true
+        "styles": {
+          "description": "Styles array will allow customer to configure different map representations for their tileset. Each style configured here will be reflected as one style in style picker in client SDK.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StyleObject"
+          }
         }
       }
     },
