@@ -250,7 +250,7 @@
       },
       "delete": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleId` of the style to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
-        "operationId": "StyleRecipe_Delete",
+        "operationId": "Style_Delete",
         "x-ms-examples": {
           "Delete an imported style": {
             "$ref": "./examples/stylerecipe/StyleRecipe_Delete.json"
@@ -310,10 +310,10 @@
   },
   "definitions": {
     "StyleListResult": {
-      "description": "The response model for the Style Recipe List API. Returns a list of all styles.",
+      "description": "The response model for the Style List API. Returns a list of all styles.",
       "type": "object",
       "properties": {
-        "styleRecipes": {
+        "styles": {
           "description": "A list of all styles.",
           "type": "array",
           "readOnly": true,
@@ -332,7 +332,7 @@
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
-        "styleRecipeId": {
+        "styleId": {
           "description": "The unique style id for the style.",
           "type": "string",
           "readOnly": true
