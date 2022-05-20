@@ -14,7 +14,7 @@ This Document describes the process of how to onboard DPG with SDK automation pi
 ![workflow-for-service-team](workflow-service-team.png)
 
 __Description:__
-1. Creates a swagger PR.
+1. Creates a swagger PR with [Guide to design and creation of Data Plane REST API and Client Libraries](https://aka.ms/azsdk/dpcodegen).
 2. If the SDK was generated for this service before , please go to step 4. Otherwise, this is a new service and please go to step 3.
 3. Create branch with name `dpg/<prNumber>` in sdk repository, and add autorest configuration file. Then add a comment `/azp run` in swagger PR.
    1. `<prNumber>` is the PR number of swagger PR.
