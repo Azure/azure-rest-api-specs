@@ -425,10 +425,10 @@
         "tags": [
           "ApiCollections"
         ],
-        "operationId": "V2ApiCollectionsMeta_Get",
+        "operationId": "V2ApiCollectionsMeta_List",
         "x-ms-examples": {
-          "V2ApiCollectionsMeta_Get_PropertySet": {
-            "$ref": "./examples/V2ApiCollectionsMeta_Get_PropertySet.json"
+          "V2ApiCollectionsMeta_List_PropertySet": {
+            "$ref": "./examples/V2ApiCollectionsMeta_List_PropertySet.json"
           }
         },
         "parameters": [
@@ -440,6 +440,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "default": 20,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -465,6 +479,75 @@
           },
           "404": {
             "description": "Collections metadata resource page does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apiCollectionsMeta/{apiCollectionMetaId}/apiCollectionMetaDetails": {
+      "get": {
+        "description": "Upon user requesting metadata of a collection for a subscription, return the metadata of the matched collection to UI",
+        "summary": "Upon user requesting metadata of a collection for a subscription, return the metadata of the matched collection to UI",
+        "tags": [
+          "ApiCollections"
+        ],
+        "operationId": "V2ApiCollectionMetaDetails_List",
+        "x-ms-examples": {
+          "V2ApiCollectionMetaDetails_List_PropertySet": {
+            "$ref": "./examples/V2ApiCollectionMetaDetails_List_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "apiCollectionMetaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "default": 20,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request to retrieve collection meta details data",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Collection meta details URI resource page does not exist",
             "x-ms-error-response": true
           }
         }
@@ -528,7 +611,7 @@
             }
           },
           "400": {
-            "description": "Bad request to retrieve collections data",
+            "description": "Bad request to retrieve collection details data",
             "x-ms-error-response": true
           },
           "401": {
@@ -932,8 +1015,8 @@
         }
       }
     },
-    "ApiCollectionsMetaResponse": {
-      "title": "ApiCollectionsMetaResponse",
+    "ApiCollectionsMetaDocument": {
+      "title": "ApiCollectionsMetaDocument",
       "type": "object",
       "properties": {
         "properties": {
@@ -950,6 +1033,21 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ApiCollectionsMetaResponse": {
+      "title": "ApiCollectionsMetaResponse",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollectionsMetaDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
