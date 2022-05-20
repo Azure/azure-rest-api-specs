@@ -155,11 +155,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Upload GeoJSON data containing geometries that represent a collection of geofences": {
-            "$ref": "./examples/UploadGeoJSON.json"
-          },
           "Upload data in customer's storage account": {
-            "$ref": "./examples/UploadBYOS.json"
+            "$ref": "./examples/Upload.json"
           }
         },
         "parameters": [
@@ -178,7 +175,7 @@
           {
             "name": "UploadBody",
             "in": "body",
-            "description": "The content or connection information to upload",
+            "description": "The connection information to upload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UploadBody"
@@ -612,13 +609,10 @@
     },
     "UploadBody": {
       "type": "object",
-      "description": "The content or connection information to upload",
+      "description": "The connection information to upload",
       "properties": {
         "connection": {
           "$ref": "#/definitions/Connection"
-        },
-        "content": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
         }
       }
     },
@@ -738,16 +732,7 @@
         "connection": {
           "$ref": "#/definitions/Connection"
         }
-      },
-      "required": [
-        "udid",
-        "location",
-        "sizeInBytes",
-        "contentMD5",
-        "uploadStatus",
-        "dataFormat",
-        "description"
-      ]
+      }
     }
   }
 }
