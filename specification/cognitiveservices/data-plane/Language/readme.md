@@ -133,13 +133,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
 ```
 
-### Tag: package-preview-2022-03
+## Suppression
 
-These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-03'
-input-file:
-  - preview/2022-03-01-preview/common.json
-  - preview/2022-03-01-preview/textanalytics.json
-  - preview/2022-03-01-preview/analyzeconversations.json
+``` yaml
+directive:
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Not every service will ship new versions within the Language pillar.
 ```
