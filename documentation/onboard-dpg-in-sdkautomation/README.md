@@ -12,7 +12,7 @@ This Document describes the process of how to onboard DPG with SDK automation pi
 
 __Description:__
 1. Creates a swagger PR.
-2. If the service has onboarded DPG before, please go to step 4. Otherwise, please go to step 3.
+2. If the SDK was generated for this service before , please go to step 4. Otherwise, this is a new service and please go to step 3.
 3. Create branch with name `dpg/<prNumber>` in sdk repository, and add `autorest.md` or `README.md`. Then add a comment `/azp run` in swagger PR.
    1. `<prNumber>` is the PR number of swagger PR.
    2. About how to add `autorest.md` or `README.md`, please refer to [Add autorest configuration in sdk repository](./add-autorest-configuration-in-sdk-repository.md).
