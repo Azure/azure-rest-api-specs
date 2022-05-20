@@ -25,3 +25,7 @@ __Description:__
       ```
    2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated same as `require` block.
 5. SDK automation pipeline generates SDK and ApiView with the modified autorest configuration file , and then add comments about results to the Swagger PR.
+
+# Future Work
+Currently, we ask service team to create branch `dpg/<prNumber>` and add/update autorest configuration file manually because the configuration file includes some necessary information to generate SDK.
+In the future, we are going to integrate the sdk generation with PowerAPP Workflow. Then service team can provide the necessary information in PowerAPP Workflow, and pipeline can use the information to generate autorest configuration file automatically. 

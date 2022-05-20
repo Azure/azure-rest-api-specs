@@ -15,17 +15,13 @@ This Document describes the process of how to onboard DPG with SDK automation pi
 
 __Description:__
 1. Creates a swagger PR with [Guide to design and creation of Data Plane REST API and Client Libraries](https://aka.ms/azsdk/dpcodegen).
-2. If the SDK was generated for this service before , please go to step 4. Otherwise, this is a new service and please go to step 3.
-3. Create branch with name `dpg/<prNumber>` in sdk repository, and add autorest configuration file. Then add a comment `/azp run` in swagger PR.
+2. If the SDK was generated for this service before, and you don't need to change the autorest configuration in sdk repository, please go to step 4. Otherwise, please go to step 3.
+3. Create branch with name `dpg/<prNumber>` in sdk repository, and add/update autorest configuration file in the branch. Then add a comment `/azp run` in swagger PR.
    1. `<prNumber>` is the PR number of swagger PR.
    2. Please refer to [Add autorest configuration file in sdk repository](./add-autorest-configuration-file-in-sdk-repository.md) on how to add autorest configuration files.
 4. Swagger PR CI generates SDK and ApiView automatically, and you can find them in swagger PR comments.
-5.  Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition) to reivew API definition.
-6. If Arch Board approves the ApiView, go to step 10. Otherwise, go to step 7.
-7. Update Swagger if needed.
-8. Update autorest configuration file if needed. Here, if there is a branch named `dpg/<prNumber>` in sdk repository, please update it in the branch. Otherwise, create a branch named `dpg/<prNumber>` from `main` branch in sdk repository and update the `autorest.md` or `README.md` in the new created branch.
-9. Add a comment `/azp run` in swagger PR, and go to step 4.
-10. Get the generated SDK and ApiView from swagger PR comment. If we want to make manual changes in the generated sdk, please refer to [Next Steps After Generating Codes](./next-steps-after-generating-codes.md).
+5. Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition) to review API definition.
+6. If any change needed, please update the Swagger/configuration files and regenerate the SDK by adding a comment `/azp run` to swagger PR. Otherwise, go to [Next Steps After Generating Codes](./next-steps-after-generating-codes.md) if you want to do manual changes on generated codes.
 
 ## FAQ
 1. I don't have permission to create branch in sdk repository. Who can I ask for help?
