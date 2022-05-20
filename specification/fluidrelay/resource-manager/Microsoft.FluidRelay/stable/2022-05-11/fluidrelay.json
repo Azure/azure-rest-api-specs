@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Fluid Relay",
-    "version": "2022-04-21"
+    "version": "2022-05-11"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -997,6 +997,18 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation time of this resource"
+        },
+        "lastAccessTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last time when user access this resource"
         }
       },
       "description": "The properties of a Fluid Relay Container resource."
