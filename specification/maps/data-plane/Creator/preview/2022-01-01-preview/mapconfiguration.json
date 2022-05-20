@@ -129,7 +129,7 @@
   "paths": {
     "/styles/stylesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Map Configuration Create API allows the caller to create a map configuration from their map configuration file.\n\n## Submit Create Request\n\nTo create your map configuration you will make a `POST` request with a map configuration file. \n\n### POST Body for Create Request\nTo send the _create map configuration_ request you will use a `POST` request where the request body will contain a `json` or `zip` file. If `json` dataFormat is provided in query parameter, the request body will contain a map configuration file in `json` format and the `Content-Type` header will be set to `application/json`, and if `zip` dataFormat is provided, the request body will contain a `zip` file including the map configuration json file and thumbnail images referenced in the configuration json file and the `Content-Type` header will be set to `application/zip`. Here's a sample map configuration json, refer to [map configuration specification](https://aka.ms/mapconfigurationspecification) for more details:\n\n\n```json\n{\n  \"version\": 1.0,\n  \"description\": \"First indoor map configuration!\",\n  \"defaultStyle\": \"indoor_light\",\n  \"styles\": [\n    {\n      \"name\": \"indoor_light\",\n      \"displayName\": \"Indoor light\",\n      \"theme\": \"light\",\n      \"thumbnail\": \"indoor_2022-01-01.png\",\n      \"baseMap\": \"microsoft_light\",\n      \"layers\": [\n        {\n         \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n         \"styleRecipeId\": \"microsoft-maps:indoor_2022-01-01\"\n        }\n       ] \n    },\n    {\n      \"name\": \"indoor_dark\",\n      \"displayName\": \"Indoor dark\",\n      \"theme\": \"dark\",\n      \"baseMap\": \"microsoft_dark\",\n      \"thumbnail\": \"indoor_dark_2022-01-01.png\",\n      \"layers\": [\n        {\n          \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n          \"styleRecipeId\": \"microsoft-maps:indoor_dark_2022-01-01\"\n        }\n      ]\n    }\n  ]\n}\n```     \n\n Since the map configuration json contains two thumbnail image references 'indoor_2022-01-01.png' and 'indoor_dark_2022-01-01.png', a zip file including the map configuration json file and two thumbnail images should be provided as request body to make a valid create request. \n\nThe Create Map Configuration API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Map Configuration Create API allows the caller to create a map configuration from their map configuration file.\n\n## Submit Create Request\n\nTo create your map configuration you will make a `POST` request with a map configuration file. \n\n### POST Body for Create Request\nTo send the _create map configuration_ request you will use a `POST` request where the request body will contain a `json` or `zip` file. If `json` dataFormat is provided in query parameter, the request body will contain a map configuration file in `json` format and the `Content-Type` header will be set to `application/json`, and if `zip` dataFormat is provided, the request body will contain a `zip` file including the map configuration json file and thumbnail images referenced in the configuration json file and the `Content-Type` header will be set to `application/zip`. Here's a sample map configuration json, refer to [map configuration specification](/rest/api/documentation-preview/map-configuration/create?#mapconfiguration) for more details:\n\n\n```json\n{\n  \"version\": 1.0,\n  \"description\": \"First indoor map configuration!\",\n  \"defaultStyle\": \"indoor_light\",\n  \"styles\": [\n    {\n      \"name\": \"indoor_light\",\n      \"displayName\": \"Indoor light\",\n      \"theme\": \"light\",\n      \"thumbnail\": \"indoor_2022-01-01.png\",\n      \"baseMap\": \"microsoft_light\",\n      \"layers\": [\n        {\n         \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n         \"styleRecipeId\": \"microsoft-maps:indoor_2022-01-01\"\n        }\n       ] \n    },\n    {\n      \"name\": \"indoor_dark\",\n      \"displayName\": \"Indoor dark\",\n      \"theme\": \"dark\",\n      \"baseMap\": \"microsoft_dark\",\n      \"thumbnail\": \"indoor_dark_2022-01-01.png\",\n      \"layers\": [\n        {\n          \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n          \"styleRecipeId\": \"microsoft-maps:indoor_dark_2022-01-01\"\n        }\n      ]\n    }\n  ]\n}\n```     \n\n Since the map configuration json contains two thumbnail image references 'indoor_2022-01-01.png' and 'indoor_dark_2022-01-01.png', a zip file including the map configuration json file and two thumbnail images should be provided as request body to make a valid create request. \n\nThe Create Map Configuration API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "MapConfiguration_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -157,7 +157,7 @@
             "$ref": "#/parameters/DescriptionMapConfiguration"
           },
           {
-            "name": "CreateContent",
+            "name": "MapConfiguration",
             "in": "body",
             "description": "The configuration file used to create the map configuration. If JSON data format is provided, then the request body should follow [MapConfiguration specification](/rest/api/documentation-preview/map-configuration/create?#mapconfiguration). If ZIP data format is provided, you should also provide the thumbnail images referenced in the configuration JSON file.",
             "required": true,
@@ -369,7 +369,7 @@
           "readOnly": true
         },
         "defaultStyle": {
-          "description": "The default style for the map configuration. The value can be one of the 'name' field in styles array.",
+          "description": "The default style for the map configuration. The value can be one of the 'name' field in StyleObject under styles array.",
           "type": "string",
           "readOnly": true
         },
@@ -407,7 +407,7 @@
           "readOnly": true
         },
         "baseMap": {
-          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Please refer to the available values for [base map types](https://aka.ms/baseMapTypes).",
+          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Please refer to the available values for [base map types](/rest/api/documentation-preview/map-configuration/create?#baseMapTypes).",
           "type": "object",
           "readOnly": true
         },
@@ -431,6 +431,57 @@
         },
         "styleId": {
           "description": "The unique id for an azure map style.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BaseMapTypes": {
+      "description": "The available base map types. Currently, we support 9 base map types.",
+      "type": "object",
+      "properties": {
+        "microsoft_light": {
+          "description": "The base road map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_dark": {
+          "description": "The base dark road map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_grayscale_dark": {
+          "description": "The grayscale dark map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_grayscale_light": {
+          "description": "The grayscale light map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_shaded_relief": {
+          "description": "The shaded relief map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_high_contrast_dark": {
+          "description": "The high contrast dark map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_high_contrast_light": {
+          "description": "The high contrast light map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_satellite": {
+          "description": "The satellite imagery map style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "microsoft_satellite_road": {
+          "description": "The satellite and road map style.",
           "type": "string",
           "readOnly": true
         }
