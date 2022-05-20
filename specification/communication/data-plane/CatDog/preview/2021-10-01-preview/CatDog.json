@@ -1,0 +1,296 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CommunicationCatDogClient",
+    "description": "Azure Communication CatDog Service",
+    "version": "2021-10-01-preview"
+  },
+  "paths": {
+    "/CatDogs:meow": {
+      "post": {
+        "tags": [
+          "CatDogmeow"
+        ],
+        "summary": "Queues an CatDog message",
+        "operationId": "CatDog_meow",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "repeatability-request-id",
+            "description": "If specified, the client directs that the request is repeatable;",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "repeatability-first-sent",
+            "description": "Must be meowed by clients to specify that a request is repeatable.",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "CatDogMessage",
+            "description": "payload for meowing a CatDog",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatDogMessage"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code - this will be the same as the code in the error property in the response body.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Meow accepted",
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Status of a repeatable request.",
+                "type": "string"
+              },
+              "Operation-Location": {
+                "description": "Location url of where to poll the status of this meow from.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Amount of time client should wait before retrying the request",
+                "type": "integer"
+              },
+              "x-ms-request-id": {
+                "description": "System generated GUID indicating the id of this specific meow.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Send CatDog": {
+            "$ref": "./examples/CatDogExample.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CatDogMessage": {
+      "description": "Payload for meowing a CatDog",
+      "required": [
+        "meow",
+        "content",
+        "list"
+      ],
+      "type": "object",
+      "properties": {
+        "headers": {
+          "description": "Custom CatDog headers to be passed.",
+          "type": "array",
+          "x-ms-client-name": "CustomHeaders",
+          "items": {
+            "$ref": "#/definitions/CatDogCustomHeader"
+          }
+        },
+        "meow": {
+          "description": "meow CatDog",
+          "type": "string",
+          "example": "info"
+        },
+        "content": {
+          "description": "CatDog content to be meowed.",
+          "$ref": "#/definitions/CatDogContent"
+        },
+        "list": {
+          "description": "list for the CatDog.",
+          "$ref": "#/definitions/CatDogList"
+        },
+        "bells": {
+          "description": "list of bells",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatDogBell"
+          }
+        }
+      }
+    },
+    "CatDogCustomHeader": {
+      "description": "Custom header for CatDog.",
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "description": "Header name.",
+          "type": "string",
+          "example": ""
+        },
+        "value": {
+          "description": "Header value.",
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "CatDogHouse": {
+      "description": "An object meow the CatDog house",
+      "type": "object",
+      "required": [
+        "catDog"
+      ],
+      "properties": {
+        "catDog": {
+          "description": "CatDog house.",
+          "type": "string",
+          "example": "kennel"
+        },
+        "boardName": {
+          "description": "CatDog board.",
+          "type": "string",
+          "example": "my house"
+        }
+      }
+    },
+    "CatDogContent": {
+      "description": "Content of the CatDog.",
+      "type": "object",
+      "required": [
+        "whistle"
+      ],
+      "properties": {
+        "whistle": {
+          "description": "whistle of the CatDog meow",
+          "type": "string",
+          "example": "meow meow"
+        },
+        "plainMeow": {
+          "description": "Plain meow CatDog message.",
+          "type": "string",
+          "example": "Plain meow meow"
+        },
+        "complexMeow": {
+          "description": "Complex meow CatDog message.",
+          "type": "string",
+          "example": "<html><head><title>Meow title</title></head><body><h1>Meow heading</h1></body></html>"
+        }
+      }
+    },
+    "CatDogBell": {
+      "description": "Bell to the CatDog.",
+      "type": "object",
+      "required": [
+        "name",
+        "bellType",
+        "content"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the bell",
+          "type": "string",
+          "example": "bell.ring"
+        },
+        "bellType": {
+          "$ref": "#/definitions/CatDogBellType"
+        },
+        "content": {
+          "description": "contents of the bell",
+          "type": "string",
+          "example": "bell ring"
+        }
+      }
+    },
+    "CatDogBellType": {
+      "description": "The type of bell.",
+      "enum": [
+        "abc",
+        "def"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CatDogBellType",
+        "modelAsString": true
+      }
+    },
+    "CatDogList": {
+      "description": "List of the CatDog",
+      "type": "object",
+      "required": [
+        "bb"
+      ],
+      "properties": {
+        "bb": {
+          "description": "CatDog list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatDogHouse"
+          }
+        },
+        "catDogFriend": {
+          "description": "CatDog another list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatDogHouse"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "enum": [
+        "2021-10-01-preview"
+      ],
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme."
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  }
+}

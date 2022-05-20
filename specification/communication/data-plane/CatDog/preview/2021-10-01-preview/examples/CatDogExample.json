@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-01-preview",
+    "repeatability-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800",
+    "repeatability-first-sent": "Sun, 06 Nov 1994 08:49:37 GMT",
+    "authorization": "HMAC-SHA256 SignedHeaders=x-ms-date;host;x-ms-content-sha256&Signature=aaaa",
+    "emailMessage": {
+      "headers": [
+        {
+          "name": "CorrelationId",
+          "value": "123"
+        },
+        {
+          "name": "CustomHeaderName",
+          "value": "CustomHeaderValue"
+        }
+      ],
+      "meow": "info",
+      "content": {
+        "whistle": "Cat whistle",
+        "plainMeow": "Plain meow meow",
+        "complexMeow": "<html><head><title>Meow title</title></head><body><h1>Meow heading</h1></body></html>"
+      },
+      "list": {
+        "bb": [
+          {
+            "catDog": "friend1",
+            "boardName": "friend1"
+          },
+          {
+            "catDog": "friend2",
+            "boardName": "friend2"
+          }
+        ],
+        "catDogFriend": [
+          {
+            "catDog": "friend3",
+            "boardName": "friend3"
+          },
+          {
+            "catDog": "friend4",
+            "boardName": "friend4"
+          }
+        ]
+      },
+      "bells": [
+        {
+          "name": "bell.ring",
+          "bellType": "abc",
+          "content": "bell ring"
+        },
+        {
+          "name": "bell.ring.2",
+          "bellType": "def",
+          "content": "bell ring 2"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Repeatability-Result": "accepted",
+        "Operation-Location": "https://contoso.westus.communications.azure.com//meow/status/8540c0de-899f-5cce-acb5-3ec493af3800?api-version=2021-10-01-preview",
+        "Retry-After": 1,
+        "x-ms-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800"
+      }
+    }
+  }
+}
