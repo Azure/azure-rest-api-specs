@@ -235,6 +235,10 @@ directive:
     where: $.definitions.ComponentLinkedStorageAccounts
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+  - suppress: OperationsApiResponseSchema
+    where: '$.paths["/providers/Microsoft.Insights/operations"]'
+    from: workbookOperations_API.json
+    reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
 ```
 
 ### Tag: package-2022-06-15
