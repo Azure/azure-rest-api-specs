@@ -84,6 +84,7 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/MaintenanceWindowOptions.json
   - Microsoft.Sql/preview/2022-02-01-preview/MaintenanceWindows.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedBackupShortTermRetentionPolicies.json
+  - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseColumns.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseQueries.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseRestoreDetails.json
@@ -98,6 +99,7 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabases.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdministrators.json
+  - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAzureADOnlyAuthentications.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceEncryptionProtectors.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceKeys.json
