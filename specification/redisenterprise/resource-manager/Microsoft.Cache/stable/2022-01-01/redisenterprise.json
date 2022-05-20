@@ -1196,7 +1196,7 @@
           "RedisEnterprise",
           "Databases"
         ],
-        "operationId": "RedisEnterprise_GetSku",
+        "operationId": "RedisEnterprise_SkuList",
         "description": "Gets information about skus in specified location for the given subscription id",
         "parameters": [{
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1208,20 +1208,28 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
         }
       ],
-        "responses": {
-          "200": {
-            "description": "The request succeeded, response body contains the requested details.",
-            "schema": {
-              "$ref": "#/definitions/RegionSkuDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+      "x-ms-examples": {
+        "RedisEnterpriseList": {
+          "$ref": "./examples/RedisEnterpriseSkuList.json"
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "The request succeeded, response body contains the requested details.",
+          "schema": {
+            "$ref": "#/definitions/RegionSkuDetails"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
           }
         }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
       }
     }
   },
@@ -1799,6 +1807,8 @@
       "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
     },
     "RegionSkuDetail": {
+      "title": "Region Sku Detail",
+      "description": "Details about the location requested and the available skus in the location",
       "type": "object",
       "properties": {
         "resourceType": {
@@ -1815,6 +1825,8 @@
       }
     },
     "RegionSkuDetails": {
+      "title": "Region Sku Details",
+      "description": "List of Region SKU Detail",
       "type": "object",
       "properties": {
         "value": {
@@ -1848,11 +1860,14 @@
     },
     "SkuDetail": {
       "type": "object",
+      "title": "Sku Detail",
+      "description": "Information about Sku",
       "properties": {
-        "SkuName": {
-          "type": "integer"
+        "skuName": {
+          "type": "integer",
+          "format": "int64"
         },
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
           "enum": [
@@ -1869,31 +1884,33 @@
             "modelAsString": true
           }
         },
-        "DefaultMaxMemory": {
+        "defaultMaxMemory": {
           "type": "number"
         },
-        "DefaultMaxFlash": {
+        "defaultMaxFlash": {
           "type": "number"
         },
-        "PlanId": {
+        "planId": {
           "type": "string"
         },
-        "InternalPlanId": {
+        "internalPlanId": {
           "type": "string"
         },
-        "IsFlash": {
+        "isFlash": {
           "type": "boolean"
         },
-        "IsLegacySku": {
+        "isLegacySku": {
           "type": "boolean"
         },
-        "RequiresQuorumNode": {
+        "requiresQuorumNode": {
           "type": "boolean"
         }
       }
     },
     "Capability": {
       "type": "object",
+      "title": "Capability",
+      "description": "Information about what features the location supports",
       "properties": {
         "name": {
           "type": "string"
@@ -1905,6 +1922,8 @@
     },
     "ZoneMapping": {
       "type": "object",
+      "title": "Zone Mapping",
+      "description": "Gives information about logical and physical zone pairing",
       "properties": {
         "logicalZone": {
           "type": "string"
