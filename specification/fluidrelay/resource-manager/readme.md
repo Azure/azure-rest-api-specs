@@ -85,6 +85,15 @@ input-file:
   - Microsoft.FluidRelay/stable/2022-04-21/fluidrelay.json
 ```
 
+### Tag: package-2022-05-11
+
+These settings apply only when `--tag=package-2022-05-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-11'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-05-11/fluidrelay.json
+```
+
 ---
 
 # Code Generation
