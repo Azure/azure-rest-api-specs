@@ -239,6 +239,10 @@ directive:
     where: '$.paths["/providers/Microsoft.Insights/operations"]'
     from: workbookOperations_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+  - suppress: TrackedResourcePatchOperation
+    where: $.definitions.Workbook
+    from: workbooks_API.json
+    reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
 ```
 
 ### Tag: package-2022-06-15
