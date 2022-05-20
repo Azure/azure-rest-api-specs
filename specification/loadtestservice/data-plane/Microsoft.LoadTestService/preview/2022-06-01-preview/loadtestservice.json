@@ -955,6 +955,12 @@
           },
           {
             "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "in": "query",
+            "name": "continuationToken",
+            "description": "Continuation token to get the next page of response.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1678,7 +1684,7 @@
           "description": "Additional details and inner errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
+            "$ref": "#/definitions/Error"
           }
         }
       }
@@ -1744,6 +1750,10 @@
           "items": {
             "$ref": "#/definitions/FileUrl"
           }
+        },
+        "nextLink": {
+          "description": "Link for the next list of file URLs, if applicable",
+          "type": "string"
         }
       }
     },
