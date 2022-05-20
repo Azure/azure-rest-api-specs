@@ -49,7 +49,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -99,7 +99,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -159,7 +159,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -217,7 +217,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -245,76 +245,6 @@
         "x-ms-examples": {
           "MigrateAgent_Create": {
             "$ref": "./examples/MigrateAgent_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "MigrateAgent"
-        ],
-        "summary": "Updates the MigrateAgent.",
-        "description": "Updates the migrateDataCenter agent.",
-        "operationId": "MigrateAgent_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "agentName",
-            "description": "MigrateAgent name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "MigrateAgent model.",
-            "schema": {
-              "$ref": "#/definitions/MigrateAgentModel"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "MigrateAgent_Update": {
-            "$ref": "./examples/MigrateAgent_Update.json"
           }
         }
       },
@@ -350,7 +280,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -407,7 +337,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -464,7 +394,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -532,7 +462,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -582,7 +512,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -633,7 +563,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -692,20 +622,23 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "MigrateDataCenter properties.",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModel"
+              "$ref": "#/definitions/UpdateMigrateDataCenterModel"
             }
           }
         ],
         "responses": {
           "202": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MigrateDataCenterModel"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -752,7 +685,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -805,7 +738,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -857,7 +790,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -910,7 +843,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -973,7 +906,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1030,7 +963,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1092,7 +1025,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1159,7 +1092,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1216,7 +1149,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1274,7 +1207,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1302,76 +1235,6 @@
         "x-ms-examples": {
           "WorkloadDeployment_Create": {
             "$ref": "./examples/WorkloadDeployment_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
-        "summary": "Updates the workload deployment.",
-        "description": "Performs update on the workload deployment.",
-        "operationId": "WorkloadDeployment_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workloadDeploymentName",
-            "description": "Workload deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Workload deployment model.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadDeploymentModel"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "WorkloadDeployment_Update": {
-            "$ref": "./examples/WorkloadDeployment_Update.json"
           }
         }
       },
@@ -1413,7 +1276,7 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1470,7 +1333,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1530,7 +1393,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1590,7 +1453,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1662,7 +1525,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1734,7 +1597,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1806,7 +1669,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1875,7 +1738,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1943,7 +1806,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2000,7 +1863,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2058,7 +1921,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -2086,76 +1949,6 @@
         "x-ms-examples": {
           "WorkloadInstance_Create": {
             "$ref": "./examples/WorkloadInstance_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "WorkloadInstance"
-        ],
-        "summary": "Updates the workload instance.",
-        "description": "Updates the workload instance in the given migrateDataCenter.",
-        "operationId": "WorkloadInstance_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workloadInstanceName",
-            "description": "Workload instance name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Workload instance model.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadInstanceModel"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "WorkloadInstance_Update": {
-            "$ref": "./examples/WorkloadInstance_Update.json"
           }
         }
       },
@@ -2191,7 +1984,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2248,7 +2041,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2315,7 +2108,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -4381,6 +4174,20 @@
         }
       }
     },
+    "UpdateMigrateDataCenterModel": {
+      "description": "Update MigrateDataCenter model.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "VMwareMigrateAgentModelCustomProperties": {
       "description": "VMware MigrateAgent model custom properties.",
       "type": "object",
@@ -5427,7 +5234,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "api-version": {
+    "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",
       "description": "Client Api Version.",
