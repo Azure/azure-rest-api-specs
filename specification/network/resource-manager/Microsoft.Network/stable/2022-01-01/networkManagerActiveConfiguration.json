@@ -139,59 +139,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityUserRules": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NetworkManagerActiveSecurityUserRules"
-        ],
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ActiveConfigurationParameter"
-            },
-            "description": "Active Configuration Parameter."
-          }
-        ],
-        "operationId": "ListActiveSecurityUserRules",
-        "description": "Lists Active Security User Rules in a network manager.",
-        "responses": {
-          "200": {
-            "description": "Post successful. The operation returns the specified Managed Network active security user rules resource.",
-            "schema": {
-              "$ref": "#/definitions/ActiveSecurityUserRulesListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Active Security User Rules": {
-            "$ref": "./examples/NetworkManagerActiveSecurityUserRulesList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -266,23 +213,6 @@
         }
       },
       "description": "Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results."
-    },
-    "ActiveSecurityUserRulesListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActiveBaseSecurityUserRule"
-          },
-          "description": "Gets a page of active security user rules."
-        },
-        "skipToken": {
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "type": "string"
-        }
-      },
-      "description": "Result of the request to list active security user rules. It contains a list of active security user rules and a skiptoken to get the next set of results."
     },
     "ActiveBaseSecurityAdminRule": {
       "type": "object",
@@ -374,98 +304,6 @@
         }
       ],
       "description": "Network default admin rule.",
-      "x-ms-discriminator-value": "Default"
-    },
-    "ActiveBaseSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "commitTime": {
-          "type": "string",
-          "description": "Deployment time string.",
-          "format": "date-time"
-        },
-        "region": {
-          "type": "string",
-          "description": "Deployment region."
-        },
-        "configurationDescription": {
-          "type": "string",
-          "description": "A description of the security user configuration."
-        },
-        "ruleCollectionDescription": {
-          "type": "string",
-          "description": "A description of the rule collection."
-        },
-        "ruleCollectionAppliesToGroups": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
-          },
-          "description": "Groups for rule collection"
-        },
-        "ruleGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup"
-          },
-          "description": "Effective configuration groups."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Whether the rule is custom or default.",
-          "enum": [
-            "Custom",
-            "Default"
-          ],
-          "x-ms-enum": {
-            "name": "EffectiveUserRuleKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "discriminator": "kind",
-      "description": "Network base rule."
-    },
-    "ActiveSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
-          "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security user rule"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActiveBaseSecurityUserRule"
-        }
-      ],
-      "description": "Network security user rule.",
-      "x-ms-discriminator-value": "Custom"
-    },
-    "ActiveDefaultSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
-          "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security default user rule"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActiveBaseSecurityUserRule"
-        }
-      ],
-      "description": "Network security default user rule.",
       "x-ms-discriminator-value": "Default"
     }
   },
