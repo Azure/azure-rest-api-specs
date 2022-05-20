@@ -1,0 +1,712 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Data Registry Service",
+    "version": "2022-12-01",
+    "description": "APIs for managing data registry in Azure Maps."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2022-12-01",
+      "x-ms-parameter-location": "client"
+    },
+    "DataFormat": {
+      "name": "dataFormat",
+      "description": "Data format of the content being uploaded.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "geojson",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          },
+          {
+            "value": "zip",
+            "description": "Compressed data format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "UniqueDataId": {
+      "name": "udid",
+      "description": "The unique data id for the data registry. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) call.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DataDescription": {
+      "name": "description",
+      "description": "The description to be given to the data registry.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the data upload request.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/mapData": {
+      "post": {
+        "description": "***Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe DataRegistry Create API allows the caller to create a data registry for their data content uploaded to Azure Storage Account in the Azure Maps Service and in exchange of a UDID. You can use this API in a scenario like registering a collection of Geofences in `GeoJSON` format, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Create Request\n\nTo create a data registry you will use a `POST` request. The request body will contain the connection object. The `dataFormat` query parameter will contain the format for the data for validation.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the connection object. Set the `dataFormat` query parameter to _geojson_.\n\nThe DataRegistry Create API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "DataRegistries_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Register GeoJSON data containing geometries that represent a collection of geofences to the Azure Maps Service": {
+            "$ref": "./examples/DataRegistries_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DataFormat"
+          },
+          {
+            "$ref": "#/parameters/DataDescription"
+          },
+          {
+            "name": "dataRegistry",
+            "in": "body",
+            "description": "The data registry to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all data registries created previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Data Response\n\nThe Data List API returns the complete list of all data in `json` format.",
+        "operationId": "DataRegistries_List",
+        "x-ms-examples": {
+          "List all the previously uploaded data": {
+            "$ref": "./examples/DataRegistries_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "schema": {
+              "$ref": "#/definitions/MapDataListResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/mapData/{udid}": {
+      "put": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe DataRegistry Update API allows the caller to update a previously created data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are uploaded using the [Data Create API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Update Request\n\nTo update your content you will use a `PUT` request. The request body will contain the new connection object that will replace the existing connection object. The path will contain the `udid` of the data to be update.\n\nFor example, to update a collection of geofences that were previously uploaded using the Upload API. Set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response.\n\nThe DataRegistry Update API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "DataRegistries_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update existing data with new connection object": {
+            "$ref": "./examples/DataRegistries_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          },
+          {
+            "$ref": "#/parameters/DataDescription"
+          },
+          {
+            "name": "dataRegistry",
+            "in": "body",
+            "description": "The object for updating a given data registry",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "patch": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe DataRegistry Patch API allows the caller to patch a previously created data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are uploaded using the [Data Create API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Patch Request\n\nTo patch a data registry you will use a `PATCH` request. The request body will contain an object representing a patch to the data registry, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396). The path will contain the `udid` of the data registry to be update.\n\nFor example, to patch a data registry that were previously uploaded using the DataRegistry Create API. Set the `udid` parameter in the path to the `udid` of the data received previously in the create API response.\n\nThe DataRegistry Patch API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "DataRegistries_Patch",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Patch existing data with new connection object": {
+            "$ref": "./examples/DataRegistries_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          },
+          {
+            "$ref": "#/parameters/DataDescription"
+          },
+          {
+            "name": "dataRegistryPatch",
+            "in": "body",
+            "description": "The object for patching a given data registry",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataRegistryPatch"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to download the underlying content of a previously created data registry.\n\nYou can use this API in a scenario like downloading an existing collection of geofences uploaded previously using the [DataRegistry Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial).\n\n## Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download.\n\nFor example, to download a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the DataRegistry Create API response.\n\n## Download Data Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource. A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
+        "operationId": "DataRegistries_Download",
+        "x-ms-examples": {
+          "Download previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/DataRegistries_Download.json"
+          }
+        },
+        "produces": [
+          "application/geo+json",
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data download request completed successfully. The response body will contain the content for the passed in `udid`.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the Download API response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "delete": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to delete a previously created data registry.\n\nYou can use this API in a scenario like removing geofences previously uploaded using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). You can also use this API to delete old/unused created udid.\n\n## Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `udid` of the data to delete.\n\nFor example, to delete a collection of geofences previously created using the DataRegistry Create API, set the `udid` parameter in the path to the `udid` of the data received previously in the DataRegistry Create API response.\n\n## Delete Data Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, if the data resource was deleted successfully.\n\nA HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
+        "operationId": "DataRegistries_Delete",
+        "x-ms-examples": {
+          "Delete previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/DataRegistries_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Data delete request completed successfully. The reference to your content was deleted in Azure Maps Service."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/mapData/{udid}/metadata": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the metadata of a given udid created previously using the [DataRegistry Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit Get Metadata Request\n\nTo fetch the metadata of a given udid you will issue a `GET` request with no additional parameters.\n\n## Get Metadata Response\n\nThe Data Metadata API returns the complete list of all data in `json` format.",
+        "operationId": "DataRegistries_GetMetadata",
+        "x-ms-examples": {
+          "Fetch the metadata of a given udid": {
+            "$ref": "./examples/DataRegistries_GetMetadata.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get metadata request completed successfully. The response body is the metadata of a given udid.",
+            "schema": {
+              "$ref": "#/definitions/MapDataResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/mapData/operations/{operationId}": {
+      "get": {
+        "description": "This path will be obtained from a call to [DataRegistry Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview), [DataRegistry Update API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview), and [DataRegistry Patch API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview). While in progress, a HTTP `200 OK` response will be returned with no extra headers -  followed by a HTTP `200 OK` with `Resource-Location` header once completed.",
+        "operationId": "DataRegistries_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/DataRegistries_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/DataRegistries_GetOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataRegistry": {
+      "description": "A DataRegistry object provides information for Azure Maps Service to access customer's resources.",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/Connection"
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
+    "DataRegistryPatch": {
+      "description": "An object for patching a given data registry.",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/ConnectionPatch"
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
+    "Connection": {
+      "description": "A Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Connection type.",
+          "type": "string",
+          "enum": [
+            "AzureBlobFile"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlobFile",
+                "description": "Connection to Azure Blob File."
+              }
+            ]
+          }
+        },
+        "msiClientId": {
+          "description": "ClientId of MSI. Use system assigned identity if not provided.",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource. Need to configure in control plane beforehand.",
+          "type": "string"
+        },
+        "blobPath": {
+          "description": "The path to the blob file.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "blobPath"
+      ]
+    },
+    "ConnectionPatch": {
+      "description": "A ConnectionPatch object represents a patch to a Connection object, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396).",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Connection type.",
+          "type": "string",
+          "enum": [
+            "AzureBlobFile"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlobFile",
+                "description": "Connection to Azure Blob File."
+              }
+            ]
+          }
+        },
+        "msiClientId": {
+          "description": "ClientId of MSI. Use system assigned identity if not provided.",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource. Need to configure in control plane first.",
+          "type": "string"
+        },
+        "blobPath": {
+          "description": "The path to the blob file.",
+          "type": "string"
+        }
+      }
+    },
+    "MapDataListResult": {
+      "description": "The response model for the Data List API. Returns a list of all the previously created data.",
+      "type": "object",
+      "properties": {
+        "mapDataList": {
+          "description": "A list of all the previously created data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapData"
+          }
+        }
+      },
+      "required": [
+        "mapDataList"
+      ]
+    },
+    "MapDataResult": {
+      "description": "The response model for the Data Metadata API. Returns the metadata of a given udid.",
+      "type": "object",
+      "properties": {
+        "mapData": {
+          "$ref": "#/definitions/MapData"
+        }
+      },
+      "required": [
+        "mapData"
+      ]
+    },
+    "MapData": {
+      "description": "Metadata of a data registry.",
+      "type": "object",
+      "properties": {
+        "udid": {
+          "description": "The unique data id for the data registry.",
+          "type": "string"
+        },
+        "downloadURL": {
+          "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data.",
+          "type": "string",
+          "format": "uri"
+        },
+        "sizeInBytes": {
+          "description": "The size of the content in bytes.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "contentMD5": {
+          "description": "The content MD5 of the content.",
+          "type": "string"
+        },
+        "createStatus": {
+          "description": "The current create status of the data registry.",
+          "$ref": "#/definitions/CreateStatus"
+        },
+        "dataFormat": {
+          "description": "Data format of the uploaded content for validation in Azure Maps Service.",
+          "$ref": "#/definitions/DataFormat"
+        },
+        "description": {
+          "description": "The description of the data.",
+          "type": "string"
+        },
+        "connection": {
+          "description": "Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
+          "$ref": "#/definitions/Connection"
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "description": "The updated timestamp.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "udid",
+        "downloadURL",
+        "sizeInBytes",
+        "contentMD5",
+        "createStatus",
+        "dataFormat",
+        "connection",
+        "created",
+        "updated"
+      ]
+    },
+    "DataFormat": {
+      "description": "Data format of the uploaded content for validation in Azure Maps Service.",
+      "type": "string",
+      "enum": [
+        "geojson",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          },
+          {
+            "value": "zip",
+            "description": "Compressed data format."
+          }
+        ]
+      }
+    },
+    "CreateStatus": {
+      "description": "The current create status of the data registry.",
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CreateStatus",
+        "values": [
+          {
+            "value": "Pending",
+            "description": "Upload is processing."
+          },
+          {
+            "value": "Completed",
+            "description": "Upload validation and processing completed."
+          },
+          {
+            "value": "Failed",
+            "description": "Upload validation and/or processing failure."
+          }
+        ]
+      }
+    }
+  }
+}

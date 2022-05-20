@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-12-01",
+    "udid": "25084fb7-307a-4720-8f91-7952a0b91012",
+    "dataRegistry": {
+      "connection": {
+        "type": "AzureBlobFile",
+        "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
+        "linkedResource": "my-storage-account",
+        "blobPath": "/my/blob/path-new.json"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/mapData/operations/{operationId}?api-version=2022-12-01",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    }
+  }
+}
