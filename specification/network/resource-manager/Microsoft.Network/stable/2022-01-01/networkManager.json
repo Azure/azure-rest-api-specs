@@ -414,63 +414,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listEffectiveVirtualNetworks": {
-      "post": {
-        "tags": [
-          "NetworkManagers"
-        ],
-        "operationId": "EffectiveVirtualNetworks_ListByNetworkManager",
-        "description": "List effective virtual networks in a network manager.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NetworkManagerNameParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EffectiveVirtualNetworksParameter"
-            },
-            "description": "Effective Virtual Networks Parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns a list of effective virtual networks.",
-            "schema": {
-              "$ref": "./networkManagerGroup.json#/definitions/EffectiveVirtualNetworksListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Effective Virtual Networks By Network Manager": {
-            "$ref": "./examples/NetworkManagerEffectiveVirtualNetworksListByNetworkManager.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -744,20 +687,6 @@
         "modelAsString": true
       },
       "description": "Configuration Deployment Type."
-    },
-    "EffectiveVirtualNetworksParameter": {
-      "type": "object",
-      "properties": {
-        "conditionalMembers": {
-          "type": "string",
-          "description": "Conditional Members."
-        },
-        "skipToken": {
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
-          "type": "string"
-        }
-      },
-      "description": "Effective Virtual Networks Parameter."
     }
   },
   "parameters": {
