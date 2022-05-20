@@ -206,51 +206,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
-      "get": {
-        "tags": [
-          "Organization"
-        ],
-        "summary": "List all Organizations under the specified resource group.",
-        "operationId": "Organization_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OrganizationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Organization_ListByResourceGroup": {
-            "$ref": "./examples/Organization_ListByResourceGroup.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
       "get": {
         "tags": [
@@ -715,8 +670,6 @@
     },
     "ProvisioningState": {
       "enum": [
-        "Accepted",
-        "Creating",
         "Updating",
         "Deleting",
         "Succeeded",
