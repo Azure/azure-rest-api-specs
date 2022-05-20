@@ -2,7 +2,7 @@
 
 Service Onboarding DPG with Swagger CI pipeline can help you get generated SDK and ApiView during the procedure of creating swagger PR.
 The benefits are following:
-1. Arch Board can review the ApiView when swagger PR is created and no need to wait for SDK owners to create ApiView manually, which saves much time.
+1. API signature could be reviewed at the same time when we submit a Swagger PR. This could help to detect API issues at the early stage.
 2. Service team can change the swagger in the PR directly if Arch Board has some comments in reviewing ApiView because the swagger PR is not merged.
 
 This Document describes the process of how to onboard DPG with SDK automation pipeline. __This document is targeting for service team.__ 
