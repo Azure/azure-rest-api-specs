@@ -10,8 +10,6 @@ The current preview release of Conversational Language Understanding and Text An
 
 The current stable release of Question Answering is 2021-10-01.
 
-The current stable release of Language is 2022-05-01.
-
 ```yaml
 tag: release_2022_05_15_preview
 add-credentials: true
@@ -24,6 +22,7 @@ directive:
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
 ```
+
 ### Release 2022-05-15-preview
 
 These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
@@ -74,6 +73,7 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file:
 - preview/2021-11-01-preview/textanalytics.json
+- preview/2021-11-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
