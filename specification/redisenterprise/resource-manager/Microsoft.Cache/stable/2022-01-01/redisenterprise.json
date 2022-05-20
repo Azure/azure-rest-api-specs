@@ -1189,6 +1189,40 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/redisEnterprise/locations/{location}/skus": {
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "RedisEnterprise_GetSku",
+        "description": "Gets information about skus in specified location for the given subscription id",
+        "parameters": [{
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/LocationParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded, response body contains the requested details.",
+            "schema": {
+              "$ref": "#/definitions/RegionSkuDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1763,6 +1797,122 @@
         "ids"
       ],
       "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
+    },
+    "RegionSkuDetail": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string"
+        },
+        "locationInfo": {
+          "$ref": "#/definitions/LocationInfo",
+          "description": "Details about location and its capabilities"
+        },
+        "skuDetails": {
+          "$ref": "#/definitions/SkuDetail",
+          "description": "Details about available skus"
+        }
+      }
+    },
+    "RegionSkuDetails": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionSkuDetail"
+          },
+          "description": "List of SkuDetails"
+        }
+      }
+    },
+    "LocationInfo": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
+        "locationCapabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
+    "SkuDetail": {
+      "type": "object",
+      "properties": {
+        "SkuName": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string",
+          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
+          "enum": [
+            "Enterprise_E10",
+            "Enterprise_E20",
+            "Enterprise_E50",
+            "Enterprise_E100",
+            "EnterpriseFlash_F300",
+            "EnterpriseFlash_F700",
+            "EnterpriseFlash_F1500"
+          ],
+          "x-ms-enum": {
+            "name": "Name",
+            "modelAsString": true
+          }
+        },
+        "DefaultMaxMemory": {
+          "type": "number"
+        },
+        "DefaultMaxFlash": {
+          "type": "number"
+        },
+        "PlanId": {
+          "type": "string"
+        },
+        "InternalPlanId": {
+          "type": "string"
+        },
+        "IsFlash": {
+          "type": "boolean"
+        },
+        "IsLegacySku": {
+          "type": "boolean"
+        },
+        "RequiresQuorumNode": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value":{
+          "type": "boolean"
+        }
+      }
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "logicalZone": {
+          "type": "string"
+        },
+        "physicalZone": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1780,6 +1930,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the database.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location of the resource",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
