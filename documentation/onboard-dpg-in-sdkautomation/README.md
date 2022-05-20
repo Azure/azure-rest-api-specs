@@ -20,7 +20,7 @@ __Description:__
    1. `<prNumber>` is the PR number of swagger PR.
    2. Please refer to [Add autorest configuration file in sdk repository](./add-autorest-configuration-file-in-sdk-repository.md) on how to add autorest configuration files.
 4. Swagger PR CI generates SDK and ApiView automatically, and you can find them in swagger PR comments.
-5. Ask Arch Board to review the generated ApiView. (Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition)).
+5.  Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition) to reivew API definition.
 6. If Arch Board approves the ApiView, go to step 10. Otherwise, go to step 7.
 7. Update Swagger if needed.
 8. Update autorest configuration file if needed. Here, if there is a branch named `dpg/<prNumber>` in sdk repository, please update it in the branch. Otherwise, create a branch named `dpg/<prNumber>` from `main` branch in sdk repository and update the `autorest.md` or `README.md` in the new created branch.
