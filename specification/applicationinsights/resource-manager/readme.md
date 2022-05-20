@@ -117,34 +117,34 @@ directive:
     reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
   - suppress: DeleteOperationResponses
     from: analyticsItems_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: componentAnnotations_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: componentApiKeys_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: componentContinuousExport_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: componentWorkItemConfigs_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: favorites_API.json
-    reason: 'consistent with existing delete response | owned by another team'
+    reason: consistent with existing delete response | owned by another team
   - suppress: DeleteOperationResponses
     from: workbooks_API.json
-    reason: 'consistent with existing delete response'
+    reason: consistent with existing delete response
   - suppress: DefaultErrorResponseSchema
     from: componentAnnotations_API.json
-    reason: 'consistent with existing default error response | owned by another team'
+    reason: consistent with existing default error response | owned by another team
   - suppress: DefaultErrorResponseSchema
     from: componentWorkItemConfigs_API.json
-    reason: 'consistent with existing default error response | owned by another team'
+    reason: consistent with existing default error response | owned by another team
   - suppress: DefaultErrorResponseSchema
     from: workbooks_API.json
-    reason: 'consistent with existing default error response'
+    reason: consistent with existing default error response
   - suppress: R4009
     from: workbookTemplates_API.json
     reason: Existing APIs don't have systemData attribute. Suppressing so don't have to make breaking change
@@ -153,93 +153,95 @@ directive:
     reason: Does not support list by subscription
   - suppress: DefaultErrorResponseSchema
     from: workbookOperations_API.json
-    reason: 'consistent with existing default error response'
+    reason: consistent with existing default error response
   - suppress: RequiredDefaultResponse
     from: analyticsItems_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentAnnotations_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentApiKeys_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentContinuousExport_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentFeaturesAndPricing_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentProactiveDetection_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: components_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: componentWorkItemConfigs_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: favorites_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: webTestLocations_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: webTestLocations_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: RequiredDefaultResponse
     from: webTests_API.json
-    reason: 'consistent with existing default response | owned by another team'
+    reason: consistent with existing default response | owned by another team
   - suppress: PathResourceTypeNameCamelCase
     from: componentAnnotations_API.json
-    reason: 'consistent with existing path | owned by another team'
+    reason: consistent with existing path | owned by another team
   - suppress: PathResourceTypeNameCamelCase
     from: componentApiKeys_API.json
-    reason: 'consistent with existing path | owned by another team'
+    reason: consistent with existing path | owned by another team
   - suppress: PathResourceTypeNameCamelCase
     from: componentProactiveDetection_API.json
-    reason: 'consistent with existing path | owned by another team'
+    reason: consistent with existing path | owned by another team
   - suppress: PathResourceTypeNameCamelCase
     from: componentWorkItemConfigs_API.json
-    reason: 'consistent with existing path | owned by another team'
+    reason: consistent with existing path | owned by another team
   - suppress: PathResourceProviderNamePascalCase
     from: analyticsItems_API.json
-    reason: 'consistent with existing path | owned by another team'
+    reason: consistent with existing path | owned by another team
   - suppress: GetCollectionResponseSchema
     from: componentProactiveDetection_API.json
-    reason: 'consistent with existing response schema | owned by another team'
+    reason: consistent with existing response schema | owned by another team
   - suppress: IntegerTypeMustHaveFormat
     from: componentFeaturesAndPricing_API.json
-    reason: 'consistent with existing format | owned by another team'
+    reason: consistent with existing format | owned by another team
   - suppress: IntegerTypeMustHaveFormat
     from: components_API.json
-    reason: 'consistent with existing format | owned by another team'
+    reason: consistent with existing format | owned by another team
   - suppress: TopLevelResourcesListBySubscription
     from: workbooks_API.json
-    reason: 'get workbook list by subscription is not supported'
+    reason: get workbook list by subscription is not supported
   - suppress: OperationsAPIImplementation
-    reason: 'Previously implemented operation apis are using an incorrect RP case format which I cannot change.'
+    reason: Previously implemented operation apis are using an incorrect RP case format which I cannot change.
   - suppress: SECRET_PROPERTY
     from: diagnosticServicesToken_API.json
     where:
       - $.definitions.DiagnosticServicesTokenResponse.properties.token
-    reason: 'Secrets are OK to return in a POST response.'
+    reason: Secrets are OK to return in a POST response.
   - suppress: DefaultErrorResponseSchema
     from: aiOperations_API
-    reason: 'consistent with existing default error response | owned by another team'
+    reason: consistent with existing default error response | owned by another team
   - suppress: OperationsApiResponseSchema
     from: aiOperations_API
-    reason: 'consistent with existing response schema | owned by another team'
+    reason: consistent with existing response schema | owned by another team
   - suppress: RequiredReadOnlySystemData
-  
+  - suppress: NestedResourcesMustHaveListOperation
+    where: $.definitions.ComponentLinkedStorageAccounts
+    from: componentLinkedStorageAccounts_API.json
+    reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
 ```
-
 
 ### Tag: package-2022-06-15
 
 These settings apply only when `--tag=package-2022-06-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06-15'
+``` yaml $(tag) == 'package-2022-06-15'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -259,6 +261,7 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
+
 ### Tag: package-2022-02-01
 
 These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
