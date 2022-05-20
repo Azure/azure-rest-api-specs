@@ -3,38 +3,20 @@
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
-    "api-version": "2022-03-01-preview",
+    "api-version": "2022-05-01",
     "body": {
-      "kind": "CustomConversation",
+      "kind": "Conversation",
       "analysisInput": {
         "conversationItem": {
-<<<<<<< HEAD
-          "language": "en-GB",
-          "text": "play a song from Phil Collins",
-          "participantId": "1",
-          "modality": "text",
-          "id": "1"
-        }
-=======
-          "participantId": "1",
           "id": "1",
-          "modality": "text",
-          "language": "en-GB",
-          "text": "play a song from Phil Collins"
-        },
-        "isLoggingEnabled": false
->>>>>>> release-cognitiveservices-Language-2022-05-01-GA
+          "participantId": "1",
+          "text": "play In the air tonight from Phil Collins"
+        }
       },
       "parameters": {
         "projectName": "{project-name}",
         "deploymentName": "{deployment-name}",
-<<<<<<< HEAD
-        "verbose": true,
-        "isLoggingEnabled": false,
         "stringIndexType": "TextElement_V8"
-=======
-        "verbose": true
->>>>>>> release-cognitiveservices-Language-2022-05-01-GA
       }
     }
   },
@@ -42,13 +24,12 @@
     "200": {
       "headers": {},
       "body": {
-        "kind": "CustomConversationResult",
-        "results": {
+        "kind": "ConversationResult",
+        "result": {
           "query": "play In the air tonight from Phil Collins",
-          "detectedLanguage": "en",
           "prediction": {
             "topIntent": "PlayMusic",
-            "projectKind": "conversation",
+            "projectKind": "Conversation",
             "intents": [
               {
                 "category": "PlayMusic",

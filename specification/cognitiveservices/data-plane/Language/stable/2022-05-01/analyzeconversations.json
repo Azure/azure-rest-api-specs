@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
-    "version": "2022-03-01-preview"
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
+    "version": "2022-05-01"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -73,14 +73,14 @@
           }
         },
         "x-ms-examples": {
-          "Arbitration result": {
-            "$ref": "./examples/conversations/Orchestrator_arbitration.json"
-          },
           "Conversation project result": {
-            "$ref": "./examples/conversations/Conversation_project.json"
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversations.json"
           },
-          "Orchestrator direct target result": {
-            "$ref": "./examples/conversations/Orchestrator_direct_target.json"
+          "Orchestration result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
+          },
+          "Orchestration direct target result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
       }
@@ -91,7 +91,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
       "enum": [
-        "CustomConversation"
+        "Conversation"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskKind",
@@ -102,7 +102,7 @@
       "type": "string",
       "description": "Enumeration of supported conversational task results",
       "enum": [
-        "CustomConversationResult"
+        "ConversationResult"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskResultsKind",
@@ -133,7 +133,7 @@
         }
       }
     },
-    "CustomConversationalTask": {
+    "ConversationalTask": {
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -145,18 +145,18 @@
           "$ref": "#/definitions/ConversationAnalysisOptions"
         },
         "parameters": {
-          "$ref": "#/definitions/CustomConversationTaskParameters"
+          "$ref": "#/definitions/ConversationTaskParameters"
         }
       },
-      "x-ms-discriminator-value": "CustomConversation",
+      "x-ms-discriminator-value": "Conversation",
       "required": [
         "analysisInput",
         "parameters"
       ]
     },
-    "CustomConversationTaskParameters": {
+    "ConversationTaskParameters": {
       "type": "object",
-      "description": "Input parameters necessary for a CustomConversation task.",
+      "description": "Input parameters necessary for a Conversation task.",
       "properties": {
         "projectName": {
           "type": "string",
@@ -169,7 +169,6 @@
         "verbose": {
           "type": "boolean",
           "description": "If true, the service will return more detailed information in the response."
-<<<<<<< HEAD
         },
         "isLoggingEnabled": {
           "type": "boolean",
@@ -188,8 +187,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/AnalysisParameters"
           }
-=======
->>>>>>> release-cognitiveservices-Language-2022-05-01-GA
         }
       },
       "required": [
@@ -197,8 +194,8 @@
         "deploymentName"
       ]
     },
-    "CustomConversationalTaskResult": {
-      "description": "The results of a CustomConversation task.",
+    "ConversationalTaskResult": {
+      "description": "The results of a Conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
@@ -206,53 +203,43 @@
       ],
       "type": "object",
       "properties": {
-        "results": {
+        "result": {
           "$ref": "#/definitions/AnalyzeConversationResult"
         }
       },
       "required": [
-        "results"
+        "result"
       ],
-      "x-ms-discriminator-value": "CustomConversationResult"
+      "x-ms-discriminator-value": "ConversationResult"
     },
     "ConversationItemBase": {
       "type": "object",
-      "discriminator": "modality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
-        "participantId": {
-          "description": "The participant Id of a ConversationItem",
+        "id": {
+          "description": "The ID of a conversation item.",
           "type": "string"
         },
-        "id": {
-          "description": "The Id of a ConversationItem",
+        "participantId": {
+          "description": "The participant ID of a conversation item.",
           "type": "string"
         },
         "language": {
-          "description": "The input language of a ConversationItem in BCP 47 language representation.",
+          "description": "The override language of a conversation item in BCP 47 language representation.",
           "type": "string"
         },
         "modality": {
-          "description": "The modality (format) of ConversationItem (e.g., Text, Transcript)",
-          "type": "string",
-          "enum": [
-            "text"
-          ],
-          "x-ms-enum": {
-            "name": "modality",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Modality"
         }
       },
       "required": [
         "participantId",
-        "id",
-        "modality"
-      ]
+        "id"
+      ],
+      "additionalProperties": true
     },
     "TextConversationItem": {
       "description": "The text modality of an input conversation.",
-      "x-ms-discriminator-value": "text",
       "allOf": [
         {
           "$ref": "#/definitions/ConversationItemBase"
@@ -260,7 +247,7 @@
       ],
       "properties": {
         "text": {
-          "description": "The single input query",
+          "description": "The text input",
           "type": "string"
         }
       },
@@ -277,24 +264,6 @@
       "properties": {
         "conversationItem": {
           "$ref": "#/definitions/ConversationItemBase"
-<<<<<<< HEAD
-=======
-        },
-        "directTarget": {
-          "type": "string",
-          "description": "The name of the target project this request is sending to directly."
-        },
-        "isLoggingEnabled": {
-          "description": "If true, the query will be kept by the service for customers to further review.",
-          "type": "boolean"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "A dictionary representing the input for each target project.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AnalysisParameters"
-          }
->>>>>>> release-cognitiveservices-Language-2022-05-01-GA
         }
       }
     },
@@ -302,21 +271,21 @@
       "type": "object",
       "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "required": [
-        "targetKind"
+        "targetProjectKind"
       ],
-      "discriminator": "targetKind",
+      "discriminator": "targetProjectKind",
       "properties": {
-        "targetKind": {
+        "targetProjectKind": {
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
-            "luis",
-            "conversation",
-            "question_answering",
-            "non_linked"
+            "Luis",
+            "Conversation",
+            "QuestionAnswering",
+            "NonLinked"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetProjectKind",
             "modelAsString": true
           }
         },
@@ -329,7 +298,7 @@
     "NoneLinkedTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of non-linked intent response.",
-      "x-ms-discriminator-value": "non_linked",
+      "x-ms-discriminator-value": "NonLinked",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -342,9 +311,9 @@
         }
       }
     },
-    "LUISParameters": {
+    "LuisParameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "x-ms-discriminator-value": "luis",
+      "x-ms-discriminator-value": "Luis",
       "type": "object",
       "allOf": [
         {
@@ -360,12 +329,12 @@
         "callingOptions": {
           "type": "object",
           "description": "This customizes how the service calls LUIS Generally Available projects.",
-          "$ref": "#/definitions/LUISCallingOptions"
+          "$ref": "#/definitions/LuisCallingOptions"
         }
       },
       "additionalProperties": true
     },
-    "LUISCallingOptions": {
+    "LuisCallingOptions": {
       "description": "This customizes how the service calls LUIS Generally Available projects.",
       "type": "object",
       "properties": {
@@ -398,7 +367,7 @@
     "ConversationParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Customized Conversation projects.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -432,7 +401,7 @@
     "QuestionAnsweringParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Question Answering knowledge bases.",
-      "x-ms-discriminator-value": "question_answering",
+      "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -440,8 +409,8 @@
       ],
       "properties": {
         "callingOptions": {
-          "type": "object",
-          "description": "The options sent to a Question Answering KB."
+          "description": "The options sent to a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersOptions"
         }
       }
     },
@@ -479,8 +448,8 @@
           "type": "string",
           "description": "The type of the project.",
           "enum": [
-            "conversation",
-            "workflow"
+            "Conversation",
+            "Orchestration"
           ],
           "x-ms-enum": {
             "name": "projectKind",
@@ -493,10 +462,10 @@
         }
       }
     },
-    "OrchestratorPrediction": {
+    "OrchestrationPrediction": {
       "type": "object",
-      "description": "This represents the prediction result of an Orchestrator project.",
-      "x-ms-discriminator-value": "workflow",
+      "description": "This represents the prediction result of an Orchestration project.",
+      "x-ms-discriminator-value": "Orchestration",
       "required": [
         "intents"
       ],
@@ -518,23 +487,23 @@
     "TargetIntentResult": {
       "type": "object",
       "description": "This is the base class of an intent prediction",
-      "discriminator": "targetKind",
+      "discriminator": "targetProjectKind",
       "required": [
         "confidenceScore",
-        "targetKind"
+        "targetProjectKind"
       ],
       "properties": {
-        "targetKind": {
+        "targetProjectKind": {
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response.",
           "enum": [
-            "luis",
-            "conversation",
-            "question_answering",
-            "non_linked"
+            "Luis",
+            "Conversation",
+            "QuestionAnswering",
+            "NonLinked"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetProjectKind",
             "modelAsString": true
           }
         },
@@ -555,7 +524,7 @@
     "ConversationTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of Conversation project response.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -573,8 +542,7 @@
       "type": "object",
       "description": "The response returned by a Conversation project.",
       "required": [
-        "query",
-        "prediction"
+        "query"
       ],
       "properties": {
         "query": {
@@ -594,7 +562,7 @@
     "ConversationPrediction": {
       "type": "object",
       "description": "Represents the prediction section of a Conversation project.",
-      "x-ms-discriminator-value": "conversation",
+      "x-ms-discriminator-value": "Conversation",
       "required": [
         "intents",
         "entities"
@@ -784,7 +752,7 @@
       ]
     },
     "QuantityResolution": {
-      "description": "represents resolutions for quantities.",
+      "description": "Represents resolutions for quantities.",
       "type": "object",
       "properties": {
         "value": {
@@ -1394,7 +1362,7 @@
         "More"
       ],
       "x-ms-enum": {
-        "name": "Modifier",
+        "name": "TemporalModifier",
         "modelAsString": true
       }
     },
@@ -1402,10 +1370,10 @@
       "type": "string",
       "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
-    "LUISTargetIntentResult": {
+    "LuisTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
-      "x-ms-discriminator-value": "luis",
+      "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1421,7 +1389,7 @@
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up a Question Answering KB response.",
-      "x-ms-discriminator-value": "question_answering",
+      "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1429,10 +1397,21 @@
       ],
       "properties": {
         "result": {
-          "type": "object",
-          "$ref": "../2021-07-15-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
-          "description": "The generated answer by a Question Answering KB."
+          "description": "The generated answer by a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersResult"
         }
+      }
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "InputModality",
+        "modelAsString": true
       }
     }
   },
