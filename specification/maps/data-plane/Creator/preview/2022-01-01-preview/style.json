@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Style Service",
     "version": "2022-01-01-preview",
-    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to compose a Mapbox style that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/))."
+    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to create map configurations that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/))."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
@@ -67,20 +67,12 @@
       "default": "2022-01-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "StyleRecipeId": {
-      "name": "styleRecipeId",
-      "description": "The Style Recipe Id.",
+    "StyleId": {
+      "name": "styleId",
+      "description": "The Style Id.",
       "type": "string",
       "in": "path",
       "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "TilesetId": {
-      "name": "tilesetId",
-      "description": "The Tileset Id",
-      "type": "string",
-      "in": "query",
-      "required": false,
       "x-ms-parameter-location": "method"
     },
     "DescriptionStyle": {
@@ -90,11 +82,11 @@
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "StyleRecipeOperationId": {
+    "StyleOperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
-      "description": "The ID to query the status for the style recipe create/import request.",
+      "description": "The ID to query the status for the style import request.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -125,36 +117,9 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "StyleFormat": {
-      "name": "styleFormat",
-      "in": "query",
-      "description": " Defines the type of JSON object that is imported.",
-      "required": false,
-      "type": "string",
-      "default": "mapbox",
-      "enum": [
-        "mapbox",
-        "azureMapsStyleRecipe"
-      ],
-      "x-ms-enum": {
-        "name": "StyleFormatType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "mapbox",
-            "description": "mapbox style data format."
-          },
-          {
-            "value": "azureMapsStyleRecipe",
-            "description": "Azure Maps style recipe data format."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "Alias": {
       "name": "alias",
-      "description": "The alias of the style recipe.",
+      "description": "The alias of the style.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -164,14 +129,14 @@
   "paths": {
     "/styles/styleRecipes": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import a style recipe from their style json file.\n\n## Submit Import Request\n\nTo import your style recipe you will make a `POST` request with an azure maps style or mapbox style. \n\nThe Import Style Recipe API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "StyleRecipe_Import",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import an [azure maps style](https://aka.ms/azuremapsstyle).\n\n## Submit Import Request\n\nTo import your style you will make a `POST` request with an azure maps style. \n\nThe Import Style API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "Style_Import",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Import Style Recipe by providing a azure maps or mapbox style json file": {
+          "Import Style by providing an azure maps style json file": {
             "$ref": "./examples/stylerecipe/StyleRecipe_Import.json"
           }
         },
@@ -186,9 +151,6 @@
             "$ref": "#/parameters/DataFormat"
           },
           {
-            "$ref": "#/parameters/StyleFormat"
-          },
-          {
             "$ref": "#/parameters/DescriptionStyle"
           },
           {
@@ -197,7 +159,7 @@
           {
             "name": "ImportContent",
             "in": "body",
-            "description": "The style recipe content to be imported.",
+            "description": "The style content to be imported.",
             "required": true,
             "schema": {
               "type": "object"
@@ -214,8 +176,8 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all style recipes imported.   \n<br>",
-        "operationId": "StyleRecipe_List",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all styles imported.   \n<br>",
+        "operationId": "Style_List",
         "x-ms-examples": {
           "Get a list of all styles": {
             "$ref": "./examples/stylerecipe/StyleRecipe_List.json"
@@ -230,14 +192,14 @@
           }
         ],
         "x-ms-pageable": {
-          "itemName": "styleRecipes",
+          "itemName": "styles",
           "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
-            "description": "List style recipe request completed successfully. The response body contains a list of all style recipes.",
+            "description": "List style request completed successfully. The response body contains a list of all styles.",
             "schema": {
-              "$ref": "#/definitions/StyleRecipeListResult"
+              "$ref": "#/definitions/StyleListResult"
             }
           },
           "default": {
@@ -246,12 +208,12 @@
         }
       }
     },
-    "/styles/styleRecipes/{styleRecipeId}": {
+    "/styles/styleRecipes/{styleId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style recipe.",
-        "operationId": "StyleRecipe_Export",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style.",
+        "operationId": "Style_Export",
         "x-ms-examples": {
-          "Exports the details for a single style recipe": {
+          "Exports the details for a single style": {
             "$ref": "./examples/stylerecipe/StyleRecipe_Export.json"
           }
         },
@@ -263,20 +225,22 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleRecipeId"
-          },
-          {
-            "$ref": "#/parameters/StyleFormat"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
+            "$ref": "#/parameters/StyleId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Export style request completed successfully. The response body contains a single style.",
+            "description": "Export style request completed successfully. The response body contains a zip file with style content.",
             "schema": {
-              "$ref": "#/definitions/StyleRecipe"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "default": {
@@ -285,10 +249,10 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style recipe.<br>    \nYou can use this API if a style recipe is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleRecipeId` of the style recipe to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Recipe Delete API returns a HTTP `204 No Content` response with an empty body, if the style recipe was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style recipe with the passed-in `styleRecipeId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - StyleRecipe Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleId` of the style to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "StyleRecipe_Delete",
         "x-ms-examples": {
-          "Delete an imported style recipe": {
+          "Delete an imported style": {
             "$ref": "./examples/stylerecipe/StyleRecipe_Delete.json"
           }
         },
@@ -300,12 +264,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleRecipeId"
+            "$ref": "#/parameters/StyleId"
           }
         ],
         "responses": {
           "204": {
-            "description": "Style recipe delete request completed successfully."
+            "description": "Style delete request completed successfully."
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
@@ -315,8 +279,8 @@
     },
     "/styles/styleRecipes/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to create a style recipe.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
-        "operationId": "StyleRecipe_GetOperation",
+        "description": "This path will be obtained from a call to create a style.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "operationId": "Style_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
             "$ref": "./examples/stylerecipe/StyleRecipe_GetOperationStillRunning.json"
@@ -330,7 +294,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleRecipeOperationId"
+            "$ref": "#/parameters/StyleOperationId"
           }
         ],
         "responses": {
@@ -345,8 +309,8 @@
     }
   },
   "definitions": {
-    "StyleRecipeListResult": {
-      "description": "The response model for the Style Recipe List API. Returns a list of all styleRecipes.",
+    "StyleListResult": {
+      "description": "The response model for the Style Recipe List API. Returns a list of all styles.",
       "type": "object",
       "properties": {
         "styleRecipes": {
@@ -354,7 +318,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/StyleRecipeListItem"
+            "$ref": "#/definitions/StyleListItem"
           }
         },
         "nextLink": {
@@ -364,12 +328,12 @@
         }
       }
     },
-    "StyleRecipeListItem": {
+    "StyleListItem": {
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
         "styleRecipeId": {
-          "description": "The unique styleRecipe id for the style.",
+          "description": "The unique style id for the style.",
           "type": "string",
           "readOnly": true
         },
@@ -379,12 +343,12 @@
           "readOnly": true
         },
         "alias": {
-          "description": "The alias of the style recipe.",
+          "description": "The alias of the style.",
           "type": "string",
           "readOnly": true
         },
         "created": {
-          "description": "The creation date and time of this styleSet.",
+          "description": "The creation date and time of this style.",
           "type": "string",
           "readOnly": true
         }
@@ -426,22 +390,22 @@
         }
       }
     },
-    "StyleRecipe": {
+    "Style": {
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "The unique style recipe id for the style.",
+          "description": "The unique style id for the style.",
           "type": "string",
           "readOnly": true
         },
         "version": {
-          "description": "The version of the style recipe.",
+          "description": "The version of the style.",
           "type": "number",
           "readOnly": true
         },
         "created": {
-          "description": "The creation date and time of this style recipe.",
+          "description": "The creation date and time of this style.",
           "type": "string",
           "readOnly": true
         },

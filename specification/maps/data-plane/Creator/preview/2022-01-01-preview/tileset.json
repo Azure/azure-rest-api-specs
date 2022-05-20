@@ -102,7 +102,7 @@
   "paths": {
     "/tilesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an optional request body as [tileset configuration](https://aka.ms/am-creator-tileset-configuration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Tileset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -127,12 +127,12 @@
             "$ref": "#/parameters/DescriptionTileset"
           },
           {
-            "name": "TilesetRecipe",
+            "name": "TilesetConfiguration",
             "in": "body",
-            "description": "The custom tileset recipe to use.",
+            "description": "The custom tileset configuration to use.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
+              "$ref": "#/definitions/TilesetConfiguration"
             }
           }
         ],
@@ -241,10 +241,10 @@
     },
     "/tilesets/recipes": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default tileset recipe based on the dataset provided.",
-        "operationId": "Tileset_GetRecipe",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default tileset configuration based on the dataset provided.",
+        "operationId": "Tileset_GetConfiguration",
         "x-ms-examples": {
-          "Gets the tileset recipe for a given dataset ontology": {
+          "Gets the tileset configuration for a given dataset": {
             "$ref": "./examples/tileset/Tileset_GetRecipe.json"
           }
         },
@@ -261,9 +261,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Get tileset recipe request completed successfully. The response body contains a default tileset recipe generated for the given dataset ontology.",
+            "description": "Get tileset configuration request completed successfully. The response body contains a default tileset configuration generated for the given dataset.",
             "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
+              "$ref": "#/definitions/TilesetConfiguration"
             }
           },
           "default": {
@@ -274,10 +274,10 @@
     },
     "/tilesets/recipes/validate": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset recipe.",
-        "operationId": "Tileset_ValidateRecipe",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset configuration.",
+        "operationId": "Tileset_ValidateConfiguration",
         "x-ms-examples": {
-          "Validates the correctness of a tileset recipe": {
+          "Validates the correctness of a tileset configuration": {
             "$ref": "./examples/tileset/Tileset_ValidateRecipe.json"
           }
         },
@@ -292,20 +292,20 @@
             "$ref": "#/parameters/DatasetIdQuery"
           },
           {
-            "name": "TilesetRecipe",
+            "name": "TilesetConfiguration",
             "in": "body",
-            "description": "The custom tileset recipe to use.",
+            "description": "The custom tileset configuration to use.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
+              "$ref": "#/definitions/TilesetConfiguration"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results.",
+            "description": "Validate tileset configuration request completed successfully. The response body contains the validation results.",
             "schema": {
-              "$ref": "#/definitions/TilesetRecipeValidationResult"
+              "$ref": "#/definitions/TilesetConfigurationValidationResult"
             }
           },
           "default": {
@@ -401,14 +401,19 @@
           "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/BoundingBox"
         },
-        "tilesetRecipe": {
-          "description": "Tileset recipe which is used to build the tileset.",
-          "$ref": "#/definitions/TilesetRecipe"
+        "tilesetConfiguration": {
+          "description": "Tileset configuration which is used to build the tileset.",
+          "$ref": "#/definitions/TilesetConfiguration"
+        },
+        "defaultStyleSetId": {
+          "description": "The default generated style set id for the tileset",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "TilesetRecipe": {
-      "description": "A tileset recipe object. Please refer to [Tileset Recipe Specification]() for details.",
+    "TilesetConfiguration": {
+      "description": "A tileset configuration object.",
       "type": "object",
       "required": [
         "version",
@@ -416,7 +421,7 @@
       ],
       "properties": {
         "version": {
-          "description": "The version of Azure Maps Tiling service recipe reference that the recipe uses.",
+          "description": "The version of Azure Maps Tiling service configuration reference that the configuration uses. Currently only version '1.0' is allowed",
           "type": "integer"
         },
         "layers": {
@@ -429,7 +434,7 @@
       }
     },
     "LayerObject": {
-      "description": "Layer object for tileset recipe.",
+      "description": "Layer object for tileset configuration.",
       "type": "object",
       "required": [
         "features",
@@ -438,7 +443,7 @@
       ],
       "properties": {
         "features": {
-          "description": "Specifies the output on a per feature basis.",
+          "description": "Specifies the feature classes and filters.",
           "$ref": "#/definitions/Feature"
         },
         "minzoom": {
@@ -452,7 +457,7 @@
       }
     },
     "Feature": {
-      "description": "Feature configuration for tileset recipe.",
+      "description": "Feature configuration for tileset configuration.",
       "type": "object",
       "required": [
         "featureClasses"
@@ -466,13 +471,13 @@
           }
         },
         "filter": {
-          "description": "Removes features that do not match a pattern.",
+          "description": "Removes features that do not match a pattern. Refer [MapLibre filter expression](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers/#filter)",
           "type": "object"
         }
       }
     },
-    "TilesetRecipeValidationResult": {
-      "description": "Tileset recipe validation result.",
+    "TilesetConfigurationValidationResult": {
+      "description": "Tileset configuration validation result.",
       "type": "object",
       "properties": {
         "valid": {

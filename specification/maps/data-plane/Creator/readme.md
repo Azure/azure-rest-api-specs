@@ -41,8 +41,8 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 ```yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - preview/2022-01-01-preview/tileset.json
-  - preview/2022-01-01-preview/stylerecipe.json
-  - preview/2022-01-01-preview/styleset.json
+  - preview/2022-01-01-preview/style.json
+  - preview/2022-01-01-preview/mapconfiguration.json
 ```
 ### Tag: 2.0-preview
 
