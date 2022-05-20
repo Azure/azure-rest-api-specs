@@ -4364,6 +4364,194 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_ListByFactory",
+        "x-ms-examples": {
+          "GlobalParameters_ListByFactory": {
+            "$ref": "./examples/GlobalParameters_ListByFactory.json"
+          }
+        },
+        "description": "Lists Global parameters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Get",
+        "x-ms-examples": {
+          "GlobalParameters_Get": {
+            "$ref": "./examples/GlobalParameters_Get.json"
+          }
+        },
+        "description": "Gets a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_CreateOrUpdate",
+        "x-ms-examples": {
+          "GlobalParameters_Create": {
+            "$ref": "./examples/GlobalParameters_Create.json"
+          },
+          "GlobalParameters_Update": {
+            "$ref": "./examples/GlobalParameters_Update.json"
+          }
+        },
+        "description": "Creates or updates a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "default",
+            "description": "Global parameter resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Delete",
+        "x-ms-examples": {
+          "GlobalParameters_Delete": {
+            "$ref": "./examples/GlobalParameters_Delete.json"
+          }
+        },
+        "description": "Deletes a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4836,6 +5024,26 @@
       "required": [
         "runId"
       ]
+    },
+    "GlobalParameterListResponse": {
+      "description": "A list of Global parameters.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of global parameters.",
+          "items": {
+            "$ref": "#/definitions/GlobalParameterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
@@ -5393,6 +5601,24 @@
         "properties": {
           "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
           "description": "Properties of the trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GlobalParameterResource": {
+      "description": "Global parameters resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/GlobalParameter.json#/definitions/GlobalParameter",
+          "description": "Properties of the global parameter."
         }
       },
       "required": [
@@ -7275,6 +7501,17 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "globalParameterName": {
+      "name": "globalParameterName",
+      "description": "The global parameter name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
       "x-ms-parameter-location": "method"
     }
   }
