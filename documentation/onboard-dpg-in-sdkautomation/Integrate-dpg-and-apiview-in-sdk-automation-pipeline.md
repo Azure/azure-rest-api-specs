@@ -11,19 +11,17 @@ __Description:__
 1. There is swagger PR triggering the SDK Automation Pipeline.
 2. SDK Automation Pipeline Framework checks whether there is a branch named `dpg/<prNumber>` in sdk repository. If yes, the branch `dpg/<prNumber>` will be used as base branch to generate SDK. Otherwise, `main` branch will be used as base branch.
    1. `<prNumber>` is the swagger PR number.
-   2. If there is branch `dpg/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
-3. SDK automation script finds the corresponding `autorest.md` or `README.md` in sdk repository. If there is no `autorest.md` or `README.md` founded, please output `{"packages": []}` in `generateOutput.json`, then the pipeline finishes and skipp the following steps.
-   1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding `autorest.md` and `README.md`.
-   2. We will only use `require` to include swagger readme.md in `autorest.md` or `README.md`, and `input-file` should not be used in `autorest.md` or `README.md` in most times, but there are some exceptions:
+   2. If there is branch `dpg/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the `mainRepository` defined in [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
+3. SDK automation script will search for the corresponding autorest configuration file in sdk repository. If those files are not found, the pipeline automation script will output `{"packages": []}` in `generateOutput.json`, and stop the generation.
+   1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding autorest configuration file in sdk repository.
+   2. We will only use `require` to include swagger readme.md in autorest configuration file, and `input-file` should not be used in autorest configuration file in most times, but there are some exceptions:
       1. .Net SDK may continue to use `input-file` because existing HLC dataplane sdk may already use `input-file`.
       2. Multi-Client for Java, Python and JS cannot use `readme.md` in swagger directly because they use `batch` task, so using `input-file` is better.
-4. SDK automation script modifies the founded `autorest.md` or `README.md`.
+4. SDK automation script will modify the autorest configuration file in the SDK repo`.
    1. Change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
       ```yaml
       require:
         - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
       ```
    2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated same as `require` block.
-5. SDK automation script generates SDK with the modified `autorest.md` or `README.md`.
-6. SDK Automation Pipeline Framework creates ApiView based on the generated SDK.
-7. Add comments about the sdk generation result and created ApiView to swagger PR.
+5. SDK automation pipeline generates SDK and ApiView with the modified autorest configuration file , and then add comments about results to the Swagger PR.
