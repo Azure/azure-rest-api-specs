@@ -2124,7 +2124,7 @@
           "$ref": "#/definitions/InputTestArtifacts"
         },
         "secrets": {
-          "description": "Secrets which are typically stored in a key-vault. Allowed secret type: AKV_SECRET_URI.",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SecretMetadata"
@@ -2281,7 +2281,7 @@
           "readOnly": true
         },
         "secrets": {
-          "description": "Secrets which are typically stored in a key-vault. Allowed secret types: AKV_SECRET_URI/SECRET_VALUE",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SecretMetadata"
