@@ -43,7 +43,7 @@ Now write your basic API scenario. For more detail about API scenario file forma
 [API Scenario Definition Reference](../references/ApiScenarioDefinition.md).
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.1/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 
 scope: ResourceGroup
 scenarios:
