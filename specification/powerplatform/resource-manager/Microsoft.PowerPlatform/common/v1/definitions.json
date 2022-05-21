@@ -1,0 +1,69 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "PatchTrackedResource": {
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "EnterprisePolicyNameParameter": {
+      "name": "enterprisePolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "EnterprisePolicy for the Microsoft Azure subscription.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

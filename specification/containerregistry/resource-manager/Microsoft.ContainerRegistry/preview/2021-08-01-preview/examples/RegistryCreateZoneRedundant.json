@@ -1,0 +1,130 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "registry": {
+      "location": "westus",
+      "tags": {
+        "key": "value"
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "zoneRedundancy": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry",
+        "name": "myRegistry",
+        "type": "Microsoft.ContainerRegistry/registries",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "properties": {
+          "loginServer": "myRegistry.azurecr-test.io",
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
+          "provisioningState": "Succeeded",
+          "adminUserEnabled": false,
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "virtualNetworkRules": [],
+            "ipRules": []
+          },
+          "policies": {
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "exportPolicy": {
+              "status": "enabled"
+            }
+          },
+          "encryption": {
+            "status": "disabled"
+          },
+          "status": null,
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "networkRuleBypassOptions": "AzureServices",
+          "zoneRedundancy": "Enabled",
+          "anonymousPullEnabled": false
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry",
+        "name": "myRegistry",
+        "type": "Microsoft.ContainerRegistry/registries",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "properties": {
+          "loginServer": "myRegistry.azurecr-test.io",
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
+          "provisioningState": "Creating",
+          "adminUserEnabled": false,
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "virtualNetworkRules": [],
+            "ipRules": []
+          },
+          "policies": {
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "exportPolicy": {
+              "status": "enabled"
+            }
+          },
+          "encryption": {
+            "status": "disabled"
+          },
+          "status": null,
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "networkRuleBypassOptions": "AzureServices",
+          "zoneRedundancy": "Enabled",
+          "anonymousPullEnabled": false
+        }
+      }
+    }
+  }
+}

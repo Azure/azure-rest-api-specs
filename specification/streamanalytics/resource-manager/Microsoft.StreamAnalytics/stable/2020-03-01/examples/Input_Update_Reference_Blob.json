@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg8440",
+    "jobName": "sj9597",
+    "inputName": "input7225",
+    "input": {
+      "properties": {
+        "type": "Reference",
+        "datasource": {
+          "type": "Microsoft.Storage/Blob",
+          "properties": {
+            "container": "differentContainer"
+          }
+        },
+        "serialization": {
+          "type": "Csv",
+          "properties": {
+            "fieldDelimiter": "|",
+            "encoding": "UTF8"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "a4ceb697-1c8f-40c8-b951-fb5ee4757437"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7225",
+        "name": "input7225",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Reference",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName"
+                }
+              ],
+              "container": "differentContainer",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": "|",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    }
+  }
+}

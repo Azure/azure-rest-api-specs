@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "Azure Lab Services REST API.",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/OperationResultId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get an azure operation result.",
+        "description": "Returns an azure operation result.",
+        "operationId": "OperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the operation result.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "204": {
+            "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getOperationResult": {
+            "$ref": "./examples/OperationResults/getOperationResult.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationResult": {
+      "description": "A long running operation result",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "status": {
+          "description": "The operation status",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The operation has been accepted but hasn't started."
+              },
+              {
+                "value": "InProgress",
+                "description": "The operation is running"
+              },
+              {
+                "value": "Succeeded",
+                "description": "The operation Succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "The operation failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "Not supported yet"
+              }
+            ]
+          }
+        },
+        "startTime": {
+          "description": "Start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "End time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percent completion",
+          "type": "number"
+        },
+        "error": {
+          "description": "The error for a failure if the operation failed.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    }
+  },
+  "parameters": {
+    "OperationResultId": {
+      "name": "operationResultId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation result ID / name.",
+      "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

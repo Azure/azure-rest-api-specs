@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "v1.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "$top": 1,
+    "$skip": 0,
+    "$maxpagesize": 10,
+    "$orderBy": [
+      "createdDateTimeUtc asc"
+    ],
+    "createdDateTimeUtcStart": "2021-03-23T07:03:38.0136316Z",
+    "createdDateTimeUtcEnd": "2021-03-25T07:03:38.0136316Z",
+    "statuses": [
+      "Succeeded"
+    ],
+    "ids": [
+      "273622bd-835c-4946-9798-fd8f19f6bbf2"
+    ]
+  },
+  "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "User is not authorized",
+          "target": "Operation",
+          "innerError": {
+            "code": "Unauthorized",
+            "message": "Operation is not authorized"
+          }
+        }
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "target": "Operation",
+          "innerError": {
+            "code": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "target": "Operation",
+          "innerError": {
+            "code": "InternalServerError",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "target": "Operation",
+          "innerError": {
+            "code": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "273622bd-835c-4946-9798-fd8f19f6bbf2",
+            "createdDateTimeUtc": "2021-03-23T07:03:30.013631Z",
+            "lastActionDateTimeUtc": "2021-03-26T01:00:00Z",
+            "status": "Succeeded",
+            "summary": {
+              "total": 10,
+              "failed": 1,
+              "success": 9,
+              "inProgress": 0,
+              "notYetStarted": 0,
+              "cancelled": 0,
+              "totalCharacterCharged": 1000
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Some argument is incorrect",
+          "target": "Operation",
+          "innerError": {
+            "code": "SASTokenInvalid",
+            "message": "SAS token for storage is invalid"
+          }
+        }
+      }
+    }
+  }
+}

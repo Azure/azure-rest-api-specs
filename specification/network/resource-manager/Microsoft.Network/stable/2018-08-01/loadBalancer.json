@@ -193,6 +193,9 @@
           },
           "Create load balancer with inbound nat pool": {
             "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
+          },
+          "Create load balancer with outbound rules": {
+            "$ref": "./examples/LoadBalancerCreateWithOutboundRules.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1227,6 +1230,14 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Gets outbound rules that use this backend address pool."
         },
+        "outboundRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Gets outbound rules that use this backend address pool."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Get provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
@@ -1609,7 +1620,7 @@
         "frontendIPConfigurations",
         "protocol"
       ],
-      "description": "Outbound pool of the load balancer."
+      "description": "Outbound rule of the load balancer."
     },
     "OutboundRule": {
       "properties": {
@@ -1632,7 +1643,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Outbound pool of the load balancer."
+      "description": "Outbound rule of the load balancer."
     },
     "LoadBalancerPropertiesFormat": {
       "properties": {

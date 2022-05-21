@@ -1,0 +1,206 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "ApiVersion": "v3.2-preview.2",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "createdDateTime": "2020-10-01T15:01:03Z",
+        "expirationDateTime": "2020-10-03T15:01:03Z",
+        "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
+        "lastUpdateDateTime": "2020-10-01T15:01:03Z",
+        "status": "succeeded",
+        "results": {
+          "documents": [
+            {
+              "id": "1",
+              "entities": [
+                {
+                  "offset": 18,
+                  "length": 5,
+                  "text": "100mg",
+                  "category": "DOSAGE",
+                  "confidenceScore": 0.99
+                },
+                {
+                  "offset": 27,
+                  "length": 9,
+                  "text": "ibuprofen",
+                  "category": "MEDICATION_NAME",
+                  "confidenceScore": 1.0,
+                  "assertion": {
+                    "certainty": "positive"
+                  },
+                  "links": [
+                    {
+                      "id": "C0020740",
+                      "dataSource": "UMLS"
+                    },
+                    {
+                      "id": "0000019879",
+                      "dataSource": "AOD"
+                    },
+                    {
+                      "id": "M01AE01",
+                      "dataSource": "ATC"
+                    },
+                    {
+                      "id": "0046165",
+                      "dataSource": "CCPSS"
+                    },
+                    {
+                      "id": "0000006519",
+                      "dataSource": "CHV"
+                    },
+                    {
+                      "id": "2270-2077",
+                      "dataSource": "CSP"
+                    },
+                    {
+                      "id": "DB01050",
+                      "dataSource": "DRUGBANK"
+                    },
+                    {
+                      "id": "1611",
+                      "dataSource": "GS"
+                    },
+                    {
+                      "id": "sh97005926",
+                      "dataSource": "LCH_NW"
+                    },
+                    {
+                      "id": "LP16165-0",
+                      "dataSource": "LNC"
+                    },
+                    {
+                      "id": "40458",
+                      "dataSource": "MEDCIN"
+                    },
+                    {
+                      "id": "d00015",
+                      "dataSource": "MMSL"
+                    },
+                    {
+                      "id": "D007052",
+                      "dataSource": "MSH"
+                    },
+                    {
+                      "id": "WK2XYI10QM",
+                      "dataSource": "MTHSPL"
+                    },
+                    {
+                      "id": "C561",
+                      "dataSource": "NCI"
+                    },
+                    {
+                      "id": "C561",
+                      "dataSource": "NCI_CTRP"
+                    },
+                    {
+                      "id": "00803",
+                      "dataSource": "NCI_DCP"
+                    },
+                    {
+                      "id": "NSC0256857",
+                      "dataSource": "NCI_DTP"
+                    },
+                    {
+                      "id": "WK2XYI10QM",
+                      "dataSource": "NCI_FDA"
+                    },
+                    {
+                      "id": "CDR0000613511",
+                      "dataSource": "NCI_NCI-GLOSS"
+                    },
+                    {
+                      "id": "002377",
+                      "dataSource": "NDDF"
+                    },
+                    {
+                      "id": "CDR0000040475",
+                      "dataSource": "PDQ"
+                    },
+                    {
+                      "id": "x02MO",
+                      "dataSource": "RCD"
+                    },
+                    {
+                      "id": "5640",
+                      "dataSource": "RXNORM"
+                    },
+                    {
+                      "id": "E-7772",
+                      "dataSource": "SNM"
+                    },
+                    {
+                      "id": "C-603C0",
+                      "dataSource": "SNMI"
+                    },
+                    {
+                      "id": "387207008",
+                      "dataSource": "SNOMEDCT_US"
+                    },
+                    {
+                      "id": "m39860",
+                      "dataSource": "USP"
+                    },
+                    {
+                      "id": "MTHU000060",
+                      "dataSource": "USPMG"
+                    },
+                    {
+                      "id": "4017840",
+                      "dataSource": "VANDF"
+                    }
+                  ]
+                },
+                {
+                  "offset": 37,
+                  "length": 11,
+                  "text": "twice daily",
+                  "category": "FREQUENCY",
+                  "confidenceScore": 1
+                }
+              ],
+              "relations": [
+                {
+                  "relationType": "DosageOfMedication",
+                  "entities": [
+                    {
+                      "ref": "#/documents/0/entities/0",
+                      "role": "Attribute"
+                    },
+                    {
+                      "ref": "#/documents/0/entities/1",
+                      "role": "Entity"
+                    }
+                  ]
+                },
+                {
+                  "relationType": "FrequencyOfMedication",
+                  "entities": [
+                    {
+                      "ref": "#/documents/0/entities/2",
+                      "role": "Attribute"
+                    },
+                    {
+                      "ref": "#/documents/0/entities/1",
+                      "role": "Entity"
+                    }
+                  ]
+                }
+              ],
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2020-05-08"
+        }
+      }
+    }
+  }
+}

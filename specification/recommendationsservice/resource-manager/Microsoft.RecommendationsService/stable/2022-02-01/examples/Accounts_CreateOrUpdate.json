@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "body": {
+      "location": "West US",
+      "tags": {
+        "Environment": "Prod"
+      },
+      "properties": {
+        "configuration": "Capacity",
+        "endpointAuthentications": [
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid",
+            "principalType": "User"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            }
+          ],
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

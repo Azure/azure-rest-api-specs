@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "accountName": "contosto-videoanalyzer",
+    "resourceGroupName": "contosto-videoanalyzer-rg",
+    "api-version": "2021-10-18-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "permissionType": "Reader",
+      "scope": "Project",
+      "projectId": "07ec9e38d4"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessToken": "<jwt token of 1260 characters length>"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Account '/subscriptions/b04775c3-63fa-40f3-9430-139d2e5522d3/resourceGroups/contosto-videoanalyzer-rg/providers/Microsoft.Contoso/accounts/contosto-videoanalyzer' not found."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "BREAKDOWN_NOT_FOUND",
+          "message": "Video/Project '07ec9e38d4' was not found"
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ALREADY_EXISTS",
+          "message": "Account with '74f866ea-f74f-4103-a916-4742f8bc0009' already exists"
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}
