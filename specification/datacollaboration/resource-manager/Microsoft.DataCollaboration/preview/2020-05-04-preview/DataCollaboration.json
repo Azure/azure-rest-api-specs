@@ -656,8 +656,8 @@
               "$ref": "#/definitions/ConstrainedResource"
             }
           },
-          "202": {
-            "description": "Accepted",
+          "200": {
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/ConstrainedResource"
             }
@@ -7058,6 +7058,14 @@
       ],
       "type": "object",
       "properties": {
+        "additionalProperties": {
+          "description": "Additional endpoint properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
         "connectionState": {
           "description": "Connection state of the Managed Private Endpoint",
           "allOf": [
@@ -9795,11 +9803,13 @@
         "createdAt": {
           "format": "date-time",
           "description": "The timestamp of resource creation (UTC).",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdBy": {
           "description": "The identity that created the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdByType": {
           "description": "The type of identity that created the resource.",
@@ -9810,6 +9820,7 @@
             "Key"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "createdByType",
             "modelAsString": true
@@ -9818,11 +9829,13 @@
         "lastModifiedAt": {
           "format": "date-time",
           "description": "The type of identity that last modified the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedBy": {
           "description": "The identity that last modified the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedByType": {
           "description": "The type of identity that last modified the resource.",
@@ -9833,6 +9846,7 @@
             "Key"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "lastModifiedByType",
             "modelAsString": true
