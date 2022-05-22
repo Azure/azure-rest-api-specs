@@ -66,7 +66,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2022-05
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -76,7 +76,7 @@ The following packages may be composed from multiple api-versions.
 
 ### Tag: package-preview-2022-05
 
-These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-05-only` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2022-05'
 input-file:
