@@ -271,9 +271,21 @@
           },
           "SAPVirtualInstances_Create_SingleServer": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
+          },
+          "SAPVirtualInstances_Create_WithOSConfig_SingleServer": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_SingleServer.json"
+          },
+          "SAPVirtualInstances_Create_WithOSConfig_Distributed": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_Distributed.json"
+          },
+          "SAPVirtualInstances_Create_WithOSConfig_HA_AvSet": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_HA_AvSet.json"
+          },
+          "SAPVirtualInstances_Create_WithOSConfig_HA_AvZone": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_HA_AvZone.json"
           }
         },
-        "description": "Creates an SAP Virtual Instance.",
+        "description": "Creates an Virtual Instance for SAP.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -289,7 +301,7 @@
           },
           {
             "in": "body",
-            "description": "The SAP Virtual Instance request body.",
+            "description": "The Virtual Instance for SAP request body.",
             "name": "body",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
@@ -298,13 +310,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the created SAP Virtual Instance.",
+            "description": "Describes the created Virtual Instance for SAP.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
           },
           "200": {
-            "description": "Describes the successfully created SAP Virtual Instance.",
+            "description": "Describes the successfully created Virtual Instance for SAP.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -327,7 +339,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Get.json"
           }
         },
-        "description": "Gets an SAP Virtual Instance.",
+        "description": "Gets an Virtual Instance for SAP.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -344,7 +356,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Virtual Instance.",
+            "description": "Describes the Virtual Instance for SAP.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -367,7 +379,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Update.json"
           }
         },
-        "description": "Updates an SAP Virtual Instance.",
+        "description": "Updates an Virtual Instance for SAP.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -384,7 +396,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The Update SAP Virtual Instance request body.",
+            "description": "The Update Virtual Instance for SAP request body.",
             "schema": {
               "$ref": "#/definitions/UpdateSAPVirtualInstanceRequest"
             }
@@ -392,7 +404,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the successfully updated SAP Virtual Instance.",
+            "description": "Describes the successfully updated Virtual Instance for SAP.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -422,7 +434,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Delete.json"
           }
         },
-        "description": "Deletes an SAP Virtual Instance.",
+        "description": "Deletes an Virtual Instance for SAP.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -473,7 +485,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Gets all SAP Virtual Instances in a resource group.",
+        "description": "Gets all Virtual Instances for SAP in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -487,7 +499,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of all SAP Virtual Instances.",
+            "description": "The list of all Virtual Instances for SAP.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstanceList"
             }
@@ -515,7 +527,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Gets all SAP Virtual Instances in the subscription.",
+        "description": "Gets all Virtual Instances for SAP in the subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -526,7 +538,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of all SAP Virtual Instances in the subscription.",
+            "description": "The list of all Virtual Instances for SAP in the subscription.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstanceList"
             }
@@ -875,7 +887,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create.json"
           }
         },
-        "description": "Puts the SAP Database Instance.",
+        "description": "Puts the SAP Database Instance. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1149,7 +1161,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create.json"
           }
         },
-        "description": "Puts the SAP Application Server Instance.",
+        "description": "Puts the SAP Application Server Instance. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1393,14 +1405,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The SAP virtual instance Start request body.",
-            "schema": {
-              "$ref": "#/definitions/StartRequest"
-            }
           }
         ],
         "responses": {
@@ -1457,7 +1461,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP virtual instance stop request body.",
+            "description": "The Virtual Instances for SAP stop request body.",
             "schema": {
               "$ref": "#/definitions/StopRequest"
             }
@@ -1485,7 +1489,7 @@
   },
   "definitions": {
     "HealthState": {
-      "description": "Defines the SAP Virtual Instance health.",
+      "description": "Defines the SAP Instance health.",
       "enum": [
         "Unknown",
         "Healthy",
@@ -1517,7 +1521,8 @@
     "SAPSoftwareInstallationType": {
       "description": "The SAP software installation Type.",
       "enum": [
-        "ServiceInitiated"
+        "ServiceInitiated",
+        "SAPInstallWithoutOSConfig"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1564,7 +1569,8 @@
       "description": "The configuration Type.",
       "enum": [
         "Deployment",
-        "Discovery"
+        "Discovery",
+        "DeploymentWithOSConfig"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1577,7 +1583,7 @@
       ]
     },
     "SAPVirtualInstanceStatus": {
-      "description": "Defines the SAP Virtual Instance status.",
+      "description": "Defines the SAP Instance status.",
       "enum": [
         "Starting",
         "Running",
@@ -1593,7 +1599,7 @@
       }
     },
     "SAPVirtualInstanceState": {
-      "description": "Defines the SAP Virtual Instance state.",
+      "description": "Defines the Virtual Instance for SAP state.",
       "enum": [
         "InfrastructureDeploymentPending",
         "InfrastructureDeploymentInProgress",
@@ -1669,7 +1675,8 @@
       "description": "Defines the SAP Product type.",
       "enum": [
         "ECC",
-        "S4HANA"
+        "S4HANA",
+        "Other"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1718,14 +1725,14 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The SAP Virtual Instance error body.",
+          "description": "The Virtual Instance for SAP error body.",
           "$ref": "#/definitions/ErrorDefinition"
         }
       },
-      "description": "An error response from the SAP Virtual Instance Workload service."
+      "description": "An error response from the Virtual Instance for SAP Workload service."
     },
     "UpdateSAPVirtualInstanceRequest": {
-      "description": "Defines the request body for updating SAP Virtual Instance.",
+      "description": "Defines the request body for updating Virtual Instance for SAP.",
       "type": "object",
       "properties": {
         "tags": {
@@ -1826,7 +1833,7 @@
       "properties": {
         "keyData": {
           "type": "string",
-          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -1860,7 +1867,11 @@
         },
         "ssh": {
           "$ref": "#/definitions/SshConfiguration",
-          "description": "Specifies the ssh key configuration for a Linux OS."
+          "description": "Specifies the ssh key configuration for a Linux OS. (This property is deprecated, please use 'sshKeyPair' instead)"
+        },
+        "sshKeyPair": {
+          "$ref": "#/definitions/SshKeyPair",
+          "description": "The SSH Key-pair used to authenticate with the VM's."
         }
       },
       "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
@@ -2493,6 +2504,39 @@
         "sshPrivateKey"
       ]
     },
+    "SAPInstallWithoutOSConfigSoftwareConfiguration": {
+      "description": "The SAP Software configuration Input when the software is to be installed by service without OS Configurations",
+      "type": "object",
+      "x-ms-discriminator-value": "SAPInstallWithoutOSConfig",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "properties": {
+        "bomUrl": {
+          "type": "string",
+          "description": "The URL to the SAP Build of Materials(BOM) file."
+        },
+        "sapBitsStorageAccountId": {
+          "type": "string",
+          "description": "The SAP bits storage account id."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The software version to install."
+        },
+        "highAvailabilitySoftwareConfiguration": {
+          "$ref": "#/definitions/HighAvailabilitySoftwareConfiguration"
+        }
+      },
+      "required": [
+        "bomUrl",
+        "sapBitsStorageAccountId",
+        "softwareVersion"
+      ]
+    },
     "HighAvailabilitySoftwareConfiguration": {
       "description": "Gets or sets the HA software configuration.",
       "type": "object",
@@ -2512,21 +2556,6 @@
         "fencingClientPassword"
       ]
     },
-    "StartRequest": {
-      "description": "Start SAP Request.",
-      "type": "object",
-      "properties": {
-        "sapUsername": {
-          "type": "string",
-          "description": "Specifies the name of the user account having permissions to start the SAP system."
-        },
-        "sapPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "description": "Specifies the name of the user account having permissions to start the SAP system."
-        }
-      }
-    },
     "StopRequest": {
       "description": "Stop SAP Request.",
       "type": "object",
@@ -2535,15 +2564,6 @@
           "type": "boolean",
           "default": false,
           "description": "A boolean to specify if the SAP system should be hard-stopped."
-        },
-        "sapUsername": {
-          "type": "string",
-          "description": "Specifies the name of the user account having permissions to stop the SAP system."
-        },
-        "sapPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "description": "Specifies the name of the user account having permissions to stop the SAP system."
         }
       }
     },
@@ -2589,6 +2609,77 @@
         "softwareConfiguration": {
           "$ref": "#/definitions/SoftwareConfiguration",
           "description": "The software configuration."
+        }
+      }
+    },
+    "DeploymentWithOSConfiguration": {
+      "x-ms-discriminator-value": "DeploymentWithOSConfig",
+      "description": "Deployment along with OS Configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPConfiguration"
+        }
+      ],
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP system is to be created."
+        },
+        "infrastructureConfiguration": {
+          "$ref": "#/definitions/InfrastructureConfiguration",
+          "description": "The infrastructure configuration."
+        },
+        "softwareConfiguration": {
+          "$ref": "#/definitions/SoftwareConfiguration",
+          "description": "The software configuration."
+        },
+        "osSapConfiguration": {
+          "$ref": "#/definitions/OsSapConfiguration",
+          "description": "The OS and SAP configuration."
+        }
+      }
+    },
+    "OsSapConfiguration": {
+      "description": "Defines the OS and SAP Configurations for Deployment",
+      "type": "object",
+      "properties": {
+        "deployerVmPackages": {
+          "$ref": "#/definitions/DeployerVmPackages",
+          "description": "The url and storage account ID where deployer VM packages are uploaded"
+        },
+        "sapFqdn": {
+          "type": "string",
+          "description": "The FQDN to set for the SAP system"
+        }
+      }
+    },
+    "DeployerVmPackages": {
+      "description": "Defines the url and storage account ID where deployer VM packages are uploaded",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to the deployer VM packages file."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "The deployer VM packages storage account id"
+        }
+      }
+    },
+    "SshKeyPair": {
+      "description": "The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).",
+      "type": "object",
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "description": "SSH public key"
+        },
+        "privateKey": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "SSH private key."
         }
       }
     },
@@ -2644,11 +2735,12 @@
       }
     },
     "SAPVirtualInstanceProperties": {
-      "description": "Defines the SAP Virtual Instance properties.",
+      "description": "Defines the Virtual Instance for SAP properties.",
       "type": "object",
       "required": [
         "environment",
-        "sapProduct"
+        "sapProduct",
+        "configuration"
       ],
       "properties": {
         "environment": {
@@ -2666,7 +2758,7 @@
           ]
         },
         "configuration": {
-          "description": "The SAP Deployment or discovery configuration",
+          "description": "Defines if an existing SAP system is being registered or a new SAP system is being created",
           "$ref": "#/definitions/SAPConfiguration"
         },
         "managedResourceGroupConfiguration": {
@@ -2690,14 +2782,14 @@
           "readOnly": true
         },
         "errors": {
-          "description": "Defines the SAP Virtual Instance errors.",
+          "description": "Defines the Virtual Instance for SAP errors.",
           "$ref": "#/definitions/SAPVirtualInstanceError",
           "readOnly": true
         }
       }
     },
     "SAPVirtualInstance": {
-      "description": "Define the SAP Virtual Instance.",
+      "description": "Define the Virtual Instance for SAP.",
       "type": "object",
       "allOf": [
         {
@@ -2718,11 +2810,11 @@
       ]
     },
     "SAPVirtualInstanceList": {
-      "description": "Defines the collection of SAP Virtual Instance.",
+      "description": "Defines the collection of Virtual Instance for SAP.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets the list of SAP virtual instances.",
+          "description": "Gets the list of Virtual Instances for SAP.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPVirtualInstance"
@@ -3201,7 +3293,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the SAP Virtual Instance.",
+      "description": "The name of the Virtual Instances for SAP.",
       "x-ms-parameter-location": "method"
     },
     "SAPApplicationInstanceNameParameter": {
