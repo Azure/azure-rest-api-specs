@@ -1467,7 +1467,7 @@
           "description": "Monitoring Settings of the vault",
           "$ref": "#/definitions/MonitoringSettings"
         },
-        "redundancySettings":{
+        "redundancySettings": {
           "description": "The redundancy Settings of a Vault",
           "type": "object",
           "properties": {
@@ -1496,51 +1496,51 @@
               "x-ms-enum": {
                 "name": "crossRegionRestore",
                 "modelAsString": true
-              }            
+              }
             }
           }
         }
       }
     },
     "IdentityData": {
-        "required": [
-          "type"
-        ],
-        "type": "object",
-        "description": "Identity for the resource.",
-        "properties": {
-          "principalId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The principal ID of resource identity."
-          },
-          "tenantId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The tenant ID of resource."
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
-            "enum": [
-              "SystemAssigned",
-              "None",
-              "UserAssigned",
-              "SystemAssigned, UserAssigned"
-            ],
-            "x-ms-enum": {
-              "name": "ResourceIdentityType",
-              "modelAsString": true
-            }
-          },
-          "userAssignedIdentities": {
-            "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/UserIdentity"
-            }
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
+          "enum": [
+            "SystemAssigned",
+            "None",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
           }
         }
+      }
     },
     "UserIdentity": {
       "type": "object",
