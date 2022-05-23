@@ -52,3 +52,13 @@ This is not used by Autorest itself.
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: CommunicationServicesEmail.json
+    where: $.definitions.EmailRecipients.properties.CC
+    reason: Linter enforcement of this rule (camelCase) for two-letter acronyms conflicts with the description in the rule (all capitalized).
+```
