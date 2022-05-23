@@ -19,7 +19,7 @@ __Description:__
 3. Create branch with name `dpg/<prNumber>` in sdk repository, and add/update autorest configuration file in the branch. Then add a comment `/azp run` in swagger PR.
    1. `<prNumber>` is the PR number of swagger PR.
    2. Please refer to [Add autorest configuration file in sdk repository](./add-autorest-configuration-file-in-sdk-repository.md) on how to add autorest configuration files.
-4. Swagger PR CI generates SDK and ApiView automatically, and you can find them in swagger PR comments.
+4. Swagger PR pipeline will generate SDK and ApiView automatically by leveraging the SDK configurations. Those information could be found in swagger PR comments.
 5. Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition) to review API definition.
 6. If any change needed, please update the Swagger/configuration files and regenerate the SDK by adding a comment `/azp run` to swagger PR. Otherwise, go to [Next Steps After Generating Codes](./next-steps-after-generating-codes.md) if you want to do manual changes on generated codes.
 
