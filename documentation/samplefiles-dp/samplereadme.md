@@ -27,6 +27,9 @@ These are the global settings for the [[ServiceName]].
 ```yaml
 openapi-type: [[OpenApiType]]
 tag: package-[[Version]]
+title: [[Title]]
+security: AADToken
+security-scopes: [[SecurityScopes]]
 ```
 
 ### Tag: package-[[Version]]
