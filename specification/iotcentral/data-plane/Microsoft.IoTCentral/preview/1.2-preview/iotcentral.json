@@ -5113,6 +5113,8 @@
             "name": "organizationId",
             "description": "Unique ID of the organization.",
             "type": "string",
+            "maxLength": 48,
+            "pattern": "^(?!-)[a-z0-9-]{1,48}[a-z0-9]$",
             "required": true
           }
         ],
@@ -5416,6 +5418,8 @@
             "name": "userId",
             "description": "Unique ID of the user.",
             "type": "string",
+            "maxLength": 48,
+            "pattern": "^[a-zA-Z0-9-_]*",
             "required": true
           }
         ],
