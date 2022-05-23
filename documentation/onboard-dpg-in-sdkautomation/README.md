@@ -5,7 +5,7 @@ The benefits are following:
 1. API signature could be reviewed at the same time when we submit a Swagger PR. This could help to detect API issues at the early stage.
 2. It enable service teams to access their SDKs even before their Swagger PR is merged.
 
-This Document describes the process of how to onboard DPG with SDK automation pipeline. __This document is targeting for service team.__ 
+This Document describes the process of how to onboard DPG with SDK automation pipeline. __This document is targeting for service team, who wants to onboard DPG.__ 
 
 *If you want to go through details of pipeline implementation, please go to [Integrate DPG and ApiView in SDK Automation Pipeline](Integrate-dpg-and-apiview-in-sdk-automation-pipeline.md).*
 
