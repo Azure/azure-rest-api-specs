@@ -18,12 +18,12 @@ __Description:__
       1. .Net SDK may continue to use `input-file` because existing HLC dataplane sdk may already use `input-file`.
       2. Multi-Client for Java, Python and JS cannot use `readme.md` in swagger directly because they use `batch` task, so using `input-file` is better.
 4. SDK automation script will modify the autorest configuration file in the SDK repo`.
-   1. Change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
+   1. Change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by relative path from package folder to sdk root, `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
       ```yaml
       require:
         - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
       ```
-   2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated same as `require` block.
+   2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated similar as `require` block.
 5. SDK automation pipeline generates SDK and ApiView with the modified autorest configuration file , and then add comments about results to the Swagger PR.
 
 # Future Work
