@@ -9,9 +9,9 @@ Before go through this document, please go through [Service Onboard DPG with Swa
 
 __Description:__
 1. There is swagger PR triggering the SDK Automation Pipeline.
-2. SDK Automation Pipeline Framework checks whether there is a branch named `dpg/<prNumber>` in sdk repository. If yes, the branch `dpg/<prNumber>` will be used as base branch to generate SDK. Otherwise, `main` branch will be used as base branch.
+2. SDK Automation Pipeline Framework checks whether there is a branch named `swagger/<prNumber>` in sdk repository. If yes, the branch `swagger/<prNumber>` will be used as base branch to generate SDK. Otherwise, `main` branch will be used as base branch.
    1. `<prNumber>` is the swagger PR number.
-   2. If there is branch `dpg/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the `mainRepository` defined in [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
+   2. If there is branch `swagger/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the `mainRepository` defined in [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
 3. SDK automation script will search for the corresponding autorest configuration file in sdk repository. If those files are not found, the pipeline automation script will output `{"packages": []}` in `generateOutput.json`, and stop the generation.
    1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding autorest configuration file in sdk repository.
    2. We will only use `require` to include swagger readme.md in autorest configuration file, and `input-file` should not be used in autorest configuration file in most times, but there are some exceptions:
@@ -27,5 +27,5 @@ __Description:__
 5. SDK automation pipeline generates SDK and ApiView with the modified autorest configuration file , and then add comments about results to the Swagger PR.
 
 # Future Work
-Currently, we ask service team to create branch `dpg/<prNumber>` and add/update autorest configuration file manually because the configuration file includes some necessary information to generate SDK.
+Currently, we ask service team to create branch `swagger/<prNumber>` and add/update autorest configuration file manually because the configuration file includes some necessary information to generate SDK.
 In the future, we are going to integrate the sdk generation with PowerAPP Workflow. Then service team can provide the necessary information in PowerAPP Workflow, and pipeline can use the information to generate autorest configuration file automatically. 

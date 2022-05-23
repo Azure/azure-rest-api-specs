@@ -16,7 +16,7 @@ This Document describes the process of how to onboard DPG with SDK automation pi
 __Description:__
 1. Creates a swagger PR with [Guide to design and creation of Data Plane REST API and Client Libraries](https://aka.ms/azsdk/dpcodegen).
 2. If the SDK was generated for this service before, and you don't need to change the autorest configuration in sdk repository, please go to step 4. Otherwise, please go to step 3.
-3. Create branch with name `dpg/<prNumber>` in sdk repository, and add/update autorest configuration file in the branch. Then add a comment `/azp run` in swagger PR.
+3. Create branch with name `swagger/<prNumber>` in sdk repository, and add/update autorest configuration file in the branch. Then add a comment `/azp run` in swagger PR.
    1. `<prNumber>` is the PR number of swagger PR.
    2. Please refer to [Add autorest configuration file in sdk repository](./add-autorest-configuration-file-in-sdk-repository.md) on how to add autorest configuration files.
 4. Swagger PR pipeline will generate SDK and ApiView automatically by leveraging the SDK configurations. Those information could be found in swagger PR comments.
@@ -32,6 +32,6 @@ __Description:__
    
     __Answer__: Please check the comment [Swagger Generation Artifacts] and the error message of failed pipeline. If you find the error messages ask you to fix `autorest.md`/`README.md`/swagger, please fix it. If you cannot understand error message, please ask sdk owners for help with mail: azsdk-dpgsupport@microsoft.com.
 
-3. Do I need to delete the branch `dpg/<prNumber>` in sdk repository?
+3. Do I need to delete the branch `swagger/<prNumber>` in sdk repository?
 
     __Answer__: It's up to you. You can delete it. If you don't delete it, there will be a scheduler job to delete it.
