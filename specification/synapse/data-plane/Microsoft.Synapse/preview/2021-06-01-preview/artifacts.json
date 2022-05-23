@@ -160,51 +160,6 @@
         "referenceName"
       ]
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "x-ms-client-flatten": true,
-          "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Property name/path in request associated with error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Array with additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "TriggerDependencyProvisioningStatus": {
       "description": "Defines the response of a provision trigger dependency operation.",
       "type": "object",

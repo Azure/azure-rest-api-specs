@@ -57,6 +57,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## CSharp

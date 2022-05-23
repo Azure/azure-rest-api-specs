@@ -59,6 +59,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_powerplatform']
+  - repo: azure-powershell
 ```
 
 ## Go
