@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
+    "version": "2022-06-01-preview",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -6060,7 +6060,9 @@
             "Full",
             "Log",
             "Differential",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6333,7 +6335,9 @@
             "Differential",
             "FullAndDifferential",
             "All",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8276,7 +8280,8 @@
             "SQLDataBase",
             "AzureFileShare",
             "SAPHanaDatabase",
-            "SAPAseDatabase"
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8411,7 +8416,8 @@
             "SQLDataBase",
             "AzureFileShare",
             "SAPHanaDatabase",
-            "SAPAseDatabase"
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9043,7 +9049,9 @@
             "Differential",
             "Log",
             "CopyOnlyFull",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9919,6 +9927,26 @@
       ],
       "x-ms-discriminator-value": "SAPHanaSystem"
     },
+    "AzureVmWorkloadSAPHanaDBInstance": {
+      "description": "Azure VM workload-specific protectable item representing SAP HANA Dbinstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaDBInstance"
+    },
+    "AzureVmWorkloadSAPHanaHSR": {
+      "description": "Azure VM workload-specific protectable item representing SAP HANA Dbinstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaHSR"
+    },
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP HANA System.",
       "type": "object",
@@ -10006,7 +10034,9 @@
             "Differential",
             "Log",
             "CopyOnlyFull",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -10141,7 +10171,8 @@
             "SAPHanaSystem",
             "SAPHanaDatabase",
             "SAPAseSystem",
-            "SAPAseDatabase"
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -10232,7 +10263,8 @@
             "SQLDataBase",
             "AzureFileShare",
             "SAPHanaDatabase",
-            "SAPAseDatabase"
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -10379,7 +10411,8 @@
             "SQLDataBase",
             "AzureFileShare",
             "SAPHanaDatabase",
-            "SAPAseDatabase"
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -10952,7 +10985,8 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "HanaHSRContainer"
           ],
           "type": "string",
           "x-ms-enum": {
