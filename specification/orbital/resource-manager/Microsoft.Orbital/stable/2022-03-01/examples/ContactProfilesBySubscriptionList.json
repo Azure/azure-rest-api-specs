@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-03-01",
+    "$skipToken": "opaqueString"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "AQUA_DIRECTPLAYBACK_WITH_UPLINK",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/contactProfiles/AQUA_DIRECTPLAYBACK_WITH_UPLINK",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "minimumViableContactDuration": "PT1M",
+              "minimumElevationDegrees": 10,
+              "autoTrackingConfiguration": "xBand",
+              "eventHubUri": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/orbitalppewestus2-ns/eventhubs/telemetry-hub/",
+              "networkConfiguration": {
+                "subnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnetName"
+              },
+              "links": [
+                {
+                  "name": "RHCP_UL",
+                  "polarization": "RHCP",
+                  "direction": "uplink",
+                  "gainOverTemperature": 0,
+                  "eirpdBW": 45,
+                  "channels": [
+                    {
+                      "name": "channel1",
+                      "centerFrequencyMHz": 2106.4063,
+                      "bandwidthMHz": 0.036,
+                      "endPoint": {
+                        "ipAddress": "10.0.1.0",
+                        "endPointName": "AQUA_command",
+                        "port": "4000",
+                        "protocol": "TCP"
+                      },
+                      "modulationConfiguration": "AQUA_UPLINK_BPSK",
+                      "demodulationConfiguration": "na",
+                      "encodingConfiguration": "AQUA_CMD_CCSDS",
+                      "decodingConfiguration": "na"
+                    }
+                  ]
+                },
+                {
+                  "name": "RHCP_DL",
+                  "polarization": "RHCP",
+                  "direction": "downlink",
+                  "gainOverTemperature": 25,
+                  "eirpdBW": 0,
+                  "channels": [
+                    {
+                      "name": "channel2",
+                      "centerFrequencyMHz": 8160,
+                      "bandwidthMHz": 150,
+                      "endPoint": {
+                        "ipAddress": "10.0.2.0",
+                        "endPointName": "AQUA_directplayback",
+                        "port": "4000",
+                        "protocol": "TCP"
+                      },
+                      "modulationConfiguration": "na",
+                      "demodulationConfiguration": "AQUA_DOWNLINK_QPSK",
+                      "encodingConfiguration": "na",
+                      "decodingConfiguration": "AQUA_DIRECTPLAYBACK_CCSDS"
+                    }
+                  ]
+                }
+              ]
+            },
+            "type": "Microsoft.Orbital/contactProfiles"
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}

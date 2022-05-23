@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+            "name": "sampleAccount",
+            "type": "Microsoft.RecommendationsService/accounts",
+            "location": "West US",
+            "tags": {
+              "Environment": "Prod"
+            },
+            "properties": {
+              "configuration": "Capacity",
+              "endpointAuthentications": [
+                {
+                  "aadTenantID": "tenant",
+                  "principalID": "oid",
+                  "principalType": "User"
+                }
+              ],
+              "cors": [
+                {
+                  "allowedOrigins": [
+                    "https://siteA.com"
+                  ],
+                  "allowedMethods": [
+                    "GET",
+                    "PUT",
+                    "POST"
+                  ],
+                  "allowedHeaders": [
+                    "X-Custom-Header",
+                    "X-Custom-Header2"
+                  ]
+                },
+                {
+                  "allowedOrigins": [
+                    "https://siteB.com"
+                  ],
+                  "maxAgeInSeconds": 20
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount2",
+            "name": "sampleAccount2",
+            "type": "Microsoft.RecommendationsService/accounts",
+            "location": "West US",
+            "tags": {
+              "Environment": "Dev"
+            },
+            "properties": {
+              "configuration": "Capacity",
+              "endpointAuthentications": [
+                {
+                  "aadTenantID": "tenant",
+                  "principalID": "oid",
+                  "principalType": "User"
+                }
+              ],
+              "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
