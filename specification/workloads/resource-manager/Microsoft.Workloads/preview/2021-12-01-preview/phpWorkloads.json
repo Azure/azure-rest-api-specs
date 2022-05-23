@@ -557,7 +557,7 @@
           "description": "Identity for the resource. Currently not supported",
           "allOf": [
             {
-              "$ref": "#/definitions/UserAssignedServiceIdentity"
+              "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
             }
           ]
         }
@@ -583,23 +583,7 @@
         "modelAsString": true
       }
     },
-    "UserAssignedServiceIdentity": {
-      "description": "Managed service identity (user assigned identities)",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of manage identity",
-          "$ref": "#/definitions/ManagedServiceIdentityType"
-        },
-        "userAssignedIdentities": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "phpWorkloadResourceProperties": {
+   "phpWorkloadResourceProperties": {
       "description": "PHP workload resource properties",
       "type": "object",
       "properties": {
@@ -1370,7 +1354,7 @@
         "identity": {
           "allOf": [
             {
-              "$ref": "#/definitions/UserAssignedServiceIdentity"
+              "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
             }
           ]
         }
