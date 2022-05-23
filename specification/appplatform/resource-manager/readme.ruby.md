@@ -12,6 +12,8 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-preview-2022-05
+  - tag: package-2022-04
   - tag: package-preview-2022-03
   - tag: package-preview-2022-01
   - tag: package-preview-2021-09
@@ -19,6 +21,27 @@ batch:
   - tag: package-preview-2020-11
   - tag: package-2020-07
 ```
+
+### Tag: package-preview-2022-05 and ruby
+
+These settings apply only when `--tag=package-preview-2022-05 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-05' && $(ruby)
+namespace: "Azure::AppPlatform::Mgmt::V2022_05_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_appplatform/lib
+```
+
+### Tag: package-2022-04 and ruby
+
+These settings apply only when `--tag=package-2022-04 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2022-04' && $(ruby)
+namespace: "Azure::AppPlatform::Mgmt::V2022_04_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_appplatform/lib
+```
+
 
 ### Tag: package-preview-2022-03 and ruby
 

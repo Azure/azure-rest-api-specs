@@ -38,7 +38,9 @@ A sample valid event definition is shown below:
 ```
 ~~~
 
-In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger. This example must be in a "examples" folder close to your JSON, and called using snakeCase based on the event final name. The example should contain the envelope, but could be CloudEvent or EventGrid schema, whatever is easier. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger in the Event Grid schema and CloudEvents schema. These examples must be close to your JSON in a "examples\event-grid-schema" and "examples\cloud-events-schema" folders respectively, and called using snakeCase based on the event final name. The example should contain the envelope. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+
+**Note:** If you already have an event type example created you can use the following [tool](https://github.com/robece/schema-converter) to convert event files from Event Grid schema to Cloud Events schema or vice versa.
 
 For the previous schema, the example file should be called "chat_message_received.json" and contains:
 ~~~ markdown
