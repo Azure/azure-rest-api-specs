@@ -456,6 +456,7 @@
           "type": "string"
         },
         "resourceProperties": {
+          "x-nullable": true,
           "description": "The azure resource connection related properties.",
           "$ref": "#/definitions/AzureResourcePropertiesBase"
         }
@@ -472,6 +473,7 @@
       ],
       "properties": {
         "connectAsKubernetesCsiDriver": {
+          "x-nullable": true,
           "description": "True if connect via Kubernetes CSI Driver.",
           "type": "boolean"
         }
@@ -562,6 +564,7 @@
       ],
       "properties": {
         "value": {
+          "x-nullable": true,
           "description": "The actual value of the secret.",
           "type": "string",
           "x-ms-secret": true
@@ -583,6 +586,7 @@
           "type": "string"
         },
         "version": {
+          "x-nullable": true,
           "description": "Version of the Key Vault secret.",
           "type": "string"
         }
@@ -629,10 +633,12 @@
       ],
       "properties": {
         "name": {
+          "x-nullable": true,
           "description": "Username or account name for secret auth.",
           "type": "string"
         },
         "secretInfo": {
+          "x-nullable": true,
           "description": "Password or key vault secret for secret auth.",
           "$ref": "#/definitions/SecretInfoBase"
         }
@@ -747,6 +753,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
+          "x-nullable": true,
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system data."
@@ -770,6 +777,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "x-nullable": true,
           "description": "The link used to get the next page of Linker list.",
           "type": "string"
         },
@@ -820,14 +828,17 @@
           "description": "The provisioning state. "
         },
         "vNetSolution": {
+          "x-nullable": true,
           "description": "The VNet solution.",
           "$ref": "#/definitions/VNetSolution"
         },
         "secretStore": {
+          "x-nullable": true,
           "description": "An option to store secret value in secure place",
           "$ref": "#/definitions/SecretStore"
         },
         "scope": {
+          "x-nullable": true,
           "type": "string",
           "description": "connection scope in source service."
         }
@@ -842,6 +853,7 @@
           "type": "string"
         },
         "value": {
+          "x-nullable": true,
           "description": "The value of setting",
           "type": "string"
         }
@@ -868,15 +880,18 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-nullable": true,
           "description": "The validation result detail.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ValidateResult"
         },
         "resourceId": {
+          "x-nullable": true,
           "description": "Validated linker id.",
           "type": "string"
         },
         "status": {
+          "x-nullable": true,
           "description": "Validation operation status.",
           "type": "string"
         }
@@ -887,32 +902,39 @@
       "type": "object",
       "properties": {
         "linkerName": {
+          "x-nullable": true,
           "description": "The linker name.",
           "type": "string"
         },
         "isConnectionAvailable": {
+          "x-nullable": true,
           "description": "A boolean value indicating whether the connection is available or not",
           "type": "boolean"
         },
         "reportStartTimeUtc": {
+          "x-nullable": true,
           "type": "string",
           "format": "date-time",
           "description": "The start time of the validation report."
         },
         "reportEndTimeUtc": {
+          "x-nullable": true,
           "type": "string",
           "format": "date-time",
           "description": "The end time of the validation report."
         },
         "sourceId": {
+          "x-nullable": true,
           "description": "The resource id of the linker source application.",
           "type": "string"
         },
         "targetId": {
+          "x-nullable": true,
           "description": "The resource Id of target service.",
           "type": "string"
         },
         "authType": {
+          "x-nullable": true,
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
         },
@@ -937,10 +959,12 @@
           "type": "string"
         },
         "description": {
+          "x-nullable": true,
           "description": "The display name of validation item",
           "type": "string"
         },
         "result": {
+          "x-nullable": true,
           "description": "The result of validation",
           "type": "string",
           "enum": [
@@ -954,10 +978,12 @@
           }
         },
         "errorMessage": {
+          "x-nullable": true,
           "description": "The error message of validation result",
           "type": "string"
         },
         "errorCode": {
+          "x-nullable": true,
           "description": "The error code of validation result",
           "type": "string"
         }
@@ -968,6 +994,7 @@
       "description": "The VNet solution for linker",
       "properties": {
         "type": {
+          "x-nullable": true,
           "description": "Type of VNet solution.",
           "type": "string",
           "enum": [
@@ -986,6 +1013,7 @@
       "description": "An option to store secret value in secure place",
       "properties": {
         "keyVaultId": {
+          "x-nullable": true,
           "type": "string",
           "description": "The key vault id to store secret"
         }
