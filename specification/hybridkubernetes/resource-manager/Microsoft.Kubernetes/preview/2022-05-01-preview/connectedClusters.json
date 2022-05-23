@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2021-10-01",
+    "version": "2022-05-01-preview",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
   "schemes": [
@@ -42,6 +42,9 @@
         "x-ms-examples": {
           "CreateClusterExample": {
             "$ref": "./examples/CreateClusterExample.json"
+          },
+          "CreateClusterPrivateLinkExample": {
+            "$ref": "./examples/CreateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -619,6 +622,23 @@
             "name": "ConnectivityStatus",
             "modelAsString": true
           }
+        },
+        "privateLinkState": {
+          "type": "string",
+          "description": "Property which describes the state of private link on a connected cluster resource.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
         }
       },
       "description": "Properties of the connected cluster."
@@ -724,32 +744,6 @@
         }
       }
     },
-    "ListClusterUserCredentialProperties": {
-      "type": "object",
-      "required": [
-        "authenticationMethod",
-        "clientProxy"
-      ],
-      "properties": {
-        "authenticationMethod": {
-          "type": "string",
-          "description": "The mode of client authentication.",
-          "enum": [
-            "Token",
-            "AAD"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true
-          }
-        },
-        "clientProxy": {
-          "type": "boolean",
-          "description": "Boolean value to indicate whether the request is for client side proxy or not"
-        }
-      },
-      "description": ""
-    },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
@@ -802,6 +796,32 @@
         }
       },
       "readOnly": true
+    },
+    "ListClusterUserCredentialProperties": {
+      "type": "object",
+      "required": [
+        "authenticationMethod",
+        "clientProxy"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "clientProxy": {
+          "type": "boolean",
+          "description": "Boolean value to indicate whether the request is for client side proxy or not"
+        }
+      },
+      "description": ""
     }
   },
   "parameters": {
