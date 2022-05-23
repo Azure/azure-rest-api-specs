@@ -51,7 +51,7 @@
           "NetworkManagerConnections"
         ],
         "operationId": "SubscriptionNetworkManagerConnections_CreateOrUpdate",
-        "description": "Create a connection from this subscription to a cross tenant network manager.",
+        "description": "Create a network manager connection on this subscription.",
         "parameters": [
           {
             "name": "parameters",
@@ -120,7 +120,7 @@
           "NetworkManagerConnections"
         ],
         "operationId": "SubscriptionNetworkManagerConnections_Delete",
-        "description": "Delete specified pending connection created by this subscription.",
+        "description": "Delete specified connection created by this subscription.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -204,7 +204,7 @@
           "NetworkManagerConnections"
         ],
         "operationId": "ManagementGroupNetworkManagerConnections_CreateOrUpdate",
-        "description": "Create a connection to a cross tenant network manager.",
+        "description": "Create a network manager connection on this management group.",
         "parameters": [
           {
             "name": "parameters",
@@ -363,7 +363,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
       "description": "The Network Manager Connection resource"
@@ -382,7 +382,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A description of the scope connection."
+          "description": "A description of the network manager connection."
         }
       },
       "description": "Information about the network manager connection."
