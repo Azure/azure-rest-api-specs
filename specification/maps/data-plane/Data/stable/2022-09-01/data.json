@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Data Service",
-    "version": "2.0",
+    "version": "2022-09-01-stable",
     "description": "APIs for uploading map data to Azure Maps."
   },
   "x-ms-parameterized-host": {
@@ -166,16 +166,32 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
           },
           "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
-          },
-          "409": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/409StorageLimit"
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       },
