@@ -10,8 +10,6 @@ The current preview release of Conversational Language Understanding and Text An
 
 The current stable release of Question Answering is 2021-10-01.
 
-The current stable release of Language is 2022-05-01.
-
 ```yaml
 tag: release_2022_05_15_preview
 add-credentials: true
