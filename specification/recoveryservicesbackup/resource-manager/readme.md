@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2022-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-06-01-preview'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-06-01-preview/bms.json
+  - Microsoft.RecoveryServices/preview/2022-06-01-preview/bms.json
 ```
 
 ### Tag: package-2022-03
