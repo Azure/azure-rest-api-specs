@@ -697,6 +697,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createemailsigninurl": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "description": "Creates an email channel sign in url for a Bot Service",
+        "operationId": "Email_CreateSignInUrl",
+        "x-ms-examples": {
+          "Create Url": {
+            "$ref": "./examples/CreateEmailSignInUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If url is created successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/CreateEmailSignInUrlResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.BotService/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1747,6 +1789,27 @@
         }
       },
       "description": "The list of  bot service operation response."
+    },
+    "CreateEmailSignInUrlResponse": {
+      "type": "object",
+      "description": "The ARM create email sign in url operation response.",
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "properties": {
+          "url": {
+            "description": "Sign in url.",
+            "type": "string"
+          }
+        }
+      }
     },
     "ListChannelWithKeysResponse": {
       "type": "object",
