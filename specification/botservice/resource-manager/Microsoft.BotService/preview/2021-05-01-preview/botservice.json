@@ -697,7 +697,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createemailsigninurl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createEmailSignInUrl": {
       "post": {
         "tags": [
           "Channel"
@@ -1804,10 +1804,16 @@
           "type": "string"
         },
         "properties": {
-          "url": {
-            "description": "Sign in url.",
-            "type": "string"
-          }
+          "$ref": "#/definitions/CreateEmailSignInUrlResponseProperties",
+          "description": "The set of properties specific to sign in url"
+        }
+      }
+    },
+    "CreateEmailSignInUrlResponseProperties": {
+      "properties": {
+        "url": {
+          "description": "Sign in url.",
+          "type": "string"
         }
       }
     },
