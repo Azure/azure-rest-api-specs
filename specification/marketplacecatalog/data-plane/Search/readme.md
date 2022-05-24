@@ -1,8 +1,8 @@
-# marketplacecatalog
+# search
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for marketplacecatalog.
+This is the AutoRest configuration file for search.
 
 ## Getting Started
 
@@ -22,20 +22,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the marketplacecatalog.
+These are the global settings for the search.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-10-01
-```
-
-### Tag: package-2021-10-01
-
-These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-10-01'
-input-file:
-  - Microsoft.Marketplace/stable/2021-10-01/marketplacecatalog.json
+tag: package-2022-02-02
 ```
 
 ### Tag: package-2022-02-02
@@ -45,3 +36,4 @@ These settings apply only when `--tag=package-2022-02-02` is specified on the co
 ```yaml $(tag) == 'package-2022-02-02'
 input-file:
   - Search/stable/2022-02-02/search.json
+```
