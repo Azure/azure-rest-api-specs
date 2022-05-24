@@ -101,6 +101,7 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdministrators.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAzureADOnlyAuthentications.json
+  - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceDtcs.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceEncryptionProtectors.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceKeys.json
   - Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceLongTermRetentionPolicies.json
@@ -399,6 +400,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceDtcs.json
 
 # Needed when there is more than one input file
 override-info:
