@@ -155,28 +155,16 @@
             "$ref": "#/parameters/DataFormat"
           },
           {
-            "name": "UploadContent",
+            "name": "UploadBody",
             "in": "body",
-            "description": "The content to upload.",
+            "description": "Theconnection information to upload",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ConnectionBody"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
-            },
-            "headers": {
-              "Resource-Location": {
-                "type": "string",
-                "description": "If successful, a URI where details on the newly created resource can be found."
-              }
-            }
-          },
           "202": {
             "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
             "headers": {
@@ -251,27 +239,31 @@
             "$ref": "#/parameters/UploadDataDescription"
           },
           {
-            "name": "UpdateContent",
+            "name": "UpdateBody",
             "in": "body",
-            "description": "The new content that will update/replace the previously uploaded content.",
+            "description": "The connection information to update",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ConnectionBody"
             }
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
-          },
           "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
-          },
-          "409": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/409StorageLimit"
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       },
@@ -284,8 +276,7 @@
           }
         },
         "produces": [
-          "application/json",
-          "application/vnd.geo+json",
+          "application/geo+json",
           "application/octet-stream"
         ],
         "parameters": [
@@ -313,7 +304,11 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       },
@@ -341,7 +336,11 @@
             "description": "Data delete request completed successfully. The content for `udid` was deleted on the server."
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -368,16 +367,77 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       }
     }
   },
   "definitions": {
+    "ConnectionBody": {
+      "type": "object",
+      "description": "The connection information to upload or update",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/Connection"
+        }
+      }
+    },
+    "Connection": {
+      "description": "The connection information to upload or update",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Connection type",
+          "type": "string",
+          "enum": [
+            "AzureBlobFile"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlobFile",
+                "description": "Connection to Azure Blob File"
+              }
+            ]
+          }
+        },
+        "msiClientId": {
+          "description": "ClientId of MSI. Use system assigned identity if not provided",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource",
+          "type": "string"
+        },
+        "blobPath": {
+          "description": "The path to the blob file",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "blobPath"
+      ]
+    },
     "MapDataListResult": {
       "description": "The response model for the Data List API. Returns a list of all the previously uploaded data.",
       "type": "object",
@@ -458,7 +518,7 @@
           "readOnly": true
         },
         "location": {
-          "x-ms-client-name": "locationURL",
+          "x-ms-client-name": "locationURL"
           "description": "The location of the data. Execute a HTTP `GET` on this location to download the data.",
           "type": "string",
           "format": "uri",
@@ -468,6 +528,11 @@
           "description": "The size of the content in bytes.",
           "type": "integer",
           "format": "int64",
+          "readOnly": true
+        },
+        "contentMD5": {
+          "description": "The content MD5 of the file content",
+          "type": "string",
           "readOnly": true
         },
         "uploadStatus": {
@@ -480,6 +545,9 @@
           "description": "The current description.",
           "type": "string",
           "readOnly": true
+        },
+        "connection": {
+          "$ref": "#/definitions/Connection"
         }
       }
     }
