@@ -286,7 +286,12 @@
             "$ref": "#/parameters/monitorNameParameter"
           },
           {
-            "$ref": "#/parameters/TagsParameter"
+            "in": "body",
+            "name": "body",
+            "description": "The Update SAP workload monitor request body.",
+            "schema": {
+              "$ref": "#/definitions/UpdateMonitorRequest"
+            }
           }
         ],
         "responses": {
@@ -744,6 +749,9 @@
     "Monitor": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MonitorProperties",
@@ -823,6 +831,22 @@
       },
       "description": "Describes the properties of a SAP monitor."
     },
+    "UpdateMonitorRequest": {
+      "description": "Defines the request body for updating monitor resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        }
+      }
+    },
     "ProviderInstanceListResult": {
       "type": "object",
       "properties": {
@@ -843,6 +867,9 @@
     "ProviderInstance": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProviderInstanceProperties",
@@ -1154,16 +1181,6 @@
       "required": true,
       "type": "string",
       "description": "Name of the provider instance.",
-      "x-ms-parameter-location": "method"
-    },
-    "TagsParameter": {
-      "name": "tagsParameter",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Tags"
-      },
-      "description": "Request body that only contains the new Tags field",
       "x-ms-parameter-location": "method"
     },
     "MonitorParameter": {
