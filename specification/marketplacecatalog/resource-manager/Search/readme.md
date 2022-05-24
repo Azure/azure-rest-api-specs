@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2022-02-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-02-02'
 input-file:
-  - stable/2022-02-02/search.json
+  - Search/stable/2022-02-02/search.json
 ```
