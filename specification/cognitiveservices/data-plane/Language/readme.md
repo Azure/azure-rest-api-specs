@@ -6,9 +6,9 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Conversational Language Understanding and Text Analytics is 2022-05-15-preview.
-
 The current stable release of Question Answering is 2021-10-01.
+
+The current stable release of Conversational Language Understanding and Language is 2022-05-01.
 
 ```yaml
 tag: release_2022_05_15_preview
@@ -22,6 +22,7 @@ directive:
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
 ```
+
 ### Release 2022-05-15-preview
 
 These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
@@ -39,6 +40,21 @@ modelerfour:
 
 ```
 
+### Release 2022-05-01
+
+These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_05_01'
+input-file:
+  - stable/2022-05-01/textanalytics.json
+  - stable/2022-05-01/analyzetext-authoring.json
+  - stable/2022-05-01/analyzeconversations-authoring.json
+  - stable/2022-05-01/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
 ### Release 2022-03-01-preview
 
 These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
