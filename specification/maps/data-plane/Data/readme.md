@@ -41,7 +41,7 @@ These settings apply only when `--tag=2022-09-01-stable` is specified on the com
 
 ``` yaml $(tag) == '2022-09-01-stable'
 input-file:
-  - stable/2022-09-01/data.json
+  - stable/2022-09-01-stable/data.json
 ```
 
 # Code Generation
