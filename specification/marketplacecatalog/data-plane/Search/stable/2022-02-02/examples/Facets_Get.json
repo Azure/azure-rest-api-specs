@@ -1,52 +1,61 @@
 {
   "parameters": {
     "searchQuery": "a",
-	"languages": ["en"],
-	"stores": ["Ibiza"],
-	"facets": ["offerType"],
-	"pricingTypes": ["Free","FreeTrial"],
+    "languages": [
+      "en"
+    ],
+    "stores": [
+      "Ibiza"
+    ],
+    "facets": [
+      "offerType"
+    ],
+    "pricingTypes": [
+      "Free",
+      "FreeTrial"
+    ],
     "api-version": "2022-02-02",
-	"x-ms-app": "MyApplication"
+    "x-ms-app": "MyApplication"
   },
   "responses": {
     "200": {
       "body": {
-		  "facets": [
-			{
-			  "facetName": "offerType",
-			  "facetValues": [
-				{
-				  "value": "VirtualMachine",
-				  "count": 453
-				},
-				{
-				  "value": "SaaS",
-				  "count": 353
-				},
-				{
-				  "value": "AzureApplication",
-				  "count": 18
-				}
-			  ]
-			}
-		  ]
-		}
+        "facets": [
+          {
+            "facetName": "offerType",
+            "facetValues": [
+              {
+                "value": "VirtualMachine",
+                "count": 453
+              },
+              {
+                "value": "SaaS",
+                "count": 353
+              },
+              {
+                "value": "AzureApplication",
+                "count": 18
+              }
+            ]
+          }
+        ]
+      }
     },
     "400": {
       "body": {
-		"error": {
-			"code": "SearchRequestFailed",
-			"message": "'legacyId' is not a facetable field name"
-		}
-	  }
+        "error": {
+          "code": "SearchRequestFailed",
+          "message": "'legacyId' is not a facetable field name"
+        }
+      }
     },
-	"500": {
+    "500": {
       "body": {
-		  "error": {
-			"code": "InternalError",
-			"message": "Timeout"
-		  }
-		}
+        "error": {
+          "code": "InternalError",
+          "message": "Timeout"
+        }
+      }
     }
   }
 }
