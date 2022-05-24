@@ -557,7 +557,7 @@
           "description": "Identity for the resource. Currently not supported",
           "allOf": [
             {
-              "$ref": "#/definitions/UserAssignedServiceIdentity"
+              "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
             }
           ]
         }
@@ -569,34 +569,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "ManagedServiceIdentityType": {
-      "description": "Type of managed service identity (only None, UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "UserAssigned"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true
-      }
-    },
-    "UserAssignedServiceIdentity": {
-      "description": "Managed service identity (user assigned identities)",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of manage identity",
-          "$ref": "#/definitions/ManagedServiceIdentityType"
-        },
-        "userAssignedIdentities": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
-        }
-      },
-      "required": [
-        "type"
       ]
     },
     "phpWorkloadResourceProperties": {
@@ -1370,7 +1342,7 @@
         "identity": {
           "allOf": [
             {
-              "$ref": "#/definitions/UserAssignedServiceIdentity"
+              "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity"
             }
           ]
         }
