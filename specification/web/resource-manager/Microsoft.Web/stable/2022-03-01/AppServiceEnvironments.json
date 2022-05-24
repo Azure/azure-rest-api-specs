@@ -1143,9 +1143,12 @@
           },
           {
             "name": "testNotification",
-            "in": "query",
+            "in": "body",
             "description": "Whether the request is to send an upgrade test notification instead of starting an upgrade.",
-            "type": "boolean"
+            "schema": {
+              "type": "boolean"
+            },
+            "default": false
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"

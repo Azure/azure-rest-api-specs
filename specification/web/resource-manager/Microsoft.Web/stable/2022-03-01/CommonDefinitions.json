@@ -177,7 +177,7 @@
               },
               {
                 "value": "Manual",
-                "description": "ASEv3 only. Once an upgrade is available, this App Service Environment will wait 14 days for the upgrade to be manually initiated. After 14 days the upgrade will begin automatically"
+                "description": "ASEv3 only. Once an upgrade is available, this App Service Environment will wait 10 days for the upgrade to be manually initiated. After 10 days the upgrade will begin automatically"
               }
             ]
           }
@@ -196,24 +196,23 @@
         },
         "upgradeAvailability": {
           "description": "Whether an upgrade is available for this App Service Environment.",
-          "default": "None",
           "enum": [
-              "None",
-              "Ready"
+            "None",
+            "Ready"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "upgradeAvailability",
+            "name": "UpgradeAvailability",
             "modelAsString": true,
             "values": [
               {
                 "value": "None",
-                "description": "There is not an upgrade available"
+                "description": "No upgrade is currently available for this App Service Environment"
               },
               {
                 "value": "Ready",
-                "description": "An upgrade is ready to be manually initiated. 14 days after notification the upgrade will begin automatically"
+                "description": "An upgrade is ready to be manually initiated on this App Service Environment"
               }
             ]
           }
