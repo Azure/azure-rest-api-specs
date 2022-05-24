@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the search.
 
 ```yaml
-openapi-type: data-plane
+openapi-type: arm
 tag: package-2022-02-02
 ```
 
