@@ -4,7 +4,6 @@
 	"take": 2,
 	"languages": ["en"],
 	"stores": ["Ibiza"],
-	"select": ["legacyId","offerType"],
 	"pricingTypes": ["Free","FreeTrial"],
     "api-version": "2022-02-02",
 	"x-ms-app": "MyApplication"
@@ -12,27 +11,24 @@
   "responses": {
     "200": {
       "body": {
-        "facets": [],
-        "results": [
+		  "autoCompleteItems": [
 			{
-			  "legacyId": "enterprisedb-corp.biganimal-prod-v1",
-			  "offerType": "SaaS"
+			  "text": "a"
 			},
 			{
-			  "legacyId": "epica1581707374769.epica",
-			  "offerType": "SaaS"
+			  "text": "a10"
 			}
-		],
-		"totalCount": 823
-      }
+		  ],
+		  "strategyUsed": "Prefix"
+		}
     },
     "400": {
       "body": {
-		"error": {
+		  "error": {
 			"code": "SearchRequestFailed",
-			"message": "'pricingType' is not a retrievable field name"
+			"message": "Request must have at least one language"
+		  }
 		}
-	  }
     }
   }
 }

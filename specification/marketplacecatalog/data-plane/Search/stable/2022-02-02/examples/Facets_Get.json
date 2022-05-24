@@ -1,10 +1,9 @@
 {
   "parameters": {
     "searchQuery": "a",
-	"take": 2,
 	"languages": ["en"],
 	"stores": ["Ibiza"],
-	"select": ["legacyId","offerType"],
+	"facets": ["offerType"],
 	"pricingTypes": ["Free","FreeTrial"],
     "api-version": "2022-02-02",
 	"x-ms-app": "MyApplication"
@@ -12,25 +11,32 @@
   "responses": {
     "200": {
       "body": {
-        "facets": [],
-        "results": [
+		  "facets": [
 			{
-			  "legacyId": "enterprisedb-corp.biganimal-prod-v1",
-			  "offerType": "SaaS"
-			},
-			{
-			  "legacyId": "epica1581707374769.epica",
-			  "offerType": "SaaS"
+			  "facetName": "offerType",
+			  "facetValues": [
+				{
+				  "value": "VirtualMachine",
+				  "count": 453
+				},
+				{
+				  "value": "SaaS",
+				  "count": 353
+				},
+				{
+				  "value": "AzureApplication",
+				  "count": 18
+				}
+			  ]
 			}
-		],
-		"totalCount": 823
-      }
+		  ]
+		}
     },
     "400": {
       "body": {
 		"error": {
 			"code": "SearchRequestFailed",
-			"message": "'pricingType' is not a retrievable field name"
+			"message": "'legacyId' is not a facetable field name"
 		}
 	  }
     }
