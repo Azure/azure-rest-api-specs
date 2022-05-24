@@ -53,7 +53,7 @@
         },
         "x-ms-examples": {
           "List DevOps audit settings of a server": {
-            "$ref": "./examples/ServerDevOpsAuditSettingsList.json"
+            "$ref": "./examples/ServerDevOpsAuditList.json"
           }
         }
       }
@@ -75,9 +75,15 @@
           {
             "name": "devOpsAuditingSettingsName",
             "in": "path",
-            "description": "The name of the devops audit settings. This should always be 'default'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DevOpsAuditingSettingsName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -119,9 +125,15 @@
           {
             "name": "devOpsAuditingSettingsName",
             "in": "path",
-            "description": "The name of the devops audit settings. This should always be 'default'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DevOpsAuditingSettingsName",
+              "modelAsString": true
+            }
           },
           {
             "name": "parameters",
