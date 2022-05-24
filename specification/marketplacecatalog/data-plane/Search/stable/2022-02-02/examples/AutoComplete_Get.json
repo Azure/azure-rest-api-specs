@@ -1,42 +1,49 @@
 {
   "parameters": {
     "searchQuery": "a",
-	"take": 2,
-	"languages": ["en"],
-	"stores": ["Ibiza"],
-	"pricingTypes": ["Free","FreeTrial"],
+    "take": 2,
+    "languages": [
+      "en"
+    ],
+    "stores": [
+      "Ibiza"
+    ],
+    "pricingTypes": [
+      "Free",
+      "FreeTrial"
+    ],
     "api-version": "2022-02-02",
-	"x-ms-app": "MyApplication"
+    "x-ms-app": "MyApplication"
   },
   "responses": {
     "200": {
       "body": {
-		  "autoCompleteItems": [
-			{
-			  "text": "a"
-			},
-			{
-			  "text": "a10"
-			}
-		  ],
-		  "strategyUsed": "Prefix"
-		}
+        "autoCompleteItems": [
+          {
+            "text": "a"
+          },
+          {
+            "text": "a10"
+          }
+        ],
+        "strategyUsed": "Prefix"
+      }
     },
     "400": {
       "body": {
-		  "error": {
-			"code": "SearchRequestFailed",
-			"message": "Request must have at least one language"
-		  }
-		}
+        "error": {
+          "code": "SearchRequestFailed",
+          "message": "Request must have at least one language"
+        }
+      }
     },
-	"500": {
+    "500": {
       "body": {
-		  "error": {
-			"code": "InternalError",
-			"message": "Timeout"
-		  }
-		}
+        "error": {
+          "code": "InternalError",
+          "message": "Timeout"
+        }
+      }
     }
   }
 }
