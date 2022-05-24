@@ -1,6 +1,5 @@
 {
   "parameters": {
-	"privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406",
     "searchQuery": "a",
 	"take": 2,
 	"languages": ["en"],
@@ -8,7 +7,8 @@
 	"select": ["legacyId","offerType"],
 	"privateStoreAllowances": ["AllowedByDefault"],
     "api-version": "2022-02-02",
-	"x-ms-app": "MyApplication"
+	"x-ms-app": "MyApplication",
+	"x-ms-client-tenant-id": "a0e28e55-90c4-41d8-8e34-bb7ef7775406"
   },
   "responses": {
     "200": {
@@ -34,6 +34,14 @@
 			"message": "'pricingType' is not a retrievable field name"
 		}
 	  }
+    },
+	"500": {
+      "body": {
+		  "error": {
+			"code": "InternalError",
+			"message": "Timeout"
+		  }
+		}
     }
   }
 }
