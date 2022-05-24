@@ -5,322 +5,29 @@
 		"title": "Microsoft Marketplace Search API",
 		"version": "1.0.0"
 	},
-	"host": "catalogapi.azure.com",
+	"host": "management.azure.com",
 	"paths": {
-		"/autocomplete": {
+		"/providers/Microsoft.Marketplace/search": {
 			"get": {
 				"tags": [
-					"Public-Search"
+					"Authenticated-Arm-Search"
 				],
-				"summary": "Get a list of complete terms based on partial search term",
-				"operationId": "AutoComplete_Get",
+				"summary": "Returns a list of azure privatestore marketplace catalog offers and total count and facets",
+				"operationId": "Search_GetArm",
 				"parameters": [
 					{
-						"name": "searchQuery",
-						"in": "query",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 1
-					},
-					{
-						"name": "take",
-						"in": "query",
-						"schema": {
-							"type": "integer",
-							"format": "int32"
-						},
-						"x-position": 2
-					},
-					{
-						"name": "languages",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 3
-					},
-					{
-						"name": "stores",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"$ref": "#/components/schemas/Store"
-							}
-						},
-						"x-position": 4
-					},
-					{
-						"name": "offerTypes",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 5
-					},
-					{
-						"name": "pricingTypes",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"$ref": "#/components/schemas/PricingType"
-							}
-						},
-						"x-position": 6
-					},
-					{
-						"name": "publisherName",
-						"in": "query",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 7
-					},
-					{
-						"name": "isAzureBenefitEligible",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 8
-					},
-					{
-						"name": "isMicrosoftProduct",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 9
-					},
-					{
-						"name": "isCoreVm",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 10
-					},
-					{
-						"name": "isPreferredSolution",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 11
-					},
-					{
-						"name": "isAdditionalPurchaseRequired",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 12
-					},
-					{
-						"name": "isPowerBICertified",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 13
-					},
-					{
-						"name": "isIndustryCloud",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 14
-					},
-					{
-						"name": "operatingSystems",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 15
-					},
-					{
-						"name": "appSourceIndustries",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 16
-					},
-					{
-						"name": "appSourceCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 17
-					},
-					{
-						"name": "azureIndustries",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 18
-					},
-					{
-						"name": "azureCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 19
-					},
-					{
-						"name": "azurePortalCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 20
-					},
-					{
-						"name": "x-ms-app",
-						"x-originalName": "callingApp",
+						"name": "x-ms-client-tenant-id",
+						"x-originalName": "privateStoreId",
 						"in": "header",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 21
-					},
-					{
-						"name": "api-version",
-						"x-originalName": "apiVersion",
-						"in": "query",
 						"required": true,
 						"schema": {
 							"type": "string",
-							"default": "2022-02-02",
-							"nullable": true
-						},
-						"x-position": 22
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Returns a list of complete terms based on partial search term",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AutoCompleteResponseDto"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "In case request malformed",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SearchErrorResponseDto"
-								}
-							}
-						}
-					},
-					"500": {
-						"description": "In case internal error",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SearchErrorResponseDto"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		"/facets": {
-			"get": {
-				"tags": [
-					"Public-Search"
-				],
-				"summary": "Get a list of offers count per filter",
-				"operationId": "Facets_Get",
-				"parameters": [
-					{
-						"name": "searchQuery",
-						"in": "query",
-						"schema": {
-							"type": "string",
-							"nullable": true
+							"format": "guid"
 						},
 						"x-position": 1
 					},
 					{
-						"name": "publisherName",
+						"name": "searchQuery",
 						"in": "query",
 						"schema": {
 							"type": "string",
@@ -329,304 +36,13 @@
 						"x-position": 2
 					},
 					{
-						"name": "isAzureBenefitEligible",
+						"name": "publisherName",
 						"in": "query",
 						"schema": {
-							"type": "boolean",
+							"type": "string",
 							"nullable": true
 						},
 						"x-position": 3
-					},
-					{
-						"name": "isMicrosoftProduct",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 4
-					},
-					{
-						"name": "isCoreVm",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 5
-					},
-					{
-						"name": "isPreferredSolution",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 6
-					},
-					{
-						"name": "isAdditionalPurchaseRequired",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 7
-					},
-					{
-						"name": "isPowerBICertified",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 8
-					},
-					{
-						"name": "isIndustryCloud",
-						"in": "query",
-						"schema": {
-							"type": "boolean",
-							"nullable": true
-						},
-						"x-position": 9
-					},
-					{
-						"name": "languages",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 10
-					},
-					{
-						"name": "stores",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"$ref": "#/components/schemas/Store"
-							}
-						},
-						"x-position": 11
-					},
-					{
-						"name": "offerTypes",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 12
-					},
-					{
-						"name": "pricingTypes",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"$ref": "#/components/schemas/PricingType"
-							}
-						},
-						"x-position": 13
-					},
-					{
-						"name": "operatingSystems",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 14
-					},
-					{
-						"name": "appSourceIndustries",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 15
-					},
-					{
-						"name": "appSourceCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 16
-					},
-					{
-						"name": "azureIndustries",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 17
-					},
-					{
-						"name": "azureCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 18
-					},
-					{
-						"name": "azurePortalCategories",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 19
-					},
-					{
-						"name": "facets",
-						"in": "query",
-						"style": "form",
-						"explode": true,
-						"schema": {
-							"type": "array",
-							"nullable": true,
-							"items": {
-								"type": "string"
-							}
-						},
-						"x-position": 20
-					},
-					{
-						"name": "x-ms-app",
-						"x-originalName": "callingApp",
-						"in": "header",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 21
-					},
-					{
-						"name": "api-version",
-						"x-originalName": "apiVersion",
-						"in": "query",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"default": "2022-02-02",
-							"nullable": true
-						},
-						"x-position": 22
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Returns a list of offers count per filter",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/FacetsResponseDto"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "In case request malformed",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SearchErrorResponseDto"
-								}
-							}
-						}
-					},
-					"500": {
-						"description": "In case internal error",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SearchErrorResponseDto"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		"/search": {
-			"get": {
-				"tags": [
-					"Public-Search"
-				],
-				"summary": "Get a list of azure marketplace catalog offers and total count and facets",
-				"operationId": "Search_Get",
-				"parameters": [
-					{
-						"name": "searchQuery",
-						"in": "query",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 1
-					},
-					{
-						"name": "publisherName",
-						"in": "query",
-						"schema": {
-							"type": "string",
-							"nullable": true
-						},
-						"x-position": 2
 					},
 					{
 						"name": "skip",
@@ -635,7 +51,7 @@
 							"type": "integer",
 							"format": "int32"
 						},
-						"x-position": 3
+						"x-position": 4
 					},
 					{
 						"name": "take",
@@ -644,7 +60,7 @@
 							"type": "integer",
 							"format": "int32"
 						},
-						"x-position": 4
+						"x-position": 5
 					},
 					{
 						"name": "isAzureBenefitEligible",
@@ -653,7 +69,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 5
+						"x-position": 6
 					},
 					{
 						"name": "isMicrosoftProduct",
@@ -662,7 +78,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 6
+						"x-position": 7
 					},
 					{
 						"name": "isCoreVm",
@@ -671,7 +87,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 7
+						"x-position": 8
 					},
 					{
 						"name": "isPreferredSolution",
@@ -680,7 +96,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 8
+						"x-position": 9
 					},
 					{
 						"name": "isAdditionalPurchaseRequired",
@@ -689,7 +105,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 9
+						"x-position": 10
 					},
 					{
 						"name": "isPowerBICertified",
@@ -698,7 +114,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 10
+						"x-position": 11
 					},
 					{
 						"name": "isIndustryCloud",
@@ -707,7 +123,7 @@
 							"type": "boolean",
 							"nullable": true
 						},
-						"x-position": 11
+						"x-position": 12
 					},
 					{
 						"name": "languages",
@@ -721,7 +137,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 12
+						"x-position": 13
 					},
 					{
 						"name": "stores",
@@ -735,7 +151,7 @@
 								"$ref": "#/components/schemas/Store"
 							}
 						},
-						"x-position": 13
+						"x-position": 14
 					},
 					{
 						"name": "select",
@@ -749,7 +165,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 14
+						"x-position": 15
 					},
 					{
 						"name": "sortBy",
@@ -763,7 +179,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 15
+						"x-position": 16
 					},
 					{
 						"name": "offerTypes",
@@ -777,7 +193,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 16
+						"x-position": 17
 					},
 					{
 						"name": "pricingTypes",
@@ -791,7 +207,21 @@
 								"$ref": "#/components/schemas/PricingType"
 							}
 						},
-						"x-position": 17
+						"x-position": 18
+					},
+					{
+						"name": "privateStoreAllowances",
+						"in": "query",
+						"style": "form",
+						"explode": true,
+						"schema": {
+							"type": "array",
+							"nullable": true,
+							"items": {
+								"$ref": "#/components/schemas/PrivateStoreAllow"
+							}
+						},
+						"x-position": 19
 					},
 					{
 						"name": "appSourceIndustries",
@@ -805,7 +235,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 19
+						"x-position": 20
 					},
 					{
 						"name": "operatingSystems",
@@ -819,7 +249,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 20
+						"x-position": 21
 					},
 					{
 						"name": "appSourceCategories",
@@ -833,7 +263,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 21
+						"x-position": 22
 					},
 					{
 						"name": "azureIndustries",
@@ -847,7 +277,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 22
+						"x-position": 23
 					},
 					{
 						"name": "azureCategories",
@@ -861,7 +291,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 23
+						"x-position": 24
 					},
 					{
 						"name": "azurePortalCategories",
@@ -875,7 +305,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 24
+						"x-position": 25
 					},
 					{
 						"name": "facets",
@@ -889,7 +319,7 @@
 								"type": "string"
 							}
 						},
-						"x-position": 25
+						"x-position": 26
 					},
 					{
 						"name": "x-ms-app",
@@ -899,7 +329,7 @@
 							"type": "string",
 							"nullable": true
 						},
-						"x-position": 26
+						"x-position": 27
 					},
 					{
 						"name": "api-version",
@@ -911,12 +341,12 @@
 							"default": "2022-02-02",
 							"nullable": true
 						},
-						"x-position": 27
+						"x-position": 28
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "Returns a list of azure marketplace catalog offers and total count and facets",
+						"description": "Returns a list of azure privatestore marketplace catalog offers and total count and facets",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -945,39 +375,17 @@
 							}
 						}
 					}
-				}
+				},
+				"security": [
+					{
+						"JWT": []
+					}
+				]
 			}
-		}	
+		}
 	},
 	"components": {
 		"schemas": {
-			"AutoCompleteResponseDto": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"autoCompleteItems": {
-						"type": "array",
-						"nullable": true,
-						"items": {
-							"$ref": "#/components/schemas/AutoCompleteItemDto"
-						}
-					},
-					"strategyUsed": {
-						"type": "string",
-						"nullable": true
-					}
-				}
-			},
-			"AutoCompleteItemDto": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"text": {
-						"type": "string",
-						"nullable": true
-					}
-				}
-			},
 			"SearchErrorResponseDto": {
 				"type": "object",
 				"additionalProperties": false,
@@ -1381,6 +789,28 @@
 						"nullable": true
 					}
 				}
+			},
+			"PrivateStoreAllow": {
+				"type": "string",
+				"description": "",
+				"x-enumNames": [
+					"AllowedByAdmin",
+					"AllowedByDefault",
+					"NonAllowed"
+				],
+				"enum": [
+					"AllowedByAdmin",
+					"AllowedByDefault",
+					"NonAllowed"
+				]
+			}
+		},
+		"securitySchemes": {
+			"JWT": {
+				"type": "apiKey",
+				"description": "Copy this into the value field: Bearer {token}",
+				"name": "Authorization",
+				"in": "header"
 			}
 		}
 	}
