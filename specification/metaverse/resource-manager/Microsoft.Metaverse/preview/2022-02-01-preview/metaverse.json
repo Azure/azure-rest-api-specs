@@ -2101,15 +2101,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccessPolicyProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
@@ -2225,15 +2222,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "#/definitions/MetaverseChildResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/EventProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
@@ -2317,6 +2311,28 @@
           "description": "The id for the metaverse. This is not an Azure Resource Manager id.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MetaverseChildResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "Gets or sets the etag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2483,15 +2499,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "#/definitions/MetaverseChildResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/SpaceProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
@@ -2511,7 +2524,7 @@
         }
       }
     },
-    "SpaceTemplateBase": {
+    "SpaceTemplateProperties": {
       "type": "object",
       "properties": {
         "creator": {
@@ -2577,17 +2590,7 @@
             "type": "string"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "SpaceTemplateProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SpaceTemplateBase"
-        }
-      ],
-      "properties": {
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         }
@@ -2597,15 +2600,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "#/definitions/MetaverseChildResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/SpaceTemplateProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
