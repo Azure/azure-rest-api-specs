@@ -40,6 +40,7 @@ input-file:
   - Microsoft.Workloads/preview/2021-12-01-preview/SAPVirtualInstance.json
   - Microsoft.Workloads/preview/2021-12-01-preview/operations.json
   - Microsoft.Workloads/preview/2021-12-01-preview/monitors.json
+  - Microsoft.Workloads/preview/2021-12-01-preview/skus.json
 ```
 
 ---
