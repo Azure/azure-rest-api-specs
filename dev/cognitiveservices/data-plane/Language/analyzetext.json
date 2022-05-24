@@ -857,6 +857,7 @@
       "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
       "required": [
         "relationType",
+        "confidenceScore",
         "entities"
       ],
       "properties": {
@@ -890,6 +891,11 @@
             "name": "relationType",
             "modelAsString": true
           }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         },
         "entities": {
           "description": "The entities in the relation.",
