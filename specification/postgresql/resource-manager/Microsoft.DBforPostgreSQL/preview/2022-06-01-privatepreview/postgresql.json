@@ -1030,6 +1030,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/assessForMigration": {
+      "post": {
+        "tags": [
+          "AssessForMigration"
+        ],
+        "operationId": "AssessForMigration_Assess",
+        "x-ms-examples": {
+          "PerformMigrationAssessment": {
+            "$ref": "./examples/AssessForMigration.json"
+          }
+        },
+        "description": "Performs Migration Assessment for a single server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "MigrationAssessmentRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationAssessmentRequest"
+            },
+            "description": "The required parameters for performing a migration assessment on a single server"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationAssessmentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2128,6 +2176,106 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "MigrationAssessmentRequest": {
+      "type": "object",
+      "properties": {
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Source Server Resource Id to verify and perform migration assessment on."
+        }
+      },
+      "description": "Request from client to perform migration assessment"
+    },
+    "MigrationAssessmentResource": {
+      "type": "object",
+      "properties": {
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Source Server Resource Id to verify and perform migration assessment on."
+        },
+        "targetPlatformProviderId": {
+          "type": "string",
+          "description": "Target platform(Flexible Server) provider ID"
+        },
+        "targetServerDetails": {
+          "$ref": "#/definitions/TargetServerDetails"
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentSummaryItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [],
+          "description": "Represents a summary of Migration Assessment"
+        },
+        "replicaAssessmentReports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationAssessmentResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [],
+          "description": "Represents Migration assessment resource of replica servers"
+        },
+        "assessmentReportCompletionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Assessment report completion date time"
+        }
+      },
+      "description": "Represents a resource name availability."
+    },
+    "TargetServerDetails": {
+      "type": "object",
+      "properties": {
+        "serverResource": {
+          "$ref": "#/definitions/Server",
+          "readOnly": true,
+          "description": "Represents resource properties of target server"
+        },
+        "serverParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "readOnly": true,
+          "description": "Represents server parameters of target server"
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "readOnly": true,
+          "description": "Represents firewall rules of target server"
+        },
+        "platformProviderId": {
+          "type": "string",
+          "description": "Platform(Flexible Server) provider ID"
+        }
+      },
+      "description": "Represents Target Server details"
+    },
+    "AssessmentSummaryItem": {
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "Migration assessment Feature Name"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the Feature (eg:Information, Warning, Blocker)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message explaining the severity"
+        }
+      },
+      "description": "Represents a Assessment summary item"
     },
     "RestartParameter": {
       "type": "object",
