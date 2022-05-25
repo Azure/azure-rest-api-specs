@@ -153,7 +153,7 @@
             "$ref": "#/parameters/DataFormat"
           },
           {
-            "name": "UploadBody",
+            "name": "CreateBody",
             "in": "body",
             "description": "The connection information to upload",
             "required": true,
@@ -182,7 +182,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"uploadStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"createStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"createStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"createStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
         "operationId": "Data_List",
         "x-ms-examples": {
           "List all the previously uploaded data": {
@@ -443,7 +443,7 @@
   },
   "definitions": {
     "Connection": {
-      "description": "The connection information to upload or update",
+      "description": "The connection object",
       "type": "object",
       "properties": {
         "connection": {
@@ -452,7 +452,7 @@
       }
     },
     "ConnectionPatch": {
-      "description": "The connection information to patch",
+      "description": "The connection object for patching",
       "type": "object",
       "properties": {
         "connection": {
@@ -461,7 +461,7 @@
       }
     },
     "ConnectionProperties": {
-      "description": "The connection information to upload or update",
+      "description": "The connection object properties",
       "type": "object",
       "allOf": [
         {
@@ -475,7 +475,7 @@
       ]
     },
     "ConnectionPatchProperties": {
-      "description": "The connection information to upload or update",
+      "description": "The connection object properties for patching",
       "type": "object",
       "properties": {
         "type": {
@@ -510,11 +510,11 @@
       }
     },
     "MapDataListResult": {
-      "description": "The response model for the Data List API. Returns a list of all the previously uploaded data.",
+      "description": "The response model for the Data List API. Returns a list of all the previously created data.",
       "type": "object",
       "properties": {
         "mapDataList": {
-          "description": "A list of all the previously uploaded data.",
+          "description": "A list of all the previously created data.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -529,8 +529,7 @@
       "readOnly": true,
       "enum": [
         "geojson",
-        "zip",
-        "dwgzippackage"
+        "zip"
       ],
       "x-ms-enum": {
         "name": "DataFormat",
@@ -543,17 +542,12 @@
           {
             "value": "zip",
             "description": "Compressed data format."
-          },
-          {
-            "name": "dwgZipPackage",
-            "value": "dwgzippackage",
-            "description": "ZIP package containing DWG file."
           }
         ]
       }
     },
-    "UploadStatus": {
-      "description": "The current upload status of the content.",
+    "CreateStatus": {
+      "description": "The current create status of the content.",
       "type": "string",
       "readOnly": true,
       "enum": [
@@ -562,7 +556,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "UploadStatus",
+        "name": "CreateStatus",
         "values": [
           {
             "value": "Pending",
@@ -606,8 +600,8 @@
           "type": "string",
           "readOnly": true
         },
-        "uploadStatus": {
-          "$ref": "#/definitions/UploadStatus"
+        "createStatus": {
+          "$ref": "#/definitions/CreateStatus"
         },
         "dataFormat": {
           "$ref": "#/definitions/DataFormat"
@@ -618,7 +612,7 @@
           "readOnly": true
         },
         "connection": {
-          "$ref": "#/definitions/Connection"
+          "$ref": "#/definitions/ConnectionProperties"
         }
       }
     }
