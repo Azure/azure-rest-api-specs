@@ -27,7 +27,7 @@ These are the global settings for Data Client.
 ``` yaml
 title: DataClient
 openapi-type: data-plane
-tag: 2022-09-01-stable
+tag: 2022-12-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
@@ -35,13 +35,13 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 2022-09-01-stable
+### Tag: 2022-12-01
 
-These settings apply only when `--tag=2022-09-01-stable` is specified on the command line.
+These settings apply only when `--tag=2022-12-01` is specified on the command line.
 
-``` yaml $(tag) == '2022-09-01-stable'
+``` yaml $(tag) == '2022-12-01'
 input-file:
-  - stable/2022-09-01-stable/data.json
+  - stable/2022-12-01/data.json
 ```
 
 # Code Generation
