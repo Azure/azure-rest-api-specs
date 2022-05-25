@@ -315,6 +315,9 @@
           "Create Alexa Bot": {
             "$ref": "./examples/PutAlexaChannel.json"
           },
+          "Create Email Bot": {
+            "$ref": "./examples/PutEmailChannel.json"
+          },
           "Create Line Bot": {
             "$ref": "./examples/PutLineChannel.json"
           },
@@ -2100,16 +2103,11 @@
       ]
     },
     "EmailChannelAuthMethod": {
-      "description": "Email channel auth method. Default is 0 (Password).",
-      "oneOf": [
-        {
-          "type": "string",
-          "enum": ["Password", "Graph"]
-        },
-        {
-          "type": "number",
-          "enum": [0, 1]
-        }
+      "type": "number",
+      "description": "Email channel auth method. 0 Password (Default); 1 Graph.",
+      "enum": [
+        0,
+        1
       ]
     },
     "MsTeamsChannel": {
