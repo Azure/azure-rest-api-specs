@@ -1513,6 +1513,28 @@
           "type": "string",
           "description": "The display name for the schedule definition."
         },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the status of an accessReview.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionStatus",
+            "modelAsString": true
+          }
+        },
         "descriptionForAdmins": {
           "type": "string",
           "description": "The description provided by the access review creator and visible to admins."
@@ -1558,7 +1580,20 @@
           ],
           "description": "This is the collection of backup reviewers."
         },
-
+        "reviewersType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionReviewersType",
+            "modelAsString": true
+          }
+        },
         "instances": {
           "type": "array",
           "items": {
@@ -1599,7 +1634,28 @@
     "AccessReviewInstanceProperties": {
       "type": "object",
       "properties": {
-        
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the status of an access review instance.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceStatus",
+            "modelAsString": true
+          }
+        },
         "startDateTime": {
           "type": "string",
           "format": "date-time",
@@ -1627,6 +1683,20 @@
           },
           "description": "This is the collection of backup reviewers.",
           "x-ms-identifiers": []
+        },
+        "reviewersType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceReviewersType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Access Review Instance properties."
@@ -1649,6 +1719,19 @@
         "justificationRequiredOnApproval": {
           "type": "boolean",
           "description": "Flag to indicate whether the reviewer is required to pass justification when recording a decision."
+        },
+        "defaultDecision": {
+          "type": "string",
+          "description": "This specifies the behavior for the autoReview feature when an access review completes.",
+          "enum": [
+            "Approve",
+            "Deny",
+            "Recommendation"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultDecisionType",
+            "modelAsString": true
+          }
         },
         "autoApplyDecisionsEnabled": {
           "type": "boolean",
@@ -1722,7 +1805,18 @@
     "AccessReviewRecurrencePattern": {
       "type": "object",
       "properties": {
-      
+        "type": {
+          "type": "string",
+          "description": "The recurrence type : weekly, monthly, etc.",
+          "enum": [
+            "weekly",
+            "absoluteMonthly"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewRecurrencePatternType",
+            "modelAsString": true
+          }
+        },
         "interval": {
           "type": "integer",
           "format": "int32",
@@ -1734,7 +1828,19 @@
     "AccessReviewRecurrenceRange": {
       "type": "object",
       "properties": {
-
+        "type": {
+          "type": "string",
+          "description": "The recurrence range type. The possible values are: endDate, noEnd, numbered.",
+          "enum": [
+            "endDate",
+            "noEnd",
+            "numbered"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewRecurrenceRangeType",
+            "modelAsString": true
+          }
+        },
         "numberOfOccurrences": {
           "type": "integer",
           "format": "int32",
@@ -1785,9 +1891,94 @@
     "AccessReviewHistoryDefinitionProperties": {
       "type": "object",
       "properties": {
-        "FooProperty": {
+        "displayName": {
           "type": "string",
           "description": "The display name for the history definition."
+        },
+        "reviewHistoryPeriodStartDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "reviewHistoryPeriodEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Represents a reviewer's decision for a given review",
+            "enum": [
+              "Approve",
+              "Deny",
+              "NotReviewed",
+              "DontKnow",
+              "NotNotified"
+            ],
+            "x-ms-enum": {
+              "name": "AccessReviewResult",
+              "modelAsString": true
+            }
+          },
+          "description": "Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          }
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when history definition was created",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "createdBy": {
+          "x-nullable": true,
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewActorIdentity",
+          "description": "The user or other identity who created this history definition."
+        },
+        "scopes": {
+          "x-nullable": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewScope"
+          },
+          "description": "A collection of scopes used when selecting review history data",
+          "x-ms-identifiers": []
+        },
+        "settings": {
+          "x-ms-client-flatten": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/AccessReviewHistoryScheduleSettings",
+          "description": "Recurrence settings for recurring history reports, skip for one-time reports."
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewHistoryInstance"
+          },
+          "description": "Set of access review history instances for this history definition."
         }
       },
       "description": "Access Review History Instances."
@@ -1837,6 +2028,21 @@
         "displayName": {
           "type": "string",
           "description": "The display name for the parent history definition."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the requested review history instance data. This is either requested, in-progress, done or error. The state transitions are as follows - Requested -> InProgress -> Done -> Expired",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          }
         },
         "runDateTime": {
           "type": "string",
@@ -1893,7 +2099,35 @@
           "readOnly": true,
           "description": "This is used to indicate the role being reviewed"
         },
-
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type user/servicePrincipal to review",
+          "enum": [
+            "user",
+            "guestUser",
+            "servicePrincipal",
+            "user,group",
+            "redeemedGuestUser"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScopePrincipalType",
+            "modelAsString": true
+          }
+        },
+        "assignmentState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment state eligible/active to review",
+          "enum": [
+            "eligible",
+            "active"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScopeAssignmentState",
+            "modelAsString": true
+          }
+        },
         "inactiveDuration": {
           "type": "string",
           "format": "duration",
@@ -1912,6 +2146,19 @@
         "principalId": {
           "type": "string",
           "description": "The id of the reviewer(user/servicePrincipal)"
+        },
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewReviewerType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Descriptor for what needs to be reviewed"
@@ -1960,8 +2207,35 @@
           "description": "Resource associated with this decision record.",
           "x-nullable": true
         },
-
-
+        "recommendation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The feature- generated recommendation shown to the reviewer.",
+          "enum": [
+            "Approve",
+            "Deny",
+            "NoInfoAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRecommendationType",
+            "modelAsString": true
+          }
+        },
+        "decision": {
+          "type": "string",
+          "description": "The decision on the approval step. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny",
+          "enum": [
+            "Approve",
+            "Deny",
+            "NotReviewed",
+            "DontKnow",
+            "NotNotified"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewResult",
+            "modelAsString": true
+          }
+        },
         "justification": {
           "type": "string",
           "description": "Justification provided by approvers for their action"
@@ -1980,7 +2254,23 @@
           "description": "Details of the approver.",
           "x-nullable": true
         },
-
+        "applyResult": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The outcome of applying the decision.",
+          "enum": [
+            "New",
+            "Applying",
+            "AppliedSuccessfully",
+            "AppliedWithUnknownFailure",
+            "AppliedSuccessfullyButObjectNotFound",
+            "ApplyNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewApplyResult",
+            "modelAsString": true
+          }
+        },
         "appliedDateTime": {
           "type": "string",
           "readOnly": true,
@@ -2005,7 +2295,17 @@
         "type"
       ],
       "properties": {
-
+        "type": {
+          "type": "string",
+          "description": "The type of resource: azureRole",
+          "enum": [
+            "azureRole"
+          ],
+          "x-ms-enum": {
+            "name": "DecisionResourceType",
+            "modelAsString": true
+          }
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -2047,7 +2347,18 @@
         "type"
       ],
       "properties": {
-
+        "type": {
+          "type": "string",
+          "description": "The type of decision target : User/ServicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "DecisionTargetType",
+            "modelAsString": true
+          }
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -2110,6 +2421,19 @@
           "type": "string",
           "readOnly": true,
           "description": "The identity id"
+        },
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewActorIdentityType",
+            "modelAsString": true
+          }
         },
         "principalName": {
           "type": "string",
