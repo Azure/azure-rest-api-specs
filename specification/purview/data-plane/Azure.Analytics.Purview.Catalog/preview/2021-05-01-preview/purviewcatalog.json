@@ -1404,6 +1404,9 @@
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
             "$ref": "./examples/Glossary_GetGlossaryTerm.json"
+          },
+          "Glossary_GetGlossaryTerm_WithoutAssets": {
+            "$ref": "./examples/Glossary_GetGlossaryTerm_WithoutAssets.json"
           }
         },
         "parameters": [
@@ -1412,6 +1415,18 @@
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "name": "excludeRelationshipTypes",
+            "in": "query",
+            "description": "An array of relationship types exclueded.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "excludeRelationshipTypes"
           }
         ],
         "responses": {
