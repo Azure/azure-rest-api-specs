@@ -908,16 +908,6 @@
         }
       ],
       "properties": {
-        "defenderForServers": {
-          "type": "object",
-          "description": "The Defender for servers connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
-          }
-        },
         "arcAutoProvisioning": {
           "type": "object",
           "description": "The ARC autoprovisioning configuration",
@@ -1142,6 +1132,20 @@
                   "description": "The agent onboarding service account numeric id"
                 }
               }
+            }
+          }
+        },
+        "defenderForDatabasesArcAutoProvisioning": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this offering"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for this offering"
             }
           }
         }
