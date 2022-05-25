@@ -2108,6 +2108,32 @@
       "enum": [
         0,
         1
+      ],
+      "x-ms-enum": {
+        "name": "EmailChannelAuthMethod",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": 0,
+            "name": "Password",
+            "description": "Basic authentication."
+          },
+          {
+            "value": 1,
+            "name": "Graph",
+            "description": "Modern authentication."
+          }
+        ]
+      }
+    },
+    "OutlookChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "OutlookChannel",
+      "description": "Outlook channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
       ]
     },
     "MsTeamsChannel": {
