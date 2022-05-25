@@ -102,7 +102,7 @@
         "tags": [
           "Custom Speech datasets for model adaptation:"
         ],
-        "summary": "Uploads and creates a new dataset by getting the data from a specified URL.",
+        "summary": "Uploads and creates a new dataset by getting the data from a specified URL or starts waiting for data blocks to be uploaded.",
         "operationId": "Datasets_Create",
         "consumes": [
           "application/json"
@@ -143,8 +143,11 @@
           }
         },
         "x-ms-examples": {
-          "Create a dataset": {
-            "$ref": "./examples/create_dataset.json"
+          "Create a dataset with content url": {
+            "$ref": "./examples/create_dataset_with_content_url.json"
+          },
+          "Create dataset from data blocks": {
+            "$ref": "./examples/create_dataset_with_blocks.json"
           }
         }
       }
@@ -290,6 +293,108 @@
         }
       }
     },
+    "/datasets/{id}/blocks": {
+      "get": {
+        "tags": [
+          "Custom Speech datasets for model adaptation:"
+        ],
+        "summary": "Gets the list of uploaded blocks for this dataset.",
+        "operationId": "Datasets_GetDatasetBlocks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The identifier of the dataset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UploadedBlocks"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get uploaded blocks for dataset": {
+            "$ref": "./examples/get_dataset_blocks.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Custom Speech datasets for model adaptation:"
+        ],
+        "summary": "Upload a block of data for the dataset.",
+        "operationId": "Datasets_UploadBlock",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The identifier of the dataset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "blockid",
+            "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. Note that the Base64 string must be URL-encoded.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The data block was uploaded successfully."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload a block for a dataset": {
+            "$ref": "./examples/upload_block.json"
+          }
+        }
+      }
+    },
     "/datasets/upload": {
       "post": {
         "tags": [
@@ -385,66 +490,15 @@
         }
       }
     },
-    "/datasets/uploadsessions": {
-      "post": {
-        "tags": [
-          "Custom Speech datasets for model adaptation:"
-        ],
-        "summary": "Create upload session.",
-        "operationId": "Datasets_CreateUploadSession",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "dataset",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Dataset"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/UploadSession"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create session to upload a dataset": {
-            "$ref": "./examples/create_upload_session.json"
-          }
-        }
-      }
-    },
-    "/datasets/uploadsessions/{id}": {
+    "/datasets/{id}/commitBlockList": {
       "put": {
         "tags": [
           "Custom Speech datasets for model adaptation:"
         ],
-        "summary": "Upload a chunk of data.",
-        "operationId": "Datasets_UploadChunkIntoUploadSession",
+        "summary": "Commit block list to complete the upload of the dataset.",
+        "operationId": "Datasets_CommitBlocks",
         "consumes": [
-          "application/octet-stream"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -453,88 +507,27 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The identifier of the dataset.",
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "in": "header",
-            "name": "Content-Range",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
-            "name": "body",
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Once all chunks have been uploaded, the data import process is started and the response contains the handle of the created data import entity. The response contains the location of the data import entity as header.",
-            "schema": {
-              "$ref": "#/definitions/Dataset"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "202": {
-            "description": "The data chunk was uploaded successfully and further data chunks are expected as reported in the response. The response contains the location of the upload session as header.",
-            "schema": {
-              "$ref": "#/definitions/UploadSession"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                "type": "integer"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Upload a dataset with a session": {
-            "$ref": "./examples/upload_session.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Custom Speech datasets for model adaptation:"
-        ],
-        "summary": "Get upload session.",
-        "operationId": "Datasets_GetUploadSession",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
+            "name": "blockList",
+            "description": "The list of blocks that compile the dataset.",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CommitBlocksEntry"
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UploadSession"
-            }
+            "description": "The block list is accepted and the data import process can continue."
           },
           "default": {
             "description": "An error occurred.",
@@ -544,8 +537,8 @@
           }
         },
         "x-ms-examples": {
-          "Get upload session": {
-            "$ref": "./examples/get_upload_session.json"
+          "Commit uploaded blocks to dataset": {
+            "$ref": "./examples/commit_block_list.json"
           }
         }
       }
@@ -3768,45 +3761,17 @@
         "locale"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedModel"
+        }
+      ],
       "properties": {
         "links": {
           "$ref": "#/definitions/BaseModelLinks"
         },
         "properties": {
           "$ref": "#/definitions/BaseModelProperties"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the object.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the object.",
-          "type": "string"
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -3825,6 +3790,21 @@
           "description": "The date when transcription becomes deprecated.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "BaseModelFeatures": {
+      "title": "BaseModelFeatures",
+      "description": "Features supported by the model.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedModelFeatures"
+        }
+      ],
+      "properties": {
+        "adaptableWithDatasetKinds": {
+          "$ref": "#/definitions/ModelAdaptableWithDatasetKinds"
         }
       }
     },
@@ -3847,13 +3827,31 @@
         "deprecationDates": {
           "$ref": "#/definitions/BaseModelDeprecationDates"
         },
-        "capabilities": {
-          "description": "The capabilities of the model.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelCapabilities"
-          },
-          "readOnly": true
+        "features": {
+          "$ref": "#/definitions/BaseModelFeatures"
+        }
+      }
+    },
+    "BlockKind": {
+      "title": "BlockKind",
+      "description": "Type of data block.",
+      "enum": [
+        "Committed",
+        "Uncommitted",
+        "Latest"
+      ],
+      "type": "string"
+    },
+    "CommitBlocksEntry": {
+      "title": "CommitBlocksEntry",
+      "description": "Entry of the commit block list.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/BlockKind"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
@@ -3888,6 +3886,11 @@
         "locale"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedModel"
+        }
+      ],
       "properties": {
         "project": {
           "$ref": "#/definitions/EntityReference"
@@ -3897,39 +3900,6 @@
         },
         "properties": {
           "$ref": "#/definitions/CustomModelProperties"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the object.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the object.",
-          "type": "string"
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
         },
         "text": {
           "description": "The text used to adapt this language model.",
@@ -3965,6 +3935,16 @@
           "readOnly": true
         }
       }
+    },
+    "CustomModelFeatures": {
+      "title": "CustomModelFeatures",
+      "description": "Features supported by the model.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedModelFeatures"
+        }
+      ]
     },
     "CustomModelLinks": {
       "title": "CustomModelLinks",
@@ -4004,13 +3984,8 @@
         "deprecationDates": {
           "$ref": "#/definitions/CustomModelDeprecationDates"
         },
-        "capabilities": {
-          "description": "The capabilities of the model.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelCapabilities"
-          },
-          "readOnly": true
+        "features": {
+          "$ref": "#/definitions/CustomModelFeatures"
         },
         "email": {
           "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
@@ -5329,47 +5304,35 @@
         }
       }
     },
-    "ModelCapabilities": {
-      "title": "ModelCapabilities",
-      "description": "Capabilities the model has.",
-      "enum": [
-        "Transcription",
-        "AdaptationWithText",
-        "AdaptationWithAudio",
-        "AdaptationWithClasses",
-        "AdaptationWithPronunciation",
-        "TranscriptionOnSpeechContainer"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ModelCapabilities",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Transcription",
-            "description": "This model can be used for realtime and batch transcription."
-          },
-          {
-            "value": "AdaptationWithText",
-            "description": "This model can be adapted with text."
-          },
-          {
-            "value": "AdaptationWithAudio",
-            "description": "This model can be adapted with audio and reference transcription."
-          },
-          {
-            "value": "AdaptationWithClasses",
-            "description": "This model can be adapted with text and classes."
-          },
-          {
-            "value": "AdaptationWithPronunciation",
-            "description": "This model can be adapted with custom pronunciation."
-          },
-          {
-            "value": "TranscriptionOnSpeechContainer",
-            "description": "This model can be used for transcription on speech container. This capability can be added on existing models when it becomes usable on speech container."
-          }
-        ]
+    "ModelAdaptableWithDatasetKinds": {
+      "title": "ModelAdaptableWithDatasetKinds",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "A value indicating whether adaptation with text (language dataset) is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "acoustic": {
+          "description": "A value indicating whether adaptation with audio and transcription (acoustic dataset) is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "pronunciation": {
+          "description": "A value indicating whether adaptation with pronunciation dataset is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "audioFiles": {
+          "description": "A value indicating whether adaptation with only audio (audio files dataset) is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "languageMarkdown": {
+          "description": "A value indicating whether adaptation with classes (language markdown dataset) is supported.",
+          "type": "boolean",
+          "readOnly": true
+        }
       }
     },
     "ModelCopy": {
@@ -5840,6 +5803,20 @@
         ]
       }
     },
+    "ResponseBlock": {
+      "title": "ResponseBlock",
+      "description": "ResponseBlock.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "ServiceHealth": {
       "title": "ServiceHealth",
       "type": "object",
@@ -5858,6 +5835,66 @@
           "items": {
             "$ref": "#/definitions/Component"
           },
+          "readOnly": true
+        }
+      }
+    },
+    "SharedModel": {
+      "title": "SharedModel",
+      "required": [
+        "displayName",
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the object.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedModelFeatures": {
+      "title": "SharedModelFeatures",
+      "description": "Features supported by the model.",
+      "type": "object",
+      "properties": {
+        "transcription": {
+          "description": "A value indicating whether transcription (batch or live) is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "transcriptionOnSpeechContainer": {
+          "description": "A value indicating whether this model can be used for transcription on speech container. This feature can be added on existing models when it becomes usable on speech container.",
+          "type": "boolean",
           "readOnly": true
         }
       }
@@ -6069,26 +6106,22 @@
         }
       }
     },
-    "UploadSession": {
-      "title": "UploadSession",
+    "UploadedBlocks": {
+      "title": "UploadedBlocks",
+      "description": "List of uploaded blocks.",
       "type": "object",
       "properties": {
-        "self": {
-          "format": "uri",
-          "type": "string",
-          "readOnly": true
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "nextExpectedRanges": {
+        "committedBlocks": {
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "readOnly": true
+            "$ref": "#/definitions/ResponseBlock"
+          }
+        },
+        "uncommittedBlocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseBlock"
+          }
         }
       }
     },
