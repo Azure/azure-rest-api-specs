@@ -16,7 +16,9 @@
   "schemes": [
     "https"
   ],
-  "consumes": [],
+  "consumes": [
+    "application/json"
+  ],
   "produces": [
     "application/json"
   ],
@@ -126,21 +128,17 @@
   "paths": {
     "/mapData": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Upload API allows the caller to upload data content to the Azure Maps service.\nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` \nformat, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Upload Request\n\nTo upload your content you will use a `POST` request. The request body will contain the data to upload. The \n`dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter \ncan contain the sharing level for the data. The `Content-Type` header will be set to the content type of the \ndata.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the geofence \ncontent. Set the `dataFormat` query parameter to _geojson_.\n\nThe Data Upload API performs a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Data_Upload",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Create API allows the caller to register data content uploaded to storage account to the Azure Maps and get a UDID. You can use this API in a scenario like registering a collection of Geofences in `GeoJSON` format, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Create Request\n\nTo register your content you will use a `POST` request. The request body will contain the data to upload. The `dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter can contain the sharing level for the data. The `Content-Type` header will be set to the content type of the data.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the connection object. Set the `dataFormat` query parameter to _geojson_.\n\nThe Data Upload API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "Data_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Upload GeoJSON data containing geometries that represent a collection of geofences": {
-            "$ref": "./examples/Data_Upload.json"
+          "Register GeoJSON data containing geometries that represent a collection of geofences to the Azure Maps Service": {
+            "$ref": "./examples/Data_Create.json"
           }
         },
-        "consumes": [
-          "application/json",
-          "application/octet-stream"
-        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -160,7 +158,7 @@
             "description": "The connection information to upload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionBody"
+              "$ref": "#/definitions/Connection"
             }
           }
         ],
@@ -244,7 +242,7 @@
             "description": "The connection information to update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionBody"
+              "$ref": "#/definitions/Connection"
             }
           }
         ],
@@ -298,7 +296,7 @@
             "description": "The connection information to patch",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionBodyOptional"
+              "$ref": "#/definitions/ConnectionPatch"
             }
           }
         ],
@@ -444,29 +442,39 @@
     }
   },
   "definitions": {
-    "ConnectionBody": {
-      "type": "object",
-      "description": "The connection information to upload or update",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/Connection",
-          "required": [
-            "type",
-            "blobPath"
-          ]
-        }
-      }
-    },
-    "ConnectionBodyOptional": {
-      "type": "object",
-      "description": "The connection information to patch",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/Connection"
-        }
-      }
-    },
     "Connection": {
+      "description": "The connection information to upload or update",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/ConnectionProperties"
+        }
+      }
+    },
+    "ConnectionPatch": {
+      "description": "The connection information to patch",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/ConnectionPatchProperties"
+        }
+      }
+    },
+    "ConnectionProperties": {
+      "description": "The connection information to upload or update",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPatchProperties"
+        }
+      ],
+      "required": [
+        "type",
+        "msiClientId",
+        "blobPath"
+      ]
+    },
+    "ConnectionPatchProperties": {
       "description": "The connection information to upload or update",
       "type": "object",
       "properties": {
