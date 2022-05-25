@@ -109,7 +109,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "UploadDataDescription": {
+    "DataDescription": {
       "name": "description",
       "description": "The description to be given to the upload.",
       "type": "string",
@@ -147,7 +147,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/UploadDataDescription"
+            "$ref": "#/parameters/DataDescription"
           },
           {
             "$ref": "#/parameters/DataFormat"
@@ -155,7 +155,7 @@
           {
             "name": "CreateBody",
             "in": "body",
-            "description": "The connection information to upload",
+            "description": "The connection information to upload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Connection"
@@ -234,12 +234,12 @@
             "$ref": "#/parameters/UniqueDataId"
           },
           {
-            "$ref": "#/parameters/UploadDataDescription"
+            "$ref": "#/parameters/DataDescription"
           },
           {
             "name": "UpdateBody",
             "in": "body",
-            "description": "The connection information to update",
+            "description": "The connection information to update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Connection"
@@ -288,12 +288,12 @@
             "$ref": "#/parameters/UniqueDataId"
           },
           {
-            "$ref": "#/parameters/UploadDataDescription"
+            "$ref": "#/parameters/DataDescription"
           },
           {
             "name": "PatchBody",
             "in": "body",
-            "description": "The connection information to patch",
+            "description": "The connection information to patch.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectionPatch"
@@ -443,7 +443,7 @@
   },
   "definitions": {
     "Connection": {
-      "description": "The connection object",
+      "description": "The connection object.",
       "type": "object",
       "properties": {
         "connection": {
@@ -452,7 +452,7 @@
       }
     },
     "ConnectionPatch": {
-      "description": "The connection object for patching",
+      "description": "The connection object for patching.",
       "type": "object",
       "properties": {
         "connection": {
@@ -461,7 +461,7 @@
       }
     },
     "ConnectionProperties": {
-      "description": "The connection object properties",
+      "description": "The connection object properties.",
       "type": "object",
       "allOf": [
         {
@@ -475,11 +475,11 @@
       ]
     },
     "ConnectionPatchProperties": {
-      "description": "The connection object properties for patching",
+      "description": "The connection object properties for patching.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "Connection type",
+          "description": "Connection type.",
           "type": "string",
           "enum": [
             "AzureBlobFile"
@@ -490,21 +490,21 @@
             "values": [
               {
                 "value": "AzureBlobFile",
-                "description": "Connection to Azure Blob File"
+                "description": "Connection to Azure Blob File."
               }
             ]
           }
         },
         "msiClientId": {
-          "description": "ClientId of MSI. Use system assigned identity if not provided",
+          "description": "ClientId of MSI. Use system assigned identity if not provided.",
           "type": "string"
         },
         "linkedResource": {
-          "description": "The linked resource",
+          "description": "The linked resource.",
           "type": "string"
         },
         "blobPath": {
-          "description": "The path to the blob file",
+          "description": "The path to the blob file.",
           "type": "string"
         }
       }
@@ -560,15 +560,15 @@
         "values": [
           {
             "value": "Pending",
-            "description": "Upload is processing"
+            "description": "Upload is processing."
           },
           {
             "value": "Completed",
-            "description": "Upload validation and processing completed"
+            "description": "Upload validation and processing completed."
           },
           {
             "value": "Failed",
-            "description": "Upload validation and/or processing failure"
+            "description": "Upload validation and/or processing failure."
           }
         ]
       }
@@ -613,6 +613,18 @@
         },
         "connection": {
           "$ref": "#/definitions/ConnectionProperties"
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "The updated timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     }
