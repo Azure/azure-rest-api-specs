@@ -383,6 +383,60 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes": {
+      "post": {
+        "operationId": "AzureFirewalls_ListLearnedPrefixes",
+        "description": "Retrieves a list of all IP prefixes that azure firewall has learned to not SNAT.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the azure firewall."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of learnt SNAT IP prefixes for no SNAT.",
+            "schema": {
+              "$ref": "#/definitions/IPPrefixesList"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallListLearnedPrefixes": {
+            "$ref": "./examples/AzureFirewallListLearnedIPPrefixes.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1081,6 +1135,15 @@
         }
       },
       "description": "SKU of an Azure Firewall."
+    },
+	"IPPrefixesList": {
+      "properties": {
+        "ipPrefixes": {
+          "type": "string",
+          "description": "IP Prefix value."
+        }
+      },
+      "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT"
     }
   }
 }
