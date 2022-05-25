@@ -262,7 +262,6 @@ input-file:
 - Microsoft.Compute/stable/2022-03-02/DiskRP/diskEncryptionSet.json
 - Microsoft.Compute/stable/2022-03-02/DiskRP/diskRestorePoint.json
 - Microsoft.Compute/stable/2022-03-02/DiskRP/snapshot.json
-- Microsoft.Compute/stable/2021-11-01/runCommands.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-10-01/gallery.json
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
