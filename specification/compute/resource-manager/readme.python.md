@@ -37,6 +37,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2022-03-01-only
+  - tag: package-2022-01-03-only
   - tag: package-2021-12-01-only
   - tag: package-2021-11-01-only
   - tag: package-2021-10-01-only
@@ -81,6 +82,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-03-01-only'
 namespace: azure.mgmt.compute.v2022_03_01
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_03_01
+```
+
+### Tag: package-2022-01-03-only
+
+These settings apply only when `--tag=package-2022-01-03-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-01-03-only'
+namespace: azure.mgmt.compute.v2022_01_03
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_01_03
 ```
 
 ### Tag: package-2021-12-01-only
