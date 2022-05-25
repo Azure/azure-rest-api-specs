@@ -1274,10 +1274,10 @@
     "/chat/messages:send": {
       "post": {
         "tags": [
-          "ThreadlessMessages"
+          "ExternalMessages"
         ],
-        "summary": "Sends a threadless Cross-platform message.",
-        "operationId": "ThreadlessMessaging_SendMessage",
+        "summary": "Sends a threadless external Cross-platform message.",
+        "operationId": "ExternalMessaging_SendMessage",
         "consumes": [
           "application/json"
         ],
@@ -1290,18 +1290,18 @@
           },
           {
             "in": "body",
-            "name": "sendThreadlessMessageRequest",
+            "name": "sendExternalMessageRequest",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sendThreadlessMessageRequest"
+              "$ref": "#/definitions/sendExternalMessageRequest"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "Cross-platform threadless message accepted.",
+            "description": "Cross-platform threadless external message accepted.",
             "schema": {
-              "$ref": "#/definitions/SendThreadlessMessageResult"
+              "$ref": "#/definitions/SendExternalMessageResult"
             }
           },
           "401": {
@@ -1473,41 +1473,36 @@
         }
       }
     },
-    "sendThreadlessMessageRequest": {
-      "description": "Details of the Cross-platform threadless message to send.",
+    "sendExternalMessageRequest": {
+      "description": "Details of the Cross-platform threadless external message to send.",
       "required": [
         "type, from, to"
       ],
       "type": "object",
       "properties": {
-        "from": {
-          "description": "The from identifier that is owned by the authenticated account.",
-          "type": "string",
-          "example": "business phone number"
-        },
         "to": {
           "description": "The channel user identifiers of the recipient.",
           "type": "string",
           "example": "37:whatsapp:16315551234"
         },
         "type": {
-          "$ref": "#/definitions/ThreadlessMessageType"
+          "$ref": "#/definitions/ExternalMessageType"
         },
         "content": {
-          "description": "Threadless message content.",
+          "description": "External message content.",
           "type": "string",
           "example": "Come on guys, lets go for lunch together."
         },
         "media": {
-          "$ref": "#/definitions/MessageMedia"
+          "$ref": "#/definitions/ExternalMessageType"
         },
         "template": {
-          "$ref": "#/definitions/MessageTemplate"
+          "$ref": "#/definitions/ExternalMessageTemplate"
         }
       }
     },
-    "ThreadlessMessageType": {
-      "description": "The cross-platform threadless message type.",
+    "ExternalMessageType": {
+      "description": "The cross-platform threadless external message type.",
       "enum": [
         "template",
         "text",
@@ -1515,11 +1510,11 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ThreadlessMessageType",
+        "name": "ExternalMessageType",
         "modelAsString": true
       }
     },
-    "MessageMedia": {
+    "ExternalMessageMedia": {
       "description": "The media Object",
       "required": [
         "link"
@@ -1533,7 +1528,7 @@
         }
       }
     },
-    "MessageTemplate": {
+    "ExternalMessageTemplate": {
       "description": "The template object used to create templates.",
       "required": [
         "name, language, parameters"
@@ -1563,8 +1558,8 @@
         }
       }
     },
-    "SendThreadlessMessageResult": {
-      "description": "Result of the send cross-platform threadless message operation.",
+    "SendExternalMessageResult": {
+      "description": "Result of the send cross-platform threadless external message operation.",
       "required": [
         "id",
         "status"
@@ -1577,10 +1572,24 @@
           "example": "123456789"
         },
         "status": {
-          "description": "Status of the threadless message",
-          "type": "string",
-          "example": "enqueued"
+          "$ref": "#/definitions/ExternalMessageStatus"
         }
+      }
+    },
+    "ExternalMessageStatus": {
+      "description": "The cross-platform threadless external message status.",
+      "enum": [
+        "enqueued",
+        "sent",
+        "delivered",
+        "read",
+        "failed",
+        "unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ExternalMessageStatus",
+        "modelAsString": true
       }
     },
     "ChatParticipant": {
