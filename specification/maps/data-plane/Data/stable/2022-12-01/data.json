@@ -182,7 +182,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"createStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"createStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://us.atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"createStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Data Response\n\nThe Data List API returns the complete list of all data in `json` format.",
         "operationId": "Data_List",
         "x-ms-examples": {
           "List all the previously uploaded data": {
@@ -397,6 +397,39 @@
         }
       }
     },
+    "/mapData/{udid}/metadata": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the metadata of a given udid created previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit Get Metadata Request\n\nTo fetch the metadata of a given udid you will issue a `GET` request with no additional parameters.\n\n## Get Metadata Response\n\nThe Data Metadata API returns the complete list of all data in `json` format.",
+        "operationId": "Data_Metadata",
+        "x-ms-examples": {
+          "Fetch the metadata of a given udid": {
+            "$ref": "./examples/Data_Metadata.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UniqueDataId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "schema": {
+              "$ref": "#/definitions/MapDataResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
     "/mapData/operations/{operationId}": {
       "get": {
         "description": "This path will be obtained from a call to POST /mapData.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once completed.",
@@ -523,54 +556,13 @@
         }
       }
     },
-    "DataFormat": {
-      "description": "Data format of the uploaded content.",
-      "type": "string",
-      "readOnly": true,
-      "enum": [
-        "geojson",
-        "zip"
-      ],
-      "x-ms-enum": {
-        "name": "DataFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "geojson",
-            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
-          },
-          {
-            "value": "zip",
-            "description": "Compressed data format."
-          }
-        ]
-      }
-    },
-    "CreateStatus": {
-      "description": "The current create status of the content.",
-      "type": "string",
-      "readOnly": true,
-      "enum": [
-        "Pending",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "CreateStatus",
-        "values": [
-          {
-            "value": "Pending",
-            "description": "Upload is processing."
-          },
-          {
-            "value": "Completed",
-            "description": "Upload validation and processing completed."
-          },
-          {
-            "value": "Failed",
-            "description": "Upload validation and/or processing failure."
-          }
-        ]
+    "MapDataResult": {
+      "description": "The response model for the Data Metadata API. Returns the metadata of a given udid.",
+      "type": "object",
+      "properties": {
+        "mapData": {
+          "$ref": "#/definitions/MapData"
+        }
       }
     },
     "MapData": {
@@ -626,6 +618,56 @@
           "format": "date-time",
           "readOnly": true
         }
+      }
+    },
+    "DataFormat": {
+      "description": "Data format of the uploaded content.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "geojson",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          },
+          {
+            "value": "zip",
+            "description": "Compressed data format."
+          }
+        ]
+      }
+    },
+    "CreateStatus": {
+      "description": "The current create status of the content.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Pending",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CreateStatus",
+        "values": [
+          {
+            "value": "Pending",
+            "description": "Upload is processing."
+          },
+          {
+            "value": "Completed",
+            "description": "Upload validation and processing completed."
+          },
+          {
+            "value": "Failed",
+            "description": "Upload validation and/or processing failure."
+          }
+        ]
       }
     }
   }
