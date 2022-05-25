@@ -28,27 +28,37 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-2022-05
 azure-arm: true
 ```
 
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.HealthcareApis/stable/2022-05-15/healthcare-apis.json
+```
 ### Tag: package-preview-2022-01
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.HealthcareApis/preview/2022-01-31-preview/healthcare-apis.json
 ```
+
 ### Tag: package-2021-11
 
 These settings apply only when `--tag=package-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11'
+``` yaml $(tag) == 'package-2021-11'
 input-file:
   - Microsoft.HealthcareApis/stable/2021-11-01/healthcare-apis.json
 ```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
