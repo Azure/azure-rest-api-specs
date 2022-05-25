@@ -2077,9 +2077,16 @@
           "type": "string",
           "description": "The email address"
         },
+        "authMethod": {
+          "$ref": "#/definitions/EmailChannelAuthMethod"
+        },
         "password": {
           "type": "string",
           "description": "The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "magicCode": {
+          "type": "string",
+          "description": "The magic code for setting up the modern authentication."
         },
         "isEnabled": {
           "type": "boolean",
@@ -2090,6 +2097,19 @@
       "required": [
         "emailAddress",
         "isEnabled"
+      ]
+    },
+    "EmailChannelAuthMethod": {
+      "description": "Email channel auth method. Default is 0 (Password).",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": ["Password", "Graph"]
+        },
+        {
+          "type": "number",
+          "enum": [0, 1]
+        }
       ]
     },
     "MsTeamsChannel": {
