@@ -109,7 +109,7 @@ The structure should appear like so:
 |            \---readme.md
 ```
 ### Folder Structure for Service Group
-If several services with the same or different versioning cycle decide to package together in the SDK release. For the service group, the folder structure is recommended as below. In the following sample, there is only a demo of 'resource-manager' folder, there could be a similar folder structure under 'data-plane' folder, however, the sub component/service may not be consistent. 
+If several services with the same or different versioning cycle decide to package together in the SDK release. For the service group, the folder structure is recommended as below. In the following sample, there is only a demo of 'resource-manager' folder, there could be a similar folder structure under 'data-plane' folder; however, the sub component/service may not be the same. 
 
 ```bash
 .
