@@ -1,0 +1,288 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "typesDef": {
+      "enumDefs": [],
+      "structDefs": [],
+      "classificationDefs": [],
+      "entityDefs": [
+        {
+          "name": "azure_sql_server",
+          "superTypes": [
+            "azure_resource"
+          ],
+          "typeVersion": "1.0",
+          "attributeDefs": [
+            {
+              "name": "databases",
+              "typeName": "array<azure_sql_db>",
+              "cardinality": "SET",
+              "isIndexable": false,
+              "isOptional": true,
+              "isUnique": false
+            }
+          ]
+        },
+        {
+          "name": "azure_sql_db",
+          "superTypes": [
+            "azure_resource"
+          ],
+          "typeVersion": "1.0",
+          "attributeDefs": [
+            {
+              "name": "server",
+              "typeName": "azure_sql_server",
+              "cardinality": "SINGLE",
+              "constraints": [
+                {
+                  "type": "inverseRef",
+                  "params": {
+                    "attribute": "databases"
+                  }
+                }
+              ],
+              "isIndexable": false,
+              "isOptional": false,
+              "isUnique": false
+            },
+            {
+              "name": "schemas",
+              "typeName": "array<azure_sql_schema>",
+              "cardinality": "SET",
+              "isIndexable": false,
+              "isOptional": true,
+              "isUnique": false
+            },
+            {
+              "name": "collation",
+              "typeName": "string",
+              "cardinality": "SINGLE",
+              "isIndexable": false,
+              "isOptional": true,
+              "isUnique": false
+            },
+            {
+              "name": "compatibilityLevel",
+              "typeName": "int",
+              "cardinality": "SINGLE",
+              "isIndexable": false,
+              "isOptional": true,
+              "isUnique": false
+            }
+          ]
+        }
+      ],
+      "relationshipDefs": [
+        {
+          "name": "azure_sql_server_databases",
+          "typeVersion": "1.0",
+          "relationshipCategory": "COMPOSITION",
+          "endDef1": {
+            "type": "azure_sql_server",
+            "name": "databases",
+            "isContainer": true,
+            "cardinality": "SET",
+            "isLegacyAttribute": true
+          },
+          "endDef2": {
+            "type": "azure_sql_db",
+            "name": "server",
+            "isContainer": false,
+            "cardinality": "SINGLE",
+            "isLegacyAttribute": true
+          }
+        },
+        {
+          "name": "azure_sql_db_schemas",
+          "typeVersion": "1.0",
+          "relationshipCategory": "COMPOSITION",
+          "endDef1": {
+            "type": "azure_sql_db",
+            "name": "schemas",
+            "isContainer": true,
+            "cardinality": "SET",
+            "isLegacyAttribute": true
+          },
+          "endDef2": {
+            "type": "azure_sql_schema",
+            "name": "db",
+            "isContainer": false,
+            "cardinality": "SINGLE",
+            "isLegacyAttribute": true
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "enumDefs": [],
+        "structDefs": [],
+        "classificationDefs": [],
+        "entityDefs": [
+          {
+            "category": "ENTITY",
+            "guid": "a59fe369-2b1d-4bba-bb74-c273f3d74eb1",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1548841689501,
+            "updateTime": 1553671448662,
+            "version": 3,
+            "name": "azure_sql_server",
+            "description": "azure_sql_server",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+              {
+                "name": "databases",
+                "typeName": "array<azure_sql_db>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 2147483647,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              }
+            ],
+            "superTypes": [
+              "azure_resource"
+            ],
+            "subTypes": []
+          },
+          {
+            "category": "ENTITY",
+            "guid": "cc33ec5a-205a-4853-91dd-c0ebd0049ffb",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1548841689575,
+            "updateTime": 1553671448783,
+            "version": 3,
+            "name": "azure_sql_db",
+            "description": "azure_sql_db",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+              {
+                "name": "server",
+                "typeName": "azure_sql_server",
+                "isOptional": false,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 1,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "constraints": [
+                  {
+                    "type": "inverseRef",
+                    "params": {
+                      "attribute": "databases"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "schemas",
+                "typeName": "array<azure_sql_schema>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 2147483647,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "collation",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "compatibilityLevel",
+                "typeName": "int",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              }
+            ],
+            "superTypes": [
+              "azure_resource"
+            ],
+            "subTypes": []
+          }
+        ],
+        "relationshipDefs": [
+          {
+            "category": "RELATIONSHIP",
+            "guid": "1e0584a8-2587-4e1d-a772-db1e879469af",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1548841689879,
+            "updateTime": 1553671449536,
+            "version": 3,
+            "name": "azure_sql_server_databases",
+            "description": "azure_sql_server_databases",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "relationshipCategory": "COMPOSITION",
+            "endDef1": {
+              "type": "azure_sql_server",
+              "name": "databases",
+              "isContainer": true,
+              "cardinality": "SET",
+              "isLegacyAttribute": true
+            },
+            "endDef2": {
+              "type": "azure_sql_db",
+              "name": "server",
+              "isContainer": false,
+              "cardinality": "SINGLE",
+              "isLegacyAttribute": true
+            },
+            "relationshipLabel": "r:azure_sql_server_databases"
+          },
+          {
+            "category": "RELATIONSHIP",
+            "guid": "77ee34f6-ea48-4fe3-86bf-7e2e722f4596",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1548841690094,
+            "updateTime": 1553671449545,
+            "version": 3,
+            "name": "azure_sql_db_schemas",
+            "description": "azure_sql_db_schemas",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "relationshipCategory": "COMPOSITION",
+            "endDef1": {
+              "type": "azure_sql_db",
+              "name": "schemas",
+              "isContainer": true,
+              "cardinality": "SET",
+              "isLegacyAttribute": true
+            },
+            "endDef2": {
+              "type": "azure_sql_schema",
+              "name": "db",
+              "isContainer": false,
+              "cardinality": "SINGLE",
+              "isLegacyAttribute": true
+            },
+            "relationshipLabel": "r:azure_sql_db_schemas"
+          }
+        ]
+      }
+    }
+  }
+}

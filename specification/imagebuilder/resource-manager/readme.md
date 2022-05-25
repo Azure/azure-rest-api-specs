@@ -28,15 +28,24 @@ These are the global settings for the Virtual Machine Image Builder API.
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2021-10
+tag: package-2022-02
 azure-arm: true
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.VirtualMachineImages/stable/2022-02-14/imagebuilder.json
+```
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.VirtualMachineImages/stable/2021-10-01/imagebuilder.json
 ```
@@ -45,10 +54,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-02'
+``` yaml $(tag) == 'package-2020-02'
 input-file:
   - Microsoft.VirtualMachineImages/stable/2020-02-14/imagebuilder.json
 ```
+
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
@@ -85,7 +95,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -93,7 +102,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-```  
+  - repo: azure-powershell
+```
 
 ## Python
 
@@ -149,6 +159,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
