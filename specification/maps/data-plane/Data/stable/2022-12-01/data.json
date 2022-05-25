@@ -77,8 +77,7 @@
       "required": true,
       "enum": [
         "geojson",
-        "zip",
-        "dwgzippackage"
+        "zip"
       ],
       "x-ms-enum": {
         "name": "DataFormat",
@@ -91,11 +90,33 @@
           {
             "value": "zip",
             "description": "Compressed data format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DataSharingLevel": {
+      "name": "dataSharingLevel",
+      "description": "Data sharing level.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "default": "account",
+      "enum": [
+        "account",
+        "subscription"
+      ],
+      "x-ms-enum": {
+        "name": "DataSharingLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "account",
+            "description": "Data available within the maps account."
           },
           {
-            "name": "dwgZipPackage",
-            "value": "dwgzippackage",
-            "description": "ZIP package containing DWG file."
+            "value": "subscription",
+            "description": "Data available within the subscription where the maps account is located."
           }
         ]
       },
@@ -128,7 +149,7 @@
   "paths": {
     "/mapData": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Create API allows the caller to register data content uploaded to storage account to the Azure Maps and get a UDID. You can use this API in a scenario like registering a collection of Geofences in `GeoJSON` format, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Create Request\n\nTo register your content you will use a `POST` request. The request body will contain the data to upload. The `dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter can contain the sharing level for the data. The `Content-Type` header will be set to the content type of the data.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the connection object. Set the `dataFormat` query parameter to _geojson_.\n\nThe Data Upload API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Create API allows the caller to register their data content uploaded to Azure Storage Account to the Azure Maps Service and get a UDID. You can use this API in a scenario like registering a collection of Geofences in `GeoJSON` format, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Create Request\n\nTo register your content you will use a `POST` request. The request body will contain the connection object. The `dataFormat` query parameter will contain the format for the data for validation. The `dataSharingLevel` query parameter can contain the sharing level for the data.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the connection object. Set the `dataFormat` query parameter to _geojson_.\n\nThe Data Upload API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Data_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -147,10 +168,13 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/DataFormat"
+          },
+          {
             "$ref": "#/parameters/DataDescription"
           },
           {
-            "$ref": "#/parameters/DataFormat"
+            "$ref": "#/parameters/DataSharingLevel"
           },
           {
             "name": "CreateBody",
@@ -400,10 +424,10 @@
     "/mapData/{udid}/metadata": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the metadata of a given udid created previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit Get Metadata Request\n\nTo fetch the metadata of a given udid you will issue a `GET` request with no additional parameters.\n\n## Get Metadata Response\n\nThe Data Metadata API returns the complete list of all data in `json` format.",
-        "operationId": "Data_Metadata",
+        "operationId": "Data_GetMetadata",
         "x-ms-examples": {
           "Fetch the metadata of a given udid": {
-            "$ref": "./examples/Data_Metadata.json"
+            "$ref": "./examples/Data_GetMetadata.json"
           }
         },
         "parameters": [
@@ -419,7 +443,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "description": "Get metadata request completed successfully. The response body is the metadata of a given udid.",
             "schema": {
               "$ref": "#/definitions/MapDataResult"
             }
@@ -503,7 +527,6 @@
       ],
       "required": [
         "type",
-        "msiClientId",
         "blobPath"
       ]
     },
@@ -598,6 +621,9 @@
         "dataFormat": {
           "$ref": "#/definitions/DataFormat"
         },
+        "dataSharingLevel": {
+          "$ref": "#/definitions/DataSharingLevel"
+        },
         "description": {
           "description": "The current description.",
           "type": "string",
@@ -639,6 +665,29 @@
           {
             "value": "zip",
             "description": "Compressed data format."
+          }
+        ]
+      }
+    },
+    "DataSharingLevel": {
+      "description": "Data sharing level.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "account",
+        "subscription"
+      ],
+      "x-ms-enum": {
+        "name": "DataSharingLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "account",
+            "description": "Data available within the maps account."
+          },
+          {
+            "value": "subscription",
+            "description": "Data available within the subscription where the maps account is located."
           }
         ]
       }
