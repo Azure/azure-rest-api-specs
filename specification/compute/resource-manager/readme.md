@@ -336,8 +336,8 @@ input-file:
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/restorePoint.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
-- Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json 
-```
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json
+``` 
 
 ### Tag: package-2021-12-01
 
@@ -1165,5 +1165,4 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
-
 
