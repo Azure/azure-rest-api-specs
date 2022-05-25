@@ -32,7 +32,7 @@ tag: package-2020-01-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-05-01
+tag: package-flexibleserver-2021-12-01-preview
 ```
 
 ``` yaml $(package-singleservers)
@@ -146,6 +146,15 @@ These settings apply only when `--tag=package-flexibleserver-2021-05-01` is spec
 ``` yaml $(tag) == 'package-flexibleserver-2021-05-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
+```
+
+### Tag: package-flexibleserver-2021-12-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2021-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-12-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/mysql.json
 ```
 
 ## Suppression

@@ -558,6 +558,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/backups/{backupName}": {
+      "put": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Put",
+        "x-ms-examples": {
+          "Create backup for a server": {
+            "$ref": "./examples/BackupPut.json"
+          }
+        },
+        "description": "Create backup for a given server with specified backup name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Backups"
@@ -1204,6 +1247,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/logFiles": {
+      "get": {
+        "tags": [
+          "LogFiles"
+        ],
+        "operationId": "LogFiles_ListByServer",
+        "x-ms-examples": {
+          "List all serverlog files for a server": {
+            "$ref": "./examples/LogFilesListByServer.json"
+          }
+        },
+        "description": "List all the serverlog files in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LogFileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations": {
       "get": {
         "tags": [
@@ -1228,6 +1316,18 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationTagsParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationKeywordParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationPageParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationPageSizeParameter"
           }
         ],
         "responses": {
@@ -1858,6 +1958,10 @@
           "format": "password",
           "description": "The password of the administrator login."
         },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "Server version."
+        },
         "storage": {
           "$ref": "#/definitions/Storage",
           "description": "Storage related properties of a server."
@@ -2266,9 +2370,80 @@
             "$ref": "#/definitions/ConfigurationForBatchUpdate"
           },
           "description": "The list of server configurations."
+        },
+        "resetAllToDefault": {
+          "type": "boolean",
+          "description": "Whether to reset all server parameters to default."
         }
       },
       "description": "A list of server configurations to update."
+    },
+    "LogFileProperties": {
+      "type": "object",
+      "properties": {
+        "sizeInKB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size in kb of the logFile."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp of the log file."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the log file."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified timestamp of the log file."
+        },
+        "url": {
+          "type": "string",
+          "description": "The url to download the log file from."
+        }
+      },
+      "description": "The properties of a logFile."
+    },
+    "LogFile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogFileProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a logFile."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a logFile."
+    },
+    "LogFileListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogFile"
+          },
+          "description": "The list of logFiles in a server"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A List of logFiles."
     },
     "VirtualNetworkSubnetUsageParameter": {
       "type": "object",
@@ -2685,6 +2860,40 @@
       "required": true,
       "type": "string",
       "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationTagsParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The tags of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationKeywordParameter": {
+      "name": "keyword",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The keyword of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationPageParameter": {
+      "name": "page",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The page of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationPageSizeParameter": {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The pageSize of the server configuration.",
       "x-ms-parameter-location": "method"
     },
     "LocationNameParameter": {
