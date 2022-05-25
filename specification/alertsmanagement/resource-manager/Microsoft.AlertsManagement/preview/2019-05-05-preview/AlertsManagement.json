@@ -55,6 +55,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -240,6 +245,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -496,6 +504,16 @@
         "modelAsString": true
       }
     },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "type": "string"
+      }
+    },
     "alertState": {
       "description": "Filter by state of the alert instance. Default value is to select all.",
       "name": "alertState",
@@ -709,6 +727,10 @@
               "description": "Description of the operation"
             }
           }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
         }
       }
     },
