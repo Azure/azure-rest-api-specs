@@ -639,6 +639,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Whether to force resource update",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -1056,7 +1064,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1115,7 +1127,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "name": "dataSet",
@@ -1189,7 +1205,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1219,6 +1239,236 @@
         "x-ms-examples": {
           "DataSets_Delete": {
             "$ref": "./examples/DataSets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoint"
+        ],
+        "summary": "List managed private endpoints in a Workspace.",
+        "description": "List managed private endpoints in a Workspace",
+        "operationId": "ManagedPrivateEndpoints_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_ListByWorkspace": {
+            "$ref": "./examples/ManagedPrivateEndpoints_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoint"
+        ],
+        "summary": "Get a managed private endpoint in a workspace.",
+        "description": "Get a ManagedPrivateEndpoint in a Workspace",
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The name of the managed private endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedPrivateEndpoint"
+        ],
+        "summary": "Adds a new managed private endpoint to an existing workspace.",
+        "description": "Create a managed private endpoint in a Workspace ",
+        "operationId": "ManagedPrivateEndpoints_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The name of the managed private endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "in": "body",
+            "description": "The new managed private endpoint information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedPrivateEndpoint"
+        ],
+        "summary": "Delete a managed private endpoint from a workspace.",
+        "description": "Delete a ManagedPrivateEndpoint in a Workspace",
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The name of the managed private endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
           }
         }
       }
@@ -2492,6 +2742,9 @@
         "x-ms-examples": {
           "DataAssetReferences_CreateOrUpdate": {
             "$ref": "./examples/DataAssetReferences_CreateOrUpdate.json"
+          },
+          "DataAssetReferences_WriteOnly_CreateOrUpdate": {
+            "$ref": "./examples/DataAssetReferences_WriteOnly_CreateOrUpdate.json"
           }
         }
       },
@@ -3096,6 +3349,9 @@
         "x-ms-examples": {
           "Constraints_CreateOrUpdate": {
             "$ref": "./examples/Constraints_CreateOrUpdate.json"
+          },
+          "Constraints_ScriptParameter_CreateOrUpdate": {
+            "$ref": "./examples/Constraints_ScriptParameter_CreateOrUpdate.json"
           }
         }
       },
@@ -3820,6 +4076,138 @@
             "$ref": "./examples/Participants_Get.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Participant"
+        ],
+        "summary": "Adds a new Participant to a Proposal.",
+        "description": "Create or update a Participant in a Proposal ",
+        "operationId": "Participants_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantName",
+            "in": "path",
+            "description": "The name of the participant.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participant",
+            "in": "body",
+            "description": "The new participant information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Participants_CreateOrUpdate": {
+            "$ref": "./examples/Participants_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Participant"
+        ],
+        "summary": "Delete a Participant in a Proposal.",
+        "description": "Delete a Participant in a Proposal",
+        "operationId": "Participants_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantName",
+            "in": "path",
+            "description": "The name of the participant.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Participants_Delete": {
+            "$ref": "./examples/Participants_Delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/revoke": {
@@ -4243,6 +4631,123 @@
         "x-ms-examples": {
           "Proposals_Sign": {
             "$ref": "./examples/Proposals_Sign.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/virtualOutputReferences": {
+      "get": {
+        "tags": [
+          "VirtualOutputReference"
+        ],
+        "summary": "List VirtualOutputReference in a Proposal.",
+        "description": "List VirtualOutputReference in a Proposal",
+        "operationId": "VirtualOutputReferences_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualOutputReferenceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualOutputReferences_ListByProposal": {
+            "$ref": "./examples/VirtualOutputReferences_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/virtualOutputReferences/{referenceName}": {
+      "get": {
+        "tags": [
+          "VirtualOutputReference"
+        ],
+        "summary": "Get a VirtualOutputReference in a Proposal.",
+        "description": "Get a VirtualOutputReference in a Proposal",
+        "operationId": "VirtualOutputReferences_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualOutputReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualOutputReferences_Get": {
+            "$ref": "./examples/VirtualOutputReferences_Get.json"
           }
         }
       }
@@ -4672,6 +5177,23 @@
     }
   },
   "definitions": {
+    "AdapterBindingConstraint": {
+      "description": "Properties for adapter binding constraint",
+      "required": [
+        "scriptReferenceId"
+      ],
+      "type": "object",
+      "properties": {
+        "bindingKey": {
+          "description": "The key of script's source or sink.",
+          "type": "string"
+        },
+        "scriptReferenceId": {
+          "description": "The unique identifier of the adapter script reference.",
+          "type": "string"
+        }
+      }
+    },
     "ADLSGen2FileDataSet": {
       "description": "An ADLS Gen 2 file data set.",
       "required": [
@@ -4956,6 +5478,101 @@
         }
       }
     },
+    "BooleanPipelineRunParameterAssignment": {
+      "description": "Pipeline run boolean parameter assignment",
+      "required": [
+        "value",
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineRunParameterAssignment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "Parameter value",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "Boolean"
+    },
+    "BooleanScriptParameter": {
+      "description": "Script parameter of type boolean",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameter"
+        }
+      ],
+      "properties": {
+        "defaultValue": {
+          "description": "Default parameter value",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "Boolean"
+    },
+    "BoundAdapter": {
+      "description": "Bound adapter.",
+      "required": [
+        "adapterType",
+        "scriptId",
+        "scriptRevision"
+      ],
+      "type": "object",
+      "properties": {
+        "adapterType": {
+          "description": "The adapter type",
+          "enum": [
+            "Standard",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "adapterType",
+            "modelAsString": true
+          }
+        },
+        "scriptId": {
+          "description": "The adapter script id",
+          "type": "string"
+        },
+        "scriptRevision": {
+          "format": "int32",
+          "description": "The adapter script revision",
+          "type": "integer"
+        }
+      }
+    },
+    "BoundDataDescriptor": {
+      "description": "Base class for bound data descriptor",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of bound data descriptor.",
+          "enum": [
+            "DataAsset",
+            "ScriptOutput"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "boundDataDescriptorKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
     "ConstrainedResource": {
       "description": "A constrained resource data transfer object",
       "required": [
@@ -4975,13 +5592,9 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "constrainedResourceKind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of constrained resource"
         }
       },
       "discriminator": "kind"
@@ -5003,7 +5616,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConstrainedResource"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5023,17 +5637,14 @@
           "description": "Kind of constraint.",
           "enum": [
             "Script",
-            "Location"
+            "Location",
+            "ScriptParameter"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "constraintKind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -5055,7 +5666,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Constraint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5100,7 +5712,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConsumerInvitation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5196,12 +5809,27 @@
           "$ref": "#/definitions/DataAssetProperties",
           "description": "The property bag of the DataAsset",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAsset"
         }
       }
+    },
+    "DataAssetBoundDataDescriptor": {
+      "description": "Data asset bound data descriptor",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BoundDataDescriptor"
+        }
+      ],
+      "properties": {
+        "dataAssetId": {
+          "description": "The bounded data asset Id",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataAsset"
     },
     "DataAssetList": {
       "description": "List response for get data assets",
@@ -5220,7 +5848,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataAsset"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5284,10 +5913,6 @@
           "$ref": "#/definitions/DataAssetReferenceProperties",
           "description": "Properties on the dataset reference",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -5308,17 +5933,49 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataAssetReference"
-          }
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataAssetReferencePlaceholderInfo": {
+      "description": "Placeholder information for a data asset reference",
+      "required": [
+        "assignerId",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "assignerId": {
+          "description": "Participant id who is allowed to assign the placeholder.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the placeholder.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the placeholder.",
+          "type": "string"
         }
       }
     },
     "DataAssetReferenceProperties": {
       "description": "Properties of data set reference data transfer object.",
-      "required": [
-        "dataAssetId"
-      ],
       "type": "object",
       "properties": {
+        "dataAccessType": {
+          "description": "The data asset reference type. Represents the data access allowed using this data in pipeline",
+          "enum": [
+            "ReadOnly",
+            "WriteOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dataAccessType",
+            "modelAsString": true
+          }
+        },
         "dataAssetId": {
           "description": "The unique identifier of the referenced data asset",
           "type": "string"
@@ -5332,10 +5989,32 @@
           "description": "General Description of the data asset reference",
           "type": "string"
         },
+        "displayName": {
+          "description": "Reference display name",
+          "type": "string"
+        },
         "ownerId": {
           "description": "The participant id of the data asset owner",
           "type": "string",
           "readOnly": true
+        },
+        "placeholderInfo": {
+          "$ref": "#/definitions/DataAssetReferencePlaceholderInfo",
+          "description": "The placeholder information"
+        },
+        "placeholderState": {
+          "description": "The placeholder state",
+          "enum": [
+            "None",
+            "Unassigned",
+            "Assigned"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "placeholderState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5364,6 +6043,19 @@
       "description": "Properties for dataAssetReference resource reference used to only allow access if the resource is used within the specified Azure dataAssetReference.",
       "type": "object",
       "properties": {
+        "dataAccessType": {
+          "description": "The data asset reference type. Represents the data access allowed using this data in pipeline",
+          "enum": [
+            "ReadOnly",
+            "WriteOnly"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataAccessType",
+            "modelAsString": true
+          }
+        },
         "dataAssetId": {
           "description": "The unique identifier of the referenced data asset",
           "type": "string",
@@ -5376,6 +6068,11 @@
         },
         "description": {
           "description": "General Description of the data asset reference",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Reference display name",
           "type": "string",
           "readOnly": true
         }
@@ -5449,7 +6146,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataCollaborationErrorInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "message": {
           "description": "Message of the error",
@@ -5486,6 +6184,11 @@
             "modelAsString": true
           }
         },
+        "dataSetCategory": {
+          "description": "The category of the source dataset",
+          "type": "string",
+          "readOnly": true
+        },
         "dataSetName": {
           "description": "The name of the source dataset",
           "type": "string",
@@ -5502,6 +6205,15 @@
           "type": "integer",
           "readOnly": true
         },
+        "resourceId": {
+          "description": "The resource id of the dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/SubstepReference",
+          "description": "The sub-step that is the source of data"
+        },
         "totalBytes": {
           "format": "int64",
           "description": "Total size (in bytes) read from the source",
@@ -5509,6 +6221,20 @@
           "readOnly": true
         }
       },
+      "x-ms-discriminator-value": "DataMovement"
+    },
+    "DataMovementSubstepReference": {
+      "description": "A reference to a data movement sub-step",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubstepReference"
+        }
+      ],
+      "properties": {},
       "x-ms-discriminator-value": "DataMovement"
     },
     "DataSet": {
@@ -5559,27 +6285,117 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
+    },
+    "DateTimeOptionsSetScriptParameterRule": {
+      "description": "Script Parameter DateTime Options Set validation rule definition",
+      "required": [
+        "options",
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "options": {
+          "description": "Defines a set of value options for the parameter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-discriminator-value": "DateTimeOptionsSet"
+    },
+    "DateTimePipelineRunParameterAssignment": {
+      "description": "Pipeline run DateTime parameter assignment",
+      "required": [
+        "value",
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineRunParameterAssignment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "date-time",
+          "description": "Parameter value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DateTime"
+    },
+    "DateTimeRangeScriptParameterRule": {
+      "description": "Script Parameter DateTime range validation rule definition",
+      "required": [
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "maximumValue": {
+          "format": "date-time",
+          "description": "Defines maximum value for the parameter",
+          "type": "string"
+        },
+        "minimumValue": {
+          "format": "date-time",
+          "description": "Defines minimum value for the parameter",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DateTimeRange"
+    },
+    "DateTimeScriptParameter": {
+      "description": "Script parameter of type datetime",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameter"
+        }
+      ],
+      "properties": {
+        "defaultValue": {
+          "format": "date-time",
+          "description": "Default parameter value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DateTime"
     },
     "DefaultDto": {
       "description": "Base data transfer object implementation for default resources.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource id of the azure resource",
-          "type": "string",
-          "readOnly": true
-        },
         "location": {
           "description": "Location of the azure resource.",
           "type": "string"
-        },
-        "name": {
-          "description": "Name of the azure resource",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -5587,14 +6403,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "type": {
-          "description": "Type of the azure resource",
-          "type": "string",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "DiagnosticPolicy": {
       "description": "A diagnostic policy.",
@@ -5645,6 +6455,115 @@
         }
       }
     },
+    "DiagnosticsConsoleLog": {
+      "description": "Diagnostics console log.",
+      "required": [
+        "kind",
+        "dataAssetId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiagnosticsLog"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "ConsoleLog"
+    },
+    "DiagnosticsEventLog": {
+      "description": "Diagnostics event log.",
+      "required": [
+        "kind",
+        "dataAssetId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiagnosticsLog"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "EventLog"
+    },
+    "DiagnosticsLog": {
+      "description": "Base class for diagnostics log",
+      "required": [
+        "kind",
+        "dataAssetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "The data asset Id",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind of diagnostics log.",
+          "enum": [
+            "ConsoleLog",
+            "EventLog"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "diagnosticsLogKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DiagnosticsLogPipelineSubstep": {
+      "description": "A substep representing copy data activity",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineSubstep"
+        }
+      ],
+      "properties": {
+        "dataSetCategory": {
+          "description": "The category of the dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetName": {
+          "description": "The name of the dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetType": {
+          "description": "The type of the dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "diagnosticsLogType": {
+          "description": "The type of the diagnostics log",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfFiles": {
+          "format": "int64",
+          "description": "Number of files written to dataset",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "The resource id of the dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalBytes": {
+          "format": "int64",
+          "description": "Total size (in bytes) read from the logs",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DiagnosticsLog"
+    },
     "DimensionProperties": {
       "description": "properties for dimension",
       "type": "object",
@@ -5675,10 +6594,6 @@
           "$ref": "#/definitions/EntitlementProperties",
           "description": "Properties on the entitlement",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -5699,7 +6614,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Entitlement"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5724,7 +6640,8 @@
           "description": "The type of resourced used by the entitlement.",
           "enum": [
             "DataAssetReference",
-            "ScriptReference"
+            "ScriptReference",
+            "VirtualOutputReference"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5737,6 +6654,100 @@
           "type": "string"
         }
       }
+    },
+    "FloatOptionsSetScriptParameterRule": {
+      "description": "Script Parameter Float Options Set validation rule definition",
+      "required": [
+        "options",
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "options": {
+          "description": "Defines a set of value options for the parameter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-discriminator-value": "FloatOptionsSet"
+    },
+    "FloatPipelineRunParameterAssignment": {
+      "description": "Pipeline run float parameter assignment",
+      "required": [
+        "value",
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineRunParameterAssignment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "float",
+          "description": "Parameter value",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "Float"
+    },
+    "FloatRangeScriptParameterRule": {
+      "description": "Script Parameter float range validation rule definition",
+      "required": [
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "maximumValue": {
+          "format": "float",
+          "description": "Defines maximum value for the parameter",
+          "type": "number"
+        },
+        "minimumValue": {
+          "format": "float",
+          "description": "Defines minimum value for the parameter",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "FloatRange"
+    },
+    "FloatScriptParameter": {
+      "description": "Script parameter of type float",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameter"
+        }
+      ],
+      "properties": {
+        "defaultValue": {
+          "format": "float",
+          "description": "Default parameter value",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "Float"
     },
     "Identity": {
       "description": "Identity of resource",
@@ -5764,6 +6775,100 @@
           }
         }
       }
+    },
+    "IntegerOptionsSetScriptParameterRule": {
+      "description": "Script Parameter Integer Options Set validation rule definition",
+      "required": [
+        "options",
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "options": {
+          "description": "Defines a set of value options for the parameter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-discriminator-value": "IntegerOptionsSet"
+    },
+    "IntegerPipelineRunParameterAssignment": {
+      "description": "Pipeline run integer parameter assignment",
+      "required": [
+        "value",
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineRunParameterAssignment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "int32",
+          "description": "Parameter value",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Integer"
+    },
+    "IntegerRangeScriptParameterRule": {
+      "description": "Script Parameter integer range validation rule definition",
+      "required": [
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "maximumValue": {
+          "format": "int32",
+          "description": "Defines maximum value for the parameter",
+          "type": "integer"
+        },
+        "minimumValue": {
+          "format": "int32",
+          "description": "Defines minimum value for the parameter",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "IntegerRange"
+    },
+    "IntegerScriptParameter": {
+      "description": "Script parameter of type integer",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameter"
+        }
+      ],
+      "properties": {
+        "defaultValue": {
+          "format": "int32",
+          "description": "Default parameter value",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Integer"
     },
     "Invitation": {
       "description": "Invitation to participate in a shared proposal",
@@ -5798,7 +6903,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invitation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5824,6 +6930,10 @@
             "name": "invitationStatus",
             "modelAsString": true
           }
+        },
+        "participantPlaceholderId": {
+          "description": "The participant placeholder Id which this invitation is meant to assign",
+          "type": "string"
         },
         "respondedAt": {
           "format": "date-time",
@@ -5899,6 +7009,109 @@
         }
       }
     },
+    "ManagedPrivateEndpoint": {
+      "description": "Private endpoint on the service managed virtual network",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedPrivateEndpointProperties",
+          "description": "Properties on the ManagedPrivateEndpoint",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointList": {
+      "description": "List response for get ManagedPrivateEndpointList",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpoint"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedPrivateEndpointProperties": {
+      "description": "Properties of Managed Private Endpoint data transfer object.",
+      "required": [
+        "privateLinkResourceId",
+        "groupId"
+      ],
+      "type": "object",
+      "properties": {
+        "additionalProperties": {
+          "description": "Additional endpoint properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
+        "connectionState": {
+          "description": "Connection state of the Managed Private Endpoint",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnectionState"
+            }
+          ],
+          "readOnly": true
+        },
+        "groupId": {
+          "description": "The type of endpoint on the linked resource",
+          "enum": [
+            "blob",
+            "blob_secondary",
+            "dfs",
+            "dfs_secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "groupId",
+            "modelAsString": true
+          }
+        },
+        "privateLinkResourceId": {
+          "description": "The Azure id of the linked resource",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Managed Private Endpoint",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "OperationList": {
       "description": "List response for get operations.",
       "required": [
@@ -5916,7 +7129,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationModel"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5952,7 +7166,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "displayDescription": {
           "description": "description of the metric",
@@ -5988,7 +7203,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedTimeGrainTypes": {
           "description": "supported time grain types",
@@ -5996,7 +7212,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "unit": {
           "description": "units for the metric",
@@ -6024,7 +7241,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metricSpecifications": {
           "description": "metric specifications for the operation",
@@ -6032,7 +7250,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6043,6 +7262,10 @@
         "display": {
           "$ref": "#/definitions/OperationModelProperties",
           "description": "Properties on the operation"
+        },
+        "isDataAction": {
+          "description": "Determines whether an operation is done on the data-layer or not",
+          "type": "boolean"
         },
         "name": {
           "description": "Operation name for display purposes",
@@ -6120,6 +7343,48 @@
         }
       }
     },
+    "OutputPolicy": {
+      "description": "A Output policy.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Policy"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutputPolicyProperties",
+          "description": "Properties for Output policy",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Output"
+    },
+    "OutputPolicyProperties": {
+      "description": "An Output policy transfer object.",
+      "required": [
+        "outputName"
+      ],
+      "type": "object",
+      "properties": {
+        "appliesTo": {
+          "description": "The name of the sink this policy applies to. If not present the policy applies to all sinks.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the policy",
+          "type": "string"
+        },
+        "outputName": {
+          "description": "The name of the virtual reference representing this policy.",
+          "type": "string"
+        }
+      }
+    },
     "Participant": {
       "description": "Participant information",
       "type": "object",
@@ -6133,6 +7398,22 @@
           "$ref": "#/definitions/ParticipantProperties",
           "description": "Properties on the participant",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ParticipantDetails": {
+      "description": "A participant details",
+      "type": "object",
+      "properties": {
+        "tenantName": {
+          "description": "Tenant name of the participant",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceDisplayName": {
+          "description": "Display name of the workspace",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6153,7 +7434,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Participant"
-          }
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ParticipantPlaceholderInfo": {
+      "description": "Placeholder information for participant",
+      "required": [
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the placeholder.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the placeholder.",
+          "type": "string"
         }
       }
     },
@@ -6167,10 +7466,33 @@
           "type": "string",
           "readOnly": true
         },
+        "displayName": {
+          "description": "Participant display name",
+          "type": "string",
+          "readOnly": true
+        },
         "participantId": {
           "description": "Unique id for identifying a participant",
           "type": "string",
           "readOnly": true
+        },
+        "placeholderInfo": {
+          "$ref": "#/definitions/ParticipantPlaceholderInfo",
+          "description": "The placeholder information"
+        },
+        "placeholderState": {
+          "description": "The placeholder state",
+          "enum": [
+            "None",
+            "Unassigned",
+            "Assigned"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "placeholderState",
+            "modelAsString": true
+          }
         },
         "proposalApprovalStatus": {
           "description": "Current approval status",
@@ -6186,6 +7508,11 @@
             "modelAsString": true
           }
         },
+        "tenantName": {
+          "description": "Tenant name of the participant",
+          "type": "string",
+          "readOnly": true
+        },
         "userEmail": {
           "description": "Email of the user who created the resource",
           "type": "string",
@@ -6193,6 +7520,11 @@
         },
         "userName": {
           "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceDisplayName": {
+          "description": "Display name of the workspace",
           "type": "string",
           "readOnly": true
         }
@@ -6211,10 +7543,6 @@
           "$ref": "#/definitions/PipelineProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of pipeline"
         }
       }
     },
@@ -6235,7 +7563,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Pipeline"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6268,6 +7597,15 @@
             "name": "provisioningState",
             "modelAsString": true
           }
+        },
+        "scriptParameters": {
+          "description": "List of pipeline level script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6284,10 +7622,6 @@
           "$ref": "#/definitions/PipelineRunProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of pipelineRun"
         }
       }
     },
@@ -6308,9 +7642,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineRun"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
+    },
+    "PipelineRunParameterAssignment": {
+      "description": "Pipeline run parameter assignment",
+      "required": [
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "properties": {
+        "parameterType": {
+          "description": "Parameter type.",
+          "enum": [
+            "Boolean",
+            "Integer",
+            "Float",
+            "String",
+            "DateTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        },
+        "pipelineParameterId": {
+          "description": "Pipeline parameter id",
+          "type": "string"
+        }
+      },
+      "discriminator": "parameterType"
     },
     "PipelineRunParameters": {
       "description": "The parameters for a pipeline run.",
@@ -6327,6 +7692,15 @@
             "name": "pipelineRunMode",
             "modelAsString": true
           }
+        },
+        "pipelineRunParameterAssignments": {
+          "description": "Pipeline run parameters assignments",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRunParameterAssignment"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6384,7 +7758,9 @@
             "Queued",
             "Unknown",
             "Cancelled",
-            "Canceling"
+            "Canceling",
+            "Waiting",
+            "Incomplete"
           ],
           "type": "string",
           "readOnly": true,
@@ -6420,7 +7796,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "pipelineStepKind",
             "modelAsString": true
           }
         }
@@ -6444,7 +7820,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineStep"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6481,7 +7858,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineStepRun"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6521,7 +7899,9 @@
             "Queued",
             "Unknown",
             "Cancelled",
-            "Canceling"
+            "Canceling",
+            "Waiting",
+            "Incomplete"
           ],
           "type": "string",
           "readOnly": true,
@@ -6537,7 +7917,8 @@
           "items": {
             "$ref": "#/definitions/PipelineSubstep"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "startTime": {
           "format": "date-time",
@@ -6581,7 +7962,9 @@
             "Queued",
             "Unknown",
             "Cancelled",
-            "Canceling"
+            "Canceling",
+            "Waiting",
+            "Incomplete"
           ],
           "type": "string",
           "readOnly": true,
@@ -6594,13 +7977,19 @@
           "description": "Kind of pipeline substep.",
           "enum": [
             "DataMovement",
-            "ScriptExecution"
+            "ScriptExecution",
+            "DiagnosticsLog"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "pipelineSubStepKind",
             "modelAsString": true
           }
+        },
+        "pipelineSubstepId": {
+          "description": "Id of pipeline substep.",
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
           "format": "date-time",
@@ -6626,17 +8015,14 @@
         "kind": {
           "description": "Kind of policy.",
           "enum": [
-            "DiagnosticLevel"
+            "DiagnosticLevel",
+            "Output"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "policyKind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of policy"
         }
       },
       "discriminator": "kind"
@@ -6658,6 +8044,38 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Policy"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PrivateEndpointConnectionState": {
+      "description": "The connection state of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "actionsRequired": {
+          "description": "The actions required on the managed private endpoint",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The managed private endpoint description",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointStatus": {
+          "description": "The approval status",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "privateEndpointStatus",
+            "modelAsString": true
           }
         }
       }
@@ -6678,10 +8096,6 @@
           "$ref": "#/definitions/ProposalProperties",
           "description": "Properties on the proposal",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -6702,7 +8116,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Proposal"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6756,6 +8171,11 @@
             "create"
           ]
         },
+        "participantId": {
+          "description": "Id of the participant that authorized access to this proposal.",
+          "type": "string",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Provisioning state of the proposal",
           "enum": [
@@ -6806,6 +8226,11 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System Data of the Azure resource.",
+          "readOnly": true
+        },
         "type": {
           "description": "Type of the azure resource",
           "type": "string",
@@ -6813,6 +8238,26 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "RegularExpressionScriptParameterRule": {
+      "description": "Script Parameter float range validation rule definition",
+      "required": [
+        "regularExpression",
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "regularExpression": {
+          "description": "Defines a regular expression parameter value must supply",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RegularExpression"
     },
     "ResourceReference": {
       "description": "A set of data from external storage",
@@ -6831,9 +8276,18 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "resourceReferenceKind",
             "modelAsString": true
           }
+        },
+        "participantDetails": {
+          "description": "Participant Details of the resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ParticipantDetails"
+            }
+          ],
+          "readOnly": true
         },
         "resourceId": {
           "description": "Id of the azure resource",
@@ -6879,7 +8333,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6902,13 +8357,9 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "scriptKind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -6941,6 +8392,15 @@
       ],
       "type": "object",
       "properties": {
+        "adapterBindingConstraints": {
+          "description": "The identifier of the adapter binding constraints.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdapterBindingConstraint"
+          },
+          "x-ms-identifiers": []
+        },
         "description": {
           "description": "Description of the constraint.",
           "type": "string"
@@ -6955,12 +8415,95 @@
       "description": "Binds a data asset reference to a script source or sink by key.",
       "type": "object",
       "properties": {
-        "dataAssetId": {
-          "description": "The bounded data asset Id",
-          "type": "string"
+        "adapter": {
+          "$ref": "#/definitions/BoundAdapter",
+          "description": "Adapter used to access the data asset"
+        },
+        "boundDataDescriptor": {
+          "$ref": "#/definitions/BoundDataDescriptor",
+          "description": "The bounded data descriptor"
         },
         "key": {
           "description": "The key of script's source or sink",
+          "type": "string"
+        }
+      }
+    },
+    "ScriptExecutionInformation": {
+      "description": "The information about an executed script",
+      "type": "object",
+      "properties": {
+        "executionParameters": {
+          "description": "The parameter values used during execution",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptExecutionParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "description": "The name of the script",
+          "type": "string",
+          "readOnly": true
+        },
+        "purpose": {
+          "description": "The kind of the script",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "The resource id of the script",
+          "type": "string",
+          "readOnly": true
+        },
+        "revision": {
+          "format": "int32",
+          "description": "The revision of the script",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ScriptExecutionParameter": {
+      "description": "Script parameter execution values",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Parameter name",
+          "type": "string"
+        },
+        "parameterType": {
+          "description": "Parameter type",
+          "enum": [
+            "Boolean",
+            "Integer",
+            "Float",
+            "String",
+            "DateTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        },
+        "resolvedBy": {
+          "description": "Parameter resolution by",
+          "enum": [
+            "Default",
+            "Constant",
+            "PipelineRun"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "resolvedBy",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Parameter value",
           "type": "string"
         }
       }
@@ -6976,7 +8519,59 @@
           "$ref": "#/definitions/PipelineSubstep"
         }
       ],
-      "properties": {},
+      "properties": {
+        "executionTimeout": {
+          "description": "The upper boundary of script execution time",
+          "type": "string",
+          "readOnly": true
+        },
+        "scriptExecutionInformation": {
+          "$ref": "#/definitions/ScriptExecutionInformation",
+          "description": "Script information"
+        },
+        "sinkBindings": {
+          "description": "Sink Binding",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkBindingExecutionInformation"
+          },
+          "x-ms-identifiers": []
+        },
+        "sourceBindings": {
+          "description": "Source Binding",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceBindingExecutionInformation"
+          },
+          "x-ms-identifiers": []
+        },
+        "synapseSparkInformation": {
+          "$ref": "#/definitions/SynapseSparkInformation",
+          "description": "Information about the Synapse Spark"
+        }
+      },
+      "x-ms-discriminator-value": "ScriptExecution"
+    },
+    "ScriptExecutionSubstepReference": {
+      "description": "A reference to a script execution sub-step",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubstepReference"
+        }
+      ],
+      "properties": {
+        "outputBindingKey": {
+          "description": "The output binding key",
+          "type": "string",
+          "readOnly": true
+        }
+      },
       "x-ms-discriminator-value": "ScriptExecution"
     },
     "ScriptList": {
@@ -6996,9 +8591,179 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Script"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
+    },
+    "ScriptOutputBoundDataDescriptor": {
+      "description": "Script output bound data descriptor",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BoundDataDescriptor"
+        }
+      ],
+      "properties": {
+        "outputName": {
+          "description": "The key of the output binding in the source step",
+          "type": "string"
+        },
+        "stepName": {
+          "description": "The name of the source step",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ScriptOutput"
+    },
+    "ScriptParameter": {
+      "description": "Script parameter definition",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Parameter usage description",
+          "type": "string"
+        },
+        "name": {
+          "description": "Parameter name as it appears in the script",
+          "type": "string"
+        },
+        "parameterId": {
+          "description": "Parameter identifier",
+          "type": "string"
+        },
+        "parameterType": {
+          "description": "Parameter type.",
+          "enum": [
+            "Boolean",
+            "Integer",
+            "Float",
+            "String",
+            "DateTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "parameterType"
+    },
+    "ScriptParameterBinding": {
+      "description": "Pipeline script parameter binding",
+      "required": [
+        "scriptParameterId",
+        "pipelineParameterId"
+      ],
+      "type": "object",
+      "properties": {
+        "pipelineParameterId": {
+          "description": "Pipeline Parameter identifier",
+          "type": "string"
+        },
+        "scriptParameterId": {
+          "description": "Script parameter identifier",
+          "type": "string"
+        }
+      }
+    },
+    "ScriptParameterConstraint": {
+      "description": "Constraint used to only allow access if the resource is using a specific script parameter.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Constraint"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScriptParameterConstraintProperties",
+          "description": "Properties for script parameter constraint",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ScriptParameter"
+    },
+    "ScriptParameterConstraintProperties": {
+      "description": "Properties for script parameter constraint used to only allow access if the resource is using a specific script parameter.",
+      "required": [
+        "parameterName"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the constraint.",
+          "type": "string"
+        },
+        "isParameterRequired": {
+          "description": "Parameter must exist",
+          "type": "boolean"
+        },
+        "parameterName": {
+          "description": "The parameter name which this constraint will apply to",
+          "type": "string"
+        },
+        "parameterType": {
+          "description": "Parameter should be of type",
+          "enum": [
+            "Boolean",
+            "Integer",
+            "Float",
+            "String",
+            "DateTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        },
+        "validationRule": {
+          "$ref": "#/definitions/ScriptParameterValidationRule",
+          "description": "Rule in which parameter have to follow"
+        }
+      }
+    },
+    "ScriptParameterValidationRule": {
+      "description": "Script Parameter validation rule definition",
+      "required": [
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "properties": {
+        "scriptParameterValidationRuleType": {
+          "description": "Script parameter validation rule type.",
+          "enum": [
+            "IntegerRange",
+            "FloatRange",
+            "DateTimeRange",
+            "StringLengthRange",
+            "RegularExpression",
+            "IntegerOptionsSet",
+            "FloatOptionsSet",
+            "StringOptionsSet",
+            "DateTimeOptionsSet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "scriptParameterValidationRuleType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "scriptParameterValidationRuleType"
     },
     "ScriptReference": {
       "description": "Script reference dto.",
@@ -7016,10 +8781,6 @@
           "$ref": "#/definitions/ScriptReferenceProperties",
           "description": "Properties on the script reference",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -7040,22 +8801,101 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ScriptReferencePlaceholderInfo": {
+      "description": "Placeholder information for a script reference",
+      "required": [
+        "purpose",
+        "assignerId",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "assignerId": {
+          "description": "Participant id who is allowed to assign the placeholder.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the placeholder.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the placeholder.",
+          "type": "string"
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
           }
         }
       }
     },
     "ScriptReferenceProperties": {
       "description": "Properties of data set reference data transfer object.",
-      "required": [
-        "scriptId",
-        "revision"
-      ],
       "type": "object",
       "properties": {
+        "displayName": {
+          "description": "Reference display name",
+          "type": "string"
+        },
         "ownerId": {
           "description": "The participant id of the script owner",
           "type": "string",
           "readOnly": true
+        },
+        "parameters": {
+          "description": "The list of script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "placeholderInfo": {
+          "$ref": "#/definitions/ScriptReferencePlaceholderInfo",
+          "description": "The placeholder information"
+        },
+        "placeholderState": {
+          "description": "The placeholder state",
+          "enum": [
+            "None",
+            "Unassigned",
+            "Assigned"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "placeholderState",
+            "modelAsString": true
+          }
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
         },
         "revision": {
           "format": "int32",
@@ -7103,7 +8943,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -7112,7 +8953,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7141,6 +8983,35 @@
       "description": "Properties for scriptReference resource reference used to only allow access if the resource is used within the specified Azure scriptReference.",
       "type": "object",
       "properties": {
+        "displayName": {
+          "description": "Reference display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The list of script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
+        },
         "revision": {
           "format": "int32",
           "description": "The revision number of the scriptReference being referenced.\r\nIf omitted, the scriptReference latest version will be referenced.",
@@ -7176,7 +9047,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the scriptReference can use as it's data sources",
@@ -7185,7 +9057,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7214,6 +9087,30 @@
       "description": "Properties for script resource reference used to only allow access if the resource is used within the specified Azure script.",
       "type": "object",
       "properties": {
+        "parameters": {
+          "description": "The list of script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
+        },
         "revision": {
           "format": "int32",
           "description": "The revision number of the script being referenced.\r\nIf omitted, the script latest version will be referenced.",
@@ -7244,7 +9141,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -7253,7 +9151,231 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SinkBindingExecutionInformation": {
+      "description": "Information about the bounded sink",
+      "type": "object",
+      "properties": {
+        "adapter": {
+          "$ref": "#/definitions/ScriptExecutionInformation",
+          "description": "The bounded adapter"
+        },
+        "bindingKey": {
+          "description": "The binding key",
+          "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SourceBindingExecutionInformation": {
+      "description": "Information about the bounded source",
+      "type": "object",
+      "properties": {
+        "adapter": {
+          "$ref": "#/definitions/ScriptExecutionInformation",
+          "description": "The bounded adapter"
+        },
+        "bindingKey": {
+          "description": "The binding key",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSubstepReference": {
+          "$ref": "#/definitions/SubstepReference",
+          "description": "The bounded sub-step"
+        }
+      }
+    },
+    "SparkPoolExecutionInformation": {
+      "description": "Information about the Spark pool execution",
+      "type": "object",
+      "properties": {
+        "executorNodeSize": {
+          "description": "The executers node size",
+          "type": "string",
+          "readOnly": true
+        },
+        "executorsCount": {
+          "format": "int32",
+          "description": "The executers count",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "SparkPoolInformation": {
+      "description": "Information about the Spark pool",
+      "type": "object",
+      "properties": {
+        "maxNodeCount": {
+          "format": "int32",
+          "description": "The Spark pool max node count (If auto-scale is enabled)",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minNodeCount": {
+          "format": "int32",
+          "description": "The Spark pool min node count (If auto-scale is enabled)",
+          "type": "integer",
+          "readOnly": true
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "The Spark pool node count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "nodeSize": {
+          "description": "The Spark pool node size",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "The resource Id of the Spark pool",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StringLengthRangeScriptParameterRule": {
+      "description": "Script Parameter float range validation rule definition",
+      "required": [
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "maximumLength": {
+          "format": "int32",
+          "description": "Defines maximum length for the string parameter",
+          "type": "integer"
+        },
+        "minimumLength": {
+          "format": "int32",
+          "description": "Defines minimum length for the string parameter",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "StringLengthRange"
+    },
+    "StringOptionsSetScriptParameterRule": {
+      "description": "Script Parameter String Options Set validation rule definition",
+      "required": [
+        "options",
+        "scriptParameterValidationRuleType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameterValidationRule"
+        }
+      ],
+      "properties": {
+        "options": {
+          "description": "Defines a set of value options for the parameter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-discriminator-value": "StringOptionsSet"
+    },
+    "StringPipelineRunParameterAssignment": {
+      "description": "Pipeline run string parameter assignment",
+      "required": [
+        "value",
+        "pipelineParameterId",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineRunParameterAssignment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "Parameter value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "String"
+    },
+    "StringScriptParameter": {
+      "description": "Script parameter of type string",
+      "required": [
+        "name",
+        "parameterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScriptParameter"
+        }
+      ],
+      "properties": {
+        "defaultValue": {
+          "description": "Default parameter value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "String"
+    },
+    "SubstepReference": {
+      "description": "A reference to a sub-step",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of substep reference.",
+          "enum": [
+            "DataMovement",
+            "ScriptExecution",
+            "DiagnosticsLog"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "subStepReferenceKind",
+            "modelAsString": true
+          }
+        },
+        "pipelineStepName": {
+          "description": "The name of the Pipeline Step Run which contains the referred sub-step",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineSubstepId": {
+          "description": "The Id of the Sub-step",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind"
+    },
+    "SynapseSparkInformation": {
+      "description": "Information about the Synapse Spark",
+      "type": "object",
+      "properties": {
+        "sparkPoolExecutionInformation": {
+          "$ref": "#/definitions/SparkPoolExecutionInformation",
+          "description": "The Spark pool execution information"
+        },
+        "sparkPoolInformation": {
+          "$ref": "#/definitions/SparkPoolInformation",
+          "description": "The Spark pool information"
         }
       }
     },
@@ -7294,7 +9416,17 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnosticsLogBindings": {
+          "description": "Bindings between the diagnostics logs and data assets",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticsLog"
+          },
+          "x-ms-identifiers": []
         },
         "executorNodeSize": {
           "description": "The node size to use per executor.",
@@ -7318,9 +9450,31 @@
           "description": "Number of executors to execute this step.",
           "type": "integer"
         },
+        "scriptExecutionTimeout": {
+          "description": "The upper boundary of script execution time. Pattern: ((\\\\d+)\\\\.)?(\\\\d\\\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
+          "type": "string"
+        },
         "scriptId": {
           "description": "The script Id that the pipeline step should execute",
           "type": "string"
+        },
+        "scriptParameterBindings": {
+          "description": "Binding between the script parameter and pipeline parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameterBinding"
+          },
+          "x-ms-identifiers": []
+        },
+        "scriptParameters": {
+          "description": "List of pipeline step level script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "x-ms-identifiers": []
         },
         "scriptRevision": {
           "format": "int32",
@@ -7333,7 +9487,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptDataAssetBinding"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scriptSourceBindings": {
           "description": "Bindings between the script's source keys and data assets",
@@ -7341,7 +9496,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptDataAssetBinding"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "synapseSparkPoolId": {
           "description": "The Synapse Spark pool that will execute this step",
@@ -7372,6 +9528,10 @@
     },
     "SynapseSparkPoolAutoPauseProperties": {
       "description": "Spark pool auto-pausing properties",
+      "required": [
+        "delayInMinutes",
+        "enabled"
+      ],
       "type": "object",
       "properties": {
         "delayInMinutes": {
@@ -7405,6 +9565,16 @@
         }
       }
     },
+    "SynapseSparkPoolLibraryRequirementsProperties": {
+      "description": "Spark pool library requirements properties",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "Gets or sets the library requirements.",
+          "type": "string"
+        }
+      }
+    },
     "SynapseSparkPoolProperties": {
       "description": "A Synapse Spark Pool data transfer object.",
       "type": "object",
@@ -7434,6 +9604,10 @@
             "name": "family",
             "modelAsString": true
           }
+        },
+        "libraryRequirements": {
+          "$ref": "#/definitions/SynapseSparkPoolLibraryRequirementsProperties",
+          "description": "Gets or sets library requirements properties"
         },
         "nodeCount": {
           "format": "int32",
@@ -7518,6 +9692,7 @@
       "required": [
         "language",
         "visibility",
+        "purpose",
         "sources",
         "sinks",
         "content"
@@ -7539,6 +9714,15 @@
             "modelAsString": true
           }
         },
+        "parameters": {
+          "description": "The list of overridable script parameters",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptParameter"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "description": "Provisioning state of the script.",
           "enum": [
@@ -7553,6 +9737,19 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "purpose",
             "modelAsString": true
           }
         },
@@ -7573,7 +9770,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -7581,7 +9779,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "visibility": {
           "description": "Script visibility mode",
@@ -7598,7 +9797,7 @@
       }
     },
     "SystemData": {
-      "description": "SystemData of resource",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -7608,7 +9807,7 @@
           "readOnly": true
         },
         "createdBy": {
-          "description": "A string identifier for the identity that created the resource.",
+          "description": "The identity that created the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -7629,12 +9828,12 @@
         },
         "lastModifiedAt": {
           "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC).",
+          "description": "The type of identity that last modified the resource.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "A string identifier for the identity that last modified the resource.",
+          "description": "The identity that last modified the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -7652,6 +9851,63 @@
             "name": "lastModifiedByType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "VirtualOutputReference": {
+      "description": "Reference to a virtual output.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualOutputReferenceProperties",
+          "description": "Properties on the output reference",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualOutputReferenceList": {
+      "description": "List response for get output references",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualOutputReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VirtualOutputReferenceProperties": {
+      "description": "Properties of virtual output reference data transfer object.",
+      "type": "object",
+      "properties": {
+        "outputPolicyResourceId": {
+          "description": "Azure resource id of the referenced output policy",
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualOutputReferenceId": {
+          "description": "Unique id for identifying a virtual output reference resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7675,10 +9931,6 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "Properties on the workspace",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -7699,7 +9951,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Workspace"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7707,6 +9960,10 @@
       "description": "Workspace property bag.",
       "type": "object",
       "properties": {
+        "displayName": {
+          "description": "Display name of the workspace",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "Provisioning state of the Workspace",
           "enum": [
