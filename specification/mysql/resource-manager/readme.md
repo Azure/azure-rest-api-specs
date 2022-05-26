@@ -155,6 +155,10 @@ These settings apply only when `--tag=package-flexibleserver-2021-12-01-preview`
 ``` yaml $(tag) == 'package-flexibleserver-2021-12-01-preview'
 input-file:
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/mysql.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Servers.json
 ```
 
 ## Suppression
