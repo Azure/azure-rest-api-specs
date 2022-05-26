@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-02-01",
+    "version": "2022-02-01-preview",
     "title": "SqlVirtualMachineManagementClient",
     "description": "The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener."
   },
@@ -243,7 +243,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available SQL Rest API operations.",
+        "description": "Lists all of the available SQL Virtual Machine Rest API operations.",
         "operationId": "Operations_List",
         "parameters": [
           {
@@ -265,7 +265,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Lists all of the available SQL Rest API operations.": {
+          "Lists all of the available SQL Virtual Machine Rest API operations.": {
             "$ref": "./examples/ListOperation.json"
           }
         }
@@ -1738,7 +1738,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "PatchingDayOfWeek",
+            "name": "DayOfWeek",
             "modelAsString": false
           }
         },
@@ -1828,17 +1828,17 @@
           "type": "array",
           "items": {
             "enum": [
-              "Sunday",
               "Monday",
               "Tuesday",
               "Wednesday",
               "Thursday",
               "Friday",
-              "Saturday"
+              "Saturday",
+              "Sunday"
             ],
             "type": "string",
             "x-ms-enum": {
-              "name": "DayOfWeek",
+              "name": "AutoBackupDaysOfWeek",
               "modelAsString": true
             }
           }
@@ -2151,7 +2151,7 @@
         },
         "dataGrowth": {
           "format": "int32",
-          "description": "SQL Server tempb data file autogrowth size",
+          "description": "SQL Server tempb data file autoGrowth size",
           "type": "integer"
         },
         "logFileSize": {
@@ -2161,7 +2161,7 @@
         },
         "logGrowth": {
           "format": "int32",
-          "description": "SQL Server tempdb log file autogrowth size",
+          "description": "SQL Server tempdb log file autoGrowth size",
           "type": "integer"
         },
         "dataFileCount": {
@@ -2205,7 +2205,7 @@
         },
         "monthlyOccurrence": {
           "format": "int32",
-          "description": "Occurence of the DayOfWeek day within a month to schedule assessment. Takes values: 1,2,3,4 and -1. Use -1 for last DayOfWeek day of the month",
+          "description": "Occurrence of the DayOfWeek day within a month to schedule assessment. Takes values: 1,2,3,4 and -1. Use -1 for last DayOfWeek day of the month",
           "type": "integer"
         },
         "dayOfWeek": {
@@ -2221,7 +2221,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DayOfWeek",
+            "name": "AssessmentDayOfWeek",
             "modelAsString": false
           }
         },
