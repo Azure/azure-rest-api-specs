@@ -109,7 +109,14 @@ The structure should appear like so:
 |            \---readme.md
 ```
 ### Folder Structure for Service Group
-If several services with the same or different versioning cycle decide to package together in the SDK release. For the service group, the folder structure is recommended as below. In the following sample, there is only a demo of 'resource-manager' folder, there could be a similar folder structure under 'data-plane' folder; however, the sub component/service may not be the same. 
+If you are working on API specification of a service group, then you may choose to build a folder structure of service group. This folder structure can bring more flexibility in multiple service teams collaboaration, especially to support:
+
+- To collect API definition of multiple components/services with different versioning cycle in one rp folder
+- To share some common entity types among services or components under the same rp folder.  
+
+In the following folder structure sample, there is only 'resource-manager' folder. There could be a similar folder structure under 'data-plane' folder, while the sub-component/sub-service folders may not be the same. 
+
+Ensure to consult [API Spec and Tooling Support](https://teams.microsoft.com/l/channel/19%3af1b9607b948840cca8b7852ed6bb1713%40thread.skype/General?groupId=a5e9b41d-1b0a-471d-a170-8ce202fa30b1&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) for the first time creating the folder structure or if you want to change current folder structure. 
 
 ```bash
 .
@@ -144,17 +151,26 @@ If several services with the same or different versioning cycle decide to packag
 |    |      |     |            +---sharedGallery.json
 |    |      |     |            +---communityGallery.json
 |    |      |     |            \---examples
-|    |      |     \---cloudService
-|    |      |         \---stable
-|    |      |              \---2021-03-01
-|    |      |                   +---cloudService.json
-|    |      |                   \---examples
+|    |      |     +---cloudService
+|    |      |     |   \---stable
+|    |      |     |        \---2021-03-01
+|    |      |     |            +---cloudService.json
+|    |      |     |            \---examples
+|    |      |     \---common-types
+|    |      |         \---v1
+|    |      |              \---entity-types.json
+|    |      |                   
 |    |       \---readme.md
 ```
 
+If the AutoRest configuration file (aka. the readme.md) is placed out side of sub-service/sub-component folder, then there will be only one SDK package that holds all sub-services/sub-components. If the file is placed inside each sub-service/sub-component folder, then there will be separate SDK packages of each sub-services/sub-components.  Ensure to consult [Azure SDK ArchBoard](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/667/Azure-SDK-Archboard-Review) for SDK packaging strategy at the beginning of service API definition.
+
 ### common-types
 
-Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Entity type definition that need to be referred cross RP folders should to be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types). Refer to [Resource-Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management) common types for example.
+Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Entity type definition that can be shared cross resource providers or services should to be placed and maintained either under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types) under specification, or under **common-types** folder of service group folder structure. The former supports the entity type sharing cross rp folders, while the latter supports the enitity type sharing cross components or services under the same rp folder.
+
+. Refer to [Resource-Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management) common types for example. 
+
 
 ## Next steps
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
