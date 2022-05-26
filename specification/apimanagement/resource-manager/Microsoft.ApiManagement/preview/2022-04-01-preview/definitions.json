@@ -456,6 +456,13 @@
           "$ref": "#/definitions/AuthenticationSettingsContract",
           "description": "Collection of authentication settings included into this API."
         },
+        "oAuth2AuthenticationSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
+          },
+          "description": "Collection of OAuth2 authentication settings included into this API."
+        },
         "subscriptionKeyParameterNames": {
           "$ref": "#/definitions/SubscriptionKeyParameterNamesContract",
           "description": "Protocols over which API is made available."
@@ -1242,6 +1249,14 @@
           "minLength": 1,
           "maxLength": 50
         },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "If true, the authorization server may be used in the developer portal test console. True by default if no value is provided."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "If true, the authorization server will be used in the API documentation in the developer portal. False by default if no value is provided."
+        },
         "clientRegistrationEndpoint": {
           "type": "string",
           "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced."
@@ -1334,6 +1349,14 @@
           "description": "User-friendly authorization server name.",
           "minLength": 1,
           "maxLength": 50
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "If true, the authorization server may be used in the developer portal test console. True by default if no value is provided."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "If true, the authorization server will be used in the API documentation in the developer portal. False by default if no value is provided."
         },
         "clientRegistrationEndpoint": {
           "type": "string",
