@@ -50,11 +50,7 @@
             "description": "The namespace of the resource provider."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -71,10 +67,16 @@
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadata"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get provider operations metadata for resource provider": {
             "$ref": "./examples/GetProviderOperationsRP.json"
           }
         }
@@ -89,11 +91,7 @@
         "description": "Gets provider operations metadata for all resource providers.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for this operation."
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -110,13 +108,19 @@
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadataListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List provider operations metadata for all resource providers": {
             "$ref": "./examples/GetAllProviderOperations.json"
           }
         }
@@ -139,6 +143,7 @@
           "items": {
             "$ref": "#/definitions/ProviderOperation"
           },
+          "x-ms-identifiers": [],
           "description": "The resource type operations."
         }
       },
@@ -193,6 +198,9 @@
           "items": {
             "$ref": "#/definitions/ResourceType"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The provider resource types"
         },
         "operations": {
@@ -200,6 +208,7 @@
           "items": {
             "$ref": "#/definitions/ProviderOperation"
           },
+          "x-ms-identifiers": [],
           "description": "The provider operations."
         }
       },
@@ -222,20 +231,5 @@
       "description": "Provider operations metadata list"
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    }
-  }
+  "parameters": {}
 }

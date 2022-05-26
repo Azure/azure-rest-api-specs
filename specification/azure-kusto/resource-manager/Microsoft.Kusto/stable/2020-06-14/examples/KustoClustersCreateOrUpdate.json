@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoclusterrptest4",
+    "api-version": "2020-06-14",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Standard_L8s",
+        "capacity": 2,
+        "tier": "Standard"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "enableStreamingIngest": true,
+        "enablePurge": true,
+        "enableDoubleEncryption": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
+        "name": "KustoClusterRPTest4",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableDoubleEncryption": false,
+          "keyVaultProperties": {
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyName": "keyName",
+            "keyVersion": "keyVersion"
+          }
+        },
+        "sku": {
+          "name": "Standard_L8s",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "userAssignedIdentities": {}
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
+        "name": "KustoClusterRPTest4",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableDoubleEncryption": false,
+          "keyVaultProperties": {
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyName": "keyName",
+            "keyVersion": "keyVersion"
+          }
+        },
+        "sku": {
+          "name": "Standard_L8s",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "userAssignedIdentities": {}
+        }
+      }
+    }
+  }
+}

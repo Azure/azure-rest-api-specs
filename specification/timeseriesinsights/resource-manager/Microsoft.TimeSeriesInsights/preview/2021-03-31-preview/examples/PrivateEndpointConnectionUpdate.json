@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "environmentName": "myEnvironment",
+    "api-version": "2021-03-31-preview",
+    "privateEndpointConnectionName": "myPrivateEndpointConnectionName",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Rejected",
+          "description": "Rejected for some reason"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.TimeSeriesInsights/Environments/myEnvironment/privateEndpointConnections/myPrivateEndpointConnectionName",
+        "name": "myPrivateEndpointConnectionName",
+        "type": "Microsoft.TimeSeriesInsights/Environments/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/testEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Rejected",
+            "description": "Rejected for some reason",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

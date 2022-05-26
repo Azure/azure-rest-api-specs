@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingAccountId": "123456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "exportName": "TestExport"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "properties": {
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ActualCost",
+            "timeframe": "Custom",
+            "timePeriod": {
+              "from": "2020-05-01T00:00:00Z",
+              "to": "2020-05-31T00:00:00Z"
+            },
+            "dataSet": {
+              "granularity": "Daily",
+              "configuration": {
+                "columns": [
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

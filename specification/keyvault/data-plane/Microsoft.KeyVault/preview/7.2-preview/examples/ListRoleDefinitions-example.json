@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "scope": "keys",
+    "api-version": "7.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "roleName": "Role name",
+              "type": "roletype",
+              "description": "Role description",
+              "assignableScopes": [
+                "/keys"
+              ],
+              "permissions": [
+                {
+                  "actions": [
+                    "get"
+                  ],
+                  "notActions": []
+                }
+              ]
+            },
+            "id": "/keys/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+            "type": "Microsoft.Authorization/roleDefinitions",
+            "name": "roleDefinitionId"
+          }
+        ]
+      }
+    }
+  }
+}
