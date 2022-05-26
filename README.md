@@ -109,7 +109,7 @@ The structure should appear like so:
 |            \---readme.md
 ```
 ### Folder Structure for Service Group
-If you are working on API specification of a service group, then you may choose to build a folder structure of service group. This folder structure can bring more flexibility in multiple service teams collaboaration, especially to support:
+If you are working on API specification of a service group, then you may choose to build a folder structure as below. This folder structure brings more flexibility in multiple service teams collaboaration, especially supporting:
 
 - To collect API definition of multiple components/services with different versioning cycle in one rp folder
 - To share some common entity types among services or components under the same rp folder.  
@@ -163,7 +163,7 @@ Ensure to consult [API Spec and Tooling Support](https://teams.microsoft.com/l/c
 |    |       \---readme.md
 ```
 
-If the AutoRest configuration file (aka. the readme.md) is placed out side of sub-service/sub-component folder, then there will be only one SDK package that holds all sub-services/sub-components. If the file is placed inside each sub-service/sub-component folder, then there will be separate SDK packages of each sub-services/sub-components.  Ensure to consult [Azure SDK ArchBoard](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/667/Azure-SDK-Archboard-Review) for SDK packaging strategy at the beginning of service API definition.
+If the AutoRest configuration file (aka. the readme.md) is placed out of sub-service/sub-component folders, then there will be only one SDK package that holds all sub-services/sub-components. If the file is placed in each sub-service/sub-component folder, then there will be separate SDK packages of each sub-service/sub-component.  Ensure to consult [Azure SDK ArchBoard](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/667/Azure-SDK-Archboard-Review) for SDK packaging strategy when consolidating AutoRest configuration file for SDK generation.
 
 ### common-types
 
