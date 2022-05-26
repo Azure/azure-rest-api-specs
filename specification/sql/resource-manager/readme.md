@@ -31,7 +31,6 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
@@ -50,6 +49,11 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseRecommendedActions.json
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSchemas.json
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSecurityAlertPolicies.json
+  - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentExecuteScan.json
+  - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
+  - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
+  - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
+  - Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseTables.json
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseUsages.json
   - Microsoft.Sql/preview/2022-02-01-preview/DatabaseVulnerabilityAssessmentRuleBaselines.json
@@ -140,6 +144,11 @@ input-file:
   - Microsoft.Sql/preview/2022-02-01-preview/ServerVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2022-02-01-preview/Servers.json
   - Microsoft.Sql/preview/2022-02-01-preview/SqlAgent.json
+  - Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
+  - Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
+  - Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScanResult.json
+  - Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScans.json
+  - Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentsSettings.json   
   - Microsoft.Sql/preview/2022-02-01-preview/SubscriptionUsages.json
   - Microsoft.Sql/preview/2022-02-01-preview/SyncAgents.json
   - Microsoft.Sql/preview/2022-02-01-preview/SyncGroups.json
