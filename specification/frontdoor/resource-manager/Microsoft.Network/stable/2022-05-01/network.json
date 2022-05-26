@@ -38,56 +38,36 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
-      "description": "Error properties",
-      "title": "ErrorDetails",
       "properties": {
         "code": {
-          "description": "Error detail code",
-          "title": "Code",
           "type": "string"
         },
         "target": {
-          "description": "Target object",
-          "title": "Target",
           "type": "string"
         },
         "message": {
-          "description": "Message object",
-          "title": "Message",
           "type": "string"
         }
       }
     },
     "Error": {
-      "description": "Error properties",
-      "title": "Error",
       "properties": {
         "code": {
-          "description": "Error code",
-          "title": "Code",
           "type": "string"
         },
         "message": {
-          "description": "Message object",
-          "title": "Message",
           "type": "string"
         },
         "target": {
-          "description": "Target object",
-          "title": "Target",
           "type": "string"
         },
         "details": {
-          "description": "Details object",
-          "title": "Details",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           }
         },
         "innerError": {
-          "description": "InnerError object",
-          "title": "InnerError",
           "type": "string"
         }
       }
@@ -108,8 +88,6 @@
           }
         },
         "error": {
-          "description": "error object",
-          "title": "error",
           "$ref": "#/definitions/Error"
         }
       },
