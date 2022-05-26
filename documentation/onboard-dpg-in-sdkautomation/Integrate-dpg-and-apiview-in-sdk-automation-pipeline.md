@@ -8,24 +8,20 @@ Before go through this document, please go through [Service Onboard DPG with Swa
 ![integrate-dpg-and-apiview](integrate-dpg-and-apiview.png)
 
 __Description:__
-1. There is swagger PR triggering the SDK Automation Pipeline.
-2. SDK Automation Pipeline Framework checks whether there is a branch named `swagger/<prNumber>` in sdk repository. If yes, the branch `swagger/<prNumber>` will be used as base branch to generate SDK. Otherwise, `main` branch will be used as base branch.
-   1. `<prNumber>` is the swagger PR number.
-   2. If there is branch `swagger/<prNumber>`, `main` branch is usually used and sometimes not. It depends on the `mainRepository` defined in [specificationRepositoryConfiguration](../../specificationRepositoryConfiguration.json).
-3. SDK automation script will search for the corresponding autorest configuration file in sdk repository. If those files are not found, the pipeline automation script will output `{"packages": []}` in `generateOutput.json`, and stop the generation.
-   1. A relative readme.md and changedFiles of the swagger PR can be get in `generateInput.json`, and automation script can use it to find the corresponding autorest configuration file in sdk repository.
-   2. We will only use `require` to include swagger readme.md in autorest configuration file, and `input-file` should not be used in autorest configuration file in most times, but there are some exceptions:
-      1. .Net SDK may continue to use `input-file` because existing HLC dataplane sdk may already use `input-file`.
-      2. Multi-Client for Java, Python and JS cannot use `readme.md` in swagger directly because they use `batch` task, so using `input-file` is better.
-4. SDK automation script will modify the autorest configuration file in the SDK repo`.
-   1. Change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by relative path from package folder to sdk root, `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
-      ```yaml
-      require:
-        - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
-      ```
-   2. For exceptions which still use `input-file`, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated similar as `require` block.
-5. SDK automation pipeline generates SDK and ApiView with the modified autorest configuration file , and then add comments about results to the Swagger PR.
+1. SDK Automation Pipeline is triggered in spec PR CI.
+2. SDK Automation Pipeline Framework checks whether there is a comment containing autorest configuration in spec PR. If found, generate sdk by the autorest configuration in comment.
+Otherwise, sdk automation pipeline will try to find if there is autorest configuration file in sdk repo. If found, generate sdk with the founded autorest configuration file. If not found, pipeline stops.
+   1. When there is a comment containing autorest configuration file, sdk automation pipeline will extract the autorest configuration from the comment, and let automation script use it to generate a new autorest configuration file, and use the new generated autorest configuration file to generate SDK.
+   2. When using the autorest configuration file found in sdk repository to generate SDK, SDK automation script need to modify the autorest configuration file in the SDK repo.
+      1. If `require` block is used, change the `require` block to include the latest swagger `readme.md` in the PR. The value can be joined by relative path from package folder to sdk root, `specFolder` and `relatedReadmeMdFiles` in `generateInput.json`. For example:
+         ```yaml
+         require:
+           - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
+         ```
+      2. If `input-file` is used, replace the value of `input-file` to include the latest swagger in the PR. The value can be calculated similar as `require` block.
+      (We will use `require` block in most times, but we still need to use `input-file` for .Net automation and multi-client for python, java and js sdk.)
+3. After generating SDK, SDK automation pipeline generates ApiView and then add comments about results to the Swagger PR.
 
 # Future Work
-Currently, we ask service team to create branch `swagger/<prNumber>` and add/update autorest configuration file manually because the configuration file includes some necessary information to generate SDK.
-In the future, we are going to integrate the sdk generation with PowerAPP Workflow. Then service team can provide the necessary information in PowerAPP Workflow, and pipeline can use the information to generate autorest configuration file automatically. 
+Currently, we ask service team must add a comment containing autorest configuration in spec PR when new service onboards DPG.
+In the future, we are going to integrate it with PowerAPP Workflow. Then service team can provide the necessary information in PowerAPP Workflow, and the information will be added to spec PR automatically. 
