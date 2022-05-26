@@ -1493,8 +1493,10 @@
           "type": "string",
           "example": "Come on guys, lets go for lunch together."
         },
-        "media": {
-          "$ref": "#/definitions/ExternalMessageMedia"
+        "mediaUri": {
+          "description": "A media url for the file. Required if the type is media",
+          "type": "string",
+          "example": "https://IMAGE_URL"
         },
         "template": {
           "$ref": "#/definitions/ExternalMessageTemplate"
@@ -1512,20 +1514,6 @@
       "x-ms-enum": {
         "name": "ExternalMessageType",
         "modelAsString": true
-      }
-    },
-    "ExternalMessageMedia": {
-      "description": "The media Object",
-      "required": [
-        "link"
-      ],
-      "type": "object",
-      "properties": {
-        "link": {
-          "description": "A media url for the file. Required if the type is image",
-          "type": "string",
-          "example": "https://IMAGE_URL"
-        }
       }
     },
     "ExternalMessageTemplate": {
