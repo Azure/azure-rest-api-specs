@@ -269,7 +269,7 @@ input-file:
   - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
   - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
   - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
-  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/stable/2022-04-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
