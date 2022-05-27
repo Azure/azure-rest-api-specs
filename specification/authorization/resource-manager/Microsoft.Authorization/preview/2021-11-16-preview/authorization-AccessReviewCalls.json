@@ -106,140 +106,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
-      "get": {
-        "tags": [
-          "GetAccessReviewScheduleDefinition"
-        ],
-        "operationId": "AccessReviewScheduleDefinitions_GetById",
-        "x-ms-examples": {
-          "GetAccessReviewScheduleDefinition": {
-            "$ref": "./examples/GetAccessReviewScheduleDefinition.json"
-          }
-        },
-        "description": "Get single access review definition",
-        "parameters": [
-          {
-            "name": "scheduleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review schedule definition."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinition"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DeleteAccessReviewScheduleDefinition"
-        ],
-        "operationId": "AccessReviewScheduleDefinitions_DeleteById",
-        "x-ms-examples": {
-          "DeleteAccessReview": {
-            "$ref": "./examples/DeleteAccessReviewScheduleDefinition.json"
-          }
-        },
-        "description": "Delete access review schedule definition",
-        "parameters": [
-          {
-            "name": "scheduleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review schedule definition."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully"
-          },
-          "204": {
-            "description": "Request is well formed but the resource does not exist"
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PutAccessReviewScheduleDefinition"
-        ],
-        "operationId": "AccessReviewScheduleDefinitions_CreateOrUpdateById",
-        "x-ms-examples": {
-          "PutAccessReview": {
-            "$ref": "./examples/PutAccessReviewScheduleDefinition.json"
-          }
-        },
-        "description": "Create or Update access review schedule definition.",
-        "parameters": [
-          {
-            "name": "scheduleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review schedule definition."
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
-            },
-            "description": "Access review schedule definition properties."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful update",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinition"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
       "post": {
         "tags": [
@@ -1208,33 +1074,7 @@
     }
   },
   "definitions": {
-    "AccessReviewScheduleDefinition": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The access review schedule definition id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The access review schedule definition unique id."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource type."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties",
-          "description": "Access Review properties."
-        }
-      },
-      "description": "Access Review Schedule Definition."
-    },
+
     "AccessReviewScheduleDefinitionProperties": {
       "type": "object",
       "properties": {
@@ -2227,23 +2067,7 @@
       },
       "description": "Properties of access review contacted reviewer."
     },
-    "AccessReviewScheduleDefinitionListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewScheduleDefinition"
-          },
-          "description": "Access Review Schedule Definition list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "List of Access Review Schedule Definitions."
-    },
+
     "AccessReviewInstanceListResult": {
       "type": "object",
       "properties": {
