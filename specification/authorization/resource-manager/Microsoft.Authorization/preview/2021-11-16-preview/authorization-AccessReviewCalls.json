@@ -167,15 +167,6 @@
             "description": "The id of the access review history definition."
           },
           {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties"
-            },
-            "description": "Access review history definition properties."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1879,109 +1870,9 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties",
-          "description": "Access Review History Definition properties."
         }
       },
       "description": "Access Review History Definition."
-    },
-    "AccessReviewHistoryDefinitionProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the history definition."
-        },
-        "reviewHistoryPeriodStartDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "reviewHistoryPeriodEndDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "decisions": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Represents a reviewer's decision for a given review",
-            "enum": [
-              "Approve",
-              "Deny",
-              "NotReviewed",
-              "DontKnow",
-              "NotNotified"
-            ],
-            "x-ms-enum": {
-              "name": "FooProperty",
-              "modelAsString": true
-            }
-          },
-          "description": "Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.",
-          "x-nullable": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
-          "enum": [
-            "Requested",
-            "InProgress",
-            "Done",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewHistoryDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time when history definition was created",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "createdBy": {
-          "x-nullable": true,
-          "readOnly": true,
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewActorIdentity",
-          "description": "The user or other identity who created this history definition."
-        },
-        "scopes": {
-          "x-nullable": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewScope"
-          },
-          "description": "A collection of scopes used when selecting review history data",
-          "x-ms-identifiers": []
-        },
-        "settings": {
-          "x-ms-client-flatten": true,
-          "x-nullable": true,
-          "$ref": "#/definitions/AccessReviewHistoryScheduleSettings",
-          "description": "Recurrence settings for recurring history reports, skip for one-time reports."
-        },
-        "instances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewHistoryInstance"
-          },
-          "description": "Set of access review history instances for this history definition."
-        }
-      },
-      "description": "Access Review History Instances."
     },
     "AccessReviewHistoryInstance": {
       "x-ms-azure-resource": true,
