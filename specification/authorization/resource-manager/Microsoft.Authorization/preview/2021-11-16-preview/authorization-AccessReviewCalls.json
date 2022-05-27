@@ -658,15 +658,6 @@
             "description": "The id of the access review instance."
           },
           {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccessReviewInstanceProperties"
-            },
-            "description": "Access review instance properties."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1501,84 +1492,9 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewInstanceProperties",
-          "description": "Access Review properties."
         }
       },
       "description": "Access Review Instance."
-    },
-    "AccessReviewInstanceProperties": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This read-only field specifies the status of an access review instance.",
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Completed",
-            "Applied",
-            "Initializing",
-            "Applying",
-            "Completing",
-            "Scheduled",
-            "AutoReviewing",
-            "AutoReviewed",
-            "Starting"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewInstanceStatus",
-            "modelAsString": true
-          }
-        },
-        "startDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The DateTime when the review instance is scheduled to be start.",
-          "x-nullable": false
-        },
-        "endDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The DateTime when the review instance is scheduled to end.",
-          "x-nullable": false
-        },
-        "reviewers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewReviewer"
-          },
-          "description": "This is the collection of reviewers.",
-          "x-ms-identifiers": []
-        },
-        "backupReviewers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewReviewer"
-          },
-          "description": "This is the collection of backup reviewers.",
-          "x-ms-identifiers": []
-        },
-        "reviewersType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
-          "enum": [
-            "Assigned",
-            "Self",
-            "Managers"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewInstanceReviewersType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Access Review Instance properties."
     },
     "AccessReviewScheduleSettings": {
       "type": "object",
