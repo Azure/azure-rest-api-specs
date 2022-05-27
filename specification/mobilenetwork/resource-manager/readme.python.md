@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.MobileNetwork
   package-name: mobilenetwork
-  package-version: 2020-06-01-preview
+  package-version: 2022-04-01-preview
   clear-output-folder: true
 ```
 
