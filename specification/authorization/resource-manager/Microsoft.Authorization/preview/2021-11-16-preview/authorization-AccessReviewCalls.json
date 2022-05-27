@@ -187,56 +187,6 @@
             }
           }
         }
-      },
-      "put": {
-        "tags": [
-          "PutAccessReviewScheduleDefinition"
-        ],
-        "operationId": "AccessReviewScheduleDefinitions_CreateOrUpdateById",
-        "x-ms-examples": {
-          "PutAccessReview": {
-            "$ref": "./examples/PutAccessReviewScheduleDefinition.json"
-          }
-        },
-        "description": "Create or Update access review schedule definition.",
-        "parameters": [
-          {
-            "name": "scheduleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review schedule definition."
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
-            },
-            "description": "Access review schedule definition properties."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful update",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinition"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
