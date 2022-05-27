@@ -2833,72 +2833,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
-      "get": {
-        "operationId": "DeviceGroups_ListByProducts",
-        "summary": "List all DeviceGroup by productName",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogParameter"
-          },
-          {
-            "$ref": "#/parameters/ProductParameter"
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipTokenParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            },
-            "description": "Typed response envelope for ARM operations.",
-            "schema": {
-              "$ref": "#/definitions/Page_DeviceGroup"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "tags": [
-          "DeviceGroups"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get device groups in a catalog": {
-            "$ref": "./examples/GetDeviceGroups.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images": {
       "get": {
         "operationId": "Images_ListByCatalogs",
@@ -3021,6 +2955,72 @@
         "x-ms-examples": {
           "Get deployments in a catalog": {
             "$ref": "./examples/GetDeployments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
+      "get": {
+        "operationId": "DeviceGroups_ListByProducts",
+        "summary": "List all DeviceGroup by productName",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Typed response envelope for ARM operations.",
+            "schema": {
+              "$ref": "#/definitions/Page_DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "DeviceGroups"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get device groups in a catalog": {
+            "$ref": "./examples/GetDeviceGroups.json"
           }
         }
       }
@@ -3906,23 +3906,6 @@
       },
       "description": "Paged response"
     },
-    "Page_DeviceGroup": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceGroup"
-          },
-          "description": "The items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "description": "Paged response"
-    },
     "Page_Image": {
       "type": "object",
       "properties": {
@@ -3947,6 +3930,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Deployment"
+          },
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "Paged response"
+    },
+    "Page_DeviceGroup": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceGroup"
           },
           "description": "The items on this page"
         },
@@ -4103,7 +4103,12 @@
         },
         "allowCrashDumpsCollection": {
           "type": "boolean",
-          "description": "Flag to define if the user allows for crash dump collection"
+          "description": "Flag to define if the user allows for crash dump collection."
+        },
+        "currentDeployment": {
+          "$ref": "#/definitions/Deployment",
+          "description": "Current deployment for the device group.",
+          "readOnly": true
         }
       },
       "description": "Properties of the device group",
