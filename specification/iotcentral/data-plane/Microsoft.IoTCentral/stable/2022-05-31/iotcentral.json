@@ -3380,13 +3380,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "maxLength": 48,
-            "pattern": "^(?!-)[a-z0-9-]{1,48}[a-z0-9]$",
-            "required": true
+            "$ref": "#/parameters/OrganizationId"
           }
         ],
         "responses": {
@@ -3423,11 +3417,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/OrganizationId"
           },
           {
             "in": "body",
@@ -3477,11 +3467,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/OrganizationId"
           },
           {
             "in": "body",
@@ -3527,11 +3513,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/OrganizationId"
           }
         ],
         "responses": {
@@ -3688,13 +3670,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "maxLength": 48,
-            "pattern": "^[a-zA-Z0-9-_]*",
-            "required": true
+            "$ref": "#/parameters/UserId"
           }
         ],
         "responses": {
@@ -3734,11 +3710,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           },
           {
             "in": "body",
@@ -3791,11 +3763,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           },
           {
             "in": "body",
@@ -3841,11 +3809,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           }
         ],
         "responses": {
@@ -3929,6 +3893,16 @@
       "type": "string",
       "required": true
     },
+    "OrganizationId": {
+      "in": "path",
+      "name": "organizationId",
+      "description": "Unique ID of the organization.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 48,
+      "pattern": "^(?!-)[a-z0-9-]{1,48}[a-z0-9]$",
+      "required": true
+    },
     "Subdomain": {
       "in": "path",
       "name": "subdomain",
@@ -3943,6 +3917,16 @@
       "description": "Name of this device telemetry.",
       "x-ms-parameter-location": "method",
       "type": "string",
+      "required": true
+    },
+    "UserId": {
+      "in": "path",
+      "name": "userId",
+      "description": "Unique ID of the user.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 48,
+      "pattern": "^[a-zA-Z0-9-_]*",
       "required": true
     },
     "Version": {
