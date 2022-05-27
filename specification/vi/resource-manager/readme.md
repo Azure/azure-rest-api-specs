@@ -26,7 +26,7 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-
+      - Microsoft.VideoIndexer/preview/2022-04-03-preview/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
@@ -44,9 +44,18 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-10-preview
+tag: package-2022-04-13-preview
 ```
 
+### Tag: package-2022-04-13-preview
+
+These settings apply only when `--tag=2022-04-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-13-preview'
+version-with-underscores: 2022-04-13_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+```
 ### Tag: package-2021-11-10-preview
 
 These settings apply only when `--tag=2021-11-10-preview` is specified on the command line.
