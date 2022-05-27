@@ -1845,6 +1845,40 @@
       },
       "description": "Service Principal Decision Target"
     },
+    "AccessReviewActorIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity id"
+        },
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewActorIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity display name"
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user principal name(if valid)"
+        }
+      },
+      "description": "Details of the actor identity"
+    },
     "AccessReviewContactedReviewer": {
       "type": "object",
       "x-ms-azure-resource": true,
