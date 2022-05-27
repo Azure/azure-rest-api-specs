@@ -22,10 +22,10 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Data Client.
+These are the global settings for Data Registry Client.
 
 ``` yaml
-title: DataClient
+title: DataRegistryClient
 openapi-type: data-plane
 tag: 2022-12-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
@@ -41,7 +41,7 @@ These settings apply only when `--tag=2022-12-01` is specified on the command li
 
 ``` yaml $(tag) == '2022-12-01'
 input-file:
-  - stable/2022-12-01/data.json
+  - stable/2022-12-01/dataregistry.json
 ```
 
 # Code Generation

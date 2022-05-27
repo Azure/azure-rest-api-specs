@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Data Service",
+    "title": "Azure Maps Data Registry Service",
     "version": "2022-12-01",
-    "description": "APIs for uploading map data to Azure Maps."
+    "description": "APIs for managing data registry in Azure Maps."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
@@ -32,11 +32,11 @@
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
-    "SharedKey": {
+    "AzureKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
-      "in": "query"
+      "in": "header"
     },
     "SasToken": {
       "type": "apiKey",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "SharedKey": []
+      "AzureKey": []
     },
     {
       "SasToken": []
@@ -124,7 +124,7 @@
     },
     "UniqueDataId": {
       "name": "udid",
-      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) call.",
+      "description": "The unique data id for the data registry. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) call.",
       "type": "string",
       "in": "path",
       "required": true,
@@ -132,12 +132,12 @@
     },
     "DataDescription": {
       "name": "description",
-      "description": "The description to be given to the upload.",
+      "description": "The description to be given to the data registry.",
       "type": "string",
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "DataUploadOperationId": {
+    "OperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
@@ -150,14 +150,14 @@
     "/mapData": {
       "post": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Create API allows the caller to register their data content uploaded to Azure Storage Account to the Azure Maps Service and get a UDID. You can use this API in a scenario like registering a collection of Geofences in `GeoJSON` format, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Create Request\n\nTo register your content you will use a `POST` request. The request body will contain the connection object. The `dataFormat` query parameter will contain the format for the data for validation. The `dataSharingLevel` query parameter can contain the sharing level for the data.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the connection object. Set the `dataFormat` query parameter to _geojson_.\n\nThe Data Upload API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Data_Create",
+        "operationId": "DataRegistry_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
           "Register GeoJSON data containing geometries that represent a collection of geofences to the Azure Maps Service": {
-            "$ref": "./examples/Data_Create.json"
+            "$ref": "./examples/DataRegistry_Create.json"
           }
         },
         "parameters": [
@@ -177,9 +177,9 @@
             "$ref": "#/parameters/DataSharingLevel"
           },
           {
-            "name": "CreateBody",
+            "name": "connection",
             "in": "body",
-            "description": "The connection information to upload.",
+            "description": "The connection object for creating data registry.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Connection"
@@ -207,10 +207,10 @@
       },
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Data Response\n\nThe Data List API returns the complete list of all data in `json` format.",
-        "operationId": "Data_List",
+        "operationId": "DataRegistry_List",
         "x-ms-examples": {
           "List all the previously uploaded data": {
-            "$ref": "./examples/Data_List.json"
+            "$ref": "./examples/DataRegistry_List.json"
           }
         },
         "parameters": [
@@ -237,14 +237,14 @@
     "/mapData/{udid}": {
       "put": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Update API allows the caller to update a previously uploaded data content.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. \nGeofences are uploaded using the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview), for \nuse in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Update Request\n\nTo update your content you will use a `PUT` request. The request body will contain the new connection object that will replace \nthe existing connection object. The path will contain \nthe `udid` of the data to be update.\n\nFor example, to update a collection of geofences that were previously uploaded using the Upload API. Set the `udid` parameter in the path to the `udid` of the data received \npreviously in the upload API response.\n\nThe Data Update API performs a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Data_Update",
+        "operationId": "DataRegistry_Update",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
           "Update existing data with new connection object": {
-            "$ref": "./examples/Data_Update.json"
+            "$ref": "./examples/DataRegistry_Update.json"
           }
         },
         "parameters": [
@@ -261,9 +261,9 @@
             "$ref": "#/parameters/DataDescription"
           },
           {
-            "name": "UpdateBody",
+            "name": "connection",
             "in": "body",
-            "description": "The connection information to update.",
+            "description": "The connection object for updating data registry.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Connection"
@@ -291,14 +291,14 @@
       },
       "patch": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Patch API allows the caller to patch a previously uploaded data content.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are uploaded using the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Update Request\n\nTo update your content you will use a `PATCH` request. The request body will contain the new connection object that will replace the existing connection object. The path will contain the `udid` of the data to be update.\n\nFor example, to update a collection of geofences that were previously uploaded using the Upload API. Set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response.\n\nThe Data Update API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Data_Patch",
+        "operationId": "DataRegistry_Patch",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
           "Patch existing data with new connection object": {
-            "$ref": "./examples/Data_Patch.json"
+            "$ref": "./examples/DataRegistry_Patch.json"
           }
         },
         "parameters": [
@@ -315,9 +315,9 @@
             "$ref": "#/parameters/DataDescription"
           },
           {
-            "name": "PatchBody",
+            "name": "connection",
             "in": "body",
-            "description": "The connection information to patch.",
+            "description": "The connection object for patching data registry.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectionPatch"
@@ -345,10 +345,10 @@
       },
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to download a previously uploaded data content.\n\nYou can use this API in a scenario like downloading an existing collection of geofences uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial).\n\n## Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download.\n\nFor example, to download a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the Data Create API response.\n\n## Download Data Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource. A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
-        "operationId": "Data_Download",
+        "operationId": "DataRegistry_Download",
         "x-ms-examples": {
           "Download previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
-            "$ref": "./examples/Data_Download.json"
+            "$ref": "./examples/DataRegistry_Download.json"
           }
         },
         "produces": [
@@ -390,10 +390,10 @@
       },
       "delete": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to delete a previously uploaded data content.\n\nYou can use this API in a scenario like removing geofences previously uploaded using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). You can also use this API to delete old/unused created udid.\n\n## Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `udid` of the data to delete.\n\nFor example, to delete a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the Data Create API response.\n\n## Delete Data Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, if the data resource was deleted successfully.\n\nA HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
-        "operationId": "Data_Delete",
+        "operationId": "DataRegistry_Delete",
         "x-ms-examples": {
           "Delete previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
-            "$ref": "./examples/Data_Delete.json"
+            "$ref": "./examples/DataRegistry_Delete.json"
           }
         },
         "parameters": [
@@ -424,10 +424,10 @@
     "/mapData/{udid}/metadata": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the metadata of a given udid created previously using the [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview).\n\n## Submit Get Metadata Request\n\nTo fetch the metadata of a given udid you will issue a `GET` request with no additional parameters.\n\n## Get Metadata Response\n\nThe Data Metadata API returns the complete list of all data in `json` format.",
-        "operationId": "Data_GetMetadata",
+        "operationId": "DataRegistry_GetMetadata",
         "x-ms-examples": {
           "Fetch the metadata of a given udid": {
-            "$ref": "./examples/Data_GetMetadata.json"
+            "$ref": "./examples/DataRegistry_GetMetadata.json"
           }
         },
         "parameters": [
@@ -461,13 +461,13 @@
     "/mapData/operations/{operationId}": {
       "get": {
         "description": "This path will be obtained from a call to [Data Create API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview), [Data Update API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview), and [Data Patch API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview). While in progress, a HTTP `200 OK` response will be returned with no extra headers -  followed by a HTTP `200 OK` with `Resource-Location` header once completed.",
-        "operationId": "Data_GetOperation",
+        "operationId": "DataRegistry_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/Data_GetOperationStillRunning.json"
+            "$ref": "./examples/DataRegistry_GetOperationStillRunning.json"
           },
           "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/Data_GetOperation.json"
+            "$ref": "./examples/DataRegistry_GetOperation.json"
           }
         },
         "parameters": [
@@ -475,7 +475,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/DataUploadOperationId"
+            "$ref": "#/parameters/OperationId"
           }
         ],
         "responses": {
@@ -504,31 +504,63 @@
   },
   "definitions": {
     "Connection": {
-      "description": "The connection object.",
+      "description": "The connection object for Azure Maps Service to connection to your resource.",
       "type": "object",
       "properties": {
         "connection": {
           "$ref": "#/definitions/ConnectionProperties"
         }
-      }
+      },
+      "required": [
+        "connection"
+      ]
     },
     "ConnectionPatch": {
-      "description": "The connection object for patching.",
+      "description": "The connection object for patching data registry",
       "type": "object",
       "properties": {
         "connection": {
           "$ref": "#/definitions/ConnectionPatchProperties"
         }
-      }
+      },
+      "required": [
+        "connection"
+      ]
     },
     "ConnectionProperties": {
-      "description": "The connection object properties.",
+      "description": "The connection object properties for creating and updating data registry",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPatchProperties"
+      "properties": {
+        "type": {
+          "description": "Connection type.",
+          "type": "string",
+          "enum": [
+            "AzureBlobFile"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlobFile",
+                "description": "Connection to Azure Blob File."
+              }
+            ]
+          }
+        },
+        "msiClientId": {
+          "description": "ClientId of MSI. Use system assigned identity if not provided.",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource. Need to configure in control plane beforehand.",
+          "type": "string"
+        },
+        "blobPath": {
+          "description": "The path to the blob file.",
+          "type": "string"
         }
-      ],
+      },
       "required": [
         "type",
         "blobPath"
@@ -545,7 +577,7 @@
             "AzureBlobFile"
           ],
           "x-ms-enum": {
-            "name": "ConnectionTypeEnum",
+            "name": "ConnectionType",
             "modelAsString": true,
             "values": [
               {
@@ -560,7 +592,7 @@
           "type": "string"
         },
         "linkedResource": {
-          "description": "The linked resource.",
+          "description": "The linked resource. Need to configure in control plane first.",
           "type": "string"
         },
         "blobPath": {
@@ -581,7 +613,10 @@
             "$ref": "#/definitions/MapData"
           }
         }
-      }
+      },
+      "required": [
+        "mapDataList"
+      ]
     },
     "MapDataResult": {
       "description": "The response model for the Data Metadata API. Returns the metadata of a given udid.",
@@ -593,17 +628,24 @@
       }
     },
     "MapData": {
-      "description": "Detail information for the data.",
+      "description": "Metadata of a data registry.",
       "type": "object",
       "properties": {
         "udid": {
-          "description": "The unique data id for the data.",
+          "description": "The unique data id for the data registry.",
           "type": "string",
           "readOnly": true
         },
-        "location": {
-          "x-ms-client-name": "locationURL",
-          "description": "The location of the data. Execute a HTTP `GET` on this location to download the data.",
+        "allowedGeographicRegions": {
+          "description": "Geographic regions allowed for Azure Maps Service to access the data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GeographicRegion"
+          }
+        },
+        "downloadURL": {
+          "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data.",
           "type": "string",
           "format": "uri",
           "readOnly": true
@@ -615,26 +657,34 @@
           "readOnly": true
         },
         "contentMD5": {
-          "description": "The content MD5 of the file content",
+          "description": "The content MD5 of the content.",
           "type": "string",
           "readOnly": true
         },
         "createStatus": {
-          "$ref": "#/definitions/CreateStatus"
+          "description": "The current create status of the data registry.",
+          "$ref": "#/definitions/CreateStatus",
+          "readOnly": true
         },
         "dataFormat": {
-          "$ref": "#/definitions/DataFormat"
+          "description": "Data format of the uploaded content for validation in Azure Maps Service.",
+          "$ref": "#/definitions/DataFormat",
+          "readOnly": true
         },
         "dataSharingLevel": {
-          "$ref": "#/definitions/DataSharingLevel"
+          "description": "Data sharing level.",
+          "$ref": "#/definitions/DataSharingLevel",
+          "readOnly": true
         },
         "description": {
-          "description": "The current description.",
+          "description": "The description of the data.",
           "type": "string",
           "readOnly": true
         },
         "connection": {
-          "$ref": "#/definitions/ConnectionProperties"
+          "description": "The connection object for Azure Maps Service to connection to your resource",
+          "$ref": "#/definitions/ConnectionProperties",
+          "readOnly": true
         },
         "created": {
           "description": "The created timestamp.",
@@ -648,12 +698,47 @@
           "format": "date-time",
           "readOnly": true
         }
+      },
+      "required": [
+        "udid",
+        "allowedGeographicRegions",
+        "downloadURL",
+        "sizeInBytes",
+        "contentMD5",
+        "createStatus",
+        "dataFormat",
+        "dataSharingLevel",
+        "connection",
+        "created",
+        "updated"
+      ]
+    },
+    "GeographicRegion": {
+      "description": "The geographic region allowed to access the data",
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicRegion",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "United States"
+          },
+          {
+            "value": "eu",
+            "description": "Europe"
+          }
+        ]
       }
     },
     "DataFormat": {
-      "description": "Data format of the uploaded content.",
+      "description": "Data format of the uploaded content for validation in Azure Maps Service.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "geojson",
         "zip"
@@ -676,7 +761,6 @@
     "DataSharingLevel": {
       "description": "Data sharing level.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "account",
         "subscription"
@@ -697,9 +781,8 @@
       }
     },
     "CreateStatus": {
-      "description": "The current create status of the content.",
+      "description": "The current create status of the data registry.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "Pending",
         "Completed",
