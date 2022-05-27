@@ -1892,74 +1892,9 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewHistoryInstanceProperties",
-          "description": "Access Review History Definition Instance properties."
         }
       },
       "description": "Access Review History Definition Instance."
-    },
-    "AccessReviewHistoryInstanceProperties": {
-      "type": "object",
-      "properties": {
-        "reviewHistoryPeriodStartDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": false,
-          "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports."
-        },
-        "reviewHistoryPeriodEndDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": false,
-          "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the parent history definition."
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Status of the requested review history instance data. This is either requested, in-progress, done or error. The state transitions are as follows - Requested -> InProgress -> Done -> Expired",
-          "enum": [
-            "Requested",
-            "InProgress",
-            "Done",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewHistoryDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "runDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time when the history data report is scheduled to be generated.",
-          "x-nullable": true
-        },
-        "fulfilledDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time when the history data report is scheduled to be generated.",
-          "x-nullable": true
-        },
-        "downloadUri": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Uri which can be used to retrieve review history data. To generate this Uri, generateDownloadUri() must be called for a specific accessReviewHistoryDefinitionInstance. The link expires after a 24 hour period. Callers can see the expiration date time by looking at the 'se' parameter in the generated uri."
-        },
-        "expiration": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date time when history data report expires and the associated data is deleted.",
-          "x-nullable": true
-        }
-      },
-      "description": "Access Review History Definition Instance properties."
     },
     "AccessReviewHistoryScheduleSettings": {
       "type": "object",
