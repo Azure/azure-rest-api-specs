@@ -593,6 +593,7 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## Java
 
+<<<<<<< HEAD
 See configuration in [readme.java.md](./readme.java.md)
 <<<<<<< HEAD
 =======
@@ -666,3 +667,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 >>>>>>> upstream/master
+=======
+See configuration in [readme.java.md](./readme.java.md)
+>>>>>>> upstream/main

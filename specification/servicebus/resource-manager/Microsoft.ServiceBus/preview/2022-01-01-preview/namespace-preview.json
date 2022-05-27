@@ -757,6 +757,20 @@
         "alternateName": {
           "type": "string",
           "description": "Alternate name for namespace"
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
         }
       },
       "description": "Properties of the namespace."
