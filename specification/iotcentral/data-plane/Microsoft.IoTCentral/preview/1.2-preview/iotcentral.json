@@ -6125,6 +6125,8 @@
       "name": "deviceGroupId",
       "description": "Unique ID for the device group.",
       "x-ms-parameter-location": "method",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_-]*$",
       "type": "string",
       "required": true
     },
@@ -6233,7 +6235,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "maxLength": 48,
-      "pattern": "^[a-zA-Z0-9-_]*",
+      "pattern": "^[a-zA-Z0-9-_]*$",
       "required": true
     },
     "Version": {
