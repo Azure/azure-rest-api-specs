@@ -1,0 +1,419 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Regulatory documents.",
+      "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers.",
+      "version": "2022-07-31"
+    },
+    "paths": {
+      "/kyc/applications/:create": {
+        "post": {
+          "tags": [
+            "KYC Application Management"
+          ],
+          "summary": "Creates a KYC Application.",
+          "operationId": "KYC_CreateApplication",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The KYC application creation request.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/KYCApplicationCreateRequest"
+              }
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/KYCApplicationCreateResponse"
+              }
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/kyc/applications/{kycApplicationId}": {
+        "get": {
+          "tags": [
+            "KYC Application Management"
+          ],
+          "summary": "Gets a KYC Application by its KYC Application ID.",
+          "operationId": "KYC_DeleteApplication",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "kycApplicationId",
+              "description": "The KYC Application ID",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/KYCApplication"
+              }
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/kyc/applications": {
+        "get": {
+          "tags": [
+            "KYC Application Management"
+          ],
+          "summary": "Gets a list of all KYC Applications.",
+          "operationId": "KYC_GetsApplications",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "kycApplicationId",
+              "description": "The KYC Application ID",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/KYCApplication"
+              }
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/kyc/applications/{kycApplicationId}:cancel": {
+        "delete": {
+          "tags": [
+            "KYC Application Management"
+          ],
+          "summary": "Deletes a KYC Application by its KYC Application ID.",
+          "operationId": "KYC_GetsApplication",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Success"
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/kyc/applications/{kycApplicationId}:update": {
+        "post": {
+          "tags": [
+            "KYC Application Management"
+          ],
+          "summary": "Updates a KYC Application by its KYC Application ID.",
+          "operationId": "KYC_GetsApplication",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The KYC Application update request.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/KYCApplicationUpdateRequest"
+              }
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Success"
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "KYCApplicationCreateRequest": {
+        "description": "KYC Application Create Request",
+        "type": "object",
+        "properties": {
+          "phoneNumberType": {
+            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
+            "type": "string"
+          },
+          "businessName": {
+            "description": "Represents the business name in the application.",
+            "type": "string"
+          },
+          "address": {
+            "description": "Represents the unstructured address.",
+            "type": "string"
+          },
+          "addressCountry": {
+            "description": "Represents the address country.",
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "Represents the registration number.",
+            "type": "string"
+          },
+          "phoneNumberLocality": {
+            "description": "Represents the name of the locality for the application, e.g. city, town name",
+            "type": "string"
+          },
+          "contact": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "contactPhoneNumber": {
+            "description": "Represents the contact's phone number",
+            "type": "string"
+          },
+          "contactEmail": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "taxNumber": {
+            "description": "Represents the tax number of the business.",
+            "type": "string"
+          }
+        }
+      },
+      "KYCApplicationCreateResponse": {
+        "description": "KYC Application Create Response",
+        "type": "object",
+        "properties": {
+          "kycApplicationId": {
+            "description": "Represents the ID of the existing KYC Application",
+            "type": "string"
+          }
+        }
+      },
+      "KYCApplicationUpdateRequest": {
+        "description": "KYC Application Update Request",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Represents the KYC Application ID.",
+            "type": "string"
+          },
+          "phoneNumberType": {
+            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
+            "type": "string"
+          },
+          "businessName": {
+            "description": "Represents the business name in the application.",
+            "type": "string"
+          },
+          "address": {
+            "description": "Represents the business address.",
+            "type": "string"
+          },
+          "addressCountry": {
+            "description": "Represents the business address country.",
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "Represents the business registration or identification number.",
+            "type": "string"
+          },
+          "phoneNumberLocality": {
+            "description": "Represents the name of the locality for the application, e.g. city, town name",
+            "type": "string"
+          },
+          "contact": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "contactPhoneNumber": {
+            "description": "Represents the contact's phone number",
+            "type": "string"
+          },
+          "contactEmail": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "taxNumber": {
+            "description": "Represents the business tax number.",
+            "type": "string"
+          }
+        }
+      },
+      "KYCApplication": {
+        "description": "KYC Application",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID of the KYC application.",
+            "type": "string"
+          },
+          "phoneNumberType": {
+            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
+            "type": "string"
+          },
+          "businessName": {
+            "description": "Represents the business name in the application.",
+            "type": "string"
+          },
+          "address": {
+            "description": "Represents the unstructured address.",
+            "type": "string"
+          },
+          "addressCountry": {
+            "description": "Represents the address country.",
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "Represents the registration number.",
+            "type": "string"
+          },
+          "contact": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "contactPhoneNumber": {
+            "description": "Represents the contact's phone number",
+            "type": "string"
+          },
+          "contactEmail": {
+            "description": "Represents the name of the contact responsible for this application.",
+            "type": "string"
+          },
+          "taxNumber": {
+            "description": "Represents the tax number of the business.",
+            "type": "string"
+          }
+        }
+      },
+      "KYCApplications": {
+        "description": "The list of KYC Applications.",
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "phoneNumbers": {
+            "description": "Represents a list of KYC Applications.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/KYCApplication"
+            }
+          },
+          "nextLink": {
+            "description": "Represents the URL link to the next page of KYC application results.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "ApiVersionParameter": {
+        "in": "query",
+        "name": "api-version",
+        "description": "Version of API to invoke.",
+        "required": true,
+        "type": "string"
+      },
+      "Endpoint": {
+        "in": "path",
+        "name": "endpoint",
+        "description": "The communication resource, for example https://resourcename.communication.azure.com.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        },
+        "description": "Azure Active Directory OAuth2 Flow"
+      }
+    },
+    "x-ms-parameterized-host": {
+      "hostTemplate": "{endpoint}",
+      "useSchemePrefix": false,
+      "parameters": [
+        {
+          "$ref": "#/parameters/Endpoint"
+        }
+      ]
+    }
+  }
+  
