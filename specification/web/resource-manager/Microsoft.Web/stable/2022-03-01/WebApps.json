@@ -22571,12 +22571,31 @@
           "type": "object",
           "properties": {
             "deploymentId": {
-              "description": "Deployment operation id..",
+              "description": "Deployment operation id.",
               "type": "string"
             },
             "status": {
               "description": "Deployment build status.",
-              "type": "string"
+              "enum": [
+                "TimedOut",
+                "RuntimeFailed",
+                "BuildAborted",
+                "BuildFailed",
+                "BuildRequestReceived",
+                "BuildPending",
+                "BuildInProgress",
+                "BuildSuccessful",
+                "PostBuildRestartRequired",
+                "StartPolling",
+                "StartPollingWithRestart",
+                "RuntimeStarting",
+                "RuntimeSuccessful"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DeploymentBuildStatus",
+                "modelAsString": false
+              }
             },
             "numberOfInstancesInProgress": {
               "format": "int32",
