@@ -64,48 +64,7 @@
       }
     },
 
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions": {
-      "get": {
-        "tags": [
-          "GetAccessReviewScheduleDefinitions"
-        ],
-        "operationId": "AccessReviewScheduleDefinitions_List",
-        "x-ms-examples": {
-          "GetAccessReviewScheduleDefinitions": {
-            "$ref": "./examples/GetAccessReviewScheduleDefinitions.json"
-          }
-        },
-        "description": "Get access review schedule definitions",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
+
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
       "post": {
         "tags": [
@@ -675,45 +634,6 @@
               "$ref": "#/definitions/ErrorDefinition"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions": {
-      "get": {
-        "tags": [
-          "GetAccessReviewScheduleDefinitionsAssignedForMyApproval"
-        ],
-        "operationId": "AccessReviewScheduleDefinitionsAssignedForMyApproval_List",
-        "x-ms-examples": {
-          "GetAccessReviewScheduleDefinitionsAssignedForMyApproval": {
-            "$ref": "./examples/GetAccessReviewScheduleDefinitionsAssignedForMyApproval.json"
-          }
-        },
-        "description": "Get access review instances assigned for my approval.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
