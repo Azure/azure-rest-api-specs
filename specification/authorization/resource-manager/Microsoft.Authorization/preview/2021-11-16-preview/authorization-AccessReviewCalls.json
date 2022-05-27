@@ -471,15 +471,6 @@
             "description": "The id of the access review schedule definition."
           },
           {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
-            },
-            "description": "Access review schedule definition properties."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1488,112 +1479,9 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties",
-          "description": "Access Review properties."
         }
       },
       "description": "Access Review Schedule Definition."
-    },
-    "AccessReviewScheduleDefinitionProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the schedule definition."
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This read-only field specifies the status of an accessReview.",
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Completed",
-            "Applied",
-            "Initializing",
-            "Applying",
-            "Completing",
-            "Scheduled",
-            "AutoReviewing",
-            "AutoReviewed",
-            "Starting"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewScheduleDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "descriptionForAdmins": {
-          "type": "string",
-          "description": "The description provided by the access review creator and visible to admins."
-        },
-        "descriptionForReviewers": {
-          "type": "string",
-          "description": "The description provided by the access review creator to be shown to reviewers."
-        },
-        "createdBy": {
-          "readOnly": true,
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewActorIdentity",
-          "description": "The user or other identity who created this review."
-        },
-        "settings": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewScheduleSettings",
-          "description": "Access Review Settings."
-        },
-        "scope": {
-          "readOnly": true,
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewScope",
-          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId and roleDefinitionId."
-        },
-        "reviewers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewReviewer"
-          },
-          "x-ms-identifiers": [
-            "principalId"
-          ],
-          "description": "This is the collection of reviewers."
-        },
-        "backupReviewers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewReviewer"
-          },
-          "x-ms-identifiers": [
-            "principalId"
-          ],
-          "description": "This is the collection of backup reviewers."
-        },
-        "reviewersType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
-          "enum": [
-            "Assigned",
-            "Self",
-            "Managers"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewScheduleDefinitionReviewersType",
-            "modelAsString": true
-          }
-        },
-        "instances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessReviewInstance"
-          },
-          "description": "This is the collection of instances returned when one does an expand on it."
-        }
-      },
-      "description": "Access Review."
     },
     "AccessReviewInstance": {
       "type": "object",
