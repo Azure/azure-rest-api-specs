@@ -167,6 +167,15 @@
             "description": "The id of the access review history definition."
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties"
+            },
+            "description": "Access review history definition properties."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -471,6 +480,15 @@
             "description": "The id of the access review schedule definition."
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
+            },
+            "description": "Access review schedule definition properties."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -656,6 +674,15 @@
             "required": true,
             "type": "string",
             "description": "The id of the access review instance."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessReviewInstanceProperties"
+            },
+            "description": "Access review instance properties."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1470,9 +1497,112 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties",
+          "description": "Access Review properties."
         }
       },
       "description": "Access Review Schedule Definition."
+    },
+    "AccessReviewScheduleDefinitionProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the schedule definition."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the status of an accessReview.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionStatus",
+            "modelAsString": true
+          }
+        },
+        "descriptionForAdmins": {
+          "type": "string",
+          "description": "The description provided by the access review creator and visible to admins."
+        },
+        "descriptionForReviewers": {
+          "type": "string",
+          "description": "The description provided by the access review creator to be shown to reviewers."
+        },
+        "createdBy": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewActorIdentity",
+          "description": "The user or other identity who created this review."
+        },
+        "settings": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewScheduleSettings",
+          "description": "Access Review Settings."
+        },
+        "scope": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewScope",
+          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId and roleDefinitionId."
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
+          "description": "This is the collection of reviewers."
+        },
+        "backupReviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
+          "description": "This is the collection of backup reviewers."
+        },
+        "reviewersType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionReviewersType",
+            "modelAsString": true
+          }
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewInstance"
+          },
+          "description": "This is the collection of instances returned when one does an expand on it."
+        }
+      },
+      "description": "Access Review."
     },
     "AccessReviewInstance": {
       "type": "object",
@@ -1492,9 +1622,84 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewInstanceProperties",
+          "description": "Access Review properties."
         }
       },
       "description": "Access Review Instance."
+    },
+    "AccessReviewInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the status of an access review instance.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceStatus",
+            "modelAsString": true
+          }
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The DateTime when the review instance is scheduled to be start.",
+          "x-nullable": false
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The DateTime when the review instance is scheduled to end.",
+          "x-nullable": false
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "description": "This is the collection of reviewers.",
+          "x-ms-identifiers": []
+        },
+        "backupReviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "description": "This is the collection of backup reviewers.",
+          "x-ms-identifiers": []
+        },
+        "reviewersType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceReviewersType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Access Review Instance properties."
     },
     "AccessReviewScheduleSettings": {
       "type": "object",
@@ -1674,9 +1879,109 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties",
+          "description": "Access Review History Definition properties."
         }
       },
       "description": "Access Review History Definition."
+    },
+    "AccessReviewHistoryDefinitionProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the history definition."
+        },
+        "reviewHistoryPeriodStartDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "reviewHistoryPeriodEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Represents a reviewer's decision for a given review",
+            "enum": [
+              "Approve",
+              "Deny",
+              "NotReviewed",
+              "DontKnow",
+              "NotNotified"
+            ],
+            "x-ms-enum": {
+              "name": "AccessReviewResult",
+              "modelAsString": true
+            }
+          },
+          "description": "Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          }
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when history definition was created",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "createdBy": {
+          "x-nullable": true,
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewActorIdentity",
+          "description": "The user or other identity who created this history definition."
+        },
+        "scopes": {
+          "x-nullable": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewScope"
+          },
+          "description": "A collection of scopes used when selecting review history data",
+          "x-ms-identifiers": []
+        },
+        "settings": {
+          "x-ms-client-flatten": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/AccessReviewHistoryScheduleSettings",
+          "description": "Recurrence settings for recurring history reports, skip for one-time reports."
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewHistoryInstance"
+          },
+          "description": "Set of access review history instances for this history definition."
+        }
+      },
+      "description": "Access Review History Instances."
     },
     "AccessReviewHistoryInstance": {
       "x-ms-azure-resource": true,
@@ -1696,9 +2001,74 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewHistoryInstanceProperties",
+          "description": "Access Review History Definition Instance properties."
         }
       },
       "description": "Access Review History Definition Instance."
+    },
+    "AccessReviewHistoryInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "reviewHistoryPeriodStartDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": false,
+          "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports."
+        },
+        "reviewHistoryPeriodEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": false,
+          "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the parent history definition."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the requested review history instance data. This is either requested, in-progress, done or error. The state transitions are as follows - Requested -> InProgress -> Done -> Expired",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          }
+        },
+        "runDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when the history data report is scheduled to be generated.",
+          "x-nullable": true
+        },
+        "fulfilledDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when the history data report is scheduled to be generated.",
+          "x-nullable": true
+        },
+        "downloadUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Uri which can be used to retrieve review history data. To generate this Uri, generateDownloadUri() must be called for a specific accessReviewHistoryDefinitionInstance. The link expires after a 24 hour period. Callers can see the expiration date time by looking at the 'se' parameter in the generated uri."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when history data report expires and the associated data is deleted.",
+          "x-nullable": true
+        }
+      },
+      "description": "Access Review History Definition Instance properties."
     },
     "AccessReviewHistoryScheduleSettings": {
       "type": "object",
