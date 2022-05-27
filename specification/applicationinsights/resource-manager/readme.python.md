@@ -28,7 +28,7 @@ batch:
   - tag: package-2021-03-08-only
   - tag: package-2021-08
   - tag: package-2021-10
-  - tag: package-2022-04-01
+  - tag: package-2022-04-01-only
   - multiapiscript: true
 ```
 
