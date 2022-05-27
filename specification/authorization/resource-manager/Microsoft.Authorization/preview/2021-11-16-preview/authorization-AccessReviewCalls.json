@@ -295,62 +295,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
-      "get": {
-        "tags": [
-          "GetAccessReviewInstanceDecisions"
-        ],
-        "operationId": "AccessReviewInstanceDecisions_List",
-        "x-ms-examples": {
-          "GetAccessReviewInstanceDecisions": {
-            "$ref": "./examples/GetAccessReviewInstanceDecisions.json"
-          }
-        },
-        "description": "Get access review instance decisions",
-        "parameters": [
-          {
-            "name": "scheduleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review schedule definition."
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the access review instance."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AccessReviewDecisionListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
+
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
         "tags": [
