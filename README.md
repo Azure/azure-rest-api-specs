@@ -98,8 +98,8 @@ The structure should appear like so:
 |    |       \---readme.md
 |    +---playfab
 |        \---resource-manager
-|            +---cadl
 |            +---Microsoft.Playfab
+|            |   +---cadl
 |            |   +---stable
 |            |   |   \---2017-02-27-preview
 |            |   |       \---examples
