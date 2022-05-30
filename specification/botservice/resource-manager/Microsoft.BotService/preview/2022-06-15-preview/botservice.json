@@ -315,6 +315,9 @@
           "Create Alexa Bot": {
             "$ref": "./examples/PutAlexaChannel.json"
           },
+          "Create Email Bot": {
+            "$ref": "./examples/PutEmailChannel.json"
+          },
           "Create Line Bot": {
             "$ref": "./examples/PutLineChannel.json"
           },
@@ -690,6 +693,48 @@
           },
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createEmailSignInUrl": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "description": "Creates an email channel sign in url for a Bot Service",
+        "operationId": "Email_CreateSignInUrl",
+        "x-ms-examples": {
+          "Create Url": {
+            "$ref": "./examples/CreateEmailSignInUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If url is created successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/CreateEmailSignInUrlResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1748,6 +1793,35 @@
       },
       "description": "The list of  bot service operation response."
     },
+    "CreateEmailSignInUrlResponse": {
+      "type": "object",
+      "description": "The ARM create email sign in url operation response.",
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/CreateEmailSignInUrlResponseProperties",
+          "description": "The set of properties specific to sign in url"
+        }
+      }
+    },
+    "CreateEmailSignInUrlResponseProperties": {
+      "type": "object",
+      "description": "The set of properties specific to sign in url",
+      "properties": {
+        "url": {
+          "description": "Sign in url.",
+          "type": "string"
+        }
+      }
+    },
     "ListChannelWithKeysResponse": {
       "type": "object",
       "description": "The ARM channel of list channel with keys operation response.",
@@ -2006,9 +2080,16 @@
           "type": "string",
           "description": "The email address"
         },
+        "authMethod": {
+          "$ref": "#/definitions/EmailChannelAuthMethod"
+        },
         "password": {
           "type": "string",
           "description": "The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "magicCode": {
+          "type": "string",
+          "description": "The magic code for setting up the modern authentication."
         },
         "isEnabled": {
           "type": "boolean",
@@ -2019,6 +2100,40 @@
       "required": [
         "emailAddress",
         "isEnabled"
+      ]
+    },
+    "EmailChannelAuthMethod": {
+      "type": "number",
+      "description": "Email channel auth method. 0 Password (Default); 1 Graph.",
+      "enum": [
+        0,
+        1
+      ],
+      "x-ms-enum": {
+        "name": "EmailChannelAuthMethod",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": 0,
+            "name": "Password",
+            "description": "Basic authentication."
+          },
+          {
+            "value": 1,
+            "name": "Graph",
+            "description": "Modern authentication."
+          }
+        ]
+      }
+    },
+    "OutlookChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "OutlookChannel",
+      "description": "Outlook channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
       ]
     },
     "MsTeamsChannel": {
