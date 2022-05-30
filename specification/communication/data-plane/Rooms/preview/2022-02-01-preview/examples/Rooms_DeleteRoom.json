@@ -1,11 +1,19 @@
 {
   "parameters": {
     "endpoint": "https://contoso.communication.azure.com/",
-    "api-version": "2021-04-07",
-    "roomId": "999126454"
+    "api-version": "2021-02-01",
+    "roomId": "99199690362660524"
   },
   "responses": {
     "204": {},
+    "400": {
+      "body": {
+        "error": {
+          "code": "Bad Request",
+          "message": "Request is a bad request."
+        }
+      }
+    },
     "401": {
       "body": {
         "error": {
@@ -18,7 +26,7 @@
       "body": {
         "error": {
           "code": "Forbidden",
-          "message": "Method not allowed for the user."
+          "message": "User is not allowed to perform specified action."
         }
       }
     },
