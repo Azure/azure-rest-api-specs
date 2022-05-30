@@ -6402,6 +6402,110 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/locations/{location}/validateWorkflowExport": {
+      "post": {
+        "tags": [
+          "WorkflowExport"
+        ],
+        "operationId": "Locations_ValidateWorkflowExport",
+        "description": "Validates the workflow export.",
+        "x-ms-examples": {
+          "Validates a workflow export": {
+            "$ref": "./examples/Locations_ValidateWorkflowExport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "description": "The workflow location.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowExportRequest",
+            "description": "The workflow export request.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WorkflowExportRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/locations/{location}/workflowExport": {
+      "post": {
+        "tags": [
+          "WorkflowExport"
+        ],
+        "operationId": "Locations_WorkflowExport",
+        "description": "Executes the workflow export.",
+        "x-ms-examples": {
+          "Export workflows": {
+            "$ref": "./examples/Locations_WorkflowExport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "description": "The workflow location.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowExportRequest",
+            "description": "The workflow export request.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WorkflowExportRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -13094,6 +13198,29 @@
         "bodyLink": {
           "$ref": "#/definitions/ContentLink",
           "description": "Details on the location of the body content."
+        }
+      }
+    },
+    "WorkflowExportRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The workflow export request.",
+      "required": [
+        "workflows",
+        "workflowExportOptions"
+      ],
+      "properties": {
+        "workflows": {
+          "description": "The workflows for export.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of workflow resources."
+          }
+        },
+        "workflowExportOptions": {
+          "type": "string",
+          "description": "The workflow export options flags. Possible options are: CloneConnections, GenerateInfrastructureTemplates"
         }
       }
     }

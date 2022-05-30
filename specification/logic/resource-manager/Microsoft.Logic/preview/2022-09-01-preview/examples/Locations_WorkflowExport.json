@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "location": "brazilsouth",
+    "workflowExportRequest": {
+      "workflowExportOptions": "CloneConnections",
+      "workflows": [
+        {
+          "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/existing/ResourceGroup/providers/Microsoft.Logic/workflows/existingWorkflow"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "PackageLink": {
+          "uri": "http://tempuri.org"
+        },
+        "Details": [
+          {
+            "ExportDetailCategory": "RequiredStep",
+            "ExportDetailCode": "ConnectionReauth",
+            "ExportDetailMessage": "You will need to re-authenticate 'connection1' after you create it using the ARM template."
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "location": "brazilsouth",
+    "workflowExportRequest": {
+      "workflowExportOptions": "CloneConnections",
+      "workflows": [
+        {
+          "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/existing/ResourceGroup/providers/Microsoft.Logic/workflows/existingWorkflow"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ValidationState": "Successful",
+        "workflows": {
+          "existingWorkflow": {
+            "ValidationState": "Successful",
+            "WorkflowOperations": {
+              "trigger1": {
+                "ValidationState": "Successful"
+              },
+              "action1": {
+                "ValidationState": "Successful"
+              }
+            },
+            "Connections": {
+              "connection1": {
+                "ValidationState": "Successful"
+              }
+            },
+            "Parameters": {
+              "parameter1": {
+                "ValidationState": "Successful"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
