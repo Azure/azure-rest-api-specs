@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "instanceId": "11111111-2222-3333-4444-000000000000",
+    "Content-Type": "application/json",
+    "body": {
+      "targetMeasure": {
+        "dataSetId": "01234567-8901-2345-6789-012345678901",
+        "measureName": "Failure Rate"
+      },
+      "assistiveMeasures": [
+        {
+          "dataSetId": "01234567-8901-2345-6789-012345678901",
+          "measureName": "Error Count"
+        },
+        {
+          "dataSetId": "01234567-8901-2345-6789-012345678901",
+          "measureName": "Total Count"
+        }
+      ],
+      "displayName": "Sample Root Cause Analysis Instance Name",
+      "kind": "multidimensional"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": ""
+      }
+    }
+  }
+}
