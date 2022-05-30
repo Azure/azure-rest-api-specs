@@ -100,6 +100,7 @@ The structure should appear like so:
 |        \---resource-manager
 |            +---Microsoft.Playfab
 |            |   +---cadl
+|            |   |   \---playfab.cadl    
 |            |   +---stable
 |            |   |   \---2017-02-27-preview
 |            |   |       \---examples
