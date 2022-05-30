@@ -2685,6 +2685,607 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/linkedBackends/{linkedBackendName}/validate": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Validates that a backend can be linked to a static site",
+        "operationId": "StaticSites_ValidateBackend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the linked backend that should be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteLinkedBackendEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the linked backend request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate if backend can be linked to static site.": {
+            "$ref": "./examples/ValidateLinkedBackendForStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/linkedBackends/{linkedBackendName}/validate": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Validates that a backend can be linked to a static site build",
+        "operationId": "StaticSites_ValidateBackendForBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the linked backend that should be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteLinkedBackendEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the linked backend request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate if backend can be linked to static site build.": {
+            "$ref": "./examples/ValidateLinkedBackendForStaticSiteBuild.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/linkedBackends": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of all backends linked to a static site",
+        "operationId": "StaticSites_GetLinkedBackends",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backends registered with a static site.": {
+            "$ref": "./examples/GetLinkedBackendsForStaticSite.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/linkedBackends": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of all backends linked to a static site build",
+        "operationId": "StaticSites_GetLinkedBackendsForBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backends registered with a static site build.": {
+            "$ref": "./examples/GetLinkedBackendsForStaticSiteBuild.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/linkedBackends/{linkedBackendName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns the details of a linked backend linked to a static site by name",
+        "operationId": "StaticSites_GetLinkedBackend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the linked backend that should be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backend registered with a static site by name.": {
+            "$ref": "./examples/GetLinkedBackendForStaticSite.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Link backend to a static site",
+        "operationId": "StaticSites_LinkBackend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the backend to link to the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteLinkedBackendEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the linked backend request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Link a backend to a static site": {
+            "$ref": "./examples/LinkBackendToStaticSite.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Unlink a backend from a static site",
+        "operationId": "StaticSites_UnlinkBackend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the backend linked to the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "isCleaningAuthConfig",
+            "in": "query",
+            "description": "Decides if Easy Auth configuration will be removed from backend configuration",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unlink a backend from a static site.": {
+            "$ref": "./examples/UnlinkBackendFromStaticSite.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/linkedBackends/{linkedBackendName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns the details of a linked backend linked to a static site build by name",
+        "operationId": "StaticSites_GetLinkedBackendForBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the linked backend that should be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backend registered with a static site build by name.": {
+            "$ref": "./examples/GetLinkedBackendForStaticSiteBuild.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Link backend to a static site build",
+        "operationId": "StaticSites_LinkBackendToBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the backend to link to the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteLinkedBackendEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the linked backend request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Link a backend to a static site build": {
+            "$ref": "./examples/LinkBackendToStaticSiteBuild.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Unlink a backend from a static site build",
+        "operationId": "StaticSites_UnlinkBackendFromBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The stage site identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkedBackendName",
+            "in": "path",
+            "description": "Name of the backend linked to the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "isCleaningAuthConfig",
+            "in": "query",
+            "description": "Decides if auth will be removed from backend configuration",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unlink a backend from a static site build.": {
+            "$ref": "./examples/UnlinkBackendFromStaticSiteBuild.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2889,6 +3490,15 @@
           },
           "readOnly": true
         },
+        "linkedBackends": {
+          "description": "Backends linked to the static side",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteLinkedBackend"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
         "provider": {
           "description": "The provider that submitted the last deployment to the primary environment of the static site.",
           "type": "string"
@@ -3001,6 +3611,15 @@
               "items": {
                 "$ref": "#/definitions/StaticSiteUserProvidedFunctionApp"
               },
+              "readOnly": true
+            },
+            "linkedBackends": {
+              "description": "Backends linked to the static side build",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StaticSiteLinkedBackend"
+              },
+              "x-ms-identifiers": [],
               "readOnly": true
             }
           },
@@ -3641,6 +4260,89 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "StaticSiteLinkedBackendARMResource": {
+      "description": "Static Site Linked Backend ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteLinkedBackendARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "backendResourceId": {
+              "description": "The resource id of the backend linked to the static site",
+              "type": "string"
+            },
+            "region": {
+              "description": "The region of the backend linked to the static site",
+              "type": "string"
+            },
+            "createdOn": {
+              "format": "date-time",
+              "description": "The date and time on which the backend was linked to the static site.",
+              "type": "string",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the linking process.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteLinkedBackend": {
+      "description": "Static Site Linked Backend ARM resource.",
+      "type": "object",
+      "properties": {
+        "backendResourceId": {
+          "description": "The resource id of the backend linked to the static site",
+          "type": "string"
+        },
+        "region": {
+          "description": "The region of the backend linked to the static site",
+          "type": "string"
+        },
+        "createdOn": {
+          "format": "date-time",
+          "description": "The date and time on which the backend was linked to the static site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the linking process.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteLinkedBackendsCollection": {
+      "description": "Collection of static site linked backends.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
