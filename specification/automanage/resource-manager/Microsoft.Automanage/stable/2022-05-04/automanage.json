@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-04-30-preview",
+    "version": "2022-05-04",
     "title": "Automanage"
   },
   "host": "management.azure.com",
@@ -712,73 +712,6 @@
           },
           "204": {
             "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "ConfigurationProfilesVersions"
-        ],
-        "operationId": "ConfigurationProfilesVersions_Update",
-        "description": "Updates a configuration profile version",
-        "x-ms-examples": {
-          "Update configuration profile version": {
-            "$ref": "./examples/updateConfigurationProfileVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile."
-          },
-          {
-            "name": "versionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile version name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileUpdate"
-            },
-            "description": "Parameters supplied to update configuration profile."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
