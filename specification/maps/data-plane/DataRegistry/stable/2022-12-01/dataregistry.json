@@ -177,12 +177,12 @@
             "$ref": "#/parameters/DataSharingLevel"
           },
           {
-            "name": "connection",
+            "name": "dataRegistry",
             "in": "body",
-            "description": "The connection object for creating data registry.",
+            "description": "The data registry to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Connection"
+              "$ref": "#/definitions/DataRegistry"
             }
           }
         ],
@@ -261,12 +261,12 @@
             "$ref": "#/parameters/DataDescription"
           },
           {
-            "name": "connection",
+            "name": "dataRegistry",
             "in": "body",
-            "description": "The connection object for updating data registry.",
+            "description": "The object for updating a given data registry",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Connection"
+              "$ref": "#/definitions/DataRegistry"
             }
           }
         ],
@@ -315,12 +315,12 @@
             "$ref": "#/parameters/DataDescription"
           },
           {
-            "name": "connection",
+            "name": "dataRegistryPatch",
             "in": "body",
-            "description": "The connection object for patching data registry.",
+            "description": "The object for patching a given data registry",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionPatch"
+              "$ref": "#/definitions/DataRegistryPatch"
             }
           }
         ],
@@ -503,32 +503,32 @@
     }
   },
   "definitions": {
+    "DataRegistry": {
+      "description": "A DataRegistry object provides information for Azure Maps Service to access customer's resources.",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/Connection"
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
+    "DataRegistryPatch": {
+      "description": "An object for patching a given data registry.",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/ConnectionPatch"
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
     "Connection": {
-      "description": "The connection object for Azure Maps Service to connection to your resource.",
-      "type": "object",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/ConnectionProperties"
-        }
-      },
-      "required": [
-        "connection"
-      ]
-    },
-    "ConnectionPatch": {
-      "description": "The connection object for patching data registry.",
-      "type": "object",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/ConnectionPatchProperties"
-        }
-      },
-      "required": [
-        "connection"
-      ]
-    },
-    "ConnectionProperties": {
-      "description": "The connection object properties for creating and updating data registry.",
+      "description": "A Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
       "type": "object",
       "properties": {
         "type": {
@@ -566,8 +566,8 @@
         "blobPath"
       ]
     },
-    "ConnectionPatchProperties": {
-      "description": "The connection object properties for patching.",
+    "ConnectionPatch": {
+      "description": "A ConnectionPatch object represents a patch to a Connection object, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396).",
       "type": "object",
       "properties": {
         "type": {
@@ -608,7 +608,6 @@
         "mapDataList": {
           "description": "A list of all the previously created data.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MapData"
           }
@@ -636,13 +635,11 @@
       "properties": {
         "udid": {
           "description": "The unique data id for the data registry.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "allowedGeographicRegions": {
           "description": "Geographic regions allowed for Azure Maps Service to access the data.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/GeographicRegion"
           }
@@ -650,56 +647,46 @@
         "downloadURL": {
           "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data.",
           "type": "string",
-          "format": "uri",
-          "readOnly": true
+          "format": "uri"
         },
         "sizeInBytes": {
           "description": "The size of the content in bytes.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "contentMD5": {
           "description": "The content MD5 of the content.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "createStatus": {
           "description": "The current create status of the data registry.",
-          "$ref": "#/definitions/CreateStatus",
-          "readOnly": true
+          "$ref": "#/definitions/CreateStatus"
         },
         "dataFormat": {
           "description": "Data format of the uploaded content for validation in Azure Maps Service.",
-          "$ref": "#/definitions/DataFormat",
-          "readOnly": true
+          "$ref": "#/definitions/DataFormat"
         },
         "dataSharingLevel": {
           "description": "Data sharing level.",
-          "$ref": "#/definitions/DataSharingLevel",
-          "readOnly": true
+          "$ref": "#/definitions/DataSharingLevel"
         },
         "description": {
           "description": "The description of the data.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "connection": {
-          "description": "The connection object for Azure Maps Service to connection to your resource",
-          "$ref": "#/definitions/ConnectionProperties",
-          "readOnly": true
+          "description": "Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
+          "$ref": "#/definitions/Connection"
         },
         "created": {
           "description": "The created timestamp.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "updated": {
           "description": "The updated timestamp.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         }
       },
       "required": [
