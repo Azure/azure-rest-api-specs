@@ -171,6 +171,9 @@ directive:
   - suppress: OperationsApiResponseSchema
     from: mysql.json
     reason: Property isDataAction is not included in get operation reponse body
+  - suppress: OperationsApiResponseSchema
+    from: Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
+    reason: Property isDataAction is not included in get operation reponse body
 ```
 
 ---
