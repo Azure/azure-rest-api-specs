@@ -33,6 +33,24 @@ tag: package-2022-03
 
 ---
 
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+```
+
+```yaml $(tag) == 'package-preview-2022-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+```
 
 ### Tag: package-2022-03
 
@@ -44,6 +62,24 @@ input-file:
   - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+```
+
+### Tag: package-preview-2022-01-15
+
+These settings apply only when `--tag=package-preview-2022-01-15` is specified on the command line..
+
+```yaml $(tag) == 'package-preview-2022-01-15'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
+```
+
+```yaml $(tag) == 'package-preview-2022-01-15-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
 ```
 
 ### Tag: package-preview-2022-01
@@ -93,6 +129,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
     from: extensions.json
+  - suppress: TopLevelResourcesListBySubscription
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: extensionTypes.json
   - suppress: BodyTopLevelProperties
     where: $.definitions.Extension.properties
     from: extensions.json
@@ -233,7 +272,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -243,6 +281,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_kubernetesconfiguration']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

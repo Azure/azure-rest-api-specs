@@ -10,7 +10,7 @@ go:
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum and then remove it from the generated code to avoid the generator generates the code by hard-coding the single-entry enum value
     # this directive adds a DummyOrchestrationServiceName to the enum type
-  - from: compute.json
+  - from: ComputeRP/virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
