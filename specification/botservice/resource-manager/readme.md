@@ -37,7 +37,16 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 ```yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.BotService/preview/2022-06-15-preview/botservice.json
-  - Microsoft.BotService/preview/2022-06-15-preview/privatelinks.json
+directive:
+  - suppress: R4009
+    from: botservice.json
+    reason: We don not yet support systemdata
+  - suppress: R3016
+    from: botservice.json
+    reason: app settings keys are case sensitive
+  - suppress: R3018
+    from: botservice.json
+    reason: app settings for ValidateAuthority needs to be boolean
 ```
 ### Tag: package-preview-2021-05
 
