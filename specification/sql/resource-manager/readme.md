@@ -296,15 +296,10 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
-- Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
-- Microsoft.Sql/stable/2014-04-01/dataMasking.json
-- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01-legacy/sql.core_legacy.json
-- Microsoft.Sql/stable/2014-04-01-legacy/usages_legacy.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseColumns.json
@@ -420,7 +415,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-02-01-preview/DataMaskingRules.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/GeoBackupPolicies.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/RecoverableDatabases.json
-- Microsoft.Sql/preview/2022-02-01-preview/ServerUsages.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/ServerUsages.json
 
 # Needed when there is more than one input file
 override-info:
