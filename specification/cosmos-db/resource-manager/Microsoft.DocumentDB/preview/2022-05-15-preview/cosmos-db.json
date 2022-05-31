@@ -7439,6 +7439,11 @@
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
           "type": "boolean"
+        },
+        "keysMetadata": {
+          "description": "The object that represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
         }
       }
     },
@@ -7584,6 +7589,11 @@
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
           "type": "boolean"
+        },
+        "keysMetadata": {
+          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
         }
       },
       "required": [
@@ -7753,6 +7763,11 @@
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
           "type": "boolean"
+        },
+        "keysMetadata": {
+          "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
         }
       }
     },
@@ -9620,6 +9635,40 @@
       "x-ms-enum": {
         "name": "NetworkAclBypass",
         "modelAsString": false
+      }
+    },
+    "AccountKeyMetadata": {
+      "description": "The metadata related to an access key for a given database account.",
+      "type": "object",
+      "properties": {
+        "generationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Generation time in UTC of the key in ISO-8601 format. A value of null means that the time of the last key regeneration was before {DATE OF APRIL DEPLOYMENT}."
+        }
+      }
+    },
+    "DatabaseAccountKeysMetadata": {
+      "description": "The metadata related to each access key for the given Cosmos DB database account.",
+      "type": "object",
+      "properties": {
+        "primaryMasterKey": {
+          "description": "The metadata related to the Primary Read-Write Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "secondaryMasterKey": {
+          "description": "The metadata related to the Secondary Read-Write Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "primaryReadonlyMasterKey": {
+          "description": "The metadata related to the Primary Read-Only Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "secondaryReadonlyMasterKey": {
+          "description": "The metadata related to the Secondary Read-Only Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        }
       }
     },
     "DiagnosticLogSettings": {
