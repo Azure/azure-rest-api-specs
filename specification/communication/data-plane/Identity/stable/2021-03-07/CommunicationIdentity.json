@@ -190,6 +190,30 @@
     }
   },
   "definitions": {
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "chat",
+        "voip"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true
+      }
+    },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "properties": {
+        "createTokenWithScopes": {
+          "description": "Also create access token for the created identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
     "CommunicationIdentity": {
       "description": "A communication identity.",
       "required": [
@@ -222,24 +246,6 @@
         }
       }
     },
-    "CommunicationIdentityAccessTokenRequest": {
-      "required": [
-        "scopes"
-      ],
-      "type": "object",
-      "properties": {
-        "scopes": {
-          "description": "List of scopes attached to the token.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentityTokenScope"
-          }
-        },
-        "validity": {
-          "type": "string"
-        }
-      }
-    },
     "CommunicationIdentityAccessTokenResult": {
       "description": "A communication identity with access token.",
       "required": [
@@ -255,28 +261,23 @@
         }
       }
     },
-    "CommunicationIdentityCreateRequest": {
+    "CommunicationIdentityAccessTokenRequest": {
+      "required": [
+        "scopes"
+      ],
       "type": "object",
       "properties": {
-        "createTokenWithScopes": {
-          "description": "Also create access token for the created identity.",
+        "scopes": {
+          "description": "List of scopes attached to the token.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
+        },
+        "validity": {
+          "format": "date-span",
+          "type": "string"
         }
-      }
-    },
-    "CommunicationIdentityTokenScope": {
-      "description": "List of scopes for an access token.",
-      "enum": [
-        "chat",
-        "voip"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CommunicationIdentityTokenScope",
-        "modelAsString": true
       }
     }
   },
