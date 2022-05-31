@@ -1,0 +1,461 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-05-17-preview",
+    "title": "scan",
+    "description": "Scan Resource Provider API",
+    "x-ms-code-generation-settings": {
+      "name": "scanClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureScan/scanningAccounts/{accountName}": {
+      "put": {
+        "operationId": "AzureScanningAccount_Create",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/createScanningAccount.json"
+          }
+        },
+        "description": "Create a Scan Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "scanningAccount",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccount"
+            },
+            "description": "Parameters to create the scanning account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccount"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "AzureScanningAccount_Update",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/updateScanningAccount.json"
+          }
+        },
+        "description": "Update a Scan Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "scanningAccountPatch",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccountPatch"
+            },
+            "description": "Parameters to update the scanning account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ]
+      },
+      "get": {
+        "operationId": "AzureScanningAccount_Get",
+        "description": "Get a Scan Account",
+        "x-ms-examples": {
+          "Get Scanning Account": {
+            "$ref": "./examples/getScanningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ]
+      },
+      "delete": {
+        "operationId": "AzureScanningAccount_Delete",
+        "description": "Delete a Scan Account",
+        "x-ms-examples": {
+          "Delete Scanning Account": {
+            "$ref": "./examples/deleteScanningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Resource deletion is in progress"
+          },
+          "204": {
+            "description": "The resource was not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ],
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AzureScan/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available API operations for scanning resource.",
+        "x-ms-examples": {
+          "List Scanning Account operations": {
+            "$ref": "./examples/listScanningAccountOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureScan/scanningAccounts": {
+      "get": {
+        "operationId": "AzureScanningAccount_ListBySubscription",
+        "description": "Lists Scanning Accounts within a subscription",
+        "x-ms-examples": {
+          "List Scanning Accounts by Subscription": {
+            "$ref": "./examples/listScanningAccountsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all scanning accounts in the specified subscription",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccounts"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureScan/scanningAccounts": {
+      "get": {
+        "operationId": "AzureScanningAccount_ListByResourceGroup",
+        "description": "List Scanning Accounts within a resource group",
+        "x-ms-examples": {
+          "List Scanning Accounts by Resource Group": {
+            "$ref": "./examples/listScanningAccountsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all Scanning accounts in the specified resource group",
+            "schema": {
+              "$ref": "#/definitions/ScanningAccounts"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ScanningAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScanningAccounts": {
+      "description": "The paginated list of scanning accounts",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of scanning accounts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanningAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of scanning account",
+          "type": "string"
+        }
+      }
+    },
+    "ScanningAccount": {
+      "description": "Scanning account resource",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScanProfileProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ScanProfileProperties": {
+      "description": "Properties of the scan profile",
+      "type": "object",
+      "required": [
+        "aadClientId"
+      ],
+      "properties": {
+        "aadClientId": {
+          "$ref": "#/definitions/AadClientId"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AadClientId": {
+      "description": "AAD client Id of the scan profile",
+      "type": "string"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the scanning account",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ScanningAccountPatch": {
+      "description": "Parameters for creating or updating a scanning account",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScanningAccountPatchProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ScanningAccountPatchProperties": {
+      "description": "Properties of the scanning account",
+      "type": "object",
+      "properties": {
+        "aadClientId": {
+          "$ref": "#/definitions/AadClientId"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "name": "accountName",
+      "description": "Scanning account name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
