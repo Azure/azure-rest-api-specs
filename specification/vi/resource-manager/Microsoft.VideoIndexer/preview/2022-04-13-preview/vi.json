@@ -224,7 +224,7 @@
           "200": {
             "description": "The Azure Video Indexer account properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountForGet"
             }
           },
           "default": {
@@ -273,7 +273,7 @@
           "200": {
             "description": "The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountForPut"
             }
           },
           "400": {
@@ -356,7 +356,7 @@
             "name": "parameters",
             "description": "The parameters to provide for the Azure Video Indexer account.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountForPut"
             }
           }
         ],
@@ -364,7 +364,7 @@
           "200": {
             "description": "The resource was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountForPut"
             }
           },
           "400": {
@@ -726,7 +726,32 @@
         }
       }
     },
-    "Account": {
+    "AccountForGet": {
+      "description": "An Azure Video Indexer account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "List of account properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccountPropertiesForGetRequest"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountForPut": {
       "description": "An Azure Video Indexer account.",
       "type": "object",
       "properties": {
@@ -770,6 +795,58 @@
           "$ref": "#/definitions/Tags"
         }
       ]
+    },
+    "AccountPropertiesForGetRequest": {
+      "description": "Azure Video Indexer account properties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The account's tenant id",
+          "type": "string",
+          "readOnly": true,
+          "example": "2b9bcf6d-39d5-460a-a6bb-7b40b7ccf139"
+        },
+        "accountId": {
+          "description": "The account's data-plane ID",
+          "type": "string",
+          "readOnly": true,
+          "example": "3575690b-a569-449c-ab7b-11020f948f76"
+        },
+        "accountName": {
+          "description": "The account's name",
+          "type": "string",
+          "readOnly": true,
+          "example": "contoso-videoAnalyzer"
+        },
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
+          "$ref": "#/definitions/MediaServicesForPutRequest"
+        },
+        "totalSecondsIndexed": {
+          "description": "An integer representing the total seconds that have been indexed on the account",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the account at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "AccountPropertiesForPutRequest": {
       "description": "Azure Video Indexer account properties",
@@ -868,7 +945,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Account"
+            "$ref": "#/definitions/AccountForGet"
           },
           "description": "List of accounts and their properties."
         },
@@ -960,6 +1037,7 @@
           "type": "string",
           "readOnly": true,
           "description": "The access token.",
+          "x-ms-secret": true,
           "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjI0NDc3MzMsImV4cCI6MTY1Mzk4MzczMywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0"
         }
       }
@@ -1270,9 +1348,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the Azure Video Indexer account.",
-      "pattern": "^[A-Za-z0-9-]+$",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
       "maxLength": 50,
-      "minLength": 3,
       "x-ms-parameter-location": "method"
     }
   }
