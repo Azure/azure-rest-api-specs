@@ -6,12 +6,15 @@
     "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/atlas/{api-version}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
-      }
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
+      },
     ]
   },
   "basePath": "/catalog/api",
@@ -43,7 +46,7 @@
     }
   ],
   "paths": {
-    "/atlas/v2/entity": {
+    "/entity": {
       "post": {
         "tags": [
           "Entity"
