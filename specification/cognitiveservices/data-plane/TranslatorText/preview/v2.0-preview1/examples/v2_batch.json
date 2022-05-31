@@ -6,8 +6,8 @@
     "endpoint": "{endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "body": {
-      "source": {
-        "containerUrl": "https://myblob.blob.core.windows.net/sourceContainer",
+      "sourceContainerUrl": {
+        "url": "https://myblob.blob.core.windows.net/sourceContainer",
         "filters": [
           {
             "prefix": "pre",
@@ -17,7 +17,7 @@
         "language": "en"
       },
       "properties": {
-        "flight": "experimental",
+        "experimental": false,
         "pdfOutputAdditionalFormat": "OpenXmlWord",
         "category": "generalnn",
         "glossaries": [
@@ -25,7 +25,8 @@
             "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf",
             "format": "XLIFF"
           }
-        ]
+        ],
+        "allowFallback": true
       },
       "targets": [
         {
