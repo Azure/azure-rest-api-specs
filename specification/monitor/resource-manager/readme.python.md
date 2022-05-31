@@ -15,8 +15,9 @@ python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
 clear-output-folder: true
+multiapi: true
 batch:
   - tag: package-2022-04-01-only
   - tag: package-2022-02-01-preview-only
