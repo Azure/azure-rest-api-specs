@@ -41,6 +41,9 @@ directive:
   - suppress: R4009
     from: botservice.json
     reason: We don not yet support systemdata
+  - suppress: R4018
+    from: botservice.json
+    reason: We don not yet support systemdata
   - suppress: R3016
     from: botservice.json
     reason: app settings keys are case sensitive
