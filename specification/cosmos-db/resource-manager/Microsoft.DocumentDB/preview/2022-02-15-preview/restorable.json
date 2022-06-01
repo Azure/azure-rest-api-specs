@@ -1689,12 +1689,33 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../preview/2022-02-15-preview/cosmos-db.json#/definitions/TableName"
+            "$ref": "#/definitions/RestorableTableResourcesGetResult"
           },
           "description": "List of restorable table names."
         }
       },
       "description": "List of restorable table names."
+    },
+    "RestorableTableResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the Table."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
     },
     "OperationType": {
       "description": "Enum to indicate the operation type of the event.",
