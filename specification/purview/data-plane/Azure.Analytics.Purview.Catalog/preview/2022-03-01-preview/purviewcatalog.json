@@ -1032,7 +1032,7 @@
           "Entity"
         ],
         "description": "Delete business metadata from an entity.",
-        "operationId": "Entity_DeleteBusinessAttributes",
+        "operationId": "Entity_DeleteBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1077,7 +1077,7 @@
           "Entity"
         ],
         "description": "Add or update business attributes",
-        "operationId": "Entity_AddOrUpdateBusinessAttributes",
+        "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1149,7 +1149,7 @@
           "Entity"
         ],
         "description": "Upload the file for creating Business Metadata in BULK",
-        "operationId": "Entity_ImportBusinessAttributes",
+        "operationId": "Entity_ImportBusinessMetadata",
         "consumes": [
           "multipart/form-data"
         ],
@@ -2034,6 +2034,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/termGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "in": "body",
