@@ -3,7 +3,7 @@
   "info": {
     "title": "Form Recognizer Client",
     "description": "Extracts content, layout, and structured data from documents.",
-    "version": "2022-01-30-preview"
+    "version": "2022-06-30-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -45,7 +45,12 @@
           "image/jpeg",
           "image/png",
           "image/tiff",
-          "image/bmp"
+          "image/bmp",
+          "image/heif",
+          "text/html",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation"
         ],
         "produces": [
           "application/json"
@@ -808,7 +813,7 @@
       "description": "API version.",
       "type": "string",
       "enum": [
-        "2022-01-30-preview"
+        "2022-06-30-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersion",
@@ -1216,6 +1221,13 @@
             "$ref": "#/definitions/DocumentPage"
           }
         },
+        "paragraphs": {
+          "description": "Extracted paragraphs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentParagraph"
+          }
+        },
         "tables": {
           "description": "Extracted tables.",
           "type": "array",
@@ -1228,13 +1240,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentKeyValuePair"
-          }
-        },
-        "entities": {
-          "description": "Extracted entities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentEntity"
           }
         },
         "styles": {
@@ -1264,16 +1269,25 @@
       "description": "Content and layout elements extracted from a page from the input.",
       "type": "object",
       "required": [
+        "kind",
         "pageNumber",
-        "angle",
-        "width",
-        "height",
-        "unit",
-        "words",
-        "lines",
         "spans"
       ],
       "properties": {
+        "kind": {
+          "description": "Kind of document page.",
+          "type": "string",
+          "enum": [
+            "document",
+            "sheet",
+            "slide",
+            "image"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentPageKind",
+            "modelAsString": true
+          }
+        },
         "pageNumber": {
           "description": "1-based page number in the input document.",
           "type": "integer",
@@ -1298,7 +1312,7 @@
           "minimum": 0
         },
         "unit": {
-          "description": "The unit used by the width, height, and boundingBox properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
+          "description": "The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
           "type": "string",
           "enum": [
             "pixel",
@@ -1330,6 +1344,13 @@
             "$ref": "#/definitions/DocumentSelectionMark"
           }
         },
+        "images": {
+          "description": "Extracted images from the page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentImage"
+          }
+        },
         "lines": {
           "description": "Extracted lines from the page, potentially containing both textual and visual elements.",
           "type": "array",
@@ -1352,9 +1373,9 @@
           "description": "Text content of the word.",
           "type": "string"
         },
-        "boundingBox": {
-          "description": "Bounding box of the word.",
-          "$ref": "#/definitions/BoundingBox"
+        "polygon": {
+          "description": "Bounding polygon of the word.",
+          "$ref": "#/definitions/BoundingPolygon"
         },
         "span": {
           "description": "Location of the word in the reading order concatenated content.",
@@ -1379,9 +1400,9 @@
           "description": "State of the selection mark.",
           "$ref": "#/definitions/DocumentSelectionMarkState"
         },
-        "boundingBox": {
-          "description": "Bounding box of the selection mark.",
-          "$ref": "#/definitions/BoundingBox"
+        "polygon": {
+          "description": "Bounding polygon of the selection mark.",
+          "$ref": "#/definitions/BoundingPolygon"
         },
         "span": {
           "description": "Location of the selection mark in the reading order concatenated content.",
@@ -1389,6 +1410,34 @@
         },
         "confidence": {
           "description": "Confidence of correctly extracting the selection mark.",
+          "$ref": "#/definitions/Confidence"
+        }
+      }
+    },
+    "DocumentImage": {
+      "description": "An image object detected in the page.",
+      "type": "object",
+      "required": [
+        "span",
+        "pageRef",
+        "confidence"
+      ],
+      "properties": {
+        "polygon": {
+          "description": "Bounding polygon of the image.",
+          "$ref": "#/definitions/BoundingPolygon"
+        },
+        "span": {
+          "description": "Location of the image in the reading order concatenated content.",
+          "$ref": "#/definitions/DocumentSpan"
+        },
+        "pageRef": {
+          "description": "0-based index of the global pages array that containing the content of the image.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "confidence": {
+          "description": "Confidence of correctly identifying the image.",
           "$ref": "#/definitions/Confidence"
         }
       }
@@ -1417,12 +1466,56 @@
           "description": "Concatenated content of the contained elements in reading order.",
           "type": "string"
         },
-        "boundingBox": {
-          "description": "Bounding box of the line.",
-          "$ref": "#/definitions/BoundingBox"
+        "polygon": {
+          "description": "Bounding polygon of the line.",
+          "$ref": "#/definitions/BoundingPolygon"
         },
         "spans": {
           "description": "Location of the line in the reading order concatenated content.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          }
+        }
+      }
+    },
+    "DocumentParagraph": {
+      "description": "A paragraph object consisting with contiguous lines generally with common alignment and spacing.",
+      "type": "object",
+      "required": [
+        "content",
+        "spans"
+      ],
+      "properties": {
+        "role": {
+          "description": "Semantic role of the paragraph.",
+          "type": "string",
+          "enum": [
+            "pageHeader",
+            "pageFooter",
+            "pageNumber",
+            "title",
+            "sectionHeading",
+            "footnote"
+          ],
+          "x-ms-enum": {
+            "name": "ParagraphRole",
+            "modelAsString": true
+          }
+        },
+        "content": {
+          "description": "Concatenated content of the paragraph in reading order.",
+          "type": "string"
+        },
+        "boundingRegions": {
+          "description": "Bounding regions covering the paragraph.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          }
+        },
+        "spans": {
+          "description": "Location of the paragraph in the reading order concatenated content.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentSpan"
@@ -1457,6 +1550,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentTableCell"
+          }
+        },
+        "caption": {
+          "description": "Caption associated with the table.",
+          "$ref": "#/definitions/DocumentCaption"
+        },
+        "footnotes": {
+          "description": "Footnotes associated with the table.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentFootnote"
           }
         },
         "boundingRegions": {
@@ -1545,6 +1649,62 @@
         }
       }
     },
+    "DocumentCaption": {
+      "description": "An object representing the location and content of a table caption.",
+      "type": "object",
+      "required": [
+        "content",
+        "spans"
+      ],
+      "properties": {
+        "content": {
+          "description": "Table caption content.",
+          "type": "string"
+        },
+        "boundingRegions": {
+          "description": "Bounding regions covering the table caption.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          }
+        },
+        "spans": {
+          "description": "Location of the table caption in the reading order concatenated content.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          }
+        }
+      }
+    },
+    "DocumentFootnote": {
+      "description": "An object representing the location and content of a table footnote.",
+      "type": "object",
+      "required": [
+        "content",
+        "spans"
+      ],
+      "properties": {
+        "content": {
+          "description": "Table footnote content.",
+          "type": "string"
+        },
+        "boundingRegions": {
+          "description": "Bounding regions covering the table footnote.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          }
+        },
+        "spans": {
+          "description": "Location of the table footnote in the reading order concatenated content.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          }
+        }
+      }
+    },
     "DocumentKeyValuePair": {
       "description": "An object representing a form field with distinct field label (key) and field value (may be empty).",
       "type": "object",
@@ -1595,48 +1755,6 @@
         }
       }
     },
-    "DocumentEntity": {
-      "description": "An object representing various categories of entities.",
-      "type": "object",
-      "required": [
-        "category",
-        "content",
-        "spans",
-        "confidence"
-      ],
-      "properties": {
-        "category": {
-          "description": "Entity type.",
-          "type": "string"
-        },
-        "subCategory": {
-          "description": "Entity sub type.",
-          "type": "string"
-        },
-        "content": {
-          "description": "Entity content.",
-          "type": "string"
-        },
-        "boundingRegions": {
-          "description": "Bounding regions covering the entity.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BoundingRegion"
-          }
-        },
-        "spans": {
-          "description": "Location of the entity in the reading order concatenated content.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentSpan"
-          }
-        },
-        "confidence": {
-          "description": "Confidence of correctly extracting the entity.",
-          "$ref": "#/definitions/Confidence"
-        }
-      }
-    },
     "DocumentStyle": {
       "description": "An object representing observed text styles.",
       "type": "object",
@@ -1666,12 +1784,12 @@
       "description": "An object representing the detected language for a given text span.",
       "type": "object",
       "required": [
-        "languageCode",
+        "locale",
         "spans",
         "confidence"
       ],
       "properties": {
-        "languageCode": {
+        "locale": {
           "description": "Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"zh-Hans\").",
           "type": "string"
         },
@@ -1693,7 +1811,6 @@
       "type": "object",
       "required": [
         "docType",
-        "fields",
         "spans",
         "confidence"
       ],
@@ -1805,6 +1922,10 @@
           "description": "Currency value.",
           "$ref": "#/definitions/CurrencyValue"
         },
+        "valueAddress": {
+          "description": "Address value.",
+          "$ref": "#/definitions/AddressValue"
+        },
         "content": {
           "description": "Field content.",
           "type": "string"
@@ -1844,7 +1965,8 @@
         "signature",
         "array",
         "object",
-        "currency"
+        "currency",
+        "address"
       ],
       "x-ms-enum": {
         "name": "DocumentFieldType",
@@ -1865,6 +1987,44 @@
         },
         "currencySymbol": {
           "description": "Currency symbol label, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "AddressValue": {
+      "description": "Address field value.",
+      "type": "object",
+      "properties": {
+        "houseNumber": {
+          "description": "House or building number.",
+          "type": "string"
+        },
+        "poBox": {
+          "description": "Post office box number.",
+          "type": "string"
+        },
+        "road": {
+          "description": "Street name.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Name of city, town, village, etc.",
+          "type": "string"
+        },
+        "state": {
+          "description": "First-level administrative division.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code used for mail sorting.",
+          "type": "string"
+        },
+        "countryRegion": {
+          "description": "Country/region.",
+          "type": "string"
+        },
+        "streetAddress": {
+          "description": "Street-level address, excluding city, state, countryRegion, and postalCode.",
           "type": "string"
         }
       }
@@ -1897,22 +2057,20 @@
       "minLength": 2,
       "maxLength": 64
     },
-    "BoundingBox": {
-      "description": "Quadrangle bounding box, with coordinates specified relative to the top-left of the page. The eight numbers represent the four points, clockwise from the top-left corner relative to the text orientation.",
+    "BoundingPolygon": {
+      "description": "Bounding polygon, with coordinates specified relative to the top-left of the page. The numbers represent the x, y values of the polygon vertices, clockwise from the left (-180 degrees inclusive) relative to the element orientation.",
       "type": "array",
-      "minItems": 8,
-      "maxItems": 8,
       "items": {
         "type": "number",
         "minimum": 0
       }
     },
     "BoundingRegion": {
-      "description": "Bounding box on a specific page of the input.",
+      "description": "Bounding polygon on a specific page of the input.",
       "type": "object",
       "required": [
         "pageNumber",
-        "boundingBox"
+        "polygon"
       ],
       "properties": {
         "pageNumber": {
@@ -1921,9 +2079,9 @@
           "format": "int32",
           "minimum": 1
         },
-        "boundingBox": {
-          "description": "Bounding box on the page, or the entire page if not specified.",
-          "$ref": "#/definitions/BoundingBox"
+        "polygon": {
+          "description": "Bounding polygon on the page, or the entire page if not specified.",
+          "$ref": "#/definitions/BoundingPolygon"
         }
       }
     },
@@ -1987,7 +2145,7 @@
       "type": "string",
       "in": "query",
       "enum": [
-        "2022-01-30-preview"
+        "2022-06-30-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersion",
