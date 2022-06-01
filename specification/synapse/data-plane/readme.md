@@ -455,6 +455,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.

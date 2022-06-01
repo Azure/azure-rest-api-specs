@@ -74,6 +74,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Python
