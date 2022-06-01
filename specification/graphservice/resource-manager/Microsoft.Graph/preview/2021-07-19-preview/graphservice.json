@@ -3,7 +3,7 @@
   "info": {
     "title": "GraphServices",
     "description": "Microsoft Graph Metering Service",
-    "version": "2022-04-18-privatepreview"
+    "version": "2021-07-19-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -139,7 +139,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -195,7 +195,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -241,7 +241,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -285,13 +285,275 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Delete AzureAdApplication resource": {
             "$ref": "./examples/AzureADApplication_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Graph/azureAdApplicationPrototype": {
+      "get": {
+        "description": "Returns list of AzureAdApplicationPrototype apps.",
+        "operationId": "AzureAdApplicationPrototype_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AzureAdApplicationPrototype details.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update AzureAdApplicationPrototype resource": {
+            "$ref": "./examples/AzureAdApplicationPrototype_List.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Graph/azureAdApplicationPrototype": {
+      "get": {
+        "description": "Returns list of AzureAdApplicationPrototype belonging to a subscription.",
+        "operationId": "AzureAdApplicationPrototype_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AzureAdApplicationPrototype details.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of AzureAdApplicationPrototype by subscription": {
+            "$ref": "./examples/AzureAdApplicationPrototype_List_Sub.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Graph/azureAdApplicationPrototype/{resourceName}": {
+      "get": {
+        "description": "Returns AzureAdApplicationPrototype resource for a given name.",
+        "operationId": "AzureAdApplicationPrototype_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AzureAdApplicationPrototype details.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get AzureAdApplicationPrototype": {
+            "$ref": "./examples/AzureAdApplicationPrototype_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update AzureAdApplicationPrototype resource.",
+        "operationId": "AzureAdApplicationPrototype_CreateAndUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "AzureAdApplicationPrototype",
+            "description": "AzureAdApplicationPrototype details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
+            }
+          },
+          "201": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create AzureAdApplicationPrototype resource": {
+            "$ref": "./examples/AzureAdApplicationPrototype_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update AzureAdApplicationPrototype details.",
+        "operationId": "AzureAdApplicationPrototype_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "AzureAdApplicationPrototypePatch",
+            "description": "AzureAdApplicationPrototype patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update AzureAdApplicationPrototype resource": {
+            "$ref": "./examples/AzureAdApplicationPrototype_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a AzureAdApplicationPrototype resource.",
+        "operationId": "AzureAdApplicationPrototype_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account was deleted."
+          },
+          "202": {
+            "description": "Async operation to delete Account was created."
+          },
+          "204": {
+            "description": "Account has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete AzureAdApplicationPrototype resource": {
+            "$ref": "./examples/AzureAdApplicationPrototype_Delete.json"
           }
         }
       }
@@ -315,7 +577,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -445,6 +707,88 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureAdApplicationResource"
+          }
+        }
+      }
+    },
+    "AzureAdApplicationPrototypeResource": {
+      "type": "object",
+      "description": "AzureAdApplicationPrototype details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "required": [
+            "appId"
+          ],
+          "properties": {
+            "provisioningState": {
+              "description": "provisioning state",
+              "type": "string",
+              "readOnly": true
+            },
+            "appId": {
+              "type": "string",
+              "description": "User owned App Id",
+              "pattern": "^[A-Za-z0-9-]+$"
+            }
+          }
+        }
+      }
+    },
+    "AzureAdApplicationPrototypePatchResource": {
+      "type": "object",
+      "description": "AzureAdApplicationPrototype patch properties",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "provisioning state",
+              "type": "string",
+              "readOnly": true
+            },
+            "appId": {
+              "type": "string",
+              "description": "User owned App Id",
+              "pattern": "^[A-Za-z0-9-]+$"
+            }
+          }
+        }
+      }
+    },
+    "AzureAdApplicationPrototypeResourceList": {
+      "description": "The list of AzureAdApplicationPrototype.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of AzureAdApplicationPrototype list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureAdApplicationPrototypeResource"
           }
         }
       }
