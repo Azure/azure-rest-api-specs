@@ -490,8 +490,8 @@
         }
       }
     },
-    "/datasets/{id}/commitBlockList": {
-      "put": {
+    "/datasets/{id}/blocks/commit": {
+      "post": {
         "tags": [
           "Custom Speech datasets for model adaptation:"
         ],
@@ -3803,8 +3803,13 @@
         }
       ],
       "properties": {
-        "adaptableWithDatasetKinds": {
-          "$ref": "#/definitions/ModelAdaptableWithDatasetKinds"
+        "supportsAdaptationsWith": {
+          "description": "Supported dataset kinds to adapt the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetKind"
+          },
+          "readOnly": true
         }
       }
     },
@@ -4109,6 +4114,24 @@
         "files": {
           "format": "uri",
           "description": "The location to get all files of this entity. See operation \"Datasets_ListFiles\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "commitBlocks": {
+          "format": "uri",
+          "description": "The location to commit the list of blocks when upload using blocks. See operation \"Datasets_CommitBlocks\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "listBlocks": {
+          "format": "uri",
+          "description": "The location to get list of blocks of this entity when upload using blocks. See operation \"Datasets_GetDatasetBlocks\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uploadBlocks": {
+          "format": "uri",
+          "description": "The location to upload blocks to when upload using blocks. See operation \"Datasets_UploadBlock\" for more details.",
           "type": "string",
           "readOnly": true
         }
@@ -5304,37 +5327,6 @@
         }
       }
     },
-    "ModelAdaptableWithDatasetKinds": {
-      "title": "ModelAdaptableWithDatasetKinds",
-      "type": "object",
-      "properties": {
-        "language": {
-          "description": "A value indicating whether adaptation with text (language dataset) is supported.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "acoustic": {
-          "description": "A value indicating whether adaptation with audio and transcription (acoustic dataset) is supported.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "pronunciation": {
-          "description": "A value indicating whether adaptation with pronunciation dataset is supported.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "audioFiles": {
-          "description": "A value indicating whether adaptation with only audio (audio files dataset) is supported.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "languageMarkdown": {
-          "description": "A value indicating whether adaptation with classes (language markdown dataset) is supported.",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
     "ModelCopy": {
       "title": "ModelCopy",
       "required": [
@@ -5887,12 +5879,17 @@
       "description": "Features supported by the model.",
       "type": "object",
       "properties": {
-        "transcription": {
-          "description": "A value indicating whether transcription (batch or live) is supported.",
+        "supportsTranscriptions": {
+          "description": "A value indicating whether batch transcription is supported.",
           "type": "boolean",
           "readOnly": true
         },
-        "transcriptionOnSpeechContainer": {
+        "supportsEndpoints": {
+          "description": "A value indicating whether creation of endpoints for live transcription is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "supportsTranscriptionsOnSpeechContainers": {
           "description": "A value indicating whether this model can be used for transcription on speech container. This feature can be added on existing models when it becomes usable on speech container.",
           "type": "boolean",
           "readOnly": true
