@@ -456,16 +456,6 @@
           "$ref": "#/definitions/AuthenticationSettingsContract",
           "description": "Collection of authentication settings included into this API."
         },
-        "oAuth2AuthenticationSettings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
-          },
-          "x-ms-identifiers": [
-            "authorizationServerId"
-          ],
-          "description": "Collection of OAuth2 authentication settings included into this API."
-        },
         "subscriptionKeyParameterNames": {
           "$ref": "#/definitions/SubscriptionKeyParameterNamesContract",
           "description": "Protocols over which API is made available."
@@ -1092,6 +1082,16 @@
         "openid": {
           "$ref": "#/definitions/OpenIdAuthenticationSettingsContract",
           "description": "OpenID Connect Authentication Settings"
+        },
+        "oAuth2AuthenticationSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
+          },
+          "x-ms-identifiers": [
+            "authorizationServerId"
+          ],
+          "description": "Collection of OAuth2 authentication settings included into this API."
         }
       },
       "description": "API Authentication Settings."

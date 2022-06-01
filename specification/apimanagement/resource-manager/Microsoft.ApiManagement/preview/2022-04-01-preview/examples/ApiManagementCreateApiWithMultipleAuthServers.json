@@ -8,16 +8,18 @@
     "parameters": {
       "properties": {
         "description": "apidescription5200",
-        "oAuth2AuthenticationSettings": [
-          {
-            "authorizationServerId": "authorizationServerId2283",
-            "scope": "oauth2scope2580"
-          },
-          {
-            "authorizationServerId": "authorizationServerId2284",
-            "scope": "oauth2scope2581"
-          }
-        ],
+        "authenticationSettings": {
+          "oAuth2AuthenticationSettings": [
+            {
+              "authorizationServerId": "authorizationServerId2283",
+              "scope": "oauth2scope2580"
+            },
+            {
+              "authorizationServerId": "authorizationServerId2284",
+              "scope": "oauth2scope2581"
+            }
+          ]
+        },
         "subscriptionKeyParameterNames": {
           "header": "header4520",
           "query": "query3037"
@@ -48,16 +50,6 @@
             "http",
             "https"
           ],
-          "oAuth2AuthenticationSettings": [
-            {
-              "authorizationServerId": "authorizationServerId2283",
-              "scope": "oauth2scope2580"
-            },
-            {
-              "authorizationServerId": "authorizationServerId2284",
-              "scope": "oauth2scope2581"
-            }
-          ],
           "subscriptionKeyParameterNames": {
             "header": "header4520",
             "query": "query3037"
@@ -87,16 +79,22 @@
             "http",
             "https"
           ],
-          "oAuth2AuthenticationSettings": [
-            {
+          "authenticationSettings": {
+            "oAuth2": {
               "authorizationServerId": "authorizationServerId2283",
               "scope": "oauth2scope2580"
             },
-            {
-              "authorizationServerId": "authorizationServerId2284",
-              "scope": "oauth2scope2581"
-            }
-          ],
+            "oAuth2AuthenticationSettings": [
+              {
+                "authorizationServerId": "authorizationServerId2283",
+                "scope": "oauth2scope2580"
+              },
+              {
+                "authorizationServerId": "authorizationServerId2284",
+                "scope": "oauth2scope2581"
+              }
+            ]
+          },
           "subscriptionKeyParameterNames": {
             "header": "header4520",
             "query": "query3037"
