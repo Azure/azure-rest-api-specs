@@ -6417,7 +6417,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -6436,14 +6436,14 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/WorkflowExportValidityResult"
             }
           },
           "default": {
@@ -6469,7 +6469,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -6488,14 +6488,14 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/WorkflowExportResult"
             }
           },
           "default": {
@@ -13221,6 +13221,165 @@
         "workflowExportOptions": {
           "type": "string",
           "description": "The workflow export options flags. Possible options are: CloneConnections, GenerateInfrastructureTemplates"
+        }
+      }
+    },
+    "ValidationState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Failed",
+        "SucceededWithWarning",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationState",
+        "modelAsString": true
+      },
+      "description": "The validation state."
+    },
+    "ResourceExportValidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The resource export validity.",
+      "properties": {
+        "validationState": {
+          "description": "The validation state for the resource.",
+          "$ref": "#/definitions/ValidationState"
+        },
+        "details": {
+          "description": "Error response describing why the operation failed.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ConnectionExportValidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The connection export validity.",
+      "properties": {
+        "validationState": {
+          "description": "The validation state for the connection.",
+          "$ref": "#/definitions/ValidationState"
+        },
+        "details": {
+          "description": "Error response describing why the operation failed.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the connection."
+        }
+      }
+    },
+    "WorkflowExportValidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The workflow export validity.",
+      "properties": {
+        "validationState": {
+          "description": "The validation state for the workflow.",
+          "$ref": "#/definitions/ValidationState"
+        },
+        "workflowOperations": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceExportValidity"
+          },
+          "description": "The workflow operations export validity."
+        },
+        "connections": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ConnectionExportValidity"
+          },
+          "description": "The connections export validity."
+        },
+        "parameters": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceExportValidity"
+          },
+          "description": "The parameters export validity."
+        }
+      }
+    },
+    "WorkflowExportValidityResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The workflow export validity result.",
+      "properties": {
+        "validationState": {
+          "description": "The validation state for the workflow export.",
+          "$ref": "#/definitions/ValidationState"
+        },
+        "workflows": {
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowExportValidity"
+          },
+          "description": "The workflows export validity."
+        }
+      }
+    },
+    "ExportDetailCategory": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Information",
+        "RequiredStep"
+      ],
+      "x-ms-enum": {
+        "name": "ExportDetailCategory",
+        "modelAsString": true
+      },
+      "description": "The export detail category."
+    },
+    "ExportDetailCode": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "ConnectionCloningUnsupported"
+      ],
+      "x-ms-enum": {
+        "name": "ExportDetailCode",
+        "modelAsString": true
+      },
+      "description": "The export detail code."
+    },
+    "ExportDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The workflow export detail.",
+      "properties": {
+        "exportDetailCategory": {
+          "description": "The export detail category.",
+          "$ref": "#/definitions/ExportDetailCategory"
+        },
+        "exportDetailCode": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ExportDetailCode"
+          },
+          "description": "The export detail code."
+        },
+        "exportDetailMessage": {
+          "type": "string",
+          "description": "The export detail message."
+        }
+      }
+    },
+    "WorkflowExportResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The workflow export result.",
+      "properties": {
+        "details": {
+          "description": "The export details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportDetail",
+            "description": "The export detail."
+          }
+        },
+        "packageLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "The link for the export package."
         }
       }
     }
