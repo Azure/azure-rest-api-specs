@@ -217,6 +217,36 @@
             }
           },
           {
+            "name": "featuresMode",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "disabled",
+              "enabled"
+            ],
+            "x-ms-enum": {
+              "name": "FeaturesMode",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "disabled",
+                  "name": "Disabled",
+                  "description": "Set 'disabled' to not include query result features."
+                },
+                {
+                  "value": "enabled",
+                  "name": "Enabled",
+                  "description": "Use 'disabled' to expose more query result features: per field similarity score, per field term frequency, and per field number of unique tokens matched."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies if your query will return result feaetures used to compute the relevance score of a document in relation to the query, default is 'disabled'",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "scoringParameter",
             "in": "query",
             "type": "array",
