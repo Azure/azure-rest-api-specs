@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure IoT Central",
     "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale.",
-    "version": "1.0"
+    "version": "2022-05-31"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{subdomain}.{baseDomain}",
@@ -27,6 +27,33 @@
     "application/json"
   ],
   "definitions": {
+    "ADGroupUser": {
+      "description": "The active directory group user definition.",
+      "x-ms-discriminator-value": "adGroup",
+      "allOf": [
+        {
+          "$ref": "#/definitions/User"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The AAD tenant ID of the AD Group.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The AAD object ID of the AD Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tenantId",
+        "objectId"
+      ]
+    },
+    "AnyValue": {
+      "description": "Can be anything: string, number, array, object, etc. (except `null`)"
+    },
     "ApiToken": {
       "description": "The API access token definition.",
       "allOf": [
@@ -74,6 +101,7 @@
       ]
     },
     "Attestation": {
+      "description": "The attestation definition.",
       "type": "object",
       "properties": {
         "type": {
@@ -139,6 +167,13 @@
         "simulated": {
           "description": "Whether the device is simulated.",
           "type": "boolean"
+        },
+        "organizations": {
+          "description": "List of organization IDs that the device is a part of, only one organization support today, multiple organizations will be supported soon.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -184,10 +219,10 @@
           "maximum": 30
         },
         "request": {
-          "description": "The payload for the device command."
+          "description": "The payload for the device command, support any primitive types or object."
         },
         "response": {
-          "description": "The payload of the device command response.",
+          "description": "The payload of the device command response, support any primitive types or object.",
           "readOnly": true
         },
         "responseCode": {
@@ -240,6 +275,64 @@
       },
       "required": [
         "idScope"
+      ]
+    },
+    "DeviceGroup": {
+      "description": "The device group definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the device group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the device group.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "Query defining which devices should be in this group, [Query Language Reference](https://aka.ms/iotcquery).",
+          "type": "string"
+        },
+        "description": {
+          "description": "Short summary of device group.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict in device group updates.",
+          "type": "string"
+        },
+        "organizations": {
+          "description": "List of organization IDs of the device group, only one organization support today, multiple organizations will be supported soon.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "filter"
+      ]
+    },
+    "DeviceGroupCollection": {
+      "description": "The paged results of device groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of device groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceGroup"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of device groups.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DeviceProperties": {
@@ -331,12 +424,157 @@
       "properties": {
         "email": {
           "description": "Email address of the user.",
-          "type": "string",
-          "format": "email"
+          "type": "string"
         }
       },
       "required": [
         "email"
+      ]
+    },
+    "Error": {
+      "description": "The response error definition",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details for current request.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorDetails": {
+      "description": "The detail information of the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message details."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Correlation Id for current request."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "description": "The time that error request failed."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "FileUpload": {
+      "description": "The file upload configuration definition.",
+      "type": "object",
+      "properties": {
+        "account": {
+          "description": "The storage account name where to upload the file to",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "The connection string used to configure the storage account",
+          "type": "string"
+        },
+        "container": {
+          "description": "The name of the container inside the storage account",
+          "type": "string"
+        },
+        "sasTtl": {
+          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the file upload configuration",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "pending",
+            "updating",
+            "deleting",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "FileUploadState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "pending",
+                "name": "Pending"
+              },
+              {
+                "value": "updating",
+                "name": "Updating"
+              },
+              {
+                "value": "deleting",
+                "name": "Deleting"
+              },
+              {
+                "value": "succeeded",
+                "name": "Succeeded"
+              },
+              {
+                "value": "failed",
+                "name": "Failed"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict with multiple uploads",
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString",
+        "container"
+      ]
+    },
+    "Organization": {
+      "description": "The organization definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the organization.",
+          "type": "string"
+        },
+        "parent": {
+          "description": "ID of the parent of the organization.",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of organizations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of organizations.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "Permission": {
@@ -377,6 +615,10 @@
       "properties": {
         "role": {
           "description": "ID of the role for this role assignment.",
+          "type": "string"
+        },
+        "organization": {
+          "description": "ID of the organization for this role assignment.",
           "type": "string"
         }
       },
@@ -640,6 +882,18 @@
             "schema": {
               "$ref": "#/definitions/ApiTokenCollection"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -670,6 +924,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ApiToken"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -709,6 +975,18 @@
             "schema": {
               "$ref": "#/definitions/ApiToken"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -735,6 +1013,228 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/deviceGroups": {
+      "get": {
+        "operationId": "DeviceGroups_List",
+        "summary": "Get the list of device groups in an application.",
+        "x-ms-examples": {
+          "List device groups": {
+            "$ref": "./examples/devicegroups_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/deviceGroups/{deviceGroupId}": {
+      "get": {
+        "operationId": "DeviceGroups_Get",
+        "summary": "Get the device group by ID.",
+        "x-ms-examples": {
+          "Get device group by ID": {
+            "$ref": "./examples/devicegroups_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceGroups_Create",
+        "summary": "Create or update a device group",
+        "description": "Create or update a device group.",
+        "x-ms-examples": {
+          "Create device group": {
+            "$ref": "./examples/devicegroups_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device group body.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceGroups_Update",
+        "summary": "Update a device group via patch",
+        "description": "Update an existing device group by ID.",
+        "x-ms-examples": {
+          "Update device device group": {
+            "$ref": "./examples/devicegroups_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device group patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceGroups_Remove",
+        "summary": "Delete a device group.",
+        "x-ms-examples": {
+          "Delete device group": {
+            "$ref": "./examples/devicegroups_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -742,7 +1242,7 @@
     "/deviceTemplates": {
       "get": {
         "operationId": "DeviceTemplates_List",
-        "summary": "Get the list of device templates in an application",
+        "summary": "Get the list of device templates in an application.",
         "x-ms-examples": {
           "List device templates": {
             "$ref": "./examples/devicetemplates_list.json"
@@ -762,6 +1262,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplateCollection"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -771,7 +1283,7 @@
         "operationId": "DeviceTemplates_Get",
         "summary": "Get a device template by ID",
         "x-ms-examples": {
-          "Get a device template by Id": {
+          "Get a device template by ID": {
             "$ref": "./examples/devicetemplates_get.json"
           }
         },
@@ -788,6 +1300,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -823,6 +1347,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -831,9 +1367,13 @@
         "summary": "Update the cloud properties and overrides of an existing device template via patch.",
         "x-ms-examples": {
           "Update a device template": {
-            "$ref": "./examples/devicetemplates_create.json"
+            "$ref": "./examples/devicetemplates_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -857,6 +1397,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -865,7 +1417,7 @@
         "summary": "Delete a device template",
         "description": "Delete an existing device template by device ID.",
         "x-ms-examples": {
-          "Delete a device template by Id": {
+          "Delete a device template by ID": {
             "$ref": "./examples/devicetemplates_delete.json"
           }
         },
@@ -880,6 +1432,18 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -887,7 +1451,7 @@
     "/devices": {
       "get": {
         "operationId": "Devices_List",
-        "summary": "Get the list of devices in an application",
+        "summary": "Get the list of devices in an application.",
         "x-ms-examples": {
           "List devices": {
             "$ref": "./examples/devices_list.json"
@@ -907,6 +1471,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCollection"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -917,7 +1493,7 @@
         "summary": "Get a device by ID",
         "description": "Get details about an existing device by device ID.",
         "x-ms-examples": {
-          "Get device by Id": {
+          "Get device by ID": {
             "$ref": "./examples/devices_get.json"
           }
         },
@@ -934,6 +1510,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -970,6 +1558,18 @@
             "schema": {
               "$ref": "#/definitions/Device"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -979,7 +1579,7 @@
         "description": "Update an existing device by ID.",
         "x-ms-examples": {
           "Update device": {
-            "$ref": "./examples/devices_update.json"
+            "$ref": "./examples/devices_create.json"
           }
         },
         "consumes": [
@@ -1009,6 +1609,18 @@
             "schema": {
               "$ref": "#/definitions/Device"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -1032,6 +1644,18 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1058,6 +1682,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1098,6 +1734,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1143,6 +1791,18 @@
             "schema": {
               "$ref": "#/definitions/Attestation"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -1165,6 +1825,18 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1197,6 +1869,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1236,6 +1920,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1262,6 +1958,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1298,6 +2006,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1340,6 +2060,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1369,6 +2101,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1406,6 +2150,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1448,6 +2204,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1482,6 +2250,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1509,6 +2289,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCredentials"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1535,6 +2327,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1571,6 +2375,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1613,6 +2429,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1642,6 +2470,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1681,6 +2521,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1726,6 +2578,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1758,6 +2622,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1798,6 +2674,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1843,6 +2731,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1880,6 +2780,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1910,6 +2822,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1948,6 +2872,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1991,6 +2927,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2025,6 +2973,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2052,6 +3012,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2087,6 +3059,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2127,6 +3111,18 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2158,6 +3154,383 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/fileUploads": {
+      "get": {
+        "operationId": "FileUploads_Get",
+        "summary": "Get the file upload storage account configuration.",
+        "x-ms-examples": {
+          "Get file upload storage account configuration": {
+            "$ref": "./examples/fileUpload_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileUpload"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FileUploads_Create",
+        "summary": "Create the file upload storage account configuration.",
+        "x-ms-examples": {
+          "Create file upload storage account configuration": {
+            "$ref": "./examples/fileUpload_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "File upload storage account configuration body.",
+            "schema": {
+              "$ref": "#/definitions/FileUpload"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileUpload"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "FileUploads_Update",
+        "summary": "Update the file upload storage account configuration",
+        "x-ms-examples": {
+          "Update file upload storage account configuration": {
+            "$ref": "./examples/fileUpload_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "File upload storage account configuration body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileUpload"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FileUploads_Remove",
+        "summary": "Delete the file upload storage configuration.",
+        "x-ms-examples": {
+          "Remove file upload storage configuration": {
+            "$ref": "./examples/fileUpload_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/organizations": {
+      "get": {
+        "operationId": "Organizations_List",
+        "summary": "Get the list of organizations the user has access to in an application",
+        "x-ms-examples": {
+          "List organizations": {
+            "$ref": "./examples/organizations_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/organizations/{organizationId}": {
+      "get": {
+        "operationId": "Organizations_Get",
+        "summary": "Get an organization by ID",
+        "x-ms-examples": {
+          "Get organization": {
+            "$ref": "./examples/organizations_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/OrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Organizations_Create",
+        "summary": "Create an organization in the application",
+        "x-ms-examples": {
+          "Add or update organization": {
+            "$ref": "./examples/organizations_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/OrganizationId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Organization body.",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Organizations_Update",
+        "summary": "Update an organization in the application via patch",
+        "x-ms-examples": {
+          "Update organization": {
+            "$ref": "./examples/organizations_create.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/OrganizationId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Organization patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Organizations_Remove",
+        "summary": "Delete an organization",
+        "x-ms-examples": {
+          "Delete organization": {
+            "$ref": "./examples/organizations_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/OrganizationId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2185,6 +3558,18 @@
             "schema": {
               "$ref": "#/definitions/RoleCollection"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2194,7 +3579,7 @@
         "operationId": "Roles_Get",
         "summary": "Get a role by ID.",
         "x-ms-examples": {
-          "Get role by Id": {
+          "Get role by ID": {
             "$ref": "./examples/roles_get.json"
           }
         },
@@ -2215,6 +3600,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Role"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2243,6 +3640,18 @@
             "schema": {
               "$ref": "#/definitions/UserCollection"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2261,11 +3670,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           }
         ],
         "responses": {
@@ -2273,6 +3678,18 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2293,11 +3710,7 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           },
           {
             "in": "body",
@@ -2315,6 +3728,18 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2329,16 +3754,16 @@
             "$ref": "./examples/users_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           },
           {
             "in": "body",
@@ -2356,6 +3781,18 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2372,16 +3809,24 @@
             "$ref": "#/parameters/Version"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "description": "Unique ID of the user.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/UserId"
           }
         ],
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2414,6 +3859,16 @@
       "type": "string",
       "required": true
     },
+    "DeviceGroupId": {
+      "in": "path",
+      "name": "deviceGroupId",
+      "description": "Unique ID for the device group.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_-]*$",
+      "required": true
+    },
     "DeviceId": {
       "in": "path",
       "name": "deviceId",
@@ -2425,7 +3880,7 @@
     "DeviceTemplateId": {
       "in": "path",
       "name": "deviceTemplateId",
-      "description": "Digital Twin Model Identifier of the device template, [More Details](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md#digital-twin-model-identifier)",
+      "description": "Unique [Digital Twin Model Identifier](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md#digital-twin-model-identifier) of the device template.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
@@ -2436,6 +3891,16 @@
       "description": "Name of the device module.",
       "x-ms-parameter-location": "method",
       "type": "string",
+      "required": true
+    },
+    "OrganizationId": {
+      "in": "path",
+      "name": "organizationId",
+      "description": "Unique ID of the organization.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 48,
+      "pattern": "^(?!-)[a-z0-9-]{1,48}[a-z0-9]$",
       "required": true
     },
     "Subdomain": {
@@ -2454,13 +3919,22 @@
       "type": "string",
       "required": true
     },
+    "UserId": {
+      "in": "path",
+      "name": "userId",
+      "description": "Unique ID of the user.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 48,
+      "pattern": "^[a-zA-Z0-9-_]*$",
+      "required": true
+    },
     "Version": {
       "in": "query",
       "name": "api-version",
       "description": "The version of the API being called.",
       "x-ms-parameter-location": "client",
       "type": "string",
-      "default": "1.0",
       "required": true
     }
   },
