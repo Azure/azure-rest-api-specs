@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2021-04-01",
+    "version": "2022-06-01-preview",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -598,6 +598,44 @@
             "description": "Returns the validation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/validateResources": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ValidateResourcesAtTenantScope",
+        "x-ms-long-running-operation": true,
+        "description": "Validates whether the specified resources are syntactically correct and will be accepted by Azure Resource Manager..",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceValidatorRequest"
+            },
+            "description": "Parameters to validate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidatorResult"
             }
           },
           "default": {
@@ -5333,6 +5371,63 @@
         }
       },
       "description": "Deployment on error behavior with additional details."
+    },
+    "ResourceValidatorRequest": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider namespace."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource provider type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource(s) validation location. For resource group scope this value must contain a valid region, for other scopes this value can be left empty."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The resource(s) validation scope. This value must be a valid identifier: e.g. /subscriptions/sub_id/resourceGroups/rg_name. For tenant scope, pass: / for more information refer to this documentation site: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-subscription?tabs=azure-cli#deployment-scopes"
+        },
+        "resources": {
+          "type": "array",
+          "description": "Array of resources to validate. These resources must share the same resource type, and namespace as the top-level properties",
+          "items": {
+            "$ref": "#/definitions/GenericResource",
+            "description": "Details of validated resources."
+          }
+        }
+      },
+      "required": [
+        "provider",
+        "type",
+        "scope",
+        "resources"
+      ],
+      "description": "Resource validator request."
+    },
+    "ResourceValidatorResult": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceValidatorValidatedResources",
+          "description": "Details of validated resources."
+        }
+      },
+      "description": "Information from resource validator response."
+    },
+    "ResourceValidatorValidatedResources": {
+      "properties": {
+        "validatedResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of validated resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of validated resources."
+          }
+        }
+      }
     },
     "DeploymentValidateResult": {
       "properties": {
