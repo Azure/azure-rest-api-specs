@@ -355,7 +355,8 @@
             "Azure",
             "AWS",
             "GCP",
-            "Github"
+            "Github",
+            "AzureDevOps"
           ],
           "x-ms-enum": {
             "name": "cloudName",
@@ -391,7 +392,8 @@
           "enum": [
             "AwsAccount",
             "GcpProject",
-            "GithubScope"
+            "GithubScope",
+            "AzureDevOpsScope"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -601,6 +603,17 @@
       ],
       "properties": {}
     },
+    "AzureDevOpsScopeEnvironmentData": {
+      "type": "object",
+      "description": "The AzureDevOps scope connector's environment data",
+      "x-ms-discriminator-value": "AzureDevOpsScope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {}
+    },
     "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
@@ -620,6 +633,7 @@
             "InformationProtectionAws",
             "CspmMonitorGcp",
             "CspmMonitorGithub",
+            "CspmMonitorAzureDevOps",
             "DefenderForServersGcp",
             "DefenderForContainersGcp",
             "DefenderForDatabasesGcp"
@@ -1207,6 +1221,17 @@
       "type": "object",
       "description": "The CSPM monitoring for github offering",
       "x-ms-discriminator-value": "CspmMonitorGithub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "cspmMonitorAzureDevOpsOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for AzureDevOps offering",
+      "x-ms-discriminator-value": "CspmMonitorAzureDevOps",
       "allOf": [
         {
           "$ref": "#/definitions/cloudOffering"
