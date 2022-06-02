@@ -407,10 +407,8 @@
           "readOnly": true
         },
         "baseMap": {
-          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Please refer to the available values for [base map types](/rest/api/documentation-preview/map-configuration/create?#baseMapTypes).",
-          "type": {
-            "$ref": "#/definitions/BaseMapTypes"
-          },
+          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Please refer to the available values for [base map types](/rest/api/documentation-preview/map-configuration/create?#baseMapType).",
+          "type": "string",
           "readOnly": true
         },
         "layers": {
@@ -438,55 +436,61 @@
         }
       }
     },
-    "BaseMapTypes": {
+    "BaseMapType": {
       "description": "The available base map types. Currently, we support 9 base map types.",
-      "type": "object",
-      "properties": {
-        "microsoft_light": {
-          "description": "The base road map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_dark": {
-          "description": "The base dark road map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_grayscale_dark": {
-          "description": "The grayscale dark map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_grayscale_light": {
-          "description": "The grayscale light map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_shaded_relief": {
-          "description": "The shaded relief map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_high_contrast_dark": {
-          "description": "The high contrast dark map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_high_contrast_light": {
-          "description": "The high contrast light map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_satellite": {
-          "description": "The satellite imagery map style.",
-          "type": "string",
-          "readOnly": true
-        },
-        "microsoft_satellite_road": {
-          "description": "The satellite and road map style.",
-          "type": "string",
-          "readOnly": true
-        }
+      "type": "string",
+      "enum": [
+        "microsoft_light",
+        "microsoft_dark",
+        "microsoft_grayscale_light",
+        "microsoft_grayscale_dark",
+        "microsoft_high_contrast_light",
+        "microsoft_high_contrast_dark",
+        "microsoft_shaded_relief",
+        "microsoft_satellite",
+        "microsoft_satellite_road"
+      ],
+      "x-ms-enum": {
+        "name": "BaseMap",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "microsoft_light",
+            "description": "The base road map style."
+          },
+          {
+            "value": "microsoft_dark",
+            "description": "The base dark road map style."
+          },
+          {
+            "value": "microsoft_grayscale_light",
+            "description": "The grayscale light map style."
+          },
+          {
+            "value": "microsoft_grayscale_dark",
+            "description": "The grayscale dark map style."
+          },
+          {
+            "value": "microsoft_high_contrast_light",
+            "description": "The high contrast light map style."
+          },
+          {
+            "value": "microsoft_high_contrast_dark",
+            "description": "The high contrast dark map style."
+          },
+          {
+            "value": "microsoft_shaded_relief",
+            "description": "The shaded relief map style."
+          },
+          {
+            "value": "microsoft_satellite",
+            "description": "The satellite imagery map style."
+          },
+          {
+            "value": "microsoft_satellite_road",
+            "description": "The satellite and road map style."
+          }
+        ]
       }
     }
   }
