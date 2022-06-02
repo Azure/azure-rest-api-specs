@@ -127,7 +127,7 @@
     }
   },
   "paths": {
-    "/styles/styleRecipes": {
+    "/styles": {
       "post": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import an [azure maps style](https://aka.ms/azuremapsstyle).\n\n## Submit Import Request\n\nTo import your style you will make a `POST` request with an azure maps style. \n\nThe Import Style API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Style_Import",
@@ -137,7 +137,7 @@
         },
         "x-ms-examples": {
           "Import Style by providing an azure maps style json file": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_Import.json"
+            "$ref": "./examples/style/Style_Import.json"
           }
         },
         "parameters": [
@@ -180,7 +180,7 @@
         "operationId": "Style_List",
         "x-ms-examples": {
           "Get a list of all styles": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_List.json"
+            "$ref": "./examples/style/Style_List.json"
           }
         },
         "parameters": [
@@ -208,13 +208,13 @@
         }
       }
     },
-    "/styles/styleRecipes/{styleId}": {
+    "/styles/{styleId}": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style.",
         "operationId": "Style_Export",
         "x-ms-examples": {
           "Exports the details for a single style": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_Export.json"
+            "$ref": "./examples/style/Style_Export.json"
           }
         },
         "parameters": [
@@ -253,7 +253,7 @@
         "operationId": "Style_Delete",
         "x-ms-examples": {
           "Delete an imported style": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_Delete.json"
+            "$ref": "./examples/style/Style_Delete.json"
           }
         },
         "parameters": [
@@ -277,16 +277,16 @@
         }
       }
     },
-    "/styles/styleRecipes/operations/{operationId}": {
+    "/styles/operations/{operationId}": {
       "get": {
         "description": "This path will be obtained from a call to create a style.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "operationId": "Style_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_GetOperationStillRunning.json"
+            "$ref": "./examples/style/Style_GetOperationStillRunning.json"
           },
           "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/stylerecipe/StyleRecipe_GetOperation.json"
+            "$ref": "./examples/style/Style_GetOperation.json"
           }
         },
         "parameters": [
