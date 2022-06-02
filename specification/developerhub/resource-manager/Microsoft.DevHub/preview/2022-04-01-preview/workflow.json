@@ -69,7 +69,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth/default/getGitHubOAuthInfo": {
       "post": {
         "tags": [
           "GitHubOAuth"
@@ -114,13 +114,15 @@
             "$ref": "./examples/GitHubOAuth.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth/default": {
       "get": {
         "tags": [
           "GitHubOAuth"
         ],
         "operationId": "GitHubOAuthCallback",
-        "summary": "Callback URL to hit once authenticated with GitHub App to retrieve the OAuth token.",
+        "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -140,7 +142,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -152,6 +157,45 @@
         "x-ms-examples": {
           "GitHub OAuth Callback": {
             "$ref": "./examples/GitHubOAuthCallback.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth": {
+      "get": {
+        "tags": [
+          "GitHubOAuth"
+        ],
+        "operationId": "ListGitHubOAuth",
+        "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List GitHub OAuth": {
+            "$ref": "./examples/GitHubOAuth_List.json"
           }
         }
       }
@@ -240,7 +284,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/workflows/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/workflows/{workflowName}": {
       "get": {
         "tags": [
           "Workflow"
@@ -258,7 +302,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/WorkflowNameParameter"
           }
         ],
         "responses": {
@@ -298,7 +342,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/WorkflowNameParameter"
           },
           {
             "name": "parameters",
@@ -352,7 +396,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/WorkflowNameParameter"
           }
         ],
         "responses": {
@@ -395,7 +439,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/WorkflowNameParameter"
           },
           {
             "name": "parameters",
@@ -432,7 +476,7 @@
   "definitions": {
     "Workflow": {
       "title": "Workflow",
-      "description": "",
+      "description": "Resource representation of a workflow",
       "type": "object",
       "allOf": [
         {
@@ -706,6 +750,10 @@
         "acrRegistryName": {
           "type": "string",
           "description": "ACR registry"
+        },
+        "acrRepositoryName": {
+          "type": "string",
+          "description": "ACR repository"
         }
       }
     },
@@ -755,6 +803,45 @@
         }
       },
       "description": "GitHubOAuth request object"
+    },
+    "GitHubOAuthResponse": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a workflow.",
+          "$ref": "#/definitions/GitHubOAuthProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Singleton response of GitHubOAuth containing "
+    },
+    "GitHubOAuthProperties": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "user making request"
+        }
+      },
+      "description": "The response from List GitHubOAuth operation."
+    },
+    "GitHubOAuthListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitHubOAuthResponse"
+          },
+          "description": "Singleton list response containing one GitHubOAuthResponse response"
+        }
+      },
+      "description": "The response from List GitHubOAuth operation."
     }
   },
   "parameters": {
@@ -798,15 +885,15 @@
       "description": "The name of a supported Azure region.",
       "x-ms-parameter-location": "method"
     },
-    "ResourceNameParameter": {
-      "name": "resourceName",
+    "WorkflowNameParameter": {
+      "name": "workflowName",
       "in": "path",
       "required": true,
       "type": "string",
       "minLength": 1,
       "maxLength": 63,
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "The name of the managed cluster resource.",
+      "description": "The name of the workflow resource.",
       "x-ms-parameter-location": "method"
     },
     "GitHubOAuthCodeParameter": {
