@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ConnectToTargetSqlDbTaskInput": {
+      "type": "object",
+      "description": "Input for the task that validates connection to SQL DB and target server requirements",
+      "properties": {
+        "targetConnectionInfo": {
+          "description": "Connection information for target SQL DB",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "queryObjectCounts": {
+          "description": "Boolean flag indicating whether to query object counts for each database on the target server",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "targetConnectionInfo"
+      ]
+    },
+    "ConnectToTargetSqlDbTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that validates connection to SQL DB and target server requirements",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "string",
+          "description": "Source databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Version of the target server",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
