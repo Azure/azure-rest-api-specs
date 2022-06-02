@@ -1923,14 +1923,54 @@
         "content": {
           "type": "string",
           "description": "Content in the service config file."
+        },
+        "component": {
+          "type": "string",
+          "description": "Component Name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Config type."
+        },
+        "path": {
+          "type": "string",
+          "description": "Config file path."
+        },
+        "customKeys": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultKeys": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ClusterInstanceServiceConfigEntity"
+          }
         }
       },
       "required": [
         "serviceConfigName",
-        "fileName",
-        "content"
+        "fileName"
       ],
       "description": "Service config response."
+    },
+    "ClusterInstanceServiceConfigEntity": {
+      "type": "object",
+      "description": "Default config details.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Config value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Config description."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ClusterInstanceViewsResult": {
       "type": "object",
