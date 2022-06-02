@@ -29,7 +29,7 @@ openapi-type: data-plane
 tag: package-phonenumber-2022-07-31-preview3
 ```
 
-### Tag: package-phonenumber-2022-03-31
+### Tag: package-phonenumber-2022-07-31-preview3
 
 These settings apply only when `--tag=package-phonenumber-2022-07-31-preview3` is specified on the command line.
 
