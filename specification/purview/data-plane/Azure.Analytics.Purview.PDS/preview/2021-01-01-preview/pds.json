@@ -1,0 +1,1123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Distribution Service REST API Document",
+    "description": "Purview distribution service enables various Azure RPs to fetch the policies and attributes for data governance.",
+    "version": "2021-01-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/attributeblobs": {
+      "get": {
+        "tags": [
+          "AttributesBlobs"
+        ],
+        "description": "Get attribute blobs for given scope.",
+        "operationId": "PDSGetAttributesBlobs_Resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttributeResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetAttributesBlobs_Resource": {
+            "$ref": "./examples/PDSGetAttributesBlobs_Resource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/{subResourceType}/{subResourceName}/attributeblobs": {
+      "get": {
+        "tags": [
+          "AttributesBlobs"
+        ],
+        "description": "Get attribute blobs for given scope.",
+        "operationId": "PDSGetAttributesBlobs_SubResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subResourceType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttributeResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetAttributesBlobs_SubResource": {
+            "$ref": "./examples/PDSGetAttributesBlobs_SubResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{sqlServerName}/attributeblobevents": {
+      "post": {
+        "tags": [
+          "AttributesBlobEvents"
+        ],
+        "description": "Get attribute events for given scope.",
+        "operationId": "PDSGetAttributesBlobEvents_SqlServers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "sqlServerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request Body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttributeBlobEventsRequestBodyData"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttributeEventResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetAttributesBlobEvents_SqlServers": {
+            "$ref": "./examples/PDSGetAttributesBlobEvents_SqlServers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{sqlServerName}/attributeblobevents": {
+      "post": {
+        "tags": [
+          "AttributesBlobEvents"
+        ],
+        "description": "Get attribute events for given scope.",
+        "operationId": "PDSGetAttributesBlobEvents_SqlManagedInstances",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "sqlServerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request Body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttributeBlobEventsRequestBodyData"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttributeEventResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetAttributesBlobEvents_SqlManagedInstances": {
+            "$ref": "./examples/PDSGetAttributesBlobEvents_SqlManagedInstances.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/SqlServerInstances/{sqlServerName}/attributeblobevents": {
+      "post": {
+        "tags": [
+          "AttributesBlobEvents"
+        ],
+        "description": "Get attribute events for given scope.",
+        "operationId": "PDSGetAttributesBlobEvents_AzureArcDataSqlServerInstances",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "sqlServerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request Body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttributeBlobEventsRequestBodyData"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttributeEventResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetAttributesBlobEvents_AzureArcDataSqlServerInstances": {
+            "$ref": "./examples/PDSGetAttributesBlobEvents_AzureArcDataSqlServerInstances.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PDSGetPolicyElements_Subscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyElements_Subscription": {
+            "$ref": "./examples/PDSGetPolicyElements_Subscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PDSGetPolicyElements_ResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyElements_ResourceGroup": {
+            "$ref": "./examples/PDSGetPolicyElements_ResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PDSGetPolicyElements_Resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyElements_Resource": {
+            "$ref": "./examples/PDSGetPolicyElements_Resource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PDSGetPolicyEvents_Subscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyEvents_Subscription": {
+            "$ref": "./examples/PDSGetPolicyEvents_Subscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PDSGetPolicyEvents_ResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyEvents_ResourceGroup": {
+            "$ref": "./examples/PDSGetPolicyEvents_ResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PDSGetPolicyEvents_Resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The api version to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PDSGetPolicyEvents_Resource": {
+            "$ref": "./examples/PDSGetPolicyEvents_Resource.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttributeBlobEventsRequestBodyData": {
+      "required": [
+        "database"
+      ],
+      "type": "object",
+      "properties": {
+        "database": {
+          "type": "string"
+        },
+        "syncToken": {
+          "type": "string"
+        }
+      }
+    },
+    "AttributeBlobReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "blobLastModifiedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AttributeEventBlobReference": {
+      "type": "object",
+      "properties": {
+        "syncToken": {
+          "type": "string"
+        },
+        "blobReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeBlobReference"
+          }
+        },
+        "database": {
+          "type": "string"
+        },
+        "returnCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AttributeEventResponse": {
+      "type": "object",
+      "properties": {
+        "allBlobReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeEventBlobReference"
+          }
+        }
+      }
+    },
+    "AttributeResponse": {
+      "type": "object",
+      "properties": {
+        "syncToken": {
+          "type": "string"
+        },
+        "blobReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeBlobReference"
+          }
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "JToken": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/JToken"
+      }
+    },
+    "MetadataObjectModel": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JToken"
+          }
+        }
+      }
+    },
+    "PolicyElement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "elementJson": {
+          "type": "string"
+        }
+      }
+    },
+    "PolicyElementEventModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "elementJson": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        }
+      }
+    },
+    "PolicyEventsResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "syncToken": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElementEventModel"
+          }
+        }
+      }
+    },
+    "PolicyResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "syncToken": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElement"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "PurviewMetadataResponseModel": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataObjectModel"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "basePath": "/pds",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
