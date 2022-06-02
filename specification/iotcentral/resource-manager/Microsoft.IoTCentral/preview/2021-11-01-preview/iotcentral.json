@@ -966,6 +966,18 @@
       "description": "An object for an IP range that will be allowed access.",
       "type": "object",
       "properties": {
+        "action": {
+          "description": "The network action for the IP mask.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "IpRuleAction",
+            "modelAsString": true
+          }
+        },
         "filterName": {
           "description": "The readable name of the IP rule.",
           "type": "string"
