@@ -424,6 +424,13 @@
         "location": {
           "description": "Location of the experiment workspace",
           "type": "string"
+        },
+        "tags": {
+            "description": "Tags assigned to the experiment workspace.",
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
         }
       }
     },
@@ -514,7 +521,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the experiment workspace. "
+          "description": "Tags assigned to the experiment workspace."
         },
         "properties": {
           "$ref": "#/definitions/ExperimentWorkspacePatchParameters",
