@@ -2,6 +2,7 @@
 
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow.
 </i>
+Azure 1st Party Service can try out the [Shift Left](https://aka.ms/ShiftLeft) experience to initiate API design review from ADO code repo.  If you are interested, may request engineering support by filling in with the form https://aka.ms/ShiftLeftSupportForm.
 
 ### Changelog
 Add a changelog entry for this PR by answering the following questions:

@@ -96,7 +96,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}": {
       "get": {
         "tags": [
           "ContainerApps"
@@ -111,7 +111,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -150,7 +150,7 @@
           "ContainerApps"
         ],
         "summary": "Create or update a Container App.",
-        "description": "Description for Create or update a Container App.",
+        "description": "Create or update a Container App.",
         "operationId": "ContainerApps_CreateOrUpdate",
         "parameters": [
           {
@@ -160,7 +160,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -211,7 +211,7 @@
           "ContainerApps"
         ],
         "summary": "Delete a Container App.",
-        "description": "Description for Delete a Container App.",
+        "description": "Delete a Container App.",
         "operationId": "ContainerApps_Delete",
         "parameters": [
           {
@@ -221,7 +221,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -270,7 +270,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -360,7 +360,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/listSecrets": {
       "post": {
         "tags": [
           "ContainerApps"
@@ -378,7 +378,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "containerAppName",
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
@@ -425,8 +425,8 @@
         "activeRevisionsMode": {
           "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>",
           "enum": [
-            "multiple",
-            "single"
+            "Multiple",
+            "Single"
           ],
           "type": "string",
           "x-ms-enum": {

@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2021-12
+tag: package-2022-02
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -54,11 +54,20 @@ semantic-validator: true
 message-format: json
 ```
 
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-03-01/bms.json
+```
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-02-01/bms.json
 ```
@@ -67,10 +76,11 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-01-01/bms.json
 ```
+
 ### Tag: package-2021-12
 
 These settings apply only when `--tag=package-2021-12` is specified on the command line.
@@ -310,6 +320,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_backup']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

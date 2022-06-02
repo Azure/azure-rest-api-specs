@@ -775,7 +775,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservationSummaries"
@@ -972,7 +972,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservationDetails"
@@ -1059,7 +1059,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -1119,7 +1119,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -3631,7 +3631,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -5204,7 +5203,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationsSummariesParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5213,7 +5212,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5222,7 +5221,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5231,7 +5230,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5240,7 +5239,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationTransactionsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
