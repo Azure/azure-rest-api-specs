@@ -1031,8 +1031,8 @@
         "tags": [
           "Entity"
         ],
-        "description": "Delete business metadata from an entity.",
-        "operationId": "Entity_DeleteBusinessAttributes",
+        "description": "Delete business metadata attributes from an entity.",
+        "operationId": "Entity_DeleteBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1057,13 +1057,13 @@
             "required": false,
             "in": "body",
             "schema": {
-              "description": "BusinessAttribute",
+              "description": "BusinessMetadataAttributes",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
               }
             },
-            "description": "BusinessAttribute"
+            "description": "BusinessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1076,8 +1076,8 @@
         "tags": [
           "Entity"
         ],
-        "description": "Add or update business attributes",
-        "operationId": "Entity_AddOrUpdateBusinessAttributes",
+        "description": "Add or update business metadata attributes",
+        "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1102,13 +1102,13 @@
             "required": false,
             "in": "body",
             "schema": {
-              "description": "BusinessAttribute",
+              "description": "BusinessMetadataAttributes",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
               }
             },
-            "description": "BusinessAttribute"
+            "description": "BusinessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1149,7 +1149,7 @@
           "Entity"
         ],
         "description": "Upload the file for creating Business Metadata in BULK",
-        "operationId": "Entity_ImportBusinessAttributes",
+        "operationId": "Entity_ImportBusinessMetadata",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1980,6 +1980,9 @@
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
             "$ref": "./examples/Glossary_GetGlossaryTerm.json"
+          },
+          "Glossary_GetGlossaryTerm_WithoutAssets": {
+            "$ref": "./examples/Glossary_GetGlossaryTerm_WithoutAssets.json"
           }
         },
         "parameters": [
@@ -1988,6 +1991,18 @@
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "name": "excludeRelationshipTypes",
+            "in": "query",
+            "description": "An array of relationship types which need to be excluded.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "excludeRelationshipTypeList"
           }
         ],
         "responses": {
@@ -2028,6 +2043,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -2913,6 +2931,11 @@
         ],
         "description": "Export Glossary Terms as csv file",
         "operationId": "Glossary_ExportGlossaryTermsAsCsv",
+        "x-ms-examples": {
+          "Glossary_ExportGlossaryTermsAsCsv": {
+            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
+          }
+        },
         "produces": [
           "text/csv"
         ],
@@ -4029,7 +4052,7 @@
     "/atlas/v2/types/businessmetadatadef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
         "description": "Get the businessMetadata definition for the given guid",
         "operationId": "Types_GetBusinessMetadataDefByGuid",
