@@ -49,6 +49,17 @@ input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
 ```
 
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+  - Microsoft.Communication/preview/2021-10-01-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2021-10-01-preview/Domains.json
+  - Microsoft.Communication/preview/2021-10-01-preview/EmailServices.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
