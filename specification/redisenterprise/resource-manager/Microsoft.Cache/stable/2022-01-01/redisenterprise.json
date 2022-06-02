@@ -1194,9 +1194,9 @@
       "get": {
         "tags": [
           "RedisEnterprise",
-          "Databases"
+          "SKU"
         ],
-        "operationId": "RedisEnterprise_SkuList",
+        "operationId": "Sku_List",
         "description": "Gets information about skus in specified location for the given subscription id",
         "parameters": [{
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1209,8 +1209,8 @@
         }
       ],
       "x-ms-examples": {
-        "RedisEnterpriseList": {
-          "$ref": "./examples/RedisEnterpriseSkuList.json"
+        "ListSKU": {
+          "$ref": "./examples/RedisEnterpriseListSKU.json"
         }
       },
       "responses": {
@@ -1811,9 +1811,6 @@
       "description": "Details about the location requested and the available skus in the location",
       "type": "object",
       "properties": {
-        "resourceType": {
-          "type": "string"
-        },
         "locationInfo": {
           "$ref": "#/definitions/LocationInfo",
           "description": "Details about location and its capabilities"
@@ -1834,7 +1831,8 @@
           "items": {
             "$ref": "#/definitions/RegionSkuDetail"
           },
-          "description": "List of SkuDetails"
+          "description": "List of SkuDetails",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1842,19 +1840,16 @@
       "type": "object",
       "properties": {
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Location name"
         },
-        "zoneMappings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ZoneMapping"
-          }
-        },
-        "locationCapabilities": {
+        "capabilities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Capability"
-          }
+          },
+          "description": "List of capabilities",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1863,10 +1858,6 @@
       "title": "Sku Detail",
       "description": "Information about Sku",
       "properties": {
-        "skuName": {
-          "type": "integer",
-          "format": "int64"
-        },
         "name": {
           "type": "string",
           "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
@@ -1885,25 +1876,12 @@
           }
         },
         "defaultMaxMemory": {
-          "type": "number"
+          "type": "number",
+          "description": "The memory limit"
         },
         "defaultMaxFlash": {
-          "type": "number"
-        },
-        "planId": {
-          "type": "string"
-        },
-        "internalPlanId": {
-          "type": "string"
-        },
-        "isFlash": {
-          "type": "boolean"
-        },
-        "isLegacySku": {
-          "type": "boolean"
-        },
-        "requiresQuorumNode": {
-          "type": "boolean"
+          "type": "number",
+          "description": "The memory limit in flash tier caches"
         }
       }
     },
@@ -1913,23 +1891,12 @@
       "description": "Information about what features the location supports",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Feature name"
         },
         "value":{
-          "type": "boolean"
-        }
-      }
-    },
-    "ZoneMapping": {
-      "type": "object",
-      "title": "Zone Mapping",
-      "description": "Gives information about logical and physical zone pairing",
-      "properties": {
-        "logicalZone": {
-          "type": "string"
-        },
-        "physicalZone": {
-          "type": "string"
+          "type": "boolean",
+          "description": "Indicates whether feature is supported or not"
         }
       }
     }
