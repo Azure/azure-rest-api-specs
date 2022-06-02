@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-06-01-preview",
+    "parameters": {
+      "properties": {
+          "provider": "Microsoft.Storage",
+          "type": "storageAccounts",
+          "location": "West US",
+          "scope": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group",
+          "resources": [
+            {
+              "name": "foobarstorageaccount1",
+              "apiVersion": "2021-04-01",
+              "location": "West US",
+              "kind": "[variables('foo')]",
+              "sku": {
+                  "name": "Premium_LRS"
+              }
+          }
+          ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "validatedResources": [
+            "/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/salesianos90-rg/providers/Microsoft.Storage/storageAccounts/foobarstorageaccount1"
+          ]
+        }
+      }
+    }
+  }
+}
