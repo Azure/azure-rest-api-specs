@@ -1196,7 +1196,7 @@
           "RedisEnterprise",
           "SKU"
         ],
-        "operationId": "Sku_List",
+        "operationId": "Skus_List",
         "description": "Gets information about skus in specified location for the given subscription id",
         "parameters": [{
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1209,8 +1209,8 @@
         }
       ],
       "x-ms-examples": {
-        "ListSKU": {
-          "$ref": "./examples/RedisEnterpriseListSKU.json"
+        "SkusList": {
+          "$ref": "./examples/SkusList.json"
         }
       },
       "responses": {
@@ -1838,6 +1838,7 @@
     },
     "LocationInfo": {
       "type": "object",
+      "description": "Information about location (forex: features that it supports)",
       "properties": {
         "location": {
           "type": "string",
