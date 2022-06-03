@@ -62,6 +62,9 @@ directive:
     where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
     reason: Property name contains WWW which is an acronym, so camel case does not apply here.
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: ResourceProvider.json
+    reason: Model type is not owned by cert and domain team
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: WebApps.json
     reason: Retroactive addition of missing examples out of scope at this time.
 ```
