@@ -2960,6 +2960,12 @@
               "$ref": "#/definitions/CsmDeploymentStatus"
             }
           },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -11877,6 +11883,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
             "schema": {
               "$ref": "#/definitions/CsmDeploymentStatus"
             }
@@ -22594,7 +22606,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "DeploymentBuildStatus",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "numberOfInstancesInProgress": {
