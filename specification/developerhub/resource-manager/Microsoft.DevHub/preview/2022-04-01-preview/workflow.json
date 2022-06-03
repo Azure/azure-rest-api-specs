@@ -773,8 +773,13 @@
     },
     "TagsObject": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       },
       "x-ms-mutability": [
         "read",
@@ -844,6 +849,7 @@
     }
   },
   "parameters": {
+
     "ManagedClusterParameter": {
       "name": "managedClusterResource",
       "in": "query",
