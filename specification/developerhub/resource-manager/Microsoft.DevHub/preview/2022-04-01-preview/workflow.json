@@ -44,7 +44,7 @@
         "summary": "Gets a list of operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -78,13 +78,13 @@
         "summary": "Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -125,13 +125,13 @@
         "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/GitHubOAuthCodeParameter"
@@ -170,13 +170,13 @@
         "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -209,10 +209,10 @@
         "summary": "Gets a list of workflows associated with the specified subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -248,13 +248,13 @@
         "summary": "Gets a list of workflows within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedClusterParameter"
@@ -293,13 +293,13 @@
         "summary": "Gets a workflow.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkflowNameParameter"
@@ -333,13 +333,13 @@
         "summary": "Creates or updates a workflow",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkflowNameParameter"
@@ -387,13 +387,13 @@
         "summary": "Deletes a workflow",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkflowNameParameter"
@@ -430,13 +430,13 @@
         "summary": "Updates tags on a workflow.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkflowNameParameter"
@@ -773,16 +773,15 @@
     },
     "TagsObject": {
       "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
+      "additionalProperties": {
+        "type": "string"
       },
-      "description": "Tags object for patch operations."
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource tags."
     },
     "DeleteWorkflowResponse": {
       "type": "object",
@@ -845,13 +844,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    },
     "ManagedClusterParameter": {
       "name": "managedClusterResource",
       "in": "query",
@@ -859,31 +851,6 @@
       "type": "string",
       "description": "The ManagedCluster resource associated with the workflows.",
       "x-ms-parameter-location": "client"
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationParameter": {
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of a supported Azure region.",
-      "x-ms-parameter-location": "method"
     },
     "WorkflowNameParameter": {
       "name": "workflowName",
