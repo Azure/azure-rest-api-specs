@@ -49,6 +49,10 @@
       "type": "object",
       "description": "The properties of an Active Directory connector resource",
       "properties": {
+        "domainServiceAccountLoginInformation": {
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
+          "description": "Username and password for domain service account authentication."
+        },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the Active Directory connector resource.",
@@ -100,6 +104,23 @@
         "netbiosDomainName": {
           "type": "string",
           "description": "NETBIOS name of the Active Directory domain."
+        },
+        "serviceAccountProvisioning": {
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual"
+          ],
+          "x-ms-enum": {
+            "name": "accountProvisioningMode",
+            "modelAsString": true
+          },
+          "default": "manual",
+          "description": "The service account provisioning mode for this Active Directory connector."
+        },
+        "ouDistinguishedName": {
+          "type": "string",
+          "description": "The distinguished name of the Active Directory Organizational Unit."
         },
         "domainControllers": {
           "$ref": "#/definitions/ActiveDirectoryDomainControllers",

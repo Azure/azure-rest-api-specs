@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor1",
+            "name": "mySapMonitor1",
+            "type": "Microsoft.Workloads/workloads",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "errors": [
+                {
+                  "code": "0000",
+                  "message": "Error message",
+                  "target": "",
+                  "details": "Error details",
+                  "innerError": "Error stack trace"
+                }
+              ],
+              "appLocation": "eastus",
+              "routingPreference": "RouteAll",
+              "managedResourceGroupConfiguration": {
+                "name": "myManagedRg1"
+              },
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+              "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor2",
+            "name": "mySapMonitor2",
+            "type": "Microsoft.Workloads/workloads",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "errors": [
+                {
+                  "code": "0000",
+                  "message": "Error message",
+                  "target": "",
+                  "details": "Error details",
+                  "innerError": "Error stack trace"
+                }
+              ],
+              "appLocation": "westus",
+              "routingPreference": "Default",
+              "managedResourceGroupConfiguration": {
+                "name": "myManagedRg2"
+              },
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+              "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

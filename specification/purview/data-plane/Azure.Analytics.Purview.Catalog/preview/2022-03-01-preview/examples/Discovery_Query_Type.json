@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "and": [
+          {
+            "entityType": "azure_blob_path",
+            "includeSubTypes": false
+          }
+        ]
+      }
+    },
+    "api-version": "2022-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 221,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "1d797ddf-47bf-4151-8fe8-918590d62e70",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata.csv",
+            "name": "exampledata.csv",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [
+              "Example.Label"
+            ],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "d3e83b17-c730-4898-94c8-58579cda04f6",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata2.csv",
+            "name": "exampledata2.csv",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [
+              "Example.Label"
+            ],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}

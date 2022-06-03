@@ -166,6 +166,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
