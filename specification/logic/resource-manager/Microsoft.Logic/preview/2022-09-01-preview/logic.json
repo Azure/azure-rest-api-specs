@@ -13210,13 +13210,14 @@
           }
         },
         "workflowExportOptions": {
-          "type": "string",
-          "description": "The workflow export options flags. Possible options are: CloneConnections, GenerateInfrastructureTemplates"
+          "description": "The workflow export options flags. Possible options are: CloneConnections, GenerateInfrastructureTemplates",
+          "$ref": "#/definitions/WorkflowExportOptions"
         }
       }
     },
     "ValidationState": {
       "type": "string",
+      "description": "The validation state.",
       "enum": [
         "NotSpecified",
         "Failed",
@@ -13226,8 +13227,20 @@
       "x-ms-enum": {
         "name": "ValidationState",
         "modelAsString": true
-      },
-      "description": "The validation state."
+      }
+    },
+    "WorkflowExportOptions": {
+      "type": "string",
+      "description": "The workflow export options flags. Possible options are: CloneConnections, GenerateInfrastructureTemplates",
+      "enum": [
+        "CloneConnections",
+        "GenerateInfrastructureTemplates",
+        "CloneConnections,GenerateInfrastructureTemplates"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowExportOptions",
+        "modelAsString": true
+      }
     },
     "ResourceExportValidity": {
       "type": "object",
