@@ -49,6 +49,24 @@ input-file:
 - Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
 ```
 
+### Tag: package-2022-02-01-preview
+
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-preview'
+input-file:
+- Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
+```
+
+### Tag: package-2022-02-01-stable
+
+These settings apply only when `--tag=package-2022-02-01-stable` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-stable'
+input-file:
+- Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
+```
+
 ---
 
 # Code Generation
