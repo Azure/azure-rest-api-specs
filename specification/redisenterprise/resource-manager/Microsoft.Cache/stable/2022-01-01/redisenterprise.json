@@ -1190,10 +1190,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/redisEnterprise/locations/{location}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
       "get": {
         "tags": [
-          "RedisEnterprise",
           "SKU"
         ],
         "operationId": "Skus_List",
@@ -1811,6 +1810,10 @@
       "description": "Details about the location requested and the available skus in the location",
       "type": "object",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type which has the SKU, such as Microsoft.Cache/redisEnterprise"
+        },
         "locationInfo": {
           "$ref": "#/definitions/LocationInfo",
           "description": "Details about location and its capabilities"
