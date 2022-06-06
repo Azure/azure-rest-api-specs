@@ -3,8 +3,8 @@
 ## Parameter Description
 
 - `<ServiceName>`: The RP name, which is usually same as folder name in swagger.
-- `<PackageFolder>`: Python package name.
-
+- `<PackageFolder>`: Python package folder name, which must ends with `-rest`. For example: `purview-administration-rest`.
+- `<SubFolderName>`: The sub-folder name in the package. It's only used by multi-client scenario. 
 
 ## Single Client
 If you want to generate sdk with single client, please copy the following configuration into spec PR comment.
@@ -25,12 +25,21 @@ If you want to generate sdk with multi client, please copy the following configu
 # azure-sdk-for-js
 ``` yaml && $(multi-client)
 tag: false
-output-folder: sdk/<ServiveName>/<PackageFolder>
 require:
  - specification/<RPName>/dataplane/readme.md
 batch:
  - package-A
  - package-B
+```
+
+``` yaml $(package-A)
+title: <Title>
+output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
+```
+
+``` yaml $(package-B)
+title: <Title>
+output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.

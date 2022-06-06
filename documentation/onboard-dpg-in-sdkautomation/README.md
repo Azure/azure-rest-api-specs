@@ -25,4 +25,4 @@ Otherwise, pipeline will try to find autorest configuration file in sdk reposito
  
 1. What should I do when I encounter error in generating SDK in swagger PR CI pipeline?
    
-    __Answer__: Please check the comment [Swagger Generation Artifacts] and the error message of failed pipeline. If you find the error messages ask you to fix `autorest.md`/`README.md`/swagger, please fix it. If you cannot understand error message, please ask sdk owners for help with mail: azsdk-dpgsupport@microsoft.com.
+    __Answer__: Please check the comment [Swagger Generation Artifacts] and the error message of failed pipeline. If you find the error messages ask you to fix autorest configuration comment or swagger, please fix it. If you cannot understand error message, please ask sdk owners for help with mail: azsdk-dpgsupport@microsoft.com.
