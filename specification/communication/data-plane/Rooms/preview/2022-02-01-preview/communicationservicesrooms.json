@@ -55,9 +55,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -146,7 +152,8 @@
         "summary": "Update a room with given changes.",
         "operationId": "Rooms_UpdateRoom",
         "consumes": [
-          "application/json"
+          "application/json",
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
@@ -179,9 +186,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -217,9 +230,15 @@
             "description": "The room was successfully deleted."
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -260,9 +279,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -315,9 +340,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -370,9 +401,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
@@ -425,9 +462,15 @@
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           }
         },
