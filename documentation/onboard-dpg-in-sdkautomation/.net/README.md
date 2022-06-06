@@ -7,7 +7,7 @@
 - `<Title>`: SDK Client Name
 
 ## Autorest Configuration
-
+Please copy the following configuration into spec PR comment.
 ~~~
 # azure-sdk-for-python
 ``` yaml
