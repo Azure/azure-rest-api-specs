@@ -25,7 +25,7 @@ clear-output-folder: true
 multiapi: true
 batch:
   - tag: package-2022-05-01
-  - tag: package-2022-03-01
+  - tag: package-2022-03-01-preview
   - multiapiscript: true
 ```
 
@@ -44,12 +44,12 @@ namespace: azure.mgmt.appconfiguration.v2022_05_01
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2022_05_01
 ```
 
-### Tag: package-2022-03-01 and python
+### Tag: package-2022-03-01-preview and python
 
-These settings apply only when `--tag=package-2022-03-01 --python` is specified on the command line.
+These settings apply only when `--tag=package-2022-03-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2022-03-01' && $(python)
-namespace: azure.mgmt.appconfiguration.v2022_03_01
-output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2022_03_01
+``` yaml $(tag) == 'package-2022-03-01-preview' && $(python)
+namespace: azure.mgmt.appconfiguration.v2022_03_01_preview
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2022_03_01_preview
 ```
