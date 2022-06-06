@@ -9,7 +9,7 @@
 ## Autorest Configuration
 Please copy the following configuration into spec PR comment.
 ~~~
-# azure-sdk-for-python
+# azure-sdk-for-net-track2
 ``` yaml
 title: <Title>
 output-folder: sdk/<ServiveName>/<NameSpace>
