@@ -9,14 +9,22 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
-],
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,13 +39,17 @@
   "paths": {
     "/providers/Microsoft.Codespaces/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "description": "Retrieves a list of available API operations",
         "summary": "Retrieves a list of available API operations under this Resource Provider.",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request was successful; response contains the list of operations under Microsoft.Codespaces resource provider.",
@@ -70,7 +82,8 @@
         "summary": "Retrieves information about a Codespaces Plan resource.",
         "description": "Retrieves the properties of a Codespaces Plan.",
         "operationId": "Plan_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -110,7 +123,8 @@
         "summary": "Deletes a Codespaces Plan resource.",
         "description": "Deletes an existing Codespaces Plan.",
         "operationId": "Plan_Delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -150,7 +164,8 @@
         "summary": "Creates a Codespaces Plan.",
         "description": "Creates a Codespaces Plan with the specified create parameters.",
         "operationId": "Plan_Create",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -200,7 +215,8 @@
         "summary": "Updates a Codespaces Plan.",
         "description": "Updates the properties of an existing Codespaces Plan with the specified update parameters.",
         "operationId": "Plan_Update",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -446,7 +462,8 @@
         "summary": "Retrieves information about all Codespaces Plan resources under the given subscription and resource group",
         "description": "Retrieves the properties of all Codespaces Plans.",
         "operationId": "Plan_ListByResourceGroup",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -488,7 +505,8 @@
         "summary": "Retrieves information about all Codespaces Plan resources under the given subscription",
         "description": "Retrieves the properties of all Codespaces Plans.",
         "operationId": "Plan_ListBySubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -654,7 +672,7 @@
         "subnetId": {
           "type": "string",
           "description": "The ARM resource identifier of the virtual network subnet which the codespaces of the Codespaces Plan will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.The virtual network must be in the same region and subscription as the Codespaces Plan."
-         }
+        }
       }
     },
     "ResourceProviderOperationList": {
@@ -735,7 +753,7 @@
               "description": "Specifies the default codespace sku name for this plan.",
               "type": "string"
             },
-            "vnetProperties":{
+            "vnetProperties": {
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
             }
@@ -759,11 +777,11 @@
           "$ref": "#/definitions/Sku",
           "description": "SKU of the service."
         },
-        "identity":{
+        "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The type of identity used for the resource. "
         },
-        "properties":{
+        "properties": {
           "type": "object",
           "description": "Additional Codespaces Plan properties.",
           "title": "Codespaces Additional properties",
@@ -777,7 +795,7 @@
               "description": "Specifies the default codespace sku name for this plan.",
               "type": "string"
             },
-            "vnetProperties":{
+            "vnetProperties": {
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
             }

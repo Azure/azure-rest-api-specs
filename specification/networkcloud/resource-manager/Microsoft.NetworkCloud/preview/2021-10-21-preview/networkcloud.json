@@ -1,7 +1,13 @@
 {
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "schemes": ["https"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "description": "The Network Cloud APIs provide management of the on-premises clusters and their resources, such as, racks, bare metal hosts, virtual machines, workload networks and more.",
@@ -2752,7 +2758,11 @@
     "BareMetalMachine": {
       "type": "object",
       "title": "BareMetalMachine represents the physical machine in the rack.",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2766,7 +2776,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -2805,7 +2818,10 @@
           "description": "Allows to bypass evacuation of node workload and cordon bare metal machine immediately.",
           "type": "string",
           "default": "False",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineEvacuate"
@@ -2870,7 +2886,10 @@
           "description": "Allows to bypass OS shutdown and power bare metal machine off immediately.",
           "type": "string",
           "default": "False",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineSkipShutdown"
@@ -2881,12 +2900,17 @@
     "BareMetalMachineProperties": {
       "type": "object",
       "title": "BareMetalMachineProperties represents the properties of a bare metal machine.",
-      "required": ["bootMacAddress"],
+      "required": [
+        "bootMacAddress"
+      ],
       "properties": {
         "adminStatus": {
           "description": "Admin status of the bare metal machine.",
           "type": "string",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineAdminStatus"
@@ -2913,7 +2937,10 @@
         "cordonStatus": {
           "description": "Cordon status of the bare metal machine.",
           "type": "string",
-          "enum": ["Cordoned", "Uncordoned"],
+          "enum": [
+            "Cordoned",
+            "Uncordoned"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineCordonStatus"
@@ -2962,7 +2989,10 @@
         "powerState": {
           "description": "Power state of the bare metal machine.",
           "type": "string",
-          "enum": ["On", "Off"],
+          "enum": [
+            "On",
+            "Off"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachinePowerState"
@@ -2972,7 +3002,13 @@
         "provisioningState": {
           "description": "Provisioning state of the bare metal machine.",
           "type": "string",
-          "enum": ["Succeeded", "Failed", "Canceled", "Pending", "Accepted"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Pending",
+            "Accepted"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineProvisioningState"
@@ -2993,7 +3029,10 @@
         "readyState": {
           "description": "Indicator of whether the bare metal machine is ready to receive workloads.",
           "type": "string",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineReadyState"
@@ -3074,7 +3113,11 @@
       "description": "A cluster is the top level object for the on-premise environment.",
       "type": "object",
       "title": "Cluster represents an on-Premise Network Cloud cluster",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3088,7 +3131,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -3126,7 +3172,10 @@
         "controlImpact": {
           "description": "The indicator of whether the control plane will be impacted during the upgrade.",
           "type": "string",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ControlImpact"
@@ -3151,7 +3200,10 @@
         "workloadImpact": {
           "description": "The indicator of whether the workload will be impacted during the upgrade.",
           "type": "string",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "WorkloadImpact"
@@ -3191,7 +3243,10 @@
       "description": "A ClusterManager creates and  manages customer manager instances on demand.",
       "type": "object",
       "title": "ClusterManager represents a control-plane to manage one or more on-premises clusters.",
-      "required": ["location", "properties"],
+      "required": [
+        "location",
+        "properties"
+      ],
       "properties": {
         "id": {
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
@@ -3201,7 +3256,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -3253,7 +3311,10 @@
     "ClusterManagerProperties": {
       "description": "ClusterManagerProperties represents the properties of a cluster manager",
       "type": "object",
-      "required": ["fabricControllerId", "analyticsWorkspaceId"],
+      "required": [
+        "fabricControllerId",
+        "analyticsWorkspaceId"
+      ],
       "properties": {
         "aggregatorRackSkusSupported": {
           "description": "A list of the aggregator rack SKUs supported by the cluster manager.",
@@ -3351,7 +3412,9 @@
           "items": {
             "$ref": "#/definitions/ClusterAvailableUpgradeVersion"
           },
-          "x-ms-identifiers": ["targetClusterVersion"],
+          "x-ms-identifiers": [
+            "targetClusterVersion"
+          ],
           "readOnly": true
         },
         "clusterExtendedLocation": {
@@ -3371,7 +3434,10 @@
         "clusterType": {
           "description": "The type of rack configuration for this cluster.",
           "type": "string",
-          "enum": ["SingleRack", "MultiRack"],
+          "enum": [
+            "SingleRack",
+            "MultiRack"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterType"
@@ -3384,7 +3450,10 @@
         "deploymentState": {
           "description": "The state of the cluster's deployment.",
           "type": "string",
-          "enum": ["PendingDeployment", "Deployed"],
+          "enum": [
+            "PendingDeployment",
+            "Deployed"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterDeploymentState"
@@ -3432,7 +3501,10 @@
     "ExtendedLocation": {
       "type": "object",
       "title": "ExtendedLocation is the Azure custom location where this resource will be created.",
-      "required": ["type", "name"],
+      "required": [
+        "type",
+        "name"
+      ],
       "properties": {
         "name": {
           "description": "ResourceId of the custom location on which resource will be created.",
@@ -3455,7 +3527,9 @@
           "items": {
             "$ref": "#/definitions/Nic"
           },
-          "x-ms-identifiers": ["name"],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -3463,12 +3537,19 @@
     "NetworkAttachment": {
       "description": "NetworkAttachment represents a single network attachment",
       "type": "object",
-      "required": ["workloadNetworkId", "ipAllocationMethod"],
+      "required": [
+        "workloadNetworkId",
+        "ipAllocationMethod"
+      ],
       "properties": {
         "ipAllocationMethod": {
           "description": "The IP allocation mechanism for the virtual machine.",
           "type": "string",
-          "enum": ["Dynamic", "Static", "Disabled"],
+          "enum": [
+            "Dynamic",
+            "Static",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VirtualMachineIPAllocationMethod"
@@ -3507,7 +3588,10 @@
     "PlacementHint": {
       "description": "PlacementHint represents a single scheduling hint of virtual machine",
       "type": "object",
-      "required": ["key", "value"],
+      "required": [
+        "key",
+        "value"
+      ],
       "properties": {
         "key": {
           "description": "The key for the virtual machine placement hint.",
@@ -3526,7 +3610,11 @@
     "Rack": {
       "type": "object",
       "title": "The rack represents the hardware of a rack and is dependent upon the Cluster for lifecycle.",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3540,7 +3628,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -3591,7 +3682,11 @@
     "RackManifest": {
       "type": "object",
       "title": "Rack Manifest represents the intentions for the hardware of a rack in a cluster. Rack Manifest is dependent upon the cluster for its lifecycle.",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3605,7 +3700,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -3639,7 +3737,10 @@
     "RackManifestBmcCredentials": {
       "type": "object",
       "title": "Credentials for the baseboard management controller device on this bare metal machine of the rack.",
-      "required": ["username", "password"],
+      "required": [
+        "username",
+        "password"
+      ],
       "properties": {
         "password": {
           "description": "The baseboard management controller device server password.",
@@ -3714,7 +3815,9 @@
           "items": {
             "$ref": "#/definitions/BareMetalMachineUserData"
           },
-          "x-ms-identifiers": ["rackSlot"]
+          "x-ms-identifiers": [
+            "rackSlot"
+          ]
         },
         "clusterId": {
           "description": "The resource ID of the cluster to which this rack is associated.",
@@ -3732,7 +3835,12 @@
         "provisioningState": {
           "description": "The provisioning state of the rack manifest.",
           "type": "string",
-          "enum": ["Succeeded", "Failed", "Canceled", "Accepted"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RackManifestProvisioningState"
@@ -3851,7 +3959,11 @@
     "VirtualMachine": {
       "description": "VirtualMachine represents an on-Premises Network Cloud Virtual Machine",
       "type": "object",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3865,7 +3977,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -3921,7 +4036,10 @@
           "description": "Allows to bypass OS shutdown and power virtual machine off immediately.",
           "type": "string",
           "default": "False",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "SkipShutdown"
@@ -3987,12 +4105,17 @@
           "items": {
             "$ref": "#/definitions/PlacementHint"
           },
-          "x-ms-identifiers": ["key"]
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "powerState": {
           "description": "The power state of the virtual machine.",
           "type": "string",
-          "enum": ["On", "Off"],
+          "enum": [
+            "On",
+            "Off"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VirtualMachinePowerState"
@@ -4032,7 +4155,11 @@
     "WorkloadNetwork": {
       "description": "WorkloadNetwork represents an on-premises workload network",
       "type": "object",
-      "required": ["location", "extendedLocation", "properties"],
+      "required": [
+        "location",
+        "extendedLocation",
+        "properties"
+      ],
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4046,7 +4173,10 @@
         "location": {
           "description": "The geo-location where the resource lives",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "description": "The name of the resource",
@@ -4097,7 +4227,9 @@
     "WorkloadNetworkProperties": {
       "type": "object",
       "title": "WorkloadNetworkProperties represents the properties of a workload network.",
-      "required": ["routingDomainIds"],
+      "required": [
+        "routingDomainIds"
+      ],
       "properties": {
         "clusterId": {
           "description": "The resourceId of the Network Cloud cluster this workload network is associated with.",
@@ -4117,7 +4249,10 @@
           "description": "Denotes whether or not to enable IP Address Management(IPAM) allocation on this network attachment definition. By default, IPAM is enabled.",
           "type": "string",
           "default": "True",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "HybridAksIpamEnabled"
@@ -4127,7 +4262,12 @@
           "description": "The network plugin type for HybridAKS, defaults to \"HostDevice\".",
           "type": "string",
           "default": "HostDevice",
-          "enum": ["HostDevice", "MACVLAN", "DPDK", "IPVLAN"],
+          "enum": [
+            "HostDevice",
+            "MACVLAN",
+            "DPDK",
+            "IPVLAN"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "WorkloadNetworkHybridAksPluginType"
@@ -4142,7 +4282,11 @@
           "description": "The type of the IP address allocation, defaulted to \"DualStack\".",
           "type": "string",
           "default": "DualStack",
-          "enum": ["IPV4", "IPV6", "DualStack"],
+          "enum": [
+            "IPV4",
+            "IPV6",
+            "DualStack"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "WorkloadNetworkIPAllocationType"
@@ -4188,7 +4332,10 @@
           "description": "The parameter indicates if the routing domains should be trunked. If more than one routing domain is supplied, and this value is set to \"False\", only the first Routing Domain will be utilized.",
           "type": "string",
           "default": "False",
-          "enum": ["True", "False"],
+          "enum": [
+            "True",
+            "False"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "TrunkRoutingDomains"
@@ -4277,7 +4424,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ]
 }

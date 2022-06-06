@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,7 +39,9 @@
   "paths": {
     "/providers/Microsoft.VSOnline/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "description": "Retrieves a list of available API operations",
         "summary": "Retrieves a list of available API operations under this Resource Provider.",
@@ -595,7 +605,7 @@
           "type": "string",
           "readOnly": true
         },
-        "tags":{
+        "tags": {
           "description": "Tags for the VS Online Account",
           "type": "object",
           "additionalProperties": {
@@ -656,7 +666,7 @@
         "SubnetId": {
           "type": "string",
           "description": "The ARM resource identifier of the virtual network subnet which the codespaces of the VSO Plan will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.The virtual network must be in the same region and subscription as the VSO Plan."
-         }
+        }
       }
     },
     "ResourceProviderOperationList": {
@@ -710,7 +720,7 @@
         }
       }
     },
-   "VSOPlanUpdateParameters": {
+    "VSOPlanUpdateParameters": {
       "type": "object",
       "description": "Parameters for updating a VS Online Plan.",
       "properties": {
@@ -736,7 +746,7 @@
               "description": "Specifies the default environment sku name for this plan.",
               "type": "string"
             },
-            "vnetProperties":{
+            "vnetProperties": {
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
             }
@@ -768,7 +778,7 @@
         }
       ],
       "properties": {
-        "properties":{
+        "properties": {
           "type": "object",
           "description": "Additional VS Online Plan properties.",
           "title": "VS Online Additional properties",
@@ -790,7 +800,7 @@
               "description": "Specifies the default environment sku name for this plan.",
               "type": "string"
             },
-            "vnetProperties":{
+            "vnetProperties": {
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
             }

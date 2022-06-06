@@ -18,11 +18,13 @@
   "produces": [
     "application/json"
   ],
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -42,9 +44,11 @@
         "tags": [
           "Operations"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The list of supported operations has been fetched successfully.",
@@ -148,7 +152,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -196,7 +201,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -244,7 +250,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -283,7 +290,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -321,7 +329,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -362,7 +371,8 @@
         "tags": [
           "TokenService"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1298,9 +1308,11 @@
     "TokenServiceResource": {
       "type": "object",
       "description": "Token service resource",
-      "allOf": [{
-        "$ref": "#/definitions/TrackedResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "properties": {
           "description": "Custom properties of tokenService resource",

@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,7 +39,9 @@
   "paths": {
     "/providers/Microsoft.VSOnline/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "description": "Retrieves a list of available API operations",
         "summary": "Retrieves a list of available API operations under this Resource Provider.",
@@ -864,7 +874,7 @@
           "type": "string",
           "readOnly": true
         },
-        "tags":{
+        "tags": {
           "description": "Tags for the VS Online Account",
           "type": "object",
           "additionalProperties": {
@@ -902,7 +912,7 @@
         }
       ],
       "properties": {
-        "properties":{
+        "properties": {
           "type": "object",
           "description": "Additional VS Online Account properties.",
           "title": "VS Online Additional properties",
@@ -1083,7 +1093,7 @@
           "$ref": "#/definitions/Sku",
           "description": "SKU of the service."
         },
-        "properties":{
+        "properties": {
           "type": "object",
           "description": "Additional VS Online Plan properties.",
           "title": "VS Online Additional properties",
