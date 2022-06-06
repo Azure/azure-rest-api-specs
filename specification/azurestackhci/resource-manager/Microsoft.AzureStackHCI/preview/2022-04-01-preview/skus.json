@@ -198,7 +198,29 @@
           "type": "string",
           "description": "The API version of the catalog service used to serve the catalog content"
         },
-        "skuVersions": {
+        "skuMappings": {
+          "type": "array",
+          "description": "Array of SKU mappings",
+          "items": {
+            "$ref": "#/definitions/SkuMappings"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuMappings": {
+      "description": "SKU Mapping details.",
+      "type": "object",
+      "properties": {
+        "catalogPlanId": {
+          "type": "string",
+          "description": "Identifier of the CatalogPlan for the sku"
+        },
+        "marketplaceSkuId": {
+          "type": "string",
+          "description": "Identifier for the sku"
+        },
+        "marketplaceSkuVersions": {
           "type": "array",
           "description": "Array of SKU versions available",
           "items": {
