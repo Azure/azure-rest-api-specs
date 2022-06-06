@@ -54,47 +54,11 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition Failed",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "501": {
-            "description": "Not Implemented",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -214,40 +178,11 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition Failed",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -281,33 +216,11 @@
           "204": {
             "description": "The room was successfully deleted."
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -346,33 +259,11 @@
               "$ref": "#/definitions/ParticipantsCollection"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -382,7 +273,7 @@
         }
       }
     },
-    "/rooms/{roomId}/participants/:add": {
+    "/rooms/{roomId}/participants:add": {
       "post": {
         "tags": [
           "Participants"
@@ -423,33 +314,11 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -459,7 +328,7 @@
         }
       }
     },
-    "/room/{roomId}/participants/:update": {
+    "/room/{roomId}/participants:update": {
       "post": {
         "tags": [
           "Participants"
@@ -500,33 +369,11 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -536,7 +383,7 @@
         }
       }
     },
-    "/rooms/{roomId}/participants/:remove": {
+    "/rooms/{roomId}/participants:remove": {
       "post": {
         "tags": [
           "Participants"
@@ -577,33 +424,11 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
