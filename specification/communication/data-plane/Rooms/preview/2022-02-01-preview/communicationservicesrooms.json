@@ -103,40 +103,17 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Resource not found",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "InternalServerError",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
