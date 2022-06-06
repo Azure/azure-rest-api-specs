@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-02-01-preview"
+    "version": "2022-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -856,7 +856,19 @@
         },
         "isSpotVM": {
           "type": "boolean",
-          "description": "Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time. "
+          "description": "Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time."
+        },
+        "hostGroupId": {
+          "type": "string",
+          "description": "Specifies the full host group resource Id. This property is used for deploying on azure dedicated hosts."
+        },
+        "useEphemeralOSDisk": {
+          "type": "boolean",
+          "description": "Indicates whether to use ephemeral os disk. The sku selected on the vmSize property needs to support this feature."
+        },
+        "spotRestoreTimeout": {
+          "type": "string",
+          "description": "Indicates the time duration after which the platform will not try to restore the VMSS SPOT instances specified as ISO 8601."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1466,7 +1478,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-02-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-06-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
