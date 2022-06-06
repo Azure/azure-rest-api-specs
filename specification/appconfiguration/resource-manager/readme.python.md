@@ -19,7 +19,7 @@ clear-output-folder: true
 multiapi: true
 batch:
   - tag: package-2022-05-01
-  - tag: package-2022-03-01-preview
+  - tag: package-2021-03-01-preview
   - multiapiscript: true
 ```
 
