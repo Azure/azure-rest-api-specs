@@ -1976,6 +1976,7 @@
           "description": "Gets or sets maintenanceScope of the configuration",
           "enum": [
             "Host",
+            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1991,7 +1992,7 @@
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
               },
-			  {
+			        {
                 "value": "Resource",
                 "description": "This maintenance scope is default for update by any Resource Providers"
               },
@@ -2347,6 +2348,7 @@
           "description": "The impact area",
           "enum": [
             "Host",
+            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -2361,6 +2363,10 @@
               {
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "Resource",
+                "description": "This maintenance scope is default for update by any Resource Providers"
               },
               {
                 "value": "OSImage",
