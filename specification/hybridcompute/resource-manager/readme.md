@@ -27,6 +27,12 @@ These are the global settings for the HybridCompute API.
 ``` yaml
 openapi-type: arm
 tag: package-preview-2022-05
+
+directive:
+  - where:
+      - $.definitions.Machine.properties
+    suppress:
+      - BodyTopLevelProperties
 ```
 
 
