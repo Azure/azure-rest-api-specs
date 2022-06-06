@@ -3657,23 +3657,7 @@
           }
         },
         "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "x-ms-client-name": "VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
-          },
+          "$ref": "../common.json#/definitions/UserAssignedIdentities",
           "description": "The list of user identities associated with the virtual machine scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
