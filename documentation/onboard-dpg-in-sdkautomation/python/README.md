@@ -4,7 +4,7 @@
 
 - `<ServiceName>`: The RP name, which is usually same as folder name in swagger.
 - `<PackageName>`: Python package name.
-
+- `<Title>`: SDK Client Name
 
 ## Single Client
 If you want to generate sdk with single client, please copy the following configuration into spec PR comment.
