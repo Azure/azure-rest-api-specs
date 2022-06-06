@@ -278,7 +278,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 
 # Needed when there is more than one input file
 override-info:
