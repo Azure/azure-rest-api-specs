@@ -66,7 +66,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-2022-05
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -78,7 +78,7 @@ The following packages may be composed from multiple api-versions.
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.Security/stable/2022-05-01/settings.json
 ```
@@ -264,7 +264,7 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/stable/2021-11-01/alerts.json
-- Microsoft.Security/stable/2021-07-01/settings.json
+- Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
@@ -536,6 +536,18 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
 - Microsoft.Security/stable/2021-06-01/assessments.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2021-07-only
+
+These settings apply only when `--tag=package-2021-07-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-07-only'
+input-file:
+- Microsoft.Security/stable/2021-07-01/settings.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
