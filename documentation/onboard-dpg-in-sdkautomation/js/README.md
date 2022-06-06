@@ -27,7 +27,7 @@ If you want to generate sdk with multi client, please copy the following configu
 tag: false
 output-folder: sdk/<ServiveName>/<PackageFolder>
 require:
- - specification/<ServiveName>/dataplane/readme.md
+ - specification/<RPName>/dataplane/readme.md
 batch:
  - package-A
  - package-B

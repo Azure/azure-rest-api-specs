@@ -14,7 +14,7 @@
 title: <Title>
 output-folder: sdk/<ServiveName>/<NameSpace>
 require:
- - specification/<ServiveName>/dataplane/readme.md
+ - specification/<RPName>/dataplane/readme.md
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.

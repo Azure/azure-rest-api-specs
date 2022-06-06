@@ -13,7 +13,7 @@ If you want to generate sdk with single client, please copy the following config
 ``` yaml
 output-folder: sdk/<ServiveName>/<PackageName>
 require:
- - specification/<ServiveName>/dataplane/readme.md
+ - specification/<RPName>/dataplane/readme.md
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.
