@@ -197,13 +197,8 @@
             "x-nullable": true
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "default": "2022-02-02",
-            "x-nullable": true
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter",
+            "default": "2022-02-02"
           }
         ],
         "responses": {
@@ -214,26 +209,12 @@
               "$ref": "#/definitions/AutoCompleteResponseDto"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "description": "In case request malformed",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
-          "500": {
-            "x-nullable": false,
-            "description": "In case internal error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
           "default": {
-            "description": "In case internal error",
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -424,13 +405,8 @@
             "x-nullable": true
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "default": "2022-02-02",
-            "x-nullable": true
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter",
+            "default": "2022-02-02"
           }
         ],
         "responses": {
@@ -441,26 +417,12 @@
               "$ref": "#/definitions/FacetsResponseDto"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "description": "In case request malformed",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
-          "500": {
-            "x-nullable": false,
-            "description": "In case internal error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
           "default": {
-            "description": "In case internal error",
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -685,13 +647,8 @@
             "x-nullable": true
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "default": "2022-02-02",
-            "x-nullable": true
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter",
+            "default": "2022-02-02"
           }
         ],
         "responses": {
@@ -702,26 +659,12 @@
               "$ref": "#/definitions/SearchResponseDto"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "description": "In case request malformed",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
-          "500": {
-            "x-nullable": false,
-            "description": "In case internal error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
-            }
-          },
           "default": {
-            "description": "In case internal error",
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -750,25 +693,6 @@
       "type": "object",
       "properties": {
         "text": {
-          "type": "string"
-        }
-      }
-    },
-    "SearchErrorResponseDto": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/SearchErrorResponseDetails"
-        }
-      }
-    },
-    "SearchErrorResponseDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
           "type": "string"
         }
       }
