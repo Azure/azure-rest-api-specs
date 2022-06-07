@@ -52,12 +52,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -69,6 +71,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -77,12 +85,6 @@
           },
           "204": {
             "description": "No Content"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -109,12 +111,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -140,16 +144,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RoleInstance"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoleInstance"
             }
           }
         },
@@ -178,12 +182,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -195,16 +201,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RoleInstanceInstanceView"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoleInstanceInstanceView"
             }
           }
         },
@@ -226,12 +232,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -257,16 +265,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RoleInstanceListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoleInstanceListResult"
             }
           }
         },
@@ -298,12 +306,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -315,17 +325,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -354,12 +364,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -371,17 +383,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -410,12 +422,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -427,17 +441,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -469,12 +483,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -486,17 +502,17 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
               "format": "binary",
               "type": "file"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         }
@@ -520,12 +536,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -537,16 +555,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudServiceRole"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceRole"
             }
           }
         },
@@ -568,12 +586,14 @@
           {
             "in": "path",
             "name": "resourceGroupName",
+            "description": "Name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cloudServiceName",
+            "description": "Name of the cloud service.",
             "required": true,
             "type": "string"
           },
@@ -585,16 +605,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudServiceRoleListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceRoleListResult"
             }
           }
         },
@@ -646,6 +666,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -656,12 +682,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CloudService"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
@@ -718,16 +738,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudService"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
             }
           }
         },
@@ -767,6 +787,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -775,12 +801,6 @@
           },
           "204": {
             "description": "No Content"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -819,16 +839,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudService"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
             }
           }
         },
@@ -869,16 +889,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudServiceInstanceView"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceInstanceView"
             }
           }
         },
@@ -905,16 +925,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudServiceListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceListResult"
             }
           }
         },
@@ -951,16 +971,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudServiceListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceListResult"
             }
           }
         },
@@ -1004,17 +1024,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1055,17 +1075,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1114,17 +1134,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1173,17 +1193,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1232,17 +1252,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1291,17 +1311,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1358,17 +1378,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
             }
+          },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1415,16 +1435,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UpdateDomain"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateDomain"
             }
           }
         },
@@ -1465,16 +1485,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UpdateDomainListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateDomainListResult"
             }
           }
         },
@@ -1518,16 +1538,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OSVersion"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSVersion"
             }
           }
         },
@@ -1561,16 +1581,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OSVersionListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSVersionListResult"
             }
           }
         },
@@ -1614,16 +1634,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OSFamily"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSFamily"
             }
           }
         },
@@ -1657,16 +1677,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OSFamilyListResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../common.json#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSFamilyListResult"
             }
           }
         },
@@ -1683,6 +1703,7 @@
   },
   "definitions": {
     "InstanceSku": {
+      "description": "The role instance SKU.",
       "type": "object",
       "properties": {
         "name": {
@@ -1783,6 +1804,7 @@
       }
     },
     "RoleInstanceProperties": {
+      "description": "Role instance properties.",
       "type": "object",
       "properties": {
         "networkProfile": {
@@ -1794,6 +1816,7 @@
       }
     },
     "RoleInstance": {
+      "description": "Describes the cloud service role instance.",
       "type": "object",
       "properties": {
         "id": {
@@ -1833,15 +1856,18 @@
       }
     },
     "RoleInstanceListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoleInstance"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
@@ -1869,7 +1895,7 @@
       }
     },
     "CloudServiceRoleProperties": {
-      "description": "",
+      "description": "The cloud service role properties.",
       "type": "object",
       "properties": {
         "uniqueId": {
@@ -1912,15 +1938,18 @@
       }
     },
     "CloudServiceRoleListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudServiceRole"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
@@ -2035,6 +2064,7 @@
       }
     },
     "LoadBalancerFrontendIPConfiguration": {
+      "description": "Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.",
       "type": "object",
       "properties": {
         "name": {
@@ -2052,6 +2082,7 @@
       ]
     },
     "LoadBalancerConfigurationProperties": {
+      "description": "Describes the properties of the load balancer configuration.",
       "type": "object",
       "properties": {
         "frontendIPConfigurations": {
@@ -2112,12 +2143,15 @@
       "type": "object",
       "properties": {
         "sourceVault": {
-          "$ref": "../common.json#/definitions/SubResource"
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The ARM Resource ID of the Key Vault"
         },
         "secretUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "Secret URL which contains the protected settings of the extension"
         }
-      }
+      },
+      "description": "Protected settings for the extension, referenced using KeyVault which are encrypted before sent to the role instance."
     },
     "CloudServiceExtensionProperties": {
       "description": "Extension Properties.",
@@ -2141,11 +2175,11 @@
         },
         "settings": {
           "description": "Public settings for the extension. For JSON extensions, this is the JSON settings for the extension. For XML Extension (like RDP), this is the XML setting for the extension.",
-          "type": "string"
+          "type": "object"
         },
         "protectedSettings": {
           "description": "Protected settings for the extension which are encrypted before sent to the role instance.",
-          "type": "string"
+          "type": "object"
         },
         "protectedSettingsFromKeyVault": {
           "$ref": "#/definitions/CloudServiceVaultAndSecretReference"
@@ -2248,6 +2282,25 @@
         }
       }
     },
+    "SystemData": {
+      "description": "The system meta data relating to this resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Specifies the time in UTC at which the Cloud Service (extended support) resource was created. <br />Minimum api-version: 2022-04-04.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "Specifies the time in UTC at which the Cloud Service (extended support) resource was last modified. <br />Minimum api-version: 2022-04-04.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
     "CloudService": {
       "description": "Describes the cloud service.",
       "type": "object",
@@ -2280,6 +2333,9 @@
         },
         "properties": {
           "$ref": "#/definitions/CloudServiceProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -2300,6 +2356,7 @@
       }
     },
     "StatusCodeCount": {
+      "description": "The status code and count of the cloud service instance view statuses",
       "type": "object",
       "properties": {
         "code": {
@@ -2320,6 +2377,7 @@
       "type": "object",
       "properties": {
         "statusesSummary": {
+          "description": "The summary.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StatusCodeCount"
@@ -2360,15 +2418,18 @@
       }
     },
     "CloudServiceListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudService"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
@@ -2409,15 +2470,18 @@
       }
     },
     "UpdateDomainListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpdateDomain"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
@@ -2491,15 +2555,18 @@
       }
     },
     "OSVersionListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OSVersion"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
@@ -2590,15 +2657,18 @@
       }
     },
     "OSFamilyListResult": {
+      "description": "The list operation result.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OSFamily"
           }
         },
         "nextLink": {
+          "description": "The URI to fetch the next page of resources. Use this to get the next page of resources. Do this till nextLink is null to fetch all the resources.",
           "type": "string"
         }
       },
