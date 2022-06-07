@@ -32,16 +32,28 @@ tag: package-preview-2021-10
 ```
 
 
+### Tag: package-preview-2022-03-29
+
+These settings apply only when `--tag=package-preview-2022-03-29` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.Communication/preview/2022-03-29-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2022-03-29-preview/Domains.json
+  - Microsoft.Communication/preview/2022-03-29-preview/EmailServices.json
+```
+
 ### Tag: package-preview-2021-10
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-10'
+``` yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.Communication/preview/2021-10-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2021-10-01-preview/EmailServices.json
   - Microsoft.Communication/preview/2021-10-01-preview/Domains.json
 ```
+
 ### Tag: package-2020-08-20
 
 These settings apply only when `--tag=package-2020-08-20` is specified on the command line.
@@ -104,22 +116,26 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
+
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_vsonline']
-  - repo: azure-powershell
 ```
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
 
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
