@@ -36,7 +36,12 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedSubnets/{resourceName}": {
       "get": {
+<<<<<<< HEAD:specification/dnc/resource-manager/Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
         "description": "Gets details about the specified dnc DelegatedSubnet Link.",
+=======
+        "operationId": "storagecontainers_Retrieve",
+        "description": "Gets storagecontainers by resource name",
+>>>>>>> 858f624c15... [Microsoft.AzureStackHCI] 2021-09-01-preview update (#7147):specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json
         "x-ms-examples": {
           "Get details of a delegated subnet": {
             "$ref": "./examples/getDelegatedSubnet.json"
@@ -312,8 +317,94 @@
     }
   },
   "definitions": {
+<<<<<<< HEAD:specification/dnc/resource-manager/Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
     "DelegatedSubnetResource": {
       "description": "Represents an instance of a resource.",
+=======
+    "storagecontainersProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path of the storage container on the disk"
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "name of the object to be used in moc"
+        },
+        "availableSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Amount of space available on the disk in MB"
+        },
+        "containerSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Total size of the disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/storageContainerStatus"
+        }
+      },
+      "description": "storagecontainersProperties defines a list of properties under storagecontainers"
+    },
+    "storageContainerStatus": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "readOnly": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "StorageContainer provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "availableSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Amount of space available on the disk in MB"
+        },
+        "containerSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of the disk in MB"
+        },
+        "provisioningStatus": {
+          "type": "object",
+          "description": "The provisioning status of the storage container",
+          "properties": {
+            "operationId": {
+              "type": "string",
+              "description": "The ID of the operation performed on the storage container"
+            },
+            "status": {
+              "type": "string",
+              "description": "The status of the operation performed on the storage container [Succeeded, Failed, InProgress]",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "InProgress"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStatusEnum",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "description": "storageContainerStatus defines the observed state of storagecontainers"
+    },
+    "storagecontainers": {
+>>>>>>> 858f624c15... [Microsoft.AzureStackHCI] 2021-09-01-preview update (#7147):specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json
       "type": "object",
       "properties": {
         "id": {

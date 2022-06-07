@@ -317,17 +317,28 @@
           "readOnly": true,
           "description": "An identifier that represents the resource."
         },
-        "name": {
+        "errorMessage": {
           "type": "string",
           "readOnly": true,
           "description": "The name of the resource."
         },
-        "type": {
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The progress of the operation in percentage"
+        }
+      },
+      "description": "galleryImageStatus defines the observed state of galleryimages"
+    },
+    "galleryImageIdentifier": {
+      "type": "object",
+      "properties": {
+        "publisher": {
           "type": "string",
           "readOnly": true,
           "description": "The type of resource."
         },
-        "location": {
+        "offer": {
           "type": "string",
           "description": "Location of the resource."
         },
@@ -357,6 +368,7 @@
     "DelegatedControllers": {
       "description": "An array of Delegated controller resources.",
       "type": "object",
+      "description": "List of galleryimages.",
       "properties": {
         "value": {
           "type": "array",
