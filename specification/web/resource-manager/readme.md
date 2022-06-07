@@ -64,6 +64,12 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: ResourceProvider.json
     reason: Model type is not owned by cert and domain team
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_SPEC
+    from: StaticSites.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from: StaticSites.json
+    reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
 
