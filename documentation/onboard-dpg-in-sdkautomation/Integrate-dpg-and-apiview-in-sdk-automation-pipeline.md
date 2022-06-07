@@ -21,6 +21,7 @@ Otherwise, sdk automation pipeline will try to find if there is autorest configu
            - ../../../../../azure-rest-api-specs/specification/deviceupdate/data-plane/readme.md
          ```
          *You can also use the absolute path of spec repo, which can be resolved by yourself.*
+      5. If there is other metadata in autorest configuration of spec PR comment, please copy them to autorest configuration file directly. (Although we only list little metadata service team can use in spec PR comment, we still need to support to add more metadata because the metadata listed in document maybe not enough.)
    2. When using the autorest configuration file found in sdk repository to generate SDK, SDK automation script need to modify the autorest configuration file in the SDK repo.
       1. If `require` block is used, change the `require` block to include the latest swagger `readme.md` in the PR.
       2. `input-file` will not be used. If the existing autorest configuration file uses `input-file`, we should change it to `require` before triggering the sdk automation pipeline, or add the autorest configuration in spec comment.
