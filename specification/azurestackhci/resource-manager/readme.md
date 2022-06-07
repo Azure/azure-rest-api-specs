@@ -103,6 +103,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/clusters.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/marketplaceGalleryImages.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/networkInterfaces.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/operations.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json

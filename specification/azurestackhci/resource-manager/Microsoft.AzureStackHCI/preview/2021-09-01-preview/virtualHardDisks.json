@@ -40,6 +40,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualharddisks/{virtualharddisksName}": {
       "get": {
         "operationId": "virtualharddisks_Retrieve",
+        "description": "Gets virtualharddisks by resource name",
         "x-ms-examples": {
           "GetVirtualHardDisk": {
             "$ref": "./examples/GetVirtualHardDisk.json"
@@ -314,6 +315,30 @@
           "type": "integer",
           "format": "int32"
         },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
+        "diskFileFormat": {
+          "type": "string",
+          "description": "The format of the actual VHD file [vhd, vhdx]",
+          "enum": [
+            "vhdx",
+            "vhd"
+          ],
+          "x-ms-enum": {
+            "name": "DiskFileFormat",
+            "modelAsString": true
+          }
+        },
         "provisioningState": {
           "type": "string"
         },
@@ -326,49 +351,59 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "type": "object",
-          "description": "MOCVirtualHardDiskStatus defines the observed state of MOCVirtualHardDisk"
+          "$ref": "#/definitions/virtualHardDiskStatus"
         }
       },
-      "description": "MOCVirtualHardDiskSpec defines the desired state of MOCVirtualHardDisk"
+      "description": "virtualharddisksProperties defines a list of properties under virtualharddisks"
+    },
+    "virtualHardDiskStatus": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "readOnly": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualHardDisk provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "type": "object",
+          "description": "The provisioning status of the virtual harddisk",
+          "properties": {
+            "operationId": {
+              "type": "string",
+              "description": "The ID of the operation performed on the virtual harddisk"
+            },
+            "status": {
+              "type": "string",
+              "description": "The status of the operation performed on the virtual harddisk [Succeeded, Failed, InProgress]",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "InProgress"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStatusEnum",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "description": "virtualHardDiskStatus defines the observed state of virtualharddisks"
     },
     "virtualharddisks": {
       "type": "object",
+      "description": "The virtualharddisks resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualharddisksProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "extendedLocation": {
           "type": "object",
@@ -382,12 +417,16 @@
               "description": "The extended location name."
             }
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The virtualharddisks resource definition."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "virtualharddisksPatch": {
       "type": "object",

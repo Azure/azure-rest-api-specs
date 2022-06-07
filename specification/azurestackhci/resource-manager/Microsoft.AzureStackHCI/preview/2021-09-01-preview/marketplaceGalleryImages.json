@@ -37,13 +37,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces/{networkinterfacesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/{marketplacegalleryimagesName}": {
       "get": {
-        "operationId": "networkinterfaces_Retrieve",
-        "description": "Gets networkinterfaces by resource name",
+        "operationId": "marketplacegalleryimages_Get",
+        "description": "Gets marketplacegalleryimages by resource name",
         "x-ms-examples": {
-          "GetNetworkInterface": {
-            "$ref": "./examples/GetNetworkInterface.json"
+          "GetMarketplaceGalleryImage": {
+            "$ref": "./examples/GetMarketplaceGalleryImage.json"
           }
         },
         "parameters": [
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -68,18 +68,19 @@
             }
           },
           "200": {
-            "description": "Retrieves the networkinterfaces resource.",
+            "description": "Retrieves the marketplacegalleryimages resource.",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           }
         }
       },
       "put": {
-        "operationId": "networkinterfaces_CreateOrUpdate",
+        "operationId": "marketplacegalleryimages_CreateOrUpdate",
+        "description": "Creates or updates a marketplacegalleryimage",
         "x-ms-examples": {
-          "PutNetworkInterface": {
-            "$ref": "./examples/PutNetworkInterface.json"
+          "PutMarketplaceGalleryImage": {
+            "$ref": "./examples/PutMarketplaceGalleryImage.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -94,17 +95,17 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "networkinterfaces",
+            "name": "marketplacegalleryimages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           }
         ],
@@ -116,24 +117,25 @@
             }
           },
           "200": {
-            "description": "Updates the networkinterfaces resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           },
           "201": {
-            "description": "Creates the networkinterfaces resource.",
+            "description": "Creates the marketplacegalleryimages resource.",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           }
         }
       },
       "delete": {
-        "operationId": "networkinterfaces_Delete",
+        "operationId": "marketplacegalleryimages_Delete",
+        "description": "Deletes a marketplacegalleryimage",
         "x-ms-examples": {
-          "DeleteNetworkInterface": {
-            "$ref": "./examples/DeleteNetworkInterface.json"
+          "DeleteMarketplaceGalleryImage": {
+            "$ref": "./examples/DeleteMarketplaceGalleryImage.json"
           }
         },
         "parameters": [
@@ -144,7 +146,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -158,7 +160,7 @@
             }
           },
           "200": {
-            "description": "Deletes the networkinterfaces resource."
+            "description": "Deletes the marketplacegalleryimages resource."
           },
           "204": {
             "description": "No content"
@@ -166,10 +168,11 @@
         }
       },
       "patch": {
-        "operationId": "networkinterfaces_Update",
+        "operationId": "marketplacegalleryimages_Update",
+        "description": "Updates a marketplacegalleryimage",
         "x-ms-examples": {
-          "UpdateNetworkInterface": {
-            "$ref": "./examples/UpdateNetworkInterface.json"
+          "UpdateMarketplaceGalleryImage": {
+            "$ref": "./examples/UpdateMarketplaceGalleryImage.json"
           }
         },
         "parameters": [
@@ -180,17 +183,17 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "networkinterfaces",
+            "name": "marketplacegalleryimages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/networkinterfacesPatch"
+              "$ref": "#/definitions/marketplacegalleryimagesPatch"
             }
           }
         ],
@@ -202,26 +205,27 @@
             }
           },
           "200": {
-            "description": "Updates the networkinterfaces resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           },
           "201": {
-            "description": "Updates the networkinterfaces resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/marketplacegalleryimages"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
       "get": {
-        "operationId": "networkinterfaces_ListByResourceGroup",
+        "operationId": "marketplacegalleryimages_ListByResourceGroup",
+        "description": "Lists all marketplacegalleryimages under the resource group",
         "x-ms-examples": {
-          "ListNetworkInterfaceByResourceGroup": {
-            "$ref": "./examples/ListNetworkInterfaceByResourceGroup.json"
+          "ListMarketplaceGalleryImageByResourceGroup": {
+            "$ref": "./examples/ListMarketplaceGalleryImageByResourceGroup.json"
           }
         },
         "parameters": [
@@ -243,9 +247,9 @@
             }
           },
           "200": {
-            "description": "Lists all networkinterfaces under the resource group.",
+            "description": "Lists all marketplacegalleryimages under the resource group.",
             "schema": {
-              "$ref": "#/definitions/networkinterfacesListResult"
+              "$ref": "#/definitions/marketplacegalleryimagesListResult"
             }
           }
         },
@@ -254,12 +258,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/networkinterfaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
       "get": {
-        "operationId": "networkinterfaces_ListBySubscription",
+        "operationId": "marketplacegalleryimages_ListBySubscription",
+        "description": "Lists all marketplacegalleryimages under the subscription",
         "x-ms-examples": {
-          "ListNetworkInterfaceBySubscription": {
-            "$ref": "./examples/ListNetworkInterfaceBySubscription.json"
+          "ListMarketplaceGalleryImageBySubscription": {
+            "$ref": "./examples/ListMarketplaceGalleryImageBySubscription.json"
           }
         },
         "parameters": [
@@ -278,9 +283,9 @@
             }
           },
           "200": {
-            "description": "Lists all networkinterfaces under the subscription.",
+            "description": "Lists all marketplacegalleryimages under the subscription.",
             "schema": {
-              "$ref": "#/definitions/networkinterfacesListResult"
+              "$ref": "#/definitions/marketplacegalleryimagesListResult"
             }
           }
         },
@@ -291,40 +296,59 @@
     }
   },
   "definitions": {
-    "InterfaceDNSSettings": {
-      "type": "object",
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of DNS server IP Addresses for the interface"
-        }
-      }
-    },
-    "networkinterfacesProperties": {
+    "marketplacegalleryimagesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
-        "ipConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ipConfiguration"
-          },
-          "description": "IPConfigurations - A list of IPConfigurations of the network interface.",
-          "x-ms-identifiers": []
-        },
-        "macAddress": {
+        "containerName": {
           "type": "string",
-          "description": "MacAddress - The MAC address of the network interface."
+          "description": "Container Name for storage container"
         },
-        "dnsSettings": {
-          "$ref": "#/definitions/InterfaceDNSSettings",
-          "description": "DNS Settings for the interface"
+        "osType": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          },
+          "description": "operating system type that the gallery image uses. Expected to be linux or windows"
+        },
+        "cloudInitDataSource": {
+          "type": "string",
+          "description": "Datasource for the gallery image when provisioning with cloud-init [Azure, NoCloud]",
+          "enum": [
+            "NoCloud",
+            "Azure"
+          ],
+          "x-ms-enum": {
+            "name": "CloudInitDataSource",
+            "modelAsString": true
+          }
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
+        "identifier": {
+          "$ref": "#/definitions/galleryImageIdentifier"
+        },
+        "version": {
+          "$ref": "#/definitions/galleryImageVersion"
         },
         "provisioningState": {
           "type": "string",
+          "description": "Provisioning state of the gallery image.",
           "readOnly": true,
           "enum": [
             "Succeeded",
@@ -344,19 +368,19 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/networkInterfaceStatus"
+          "$ref": "#/definitions/marketplaceGalleryImageStatus"
         }
       },
-      "description": "networkInterfacesProperties defines a list of properties under networkinterfaces"
+      "description": "marketplacegalleryimagesProperties defines a list of properties under marketplacegalleryimages"
     },
-    "networkInterfaceStatus": {
+    "marketplaceGalleryImageStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "NetworkInterface provisioning error code"
+          "description": "MarketplaceGalleryImage provisioning error code"
         },
         "errorMessage": {
           "type": "string",
@@ -364,15 +388,15 @@
         },
         "provisioningStatus": {
           "type": "object",
-          "description": "The provisioning status of the network interface",
+          "description": "The provisioning status of the marketplace gallery image",
           "properties": {
             "operationId": {
               "type": "string",
-              "description": "The ID of the operation performed on the network interface"
+              "description": "The ID of the operation performed on the marketplace gallery image"
             },
             "status": {
               "type": "string",
-              "description": "The status of the operation performed on the network interface [Succeeded, Failed, InProgress]",
+              "description": "The status of the operation performed on the marketplace gallery image [Succeeded, Failed, InProgress]",
               "enum": [
                 "Succeeded",
                 "Failed",
@@ -384,74 +408,117 @@
               }
             }
           }
+        },
+        "downloadStatus": {
+          "type": "object",
+          "properties": {
+            "downloadSizeInMB": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The downloaded sized of the image in MB"
+            }
+          },
+          "description": "The download status of the marketplace gallery image"
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The progress of the operation in percentage"
         }
       },
-      "description": "networkInterfaceStatus defines the observed state of networkinterfaces"
+      "description": "marketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
     },
-    "ipConfiguration": {
+    "galleryImageIdentifier": {
       "type": "object",
-      "x-ms-client-flatten": true,
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the gallery image definition publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The name of the gallery image definition offer."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The name of the gallery image definition SKU."
+        }
+      },
+      "required": [
+        "publisher",
+        "offer",
+        "sku"
+      ],
+      "description": "This is the gallery image definition identifier."
+    },
+    "galleryImageVersion": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "This is the version of the gallery image."
         },
         "properties": {
-          "type": "object",
-          "properties": {
-            "gateway": {
-              "x-ms-client-flatten": true,
-              "type": "string",
-              "description": "Gateway for network interface"
-            },
-            "prefixLength": {
-              "type": "string",
-              "description": "prefixLength for network interface"
-            },
-            "privateIPAddress": {
-              "type": "string",
-              "description": "PrivateIPAddress - Private IP address of the IP configuration."
-            },
-            "privateIPAllocationMethod": {
-              "type": "string",
-              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-              "enum": [
-                "Dynamic",
-                "Static"
-              ],
-              "x-ms-enum": {
-                "name": "PrivateIPAllocationMethodEnum",
-                "modelAsString": true
-              }
-            },
-            "subnet": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
-                }
-              },
-              "description": "Subnet - Name of Subnet bound to the IP configuration."
-            }
-          },
-          "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/galleryImageVersionProperties"
         }
       },
-      "description": "InterfaceIPConfiguration iPConfiguration in a network interface."
+      "description": "Specifies information about the gallery image version that you want to create or update."
     },
-    "networkinterfaces": {
+    "galleryImageVersionProperties": {
       "type": "object",
-      "description": "The networkinterfaces resource definition.",
+      "properties": {
+        "storageProfile": {
+          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+        }
+      },
+      "required": [
+        "storageProfile"
+      ],
+      "description": "Describes the properties of a gallery image version."
+    },
+    "galleryImageVersionStorageProfile": {
+      "type": "object",
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/galleryOSDiskImage"
+        }
+      },
+      "description": "This is the storage profile of a Gallery Image Version."
+    },
+    "galleryOSDiskImage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/galleryDiskImage"
+        }
+      ],
+      "description": "This is the OS disk image."
+    },
+    "galleryDiskImage": {
+      "type": "object",
+      "properties": {
+        "sizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "This property indicates the size of the VHD to be created."
+        }
+      },
+      "description": "This is the disk image base class."
+    },
+    "marketplacegalleryimages": {
+      "type": "object",
+      "description": "The marketplacegalleryimages resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/networkinterfacesProperties"
+          "$ref": "#/definitions/marketplacegalleryimagesProperties"
         },
         "extendedLocation": {
           "type": "object",
+          "description": "The extendedLocation of the resource.",
           "properties": {
             "type": {
               "type": "string",
@@ -473,7 +540,7 @@
         }
       ]
     },
-    "networkinterfacesPatch": {
+    "marketplacegalleryimagesPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -484,32 +551,37 @@
           "description": "Resource tags"
         }
       },
-      "description": "The networkinterfaces resource patch definition."
+      "description": "The marketplacegalleryimages resource patch definition."
     },
-    "networkinterfacesListResult": {
+    "marketplacegalleryimagesListResult": {
       "type": "object",
+      "description": "List of marketplacegalleryimages.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The itemed list of marketplacegalleryimages",
           "items": {
-            "$ref": "#/definitions/networkinterfaces"
+            "$ref": "#/definitions/marketplacegalleryimages"
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next set of results.",
+          "readOnly": true
         }
       }
     }
   },
   "parameters": {
-    "networkinterfacesNameParameter": {
-      "name": "networkinterfacesName",
+    "marketplacegalleryimagesNameParameter": {
+      "name": "marketplacegalleryimagesName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
-      "minLength": 3
+      "minLength": 3,
+      "description": "Name of the marketplace gallery image"
     }
   }
 }

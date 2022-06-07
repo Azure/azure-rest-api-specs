@@ -40,6 +40,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryimagesName}": {
       "get": {
         "operationId": "galleryimages_Retrieve",
+        "description": "Gets galleryimages by resource name",
         "x-ms-examples": {
           "GetGalleryImage": {
             "$ref": "./examples/GetGalleryImage.json"
@@ -76,6 +77,7 @@
       },
       "put": {
         "operationId": "galleryimages_CreateOrUpdate",
+        "description": "Create or update a galleryimage.",
         "x-ms-examples": {
           "PutGalleryImage": {
             "$ref": "./examples/PutGalleryImage.json"
@@ -130,6 +132,7 @@
       },
       "delete": {
         "operationId": "galleryimages_Delete",
+        "description": "Delete a galleryimage.",
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/DeleteGalleryImage.json"
@@ -166,6 +169,7 @@
       },
       "patch": {
         "operationId": "galleryimages_Update",
+        "description": "Update a galleryimage.",
         "x-ms-examples": {
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
@@ -218,6 +222,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListByResourceGroup",
+        "description": "Lists all galleryimages under the resource group.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageByResourceGroup.json"
@@ -256,6 +261,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListBySubscription",
+        "description": "List all galleryimages under the subscription",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
@@ -300,6 +306,7 @@
         },
         "imagePath": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "location of the image the gallery image should be created from"
         },
         "osType": {
@@ -314,21 +321,198 @@
           },
           "description": "operating system type that the gallery image uses. Expected to be linux or windows"
         },
+        "cloudInitDataSource": {
+          "type": "string",
+          "description": "Datasource for the gallery image when provisioning with cloud-init (Azure or NoCloud)",
+          "enum": [
+            "NoCloud",
+            "Azure"
+          ],
+          "x-ms-enum": {
+            "name": "CloudInitDataSource",
+            "modelAsString": true
+          }
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
+        "identifier": {
+          "$ref": "#/definitions/galleryImageIdentifier"
+        },
+        "version": {
+          "$ref": "#/definitions/galleryImageVersion"
+        },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "description": "Provisioning state of the gallery image.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Accepted",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "type": "object",
-          "description": "MOCGalleryImageStatus defines the observed state of MOCGalleryImage"
+          "$ref": "#/definitions/galleryImageStatus"
         }
-      }
+      },
+      "description": "galleryimagesProperties defines a list of properties under galleryimages"
+    },
+    "galleryImageStatus": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "readOnly": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "GalleryImage provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "type": "object",
+          "description": "The provisioning status of the gallery image",
+          "properties": {
+            "operationId": {
+              "type": "string",
+              "description": "The ID of the operation performed on the gallery image"
+            },
+            "status": {
+              "type": "string",
+              "description": "The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "InProgress"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStatusEnum",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "downloadStatus": {
+          "type": "object",
+          "properties": {
+            "downloadSizeInMB": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The downloaded sized of the image in MB"
+            }
+          },
+          "description": "The download status of the gallery image"
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The progress of the operation in percentage"
+        }
+      },
+      "description": "galleryImageStatus defines the observed state of galleryimages"
+    },
+    "galleryImageIdentifier": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the gallery image definition publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The name of the gallery image definition offer."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The name of the gallery image definition SKU."
+        }
+      },
+      "required": [
+        "publisher",
+        "offer",
+        "sku"
+      ],
+      "description": "This is the gallery image definition identifier."
+    },
+    "galleryImageVersion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the version of the gallery image."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/galleryImageVersionProperties"
+        }
+      },
+      "description": "Specifies information about the gallery image version that you want to create or update."
+    },
+    "galleryImageVersionProperties": {
+      "type": "object",
+      "properties": {
+        "storageProfile": {
+          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+        }
+      },
+      "required": [
+        "storageProfile"
+      ],
+      "description": "Describes the properties of a gallery image version."
+    },
+    "galleryImageVersionStorageProfile": {
+      "type": "object",
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/galleryOSDiskImage"
+        }
+      },
+      "description": "This is the storage profile of a Gallery Image Version."
+    },
+    "galleryOSDiskImage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/galleryDiskImage"
+        }
+      ],
+      "description": "This is the OS disk image."
+    },
+    "galleryDiskImage": {
+      "type": "object",
+      "properties": {
+        "sizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "This property indicates the size of the VHD to be created."
+        }
+      },
+      "description": "This is the disk image base class."
     },
     "galleryimages": {
       "type": "object",
+      "description": "The galleryimages resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -336,37 +520,9 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/galleryimagesProperties"
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "extendedLocation": {
           "type": "object",
+          "description": "The extendedLocation of the resource.",
           "properties": {
             "type": {
               "type": "string",
@@ -377,12 +533,16 @@
               "description": "The extended location name."
             }
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The galleryimages resource definition."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "galleryimagesPatch": {
       "type": "object",
@@ -399,6 +559,7 @@
     },
     "galleryimagesListResult": {
       "type": "object",
+      "description": "List of galleryimages.",
       "properties": {
         "value": {
           "type": "array",
@@ -407,7 +568,9 @@
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next set of results.",
+          "readOnly": true
         }
       }
     }
@@ -420,7 +583,8 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
-      "minLength": 3
+      "minLength": 3,
+      "description": "Name of the gallery image"
     }
   }
 }
