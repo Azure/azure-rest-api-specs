@@ -682,16 +682,16 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response.",
-            "type": "string"
-          },
-          {
             "in": "path",
             "name": "phoneNumber",
             "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
             "type": "string"
           },
           {
@@ -784,12 +784,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response.",
-            "type": "string"
-          },
-          {
             "in": "query",
             "name": "skip",
             "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
@@ -804,6 +798,12 @@
             "type": "integer",
             "format": "int32",
             "default": 100
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "description": "The locale to display in the localized fields in the response.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1265,7 +1265,7 @@
       "description": "Represents a wrapper around a list of countries.",
       "type": "object",
       "properties": {
-        "countries": {
+        "phoneNumberCountries": {
           "description": "Represents the underlying list of countries.",
           "type": "array",
           "items": {
@@ -1290,7 +1290,7 @@
           "type": "string"
         },
         "administrativeDivision": {
-          "description": "Represents the name of the admnistrative division of the locality. e.g. state or province.",
+          "description": "Represents the name of the administrative division of the locality. e.g. state or province.",
           "type": "object",
           "$ref": "#/definitions/PhoneNumberAdministrativeDivision"
         }
