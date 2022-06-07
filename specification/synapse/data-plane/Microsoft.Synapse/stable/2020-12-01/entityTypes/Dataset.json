@@ -2342,6 +2342,44 @@
         "tableName"
       ]
     },
+    "SapODPResourceDataset": {
+      "x-ms-discriminator-value": "SapODPResource",
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ODP Resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapODPResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapODPResourceDatasetTypeProperties": {
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "description": "The context of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        },
+        "objectName": {
+          "type": "object",
+          "description": "The name of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "context",
+        "objectName"
+      ]
+    },
     "WebTableDataset": {
       "x-ms-discriminator-value": "WebTable",
       "description": "The dataset points to a HTML table in the web page.",
