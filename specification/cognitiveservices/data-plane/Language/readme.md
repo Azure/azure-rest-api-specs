@@ -155,3 +155,16 @@ directive:
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     reason: Not every service will ship new versions within the Language pillar.
 ```
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - preview/2022-10-01-preview/analyzeconversations-authoring.json
+  - preview/2022-10-01-preview/analyzeconversations.json
+  - preview/2022-10-01-preview/analyzetext-authoring.json
+  - preview/2022-10-01-preview/common.json
+  - preview/2022-10-01-preview/textanalytics.json
+```
+
