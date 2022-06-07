@@ -127,9 +127,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
-          },
-          {
             "$ref": "#/parameters/SkipTokenParameter"
           },
           {
@@ -182,9 +179,6 @@
           },
           {
             "$ref": "#/parameters/ReportNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
           }
         ],
         "responses": {
@@ -228,12 +222,6 @@
           },
           {
             "$ref": "#/parameters/ReportNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
-          },
-          {
-            "$ref": "#/parameters/ArmResourceSystemDataHeaderParameter"
           }
         ],
         "responses": {
@@ -287,12 +275,6 @@
           },
           {
             "$ref": "#/parameters/ReportNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
-          },
-          {
-            "$ref": "#/parameters/ArmResourceSystemDataHeaderParameter"
           }
         ],
         "responses": {
@@ -334,9 +316,6 @@
           },
           {
             "$ref": "#/parameters/ReportNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
           }
         ],
         "responses": {
@@ -388,9 +367,6 @@
             "$ref": "#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
-          },
-          {
             "$ref": "#/parameters/SelectParameter"
           },
           {
@@ -440,9 +416,6 @@
           },
           {
             "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
           }
         ],
         "responses": {
@@ -482,9 +455,6 @@
           },
           {
             "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
           },
           {
             "$ref": "#/parameters/ReportCreatorTenantIdParameter"
@@ -1184,24 +1154,6 @@
     }
   },
   "parameters": {
-    "ClientTenantIdHeaderParameter": {
-      "name": "x-ms-client-tenant-id",
-      "in": "header",
-      "description": "The client tenant id in header. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-      "required": true,
-      "type": "string",
-      "x-ms-client-name": "ClientTenantId",
-      "x-ms-parameter-location": "method"
-    },
-    "ArmResourceSystemDataHeaderParameter": {
-      "name": "x-ms-arm-resource-system-data",
-      "in": "header",
-      "description": "The detail info about the resource's create/modify track info.",
-      "required": true,
-      "type": "string",
-      "x-ms-client-name": "SystemData",
-      "x-ms-parameter-location": "method"
-    },
     "ReportNameParameter": {
       "name": "reportName",
       "in": "path",
