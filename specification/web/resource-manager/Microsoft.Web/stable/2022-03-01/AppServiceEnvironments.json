@@ -493,6 +493,154 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/configurations/customdnssuffix": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get Custom Dns Suffix configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_GetAseCustomDnsSuffixConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ASE custom DNS suffix configuration": {
+            "$ref": "./examples/GetAseCustomDnsSuffixConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Update Custom Dns Suffix configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_UpdateAseCustomDnsSuffixConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDnsSuffixConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update ASE custom DNS suffix configuration": {
+            "$ref": "./examples/UpdateAseCustomDnsSuffixConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Delete Custom Dns Suffix configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_DeleteAseCustomDnsSuffixConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ASE custom DNS suffix configuration": {
+            "$ref": "./examples/DeleteAseCustomDnsSuffixConfiguration.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/configurations/networking": {
       "get": {
         "tags": [
