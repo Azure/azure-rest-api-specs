@@ -123,14 +123,10 @@
           "readOnly": true,
           "description": "The provisioning state of the Arc-enabled SQL Managed Instance resource."
         },
-        "keytab": {
-          "type": "string",
-          "description": "A base64-encoded keytab.",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
+        "activeDirectoryInformation": {
+          "type": "object",
+          "description": "Active Directory information related to this SQL Managed Instance.",
+          "$ref": "#/definitions/ActiveDirectoryInformation"
         },
         "licenseType": {
           "type": "string",
@@ -243,6 +239,32 @@
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "KeytabInformation": {
+      "type": "object",
+      "description": "Keytab used for authenticate with Active Directory.",
+      "properties": {
+        "keytab": {
+          "type": "string",
+          "description": "A base64-encoded keytab.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ActiveDirectoryInformation": {
+      "type": "object",
+      "description": "Active Directory information that related to the resource.",
+      "properties": {
+        "keytabInformation": {
+          "type": "object",
+          "description": "Keytab information that is used for the Sql Managed Instance when Active Directory authentication is used.",
+          "$ref": "#/definitions/KeytabInformation"
+        }
       }
     },
     "SqlManagedInstanceListResult": {

@@ -1145,7 +1145,13 @@
         },
         "httpHeaders": {
           "description": "The HTTP headers.",
-          "$ref": "#/definitions/HttpHeaders"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpHeader"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1777,8 +1783,8 @@
         }
       }
     },
-    "HttpHeaders": {
-      "description": "The HTTP headers.",
+    "HttpHeader": {
+      "description": "The HTTP header.",
       "type": "object",
       "properties": {
         "name": {

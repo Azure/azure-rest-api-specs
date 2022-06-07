@@ -1431,6 +1431,7 @@
         "Expiring",
         "Expired",
         "Pending",
+        "Processing",
         "Cancelled",
         "Failed"
       ]
@@ -1599,6 +1600,7 @@
       "enum": [
         "None",
         "Pending",
+        "Processing",
         "Active",
         "PurchaseError",
         "PaymentInstrumentError",
@@ -2193,6 +2195,11 @@
         },
         "cancelledCount": {
           "description": "The number of reservation in Cancelled state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "processingCount": {
+          "description": "The number of reservation in Processing state",
           "readOnly": true,
           "type": "number"
         }

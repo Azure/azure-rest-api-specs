@@ -2729,7 +2729,8 @@
             "Anonymous",
             "Basic",
             "AadServicePrincipal",
-            "ManagedServiceIdentity"
+            "ManagedServiceIdentity",
+            "OAuth2ClientCredential"
           ],
           "x-ms-enum": {
             "name": "RestServiceAuthenticationType",
@@ -2767,6 +2768,26 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "clientId": {
+          "type": "object",
+          "description": "The client ID associated with your application. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret associated with your application.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "tokenEndpoint": {
+          "type": "object",
+          "description": "The token endpoint of the authorization server to acquire access token. Type: string (or Expression with resultType string)."
+        },
+        "resource": {
+          "type": "object",
+          "description": "The target service or resource to which the access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "scope": {
+          "type": "object",
+          "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -2975,6 +2996,161 @@
       "required": [
         "authenticationType",
         "url"
+      ]
+    },
+    "DataworldLinkedService": {
+      "x-ms-discriminator-value": "Dataworld",
+      "description": "Linked service for Dataworld.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dataworld linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataworldLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DataworldLinkedServiceTypeProperties": {
+      "description": "Dataworld linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Dataworld source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "AppFiguresLinkedService": {
+      "x-ms-discriminator-value": "AppFigures",
+      "description": "Linked service for AppFigures.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AppFigures linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppFiguresLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppFiguresLinkedServiceTypeProperties": {
+      "description": "AppFigures linked service type properties.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "object",
+          "description": "The username of the Appfigures source."
+        },
+        "password": {
+          "description": "The password of the AppFigures source.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "clientKey": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The client key for the AppFigures source."
+        }
+      },
+      "required": [
+        "userName",
+        "password",
+        "clientKey"
+      ]
+    },
+    "AsanaLinkedService": {
+      "x-ms-discriminator-value": "Asana",
+      "description": "Linked service for Asana.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Asana linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsanaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AsanaLinkedServiceTypeProperties": {
+      "description": "Asana linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Asana source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "TwilioLinkedService": {
+      "x-ms-discriminator-value": "Twilio",
+      "description": "Linked service for Twilio.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Twilio linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TwilioLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "TwilioLinkedServiceTypeProperties": {
+      "description": "Twilio linked service type properties.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "object",
+          "description": "The Account SID of Twilio service."
+        },
+        "password": {
+          "description": "The auth token of Twilio service.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "userName",
+        "password"
       ]
     },
     "AmazonS3LinkedService": {
