@@ -2282,25 +2282,6 @@
         }
       }
     },
-    "SystemData": {
-      "description": "The system meta data relating to this resource.",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "Specifies the time in UTC at which the Cloud Service (extended support) resource was created. <br />Minimum api-version: 2022-04-04.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "Specifies the time in UTC at which the Cloud Service (extended support) resource was last modified. <br />Minimum api-version: 2022-04-04.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
     "CloudService": {
       "description": "Describes the cloud service.",
       "type": "object",
@@ -2335,7 +2316,7 @@
           "$ref": "#/definitions/CloudServiceProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../common.json#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true,
