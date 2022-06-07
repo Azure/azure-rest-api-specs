@@ -426,6 +426,73 @@
           "readOnly": true,
           "type": "string",
           "description": "Digest of the vulnerable image"
+        },
+        "Scanner": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The vulnerabilities scanner"
+        }
+      }
+    },
+    "AmazonElasticContainerRegistryVulnerabilityProperties": {
+      "type": "object",
+      "description": "Additional context fields for amazon elastic container registry Vulnerability assessment",
+      "x-ms-discriminator-value": "AmazonElasticContainerRegistryVulnerability",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalData"
+        }
+      ],
+      "properties": {
+        "cve": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of CVEs",
+          "items": {
+            "$ref": "#/definitions/CVE"
+          }
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/string"
+          }
+        },
+        "Metadata": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The sub assessment metadata"
+        },
+        "PackageName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the package the vulnerabilities relates too"
+        },
+        "InstalledVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version installed"
+        },
+        "RegistryHost": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the registry which the vulnerable image belongs to"
+        },
+        "repositoryName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the repository which the vulnerable image belongs to"
+        },
+        "imageDigest": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Digest of the vulnerable image"
+        },
+        "Scanner": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The vulnerabilities scanner"
         }
       }
     },
