@@ -124,8 +124,43 @@
       }
     },
     "/{resourceUri}/query": {
+      "get": {
+        "operationId": "Query_Resource_Get",
+        "summary": "Execute an Analytics query using resource URI",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/oms-get-resource-centric-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/timespanParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
       "post": {
-        "operationId": "Query_Resource",
+        "operationId": "Query_Resource_Post",
         "summary": "Execute an Analytics query using resource URI",
         "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
