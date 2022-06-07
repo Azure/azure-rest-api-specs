@@ -2858,11 +2858,12 @@
       "properties": {
         "directoryServiceOptions": {
           "type": "string",
-          "description": "Indicates the directory service used.",
+          "description": "Indicates the directory service used. Note that this enum may be extended in the future.",
           "enum": [
             "None",
             "AADDS",
-            "AD"
+            "AD",
+            "AADKERB"
           ],
           "x-ms-enum": {
             "name": "DirectoryServiceOptions",
@@ -2871,7 +2872,7 @@
         },
         "activeDirectoryProperties": {
           "$ref": "#/definitions/ActiveDirectoryProperties",
-          "description": "Required if choose AD."
+          "description": "Required if directoryServiceOptions are AD, optional if they are AADKERB."
         },
         "defaultSharePermission": {
           "type": "string",
