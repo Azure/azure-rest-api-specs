@@ -21,16 +21,13 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+      "description": "Azure Active Directory OAuth2 Flow"
     }
   },
   "security": [
     {
       "azure_auth": [
-        "user_impersonation"
+        "https://monitor.azure.com//.default"
       ]
     }
   ],
@@ -42,7 +39,7 @@
         ],
         "summary": "Ingestion API used to directly ingest data using Data Collection Rules",
         "description": "See error response code and error response message for more detail.",
-        "operationId": "DataCollectionRule_Ingest",
+        "operationId": "Upload",
         "consumes": [
           "application/json"
         ],
