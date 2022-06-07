@@ -6174,6 +6174,10 @@
           "description": "The default identity for accessing key vault used in features like customer managed keys. The default identity needs to be explicitly set by the users. It can be \"FirstPartyIdentity\", \"SystemAssignedIdentity\" and more.",
           "type": "string"
         },
+        "minimalTlsVersion": {
+          "description": "The minimum TLS version allowed to access a database. It can be \"1.0\", \"1.1\" or \"1.2\".",
+          "type": "string"
+        },
         "publicNetworkAccess": {
           "description": "Whether requests from Public Network are allowed",
           "$ref": "#/definitions/PublicNetworkAccess"
@@ -6313,6 +6317,10 @@
         },
         "defaultIdentity": {
           "description": "The default identity for accessing key vault used in features like customer managed keys. The default identity needs to be explicitly set by the users. It can be \"FirstPartyIdentity\", \"SystemAssignedIdentity\" and more.",
+          "type": "string"
+        },
+        "minimalTlsVersion": {
+          "description": "The minimum TLS version allowed to access a database. It can be \"1.0\", \"1.1\" or \"1.2\".",
           "type": "string"
         },
         "publicNetworkAccess": {
@@ -6484,6 +6492,10 @@
         },
         "defaultIdentity": {
           "description": "The default identity for accessing key vault used in features like customer managed keys. The default identity needs to be explicitly set by the users. It can be \"FirstPartyIdentity\", \"SystemAssignedIdentity\" and more.",
+          "type": "string"
+        },
+        "minimalTlsVersion": {
+          "description": "The minimum TLS version allowed to access a database. It can be \"1.0\", \"1.1\" or \"1.2\".",
           "type": "string"
         },
         "publicNetworkAccess": {
@@ -7128,6 +7140,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autoscaleSettings is required, but not both."
         },
         "autoscaleSettings": {
@@ -7152,6 +7165,7 @@
       "properties": {
         "maxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents maximum throughput container can scale up to."
         },
         "autoUpgradePolicy": {
@@ -7160,6 +7174,7 @@
         },
         "targetMaxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents target maximum throughput container can scale up to once offer is no longer in pending state.",
           "readOnly": true
         }
@@ -7188,6 +7203,7 @@
         },
         "incrementPercent": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents the percentage by which throughput can increase every time throughput policy kicks in."
         }
       }
@@ -7199,6 +7215,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Value of the Cosmos DB resource throughput or autoscaleSettings. Use the ThroughputSetting resource when retrieving offer details."
         },
         "autoscaleSettings": {
@@ -7239,6 +7256,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Default time to live"
         },
         "uniqueKeyPolicy": {
@@ -7360,7 +7378,8 @@
         },
         "precision": {
           "description": "The precision of the index. -1 is maximum precision.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "kind": {
           "description": "Indicates the type of index.",
@@ -7644,6 +7663,7 @@
         },
         "analyticalStorageTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Analytical TTL."
         }
       },
@@ -7695,7 +7715,8 @@
       "properties": {
         "expireAfterSeconds": {
           "description": "Expire after seconds",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "unique": {
           "description": "Is unique or not",
@@ -7739,6 +7760,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Time to live of the Cosmos DB Cassandra table"
         },
         "schema": {
@@ -7747,6 +7769,7 @@
         },
         "analyticalStorageTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Analytical TTL."
         }
       },
@@ -7850,6 +7873,7 @@
         },
         "defaultTtl": {
           "type": "integer",
+          "format": "int32",
           "description": "Default time to live"
         },
         "uniqueKeyPolicy": {
@@ -7859,6 +7883,11 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the graph."
+        },
+        "analyticalStorageTtl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Analytical TTL."
         }
       },
       "required": [
@@ -7870,6 +7899,7 @@
       "properties": {
         "throughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Request Units per second. For example, \"throughput\": 10000."
         },
         "autoscaleSettings": {
@@ -7884,6 +7914,7 @@
       "properties": {
         "maxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Represents maximum throughput, the resource can scale up to."
         }
       }
@@ -8010,6 +8041,19 @@
       ],
       "x-ms-enum": {
         "name": "NetworkAclBypass",
+        "modelAsString": false
+      }
+    },
+    "MinimalTlsVersions": {
+      "description": "The minimum allowed TLS version for the Cosmos DB account.",
+      "type": "string",
+      "enum": [
+        "1.0",
+        "1.1",
+        "1.2"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersions",
         "modelAsString": false
       }
     },
