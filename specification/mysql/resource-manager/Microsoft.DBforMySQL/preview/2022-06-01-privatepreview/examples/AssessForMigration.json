@@ -26,7 +26,9 @@
             },
             "properties": {
               "administratorLogin": "cloudsa",
+              "createMode": "Migrate",
               "version": "5.7",
+              "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver",
               "storage": {
                 "storageSizeGB": 120,
                 "iops": 360,
@@ -37,34 +39,23 @@
                 "geoRedundantBackup": "False"
               },
               "network": {
-                "publicNetworkAccess": "Disabled"
+                "publicNetworkAccess": "Enabled"
               }
             },
             "tags": {
               "MigrationSourceSingleServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver"
             },
             "location": "southeastasia",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver"
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver",
+            "type": "Microsoft.DBforMySQL/flexibleServers"
           },
           "configurations": [
             {
               "properties": {
                 "value": "ON"
               },
-              "name": "require_secure_transport"
-            },
-            {
-              "properties": {
-                "value": "2000"
-              },
-              "name": "table_definition_cache",
-              "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
-            },
-            {
-              "properties": {
-                "value": "2000"
-              },
-              "name": "table_open_cache",
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver/configurations/require_secure_transport",
+              "name": "require_secure_transport",
               "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
             }
           ],
@@ -74,10 +65,11 @@
                 "startIpAddress": "0.0.0.0",
                 "endIpAddress": "255.255.255.254"
               },
-              "name": "AllowAll"
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver/firewallRules/testfr",
+              "name": "testfr",
+              "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules"
             }
-          ],
-          "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
+          ]
         },
         "replicaAssessmentReports": [
           {
@@ -97,7 +89,9 @@
                 },
                 "properties": {
                   "administratorLogin": "cloudsa",
+                  "createMode": "Migrate",
                   "version": "5.7",
+                  "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica",
                   "storage": {
                     "storageSizeGB": 120,
                     "iops": 360,
@@ -108,19 +102,24 @@
                     "geoRedundantBackup": "False"
                   },
                   "network": {
-                    "publicNetworkAccess": "Disabled"
+                    "publicNetworkAccess": "Enabled"
                   }
                 },
-                "tags": {},
+                "tags": {
+                  "MigrationSourceSingleServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/servers/sourcesterlingserver-replica"
+                },
                 "location": "southeastasia",
-                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica"
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica",
+                "type": "Microsoft.DBforMySQL/flexibleServers"
               },
               "configurations": [
                 {
                   "properties": {
                     "value": "ON"
                   },
-                  "name": "require_secure_transport"
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica/configurations/require_secure_transport",
+                  "name": "require_secure_transport",
+                  "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
                 }
               ],
               "firewallRules": [
@@ -129,11 +128,13 @@
                     "startIpAddress": "0.0.0.0",
                     "endIpAddress": "255.255.255.254"
                   },
-                  "name": "AllowAll"
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/fs-sourcesterlingserver-replica/firewallRules/testfr",
+                  "name": "testfr",
+                  "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules"
                 }
-              ],
-              "platformProviderId": "/Microsoft.DBforMySQL/flexibleServers"
-            }
+              ]
+            },
+            "assessmentReportCompletionDateTime": "2021-06-15T16:05:24.902522+00:00"
           }
         ],
         "assessmentReportCompletionDateTime": "2021-06-15T16:05:19.902522+00:00"
