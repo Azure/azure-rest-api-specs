@@ -1261,6 +1261,7 @@
       "description": "Server version capabilities."
     },
     "StorageEditionCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1382,6 +1383,7 @@
       "description": "Hyperscale node edition capabilities."
     },
     "CapabilityProperties": {
+      "type": "object",
       "properties": {
         "zone": {
           "type": "string",
@@ -1469,6 +1471,7 @@
       }
     },
     "ServerProperties": {
+      "type": "object",
       "properties": {
         "administratorLogin": {
           "type": "string",
@@ -1599,6 +1602,7 @@
       "description": "The properties of a server."
     },
     "Server": {
+      "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1623,6 +1627,7 @@
       "description": "Represents a server."
     },
     "ServerPropertiesForUpdate": {
+      "type": "object",
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
@@ -1675,6 +1680,7 @@
       }
     },
     "ServerForUpdate": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1717,6 +1723,7 @@
       "description": "A list of servers."
     },
     "Sku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1743,6 +1750,7 @@
       "description": "Sku information related properties of a server."
     },
     "Storage": {
+      "type": "object",
       "properties": {
         "storageSizeGB": {
           "type": "integer",
@@ -1753,6 +1761,7 @@
       "description": "Storage properties of a server"
     },
     "Backup": {
+      "type": "object",
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
@@ -1787,6 +1796,7 @@
       "description": "Backup properties of a server"
     },
     "Network": {
+      "type": "object",
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
@@ -1823,6 +1833,7 @@
       "description": "Network properties of a server"
     },
     "HighAvailability": {
+      "type": "object",
       "properties": {
         "mode": {
           "type": "string",
@@ -1893,6 +1904,7 @@
       }
     },
     "FirewallRuleProperties": {
+      "type": "object",
       "properties": {
         "startIpAddress": {
           "type": "string",
@@ -1969,6 +1981,7 @@
       "description": "A list of server backups."
     },
     "FirewallRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
@@ -2009,6 +2022,7 @@
       "description": "A list of firewall rules."
     },
     "ConfigurationProperties": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -2077,6 +2091,7 @@
       "description": "The properties of a configuration."
     },
     "Configuration": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
@@ -2114,6 +2129,7 @@
       "description": "A list of server configurations."
     },
     "OperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -2139,6 +2155,7 @@
       "description": "Display metadata associated with the operation."
     },
     "Operation": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2216,6 +2233,7 @@
       "description": "Request from client to check resource name availability."
     },
     "NameAvailability": {
+      "type": "object",
       "properties": {
         "message": {
           "type": "string",
@@ -2279,6 +2297,7 @@
     },
     "CloudError": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
