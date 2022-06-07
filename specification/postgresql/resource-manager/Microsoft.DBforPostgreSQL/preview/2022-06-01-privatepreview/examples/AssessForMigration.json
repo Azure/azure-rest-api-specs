@@ -35,10 +35,12 @@
                 "geoRedundantBackup": "False"
               },
               "network": {
-                "publicNetworkAccess": "Disabled"
+                "publicNetworkAccess": "Enabled"
               }
             },
-            "tags": {},
+            "tags": {
+              "MigrationSourceSingleServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourcesterlingserver"
+            },
             "location": "southeastasia"
           },
           "configurations": [
@@ -74,7 +76,62 @@
           ],
           "platformProviderId": "/Microsoft.DBforPostgreSQL/flexibleServers"
         },
-        "replicaAssessmentReports": [],
+        "replicaAssessmentReports": [
+          {
+            "serverResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourcesterlingserver-replica",
+            "summary": [
+              {
+                "featureName": "TLSVersion",
+                "severity": "Warning",
+                "message": "Flexible server supports encrypted connections using Transport Layer Security(TLS 1.2).Flexible server will deny all connections with lower TLS version.To match the source server configuration the following server parameters will be set during server creation: require_secure_transport, tls_version"
+              }
+            ],
+            "targetServerDetails": {
+              "resource": {
+                "sku": {
+                  "name": "Standard_D2ds_v4",
+                  "tier": "GeneralPurpose"
+                },
+                "properties": {
+                  "administratorLogin": "cloudsa",
+                  "version": "11",
+                  "storage": {
+                    "storageSizeGB": 120
+                  },
+                  "backup": {
+                    "backupRetentionDays": 7,
+                    "geoRedundantBackup": "False"
+                  },
+                  "network": {
+                    "publicNetworkAccess": "Enabled"
+                  }
+                },
+                "tags": {
+                  "MigrationSourceSingleServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/test_resourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourcesterlingserver-replica"
+                },
+                "location": "southeastasia"
+              },
+              "configurations": [
+                {
+                  "properties": {
+                    "value": "ON"
+                  },
+                  "name": "require_secure_transport"
+                }
+              ],
+              "firewallRules": [
+                {
+                  "properties": {
+                    "startIpAddress": "0.0.0.0",
+                    "endIpAddress": "255.255.255.254"
+                  },
+                  "name": "AllowAll"
+                }
+              ],
+              "platformProviderId": "/Microsoft.DBforPostgreSQL/flexibleServers"
+            }
+          }
+        ],
         "assessmentReportCompletionDateTime": "2021-06-15T16:05:19.902522+00:00"
       }
     }
