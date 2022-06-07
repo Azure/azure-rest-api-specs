@@ -70,6 +70,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devops']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

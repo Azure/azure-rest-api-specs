@@ -5,7 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-managedapplication
@@ -17,7 +17,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-managedapplications-2021-07
@@ -26,7 +26,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/managedapplication/azure-mgmt-managedapplication/azure/mgmt/managedapplication/
-clear-output-folder: false
 perform-load: false
 ```
 
