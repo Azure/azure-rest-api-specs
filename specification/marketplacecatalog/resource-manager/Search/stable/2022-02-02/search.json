@@ -37,212 +37,13 @@
             "x-nullable": false
           },
           {
-            "type": "string",
-            "name": "searchQuery",
+            "name": "request",
             "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "string",
-            "name": "publisherName",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "integer",
-            "name": "skip",
-            "in": "body",
-            "format": "int32",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            },
             "x-nullable": false
-          },
-          {
-            "type": "integer",
-            "name": "take",
-            "in": "body",
-            "format": "int32",
-            "x-nullable": false
-          },
-          {
-            "type": "boolean",
-            "name": "isAzureBenefitEligible",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isMicrosoftProduct",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isCoreVm",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isPreferredSolution",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isAdditionalPurchaseRequired",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isPowerBICertified",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "boolean",
-            "name": "isIndustryCloud",
-            "in": "body",
-            "x-nullable": true
-          },
-          {
-            "type": "array",
-            "name": "languages",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "stores",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "select",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "sortBy",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "offerTypes",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "pricingTypes",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "privateStoreAllowances",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "appSourceIndustries",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "operatingSystems",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "appSourceCategories",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "azureIndustries",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "azureCategories",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "azurePortalCategories",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "facets",
-            "in": "body",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "string"
-            }
           },
           {
             "type": "string",
@@ -646,6 +447,151 @@
       "x-ms-enum": {
         "name": "PrivateStoreAllow",
         "modelAsString": true
+      }
+    },
+    "SearchRequest": {
+      "type": "object",
+      "required": [
+        "skip",
+        "take",
+        "languages",
+        "stores",
+        "select",
+        "sortBy",
+        "offerTypes",
+        "pricingTypes",
+        "privateStoreAllowances",
+        "appSourceIndustries",
+        "operatingSystems",
+        "appSourceCategories",
+        "azureIndustries",
+        "azureCategories",
+        "azurePortalCategories",
+        "facets"
+      ],
+      "properties": {
+        "searchQuery": {
+          "type": "string"
+        },
+        "publisherName": {
+          "type": "string"
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "take": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isAzureBenefitEligible": {
+          "type": "boolean"
+        },
+        "isMicrosoftProduct": {
+          "type": "boolean"
+        },
+        "isThirdParty": {
+          "type": "boolean"
+        },
+        "isCoreVm": {
+          "type": "boolean"
+        },
+        "isPreferredSolution": {
+          "type": "boolean"
+        },
+        "isAdditionalPurchaseRequired": {
+          "type": "boolean"
+        },
+        "isPowerBICertified": {
+          "type": "boolean"
+        },
+        "isIndustryCloud": {
+          "type": "boolean"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Store"
+          }
+        },
+        "select": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sortBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "offerTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "privateStoreAllowances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateStoreAllow"
+          }
+        },
+        "appSourceIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatingSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSourceCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azurePortalCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   },
