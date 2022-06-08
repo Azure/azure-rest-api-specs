@@ -4386,6 +4386,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
           }
         ],
         "responses": {
@@ -5389,11 +5398,13 @@
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the VM represented by this backup item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine represented by this item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "protectionStatus": {
           "description": "Backup status of this backup item.",
@@ -5427,7 +5438,8 @@
           "x-ms-enum": {
             "name": "HealthStatus",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "healthDetails": {
           "description": "Health details on this backup item.",
@@ -5453,11 +5465,13 @@
         "lastBackupTime": {
           "format": "date-time",
           "description": "Timestamp of the last backup operation on this backup item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "protectedItemDataId": {
           "description": "Data ID of the protected item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "extendedInfo": {
           "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo",
@@ -5760,7 +5774,8 @@
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the DB represented by this backup item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serverName": {
           "description": "Host/Cluster Name for instance or AG",
@@ -5776,7 +5791,8 @@
         },
         "protectionStatus": {
           "description": "Backup status of this backup item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "protectionState": {
           "description": "Backup state of this backup item.",
@@ -8311,7 +8327,8 @@
           "x-ms-enum": {
             "name": "BackupManagementType",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "workloadType": {
           "description": "Type of workload this item represents.",
@@ -8337,7 +8354,8 @@
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "containerName": {
           "description": "Unique name of container",
