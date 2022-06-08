@@ -11,14 +11,14 @@
       "properties": {
         "scope": "cluster",
         "namespace": "srs-namespace",
-        "sourceKind": "Bucket",
+        "sourceKind": "AzureBlob",
         "suspend": false,
-        "bucket": {
-          "url": "https://fluxminiotest.az.minio.io",
-          "bucketName": "flux",
+        "azureBlob": {
+          "url": "https://shasama.blob.core.windows.net",
+          "containerName": "testcontainer",
           "syncIntervalInSeconds": 1000,
           "timeoutInSeconds": 1000,
-          "accessKey": "fluxminiotest"
+          "accountKey": "testaccountkey"
         },
         "kustomizations": {
           "srs-kustomization1": {
@@ -63,16 +63,17 @@
         "properties": {
           "scope": "cluster",
           "namespace": "srs-namespace",
-          "sourceKind": "Bucket",
+          "sourceKind": "azureBlob",
           "suspend": false,
           "gitRepository": null,
-          "bucket": {
-            "url": "https://fluxminiotest.az.minio.io",
-            "bucketName": "flux",
+          "bucket": null,
+          "azureBlob": {
+            "url": "https://shasama.blob.core.windows.net",
+            "containerName": "testcontainer",
             "syncIntervalInSeconds": 1000,
             "timeoutInSeconds": 1000,
-            "accessKey": "fluxminiotest"
-          },
+            "accountKey": ""
+            },
           "kustomizations": {
             "srs-kustomization1": {
               "name": "srs-kustomization1",
@@ -192,16 +193,17 @@
         "properties": {
           "scope": "cluster",
           "namespace": "srs-namespace",
-          "sourceKind": "Bucket",
+          "sourceKind": "AzureBlob",
           "suspend": false,
           "gitRepository": null,
-          "bucket": {
-            "url": "https://fluxminiotest.az.minio.io",
-            "bucketName": "flux",
+          "bucket": null,
+          "azureBlob": {
+            "url": "https://shasama.blob.core.windows.net",
+            "containerName": "testcontainer",
             "syncIntervalInSeconds": 1000,
             "timeoutInSeconds": 1000,
-            "accessKey": "fluxminiotest"
-          },
+            "accountKey": ""
+            },
           "kustomizations": {
             "srs-kustomization1": {
               "name": "srs-kustomization1",
