@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
+    "version": "2022-04-01",
     "title": "RecoveryServicesClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -1028,7 +1028,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of SKU is RS0 (Recovery Services 0th version) and the tier is standard tier. They do not have affect on backend storage redundancy or any other vault settings. To manage storage redundancy, use the 'backupstorageconfig",
+          "description": "The Sku name.",
           "enum": [
             "Standard",
             "RS0"
@@ -1395,10 +1395,6 @@
             }
           }
         },
-        "monitoringSettings": {
-          "description": "Monitoring Settings of the vault",
-          "$ref": "#/definitions/MonitoringSettings"
-        },
         "moveDetails": {
           "description": "The details of the latest move operation performed on the Azure Resource",
           "type": "object",
@@ -1465,6 +1461,43 @@
           "x-ms-enum": {
             "name": "BackupStorageVersion",
             "modelAsString": true
+          }
+        },
+        "monitoringSettings": {
+          "description": "Monitoring Settings of the vault",
+          "$ref": "#/definitions/MonitoringSettings"
+        },
+        "redundancySettings": {
+          "description": "The redundancy Settings of a Vault",
+          "type": "object",
+          "properties": {
+            "standardTierStorageRedundancy": {
+              "description": "The storage redundancy setting of a vault",
+              "enum": [
+                "LocallyRedundant",
+                "GeoRedundant",
+                "ZoneRedundant"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "standardTierStorageRedundancy",
+                "modelAsString": true
+              }
+            },
+            "crossRegionRestore": {
+              "description": "Flag to show if Cross Region Restore is enabled on the Vault or not",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "crossRegionRestore",
+                "modelAsString": true
+              }
+            }
           }
         }
       }
