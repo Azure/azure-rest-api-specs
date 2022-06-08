@@ -133,6 +133,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
   - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

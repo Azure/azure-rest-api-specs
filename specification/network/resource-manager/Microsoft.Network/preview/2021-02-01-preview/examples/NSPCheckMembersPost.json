@@ -1,0 +1,30 @@
+{
+  "title": "Post Network Security Perimeter Check Members",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "networkSecurityPerimeterProfile": "NP1",
+    "parameters": {
+      "memberDestinations": [
+        {
+          "privateLinkResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Sql/servers/resourceName1"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "memberDestinations": [
+          {
+            "privateLinkResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Sql/servers/resourceName1",
+            "isMember": "no",
+            "profile": ""
+          }
+        ]
+      }
+    }
+  }
+}

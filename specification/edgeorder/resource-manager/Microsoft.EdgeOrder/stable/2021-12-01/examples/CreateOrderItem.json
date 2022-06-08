@@ -1,20 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
-    "resourceGroupName": "TestRG",
-    "orderItemName": "TestOrderItemName01",
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "orderItemName": "TestOrderItemName2",
     "api-version": "2021-12-01",
     "User-Agent": [
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01?api-version=2021-12-01"
+      "https://management.azure.com/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName2?api-version=2021-12-01"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "1358"
+      "1228"
     ],
     "orderItemResource": {
       "properties": {
@@ -22,10 +22,10 @@
           "orderItemType": "Purchase",
           "productDetails": {
             "hierarchyInformation": {
-              "productFamilyName": "AzureStackEdge",
-              "productLineName": "AzureStackEdge",
-              "productName": "AzureStackEdgeGPU",
-              "configurationName": "AzureStackEdgeGPU"
+              "productFamilyName": "azurestackedge",
+              "productLineName": "azurestackedge",
+              "productName": "azurestackedgegpu",
+              "configurationName": "edgep_base"
             }
           },
           "preferences": {
@@ -44,26 +44,21 @@
               "country": "US",
               "postalCode": "94107",
               "companyName": "Microsoft",
-              "zipExtendedCode": "1",
-              "addressType": "Residential"
+              "addressType": "None"
             },
             "contactDetails": {
-              "contactName": "164 TOWNSEND ST",
-              "phone": "3213131190",
+              "contactName": "XXXX XXXX",
+              "phone": "0000000000",
+              "phoneExtension": "",
               "emailList": [
-                "ssemmail@microsoft.com",
-                "vishwamdir@microsoft.com"
+                "xxxx@xxxx.xxx"
               ]
             }
           }
         },
-        "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
+        "orderId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName2"
       },
-      "tags": {
-        "mango": "fruit",
-        "carrot": "vegetable"
-      },
-      "location": "westus"
+      "location": "eastus"
     }
   },
   "responses": {
@@ -80,7 +75,7 @@
                 "productFamilyName": "azurestackedge",
                 "productLineName": "azurestackedge",
                 "productName": "azurestackedgegpu",
-                "configurationName": "azurestackedgegpu"
+                "configurationName": "edgep_base"
               },
               "count": 0,
               "productDoubleEncryptionStatus": "Disabled"
@@ -89,7 +84,7 @@
             "currentStage": {
               "stageStatus": "InProgress",
               "stageName": "Placed",
-              "startTime": "2021-06-07T13:08:14.0368516+05:30"
+              "startTime": "2022-03-04T10:58:27.5824859+05:30"
             },
             "orderItemStageHistory": [
               {
@@ -125,7 +120,12 @@
             "notificationEmailList": [],
             "cancellationStatus": "Cancellable",
             "deletionStatus": "NotAllowed",
-            "returnStatus": "NotReturnable"
+            "returnStatus": "NotReturnable",
+            "managementRpDetailsList": [
+              {
+                "resourceProviderNamespace": "Microsoft.DataBoxEdge"
+              }
+            ]
           },
           "addressDetails": {
             "forwardAddress": {
@@ -136,30 +136,31 @@
                 "stateOrProvince": "CA",
                 "country": "US",
                 "postalCode": "94107",
-                "zipExtendedCode": "1",
                 "companyName": "Microsoft",
-                "addressType": "Residential"
+                "addressType": "None"
               },
               "contactDetails": {
-                "contactName": "164 TOWNSEND ST",
-                "phone": "3213131190",
+                "contactName": "XXXX XXXX",
+                "phone": "0000000000",
+                "phoneExtension": "",
                 "emailList": [
-                  "ssemmail@microsoft.com",
-                  "vishwamdir@microsoft.com"
+                  "xxxx@xxxx.xxx"
                 ]
-              }
+              },
+              "addressValidationStatus": "Valid"
             }
           },
-          "startTime": "2021-06-07T13:08:14.0368516+05:30",
-          "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
+          "startTime": "2022-03-04T10:58:27.5824859+05:30",
+          "orderId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName2"
         },
-        "location": "westus",
-        "tags": {
-          "mango": "fruit",
-          "carrot": "vegetable"
+        "systemData": {
+          "createdAt": "0001-01-01T05:30:00+05:30",
+          "lastModifiedAt": "0001-01-01T05:30:00+05:30"
         },
-        "name": "TestOrderItemName01",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01",
+        "location": "eastus",
+        "tags": {},
+        "name": "TestOrderItemName2",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName2",
         "type": "Microsoft.EdgeOrder/orderItems"
       }
     },

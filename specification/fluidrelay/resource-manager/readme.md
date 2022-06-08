@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-06-15-preview
+tag: package-2022-05-11
 ```
 
 ### Tag: package-2021-03-12-preview
@@ -67,6 +67,33 @@ input-file:
   - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json
 ```
 
+### Tag: package-2022-02-15
+
+These settings apply only when `--tag=package-2022-02-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-15'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-02-15/fluidrelay.json
+```
+
+### Tag: package-2022-04-21
+
+These settings apply only when `--tag=package-2022-04-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-21'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-04-21/fluidrelay.json
+```
+
+### Tag: package-2022-05-11
+
+These settings apply only when `--tag=package-2022-05-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-11'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-05-11/fluidrelay.json
+```
+
 ---
 
 # Code Generation
@@ -78,6 +105,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -85,6 +113,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_fluidrelay']
+  - repo: azure-powershell
 ```
 
 ## Go
