@@ -569,6 +569,29 @@
         ]
       }
     },
+    "EvictionPolicyType": {
+      "type": "string",
+      "description": "Specifies the eviction policy for virtual machines in a SPOT node type.",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "default": "Delete",
+      "x-ms-enum": {
+        "name": "EvictionPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Delete",
+            "description": "Eviction policy will be Delete for SPOT vms."
+          },
+          {
+            "value": "Deallocate",
+            "description": "Eviction policy will be Deallocate for SPOT vms."
+          }
+        ]
+      }
+    },
     "FrontendConfiguration": {
       "type": "object",
       "properties": {
@@ -872,6 +895,10 @@
         "spotRestoreTimeout": {
           "type": "string",
           "description": "Indicates the time duration after which the platform will not try to restore the VMSS SPOT instances specified as ISO 8601."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicyType",
+          "description": "Specifies the eviction policy for virtual machines in a SPOT node type. Default is Delete."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
