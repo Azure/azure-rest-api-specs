@@ -58,11 +58,11 @@ input-file:
 - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
 ```
 
-### Tag: package-2022-02-01-stable
+### Tag: package-2022-02-01
 
-These settings apply only when `--tag=package-2022-02-01-stable` is specified on the command line.
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02-01-stable'
+``` yaml $(tag) == 'package-2022-02-01'
 input-file:
 - Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
 ```
