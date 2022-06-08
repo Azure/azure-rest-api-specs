@@ -28,8 +28,8 @@ tag: false
 require:
  - specification/<RPName>/dataplane/readme.md
 batch:
- - package-A
- - package-B
+ - package-A: true
+ - package-B: true
 ```
 
 ``` yaml $(package-A)
