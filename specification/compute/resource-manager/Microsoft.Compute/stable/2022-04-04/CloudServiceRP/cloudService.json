@@ -2122,6 +2122,18 @@
         "properties"
       ]
     },
+    "CloudServiceSlotType": {
+      "description": "Slot type for the cloud service.\r\nPossible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />\r\nIf not specified, the default value is Production.",
+      "enum": [
+        "Production",
+        "Staging"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CloudServiceSlotType",
+        "modelAsString": true
+      }
+    },
     "CloudServiceNetworkProfile": {
       "description": "Network Profile for the cloud service.",
       "type": "object",
@@ -2132,6 +2144,9 @@
           "items": {
             "$ref": "#/definitions/LoadBalancerConfiguration"
           }
+        },
+        "slotType": {
+          "$ref": "#/definitions/CloudServiceSlotType"
         },
         "swappableCloudService": {
           "$ref": "../common.json#/definitions/SubResource",
