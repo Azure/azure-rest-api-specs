@@ -143,8 +143,9 @@ The batch is a tag list which are used in the multi-api package. For example:
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
 clear-output-folder: true
+multiapi: true
 batch:
   - tag: package-2020-06-01-only
   - tag: package-2020-05-01-only
