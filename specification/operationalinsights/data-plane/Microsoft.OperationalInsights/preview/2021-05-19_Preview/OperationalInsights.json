@@ -123,7 +123,7 @@
         }
       }
     },
-    "/{resourceUri}/query": {
+    "/{resourceId}/query": {
       "get": {
         "operationId": "Query_ResourceGet",
         "summary": "Execute an Analytics query using resource URI",
@@ -135,7 +135,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/ResourceIdParameter"
           },
           {
             "$ref": "#/parameters/queryParam"
@@ -160,7 +160,7 @@
         }
       },
       "post": {
-        "operationId": "Query_ResourcePost",
+        "operationId": "Query_ResourceExecute",
         "summary": "Execute an Analytics query using resource URI",
         "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -170,7 +170,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/ResourceIdParameter"
           },
           {
             "$ref": "#/parameters/queryBody"
@@ -331,8 +331,8 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ResourceUriParameter": {
-      "name": "resourceUri",
+    "ResourceIdParameter": {
+      "name": "resourceId",
       "in": "path",
       "required": true,
       "type": "string",
