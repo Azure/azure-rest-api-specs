@@ -5,7 +5,7 @@
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     },
-    "version": "2022-06-01"
+    "version": "2022-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -771,6 +771,17 @@
       }
     },
     "NotificationRequestBody": {
+      "description": "An action group resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NotificationRequest",
+          "description": "The action groups properties of the resource."
+        }
+      }
+    },
+    "NotificationRequest": {
       "description": "The request body which contain contact detail metadata",
       "type": "object",
       "properties": {
