@@ -314,7 +314,7 @@
           }
         }
       },
-      "RegulatoryDocumentBusinessInformation": {
+      "RegulatoryDocumentBusinessDetails": {
         "description": "The business's information for the regulatory document.",
         "type": "object",
         "required": [
@@ -343,7 +343,7 @@
           }
         }
       },
-      "RegulatoryDocumentContactInformation": {
+      "RegulatoryDocumentContactDetails": {
         "description": "Contact of the authorized individual for the regulatory document.",
         "type": "object",
         "required": [
@@ -384,6 +384,16 @@
           "locality": {
             "description": "The name of the geographic localitiy (city or town) of the regulatory document. This is only needed for geographic phone number type.",
             "type": "string"
+          },
+          "businessDetails": {
+            "description": "The regulatory business details",
+            "type": "object",
+            "$ref": "#/definitions/RegulatoryDocumentBusinessDetails"
+          },
+          "contactDetails": {
+            "description": "The regulatory document's contact details",
+            "type": "object",
+            "$ref": "#/definitions/RegulatoryDocumentContactDetails"
           }
         }
       },
@@ -400,21 +410,21 @@
             "type": "string"
           },
           "details": {
-            "description": "The regulatory document details."
+            "description": "The regulatory document details.",
             "type": "object",
             "$ref": "#/definitions/RegulatoryDocumentDetails"
           }
         }
       },
       "RegulatoryDocuments": {
-        "description": "The list of KYC Applications.",
+        "description": "The list of regulatory documents.",
         "required": [
           "values"
         ],
         "type": "object",
         "properties": {
           "values": {
-            "description": "Represents a list of KYC Applications.",
+            "description": "Represents a list of regulatory documents.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/RegulatoryDocument"
