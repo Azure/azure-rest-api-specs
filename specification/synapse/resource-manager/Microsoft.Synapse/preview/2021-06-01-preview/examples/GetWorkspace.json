@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "workspaceName": "workspace1",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+          },
+          "sqlAdministratorLogin": "login",
+          "managedResourceGroupName": "resourceGroup2",
+          "workspaceRepositoryConfiguration": {
+            "type": "FactoryGitHubConfiguration",
+            "hostName": "",
+            "accountName": "myGithubAccount",
+            "projectName": "myProject",
+            "repositoryName": "myRepository",
+            "collaborationBranch": "master",
+            "rootFolder": "/"
+          },
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "cspWorkspaceAdminProperties": {
+            "initialWorkspaceAdminObjectId": "6c20646f-8050-49ec-b3b1-80a0e58e454d"
+          },
+          "extraProperties": {
+            "IsScopeEnabled": "false",
+            "WorkspaceType": "Normal"
+          }
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

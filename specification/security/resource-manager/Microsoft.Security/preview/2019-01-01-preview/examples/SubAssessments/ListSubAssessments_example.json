@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "assessmentName": "82e20e14-edc5-4373-bfc4-f13121257c37"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/ascdemoRG/providers/Microsoft.Sql/servers/sqlserver1demo/providers/Microsoft.Security/assessments/82e20e14-edc5-4373-bfc4-f13121257c37/subassessments/8fbe5054-e97c-3a7a-fda7-c8308ca8d3cf",
+            "name": "8fbe5054-e97c-3a7a-fda7-c8308ca8d3cf",
+            "type": "Microsoft.Security/assessments/subAssessments",
+            "properties": {
+              "id": "VA2064",
+              "displayName": "Database-level firewall rules should be tracked and maintained at a strict minimum",
+              "status": {
+                "code": "Healthy",
+                "severity": "High",
+                "cause": "Unknown"
+              },
+              "remediation": "Evaluate each of the database-level firewall rules. Remove any rules that grant unnecessary access and set the rest as a baseline. Deviations from the baseline will be identified and brought to your attention in subsequent scans.",
+              "impact": "Firewall rules should be strictly configured to allow access only to client computers that have a valid need to connect to the database. Any superfluous entries in the firewall may pose a threat by allowing an unauthorized source access to your database.",
+              "category": "SurfaceAreaReduction",
+              "description": "The Azure SQL Database-level firewall helps protect your data by preventing all access to your database until you specify which IP addresses have permission. Database-level firewall rules grant access to the specific database based on the originating IP address of each request.\n\nDatabase-level firewall rules for master",
+              "timeGenerated": "2019-06-23T12:20:08.7644808Z",
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/ascdemoRG/providers/Microsoft.Sql/servers/sqlserver1demo/databases/database1"
+              },
+              "additionalData": {
+                "assessedResourceType": "SqlServerVulnerability",
+                "type": "AzureDatabase",
+                "query": "SELECT name\n    ,start_ip_address\n    ,end_ip_address\nFROM sys.database_firewall_rules",
+                "benchmarks": []
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

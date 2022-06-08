@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "backupPolicyName": "backupPolicyName",
+    "api-version": "2021-10-01",
+    "body": {
+      "location": "westus",
+      "properties": {
+        "dailyBackupsToKeep": 10,
+        "weeklyBackupsToKeep": 10,
+        "monthlyBackupsToKeep": 10,
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupPolocies/backupPolicyName",
+        "name": "account1/backupPolicyName",
+        "type": "Microsoft.NetApp/netAppAccounts/backupPolicies",
+        "location": "westus",
+        "properties": {
+          "dailyBackupsToKeep": 10,
+          "weeklyBackupsToKeep": 10,
+          "monthlyBackupsToKeep": 10,
+          "enabled": true,
+          "provisioningState": "creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupPolocies/backupPolicyName",
+        "name": "account1/backupPolicyName",
+        "type": "Microsoft.NetApp/netAppAccounts/backupPolicies",
+        "location": "westus",
+        "properties": {
+          "dailyBackupsToKeep": 10,
+          "weeklyBackupsToKeep": 10,
+          "monthlyBackupsToKeep": 10,
+          "enabled": true,
+          "provisioningState": "creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

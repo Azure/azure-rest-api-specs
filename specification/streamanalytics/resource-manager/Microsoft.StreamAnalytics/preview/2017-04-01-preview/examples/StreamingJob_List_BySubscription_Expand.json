@@ -1,0 +1,503 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "$expand": "inputs,outputs,transformation,functions"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/asaClusterTest",
+            "name": "asaClusterTest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs",
+            "location": "West US",
+            "tags": {
+              "hidden-link:/Microsoft.StreamAnalytics/streamingjobs/inputs/input": "{\"partitionCount\":2}"
+            },
+            "properties": {
+              "sku": {
+                "name": "Standard"
+              },
+              "jobId": "c5b86804-4b8e-4d99-885f-910ea24b51f4",
+              "provisioningState": "Succeeded",
+              "jobState": "Created",
+              "eventsOutOfOrderPolicy": "Adjust",
+              "outputErrorPolicy": "Stop",
+              "eventsOutOfOrderMaxDelayInSeconds": 0,
+              "eventsLateArrivalMaxDelayInSeconds": 5,
+              "dataLocale": "en-US",
+              "createdDate": "2020-07-15T03:41:25.7Z",
+              "compatibilityLevel": "1.2",
+              "jobStorageAccount": null,
+              "contentStoragePolicy": "SystemAccount",
+              "inputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/asaClusterTest/inputs/HistoricalTrafficData",
+                  "name": "HistoricalTrafficData",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+                  "properties": {
+                    "type": "Reference",
+                    "datasource": {
+                      "type": "Microsoft.Storage/Blob",
+                      "properties": {
+                        "storageAccounts": [
+                          {
+                            "accountName": "zhejuntest"
+                          }
+                        ],
+                        "container": "container1",
+                        "pathPattern": "{date}{time}",
+                        "dateFormat": "yyyy/MM/dd",
+                        "timeFormat": "HH"
+                      }
+                    },
+                    "compression": {
+                      "type": "None"
+                    },
+                    "serialization": {
+                      "type": "Csv",
+                      "properties": {
+                        "fieldDelimiter": ",",
+                        "encoding": "UTF8"
+                      }
+                    },
+                    "etag": "8ffd285f-cc45-4a0a-9e0b-a7cfd7f7130c"
+                  }
+                },
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/asaClusterTest/inputs/input",
+                  "name": "input",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+                  "properties": {
+                    "type": "Stream",
+                    "datasource": {
+                      "type": "Microsoft.ServiceBus/EventHub",
+                      "properties": {
+                        "consumerGroupName": "1",
+                        "eventHubName": "input",
+                        "serviceBusNamespace": "azuremlbugbash",
+                        "sharedAccessPolicyName": "inputpolicy",
+                        "authenticationMode": "ConnectionString"
+                      }
+                    },
+                    "compression": {
+                      "type": "None"
+                    },
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8"
+                      }
+                    },
+                    "etag": "d62c06ad-343b-4631-81cc-2c63c4081869"
+                  }
+                }
+              ],
+              "transformation": {
+                "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/asaClusterTest/transformations/Transformation",
+                "name": "Transformation",
+                "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+                "properties": {
+                  "streamingUnits": 3,
+                  "query": "-- input refers to the alias of your event hub \r\n\r\nWITH  \r\n\r\nTripData AS ( \r\n\r\n    SELECT TRY_CAST(pickupLat AS float) as pickupLat, \r\n\r\n    TRY_CAST(pickupLon AS float) as pickupLon, \r\n\r\n    passengerCount, TripTimeinSeconds,  \r\n\r\n    pickupTime, VendorID, tripDistanceInMiles \r\n\r\n    FROM input timestamp by pickupTime \r\n\r\n    WHERE pickupLat > -90 AND pickupLat < 90 AND pickupLon > -180 AND pickupLon < 180 \r\n\r\n) \r\n\r\n \r\n\r\n--query 1 \r\n\r\nSELECT count(*), system.timestamp as timestamps \r\n\r\nINTO output \r\n\r\nFROM TripData \r\n\r\nGroup by hoppingwindow(second,60,5) \r\n\r\n \r\n\r\n \r\n\r\n--query 2 where HistoricalTrafficData is the alias of your reference data \r\n\r\nSELECT count(TripData.VendorID) as NbTrips, avg(TripData.passengerCount) as AvgPassenger, avg(TripData.TripTimeinSeconds) as TripTimeinSeconds, System.Timestamp as timestamps, TRY_CAST(HistoricalTrafficData.avgTraffic as bigint) as historicalTraffic \r\n\r\nINTO PBI \r\n\r\nFROM TripData \r\n\r\nJOIN HistoricalTrafficData ON \r\n\r\ndatepart(hour,TripData.pickupTime) = TRY_CAST(HistoricalTrafficData.hour as bigint) \r\n\r\nGroup By TripData.VendorID, HistoricalTrafficData.avgTraffic, hoppingwindow(second,60,5) ",
+                  "etag": "cc14703e-4d5f-489c-97e4-adf75698b20d"
+                }
+              },
+              "functions": [],
+              "outputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/asaClusterTest/outputs/output",
+                  "name": "output",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+                  "properties": {
+                    "datasource": {
+                      "type": "Microsoft.Storage/Blob",
+                      "properties": {
+                        "storageAccounts": [
+                          {
+                            "accountName": "zhejuntest"
+                          }
+                        ],
+                        "container": "output",
+                        "pathPattern": "",
+                        "dateFormat": "yyyy/MM/dd",
+                        "timeFormat": "HH",
+                        "authenticationMode": "ConnectionString"
+                      }
+                    },
+                    "timeWindow": "01:59:00",
+                    "sizeWindow": 1,
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8",
+                        "format": "LineSeparated"
+                      }
+                    },
+                    "etag": "3632dbc3-1a8c-49dc-838d-1f84b709c667"
+                  }
+                }
+              ],
+              "etag": "ba6f6d8e-57e2-45bd-87ba-2b62c259bbcc",
+              "jobType": "Cloud",
+              "cluster": {
+                "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/clusters/zhejunASA"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/ASAUDFTest",
+            "name": "ASAUDFTest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "sku": {
+                "name": "Standard"
+              },
+              "jobId": "8b39d20f-d8df-42e0-8198-a20160e4696b",
+              "provisioningState": "Succeeded",
+              "jobState": "Created",
+              "eventsOutOfOrderPolicy": "Adjust",
+              "outputErrorPolicy": "Stop",
+              "eventsOutOfOrderMaxDelayInSeconds": 0,
+              "eventsLateArrivalMaxDelayInSeconds": 5,
+              "dataLocale": "en-US",
+              "createdDate": "2020-07-16T05:56:55.51Z",
+              "compatibilityLevel": "1.2",
+              "jobStorageAccount": {
+                "authenticationMode": "ConnectionString",
+                "accountName": "zhejuntest"
+              },
+              "contentStoragePolicy": "SystemAccount",
+              "inputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/ASAUDFTest/inputs/Input",
+                  "name": "Input",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+                  "properties": {
+                    "type": "Stream",
+                    "datasource": {
+                      "type": "GatewayMessageBus"
+                    },
+                    "compression": {
+                      "type": "None"
+                    },
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8"
+                      }
+                    },
+                    "etag": "34dcf5e8-d33e-4de3-b413-580fa9316f4b"
+                  }
+                }
+              ],
+              "transformation": {
+                "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/ASAUDFTest/transformations/Transformation",
+                "name": "Transformation",
+                "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+                "properties": {
+                  "streamingUnits": null,
+                  "query": "    SELECT machine.temperature, udf.ASAEdgeUDFDemo_Class1_SquareFunction(try_cast(machine.temperature as bigint))\r\n    INTO Output\r\n    FROM Input",
+                  "etag": "29beb753-10cb-4627-91df-09dbfea9ac77"
+                }
+              },
+              "functions": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/ASAUDFTest/functions/ASAEdgeUDFDemo_Class1_SquareFunction",
+                  "name": "ASAEdgeUDFDemo_Class1_SquareFunction",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+                  "properties": {
+                    "type": "Scalar",
+                    "properties": {
+                      "inputs": [
+                        {
+                          "dataType": "any",
+                          "isConfigurationParameter": null
+                        }
+                      ],
+                      "output": {
+                        "dataType": "any"
+                      },
+                      "binding": {
+                        "type": "Microsoft.StreamAnalytics/CLRUdf",
+                        "properties": {
+                          "dllPath": "ASAEdgeApplication2_CodeBehind",
+                          "class": "ASAEdgeUDFDemo.Class1",
+                          "method": "SquareFunction"
+                        }
+                      }
+                    },
+                    "etag": "c3f6f31b-6b42-42c9-8cb1-1d12d6ab448a"
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/ASAUDFTest/outputs/Output",
+                  "name": "Output",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+                  "properties": {
+                    "datasource": {
+                      "type": "GatewayMessageBus"
+                    },
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8",
+                        "format": "Array"
+                      }
+                    },
+                    "etag": "c6ba3df6-13af-40af-992f-9317e8537590"
+                  }
+                }
+              ],
+              "etag": "bfee3a7f-cdaf-4b1e-b449-71a3b8b4d6d9",
+              "jobType": "Edge",
+              "externals": {
+                "storageAccount": {
+                  "accountName": "zhejuntest"
+                },
+                "container": "container2",
+                "path": "UserCustomCode.zip"
+              },
+              "cluster": null
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest",
+            "name": "zhejunmltest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs",
+            "location": "West US",
+            "properties": {
+              "sku": {
+                "name": "Standard"
+              },
+              "jobId": "aacee415-41d4-47f6-acf4-de9ae50175b0",
+              "provisioningState": "Succeeded",
+              "jobState": "Created",
+              "eventsOutOfOrderPolicy": "Adjust",
+              "outputErrorPolicy": "Drop",
+              "eventsOutOfOrderMaxDelayInSeconds": 0,
+              "eventsLateArrivalMaxDelayInSeconds": 5,
+              "dataLocale": "en-US",
+              "createdDate": "2020-07-17T08:36:07.463Z",
+              "compatibilityLevel": "1.2",
+              "jobStorageAccount": null,
+              "contentStoragePolicy": "SystemAccount",
+              "inputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/inputs/Input",
+                  "name": "Input",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+                  "properties": {
+                    "type": "Stream",
+                    "datasource": {
+                      "type": "Microsoft.Devices/IotHubs",
+                      "properties": {
+                        "iotHubNamespace": "MyASAIoT",
+                        "sharedAccessPolicyName": "iothubowner",
+                        "endpoint": "messages/events",
+                        "consumerGroupName": "$Default"
+                      }
+                    },
+                    "compression": {
+                      "type": "None"
+                    },
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8"
+                      }
+                    },
+                    "etag": "3cb574f7-b63a-4ac1-a1db-8e8a3b88a20d"
+                  }
+                }
+              ],
+              "transformation": {
+                "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/transformations/Transformation",
+                "name": "Transformation",
+                "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+                "properties": {
+                  "streamingUnits": 3,
+                  "query": "\r\nWITH sentiment AS (  \r\nSELECT Temperature, diabetespredict(Temperature) as result \r\nFROM Input  \r\n)  \r\n\r\nSELECT Temperature, result.[Score]  \r\nINTO BlobOutput1\r\nFROM sentiment\r\n\r\n/*\r\nSELECT data, MLFunction2(data)\r\nFROM sampleRequestData\r\n*/\r\n/*\r\nSELECT data, AksArrayScore(data)\r\nFROM sampleData\r\n*/",
+                  "etag": "7241d411-e71d-4205-b77e-4cc56aba34c0"
+                }
+              },
+              "functions": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/diabetespredict",
+                  "name": "diabetespredict",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+                  "properties": {
+                    "type": "Scalar",
+                    "properties": {
+                      "inputs": [
+                        {
+                          "dataType": "array",
+                          "isConfigurationParameter": null
+                        }
+                      ],
+                      "output": {
+                        "dataType": "float"
+                      },
+                      "binding": {
+                        "type": "Microsoft.MachineLearningServices",
+                        "properties": {
+                          "endpoint": "http://52.183.91.247/api/v1/service/aks-service-1/score",
+                          "apiKey": null,
+                          "inputs": [
+                            {
+                              "name": "data",
+                              "dataType": "array",
+                              "mapTo": 0
+                            }
+                          ],
+                          "outputs": [
+                            {
+                              "name": "output",
+                              "dataType": "double",
+                              "mapTo": 0
+                            }
+                          ],
+                          "batchSize": 1000,
+                          "numberOfParallelRequests": 1
+                        }
+                      }
+                    },
+                    "etag": "acfdd307-418c-48f3-8856-7c176d38529f"
+                  }
+                },
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/MLFunction2",
+                  "name": "MLFunction2",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+                  "properties": {
+                    "type": "Scalar",
+                    "properties": {
+                      "inputs": [
+                        {
+                          "dataType": "array",
+                          "isConfigurationParameter": null
+                        }
+                      ],
+                      "output": {
+                        "dataType": "float"
+                      },
+                      "binding": {
+                        "type": "Microsoft.MachineLearningServices",
+                        "properties": {
+                          "endpoint": "http://13.83.67.157/api/v1/service/nyc-fare-predict/score",
+                          "apiKey": null,
+                          "inputs": [
+                            {
+                              "name": "data",
+                              "dataType": "array",
+                              "mapTo": 0
+                            }
+                          ],
+                          "outputs": [
+                            {
+                              "name": "output",
+                              "dataType": "double",
+                              "mapTo": 0
+                            }
+                          ],
+                          "batchSize": 1000,
+                          "numberOfParallelRequests": 1
+                        }
+                      }
+                    },
+                    "etag": "4d537fa6-f43c-4ee6-a45e-9a8f8002a65c"
+                  }
+                },
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/MLFunction3",
+                  "name": "MLFunction3",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+                  "properties": {
+                    "type": "Scalar",
+                    "properties": {
+                      "inputs": [
+                        {
+                          "dataType": "array",
+                          "isConfigurationParameter": null
+                        }
+                      ],
+                      "output": {
+                        "dataType": "float"
+                      },
+                      "binding": {
+                        "type": "Microsoft.MachineLearningServices",
+                        "properties": {
+                          "endpoint": "http://52.183.91.247/api/v1/service/aks-service-1/score",
+                          "apiKey": null,
+                          "inputs": [
+                            {
+                              "name": "data",
+                              "dataType": "array",
+                              "mapTo": 0
+                            }
+                          ],
+                          "outputs": [
+                            {
+                              "name": "output",
+                              "dataType": "double",
+                              "mapTo": 0
+                            }
+                          ],
+                          "batchSize": 1000,
+                          "numberOfParallelRequests": 1
+                        }
+                      }
+                    },
+                    "etag": "912f08e7-4a8c-46eb-afaf-d88f930a7b45"
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/outputs/BlobOutput1",
+                  "name": "BlobOutput1",
+                  "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+                  "properties": {
+                    "datasource": {
+                      "type": "Microsoft.Storage/Blob",
+                      "properties": {
+                        "storageAccounts": [
+                          {
+                            "accountName": "zhejuntest2"
+                          }
+                        ],
+                        "container": "output",
+                        "pathPattern": "{date}{time}",
+                        "dateFormat": "yyyy/MM/dd",
+                        "timeFormat": "HH",
+                        "authenticationMode": "ConnectionString"
+                      }
+                    },
+                    "serialization": {
+                      "type": "Json",
+                      "properties": {
+                        "encoding": "UTF8",
+                        "format": "LineSeparated"
+                      }
+                    },
+                    "etag": "1c271cd5-dd4a-4d3e-95ee-1dbcaa530c2c"
+                  }
+                }
+              ],
+              "etag": "89ba3a42-e217-432e-bf23-798dbf001519",
+              "jobType": "Cloud",
+              "cluster": null
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

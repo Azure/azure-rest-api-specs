@@ -1,0 +1,394 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2021-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues": {
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_ListByNamespace",
+        "x-ms-examples": {
+          "QueueListByNameSpace": {
+            "$ref": "./examples/Queues/SBQueueListByNameSpace.json"
+          }
+        },
+        "description": "Gets the queues within a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queues successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBQueueListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}": {
+      "put": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_CreateOrUpdate",
+        "x-ms-examples": {
+          "QueueCreate": {
+            "$ref": "./examples/Queues/SBQueueCreate.json"
+          }
+        },
+        "description": "Creates or updates a Service Bus queue. This operation is idempotent.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBQueue"
+            },
+            "description": "Parameters supplied to create or update a queue resource."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SBQueue"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_Delete",
+        "x-ms-examples": {
+          "QueueDelete": {
+            "$ref": "./examples/Queues/SBQueueDelete.json"
+          }
+        },
+        "description": "Deletes a queue from the specified namespace in a resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_Get",
+        "x-ms-examples": {
+          "QueueGet": {
+            "$ref": "./examples/Queues/SBQueueGet.json"
+          }
+        },
+        "description": "Returns a description for the specified queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue description successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBQueue"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SBQueueListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SBQueue"
+          },
+          "description": "Result of the List Queues operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of queues."
+        }
+      },
+      "description": "The response to the List Queues operation."
+    },
+    "SBQueue": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SBQueueProperties",
+          "description": "Queue Properties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Description of queue Resource."
+    },
+    "SBQueueProperties": {
+      "type": "object",
+      "properties": {
+        "countDetails": {
+          "readOnly": true,
+          "$ref": "../../../common/v1/definitions.json#/definitions/MessageCountDetails",
+          "description": "Message Count Details."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message was created."
+        },
+        "updatedAt": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message was updated."
+        },
+        "accessedAt": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time a message was sent, or the last time there was a receive request to this queue."
+        },
+        "sizeInBytes": {
+          "readOnly": true,
+          "format": "int64",
+          "type": "integer",
+          "description": "The size of the queue, in bytes."
+        },
+        "messageCount": {
+          "readOnly": true,
+          "format": "int64",
+          "type": "integer",
+          "description": "The number of messages in the queue."
+        },
+        "lockDuration": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+        },
+        "maxSizeInMegabytes": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue. Default is 1024."
+        },
+        "maxMessageSizeInKilobytes": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum size (in KB) of the message payload that can be accepted by the queue. This property is only used in Premium today and default is 1024."
+        },
+        "requiresDuplicateDetection": {
+          "type": "boolean",
+          "description": "A value indicating if this queue requires duplicate detection."
+        },
+        "requiresSession": {
+          "type": "boolean",
+          "description": "A value that indicates whether the queue supports the concept of sessions."
+        },
+        "defaultMessageTimeToLive": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "deadLetteringOnMessageExpiration": {
+          "type": "boolean",
+          "description": "A value that indicates whether this queue has dead letter support when a message expires."
+        },
+        "duplicateDetectionHistoryTimeWindow": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+        },
+        "maxDeliveryCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries. default value is 10."
+        },
+        "status": {
+          "$ref": "../../../common/v1/definitions.json#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
+        },
+        "enableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled."
+        },
+        "autoDeleteOnIdle": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8061 timeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "enablePartitioning": {
+          "type": "boolean",
+          "description": "A value that indicates whether the queue is to be partitioned across multiple message brokers."
+        },
+        "enableExpress": {
+          "type": "boolean",
+          "description": "A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "forwardTo": {
+          "type": "string",
+          "description": "Queue/Topic name to forward the messages"
+        },
+        "forwardDeadLetteredMessagesTo": {
+          "type": "string",
+          "description": "Queue/Topic name to forward the Dead Letter message"
+        }
+      },
+      "description": "The Queue Properties definition."
+    }
+  },
+  "parameters": {}
+}

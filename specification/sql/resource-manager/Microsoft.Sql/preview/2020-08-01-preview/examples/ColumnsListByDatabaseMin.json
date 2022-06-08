@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myRG",
+    "serverName": "serverName",
+    "databaseName": "myDatabase",
+    "api-version": "2020-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "columnType": "int",
+              "temporalType": "NonTemporalTable",
+              "memoryOptimized": false,
+              "isComputed": false
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1/columns/col1",
+            "name": "col1",
+            "type": "Microsoft.Sql/servers/databases/schemas/tables/columns"
+          },
+          {
+            "properties": {
+              "columnType": "bit",
+              "temporalType": "SystemVersionedTemporalTable",
+              "memoryOptimized": false,
+              "isComputed": false
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1/columns/col2",
+            "name": "col2",
+            "type": "Microsoft.Sql/servers/databases/schemas/tables/columns"
+          }
+        ]
+      }
+    }
+  }
+}

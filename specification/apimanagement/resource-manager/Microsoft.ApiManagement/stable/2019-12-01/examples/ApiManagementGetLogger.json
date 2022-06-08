@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-12-01",
+    "subscriptionId": "subid",
+    "loggerId": "templateLogger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/kloudapilogger1",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "name": "kloudapilogger1",
+        "properties": {
+          "loggerType": "azureEventHub",
+          "description": "testeventhub3again",
+          "credentials": {
+            "name": "testeventhub4",
+            "connectionString": "Endpoint=sb://eventhubapim.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=************"
+          },
+          "isBuffered": true,
+          "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/eventhubapim"
+        }
+      }
+    }
+  }
+}

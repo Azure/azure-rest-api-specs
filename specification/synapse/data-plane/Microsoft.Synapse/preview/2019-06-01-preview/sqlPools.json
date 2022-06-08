@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/sqlPools": {
+      "get": {
+        "tags": [
+          "SqlPools"
+        ],
+        "operationId": "SqlPools_List",
+        "description": "List Sql Pools",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolInfoListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/sqlPools/{sqlPoolName}": {
+      "get": {
+        "tags": [
+          "SqlPools"
+        ],
+        "operationId": "SqlPools_Get",
+        "description": "Get Sql Pool",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SqlPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Sql Pool name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

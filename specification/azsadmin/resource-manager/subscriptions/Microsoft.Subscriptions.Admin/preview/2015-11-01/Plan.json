@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -37,6 +37,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -49,7 +55,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans": {
       "get": {
         "x-ms-examples": {
           "Get the list of plans under a resource group.": {
@@ -73,6 +79,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -85,7 +97,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}": {
       "get": {
         "x-ms-examples": {
           "Get the specified plan.": {
@@ -112,6 +124,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -145,10 +163,16 @@
             "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NewPlanParameter"
+            "$ref": "#/parameters/PlanDefinitionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
@@ -189,6 +213,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -225,6 +255,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -261,6 +297,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -317,7 +359,8 @@
         },
         "subscriptionCount": {
           "description": "Subscription count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "skuIds": {
           "description": "SKU identifiers.",
@@ -346,9 +389,9 @@
     }
   },
   "parameters": {
-    "NewPlanParameter": {
+    "PlanDefinitionParameter": {
       "description": "New plan.",
-      "name": "newPlan",
+      "name": "planDefinition",
       "in": "body",
       "required": true,
       "schema": {
