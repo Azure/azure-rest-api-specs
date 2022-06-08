@@ -606,6 +606,7 @@
         "AccountObjectGuid",
         "AccountUPNSuffix",
         "AlertProductNames",
+        "AlertAnalyticRuleIds",
         "AzureResourceResourceId",
         "AzureResourceSubscriptionId",
         "CloudApplicationAppId",
@@ -717,6 +718,10 @@
           {
             "value": "AlertProductNames",
             "description": "The name of the product of the alert"
+          },
+          {
+            "value": "AlertAnalyticRuleIds",
+            "description": "The analytic rule ids of the alert"
           },
           {
             "value": "AzureResourceResourceId",
@@ -1114,7 +1119,8 @@
     },
     "triggersOn": {
       "enum": [
-        "Incidents"
+        "Incidents",
+        "Alerts"
       ],
       "type": "string",
       "example": "Incidents",
@@ -1125,6 +1131,10 @@
           {
             "value": "Incidents",
             "description": "Trigger on Incidents"
+          },
+          {
+            "value": "Alerts",
+            "description": "Trigger on Alerts"
           }
         ]
       }
