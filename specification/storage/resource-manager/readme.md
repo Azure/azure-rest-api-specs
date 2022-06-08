@@ -26,7 +26,7 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-09
+tag: package-2022-05
 ```
 
 ### Tag: package-2022-05
