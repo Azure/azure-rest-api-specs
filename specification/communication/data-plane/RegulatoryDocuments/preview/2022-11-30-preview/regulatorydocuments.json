@@ -1,18 +1,18 @@
 {
     "swagger": "2.0",
     "info": {
-      "title": "Regulatory documents.",
-      "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers.",
-      "version": "2022-07-31"
+      "title": "Regulatory documents management",
+      "description": "Regulatory documents management API used for submitting document to gain eligibility to purchase phone numbers from certain geographic regions.",
+      "version": "2022-11-30-preview"
     },
     "paths": {
-      "/kyc/applications/:create": {
+      "/regulatoryDocuments/:create": {
         "post": {
           "tags": [
-            "KYC Application Management"
+            "Regulatory Documents Management"
           ],
-          "summary": "Creates a KYC Application.",
-          "operationId": "KYC_CreateApplication",
+          "summary": "Creates a regulatory document.",
+          "operationId": "RegulatoryDocument_Create",
           "consumes": [
             "application/json"
           ],
@@ -26,7 +26,7 @@
               "description": "The KYC application creation request.",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/KYCApplicationCreateRequest"
+                "$ref": "#/definitions/RegulatoryDocumentCreateRequest"
               }
             },
             {
@@ -52,7 +52,7 @@
       "/kyc/applications/{kycApplicationId}": {
         "get": {
           "tags": [
-            "KYC Application Management"
+            "Regulatory Documents Management"
           ],
           "summary": "Gets a KYC Application by its KYC Application ID.",
           "operationId": "KYC_DeleteApplication",
@@ -93,7 +93,7 @@
       "/kyc/applications": {
         "get": {
           "tags": [
-            "KYC Application Management"
+            "Regulatory Documents Management"
           ],
           "summary": "Gets a list of all KYC Applications.",
           "operationId": "KYC_GetsApplications",
@@ -134,7 +134,7 @@
       "/kyc/applications/{kycApplicationId}:cancel": {
         "delete": {
           "tags": [
-            "KYC Application Management"
+            "Regulatory Documents Management"
           ],
           "summary": "Deletes a KYC Application by its KYC Application ID.",
           "operationId": "KYC_GetsApplication",
@@ -165,7 +165,7 @@
       "/kyc/applications/{kycApplicationId}:update": {
         "post": {
           "tags": [
-            "KYC Application Management"
+            "Regulatory Documents Management"
           ],
           "summary": "Updates a KYC Application by its KYC Application ID.",
           "operationId": "KYC_GetsApplication",
@@ -204,10 +204,14 @@
       }
     },
     "definitions": {
-      "KYCApplicationCreateRequest": {
-        "description": "KYC Application Create Request",
+      "RegulatoryDocumentCreateRequest": {
+        "description": "Regulatory Document Create Request",
         "type": "object",
         "properties": {
+          "countryCode": {
+            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
+            "type": "string"
+          },
           "phoneNumberType": {
             "description": "Represents the phone number type, e.g. TollFree, Geographic.",
             "type": "string"
@@ -310,68 +314,114 @@
           }
         }
       },
-      "KYCApplication": {
-        "description": "KYC Application",
+      "RegulatoryDocumentBusinessInformation": {
+        "description": "The business's information for the regulatory document.",
         "type": "object",
+        "required": [
+          "name"
+        ],
         "properties": {
-          "id": {
-            "description": "The ID of the KYC application.",
-            "type": "string"
-          },
-          "phoneNumberType": {
-            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
-            "type": "string"
-          },
-          "businessName": {
-            "description": "Represents the business name in the application.",
+          "name": {
+            "description": "The business' name.",
             "type": "string"
           },
           "address": {
-            "description": "Represents the unstructured address.",
+            "description": "The business' address.",
             "type": "string"
           },
           "addressCountry": {
-            "description": "Represents the address country.",
+            "description": "The business' address' country.",
             "type": "string"
           },
           "registrationNumber": {
-            "description": "Represents the registration number.",
-            "type": "string"
-          },
-          "contact": {
-            "description": "Represents the name of the contact responsible for this application.",
-            "type": "string"
-          },
-          "contactPhoneNumber": {
-            "description": "Represents the contact's phone number",
-            "type": "string"
-          },
-          "contactEmail": {
-            "description": "Represents the name of the contact responsible for this application.",
+            "description": "The business' registration number.",
             "type": "string"
           },
           "taxNumber": {
-            "description": "Represents the tax number of the business.",
+            "description": "The business' tax number.",
             "type": "string"
           }
         }
       },
-      "KYCApplications": {
+      "RegulatoryDocumentContactInformation": {
+        "description": "Contact of the authorized individual for the regulatory document.",
+        "type": "object",
+        "required": [
+          "name",
+          "email"
+        ],
+        "properties": {
+          "name": {
+            "description": "The contact individual's name.",
+            "type": "string"
+          },
+          "email": {
+            "description": "The email that will be contacted when the regulatory document status has changed.",
+            "type": "string"
+          },
+          "phoneNumber": {
+            "description": "The contact's phone number.",
+            "type": "string"
+          }
+        }
+      },
+      "RegulatoryDocumentDetails": {
+        "description": "The regulatory document details.",
+        "required": [
+          "id",
+          "details"
+        ],
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "description": "The country code of the phone numbers requested in this regulatory document, in ISO 3166-2 format, e.g. US.",
+            "type": "string"
+          },
+          "phoneNumberType": {
+            "description": "The phone number type.",
+            "type": "string"
+          },
+          "locality": {
+            "description": "The name of the geographic localitiy (city or town) of the regulatory document. This is only needed for geographic phone number type.",
+            "type": "string"
+          }
+        }
+      },
+      "RegulatoryDocument": {
+        "description": "The regulatory document",
+        "required": [
+          "id",
+          "details"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID of the regulatory document.",
+            "type": "string"
+          },
+          "details": {
+            "description": "The regulatory document details."
+            "type": "object",
+            "$ref": "#/definitions/RegulatoryDocumentDetails"
+          }
+        }
+      },
+      "RegulatoryDocuments": {
         "description": "The list of KYC Applications.",
         "required": [
           "values"
         ],
         "type": "object",
         "properties": {
-          "phoneNumbers": {
+          "values": {
             "description": "Represents a list of KYC Applications.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/KYCApplication"
+              "$ref": "#/definitions/RegulatoryDocument"
             }
           },
           "nextLink": {
-            "description": "Represents the URL link to the next page of KYC application results.",
+            "description": "Represents the URL link to the next page of regulatory document results.",
             "type": "string"
           }
         }
