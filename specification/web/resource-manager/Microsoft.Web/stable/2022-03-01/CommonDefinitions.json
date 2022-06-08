@@ -157,6 +157,12 @@
         "zoneRedundant": {
           "description": "Whether or not this App Service Environment is zone-redundant.",
           "type": "boolean"
+        },
+        "customDnsSuffixConfiguration": {
+          "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+        },
+        "networkingConfiguration": {
+          "$ref": "#/definitions/AseV3NetworkingConfiguration"
         }
       }
     },
@@ -355,6 +361,68 @@
         "id": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AseV3NetworkingConfiguration": {
+      "description": "Full view of networking configuration for an ASE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseV3NetworkingConfiguration resource specific properties",
+          "type": "object",
+          "properties": {
+            "windowsOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "allowNewPrivateEndpointConnections": {
+              "description": "Property to enable and disable new private endpoint connection creation on ASE",
+              "type": "boolean"
+            },
+            "ftpEnabled": {
+              "description": "Property to enable and disable FTP on ASEV3",
+              "type": "boolean"
+            },
+            "remoteDebugEnabled": {
+              "description": "Property to enable and disable Remote Debug on ASEV3",
+              "type": "boolean"
+            },
+            "inboundIpAddressOverride": {
+              "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -819,6 +887,54 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "CustomDnsSuffixConfiguration": {
+      "description": "Full view of the custom domain suffix configuration for ASEv3.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CustomDnsSuffixConfiguration resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Degraded",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CustomDnsSuffixProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "provisioningDetails": {
+              "type": "string",
+              "readOnly": true
+            },
+            "dnsSuffix": {
+              "description": "The default custom domain suffix to use for all sites deployed on the ASE.",
+              "type": "string"
+            },
+            "certificateUrl": {
+              "description": "The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.",
+              "type": "string"
+            },
+            "keyVaultReferenceIdentity": {
+              "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2725,6 +2841,18 @@
               "type": "string",
               "readOnly": true
             },
+            "vnetRouteAllEnabled": {
+              "description": "Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.",
+              "type": "boolean"
+            },
+            "vnetImagePullEnabled": {
+              "description": "To enable pulling image over Virtual Network",
+              "type": "boolean"
+            },
+            "vnetContentShareEnabled": {
+              "description": "To enable accessing content over virtual network",
+              "type": "boolean"
+            },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
               "description": "Configuration of the app."
@@ -2872,6 +3000,10 @@
               "type": "string",
               "readOnly": true,
               "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "publicNetworkAccess": {
+              "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
+              "type": "string"
             },
             "storageAccountRequired": {
               "description": "Checks if Customer provided storage account is required",

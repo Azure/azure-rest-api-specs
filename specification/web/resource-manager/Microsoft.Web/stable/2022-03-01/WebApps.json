@@ -2872,6 +2872,115 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentStatus": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment statuses for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_ListProductionSiteDeploymentStatuses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatusCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Status": {
+            "$ref": "./examples/ListSiteDeploymentStatus.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentStatus/{deploymentStatusId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the deployment status for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetProductionSiteDeploymentStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentStatusId",
+            "in": "path",
+            "description": "GUID of the deployment operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Status": {
+            "$ref": "./examples/GetSiteDeploymentStatus.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
       "get": {
         "tags": [
@@ -11675,6 +11784,129 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deploymentStatus": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment statuses for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_ListSlotSiteDeploymentStatusesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the deployment status for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatusCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Status Slot": {
+            "$ref": "./examples/ListSiteDeploymentStatusSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deploymentStatus/{deploymentStatusId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the deployment status for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetSlotSiteDeploymentStatusSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the deployment status for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentStatusId",
+            "in": "path",
+            "description": "GUID of the deployment operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/CsmDeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Status Slot": {
+            "$ref": "./examples/GetSiteDeploymentStatusSlot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments": {
@@ -24019,6 +24251,102 @@
       },
       "description": "The correlation property."
     },
+    "CsmDeploymentStatus": {
+      "description": "Deployment status response payload.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CsmDeploymentStatus resource specific properties",
+          "type": "object",
+          "properties": {
+            "deploymentId": {
+              "description": "Deployment operation id.",
+              "type": "string"
+            },
+            "status": {
+              "description": "Deployment build status.",
+              "enum": [
+                "TimedOut",
+                "RuntimeFailed",
+                "BuildAborted",
+                "BuildFailed",
+                "BuildRequestReceived",
+                "BuildPending",
+                "BuildInProgress",
+                "BuildSuccessful",
+                "PostBuildRestartRequired",
+                "StartPolling",
+                "StartPollingWithRestart",
+                "RuntimeStarting",
+                "RuntimeSuccessful"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DeploymentBuildStatus",
+                "modelAsString": true
+              }
+            },
+            "numberOfInstancesInProgress": {
+              "format": "int32",
+              "description": "Number of site instances currently being provisioned.",
+              "type": "integer"
+            },
+            "numberOfInstancesSuccessful": {
+              "format": "int32",
+              "description": "Number of site instances provisioned successfully.",
+              "type": "integer"
+            },
+            "numberOfInstancesFailed": {
+              "format": "int32",
+              "description": "Number of site instances failed to provision.",
+              "type": "integer"
+            },
+            "failedInstancesLogs": {
+              "description": "List of URLs pointing to logs for instances which failed to provision.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "errors": {
+              "description": "List of errors.",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CsmDeploymentStatusCollection": {
+      "description": "Deployment status collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CsmDeploymentStatus"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CsmPublishingCredentialsPoliciesEntity": {
       "description": "Publishing Credentials Policies parameters.",
       "type": "object",
@@ -28557,6 +28885,14 @@
             },
             "using_sdk": {
               "description": "Using SDK?",
+              "type": "boolean"
+            },
+            "publicNetworkAccess": {
+              "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
+              "type": "string"
+            },
+            "storageAccountRequired": {
+              "description": "Checks if Customer provided storage account is required",
               "type": "boolean"
             },
             "settings": {
