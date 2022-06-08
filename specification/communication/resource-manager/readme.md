@@ -28,7 +28,7 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-08-20
+tag: package-2021-10-01-preview
 ```
 
 ### Tag: package-2020-08-20

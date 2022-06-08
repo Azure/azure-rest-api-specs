@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2022-01-03
+tag: package-2022-03-02
 
 directive:
   - where:
@@ -233,6 +233,57 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+```
+
+### Tag: package-2022-03-02
+
+These settings apply only when `--tag=package-2022-03-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-02'
+input-file:
+- Microsoft.Compute/stable/2022-03-02/common.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/computeRPCommon.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineExtensionImage.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/availabilitySet.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/proximityPlacementGroup.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/dedicatedHost.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/image.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/restorePoint.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json 
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskRPCommon.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/disk.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskAccess.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskEncryptionSet.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskRestorePoint.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/snapshot.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/galleryRPCommon.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+
+### Tag: package-2022-03-02-only
+
+These settings apply only when `--tag=package-2022-03-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-02-only'
+input-file:
+- Microsoft.Compute/stable/2022-03-02/common.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskRPCommon.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/disk.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskAccess.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskEncryptionSet.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/diskRestorePoint.json
+- Microsoft.Compute/stable/2022-03-02/DiskRP/snapshot.json
 ```
 
 ### Tag: package-2022-01-03
@@ -1156,4 +1207,3 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
-

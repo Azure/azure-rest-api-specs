@@ -257,6 +257,15 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
+### Tag: package-2022-04-01-only
+
+These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+input-file:
+  - Microsoft.Insights/stable/2022-04-01/workbooks_API.json
+```
+
 ### Tag: package-2022-02-01
 
 These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
@@ -510,6 +519,15 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
 - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
+- Microsoft.Insights/stable/2020-02-02/components_API.json
+```
+
+### Tag: package-2020-02-02-only
+
+These settings apply only when `--tag=package-2020-02-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-02-only'
+input-file:
 - Microsoft.Insights/stable/2020-02-02/components_API.json
 ```
 
