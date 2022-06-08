@@ -1,32 +1,8 @@
 {
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
-    "api-version": "2022-03-31-preview",
-    "mediaCompositionId": "49b2b09f-5be7-4a67-835e-9b11aa260f08",
-    "updatedMediaComposition": {
-      "layout": {
-        "autoGrid": {
-          "inputIds": [
-            "presenter",
-            "meeting:not(\"presenter\")"
-          ],
-          "highlightDominantSpeaker": true
-        }
-      },
-      "inputs": {
-        "presenter": {
-          "call": "meeting",
-          "participant": {
-            "id": {
-              "microsoftTeamsUser": {
-                "id": "fbb3436a-4ec7-46e0-b20d-e6de72513e58"
-              }
-            }
-          },
-          "placeholderImageUri": "https://picsum.photos/200"
-        }
-      }
-    }
+    "api-version": "2022-07-16-preview1",
+    "mediaCompositionId": "49b2b09f-5be7-4a67-835e-9b11aa260f08"
   },
   "responses": {
     "200": {
@@ -36,10 +12,9 @@
           "kind": "autoGrid",
           "autoGrid": {
             "inputIds": [
-              "presenter",
-              "meeting:not(\"presenter\")"
+                "meeting"
             ],
-            "highlightDominantSpeaker": true
+            "highlightDominantSpeaker": false
           },
           "resolution": {
             "width": 1920,
@@ -51,16 +26,6 @@
             "kind": "teamsMeeting",
             "teamsMeeting": {
               "teamsJoinUrl": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjhlYTc5NTEtYjQ0Ny00ZDkwLWIxZTYtYzg0MDNmMTg5MGIy%40thread.v2/0?context=%7b%22Tid%22%3a%2221fa45a2-67de-4731-b654-ccf5c9c0d577%22%2c%22Oid%22%3a%22fbb3436a-4ec7-46e0-b20d-e6de72513e58%22%7d"
-            }
-          },
-          "presenter": {
-            "participant": {
-              "call": "meeting",
-              "id": {
-                "microsoftTeamsUser": {
-                  "userId": "fbb3436a-4ec7-46e0-b20d-e6de72513e58"
-                }
-              }
             }
           }
         },
