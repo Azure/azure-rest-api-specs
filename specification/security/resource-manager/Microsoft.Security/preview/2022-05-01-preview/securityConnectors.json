@@ -753,7 +753,7 @@
         "kubeAuditRetentionTime": {
           "type": "integer",
           "format": "int64",
-          "description": "The retention time of kube audit logs set on the CloudWatch log group"
+          "description": "The retention time in days of kube audit logs set on the CloudWatch log group"
         },
         "scubaExternalId": {
           "type": "string",
@@ -892,7 +892,7 @@
                 },
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode. Can be either 'Default'",
+                  "description": "The scanning mode for the vm scan.",
                   "enum": [
                     "Default"
                   ],
@@ -940,6 +940,7 @@
               "properties": {
                 "expiryDate": {
                   "type": "string",
+                  "format": "date-time",
                   "description": "expiration date of service principal secret"
                 },
                 "parameterStoreRegion": {
