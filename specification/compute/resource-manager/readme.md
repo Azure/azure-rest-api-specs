@@ -240,9 +240,9 @@ directive:
 
 These settings apply only when `--tag=package-2022-04-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03-02'
+``` yaml $(tag) == 'package-2022-04-04'
 input-file:
-- Microsoft.Compute/stable/2022-04-/04/common.json
+- Microsoft.Compute/stable/2022-04-04/common.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/computeRPCommon.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachine.json
@@ -268,7 +268,7 @@ input-file:
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/communityGallery.json
-- Microsoft.Compute/stable/2022-04-04/cloudService.json
+- Microsoft.Compute/stable/2022-04-04/CloudServiceRP/cloudService.json
 ```
 
 ### Tag: package-2022-04-04-only
