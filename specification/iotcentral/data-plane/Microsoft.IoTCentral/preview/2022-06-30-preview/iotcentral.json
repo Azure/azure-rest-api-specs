@@ -2024,6 +2024,28 @@
         "value"
       ]
     },
+    "JobProgress": {
+      "description": "progress summary for a scheduled job.",
+      "type": "object",
+      "properties": {
+        "total": {
+          "description": "The total number of entities targeted by the job.",
+          "type": "integer"
+        },
+        "pending": {
+          "description": "The number of entities for which the job is not yet running.",
+          "type": "integer"
+        },
+        "completed": {
+          "description": "The number of entities for which the job has completed.",
+          "type": "integer"
+        },
+        "failed": {
+          "description": "The number of entities for which the job has failed.",
+          "type": "integer"
+        }
+      }
+    },
     "JobSchedule": {
       "description": "The schedule definition of job.",
       "type": "object",
