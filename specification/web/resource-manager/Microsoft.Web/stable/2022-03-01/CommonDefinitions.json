@@ -149,6 +149,39 @@
           "type": "boolean",
           "readOnly": true
         },
+        "upgradePreference": {
+          "description": "Upgrade Preference",
+          "default": "None",
+          "enum": [
+            "None",
+            "Early",
+            "Late",
+            "Manual"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpgradePreference",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No preference on when this App Service Environment will be upgraded"
+              },
+              {
+                "value": "Early",
+                "description": "This App Service Environment will be upgraded before others in the same region that have Upgrade Preference 'Late'"
+              },
+              {
+                "value": "Late",
+                "description": "This App Service Environment will be upgraded after others in the same region that have Upgrade Preference 'Early'"
+              },
+              {
+                "value": "Manual",
+                "description": "ASEv3 only. Once an upgrade is available, this App Service Environment will wait 10 days for the upgrade to be manually initiated. After 10 days the upgrade will begin automatically"
+              }
+            ]
+          }
+        },
         "dedicatedHostCount": {
           "format": "int32",
           "description": "Dedicated Host Count",
@@ -163,6 +196,29 @@
         },
         "networkingConfiguration": {
           "$ref": "#/definitions/AseV3NetworkingConfiguration"
+        },
+        "upgradeAvailability": {
+          "description": "Whether an upgrade is available for this App Service Environment.",
+          "enum": [
+            "None",
+            "Ready"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UpgradeAvailability",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No upgrade is currently available for this App Service Environment"
+              },
+              {
+                "value": "Ready",
+                "description": "An upgrade is ready to be manually initiated on this App Service Environment"
+              }
+            ]
+          }
         }
       }
     },
