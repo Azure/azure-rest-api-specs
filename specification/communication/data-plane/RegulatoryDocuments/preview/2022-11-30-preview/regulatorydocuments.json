@@ -23,7 +23,7 @@
             {
               "in": "body",
               "name": "body",
-              "description": "The KYC application creation request.",
+              "description": "The regulatory document creation request.",
               "required": true,
               "schema": {
                 "$ref": "#/definitions/RegulatoryDocumentCreateRequest"
@@ -37,7 +37,7 @@
             "200": {
               "description": "Success",
               "schema": {
-                "$ref": "#/definitions/KYCApplicationCreateResponse"
+                "$ref": "#/definitions/RegulatoryDocumentCreateResponse"
               }
             },
             "default": {
@@ -49,13 +49,13 @@
           }
         }
       },
-      "/kyc/applications/{kycApplicationId}": {
+      "/regulatoryDocuments/{regulatoryDocumentId}": {
         "get": {
           "tags": [
             "Regulatory Documents Management"
           ],
-          "summary": "Gets a KYC Application by its KYC Application ID.",
-          "operationId": "KYC_DeleteApplication",
+          "summary": "Gets a regulatory document by its ID.",
+          "operationId": "RegulatoryDocuments_Get",
           "consumes": [
             "application/json"
           ],
@@ -65,8 +65,8 @@
           "parameters": [
             {
               "in": "path",
-              "name": "kycApplicationId",
-              "description": "The KYC Application ID",
+              "name": "regulatoryDocumentId",
+              "description": "The regulatory document ID",
               "required": true,
               "type": "string"
             },
@@ -78,7 +78,7 @@
             "200": {
               "description": "Success",
               "schema": {
-                "$ref": "#/definitions/KYCApplication"
+                "$ref": "#/definitions/RegulatoryDocument"
               }
             },
             "default": {
@@ -90,13 +90,13 @@
           }
         }
       },
-      "/kyc/applications": {
+      "/regulatoryDocuments": {
         "get": {
           "tags": [
             "Regulatory Documents Management"
           ],
-          "summary": "Gets a list of all KYC Applications.",
-          "operationId": "KYC_GetsApplications",
+          "summary": "Gets a list of all regulatory documents.",
+          "operationId": "RegulatoryDocument_GetAll",
           "consumes": [
             "application/json"
           ],
@@ -105,11 +105,16 @@
           ],
           "parameters": [
             {
-              "in": "path",
-              "name": "kycApplicationId",
-              "description": "The KYC Application ID",
-              "required": true,
-              "type": "string"
+              "in": "query",
+              "name": "skip",
+              "description": "The number of entries to skip, for pagination purposes.",
+              "type": "number"
+            },
+            {
+              "in": "query",
+              "name": "maxPageSize",
+              "description": "The maximum number of entries to fetch, for pagination purposes",
+              "type": "number"
             },
             {
               "$ref": "#/parameters/ApiVersionParameter"
@@ -119,7 +124,7 @@
             "200": {
               "description": "Success",
               "schema": {
-                "$ref": "#/definitions/KYCApplication"
+                "$ref": "#/definitions/RegulatoryDocuments"
               }
             },
             "default": {
@@ -131,13 +136,13 @@
           }
         }
       },
-      "/kyc/applications/{kycApplicationId}:cancel": {
+      "/regulatoryDocuments/{regulatoryDocumentId}:delete": {
         "delete": {
           "tags": [
             "Regulatory Documents Management"
           ],
-          "summary": "Deletes a KYC Application by its KYC Application ID.",
-          "operationId": "KYC_GetsApplication",
+          "summary": "Deletes a regulatory document by its ID.",
+          "operationId": "RegulatoryDocument_Delete",
           "consumes": [
             "application/json"
           ],
@@ -145,6 +150,13 @@
             "application/json"
           ],
           "parameters": [
+            {
+              "in": "path",
+              "name": "regulatoryDocumentId",
+              "description": "The regulatory document ID",
+              "required": true,
+              "type": "string"
+            },
             {
               "$ref": "#/parameters/ApiVersionParameter"
             }
@@ -162,13 +174,60 @@
           }
         }
       },
-      "/kyc/applications/{kycApplicationId}:update": {
+      "/regulatoryDocuments/{regulatoryDocumentId}:update": {
         "post": {
           "tags": [
             "Regulatory Documents Management"
           ],
-          "summary": "Updates a KYC Application by its KYC Application ID.",
-          "operationId": "KYC_GetsApplication",
+          "summary": "Updates a regulatory documentby its ID.",
+          "operationId": "RegulatoryDocument_Update",
+          "consumes": [
+            "application/json-merge-patch"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "regulatoryDocumentId",
+              "description": "The regulatory document ID",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The regulatory document update request.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/RegulatoryDocumentUpdateRequest"
+              }
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Success"
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/regulatoryDocuments/{regulatoryDocumentId}:attachment": {
+        "put": {
+          "tags": [
+            "Regulatory Documents Management"
+          ],
+          "summary": "Upload a file attachment for a regulatory document.",
+          "operationId": "RegulatoryDocument_UploadAttachment",
           "consumes": [
             "application/json"
           ],
@@ -177,12 +236,19 @@
           ],
           "parameters": [
             {
+              "in": "path",
+              "name": "regulatoryDocumentId",
+              "description": "The regulatory document ID",
+              "required": true,
+              "type": "string"
+            },
+            {
               "in": "body",
               "name": "body",
-              "description": "The KYC Application update request.",
+              "description": "The regulatory document attachment.",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/KYCApplicationUpdateRequest"
+                "$ref": "#/definitions/RegulatoryDocumentAttachment"
               }
             },
             {
@@ -208,109 +274,35 @@
         "description": "Regulatory Document Create Request",
         "type": "object",
         "properties": {
-          "countryCode": {
-            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
-            "type": "string"
-          },
-          "phoneNumberType": {
-            "description": "Represents the phone number type, e.g. TollFree, Geographic.",
-            "type": "string"
-          },
-          "businessName": {
-            "description": "Represents the business name in the application.",
-            "type": "string"
-          },
-          "address": {
-            "description": "Represents the unstructured address.",
-            "type": "string"
-          },
-          "addressCountry": {
-            "description": "Represents the address country.",
-            "type": "string"
-          },
-          "registrationNumber": {
-            "description": "Represents the registration number.",
-            "type": "string"
-          },
-          "phoneNumberLocality": {
-            "description": "Represents the name of the locality for the application, e.g. city, town name",
-            "type": "string"
-          },
-          "contact": {
-            "description": "Represents the name of the contact responsible for this application.",
-            "type": "string"
-          },
-          "contactPhoneNumber": {
-            "description": "Represents the contact's phone number",
-            "type": "string"
-          },
-          "contactEmail": {
-            "description": "Represents the name of the contact responsible for this application.",
-            "type": "string"
-          },
-          "taxNumber": {
-            "description": "Represents the tax number of the business.",
-            "type": "string"
+          "details": {
+            "description": "The regulatory document's details",
+            "type": "object",
+            "$ref": "#/definitions/RegulatoryDocumentDetails"
           }
         }
       },
-      "KYCApplicationCreateResponse": {
-        "description": "KYC Application Create Response",
+      "RegulatoryDocumentCreateResponse": {
+        "description": "Regulatory document create response",
         "type": "object",
         "properties": {
-          "kycApplicationId": {
-            "description": "Represents the ID of the existing KYC Application",
+          "regulatoryDocumentId": {
+            "description": "The regulatory document's ID",
             "type": "string"
           }
         }
       },
-      "KYCApplicationUpdateRequest": {
-        "description": "KYC Application Update Request",
+      "RegulatoryDocumentUpdateRequest": {
+        "description": "Regulatory Document Update Request",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Represents the KYC Application ID.",
+            "description": "The regulatory document ID.",
             "type": "string"
           },
-          "phoneNumberType": {
+          "details": {
             "description": "Represents the phone number type, e.g. TollFree, Geographic.",
-            "type": "string"
-          },
-          "businessName": {
-            "description": "Represents the business name in the application.",
-            "type": "string"
-          },
-          "address": {
-            "description": "Represents the business address.",
-            "type": "string"
-          },
-          "addressCountry": {
-            "description": "Represents the business address country.",
-            "type": "string"
-          },
-          "registrationNumber": {
-            "description": "Represents the business registration or identification number.",
-            "type": "string"
-          },
-          "phoneNumberLocality": {
-            "description": "Represents the name of the locality for the application, e.g. city, town name",
-            "type": "string"
-          },
-          "contact": {
-            "description": "Represents the name of the contact responsible for this application.",
-            "type": "string"
-          },
-          "contactPhoneNumber": {
-            "description": "Represents the contact's phone number",
-            "type": "string"
-          },
-          "contactEmail": {
-            "description": "Represents the name of the contact responsible for this application.",
-            "type": "string"
-          },
-          "taxNumber": {
-            "description": "Represents the business tax number.",
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/RegulatoryDocumentDetails"
           }
         }
       },
@@ -379,7 +371,15 @@
           },
           "phoneNumberType": {
             "description": "The phone number type.",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "geographic",
+              "tollFree"
+            ],
+            "x-ms-enum": {
+              "name": "phoneNumberType",
+              "modelAsString": true
+            }
           },
           "locality": {
             "description": "The name of the geographic localitiy (city or town) of the regulatory document. This is only needed for geographic phone number type.",
@@ -432,6 +432,39 @@
           },
           "nextLink": {
             "description": "Represents the URL link to the next page of regulatory document results.",
+            "type": "string"
+          }
+        }
+      },
+      "RegulatoryDocumentAttachment": {
+        "description": "The regulatory document attachment.",
+        "required": [
+          "fileName",
+          "fileType",
+          "fileContent"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "description": "The file name.",
+            "type": "string"
+          },
+          "fileType": {
+            "description": "The type of file being attached.",
+            "enum": [
+              "jpeg",
+              "jpg",
+              "pdf",
+              "png"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "fileType",
+              "modelAsString": true
+            }
+          },
+          "fileContent": {
+            "description": "The file contents of the attachment.",
             "type": "string"
           }
         }
