@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationIdentityClient",
     "description": "Azure Communication Identity Service",
-    "version": "2022-06-01"
+    "version": "2022-09-01"
   },
   "paths": {
     "/identities": {
@@ -230,7 +230,7 @@
           }
         },
         "x-ms-examples": {
-          "Issue an access token": {
+          "Issue an access token and optionally specify a custom expiration time within [1-24] hours. Expiration time default value is 24 hours.": {
             "$ref": "./examples/IssueAccessToken.json"
           }
         }
@@ -282,6 +282,10 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
+        },
+        "expiresInMinutes": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },

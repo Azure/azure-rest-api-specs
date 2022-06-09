@@ -11,7 +11,7 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Create a new identity, and optionally, an access token.",
+        "summary": "Create a new identity.",
         "operationId": "CommunicationIdentity_Create",
         "consumes": [
           "application/json"
@@ -26,7 +26,6 @@
           {
             "in": "body",
             "name": "body",
-            "description": "If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityCreateRequest"
             }
@@ -83,7 +82,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "Success"
           }
         },
         "x-ms-examples": {
@@ -123,7 +122,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "Success"
           }
         },
         "x-ms-examples": {
@@ -160,7 +159,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Requested scopes for the new token.",
+            "description": "Requesting scopes for the new token.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
@@ -273,10 +272,6 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
-        },
-        "validityTimeInMinutes": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     }
