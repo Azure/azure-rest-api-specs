@@ -653,20 +653,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/JobScheduleEnd"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "date": {
-              "description": "The date when to end the scheduled job.",
-              "type": "string",
-              "format": "date"
-            }
-          },
-          "required": [
-            "date"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "The date when to end the scheduled job.",
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "date"
       ]
     },
     "Destination": {
@@ -2316,21 +2314,19 @@
       "allOf": [
         {
           "$ref": "#/definitions/JobScheduleEnd"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "occurrences": {
-              "description": "The number of occurrences after which to end the scheduled job.",
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 999
-            }
-          },
-          "required": [
-            "occurrences"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "occurrences": {
+          "description": "The number of occurrences after which to end the scheduled job.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        }
+      },
+      "required": [
+        "occurrences"
       ]
     },
     "Organization": {
