@@ -46,7 +46,7 @@ perform-load: false
 
 These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-07'
 namespace: azure.mgmt.kubernetesconfiguration.v2022_07_01
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_07_01
 ```
