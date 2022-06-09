@@ -1500,7 +1500,7 @@
         "workspaceKey": {
           "description": "The workspace key for log analytics",
           "type": "string",
-          "x-ms-mutability": ["create", "update"]
+          "x-ms-secret": true
         },
         "logType": {
           "type": "string",
@@ -1523,7 +1523,8 @@
         },
         "workspaceResourceId": {
           "description": "The workspace resource id for log analytics",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1671,11 +1672,13 @@
         },
         "value": {
           "type": "string",
-          "description": "The value of the environment variable."
+          "description": "The value of the environment variable.",
+          "x-ms-secret": true
         },
         "secureValue": {
           "type": "string",
-          "description": "The value of the secure environment variable."
+          "description": "The value of the secure environment variable.",
+          "x-ms-secret": true
         }
       },
       "required": [
