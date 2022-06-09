@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2021-05-01"
+    "version": "2022-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -905,6 +905,32 @@
           "description": "A flag to determine whether or not KerberosArmoring is enabled or disabled.",
           "x-ms-enum": {
             "name": "KerberosArmoring",
+            "modelAsString": true
+          }
+        },
+        "ldapSigning": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether or not LdapSigning is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "LdapSigning",
+            "modelAsString": true
+          }
+        },
+        "channelBinding": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether or not ChannelBinding is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "ChannelBinding",
             "modelAsString": true
           }
         }
