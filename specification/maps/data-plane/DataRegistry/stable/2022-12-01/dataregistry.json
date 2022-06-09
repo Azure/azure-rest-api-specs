@@ -71,7 +71,7 @@
     },
     "UniqueDataId": {
       "name": "udid",
-      "description": "The unique data id for the data registry. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) call.",
+      "description": "The unique data id for the data registry. The `udid` must have been obtained from a successful long-running [DataRegistry Register API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register) call.",
       "type": "string",
       "in": "path",
       "required": true,
@@ -87,7 +87,7 @@
     },
     "DeleteMode": {
       "name": "deleteMode",
-      "description": "Mode of deletion (default: soft)",
+      "description": "Mode of deletion. Default is `soft`",
       "type": "string",
       "in": "query",
       "required": false,
@@ -299,7 +299,7 @@
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThis API allows the caller to download the underlying content of a previously registered data registry.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [DataRegistry Register API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial).\n\n## Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download.\n\nFor example, to download a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Download Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource. A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
         "operationId": "DataRegistries_Download",
         "x-ms-examples": {
-          "Download previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+          "Download previously registered GeoJSON data": {
             "$ref": "./examples/DataRegistries_Download.json"
           }
         },
@@ -466,7 +466,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "The description to be given to the data registry.",
+          "description": "The description to be given to the data registry. The max length is 1024 characters.",
           "type": "string"
         },
         "dataFormat": {
@@ -487,7 +487,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "The description to be given to the data registry.",
+          "description": "The description to be given to the data registry. The max length is 1024 characters.",
           "type": "string"
         },
         "dataFormat": {
