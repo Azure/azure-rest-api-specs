@@ -1646,7 +1646,7 @@
       "discriminator": "type"
     },
     "GroupSymmetricKeyAttestation": {
-      "description": "The symmetric key attestion definition.",
+      "description": "The symmetric key attestation definition.",
       "x-ms-discriminator-value": "symmetricKey",
       "allOf": [
         {
@@ -1806,6 +1806,10 @@
           "type": "string",
           "readOnly": true
         },
+        "scheduledJobId": {
+          "description": "Id of the scheduled job definition that created this job.",
+          "type": "string"
+        },
         "displayName": {
           "description": "Display name of the job.",
           "type": "string"
@@ -1833,6 +1837,23 @@
             "$ref": "#/definitions/JobData"
           },
           "minItems": 1
+        },
+        "start": {
+          "description": "The start time of the job",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "end": {
+          "description": "The end time of the job",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "progress": {
+          "description": "The progress statistics of the job.",
+          "$ref": "#/definitions/JobProgress",
+          "readOnly": true
         },
         "status": {
           "description": "Indicates whether the job is starting, running, etc.",
