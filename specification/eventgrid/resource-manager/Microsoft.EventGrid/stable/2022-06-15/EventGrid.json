@@ -4521,9 +4521,6 @@
         "x-ms-examples": {
           "Topics_CreateOrUpdate": {
             "$ref": "./examples/Topics_CreateOrUpdate.json"
-          },
-          "Topics_CreateOrUpdateForAzureArc": {
-            "$ref": "./examples/Topics_CreateOrUpdateForAzureArc.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -10462,20 +10459,6 @@
         }
       }
     },
-    "ExtendedLocation": {
-      "description": "Definition of an Extended Location",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Fully qualified name of the extended location.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the extended location.",
-          "type": "string"
-        }
-      }
-    },
     "Topic": {
       "description": "EventGrid Topic",
       "type": "object",
@@ -10493,23 +10476,6 @@
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Identity information for the resource."
-        },
-        "kind": {
-          "description": "Kind of the resource.",
-          "default": "Azure",
-          "enum": [
-            "Azure",
-            "AzureArc"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceKind",
-            "modelAsString": true
-          }
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Extended location of the resource."
         },
         "systemData": {
           "description": "The system metadata relating to Topic resource.",
