@@ -5839,7 +5839,7 @@
           "x-nullable": true
         },
         "fileShareName": {
-          "description": "[Required] TODO - File share name.",
+          "description": "[Required] The name of the Azure file share that the datastore points to.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -8307,7 +8307,7 @@
           },
           {
             "value": "TCNForecaster",
-            "description": "TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro."
+            "description": "TCNForecaster: Temporal Convolutional Networks Forecaster."
           },
           {
             "value": "ElasticNet",
@@ -8988,9 +8988,9 @@
           "x-nullable": true
         },
         "tileGridSize": {
-          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic A tuple of two integers passed as a string.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A string containing two integers in mxn format.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
           "type": "string",
-          "example": "choice('[3;2]', '[2;2]')",
+          "example": "choice('3x2', '2x2')",
           "x-nullable": true
         },
         "tileOverlapRatio": {
@@ -9312,9 +9312,9 @@
           "x-nullable": true
         },
         "tileGridSize": {
-          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A tuple of two integers passed as a string.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A string containing two integers in mxn format.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
           "type": "string",
-          "example": "[3;2]",
+          "example": "3x2",
           "x-nullable": true
         },
         "tileOverlapRatio": {
@@ -12688,7 +12688,7 @@
       "additionalProperties": false
     },
     "SkuScaleType": {
-      "description": "TODO - SKU scale type",
+      "description": "Node scaling setting for the compute sku.",
       "enum": [
         "Automatic",
         "Manual",
@@ -12700,13 +12700,16 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Automatic"
+            "value": "Automatic",
+            "description": "Automatically scales node count."
           },
           {
-            "value": "Manual"
+            "value": "Manual",
+            "description": "Node count scaled upon user request."
           },
           {
-            "value": "None"
+            "value": "None",
+            "description": "Fixed set of nodes."
           }
         ]
       },

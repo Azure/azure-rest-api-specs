@@ -5,8 +5,10 @@
     "scope": {
       "type": "string",
       "enum": [
-        "ResourceGroup"
-      ]
+        "ResourceGroup",
+        "None"
+      ],
+      "default": "ResourceGroup"
     },
     "variables": {
       "$ref": "#/definitions/Variables"
@@ -41,7 +43,7 @@
   "definitions": {
     "Name": {
       "type": "string",
-      "pattern": "^[A-Za-z_][A-Za-z0-9_-]*$"
+      "pattern": "^[A-Za-z_$][A-Za-z0-9_-]*$"
     },
     "JsonPointer": {
       "type": "string",
@@ -94,13 +96,26 @@
                   }
                 },
                 "then": {
-                  "properties": {
-                    "type": {},
-                    "value": {
-                      "type": "string"
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "prefix": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
                     }
-                  },
-                  "additionalProperties": false
+                  ]
                 }
               },
               {
@@ -311,9 +326,11 @@
     },
     "StepRestBase": {
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/StepBase"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
       "properties": {
         "outputVariables": {
           "type": "object",
@@ -369,8 +386,16 @@
                     "type": "string"
                   }
                 },
-                "body":{
-                  "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                "body": {
+                  "type": [
+                    "object",
+                    "number",
+                    "array",
+                    "integer",
+                    "string",
+                    "boolean",
+                    "null"
+                  ]
                 }
               }
             }
