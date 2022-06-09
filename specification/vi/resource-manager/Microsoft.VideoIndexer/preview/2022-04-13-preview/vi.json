@@ -782,8 +782,9 @@
           "example": "2b9bcf6d-39d5-460a-a6bb-7b40b7ccf139"
         },
         "accountId": {
-          "description": "The account's data-plane ID",
+          "description": "The account's data-plane ID. This can be set only when connecting an existing classic account",
           "type": "string",
+          "default": "00000000-0000-0000-0000-000000000000",
           "example": "3575690b-a569-449c-ab7b-11020f948f76"
         },
         "accountName": {
@@ -960,6 +961,7 @@
           "type": "string",
           "readOnly": true,
           "description": "The access token.",
+          "x-ms-secret": true,
           "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjI0NDc3MzMsImV4cCI6MTY1Mzk4MzczMywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0"
         }
       }

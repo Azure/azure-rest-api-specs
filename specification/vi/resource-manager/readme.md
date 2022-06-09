@@ -26,7 +26,7 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2022-04-03-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
