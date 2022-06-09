@@ -3,7 +3,7 @@
     "subscriptionId": "xxxx-xxxx-xxxx-xxxx",
     "resourceGroup": "myResourceGroup",
     "fluidRelayServerName": "myFluidRelayServer",
-    "api-version": "2022-05-11",
+    "api-version": "2022-05-26",
     "resource": {
       "location": "west-us",
       "identity": {
@@ -15,6 +15,9 @@
       },
       "tags": {
         "Category": "sales"
+      },
+      "properties": {
+        "storagesku": "basic"
       }
     }
   },
@@ -48,6 +51,9 @@
             ],
             "storageEndpoints": [
               "https://www.contoso.org/storage"
+            ],
+            "serviceEndpoints": [
+              "https://www.afd.contoso.org"
             ]
           },
           "provisioningState": "Succeeded"

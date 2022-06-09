@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Fluid Relay",
-    "version": "2022-05-11"
+    "version": "2022-05-26"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -966,6 +966,19 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "All encryption configuration for a resource."
+        },
+        "storagesku": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "basic"
+          ],
+          "description": "Sku of the storage associated with the resource",
+          "title": "StorageSKU",
+          "x-ms-enum": {
+            "name": "StorageSKU",
+            "modelAsString": true
+          }
         }
       },
       "description": "The properties of a Fluid Relay Service resource."
@@ -1030,6 +1043,14 @@
             "type": "string"
           },
           "description": "The Fluid Relay storage endpoints.",
+          "readOnly": true
+        },
+        "serviceEndpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Fluid Relay service endpoints.",
           "readOnly": true
         }
       },
