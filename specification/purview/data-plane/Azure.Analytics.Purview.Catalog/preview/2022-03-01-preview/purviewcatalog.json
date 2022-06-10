@@ -6,14 +6,14 @@
     "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/atlas/{api-version}",
+    "hostTemplate": "{Endpoint}/atlas/{serviceVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
       },
       {
-        "$ref": "#/parameters/ApiVersion"
+        "$ref": "#/parameters/serviceVersion"
       }
     ]
   },
@@ -8371,17 +8371,18 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersion": {
-      "name": "api-version",
+    "serviceVersion": {
+      "name": "serviceVersion",
       "description": "the version of api",
       "type": "string",
       "in": "path",
       "required": true,
       "enum": [
-        "v2"
+        "v2",
+        "v3"
       ],
       "x-ms-enum": {
-        "name": "ApiVersionEnum",
+        "name": "serviceVersionEnum",
         "modelAsString": true
       }
     }
