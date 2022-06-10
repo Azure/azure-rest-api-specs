@@ -169,7 +169,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/DataRegistry"
+              "$ref": "#/definitions/DataRegistryWithUDID"
             }
           },
           "default": {
@@ -264,7 +264,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/DataRegistry"
+              "$ref": "#/definitions/DataRegistryWithUDID"
             }
           },
           "default": {
@@ -329,7 +329,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/DataRegistry"
+              "$ref": "#/definitions/DataRegistryWithUDID"
             }
           },
           "default": {
@@ -484,15 +484,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
-            },
+            "description": "The status of the long running operation",
             "headers": {
-              "Resource-Location": {
-                "type": "string",
-                "description": "If successful, a URI where details on the newly registered resource can be found."
+              "Retry-After": {
+                "type": "integer",
+                "description": "Recommended minimum number of seconds to wait before next check."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
             }
           },
           "default": {
@@ -508,7 +508,7 @@
   },
   "definitions": {
     "DataRegistry": {
-      "description": "A DataRegistry object provides information for Azure Maps Service to access customer's resources.",
+      "description": "A DataRegistry object providing information for Azure Maps Service to access customer's resources.",
       "type": "object",
       "properties": {
         "description": {
@@ -525,6 +525,24 @@
       "required": [
         "dataFormat",
         "connection"
+      ]
+    },
+    "DataRegistryWithUDID": {
+      "description": "A DataRegistry object with UDID",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataRegistry"
+        }
+      ],
+      "properties": {
+        "udid": {
+          "description": "The unique data id for the data registry.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "udid"
       ]
     },
     "DataRegistryPatch": {
@@ -720,6 +738,45 @@
           }
         ]
       }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The operationId",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "LongRunningOperationStatus": {
+      "description": "The status of a long running operation.",
+      "type": "string",
+      "enum": [
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "LongRunningOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Failed",
+            "description": "The request has one or more failures."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The request has successfully completed."
+          }
+        ]
+      },
+      "readOnly": true
     }
   }
 }
