@@ -1827,6 +1827,7 @@
           "items": {
             "$ref": "#/definitions/SharingProfileGroup"
           },
+          "x-ms-identifiers": [],
           "description": "A list of sharing profile groups."
         },
         "communityGalleryInfo": {
@@ -1920,6 +1921,9 @@
           "items": {
             "$ref": "#/definitions/RegionalSharingStatus"
           },
+          "x-ms-identifiers": [
+            "region"
+          ],
           "description": "Summary of all regional sharing status."
         }
       },
@@ -2263,7 +2267,22 @@
           "items": {
             "$ref": "#/definitions/GalleryImageFeature"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of gallery image features."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The architecture of the image. Applicable to OS disks only.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -2430,6 +2449,9 @@
           "items": {
             "$ref": "#/definitions/TargetRegion"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The target regions where the Image Version is going to be replicated to. This property is updatable."
         },
         "replicaCount": {
@@ -2482,6 +2504,10 @@
           "items": {
             "$ref": "#/definitions/GalleryTargetExtendedLocation"
           },
+          "x-ms-identifiers": [
+            "name",
+            "extendedLocation/name"
+          ],
           "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
         }
       },
@@ -2587,6 +2613,9 @@
           "items": {
             "$ref": "#/definitions/DataDiskImageEncryption"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "A list of encryption specifications for data disk images."
         }
       },
@@ -2702,6 +2731,9 @@
           "items": {
             "$ref": "#/definitions/GalleryDataDiskImage"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "A list of data disk images."
         }
       },
@@ -2796,6 +2828,9 @@
           "items": {
             "$ref": "#/definitions/RegionalReplicationStatus"
           },
+          "x-ms-identifiers": [
+            "region"
+          ],
           "description": "This is a summary of replication status for each region."
         }
       },
@@ -2948,6 +2983,10 @@
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The Api error details"
         },
         "innererror": {
@@ -3084,6 +3123,7 @@
           "items": {
             "$ref": "#/definitions/SharingProfileGroup"
           },
+          "x-ms-identifiers": [],
           "description": "A list of sharing profile groups."
         }
       },

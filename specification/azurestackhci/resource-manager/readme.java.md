@@ -10,6 +10,19 @@ namespace: com.microsoft.azure.management.azurestackhci
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestackhci
+directive:
+  - from: arcSettings.json
+    where: $.definitions.ArcSetting.properties.systemData
+    transform: $['x-ms-client-flatten'] = false
+    reason: systemData should not be flattened
+  - from: clusters.json
+    where: $.definitions.Cluster.properties.systemData
+    transform: $['x-ms-client-flatten'] = false
+    reason: systemData should not be flattened
+  - from: extensions.json
+    where: $.definitions.Extension.properties.systemData
+    transform: $['x-ms-client-flatten'] = false
+    reason: systemData should not be flattened
 ```
 
 # Validation

@@ -18,7 +18,8 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(python) && $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2021-03-only
@@ -40,7 +41,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
-clear-output-folder: false
 perform-load: false
 
 ```

@@ -8,7 +8,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
@@ -20,7 +20,7 @@ package-version: 1.0.0b1
 
 Generate all API versions currently shipped for this package
 
-```yaml $(track2)
+```yaml $(python)
 clear-output-folder: true
 batch:
   - tag: package-flexibleserver-2021-05-01
@@ -47,7 +47,7 @@ namespace: azure.mgmt.rdbms.mysql
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
 
-``` yaml $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

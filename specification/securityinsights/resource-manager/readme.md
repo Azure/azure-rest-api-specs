@@ -26,17 +26,118 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-10
+tag: package-preview-2022-06
 ```
 
 ---
 
 
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2022-06-01-preview/operations.json
+```
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/operations.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2022-04-01-preview/operations.json
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/operations.json
+```
+
 ### Tag: package-preview-2021-10
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-10'
+``` yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.SecurityInsights/preview/2021-10-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2021-10-01-preview/AutomationRules.json
@@ -56,6 +157,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2021-10-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2021-10-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
@@ -82,6 +184,23 @@ input-file:
 ```
 
 ---
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.SecurityInsights/stable/2021-10-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/operations.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AutomationRules.json
+```
 
 ### Tag: package-2021-04-01-only
 
@@ -182,6 +301,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

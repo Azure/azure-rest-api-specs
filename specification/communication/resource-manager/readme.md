@@ -28,7 +28,7 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-08-20
+tag: package-2021-10-01-preview
 ```
 
 ### Tag: package-2020-08-20
@@ -49,6 +49,17 @@ input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
 ```
 
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+  - Microsoft.Communication/preview/2021-10-01-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2021-10-01-preview/Domains.json
+  - Microsoft.Communication/preview/2021-10-01-preview/EmailServices.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -58,7 +69,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
@@ -67,6 +77,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## CSharp
