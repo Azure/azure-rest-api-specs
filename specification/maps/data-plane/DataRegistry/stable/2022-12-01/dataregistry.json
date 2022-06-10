@@ -79,8 +79,9 @@
     },
     "OperationIdHeader": {
       "name": "Operation-Id",
-      "description": "The caller provided operationId.",
+      "description": "The caller provided operationId, in GUID format.",
       "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
       "in": "header",
       "required": false,
       "x-ms-parameter-location": "method"
