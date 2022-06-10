@@ -31,6 +31,14 @@ openapi-type: arm
 tag: package-2022-02-01-stable
 ```
 
+### Tag: package-2017-03-01-preview
+
+These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03-01-preview'
+input-file:
+- Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
+```
 
 ### Tag: package-preview-2021-11
 
@@ -39,14 +47,6 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 ```yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2021-11-01-preview/sqlvm.json
-```
-### Tag: package-2017-03-01-preview
-
-These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-03-01-preview'
-input-file:
-- Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
 ```
 
 ### Tag: package-2022-02-01-preview
