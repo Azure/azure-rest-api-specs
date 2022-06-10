@@ -77,7 +77,15 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "OperationId": {
+    "OperationIdHeader": {
+      "name": "Operation-Id",
+      "description": "The caller provided operationId.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdQuery": {
       "name": "operationId",
       "type": "string",
       "in": "path",
@@ -115,8 +123,8 @@
   },
   "paths": {
     "/mapData": {
-      "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not able to use this service.\n\nThe DataRegistry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service and get the `udid` representing the registered data content.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register Request\n\nTo register your data you will use a `POST` request. The request body will contain the connection object. The `dataFormat` query parameter will contain the format for the data for validation purpose.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set the request body to the connection object representing how Azure Maps can access your geojson file. Set the `dataFormat` query parameter to _geojson_.\n\nThe DataRegistry Register API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+      "put": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not able to use this service.\n\nThe DataRegistry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service and get the `udid` representing the registered data content.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register Request\n\nTo register your data you will use a `PUT` request. The request body will contain the connection object. The `dataFormat` query parameter will contain the format for the data for validation purpose.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set the request body to the connection object representing how Azure Maps can access your geojson file. Set the `dataFormat` query parameter to _geojson_.\n\nThe DataRegistry Register API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "DataRegistries_Register",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -135,6 +143,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
             "name": "dataRegistry",
             "in": "body",
             "description": "The data registry to be registered.",
@@ -145,12 +156,16 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+          "201": {
+            "description": "Resource Creating: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
               "Operation-Location": {
                 "type": "string",
-                "description": "New URL to check for the results of the long running process."
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
             }
           },
@@ -216,6 +231,9 @@
             "$ref": "#/parameters/UniqueDataId"
           },
           {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
             "name": "dataRegistry",
             "in": "body",
             "description": "The object for updating a given data registry",
@@ -226,12 +244,16 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+          "200": {
+            "description": "Resource Replacing: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
               "Operation-Location": {
                 "type": "string",
-                "description": "New URL to check for the results of the long running process."
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
             }
           },
@@ -267,6 +289,9 @@
             "$ref": "#/parameters/UniqueDataId"
           },
           {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
             "name": "dataRegistryPatch",
             "in": "body",
             "description": "The object for patching a given data registry",
@@ -280,9 +305,13 @@
           "202": {
             "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
               "Operation-Location": {
                 "type": "string",
-                "description": "New URL to check for the results of the long running process."
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
             }
           },
@@ -433,7 +462,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/OperationIdQuery"
           }
         ],
         "responses": {
@@ -470,7 +499,6 @@
           "type": "string"
         },
         "dataFormat": {
-          "description": "Data format of the uploaded content for validation purpose",
           "$ref": "#/definitions/DataFormat"
         },
         "connection": {
@@ -491,7 +519,6 @@
           "type": "string"
         },
         "dataFormat": {
-          "description": "Data format of the uploaded content for validation purpose",
           "$ref": "#/definitions/DataFormat"
         },
         "connection": {
@@ -500,7 +527,7 @@
       }
     },
     "Connection": {
-      "description": "A Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
+      "description": "A Connection object representing how Azure Maps Service accesses customer's resources and the scope of it.",
       "type": "object",
       "properties": {
         "type": {
@@ -610,7 +637,7 @@
           "type": "string"
         },
         "downloadURL": {
-          "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data.",
+          "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data. `api-version` is not included.",
           "type": "string",
           "format": "uri"
         },
@@ -624,7 +651,6 @@
           "type": "string"
         },
         "dataFormat": {
-          "description": "Data format of the uploaded content for validation purpose",
           "$ref": "#/definitions/DataFormat"
         },
         "description": {
@@ -632,7 +658,6 @@
           "type": "string"
         },
         "connection": {
-          "description": "Connection object represents how Azure Maps Service accesses customer's resources and the scope of it.",
           "$ref": "#/definitions/Connection"
         },
         "registered": {
@@ -658,7 +683,7 @@
       ]
     },
     "DataFormat": {
-      "description": "Data format of the uploaded content for validation in Azure Maps Service.",
+      "description": "Data format of the uploaded content for validation purpose.",
       "type": "string",
       "enum": [
         "geojson",
