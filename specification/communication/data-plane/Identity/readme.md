@@ -29,6 +29,14 @@ openapi-type: data-plane
 tag: package-2022-06
 ```
 
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - stable/2022-09-01/CommunicationIdentity.json
+```
 
 ### Tag: package-2022-06
 
