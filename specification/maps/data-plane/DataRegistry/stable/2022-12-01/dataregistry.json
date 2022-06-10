@@ -199,9 +199,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "description": "List data request completed successfully. The response body contains a list of metadata of all the previously registered data registries.",
             "schema": {
-              "$ref": "#/definitions/MapDataListResult"
+              "$ref": "#/definitions/MetadataListResult"
             }
           },
           "default": {
@@ -320,6 +320,10 @@
                 "description": "ID of the status monitor for the operation."
               },
               "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
+              },
+              "Location": {
                 "type": "string",
                 "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
@@ -443,9 +447,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Get metadata request completed successfully. The response body is the metadata of a given udid.",
+            "description": "Get metadata request completed successfully. The response body is the metadata of a given data registry.",
             "schema": {
-              "$ref": "#/definitions/MapDataResult"
+              "$ref": "#/definitions/MetadataResult"
             }
           },
           "default": {
@@ -613,41 +617,51 @@
         }
       }
     },
-    "MapDataListResult": {
-      "description": "The response model for the Data List API. Returns a list of all the previously registered data.",
+    "MetadataListResult": {
+      "description": "The response model for the DataRegistry List API. Returns a list of all the previously registered data.",
       "type": "object",
       "properties": {
-        "mapDataList": {
-          "description": "A list of all the previously registered data.",
+        "metadataList": {
+          "description": "A list of all the previously registered data registries.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MapData"
+            "$ref": "#/definitions/Metadata"
           }
         }
       },
       "required": [
-        "mapDataList"
+        "metadataList"
       ]
     },
-    "MapDataResult": {
-      "description": "The response model for the Data Metadata API. Returns the metadata of a given udid.",
+    "MetadataResult": {
+      "description": "The response model for the DataRegistry Metadata API. Returns the metadata of a given data registry.",
       "type": "object",
       "properties": {
-        "mapData": {
-          "$ref": "#/definitions/MapData"
+        "metadata": {
+          "$ref": "#/definitions/Metadata"
         }
       },
       "required": [
-        "mapData"
+        "metadata"
       ]
     },
-    "MapData": {
+    "Metadata": {
       "description": "Metadata of a data registry.",
       "type": "object",
       "properties": {
         "udid": {
           "description": "The unique data id for the data registry.",
           "type": "string"
+        },
+        "description": {
+          "description": "The description of the data.",
+          "type": "string"
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/DataFormat"
+        },
+        "connection": {
+          "$ref": "#/definitions/Connection"
         },
         "downloadURL": {
           "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data. `api-version` is not included.",
@@ -662,16 +676,6 @@
         "contentMD5": {
           "description": "The content MD5 of the content.",
           "type": "string"
-        },
-        "dataFormat": {
-          "$ref": "#/definitions/DataFormat"
-        },
-        "description": {
-          "description": "The description of the data.",
-          "type": "string"
-        },
-        "connection": {
-          "$ref": "#/definitions/Connection"
         },
         "registered": {
           "description": "The registered timestamp.",
