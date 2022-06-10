@@ -6,20 +6,55 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
-
 The current stable release of Question Answering is 2021-10-01.
 
+The current stable release of Conversational Language Understanding and Language is 2022-05-01.
+
 ```yaml
-tag: release_2022_03_01_preview
+tag: release_2022_05_15_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
+  - suppress: R3016
+    where: $.definitions.CurrencyResolution.properties.ISO4217
+    reason: ISO should be upper case.
 ```
 
+### Release 2022-05-15-preview
+
+These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_05_15_preview'
+input-file:
+  - preview/2022-05-15-preview/textanalytics.json
+  - preview/2022-05-15-preview/analyzeconversations.json
+  - preview/2022-05-15-preview/analyzetext-authoring.json
+  - preview/2022-05-15-preview/analyzeconversations-authoring.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+
+```
+
+### Release 2022-05-01
+
+These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_05_01'
+input-file:
+  - stable/2022-05-01/textanalytics.json
+  - stable/2022-05-01/analyzetext-authoring.json
+  - stable/2022-05-01/analyzeconversations-authoring.json
+  - stable/2022-05-01/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
 ### Release 2022-03-01-preview
 
 These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
@@ -110,8 +145,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
 ```
 
 ## Suppression

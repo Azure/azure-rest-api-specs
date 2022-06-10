@@ -164,7 +164,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
-- Microsoft.Sql/stable/2014-04-01-legacy/replicationLinks_legacy.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01-legacy/sql.core_legacy.json
@@ -273,10 +272,12 @@ input-file:
 - ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1778,7 +1779,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
