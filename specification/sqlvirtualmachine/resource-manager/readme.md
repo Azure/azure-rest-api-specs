@@ -28,9 +28,17 @@ These are the global settings for the SQL virtual machine API.
 title: SqlVirtualMachineManagementClient
 description: 'The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.'
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2022-02-01
 ```
 
+### Tag: package-2017-03-01-preview
+
+These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03-01-preview'
+input-file:
+- Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
+```
 
 ### Tag: package-preview-2021-11
 
@@ -40,13 +48,23 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2021-11-01-preview/sqlvm.json
 ```
-### Tag: package-2017-03-01-preview
 
-These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
+### Tag: package-2022-02-01-preview
 
-``` yaml $(tag) == 'package-2017-03-01-preview'
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
-- Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
+- Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
+```
+
+### Tag: package-2022-02-01
+
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01'
+input-file:
+- Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
 ```
 
 ---
