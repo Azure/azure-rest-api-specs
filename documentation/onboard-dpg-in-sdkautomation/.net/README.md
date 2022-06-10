@@ -4,7 +4,7 @@
 
 - `<ServiceName>`: The RP name, which is usually same as folder name in swagger.
 - `<NameSpace>`: Python package name.
-- `<Title>`: SDK Client Name
+- `<Title>`: SDK Client Name. It's optional if there is a title defined in spec readme.md file.
 
 ## Autorest Configuration
 Please copy the following configuration into spec PR comment.
