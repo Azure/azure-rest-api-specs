@@ -430,8 +430,11 @@
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThis API allows the caller to fetch the metadata of a given udid registered previously using the [DataRegistry Register API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register).\n\n## Submit Get Metadata Request\n\nTo fetch the metadata of a given udid you will issue a `GET` request with no additional parameters.",
         "operationId": "DataRegistries_GetMetadata",
         "x-ms-examples": {
-          "Fetch the metadata of a given udid": {
-            "$ref": "./examples/DataRegistries_GetMetadata.json"
+          "Fetch the metadata of a given valid udid": {
+            "$ref": "./examples/DataRegistries_GetMetadataValid.json"
+          },
+          "Fetch the metadata of a given invalid udid": {
+            "$ref": "./examples/DataRegistries_GetMetadataInvalid.json"
           }
         },
         "parameters": [
@@ -586,8 +589,12 @@
           "description": "ClientId of MSI. Use system assigned identity if not provided.",
           "type": "string"
         },
+        "containerName": {
+          "description": "The container name where the blob file is stored.",
+          "type": "string"
+        },
         "linkedResource": {
-          "description": "The linked resource. Need to configure in control plane beforehand.",
+          "description": "The linked resource. Need to configure in control plane beforehand. Default is `default-linked-storage`",
           "type": "string"
         },
         "blobPath": {
@@ -597,6 +604,7 @@
       },
       "required": [
         "type",
+        "containerName",
         "blobPath"
       ]
     },
@@ -623,6 +631,10 @@
         },
         "msiClientId": {
           "description": "ClientId of MSI. Use system assigned identity if not provided.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "The container name where the blob file is stored.",
           "type": "string"
         },
         "linkedResource": {
@@ -657,10 +669,18 @@
       "properties": {
         "metadata": {
           "$ref": "#/definitions/Metadata"
+        },
+        "isValid": {
+          "description": "Validity of a data registry.",
+          "type": "boolean"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "isValid"
       ]
     },
     "Metadata": {
