@@ -167,6 +167,9 @@
                 "type": "string",
                 "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
             }
           },
           "default": {
@@ -202,7 +205,11 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -255,6 +262,9 @@
                 "type": "string",
                 "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
             }
           },
           "default": {
@@ -313,6 +323,9 @@
                 "type": "string",
                 "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
             }
           },
           "default": {

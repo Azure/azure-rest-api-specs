@@ -4,6 +4,7 @@
     "api-version": "2022-12-01",
     "udid": "25084fb7-307a-4720-8f91-7952a0b91012",
     "dataRegistryPatch": {
+      "description": "New Contoso Geofence GeoJSON",
       "connection": {
         "blobPath": "/my/blob/path-new.json"
       }
@@ -15,6 +16,16 @@
         "Operation-Id": "b39c55fe-f204-425e-9236-c32060f9127d",
         "Operation-Location": "https://us.atlas.microsoft.com/mapData/operations/b39c55fe-f204-425e-9236-c32060f9127d",
         "Access-Control-Expose-Headers": "Operation-Id, Operation-Location"
+      },
+      "body": {
+        "description": "New Contoso Geofence GeoJSON",
+        "dataFormat": "geojson",
+        "connection": {
+          "type": "AzureBlobFile",
+          "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
+          "linkedResource": "my-storage-account",
+          "blobPath": "/my/blob/path-new.json"
+        }
       }
     }
   }
