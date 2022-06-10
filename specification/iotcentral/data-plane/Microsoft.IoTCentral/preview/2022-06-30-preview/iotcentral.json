@@ -469,9 +469,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "minItems": 1,
-          "maxItems": 1
+          }
         }
       },
       "required": [
@@ -787,8 +785,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "maxItems": 1
+          }
         }
       }
     },
@@ -942,8 +939,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "maxItems": 1
+          }
         }
       },
       "required": [
@@ -1279,7 +1275,7 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "The time that error request failed."
         }
       },
@@ -1863,9 +1859,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "minItems": 1,
-          "maxItems": 1
+          }
         }
       },
       "required": [
@@ -2588,9 +2582,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "minItems": 1,
-          "maxItems": 1
+          }
         },
         "schedule": {
           "description": "The schedule at which to execute the job.",
@@ -4581,6 +4573,7 @@
           }
         },
         "consumes": [
+          "application/json",
           "application/merge-patch+json"
         ],
         "parameters": [
@@ -8961,7 +8954,7 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 48,
-      "pattern": "^[a-zA-Z0-9_-]*$",
+      "pattern": "^[a-zA-Z0-9-_]*$",
       "required": true
     },
     "Version": {
