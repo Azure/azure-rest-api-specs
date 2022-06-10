@@ -29,8 +29,8 @@ output-folder: sdk/<ServiveName>/<PackageName>
 require:
  - specification/<ServiveName>/dataplane/readme.md
 batch:
- - package-A
- - package-B
+ - package-A: true
+ - package-B: true
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.

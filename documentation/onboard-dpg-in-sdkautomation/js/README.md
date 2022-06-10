@@ -23,13 +23,13 @@ require:
 If you want to generate sdk with multi client, please copy the following configuration into spec PR comment.
 ~~~
 # azure-sdk-for-js
-``` yaml && $(multi-client)
+``` yaml $(multi-client)
 tag: false
 require:
  - specification/<RPName>/dataplane/readme.md
 batch:
- - package-A
- - package-B
+ - package-A: true
+ - package-B: true
 ```
 
 ``` yaml $(package-A)
