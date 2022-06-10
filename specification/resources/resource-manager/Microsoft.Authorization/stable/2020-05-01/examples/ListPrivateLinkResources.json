@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-resource-group",
+    "resourceManagementPrivateLinks": "sample-rmpl-plr",
+    "api-version": "2020-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers//Microsoft.Authorization/resourceManagementPrivateLinks/sample-rmpl-plr/privateLinkResources",
+            "name": "sample-rmpl-plr",
+            "type": "Microsoft.Authorization/resourceManagementPrivateLinks",
+            "properties": {
+              "groupId": "vault",
+              "requiredMembers": [
+                "default"
+              ],
+              "requiredZoneNames": [
+                "privatelink.vaultcore.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
