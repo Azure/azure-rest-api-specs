@@ -1,20 +1,35 @@
 {
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
-    "api-version": "2021-06-15-preview",
+    "api-version": "2022-04-07-preview",
     "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "request": {
-      "audioFileUri": "https://app.contoso.com/audio/message.wav",
-      "loop": false,
-      "operationContext": "31130c66-2f86-41b5-af61-23850243e093",
-      "audioFileId": "42922e2c-a204-4ac4-8d80-375ae2792389"
+    "transferToParticipantRequest": {
+      "targetParticipant": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_da7be3a9-8788-42a6-85c6-56b2cf784fce"
+        }
+      },
+      "transfereeCallerId": {
+        "value": "+11234567890"
+      },
+      "userToUserInformation": {
+        "description": "The user to user information.",
+        "type": "string"
+      },
+      "operationContext": "5161f20a-7225-4a74-a529-efaf8e7b351d"
     }
   },
   "responses": {
     "202": {
       "body": {
+        "operationId": "6431f20a-1235-4a74-j632-asas8h6f999s",
         "status": "running",
-        "operationContext": "31130c66-2f86-41b5-af61-23850243e093"
+        "operationContext": "trasferring call",
+        "resultDetails": {
+          "code": "success",
+          "subCode": "success",
+          "message": "request successfully received"
+        }
       }
     },
     "400": {

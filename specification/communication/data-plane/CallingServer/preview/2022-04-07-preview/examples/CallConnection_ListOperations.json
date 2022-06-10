@@ -1,12 +1,32 @@
 {
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
-    "api-version": "2021-06-15-preview",
-    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
-    "participantId": "d8b26c04-7186-41e2-971a-bdfa9a662a53"
+    "api-version": "2022-04-07-preview",
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c"
   },
   "responses": {
-    "202": {},
+    "200": {
+      "body": {
+        "operationsCollection": {
+          "value": [
+            {
+              "operationId": "6431f20a-1235-4a74-j632-asas8h6f999s",
+              "status": "running",
+              "resultDetails": {
+                "code": "success"
+              }
+            },
+            {
+              "operationId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+              "status": "completed",
+              "resultDetails": {
+                "code": "success"
+              }
+            }
+          ]
+        }
+      }
+    },
     "400": {
       "body": {
         "error": {

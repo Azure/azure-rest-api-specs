@@ -1,12 +1,30 @@
 {
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
-    "api-version": "2021-06-15-preview",
-    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
-    "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI3ZjQyNmI1OC03NTRmLTQ2M2UtYWRkMS0wNWFhNGNiYjliMzQiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiJmNjMzODYwMS00MmE1LTRkMGUtODI3My01NjIwM2JhNzAzODYifQ"
+    "api-version": "2022-04-07-preview",
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "transferCallRequest": {
+      "targetCallConnectionId": "1261f20y-9090-4s61-v456-acsf8e7b388f",
+      "userToUserInformation": {
+        "description": "The user to user information.",
+        "type": "string"
+      },
+      "operationContext": "5161f20a-7225-4a74-a529-efaf8e7b351d"
+    }
   },
   "responses": {
-    "200": {},
+    "202": {
+      "body": {
+        "operationId": "6431f20a-1235-4a74-j632-asas8h6f999s",
+        "status": "running",
+        "operationContext": "trasferring call",
+        "resultDetails": {
+          "code": "success",
+          "subCode": "success",
+          "message": "request successfully received"
+        }
+      }
+    },
     "400": {
       "body": {
         "error": {
