@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "scvmm"
-  output-folder: "$(typescript-sdks-folder)/packages/scvmm"
+  package-name: "@azure/arm-scvmm"
+  output-folder: "$(typescript-sdks-folder)/sdk/scvmm/arm-scvmm"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

@@ -73,11 +73,20 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Security/stable/2022-05-01/settings.json
+```
 ### Tag: package-2021-11
 
 These settings apply only when `--tag=package-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11'
+``` yaml $(tag) == 'package-2021-11'
 input-file:
   - Microsoft.Security/stable/2021-11-01/alerts.json
 ```
@@ -86,7 +95,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.Security/stable/2022-03-01/pricings.json
 ```
@@ -95,7 +104,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-12-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-12'
+``` yaml $(tag) == 'package-preview-2021-12'
 input-file:
   - Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
   - Microsoft.Security/preview/2015-06-01-preview/operations.json
@@ -255,7 +264,7 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/stable/2021-11-01/alerts.json
-- Microsoft.Security/stable/2021-07-01/settings.json
+- Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
@@ -532,6 +541,18 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-07-only
+
+These settings apply only when `--tag=package-2021-07-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-07-only'
+input-file:
+- Microsoft.Security/stable/2021-07-01/settings.json
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-preview-2021-07-preview-only
 
 These settings apply only when `--tag=package-preview-2021-07-preview-only` is specified on the command line.
@@ -563,6 +584,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

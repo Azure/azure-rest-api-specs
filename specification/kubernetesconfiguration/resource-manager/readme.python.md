@@ -18,7 +18,8 @@ clear-output-folder: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch: 
   - tag: package-preview-2022-04-only
