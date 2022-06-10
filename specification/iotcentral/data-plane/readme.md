@@ -15,13 +15,44 @@ To see additional help and options, run:
 
 These are the global settings for the IoT Central API.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2022-06-30-preview
+tag: package-2022-05-31
+```
+
+### Tag: package-1.2-preview
+These settings apply only when `--tag=package-1.2-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-1.2-preview'
+input-file:
+  - Microsoft.IoTCentral/preview/1.2-preview/iotcentral.json
+```
+
+### Tag: package-1.1-preview
+These settings apply only when `--tag=package-1.1-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-1.1-preview'
+input-file:
+  - Microsoft.IoTCentral/preview/1.1-preview/iotcentral.json
+```
+
+### Tag: package-2021-04-30-preview
+These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-30-preview'
+input-file:
+  - Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
+```
+
+### Tag: package-1.0
+These settings apply only when `--tag=package-1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-1.0'
+input-file:
+  - Microsoft.IoTCentral/stable/1.0/iotcentral.json
 ```
 
 ### Tag: package-2022-05-31
-
 These settings apply only when `--tag=package-2022-05-31` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-05-31'
@@ -30,7 +61,6 @@ input-file:
 ```
 
 ### Tag: package-2022-06-30-preview
-
 These settings apply only when `--tag=package-2022-06-30-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-06-30-preview'

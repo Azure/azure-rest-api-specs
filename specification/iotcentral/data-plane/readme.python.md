@@ -12,6 +12,6 @@ python:
   clear-output-folder: true
   namespace: Microsoft.Azure.IotCentral
   package-name: iotcentral
-  package-version: 2022-06-30-preview
-  output-folder: $(python-sdks-folder)/2022-06-30-preview
+  package-version: "2022-05-31"
+  output-folder: $(python-sdks-folder)/2022-05-31
 ```
