@@ -72,6 +72,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -132,6 +138,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -160,6 +172,7 @@
           "ManagedHsms"
         ],
         "operationId": "ManagedHsms_Delete",
+        "x-ms-long-running-operation": true,
         "description": "Deletes the specified managed HSM Pool.",
         "parameters": [
           {
@@ -184,7 +197,13 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -200,8 +219,7 @@
           "Delete a managed HSM Pool": {
             "$ref": "./examples/ManagedHsm_Delete.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
@@ -233,9 +251,6 @@
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "Request successful. Resource does not exist."
@@ -493,6 +508,7 @@
           "ManagedHsms"
         ],
         "operationId": "ManagedHsms_PurgeDeleted",
+        "x-ms-long-running-operation": true,
         "description": "Permanently deletes the specified managed HSM.",
         "parameters": [
           {
@@ -518,7 +534,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
@@ -531,8 +553,7 @@
           "Purge a managed HSM Pool": {
             "$ref": "./examples/DeletedManagedHsm_Purge.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
@@ -664,6 +685,7 @@
           "MHSMPrivateEndpointConnections"
         ],
         "operationId": "MHSMPrivateEndpointConnections_Delete",
+        "x-ms-long-running-operation": true,
         "description": "Deletes the specified private endpoint connection associated with the managed hsm pool.",
         "x-ms-examples": {
           "ManagedHsmDeletePrivateEndpointConnection": {
@@ -704,11 +726,6 @@
           "202": {
             "description": "The private endpoint connection is being deleted.",
             "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Location": {
                 "description": "The URI to poll for completion status.",
                 "type": "string"
@@ -724,8 +741,7 @@
               "$ref": "common.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources": {
