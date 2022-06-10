@@ -26,15 +26,32 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05
+tag: package-preview-2022-06
 ```
 
 
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.App/preview/2022-06-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-06-01-preview/DaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-06-01-preview/Global.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/SourceControls.json
+```
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.App/stable/2022-05-01/AuthConfigs.json
   - Microsoft.App/stable/2022-05-01/CommonDefinitions.json
@@ -47,6 +64,7 @@ input-file:
   - Microsoft.App/stable/2022-05-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2022-05-01/SourceControls.json
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
