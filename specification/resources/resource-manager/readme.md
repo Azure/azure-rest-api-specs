@@ -82,6 +82,7 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 input-file:
   - Microsoft.Resources/stable/2022-01-01/subscriptions.json
 ```
+
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.

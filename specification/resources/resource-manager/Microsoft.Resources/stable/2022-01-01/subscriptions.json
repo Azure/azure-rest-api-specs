@@ -281,6 +281,7 @@
   },
   "definitions": {
     "PairedRegion": {
+      "type": "object",
       "description": "Information regarding paired region.",
       "properties": {
         "name": {
@@ -301,6 +302,7 @@
       }
     },
     "LocationMetadata": {
+      "type": "object",
       "description": "Location metadata information",
       "properties": {
         "regionType": {
@@ -409,7 +411,8 @@
           "$ref": "#/definitions/LocationMetadata"
         }
       },
-      "description": "Location information."
+      "description": "Location information.",
+      "type": "object"
     },
     "LocationListResult": {
       "properties": {
@@ -421,7 +424,8 @@
           "description": "An array of locations."
         }
       },
-      "description": "Location list operation response."
+      "description": "Location list operation response.",
+      "type": "object"
     },
     "Subscription": {
       "properties": {
@@ -495,7 +499,8 @@
           "description": "The tags attached to the subscription."
         }
       },
-      "description": "Subscription information."
+      "description": "Subscription information.",
+      "type": "object"
     },
     "SubscriptionPolicies": {
       "properties": {
@@ -524,7 +529,8 @@
           }
         }
       },
-      "description": "Subscription policies."
+      "description": "Subscription policies.",
+      "type": "object"
     },
     "ManagedByTenant": {
       "properties": {
@@ -534,7 +540,8 @@
           "description": "The tenant ID of the managing tenant. This is a GUID."
         }
       },
-      "description": "Information about a tenant managing the subscription."
+      "description": "Information about a tenant managing the subscription.",
+      "type": "object"
     },
     "Promotion": {
       "properties": {
@@ -550,7 +557,8 @@
           "description": "The promotion end date."
         }
       },
-      "description": "Information about list of promotion categories and end dates associated with the subscription."
+      "description": "Information about list of promotion categories and end dates associated with the subscription.",
+      "type": "object"
     },
     "SubscriptionListResult": {
       "properties": {
@@ -569,7 +577,8 @@
       "required": [
         "nextLink"
       ],
-      "description": "Subscription list operation response."
+      "description": "Subscription list operation response.",
+      "type": "object"
     },
     "TenantIdDescription": {
       "properties": {
@@ -637,7 +646,8 @@
           "description": "The tenant's branding logo URL. Only available for 'Home' tenant category."
         }
       },
-      "description": "Tenant Id information."
+      "description": "Tenant Id information.",
+      "type": "object"
     },
     "TenantListResult": {
       "properties": {
@@ -656,10 +666,12 @@
       "required": [
         "nextLink"
       ],
-      "description": "Tenant Ids information."
+      "description": "Tenant Ids information.",
+      "type": "object"
     },
     "ResourceName": {
       "description": "Name and Type of the Resource",
+      "type": "object",
       "required": [
         "name",
         "type"
@@ -698,6 +710,7 @@
           }
         }
       },
+      "type": "object",
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
     },
     "CloudError": {
@@ -707,6 +720,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
+      "type": "object",
       "description": "An error response for a resource management request."
     },
     "Operation": {
@@ -742,6 +756,7 @@
     },
     "OperationListResult": {
       "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
