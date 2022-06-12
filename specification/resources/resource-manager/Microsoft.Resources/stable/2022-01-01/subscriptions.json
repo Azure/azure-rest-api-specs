@@ -479,6 +479,13 @@
           ],
           "description": "An array containing the tenants managing the subscription."
         },
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Promotion"
+          },
+          "description": "An array containing the promotions on the subscription."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -528,6 +535,22 @@
         }
       },
       "description": "Information about a tenant managing the subscription."
+    },
+    "Promotion": {
+      "properties": {
+        "category": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The promotion category."
+        },
+        "endDateTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The promotion end date."
+        }
+      },
+      "description": "Information about list of promotion categories and end dates associated with the subscription."
     },
     "SubscriptionListResult": {
       "properties": {
