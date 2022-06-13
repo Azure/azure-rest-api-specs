@@ -59,6 +59,14 @@ directive:
     where: "$.definitions.PagedClassificationPolicy.properties.queueSelectors.items"
     transform: >
       $["$ref"] = "#/definitions/QueueSelectorAttachment";
+
+# Set reference to ExceptionAction in ExceptionRule
+  - from: swagger-document
+    where: "$.definitions.ExceptionRule.properties.actions"
+    transform: >
+      $.type = "object";
+      $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
+
 # Rename CommunicationError to JobRouterError
   - from: swagger-document
     where: '$.definitions.CommunicationError'
