@@ -599,6 +599,32 @@
       "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
+    "MapsAccountGeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Account is located. Valid values are us (East US, West Central US, West US 2) and eu (North Europe, West Europe).",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Account in the United States (East US, West Central US, West US 2)."
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Account in Europe (North Europe, West Europe)."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "GeographicResourceLocation": {
       "name": "geography",
       "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
