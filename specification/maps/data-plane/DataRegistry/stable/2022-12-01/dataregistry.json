@@ -170,7 +170,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/DataRegistryWithUDID"
+              "$ref": "#/definitions/Metadata"
             }
           },
           "default": {
@@ -265,7 +265,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/DataRegistryWithUDID"
+              "$ref": "#/definitions/Metadata"
             }
           },
           "default": {
@@ -278,7 +278,7 @@
         }
       },
       "patch": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThe DataRegistry Patch API allows the caller to patch a previously registered data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are registered using the [DataRegistry Register API](https://docs.microsoft.com/rest/api/maps/data-registry/Register), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\nThis API is a synchronous API which may eventually fail and revert even if it returns `200 OK`. Please check [DataRegistry GetMetadata API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-metadata) for the processing status.\n\n## Submit Patch Request\n\nTo patch a data registry you will use a `PATCH` request. The request body will contain an object representing a patch to the data registry, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396). The path will contain the `udid` of the data registry to be update.\n\nFor example, to just change the connection object of a data registry that were previously registered without chaning other properties of the data registry, set the `udid` in the query parameter and the new connection object in the body.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThe DataRegistry Patch API allows the caller to patch a previously registered data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are registered using the [DataRegistry Register API](https://docs.microsoft.com/rest/api/maps/data-registry/Register), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\nThis API is a synchronous API which may eventually fail and revert even if it returns `200 OK`. Please check [DataRegistry GetMetadata API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-metadata) for the processing status.\n\n## Submit Patch Request\n\nTo patch a data registry you will use a `PATCH` request. The request body will contain an object representing a patch to the data registry, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396). The path will contain the `udid` of the data registry to be update.\n\nFor example, to just change the connection object of a data registry that were previously registered without changing other properties of the data registry, set the `udid` in the query parameter and the new connection object in the body.",
         "operationId": "DataRegistries_Patch",
         "x-ms-examples": {
           "Patch existing data with new blob path": {
@@ -312,7 +312,7 @@
           "200": {
             "description": "Request OK: It is still possible that this request will fail and revert. Please check [DataRegistry GetMetadata API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-metadata) for processing status",
             "schema": {
-              "$ref": "#/definitions/DataRegistryWithUDID"
+              "$ref": "#/definitions/Metadata"
             }
           },
           "default": {
@@ -513,24 +513,6 @@
         "connection"
       ]
     },
-    "DataRegistryWithUDID": {
-      "description": "A DataRegistry object with UDID",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataRegistry"
-        }
-      ],
-      "properties": {
-        "udid": {
-          "description": "The unique data id for the data registry.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "udid"
-      ]
-    },
     "DataRegistryPatch": {
       "description": "An object for patching a given data registry.",
       "type": "object",
@@ -677,7 +659,7 @@
           "$ref": "#/definitions/Connection"
         },
         "downloadURL": {
-          "description": "The download url of the data. Execute a HTTP `GET` on the prepended endpoint to download the data. `api-version` is not included.",
+          "description": "The download url of the data which may not be available if the data registry was just created. Execute a HTTP `GET` on the prepended endpoint to download the data. `api-version` is not included.",
           "type": "string",
           "format": "uri"
         },
