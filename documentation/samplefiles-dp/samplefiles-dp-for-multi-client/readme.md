@@ -32,10 +32,12 @@ security-scopes: [[SecurityScopes]]
 ```
 
 ```yaml && $(package-A)
+title: [[Title_A]]
 package-A-tag: package-A-[[Version]]
 ```
 
 ```yaml && $(package-B)
+title: [[Title_B]]
 package-B-tag: package-B-[[Version]]
 ```
 

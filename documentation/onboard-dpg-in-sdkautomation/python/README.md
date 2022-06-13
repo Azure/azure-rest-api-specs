@@ -33,13 +33,6 @@ batch:
  - package-B: true
 ```
 
-``` yaml $(package-A)
-title: <Title>
-```
-
-``` yaml $(package-B)
-title: <Title>
-```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.
 - `require`: The item of the value is the relative path of spec readme.md file.

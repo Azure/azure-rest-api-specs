@@ -33,12 +33,10 @@ batch:
 ```
 
 ``` yaml $(package-A)
-title: <Title>
 output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
 ```
 
 ``` yaml $(package-B)
-title: <Title>
 output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
 ```
 ~~~
