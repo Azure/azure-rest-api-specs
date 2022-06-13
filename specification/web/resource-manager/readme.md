@@ -61,6 +61,9 @@ directive:
     from: WebApps.json
     where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
     reason: Property name contains WWW which is an acronym, so camel case does not apply here.
+  - suppress: OAV107
+    from: AppServiceCertificateOrders.json
+    reason:  Will fix in next version.
 ```
 
 
@@ -236,6 +239,9 @@ directive:
 - suppress: R3026
   from: ContainerAppsRevisions.json
   reason: Patch operation will be implemented in later version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-02
@@ -396,6 +402,9 @@ directive:
 - where: $.definitions.TriggeredJobRun.properties.web_job_id
   suppress: R3016
   reason: This requires a breaking change in kudu runtime API.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-01-15
@@ -532,6 +541,9 @@ directive:
   reason: Will fix in next version
 - suppress: R3010
   reason: Will fix in next version
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-01
@@ -631,6 +643,9 @@ directive:
 - suppress: R4009
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-12
@@ -727,6 +742,9 @@ directive:
 - suppress: R4009
   from: ResourceHealthMetadata.json
   reason: SystemData will implement in next version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-10
@@ -767,6 +785,9 @@ directive:
 - where: $.definitions.VnetInfo
   suppress: R4015
   reason: Does not have list operation
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-09
@@ -811,6 +832,9 @@ directive:
   suppress: R4015
   reason: Does not have list operation
   approved-by: "@mark.cowlishaw"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-06
@@ -843,6 +867,9 @@ directive:
   suppress: R3016
   reason: This requires a breaking change in functions runtime API.
   approved-by: "@weidongxu-microsoft"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2019-08
@@ -870,6 +897,10 @@ input-file:
 - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
 - Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
+directive:
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-12
@@ -900,6 +931,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-11
@@ -930,6 +964,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-11-only
@@ -945,6 +982,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-02
@@ -975,6 +1015,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-02-only
@@ -1005,6 +1048,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-09
@@ -1139,6 +1185,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-09-only
@@ -1259,6 +1308,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-08-only
@@ -1378,6 +1430,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-03-only
@@ -1624,6 +1679,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2015-04-only
@@ -1774,6 +1832,10 @@ These settings apply only when `--tag=package-2015-08-certificate-registration` 
 input-file:
 - Microsoft.CertificateRegistration/stable/2015-08-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2015-08-01/CertificateRegistrationProvider.json
+directive:
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2015-04-domain-registration
