@@ -34,10 +34,18 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-05
+tag: package-preview-2022-06
 ```
 
 
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.ContainerService/preview/2022-06-02-preview/managedClusters.json
+```
 ### Tag: package-preview-2022-05
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
