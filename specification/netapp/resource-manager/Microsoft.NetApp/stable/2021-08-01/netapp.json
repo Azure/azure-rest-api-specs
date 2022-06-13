@@ -3424,48 +3424,21 @@
       "required": [
         "location"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        },
         "properties": {
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -3730,38 +3703,16 @@
         "location",
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Capacity pool properties",
@@ -3980,38 +3931,16 @@
         "location",
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Volume properties",
@@ -4301,7 +4230,6 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
-          "default": 0.0,
           "example": 128.22
         },
         "encryptionKeySource": {
@@ -4712,7 +4640,6 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
-          "default": 0.0,
           "example": 128.22
         },
         "dataProtection": {
@@ -4967,38 +4894,16 @@
         "location",
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Snapshot policy Properties",
@@ -5472,38 +5377,16 @@
         "location",
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Backup policy Properties",
@@ -5902,10 +5785,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Volume group properties",
