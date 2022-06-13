@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "ruleId": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+    "governanceRule": {
+      "properties": {
+        "displayName": "Admin's rule",
+        "description": "A rule on critical recommendations",
+        "remediationTimeframe": "7.00:00:00",
+        "isGracePeriod": true,
+        "rulePriority": 200,
+        "isDisabled": false,
+        "ruleType": "Integrated",
+        "sourceResourceType": "Assessments",
+        "conditionSets": [
+          {
+            "conditions": [
+              {
+                "property": "$.AssessmentKey",
+                "value": "[\"b1cd27e0-4ecc-4246-939f-49c426d9d72f\", \"fe83f80b-073d-4ccf-93d9-6797eb870201\"]",
+                "operator": "In"
+              }
+            ]
+          }
+        ],
+        "ownerSource": {
+          "type": "Manually",
+          "value": "user@contoso.com"
+        },
+        "governanceEmailNotification": {
+          "disableManagerEmailNotification": false,
+          "disableOwnerEmailNotification": false
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+        "type": "Microsoft.Security/governanceRules",
+        "properties": {
+          "displayName": "Admin's rule",
+          "description": "A rule on critical recommendations",
+          "remediationTimeframe": "7.00:00:00",
+          "isGracePeriod": true,
+          "rulePriority": 200,
+          "isDisabled": false,
+          "ruleType": "Integrated",
+          "sourceResourceType": "Assessments",
+          "conditionSets": [
+            {
+              "conditions": [
+                {
+                  "property": "$.AssessmentKey",
+                  "value": "[\"b1cd27e0-4ecc-4246-939f-49c426d9d72f\", \"fe83f80b-073d-4ccf-93d9-6797eb870201\"]",
+                  "operator": "In"
+                }
+              ]
+            }
+          ],
+          "ownerSource": {
+            "type": "Manually",
+            "value": "user@contoso.com"
+          },
+          "governanceEmailNotification": {
+            "disableManagerEmailNotification": false,
+            "disableOwnerEmailNotification": false
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+        "type": "Microsoft.Security/governanceRules",
+        "properties": {
+          "displayName": "Admin's rule",
+          "description": "A rule on critical recommendations",
+          "remediationTimeframe": "7.00:00:00",
+          "isGracePeriod": true,
+          "rulePriority": 200,
+          "isDisabled": false,
+          "ruleType": "Integrated",
+          "sourceResourceType": "Assessments",
+          "conditionSets": [
+            {
+              "conditions": [
+                {
+                  "property": "$.AssessmentKey",
+                  "value": "[\"b1cd27e0-4ecc-4246-939f-49c426d9d72f\", \"fe83f80b-073d-4ccf-93d9-6797eb870201\"]",
+                  "operator": "In"
+                }
+              ]
+            }
+          ],
+          "ownerSource": {
+            "type": "Manually",
+            "value": "user@contoso.com"
+          },
+          "governanceEmailNotification": {
+            "disableManagerEmailNotification": false,
+            "disableOwnerEmailNotification": false
+          }
+        }
+      }
+    }
+  }
+}
