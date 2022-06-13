@@ -355,65 +355,6 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:transfer": {
-      "post": {
-        "tags": [
-          "Mid-Connection"
-        ],
-        "summary": "Transfer a call.",
-        "description": "Transfer a call.",
-        "operationId": "CallConnection_TransferCall",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "TransferToCallRequest",
-            "in": "body",
-            "description": "The transfer call request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferToCallRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the transfer call response.",
-            "schema": {
-              "$ref": "#/definitions/TransferCallResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "transfer": {
-            "$ref": "./examples/CallConnection_TransferCall.json"
-          }
-        }
-      }
-    },
     "/calling/callConnections/{callConnectionId}/operations": {
       "get": {
         "tags": [
@@ -1021,24 +962,6 @@
         },
         "callbackUri": {
           "description": "The callback URI.",
-          "type": "string"
-        }
-      }
-    },
-    "TransferToCallRequest": {
-      "description": "The transfer call request.",
-      "type": "object",
-      "properties": {
-        "targetCallConnectionId": {
-          "description": "The Call Leg id to replace the current call with. This parameter should be used for consultative transfer.",
-          "type": "string"
-        },
-        "userToUserInformation": {
-          "description": "The user to user information.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "The operation context.",
           "type": "string"
         }
       }
