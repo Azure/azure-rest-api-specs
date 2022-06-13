@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-12-01",
+    "udid": "25084fb7-307a-4720-8f91-7952a0b91012",
+    "dataRegistryPatch": {
+      "description": "Contoso Geofence GeoJSON with system assigned managed identity",
+      "connection": {
+        "msiClientId": null
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "udid": "25084fb7-307a-4720-8f91-7952a0b91012",
+        "description": "Contoso Geofence GeoJSON with system assigned managed identity",
+        "dataFormat": "geojson",
+        "connection": {
+          "type": "AzureBlobFile",
+          "linkedResource": "my-storage-account",
+          "containerName": "my-container",
+          "blobPath": "/my/blob/path.json"
+        }
+      }
+    }
+  }
+}
