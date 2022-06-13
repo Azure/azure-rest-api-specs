@@ -34,7 +34,7 @@ openapi-type: arm
 tag: package-2021-03-01-preview
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: SECRET_PROPERTY
