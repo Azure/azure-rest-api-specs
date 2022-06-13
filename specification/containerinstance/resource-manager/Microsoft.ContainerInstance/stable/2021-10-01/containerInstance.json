@@ -1260,6 +1260,12 @@
           "$ref": "#/definitions/Resource"
         },
         {
+          "$ref": "#/definitions/ContainerGroupProperties"
+        }
+      ]
+    },
+    "ContainerGroupProperties": {
+      "description": "The container group properties",
           "type": "object",
           "required": [
             "properties"
@@ -1402,9 +1408,7 @@
               ]
             }
           }
-        }
-      ]
-    },
+        },
     "ContainerGroupIdentity": {
       "description": "Identity for the container group.",
       "properties": {
@@ -1434,8 +1438,15 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the container group.",
           "additionalProperties": {
+            "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+            "$ref": "#/definitions/UserAssignedIdentities"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentities": {
             "type": "object",
             "properties": {
               "principalId": {
@@ -1449,10 +1460,7 @@
                 "description": "The client id of user assigned identity."
               }
             }
-          }
-        }
-      }
-    },
+          },
     "ImageRegistryCredential": {
       "description": "Image registry credential.",
       "type": "object",
