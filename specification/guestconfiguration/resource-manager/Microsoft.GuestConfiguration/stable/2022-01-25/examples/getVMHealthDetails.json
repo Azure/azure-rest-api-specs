@@ -1,0 +1,89 @@
+{
+    "parameters": {
+      "subscriptionId": "mySubscriptionId",
+      "resourceGroupName": "myResourceGroupName",
+      "vmName": "myVMName",
+      "api-version": "2022-01-25"
+    },
+    "responses": {
+      "200": {
+        "headers": {},
+        "body": [
+            {
+                "IsGCExtensionInstalled": true,
+                "IsMSIEnabled": true,
+                "Assignments": [
+                  {
+                    "evaluationResult": null,
+                    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3e4e2bd5-15a2-4628-b3e1-58977e9793f3",
+                    "policyDefinitionName": "3e4e2bd5-15a2-4628-b3e1-58977e9793f3",
+                    "policyDefinitionEffect": "AuditIfNotExists",
+                    "policyType": "BuiltIn",
+                    "policyAssignmentId": "/subscriptions/f086ff61-06ab-4451-9b12-fe2228e04fd9/resourcegroups/testrohanrg/providers/Microsoft.Authorization/policyAssignments/678e54fa3d6042a7a0128354",
+                    "policyDisplayName": "Audit Windows machines that do not have the specified Windows PowerShell modules installed",
+                    "guestConfigurationAssignmentName": "678e54fa3d6042a7a0128354",
+                    "policyAssignmentScope": "/subscriptions/f086ff61-06ab-4451-9b12-fe2228e04fd9/resourcegroups/testrohanrg",
+                    "policyAssignmentParameters": {
+                      "modules": "PSReadline"
+                    },
+                    "configurationName": "WindowsPowerShellModules",
+                    "availableInAzurePolicy": true,
+                    "availableInControlPlane": false,
+                    "availableInDataPlane": false,
+                    "isVisibleToARMInDP": false,
+                    "isVisibleToARMInCP": false,
+                    "complianceStatusInCP": null,
+                    "complianceStatusInDP": null,
+                    "lastComplianceStatusChecked": null,
+                    "latestReportId": null,
+                    "policyDefinition": null,
+                    "policyConfigurationParameters": null
+                  },
+                  {
+                    "evaluationResult": null,
+                    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f6ec09a3-78bf-4f8f-99dc-6c77182d0f99",
+                    "policyDefinitionName": "f6ec09a3-78bf-4f8f-99dc-6c77182d0f99",
+                    "policyDefinitionEffect": "AuditIfNotExists",
+                    "policyType": "BuiltIn",
+                    "policyAssignmentId": "/subscriptions/f086ff61-06ab-4451-9b12-fe2228e04fd9/resourcegroups/testrohanrg/providers/Microsoft.Authorization/policyAssignments/c9f563b3ab6f4a5198685746",
+                    "policyDisplayName": "Audit Linux machines that have accounts without passwords",
+                    "guestConfigurationAssignmentName": "PasswordPolicy_msid232",
+                    "policyAssignmentScope": "/subscriptions/f086ff61-06ab-4451-9b12-fe2228e04fd9/resourcegroups/testrohanrg",
+                    "policyAssignmentParameters": {},
+                    "configurationName": "PasswordPolicy_msid232",
+                    "availableInAzurePolicy": true,
+                    "availableInControlPlane": false,
+                    "availableInDataPlane": true,
+                    "isVisibleToARMInDP": true,
+                    "isVisibleToARMInCP": false,
+                    "complianceStatusInCP": null,
+                    "complianceStatusInDP": "Compliant",
+                    "lastComplianceStatusChecked": "2022-06-08T20:58:36Z",
+                    "latestReportId": "e04d616e-31f2-4e20-a283-cf2987730ef9",
+                    "policyDefinition": null,
+                    "policyConfigurationParameters": {
+                      "name": "PasswordPolicy_msid232",
+                      "version": "1.*",
+                      "contentUri": null,
+                      "contentHash": null,
+                      "contentType": "Builtin",
+                      "assignmentType": null,
+                      "configurationSetting": {
+                        "configurationMode": "MonitorOnly",
+                        "allowModuleOverwrite": false,
+                        "actionAfterReboot": "",
+                        "refreshFrequencyMins": 5,
+                        "rebootIfNeeded": true,
+                        "configurationModeFrequencyMins": 15
+                      },
+                      "configurationParameter": [],
+                      "configurationProtectedParameter": []
+                    }
+                  }
+                ]
+        }
+    ]
+    }
+  }
+}
+  
