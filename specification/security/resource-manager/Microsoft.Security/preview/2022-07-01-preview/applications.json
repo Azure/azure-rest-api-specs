@@ -192,18 +192,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/applications": {
       "get": {
         "x-ms-examples": {
-          "List security governanceRules by security connector level scope": {
-            "$ref": "./examples/GovernanceRules/ListBySecurityConnectorGovernanceRules_example.json"
+          "List security applications by security connector level scope": {
+            "$ref": "./examples/Applications/ListBySecurityConnectorApplicationss_example.json"
           }
         },
         "tags": [
-          "GovernanceRules"
+          "Applications"
         ],
-        "description": "Get a list of all relevant governanceRules over a security connector level scope",
-        "operationId": "SecurityConnectorGovernanceRule_List",
+        "description": "Get a list of all relevant applications over a security connector level scope",
+        "operationId": "SecurityConnectorApplicationsRule_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -222,7 +222,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GovernanceRuleList"
+              "$ref": "#/definitions/ApplicationsList"
             }
           },
           "default": {
@@ -240,15 +240,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
-          "Get security governanceRules by specific governanceRuleId": {
-            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRule_example.json"
+          "Get security applications by specific applicationId": {
+            "$ref": "./examples/Applications/GetSecurityConnectorApplication_example.json"
           }
         },
         "tags": [
-          "GovernanceRules"
+          "Applications"
         ],
-        "description": "Get a specific governanceRule for the requested scope by ruleId",
-        "operationId": "SecurityConnectorGovernanceRules_Get",
+        "description": "Get a specific application for the requested scope by applicationId",
+        "operationId": "SecurityConnectorApplication_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -263,14 +263,14 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/ApplicationId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GovernanceRule"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -283,15 +283,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create Governance rule": {
-            "$ref": "./examples/GovernanceRules/PutSecurityConnectorGovernanceRule_example.json"
+          "Create Application": {
+            "$ref": "./examples/Applications/PutSecurityConnectorApplication_example.json"
           }
         },
         "tags": [
-          "GovernanceRules"
+          "Applications"
         ],
-        "description": "Creates or update a security GovernanceRule on the given security connector.",
-        "operationId": "SecurityConnectorGovernanceRules_CreateOrUpdate",
+        "description": "Creates or update a security Application on the given security connector.",
+        "operationId": "SecurityConnectorApplication_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -309,20 +309,20 @@
             "$ref": "#/parameters/RuleId"
           },
           {
-            "$ref": "#/parameters/GovernanceRuleBody"
+            "$ref": "#/parameters/ApplicationBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/GovernanceRule"
+              "$ref": "#/definitions/Application"
             }
           },
           "200": {
             "description": "OK - Updated",
             "schema": {
-              "$ref": "#/definitions/GovernanceRule"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -335,15 +335,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete security GovernanceRule": {
-            "$ref": "./examples/GovernanceRules/DeleteSecurityConnectorGovernanceRule_example.json"
+          "Delete security Application": {
+            "$ref": "./examples/Applications/DeleteSecurityConnectorApplication_example.json"
           }
         },
         "tags": [
-          "GovernanceRules"
+          "Applications"
         ],
-        "description": "Delete a GovernanceRule over a given scope",
-        "operationId": "SecurityConnectorGovernanceRules_Delete",
+        "description": "Delete a Application over a given scope",
+        "operationId": "SecurityConnectorApplication_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -363,10 +363,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - GovernanceRule was deleted"
+            "description": "OK - Application was deleted"
           },
           "204": {
-            "description": "No Content - GovernanceRule does not exist"
+            "description": "No Content - Application does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed"
@@ -423,88 +423,35 @@
           "description": "description of the application",
           "type": "string"
         },
-        "remediationTimeframe": {
-          "type": "string",
-          "description": "Governance rule remediation timeframe - this is the time that will affect on the grace-period duration e.g. 7.00:00:00 - means 7 days"
-        },
-        "isGracePeriod": {
-          "description": "Defines whether there is a grace period on the governance rule",
-          "type": "boolean"
-        },
-        "rulePriority": {
-          "description": "The governance rule priority, priority to the lower number. Rules with the same priority on the same subscription will not be allowed",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "maximum": 1000
-        },
-        "isDisabled": {
-          "description": "Defines whether the rule is active/inactive",
-          "type": "boolean"
-        },
-        "ruleType": {
-          "type": "string",
-          "description": "The rule type of the governance rule, defines the source of the rule e.g. Integrated",
-          "enum": [
-            "Integrated",
-            "ServiceNow"
-          ],
-          "x-ms-enum": {
-            "name": "GovernanceRuleType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Integrated",
-                "description": "The source of the rule type definition is integrated"
-              },
-              {
-                "value": "ServiceNow",
-                "description": "The source of the rule type definition is ServiceNow"
-              }
-            ]
-          }
-        },
         "sourceResourceType": {
           "type": "string",
-          "description": "The governance rule source, what the rule affects, e.g. Assessments",
+          "description": "The application source, what it affects, e.g. Assessments",
           "enum": [
             "Assessments"
           ],
           "x-ms-enum": {
-            "name": "GovernanceRuleSourceResourceType",
+            "name": "ApplicationSourceResourceType",
             "modelAsString": true,
             "values": [
               {
                 "value": "Assessments",
-                "description": "The source of the governance rule is assessments"
+                "description": "The source of the application is assessments"
               }
             ]
           }
         },
         "conditionSets": {
           "type": "array",
-          "description": "The governance rule conditionSets - see examples",
+          "description": "The application conditionSets - see examples",
           "items": {
-            "$ref": "#/definitions/GovernanceRuleConditionSets"
+            "$ref": "#/definitions/ApplicatioConditionSets"
           },
           "x-ms-identifiers": []
-        },
-        "ownerSource": {
-          "description": "The Owner source for the governance rule - e.g. Manually by user@contoso.com - see example",
-          "$ref": "#/definitions/GovernanceRuleOwnerSource"
-        },
-        "governanceEmailNotification": {
-          "description": "The email notifications settings for the governance rule, states whether to disable notifications for mangers and owners",
-          "$ref": "#/definitions/GovernanceRuleEmailNotification"
         }
       },
       "required": [
-        "displayName",
-        "rulePriority",
-        "ruleType",
         "sourceResourceType",
-        "conditionSets",
-        "ownerSource"
+        "conditionSets"
       ]
     },
     "GovernanceRuleOwnerSource": {
@@ -539,16 +486,16 @@
         }
       }
     },
-    "GovernanceRuleConditionSets": {
+    "ApplicationConditionSets": {
       "type": "object",
-      "description": "List of governance rule's condition sets - OR between ConditionSets, AND between conditions in a set",
+      "description": "List of application's condition sets - OR between ConditionSets, AND between conditions in a set",
       "items": {
         "$ref": "#/definitions/Conditions"
       }
     },
     "Conditions": {
       "type": "array",
-      "description": "Governance rule's conditions",
+      "description": "Application's conditions",
       "items": {
         "$ref": "#/definitions/Condition"
       },
@@ -556,25 +503,25 @@
     },
     "Condition": {
       "type": "object",
-      "description": "Governance rule's condition",
+      "description": "Application's condition",
       "properties": {
         "property": {
-          "description": "The governance rule Condition's Property, e.g. Severity or AssessmentKey, see examples",
+          "description": "The application Condition's Property, e.g. Severity or AssessmentKey, see examples",
           "type": "string"
         },
         "value": {
-          "description": "The governance rule Condition's Value like severity Low, High or assessments keys, see examples",
+          "description": "The application Condition's Value like severity Low, High or assessments keys, see examples",
           "type": "string"
         },
         "operator": {
           "type": "string",
-          "description": "The governance rule Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
+          "description": "The application Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
           "enum": [
             "Equals",
             "In"
           ],
           "x-ms-enum": {
-            "name": "GovernanceRuleConditionOperator",
+            "name": "ApplicationConditionOperator",
             "modelAsString": true,
             "values": [
               {
@@ -589,69 +536,25 @@
           }
         }
       }
-    },
-    "ExecuteGovernanceRuleParams": {
-      "type": "object",
-      "description": "Governance rule execution parameters",
-      "properties": {
-        "override": {
-          "description": "Describe if governance rule should be override",
-          "type": "boolean"
-        }
-      }
-    },
-    "GovernanceRuleEmailNotification": {
-      "type": "object",
-      "description": "The governance email weekly notification configuration.",
-      "properties": {
-        "disableManagerEmailNotification": {
-          "description": "Defines whether manager email notifications are disabled.",
-          "type": "boolean"
-        },
-        "disableOwnerEmailNotification": {
-          "description": "Defines whether owner email notifications are disabled.",
-          "type": "boolean"
-        }
-      }
-    },
-    "ExecuteRuleStatus": {
-      "type": "object",
-      "description": "Execute status of Security GovernanceRule over a given scope",
-      "properties": {
-        "operationId": {
-          "description": "Unique key for the execution of GovernanceRule",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
-    "RuleId": {
-      "name": "ruleId",
+    "ApplicationId": {
+      "name": "applicationId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The security GovernanceRule key - unique key for the standard GovernanceRule",
+      "description": "The security Application key - unique key for the standard application",
       "x-ms-parameter-location": "method"
     },
-    "GovernanceRuleBody": {
-      "name": "governanceRule",
+    "ApplicationBody": {
+      "name": "application",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/GovernanceRule"
+        "$ref": "#/definitions/Application"
       },
-      "description": "GovernanceRule over a subscription scope",
-      "x-ms-parameter-location": "method"
-    },
-    "ExecuteGovernanceRuleBody": {
-      "name": "ExecuteGovernanceRuleParams",
-      "in": "body",
-      "schema": {
-        "$ref": "#/definitions/ExecuteGovernanceRuleParams"
-      },
-      "description": "GovernanceRule over a subscription scope",
+      "description": "Application over a subscription scope",
       "x-ms-parameter-location": "method"
     },
     "
