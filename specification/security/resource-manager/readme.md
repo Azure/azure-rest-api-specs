@@ -74,7 +74,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2022-07
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -82,14 +82,6 @@ tag: package-preview-2022-07
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: package-preview-2022-07
-
-These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-07'
-input-file:
-  - Microsoft.Security/preview/2022-07-01-preview/applications.json
-```
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
@@ -595,6 +587,17 @@ override-info:
 title: SecurityCenter
 ``` 
 
+### Tag: package-preview-2022-07
+These settings apply only when `--tag=package-2022-07-preview-only` is specified on the command line.
+```yaml $(tag) == 'package-2022-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2022-07-01-preview/applications.json
+```
+# Needed when there is more than one input file
+override-info:
+title: SecurityCenter
+``` 
+
 ---
 
 # Code Generation
@@ -608,7 +611,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
