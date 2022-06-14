@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-04-07-preview",
-    "title": "Azure Communication ServerCalling APIs"
+    "title": "Azure Communication Service ServerCalling APIs",
+    "description": "Azure Communication CallingServer Service"
   },
   "schemes": [
     "https"
@@ -14,10 +15,10 @@
     "application/json"
   ],
   "paths": {
-    "/calling:callConnections": {
+    "/calling/callConnections": {
       "post": {
         "tags": [
-          "Pre-Connection"
+          "PreConnections"
         ],
         "summary": "Create an outbound call.",
         "description": "Create an outbound call.",
@@ -26,7 +27,7 @@
           {
             "name": "createCallRequest",
             "in": "body",
-            "description": "The make call request.",
+            "description": "The create call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateCallRequest"
@@ -42,31 +43,19 @@
             "schema": {
               "$ref": "#/definitions/CreateCallResponse"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
-        },
-        "x-ms-examples": {
-          "calls": {
-            "$ref": "./examples/ServerCalling_CreateCall.json"
-          }
+        }
+      },
+      "x-ms-examples": {
+        "calls": {
+          "$ref": "./examples/ServerCalling_CreateCall.json"
         }
       }
     },
     "/calling/callConnections:answer": {
       "post": {
         "tags": [
-          "Pre-Connection"
+          "PreConnections"
         ],
         "summary": "Answer a call.",
         "description": "Answer an incoming call using the IncomingCallContext from Event Grid.",
@@ -91,21 +80,6 @@
             "schema": {
               "$ref": "#/definitions/AnswerCallResponse"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
@@ -118,7 +92,7 @@
     "/calling/callConnections:redirect": {
       "post": {
         "tags": [
-          "Pre-Connection"
+          "PreConnections"
         ],
         "summary": "Redirect a call.",
         "description": "Redirect an incoming call using the IncomingCallContext from Event Grid.",
@@ -140,34 +114,19 @@
         "responses": {
           "202": {
             "description": "Returns the redirect call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
-        },
-        "x-ms-examples": {
-          "redirect": {
-            "$ref": "./examples/ServerCalling_RedirectCall.json"
-          }
+        }
+      },
+      "x-ms-examples": {
+        "redirect": {
+          "$ref": "./examples/ServerCalling_RedirectCall.json"
         }
       }
     },
     "/calling/callConnections:reject": {
       "post": {
         "tags": [
-          "Pre-Connection"
+          "PreConnections"
         ],
         "summary": "Reject a call.",
         "description": "Reject an incoming call using the IncomingCallContext from Event Grid.",
@@ -189,21 +148,6 @@
         "responses": {
           "202": {
             "description": "Returns the reject call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
@@ -216,11 +160,11 @@
     "/calling/callConnections/{callConnectionId}": {
       "get": {
         "tags": [
-          "Mid-Connection"
+          "MidConnections"
         ],
-        "summary": "Get a call.",
-        "description": "Get information of an existing call",
-        "operationId": "CallConnection_GetCall",
+        "summary": "Get a call connection.",
+        "description": "Get information of an existing call connection",
+        "operationId": "CallConnections_GetCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -239,36 +183,21 @@
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "get": {
-            "$ref": "./examples/CallConnection_GetCall.json"
+            "$ref": "./examples/CallConnections_GetCall.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Mid-Connection"
+          "MidConnections"
         ],
         "summary": "Hangup a call.",
         "description": "Hangup a call using call leg id.",
-        "operationId": "CallConnection_HangUpCall",
+        "operationId": "CallConnections_HangupCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -282,28 +211,13 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": "Returns the hangup call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "hangUp": {
-            "$ref": "./examples/CallConnection_HangUpCall.json"
+            "$ref": "./examples/CallConnections_HangUpCall.json"
           }
         }
       }
@@ -311,11 +225,11 @@
     "/calling/callConnections/{callConnectionId}:terminate": {
       "post": {
         "tags": [
-          "Mid-Connection"
+          "MidConnections"
         ],
-        "summary": "Terminate a call.",
+        "summary": "Terminate a call using CallConnectionId.",
         "description": "Terminate a call, hanging up all participants in the call.",
-        "operationId": "CallConnection_TerminateCall",
+        "operationId": "CallConnections_TerminateCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -331,26 +245,55 @@
         "responses": {
           "202": {
             "description": "Returns the terminate call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "terminate": {
-            "$ref": "./examples/CallConnection_TerminateCall.json"
+            "$ref": "./examples/CallConnections_TerminateCall.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:transferToParticipant": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Transfer the call to a participant.",
+        "description": "Transfer the call to a participant.",
+        "operationId": "CallConnections_TransferToParticipant",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferToParticipantRequest",
+            "in": "body",
+            "description": "The transfer to participant request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferToParticipantRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the transfer call response.",
+            "schema": {
+              "$ref": "#/definitions/TransferCallResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "transferToParticipant": {
+            "$ref": "./examples/CallConnections_TransferToParticipant.json"
           }
         }
       }
@@ -358,11 +301,11 @@
     "/calling/callConnections/{callConnectionId}/operations": {
       "get": {
         "tags": [
-          "Mid-Connection"
+          "MidConnections"
         ],
         "summary": "Get all operations associated with a call connection.",
         "description": "Get all operations associated with a call connection.",
-        "operationId": "CallConnection_ListOperations",
+        "operationId": "CallConnections_ListOperations",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -381,26 +324,11 @@
             "schema": {
               "$ref": "#/definitions/OperationsCollection"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "get": {
-            "$ref": "./examples/CallConnection_ListOperations.json"
+            "$ref": "./examples/CallConnections_ListOperations.json"
           }
         }
       }
@@ -408,11 +336,11 @@
     "/calling/callConnections/{callConnectionId}/operations/{operationId}": {
       "get": {
         "tags": [
-          "Mid-Connection"
+          "MidConnections"
         ],
         "summary": "Get the operation associated with a call connection.",
         "description": "Get the operation associated with a call connection.",
-        "operationId": "CallConnection_GetOperation",
+        "operationId": "CallConnections_GetOperation",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -438,26 +366,11 @@
             "schema": {
               "$ref": "#/definitions/OperationResponse"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "get": {
-            "$ref": "./examples/CallConnection_GetOperation.json"
+            "$ref": "./examples/CallConnections_GetOperation.json"
           }
         }
       }
@@ -465,11 +378,11 @@
     "/calling/callConnections/{callConnectionId}/participants": {
       "get": {
         "tags": [
-          "ParticipantsManagement"
+          "MidConnections"
         ],
         "summary": "Get information of all participants from a call.",
         "description": "Get information of all participants from a call.",
-        "operationId": "CallConnection_ListParticipant",
+        "operationId": "CallConnections_ListParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -496,26 +409,11 @@
             "schema": {
               "$ref": "#/definitions/CallParticipantCollection"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "listParticipants": {
-            "$ref": "./examples/CallConnection_ListParticipant.json"
+            "$ref": "./examples/CallConnections_ListParticipant.json"
           }
         }
       }
@@ -523,11 +421,11 @@
     "/calling/callConnections/{callConnectionId}/participants:add": {
       "post": {
         "tags": [
-          "ParticipantsManagement"
+          "MidConnections"
         ],
-        "summary": "Add a new participant to a call.",
-        "description": "Add a new participant to a call.",
-        "operationId": "CallConnection_AddParticipant",
+        "summary": "Add participants to a call.",
+        "description": "Add participants to a call.",
+        "operationId": "CallConnections_AddParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -537,12 +435,12 @@
             "type": "string"
           },
           {
-            "name": "addParticipantRequest",
+            "name": "addParticipantsRequest",
             "in": "body",
-            "description": "The add participant request.",
+            "description": "The add participants request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddParticipantRequest"
+              "$ref": "#/definitions/AddParticipantsRequest"
             }
           },
           {
@@ -553,28 +451,13 @@
           "202": {
             "description": "Returns the add participant response.",
             "schema": {
-              "$ref": "#/definitions/AddParticipantResponse"
+              "$ref": "#/definitions/AddParticipantsResponse"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "addParticipant": {
-            "$ref": "./examples/CallConnection_AddParticipant.json"
+            "$ref": "./examples/CallConnections_AddParticipant.json"
           }
         }
       }
@@ -582,11 +465,11 @@
     "/calling/callConnections/{callConnectionId}/participants:remove": {
       "post": {
         "tags": [
-          "ParticipantsManagement"
+          "MidConnections"
         ],
         "summary": "Remove participants from a call.",
         "description": "Remove participants from a call.",
-        "operationId": "CallConnection_RemoveParticipant",
+        "operationId": "CallConnections_RemoveParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -596,12 +479,12 @@
             "type": "string"
           },
           {
-            "name": "removeParticipantRequest",
+            "name": "removeParticipantsRequest",
             "in": "body",
             "description": "The remove participant request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RemoveParticipantRequest"
+              "$ref": "#/definitions/RemoveParticipantsRequest"
             }
           },
           {
@@ -612,28 +495,13 @@
           "202": {
             "description": "Returns the remove participant response.",
             "schema": {
-              "$ref": "#/definitions/RemoveParticipantResponse"
+              "$ref": "#/definitions/RemoveParticipantsResponse"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "removeParticipant": {
-            "$ref": "./examples/CallConnection_RemoveParticipant.json"
+            "$ref": "./examples/CallConnections_RemoveParticipant.json"
           }
         }
       }
@@ -641,11 +509,11 @@
     "/calling/callConnections/{callConnectionId}/participants:get": {
       "post": {
         "tags": [
-          "ParticipantsManagement"
+          "MidConnections"
         ],
         "summary": "Get information of participant from a call.",
         "description": "Get information of participant from a call.",
-        "operationId": "CallConnection_GetParticipant",
+        "operationId": "CallConnections_GetParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -673,85 +541,11 @@
             "schema": {
               "$ref": "#/definitions/CallParticipant"
             }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
           "getParticipant": {
-            "$ref": "./examples/CallConnection_GetParticipant.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/participants:transfer": {
-      "post": {
-        "tags": [
-          "ParticipantsManagement"
-        ],
-        "summary": "Transfer call to a participant.",
-        "description": "Transfer call to a participant.",
-        "operationId": "CallConnection_TransferToParticipant",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "transferToParticipantRequest",
-            "in": "body",
-            "description": "The participant transfer request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferToParticipantRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the transfer call response.",
-            "schema": {
-              "$ref": "#/definitions/TransferCallResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "getParticipant": {
-            "$ref": "./examples/CallConnection_TransferToParticipant.json"
+            "$ref": "./examples/CallConnections_GetParticipant.json"
           }
         }
       }
@@ -817,12 +611,12 @@
           "description": "The target participant to transfer the call to.",
           "$ref": "#/definitions/CommunicationIdentifierModel"
         },
-        "transfereeCallerId": {
-          "description": "The caller ID of the transferee if transferring to a pstn number.",
-          "$ref": "#/definitions/PhoneNumberIdentifierModel"
-        },
         "userToUserInformation": {
           "description": "The user to user information.",
+          "type": "string"
+        },
+        "alternateCallerId": {
+          "description": "The alternate identity of the transferor if transferring to a pstn number.",
           "type": "string"
         },
         "operationContext": {
@@ -886,7 +680,8 @@
       "description": "The request payload for create call.",
       "required": [
         "targets",
-        "source"
+        "source",
+        "callbackUri"
       ],
       "type": "object",
       "properties": {
@@ -964,7 +759,7 @@
       "description": "The transfer call response.",
       "$ref": "#/definitions/OperationResponse"
     },
-    "AddParticipantRequest": {
+    "AddParticipantsRequest": {
       "description": "The add participant request.",
       "required": [
         "participantsToAdd"
@@ -997,11 +792,11 @@
         }
       }
     },
-    "AddParticipantResponse": {
+    "AddParticipantsResponse": {
       "description": "The add participant response.",
       "$ref": "#/definitions/OperationResponse"
     },
-    "RemoveParticipantRequest": {
+    "RemoveParticipantsRequest": {
       "description": "The remove participant request.",
       "required": [
         "participantsToRemove"
@@ -1021,7 +816,7 @@
         }
       }
     },
-    "RemoveParticipantResponse": {
+    "RemoveParticipantsResponse": {
       "description": "The remove participant response.",
       "$ref": "#/definitions/OperationResponse"
     },
@@ -1195,42 +990,5 @@
         "$ref": "#/parameters/Endpoint"
       }
     ]
-  },
-  "responses": {
-    "400": {
-      "description": "BadRequest",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "401": {
-      "description": "Unauthorized",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "403": {
-      "description": "Forbidden",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "404": {
-      "description": "NotFound",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "500": {
-      "description": "InternalServerError",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    }
   }
 }
