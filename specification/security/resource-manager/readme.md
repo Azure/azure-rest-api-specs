@@ -585,7 +585,7 @@ override-info:
 
 ### Tag: package-preview-2022-01
 These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
-``` yaml $(tag) == 'package-2022-01-preview-only'
+```yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
   - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
   - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
