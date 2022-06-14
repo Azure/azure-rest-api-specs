@@ -269,6 +269,9 @@
         "x-ms-examples": {
           "CreateOrUpdateScheduledActionByScope": {
             "$ref": "./examples/scheduledAction-createOrUpdate-shared.json"
+          },
+          "CreateOrUpdateInsightAlertScheduledActionByScope": {
+            "$ref": "./examples/scheduledAction-insightAlert-createOrUpdate-shared.json"
           }
         },
         "parameters": [
@@ -703,7 +706,8 @@
       "type": "string",
       "description": "Kind of the scheduled action.",
       "enum": [
-        "Email"
+        "Email",
+        "InsightAlert"
       ],
       "x-ms-enum": {
         "name": "ScheduledActionKind",
@@ -713,6 +717,11 @@
             "value": "Email",
             "description": "Cost analysis data will be emailed.",
             "name": "Email"
+          },
+          {
+            "value": "InsightAlert",
+            "description": "Cost anomaly information will be emailed.",
+            "name": "InsightAlert"
           }
         ]
       }
@@ -782,7 +791,8 @@
       "description": "Status of the scheduled action.",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "Expired"
       ],
       "x-ms-enum": {
         "name": "ScheduledActionStatus",
@@ -797,6 +807,11 @@
             "value": "Enabled",
             "description": "Scheduled action is saved and will be executed.",
             "name": "Enabled"
+          },
+          {
+            "value": "Expired",
+            "description": "Scheduled action is expired and will not be executed.",
+            "name": "Expired"
           }
         ]
       }
