@@ -38,6 +38,40 @@ input-file:
   - preview/2021-10-20-preview2/communicationservicejobrouter.json
 title:
   Azure Communication Services
+directive:
+# Set reference to WorkerSelectorAttachment in ClassificationPolicy
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.workerSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/WorkerSelectorAttachment";
+# Set reference to QueueSelectorAttachment in ClassificationPolicy  
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.queueSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/QueueSelectorAttachment";
+# Set reference to WorkerSelectorAttachment in PagedClassificationPolicy  
+  - from: swagger-document
+    where: "$.definitions.PagedClassificationPolicy.properties.workerSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/WorkerSelectorAttachment";
+# Set reference to QueueSelectorAttachment in PagedClassificationPolicy
+  - from: swagger-document
+    where: "$.definitions.PagedClassificationPolicy.properties.queueSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/QueueSelectorAttachment";
+
+# Set reference to ExceptionAction in ExceptionRule
+  - from: swagger-document
+    where: "$.definitions.ExceptionRule.properties.actions"
+    transform: >
+      $.type = "object";
+      $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
+
+# Rename CommunicationError to JobRouterError
+  - from: swagger-document
+    where: '$.definitions.CommunicationError'
+    transform: >
+      $["x-ms-client-name"] = "JobRouterError";
 ```
 
 ---
