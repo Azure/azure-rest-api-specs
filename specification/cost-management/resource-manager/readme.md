@@ -26,7 +26,7 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-06
+tag: package-2021-10
 azure-validator: false
 ```
 
@@ -48,7 +48,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-04'
+```yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
@@ -59,7 +59,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
 ```
