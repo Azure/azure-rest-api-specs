@@ -93,7 +93,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/applicationId"
           }
         ],
         "responses": {
@@ -130,7 +130,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/ApplicationId"
           },
           {
             "$ref": "#/parameters/ApplicationBody"
@@ -176,7 +176,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/ApplicationId"
           }
         ],
         "responses": {
@@ -203,7 +203,7 @@
           "Applications"
         ],
         "description": "Get a list of all relevant applications over a security connector level scope",
-        "operationId": "SecurityConnectorApplicationsRule_List",
+        "operationId": "SecurityConnectorApplications_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -237,7 +237,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/applications/applicationId": {
       "get": {
         "x-ms-examples": {
           "Get security applications by specific applicationId": {
@@ -306,7 +306,7 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/ApplicationId"
           },
           {
             "$ref": "#/parameters/ApplicationBody"
@@ -358,7 +358,7 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/ApplicationId"
           }
         ],
         "responses": {
@@ -453,38 +453,6 @@
         "sourceResourceType",
         "conditionSets"
       ]
-    },
-    "GovernanceRuleOwnerSource": {
-      "type": "object",
-      "description": "Describe the owner source of governance rule",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The owner type for the governance rule owner source",
-          "enum": [
-            "ByTag",
-            "Manually"
-          ],
-          "x-ms-enum": {
-            "name": "GovernanceRuleOwnerSourceType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "ByTag",
-                "description": "The rule source type defined using resource tag"
-              },
-              {
-                "value": "Manually",
-                "description": "The rule source type defined manually"
-              }
-            ]
-          }
-        },
-        "value": {
-          "description": "The source value e.g. tag key like owner name or email address",
-          "type": "string"
-        }
-      }
     },
     "ApplicationConditionSets": {
       "type": "object",
