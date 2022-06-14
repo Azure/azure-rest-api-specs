@@ -374,7 +374,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/EventResource"
+              "$ref": "#/definitions/EventProperties"
             }
           }
         ],
@@ -834,7 +834,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/MetaverseResource"
+              "$ref": "#/definitions/MetaverseProperties"
             }
           }
         ],
@@ -972,6 +972,51 @@
         "x-ms-examples": {
           "Metaverse_PreviewImage": {
             "$ref": "./examples/Metaverse_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/listSasUri": {
+      "post": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "List a SAS uri that can be used to upload files to a managed storage account.",
+        "operationId": "Metaverse_ListSasUri",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metaverse_ListSasUri": {
+            "$ref": "./examples/Metaverse_ListSasUri.json"
           }
         }
       }
@@ -1381,7 +1426,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SpaceResource"
+              "$ref": "#/definitions/SpaceProperties"
             }
           }
         ],
@@ -1442,7 +1487,7 @@
             "description": "Deletes the space."
           },
           "204": {
-            "description": "Deletes the space."
+            "description": "The space does not exist."
           }
         },
         "x-ms-examples": {
@@ -1645,7 +1690,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SpaceTemplateResource"
+              "$ref": "#/definitions/SpaceTemplateProperties"
             }
           }
         ],
@@ -1711,6 +1756,10 @@
             "description": "Publish Accepted"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Template_Publish": {
             "$ref": "./examples/Template_Publish.json"
@@ -1758,6 +1807,10 @@
           "202": {
             "description": "Unpublish Accepted"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Template_Unpublish": {
@@ -2323,12 +2376,11 @@
       ],
       "properties": {
         "etag": {
-          "description": "Gets or sets the etag.",
           "type": "string",
           "readOnly": true
         },
         "tags": {
-          "description": "Resource tags.",
+          "description": "The insensitive version of dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2453,6 +2505,21 @@
       "x-ms-enum": {
         "name": "ProvisioningState"
       }
+    },
+    "SasData": {
+      "type": "object",
+      "properties": {
+        "sasUri": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-secret": true
     },
     "SpaceBase": {
       "type": "object",
@@ -2583,6 +2650,9 @@
           "description": "The display name of the template.",
           "type": "string"
         },
+        "state": {
+          "$ref": "#/definitions/TemplateCreationState"
+        },
         "tenantsVisibleTo": {
           "description": "Ids of tenants that the template is visible to.",
           "type": "array",
@@ -2622,6 +2692,17 @@
         "nextLink": {
           "type": "string"
         }
+      }
+    },
+    "TemplateCreationState": {
+      "enum": [
+        "Completed",
+        "InProgress",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TemplateCreationState"
       }
     }
   },
