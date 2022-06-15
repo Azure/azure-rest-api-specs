@@ -26,16 +26,16 @@ These are the global settings for the storagepool.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-11-20-preview
+tag: package-2022-06-15-preview
 ```
 
-### Tag: package-2021-11-20-preview
+### Tag: package-2022-06-15-preview
 
-These settings apply only when `--tag=package-2021-11-20-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-06-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-20-preview'
+```yaml $(tag) == 'package-2022-06-15-preview'
 input-file:
-  - Microsoft.ElasticSan/preview/2021-11-20-preview/elasticsan.json
+  - Microsoft.ElasticSan/preview/2022-06-15-preview/elasticsan.json
 ```
 
 ---
