@@ -316,4 +316,7 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].get'
     from: webapplicationfirewall.json
     reason: same as old versions.
+  - suppress: R4007
+    from: webapplicationfirewall.json
+    reason: we will be Implementing in new API version
 ```
