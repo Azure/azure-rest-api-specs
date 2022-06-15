@@ -861,6 +861,19 @@
           "type": "string",
           "readOnly": true,
           "description": "Specified whether the guest configuration service is enabled or disabled."
+        },
+        "configMode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.",
+          "enum": [
+            "full",
+            "monitor"
+          ],
+          "x-ms-enum": {
+            "name": "agent configuration mode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
