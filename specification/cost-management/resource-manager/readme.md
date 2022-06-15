@@ -37,7 +37,7 @@ azure-validator: false
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
