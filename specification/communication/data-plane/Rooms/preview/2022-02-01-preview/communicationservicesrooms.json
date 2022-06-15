@@ -49,7 +49,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Request successful. The action returns a new `Room`.",
+            "description": "Request successful. The action returns a new room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -79,7 +79,7 @@
         "tags": [
           "Rooms"
         ],
-        "summary": "Retrieves an existing room by Id.",
+        "summary": "Retrieves an existing room by id.",
         "operationId": "Rooms_GetRoom",
         "produces": [
           "application/json"
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The action returns a `Room`.",
+            "description": "Request successful. The action returns a room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -126,7 +126,7 @@
         "tags": [
           "Rooms"
         ],
-        "summary": "Update a room with given changes.",
+        "summary": "Update a Room with given changes.",
         "operationId": "Rooms_UpdateRoom",
         "consumes": [
           "application/json",
@@ -149,7 +149,7 @@
           {
             "in": "body",
             "name": "patchRoomRequest",
-            "description": "The path room request",
+            "description": "The patch room request",
             "schema": {
               "$ref": "#/definitions/UpdateRoomRequest"
             }
@@ -157,7 +157,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The action returns a updated `Room`.",
+            "description": "Request successful. The action returns an updated room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -292,7 +292,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "Id of the room to add participants to.",
+            "description": "Room id to add participants to.",
             "required": true,
             "type": "string"
           },
@@ -311,7 +311,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully added.",
+            "description": "The participants were successfully added. The action returns an updated room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -353,7 +353,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "Id of the room.",
+            "description": "The room id.",
             "required": true,
             "type": "string"
           },
@@ -372,7 +372,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully updated. The action returns an updated `Room`",
+            "description": "The participants were successfully updated. The action returns an updated room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -414,7 +414,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "room id to remove the participants from.",
+            "description": "Room id to remove the participants from.",
             "required": true,
             "type": "string"
           },
@@ -433,7 +433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully deleted. The action returns an updated `Room`.",
+            "description": "The participants were successfully deleted. The action returns an updated room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -479,13 +479,11 @@
           "type": "string",
           "example": "2020-09-08T15:55:41Z"
         },
-        "roomOpen": {
-          "description": "Flag to specify if the room is to be an open room or closed room.",
-          "type": "boolean",
-          "example": false
-        },
+        "roomJoinPolicy": {
+          "$ref": "#/definitions/RoomJoinPolicy"
+         },
         "participants": {
-          "description": "(Optional) Collection of identities invited to the room.",
+          "description": "(Optional) Collection of participants invited to the room.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
@@ -505,8 +503,7 @@
           "$ref": "#/definitions/CommunicationIdentifierModel"
         },
         "role": {
-          "description": "Role Name.",
-          "type": "string"
+          "$ref": "#/definitions/Role"
         }
       }
     },
@@ -515,7 +512,7 @@
       "type": "object",
       "properties": {
         "rawId": {
-          "description": "Raw Id of the identifier. Optional in requests, required in responses.",
+          "description": "Raw id of the identifier. Optional in requests, required in responses.",
           "type": "string"
         },
         "communicationUser": {
@@ -525,6 +522,31 @@
     },
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "Role": {
+      "description": "The Role of a room participant.",
+      "enum": [
+        "Presenter",
+        "Attendee",
+        "Consumer"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Role",
+        "modelAsString": true
+      }
+    },
+    "RoomJoinPolicy": {
+      "description": "The Policy based on which Participants can join a room.",
+      "enum": [
+        "InviteOnly",
+        "CommunicationServiceUsers"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RoomJoinPolicy",
+        "modelAsString": true
+      }
     },
     "RoomModel": {
       "description": "The meeting room.",
@@ -553,13 +575,11 @@
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
         },
-        "roomOpen": {
-          "description": "Flag to specify if the room is to be an open room or closed room.",
-          "type": "boolean",
-          "example": false
+        "roomJoinPolicy": {
+          "$ref": "#/definitions/RoomJoinPolicy"
         },
         "participants": {
-          "description": "Collection of identities invited to the room.",
+          "description": "Collection of room participants.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
@@ -584,11 +604,9 @@
           "type": "string",
           "example": "2020-09-08T15:55:41Z"
         },
-        "roomOpen": {
-          "description": "Flag to specify if the room is to be an open room or closed room.",
-          "type": "boolean",
-          "example": false
-        },
+        "roomJoinPolicy": {
+          "$ref": "#/definitions/RoomJoinPolicy"
+         },
         "participants": {
           "description": "Collection of room participants.",
           "type": "array",
@@ -651,7 +669,7 @@
       }
     },
     "ParticipantsCollection": {
-      "description": "Collection of participants who belong to a room.",
+      "description": "Collection of participants in a room.",
       "required": [
         "participants"
       ],
