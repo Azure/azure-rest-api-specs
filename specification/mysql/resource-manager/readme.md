@@ -32,22 +32,13 @@ tag: package-2020-01-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-05-01
+tag: package-flexibleserver-2021-12-01-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2021-12
+tag: package-2020-01-01
 ```
 
-
-### Tag: package-preview-2021-12
-
-These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-12'
-input-file:
-  - Microsoft.DBforMySQL/preview/2021-12-01-preview/mysql.json
-```
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -153,6 +144,21 @@ input-file:
 - Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
 ```
 
+### Tag: package-flexibleserver-2021-12-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2021-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-12-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
+```
+
 ## Suppression
 
 ``` yaml
@@ -161,6 +167,9 @@ directive:
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json
+    reason: Property isDataAction is not included in get operation reponse body
+  - suppress: OperationsApiResponseSchema
+    from: Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
     reason: Property isDataAction is not included in get operation reponse body
 ```
 
