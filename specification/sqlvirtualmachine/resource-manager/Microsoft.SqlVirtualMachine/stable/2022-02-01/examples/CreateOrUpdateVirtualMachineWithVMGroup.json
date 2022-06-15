@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
     "sqlVirtualMachineName": "testvm",
-    "api-version": "2022-02-01",
+    "api-version": "2022-02-01-preview",
     "parameters": {
       "location": "northeurope",
       "properties": {
@@ -13,7 +13,8 @@
           "clusterBootstrapAccountPassword": "<Password>",
           "clusterOperatorAccountPassword": "<Password>",
           "sqlServiceAccountPassword": "<Password>"
-        }
+        },
+        "wsfcStaticIp": "10.0.0.7"
       }
     }
   },
@@ -25,7 +26,8 @@
           "provisioningState": "Updating",
           "sqlImageSku": "Enterprise",
           "sqlServerLicenseType": "PAYG",
-          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup"
+          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+          "wsfcStaticIp": "10.0.0.7"
         },
         "location": "northeurope",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
@@ -40,7 +42,8 @@
           "provisioningState": "Provisioning",
           "sqlImageSku": "Unknown",
           "sqlServerLicenseType": "PAYG",
-          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup"
+          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+          "wsfcStaticIp": "10.0.0.7"
         },
         "location": "northeurope",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
