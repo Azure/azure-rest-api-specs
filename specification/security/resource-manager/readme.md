@@ -64,7 +64,7 @@ directive:
     where: $.paths
     from: governanceAssignments.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-   - suppress: OperationsAPIImplementation
+  - suppress: OperationsAPIImplementation
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
