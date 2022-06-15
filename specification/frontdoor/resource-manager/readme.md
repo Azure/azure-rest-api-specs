@@ -59,7 +59,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-05'
+``` yaml $(tag) == 'package-2020-05'
 input-file:
 - Microsoft.Network/stable/2020-05-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
@@ -288,4 +288,8 @@ directive:
     where: $.definitions.Resource.properties.tags.additionalProperties
     from: network.json
     reason: 'Same as version in 2020-11-01, will not change since it will involves breaking change. '
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].get'
+    from: webapplicationfirewall.json
+    reason: 'Same as the old versions. '
 ```
