@@ -834,7 +834,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/MetaverseProperties"
+              "$ref": "#/definitions/MetaversePatchResource"
             }
           }
         ],
@@ -981,7 +981,7 @@
         "tags": [
           "Metaverse"
         ],
-        "description": "List a SAS uri that can be used to upload files to a managed storage account.",
+        "description": "List a SAS uri that can be used to upload and download files from a managed storage account.",
         "operationId": "Metaverse_ListSasUri",
         "produces": [
           "application/json"
@@ -2385,6 +2385,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "MetaversePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetaverseProperties"
         }
       }
     },
