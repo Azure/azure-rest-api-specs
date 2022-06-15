@@ -215,7 +215,13 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -413,7 +419,6 @@
             "x-originalName": "apiVersion",
             "in": "query",
             "description": "Version of the REST API used for the request.",
-            "default": "2022-02-02",
             "required": true
           }
         ],
@@ -427,7 +432,13 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -660,7 +671,6 @@
             "x-originalName": "apiVersion",
             "in": "query",
             "description": "Version of the REST API used for the request.",
-            "default": "2022-02-02",
             "required": true
           }
         ],
@@ -674,7 +684,13 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -712,17 +728,17 @@
         }
       }
     },
-    "SearchErrorResponse": {
+    "ErrorResponse": {
       "description": "The search error response object",
       "type": "object",
       "properties": {
         "error": {
           "description": "The search error response details",
-          "$ref": "#/definitions/SearchErrorResponseDetails"
+          "$ref": "#/definitions/ErrorResponseDetails"
         }
       }
     },
-    "SearchErrorResponseDetails": {
+    "ErrorResponseDetails": {
       "description": "The search error response details object",
       "type": "object",
       "properties": {
