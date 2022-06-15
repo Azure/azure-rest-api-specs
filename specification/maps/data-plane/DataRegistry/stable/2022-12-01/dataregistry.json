@@ -325,7 +325,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThis API allows the caller to download the underlying content of a previously registered data registry.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [DataRegistry Register API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial).\n\n## Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download.\n\nFor example, to download a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Download Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource. A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThis API allows the caller to download the underlying content of a previously registered data registry. The data may not be available if the status is `Running` or `Failed`.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [DataRegistry Register API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial).\n\n## Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download.\n\nFor example, to download a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Download Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource. A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.",
         "operationId": "DataRegistries_Download",
         "x-ms-examples": {
           "Download previously registered GeoJSON data": {
@@ -455,6 +455,9 @@
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
             "$ref": "./examples/DataRegistries_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which is failed": {
+            "$ref": "./examples/DataRegistries_GetOperationFailed.json"
           },
           "Get the status of an operation which has finished successfully": {
             "$ref": "./examples/DataRegistries_GetOperation.json"
@@ -659,7 +662,7 @@
           "$ref": "#/definitions/Connection"
         },
         "downloadURL": {
-          "description": "The download url of the data which may not be available if the data registry was just created. Execute a HTTP `GET` on the prepended endpoint to download the data. `api-version` is not included.",
+          "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`. Note that `api-version` is not included.",
           "type": "string",
           "format": "uri"
         },
