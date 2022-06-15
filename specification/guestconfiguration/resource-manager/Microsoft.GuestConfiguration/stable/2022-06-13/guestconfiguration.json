@@ -1820,10 +1820,6 @@
     },
     "GuestConfigurationHealthCheckAssignment": {
       "properties": {
-        "evaluationResult": {
-          "type": "boolean",
-          "description": "Evaluation Result"
-        },
         "policyDefinitionId": {
           "type": "string",
           "description": "Policy definition Id"
@@ -1869,10 +1865,6 @@
           "type": "boolean",
           "description": "Available in Azure Policy"
         },
-        "availableInControlPlane": {
-          "type": "boolean",
-          "description": "Available in Control Plane"
-        },
         "availableInDataPlane": {
           "type": "boolean",
           "description": "Available In Data Plane"
@@ -1881,25 +1873,7 @@
           "type": "boolean",
           "description": "Policy Visibility to ARM In Data plane"
         },
-        "isVisibleToArmInCp": {
-          "type": "boolean",
-          "description": "Policy Visibility to ARM In Control Plane"
-        },
-        "complianceStatusInCP": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A value indicating compliance status of the machine for the assigned guest configuration in Control Plane",
-          "x-ms-enum": {
-            "name": "complianceStatus",
-            "modelAsString": true
-          },
-          "enum": [
-            "Compliant",
-            "NonCompliant",
-            "Pending"
-          ]
-        },
-        "complianceStatusInDP": {
+        "complianceStatusInDp": {
           "type": "string",
           "readOnly": true,
           "description": "A value indicating compliance status of the machine for the assigned guest configuration in Data Plane",
