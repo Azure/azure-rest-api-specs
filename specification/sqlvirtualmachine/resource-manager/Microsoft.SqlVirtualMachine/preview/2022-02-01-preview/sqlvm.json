@@ -996,7 +996,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MultiSubnetIpConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "multiSubnetIpConfigurations"
+          ]
         },
         "createDefaultAvailabilityGroupIfNotExist": {
           "description": "Create a default availability group if it does not exist.",
@@ -1070,7 +1073,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AgReplica"
-          }
+          },
+          "x-ms-identifiers": [
+            "replicas"
+          ]
         }
       }
     },
@@ -2113,11 +2119,11 @@
           "description": "SQL Server maximum memory.",
           "type": "integer"
         },
-        "isLPIMEnabled": {
+        "isLpimEnabled": {
           "description": "SQL Server LPIM.",
           "type": "boolean"
         },
-        "isIFIEnabled": {
+        "isIfiEnabled": {
           "description": "SQL Server IFI.",
           "type": "boolean"
         }
@@ -2151,7 +2157,7 @@
         },
         "dataGrowth": {
           "format": "int32",
-          "description": "SQL Server tempb data file autoGrowth size",
+          "description": "SQL Server tempdb data file autoGrowth size",
           "type": "integer"
         },
         "logFileSize": {
