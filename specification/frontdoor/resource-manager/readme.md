@@ -304,4 +304,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}"].put.responses.default'
     from: networkexperiment.json
     reason: 'same as old versions. '
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].get'
+    from: webapplicationfirewall.json
+    reason: Same as old versions.
 ```
