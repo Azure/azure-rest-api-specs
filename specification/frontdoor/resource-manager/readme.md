@@ -292,4 +292,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].get'
     from: webapplicationfirewall.json
     reason: 'Same as the old versions. '
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}"].get'
+    from: webapplicationfirewall.json
+    reason: 'Same as old versions. '
 ```
