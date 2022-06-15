@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "namespaceName": "NamespaceSample",
+    "resourceGroupName": "ResurceGroupSample",
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "SampleSubscription",
+    "parameters": {
+      "location": "East US",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
+        "name": "NamespaceSample",
+        "type": "Microsoft.EventHub/Namespaces",
+        "location": "East US",
+        "tags": {},
+        "identity": {
+          "principalId": "PrincipalIdGUID",
+          "tenantId": "TenantIdGUID",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
+              "clientId": "ClientIdGUID",
+              "principalId": "PrincipalIdGUID"
+            }
+          }
+        },
+        "properties": {
+          "isAutoInflateEnabled": false,
+          "disableLocalAuth": false,
+          "maximumThroughputUnits": 0,
+          "zoneRedundant": false,
+          "minimumTlsVersion": "1.1",
+          "encryption": {
+            "keySource": "Microsoft.KeyVault",
+            "keyVaultProperties": [
+              {
+                "keyName": "Samplekey",
+                "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
+                "keyVersion": "",
+                "identity": {
+                  "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+                }
+              }
+            ],
+            "requireInfrastructureEncryption": false
+          },
+          "provisioningState": "ActivatingIdentity",
+          "metricId": "MetricGUID:NamespaceSample",
+          "createdAt": "2021-01-30T00:28:38.963Z",
+          "updatedAt": "2021-01-30T00:31:13.657Z",
+          "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
+        "name": "NamespaceSample",
+        "type": "Microsoft.EventHub/Namespaces",
+        "location": "East US",
+        "tags": {},
+        "identity": {
+          "principalId": "PrincipalIdGUID",
+          "tenantId": "TenantIdGUID",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
+              "clientId": "ClientIdGUID",
+              "principalId": "PrincipalIdGUID"
+            }
+          }
+        },
+        "properties": {
+          "isAutoInflateEnabled": false,
+          "disableLocalAuth": false,
+          "maximumThroughputUnits": 0,
+          "zoneRedundant": false,
+          "encryption": {
+            "keySource": "Microsoft.KeyVault",
+            "keyVaultProperties": [
+              {
+                "keyName": "Samplekey",
+                "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
+                "keyVersion": "",
+                "identity": {
+                  "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+                }
+              }
+            ],
+            "requireInfrastructureEncryption": false
+          },
+          "provisioningState": "ActivatingIdentity",
+          "metricId": "MetricGUID:NamespaceSample",
+          "createdAt": "2021-01-30T00:28:38.963Z",
+          "updatedAt": "2021-01-30T00:31:13.657Z",
+          "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/"
+        }
+      }
+    },
+    "202": {}
+  }
+}
