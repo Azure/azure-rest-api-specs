@@ -64,6 +64,10 @@ directive:
     where: $.paths
     from: governanceAssignments.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+   - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: applications.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -172,6 +176,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+- Microsoft.Security/preview/2022-07-01-preview/applications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -586,6 +591,18 @@ input-file:
 override-info:
 title: SecurityCenter
 ``` 
+
+### Tag: package-preview-2022-07
+
+These settings apply only when `--tag=package-preview-2022-07-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2022-07-01-preview/applications.json
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
 
 ---
 
