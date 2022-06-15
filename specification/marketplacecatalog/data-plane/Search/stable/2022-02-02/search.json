@@ -10,9 +10,7 @@
     "https"
   ],
   "produces": [
-    "text/plain",
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/autocomplete": {
@@ -32,21 +30,23 @@
             "type": "string",
             "name": "searchQuery",
             "in": "query",
-            "x-nullable": true
+			      "description": "The search text. E.g. 'red hat'",
+            "required": true
           },
           {
             "type": "integer",
             "name": "take",
             "in": "query",
-            "format": "int32",
-            "x-nullable": false
+			      "description": "Number of items to return. Default: 20, Minimum: 0, Maximum: 100000",
+            "format": "int32"
           },
           {
             "type": "array",
             "name": "languages",
             "in": "query",
+			      "description": "Array of languages to search by. E.g. ['en','fr']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -55,8 +55,9 @@
             "type": "array",
             "name": "stores",
             "in": "query",
+			      "description": "Array of stores to search by. E.g. ['Ibiza']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -65,8 +66,9 @@
             "type": "array",
             "name": "offerTypes",
             "in": "query",
+		      	"description": "Array of offer types to search by. E.g. ['VirtualMachine']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -75,8 +77,9 @@
             "type": "array",
             "name": "pricingTypes",
             "in": "query",
+		      	"description": "Array of pricing types to search by. E.g. ['byol']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -85,56 +88,65 @@
             "type": "string",
             "name": "publisherName",
             "in": "query",
-            "x-nullable": true
+		      	"description": "Publisher name text to search by. E.g. 'Microsoft Publ'",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAzureBenefitEligible",
             "in": "query",
-            "x-nullable": true
+		      	"description": "Define the search for only azure benefit eligibile offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isMicrosoftProduct",
             "in": "query",
-            "x-nullable": true
+	      		"description": "Define the search for only microsoft offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isCoreVm",
             "in": "query",
-            "x-nullable": true
+	      		"description": "Define the search for only coreVm offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPreferredSolution",
             "in": "query",
-            "x-nullable": true
+	      		"description": "Define the search for only preferred solution offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAdditionalPurchaseRequired",
+		      	"description": "Define the search for only additional purchase required offers. Default: False",
             "in": "query",
-            "x-nullable": true
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPowerBICertified",
             "in": "query",
-            "x-nullable": true
+	      		"description": "Define the search for only power BI certified offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isIndustryCloud",
             "in": "query",
-            "x-nullable": true
+	      		"description": "Define the search for only industry cloud offers. Default: False",
+            "required": true
           },
           {
             "type": "array",
             "name": "operatingSystems",
             "in": "query",
+	      		"description": "Array of operating systems to search by. E.g. ['windows']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -143,8 +155,9 @@
             "type": "array",
             "name": "appSourceIndustries",
             "in": "query",
+		      	"description": "Array of app source store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -153,8 +166,9 @@
             "type": "array",
             "name": "appSourceCategories",
             "in": "query",
+		      	"description": "Array of app source store categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -163,8 +177,9 @@
             "type": "array",
             "name": "azureIndustries",
             "in": "query",
+		      	"description": "Array of azure store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -173,8 +188,9 @@
             "type": "array",
             "name": "azureCategories",
             "in": "query",
+		      	"description": "Array of azure categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -183,8 +199,9 @@
             "type": "array",
             "name": "azurePortalCategories",
             "in": "query",
+		      	"description": "Array of azure portal categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -194,32 +211,29 @@
             "name": "x-ms-app",
             "x-originalName": "callingApp",
             "in": "header",
-            "x-nullable": true
+		      	"description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
+            "required": true
           },
           {
             "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
-            "required": true,
-            "default": "2022-02-02",
-            "x-nullable": true
+		      	"description": "Version of the REST API used for the request.",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of complete terms based on partial search term",
             "schema": {
-              "$ref": "#/definitions/AutoCompleteResponseDto"
+              "$ref": "#/definitions/AutoCompleteResponse"
             }
           },
           "default": {
-            "x-nullable": false,
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -242,62 +256,72 @@
             "type": "string",
             "name": "searchQuery",
             "in": "query",
-            "x-nullable": true
+            "description": "The search text. E.g. 'red hat'",
+            "required": true
           },
           {
             "type": "string",
             "name": "publisherName",
             "in": "query",
-            "x-nullable": true
+            "description": "Publisher name text to search by. E.g. 'Microsoft Publ'",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAzureBenefitEligible",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only azure benefit eligibile offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isMicrosoftProduct",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only microsoft offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isCoreVm",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only coreVm offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPreferredSolution",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only preferred solution offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAdditionalPurchaseRequired",
+            "description": "Define the search for only additional purchase required offers. Default: False",
             "in": "query",
-            "x-nullable": true
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPowerBICertified",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only power BI certified offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isIndustryCloud",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only industry cloud offers. Default: False",
+            "required": true
           },
           {
             "type": "array",
             "name": "languages",
             "in": "query",
+            "description": "Array of languages to search by. E.g. ['en','fr']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -306,8 +330,9 @@
             "type": "array",
             "name": "stores",
             "in": "query",
+            "description": "Array of stores to search by. E.g. ['Ibiza']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -316,8 +341,9 @@
             "type": "array",
             "name": "offerTypes",
             "in": "query",
+            "description": "Array of offer types to search by. E.g. ['VirtualMachine']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -326,8 +352,9 @@
             "type": "array",
             "name": "pricingTypes",
             "in": "query",
+            "description": "Array of pricing types to search by. E.g. ['byol']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -336,8 +363,9 @@
             "type": "array",
             "name": "operatingSystems",
             "in": "query",
+            "description": "Array of operating systems to search by. E.g. ['windows']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -346,8 +374,9 @@
             "type": "array",
             "name": "appSourceIndustries",
             "in": "query",
+            "description": "Array of app source store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -356,8 +385,9 @@
             "type": "array",
             "name": "appSourceCategories",
             "in": "query",
+            "description": "Array of app source store categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -366,8 +396,9 @@
             "type": "array",
             "name": "azureIndustries",
             "in": "query",
+            "description": "Array of azure store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -376,8 +407,9 @@
             "type": "array",
             "name": "azureCategories",
             "in": "query",
+            "description": "Array of azure categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -386,8 +418,9 @@
             "type": "array",
             "name": "azurePortalCategories",
             "in": "query",
+            "description": "Array of azure portal categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -396,8 +429,9 @@
             "type": "array",
             "name": "facets",
             "in": "query",
+            "description": "Array facets to facet by, each facet may contain parameters to customize the faceting, Valid are 'count', 'sort', 'values', 'interval' and 'timeoffset'. E.g. ['pricingTypes', 'operatingSystems,count:5']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -407,32 +441,30 @@
             "name": "x-ms-app",
             "x-originalName": "callingApp",
             "in": "header",
-            "x-nullable": true
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
+            "required": true
           },
           {
             "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
-            "required": true,
+            "description": "Version of the REST API used for the request.",
             "default": "2022-02-02",
-            "x-nullable": true
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of offers count per filter",
             "schema": {
-              "$ref": "#/definitions/FacetsResponseDto"
+              "$ref": "#/definitions/FacetsResponse"
             }
           },
           "default": {
-            "x-nullable": false,
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -455,76 +487,86 @@
             "type": "string",
             "name": "searchQuery",
             "in": "query",
-            "x-nullable": true
+            "description": "The search text. E.g. 'red hat'",
+            "required": true
           },
           {
             "type": "string",
             "name": "publisherName",
+            "description": "The search publisher name. E.g. 'red hat'",
             "in": "query",
-            "x-nullable": true
-          },
-          {
-            "type": "integer",
-            "name": "skip",
-            "in": "query",
-            "format": "int32",
-            "x-nullable": false
+            "required": true
           },
           {
             "type": "integer",
             "name": "take",
             "in": "query",
-            "format": "int32",
-            "x-nullable": false
+            "description": "Number of items to return. Default: 20, Minimum: 0, Maximum: 100000",
+            "format": "int32"
+          },
+          {
+            "type": "string",
+            "name": "publisherName",
+            "in": "query",
+            "description": "Publisher name text to search by. E.g. 'Microsoft Publ'",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAzureBenefitEligible",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only azure benefit eligibile offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isMicrosoftProduct",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only microsoft offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isCoreVm",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only coreVm offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPreferredSolution",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only preferred solution offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isAdditionalPurchaseRequired",
+            "description": "Define the search for only additional purchase required offers. Default: False",
             "in": "query",
-            "x-nullable": true
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isPowerBICertified",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only power BI certified offers. Default: False",
+            "required": true
           },
           {
             "type": "boolean",
             "name": "isIndustryCloud",
             "in": "query",
-            "x-nullable": true
+            "description": "Define the search for only industry cloud offers. Default: False",
+            "required": true
           },
           {
             "type": "array",
             "name": "languages",
             "in": "query",
+            "description": "Array of operating systems to search by. E.g. ['windows']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -533,8 +575,9 @@
             "type": "array",
             "name": "stores",
             "in": "query",
+            "description": "Array of stores to search by. E.g. ['Ibiza']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -543,8 +586,9 @@
             "type": "array",
             "name": "select",
             "in": "query",
+            "description": "Array of operating systems to search by. E.g. ['windows']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -553,8 +597,9 @@
             "type": "array",
             "name": "sortBy",
             "in": "query",
+            "description": "Array of sort by fields to order by. E.g. ['ampAppsPopularity']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -563,8 +608,9 @@
             "type": "array",
             "name": "offerTypes",
             "in": "query",
+            "description": "Array of offer types to search by. E.g. ['VirtualMachine']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -573,8 +619,9 @@
             "type": "array",
             "name": "pricingTypes",
             "in": "query",
+            "description": "Array of pricing types to search by. E.g. ['byol']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -583,8 +630,9 @@
             "type": "array",
             "name": "appSourceIndustries",
             "in": "query",
+            "description": "Array of app source store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -593,8 +641,9 @@
             "type": "array",
             "name": "operatingSystems",
             "in": "query",
+            "description": "Array of operating systems to search by. E.g. ['windows']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -603,8 +652,9 @@
             "type": "array",
             "name": "appSourceCategories",
             "in": "query",
+            "description": "Array of app source store categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -613,8 +663,9 @@
             "type": "array",
             "name": "azureIndustries",
             "in": "query",
+            "description": "Array of azure store industries to search by. E.g. ['retailers']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -623,8 +674,9 @@
             "type": "array",
             "name": "azureCategories",
             "in": "query",
+            "description": "Array of azure categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -633,8 +685,9 @@
             "type": "array",
             "name": "azurePortalCategories",
             "in": "query",
+            "description": "Array of azure portal categories to search by. E.g. ['health-provider']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -643,8 +696,9 @@
             "type": "array",
             "name": "facets",
             "in": "query",
+            "description": "Array facets to facet by, each facet may contain parameters to customize the faceting, Valid are 'count', 'sort', 'values', 'interval' and 'timeoffset'. E.g. ['pricingTypes', 'operatingSystems,count:5']",
             "collectionFormat": "multi",
-            "x-nullable": true,
+            "required": true,
             "items": {
               "type": "string"
             }
@@ -654,32 +708,30 @@
             "name": "x-ms-app",
             "x-originalName": "callingApp",
             "in": "header",
-            "x-nullable": true
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
+            "required": true
           },
           {
             "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
-            "required": true,
+            "description": "Version of the REST API used for the request.",
             "default": "2022-02-02",
-            "x-nullable": true
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of azure marketplace catalog offers and total count and facets",
             "schema": {
-              "$ref": "#/definitions/SearchResponseDto"
+              "$ref": "#/definitions/SearchResponse"
             }
           },
           "default": {
-            "x-nullable": false,
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/SearchErrorResponseDto"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -687,53 +739,63 @@
     }
   },
   "definitions": {
-    "AutoCompleteResponseDto": {
+    "AutoCompleteResponse": {
+		  "description": "AutoComplete response object",
       "type": "object",
       "properties": {
         "autoCompleteItems": {
+			  "description": "The autocomplete response.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AutoCompleteItemDto"
+            "$ref": "#/definitions/AutoCompleteItem"
           },
           "x-ms-identifiers": [
             "text"
           ]
         },
         "strategyUsed": {
+		      "description": "The strategy used for autocomplete. E.g. 'Prefix'",
           "type": "string"
         }
       }
     },
-    "AutoCompleteItemDto": {
+    "AutoCompleteItem": {
+		  "description": "The AutoComplete item object",
       "type": "object",
       "properties": {
         "text": {
+          "description": "The text to autocomplete. E.g. 'win'",
           "type": "string"
         }
       }
     },
-    "SearchErrorResponseDto": {
+    "SearchErrorResponse": {
+		  "description": "The search error response object",
       "type": "object",
       "properties": {
         "error": {
+			    "description": "The search error response details",
           "$ref": "#/definitions/SearchErrorResponseDetails"
         }
       }
     },
     "SearchErrorResponseDetails": {
+		  "description": "The search error response details object",
       "type": "object",
       "properties": {
         "code": {
+		      "description": "The error code description. E.g. 'InternalError'",
           "type": "string"
         },
         "message": {
+			    "description": "The strategy used for autocomplete. E.g. 'Internal server error'",
           "type": "string"
         }
       }
     },
     "Store": {
       "type": "string",
-      "description": "",
+      "description": "Store name",
       "x-enumNames": [
         "Appsource",
         "AMP",
@@ -755,7 +817,7 @@
     },
     "PricingType": {
       "type": "string",
-      "description": "",
+      "description": "Pricing type",
       "x-enumNames": [
         "Free",
         "FreeTrial",
@@ -775,277 +837,340 @@
         "modelAsString": true
       }
     },
-    "FacetsResponseDto": {
+    "FacetsResponse": {
+		  "description": "Facets response object",
       "type": "object",
       "properties": {
         "facets": {
+			    "description": "Facets array",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FacetsItemDto"
+            "$ref": "#/definitions/FacetsItem"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "FacetsItemDto": {
+    "FacetsItem": {
+		  "description": "Facets item object",
       "type": "object",
       "properties": {
         "facetName": {
           "type": "string"
         },
         "facetValues": {
+			    "description": "Facet values array",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FacetValueDto"
+            "$ref": "#/definitions/FacetValue"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "FacetValueDto": {
+    "FacetValue": {
+		  "description": "Facet value object",
       "type": "object",
       "properties": {
         "value": {
+			    "description": "Facet value",
           "type": "string"
         },
         "count": {
+			    "description": "Facet count",
           "type": "integer",
           "format": "int64"
         }
       }
     },
-    "SearchResponseDto": {
+    "SearchResponse": {
+		  "description": "Search response object",
       "type": "object",
       "properties": {
         "facets": {
+			    "description": "facets array",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FacetsItemDto"
+            "$ref": "#/definitions/FacetsItem"
           },
           "x-ms-identifiers": []
         },
         "results": {
+			    "description": "Search results array",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SearchItemDto"
+            "$ref": "#/definitions/SearchItem"
           },
           "x-ms-identifiers": []
         },
         "totalCount": {
+			    "description": "Total number of items that exist according to the given search",
           "type": "integer",
           "format": "int64"
         }
       }
     },
-    "SearchItemDto": {
+    "SearchItem": {
+		  "description": "Search item object",
       "type": "object",
       "properties": {
         "ampAppsPopularity": {
+			    "description": "Amp store app popularity",
           "type": "number",
           "format": "double"
         },
         "ampCsPopularity": {
+			    "description": "Amp store customer services popularity",
           "type": "number",
           "format": "double"
         },
         "applicableProducts": {
+			    "description": "Applicable products",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "appSourceAppsPopularity": {
+			    "description": "Amp store app popularity",
           "type": "number",
           "format": "double"
         },
         "appSourceCategories": {
+			    "description": "Appsource store categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "appSourceCsPopularity": {
+			    "description": "Appsource store customer services popularity",
           "type": "number",
           "format": "double"
         },
         "appSourceIndustries": {
+			    "description": "Appsource store industries",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "azureCategories": {
+			    "description": "Azure store categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "azurePortalCategories": {
+			    "description": "Azure portal categories",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "azureIndustries": {
+			    "description": "Azure store industries",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "bigId": {
+			    "description": "Offer bigId",
           "type": "string"
         },
         "cspStates": {
+			    "description": "Offer csp states",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "determinedStorefronts": {
+			    "description": "Offer determined storefronts",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "displayName": {
+		    	"description": "Offer display name",
           "type": "string"
         },
         "isAzureBenefitEligible": {
+		    	"description": "Offer azure benefit eligibility",
           "type": "boolean"
         },
         "isCoreVm": {
+		    	"description": "Offer coreVm",
           "type": "boolean"
         },
         "isPreferredSolution": {
+		    	"description": "Offer is preferred solution",
           "type": "boolean"
         },
         "isAdditionalPurchaseRequired": {
+		    	"description": "Offer is additional purchase required",
           "type": "boolean"
         },
         "isPowerBICertified": {
+		    	"description": "Offer is powerBI certified",
           "type": "boolean"
         },
         "isIndustryCloud": {
+			    "description": "Offer is industry cloud",
           "type": "boolean"
         },
         "isMicrosoftProduct": {
+		    	"description": "Offer is microsoft product",
           "type": "boolean"
         },
         "isPreview": {
+		    	"description": "Offer isPreview",
           "type": "boolean"
         },
         "language": {
+	    		"description": "Offer language",
           "type": "string"
         },
         "legacyId": {
+		    	"description": "Offer legacyId",
           "type": "string"
         },
         "offerType": {
+	    		"description": "Offer type",
           "type": "string"
         },
         "operatingSystems": {
+		    	"description": "Offer supported operating systems",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "plans": {
+		    	"description": "Offer plans",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PlanDto"
+            "$ref": "#/definitions/Plan"
           },
           "x-ms-identifiers": [
             "legacyPlanId"
           ]
         },
         "pricingTypes": {
+			    "description": "Offer supported pricing types",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "publisherDisplayName": {
+		    	"description": "Offer publisher display name",
           "type": "string"
         },
         "summary": {
+		    	"description": "Offer summary",
           "type": "string"
         },
         "vmGenerations": {
+		    	"description": "Offer supported vm generations",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "vmImageTypes": {
+		    	"description": "Offer supported vm image types",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "vmSecurityTypes": {
+		    	"description": "Offer supported security types",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "smallIconUri": {
+		    	"description": "Offer small icon uri",
           "type": "string"
         },
         "mediumIconUri": {
+		    	"description": "Offer medium icon uri",
           "type": "string"
         },
         "largeIconUri": {
+		    	"description": "Offer large icon uri",
           "type": "string"
         },
         "wideIconUri": {
+		    	"description": "Offer wide icon uri",
           "type": "string"
         },
         "heroIconUri": {
+		    	"description": "Offer hero icon uri",
           "type": "string"
         }
       }
     },
-    "PlanDto": {
+    "Plan": {
+	  	"description": "Plan object",
       "type": "object",
       "properties": {
         "cspState": {
+		    	"description": "Plan csp state",
           "type": "string"
         },
         "legacyPlanId": {
+		    	"description": "Plan legacy id",
           "type": "string"
         },
         "displayName": {
+		    	"description": "Plan display name",
           "type": "string"
         },
         "architectureType": {
+		    	"description": "Plan architecture type",
           "type": "string"
         },
         "metadata": {
-          "$ref": "#/definitions/PlanMetadataDto"
+		    	"description": "Plan metadata properties",
+          "$ref": "#/definitions/PlanMetadata"
         },
         "operatingSystem": {
-          "$ref": "#/definitions/OperatingSystemDto"
+		    	"description": "Plan operating system",
+          "$ref": "#/definitions/OperatingSystem"
         }
       }
     },
-    "PlanMetadataDto": {
+    "PlanMetadata": {
+	  	"description": "Plan metadata object",
       "type": "object",
       "properties": {
         "generation": {
+	    		"description": "Plan generation",
           "type": "string"
         }
       }
     },
-    "OperatingSystemDto": {
+    "OperatingSystem": {
+	  	"description": "Plan operating system object",
       "type": "object",
       "properties": {
         "family": {
+		    	"description": "Operating system family",
           "type": "string"
         },
         "type": {
+		    	"description": "Operating system type",
           "type": "string"
         },
         "name": {
+		    	"description": "Operating system name",
           "type": "string"
         }
       }
@@ -1061,5 +1186,12 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
