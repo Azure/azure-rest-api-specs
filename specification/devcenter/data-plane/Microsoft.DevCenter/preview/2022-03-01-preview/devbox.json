@@ -12,6 +12,9 @@
         "description": "The DevCenter to operate on.",
         "required": true,
         "type": "string",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+        "minLength": 3,
+        "maxLength": 63,
         "in": "path",
         "x-ms-skip-url-encoding": true
       },
@@ -694,6 +697,9 @@
         "poolName": {
           "description": "The name of the Dev Box pool this machine belongs to.",
           "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+          "minLength": 3,
+          "maxLength": 63,
           "x-ms-mutability": [
             "read",
             "create"
@@ -875,6 +881,9 @@
       "description": "The name of a pool of Dev Boxes.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
       "in": "path",
       "x-ms-parameter-location": "method"
     },
@@ -883,6 +892,9 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
       "description": "The name of a Dev Box.",
       "x-ms-parameter-location": "method"
     },
@@ -892,6 +904,9 @@
       "required": true,
       "x-ms-client-default": "me",
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
+      "minLength": 2,
+      "maxLength": 36,
       "description": "The id of the user. If value is 'me', the identity is taken from the authentication context",
       "x-ms-parameter-location": "method"
     }
