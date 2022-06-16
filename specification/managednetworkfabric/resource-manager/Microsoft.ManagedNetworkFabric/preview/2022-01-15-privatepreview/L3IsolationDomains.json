@@ -557,7 +557,7 @@
             "in": "body",
             "name": "body",
             "required": true,
-            "description": "NorthBoundNetwork properties to update. Only annotations are supported.",
+            "description": "SouthBoundNetwork properties to update. Only annotations are supported.",
             "schema": {
               "$ref": "#/definitions/SouthBoundNetworkPatch"
             }
@@ -1102,19 +1102,17 @@
               "properties": {
                 "importRouteTargets": {
                   "type": "array",
-                  "description": "List with integer importRouteTargets.",
+                  "description": "List with importRouteTargets.",
                   "items": {
-                    "type": "integer",
-                    "format": "int32",
+                    "type": "string",
                     "description": "importRouteTarget value."
                   }
                 },
                 "exportRouteTargets": {
                   "type": "array",
-                  "description": "List with integer exportRouteTargets.",
+                  "description": "List with exportRouteTargets.",
                   "items": {
-                    "type": "integer",
-                    "format": "int32",
+                    "type": "string",
                     "description": "exportRouteTarget value."
                   }
                 },
@@ -1562,6 +1560,10 @@
                   "description": "multiplier. Example: 3."
                 }
               }
+            },
+            "defaultRouteOriginate": {
+              "type": "boolean",
+              "description": "defaultRouteOriginate. Example: true | false."
             },
             "fabricASN": {
               "type": "integer",

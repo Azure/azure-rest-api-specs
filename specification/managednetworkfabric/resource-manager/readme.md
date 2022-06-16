@@ -45,6 +45,9 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L2IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L3IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/RoutePolicies.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/AccessControlLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpCommunityLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpPrefixLists.json
 ```
 
 ---

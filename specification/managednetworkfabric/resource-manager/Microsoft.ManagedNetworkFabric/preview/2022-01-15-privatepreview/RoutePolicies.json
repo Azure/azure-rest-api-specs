@@ -417,73 +417,37 @@
                 "type": "object",
                 "description": "Route policy match properties.",
                 "properties": {
-                  "communityValues": {
+                  "accessControlListIds": {
                     "type": "array",
-                    "description": "communityValues. Example: ['1', '2', '3:1'].",
+                    "description": "accessControlListIds. Arm Resource Ids of AccessControlLists.",
                     "x-ms-identifiers": [
                       "value"
                     ],
                     "items": {
-                      "type": "object",
-                      "description": "communityValue model.",
-                      "allOf": [
-                        {
-                          "$ref": "./common.json#/definitions/AnnotationResource",
-                          "description": "Common properties for annotated type."
-                        }
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "string",
-                          "description": "communityValue match value."
-                        }
-                      }
+                      "type": "string",
+                      "description": "Arm Resource Id of AccessControlLists."
                     }
                   },
-                  "rtExtendedCommunityValues": {
+                  "ipCommunityListIds": {
                     "type": "array",
-                    "description": "rtExtendedCommunityValues. Example: [100, 101].",
+                    "description": "ipCommunityListIds. Arm Resource Ids of IpCommunityLists.",
                     "x-ms-identifiers": [
                       "value"
                     ],
                     "items": {
-                      "type": "object",
-                      "description": "rtExtendedCommunityValue.",
-                      "allOf": [
-                        {
-                          "$ref": "./common.json#/definitions/AnnotationResource",
-                          "description": "Common properties for annotated type."
-                        }
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "string",
-                          "description": "rtExtendedCommunity value."
-                        }
-                      }
+                      "type": "string",
+                      "description": "Arm Resource Id of IpCommunityLists."
                     }
                   },
-                  "prefixes": {
+                  "ipExtendedCommunityListIds": {
                     "type": "array",
-                    "description": "prefixes. Example: [100, 101].",
+                    "description": "ipExtendedCommunityListIds. Arm Resource Ids of IpCommunityLists.",
                     "x-ms-identifiers": [
                       "value"
                     ],
                     "items": {
-                      "type": "object",
-                      "description": "prefixes model.",
-                      "allOf": [
-                        {
-                          "$ref": "./common.json#/definitions/AnnotationResource",
-                          "description": "Common properties for annotated type."
-                        }
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "string",
-                          "description": "prefix. Example: 100."
-                        }
-                      }
+                      "type": "string",
+                      "description": "Arm Resource Id of IpCommunityLists."
                     }
                   }
                 }
@@ -496,63 +460,33 @@
                     "type": "string",
                     "description": "action. Example: accept | deny."
                   },
-                  "manipulations": {
+                  "set": {
                     "type": "object",
                     "properties": {
-                      "delete": {
-                        "type": "object",
-                        "description": "Route policy delete manipulations.",
-                        "properties": {
-                          "communityValues": {
-                            "type": "array",
-                            "description": "communityValues. Example: ['1', '2', '3:1'].",
-                            "x-ms-identifiers": [
-                              "value"
-                            ],
-                            "items": {
-                              "type": "object",
-                              "description": "manipulation delete value model.",
-                              "allOf": [
-                                {
-                                  "$ref": "./common.json#/definitions/AnnotationResource",
-                                  "description": "Common properties for annotated type."
-                                }
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "string",
-                                  "description": "manipulation delete."
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
                       "set": {
                         "type": "object",
                         "description": "Route policy set manipulations.",
                         "properties": {
-                          "communityValues": {
+                          "ipCommunityListIds": {
                             "type": "array",
-                            "description": "communityValues. Example: ['1', '2', '3:1'].",
+                            "description": "ipCommunityListIds. Arm Resource Ids of IpCommunityLists.",
                             "x-ms-identifiers": [
                               "value"
                             ],
                             "items": {
-                              "type": "object",
-                              "description": "set manipulation model.",
-                              "allOf": [
-                                {
-                                  "$ref": "./common.json#/definitions/AnnotationResource",
-                                  "description": "Common properties for annotated type."
-                                }
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "string",
-                                  "description": "set manipulation value."
-                                }
-                              }
+                              "type": "string",
+                              "description": "Arm Resource Id of IpCommunityLists."
+                            }
+                          },
+                          "ipExtendedCommunityListIds": {
+                            "type": "array",
+                            "description": "ipExtendedCommunityListIds. Arm Resource Ids of IpCommunityLists.",
+                            "x-ms-identifiers": [
+                              "value"
+                            ],
+                            "items": {
+                              "type": "string",
+                              "description": "Arm Resource Id of IpCommunityLists."
                             }
                           }
                         }
