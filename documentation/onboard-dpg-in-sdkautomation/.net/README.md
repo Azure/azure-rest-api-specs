@@ -14,7 +14,7 @@ Please copy the following configuration into spec PR comment.
 title: <Title>
 output-folder: sdk/<ServiveName>/<NameSpace>
 require:
- - specification/<RPName>/dataplane/readme.md
+ - specification/<RPName>/data-plane/readme.md
 ```
 ~~~
 - `title`: If it's already defined in spec readme.md, you don't need to define it here again. (By default, there is no `tag` defined in spec readme.md in multi client scenario.)
