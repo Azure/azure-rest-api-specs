@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for adp.
+This is the AutoRest configuration file for adp for test.
 
 ## Getting Started
 
