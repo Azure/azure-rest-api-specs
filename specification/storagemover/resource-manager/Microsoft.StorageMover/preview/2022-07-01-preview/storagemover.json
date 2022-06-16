@@ -315,11 +315,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Delete operation is ongoing.",
-            "x-ms-long-running-operation": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Accepted. Delete operation is ongoing."
+          },
+          "204": {
+            "description": "NoContent -- storage mover does not exist in the subscription."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -327,6 +326,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -551,11 +554,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Delete operation is ongoing.",
-            "x-ms-long-running-operation": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Accepted. Agent delete operation is ongoing."
+          },
+          "204": {
+            "description": "NoContent -- agent does not exist for this storage mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -563,6 +565,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -787,11 +793,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Delete operation is ongoing.",
-            "x-ms-long-running-operation": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Accepted. Endpoint delete operation is ongoing."
+          },
+          "204": {
+            "description": "NoContent -- Endpoint does not exist for this storage mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -799,6 +804,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1023,11 +1032,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Delete operation is ongoing.",
-            "x-ms-long-running-operation": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Accepted. Project delete operation is ongoing."
+          },
+          "204": {
+            "description": "NoContent -- project does not exist for this storage mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -1035,6 +1043,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1274,11 +1286,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Delete operation is ongoing.",
-            "x-ms-long-running-operation": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Accepted. Delete operation is ongoing."
+          },
+          "204": {
+            "description": "NoContent -- JobDefinition does not exist for this project."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -1286,6 +1297,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1473,7 +1488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The job definition resource.",
+            "description": "The job run resource.",
             "schema": {
               "$ref": "#/definitions/JobRun"
             }
@@ -1523,7 +1538,7 @@
             "Provisioning",
             "Offline",
             "Online",
-            "Transferring",
+            "Executing",
             "RequiresAttention"
           ],
           "type": "string",
@@ -1969,9 +1984,8 @@
             "modelAsString": true
           },
           "enum": [
-            "Default",
-            "Mirror",
-            "Additive"
+            "Additive",
+            "Mirror"
           ]
         },
         "sourceName": {
@@ -2019,7 +2033,7 @@
             "Canceling",
             "Canceled",
             "Failed",
-            "Success"
+            "Succeeded"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2091,9 +2105,8 @@
             "modelAsString": true
           },
           "enum": [
-            "Default",
-            "Mirror",
-            "Additive"
+            "Additive",
+            "Mirror"
           ]
         },
         "agentName": {
@@ -2178,7 +2191,7 @@
             "Canceling",
             "Canceled",
             "Failed",
-            "Success"
+            "Succeeded"
           ],
           "type": "string",
           "x-ms-enum": {
