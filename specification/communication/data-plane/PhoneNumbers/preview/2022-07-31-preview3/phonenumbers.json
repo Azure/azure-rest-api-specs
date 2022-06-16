@@ -117,7 +117,7 @@
           {
             "in": "query",
             "name": "administrativeDivision",
-            "description": "An optional parameter for the name of the state or province in which to search for the area code.",
+            "description": "An optional parameter for the name of the state or province in which to search for the area code. e.g. California",
             "type": "string"
           }
         ],
@@ -185,34 +185,42 @@
           },
           {
             "in": "query",
-            "name": "numberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "name": "phoneNumberType",
+            "description": "Filter by numberType, e.g. geographic, tollFree.",
             "type": "string",
             "enum": [
               "geographic",
               "tollFree"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
             "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. User, Application.",
+            "description": "Filter by assignmentType, e.g. user, application.",
             "type": "string",
             "enum": [
               "person",
               "application"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
             "name": "locality",
-            "description": "The name of locality or town in which to search for the area code. This is required if the number type is Geographic.",
+            "description": "The name of locality in which to search for the area code. e.g. Seattle. This is required if the phone number type is Geographic.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "administrativeDivision",
-            "description": "The name of the state or province in which to search for the area code.",
+            "description": "The name of the state or province in which to search for the area code. e.g. California.",
             "type": "string"
           },
           {
@@ -264,13 +272,17 @@
           },
           {
             "in": "query",
-            "name": "numberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "name": "phoneNumberType",
+            "description": "Filter by phoneNumberType, e.g. Geographic, TollFree.",
             "type": "string",
             "enum": [
               "geographic",
               "tollFree"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
@@ -280,7 +292,11 @@
             "enum": [
               "person",
               "application"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
