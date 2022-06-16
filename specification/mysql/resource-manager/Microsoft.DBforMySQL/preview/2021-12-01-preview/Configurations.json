@@ -408,8 +408,16 @@
           "description": "The list of server configurations."
         },
         "resetAllToDefault": {
-          "type": "boolean",
-          "description": "Whether to reset all server parameters to default."
+          "type": "string",
+          "description": "Whether to reset all server parameters to default.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "ResetAllToDefault",
+            "modelAsString": true
+          }
         }
       },
       "description": "A list of server configurations to update."
