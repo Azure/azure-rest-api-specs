@@ -256,9 +256,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1453,9 +1450,6 @@
               "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": null
-          },
           "default": {
             "description": "Default error response",
             "x-ms-error-response": true,
@@ -1600,7 +1594,8 @@
         },
         "iconUrl": {
           "type": "string",
-          "description": "The Icon Url of the bot"
+          "description": "The Icon Url of the bot",
+          "default": ""
         },
         "endpoint": {
           "type": "string",
@@ -1645,11 +1640,13 @@
         },
         "msaAppId": {
           "type": "string",
-          "description": "Microsoft App Id for the bot"
+          "description": "Microsoft App Id for the bot",
+          "x-ms-mutability": ["create", "read"]
         },
         "msaAppTenantId": {
           "type": "string",
-          "description": "Microsoft App Tenant Id for the bot"
+          "description": "Microsoft App Tenant Id for the bot",
+          "x-ms-mutability": ["create", "read"]
         },
         "msaAppMSIResourceId": {
           "type": "string",
@@ -1696,7 +1693,8 @@
         },
         "isCmekEnabled": {
           "type": "boolean",
-          "description": "Whether Cmek is enabled"
+          "description": "Whether Cmek is enabled",
+          "default": false
         },
         "cmekKeyVaultUrl": {
           "type": "string",
@@ -1709,7 +1707,8 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The Tenant Id for the bot"
+          "description": "The Tenant Id for the bot",
+          "x-ms-mutability": ["create", "read"]
         },
         "publicNetworkAccess": {
           "description": "Whether the bot is in an isolated network",
@@ -1745,7 +1744,8 @@
         },
         "schemaTransformationVersion": {
           "type": "string",
-          "description": "The channel schema transformation version for the bot"
+          "description": "The channel schema transformation version for the bot",
+          "default": "0.0"
         },
         "storageResourceId": {
           "type": "string",
@@ -1799,7 +1799,7 @@
           "description": "Gets the list of bot service results and their properties."
         }
       },
-      "description": "The list of  bot service operation response."
+      "description": "The list of bot service operation response."
     },
     "CreateEmailSignInUrlResponse": {
       "type": "object",
@@ -1882,11 +1882,13 @@
       "properties": {
         "extensionKey1": {
           "type": "string",
-          "description": "The extensionKey1"
+          "description": "The extensionKey1",
+          "readOnly": true
         },
         "extensionKey2": {
           "type": "string",
-          "description": "The extensionKey2"
+          "description": "The extensionKey2",
+          "readOnly": true
         },
         "sites": {
           "type": "array",
@@ -2165,7 +2167,8 @@
       "properties": {
         "enableCalling": {
           "type": "boolean",
-          "description": "Enable calling for Microsoft Teams channel"
+          "description": "Enable calling for Microsoft Teams channel",
+          "default": false
         },
         "callingWebhook": {
           "type": "string",
@@ -2181,11 +2184,14 @@
         },
         "deploymentEnvironment": {
           "type": "string",
-          "description": "Deployment environment for Microsoft Teams channel calls"
+          "description": "Deployment environment for Microsoft Teams channel calls",
+          "default": "FallbackDeploymentEnvironment"
         },
         "acceptedTerms": {
           "type": "boolean",
-          "description": "Whether this channel accepted terms"
+          "description": "Whether this channel accepted terms",
+          "x-nullable": true,
+          "default": null
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -2225,7 +2231,8 @@
         },
         "enableCalling": {
           "type": "boolean",
-          "description": "Enable calling for Skype channel"
+          "description": "Enable calling for Skype channel",
+          "default": false
         },
         "enableScreenSharing": {
           "type": "boolean",
@@ -2361,11 +2368,13 @@
         },
         "extensionKey1": {
           "type": "string",
-          "description": "The extensionKey1"
+          "description": "The extensionKey1",
+          "readOnly": true
         },
         "extensionKey2": {
           "type": "string",
-          "description": "The extensionKey2"
+          "description": "The extensionKey2",
+          "readOnly": true
         },
         "DirectLineEmbedCode": {
           "type": "string",
@@ -2615,17 +2624,19 @@
     "DirectLineSpeechChannelProperties": {
       "properties": {
         "cognitiveServiceResourceId": {
-        "type": "string",
-        "description": "The cognitive service id with this channel registration."
+          "type": "string",
+          "description": "The cognitive service id with this channel registration."
         },
         "cognitiveServiceRegion": {
           "type": "string",
-          "description": "The cognitive service region with this channel registration."
+          "description": "The cognitive service region with this channel registration.",
+          "x-nullable": true
         },
         "cognitiveServiceSubscriptionKey": {
           "x-ms-secret": true,
           "type": "string",
-          "description": "The cognitive service subscription key to use with this channel registration."
+          "description": "The cognitive service subscription key to use with this channel registration.",
+          "x-nullable": true
         },
         "isEnabled": {
           "type": "boolean",
@@ -2723,7 +2734,8 @@
         },
         "isTokenEnabled": {
           "type": "boolean",
-          "description": "Whether this site is token enabled for channel"
+          "description": "Whether this site is token enabled for channel",
+          "readOnly": true
         },
         "isEndpointParametersEnabled": {
           "type": "boolean",
@@ -2736,7 +2748,8 @@
         "isBlockUserUploadEnabled": {
           "type": "boolean",
           "description": "Whether this site is enabled for block user upload.",
-          "x-nullable": true
+          "x-nullable": true,
+          "default": null
         },
         "isNoStorageEnabled": {
           "type": "boolean",
