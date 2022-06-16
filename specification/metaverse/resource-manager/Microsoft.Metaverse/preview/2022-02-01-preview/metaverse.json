@@ -374,7 +374,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/EventProperties"
+              "$ref": "#/definitions/EventPatchResource"
             }
           }
         ],
@@ -983,6 +983,9 @@
         ],
         "description": "List a SAS uri that can be used to upload and download files from a managed storage account.",
         "operationId": "Metaverse_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -998,6 +1001,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
           }
         ],
         "responses": {
@@ -1426,7 +1436,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SpaceProperties"
+              "$ref": "#/definitions/SpacePatchResource"
             }
           }
         ],
@@ -1690,7 +1700,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SpaceTemplateProperties"
+              "$ref": "#/definitions/SpaceTemplatePatchResource"
             }
           }
         ],
@@ -2258,6 +2268,14 @@
         }
       }
     },
+    "EventPatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventProperties"
+        }
+      }
+    },
     "EventProperties": {
       "type": "object",
       "allOf": [
@@ -2529,6 +2547,17 @@
       },
       "x-ms-secret": true
     },
+    "SasRequest": {
+      "type": "object",
+      "properties": {
+        "fileId": {
+          "type": "string"
+        },
+        "blobType": {
+          "type": "string"
+        }
+      }
+    },
     "SpaceBase": {
       "type": "object",
       "properties": {
@@ -2554,6 +2583,14 @@
         },
         "author": {
           "type": "string"
+        }
+      }
+    },
+    "SpacePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceProperties"
         }
       }
     },
@@ -2596,6 +2633,14 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      }
+    },
+    "SpaceTemplatePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceTemplateProperties"
         }
       }
     },
