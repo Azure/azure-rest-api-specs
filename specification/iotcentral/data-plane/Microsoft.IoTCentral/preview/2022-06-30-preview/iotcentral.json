@@ -136,7 +136,7 @@
         },
         "queryRange": {
           "description": "The query range configuration of the chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         }
       },
       "required": [
@@ -388,7 +388,7 @@
       ],
       "type": "object",
       "properties": {
-        "groupId": {
+        "group": {
           "description": "The ID of the device group to display",
           "type": "string"
         },
@@ -401,7 +401,7 @@
         }
       },
       "required": [
-        "groupId",
+        "group",
         "command",
         "device"
       ]
@@ -508,7 +508,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "query": {
           "description": "The id of the Data Explorer query to show in the tile",
@@ -874,7 +874,7 @@
       ],
       "type": "object",
       "properties": {
-        "groupId": {
+        "group": {
           "type": "string",
           "description": "The ID of the device group to display"
         },
@@ -1302,7 +1302,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the event chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         }
       },
       "required": [
@@ -1327,7 +1327,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the event chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
           "description": "The format configuration of the event history chart",
@@ -1659,7 +1659,7 @@
       "type": "object",
       "description": "Configuration specifying a set of devices to display data for in a tile.",
       "properties": {
-        "groupId": {
+        "group": {
           "description": "The ID of the device group to display",
           "type": "string"
         },
@@ -1673,7 +1673,7 @@
         }
       },
       "required": [
-        "groupId",
+        "group",
         "devices"
       ]
     },
@@ -1711,7 +1711,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the heat map chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
           "description": "The format configuration of the heatmap chart",
@@ -2118,7 +2118,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the KPI chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
           "description": "The format configuration of the lkv tile",
@@ -2397,7 +2397,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the pie chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
           "description": "The format configuration of the pie chart",
@@ -2864,7 +2864,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the state chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         }
       },
       "required": [
@@ -2889,7 +2889,7 @@
       "properties": {
         "queryRange": {
           "description": "The query range configuration of the state chart",
-          "$ref": "#/definitions/TimeRangeDuration"
+          "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
           "description": "The format configuration of the state history chart",
@@ -3011,8 +3011,8 @@
       "type": "object",
       "description": "Specifies the capability to be displayed in the tile.",
       "properties": {
-        "capabilityId": {
-          "description": "The ID of the capability associated with data to be rendered in the tile.",
+        "capability": {
+          "description": "The path of the capability associated with data to be rendered in the tile.",
           "type": "string"
         },
         "aggregateFunction": {
@@ -3021,7 +3021,7 @@
         }
       },
       "required": [
-        "capabilityId",
+        "capability",
         "aggregateFunction"
       ]
     },
@@ -3091,8 +3091,7 @@
         }
       },
       "required": [
-        "duration",
-        "resolution"
+        "duration"
       ]
     },
     "TimeRangeDuration": {
