@@ -94,7 +94,7 @@
           {
             "in": "path",
             "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
+            "description": "The ISO 3166-2 country/region code, e.g. US.",
             "required": true,
             "type": "string"
           },
@@ -163,7 +163,7 @@
           {
             "in": "path",
             "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
+            "description": "The ISO 3166-2 country/region code, e.g. US.",
             "required": true,
             "type": "string"
           },
@@ -257,7 +257,7 @@
         "tags": [
           "Browse for available countries, cities and area codes"
         ],
-        "summary": "List available offerings of capabilities with rates for the given country",
+        "summary": "List available offerings of capabilities with rates for the given country/region",
         "operationId": "PhoneNumbers_ListOfferings",
         "produces": [
           "application/json"
@@ -266,7 +266,7 @@
           {
             "in": "path",
             "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
+            "description": "The ISO 3166-2 country/region code, e.g. US.",
             "required": true,
             "type": "string"
           },
@@ -360,7 +360,7 @@
           {
             "in": "path",
             "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
+            "description": "The ISO 3166-2 country/region code, e.g. US.",
             "required": true,
             "type": "string"
           },
@@ -1169,7 +1169,7 @@
           "type": "string"
         },
         "countryCode": {
-          "description": "The ISO 3166-2 code of the phone number's country, e.g. US.",
+          "description": "The ISO 3166-2 code of the phone number's country/region, e.g. US.",
           "type": "string"
         },
         "phoneNumberType": {
@@ -1260,7 +1260,7 @@
       }
     },
     "PhoneNumberCountry": {
-      "description": "Represents a country.",
+      "description": "Represents a country/region.",
       "required": [
         "countryCode",
         "localizedName"
@@ -1268,11 +1268,11 @@
       "type": "object",
       "properties": {
         "localizedName": {
-          "description": "Represents the name of the country.",
+          "description": "Represents the name of the country/region.",
           "type": "string"
         },
         "countryCode": {
-          "description": "Represents the abbreviated name of the country.",
+          "description": "Represents the abbreviated name of the country/region.",
           "type": "string"
         }
       }
