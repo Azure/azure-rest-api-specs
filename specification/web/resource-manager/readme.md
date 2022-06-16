@@ -73,6 +73,9 @@ directive:
   - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
     from: StaticSites.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: AppServicePlans.json
+    reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
 
