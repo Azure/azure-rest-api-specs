@@ -13,7 +13,7 @@ If you want to generate sdk with single client, please copy the following config
 ``` yaml
 output-folder: sdk/<ServiveName>/<PackageName>
 require:
- - specification/<RPName>/dataplane/readme.md
+ - specification/<RPName>/data-plane/readme.md
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.
@@ -27,7 +27,7 @@ If you want to generate sdk with multi client, please copy the following configu
 tag: false
 output-folder: sdk/<ServiveName>/<PackageName>
 require:
- - specification/<ServiveName>/dataplane/readme.md
+ - specification/<ServiveName>/data-plane/readme.md
 batch:
  - package-A: true
  - package-B: true
