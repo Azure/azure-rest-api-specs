@@ -5432,30 +5432,6 @@
           "description": "HostPool type for desktop.",
           "x-nullable": false
         },
-        "scalingPlanType": {
-          "enum": [
-            "Pooled",
-            "Personal"
-          ],
-          "x-ms-enum": {
-            "name": "ScalingPlanType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Pooled",
-                "description": "For Pooled HostPools and ScalingPlanSchedules."
-              },
-              {
-                "value": "Personal",
-                "description": "For Personal HostPools and ScalingPlanSchedules."
-              }
-            ]
-          },
-          "default": "Pooled",
-          "type": "string",
-          "description": "ScalingPlan type for HostPools and ScalingPlanSchedules.",
-          "x-nullable": false
-        },
         "exclusionTag": {
           "type": "string",
           "description": "Exclusion tag for scaling plan."
@@ -5479,15 +5455,163 @@
     "ScalingSchedule": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
-        }
+      "required": [
+        "name",
+        "daysOfWeek",
+        "rampUpStartTime",
+        "rampUpLoadBalancingAlgorithm",
+        "rampUpMinimumHostsPct",
+        "rampUpCapacityThresholdPct",
+        "peakStartTime",
+        "peakLoadBalancingAlgorithm",
+        "rampDownStartTime",
+        "rampDownLoadBalancingAlgorithm",
+        "rampDownMinimumHostsPct",
+        "rampDownCapacityThresholdPct",
+        "rampDownForceLogoffUsers",
+        "rampDownStopHostsWhen",
+        "rampDownWaitTimeMinutes",
+        "rampDownNotificationMessage",
+        "offPeakStartTime",
+        "offPeakLoadBalancingAlgorithm"
       ],
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of the ScalingPlanPooledSchedule."
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string"
+          }
+        },
+        "rampUpStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp up period."
+        },
+        "rampUpLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp up period."
+        },
+        "rampUpMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp up period."
+        },
+        "rampUpCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp up period."
+        },
+        "peakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for peak period."
+        },
+        "peakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for peak period."
+        },
+        "rampDownStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp down period."
+        },
+        "rampDownMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp down period."
+        },
+        "rampDownCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp down period."
+        },
+        "rampDownForceLogoffUsers": {
+          "type": "boolean",
+          "description": "Should users be logged off forcefully from hosts."
+        },
+        "rampDownStopHostsWhen": {
+          "enum": [
+            "ZeroSessions",
+            "ZeroActiveSessions"
+          ],
+          "x-ms-enum": {
+            "name": "StopHostsWhen",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Specifies when to stop hosts during ramp down period."
+        },
+        "rampDownWaitTimeMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes to wait to stop hosts during ramp down period."
+        },
+        "rampDownNotificationMessage": {
+          "type": "string",
+          "description": "Notification message for users during ramp down period."
+        },
+        "offPeakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for off-peak period."
         }
       }
     },
@@ -5553,6 +5677,25 @@
     "ScalingPlanPooledScheduleProperties": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
+      "required": [
+        "daysOfWeek",
+        "rampUpStartTime",
+        "rampUpLoadBalancingAlgorithm",
+        "rampUpMinimumHostsPct",
+        "rampUpCapacityThresholdPct",
+        "peakStartTime",
+        "peakLoadBalancingAlgorithm",
+        "rampDownStartTime",
+        "rampDownLoadBalancingAlgorithm",
+        "rampDownMinimumHostsPct",
+        "rampDownCapacityThresholdPct",
+        "rampDownForceLogoffUsers",
+        "rampDownStopHostsWhen",
+        "rampDownWaitTimeMinutes",
+        "rampDownNotificationMessage",
+        "offPeakStartTime",
+        "offPeakLoadBalancingAlgorithm"
+      ],
       "properties": {
         "daysOfWeek": {
           "type": "array",
