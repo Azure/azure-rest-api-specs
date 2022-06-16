@@ -16,7 +16,7 @@ output-folder: sdk/<ServiveName>/<PackageName>
 namespace: <Namespace>
 data-plane: true
 require:
- - specification/<RPName>/dataplane/readme.md
+ - specification/<RPName>/data-plane/readme.md
 ```
 ~~~
 - `namespace`: The namespace of generated sdk.
@@ -33,7 +33,7 @@ output-folder: sdk/<ServiveName>/<PackageName>
 namespace: <Namespace>
 data-plane: true
 require:
- - specification/<ServiveName>/dataplane/readme.md
+ - specification/<ServiveName>/data-plane/readme.md
 batch:
  - package-A: true
  - package-B: true
