@@ -76,6 +76,14 @@
 			"description": "User provided description of the routeset.",
 			"type": "string",
 			"in": "query",
+			"x-ms-parameter-location": "client"
+		},
+		"RoutesetId": {
+			"name": "routesetId",
+			"description": "The identifier for the routeset to query from.",
+			"type": "string",
+			"in": "path",
+			"required": true,
 			"x-ms-parameter-location": "method"
 		},
 		"SubscriptionKey": {
@@ -84,7 +92,7 @@
 			"type": "string",
 			"in": "query",
 			"required": true,
-			"x-ms-parameter-location": "method"
+			"x-ms-parameter-location": "client"
 		}
 	},
 	"paths": {
@@ -97,7 +105,7 @@
 				  "final-state-via": "location"
 				},
 				"x-ms-examples": {
-				  "Create dataset from a converted CAD file provided by conversionId": {
+				  "Create a routeset from a previously created rdataset ": {
 					"$ref": "./examples/Routeset_Create.json"
 				  }
 				},
@@ -110,6 +118,29 @@
 				],
 				"responses": {
 					"202": { "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2" },
+					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
+					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
+					"403": { "description": "Permission, capacity, or authentication issues." },
+					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
+					"500": { "description": "An error occurred while processing the request. Please try again later." }
+				}
+			},
+			"delete": {
+				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created routeset. You can use this API if a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `routesetId` of the routeset to delete.",
+				"operationId": "routesetDelete",
+				"x-ms-examples": {
+					"Delete previously created routeset": {
+					  "$ref": "./examples/Routeset_Delete.json"
+					}
+				  },
+				  "parameters": [
+					{"$ref": "#/parameters/RoutesetId"},
+					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
+					{"$ref": "#/parameters/SubscriptionKey"},
+					{"$ref": "#/parameters/ApiVersion"}
+				  ],
+				"responses": {
+					"204": { "description": "Routeset delete request completed successfully." },
 					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
 					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
 					"403": { "description": "Permission, capacity, or authentication issues." },
