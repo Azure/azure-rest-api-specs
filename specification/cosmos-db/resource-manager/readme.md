@@ -30,7 +30,6 @@ openapi-type: arm
 tag: package-preview-2022-05
 ```
 
-
 ### Tag: package-preview-2022-05
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
@@ -47,6 +46,22 @@ input-file:
   - Microsoft.DocumentDB/preview/2022-05-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2022-05-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2022-05-15-preview/services.json
+tag: package-2022-05
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.DocumentDB/stable/2022-05-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2022-05-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2022-05-15/notebook.json
+  - Microsoft.DocumentDB/stable/2022-05-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2022-05-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2022-05-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-05-15/restorable.json
 ```
 ### Tag: package-preview-2022-02
 
