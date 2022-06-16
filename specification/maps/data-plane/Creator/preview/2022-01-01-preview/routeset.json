@@ -39,6 +39,50 @@
 		  "in": "header"
 		}
 	},
+	"definitions": {
+		"Routeset": {
+			"description": "Detail information for the routeset.",
+			"type": "object",
+			"properties": {
+				"routesetid": {
+					"description": "The unique routeset id for the routeset.",
+					"type": "string",
+					"readOnly": true
+				},
+				"ontology": {
+					"description": "The ontology of the source dataset. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
+					"type": "string",
+					"readOnly": true
+				},
+				"datasetId": {
+					"description": "The unique dataset Id used to create the routeset.",
+					"type": "string",
+					"readOnly": true
+				},
+				"description": {
+					"description": "The description code for the building with the ontology version number.",
+					"type": "string",
+					"readOnly": true
+				},
+				"facilityDetails": {
+					"description": "The facility information and building level ordinal numbers.",
+					"type": "array",
+					"readOnly": true
+				},
+				"creationMode": {
+					"description": "The ontology item that the routeset was generated from.",
+					"type": "string",
+					"readOnly": true
+				},
+				"created": {
+					"description": "***DAVSTA REVIEW**** The created timestamp for the dataset.",
+					"type": "string",
+					"format": "date-time",
+					"readOnly": true
+				}
+			}
+		}
+	},
 	"security": [
 		{
 		  "AADToken": [
@@ -93,6 +137,14 @@
 			"in": "query",
 			"required": true,
 			"x-ms-parameter-location": "client"
+		},
+		"RoutesetOperationId": {
+			"name": "routesetOperationId",
+			"description": "The ID to query the status for the routeset create request.",
+			"type": "string",
+			"in": "path",
+			"required": true,
+			"x-ms-parameter-location": "method"
 		}
 	},
 	"paths": {
@@ -125,6 +177,54 @@
 					"500": { "description": "An error occurred while processing the request. Please try again later." }
 				}
 			},
+			"get": {
+				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all routesets created.",
+				"operationId": "routesetList",
+				"parameters": [
+					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
+					{"$ref": "#/parameters/SubscriptionKey"},
+					{"$ref": "#/parameters/ApiVersion"}
+				],
+				"responses": {
+					"200": { 
+						"description": "List routeset request completed successfully. The response body contains a list of all routesets.",
+						"schema": { "$ref": "#/definitions/Routeset" }
+					},
+					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
+					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
+					"403": { "description": "Permission, capacity, or authentication issues." },
+					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
+					"500": { "description": "An error occurred while processing the request. Please try again later." }
+				}
+			}
+		},
+		"/routesets/{routesetId}": {
+			"get": {
+				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a routeset.",
+				"operationId": "routesetGet",
+				"x-ms-examples": {
+				  "Get details for a previously created dataset": {
+					"$ref": "./examples/Routeset_GetDetails.json"
+				  }
+				},
+				"parameters": [
+					{"$ref": "#/parameters/RoutesetId"},
+					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
+					{"$ref": "#/parameters/SubscriptionKey"},
+					{"$ref": "#/parameters/ApiVersion"}
+				  ],
+				"responses": {
+				  "200": {
+					"description": "The get routeset request completed successfully.",
+					"schema": { "$ref": "#/definitions/Routeset" }
+				  },
+				  "400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
+				  "401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
+				  "403": { "description": "Permission, capacity, or authentication issues." },
+				  "404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
+				  "500": { "description": "An error occurred while processing the request. Please try again later." }
+				}
+			},
 			"delete": {
 				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created routeset. You can use this API if a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `routesetId` of the routeset to delete.",
 				"operationId": "routesetDelete",
@@ -147,6 +247,31 @@
 					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
 					"500": { "description": "An error occurred while processing the request. Please try again later." }
 				}
+			}
+		},
+		"/routesets/operations/{operationId}": {
+			"get": {
+			  "description": "This API allows the caller to view the current progress of a routeset operation and the path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
+			  "operationId": "routesetGetOperation",
+			  "x-ms-examples": {
+				"Get the status of an operation which is still running": { "$ref": "./examples/Routeset_GetOperationStillRunning.json" },
+				"Get the status of an operation which has finished successfully": { "$ref": "./examples/Routeset_GetOperation.json" }
+			  },
+			  "parameters": [
+				{
+				  "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+				},
+				{
+				  "$ref": "#/parameters/ApiVersion"
+				},
+				{
+				  "$ref": "#/parameters/RoutesetOperationId"
+				}
+			  ],
+			  "responses": {
+				"200": { "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2" },
+				"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." }
+			  }
 			}
 		}
 	}
