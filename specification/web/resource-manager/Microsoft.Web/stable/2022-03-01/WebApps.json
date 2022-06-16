@@ -24760,13 +24760,13 @@
           "items": {
             "$ref": "#/definitions/ExpressionRoot"
           },
-          "nextLink": {
-            "description": "The link used to get the next page of recommendations.",
-            "type": "string"
-          },
           "x-ms-identifiers": [
             "path"
           ]
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
         }
       }
     },
@@ -25555,6 +25555,18 @@
           "type": "string"
         }
       }
+    },
+    "Kind": {
+      "type": "string",
+      "enum": [
+        "Stateful",
+        "Stateless"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true
+      },
+      "description": "The workflow kind."
     },
     "KeyType": {
       "type": "string",
@@ -29222,6 +29234,10 @@
             "$ref": "#/definitions/WorkflowParameter"
           },
           "description": "The parameters."
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The workflow kind."
         }
       },
       "description": "The workflow properties."
