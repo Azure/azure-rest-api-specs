@@ -5459,18 +5459,11 @@
         "name",
         "daysOfWeek",
         "rampUpStartTime",
-        "rampUpLoadBalancingAlgorithm",
-        "rampUpMinimumHostsPct",
         "rampUpCapacityThresholdPct",
         "peakStartTime",
-        "peakLoadBalancingAlgorithm",
         "rampDownStartTime",
-        "rampDownLoadBalancingAlgorithm",
-        "rampDownMinimumHostsPct",
         "rampDownCapacityThresholdPct",
-        "rampDownForceLogoffUsers",
-        "offPeakStartTime",
-        "offPeakLoadBalancingAlgorithm"
+        "offPeakStartTime"
       ],
       "properties": {
         "name": {
@@ -5677,18 +5670,11 @@
       "required": [
         "daysOfWeek",
         "rampUpStartTime",
-        "rampUpLoadBalancingAlgorithm",
-        "rampUpMinimumHostsPct",
         "rampUpCapacityThresholdPct",
         "peakStartTime",
-        "peakLoadBalancingAlgorithm",
         "rampDownStartTime",
-        "rampDownLoadBalancingAlgorithm",
-        "rampDownMinimumHostsPct",
         "rampDownCapacityThresholdPct",
-        "rampDownForceLogoffUsers",
-        "offPeakStartTime",
-        "offPeakLoadBalancingAlgorithm"
+        "offPeakStartTime"
       ],
       "properties": {
         "daysOfWeek": {
@@ -5704,7 +5690,11 @@
               "Friday",
               "Saturday"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
           }
         },
         "rampUpStartTime": {
