@@ -474,16 +474,16 @@
       "description": "Application's condition",
       "properties": {
         "property": {
-          "description": "The application Condition's Property, e.g. Severity or AssessmentKey, see examples",
+          "description": "The application Condition's Property, e.g. ID, see examples",
           "type": "string"
         },
         "value": {
-          "description": "The application Condition's Value like severity Low, High or assessments keys, see examples",
+          "description": "The application Condition's Value like IDs that contain some string, see examples",
           "type": "string"
         },
         "operator": {
           "type": "string",
-          "description": "The application Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
+          "description": "The application Condition's Operator, for example Contains for id or In for list of possible IDs, see examples",
           "enum": [
             "Equals",
             "In"
@@ -493,8 +493,8 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Equals",
-                "description": "Checks that the string value of the data defined in Property equals the given value - exact fit"
+                "value": "Contains",
+                "description": "Checks that the string value of the data defined in Property contains the given value"
               },
               {
                 "value": "In",
