@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -175,6 +180,12 @@
         ],
         "operationId": "Redis_Create",
         "x-ms-examples": {
+          "RedisCacheCreateDefaultVersion": {
+            "$ref": "./examples/RedisCacheCreateDefaultVersion.json"
+          },
+          "RedisCacheCreateLatestVersion": {
+            "$ref": "./examples/RedisCacheCreateLatestVersion.json"
+          },
           "RedisCacheCreate": {
             "$ref": "./examples/RedisCacheCreate.json"
           }
@@ -278,6 +289,12 @@
         "responses": {
           "200": {
             "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "202": {
+            "description": "The existing redis cache was successfully updated. Check Azure-AsyncOperation headers to poll detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -1939,7 +1956,7 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)"
+          "description": "Redis version. This should be in the form 'major[.minor]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'."
         },
         "enableNonSslPort": {
           "type": "boolean",
