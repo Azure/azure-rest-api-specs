@@ -460,6 +460,10 @@
         "displayName": {
           "description": "Optional display name for the analysis job.",
           "type": "string"
+        },        
+        "defaultLanguage": {
+            "description": "Default language to use for records requesting automatic language detection.",
+            "type": "string"
         },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -564,6 +568,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -612,6 +619,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1021,6 +1031,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ],
       "required": [
@@ -1370,6 +1383,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1499,6 +1515,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1668,6 +1687,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1965,6 +1987,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2105,6 +2130,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2509,6 +2537,15 @@
         }
       }
     },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
     "DocumentError": {
       "type": "object",
       "required": [
@@ -2625,7 +2662,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       }
     },
