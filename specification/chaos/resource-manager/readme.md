@@ -43,12 +43,12 @@ directive:
       - $.definitions.experiment
 
 input-file:
-  - Microsoft.Chaos/preview/2021-09-15-preview/capabilities.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/experiments.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/operations.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/targets.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/capabilities.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/experiments.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/operations.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/targets.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2022-07-01-preview/capabilityTypes.json
 ```
 
 ### Tag: package-2021-09-15-preview
