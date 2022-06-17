@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "subAccountName": "SubAccount1",
+    "requestBody": {
+      "name": "myMonitor",
+      "type": "Microsoft.Logz/monitors",
+      "properties": {
+        "provisioningState": "Accepted",
+        "monitoringStatus": "Enabled"
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/accounts/SubAccount1",
+        "name": "myMonitor",
+        "type": "Microsoft.Logz/monitors",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/accounts/SubAccount1",
+        "name": "myMonitor",
+        "type": "Microsoft.Logz/monitors",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}
