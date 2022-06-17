@@ -768,6 +768,53 @@
           }
         }
       }
+    },
+      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+      "delete": {
+        "operationId": "SubnetServiceAssociationLink_Delete",
+        "x-ms-examples": {
+          "SubnetServiceAssociationLinkDelete": {
+            "$ref": "./examples/SubnetServiceAssociationLinkDelete.json"
+          }
+        },
+        "summary": "Delete container group virtual network association links.",
+        "description": "Delete container group virtual network association links. The operation does not delete other resources provided by the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Delete started."
+          },
+          "204": {
+            "description": "No Content - the specified container group was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -2306,12 +2353,36 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
+    "ResourceGroupParameter": {
+      "name": "resourceGroup",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
     "ContainerGroupNameParameter": {
       "name": "containerGroupName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the container group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
     "OperationIdParameter": {
