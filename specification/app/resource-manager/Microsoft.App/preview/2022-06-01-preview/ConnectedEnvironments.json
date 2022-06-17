@@ -18,11 +18,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments": {
       "get": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
         "summary": "Get all connectedEnvironments for a subscription.",
         "description": "Description for Get all connectedEnvironments for a subscription.",
-        "operationId": "connectedEnvironments_ListBySubscription",
+        "operationId": "ConnectedEnvironments_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -35,7 +35,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironmentCollection"
+              "$ref": "#/definitions/ConnectedEnvironmentCollection"
             }
           },
           "default": {
@@ -49,8 +49,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List edge environments by subscription": {
-            "$ref": "./examples/connectedEnvironments_ListBySubscription.json"
+          "List connected environments by subscription": {
+            "$ref": "./examples/ConnectedEnvironments_ListBySubscription.json"
           }
         }
       }
@@ -58,9 +58,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments": {
       "get": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
-        "operationId": "connectedEnvironments_ListByResourceGroup",
+        "operationId": "ConnectedEnvironments_ListByResourceGroup",
         "description": "Get all connectedEnvironments in a resource group.",
         "parameters": [
           {
@@ -77,7 +77,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironmentCollection"
+              "$ref": "#/definitions/ConnectedEnvironmentCollection"
             }
           },
           "default": {
@@ -92,7 +92,7 @@
         },
         "x-ms-examples": {
           "List environments by resource group": {
-            "$ref": "./examples/connectedEnvironments_ListByResourceGroup.json"
+            "$ref": "./examples/ConnectedEnvironments_ListByResourceGroup.json"
           }
         }
       }
@@ -100,9 +100,9 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{name}": {
       "get": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
-        "operationId": "connectedEnvironments_Get",
+        "operationId": "ConnectedEnvironments_Get",
         "description": "Get the properties of an connectedEnvironment.",
         "parameters": [
           {
@@ -126,7 +126,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironment"
+              "$ref": "#/definitions/ConnectedEnvironment"
             }
           },
           "default": {
@@ -137,17 +137,17 @@
           }
         },
         "x-ms-examples": {
-          "Get edge environment by name": {
-            "$ref": "./examples/connectedEnvironments_Get.json"
+          "Get connected environment by name": {
+            "$ref": "./examples/ConnectedEnvironments_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
         "description": "Creates or updates an connectedEnvironment.",
-        "operationId": "connectedEnvironments_CreateOrUpdate",
+        "operationId": "ConnectedEnvironments_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -169,7 +169,7 @@
             "description": "Configuration details of the connectedEnvironment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/connectedEnvironment"
+              "$ref": "#/definitions/ConnectedEnvironment"
             }
           },
           {
@@ -180,13 +180,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironment"
+              "$ref": "#/definitions/ConnectedEnvironment"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironment"
+              "$ref": "#/definitions/ConnectedEnvironment"
             }
           },
           "default": {
@@ -198,17 +198,17 @@
         },
         "x-ms-examples": {
           "Create kube environments": {
-            "$ref": "./examples/connectedEnvironments_CreateOrUpdate.json"
+            "$ref": "./examples/ConnectedEnvironments_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
         "summary": "Delete an connectedEnvironment.",
         "description": "Description for Delete an connectedEnvironment.",
-        "operationId": "connectedEnvironments_Delete",
+        "operationId": "ConnectedEnvironments_Delete",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -236,7 +236,7 @@
             "description": "Delete operation is accepted"
           },
           "204": {
-            "description": "connectedEnvironment does not exist"
+            "description": "ConnectedEnvironment does not exist"
           },
           "default": {
             "description": "Common error response.",
@@ -246,18 +246,18 @@
           }
         },
         "x-ms-examples": {
-          "Delete edge environment by name": {
-            "$ref": "./examples/connectedEnvironments_Delete.json"
+          "Delete connected environment by name": {
+            "$ref": "./examples/ConnectedEnvironments_Delete.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "connectedEnvironments"
+          "ConnectedEnvironments"
         ],
-        "summary": "Update Edge Environment's properties.",
+        "summary": "Update connected Environment's properties.",
         "description": "Patches a Managed Environment. Only patching of tags is supported currently",
-        "operationId": "connectedEnvironments_Update",
+        "operationId": "ConnectedEnvironments_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -280,7 +280,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/connectedEnvironment"
+              "$ref": "#/definitions/ConnectedEnvironment"
             }
           },
           "default": {
@@ -292,14 +292,14 @@
         },
         "x-ms-examples": {
           "Patch Managed Environment": {
-            "$ref": "./examples/connectedEnvironments_Patch.json"
+            "$ref": "./examples/ConnectedEnvironments_Patch.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "connectedEnvironment": {
+    "ConnectedEnvironment": {
       "description": "An environment for Kubernetes cluster specialized for web workloads by Azure App Service",
       "type": "object",
       "allOf": [
@@ -312,7 +312,7 @@
           "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
         },
         "properties": {
-          "description": "connectedEnvironment resource specific properties",
+          "description": "ConnectedEnvironment resource specific properties",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -330,7 +330,7 @@
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "connectedEnvironmentProvisioningState",
+                "name": "ConnectedEnvironmentProvisioningState",
                 "modelAsString": true
               }
             },
@@ -353,7 +353,7 @@
         }
       }
     },
-    "connectedEnvironmentCollection": {
+    "ConnectedEnvironmentCollection": {
       "description": "Collection of connectedEnvironments",
       "type": "object",
       "properties": {
@@ -361,7 +361,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/connectedEnvironment"
+            "$ref": "#/definitions/ConnectedEnvironment"
           }
         },
         "nextLink": {
