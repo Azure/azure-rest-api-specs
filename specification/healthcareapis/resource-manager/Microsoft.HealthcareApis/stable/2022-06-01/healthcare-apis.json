@@ -3041,6 +3041,10 @@
           "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
           "type": "boolean"
         },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern for the filter of the metric."
+        },
         "dimensions": {
           "description": "Dimensions of the metric",
           "uniqueItems": false,
@@ -3050,9 +3054,25 @@
           },
           "x-ms-identifiers": []
         },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Whether the metric is internal."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
         "sourceMdmNamespace": {
-          "description": "Name of the MDM namespace. Optional.",
-          "type": "string"
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether regional MDM account enabled."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "The resource Id dimension name override."
         }
       }
     },
