@@ -2907,7 +2907,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3092,7 +3095,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/RequiredTraffic"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         }
       }
     },
@@ -3179,7 +3185,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GitPatternRepository"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "uri": {
           "description": "URI of the repository",
@@ -3882,6 +3891,9 @@
           "items": {
             "$ref": "#/definitions/DeploymentInstance"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -4054,7 +4066,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -4142,7 +4157,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Specifications of the Metrics for Azure Monitoring",
@@ -4150,7 +4168,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4226,7 +4247,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sourceMdmNamespace": {
           "description": "Name of the MDM namespace. Optional.",
@@ -4262,7 +4286,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSku"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -4304,7 +4332,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
         },
         "restrictions": {
           "description": "Gets the restrictions because of which SKU cannot be used. This is\r\nempty if there are no restrictions.",
@@ -4312,7 +4343,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4375,7 +4407,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4439,7 +4474,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4508,7 +4546,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       },
       "x-ms-external": true
@@ -4523,6 +4565,9 @@
           "items": {
             "$ref": "#/definitions/SupportedRuntimeVersion"
           },
+          "x-ms-identifiers": [
+            "version"
+          ],
           "readOnly": true
         }
       },

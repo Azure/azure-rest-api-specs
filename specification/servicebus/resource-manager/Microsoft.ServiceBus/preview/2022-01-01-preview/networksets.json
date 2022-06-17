@@ -1,0 +1,310 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkRuleSets/default": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceNetworkRuleSetCreate": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetCreate.json"
+          }
+        },
+        "operationId": "Namespaces_CreateOrUpdateNetworkRuleSet",
+        "description": "Create or update NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            },
+            "description": "The Namespace IpFilterRule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceNetworkRuleSetGet": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetGet.json"
+          }
+        },
+        "operationId": "Namespaces_GetNetworkRuleSet",
+        "description": "Gets NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkRuleSets": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceNetworkRuleSetList": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetList.json"
+          }
+        },
+        "operationId": "Namespaces_ListNetworkRuleSets",
+        "description": "Gets list of NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NetworkRuleSets for Namespace successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSetListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NWRuleSetIpRules": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "ipMask": {
+          "type": "string",
+          "description": "IP Mask"
+        },
+        "action": {
+          "type": "string",
+          "description": "The IP Filter Action",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleIPAction",
+            "modelAsString": true
+          },
+          "default": "Allow"
+        }
+      },
+      "description": "Description of NetWorkRuleSet - IpRules resource."
+    },
+    "Subnet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of Virtual Network Subnet"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Properties supplied for Subnet"
+    },
+    "NWRuleSetVirtualNetworkRules": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Subnet properties"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Value that indicates whether to ignore missing VNet Service Endpoint"
+        }
+      },
+      "description": "Description of VirtualNetworkRules - NetworkRules resource."
+    },
+    "NetworkRuleSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "NetworkRuleSet properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "trustedServiceAccessEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether Trusted Service Access is Enabled or not."
+            },
+            "defaultAction": {
+              "type": "string",
+              "description": "Default Action for Network Rule Set",
+              "enum": [
+                "Allow",
+                "Deny"
+              ],
+              "x-ms-enum": {
+                "name": "DefaultAction",
+                "modelAsString": true
+              }
+            },
+            "virtualNetworkRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetVirtualNetworkRules"
+              },
+              "description": "List VirtualNetwork Rules"
+            },
+            "ipRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetIpRules"
+              },
+              "description": "List of IpRules"
+            },
+            "publicNetworkAccess": {
+              "description": "This determines if traffic is allowed over public network. By default it is enabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicNetworkAccessFlag",
+                "modelAsString": true
+              },
+              "default": "Enabled"
+            }
+          }
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Description of NetworkRuleSet resource."
+    },
+    "NetworkRuleSetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkRuleSet"
+          },
+          "description": "Result of the List NetworkRuleSet operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of NetworkRuleSet."
+        }
+      },
+      "description": "The response of the List NetworkRuleSet operation."
+    }
+  },
+  "parameters": {}
+}
