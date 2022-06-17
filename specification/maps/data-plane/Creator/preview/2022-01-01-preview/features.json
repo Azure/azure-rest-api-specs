@@ -1,9 +1,9 @@
 {
-  "swagger": "2022-01-01-preview",
+  "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Web Feature Service",
+    "title": "Azure Maps Features Service",
     "version": "2022-01-01-preview",
-    "description": "Azure Maps Web Feature REST APIs"
+    "description": "Azure Maps Features REST APIs"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
@@ -25,7 +25,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2022-01-01-preview](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
@@ -67,7 +67,7 @@
       "default": "2022-01-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "LimitWfs": {
+    "LimitFeatures": {
       "name": "limit",
       "in": "query",
       "type": "integer",
@@ -111,16 +111,34 @@
       "description": "Local identifier of a specific feature",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "FeatureBody": {
+      "in": "body",
+      "name": "feature",
+      "required": true,
+      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "schema": {
+        "$ref": "#/definitions/Feature"
+      }
+    },
+    "FeatureAttributesBody": {
+      "in": "body",
+      "name": "feature attributes",
+      "required": true,
+      "description": "The geometry and properties of a feature.",
+      "schema": {
+        "$ref": "#/definitions/FeatureAttributes"
+      }
     }
   },
   "paths": {
-    "/wfs/datasets/{datasetId}/": {
+    "/features/datasets/{datasetId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Landing Page API provides links to the API definition, the Conformance statements  and the metadata about the feature data in this dataset.",
-        "operationId": "WFS_GetLandingPage",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Landing Page API provides links to the API definition, the Conformance statements  and the metadata about the feature data in this dataset.",
+        "operationId": "Features_GetLandingPage",
         "x-ms-examples": {
           "GetLandingPage": {
-            "$ref": "./examples/wfs/WFS_GetLandingPage.json"
+            "$ref": "./examples/features/Features_GetLandingPage.json"
           }
         },
         "parameters": [
@@ -131,7 +149,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           }
         ],
         "responses": {
@@ -147,13 +165,13 @@
         }
       }
     },
-    "/wfs/datasets/{datasetId}/conformance": {
+    "/features/datasets/{datasetId}/conformance": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.",
-        "operationId": "WFS_ListConformance",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.",
+        "operationId": "Features_ListConformance",
         "x-ms-examples": {
           "GetConformance": {
-            "$ref": "./examples/wfs/WFS_ListConformance.json"
+            "$ref": "./examples/features/Features_ListConformance.json"
           }
         },
         "parameters": [
@@ -164,7 +182,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           }
         ],
         "responses": {
@@ -180,13 +198,13 @@
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections": {
+    "/features/datasets/{datasetId}/collections": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Collections Description API provides descriptions of all the collections in a given dataset.",
-        "operationId": "WFS_GetCollections",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Collections Description API provides descriptions of all the collections in a given dataset.",
+        "operationId": "Features_GetCollections",
         "x-ms-examples": {
           "GetCollections": {
-            "$ref": "./examples/wfs/WFS_GetCollections.json"
+            "$ref": "./examples/features/Features_GetCollections.json"
           }
         },
         "parameters": [
@@ -197,7 +215,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           }
         ],
         "responses": {
@@ -213,13 +231,13 @@
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}": {
+    "/features/datasets/{datasetId}/collections/{collectionId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n  \nThe Collection Description API provides the description of a given collection. It includes the links to the operations that can be performed on the collection.",
-        "operationId": "WFS_GetCollection",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n  \nThe Collection Description API provides the description of a given collection. It includes the links to the operations that can be performed on the collection.",
+        "operationId": "Features_GetCollection",
         "x-ms-examples": {
           "GetCollection": {
-            "$ref": "./examples/wfs/WFS_GetCollection.json"
+            "$ref": "./examples/features/Features_GetCollection.json"
           }
         },
         "parameters": [
@@ -230,7 +248,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -249,13 +267,13 @@
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/definition": {
+    "/features/datasets/{datasetId}/collections/{collectionId}/definition": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n \nThe Collection Definition API provides the detailed data model of a given collection.",
-        "operationId": "WFS_GetCollectionDefinition",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n \nThe Collection Definition API provides the detailed data model of a given collection.",
+        "operationId": "Features_GetCollectionDefinition",
         "x-ms-examples": {
           "GetCollectionDefinition": {
-            "$ref": "./examples/wfs/WFS_GetCollectionDefinition.json"
+            "$ref": "./examples/features/Features_GetCollectionDefinition.json"
           }
         },
         "parameters": [
@@ -266,7 +284,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -285,13 +303,13 @@
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/items": {
+    "/features/datasets/{datasetId}/collections/{collectionId}/items": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Features API returns the list of features in the given collection.",
-        "operationId": "WFS_GetFeatures",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Features API returns the list of features in the given collection.",
+        "operationId": "Features_GetFeatures",
         "x-ms-examples": {
           "GetFeatures": {
-            "$ref": "./examples/wfs/WFS_GetFeatures.json"
+            "$ref": "./examples/features/Features_GetFeatures.json"
           }
         },
         "parameters": [
@@ -302,13 +320,13 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
           },
           {
-            "$ref": "#/parameters/LimitWfs"
+            "$ref": "#/parameters/LimitFeatures"
           },
           {
             "$ref": "#/parameters/Bbox"
@@ -328,15 +346,52 @@
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
+      },
+      "post": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Post Feature API creates a feature with the provided attributes in the given collection.",
+        "operationId": "Features_CreateFeature",
+        "x-ms-examples": {
+          "PostFeature": {
+            "$ref": "./examples/features/Features_PostFeature.json"
+          }
+        },
+        "consumes": [
+          "application/geo+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/CollectionId"
+          },
+          {
+            "$ref": "#/parameters/FeatureBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CreateFeatureResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/items/{featureId}": {
+    "/features/datasets/{datasetId}/collections/{collectionId}/items/{featureId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Feature API returns the feature identified by the provided id in the given collection.",
-        "operationId": "WFS_GetFeature",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Feature API returns the feature identified by the provided id in the given collection.",
+        "operationId": "Features_GetFeature",
         "x-ms-examples": {
           "GetFeature": {
-            "$ref": "./examples/wfs/WFS_GetFeature.json"
+            "$ref": "./examples/features/Features_GetFeature.json"
           }
         },
         "parameters": [
@@ -344,7 +399,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -365,12 +420,86 @@
           }
         }
       },
+      "put": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Put Feature API updates the feature identified by the provided id in the given collection.",
+        "operationId": "Features_PutFeature",
+        "x-ms-examples": {
+          "PutFeature": {
+            "$ref": "./examples/features/Features_PutFeature.json"
+          }
+        },
+        "consumes": [
+          "application/geo+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/CollectionId"
+          },
+          {
+            "$ref": "#/parameters/FeatureId"
+          },
+          {
+            "$ref": "#/parameters/FeatureBody"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Feature Updated."
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "patch": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Patch Feature API updates attributes of a feature identified by the provided id in the given collection.",
+        "operationId": "Features_PatchFeature",
+        "x-ms-examples": {
+          "PatchFeature": {
+            "$ref": "./examples/features/Features_PatchFeature.json"
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/CollectionId"
+          },
+          {
+            "$ref": "#/parameters/FeatureId"
+          },
+          {
+            "$ref": "#/parameters/FeatureAttributesBody"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Feature Updated."
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Delete Feature API deletes the feature identified by the provided id in the given collection. At this point this API supports only facility features. Deleting a facility feature deletes all the child features of that facility recursively.",
-        "operationId": "WFS_DeleteFeature",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Features API is part of Creator. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Delete Feature API deletes the feature identified by the provided id in the given collection. At this point this API supports only facility features. Deleting a facility feature deletes all the child features of that facility recursively.",
+        "operationId": "Features_DeleteFeature",
         "x-ms-examples": {
           "DeleteFeature": {
-            "$ref": "./examples/wfs/WFS_DeleteFeature.json"
+            "$ref": "./examples/features/Features_DeleteFeature.json"
           }
         },
         "parameters": [
@@ -378,7 +507,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "dataset.json#/parameters/DatasetId"
+            "$ref": "../2.0/dataset.json#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -409,10 +538,10 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           }
         }
       }
@@ -430,16 +559,15 @@
             "type": "string"
           },
           "example": [
-            "http://www.opengis.net/spec/wfs-1/3.0/req/core",
-            "http://www.opengis.net/spec/wfs-1/3.0/req/oas30",
-            "http://www.opengis.net/spec/wfs-1/3.0/req/html",
-            "http://www.opengis.net/spec/wfs-1/3.0/req/geojson"
+            "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+            "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas3",
+            "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
           ]
         }
       }
     },
-    "WFSEndpointLink": {
-      "description": "Links to other WFS endpoints",
+    "FeaturesEndpointLink": {
+      "description": "Links to other Features endpoints",
       "type": "object",
       "required": [
         "href"
@@ -482,10 +610,10 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           },
           "example": [
             {
@@ -543,10 +671,10 @@
           "example": "Buildings in the city of Bonn."
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           },
           "example": [
             {
@@ -666,10 +794,10 @@
           }
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           }
         }
       }
@@ -739,10 +867,10 @@
           "type": "integer"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           }
         }
       }
@@ -760,11 +888,70 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
+          "description": "Links to other Features endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WFSEndpointLink"
+            "$ref": "#/definitions/FeaturesEndpointLink"
           }
+        }
+      }
+    },
+    "CreateFeatureResult": {
+      "description": "Response after a feature is successfully created.",
+      "type": "object",
+      "required": [
+        "id",
+        "ontology",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "description": "Identifier for the feature.",
+          "type": "string"
+        },
+        "ontology": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+        },
+        "links": {
+          "description": "Links to other Features endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesEndpointLink"
+          }
+        }
+      }
+    },
+    "Feature": {
+      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "x-ms-discriminator-value": "Feature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
+        },
+        {
+          "properties": {
+            "id": {
+              "description": "Identifier for the feature.",
+              "type": "string"
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/FeatureAttributes"
+        }
+      ]
+    },
+    "FeatureAttributes": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "type": "object"
         }
       }
     }
