@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "name": "testenv",
+    "api-version": "2022-06-01-preview",
+    "kind": "kubernetes",
+    "location": "East US",
+    "extendedLocation": {
+      "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+      "type": "CustomLocation"
+    },
+    "environmentEnvelope": {
+      "location": "East US",
+      "properties": {
+        "staticIp": "1.2.3.4"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testenv",
+        "name": "testenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "testenv.k4apps.io",
+          "staticIp": "1.2.3.4"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testenv",
+        "name": "testenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Waiting",
+          "deploymentErrors": null,
+          "defaultDomain": "testenv.k4apps.io",
+          "staticIp": "1.2.3.4"
+        }
+      }
+    }
+  }
+}

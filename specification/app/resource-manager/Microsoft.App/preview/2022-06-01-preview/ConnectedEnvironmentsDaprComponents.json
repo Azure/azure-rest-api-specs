@@ -15,12 +15,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/daprComponents": {
       "get": {
         "tags": [
           "DaprComponents"
         ],
-        "summary": "Get the Dapr Components for a managed environment.",
+        "summary": "Get the Dapr Components for a connected environment.",
         "operationId": "DaprComponents_List",
         "parameters": [
           {
@@ -32,7 +32,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -44,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponentsCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentsCollection"
             }
           },
           "default": {
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/daprComponents/{componentName}": {
       "get": {
         "tags": [
           "DaprComponents"
@@ -81,7 +81,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -112,7 +112,7 @@
         },
         "x-ms-examples": {
           "Get Dapr Component": {
-            "$ref": "./examples/DaprComponents_Get.json"
+            "$ref": "./examples/ConnectedEnvironmentDaprComponents_Get.json"
           }
         }
       },
@@ -121,7 +121,7 @@
           "DaprComponents"
         ],
         "summary": "Creates or updates a Dapr Component.",
-        "description": "Creates or updates a Dapr Component in a Managed Environment.",
+        "description": "Creates or updates a Dapr Component in a connected environment.",
         "operationId": "DaprComponents_CreateOrUpdate",
         "parameters": [
           {
@@ -133,7 +133,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -150,7 +150,7 @@
             "description": "Configuration details of the Dapr Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           {
@@ -161,7 +161,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -174,7 +174,7 @@
         "x-ms-long-running-operation": false,
         "x-ms-examples": {
           "Create or update dapr component": {
-            "$ref": "./examples/DaprComponents_CreateOrUpdate.json"
+            "$ref": "./examples/ConnectedEnvironmentDaprComponents_CreateOrUpdate.json"
           }
         }
       },
@@ -183,7 +183,7 @@
           "DaprComponents"
         ],
         "summary": "Delete a Dapr Component.",
-        "description": "Delete a Dapr Component from a Managed Environment.",
+        "description": "Delete a Dapr Component from a connected environment.",
         "operationId": "DaprComponents_Delete",
         "parameters": [
           {
@@ -195,7 +195,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -226,13 +226,13 @@
         },
         "x-ms-examples": {
           "Delete dapr component": {
-            "$ref": "./examples/DaprComponents_Delete.json"
+            "$ref": "./examples/ConnectedEnvironmentDaprComponents_Delete.json"
           }
         },
         "x-ms-long-running-operation": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets": {
       "post": {
         "tags": [
           "DaprComponents"
@@ -249,7 +249,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -268,7 +268,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprSecretsCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSecretsCollection"
             }
           },
           "default": {
@@ -280,129 +280,8 @@
         },
         "x-ms-examples": {
           "List Container Apps Secrets": {
-            "$ref": "./examples/DaprComponents_ListSecrets.json"
+            "$ref": "./examples/ConnectedEnvironmentDaprComponents_ListSecrets.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "DaprComponentsCollection": {
-      "description": "Dapr Components ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DaprComponent"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DaprComponent": {
-      "description": "Dapr Component.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Dapr Component resource specific properties",
-          "type": "object",
-          "properties": {
-            "componentType": {
-              "description": "Component type",
-              "type": "string"
-            },
-            "version": {
-              "description": "Component version",
-              "type": "string"
-            },
-            "ignoreErrors": {
-              "description": "Boolean describing if the component errors are ignores",
-              "type": "boolean"
-            },
-            "initTimeout": {
-              "description": "Initialization timeout",
-              "type": "string"
-            },
-            "secrets": {
-              "description": "Collection of secrets used by a Dapr component",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/Secret"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "metadata": {
-              "description": "Component metadata",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DaprMetadata"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "scopes": {
-              "description": "Names of container apps that can use this Dapr component",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DaprMetadata": {
-      "description": "Dapr component metadata.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Metadata property name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Metadata property value.",
-          "type": "string"
-        },
-        "secretRef": {
-          "description": "Name of the Dapr Component secret from which to pull the metadata property value.",
-          "type": "string"
-        }
-      }
-    },
-    "DaprSecretsCollection": {
-      "description": "Dapr component Secrets Collection ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of secrets used by a Dapr component",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/Secret"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     }
