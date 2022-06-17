@@ -769,7 +769,7 @@
         }
       }
     },
-      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
       "delete": {
         "operationId": "SubnetServiceAssociationLink_Delete",
         "x-ms-examples": {
@@ -787,7 +787,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/VirtualNetworkNameParameter"
@@ -2347,14 +2347,6 @@
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroup",
       "in": "path",
       "required": true,
       "type": "string",
