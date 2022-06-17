@@ -65,7 +65,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-powershell
   - repo: azure-sdk-for-java
 ```
