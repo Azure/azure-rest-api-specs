@@ -27106,39 +27106,6 @@
         }
       }
     },
-    "Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "The base resource type."
-    },
     "Response": {
       "type": "object",
       "additionalProperties": false,
@@ -27313,7 +27280,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ]
     },
@@ -29133,7 +29100,7 @@
       "description": "The workflow type.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ]
     },
@@ -29491,7 +29458,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ]
     },
@@ -30076,7 +30043,7 @@
       "description": "The workflow version.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ]
     },
