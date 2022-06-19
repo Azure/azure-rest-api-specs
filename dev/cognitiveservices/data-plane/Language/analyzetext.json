@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service",
@@ -136,6 +136,12 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Submit Extractive Summarization Job Request": {
+            "$ref": "./examples/text/SuccessfulExtractiveSummarizationJobsSubmitRequest.json"
+          },
+          "Successful Submit Abstractive Summarization Job Request": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationJobsSubmitRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -183,6 +189,12 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Extractive Summarization Job Status Request": {
+            "$ref": "./examples/text/SuccessfulExtractiveSummarizationJobStatusRequest.json"
+          },
+          "Successful Get Abstractive Summarization Job Status Request": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationJobStatusRequest.json"
           }
         }
       }
@@ -256,6 +268,7 @@
         "EntityLinking",
         "Healthcare",
         "ExtractiveSummarization",
+        "AbstractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification"
@@ -292,6 +305,7 @@
         "EntityLinkingLROResults",
         "HealthcareLROResults",
         "ExtractiveSummarizationLROResults",
+        "AbstractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults"
@@ -460,10 +474,10 @@
         "displayName": {
           "description": "Optional display name for the analysis job.",
           "type": "string"
-        },        
+        },
         "defaultLanguage": {
-            "description": "Default language to use for records requesting automatic language detection.",
-            "type": "string"
+          "description": "Default language to use for records requesting automatic language detection.",
+          "type": "string"
         },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -2684,6 +2698,21 @@
           "type": "string"
         }
       }
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
     }
   },
   "parameters": {}

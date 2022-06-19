@@ -1,5 +1,5 @@
 ﻿{
-  "swagger": "6.6",
+  "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
@@ -721,6 +721,71 @@
           "maximum": 10,
           "minimum": 1
         }
+      }
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
+        "summaryLength": {
+          "$ref": "#/definitions/SummaryLengthType"
+        },
+        "phraseControls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhraseControl"
+          }
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "SummaryLengthType": {
+      "enum": [
+        "short",
+        "medium-short",
+        "medium",
+        "medium-long",
+        "long",
+        "extra-long"
+      ],
+      "type": "string",
+      "description": "Control the length range of the summary.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SummaryLengthType"
+      }
+    },
+    "PhraseControl": {
+      "type": "object",
+      "description": "Control the phrases to be used in the summary.",
+      "properties": {
+        "targetPhrase": {
+          "type": "string",
+          "description": "The target phrase to control."
+        },
+        "strategy": {
+          "$ref": "#/definitions/PhraseControlStrategy"
+        }
+      }
+    },
+    "PhraseControlStrategy": {
+      "enum": [
+        "encourage",
+        "discourage",
+        "forbidden"
+      ],
+      "type": "string",
+      "description": "The strategy to use in phrase control.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PhraseControlStrategy"
       }
     }
   },
