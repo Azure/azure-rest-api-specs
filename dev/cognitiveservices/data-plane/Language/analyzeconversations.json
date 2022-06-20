@@ -1995,7 +1995,8 @@
       "type": "object",
       "description": "Supported parameters for an conversational summarization task.",
       "required": [
-        "summaryAspects"
+        "summaryAspects",
+        "aspects"
       ],
       "properties": {
         "summaryAspects": {
@@ -2010,12 +2011,23 @@
               "name": "SummaryAspect",
               "modelAsString": true
             }
+          },
+          "deprecated": true
+        },
+        "aspects": {
+          "type": "array",
+          "description": "Summary aspects. Build-in aspects include: issue, resolution, chapterTitle and generic. Custom aspect can be used in custom model.",
+          "items": {
+            "type": "string"
           }
         }
       },
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        },
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParameters"
         }
       ]
     },
@@ -2089,6 +2101,13 @@
         },
         "text": {
           "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/SummaryContext"
+          }
         }
       },
       "required": [
