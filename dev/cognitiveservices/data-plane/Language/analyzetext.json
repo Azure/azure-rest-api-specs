@@ -136,9 +136,6 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
-          },
-          "Successful Submit Abstractive Summarization Job Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -186,9 +183,6 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
-          },
-          "Successful Get Abstractive Summarization Job Status Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
           }
         }
       }
@@ -264,8 +258,7 @@
         "ExtractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification",
-        "AbstractiveSummarization"
+        "CustomMultiLabelClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -301,8 +294,7 @@
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults",
-        "AbstractiveSummarizationLROResults"
+        "CustomMultiLabelClassificationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -2699,104 +2691,6 @@
           "type": "string"
         }
       }
-    },
-    "AbstractiveSummarizationLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for an Abstractive Summarization task.",
-      "properties": {
-        "parameters": {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "AbstractiveSummarization"
-    },
-    "AbstractiveSummarizationLROResults": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/AbstractiveSummarizationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
-    },
-    "AbstractiveSummarizationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "AbstractiveSummaryDocumentResult": {
-      "type": "object",
-      "properties": {
-        "summaries": {
-          "type": "array",
-          "description": "A list of abstractive summaries.",
-          "items": {
-            "$ref": "#/definitions/AbstractiveSummary"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "summaries"
-      ]
-    },
-    "AbstractiveSummary": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text of the summary."
-        },
-        "contexts": {
-          "type": "array",
-          "description": "The context list of the summary.",
-          "items": {
-            "$ref": "common.json#/definitions/SummaryContext"
-          }
-        }
-      },
-      "required": [
-        "text"
-      ]
     }
   },
   "parameters": {}
