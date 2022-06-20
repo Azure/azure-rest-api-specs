@@ -5455,16 +5455,6 @@
     "ScalingSchedule": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
-      "required": [
-        "name",
-        "daysOfWeek",
-        "rampUpStartTime",
-        "rampUpCapacityThresholdPct",
-        "peakStartTime",
-        "rampDownStartTime",
-        "rampDownCapacityThresholdPct",
-        "offPeakStartTime"
-      ],
       "properties": {
         "name": {
           "type": "string",
@@ -5667,28 +5657,19 @@
     "ScalingPlanPooledScheduleProperties": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
-      "required": [
-        "daysOfWeek",
-        "rampUpStartTime",
-        "rampUpCapacityThresholdPct",
-        "peakStartTime",
-        "rampDownStartTime",
-        "rampDownCapacityThresholdPct",
-        "offPeakStartTime"
-      ],
       "properties": {
         "daysOfWeek": {
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
             "enum": [
-              "Sunday",
               "Monday",
               "Tuesday",
               "Wednesday",
               "Thursday",
               "Friday",
-              "Saturday"
+              "Saturday",
+              "Sunday"
             ],
             "type": "string",
             "x-ms-enum": {
