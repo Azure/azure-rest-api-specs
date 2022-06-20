@@ -2783,36 +2783,9 @@
       "type": "object",
       "description": "Request body for CanMigrate operation.",
       "properties": {
-        "type": {
-          "description": "The type of profile to migrate from.",
-          "enum":
-          [
-            "Classic",
-            "FirstParty"
-          ],
-          "type": "string",
-          "x-ms-enum":{
-            "name": "canMigrateType",
-            "modelAsString": true
-          }
-        },
         "classicResourceReference": {
           "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
           "$ref": "#/definitions/ResourceReference"
-        },
-        "FirstPartyReference": {
-        "description": "Resource reference of the first party cdn that need to be migrated.",
-        "TenantId": {
-          "description": "Tenant Id of first party customer",
-          "type": "string"
-        },
-        "PartnerId": {
-          "description": "Partner Id of first party customer",
-          "type": "string"
-        },
-        "SKU": {
-          "description": "SKU for migrated profile",
-          "type": "string"
         }
       }
     },
