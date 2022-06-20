@@ -117,6 +117,7 @@
       "name": "feature",
       "required": true,
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "x-ms-parameter-location": "client",
       "schema": {
         "$ref": "#/definitions/Feature"
       }
@@ -126,6 +127,7 @@
       "name": "featureAttributes",
       "required": true,
       "description": "The geometry and properties of a feature.",
+      "x-ms-parameter-location": "client",
       "schema": {
         "$ref": "#/definitions/FeatureAttributes"
       }
@@ -930,17 +932,20 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
         },
         {
-          "properties": {
-            "id": {
-              "description": "Identifier for the feature.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/FeatureId"
         },
         {
           "$ref": "#/definitions/FeatureAttributes"
         }
       ]
+    },
+    "FeatureId": {
+      "properties": {
+        "id": {
+          "description": "Identifier for the feature.",
+          "type": "string"
+        }
+      }
     },
     "FeatureAttributes": {
       "type": "object",
