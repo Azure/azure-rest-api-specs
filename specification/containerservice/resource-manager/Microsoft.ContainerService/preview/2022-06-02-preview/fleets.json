@@ -556,7 +556,8 @@
             "Failed",
             "Canceled",
             "Creating",
-            "Deleting"
+            "Deleting",
+            "Updating"
           ],
           "description": "The provisioning state of the last accepted operation."
         }
@@ -668,11 +669,6 @@
           ],
           "description": "The ARM resource id of the cluster that joins the fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'."
         },
-        "clusterLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The region where the member cluster is located."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -710,7 +706,7 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 63,
+      "maxLength": 50,
       "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
       "description": "The name of the fleet member resource.",
       "x-ms-parameter-location": "method"
