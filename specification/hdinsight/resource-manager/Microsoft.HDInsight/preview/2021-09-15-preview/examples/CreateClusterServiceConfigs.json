@@ -1,0 +1,178 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2021-09-15-preview",
+    "clusterPoolName": "clusterpool1",
+    "clusterName": "cluster1",
+    "serviceConfigName": "serviceConfig1",
+    "ServiceConfig": {
+      "location": "West US 2",
+      "properties": {
+        "serviceConfigsProfiles": [
+          {
+            "serviceName": "TestService1",
+            "configs": [
+              {
+                "component": "TestComp1",
+                "files": [
+                  {
+                    "fileName": "TestFile1",
+                    "values": {
+                      "test.config.1": "1",
+                      "test.config.2": "2"
+                    }
+                  },
+                  {
+                    "fileName": "TestFile2",
+                    "values": {
+                      "test.config.3": "3",
+                      "test.config.4": "4"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "TestComp2",
+                "files": [
+                  {
+                    "fileName": "TestFile3",
+                    "content": "testContent",
+                    "path": "testPath"
+                  },
+                  {
+                    "fileName": "TestFile4",
+                    "values": {
+                      "test.config.7": "7",
+                      "test.config.8": "8"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serviceConfigsProfiles": [
+            {
+              "serviceName": "TestService1",
+              "configs": [
+                {
+                  "component": "TestComp1",
+                  "files": [
+                    {
+                      "fileName": "TestFile1",
+                      "values": {
+                        "test.config.1": "1",
+                        "test.config.2": "2"
+                      }
+                    },
+                    {
+                      "fileName": "TestFile2",
+                      "values": {
+                        "test.config.3": "3",
+                        "test.config.4": "4"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "TestComp2",
+                  "files": [
+                    {
+                      "fileName": "TestFile3",
+                      "content": "testContent",
+                      "path": "testPath"
+                    },
+                    {
+                      "fileName": "TestFile4",
+                      "values": {
+                        "test.config.7": "7",
+                        "test.config.8": "8"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Accepted",
+          "serviceConfigsProfiles": [
+            {
+              "serviceName": "TestService1",
+              "configs": [
+                {
+                  "component": "TestComp1",
+                  "files": [
+                    {
+                      "fileName": "TestFile1",
+                      "values": {
+                        "test.config.1": "1",
+                        "test.config.2": "2"
+                      }
+                    },
+                    {
+                      "fileName": "TestFile2",
+                      "values": {
+                        "test.config.3": "3",
+                        "test.config.4": "4"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "TestComp2",
+                  "files": [
+                    {
+                      "fileName": "TestFile3",
+                      "content": "testContent",
+                      "path": "testPath"
+                    },
+                    {
+                      "fileName": "TestFile4",
+                      "values": {
+                        "test.config.7": "7",
+                        "test.config.8": "8"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}
