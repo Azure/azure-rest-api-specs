@@ -67,7 +67,7 @@
             "schema": {
               "$ref": "#/definitions/Fleet"
             },
-            "description": "The fleet to create or update."
+            "description": "The Fleet to create or update."
           }
         ],
         "responses": {
@@ -125,7 +125,7 @@
             "schema": {
               "$ref": "#/definitions/FleetPatch"
             },
-            "description": "The properties of a fleet to update."
+            "description": "The properties of a Fleet to update."
           }
         ],
         "responses": {
@@ -321,7 +321,7 @@
         ],
         "operationId": "FleetMembers_CreateOrUpdate",
         "summary": "Creates or updates a fleet member.",
-        "description": "A member contains a reference to an existing Kubernetes cluster. Creating a member makes the referenced cluster join the fleet.",
+        "description": "A member contains a reference to an existing Kubernetes cluster. Creating a member makes the referenced cluster join the Fleet.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -351,7 +351,7 @@
             "schema": {
               "$ref": "#/definitions/FleetMember"
             },
-            "description": "The fleet member to create or update."
+            "description": "The Fleet member to create or update."
           }
         ],
         "responses": {
@@ -380,7 +380,7 @@
           "FleetMembers"
         ],
         "operationId": "FleetMembers_Get",
-        "summary": "Gets a fleet member.",
+        "summary": "Gets a Fleet member.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -424,7 +424,7 @@
         ],
         "operationId": "FleetMembers_Delete",
         "summary": "Deletes a fleet member.",
-        "description": "Deleting a fleet member results in the member cluster leaving fleet. The Member azure resource is deleted upon success. The underlying cluster is not deleted.",
+        "description": "Deleting a Fleet member results in the member cluster leaving fleet. The Member azure resource is deleted upon success. The underlying cluster is not deleted.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -523,7 +523,7 @@
           "description": "Resource Etag."
         },
         "properties": {
-          "description": "Properties of a fleet.",
+          "description": "Properties of a Fleet.",
           "$ref": "#/definitions/FleetProperties",
           "x-ms-client-flatten": true
         }
@@ -533,14 +533,14 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The fleet resource which contains multiple Kubernetes clusters as its members."
+      "description": "The Fleet resource which contains multiple Kubernetes clusters as its members."
     },
     "FleetProperties": {
       "type": "object",
-      "description": "Properties of a fleet.",
+      "description": "Properties of a Fleet.",
       "properties": {
         "hubProfile": {
-          "description": "The FleetHubProfile configures the fleet's hub. it is enabled by default and can be disabled by setting the hubMode property.",
+          "description": "The FleetHubProfile configures the Fleet's hub.",
           "$ref": "#/definitions/FleetHubProfile",
           "x-ms-client-flatten": true
         },
@@ -565,7 +565,7 @@
     },
     "FleetHubProfile": {
       "type": "object",
-      "description": "The FleetHubProfile configures the fleet hub. it is enabled by default and can be disabled by setting the hubMode property.",
+      "description": "The FleetHubProfile configures the fleet hub.",
       "properties": {
         "dnsPrefix": {
           "type": "string",
@@ -573,17 +573,17 @@
             "read",
             "create"
           ],
-          "description": "DNS prefix used to create the FQDN for the fleet hub."
+          "description": "DNS prefix used to create the FQDN for the Fleet hub."
         },
         "fqdn": {
           "readOnly": true,
           "type": "string",
-          "description": "The FQDN of the fleet hub."
+          "description": "The FQDN of the Fleet hub."
         },
         "kubernetesVersion": {
           "readOnly": true,
           "type": "string",
-          "description": "The Kubernetes version of the fleet hub."
+          "description": "The Kubernetes version of the Fleet hub."
         }
       }
     },
@@ -595,11 +595,11 @@
           "items": {
             "$ref": "#/definitions/Fleet"
           },
-          "description": "The list of fleets."
+          "description": "The list of Fleets."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next page of fleets.",
+          "description": "The URL to get the next page of Fleets.",
           "readOnly": true
         }
       },
@@ -613,19 +613,19 @@
           "items": {
             "$ref": "#/definitions/FleetMember"
           },
-          "description": "The list of members in a given fleet."
+          "description": "The list of members in a given Fleet."
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "The URL to get the next page of fleet members."
+          "description": "The URL to get the next page of Fleet members."
         }
       },
       "description": "The response from the List FleetMembers operation."
     },
     "FleetPatch": {
       "type": "object",
-      "description": "Properties of a fleet that can be patched.",
+      "description": "Properties of a Fleet that can be patched.",
       "properties": {
         "tags": {
           "type": "object",
@@ -643,10 +643,10 @@
     },
     "FleetMember": {
       "type": "object",
-      "description": "A member of the fleet. It contains a reference to an existing Kubernetes cluster on Azure, which is a member of the fleet.",
+      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
       "properties": {
         "properties": {
-          "description": "Properties of a fleet member.",
+          "description": "Properties of a Fleet member.",
           "$ref": "#/definitions/FleetMemberProperties",
           "x-ms-client-flatten": true
         }
@@ -658,7 +658,7 @@
       ]
     },
     "FleetMemberProperties": {
-      "description": "Properties of a fleet member.",
+      "description": "Properties of a Fleet member.",
       "type": "object",
       "properties": {
         "clusterResourceId": {
@@ -667,7 +667,7 @@
             "read",
             "create"
           ],
-          "description": "The ARM resource id of the cluster that joins the fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'."
+          "description": "The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'."
         },
         "provisioningState": {
           "readOnly": true,
@@ -681,7 +681,8 @@
             "Failed",
             "Canceled",
             "Joining",
-            "Leaving"
+            "Leaving",
+            "Updating"
           ],
           "description": "The provisioning state of the last accepted operation."
         }
@@ -697,7 +698,7 @@
       "minLength": 1,
       "maxLength": 63,
       "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
-      "description": "The name of the fleet resource.",
+      "description": "The name of the Fleet resource.",
       "x-ms-parameter-location": "method"
     },
     "FleetMemberNameParameter": {
@@ -708,7 +709,7 @@
       "minLength": 1,
       "maxLength": 50,
       "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
-      "description": "The name of the fleet member resource.",
+      "description": "The name of the Fleet member resource.",
       "x-ms-parameter-location": "method"
     },
     "ClusterNameParameter": {
@@ -716,7 +717,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the kubernetes cluster.",
+      "description": "The name of the Kubernetes cluster.",
       "x-ms-parameter-location": "method"
     },
     "IfMatchHeader": {
