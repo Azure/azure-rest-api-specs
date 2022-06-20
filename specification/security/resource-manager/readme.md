@@ -56,6 +56,14 @@ directive:
     where: $.paths
     from: standards.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: governanceRules.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: governanceAssignments.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -73,6 +81,14 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Security/stable/2022-05-01/settings.json
+```
 
 ### Tag: package-preview-2022-05
 
@@ -81,6 +97,7 @@ These settings apply only when `--tag=package-preview-2022-05-only` is specified
 ```yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+```
 ```
 ### Tag: package-2021-11
 
@@ -264,10 +281,12 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/stable/2021-11-01/alerts.json
-- Microsoft.Security/stable/2021-07-01/settings.json
+- Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 
 # Needed when there is more than one input file
 override-info:
@@ -541,6 +560,18 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-07-only
+
+These settings apply only when `--tag=package-2021-07-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-07-only'
+input-file:
+- Microsoft.Security/stable/2021-07-01/settings.json
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-preview-2021-07-preview-only
 
 These settings apply only when `--tag=package-preview-2021-07-preview-only` is specified on the command line.
@@ -552,6 +583,18 @@ input-file:
 override-info:
   title: SecurityCenter
 ```
+
+### Tag: package-preview-2022-01
+These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
+```yaml $(tag) == 'package-2022-01-preview-only'
+input-file:
+  - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+  - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
+```
+# Needed when there is more than one input file
+override-info:
+title: SecurityCenter
+``` 
 
 ---
 
@@ -566,7 +609,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
