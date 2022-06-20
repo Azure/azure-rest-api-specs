@@ -2083,6 +2083,312 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/dedicatedVIPs": {
+      "get": {
+        "tags": [
+          "DedicatedVIPs"
+        ],
+        "description": "Lists all of the existing dedicated VIPs within a profile.",
+        "operationId": "DedicatedVIPs_ListByProfile",
+        "x-ms-examples": {
+          "DedicatedVIPs_ListByProfile": {
+            "$ref": "./examples/DedicatedVIPs_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIPListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/dedicatedVIPs/{dedicatedVIPName}": {
+      "get": {
+        "tags": [
+          "DedicatedVIPs"
+        ],
+        "description": "Gets an existing dedicated VIP within a profile.",
+        "operationId": "DedicatedVIPs_Get",
+        "x-ms-examples": {
+          "DedicatedVIPs_Get": {
+            "$ref": "./examples/DedicatedVIPs_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DedicatedVIPName",
+            "in": "path",
+            "description": "Name of the dedicated VIP which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DedicatedVIPs"
+        ],
+        "description": "Creates a new dedicated VIP within the specified profile.",
+        "operationId": "DedicatedVIPs_Create",
+        "x-ms-examples": {
+          "DedicatedVIPs_Create": {
+            "$ref": "./examples/DedicatedVIPs_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dedicatedVIPName",
+            "in": "path",
+            "description": "Name of the dedicated VIP which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dedicatedVIP",
+            "in": "body",
+            "description": "dedicated VIP properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new dedicated VIP has been created.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "DedicatedVIPs"
+        ],
+        "description": "Updates an existing dedicated VIP within a profile.",
+        "operationId": "DedicatedVIPs_Update",
+        "x-ms-examples": {
+          "DedicatedVIPs_Update": {
+            "$ref": "./examples/DedicatedVIPs_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dedicatedVIPName",
+            "in": "path",
+            "description": "Name of the dedicated VIP which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DedicatedVIPUpdateProperties",
+            "in": "body",
+            "description": "dedicated VIP properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIPUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DedicatedVIP"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "DedicatedVIPs"
+        ],
+        "description": "Deletes an existing dedicated VIP within a profile.",
+        "operationId": "DedicatedVIPs_Delete",
+        "x-ms-examples": {
+          "AFDOriginGroups_Delete": {
+            "$ref": "./examples/DedicatedVIPs_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dedicatedVIPName",
+            "in": "path",
+            "description": "Name of the dedicated VIP which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the dedicated VIP was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets": {
       "get": {
         "tags": [
@@ -4049,6 +4355,46 @@
         }
       ]
     },
+    "DedicatedVIPCertificate": {
+      "description": "Dedicated VIP Certificate used for HTTPS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Certificate version.",
+          "type": "string"
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "useLatestVersion": {
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ValidateSecretInput": {
       "description": "Input of the secret to be validated.",
       "type": "object",
@@ -4613,7 +4959,8 @@
         "UrlSigningKey",
         "CustomerCertificate",
         "ManagedCertificate",
-        "AzureFirstPartyManagedCertificate"
+        "AzureFirstPartyManagedCertificate",
+        "DedicatedVIPCertificate"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4737,6 +5084,62 @@
           "$ref": "#/definitions/SecretParameters"
         }
       ]
+    },
+    "DedicatedVIPCertificateParameters": {
+      "description": "Dedicated VIP Certificate used for https",
+      "x-ms-discriminator-value": "DedicatedVIPCertificate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "required": [
+        "secretSource"
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        },
+        "useLatestVersion": {
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "RuleSetListResult": {
       "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
@@ -5033,6 +5436,63 @@
         }
       }
     },
+    "DedicatedVIP": {
+      "description": "Dedicated VIP is used for registering path of domains.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedVIPProperties"
+        }
+      }
+    },
+    "DedicatedVIPProperties": {
+      "description": "The JSON object that contains the properties of the Dedicated VIP.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DedicatedVIPUpdatePropertiesParameters"
+        }
+      ],
+      "name": {
+        "description": "The name of dedicated VIP.",
+        "type": "string"
+      },
+      "virtualIP": {
+        "description": "The virtual IP of dedicated VIP.",
+        "type": "string"
+      }
+    },
+    "DedicatedVIPUpdateParameters": {
+      "type": "object",
+      "description": "Dedicated VIP properties needed for Dedicated VIP creation or update.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedVIPUpdatePropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DedicatedVIPUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the Dedicated VIP to create.",
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the Dedicated VIP.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificate": {
+          "description": "The certificate that bind withe dedicated VIP.",
+          "$ref": "#/definitions/DedicatedVIPCertificate"
+        }
+      }
+    },
     "LoadBalancingSettingsParameters": {
       "description": "Round-Robin load balancing settings for a backend pool",
       "type": "object",
@@ -5071,20 +5531,20 @@
         }
       }
     },
-    "RouteListResult": {
-      "description": "Result of the request to list routes. It contains a list of route objects and a URL link to get the next set of results.",
+    "DedicatedVIPListResult": {
+      "description": "Result of the request to list dedicated VIPs. It contains a list of dedicated VIPs objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Route"
+            "$ref": "#/definitions/DedicatedVIP"
           },
-          "description": "List of AzureFrontDoor routes within a profile."
+          "description": "List of CDN dedicated VIPs within an profile"
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of route objects if there are any."
+          "description": "URL to get the next set of origin objects if there are any."
         }
       }
     },
