@@ -107,6 +107,25 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These are the global settings for the PDS APIs.
+
+``` yaml
+openapi-type: data-plane
+tag: package-2021-01-01-preview
+title: PurviewPDSClient
+```
+
+### Tag: package-2021-01-01-preview
+
+These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview'
+input-file:
+- Azure.Analytics.Purview.PDS/preview/2021-01-01-preview/pds.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ---
 
 # Code Generation
