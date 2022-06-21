@@ -1752,6 +1752,9 @@
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
+        },
+        "utteranceLevelTiming": {
+          "$ref": "#/definitions/AudioTiming"
         }
       }
     },
@@ -2004,7 +2007,9 @@
             "type": "string",
             "enum": [
               "issue",
-              "resolution"
+              "resolution",
+              "chapterTitle",
+              "generic"
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
@@ -2015,7 +2020,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParameters"
         }
       ]
     },
@@ -2089,6 +2094,13 @@
         },
         "text": {
           "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/ItemizedSummaryContext"
+          }
         }
       },
       "required": [
