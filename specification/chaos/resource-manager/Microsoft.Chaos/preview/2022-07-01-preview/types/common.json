@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Common Types",
-    "version": "2021-09-15-preview"
+    "version": "2022-07-01-preview"
   },
   "paths": {},
   "definitions": {
@@ -39,6 +39,17 @@
         "type"
       ],
       "additionalProperties": false
+    },
+    "runtimeProperties": {
+      "type": "object",
+      "description": "The runtime properties of a resource.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "String of the kind of the resource's action type (continuous or discrete).",
+          "readOnly": true
+        }
+      }
     },
     "url": {
       "type": "string",

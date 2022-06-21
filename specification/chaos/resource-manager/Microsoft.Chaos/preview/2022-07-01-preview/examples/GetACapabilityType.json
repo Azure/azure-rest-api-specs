@@ -4,7 +4,7 @@
     "locationName": "westus2",
     "targetTypeName": "Microsoft-VirtualMachine",
     "capabilityTypeName": "Shutdown-1.0",
-    "api-version": "2021-09-15-preview"
+    "api-version": "2022-07-01-preview"
   },
   "responses": {
     "200": {
@@ -13,11 +13,15 @@
         "type": "Microsoft.Chaos/locations/targetTypes/capabilityTypes",
         "name": "Shutdown-1.0",
         "properties": {
+          "kind": "fault",
           "publisher": "Microsoft",
           "targetType": "VirtualMachine",
           "displayName": "Shutdown VM",
           "description": "Shutdown an Azure Virtual Machine for a defined period of time.",
           "parametersSchema": "https://schema.centralus.chaos-prod.azure.com/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0.json",
+          "runtimeProperties": {
+            "kind": "continuous"
+          },
           "urn": "urn:csci:microsoft:virtualMachine:shutdown/1.0"
         }
       }
