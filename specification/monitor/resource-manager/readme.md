@@ -41,15 +41,6 @@ directive:
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
 
-
-### Tag: package-2022-06
-
-These settings apply only when `--tag=package-2022-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-06'
-input-file:
-  - Microsoft.Insights/stable/2022-06-15/actionGroups_API.json
-```
 ### Tag: package-2022-06
 
 These settings apply only when `--tag=package-2022-06` is specified on the command line
