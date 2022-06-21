@@ -5887,6 +5887,14 @@
           "description": "Specifies whether Cool Access(tiering) is enabled for the volume.",
           "example": false,
           "default": false
+        },
+        "coolnessPeriod": {
+          "type": "integer",
+          "description": "Specifies the number of days after which data that is not accessed by clients will be tiered.",
+          "example": 7,
+          "minimum": 7,
+          "maximum": 63,
+          "format": "int32"
         }
       }
     },
