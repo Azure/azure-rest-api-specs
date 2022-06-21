@@ -2987,7 +2987,8 @@
           "type": "string",
           "enum": [
             "azure",
-            "kubenet"
+            "kubenet",
+            "none"
           ],
           "default": "kubenet",
           "x-ms-enum": {
@@ -3001,6 +3002,10 @@
               {
                 "value": "kubenet",
                 "description": "Use the Kubenet network plugin. See [Kubenet (basic) networking](https://docs.microsoft.com/azure/aks/concepts-network#kubenet-basic-networking) for more information."
+              },
+              {
+                "value": "none",
+                "description": "No CNI plugin is pre-installed. See [BYO CNI](https://docs.microsoft.com/en-us/azure/aks/use-byo-cni) for more information."
               }
             ]
           },
