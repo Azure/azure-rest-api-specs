@@ -575,7 +575,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServiceConfigsResult"
+              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
             }
           },
           "default": {
@@ -587,70 +587,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/serviceConfigs/{serviceConfigName}": {
-      "put": {
-        "operationId": "Clusters_CreateServiceConfigs",
-        "description": "Update config for all services running in cluster",
-        "x-ms-examples": {
-          "HDInsightClusterPutServiceConfigs": {
-            "$ref": "./examples/CreateClusterServiceConfigs.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceConfigNameParameter"
-          },
-          {
-            "name": "ServiceConfig",
-            "in": "body",
-            "required": true,
-            "description": "The service config to upsert",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          },
-          "201": {
-            "description": "Update Cluster Service Config request accepted.",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -687,7 +623,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServiceConfigsResult"
+              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
             }
           },
           "default": {
@@ -699,73 +635,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/serviceConfigs/{serviceConfigName}": {
-      "put": {
-        "operationId": "SessionClusters_CreateServiceConfigs",
-        "description": "Update config for all services running in cluster",
-        "x-ms-examples": {
-          "HDInsightSessionClusterPutServiceConfigs": {
-            "$ref": "./examples/CreateSessionClusterServiceConfigs.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceConfigNameParameter"
-          },
-          {
-            "name": "ServiceConfig",
-            "in": "body",
-            "required": true,
-            "description": "The  service config to update.",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          },
-          "201": {
-            "description": "Update Cluster Service Config request accepted.",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfig"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2010,7 +1879,7 @@
         }
       ]
     },
-    "ClusterServiceConfigsResult": {
+    "ClusterInstanceServiceConfigsResult": {
       "type": "object",
       "description": "Cluster/SessionCluster instance service configs api response.",
       "properties": {
@@ -2018,7 +1887,7 @@
           "type": "array",
           "description": "Cluster/SessionCluster instance service config in the array.",
           "items": {
-            "$ref": "#/definitions/ClusterServiceConfigProperties"
+            "$ref": "#/definitions/ClusterInstanceServiceConfig"
           },
           "x-ms-identifiers": []
         },
@@ -2029,18 +1898,18 @@
         }
       }
     },
-    "ClusterServiceConfigProperties": {
+    "ClusterInstanceServiceConfig": {
       "type": "object",
       "description": "Cluster/SessionCluster instance service config.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define service config properties.",
-          "$ref": "#/definitions/ClusterServiceConfigBody"
+          "$ref": "#/definitions/ClusterInstanceServiceConfigProperties"
         }
       }
     },
-    "ClusterServiceConfigBody": {
+    "ClusterInstanceServiceConfigProperties": {
       "type": "object",
       "properties": {
         "serviceConfigName": {
@@ -2076,7 +1945,7 @@
         "defaultKeys": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/DefaultClusterServiceConfigEntity"
+            "$ref": "#/definitions/ClusterInstanceServiceConfigEntity"
           }
         }
       },
@@ -2086,7 +1955,7 @@
       ],
       "description": "Service config response."
     },
-    "DefaultClusterServiceConfigEntity": {
+    "ClusterInstanceServiceConfigEntity": {
       "type": "object",
       "description": "Default config details.",
       "properties": {
@@ -2366,59 +2235,6 @@
           }
         }
       }
-    },
-    "ServiceConfigProperties": {
-      "type": "object",
-      "description": "PUT Cluster/SessionCluster Service Config properties",
-      "required": [
-        "serviceConfigsProfiles"
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "serviceConfigsProfiles": {
-          "type": "array",
-          "description": "The service configs profiles.",
-          "items": {
-            "$ref": "#/definitions/ClusterServiceConfigsProfile"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ServiceConfig": {
-      "type": "object",
-      "description": "The service config.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Set the properties. Define cluster service config properties.",
-          "$ref": "#/definitions/ServiceConfigProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "SystemData of cluster.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ]
     }
   },
   "parameters": {
@@ -2452,14 +2268,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Hilo cluster type.",
-      "x-ms-parameter-location": "method"
-    },
-    "ServiceConfigNameParameter": {
-      "name": "serviceConfigName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the HDInsight cluster service config.",
       "x-ms-parameter-location": "method"
     }
   }
