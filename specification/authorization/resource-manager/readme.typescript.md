@@ -10,6 +10,10 @@ typescript:
   azure-arm: true
   generate-metadata: true
   payload-flattening-threshold: 1
+directive:
+    from: swagger-document
+    where: $.parameters.SubscriptionIdParameter
+    transform: $['x-ms-parameter-location'] = 'method'
 ```
 
 ``` yaml $(typescript) && !$(profile-content)
