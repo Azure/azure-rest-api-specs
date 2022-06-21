@@ -15,14 +15,14 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/storages": {
       "get": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "ConnectedEnvironmentsStorages"
         ],
-        "summary": "Get all storages for a managedEnvironment.",
-        "description": "Get all storages for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_List",
+        "summary": "Get all storages for a connectedEnvironment.",
+        "description": "Get all storages for a connectedEnvironment.",
+        "operationId": "ConnectedEnvironmentsStorages_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStoragesCollection"
+              "$ref": "#/definitions/ConnectedEnvironmentStoragesCollection"
             }
           },
           "default": {
@@ -57,19 +57,19 @@
         },
         "x-ms-examples": {
           "List environments storages by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_List.json"
+            "$ref": "./examples/ConnectedEnvironmentsStorages_List.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/storages/{storageName}": {
       "get": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "ConnectedEnvironmentsStorages"
         ],
-        "summary": "Get storage for a managedEnvironment.",
-        "description": "Get storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_Get",
+        "summary": "Get storage for a connectedEnvironment.",
+        "description": "Get storage for a connectedEnvironment.",
+        "operationId": "ConnectedEnvironmentsStorages_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -99,7 +99,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "#/definitions/ConnectedEnvironmentStorage"
             }
           },
           "default": {
@@ -111,17 +111,17 @@
         },
         "x-ms-examples": {
           "get a environments storage properties by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_Get.json"
+            "$ref": "./examples/ConnectedEnvironmentsStorages_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "ConnectedEnvironmentsStorages"
         ],
-        "summary": "Create or update storage for a managedEnvironment.",
-        "description": "Create or update storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_CreateOrUpdate",
+        "summary": "Create or update storage for a connectedEnvironment.",
+        "description": "Create or update storage for a connectedEnvironment.",
+        "operationId": "ConnectedEnvironmentsStorages_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -149,7 +149,7 @@
             "description": "Configuration details of storage.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "#/definitions/ConnectedEnvironmentStorage"
             }
           },
           {
@@ -160,7 +160,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "#/definitions/ConnectedEnvironmentStorage"
             }
           },
           "default": {
@@ -172,17 +172,17 @@
         },
         "x-ms-examples": {
           "Create or update environments storage": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate.json"
+            "$ref": "./examples/ConnectedEnvironmentsStorages_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "ConnectedEnvironmentsStorages"
         ],
-        "summary": "Delete storage for a managedEnvironment.",
-        "description": "Delete storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_Delete",
+        "summary": "Delete storage for a connectedEnvironment.",
+        "description": "Delete storage for a connectedEnvironment.",
+        "operationId": "ConnectedEnvironmentsStorages_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -224,14 +224,14 @@
         },
         "x-ms-examples": {
           "List environments storages by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_Delete.json"
+            "$ref": "./examples/ConnectedEnvironmentsStorages_Delete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ManagedEnvironmentStoragesCollection": {
+    "ConnectedEnvironmentStoragesCollection": {
       "description": "Collection of Storage for Environments",
       "required": [
         "value"
@@ -242,13 +242,13 @@
           "description": "Collection of storage resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedEnvironmentStorage"
+            "$ref": "#/definitions/ConnectedEnvironmentStorage"
           }
         }
       }
     },
-    "ManagedEnvironmentStorage": {
-      "description": "Storage resource for managedEnvironment.",
+    "ConnectedEnvironmentStorage": {
+      "description": "Storage resource for connectedEnvironment.",
       "type": "object",
       "allOf": [
         {

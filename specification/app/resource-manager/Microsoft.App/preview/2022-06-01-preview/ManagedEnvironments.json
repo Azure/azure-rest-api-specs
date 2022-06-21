@@ -337,7 +337,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CertificateCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/CertificateCollection"
             }
           },
           "default": {
@@ -394,7 +394,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Certificate"
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
           "default": {
@@ -443,7 +443,7 @@
             "in": "body",
             "description": "Certificate to be created or updated",
             "schema": {
-              "$ref": "#/definitions/Certificate"
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
           {
@@ -454,7 +454,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Certificate"
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
           "default": {
@@ -557,7 +557,7 @@
             "required": true,
             "description": "Properties of a certificate that need to be updated",
             "schema": {
-              "$ref": "#/definitions/CertificatePatch"
+              "$ref": "./CommonDefinitions.json#/definitions/CertificatePatch"
             }
           },
           {
@@ -566,9 +566,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Container App updated successfully.",
+            "description": "Certificate updated successfully.",
             "schema": {
-              "$ref": "#/definitions/Certificate"
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
           "default": {
@@ -839,128 +839,6 @@
             "update"
           ],
           "x-ms-secret": true
-        }
-      }
-    },
-    "Certificate": {
-      "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Certificate resource specific properties",
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of the certificate.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "DeleteFailed",
-                "Pending"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "CertificateProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "password": {
-              "description": "Certificate password.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create"
-              ],
-              "x-ms-secret": true
-            },
-            "subjectName": {
-              "description": "Subject name of the certificate.",
-              "type": "string",
-              "readOnly": true
-            },
-            "value": {
-              "format": "byte",
-              "description": "PFX or PEM blob",
-              "type": "string",
-              "x-ms-mutability": [
-                "create"
-              ],
-              "x-ms-secret": true
-            },
-            "issuer": {
-              "description": "Certificate issuer.",
-              "type": "string",
-              "readOnly": true
-            },
-            "issueDate": {
-              "format": "date-time",
-              "description": "Certificate issue Date.",
-              "type": "string",
-              "readOnly": true
-            },
-            "expirationDate": {
-              "format": "date-time",
-              "description": "Certificate expiration date.",
-              "type": "string",
-              "readOnly": true
-            },
-            "thumbprint": {
-              "description": "Certificate thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "valid": {
-              "description": "Is the certificate valid?.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "publicKeyHash": {
-              "description": "Public key hash.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      },
-      "x-ms-client-flatten": true
-    },
-    "CertificateCollection": {
-      "description": "Collection of Certificates.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Certificate"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CertificatePatch": {
-      "description": "A certificate to update",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     }

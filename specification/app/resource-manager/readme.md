@@ -47,7 +47,9 @@ input-file:
   - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-06-01-preview/SourceControls.json
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
 ```
 ### Tag: package-2022-05
 
