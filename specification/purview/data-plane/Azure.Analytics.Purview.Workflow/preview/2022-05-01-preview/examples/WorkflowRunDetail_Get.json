@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "x-ms-client-request-id": "1e903f7e-f127-11ec-8ea0-0242ac120002",
+    "workflowRunId": "07433ad6-84c1-42f4-8b80-78068180badd",
+    "api-version": "2022-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "07433ad6-84c1-42f4-8b80-78068180badd",
+        "workflowDefinitionId": "a72ca247-d051-4cd5-aaa5-031be6bb0354",
+        "workflowType": {
+          "type": "ApprovalWorkflow",
+          "category": "DataCatalog",
+          "action": "CreateTerm"
+        },
+        "startTime": "2022-05-30T09:00:13.198322883Z",
+        "requestor": "77a9ffa9-15f8-42d4-a2a4-37712120b172",
+        "requestEventPayload": {
+          "requestType": "CreateTermRequest",
+          "targetValue": "term_sample-term",
+          "payload": {
+            "name": "term_sample-term",
+            "anchor": {
+              "glossaryGuid": "41065e8b-80af-4bae-afb8-13856b85444d"
+            },
+            "status": "Approved",
+            "nickName": "sample-term",
+            "parentTerm": {
+              "termGuid": "43adaf70-346d-4ec8-9597-f9ea7bfba299"
+            },
+            "attributes": {}
+          }
+        },
+        "status": {
+          "InProgress": {}
+        },
+        "definition": {
+          "triggers": {
+            "When term creation request is submitted": {
+              "type": "GlossaryTermTrigger"
+            }
+          },
+          "actions": {
+            "Start and wait for an approval": {
+              "type": "Approval",
+              "inputs": {
+                "parameters": {
+                  "approvalType": "PendingOnAll",
+                  "title": "Approval Request for Create Glossary Term",
+                  "assignedTo": [
+                    "77a9ffa9-15f8-42d4-a2a4-37712120b172"
+                  ]
+                }
+              },
+              "runAfter": {}
+            },
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@outputs('Start and wait for an approval')['body/outcome']",
+                      "Approved"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create glossary term": {
+                  "type": "CreateTerm",
+                  "runAfter": {}
+                },
+                "Send email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - APPROVED",
+                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                      "emailRecipients": [
+                        "@{triggerBody()['request']['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {
+                    "Create glossary term": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send reject email notification": {
+                    "type": "EmailNotification",
+                    "inputs": {
+                      "parameters": {
+                        "emailSubject": "Glossary Term Create - REJECTED",
+                        "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                        "emailRecipients": [
+                          "@{triggerBody()['request']['requestor']}"
+                        ]
+                      }
+                    },
+                    "runAfter": {}
+                  }
+                }
+              },
+              "runAfter": {
+                "Start and wait for an approval": [
+                  "Succeeded"
+                ]
+              }
+            }
+          }
+        },
+        "detail": {
+          "trigger": {
+            "startTime": "2022-05-30T09:00:18.9557863Z",
+            "status": {
+              "Succeeded": {
+                "endTime": "2022-05-30T09:00:18.9557863Z"
+              }
+            }
+          },
+          "actions": {
+            "Start and wait for an approval": {
+              "startTime": "2022-05-30T09:00:21.4840656Z",
+              "status": {
+                "type": "Running"
+              },
+              "output": {
+                "type": "inlined",
+                "content": {
+                  "statusCode": 202,
+                  "headers": {
+                    "transfer-encoding": "chunked",
+                    "Date": "Mon, 30 May 2022 09:00:44 GMT",
+                    "Server": "AzurePurview"
+                  },
+                  "body": 4.7e+34
+                }
+              },
+              "input": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

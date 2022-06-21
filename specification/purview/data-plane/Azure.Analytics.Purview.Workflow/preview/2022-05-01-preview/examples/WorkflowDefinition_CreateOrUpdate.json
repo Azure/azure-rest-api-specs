@@ -1,0 +1,200 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "x-ms-client-request-id": "1e903f7e-f127-11ec-8ea0-0242ac120002",
+    "workflowDefinitionId": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
+    "workflowDefinitionCreateOrUpdateCommand": {
+      "workflowName": "Create glossary term",
+      "description": "",
+      "workflowType": {
+        "category": "DataCatalog",
+        "type": "ApprovalWorkflow",
+        "action": "CreateTerm"
+      },
+      "associatedEntityIds": [
+        "420af98a-a15a-4241-b76c-cf37e2c3a8fd"
+      ],
+      "isEnabled": true,
+      "definition": {
+        "triggers": {
+          "When term creation request is submitted": {
+            "type": "GlossaryTermTrigger"
+          }
+        },
+        "actions": {
+          "Start and wait for an approval": {
+            "type": "Approval",
+            "inputs": {
+              "parameters": {
+                "approvalType": "PendingOnAll",
+                "title": "Approval Request for Create Glossary Term",
+                "assignedTo": [
+                  "4fda19f7-1a35-4bae-ab0b-7f4f080930b0"
+                ]
+              }
+            },
+            "runAfter": {}
+          },
+          "Condition": {
+            "type": "If",
+            "expression": {
+              "and": [
+                {
+                  "equals": [
+                    "@outputs('Start and wait for an approval')['body/outcome']",
+                    "Approved"
+                  ]
+                }
+              ]
+            },
+            "actions": {
+              "Create glossary term": {
+                "type": "CreateTerm",
+                "runAfter": {}
+              },
+              "Send email notification": {
+                "type": "EmailNotification",
+                "inputs": {
+                  "parameters": {
+                    "emailSubject": "Glossary Term Create - APPROVED",
+                    "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                    "emailRecipients": [
+                      "@{triggerBody()['request']['requestor']}"
+                    ]
+                  }
+                },
+                "runAfter": {
+                  "Create glossary term": [
+                    "Succeeded"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "actions": {
+                "Send reject email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - REJECTED",
+                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                      "emailRecipients": [
+                        "@{triggerBody()['request']['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {}
+                }
+              }
+            },
+            "runAfter": {
+              "Start and wait for an approval": [
+                "Succeeded"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
+        "workflowType": {
+          "type": "ApprovalWorkflow",
+          "category": "DataCatalog",
+          "action": "CreateTerm"
+        },
+        "associatedEntityIds": [],
+        "createdTime": "2022-05-30T08:35:49.690711398Z",
+        "createdBy": "d95bd15c-fbc9-46a8-b02b-83e80262ffc9",
+        "lastUpdateTime": "2022-05-30T08:35:49.690711398Z",
+        "updatedBy": "d95bd15c-fbc9-46a8-b02b-83e80262ffc9",
+        "workflowName": "Create glossary term",
+        "isEnabled": true,
+        "definition": {
+          "triggers": {
+            "When term creation request is submitted": {
+              "type": "GlossaryTermTrigger"
+            }
+          },
+          "actions": {
+            "Start and wait for an approval": {
+              "type": "Approval",
+              "inputs": {
+                "parameters": {
+                  "approvalType": "PendingOnAll",
+                  "title": "Approval Request for Create Glossary Term",
+                  "assignedTo": [
+                    "4fda19f7-1a35-4bae-ab0b-7f4f080930b0"
+                  ]
+                }
+              },
+              "runAfter": {}
+            },
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@outputs('Start and wait for an approval')['body/outcome']",
+                      "Approved"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create glossary term": {
+                  "type": "CreateTerm",
+                  "runAfter": {}
+                },
+                "Send email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - APPROVED",
+                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                      "emailRecipients": [
+                        "@{triggerBody()['request']['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {
+                    "Create glossary term": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send reject email notification": {
+                    "type": "EmailNotification",
+                    "inputs": {
+                      "parameters": {
+                        "emailSubject": "Glossary Term Create - REJECTED",
+                        "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                        "emailRecipients": [
+                          "@{triggerBody()['request']['requestor']}"
+                        ]
+                      }
+                    },
+                    "runAfter": {}
+                  }
+                }
+              },
+              "runAfter": {
+                "Start and wait for an approval": [
+                  "Succeeded"
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  }
+}

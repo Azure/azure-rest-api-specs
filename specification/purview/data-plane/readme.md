@@ -108,6 +108,22 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These are the global settings for the Azure Purview Workflow API.
+
+``` yaml
+openapi-type: data-plane
+tag: package-preview-2022-05
+```
+
+### Tag: package-2022-05-01-preview
+
+These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01-preview'
+input-file:
+- Azure.Analytics.Purview.Workflow/preview/2022-05-01-preview/purviewWorkflow.json
+```
+
 These are the global settings for the Purview API.
 
 ```yaml
