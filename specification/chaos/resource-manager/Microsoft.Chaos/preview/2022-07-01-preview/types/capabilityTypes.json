@@ -72,9 +72,15 @@
           "readOnly": true
         },
         "runtimeProperties": {
-          "$ref": "./common.json#/definitions/runtimeProperties",
+          "type": "object",
           "description": "Runtime properties of this Capability Type.",
-          "readOnly": true
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "String of the kind of the resource's action type (continuous or discrete).",
+              "readOnly": true
+            }
+          }
         }
       },
       "additionalProperties": false
