@@ -104,5 +104,5 @@ module-version: 0.1.0
 
 After configure all the readme files, autorest can be used to generate SDK.
 ~~~
-autorest --go --use=@autorest/go@latest --go --track2 --output-folder=/path/to/azure-sdk-for-go/sdk/resourcemanager/agrifood/armagrifood /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md
+autorest --go --use=@autorest/go@latest --go --track2 --go-sdk-folder=/path/to/azure-sdk-for-go /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md
 ~~~
