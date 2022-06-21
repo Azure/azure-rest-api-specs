@@ -1728,7 +1728,7 @@
       ],
       "type": "object",
       "properties": {
-        "imageId": {
+        "image": {
           "description": "The asset id of the image to display",
           "type": "string"
         },
@@ -3781,6 +3781,42 @@
         "x-ms-examples": {
           "Create or update a dashboard": {
             "$ref": "./examples/dashboards_create.json"
+          },
+          "Create a dashboard with bar chart tile": {
+            "$ref": "./examples/dashboards_create_bar.json"
+          },
+          "Create a dashboard with count tile": {
+            "$ref": "./examples/dashboards_create_count.json"
+          },
+          "Create a dashboard with event history tile": {
+            "$ref": "./examples/dashboards_create_event_history.json"
+          },
+          "Create a dashboard with event tile": {
+            "$ref": "./examples/dashboards_create_event.json"
+          },
+          "Create a dashboard with heatmap chart tile": {
+            "$ref": "./examples/dashboards_create_heatmap.json"
+          },
+          "Create a dashboard with KPI tile": {
+            "$ref": "./examples/dashboards_create_kpi.json"
+          },
+          "Create a dashboard with line chart tile": {
+            "$ref": "./examples/dashboards_create_line.json"
+          },
+          "Create a dashboard with LKV tile": {
+            "$ref": "./examples/dashboards_create_lkv.json"
+          },
+          "Create a dashboard with map tile": {
+            "$ref": "./examples/dashboards_create_map.json"
+          },
+          "Create a dashboard with pie chart tile": {
+            "$ref": "./examples/dashboards_create_pie.json"
+          },
+          "Create a dashboard with state history tile": {
+            "$ref": "./examples/dashboards_create_state_history.json"
+          },
+          "Create a dashboard with state tile": {
+            "$ref": "./examples/dashboards_create_state.json"
           }
         },
         "parameters": [
@@ -7040,7 +7076,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Attestation"
+              "$ref": "#/definitions/EnrollmentGroup"
             }
           },
           "default": {
@@ -7093,13 +7129,13 @@
         }
       }
     },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/primary": {
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}": {
       "get": {
-        "operationId": "EnrollmentGroups_GetPrimaryX509",
-        "summary": "Get the primary x509 certificate of an enrollment group",
-        "description": "Get details about the primary x509 certificate of an enrollment group, if it exists.",
+        "operationId": "EnrollmentGroups_GetX509",
+        "summary": "Get the primary or secondary x509 certificate of an enrollment group",
+        "description": "Get details about the primary or secondary x509 certificate of an enrollment group, if it exists.",
         "x-ms-examples": {
-          "Get primary X509": {
+          "Get primary or secondary X509": {
             "$ref": "./examples/enrollmentgroups_getx509.json"
           }
         },
@@ -7109,6 +7145,9 @@
           },
           {
             "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
           }
         ],
         "responses": {
@@ -7133,11 +7172,11 @@
         }
       },
       "put": {
-        "operationId": "EnrollmentGroups_CreatePrimaryX509",
-        "summary": "Sets the primary x509 certificate of an enrollment group",
-        "description": "Sets the primary x509 certificate of an enrollment group.",
+        "operationId": "EnrollmentGroups_CreateX509",
+        "summary": "Sets the primary or secondary x509 certificate of an enrollment group",
+        "description": "Sets the primary or secondary x509 certificate of an enrollment group.",
         "x-ms-examples": {
-          "Set primary X509": {
+          "Set primary or secondary X509": {
             "$ref": "./examples/enrollmentgroups_setx509.json"
           }
         },
@@ -7147,6 +7186,9 @@
           },
           {
             "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
           },
           {
             "in": "body",
@@ -7180,11 +7222,11 @@
         }
       },
       "delete": {
-        "operationId": "EnrollmentGroups_RemovePrimaryX509",
-        "summary": "Removes the primary x509 certificate of an enrollment group",
-        "description": "Removes the primary x509 certificate of an enrollment group.",
+        "operationId": "EnrollmentGroups_RemoveX509",
+        "summary": "Removes the primary or secondary x509 certificate of an enrollment group",
+        "description": "Removes the primary or secondary x509 certificate of an enrollment group.",
         "x-ms-examples": {
-          "Remove primary X509": {
+          "Remove primary or secondary X509": {
             "$ref": "./examples/enrollmentgroups_removex509.json"
           }
         },
@@ -7194,6 +7236,9 @@
           },
           {
             "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
           }
         ],
         "responses": {
@@ -7215,13 +7260,13 @@
         }
       }
     },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/primary/generateVerificationCode": {
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}/generateVerificationCode": {
       "post": {
-        "operationId": "EnrollmentGroups_GenerateVerificationCodePrimaryX509",
-        "summary": "Generate a verification code for the primary x509 certificate of an enrollment group",
-        "description": "Generate a verification code for the primary x509 certificate of an enrollment group.",
+        "operationId": "EnrollmentGroups_GenerateVerificationCodeX509",
+        "summary": "Generate a verification code for the primary or secondary x509 certificate of an enrollment group",
+        "description": "Generate a verification code for the primary or secondary x509 certificate of an enrollment group.",
         "x-ms-examples": {
-          "Generate primary X509 verification code": {
+          "Generate primary or secondary X509 verification code": {
             "$ref": "./examples/enrollmentgroups_generateverificationcodex509.json"
           }
         },
@@ -7231,6 +7276,9 @@
           },
           {
             "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
           }
         ],
         "responses": {
@@ -7255,13 +7303,13 @@
         }
       }
     },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/primary/verify": {
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}/verify": {
       "post": {
-        "operationId": "EnrollmentGroups_VerifyPrimaryX509",
-        "summary": "Verify the primary x509 certificate of an enrollment group",
-        "description": "Verify the primary x509 certificate of an enrollment group by providing a certificate with the signed verification code.",
+        "operationId": "EnrollmentGroups_VerifyX509",
+        "summary": "Verify the primary or secondary x509 certificate of an enrollment group",
+        "description": "Verify the primary or secondary x509 certificate of an enrollment group by providing a certificate with the signed verification code.",
         "x-ms-examples": {
-          "Verify primary X509 verification code": {
+          "Verify primary or secondary X509 verification code": {
             "$ref": "./examples/enrollmentgroups_verifyx509.json"
           }
         },
@@ -7273,212 +7321,7 @@
             "$ref": "#/parameters/EnrollmentGroupId"
           },
           {
-            "in": "body",
-            "name": "body",
-            "description": "Certificate for the signed verification code.",
-            "schema": {
-              "$ref": "#/definitions/X509VerificationCertificate"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "An error response received from the IoT Central Service.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/secondary": {
-      "get": {
-        "operationId": "EnrollmentGroups_GetSecondaryX509",
-        "summary": "Get the secondary x509 certificate of an enrollment group",
-        "description": "Get details about the secondary x509 certificate of an enrollment group, if it exists.",
-        "x-ms-examples": {
-          "Get secondary X509": {
-            "$ref": "./examples/enrollmentgroups_getx509.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/EnrollmentGroupId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SigningX509Certificate"
-            }
-          },
-          "default": {
-            "description": "An error response received from the IoT Central Service.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "EnrollmentGroups_CreateSecondaryX509",
-        "summary": "Sets the secondary x509 certificate of an enrollment group",
-        "description": "Sets the secondary x509 certificate of an enrollment group.",
-        "x-ms-examples": {
-          "Set secondary X509": {
-            "$ref": "./examples/enrollmentgroups_setx509.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/EnrollmentGroupId"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Certificate definition.",
-            "schema": {
-              "$ref": "#/definitions/SigningX509Certificate"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SigningX509Certificate"
-            }
-          },
-          "default": {
-            "description": "An error response received from the IoT Central Service.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "EnrollmentGroups_RemoveSecondaryX509",
-        "summary": "Removes the secondary x509 certificate of an enrollment group",
-        "description": "Removes the secondary x509 certificate of an enrollment group.",
-        "x-ms-examples": {
-          "Remove secondary X509": {
-            "$ref": "./examples/enrollmentgroups_removex509.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/EnrollmentGroupId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "An error response received from the IoT Central Service.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/secondary/generateVerificationCode": {
-      "post": {
-        "operationId": "EnrollmentGroups_GenerateVerificationCodeSecondaryX509",
-        "summary": "Generate a verification code for the secondary x509 certificate of an enrollment group",
-        "description": "Generate a verification code for the secondary x509 certificate of an enrollment group.",
-        "x-ms-examples": {
-          "Generate secondary X509 verification code": {
-            "$ref": "./examples/enrollmentgroups_generateverificationcodex509.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/EnrollmentGroupId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/X509VerificationCode"
-            }
-          },
-          "default": {
-            "description": "An error response received from the IoT Central Service.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/enrollmentGroups/{enrollmentGroupId}/x509/secondary/verify": {
-      "post": {
-        "operationId": "EnrollmentGroups_VerifySecondaryX509",
-        "summary": "Verify the secondary x509 certificate of an enrollment group",
-        "description": "Verify the secondary x509 certificate of an enrollment group by providing a certificate with the signed verification code.",
-        "x-ms-examples": {
-          "Verify secondary X509 verification code": {
-            "$ref": "./examples/enrollmentgroups_verifyx509.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/EnrollmentGroupId"
+            "$ref": "#/parameters/Entry"
           },
           {
             "in": "body",
@@ -8839,6 +8682,34 @@
       "type": "string",
       "maxLength": 255,
       "pattern": "^[a-zA-Z0-9-]*$",
+      "required": true
+    },
+    "Entry": {
+      "in": "path",
+      "name": "entry",
+      "description": "Entry of certificate only support primary and secondary.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateEntry",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "primary",
+            "name": "Primary",
+            "description": "The entry of primary certificate"
+          },
+          {
+            "value": "secondary",
+            "name": "Secondary",
+            "description": "The entry of secondary certificate"
+          }
+        ]
+      },
       "required": true
     },
     "ExportId": {
