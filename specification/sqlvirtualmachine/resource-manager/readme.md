@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-preview-2022-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-02'
 input-file:
-  - Microsoft.SqlVirtualMachine/preview/2022-02-01/sqlvm.json
+  - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
 ```
 
 
