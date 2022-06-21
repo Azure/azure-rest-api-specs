@@ -5,7 +5,16 @@
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "version": "2022-06-01-preview"
   },
-  "host": "<dataPlaneURL>",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": true,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -769,7 +778,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten.",
+        "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as multipart/form-data.",
         "operationId": "Test_UploadTestFile",
         "consumes": [
           "multipart/form-data"
@@ -2476,6 +2485,15 @@
       "maxLength": 50,
       "minLength": 2,
       "pattern": "^[a-z0-9_-]*$"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "URL to perform data plane API operations on the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
