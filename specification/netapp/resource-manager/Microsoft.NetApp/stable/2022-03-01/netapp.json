@@ -5290,10 +5290,11 @@
           "example": 128.22
         },
         "encryptionKeySource": {
-          "description": "Source of key used to encrypt data in volume. Possible values (case-insensitive) are: 'Microsoft.NetApp'",
+          "description": "Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'",
           "type": "string",
           "enum": [
-            "Microsoft.NetApp"
+            "Microsoft.NetApp",
+            "Microsoft.KeyVault"
           ],
           "x-ms-enum": {
             "name": "EncryptionKeySource",
@@ -5302,6 +5303,10 @@
               {
                 "value": "Microsoft.NetApp",
                 "description": "Microsoft-managed key encryption"
+              },
+              {
+                "value": "Microsoft.KeyVault",
+                "description": "Customer-managed key encryption"
               }
             ]
           },
