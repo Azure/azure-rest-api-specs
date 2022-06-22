@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-31-preview",
+    "version": "2022-04-15-preview",
     "title": "appliances",
     "description": "The appliances Rest API spec."
   },
@@ -353,6 +353,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/listClusterCustomerUserCredential": {
+      "post": {
+        "tags": [
+          "appliances"
+        ],
+        "operationId": "Appliances_ListClusterCustomerUserCredential",
+        "summary": "Returns the cluster customer user credential.",
+        "description": "Returns the cluster customer user credentials for the dedicated appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/applianceListClusterCustomerUserCredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListClusterCustomerUserCredentialAppliance": {
+            "$ref": "./examples/AppliancesListClusterCustomerUserCredential.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/listClusterUserCredential": {
       "post": {
         "tags": [
@@ -392,6 +435,56 @@
         "x-ms-examples": {
           "ListClusterUserCredentialAppliance": {
             "$ref": "./examples/AppliancesListClusterUserCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradegraph/{releaseTrain}": {
+      "get": {
+        "tags": [
+          "appliances"
+        ],
+        "operationId": "Appliances_GetUpgradeGraph",
+        "summary": "Gets an Appliance upgrade graph.",
+        "description": "Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Release train version, ex - stable"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpgradeGraph"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Appliance Upgrade Graph": {
+            "$ref": "./examples/UpgradeGraph.json"
           }
         }
       }
@@ -466,6 +559,149 @@
         }
       }
     },
+    "SSHKey": {
+      "description": "Appliance SSHKey definition.",
+      "type": "object",
+      "properties": {
+        "privateKey": {
+          "description": "User Private Key.",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "User Public Key.",
+          "type": "string"
+        }
+      }
+    },
+    "SSHKeyType": {
+      "description": "Appliance SSHKeyType definition.",
+      "type": "string",
+      "enum": [
+        "SSHCustomerUser"
+      ],
+      "x-ms-enum": {
+        "name": "SSHKeyType",
+        "modelAsString": true
+      }
+    },
+    "SupportedVersion": {
+      "description": "The SupportedVersion object for appliance.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/SupportedVersionMetadata",
+          "description": "This is the metadata of the supported newer version.",
+          "type": "object",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The newer version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionCatalogVersion": {
+      "description": "The SupportedVersionCatalogVersion object for appliance.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SupportedVersionCatalogVersionData",
+          "description": "The newer supported version catalog version data.",
+          "type": "object",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The catalog version name for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "namespace": {
+          "description": "The catalog version namespace for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionCatalogVersionData": {
+      "description": "The SupportedVersionCatalogVersionData object for appliance.",
+      "type": "object",
+      "properties": {
+        "audience": {
+          "description": "The image audience name for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "catalog": {
+          "description": "The image catalog name for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offer": {
+          "description": "The image offer name for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The image version for the version available for upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionMetadata": {
+      "description": "The SupportedVersionMetadata object for appliance.",
+      "type": "object",
+      "properties": {
+        "catalogVersion": {
+          "$ref": "#/definitions/SupportedVersionCatalogVersion",
+          "description": "The newer supported version catalog version.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "UpgradeGraph": {
+      "description": "The Upgrade Graph for appliance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The appliance resource path",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The release train name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/UpgradeGraphProperties",
+          "description": "The properties of supported version",
+          "type": "object"
+        }
+      }
+    },
+    "UpgradeGraphProperties": {
+      "description": "The Upgrade Graph Properties for appliance.",
+      "type": "object",
+      "properties": {
+        "applianceVersion": {
+          "description": "The current appliance version",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedVersions": {
+          "description": "This contains the current version and supported upgrade versions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SupportedVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "appliance": {
       "description": "Appliances definition.",
       "type": "object",
@@ -500,7 +736,8 @@
           "type": "string",
           "readOnly": true,
           "enum": [
-            "clusterUser"
+            "clusterUser",
+            "clusterCustomerUser"
           ],
           "x-ms-enum": {
             "name": "AccessProfileType",
@@ -511,6 +748,29 @@
           "description": "Contains the kubeconfig value.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "applianceListClusterCustomerUserCredentialResults": {
+      "description": "The List Cluster Customer User Credential Results appliance.",
+      "type": "object",
+      "properties": {
+        "kubeconfigs": {
+          "description": "The list of appliance kubeconfigs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "sshKeys": {
+          "description": "Map of Customer User Public and Private SSH Keys",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/SSHKey"
+          }
         }
       }
     },
@@ -529,7 +789,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/applianceCredentialKubeconfig"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -620,7 +881,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/applianceOperation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -631,14 +893,14 @@
         "distro": {
           "description": "Represents a supported Fabric/Infra. (AKSEdge etc...).",
           "type": "string",
-          "default": "AKSEdge",
           "enum": [
             "AKSEdge"
           ],
           "x-ms-enum": {
             "name": "distro",
             "modelAsString": true
-          }
+          },
+          "default": "AKSEdge"
         },
         "infrastructureConfig": {
           "description": "Contains infrastructure information about the Appliance",
@@ -650,7 +912,9 @@
               "enum": [
                 "VMWare",
                 "HCI",
-                "SCVMM"
+                "SCVMM",
+                "KubeVirt",
+                "OpenStack"
               ],
               "x-ms-enum": {
                 "name": "provider",
@@ -675,8 +939,22 @@
           "enum": [
             "WaitingForHeartbeat",
             "Validating",
+            "Connecting",
             "Connected",
-            "Running"
+            "Running",
+            "PreparingForUpgrade",
+            "UpgradePrerequisitesCompleted",
+            "PreUpgrade",
+            "UpdatingCloudOperator",
+            "WaitingForCloudOperator",
+            "UpdatingCAPI",
+            "UpdatingCluster",
+            "PostUpgrade",
+            "UpgradeComplete",
+            "UpgradeClusterExtensionFailedToDelete",
+            "UpgradeFailed",
+            "Offline",
+            "None"
           ],
           "x-ms-enum": {
             "name": "status",
@@ -685,8 +963,7 @@
         },
         "version": {
           "description": "Version of the Appliance",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
