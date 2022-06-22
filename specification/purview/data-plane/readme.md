@@ -112,7 +112,7 @@ These are the global settings for the Azure Purview Workflow API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2022-05
+tag: package-2022-05-01-preview
 ```
 
 ### Tag: package-2022-05-01-preview
