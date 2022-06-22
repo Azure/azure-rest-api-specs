@@ -765,6 +765,10 @@
     "PhraseControl": {
       "type": "object",
       "description": "Control the phrases to be used in the summary.",
+      "required": [
+        "targetPhrase",
+        "strategy"
+      ],
       "properties": {
         "targetPhrase": {
           "type": "string",
@@ -791,6 +795,10 @@
     "SummaryContext": {
       "type": "object",
       "description": "The context of the summary.",
+      "required": [
+        "offset",
+        "length"
+      ],
       "properties": {
         "offset": {
           "type": "integer",
@@ -807,6 +815,9 @@
     "ItemizedSummaryContext": {
       "type": "object",
       "description": "The context of the summary with item id.",
+      "required": [
+        "itemId"
+      ],
       "properties": {
         "itemId": {
           "type": "string",
@@ -866,6 +877,9 @@
     },
     "ExportedCustomAbstractiveSummarizationDataItem": {
       "description": "Represents an exported data item for a custom abstractive summarization project.",
+      "required": [
+        "summary"
+      ],
       "type": "object",
       "properties": {
         "summary": {
