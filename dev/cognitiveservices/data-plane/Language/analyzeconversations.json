@@ -1732,7 +1732,7 @@
       "properties": {
         "itn": {
           "type": "string",
-          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from MicrosoftΓÇÖs Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
+          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft's Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
         },
         "maskedItn": {
           "type": "string",
@@ -2013,7 +2013,25 @@
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "issue",
+                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "resolution",
+                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "chapterTitle",
+                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
+                },
+                {
+                  "value": "generic",
+                  "description": "A generic summary of any conversation."
+                }
+              ]
             }
           }
         }
