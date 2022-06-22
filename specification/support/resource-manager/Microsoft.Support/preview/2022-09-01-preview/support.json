@@ -287,7 +287,7 @@
           "SupportTickets"
         ],
         "description": "Lists all the support tickets for an Azure subscription. <br/><br/>You can also filter the support tickets by <i>Status</i> or <i>CreatedDate</i> using the $filter parameter. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTickets_List",
+        "operationId": "SupportTicketSubscription_List",
         "parameters": [
           {
             "name": "$top",
@@ -402,7 +402,7 @@
           "SupportTickets"
         ],
         "description": "Gets details for a specific support ticket in an Azure subscription. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTickets_Get",
+        "operationId": "SupportTicketSubscription_Get",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -626,155 +626,6 @@
             "$ref": "./examples/GetSupportTicketDetails.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "SupportTickets"
-        ],
-        "description": "This API allows you to update the severity level or your contact information in the support ticket. <br/><br/> Note: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.",
-        "operationId": "SupportTickets_Update",
-        "parameters": [
-          {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "updateSupportTicket",
-            "in": "body",
-            "description": "UpdateSupportTicket object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateSupportTicket"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated support ticket.",
-            "schema": {
-              "$ref": "#/definitions/SupportTicketDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateSupportTicketForSubscription": {
-            "$ref": "./examples/UpdateSupportTicketForSubscription.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SupportTickets"
-        ],
-        "description": "Creates a new support ticket for Quota increase, Technical, Billing, and Subscription Management issues for the specified subscription. <br/><br/>A paid technical support plan is required to create a support ticket using this API. <a href='https://aka.ms/supportticketAPI'>Learn more</a> <br/><br/> Use the Services API to map the right Service Id to the issue type. For example: For billing tickets set *serviceId* to *'/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc'*. <br/> For Technical issues, the Service id will map to the Azure service you want to raise a support ticket for. <br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.",
-        "operationId": "SupportTickets_Create",
-        "parameters": [
-          {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "createSupportTicketParameters",
-            "in": "body",
-            "description": "Support ticket request payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SupportTicketDetails"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - SupportTicket created successfully",
-            "schema": {
-              "$ref": "#/definitions/SupportTicketDetails"
-            }
-          },
-          "202": {
-            "description": "Accepted, SupportTicket will be created asynchronously"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Create a ticket for Billing related issues": {
-            "$ref": "./examples/CreateBillingSupportTicketForSubscription.json"
-          },
-          "Create a ticket for Subscription Management related issues": {
-            "$ref": "./examples/CreateSubMgmtSupportTicketForSubscription.json"
-          },
-          "Create a ticket for Technical issue related to a specific resource": {
-            "$ref": "./examples/CreateTechnicalSupportTicketForSubscription.json"
-          },
-          "Create a ticket to request Quota increase for Compute VM Cores": {
-            "$ref": "./examples/CreateCoresQuotaTicketForSubscription.json"
-          },
-          "Create a ticket to request Quota increase for Low-priority cores for a Batch account": {
-            "$ref": "./examples/CreateBatchQuotaTicketForSpecificBatchAccountForLowPriorityCores.json"
-          },
-          "Create a ticket to request Quota increase for specific VM family cores for a Batch account": {
-            "$ref": "./examples/CreateBatchQuotaTicketForSpecificBatchAccountForDedicatedCores.json"
-          },
-          "Create a ticket to request Quota increase for Pools for a Batch account": {
-            "$ref": "./examples/CreateBatchQuotaTicketForSpecificBatchAccountForPools.json"
-          },
-          "Create a ticket to request Quota increase for Active Jobs and Job Schedules for a Batch account": {
-            "$ref": "./examples/CreateBatchQuotaTicketForSpecificBatchAccountForActiveJobs.json"
-          },
-          "Create a ticket to request Quota increase for number of Batch accounts for a subscription": {
-            "$ref": "./examples/CreateBatchQuotaTicketForSubscription.json"
-          },
-          "Create a ticket to request Quota increase for DTUs for SQL Database": {
-            "$ref": "./examples/CreateSqlDatabaseQuotaTicketForDTUs.json"
-          },
-          "Create a ticket to request Quota increase for Servers for SQL Database": {
-            "$ref": "./examples/CreateSqlDatabaseQuotaTicketForServers.json"
-          },
-          "Create a ticket to request Quota increase for DTUs for SQL Data Warehouse": {
-            "$ref": "./examples/CreateSqlDatawarehouseQuotaTicketForDTUs.json"
-          },
-          "Create a ticket to request Quota increase for Servers for SQL Data Warehouse": {
-            "$ref": "./examples/CreateSqlDatawarehouseQuotaTicketForServers.json"
-          },
-          "Create a ticket to request Quota increase for specific VM family cores for Machine Learning service": {
-            "$ref": "./examples/CreateMachineLearningQuotaTicketForDedicatedCores.json"
-          },
-          "Create a ticket to request Quota increase for Low-priority cores for Machine Learning service": {
-            "$ref": "./examples/CreateMachineLearningQuotaTicketForLowPriorityCores.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/checkNameAvailability": {
@@ -835,7 +686,7 @@
           "Communications"
         ],
         "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by <i>CreatedDate</i>�or <i>CommunicationType</i> using the $filter parameter. The only type of communication supported today is <i>Web</i>. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of Communication results. <br/><br/> Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "Communications_List",
+        "operationId": "SupportTicketCommunicationsSubscription_List",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -901,7 +752,7 @@
           "Communications"
         ],
         "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by <i>CreatedDate</i>�or <i>CommunicationType</i> using the $filter parameter. The only type of communication supported today is <i>Web</i>. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of Communication results. <br/><br/> Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "Communications_List",
+        "operationId": "SupportTicketCommunicationsNoSubscription_List",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -964,7 +815,7 @@
           "Communications"
         ],
         "description": "Returns details of a specific communication in a support ticket.",
-        "operationId": "Communications_Get",
+        "operationId": "SupportTicketCommunicationSubscription_Get",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -1078,7 +929,7 @@
           "Communications"
         ],
         "description": "Returns details of a specific communication in a support ticket.",
-        "operationId": "Communications_Get",
+        "operationId": "SupportTicketCommunicationNoSubscription_Get",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -1115,70 +966,6 @@
         "x-ms-examples": {
           "Get communication details for a subscription support ticket": {
             "$ref": "./examples/GetCommunicationDetailsForSupportTicket.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Communications"
-        ],
-        "description": "Adds a new customer communication to an Azure support ticket. Adding attachments are not currently supported via the API. <br/>To add a file to a support ticket, visit the <a target='_blank' href='https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest'>Manage support ticket</a> page in the Azure portal, select the support ticket, and use the file upload control to add a new file.",
-        "operationId": "Communications_Create",
-        "parameters": [
-          {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "communicationName",
-            "in": "path",
-            "description": "Communication name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "createCommunicationParameters",
-            "in": "body",
-            "description": "Communication object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommunicationDetails"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Communication created successfully.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationDetails"
-            }
-          },
-          "202": {
-            "description": "Accepted, Communication will be created asynchronously"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "AddCommunicationToSubscriptionTicket": {
-            "$ref": "./examples/CreateSupportTicketCommunication.json"
           }
         }
       }
