@@ -192,11 +192,23 @@
           ],
           "x-ms-enum": {
             "name": "CostDetailsMetricType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActualCost",
+                "description": "Actual cost data.",
+                "name": "ActualCostCostDetailsMetricType"
+              },
+              {
+                "value": "AmortizedCost",
+                "description": "Amortized cost data.",
+                "name": "AmortizedCostCostDetailsMetricType"
+              }
+            ]
           }
         },
         "timePeriod": {
-          "description": "The specific date range of cost details requested for the report. This parameter cannot be used alongside either the invoiceId or billingPeriod parameters. If a timePeriod, invoiceId or billingPeriod parameter is not provided in the request body the API will return the current month's cost. API only allows data to be pulled for 1 month or less and no older than 13 months.",
+          "description": "The specific date range of cost details requested for the report. This parameter cannot be used alongside either the invoiceId or billingPeriod parameters. If a timePeriod, invoiceId or billingPeriod parameter is not provided in the request body the API will return the current month's cost. API only allows data to be pulled for 1 month or less and no older than 13 months. If no timePeriod or billingPeriod or invoiceId is provided the API defaults to the open month time period",
           "$ref": "#/definitions/CostDetailsTimePeriod"
         },
         "billingPeriod": {
@@ -210,7 +222,7 @@
       }
     },
     "CostDetailsTimePeriod": {
-      "description": "The start and end date for pulling data for the cost detailed report.",
+      "description": "The start and end date for pulling data for the cost detailed report. API only allows data to be pulled for 1 month or less and no older than 13 months.",
       "type": "object",
       "properties": {
         "start": {
@@ -253,7 +265,24 @@
           ],
           "x-ms-enum": {
             "name": "CostDetailsStatusType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed",
+                "description": "Operation is Completed.",
+                "name": "CompletedCostDetailsStatusType"
+              },
+              {
+                "value": "NoDataFound",
+                "description": "Operation is Completed and no cost data found.",
+                "name": "NoDataFoundCostDetailsStatusType"
+              },
+              {
+                "value": "Failed",
+                "description": "Operation Failed.",
+                "name": "FailedCostDetailsStatusType"
+              }
+            ]
           }
         },
         "manifest": {
@@ -289,7 +318,14 @@
           ],
           "x-ms-enum": {
             "name": "CostDetailsDataFormat",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Csv",
+                "description": "Csv data format.",
+                "name": "CsvCostDetailsDataFormat"
+              }
+            ]
           }
         },
         "byteCount": {
