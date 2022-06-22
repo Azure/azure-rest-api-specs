@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.ContainerService/preview/2022-06-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-06-02-preview/fleets.json
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
