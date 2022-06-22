@@ -216,67 +216,6 @@
       }
     },
     "/mapData/{udid}": {
-      "put": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThe DataRegistry Update API allows the caller to update a previously registered data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are registered using the [DataRegistry Register API](https://docs.microsoft.com/rest/api/maps/data-registry/register), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Update Request\n\nTo update your content you will use a `PUT` request. The request body will contain the new connection object that will replace the existing connection object. The path will contain the `udid` of the data to be update.\n\nFor example, to update a collection of geofences that were previously registered, set the `udid` in the query parameter and the new connection object in the body.\n\nThe DataRegistry Update API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "DataRegistries_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Update existing data with new connection object": {
-            "$ref": "./examples/DataRegistries_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/UniqueDataId"
-          },
-          {
-            "$ref": "#/parameters/OperationIdHeader"
-          },
-          {
-            "name": "dataRegistry",
-            "in": "body",
-            "description": "The object for updating a given data registry",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataRegistry"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource Replacing: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
-            "headers": {
-              "Operation-Id": {
-                "type": "string",
-                "description": "ID of the status monitor for the operation."
-              },
-              "Operation-Location": {
-                "type": "string",
-                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Metadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      },
       "patch": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of DataRegistry APIs is bound to the region of your maps account. Global maps account is not be able to use this service.\n\nThe DataRegistry Patch API allows the caller to patch a previously registered data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are registered using the [DataRegistry Register API](https://docs.microsoft.com/rest/api/maps/data-registry/Register), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\nThis API is a synchronous API which may eventually fail and revert even if it returns `200 OK`. Please check [DataRegistry GetMetadata API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-metadata) for the processing status.\n\n## Submit Patch Request\n\nTo patch a data registry you will use a `PATCH` request. The request body will contain an object representing a patch to the data registry, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396). The path will contain the `udid` of the data registry to be update.\n\nFor example, to just change the connection object of a data registry that were previously registered without changing other properties of the data registry, set the `udid` in the query parameter and the new connection object in the body.",
         "operationId": "DataRegistries_Patch",
