@@ -511,6 +511,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/Fleets/{fleetName}/listClusterCredential":{
+      "post": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_ListClusterCredentials",
+        "summary": "Lists the user credentials of a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Fleet Credentials": {
+            "$ref": "./examples/FleetsListClusterCredentialResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -686,6 +728,37 @@
           "description": "The provisioning state of the last accepted operation."
         }
       }
+    },
+    "CredentialResults": {
+      "type": "object",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "description": "struct hold multiple Kubernetes client configuration file."
+        }
+      },
+      "description": "The list credential result response."
+    },
+    "CredentialResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the credential."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "readOnly": true,
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The credential result response."
     }
   },
   "parameters": {
