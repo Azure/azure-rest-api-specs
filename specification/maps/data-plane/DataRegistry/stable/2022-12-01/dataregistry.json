@@ -496,17 +496,12 @@
           "description": "ClientId of MSI. Use system assigned identity if not provided.",
           "type": "string"
         },
-        "containerName": {
-          "description": "The container name where the blob file is stored.",
-          "type": "string"
-        },
         "linkedResource": {
           "description": "The linked resource. Need to configure in control plane beforehand. Default is `default-linked-storage`",
           "type": "string"
         },
-        "blobPath": {
-          "description": "The path to the blob file.",
-          "type": "string"
+        "scope": {
+          "$ref": "#/definitions/ConnectionScope"
         }
       },
       "required": [
@@ -540,16 +535,25 @@
           "description": "ClientId of MSI. Use system assigned identity if not provided.",
           "type": "string"
         },
-        "containerName": {
-          "description": "The container name where the blob file is stored.",
-          "type": "string"
-        },
         "linkedResource": {
           "description": "The linked resource. Need to configure in control plane first.",
           "type": "string"
         },
+        "scope": {
+          "$ref": "#/definitions/ConnectionScope"
+        }
+      }
+    },
+    "ConnectionScope": {
+      "description": "The scope within the specified linked resource Azure Maps Service can access.",
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "The container name where the blob file is stored. Required when type is `AzureBlobFile`.",
+          "type": "string"
+        },
         "blobPath": {
-          "description": "The path to the blob file.",
+          "description": "The path to the blob file. Required when type is `AzureBlobFile`.",
           "type": "string"
         }
       }
