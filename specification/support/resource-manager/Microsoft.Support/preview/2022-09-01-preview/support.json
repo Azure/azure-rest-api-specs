@@ -287,7 +287,7 @@
           "SupportTickets"
         ],
         "description": "Lists all the support tickets for an Azure subscription. <br/><br/>You can also filter the support tickets by <i>Status</i> or <i>CreatedDate</i> using the $filter parameter. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTicketSubscription_List",
+        "operationId": "SupportTickets_List",
         "parameters": [
           {
             "name": "$top",
@@ -347,7 +347,7 @@
           "SupportTickets"
         ],
         "description": "Lists all the support tickets. <br/><br/>You can also filter the support tickets by <i>Status</i> or <i>CreatedDate</i> using the $filter parameter. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTickets_List",
+        "operationId": "SupportTicketsNoSubscription_List",
         "parameters": [
           {
             "name": "$top",
@@ -404,7 +404,7 @@
           "SupportTickets"
         ],
         "description": "Gets details for a specific support ticket in an Azure subscription. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTicketSubscription_Get",
+        "operationId": "SupportTickets_Get",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -596,7 +596,7 @@
           "SupportTickets"
         ],
         "description": "Gets details for a specific support ticket. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTickets_Get",
+        "operationId": "SupportTicketsNoSubscription_Get",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -688,7 +688,7 @@
           "Communications"
         ],
         "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by <i>CreatedDate</i>�or <i>CommunicationType</i> using the $filter parameter. The only type of communication supported today is <i>Web</i>. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of Communication results. <br/><br/> Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTicketCommunicationsSubscription_List",
+        "operationId": "Communications_List",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -1073,6 +1073,13 @@
         "displayName": {
           "description": "Localized name of Azure service",
           "type": "string"
+        },
+        "resourceTypes": {
+          "description": "ARM Resource types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1348,7 +1355,8 @@
           "enum": [
             "minimal",
             "moderate",
-            "critical"
+            "critical",
+            "highestcriticalimpact"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1701,6 +1709,18 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SeverityLevel",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status to be updated on the ticket.",
+          "enum": [
+            "open",
+            "closed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
             "modelAsString": true
           }
         },
