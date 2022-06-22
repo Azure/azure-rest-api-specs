@@ -130,6 +130,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStack/generateDeploymentLicense": {
+      "post": {
+        "x-ms-examples": {
+          "Creates a license that can be used to deploy an Azure Stack device.": {
+            "$ref": "examples/DeploymentLicense/Post.json"
+          }
+        },
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Creates a license that can be used to deploy an Azure Stack device.",
+        "operationId": "DeploymentLicense_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentLicenseRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLicenseResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -342,6 +381,34 @@
         }
       }
     },
+    "DeploymentLicenseRequest": {
+      "description": "Request details for generating a deployment license.",
+      "type": "object",
+      "properties": {
+        "verificationVersion": {
+          "description": "Signing verification public key version.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentLicenseResponse": {
+      "description": "A license that can be used to deploy an Azure Stack device.",
+      "type": "object",
+      "properties": {
+        "temporaryLicenseChain": {
+          "description": "A license chain that can be used to temporarily activate an Azure Stack device.",
+          "type": "array",
+          "items": {
+            "description": "An intermediate or leaf license item.",
+            "type": "string"
+          }
+        },
+        "signature": {
+          "description": "Signature of the license chain.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
@@ -403,6 +470,16 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeploymentLicenseRequestParameter": {
+      "description": "Request body for creating a deployment license.",
+      "name": "deploymentLicenseRequest",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/DeploymentLicenseRequest"
+      },
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
