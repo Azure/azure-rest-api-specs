@@ -30,7 +30,9 @@
           "typeHandlerVersion": "1.10.3",
           "enableAutomaticUpgrade": true,
           "autoUpgradeMinorVersion": false,
-          "settings": "@{commandToExecute=powershell.exe -c \"Get-Process | Where-Object { $_.CPU -lt 100 }\"}",
+          "settings": {
+            "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+          },
           "protectedSettings": {},
           "provisioningState": "Succeeded",
           "instanceView": {

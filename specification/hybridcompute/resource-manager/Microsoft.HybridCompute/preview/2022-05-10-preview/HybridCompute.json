@@ -40,7 +40,7 @@
           "machines"
         ],
         "operationId": "Machines_CreateOrUpdate",
-        "description": "The operation to create or update a hybrid machine resource identity in Azure.",
+        "description": "The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
           "machines"
         ],
         "operationId": "Machines_Delete",
-        "description": "The operation to remove a hybrid machine identity in Azure.",
+        "description": "The operation to delete a hybrid machine.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -1344,7 +1344,7 @@
           "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object", 
+          "type": "object",
           "additionalProperties": {},
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
         }
