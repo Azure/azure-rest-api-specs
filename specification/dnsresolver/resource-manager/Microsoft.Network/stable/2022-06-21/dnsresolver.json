@@ -3,7 +3,7 @@
   "info": {
     "title": "DnsResolverManagementClient",
     "description": "The DNS Resolver Management Client.",
-    "version": "2022-06-21"
+    "version": "2020-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1830,9 +1830,6 @@
     "DnsResolver": {
       "description": "Describes a DNS resolver.",
       "type": "object",
-      "required":  [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the DNS resolver.",
@@ -1895,9 +1892,6 @@
     "InboundEndpointProperties": {
       "description": "Represents the properties of an inbound endpoint for a DNS resolver.",
       "type": "object",
-      "required": [
-        "ipConfigurations"
-      ],
       "properties": {
         "ipConfigurations": {
           "description": "IP configurations for the inbound endpoint.",
@@ -1922,9 +1916,6 @@
     "InboundEndpoint": {
       "description": "Describes an inbound endpoint for a DNS resolver.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the inbound endpoint.",
@@ -1987,9 +1978,6 @@
     "OutboundEndpointProperties": {
       "description": "Represents the properties of an outbound endpoint for a DNS resolver.",
       "type": "object",
-      "required": [
-        "subnet"
-      ],
       "properties": {
         "subnet": {
           "description": "The reference to the subnet used for the outbound endpoint.",
@@ -2010,9 +1998,6 @@
     "OutboundEndpoint": {
       "description": "Describes an outbound endpoint for a DNS resolver.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the outbound endpoint.",
@@ -2075,9 +2060,6 @@
     "DnsForwardingRulesetProperties": {
       "description": "Represents the properties of a DNS forwarding ruleset.",
       "type": "object",
-      "required": [
-        "dnsResolverOutboundEndpoints"
-      ],
       "properties": {
         "dnsResolverOutboundEndpoints": {
           "description": "The reference to the DNS resolver outbound endpoints that are used to route DNS queries matching the forwarding rules in the ruleset to the target DNS servers.",
@@ -2101,9 +2083,6 @@
     "DnsForwardingRuleset": {
       "description": "Describes a DNS forwarding ruleset.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the DNS forwarding ruleset.",
@@ -2131,13 +2110,6 @@
       "description": "Describes a DNS forwarding ruleset PATCH operation.",
       "type": "object",
       "properties": {
-         "dnsResolverOutboundEndpoints": {
-           "description": "The reference to the DNS resolver outbound endpoints that are used to route DNS queries matching the forwarding rules in the ruleset to the target DNS servers.",
-           "type": "array",
-           "items": {
-             "$ref": "#/definitions/SubResource"
-           }
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -2219,9 +2191,6 @@
     "ForwardingRule": {
       "description": "Describes a forwarding rule within a DNS forwarding ruleset.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the forwarding rule.",
@@ -2311,9 +2280,6 @@
     "VirtualNetworkLinkProperties": {
       "description": "Represents the properties of a virtual network link.",
       "type": "object",
-      "required": [
-        "virtualNetwork"
-      ],
       "properties": {
         "virtualNetwork": {
           "description": "The reference to the virtual network. This cannot be changed after creation.",
@@ -2336,9 +2302,6 @@
     "VirtualNetworkLink": {
       "description": "Describes a virtual network link.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the virtual network link.",
@@ -2407,9 +2370,6 @@
     "IpConfiguration": {
       "description": "IP configuration.",
       "type": "object",
-      "required": [
-        "subnet"
-      ],
       "properties": {
         "subnet": {
           "description": "The reference to the subnet bound to the IP configuration.",
@@ -2437,9 +2397,6 @@
     "TargetDnsServer": {
       "description": "Describes a server to forward the DNS queries to.",
       "type": "object",
-      "required": [
-        "ipAddress"
-      ], 
       "properties": {
         "ipAddress": {
           "description": "DNS server IP address.",
@@ -2494,9 +2451,6 @@
     "SubResource": {
       "description": "Reference to another ARM resource.",
       "type": "object",
-      "required": [
-        "id"
-      ],
       "properties": {
         "id": {
           "type": "string",

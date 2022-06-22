@@ -26,16 +26,7 @@ These are the global settings for the DNS resolver API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-06
-```
-
-### Tag: package-2022-06
-
-These settings apply only when `--tag=package-2022-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-06'
-input-file:
-  - Microsoft.Network/stable/2022-06-21/dnsresolver.json
+tag: package-2020-04-preview
 ```
 
 ### Tag: package-2020-04-preview
@@ -129,4 +120,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
