@@ -818,6 +818,69 @@
           "$ref": "#/definitions/SummaryContext"
         }
       ]
+    },
+    "AbstractiveSummarizationEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom abstractive summarization project.",
+      "required": [
+        "rouge1",
+        "rouge2",
+        "rougeL",
+        "bleu",
+        "chrF",
+        "bertScore"
+      ],
+      "type": "object",
+      "properties": {
+        "rouge1": {
+          "format": "float",
+          "description": "Represents the ROUGE-1 F1",
+          "type": "number"
+        },
+        "rouge2": {
+          "format": "float",
+          "description": "Represents the ROUGE-2 F1",
+          "type": "number"
+        },
+        "rougeL": {
+          "format": "float",
+          "description": "Represents the ROUGE-L F1",
+          "type": "number"
+        },
+        "bleu": {
+          "format": "float",
+          "description": "Represents the score of bilingual evaluation understudy",
+          "type": "number"
+        },
+        "chrF": {
+          "format": "float",
+          "description": "Represents the character n-gram F-score",
+          "type": "number"
+        },
+        "bertScore": {
+          "format": "float",
+          "description": "Represents the Bert score",
+          "type": "number"
+        }
+      },
+      "x-ms-client-name": "AbstractiveSummarizationEvaluationSummary"
+    },
+    "ExportedCustomAbstractiveSummarizationDataItem": {
+      "description": "Represents an exported document for a custom abstractive summarization project.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "The output summary.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset split. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
