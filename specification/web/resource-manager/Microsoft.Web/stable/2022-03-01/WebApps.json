@@ -28354,39 +28354,6 @@
         }
       }
     },
-    "Sku": {
-      "type": "object",
-      "description": "The sku type.",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "The name."
-        },
-        "plan": {
-          "$ref": "#/definitions/ResourceReference",
-          "description": "The reference to plan."
-        }
-      }
-    },
-    "SkuName": {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "Free",
-        "Shared",
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      },
-      "description": "The sku name."
-    },
     "SlotConfigNames": {
       "description": "Names for connection strings, application settings, and external Azure storage account configuration\nidentifiers to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
       "type": "object",
@@ -29201,7 +29168,7 @@
           "description": "The access control configuration."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/WorkflowSku",
           "readOnly": true,
           "description": "The sku."
         },
@@ -29679,6 +29646,39 @@
       },
       "description": "The workflow run trigger."
     },
+    "WorkflowSku": {
+      "type": "object",
+      "description": "The sku type.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/WorkflowSkuName",
+          "description": "The name."
+        },
+        "plan": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The reference to plan."
+        }
+      }
+    },
+    "WorkflowSkuName": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Free",
+        "Shared",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      },
+      "description": "The sku name."
+    },
     "WorkflowState": {
       "type": "string",
       "description": "The workflow state.",
@@ -30108,7 +30108,7 @@
           "description": "The access control configuration."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/WorkflowSku",
           "readOnly": true,
           "description": "The sku."
         },
