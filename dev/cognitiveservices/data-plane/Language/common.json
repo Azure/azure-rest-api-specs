@@ -361,7 +361,7 @@
       "properties": {
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document id or conversation id.",
           "items": {
             "$ref": "#/definitions/InputError"
           }
@@ -723,7 +723,7 @@
         }
       }
     },
-    "AbstractiveSummarizationTaskParameters": {
+    "AbstractiveSummarizationTaskParametersBase": {
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
       "properties": {
@@ -739,11 +739,80 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      },
+      }
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an pre-build Abstractive Summarization task.",
       "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
+      ]
+    },
+    "CustomAbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an custom Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ],
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomResult": {
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id or conversation id.",
+          "items": {
+            "$ref": "#/definitions/InputError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
       ]
     },
     "SummaryLengthType": {
@@ -878,12 +947,12 @@
     "ExportedCustomAbstractiveSummarizationDataItem": {
       "description": "Represents an exported data item for a custom abstractive summarization project.",
       "required": [
-        "summary"
+        "summaryLocation"
       ],
       "type": "object",
       "properties": {
-        "summary": {
-          "description": "The output summary.",
+        "summaryLocation": {
+          "description": "The location of the output summary.",
           "type": "string"
         },
         "language": {

@@ -3077,9 +3077,13 @@
     "ConversationalAnalysisAuthoringSummarizationDataItem": {
       "description": "Represents an exported data item for a custom abstractive summarization project.",
       "type": "object",
+      "required": [
+        "conversationLocation"
+      ],
       "properties": {
-        "conversation": {
-          "$ref": "analyzeconversations.json#/definitions/Conversation"
+        "conversationLocation": {
+          "description": "The location of the input conversation to be summarized. The blob content format is JSON of Conversation object.",
+          "type": "string"
         }
       },
       "allOf": [
