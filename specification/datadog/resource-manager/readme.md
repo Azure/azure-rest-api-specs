@@ -48,3 +48,12 @@ These settings apply only when `--tag=package-2020-02-01-preview` is specified o
 input-file:
 - Microsoft.Datadog/preview/2020-02-01-preview/swagger.json
 ```
+
+### Tag: package-2022-06-01
+
+These settings apply only when `--tag=package-2022-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06-01'
+input-file:
+- Microsoft.Datadog/stable/2022-06-01/swagger.json
+```
