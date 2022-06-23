@@ -46,7 +46,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2022-05-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2022-05-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2022-05-15-preview/services.json
-tag: package-2022-05
 ```
 
 ### Tag: package-2022-05
