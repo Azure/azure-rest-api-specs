@@ -625,7 +625,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The Kubernetes version of the Fleet hub."
+        },
+        "resourceId":{
+          "readOnly": true,
+          "type": "string",
+          "description": "The azure resource ID of FleetHub kubernetes cluster."
         }
+
       }
     },
     "FleetListResult": {
@@ -738,7 +744,7 @@
           "items": {
             "$ref": "#/definitions/CredentialResult"
           },
-          "description": "struct hold multiple Kubernetes client configuration file."
+          "description": "The list of Kubernetes client configuration files."
         }
       },
       "description": "The list credential result response."
