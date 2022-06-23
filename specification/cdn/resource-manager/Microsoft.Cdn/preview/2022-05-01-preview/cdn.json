@@ -2796,15 +2796,7 @@
       "properties": {
         "sku": {
           "description": "Sku for the migration",
-          "type": "string",
-          "enum": [
-            "Standard_AzureFrontDoor",
-            "Premium_AzureFrontDoor"
-          ],
-          "x-ms-enum": {
-            "name": "MigrationSku",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Sku"
         },
         "classicResourceReference": {
           "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
