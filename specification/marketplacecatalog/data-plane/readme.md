@@ -38,10 +38,10 @@ input-file:
   - Microsoft.Marketplace/stable/2021-10-01/marketplacecatalog.json
 ```
 
-### Tag: package-2022-02-02
+### Tag: package-2022-06-23-preview
 
-These settings apply only when `--tag=package-2022-02-02` is specified on the command line.
+These settings apply only when `--tag=package-2022-06-23-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02-02'
+```yaml $(tag) == 'package-2022-06-23-preview'
 input-file:
-  - Search/stable/2022-02-02/search.json
+  - Search/previe/2022-06-23-preview/search.json
