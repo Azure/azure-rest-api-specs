@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2021-10
+tag: package-2022-06
 ```
 
 ### Validations
@@ -135,7 +135,15 @@ directive:
       - $.path["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
     transform: delete $['post']['x-ms-pageable']['operationName']
 ```
+### Tag: package-2022-06
 
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06'
+input-file:
+- Microsoft.PolicyInsights/stable/2022-06-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2022-06-01/policyStates.json
+```
 
 ### Tag: package-2021-10
 
