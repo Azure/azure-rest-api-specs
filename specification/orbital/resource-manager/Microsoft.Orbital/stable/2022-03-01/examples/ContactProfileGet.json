@@ -1,77 +1,78 @@
 {
   "parameters": {
     "api-version": "2022-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "contactProfileName": "AQUA_DIRECTPLAYBACK_WITH_UPLINK"
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3",
+    "resourceGroupName": "contoso-Rgp",
+    "contactProfileName": "CONTOSO-CP"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "AQUA_DIRECTPLAYBACK_WITH_UPLINK",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/contactProfiles/AQUA_DIRECTPLAYBACK_WITH_UPLINK",
-        "location": "westus",
+        "location": "eastus2",
+        "tags": null,
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/contactProfiles/CONTOSO-CP",
+        "name": "CONTOSO-CP",
+        "type": "Microsoft.Orbital/contactProfiles",
         "properties": {
           "provisioningState": "Succeeded",
           "minimumViableContactDuration": "PT1M",
-          "minimumElevationDegrees": 10,
-          "autoTrackingConfiguration": "xBand",
-          "eventHubUri": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/orbitalppewestus2-ns/eventhubs/telemetry-hub/",
+          "minimumElevationDegrees": 5.0,
+          "autoTrackingConfiguration": "disabled",
+          "eventHubUri": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.EventHub/namespaces/contosoHub/eventhubs/contosoHub",
           "networkConfiguration": {
-            "subnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnetName"
+            "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
           },
           "links": [
             {
-              "name": "RHCP_UL",
-              "polarization": "RHCP",
+              "name": "contoso-uplink",
+              "polarization": "LHCP",
               "direction": "uplink",
               "gainOverTemperature": 0,
               "eirpdBW": 45,
               "channels": [
                 {
-                  "name": "channel1",
-                  "centerFrequencyMHz": 2106.4063,
-                  "bandwidthMHz": 0.036,
+                  "name": "contoso-uplink-channel",
+                  "centerFrequencyMHz": 2250.0,
+                  "bandwidthMHz": 2.0,
                   "endPoint": {
-                    "ipAddress": "10.0.1.0",
-                    "endPointName": "AQUA_command",
-                    "port": "4000",
+                    "ipAddress": "10.1.0.4",
+                    "endPointName": "ContosoTest_Uplink",
+                    "port": "50000",
                     "protocol": "TCP"
                   },
-                  "modulationConfiguration": "AQUA_UPLINK_BPSK",
-                  "demodulationConfiguration": "na",
-                  "encodingConfiguration": "AQUA_CMD_CCSDS",
-                  "decodingConfiguration": "na"
+                  "modulationConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "decodingConfiguration": null
                 }
               ]
             },
             {
-              "name": "RHCP_DL",
+              "name": "contoso-downlink",
               "polarization": "RHCP",
               "direction": "downlink",
-              "gainOverTemperature": 25,
-              "eirpdBW": 0,
+              "gainOverTemperature": 25.0,
+              "eirpdBW": 0.0,
               "channels": [
                 {
-                  "name": "channel2",
-                  "centerFrequencyMHz": 8160,
-                  "bandwidthMHz": 150,
+                  "name": "contoso-downlink-channel",
+                  "centerFrequencyMHz": 8160.0,
+                  "bandwidthMHz": 15.0,
                   "endPoint": {
-                    "ipAddress": "10.0.2.0",
-                    "endPointName": "AQUA_directplayback",
-                    "port": "4000",
-                    "protocol": "TCP"
+                    "ipAddress": "10.1.0.5",
+                    "endPointName": "ContosoTest_Downlink",
+                    "port": "51103",
+                    "protocol": "UDP"
                   },
-                  "modulationConfiguration": "na",
-                  "demodulationConfiguration": "AQUA_DOWNLINK_QPSK",
-                  "encodingConfiguration": "na",
-                  "decodingConfiguration": "AQUA_DIRECTPLAYBACK_CCSDS"
+                  "modulationConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "decodingConfiguration": null
                 }
               ]
             }
           ]
-        },
-        "type": "Microsoft.Orbital/contactProfiles"
+        }
       }
     }
   }

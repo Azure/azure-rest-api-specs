@@ -40,6 +40,17 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 input-file:
   - Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
 ```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
+```
+
+
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
