@@ -76,6 +76,15 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: AppServicePlans.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: Recommendations.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: DeletedWebApps.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: Provider.json
+    reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
 
