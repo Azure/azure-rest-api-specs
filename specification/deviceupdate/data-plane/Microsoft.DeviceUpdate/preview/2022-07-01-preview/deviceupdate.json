@@ -1185,7 +1185,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property."
+            "description": "Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property. This filter is deprecated and should not be used."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2086,11 +2086,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_CollectLogs",
-        "description": "Start the device diagnostics log collection operation on specified devices.",
+        "operationId": "DeviceManagement_StartLogCollection",
+        "description": "Start the device diagnostics log collection on specified devices.",
         "x-ms-examples": {
-          "DeviceManagement_CollectLogs": {
-            "$ref": "./examples/DeviceManagement_CollectLogs.json"
+          "DeviceManagement_StartLogCollection": {
+            "$ref": "./examples/DeviceManagement_StartLogCollection.json"
           }
         },
         "parameters": [
@@ -2098,26 +2098,26 @@
             "$ref": "#/parameters/InstanceIdParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/LogCollectionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logCollectionRequest",
+            "name": "logCollection",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             },
-            "description": "The deployment properties."
+            "description": "The log collection properties."
           }
         ],
         "responses": {
           "201": {
-            "description": "Operation created.",
+            "description": "Log collection created.",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             }
           },
           "default": {
@@ -2132,11 +2132,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_GetLogCollectionOperation",
-        "description": "Get the device diagnostics log collection operation",
+        "operationId": "DeviceManagement_GetLogCollection",
+        "description": "Get the device diagnostics log collection",
         "x-ms-examples": {
-          "DeviceManagement_GetLogCollectionOperation": {
-            "$ref": "./examples/DeviceManagement_GetLogCollectionOperation.json"
+          "DeviceManagement_GetLogCollection": {
+            "$ref": "./examples/DeviceManagement_GetLogCollection.json"
           }
         },
         "parameters": [
@@ -2144,7 +2144,7 @@
             "$ref": "#/parameters/InstanceIdParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/LogCollectionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2154,7 +2154,7 @@
           "200": {
             "description": "Operation resource",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             }
           },
           "default": {
@@ -2171,11 +2171,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_ListLogCollectionOperations",
-        "description": "Get all device diagnostics log collection operations",
+        "operationId": "DeviceManagement_ListLogCollections",
+        "description": "Get all device diagnostics log collections",
         "x-ms-examples": {
-          "DeviceManagement_ListLogCollectionOperations": {
-            "$ref": "./examples/DeviceManagement_ListLogCollectionOperations.json"
+          "DeviceManagement_ListLogCollections": {
+            "$ref": "./examples/DeviceManagement_ListLogCollections.json"
           }
         },
         "parameters": [
@@ -2188,9 +2188,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of all device diagnostics operations",
+            "description": "List of all log collections",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperationList"
+              "$ref": "#/definitions/LogCollectionList"
             }
           },
           "default": {
@@ -2210,11 +2210,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_GetLogCollectionOperationDetailedStatus",
-        "description": "Get device diagnostics log collection operation with detailed status",
+        "operationId": "DeviceManagement_GetLogCollectionDetailedStatus",
+        "description": "Get log collection with detailed status",
         "x-ms-examples": {
-          "DeviceManagement_GetLogCollectionOperationDetailedStatus": {
-            "$ref": "./examples/DeviceManagement_GetLogCollectionOperationDetailedStatus.json"
+          "DeviceManagement_GetLogCollectionDetailedStatus": {
+            "$ref": "./examples/DeviceManagement_GetLogCollectionDetailedStatus.json"
           }
         },
         "parameters": [
@@ -4061,12 +4061,13 @@
       ],
       "description": "Device Update agent id"
     },
-    "LogCollectionOperation": {
+    "LogCollection": {
       "type": "object",
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The diagnostics operation id."
+          "description": "The log collection id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "deviceList": {
           "type": "array",
@@ -4106,7 +4107,8 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The device diagnostics operation id."
+          "description": "The device diagnostics operation id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "createdDateTime": {
           "type": "string",
@@ -4134,15 +4136,15 @@
       },
       "description": "Device diagnostics operation detailed status"
     },
-    "LogCollectionOperationList": {
-      "description": "The list of diagnostics operations with server paging support.",
+    "LogCollectionList": {
+      "description": "The list of log collections with server paging support.",
       "type": "object",
       "properties": {
         "value": {
           "description": "The collection of pageable items.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LogCollectionOperation"
+            "$ref": "#/definitions/LogCollection"
           }
         },
         "nextLink": {
@@ -4154,8 +4156,8 @@
         "value"
       ]
     },
-    "LogCollectionOperationDetailedStatusList": {
-      "description": "The list of diagnostics operations with detailed status, with server paging support.",
+    "LogCollectionDetailedStatusList": {
+      "description": "The list of log collections with detailed status, with server paging support.",
       "type": "object",
       "properties": {
         "value": {
@@ -4428,6 +4430,17 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "LogCollectionIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "Log collection identifier.",
+      "minLength": 1,
+      "maxLength": 256,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "logCollectionId"
     },
     "DeviceIdParameter": {
       "name": "deviceId",
