@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ValidateResourcesClient",
+    "version": "2022-06-01-preview",
+    "description": "Provides operations for working with resource validation."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Resources/validateResources": {
+      "post": {
+        "tags": [
+          "ValidateResources"
+        ],
+        "operationId": "Deployments_ValidateResourcesAtTenantScope",
+        "description": "Validates whether the specified resources are syntactically correct and will be accepted by Azure Resource Manager.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceValidatorRequest"
+            },
+            "description": "Parameters to validate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidatorResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resource validation": {
+            "$ref": "./examples/PostValidateResources.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
+    },
+    "ExtendedLocation": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          },
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      },
+      "description": "Resource extended location."
+    },
+    "GenericResource": {
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "The plan of the resource."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The resource properties."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of the resource.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "ID of the resource that manages this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Resource information."
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "IdentityUserAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "The offer ID."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        },
+        "version": {
+          "type": "string",
+          "description": "The plan's version."
+        }
+      },
+      "description": "Plan for the resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource extended location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "Specified resource."
+    },
+    "ResourceReference": {
+      "description": "The resource Id model.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified resource Id."
+        }
+      }
+    },
+    "ResourceValidatorRequest": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider namespace."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource provider type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource(s) validation location. For resource group scope this value must contain a valid region, for other scopes this value can be left empty."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The resource(s) validation scope. This value must be a valid identifier: e.g. /subscriptions/sub_id/resourceGroups/rg_name. For tenant scope, pass: / for more information refer to this documentation site: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-subscription?tabs=azure-cli#deployment-scopes"
+        },
+        "resources": {
+          "type": "array",
+          "description": "Array of resources to validate. These resources must share the same resource type, and namespace as the top-level properties",
+          "items": {
+            "$ref": "#/definitions/GenericResource",
+            "description": "Details of validated resources."
+          }
+        }
+      },
+      "required": [
+        "provider",
+        "type",
+        "scope",
+        "resources"
+      ],
+      "description": "Resource validator request."
+    },
+    "ResourceValidatorResult": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceValidatorValidatedResources",
+          "description": "Details of validated resources."
+        }
+      },
+      "description": "Information from resource validator response."
+    },
+    "ResourceValidatorValidatedResources": {
+      "properties": {
+        "validatedResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of validated resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of validated resources."
+          }
+        }
+      }
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The SKU name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The SKU tier."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size."
+        },
+        "family": {
+          "type": "string",
+          "description": "The SKU family."
+        },
+        "model": {
+          "type": "string",
+          "description": "The SKU model."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SKU capacity."
+        }
+      },
+      "description": "SKU for the resource."
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The management group ID.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Microsoft Azure subscription ID."
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the deployment."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}
