@@ -52,6 +52,9 @@
           },
           "Create a stream IoT Hub input with Avro serialization": {
             "$ref": "./examples/Input_Create_Stream_IoTHub_Avro.json"
+          },
+          "Create a Gateway Message Bus input": {
+            "$ref": "./examples/Input_Create_GatewayMessageBus.json"
           }
         },
         "parameters": [
@@ -1121,6 +1124,42 @@
         "deltaSnapshotQuery": {
           "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
+        }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSource": {
+      "description": "Describes a blob input data source that contains stream data.",
+      "type": "object",
+      "x-ms-discriminator-value": "GatewayMessageBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayMessageBusStreamInputDataSourceProperties",
+          "description": "The properties that are associated with a gateway message bus input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus input containing stream data.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayMessageBusSourceProperties"
+        }
+      ]
+    },
+    "GatewayMessageBusSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus datasource.",
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "The name of the Service Bus topic."
         }
       }
     },
