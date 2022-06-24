@@ -825,10 +825,36 @@
         "extra-long"
       ],
       "type": "string",
-      "description": "Control the length range of the summary.",
+      "description": "Control the length range of the summary. The model will try the best to control the output length into the specified range, but not guaranteed. Aspect 'chapterTitle' won't be affected by this length control, because chapter title is always short and has different linguistic characteristics.",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "SummaryLengthType"
+        "name": "SummaryLengthType",
+        "values": [
+          {
+            "value": "short",
+            "description": "0-30 words."
+          },
+          {
+            "value": "medium-short",
+            "description": "30-60 words."
+          },
+          {
+            "value": "medium",
+            "description": "60-90 words."
+          },
+          {
+            "value": "medium-long",
+            "description": "90-120 words."
+          },
+          {
+            "value": "long",
+            "description": "120-150 words."
+          },
+          {
+            "value": "extra-long",
+            "description": "> 150 words."
+          }
+        ]
       }
     },
     "PhraseControl": {
@@ -852,13 +878,27 @@
       "enum": [
         "encourage",
         "discourage",
-        "forbidden"
+        "disallow"
       ],
       "type": "string",
       "description": "The strategy to use in phrase control.",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "PhraseControlStrategy"
+        "name": "PhraseControlStrategy",
+        "values": [
+          {
+            "value": "encourage",
+            "description": "The model is more favor to select the target phrase in the summary if there are multiple alternate."
+          },
+          {
+            "value": "discourage",
+            "description": "The model is less favor to select the target phrase in the summary if there are multiple alternate."
+          },
+          {
+            "value": "disallow",
+            "description": "The model will avoid to select the target phrase in the summary if that phrase is not in the input."
+          }
+        ]
       }
     },
     "SummaryContext": {
