@@ -16,10 +16,12 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
-- from: AssetsAndAssetFilters.json
-  where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationStatuses/{operationId}"].get'
-  transform: >
-    $["operationId"] = "AssetTrackOperationStatuses_Get"
+ - rename-operation:
+     from: OperationStatuses_Get
+     to: AssetTrackOperationStatuses_Get
+ - rename-operation:
+     from: OperationResults_Get
+     to: AssetTrackOperationResults_Get
 ```
 
 ### Go multi-api
