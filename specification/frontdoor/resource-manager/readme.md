@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Network/stable/2021-06-01/frontdoor.json
   - Microsoft.Network/stable/2021-06-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2021-06-01/network.json
+  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 directive:
   - where:
       - $.paths
