@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 ```yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2021-06-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2021-06-01/network.json
 directive:
   - where:
