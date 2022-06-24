@@ -439,7 +439,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradegraph/{releaseTrain}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}": {
       "get": {
         "tags": [
           "appliances"
@@ -461,11 +461,11 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "releaseTrain",
+            "name": "upgradeGraph",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Release train version, ex - stable"
+            "description": "Upgrade graph version, ex - stable"
           }
         ],
         "responses": {
