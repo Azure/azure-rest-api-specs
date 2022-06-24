@@ -15,6 +15,11 @@ module-name: sdk/resourcemanager/mediaservices/armmediaservices
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+  from: AssetsAndAssetFilters.json
+  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationStatuses/{operationId}"].get
+  transform: >
+    $["operationId"] = "AssetTrackOperationStatuses_Get"
 ```
 
 ### Go multi-api
