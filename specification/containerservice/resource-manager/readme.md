@@ -73,7 +73,6 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.ContainerService/preview/2022-04-02-preview/managedClusters.json
-
 ```
 
 ### Tag: package-2022-03
