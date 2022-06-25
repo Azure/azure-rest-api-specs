@@ -5360,6 +5360,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ReservedRouteUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
       ]
     },
@@ -5371,8 +5374,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservedRouteUpdatePropertiesParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ReservedRouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the reserved route to create.",
@@ -5384,15 +5386,15 @@
         },
         "domains": {
           "description": "The configuration specifying domains that reserved route registers to.",
-          "type": "string",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "type": "string"
           }
         },
         "paths": {
           "description": "The configuration specifying paths that reserved route registers to.",
-          "type": "string",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "type": "string"
           }
         }
