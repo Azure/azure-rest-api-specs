@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/deployedResources/{deployedResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/deployedResources/{deployedResourceName}": {
       "get": {
         "tags": [
           "DeployedResource"
@@ -36,8 +36,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -73,13 +73,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/deployedResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/deployedResources": {
       "get": {
         "tags": [
           "DeployedResource"
         ],
         "summary": "Lists the deployed resources.",
-        "description": "Gets the list of deployed resources in the given migrateDataCenter.",
+        "description": "Gets the list of deployed resources in the given modernizeProject.",
         "operationId": "DeployedResource_List",
         "produces": [
           "application/json"
@@ -93,8 +93,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -126,13 +126,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/migrateAgents/{agentName}": {
       "get": {
         "tags": [
           "MigrateAgent"
         ],
         "summary": "Gets the MigrateAgent.",
-        "description": "Gets the details of the migrateDataCenter agent.",
+        "description": "Gets the details of the modernizeProject agent.",
         "operationId": "MigrateAgent_Get",
         "produces": [
           "application/json"
@@ -146,8 +146,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -187,7 +187,7 @@
           "MigrateAgent"
         ],
         "summary": "Puts the MigrateAgent.",
-        "description": "Creates the migrateDataCenter agent.",
+        "description": "Creates the modernizeProject agent.",
         "operationId": "MigrateAgent_Create",
         "consumes": [
           "application/json"
@@ -204,8 +204,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -253,7 +253,7 @@
           "MigrateAgent"
         ],
         "summary": "Deletes the MigrateAgent.",
-        "description": "Deletes the migrateDataCenter agent.",
+        "description": "Deletes the modernizeProject agent.",
         "operationId": "MigrateAgent_Delete",
         "produces": [
           "application/json"
@@ -267,8 +267,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter Name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects Name.",
             "required": true,
             "type": "string"
           },
@@ -311,13 +311,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/migrateAgents": {
       "get": {
         "tags": [
           "MigrateAgent"
         ],
         "summary": "Lists the MigrateAgents.",
-        "description": "Gets the list of migrateDataCenter agents in the given migrateDataCenter.",
+        "description": "Gets the list of modernizeProject agents in the given modernizeProject.",
         "operationId": "MigrateAgent_List",
         "produces": [
           "application/json"
@@ -331,8 +331,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -361,13 +361,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}/refresh": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/migrateAgents/{agentName}/refresh": {
       "post": {
         "tags": [
           "MigrateAgent"
         ],
         "summary": "Refreshes the MigrateAgent.",
-        "description": "Refreshes the migrateDataCenter agent.",
+        "description": "Refreshes the modernizeProject agent.",
         "operationId": "MigrateAgent_Refresh",
         "produces": [
           "application/json"
@@ -381,8 +381,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -422,13 +422,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/migrateAgents/{agentName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/migrateAgents/{agentName}/operations/{operationId}": {
       "get": {
         "tags": [
           "MigrateAgent"
         ],
         "summary": "Gets the MigrateAgent operation status.",
-        "description": "Tracks the results of an asynchronous operation on the migrateDataCenter agent.",
+        "description": "Tracks the results of an asynchronous operation on the modernizeProject agent.",
         "operationId": "MigrateAgentOperationStatus_Get",
         "produces": [
           "application/json"
@@ -442,8 +442,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -486,14 +486,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}": {
       "get": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
         "summary": "Gets the migrate data center.",
         "description": "Gets the details of the migrate data center.",
-        "operationId": "MigrateDataCenter_Get",
+        "operationId": "ModernizeProjects_Get",
         "produces": [
           "application/json"
         ],
@@ -506,7 +506,7 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
+            "name": "modernizeProjectName",
             "description": "Migrate data center name.",
             "required": true,
             "type": "string"
@@ -519,7 +519,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModel"
+              "$ref": "#/definitions/ModernizeProjectsModel"
             }
           },
           "default": {
@@ -530,18 +530,18 @@
           }
         },
         "x-ms-examples": {
-          "MigrateDataCenter_Get": {
-            "$ref": "./examples/MigrateDataCenter_Get.json"
+          "ModernizeProjects_Get": {
+            "$ref": "./examples/ModernizeProjects_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Puts the migrateDataCenter.",
-        "description": "Creates the migrateDataCenter.",
-        "operationId": "MigrateDataCenter_Create",
+        "summary": "Puts the modernizeProject.",
+        "description": "Creates the modernizeProject.",
+        "operationId": "ModernizeProjects_Create",
         "consumes": [
           "application/json"
         ],
@@ -557,8 +557,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter Name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects Name.",
             "required": true,
             "type": "string"
           },
@@ -568,9 +568,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "MigrateDataCenter properties.",
+            "description": "ModernizeProjects properties.",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModel"
+              "$ref": "#/definitions/ModernizeProjectsModel"
             }
           }
         ],
@@ -578,7 +578,7 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModel"
+              "$ref": "#/definitions/ModernizeProjectsModel"
             }
           },
           "default": {
@@ -589,18 +589,18 @@
           }
         },
         "x-ms-examples": {
-          "MigrateDataCenter_Create": {
-            "$ref": "./examples/MigrateDataCenter_Create.json"
+          "ModernizeProjects_Create": {
+            "$ref": "./examples/ModernizeProjects_Create.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Updates the migrateDataCenter.",
-        "description": "Performs update on the migrateDataCenter.",
-        "operationId": "MigrateDataCenter_Update",
+        "summary": "Updates the modernizeProject.",
+        "description": "Performs update on the modernizeProject.",
+        "operationId": "ModernizeProjects_Update",
         "consumes": [
           "application/json"
         ],
@@ -616,8 +616,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter Name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects Name.",
             "required": true,
             "type": "string"
           },
@@ -627,9 +627,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "MigrateDataCenter properties.",
+            "description": "ModernizeProjects properties.",
             "schema": {
-              "$ref": "#/definitions/UpdateMigrateDataCenterModel"
+              "$ref": "#/definitions/UpdateModernizeProjectsModel"
             }
           }
         ],
@@ -637,7 +637,7 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModel"
+              "$ref": "#/definitions/ModernizeProjectsModel"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -655,18 +655,18 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MigrateDataCenter_Update": {
-            "$ref": "./examples/MigrateDataCenter_Update.json"
+          "ModernizeProjects_Update": {
+            "$ref": "./examples/ModernizeProjects_Update.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Deletes the migrateDataCenter.",
-        "description": "Removes the migrateDataCenter.",
-        "operationId": "MigrateDataCenter_Delete",
+        "summary": "Deletes the modernizeProject.",
+        "description": "Removes the modernizeProject.",
+        "operationId": "ModernizeProjects_Delete",
         "produces": [
           "application/json"
         ],
@@ -679,8 +679,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter Name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects Name.",
             "required": true,
             "type": "string"
           },
@@ -710,20 +710,20 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MigrateDataCenter_Delete": {
-            "$ref": "./examples/MigrateDataCenter_Delete.json"
+          "ModernizeProjects_Delete": {
+            "$ref": "./examples/ModernizeProjects_Delete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/migrateDataCenters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/modernizeProjects": {
       "get": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Lists the migrateDataCenters.",
-        "description": "Gets the list of migrateDataCenters in the given subscription.",
-        "operationId": "MigrateDataCenter_ListBySubscription",
+        "summary": "Lists the modernizeProjects.",
+        "description": "Gets the list of modernizeProjects in the given subscription.",
+        "operationId": "ModernizeProjects_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -745,7 +745,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModelCollection"
+              "$ref": "#/definitions/ModernizeProjectsModelCollection"
             }
           },
           "default": {
@@ -759,20 +759,20 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MigrateDataCenter_ListBySubscription": {
-            "$ref": "./examples/MigrateDataCenter_ListBySubscription.json"
+          "ModernizeProjects_ListBySubscription": {
+            "$ref": "./examples/ModernizeProjects_ListBySubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects": {
       "get": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Lists the migrateDataCenters.",
-        "description": "Gets the list of migrateDataCenters in the given subscription and resource group.",
-        "operationId": "MigrateDataCenter_List",
+        "summary": "Lists the modernizeProjects.",
+        "description": "Gets the list of modernizeProjects in the given subscription and resource group.",
+        "operationId": "ModernizeProjects_List",
         "produces": [
           "application/json"
         ],
@@ -797,7 +797,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterModelCollection"
+              "$ref": "#/definitions/ModernizeProjectsModelCollection"
             }
           },
           "default": {
@@ -811,20 +811,20 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MigrateDataCenter_List": {
-            "$ref": "./examples/MigrateDataCenter_List.json"
+          "ModernizeProjects_List": {
+            "$ref": "./examples/ModernizeProjects_List.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/statistics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/statistics": {
       "get": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Gets the migrateDataCenter statistics.",
-        "description": "Gets the statistics for the migrateDataCenter.",
-        "operationId": "MigrateDataCenterStatistics_Get",
+        "summary": "Gets the modernizeProject statistics.",
+        "description": "Gets the statistics for the modernizeProject.",
+        "operationId": "ModernizeProjectsStatistics_Get",
         "produces": [
           "application/json"
         ],
@@ -837,8 +837,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -850,7 +850,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrateDataCenterStatisticsModel"
+              "$ref": "#/definitions/ModernizeProjectsStatisticsModel"
             }
           },
           "default": {
@@ -861,20 +861,20 @@
           }
         },
         "x-ms-examples": {
-          "MigrateDataCenterStatistics_Get": {
-            "$ref": "./examples/MigrateDataCenterStatistics_Get.json"
+          "ModernizeProjectsStatistics_Get": {
+            "$ref": "./examples/ModernizeProjectsStatistics_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/operations/{operationId}": {
       "get": {
         "tags": [
-          "MigrateDataCenter"
+          "ModernizeProjects"
         ],
-        "summary": "Gets the migrateDataCenter operation status.",
-        "description": "Tracks the results of an asynchronous operation on the migrateDataCenter.",
-        "operationId": "MigrateDataCenterOperationStatus_Get",
+        "summary": "Gets the modernizeProject operation status.",
+        "description": "Tracks the results of an asynchronous operation on the modernizeProject.",
+        "operationId": "ModernizeProjectsOperationStatus_Get",
         "produces": [
           "application/json"
         ],
@@ -887,8 +887,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -924,13 +924,13 @@
           }
         },
         "x-ms-examples": {
-          "MigrateDataCenterOperationStatus_Get": {
-            "$ref": "./examples/MigrateDataCenterOperationStatus_Get.json"
+          "ModernizeProjectsOperationStatus_Get": {
+            "$ref": "./examples/ModernizeProjectsOperationStatus_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs/{workflowName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/jobs/{workflowName}": {
       "get": {
         "tags": [
           "Workflow"
@@ -950,8 +950,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -987,13 +987,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/jobs": {
       "get": {
         "tags": [
           "Workflow"
         ],
         "summary": "Lists the workflows.",
-        "description": "Gets the list of jobs in the given migrateDataCenter.",
+        "description": "Gets the list of jobs in the given modernizeProject.",
         "operationId": "Workflow_List",
         "produces": [
           "application/json"
@@ -1007,8 +1007,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1052,7 +1052,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/jobs/{workflowName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/jobs/{workflowName}/operations/{operationId}": {
       "get": {
         "tags": [
           "Workflow"
@@ -1072,8 +1072,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1116,7 +1116,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}": {
       "get": {
         "tags": [
           "WorkloadDeployment"
@@ -1136,8 +1136,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1194,8 +1194,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1257,8 +1257,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1307,13 +1307,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments": {
       "get": {
         "tags": [
           "WorkloadDeployment"
         ],
         "summary": "Lists the workload deployments.",
-        "description": "Gets the list of workload deployments in the given migrateDataCenter.",
+        "description": "Gets the list of workload deployments in the given modernizeProject.",
         "operationId": "WorkloadDeployment_List",
         "produces": [
           "application/json"
@@ -1327,8 +1327,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1360,7 +1360,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/getSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/getSecrets": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1380,8 +1380,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1417,7 +1417,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/buildContainerImage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/buildContainerImage": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1440,8 +1440,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1489,7 +1489,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/testMigrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/testMigrate": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1512,8 +1512,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1561,7 +1561,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/testMigrateCleanup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/testMigrateCleanup": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1584,8 +1584,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1633,7 +1633,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/migrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/migrate": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1656,8 +1656,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1705,7 +1705,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/completeMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/completeMigration": {
       "post": {
         "tags": [
           "WorkloadDeployment"
@@ -1725,8 +1725,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1766,7 +1766,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadDeployments/{workloadDeploymentName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/operations/{operationId}": {
       "get": {
         "tags": [
           "WorkloadDeployment"
@@ -1786,8 +1786,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1830,7 +1830,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances/{workloadInstanceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadInstances/{workloadInstanceName}": {
       "get": {
         "tags": [
           "WorkloadInstance"
@@ -1850,8 +1850,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1891,7 +1891,7 @@
           "WorkloadInstance"
         ],
         "summary": "Puts the workload instance.",
-        "description": "Creates the workload instance in the given migrateDataCenter.",
+        "description": "Creates the workload instance in the given modernizeProject.",
         "operationId": "WorkloadInstance_Create",
         "consumes": [
           "application/json"
@@ -1908,8 +1908,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -1957,7 +1957,7 @@
           "WorkloadInstance"
         ],
         "summary": "Deletes the workload instance.",
-        "description": "Deletes the workload instance in the given migrateDataCenter.",
+        "description": "Deletes the workload instance in the given modernizeProject.",
         "operationId": "WorkloadInstance_Delete",
         "produces": [
           "application/json"
@@ -1971,8 +1971,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter Name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects Name.",
             "required": true,
             "type": "string"
           },
@@ -2015,13 +2015,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadInstances": {
       "get": {
         "tags": [
           "WorkloadInstance"
         ],
         "summary": "Lists the workload instances.",
-        "description": "Gets the list of workload instances in the given migrateDataCenter.",
+        "description": "Gets the list of workload instances in the given modernizeProject.",
         "operationId": "WorkloadInstance_List",
         "produces": [
           "application/json"
@@ -2035,8 +2035,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -2068,7 +2068,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateDataCenters/{migrateDataCenterName}/workloadInstances/{workloadInstanceName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadInstances/{workloadInstanceName}/operations/{operationId}": {
       "get": {
         "tags": [
           "WorkloadInstance"
@@ -2088,8 +2088,8 @@
           },
           {
             "in": "path",
-            "name": "migrateDataCenterName",
-            "description": "MigrateDataCenter name.",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProjects name.",
             "required": true,
             "type": "string"
           },
@@ -2145,9 +2145,9 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ArmError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2639,6 +2639,42 @@
           }
         }
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
     },
     "ContainerImageProperties": {
       "description": "Class for container image properties.",
@@ -3530,16 +3566,16 @@
         }
       }
     },
-    "MigrateDataCenterModel": {
-      "description": "MigrateDataCenter model.",
+    "ModernizeProjectsModel": {
+      "description": "ModernizeProjects model.",
       "type": "object",
       "properties": {
         "location": {
-          "description": "Gets or sets the location of the migrateDataCenter.",
+          "description": "Gets or sets the location of the modernizeProject.",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/MigrateDataCenterModelProperties"
+          "$ref": "#/definitions/ModernizeProjectsModelProperties"
         },
         "id": {
           "description": "Gets or sets the Id of the resource.",
@@ -3574,15 +3610,15 @@
       },
       "x-ms-azure-resource": true
     },
-    "MigrateDataCenterModelCollection": {
-      "description": "MigrateDataCenter model collection.",
+    "ModernizeProjectsModelCollection": {
+      "description": "ModernizeProjects model collection.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the list of migrateDataCenters.",
+          "description": "Gets or sets the list of modernizeProjects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MigrateDataCenterModel"
+            "$ref": "#/definitions/ModernizeProjectsModel"
           }
         },
         "nextLink": {
@@ -3591,12 +3627,12 @@
         }
       }
     },
-    "MigrateDataCenterModelProperties": {
-      "description": "MigrateDataCenter properties.",
+    "ModernizeProjectsModelProperties": {
+      "description": "ModernizeProjects properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Gets or sets the provisioning state of the migrateDataCenter.",
+          "description": "Gets or sets the provisioning state of the modernizeProject.",
           "enum": [
             "Canceled",
             "Creating",
@@ -3628,17 +3664,17 @@
         }
       }
     },
-    "MigrateDataCenterStatisticsModel": {
-      "description": "MigrateDataCenter statistics model.",
+    "ModernizeProjectsStatisticsModel": {
+      "description": "ModernizeProjects statistics model.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrateDataCenterStatisticsModelProperties"
+          "$ref": "#/definitions/ModernizeProjectsStatisticsModelProperties"
         }
       }
     },
-    "MigrateDataCenterStatisticsModelProperties": {
-      "description": "MigrateDataCenter statistics properties.",
+    "ModernizeProjectsStatisticsModelProperties": {
+      "description": "ModernizeProjects statistics properties.",
       "type": "object",
       "properties": {
         "workloadDeploymentStatistics": {
@@ -3665,8 +3701,8 @@
           ],
           "readOnly": true
         },
-        "migrateDataCenterErrors": {
-          "description": "Gets or sets the list of migrateDataCenter health errors.",
+        "modernizeProjectErrors": {
+          "description": "Gets or sets the list of modernizeProject health errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorModel"
@@ -3723,7 +3759,7 @@
       }
     },
     "MigrationConfiguration": {
-      "description": "MigrateDataCenter properties.",
+      "description": "ModernizeProjects properties.",
       "type": "object",
       "properties": {
         "storageAccountResourceId": {
@@ -3862,27 +3898,68 @@
       }
     },
     "OperationStatus": {
-      "description": "Defines the operation status.",
+      "description": "Operation status REST resource.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets or sets the Id.",
-          "type": "string"
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "description": "Gets or sets the operation name.",
-          "type": "string"
+          "description": "Operation name.",
+          "type": "string",
+          "readOnly": true
         },
         "status": {
-          "description": "Gets or sets the status of the operation. ARM expects the terminal status to be one of\r\nSucceeded/ Failed/ Canceled. All other values imply that the operation is still running.",
-          "type": "string"
+          "description": "Status of the operation. ARM expects the terminal status to be one of Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
-          "description": "Gets or sets the start time.",
-          "type": "string"
+          "description": "Start time.",
+          "type": "string",
+          "readOnly": true
         },
         "endTime": {
-          "description": "Gets or sets the end time.",
+          "description": "End time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatusError",
+          "description": "Error stating all error details for the operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusProperties",
+          "description": "Custom data.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "Class for operation status errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatusProperties": {
+      "description": "Class for operation result properties.",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Result or output of the workflow.",
           "type": "string"
         }
       }
@@ -4174,8 +4251,8 @@
         }
       }
     },
-    "UpdateMigrateDataCenterModel": {
-      "description": "Update MigrateDataCenter model.",
+    "UpdateModernizeProjectsModel": {
+      "description": "Update ModernizeProjects model.",
       "type": "object",
       "properties": {
         "tags": {
@@ -4463,7 +4540,7 @@
         "objectType": {
           "description": "Gets or sets the object type.",
           "enum": [
-            "MigrateDataCenter",
+            "ModernizeProjects",
             "MigrateAgent",
             "WorkloadInstance",
             "WorkloadDeployment"
@@ -5270,8 +5347,8 @@
       "description": "MigrateAgent Controller."
     },
     {
-      "name": "MigrateDataCenter",
-      "description": "MigrateDataCenter Controller."
+      "name": "ModernizeProjects",
+      "description": "ModernizeProjects Controller."
     },
     {
       "name": "Workflow",
