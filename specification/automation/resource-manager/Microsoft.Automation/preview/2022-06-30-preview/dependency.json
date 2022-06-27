@@ -1,0 +1,612 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2022-06-30-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{dependencyName}/activities/{activityName}": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_Get",
+        "description": "Retrieve the activity in the dependency identified by name and activity name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "Get Activity in a dependency": {
+            "$ref": "./examples/getActivityInADependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "dependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dependency."
+          },
+          {
+            "name": "activityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of activity."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{dependencyName}/activities": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_ListByDependency",
+        "description": "Retrieve a list of activities in the dependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "List activities by a dependency": {
+            "$ref": "./examples/listActivitiesByDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "dependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dependency."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivityListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{dependencyName}": {
+      "delete": {
+        "tags": [
+          "Dependency"
+        ],
+        "operationId": "Dependency_Delete",
+        "description": "Delete the dependency by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dependencyoperations"
+        },
+        "x-ms-examples": {
+          "Delete a dependency": {
+            "$ref": "./examples/deleteDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "dependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The dependency name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Dependency"
+        ],
+        "operationId": "Dependency_Get",
+        "description": "Retrieve the dependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dependencyoperations"
+        },
+        "x-ms-examples": {
+          "Get a dependency": {
+            "$ref": "./examples/getDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "dependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The dependency name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dependency"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dependency"
+        ],
+        "operationId": "Dependency_CreateOrUpdate",
+        "description": "Create or Update the dependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dependencyoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a dependency": {
+            "$ref": "./examples/createOrUpdateDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "dependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dependency."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DependencyCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for dependency."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Dependency"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dependency"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies": {
+      "get": {
+        "tags": [
+          "Dependency"
+        ],
+        "operationId": "Dependency_ListByRuntime",
+        "description": "Retrieve a list of dependencies.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dependencyoperations"
+        },
+        "x-ms-examples": {
+          "List dependencies by runtime": {
+            "$ref": "./examples/listDependenciesByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DependencyListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Dependency"
+      }
+    }
+  },
+  "definitions": {
+    "DependencyErrorInfo": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message."
+        }
+      },
+      "description": "Definition of the dependency error info type."
+    },
+    "DependencyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dependency"
+          },
+          "description": "Gets or sets a list of dependencies."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list dependency operation."
+    },
+    "ContentHash": {
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentLink": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the uri of the runbook content."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content link."
+    },
+    "DependencyCreateOrUpdateProperties": {
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the dependency content link."
+        }
+      },
+      "required": [
+        "contentLink"
+      ],
+      "description": "The parameters supplied to the create or update dependency properties."
+    },
+    "DependencyCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DependencyCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the dependency create properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update dependency operation."
+    },
+    "DependencyProperties": {
+      "properties": {
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Gets or sets the isGlobal flag of the dependency."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the dependency."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the size in bytes of the dependency."
+        },
+        "activityCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the activity count of the dependency."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state of the dependency.",
+          "enum": [
+            "Created",
+            "Creating",
+            "StartingImportModuleRunbook",
+            "RunningImportModuleRunbook",
+            "ContentRetrieved",
+            "ContentDownloaded",
+            "ContentValidated",
+            "ConnectionTypeImported",
+            "ContentStored",
+            "ModuleDataStored",
+            "ActivitiesStored",
+            "ModuleImportRunbookComplete",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the contentLink of the dependency."
+        },
+        "error": {
+          "$ref": "#/definitions/DependencyErrorInfo",
+          "description": "Gets or sets the error info of the dependency."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        },
+        "isComposite": {
+          "type": "boolean",
+          "description": "Gets or sets type of dependency, if its composite or not."
+        }
+      },
+      "description": "Definition of the dependency property type."
+    },
+    "DependencyUpdateProperties": {
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the dependency content link."
+        }
+      },
+      "description": "The parameters supplied to the update properties."
+    },
+    "DependencyUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DependencyUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the dependency update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the update dependency operation."
+    },
+    "Dependency": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DependencyProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the dependency properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "description": "Definition of the dependency type."
+    }
+  },
+  "parameters": {}
+}
