@@ -39,4 +39,5 @@ These settings apply only when `--tag=package-2022-03-01-preview` is specified o
 input-file:
   - Microsoft.DevCenter/preview/2022-03-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2022-03-01-preview/devbox.json
+  - Microsoft.DevCenter/preview/2022-03-01-preview/environments.json
 ```
