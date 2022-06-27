@@ -346,6 +346,7 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 - Microsoft.Automation/preview/2022-06-30-preview/job.json
 - Microsoft.Automation/preview/2022-06-30-preview/runbook.json
 - Microsoft.Automation/preview/2022-06-30-preview/runtime.json
