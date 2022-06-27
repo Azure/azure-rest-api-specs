@@ -48,7 +48,7 @@
         },
         "x-ms-examples": {
           "Get runbook draft content": {
-            "$ref": "./examples/runbook/getRunbookDraftContent.json"
+            "$ref": "./examples/getRunbookDraftContent.json"
           }
         },
         "produces": [
@@ -79,7 +79,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -101,7 +101,7 @@
         },
         "x-ms-examples": {
           "Create or update runbook draft": {
-            "$ref": "./examples/runbook/replaceRunbookDraftContent.json"
+            "$ref": "./examples/replaceRunbookDraftContent.json"
           }
         },
         "consumes": [
@@ -132,7 +132,7 @@
               "type": "object",
               "format": "file"
             },
-            "description": "The runbook draft content."
+            "description": "The runbook draft content."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -140,7 +140,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
           },
           "202": {
             "description": "Accepted and  the operation will complete asynchronously.",
@@ -158,10 +161,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft": {
@@ -176,7 +176,7 @@
         },
         "x-ms-examples": {
           "Get runbook draft": {
-            "$ref": "./examples/runbook/getRunbookDraft.json"
+            "$ref": "./examples/getRunbookDraft.json"
           }
         },
         "parameters": [
@@ -228,7 +228,7 @@
         },
         "x-ms-examples": {
           "Publish runbook draft": {
-            "$ref": "./examples/runbook/publishRunbook.json"
+            "$ref": "./examples/publishRunbook.json"
           }
         },
         "parameters": [
@@ -284,7 +284,7 @@
         },
         "x-ms-examples": {
           "Undo draft edit to last known published state": {
-            "$ref": "./examples/runbook/undoDraftEditToLastKnownPublishedState.json"
+            "$ref": "./examples/undoDraftEditToLastKnownPublishedState.json"
           }
         },
         "parameters": [
@@ -310,7 +310,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunbookDraftUndoEditResult"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -333,7 +336,7 @@
         },
         "x-ms-examples": {
           "Get runbook content": {
-            "$ref": "./examples/runbook/getRunbookContent.json"
+            "$ref": "./examples/getRunbookContent.json"
           }
         },
         "produces": [
@@ -364,7 +367,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -388,7 +391,7 @@
         },
         "x-ms-examples": {
           "Get runbook": {
-            "$ref": "./examples/runbook/getRunbook.json"
+            "$ref": "./examples/getRunbook.json"
           }
         },
         "parameters": [
@@ -438,10 +441,10 @@
         },
         "x-ms-examples": {
           "Create or update runbook and publish it": {
-            "$ref": "./examples/runbook/createOrUpdateRunbook.json"
+            "$ref": "./examples/createOrUpdateRunbook.json"
           },
           "Create runbook as draft": {
-            "$ref": "./examples/runbook/createRunbookAsDraft.json"
+            "$ref": "./examples/createRunbookAsDraft.json"
           }
         },
         "parameters": [
@@ -506,7 +509,7 @@
         },
         "x-ms-examples": {
           "Update runbook": {
-            "$ref": "./examples/runbook/updateRunbook.json"
+            "$ref": "./examples/updateRunbook.json"
           }
         },
         "parameters": [
@@ -565,7 +568,7 @@
         },
         "x-ms-examples": {
           "Delete a runbook": {
-            "$ref": "./examples/runbook/deleteRunbook.json"
+            "$ref": "./examples/deleteRunbook.json"
           }
         },
         "parameters": [
@@ -617,7 +620,7 @@
         },
         "x-ms-examples": {
           "List runbooks by automation account": {
-            "$ref": "./examples/runbook/listRunbooksByAutomationAccount.json"
+            "$ref": "./examples/listRunbooksByAutomationAccount.json"
           }
         },
         "parameters": [
@@ -665,7 +668,7 @@
         },
         "x-ms-examples": {
           "Get test job stream": {
-            "$ref": "./examples/runbook/getTestJobStream.json"
+            "$ref": "./examples/getTestJobStream.json"
           }
         },
         "parameters": [
@@ -724,7 +727,7 @@
         },
         "x-ms-examples": {
           "List job streams by job name": {
-            "$ref": "./examples/runbook/listTestJobStreamsByJob.json"
+            "$ref": "./examples/listTestJobStreamsByJob.json"
           }
         },
         "parameters": [
@@ -786,7 +789,7 @@
         },
         "x-ms-examples": {
           "Create test job": {
-            "$ref": "./examples/runbook/createTestJob.json"
+            "$ref": "./examples/createTestJob.json"
           }
         },
         "parameters": [
@@ -845,7 +848,7 @@
         },
         "x-ms-examples": {
           "Get test job": {
-            "$ref": "./examples/runbook/getTestJob.json"
+            "$ref": "./examples/getTestJob.json"
           }
         },
         "parameters": [
@@ -897,7 +900,7 @@
         },
         "x-ms-examples": {
           "Resume test job": {
-            "$ref": "./examples/runbook/resumeTestJob.json"
+            "$ref": "./examples/resumeTestJob.json"
           }
         },
         "parameters": [
@@ -946,7 +949,7 @@
         },
         "x-ms-examples": {
           "Stop test job": {
-            "$ref": "./examples/runbook/stopTestJob.json"
+            "$ref": "./examples/stopTestJob.json"
           }
         },
         "parameters": [
@@ -995,7 +998,7 @@
         },
         "x-ms-examples": {
           "Suspend test job": {
-            "$ref": "./examples/runbook/suspendTestJob.json"
+            "$ref": "./examples/suspendTestJob.json"
           }
         },
         "parameters": [
@@ -1152,8 +1155,14 @@
           "type": "string",
           "description": "Gets or sets the type of the runbook.",
           "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
             "PowerShell",
-            "Python"
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell",
+            "Python2",
+            "Python3"
           ],
           "x-ms-enum": {
             "name": "RunbookTypeEnum",
@@ -1300,8 +1309,14 @@
           "type": "string",
           "description": "Gets or sets the type of the runbook.",
           "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
             "PowerShell",
-            "Python"
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell",
+            "Python2",
+            "Python3"
           ],
           "x-ms-enum": {
             "name": "RunbookTypeEnum",
@@ -1635,8 +1650,14 @@
           "type": "string",
           "description": "Gets or sets the type of the runbook.",
           "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
             "PowerShell",
-            "Python"
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell",
+            "Python2",
+            "Python3"
           ],
           "x-ms-enum": {
             "name": "RunbookTypeEnum",
