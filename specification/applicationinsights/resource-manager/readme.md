@@ -608,7 +608,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
@@ -633,8 +632,8 @@ csharp:
   azure-arm: true
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApplicationInsights.Management
-  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.ApplicationInsights/src/Generated
+  namespace: Microsoft.Azure.Management.ApplicationInsights
+  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.Management.ApplicationInsights/src/Generated
   clear-output-folder: true
 ```
 
