@@ -145,7 +145,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-                "$ref": "#/definitions/JsonWebToken"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -204,7 +204,7 @@
       }
     },
     "/certificates:add": {
-       "post": {
+      "post": {
         "tags": [
           "Policy Management Certificates"
         ],
@@ -319,7 +319,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-                "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -362,7 +362,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-                "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -408,7 +408,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-                "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -511,8 +511,8 @@
       "type": "string",
       "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*",
       "externalDocs": {
-          "description": "JSON Web Token RFC",
-          "url": "https://tools.ietf.org/html/rfc7519"
+        "description": "JSON Web Token RFC",
+        "url": "https://tools.ietf.org/html/rfc7519"
       }
     },
     "AttestationCertificateManagementBody": {
@@ -557,38 +557,38 @@
       }
     },
     "PolicyCertificatesModificationResult": {
-       "type": "object",
-       "description": "The result of a policy certificate modification",
-       "properties": {
-         "x-ms-certificate-thumbprint": {
-           "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added or removed",
-           "type": "string",
-           "x-ms-client-name": "CertificateThumbprint"
-         },
-         "x-ms-policycertificates-result": {
-           "description": "The result of the operation",
-           "type": "string",
-           "x-ms-client-name": "CertificateResolution",
-           "enum": [
-              "IsPresent",
-              "IsAbsent"
-           ],
-           "x-ms-enum": {
-             "name": "CertificateModification",
-             "modelAsString": true,
-             "values": [
-               {
-                 "value": "IsPresent",
-                 "description": "After the operation was performed, the certificate is in the set of certificates."
-               },
-               {
-                 "value": "IsAbsent",
-                 "description": "After the operation was performed, the certificate is no longer present in the set of certificates."
-               }
-             ]
-           }
-         }
-       }
+      "type": "object",
+      "description": "The result of a policy certificate modification",
+      "properties": {
+        "x-ms-certificate-thumbprint": {
+          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added or removed",
+          "type": "string",
+          "x-ms-client-name": "CertificateThumbprint"
+        },
+        "x-ms-policycertificates-result": {
+          "description": "The result of the operation",
+          "type": "string",
+          "x-ms-client-name": "CertificateResolution",
+          "enum": [
+            "IsPresent",
+            "IsAbsent"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateModification",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IsPresent",
+                "description": "After the operation was performed, the certificate is in the set of certificates."
+              },
+              {
+                "value": "IsAbsent",
+                "description": "After the operation was performed, the certificate is no longer present in the set of certificates."
+              }
+            ]
+          }
+        }
+      }
     },
     "StoredAttestationPolicy": {
       "type": "object",
@@ -781,10 +781,10 @@
           "format": "base64url"
         },
         "maa-ehd": {
-            "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
-            "x-ms-client-name": "DeprecatedEnclaveHeldData2",
-            "type": "string",
-            "format": "base64url"
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
+          "x-ms-client-name": "DeprecatedEnclaveHeldData2",
+          "type": "string",
+          "format": "base64url"
         },
         "product-id": {
           "description": "DEPRECATED: Private Preview version of x-ms-sgx-product-id",
@@ -862,34 +862,34 @@
       }
     },
     "RuntimeData": {
-        "type": "object",
-        "description": "Runtime data are a conduit for any information defined by the Trusted Execution Environment (TEE) when actually running.",
-        "properties": {
-          "data": {
-            "description": "Runtime data are generated by the Trusted Execution Environment (TEE). For an SGX quote (Coffeelake or Icelake), the SHA256 hash of the RuntimeData must match the lower 32 bytes of the quote's \"report data\" attribute. For a SEV-SNP quote, the SHA256 hash of the RuntimeData must match the quote's \"report data\" attribute.",
-            "type": "string",
-            "format": "base64url"
-          },
-          "dataType": {
-            "description": "The type of data contained within the \"data\" field",
-            "$ref": "#/definitions/DataType"
-          }
+      "type": "object",
+      "description": "Runtime data are a conduit for any information defined by the Trusted Execution Environment (TEE) when actually running.",
+      "properties": {
+        "data": {
+          "description": "Runtime data are generated by the Trusted Execution Environment (TEE). For an SGX quote (Coffeelake or Icelake), the SHA256 hash of the RuntimeData must match the lower 32 bytes of the quote's \"report data\" attribute. For a SEV-SNP quote, the SHA256 hash of the RuntimeData must match the quote's \"report data\" attribute.",
+          "type": "string",
+          "format": "base64url"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
         }
+      }
     },
     "InitTimeData": {
-        "type": "object",
-        "description": "Initialization time data are a conduit for any configuration information that is unknown when building the Trusted Execution Environment (TEE) and is defined at TEE launch time. This data can be used with confidential container or VM scenarios to capture configuration settings such as disk volume content, network configuration, etc.",
-        "properties": {
-          "data": {
-            "description": "Initialization time data are passed into the Trusted Execution Environment (TEE) when it is created. For an Icelake SGX quote, the SHA256 hash of the InitTimeData must match the lower 32 bytes of the quote's \"config id\" attribute. For a SEV-SNP quote, the SHA256 hash of the InitTimeData must match the quote's \"host data\" attribute.",
-            "type": "string",
-            "format": "base64url"
-          },
-          "dataType": {
-            "description": "The type of data contained within the \"data\" field",
-            "$ref": "#/definitions/DataType"
-          }
+      "type": "object",
+      "description": "Initialization time data are a conduit for any configuration information that is unknown when building the Trusted Execution Environment (TEE) and is defined at TEE launch time. This data can be used with confidential container or VM scenarios to capture configuration settings such as disk volume content, network configuration, etc.",
+      "properties": {
+        "data": {
+          "description": "Initialization time data are passed into the Trusted Execution Environment (TEE) when it is created. For an Icelake SGX quote, the SHA256 hash of the InitTimeData must match the lower 32 bytes of the quote's \"config id\" attribute. For a SEV-SNP quote, the SHA256 hash of the InitTimeData must match the quote's \"host data\" attribute.",
+          "type": "string",
+          "format": "base64url"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
         }
+      }
     },
     "AttestSgxEnclaveRequest": {
       "type": "object",
@@ -905,8 +905,8 @@
           "$ref": "#/definitions/RuntimeData"
         },
         "initTimeData": {
-            "description": "Initialization data provided when the enclave is created. MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
-            "$ref": "#/definitions/InitTimeData"
+          "description": "Initialization data provided when the enclave is created. MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
+          "$ref": "#/definitions/InitTimeData"
         },
         "draftPolicyForAttestation": {
           "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
@@ -932,8 +932,8 @@
           "$ref": "#/definitions/RuntimeData"
         },
         "initTimeData": {
-            "description": "Base64Url encoded \"InitTime data\". The MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
-            "$ref": "#/definitions/InitTimeData"
+          "description": "Base64Url encoded \"InitTime data\". The MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
+          "$ref": "#/definitions/InitTimeData"
         },
         "draftPolicyForAttestation": {
           "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
@@ -949,11 +949,11 @@
       "type": "object",
       "description": "Attestation request for Trusted Platform Module (TPM) attestation.",
       "properties": {
-          "data": {
-            "description": "Protocol data containing artifacts for attestation.",
-            "type": "string",
-            "format": "base64url"
-          }
+        "data": {
+          "description": "Protocol data containing artifacts for attestation.",
+          "type": "string",
+          "format": "base64url"
+        }
       }
     },
     "TpmAttestationResponse": {
@@ -1009,4 +1009,3 @@
     }
   }
 }
-
