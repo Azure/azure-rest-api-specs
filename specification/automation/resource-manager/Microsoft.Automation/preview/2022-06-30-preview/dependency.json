@@ -379,6 +379,167 @@
     }
   },
   "definitions": {
+    "ActivityParameter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the activity parameter."
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional."
+        },
+        "isDynamic": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter is dynamic."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the position of the activity parameter."
+        },
+        "valueFromPipeline": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object."
+        },
+        "valueFromPipelineByPropertyName": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name. "
+        },
+        "valueFromRemainingArguments": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the activity parameter."
+        },
+        "validationSet": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameterValidationSet"
+          },
+          "description": "Gets or sets the validation set of activity parameter."
+        }
+      },
+      "description": "Definition of the activity parameter."
+    },
+    "ActivityParameterSet": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter set."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameter"
+          },
+          "description": "Gets or sets the parameters of the activity parameter set."
+        }
+      },
+      "description": "Definition of the activity parameter set."
+    },
+    "ActivityParameterValidationSet": {
+      "properties": {
+        "memberValue": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter validation set member."
+        }
+      },
+      "description": "Definition of the activity parameter validation set."
+    },
+    "ActivityOutputType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity output type."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the activity output type."
+        }
+      },
+      "description": "Definition of the activity output type."
+    },
+    "ActivityProperties": {
+      "properties": {
+        "definition": {
+          "type": "string",
+          "description": "Gets or sets the user name of the activity."
+        },
+        "parameterSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameterSet"
+          },
+          "description": "Gets or sets the parameter sets of the activity."
+        },
+        "outputTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityOutputType"
+          },
+          "description": "Gets or sets the output types of the activity."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Properties of the activity."
+    },
+    "Activity": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the activity."
+        },
+        "properties": {
+          "$ref": "#/definitions/ActivityProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the activity."
+        }
+      },
+      "description": "Definition of the activity."
+    },
+    "ActivityListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          },
+          "description": "Gets or sets a list of activities."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list activity operation."
+    },
     "DependencyErrorInfo": {
       "properties": {
         "code": {
