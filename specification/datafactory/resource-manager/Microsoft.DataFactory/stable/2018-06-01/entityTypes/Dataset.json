@@ -51,7 +51,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "folder": {
           "description": "The folder that this Dataset is in. If not specified, Dataset will appear at the root level.",
@@ -2327,6 +2328,44 @@
       },
       "required": [
         "tableName"
+      ]
+    },
+    "SapOdpResourceDataset": {
+      "x-ms-discriminator-value": "SapOdpResource",
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ODP Resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOdpResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOdpResourceDatasetTypeProperties": {
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "description": "The context of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        },
+        "objectName": {
+          "type": "object",
+          "description": "The name of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "context",
+        "objectName"
       ]
     },
     "WebTableDataset": {

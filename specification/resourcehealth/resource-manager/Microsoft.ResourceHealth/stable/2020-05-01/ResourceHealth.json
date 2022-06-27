@@ -149,6 +149,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -366,6 +371,10 @@
                 "name": "AvailabilityStateValues",
                 "modelAsString": true
               }
+            },
+            "title": {
+              "type": "string",
+              "description": "Title description of the availability status."
             },
             "summary": {
               "type": "string",
@@ -670,6 +679,10 @@
       "enum": [
         "default"
       ],
+      "x-ms-enum": {
+        "name": "IssueNameParameter",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {

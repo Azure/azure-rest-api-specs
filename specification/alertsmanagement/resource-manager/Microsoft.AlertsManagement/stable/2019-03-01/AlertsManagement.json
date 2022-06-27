@@ -49,6 +49,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -234,6 +239,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -505,6 +513,16 @@
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
+      }
+    },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "schema": {
+        "type": "string"
       }
     },
     "alertState": {
@@ -882,6 +900,16 @@
       "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
     },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
+    },
     "essentials": {
       "type": "object",
       "description": "This object contains consistent fields across different monitor services.",
@@ -1027,6 +1055,13 @@
           "type": "string",
           "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },

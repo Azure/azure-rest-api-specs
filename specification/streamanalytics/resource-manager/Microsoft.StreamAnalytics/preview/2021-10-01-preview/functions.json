@@ -711,10 +711,6 @@
       "description": "The binding properties associated with a CSharp function.",
       "type": "object",
       "properties": {
-        "script": {
-          "type": "string",
-          "description": "The Csharp code containing a single function definition."
-        },
         "dllPath": {
           "type": "string",
           "description": "The Csharp code containing a single function definition."
@@ -726,7 +722,22 @@
         "method": {
           "type": "string",
           "description": "The Csharp code containing a single function definition."
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode"
         }
+      }
+    },
+    "UpdateMode": {
+      "type": "string",
+      "description": "Refresh modes for Stream Analytics functions.",
+      "enum": [
+        "Static",
+        "Refreshable"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateMode",
+        "modelAsString": true
       }
     },
     "FunctionRetrieveDefaultDefinitionParameters": {
@@ -919,6 +930,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of parallel requests that will be sent per partition of your job to the machine learning service. Default is 1."
+        },
+        "inputRequestName": {
+          "type": "string",
+          "description": "Label for the input request object."
+        },
+        "outputResponseName": {
+          "type": "string",
+          "description": "Label for the output request object."
         }
       }
     },

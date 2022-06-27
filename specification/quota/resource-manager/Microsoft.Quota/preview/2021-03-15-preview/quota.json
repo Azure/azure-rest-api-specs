@@ -202,7 +202,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -258,7 +258,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -493,7 +493,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -1081,7 +1084,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "subRequestId"
+          ]
         }
       }
     },
@@ -1196,6 +1202,9 @@
           "items": {
             "$ref": "#/definitions/ServiceErrorDetail"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "List of error details.",
           "readOnly": true
         }

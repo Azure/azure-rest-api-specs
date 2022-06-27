@@ -16,5 +16,4 @@ batch:
 typescript:
   package-name: "@azure/arm-managedapplications"
   output-folder: "$(typescript-sdks-folder)/sdk/managedapplications/arm-managedapplications"
-  clear-output-folder: true
 ```

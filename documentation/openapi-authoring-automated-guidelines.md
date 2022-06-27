@@ -60,6 +60,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
 | [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs |
+| [R4025](#r4025) | [DeleteOperationAsyncResponseValidation](#r4025) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -120,6 +121,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4039](#r4039) | [ParametersOrder](#r4039) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4040](#r4040) | [EnumMustRespectType](#r4040) | ARM and Data plan OpenAPI(swagger) specs |
+| [R4041](#r4041) | [XmsIdentifierValidation](#r4041) | ARM OpenAPI(swagger) specs |
 #### SDK Warnings
 
 | Id | Rule Name | Applies to |
@@ -160,7 +162,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
 | [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
-| [R4025](#r4025) | [RPaasDeleteLongRunningOperation202Only](#r4025) | ARM OpenAPI(swagger) specs |
 | [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs |
 | [R4031](#r4031) | [RPaasResourceProvisioningState](#r4031) | ARM OpenAPI(swagger) specs |
 | [R4038](#r4038) | [ExtensionResourcePathPattern](#r4038) | ARM OpenAPI(swagger) specs |
@@ -1543,13 +1544,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Every OpenAPI(swagger) spec/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+**Output Message**: Every OpenAPI(swagger) spec/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/azure-openapi-validator/blob/master/docs/security-definitions-structure-validation.md)
 
 **Description**: Each OpenAPI json document must contain a security definitions section and the section must adhere to a certain format.
 
 **Why the rule is important**: Missing security definitions section does not describe the Azure services security model accurately. This is an ARM specific requirement which describes the security mechanism to access the services.
 
-**How to fix the violation**: Ensure that the document has a security definition section as described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+**How to fix the violation**: Ensure that the document has a security definition section as described [here](https://github.com/Azure/azure-openapi-validator/blob/master/docs/security-definitions-structure-validation.md)
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -2521,7 +2522,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The delete operation is defined without a 200 or 204 error response implementation,please add it. 
 
-**Description** : Per ARM Specs, all DELETE methods must have responses code implementation: 200, 204.   
+**Description** : Per ARM Specs, all DELETE methods (non-async) must have responses code implementation: 200, 204.   
 
 **CreatedAt**: May 21, 2020
 
@@ -3015,13 +3016,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
    
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4025"></a>R4025 RPaasDeleteLongRunningOperation202Only
+### <a name="r4025"></a>R4025 DeleteOperationAsyncResponseValidation
 
-**Category** : RPaaS Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : [RPaaS] DELETE async supports
+**Output Message** : DELETE async supports
 
 **Description** : An async DELETE operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Must support 204 (resource doesn't exists). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
 
@@ -3577,5 +3578,26 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**:
 Just change the enum value to the right type.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4041"></a>R4041 XmsIdentifierValidation
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : Missing identifier {0} in array item property.
+
+**Description**: This rule is to check the `id` property or identifier of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers).
+
+**CreatedAt**: Decenmber 15, 2021
+
+**LastModifiedAt**: Decenmber 15, 2021
+
+**Why this rule is important**: Using [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers) will provide more flexibility for array types in SDK generated code.
+
+**How to fix the violation**:
+If you don't need identifier in array, leave `x-ms-identifiers` as an empty array. Otherwise, add the identifying property in the object or correct the `x-ms-identifiers`.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

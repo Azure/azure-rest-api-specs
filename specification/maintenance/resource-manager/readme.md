@@ -99,6 +99,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
