@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "devCenter": "{devCenter}",
+    "devCenterDnsSuffix": "devcenter.azure.com",
+    "projectName": "{projectName}",
+    "environmentName": "{environmentName}",
+    "userId": "{userId}",
+    "body": {
+      "description": "Personal Dev Environment",
+      "environmentType": "DevTest",
+      "catalogName": "main",
+      "catalogItemName": "helloworld",
+      "parameters": {
+        "functionAppRuntime": "node",
+        "storageAccountType": "Standard_LRS"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{environmentName}",
+        "description": "Personal Dev Environment",
+        "environmentType": "DevTest",
+        "catalogName": "main",
+        "catalogItemName": "helloworld",
+        "parameters": {
+          "functionAppRuntime": "node",
+          "storageAccountType": "Standard_LRS"
+        },
+        "provisioningState": "Succeeded"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{environmentName}",
+        "description": "Personal Dev Environment",
+        "environmentType": "DevTest",
+        "catalogName": "main",
+        "catalogItemName": "helloworld",
+        "parameters": {
+          "functionAppRuntime": "node",
+          "storageAccountType": "Standard_LRS"
+        },
+        "provisioningState": "Creating"
+      }
+    }
+  }
+}
