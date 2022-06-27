@@ -556,15 +556,8 @@
         }
       },
       "required": [
-        "udid",
         "dataFormat",
-        "connection",
-        "downloadURL",
-        "sizeInBytes",
-        "ContentMD5",
-        "status",
-        "registered",
-        "updated"
+        "connection"
       ]
     },
     "DataRegistryPatch": {
@@ -675,6 +668,7 @@
         "dataRegistries": {
           "description": "A list of all the previously registered data registries.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/DataRegistry"
           }
@@ -712,7 +706,8 @@
       "properties": {
         "id": {
           "description": "The operationId",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/LongRunningOperationStatus"
@@ -729,6 +724,7 @@
     "LongRunningOperationStatus": {
       "description": "The status of a long running operation.",
       "type": "string",
+      "readOnly": true,
       "enum": [
         "Running",
         "Failed",
@@ -751,8 +747,7 @@
             "description": "The request has successfully completed."
           }
         ]
-      },
-      "readOnly": true
+      }
     }
   }
 }
