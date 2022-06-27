@@ -28,7 +28,16 @@ These are the global settings for the Guest Configuration API.
 title: GuestConfigurationClient
 description: Guest Configuration Client
 openapi-type: arm
-tag: package-2022-01-25
+tag: package-2022-06-13
+```
+
+### Tag: package-2022-06-13
+
+These settings apply only when `--tag=package-2022-06-13` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06-13'
+input-file:
+  - Microsoft.GuestConfiguration/stable/2022-06-13/guestconfiguration.json
 ```
 
 ### Tag: package-2022-01-25
