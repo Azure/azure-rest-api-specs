@@ -22,6 +22,8 @@ output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnec
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
+multiapi: true
+clear-output-folder: true
 batch:
   - tag: package-2022-04-15-preview
   - multiapiscript: true
