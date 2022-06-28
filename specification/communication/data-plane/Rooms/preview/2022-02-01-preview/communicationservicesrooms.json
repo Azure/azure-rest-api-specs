@@ -292,7 +292,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "Room id to add participants to.",
+            "description": "Room id to add participants.",
             "required": true,
             "type": "string"
           },
@@ -503,7 +503,7 @@
           "$ref": "#/definitions/CommunicationIdentifierModel"
         },
         "role": {
-          "$ref": "#/definitions/Role"
+          "$ref": "#/definitions/RoleType"
         }
       }
     },
@@ -523,7 +523,7 @@
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
     },
-    "Role": {
+    "RoleType": {
       "description": "The Role of a room participant.",
       "enum": [
         "Presenter",
@@ -532,7 +532,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "Role",
+        "name": "RoleType",
         "modelAsString": true
       }
     },
