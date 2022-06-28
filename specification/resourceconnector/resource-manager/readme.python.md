@@ -29,7 +29,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/
-clear-output-folder: false
 perform-load: false
 ```
 
