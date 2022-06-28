@@ -537,7 +537,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CredentialResults"
+              "$ref": "#/definitions/FleetCredentialResults"
             }
           },
           "default": {
@@ -729,21 +729,21 @@
         }
       }
     },
-    "CredentialResults": {
+    "FleetCredentialResults": {
       "type": "object",
       "properties": {
         "kubeconfigs": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CredentialResult"
+            "$ref": "#/definitions/FleetCredentialResult"
           },
           "description": "Base64-encoded Kubernetes configuration file."
         }
       },
       "description": "The list credential result response."
     },
-    "CredentialResult": {
+    "FleetCredentialResult": {
       "type": "object",
       "properties": {
         "name": {
