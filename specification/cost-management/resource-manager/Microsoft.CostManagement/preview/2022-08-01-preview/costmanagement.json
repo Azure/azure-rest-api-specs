@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
+    "version": "2022-08-01-preview",
     "title": "CostManagementClient"
   },
   "host": "management.azure.com",
@@ -1027,6 +1027,13 @@
             "$ref": "common-types.json#/parameters/apiVersionParameter"
           },
           {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -1082,6 +1089,13 @@
           },
           {
             "$ref": "common-types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "parameters",
