@@ -5,24 +5,16 @@
     "title": "DevCenter"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{devCenter}.{devcenterDnsSuffix}",
+    "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
     "parameters": [
       {
-        "name": "devCenter",
-        "description": "The DevCenter to operate on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+        "$ref": "devcenter.json#/parameters/TenantIdParameterName"
       },
       {
-        "name": "devCenterDnsSuffix",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "default": "devcenter.azure.com",
-        "x-ms-skip-url-encoding": true,
-        "description": "The DNS suffix used as the base for all devcenter requests."
+        "$ref": "devcenter.json#/parameters/DevCenterParameterName"
+      },
+      {
+        "$ref": "devcenter.json#/parameters/DevCenterDnsSuffixParameterName"
       }
     ]
   },
@@ -185,7 +177,7 @@
       "x-ms-external": true,
       "description": "An error response from the Fidalgo service.",
       "type": "object",
-      "required": ["code", "message"],
+      "required": [ "code", "message" ],
       "properties": {
         "code": {
           "type": "string",
@@ -222,20 +214,20 @@
           "type": "string",
           "description": "The error message."
         }
-    }
-      },
-      "EnableStatus": {
-        "description": "Enable or disable status. Indicates whether the property applied to is either enabled or disabled.",
-        "enum": [
-          "Enabled",
-          "Disabled"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "EnableStatus",
-          "modelAsString": true
-        }
       }
+    },
+    "EnableStatus": {
+      "description": "Enable or disable status. Indicates whether the property applied to is either enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnableStatus",
+        "modelAsString": true
+      }
+    }
   },
   "parameters": {
     "ProjectNameParameter": {
