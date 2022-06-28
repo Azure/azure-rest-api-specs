@@ -166,6 +166,109 @@
         }
       }
     },
+    "/projects/{projectName}/pools/{poolName}/schedules": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          }
+        ],
+        "description": "Lists available schedules for a pool.",
+        "operationId": "Schedule_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listSchedules": {
+            "$ref": "./examples/Schedules_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Schedule"
+      }
+    },
+    "/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScheduleNameParameter"
+          }
+        ],
+        "description": "Gets a schedule.",
+        "operationId": "Schedule_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Get": {
+            "$ref": "./examples/Schedule_Get.json"
+          }
+        }
+      }
+    },
     "/devboxes": {
       "get": {
         "tags": [
@@ -694,6 +797,81 @@
         }
       }
     },
+    "ScheduleListResult": {
+      "type": "object",
+      "description": "The Schedule list result",
+      "properties": {
+        "value": {
+          "description": "Current page of results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "A Schedule to execute action.",
+      "properties": {
+        "name": {
+          "description": "Display name for the Schedule",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Supported type this scheduled task represents.",
+          "$ref": "#/definitions/ScheduledType",
+          "readOnly": true
+        },
+        "frequency": {
+          "description": "The frequency of this scheduled task.",
+          "$ref": "#/definitions/ScheduledFrequency",
+          "readOnly": true
+        },
+        "time": {
+          "description": "The target time to trigger the action. The format is HH:MM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeZone": {
+          "description": "The IANA timezone id at which the schedule should execute.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledType": {
+      "description": "The supported types for a scheduled task.",
+      "enum": [
+        "StopDevBox"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduledType",
+        "modelAsString": true
+      }
+    },
+    "ScheduledFrequency": {
+      "description": "The frequency of task execution.",
+      "enum": [
+        "Daily"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduledFrequency",
+        "modelAsString": true
+      }
+    },
     "DevBoxListResult": {
       "type": "object",
       "description": "The Dev Box list result",
@@ -935,6 +1113,14 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ScheduleNameParameter": {
+      "name": "scheduleName",
+      "description": "The name of a schedule.",
+      "required": true,
+      "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method"
     },
