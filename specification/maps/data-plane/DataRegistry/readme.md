@@ -41,7 +41,7 @@ These settings apply only when `--tag=2022-12-01-preview` is specified on the co
 
 ``` yaml $(tag) == '2022-12-01-preview'
 input-file:
-  - preview/2022-12-01/dataregistry.json
+  - preview/2022-12-01-preview/dataregistry.json
 ```
 
 # Code Generation
