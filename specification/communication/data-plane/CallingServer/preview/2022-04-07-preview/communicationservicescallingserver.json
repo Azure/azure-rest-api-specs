@@ -40,7 +40,7 @@
           "201": {
             "description": "Returns the create call response.",
             "schema": {
-              "$ref": "#/definitions/CreateCallResponse"
+              "$ref": "#/definitions/CallConnectionPropertiesDto"
             }
           }
         },
@@ -74,10 +74,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Returns the answer call response.",
             "schema": {
-              "$ref": "#/definitions/AnswerCallResponse"
+              "$ref": "#/definitions/CallConnectionPropertiesDto"
             }
           }
         },
@@ -179,7 +179,7 @@
           "200": {
             "description": "Returns the get call response.",
             "schema": {
-              "$ref": "#/definitions/GetCallResponse"
+              "$ref": "#/definitions/CallConnectionPropertiesDto"
             }
           }
         },
@@ -296,6 +296,88 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/content/:play": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Play audio.",
+        "description": "Play audio.",
+        "operationId": "Content_Play",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "playRequest",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlayRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the play audio response.",
+            "schema": {
+              "$ref": "#/definitions/PlayResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Play audio.": {
+            "$ref": "./examples/Content_Play.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Get participants from a call.",
+        "description": "Get participants from a call.",
+        "operationId": "CallConnections_GetParticipants",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the get participants response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AcsCallParticipantDto"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get participants from a call.": {
+            "$ref": "./examples/CallConnections_GetParticipants.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants:add": {
       "post": {
         "tags": [
@@ -389,8 +471,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Get a participants from a call.",
-        "description": "Get a participants from a call.",
+        "summary": "Get a participant from a call.",
+        "description": "Get a participant from a call.",
         "operationId": "CallConnections_GetParticipant",
         "parameters": [
           {
@@ -422,7 +504,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a participants from a call.": {
+          "Get a participant from a call.": {
             "$ref": "./examples/CallConnections_GetParticipant.json"
           }
         }
@@ -539,16 +621,58 @@
         }
       }
     },
-    "CreateCallResponse": {
-      "description": "The response payload of the create call operation.",
+    "CallConnectionStateModel": {
+      "description": "The state of the call connection.",
+      "enum": [
+        "unknown",
+        "connecting",
+        "connected",
+        "transferring",
+        "transferAccepted",
+        "disconnecting",
+        "disconnected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallConnectionStateModel",
+        "modelAsString": true
+      }
+    },
+    "CallConnectionPropertiesDto": {
       "type": "object",
       "properties": {
+        "callConnectionId": {
+          "description": "The call connection id.",
+          "type": "string"
+        },
         "serverCallId": {
           "description": "The server call id.",
           "type": "string"
         },
-        "callConnectionId": {
-          "description": "The Call connection ID",
+        "source": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The source of the call."
+        },
+        "alternateCallerId": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The alternate identity of the source of the call if dialing out to a pstn number"
+        },
+        "targets": {
+          "description": "The targets of the call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
+        "callConnectionState": {
+          "$ref": "#/definitions/CallConnectionStateModel"
+        },
+        "subject": {
+          "description": "The subject.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI.",
           "type": "string"
         }
       }
@@ -567,22 +691,6 @@
         "callbackUri": {
           "description": "The callback uri.",
           "type": "string"
-        }
-      }
-    },
-    "AnswerCallResponse": {
-      "description": "The response payload of the answer call operation.",
-      "type": "object",
-      "properties": {
-        "serverCallId": {
-          "description": "The server call id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "callConnectionId": {
-          "description": "The subscription id.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -630,58 +738,6 @@
         },
         "callRejectReason": {
           "$ref": "#/definitions/CallRejectReason"
-        }
-      }
-    },
-    "CallConnectionStateModel": {
-      "description": "The state of the call connection.",
-      "enum": [
-        "unknown",
-        "connecting",
-        "connected",
-        "transferring",
-        "transferAccepted",
-        "disconnecting",
-        "disconnected"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallConnectionStateModel",
-        "modelAsString": true
-      }
-    },
-    "GetCallResponse": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "The call connection id.",
-          "type": "string"
-        },
-        "source": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The source of the call."
-        },
-        "alternateCallerId": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The alternate identity of the source of the call if dialing out to a pstn number"
-        },
-        "targets": {
-          "description": "The targets of the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
-        },
-        "callConnectionState": {
-          "$ref": "#/definitions/CallConnectionStateModel"
-        },
-        "subject": {
-          "description": "The subject.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback URI.",
-          "type": "string"
         }
       }
     },
@@ -767,6 +823,99 @@
         "message": {
           "description": "The message is a detail explanation of subcode.",
           "type": "string"
+        }
+      }
+    },
+    "PlayRequest": {
+      "required": [
+        "playSourceInfo"
+      ],
+      "type": "object",
+      "properties": {
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource",
+          "description": "The source of the audio to be played."
+        },
+        "playTo": {
+          "description": "The list of call participants play provided audio to. \r\nPlays to everyone in the call when not provided.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
+        "playOptions": {
+          "$ref": "#/definitions/PlayOptions",
+          "description": "Defines options for playing the audio."
+        }
+      }
+    },
+    "PlaySourceType": {
+      "description": "Defines the type of the play source",
+      "enum": [
+        "file"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PlaySourceType",
+        "modelAsString": true
+      }
+    },
+    "PlaySource": {
+      "required": [
+        "sourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/PlaySourceType"
+        }
+      }
+    },
+    "PlayOptions": {
+      "required": [
+        "loop"
+      ],
+      "type": "object",
+      "properties": {
+        "loop": {
+          "description": "The option to play the provided audio source in loop when set to true",
+          "type": "boolean"
+        }
+      }
+    },
+    "PlayResponse": {
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CallingOperationStatusDto"
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "resultDetails": {
+          "$ref": "#/definitions/CallingOperationResultDetailsDto",
+          "description": "The result info for the operation."
+        }
+      }
+    },
+    "AcsCallParticipantDto": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Communication identifier of the participant"
+        },
+        "isMuted": {
+          "description": "Is participant muted",
+          "type": "boolean"
         }
       }
     },
@@ -869,19 +1018,6 @@
       "properties": {
         "participant": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
-        }
-      }
-    },
-    "AcsCallParticipantDto": {
-      "type": "object",
-      "properties": {
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Communication identifier of the participant"
-        },
-        "isMuted": {
-          "description": "Is participant muted",
-          "type": "boolean"
         }
       }
     }
