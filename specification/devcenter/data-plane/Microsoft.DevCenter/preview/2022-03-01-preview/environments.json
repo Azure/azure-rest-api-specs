@@ -6,24 +6,16 @@
     "description": "Deployment Environments API."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{devCenter}.{devCenterDnsSuffix}",
+    "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
     "parameters": [
       {
-        "name": "devCenter",
-        "description": "The DevCenter to operate on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+        "$ref": "devcenter.json#/parameters/TenantIdParameterName"
       },
       {
-        "name": "devCenterDnsSuffix",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "default": "devcenter.azure.com",
-        "x-ms-skip-url-encoding": true,
-        "description": "The DNS suffix used as the base for all devcenter requests."
+        "$ref": "devcenter.json#/parameters/DevCenterParameterName"
+      },
+      {
+        "$ref": "devcenter.json#/parameters/DevCenterDnsSuffixParameterName"
       }
     ]
   },

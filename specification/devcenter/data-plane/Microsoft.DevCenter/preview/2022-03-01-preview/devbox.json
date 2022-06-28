@@ -9,35 +9,13 @@
     "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
     "parameters": [
       {
-        "name": "tenantId",
-        "description": "The tenant to operate on.",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
-        "minLength": 36,
-        "maxLength": 36,
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+        "$ref": "devcenter.json#/parameters/TenantIdParameterName"
       },
       {
-        "name": "devCenter",
-        "description": "The DevCenter to operate on.",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
-        "minLength": 3,
-        "maxLength": 63,
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+        "$ref": "devcenter.json#/parameters/DevCenterParameterName"
       },
       {
-        "name": "devCenterDnsSuffix",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "default": "devcenter.azure.com",
-        "x-ms-skip-url-encoding": true,
-        "description": "The DNS suffix used as the base for all devcenter requests."
+        "$ref": "devcenter.json#/parameters/DevCenterDnsSuffixParameterName"
       }
     ]
   },
@@ -334,7 +312,7 @@
             "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           }
         ],
         "description": "Lists Dev Boxes in the Dev Center for a particular user.",
@@ -389,7 +367,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           }
         ],
         "description": "Lists Dev Boxes in the project for a particular user.",
@@ -438,7 +416,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -484,7 +462,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -543,7 +521,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -598,7 +576,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -650,7 +628,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -702,7 +680,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
@@ -1133,18 +1111,6 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of a Dev Box.",
-      "x-ms-parameter-location": "method"
-    },
-    "UserIdParameterName": {
-      "name": "userId",
-      "in": "path",
-      "required": true,
-      "x-ms-client-default": "me",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
-      "minLength": 2,
-      "maxLength": 36,
-      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
       "x-ms-parameter-location": "method"
     }
   }

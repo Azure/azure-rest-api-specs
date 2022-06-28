@@ -279,8 +279,42 @@
       "required": true,
       "x-ms-client-default": "me",
       "type": "string",
-      "description": "The id of the user. If value is 'me', the identity is taken from the authentication context",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
+      "minLength": 2,
+      "maxLength": 36,
+      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
       "x-ms-parameter-location": "method"
+    },
+    "TenantIdParameterName": {
+      "name": "tenantId",
+      "description": "The tenant to operate on.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+      "minLength": 36,
+      "maxLength": 36,
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "DevCenterParameterName": {
+      "name": "devCenter",
+      "description": "The DevCenter to operate on.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "DevCenterDnsSuffixParameterName": {
+      "name": "devCenterDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "devcenter.azure.com",
+      "x-ms-skip-url-encoding": true,
+      "description": "The DNS suffix used as the base for all devcenter requests."
     }
   }
 }
