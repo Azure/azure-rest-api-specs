@@ -1090,6 +1090,54 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/diagnostics/healthcheck": {
+      "post": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_VMHealthCheck",
+        "description": "Get VM Health details",
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/getVMHealthDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The details for the health of VM returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationVMHealthCheckProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/providers/Microsoft.GuestConfiguration/operations": {
       "get": {
         "tags": [
@@ -1749,6 +1797,119 @@
         }
       },
       "description": "Information about VMSS VM"
+    },
+    "GuestConfigurationVMHealthCheckProperties": {
+      "properties": {
+        "isGcExtensionInstalled": {
+          "type": "boolean",
+          "description": "Installation status for Guest Configuration extension on VM"
+        },
+        "isMsiEnabled": {
+          "type": "boolean",
+          "description": "MSI enablement status on VM"
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestConfigurationHealthCheckAssignment"
+          },
+          "description": "List of policy assignment details on the VM"
+        }
+      },
+      "description": "Get the VM Health Details (policy assignments)"
+    },
+    "GuestConfigurationHealthCheckAssignment": {
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "Policy definition Id"
+        },
+        "policyDefinitionName": {
+          "type": "string",
+          "description": "Policy Definition Name"
+        },
+        "policyDefinitionEffect": {
+          "type": "string",
+          "description": "Policy Definition Effect"
+        },
+        "policyType": {
+          "type": "string",
+          "description": "Policy Type"
+        },
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "Policy Assignment Id"
+        },
+        "policyDisplayName": {
+          "type": "string",
+          "description": "Policy Display Name"
+        },
+        "guestConfigurationAssignmentName": {
+          "type": "string",
+          "description": "Guest Configuration Assignment Name"
+        },
+        "policyAssignmentScope": {
+          "type": "string",
+          "description": "Policy Assignment Scope"
+        },
+        "policyAssignmentParameters": {
+          "type": "object",
+          "readOnly": true,
+          "description": "Policy Assignment parameters"
+        },
+        "configurationName": {
+          "type": "string",
+          "description": "Configuration Name"
+        },
+        "availableInAzurePolicy": {
+          "type": "boolean",
+          "description": "Available in Azure Policy"
+        },
+        "availableInDataPlane": {
+          "type": "boolean",
+          "description": "Available In Data Plane"
+        },
+        "isVisibleToArmInDp": {
+          "type": "boolean",
+          "description": "Policy Visibility to ARM In Data plane"
+        },
+        "complianceStatusInDp": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration in Data Plane",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "lastComplianceStatusChecked": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Date and time when last compliance status was checked.",
+          "x-nullable": true
+        },
+        "latestReportId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of the latest report for the guest configuration assignment. ",
+          "x-nullable": true
+        },
+        "policyDefinition": {
+          "type": "string",
+          "description": "Definition of the Policy"
+        },
+        "policyConfigurationParameters": {
+          "$ref": "#/definitions/GuestConfigurationNavigation",
+          "description": "The guest configuration to assign."
+        }
+      },
+      "description": "List all policy assignments with detailed properties on the VM"
     }
   },
   "parameters": {}
