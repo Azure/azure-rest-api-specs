@@ -327,9 +327,19 @@
           "description": "Gets or sets the name of the runtime."
         },
         "properties": {
-          "$ref": "#/definitions/RuntimeProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the runtime properties."
+          "language": {
+            "type": "string",
+            "description": "Gets or sets the language of the runtime."
+          },
+          "languageVersion": {
+            "type": "string",
+            "description": "Gets or sets the language version of the runtime."
+          },
+          "builtInDependencies": {
+            "$ref": "#/definitions/RuntimeDependencies",
+            "x-ms-client-flatten": true,
+            "description": "Gets or sets the built in dependencies of the runtime."
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -337,21 +347,6 @@
         }
       },
       "description": "Definition of runtime."
-    },
-    "RuntimeProperties": {
-      "language": {
-        "type": "string",
-        "description": "Gets or sets the language of the runtime."
-      },
-      "languageVersion": {
-        "type": "string",
-        "description": "Gets or sets the language version of the runtime."
-      },
-      "builtInDependencies": {
-        "$ref": "#/definitions/RuntimeDependencies",
-        "x-ms-client-flatten": true,
-        "description": "Gets or sets the built in dependencies of the runtime."
-      }
     },
     "RuntimeDependencies": {
       "builtInDependencies": {
@@ -388,8 +383,19 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RuntimeProperties",
-          "description": "Sets the properties of runtime."
+          "language": {
+            "type": "string",
+            "description": "Gets or sets the language of the runtime."
+          },
+          "languageVersion": {
+            "type": "string",
+            "description": "Gets or sets the language version of the runtime."
+          },
+          "builtInDependencies": {
+            "$ref": "#/definitions/RuntimeDependencies",
+            "x-ms-client-flatten": true,
+            "description": "Gets or sets the built in dependencies of the runtime."
+          }
         },
         "name": {
           "type": "string",
