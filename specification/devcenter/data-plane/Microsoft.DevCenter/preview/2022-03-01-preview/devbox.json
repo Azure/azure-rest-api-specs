@@ -2,11 +2,23 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-03-01-preview",
-    "title": "DevCenter"
+    "title": "DevCenter",
+    "description": "DevBox API."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{devCenter}.{devcenterDnsSuffix}",
+    "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
     "parameters": [
+      {
+        "name": "tenantId",
+        "description": "The tenant to operate on.",
+        "required": true,
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+        "minLength": 36,
+        "maxLength": 36,
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
       {
         "name": "devCenter",
         "description": "The DevCenter to operate on.",
@@ -439,7 +451,13 @@
         "x-ms-long-running-operation": true,
         "responses": {
           "202": {
-            "description": "OK"
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -488,7 +506,13 @@
         "x-ms-long-running-operation": true,
         "responses": {
           "202": {
-            "description": "The request was accepted"
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -534,7 +558,13 @@
         "x-ms-long-running-operation": true,
         "responses": {
           "202": {
-            "description": "The request was accepted"
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -556,7 +586,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:getRemoteConnection": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "tags": [
           "Dev Boxes"
@@ -623,7 +653,10 @@
           "description": "The URL to get the next set of results.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Pool": {
       "type": "object",
@@ -678,7 +711,10 @@
           "description": "The URL to get the next set of results.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DevBox": {
       "type": "object",
@@ -697,7 +733,7 @@
         "poolName": {
           "description": "The name of the Dev Box pool this machine belongs to.",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "minLength": 3,
           "maxLength": 63,
           "x-ms-mutability": [
@@ -718,6 +754,11 @@
         "powerState": {
           "description": "The current power state of the Dev Box.",
           "$ref": "#/definitions/PowerState",
+          "readOnly": true
+        },
+        "uniqueId": {
+          "description": "A unique identifier for the Dev Box. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+          "type": "string",
           "readOnly": true
         },
         "errorDetails": {
@@ -835,6 +876,16 @@
           "type": "string",
           "readOnly": true
         },
+        "operatingSystem": {
+          "description": "The operating system of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osBuildNumber": {
+          "description": "The operating system build number of the image.",
+          "type": "string",
+          "readOnly": true
+        },
         "publishedDate": {
           "description": "The datetime that the backing image version was published.",
           "type": "string",
@@ -881,7 +932,7 @@
       "description": "The name of a pool of Dev Boxes.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
       "in": "path",
@@ -892,7 +943,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of a Dev Box.",
@@ -907,7 +958,7 @@
       "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
       "minLength": 2,
       "maxLength": 36,
-      "description": "The id of the user. If value is 'me', the identity is taken from the authentication context",
+      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
       "x-ms-parameter-location": "method"
     }
   }
