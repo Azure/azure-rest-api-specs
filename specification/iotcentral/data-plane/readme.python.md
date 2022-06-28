@@ -10,8 +10,8 @@ python:
   payload-flattening-threshold: 2
   no-namespace-folders: true
   clear-output-folder: true
-  namespace: Microsoft.Azure.IotCentral.Stable
+  namespace: Microsoft.Azure.IotCentral
   package-name: iotcentral
-  package-version: 2022-05-31
-  output-folder: $(python-sdks-folder)/iotcentral/generated
+  package-version: "2022-05-31"
+  output-folder: $(python-sdks-folder)/2022-05-31
 ```
