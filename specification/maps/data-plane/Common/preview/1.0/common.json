@@ -533,17 +533,20 @@
       "description": "The ontology version of this dataset.",
       "readOnly": true
     },
-    "ErrorResponse": {
+    "MapsErrorResponse": {
       "type": "object",
       "description": "Common error response for Azure Maps APIs to return error details for failed operations.",
       "readOnly": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "#/definitions/MapsErrorDetail"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
-    "ErrorDetail": {
+    "MapsErrorDetail": {
       "type": "object",
       "description": "The error detail.",
       "readOnly": true,
@@ -558,7 +561,10 @@
           "description": "The error message.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "code"
+      ]
     }
   },
   "parameters": {
