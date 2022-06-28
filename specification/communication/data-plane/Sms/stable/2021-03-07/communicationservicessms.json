@@ -98,7 +98,7 @@
           "type": "boolean"
         },
         "validityPeriodSeconds": {
-          "description": "Use this optional property to set maximum time in seconds to receive a delivery report, its default is 18000 seconds and minimum is 1 second.",
+          "description": "To set the message validity period, include the optional ValidityPeriodSeconds parameter in your request with the number of seconds in which you would like the message to expire in. Valid values are between 1 and 18000 seconds (the default). We recommend setting the value for at least 300 seconds. After exceeding this time limit, if Azure Communication Services has not received a delivery report from the carriers, you will get a failed delivery report on your configured endpoint.",
           "type": "integer"
         },
         "tag": {
