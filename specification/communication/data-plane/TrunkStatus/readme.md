@@ -51,4 +51,4 @@ This is not used by Autorest itself.
 
 ## CSharp
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+See configuration in [readme.typescript.md](./readme.typescript.md)
