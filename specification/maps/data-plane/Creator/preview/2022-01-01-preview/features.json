@@ -700,8 +700,7 @@
       "required": [
         "idPrefix",
         "name",
-        "geometryType",
-        "featureTypes"
+        "geometryType"
       ],
       "properties": {
         "description": {
@@ -780,13 +779,6 @@
             ]
           }
         },
-        "featureTypes": {
-          "description": "type of features returned",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "properties": {
           "description": "attributes of the collection used",
           "type": "array",
@@ -831,7 +823,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollectionData"
+          "$ref": "#/definitions/FeatureCollectionData"
         },
         {
           "$ref": "#/definitions/ExtendedGeoJsonFeatureCollectionData"
@@ -886,7 +878,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "feature": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
+          "$ref": "#/definitions/Feature"
         },
         "links": {
           "description": "Links to other Features endpoints.",
@@ -958,6 +950,21 @@
           "type": "object"
         }
       }
+    },
+    "FeatureCollectionData": {
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ]
     }
   }
 }
