@@ -511,6 +511,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_ListCredentials",
+        "summary": "Lists the user credentials of a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetCredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Fleet Credentials": {
+            "$ref": "./examples/Fleets_ListCredentialsResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -686,6 +728,40 @@
           "description": "The provisioning state of the last accepted operation."
         }
       }
+    },
+    "FleetCredentialResults": {
+      "type": "object",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FleetCredentialResult"
+          },
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The list credential result response."
+    },
+    "FleetCredentialResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the credential."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "readOnly": true,
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The credential result response."
     }
   },
   "parameters": {
