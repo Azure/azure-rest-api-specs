@@ -772,6 +772,10 @@
           "description": "Image settings for Dev Boxes create in this pool",
           "$ref": "#/definitions/ImageReference",
           "readOnly": true
+        },
+        "localAdministrator": {
+          "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on the Dev Boxes.",
+          "$ref": "#/definitions/LocalAdminStatus"
         }
       }
     },
@@ -957,6 +961,10 @@
           "type": "string",
           "readOnly": true,
           "format": "date-time"
+        },
+        "localAdministrator": {
+          "description": "Indicates whether the owner of the Dev Box is a local administrator.",
+          "$ref": "#/definitions/LocalAdminStatus"
         }
       },
       "required": [
@@ -1078,6 +1086,17 @@
       "description": "The power states of a Dev Box.",
       "x-ms-enum": {
         "name": "PowerState",
+        "modelAsString": true
+      }
+    },
+    "LocalAdminStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "LocalAdminStatus",
         "modelAsString": true
       }
     }
