@@ -17,6 +17,7 @@
           "tag2": "B"
         },
         "properties": {
+          "immutableId": "dcr-b74e0d383fc9415abaa584ec41adece3",
           "dataSources": {
             "performanceCounters": [
               {
@@ -24,7 +25,6 @@
                 "streams": [
                   "Microsoft-Perf"
                 ],
-                "scheduledTransferPeriod": "PT1M",
                 "samplingFrequencyInSeconds": 15,
                 "counterSpecifiers": [
                   "\\Processor(_Total)\\% Processor Time",
@@ -38,7 +38,6 @@
                 "streams": [
                   "Microsoft-Perf"
                 ],
-                "scheduledTransferPeriod": "PT5M",
                 "samplingFrequencyInSeconds": 30,
                 "counterSpecifiers": [
                   "\\Process(_Total)\\Thread Count"
@@ -51,7 +50,6 @@
                 "streams": [
                   "Microsoft-WindowsEvent"
                 ],
-                "scheduledTransferPeriod": "PT1M",
                 "xPathQueries": [
                   "Security!"
                 ]
@@ -61,7 +59,6 @@
                 "streams": [
                   "Microsoft-WindowsEvent"
                 ],
-                "scheduledTransferPeriod": "PT5M",
                 "xPathQueries": [
                   "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
                   "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
@@ -103,6 +100,7 @@
             "logAnalytics": [
               {
                 "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
                 "name": "centralWorkspace"
               }
             ]

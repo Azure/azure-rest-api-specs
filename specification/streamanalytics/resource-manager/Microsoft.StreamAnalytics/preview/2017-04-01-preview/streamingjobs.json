@@ -111,6 +111,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -169,6 +175,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -206,6 +218,12 @@
           },
           "204": {
             "description": "The streaming job does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -257,6 +275,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -300,6 +324,12 @@
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -342,6 +372,12 @@
             "description": "Successfully listed the streaming jobs under the given subscription.",
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -397,6 +433,12 @@
           },
           "202": {
             "description": "The start streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -434,6 +476,12 @@
           },
           "202": {
             "description": "The stop streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -443,6 +491,7 @@
   "definitions": {
     "External": {
       "description": "The storage account where the custom code artifacts are located.",
+      "type": "object",
       "properties": {
         "storageAccount": {
           "$ref": "./inputs.json#/definitions/StorageAccount"
@@ -455,63 +504,9 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of Stream Analytics operations supported by the Microsoft.StreamAnalytics resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Stream Analytics REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the operation being performed on this particular object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Contains the localized display information for this particular operation / action.",
-          "readOnly": true,
-          "properties": {
-            "provider": {
-              "description": "The localized friendly form of the resource provider name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "The localized friendly form of the resource type related to this action/operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "The localized friendly name for the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "The localized friendly description for the operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
     "StreamingJob": {
       "description": "A streaming job object, containing all information associated with the named streaming job.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
@@ -531,6 +526,7 @@
     },
     "StreamingJobProperties": {
       "description": "The properties that are associated with a streaming job.",
+      "type": "object",
       "properties": {
         "sku": {
           "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
@@ -668,6 +664,7 @@
     },
     "ClusterInfo": {
       "description": "The properties associated with a Stream Analytics cluster.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "The resource id of cluster.",
@@ -677,6 +674,7 @@
     },
     "StreamingJobSku": {
       "description": "The properties that are associated with a SKU.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -692,6 +690,7 @@
       }
     },
     "StreamingJobListResult": {
+      "description": "Object containing a list of streaming jobs.",
       "properties": {
         "value": {
           "type": "array",
@@ -706,11 +705,11 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      },
-      "description": "Object containing a list of streaming jobs."
+      }
     },
     "StartStreamingJobParameters": {
       "description": "Parameters supplied to the Start Streaming Job operation.",
+      "type": "object",
       "properties": {
         "outputStartMode": {
           "$ref": "#/definitions/OutputStartMode",
@@ -773,6 +772,7 @@
     },
     "JobStorageAccount": {
       "description": "The properties that are associated with an Azure Storage account with MSI",
+      "type": "object",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/StorageAccount"

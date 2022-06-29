@@ -10,7 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.purview
 package-name: azure-mgmt-purview
-package-version: 1.0.0b1
+package-version: 1.0.1
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
@@ -20,4 +20,9 @@ output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purvi
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
+```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```

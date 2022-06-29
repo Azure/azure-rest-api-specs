@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "firewallRuleName": "rule1",
+    "serverName": "testserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-06-15-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1",
+        "name": "rule1",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+        "properties": {
+          "startIpAddress": "0.0.0.0",
+          "endIpAddress": "255.255.255.255"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1",
+        "name": "rule1",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+        "properties": {
+          "startIpAddress": "0.0.0.0",
+          "endIpAddress": "255.255.255.255"
+        }
+      }
+    },
+    "202": {}
+  }
+}

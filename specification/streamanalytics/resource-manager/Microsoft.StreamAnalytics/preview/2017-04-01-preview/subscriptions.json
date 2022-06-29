@@ -47,11 +47,7 @@
         },
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region in which to retrieve the subscription's quota information. You can find out which regions Azure Stream Analytics is supported in here: https://azure.microsoft.com/en-us/regions/"
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -66,6 +62,271 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotasListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testQuery": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestQuery",
+        "description": "Test the Stream Analytics query on a sample input.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics query": {
+            "$ref": "./examples/Subscription_TestQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "testQuery",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestQuery"
+            },
+            "description": "The query testing object that defines the input, output, and transformation for the query testing."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request to test the Stream Analytics query was successful.",
+            "schema": {
+              "$ref": "#/definitions/QueryTestingResult"
+            }
+          },
+          "202": {
+            "description": "The request to test the Stream Analytics query was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/compileQuery": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CompileQuery",
+        "description": "Compile the Stream Analytics query.",
+        "x-ms-examples": {
+          "Compile the Stream Analytics query": {
+            "$ref": "./examples/Subscription_CompileQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "compileQuery",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompileQuery"
+            },
+            "description": "The query compilation object which defines the input, output, and transformation for the query compilation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Stream Analytics query was compiled successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryCompilationResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/sampleInput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_SampleInput",
+        "description": "Sample the Stream Analytics input data.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Sample the Stream Analytics input data": {
+            "$ref": "./examples/Subscription_SampleInput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sampleInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SampleInput"
+            },
+            "description": "Defines the necessary parameters for sampling the Stream Analytics input data."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to sample the Stream Analytics input was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/SampleInputResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testInput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestInput",
+        "description": "Test the Stream Analytics input.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics input": {
+            "$ref": "./examples/Subscription_TestInput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "testInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestInput"
+            },
+            "description": "Defines the necessary parameters for testing the Stream Analytics input."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to test the Stream Analytics input was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/TestDatasourceResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testOutput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestOutput",
+        "description": "Test the Stream Analytics output.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics output": {
+            "$ref": "./examples/Subscription_TestOutput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "testOutput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestOutput"
+            },
+            "description": "Defines the necessary parameters for testing the Stream Analytics output."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to test the Stream Analytics output was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/TestDatasourceResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -74,6 +335,7 @@
   "definitions": {
     "SubscriptionQuotasListResult": {
       "description": "Result of the GetQuotas operation. It contains a list of quotas for the subscription in a particular region.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of quotas for the subscription in a particular region.",
@@ -115,8 +377,447 @@
         }
       }
     },
+    "TestQuery": {
+      "description": "The request object for query testing.",
+      "type": "object",
+      "properties": {
+        "diagnostics": {
+          "description": "Diagnostics information related to query testing.",
+          "type": "object",
+          "properties": {
+            "writeUri": {
+              "description": "The SAS URI to the container or directory.",
+              "type": "string"
+            },
+            "path": {
+              "description": "The path to the subdirectory.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "writeUri"
+          ]
+        },
+        "streamingJob": {
+          "description": "Stream analytics job object which defines the input, output, and transformation for the query testing.",
+          "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+        }
+      },
+      "required": [
+        "streamingJob"
+      ]
+    },
+    "QueryTestingResult": {
+      "description": "The result of the query testing request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the query testing request.",
+          "$ref": "#/definitions/QueryTestingResultStatus"
+        },
+        "outputUri": {
+          "description": "The SAS URL to the outputs payload.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryTestingResultStatus": {
+      "description": "The status of the query testing request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Started",
+        "Success",
+        "CompilerError",
+        "RuntimeError",
+        "Timeout",
+        "UnknownError"
+      ],
+      "x-ms-enum": {
+        "name": "QueryTestingResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Started",
+            "description": "The query testing operation was initiated."
+          },
+          {
+            "value": "Success",
+            "description": "The query testing operation succeeded."
+          },
+          {
+            "value": "CompilerError",
+            "description": "The query testing operation failed due to a compiler error."
+          },
+          {
+            "value": "RuntimeError",
+            "description": "The query testing operation failed due to a runtime error."
+          },
+          {
+            "value": "Timeout",
+            "description": "The query testing operation failed due to a timeout."
+          },
+          {
+            "value": "UnknownError",
+            "description": "The query testing operation failed due to an unknown error ."
+          }
+        ]
+      }
+    },
+    "CompileQuery": {
+      "description": "The query compilation object which defines the input, output, and transformation for the query compilation.",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query to compile.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The inputs for the query compilation.",
+          "type": "array",
+          "items": {
+            "description": "An input for the query compilation.",
+            "$ref": "#/definitions/QueryInput"
+          }
+        },
+        "functions": {
+          "description": "The functions for the query compilation.",
+          "type": "array",
+          "items": {
+            "description": "A function for the query compilation.",
+            "$ref": "#/definitions/QueryFunction"
+          }
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Describes the type of the job. Valid values are `Cloud` and 'Edge'.",
+          "enum": [
+            "Cloud",
+            "Edge"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
+        },
+        "compatibilityLevel": {
+          "description": "The query to compile.",
+          "$ref": "./streamingjobs.json#/definitions/CompatibilityLevel"
+        }
+      },
+      "required": [
+        "query",
+        "jobType"
+      ]
+    },
+    "QueryInput": {
+      "description": "An input for the query compilation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the input.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the input, can be Stream or Reference.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "QueryFunction": {
+      "description": "A function for the query compilation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the function.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the function.",
+          "type": "string"
+        },
+        "bindingType": {
+          "description": "The type of the function binding.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The inputs for the function.",
+          "type": "array",
+          "items": {
+            "description": "An input for the function.",
+            "$ref": "./functions.json#/definitions/FunctionInput"
+          }
+        },
+        "output": {
+          "description": "An output for the function.",
+          "$ref": "./functions.json#/definitions/FunctionOutput"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "bindingType",
+        "inputs",
+        "output"
+      ]
+    },
+    "QueryCompilationResult": {
+      "description": "The result of the query compilation request.",
+      "type": "object",
+      "properties": {
+        "errors": {
+          "description": "Error messages produced by the compiler.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An error produced by the compiler.",
+            "$ref": "#/definitions/QueryCompilationError"
+          }
+        },
+        "warnings": {
+          "description": "Warning messages produced by the compiler.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A warning produced by the compiler.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "inputs": {
+          "description": "All input names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An input used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "outputs": {
+          "description": "All output names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An output used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "functions": {
+          "description": "All function names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A function used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "QueryCompilationError": {
+      "description": "An error produced by the compiler.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The content of the error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startLine": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "startColumn": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "endLine": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "endColumn": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "isGlobal": {
+          "description": "Whether the error is not for a specific part but for the entire query.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "SampleInput": {
+      "description": "The stream analytics input to sample.",
+      "type": "object",
+      "properties": {
+        "input": {
+          "description": "The stream analytics input to sample.",
+          "$ref": "./inputs.json#/definitions/Input"
+        },
+        "compatibilityLevel": {
+          "description": "Defaults to the default ASA job compatibility level. Today it is 1.2",
+          "type": "string"
+        },
+        "eventsUri": {
+          "description": "The SAS URI of the storage blob for service to write the sampled events to. If this parameter is not provided, service will write events to he system account and share a temporary SAS URI to it.",
+          "type": "string"
+        },
+        "dataLocale": {
+          "description": "Defaults to en-US.",
+          "type": "string"
+        }
+      }
+    },
+    "SampleInputResult": {
+      "description": "The result of the sample input request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the sample input request.",
+          "$ref": "#/definitions/SampleInputResultStatus"
+        },
+        "diagnostics": {
+          "description": "Diagnostics messages. E.g. message indicating some partitions from the input have no data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A diagnostics message.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "eventsDownloadUrl": {
+          "description": "A SAS URL to download the sampled input data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastArrivalTime": {
+          "description": "The timestamp for the last event in the data. It is in DateTime format.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SampleInputResultStatus": {
+      "description": "The status of the sample input request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "ReadAllEventsInRange",
+        "NoEventsFoundInRange",
+        "ErrorConnectingToInput"
+      ],
+      "x-ms-enum": {
+        "name": "SampleInputResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ReadAllEventsInRange",
+            "description": "The sample input operation successfully read all the events in the range."
+          },
+          {
+            "value": "NoEventsFoundInRange",
+            "description": "The sample input operation found no events in the range."
+          },
+          {
+            "value": "ErrorConnectingToInput",
+            "description": "The sample input operation failed to connect to the input."
+          }
+        ]
+      }
+    },
+    "TestInput": {
+      "description": "A stream analytics input.",
+      "type": "object",
+      "properties": {
+        "input": {
+          "description": "The stream analytics input to test.",
+          "$ref": "./inputs.json#/definitions/Input"
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "TestOutput": {
+      "description": "A stream analytics output.",
+      "type": "object",
+      "properties": {
+        "output": {
+          "description": "The stream analytics output to test.",
+          "$ref": "./outputs.json#/definitions/Output"
+        }
+      },
+      "required": [
+        "output"
+      ]
+    },
+    "TestDatasourceResult": {
+      "description": "The result of the test input or output request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the sample output request.",
+          "$ref": "#/definitions/TestDatasourceResultStatus"
+        }
+      }
+    },
+    "TestDatasourceResultStatus": {
+      "description": "The status of the test input or output request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "TestSucceeded",
+        "TestFailed"
+      ],
+      "x-ms-enum": {
+        "name": "TestDatasourceResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TestSucceeded",
+            "description": "The test datasource operation succeeded."
+          },
+          {
+            "value": "TestFailed",
+            "description": "The test datasource operation failed."
+          }
+        ]
+      }
+    },
     "SubResource": {
       "description": "The base sub-resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "location": "West US",
+    "compileQuery": {
+      "query": "SELECT\r\n    *\r\nINTO\r\n    [output1]\r\nFROM\r\n    [input1]",
+      "inputs": [
+        {
+          "name": "input1",
+          "type": "Stream"
+        }
+      ],
+      "functions": [
+        {
+          "name": "function1",
+          "type": "Scalar",
+          "bindingType": "Microsoft.StreamAnalytics/JavascriptUdf",
+          "inputs": [
+            {
+              "dataType": "any",
+              "isConfigurationParameter": null
+            }
+          ],
+          "output": {
+            "dataType": "bigint"
+          }
+        }
+      ],
+      "jobType": "Cloud",
+      "compatibilityLevel": "1.2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "errors": [
+          {
+            "message": "Query failed to compile.",
+            "isGlobal": true
+          }
+        ],
+        "inputs": [
+          "inputtest"
+        ],
+        "outputs": [
+          "outputtest"
+        ],
+        "functions": [
+          "transformationtest"
+        ]
+      }
+    }
+  }
+}

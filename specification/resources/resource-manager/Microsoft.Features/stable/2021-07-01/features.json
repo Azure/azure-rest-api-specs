@@ -1,0 +1,456 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FeatureClient",
+    "version": "2021-07-01",
+    "description": "Azure Feature Exposure Control (AFEC) provides a mechanism for the resource providers to control feature exposure to users. Resource providers typically use this mechanism to provide public/private preview for new features prior to making them generally available. Users need to explicitly register for AFEC features to get access to such functionality."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Features/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.Features REST API operations.",
+        "x-ms-examples": {
+          "List Features operations": {
+            "$ref": "./examples/listFeaturesOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/features": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_ListAll",
+        "description": "Gets all the preview features that are available through AFEC for the subscription.",
+        "x-ms-examples": {
+          "List subscription Features": {
+            "$ref": "./examples/listSubscriptionFeatures.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array containing metadata for each feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureOperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_List",
+        "description": "Gets all the preview features in a provider namespace that are available through AFEC for the subscription.",
+        "x-ms-examples": {
+          "List provider Features": {
+            "$ref": "./examples/listProviderFeatures.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider for getting features."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array containing metadata for each feature in the resource provider. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureOperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_Get",
+        "description": "Gets the preview feature with the specified name.",
+        "x-ms-examples": {
+          "Get feature": {
+            "$ref": "./examples/getFeature.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource provider namespace for the feature."
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the feature to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns metadata about the feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}/register": {
+      "post": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_Register",
+        "description": "Registers the preview feature for the subscription.",
+        "x-ms-examples": {
+          "Register feature": {
+            "$ref": "./examples/registerFeature.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the feature to register."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns metadata about the registered feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}/unregister": {
+      "post": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_Unregister",
+        "description": "Unregisters the preview feature for the subscription.",
+        "x-ms-examples": {
+          "Register feature": {
+            "$ref": "./examples/unregisterFeature.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the feature to unregister."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns metadata about the unregistered feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FeatureProperties": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The registration state of the feature for the subscription."
+        }
+      },
+      "description": "Information about feature."
+    },
+    "FeatureResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature."
+        },
+        "properties": {
+          "$ref": "#/definitions/FeatureProperties",
+          "description": "Properties of the previewed feature."
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the feature."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the feature."
+        }
+      },
+      "description": "Previewed feature information."
+    },
+    "FeatureOperationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureResult"
+          },
+          "description": "The array of features."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of previewed features."
+    },
+    "Operation": {
+      "description": "Microsoft.Features operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "type": "object",
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Features",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Microsoft.Features operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Features operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}

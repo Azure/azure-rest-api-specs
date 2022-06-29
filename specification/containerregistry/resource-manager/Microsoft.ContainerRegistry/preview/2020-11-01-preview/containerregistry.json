@@ -4106,6 +4106,7 @@
         },
         "anonymousPullEnabled": {
           "description": "Enables registry-wide pull from unauthenticated clients.",
+          "default": false,
           "type": "boolean"
         }
       }
@@ -5736,9 +5737,11 @@
           "type": "string"
         },
         "details": {
-          "$ref": "#/definitions/InnerErrorDescription",
           "description": "an array of additional nested error response info objects, as described by this contract.",
-          "type": "array"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDescription"
+          }
         }
       }
     },

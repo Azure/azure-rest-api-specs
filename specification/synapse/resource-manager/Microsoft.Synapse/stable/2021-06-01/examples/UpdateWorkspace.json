@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "workspaceName": "workspace1",
+    "api-version": "2021-06-01",
+    "workspacePatchInfo": {
+      "tags": {
+        "key": "value"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "sqlAdministratorLoginPassword": "password",
+        "managedVirtualNetworkSettings": {
+          "preventDataExfiltration": false,
+          "linkedAccessCheckOnTargetResource": false,
+          "allowedAadTenantIdsForLinking": [
+            "740239CE-A25B-485B-86A0-262F29F6EBDB"
+          ]
+        },
+        "workspaceRepositoryConfiguration": {
+          "type": "FactoryGitHubConfiguration",
+          "hostName": "",
+          "accountName": "adifferentacount",
+          "projectName": "myproject",
+          "repositoryName": "myrepository",
+          "collaborationBranch": "master",
+          "rootFolder": "/"
+        },
+        "purviewConfiguration": {
+          "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+        },
+        "encryption": {
+          "cmk": {
+            "key": {
+              "name": "default",
+              "keyVaultUrl": "https://vault.azure.net/keys/key1"
+            }
+          }
+        },
+        "publicNetworkAccess": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "sqlAdministratorLogin": "login",
+          "managedResourceGroupName": "resourceGroup2",
+          "provisioningState": "Succeeded",
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Consistent",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          },
+          "publicNetworkAccess": "Enabled"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "sqlAdministratorLogin": "login",
+          "managedResourceGroupName": "resourceGroup2",
+          "provisioningState": "Provisioning",
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Updating",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          },
+          "publicNetworkAccess": "Enabled"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

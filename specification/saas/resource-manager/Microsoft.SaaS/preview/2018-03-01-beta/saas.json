@@ -958,6 +958,63 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/providers/Microsoft.SaaS/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "SaaSOperations"
+        ],
+        "operationId": "SaaSOperation_Get",
+        "description": "Gets information about the specified operation progress.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation ended successfully. The request returns the updated SaaS resource.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation status": {
+            "$ref": "./examples/OperationResults/Get.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1090,6 +1147,10 @@
         "tags": {
           "description": "the resource tags.",
           "$ref": "#/definitions/Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location. Only value allowed for SaaS is 'global'"
         },
         "properties": {
           "$ref": "#/definitions/SaasCreationProperties",

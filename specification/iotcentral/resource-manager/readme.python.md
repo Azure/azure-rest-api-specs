@@ -6,23 +6,20 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.iotcentral
-  package-name: azure-mgmt-iotcentral
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.iotcentral
+package-name: azure-mgmt-iotcentral
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iotcentral/azure/mgmt/iotcentral
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iotcentral/azure/mgmt/iotcentral
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iotcentral
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iotcentral
 ```
