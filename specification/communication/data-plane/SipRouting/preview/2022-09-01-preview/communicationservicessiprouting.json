@@ -15,7 +15,7 @@
           "SipConfiguration"
         ],
         "summary": "Gets SIP configuration for resource.",
-        "operationId": "SipConfiguration_Get",
+        "operationId": "SipRouting_Get",
         "produces": [
           "application/json"
         ],
@@ -55,7 +55,7 @@
           "SipConfiguration"
         ],
         "summary": "Patches SIP configuration for resource.",
-        "operationId": "SipConfiguration_Patch",
+        "operationId": "SipRouting_Patch",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -162,22 +162,29 @@
         }
       }
     },
+    "DomainType": {
+      "type": "string",
+      "description": "Type of domain.\r\nCurrently only 'custom' type is supported.",
+      "enum": [
+        "custom"
+      ],
+      "x-ms-enum": {
+        "name": "DomainType",
+        "modelAsString": true,
+        "values":[
+          {
+            "value": "custom",
+            "description": "Custom domain is every domain that is configured by user (domain.com)."
+          }
+        ]
+     }
+    },
     "Domain": {
       "description": "Represents Domain object as response of validation api.\r\nMap key is domain.",
       "type": "object",
       "properties": {
         "type": {
           "description": "Domain type",
-          "$ref": "#/definitions/DomainType"
-        }
-      }
-    },
-    "DomainPatch": {
-      "description": "Represents Domain that will be validated and used.\r\nMap key is domain.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Domain Type",
           "$ref": "#/definitions/DomainType"
         }
       }
@@ -212,6 +219,16 @@
         }
       }
     },
+    "DomainPatch": {
+      "description": "Represents Domain that will be validated and used.\r\nMap key is domain.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Domain Type",
+          "$ref": "#/definitions/DomainType"
+        }
+      }
+    },
     "SipConfigurationPatch": {
       "description": "Represents a SIP configuration patch.",
       "type": "object",
@@ -240,23 +257,6 @@
           }
         }
       }
-    },
-    "DomainType": {
-      "type": "string",
-      "description": "Type of domain.\r\nCurrently only 'custom' type is supported.",
-      "enum": [
-        "custom"
-      ],
-      "x-ms-enum": {
-        "name": "DomainType",
-        "modelAsString": true,
-        "values":[
-          {
-            "value": "custom",
-            "description": "Custom domain is every domain that is configured by user (domain.com)."
-          }
-        ]
-     }
     }
   },
   "parameters": {
