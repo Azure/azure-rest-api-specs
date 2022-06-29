@@ -7,14 +7,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resourceconnector
-namespace: azure.mgmt.resourceconnector
+no-namespace-folders: true
 package-version: 1.0.0b1
 clear-output-folder: true
-```
-
-``` yaml $(python)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector
 ```
 
 ### Python multi-api
