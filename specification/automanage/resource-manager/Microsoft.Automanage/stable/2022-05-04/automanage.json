@@ -2191,6 +2191,11 @@
           "$ref": "#/definitions/ConfigurationProfileAssignmentProperties",
           "description": "Properties of the configuration profile assignment."
         },
+        "managedBy": {
+          "readOnly": true,
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
@@ -2409,6 +2414,10 @@
           "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
         }
       }
+    },
+    "ManagedBy": {
+      "type": "string",
+      "description": "Azure resource id. Indicates if this resource is managed by another Azure resource."
     }
   },
   "parameters": {
