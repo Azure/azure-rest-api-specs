@@ -327,19 +327,9 @@
           "description": "Gets or sets the name of the runtime."
         },
         "properties": {
-          "language": {
-            "type": "string",
-            "description": "Gets or sets the language of the runtime."
-          },
-          "languageVersion": {
-            "type": "string",
-            "description": "Gets or sets the language version of the runtime."
-          },
-          "builtInDependencies": {
-            "$ref": "#/definitions/RuntimeDependencies",
-            "x-ms-client-flatten": true,
-            "description": "Gets or sets the built in dependencies of the runtime."
-          }
+          "$ref": "#/definitions/RuntimeProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the hybrid worker group properties."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -348,11 +338,26 @@
       },
       "description": "Definition of runtime."
     },
-    "RuntimeDependencies": {
-      "builtInDependencies": {
-        "type": "object",
-        "description": "Gets or sets the built in dependencies of the runtime."
-      }
+    "RuntimeProperties": {
+      "type": "object",
+      "properties":{
+        "language": {
+          "type": "string",
+          "description": "Gets or sets the language of the runtime."
+        },
+        "languageVersion": {
+          "type": "string",
+          "description": "Gets or sets the language version of the runtime."
+        },
+        "builtInDependencies": {
+          "type": "object",
+          "additionalProperties":{
+            "type": "string"
+          },
+          "description": "Gets or sets the built in dependencies of the runtime."
+        }
+      },
+      "description": "Runtime properties"
     },
     "RuntimeListResult": {
       "properties": {
@@ -373,8 +378,13 @@
     "RuntimeUpdateParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RuntimeDependencies",
-          "description": "Sets the properties of runtime."
+          "builtInDependencies": {
+            "type": "object",
+            "additionalProperties":{
+              "type": "string"
+            },
+            "description": "Gets or sets the built in dependencies of the runtime."
+          }
         }
       },
       "description": "Parameters supplied to the update operation."
@@ -383,19 +393,8 @@
       "type": "object",
       "properties": {
         "properties": {
-          "language": {
-            "type": "string",
-            "description": "Gets or sets the language of the runtime."
-          },
-          "languageVersion": {
-            "type": "string",
-            "description": "Gets or sets the language version of the runtime."
-          },
-          "builtInDependencies": {
-            "$ref": "#/definitions/RuntimeDependencies",
-            "x-ms-client-flatten": true,
-            "description": "Gets or sets the built in dependencies of the runtime."
-          }
+          "$ref": "#/definitions/RuntimeProperties",
+          "description": "Sets the properties of runtime."
         },
         "name": {
           "type": "string",
