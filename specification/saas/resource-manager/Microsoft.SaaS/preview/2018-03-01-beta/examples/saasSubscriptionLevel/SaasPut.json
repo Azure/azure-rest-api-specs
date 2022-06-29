@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "c825645b-e31b-9cf4-1cee-2aba9e58bc7c",
+    "resourceGroupName": "my-saas-rg",
+    "resourceName": "MyContosoSubscription",
+    "api-version": "2018-03-01-beta",
+    "parameters": {
+      "location": "global",
+      "name": "MyContosoSubscription",
+      "properties": {
+        "publisherId": "microsoft-contoso",
+        "offerId": "contosoOffer",
+        "saasResourceName": "MyContosoSubscription",
+        "skuId": "free",
+        "paymentChannelType": "SubscriptionDelegated",
+        "termId": "hjdtn7tfnxcy",
+        "paymentChannelMetadata": {
+          "AzureSubscriptionId": "155af98a-3205-47e7-883b-a2ab9db9f88d"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c825645b-e31b-9cf4-1cee-2aba9e58bc7c/resourceGroups/my-saas-rg/providers/Microsoft.SaaS/resources/MyContosoSubscription",
+        "name": "MyContosoSubscription",
+        "type": "Microsoft.SaaS/resources",
+        "properties": {
+          "status": "Subscribed",
+          "saasResourceName": "MyContosoSubscription",
+          "publisherId": "microsoft-contoso",
+          "skuId": "free",
+          "offerId": "contosoOffer",
+          "quantity": null,
+          "termId": null,
+          "paymentChannelType": "SubscriptionDelegated",
+          "paymentChannelMetadata": {
+            "azureSubscriptionId": "c825645b-e31b-9cf4-1cee-2aba9e58bc7c",
+            "resourceId": "263ebe8c-3621-4ac0-a6ba-f1419bfb9166"
+          },
+          "publisherTestEnvironment": null,
+          "term": {
+            "termUnit": "P1M",
+            "startDate": "2021-01-01T00:00:00Z",
+            "endDate": "2021-02-31T00:00:00Z"
+          },
+          "autoRenew": true,
+          "isFreeTrial": false,
+          "created": "2021-01-01T08:30:10.1234567Z",
+          "lastModified": "2020-01-01T08:35:05.7654321Z"
+        },
+        "tags": {}
+      }
+    },
+    "202": {},
+    "204": {}
+  }
+}

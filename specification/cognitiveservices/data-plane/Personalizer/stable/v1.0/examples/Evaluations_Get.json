@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "evaluationId": "id",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "b58c6d92-b727-48c1-9487-4be2782c9e0a",
+        "name": "myFirstEvaluation",
+        "startTime": "2018-12-19T00:00:00Z",
+        "endTime": "2019-01-19T00:00:00Z",
+        "status": "completed",
+        "policyResults": [
+          {
+            "name": "Custom Learning settings 1",
+            "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5",
+            "summary": [
+              {
+                "timeStamp": "2018-12-19T00:00:00Z",
+                "ipsEstimatorNumerator": 0.0,
+                "ipsEstimatorDenominator": 170.0,
+                "snipsEstimatorDenominator": 308.25,
+                "aggregateTimeWindow": "PT0S",
+                "nonZeroProbability": 64.0,
+                "confidenceInterval": 0.0,
+                "sumOfSquares": 0.0
+              },
+              {
+                "timeStamp": "2018-12-19T00:05:00Z",
+                "ipsEstimatorNumerator": 2.2,
+                "ipsEstimatorDenominator": 196.0,
+                "snipsEstimatorDenominator": 193.761,
+                "aggregateTimeWindow": "PT0S",
+                "nonZeroProbability": 68.0,
+                "confidenceInterval": 1.1009,
+                "sumOfSquares": 2.424
+              }
+            ],
+            "totalSummary": {
+              "timeStamp": "2019-01-19T00:00:00Z",
+              "ipsEstimatorNumerator": 22.2,
+              "ipsEstimatorDenominator": 1906.0,
+              "snipsEstimatorDenominator": 1993.761,
+              "aggregateTimeWindow": "PT0S",
+              "nonZeroProbability": 68.0,
+              "confidenceInterval": 1.1209,
+              "sumOfSquares": 2.484
+            }
+          }
+        ],
+        "featureImportance": [
+          [
+            "f1",
+            "f2"
+          ],
+          [
+            "f3",
+            "f4"
+          ]
+        ]
+      }
+    }
+  }
+}

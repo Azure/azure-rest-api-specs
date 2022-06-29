@@ -198,6 +198,33 @@
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
+    "AppTypeParameter": {
+      "name": "appType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Determines the type of application which send the create user request. Default is legacy publisher portal.",
+      "enum": [
+        "portal",
+        "developerPortal"
+      ],
+      "x-ms-enum": {
+        "name": "AppType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "portal",
+            "description": "User create request was sent by legacy developer portal."
+          },
+          {
+            "value": "developerPortal",
+            "description": "User create request was sent by new developer portal."
+          }
+        ]
+      },
+      "default": "portal",
+      "x-ms-parameter-location": "method"
+    },
     "AttachmentIdParameter": {
       "name": "attachmentId",
       "in": "path",

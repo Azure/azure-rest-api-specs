@@ -1,61 +1,32 @@
 {
   "parameters": {
-    "resourceUri": "subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default",
-    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+    "resourceUri": "d69f0a10-6508-4026-98b0-eff8f6faaade/resourceGroups/quickpulse-int/providers/Microsoft.Storage/storageAccounts/quickpulseintusscdiag/blobServices/default",
+    "timespan": "2021-04-16T01:00:00.000Z/2021-04-17T02:00:00.000Z",
     "metric": "BlobCapacity",
     "$filter": "BlobType eq '*'",
     "top": "3",
-    "orderby": "Average asc",
-    "aggregation": "Average,count",
-    "interval": "PT1M",
+    "orderby": "Average desc",
+    "aggregation": "average,minimum,maximum",
+    "interval": "PT6H",
     "api-version": "2017-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "cost": 0,
-        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
-        "interval": "PT1M",
+        "cost": 1499,
+        "timespan": "2021-04-16T01:00:00Z/2021-04-17T02:00:00Z",
+        "interval": "PT6H",
         "value": [
           {
-            "id": "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "id": "/subscriptions/d69f0a10-6508-4026-98b0-eff8f6faaade/resourceGroups/quickpulse-int/providers/Microsoft.Storage/storageAccounts/quickpulseintusscdiag/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
             "type": "Microsoft.Insights/metrics",
             "name": {
               "value": "BlobCapacity",
               "localizedValue": "Blob Capacity"
             },
+            "displayDescription": "The amount of storage used by the storage account’s Blob service in bytes.",
             "unit": "Bytes",
             "timeseries": [
-              {
-                "metadatavalues": [
-                  {
-                    "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
-                    },
-                    "value": "PageBlob"
-                  }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2017-04-14T02:20:00Z",
-                    "count": 0.0
-                  },
-                  {
-                    "timeStamp": "2017-04-14T02:21:00Z",
-                    "count": 0.0
-                  },
-                  {
-                    "timeStamp": "2017-04-14T02:22:00Z",
-                    "count": 0.0
-                  },
-                  {
-                    "timeStamp": "2017-04-14T02:23:00Z",
-                    "count": 1.0,
-                    "average": 0.0
-                  }
-                ]
-              },
               {
                 "metadatavalues": [
                   {
@@ -68,25 +39,125 @@
                 ],
                 "data": [
                   {
-                    "timeStamp": "2017-04-14T02:20:00Z",
-                    "count": 0.0
+                    "timeStamp": "2021-04-16T01:00:00Z",
+                    "average": 35492299169.0,
+                    "minimum": 35492299169.0,
+                    "maximum": 35492299169.0
                   },
                   {
-                    "timeStamp": "2017-04-14T02:21:00Z",
-                    "count": 0.0
+                    "timeStamp": "2021-04-16T07:00:00Z",
+                    "average": 35492299169.0,
+                    "minimum": 35492299169.0,
+                    "maximum": 35492299169.0
                   },
                   {
-                    "timeStamp": "2017-04-14T02:22:00Z",
-                    "count": 0.0
+                    "timeStamp": "2021-04-16T13:00:00Z",
+                    "average": 35492299169.0,
+                    "minimum": 35492299169.0,
+                    "maximum": 35492299169.0
                   },
                   {
-                    "timeStamp": "2017-04-14T02:23:00Z",
-                    "count": 1.0,
-                    "average": 245.0
+                    "timeStamp": "2021-04-16T19:00:00Z",
+                    "average": 35492299169.0,
+                    "minimum": 35492299169.0,
+                    "maximum": 35492299169.0
+                  },
+                  {
+                    "timeStamp": "2021-04-17T01:00:00Z",
+                    "average": 35492299169.0,
+                    "minimum": 35492299169.0,
+                    "maximum": 35492299169.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "PageBlob"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-04-16T01:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T07:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T13:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T19:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-17T01:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "Azure Data Lake Storage"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-04-16T01:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T07:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T13:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-16T19:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
+                  },
+                  {
+                    "timeStamp": "2021-04-17T01:00:00Z",
+                    "average": 0.0,
+                    "minimum": 0.0,
+                    "maximum": 0.0
                   }
                 ]
               }
-            ]
+            ],
+            "errorCode": "Success"
           }
         ]
       }

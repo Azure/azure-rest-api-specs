@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for IotCentral.
 
 ---
+
 ## Getting Started
+
 To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,16 +15,62 @@ To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for IotCentral.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09-01
+tag: package-preview-2021-11
+```
+
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.IoTCentral/preview/2021-11-01-preview/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
+  - suppress: R3026
+    from: privatelinks.json
+    reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
+  - suppress: R3010
+    from: privatelinks.json
+    reason: privateLink and privateEndpointConnection sub-resources don't have list by immediate parent apis.
+```
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
 ```
 
 ### Tag: package-2018-09-01
@@ -34,16 +82,8 @@ input-file:
 - Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
 ```
 
-### Tag: package-2017-07-01-privatepreview
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-07-01-privatepreview'
-input-file:
-- Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
-```
-
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -53,8 +93,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -62,6 +102,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_central']
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -97,14 +139,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iotcentral
 ```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-09-01
-  - tag: package-2017-07-01-privatepreview
-```
-
 ### Tag: package-2018-09-01 and java
 
 These settings apply only when `--tag=package-2018-09-01 --java` is specified on the command line.
@@ -113,75 +147,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-09-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
-
-### Tag: package-2017-07-01-privatepreview and java
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag)=='package-2017-07-01-privatepreview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.iotcentral.v2017_07_01_privatepreview
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2017_07_01_privatepreview
-regenerate-manager: true
-generate-interface: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.iotcentral
-  package-name: azure-mgmt-iotcentral
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/iotcentral/azure-mgmt-iotcentral/azure/mgmt/iotcentral
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/iotcentral/azure-mgmt-iotcentral
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
-  - $(this-folder)/Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

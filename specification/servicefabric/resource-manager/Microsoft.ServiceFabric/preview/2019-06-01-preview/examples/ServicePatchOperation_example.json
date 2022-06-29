@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "serviceName": "myService",
+    "api-version": "2019-06-01-preview",
+    "parameters": {
+      "type": "services",
+      "location": "eastus",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+      "name": "myCluster",
+      "tags": {},
+      "properties": {
+        "serviceKind": "Stateless",
+        "serviceLoadMetrics": [
+          {
+            "name": "metric1",
+            "weight": "Low"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4dde8d8b-b6b2-4c56-99c6-9b83932bb09a?api-version=2019-06-01-preview"
+      },
+      "body": {
+        "type": "services",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502183671257\"",
+        "properties": {
+          "provisioningState": "Updating",
+          "serviceKind": "Stateless",
+          "serviceTypeName": "myServiceType",
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "weight": "Low"
+            }
+          ],
+          "instanceCount": 1,
+          "servicePackageActivationMode": "SharedProcess"
+        }
+      }
+    }
+  }
+}

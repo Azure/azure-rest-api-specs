@@ -863,6 +863,9 @@
     },
     "CopyLogDetails": {
       "description": "Details for log generated during copy.",
+      "required": [
+        "copyLogDetailsType"
+      ],
       "type": "object",
       "properties": {
         "copyLogDetailsType": {
@@ -873,7 +876,6 @@
             "DataBoxHeavy"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
             "modelAsExtensible": false,
@@ -1777,6 +1779,9 @@
     },
     "JobSecrets": {
       "description": "The base class for the secrets",
+      "required": [
+        "jobSecretsType"
+      ],
       "type": "object",
       "properties": {
         "jobSecretsType": {
@@ -1787,7 +1792,6 @@
             "DataBoxHeavy"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
             "modelAsExtensible": false,
@@ -2018,7 +2022,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -2359,7 +2364,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },

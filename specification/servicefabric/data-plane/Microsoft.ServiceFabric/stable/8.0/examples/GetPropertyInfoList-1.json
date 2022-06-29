@@ -1,0 +1,41 @@
+{
+  "operationId": "GetPropertyInfoList",
+  "description": "This example shows how to get all Service Fabric properties under a given name.",
+  "parameters": {
+    "api-version": "6.0",
+    "nameId": "samples/apps"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "PersistentQueueAppData$131439231986491349",
+        "IsConsistent": true,
+        "Properties": [
+          {
+            "Name": "CalculatorAppData",
+            "Metadata": {
+              "TypeId": "Int64",
+              "CustomTypeId": "",
+              "Parent": "fabric:/samples/apps",
+              "SizeInBytes": 5,
+              "LastModifiedUtcTimestamp": "2017-07-17T04:27:19.049Z",
+              "SequenceNumber": "10"
+            }
+          },
+          {
+            "Name": "PersistentQueueAppData",
+            "Metadata": {
+              "TypeId": "Binary",
+              "CustomTypeId": "InitializationDataType",
+              "Parent": "fabric:/samples/apps",
+              "SizeInBytes": 5,
+              "LastModifiedUtcTimestamp": "2017-07-17T04:36:19.049Z",
+              "SequenceNumber": "12"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

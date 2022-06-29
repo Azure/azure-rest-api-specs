@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "metricId": "22222222-2222-2222-2222-000000000001",
+    "Content-Type": "application/json",
+    "body": {
+      "startTime": "2020-01-01T00:00:00.000Z",
+      "endTime": "2020-02-01T00:00:00.000Z",
+      "series": [
+        {
+          "category": "__SUM__",
+          "city": "Beijing"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": {
+              "metricId": "22222222-2222-2222-2222-000000000001",
+              "dimension": {
+                "category": "__SUM__",
+                "city": "Beijing"
+              }
+            },
+            "timestampList": [
+              "2020-01-01T00:00:00.000Z",
+              "2020-01-02T00:00:00.000Z"
+            ],
+            "valueList": [
+              2.718281828459045,
+              3.141592653589793
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
