@@ -11,16 +11,14 @@ This file provides general guidance for developers that are creating or updating
 
 <!-- toc -->
 
+- [Reporting problems](#reporting-problems)
+- [Avoid Breaking Changes](#avoid-breaking-changes)
 - [Design Guidelines](#design-guidelines)
+  * [Exceptions for consistency within a service](#exceptions-for-consistency-within-a-service)
 - [Coding Style](#coding-style)
 - [Directory Structure](#directory-structure)
 - [Pull Requests](#pull-requests)
-- [Adding a new service](#adding-a-new-service)
-- [Running tests](#running-tests)
-  * [Unit tests](#unit-tests)
-  * [Integration tests](#integration-tests)
-- [Developer's Certificate of Origin 1.1](#developers-certificate-of-origin-11)
-- [Additional Resources](#additional-resources)
+- [Pull Request checks](#pull-request-checks)
 
 <!-- tocstop -->
 
