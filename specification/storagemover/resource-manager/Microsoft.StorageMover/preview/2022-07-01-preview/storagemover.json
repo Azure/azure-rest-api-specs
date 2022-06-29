@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-07-01-preview",
-    "title": "StorageMover",
+    "title": "StorageMoverClient",
     "description": "The Azure Storage Mover REST API."
   },
   "host": "management.azure.com",
@@ -1809,28 +1809,12 @@
     "EndpointBaseUpdateProperties": {
       "description": "The endpoint resource, which contains information about file sources and targets.",
       "type": "object",
-      "discriminator": "endpointType",
       "properties": {
-        "endpointType": {
-          "description": "The endpoint resource type.",
-          "enum": [
-            "AzureStorageBlobContainer",
-            "NfsMount"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointType",
-            "modelAsString": true
-          }
-        },
         "description": {
           "type": "string",
           "description": "A description for the endpoint."
         }
-      },
-      "required": [
-        "endpointType"
-      ]
+      }
     },
     "EndpointBaseUpdateParameters": {
       "description": "The endpoint resource.",
@@ -1869,7 +1853,11 @@
         },
         "blobContainerName": {
           "description": "The name of the Storage blob container that is the target destination.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1884,17 +1872,6 @@
     },
     "AzureStorageBlobContainerEndpointUpdateProperties": {
       "type": "object",
-      "x-ms-discriminator-value": "AzureStorageBlobContainer",
-      "properties": {
-        "storageAccountResourceId": {
-          "description": "The Azure Resource ID of the storage account that is the target destination.",
-          "type": "string"
-        },
-        "blobContainerName": {
-          "description": "The name of the Storage blob container that is the target destination.",
-          "type": "string"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/EndpointBaseUpdateProperties"
@@ -1907,7 +1884,11 @@
       "properties": {
         "host": {
           "description": "The host name or IP address of the server exporting the file system.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "nfsVersion": {
           "description": "The NFS protocol version.",
@@ -1920,11 +1901,19 @@
           "x-ms-enum": {
             "name": "NfsVersion",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "remoteExport": {
           "description": "The directory being exported from the server.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1939,30 +1928,6 @@
     },
     "NfsMountEndpointUpdateProperties": {
       "type": "object",
-      "x-ms-discriminator-value": "NfsMount",
-      "properties": {
-        "host": {
-          "description": "The host name or IP address of the server exporting the file system.",
-          "type": "string"
-        },
-        "nfsVersion": {
-          "description": "The NFS protocol version.",
-          "enum": [
-            "NFSauto",
-            "NFSv3",
-            "NFSv4"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NfsVersion",
-            "modelAsString": true
-          }
-        },
-        "remoteExport": {
-          "description": "The directory being exported from the server.",
-          "type": "string"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/EndpointBaseUpdateProperties"
@@ -1991,7 +1956,11 @@
         },
         "sourceName": {
           "type": "string",
-          "description": "The name of the source endpoint."
+          "description": "The name of the source endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sourceResourceId": {
           "type": "string",
@@ -2000,11 +1969,19 @@
         },
         "sourceSubpath": {
           "type": "string",
-          "description": "The subpath to use when reading from the source Endpoint."
+          "description": "The subpath to use when reading from the source Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "targetName": {
           "type": "string",
-          "description": "The name of the target endpoint."
+          "description": "The name of the target endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "targetResourceId": {
           "type": "string",
@@ -2013,7 +1990,11 @@
         },
         "targetSubpath": {
           "type": "string",
-          "description": "The subpath to use when writing to the target Endpoint."
+          "description": "The subpath to use when writing to the target Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "latestJobRunName": {
           "type": "string",
@@ -2113,22 +2094,6 @@
         "agentName": {
           "type": "string",
           "description": "Name of the agent to assign for new job runs of this definition."
-        },
-        "sourceName": {
-          "type": "string",
-          "description": "The name of the source endpoint."
-        },
-        "sourceSubpath": {
-          "type": "string",
-          "description": "The subpath to use when reading from the source Endpoint."
-        },
-        "targetName": {
-          "type": "string",
-          "description": "The name of the target endpoint."
-        },
-        "targetSubpath": {
-          "type": "string",
-          "description": "The subpath to use when writing to the target Endpoint."
         }
       }
     },
@@ -2318,13 +2283,13 @@
         "bytesFailed": {
           "type": "integer",
           "format": "int64",
-          "description": "Bytes of data successfully transferred to target.",
+          "description": "Bytes of data that were attempted to transfer and failed.",
           "readOnly": true
         },
         "bytesTransferred": {
           "type": "integer",
           "format": "int64",
-          "description": "Bytes of data that were attempted to transfer and failed.",
+          "description": "Bytes of data successfully transferred to target.",
           "readOnly": true
         },
         "sourceName": {
