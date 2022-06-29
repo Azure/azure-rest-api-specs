@@ -97,7 +97,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{name}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}": {
       "get": {
         "tags": [
           "ConnectedEnvironments"
@@ -112,7 +112,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "connectedEnvironmentName": "connectedEnvironmentName",
             "in": "path",
             "description": "Name of the connectedEnvironment.",
             "required": true,
@@ -137,7 +137,7 @@
           }
         },
         "x-ms-examples": {
-          "Get connected environment by name": {
+          "Get connected environment by connectedEnvironmentName": {
             "$ref": "./examples/ConnectedEnvironments_Get.json"
           }
         }
@@ -157,14 +157,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "connectedEnvironmentName": "connectedEnvironmentName",
             "in": "path",
             "description": "Name of the connectedEnvironment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "environmentEnvelope",
+            "connectedEnvironmentName": "environmentEnvelope",
             "in": "body",
             "description": "Configuration details of the connectedEnvironment.",
             "required": true,
@@ -218,7 +218,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "connectedEnvironmentName": "connectedEnvironmentName",
             "in": "path",
             "description": "Name of the connectedEnvironment.",
             "required": true,
@@ -246,7 +246,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete connected environment by name": {
+          "Delete connected environment by connectedEnvironmentName": {
             "$ref": "./examples/ConnectedEnvironments_Delete.json"
           }
         }
@@ -266,7 +266,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "connectedEnvironmentName": "connectedEnvironmentName",
             "in": "path",
             "description": "Name of the connectedEnvironment.",
             "required": true,
@@ -297,13 +297,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{environmentName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability": {
       "post": {
         "tags": [
           "ConnectedEnvironments"
         ],
-        "summary": "Checks the resource name availability.",
-        "description": "Checks if resource name is available.",
+        "summary": "Checks the resource connectedEnvironmentName availability.",
+        "description": "Checks if resource connectedEnvironmentName is available.",
         "operationId": "ConnectedEnvironments_CheckNameAvailability",
         "parameters": [
           {
@@ -313,16 +313,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "connectedEnvironmentName": "connectedEnvironmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "checkNameAvailabilityRequest",
+            "connectedEnvironmentName": "checkNameAvailabilityRequest",
             "in": "body",
-            "description": "The check name availability request.",
+            "description": "The check connectedEnvironmentName availability request.",
             "required": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
@@ -386,7 +386,7 @@
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "ConnectedEnvironmentProvisioningState",
+                "connectedEnvironmentName": "ConnectedEnvironmentProvisioningState",
                 "modelAsString": true
               }
             },
