@@ -578,6 +578,9 @@
           },
           "Create/Update Managed Cluster with dual-stack networking": {
             "$ref": "./examples/ManagedClustersCreate_DualStackNetworking.json"
+          },
+          "Create Managed Cluster with Dedicated Host Group": {
+            "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -1067,6 +1070,9 @@
           },
           "Start Agent Pool": {
             "$ref": "./examples/AgentPools_Start.json"
+          },
+          "Create Agent Pool with Dedicated Host Group": {
+            "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -2781,6 +2787,19 @@
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot."
+        },
+        "hostGroupID": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/hostGroups"
+              }
+            ]
+          },
+          "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
+          "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
         }
       },
       "description": "Properties for the container service agent pool profile."
