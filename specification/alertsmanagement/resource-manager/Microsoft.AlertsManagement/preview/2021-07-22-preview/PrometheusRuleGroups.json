@@ -353,6 +353,10 @@
           "type": "string",
           "description": "the description of the Prometheus rule group that will be included in the alert email."
         },
+        "enabled": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the Prometheus rule group is enabled."
+        },
         "scopes": {
           "type": "array",
           "items": {
@@ -363,7 +367,7 @@
         },
         "interval": {
           "type": "string",
-          "description": "the interval in which to run the Prometheus rule group represented in ISO 8601 duration format."
+          "description": "the interval in which to run the Prometheus rule group represented in ISO 8601 duration format. Should be between 1 and 15 minutes"
         },
         "rules": {
           "type": "array",
@@ -457,6 +461,10 @@
           "type": "string",
           "description": "the name of the alert rule."
         },
+        "enabled": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the Prometheus rule is enabled."
+        },
         "expression": {
           "type": "string",
           "description": "the expression to run for the rule."
@@ -507,7 +515,7 @@
         },
         "timeToResolve": {
           "type": "string",
-          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format."
+          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format. Should be between 1 and 15 minutes"
         }
       },
       "description": "Specifies the Prometheus alert rule configuration."
