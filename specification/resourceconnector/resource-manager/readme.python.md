@@ -29,6 +29,16 @@ output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnec
 perform-load: false
 ```
 
+### Tag: package-2022-04-15-preview and python
+
+These settings apply only when `--tag=package-2022-04-15-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-04-15-preview'
+namespace: azure.mgmt.resourceconnector.2022_04_15_preview
+output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/2022_04_15_preview
+```
+
 ### Tag: package-2021-10-31-preview and python
 
 These settings apply only when `--tag=package-2021-10-31-preview --python` is specified on the command line.
@@ -39,12 +49,4 @@ namespace: azure.mgmt.resourceconnector.v2021_10_31_preview
 output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/v2021_10_31_preview
 ```
 
-### Tag: package-2022-04-15-preview and python
 
-These settings apply only when `--tag=package-2022-04-15-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2022-04-15-preview'
-namespace: azure.mgmt.resourceconnector.2022_04_15_preview
-output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/2022_04_15_preview
-```
