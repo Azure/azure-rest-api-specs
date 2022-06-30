@@ -670,6 +670,83 @@
             "$ref": "./examples/ServerCalls_ResumeRecording.json"
           }
         }
+      },
+      "/calling/callConnections/{callConnectionId}/operations": {
+        "get": {
+          "tags": [
+            "MidConnections"
+          ],
+          "summary": "Get all operations associated with a call connection.",
+          "description": "Get all operations associated with a call connection.",
+          "operationId": "CallConnections_ListOperations",
+          "parameters": [
+            {
+              "name": "callConnectionId",
+              "in": "path",
+              "description": "The call connection ID.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Returns the list operations response.",
+              "schema": {
+                "$ref": "#/definitions/OperationsCollection"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "get": {
+              "$ref": "./examples/CallConnections_ListOperations.json"
+            }
+          }
+        }
+      },
+      "/calling/callConnections/{callConnectionId}/operations/{operationId}": {
+        "get": {
+          "tags": [
+            "MidConnections"
+          ],
+          "summary": "Get the operation associated with a call connection.",
+          "description": "Get the operation associated with a call connection.",
+          "operationId": "CallConnections_GetOperation",
+          "parameters": [
+            {
+              "name": "callConnectionId",
+              "in": "path",
+              "description": "The call connection ID.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "operationId",
+              "in": "path",
+              "description": "The operation ID.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Returns the operation response.",
+              "schema": {
+                "$ref": "#/definitions/OperationResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "get": {
+              "$ref": "./examples/CallConnections_GetOperation.json"
+            }
+          }
+        }
       }
     }
   },
