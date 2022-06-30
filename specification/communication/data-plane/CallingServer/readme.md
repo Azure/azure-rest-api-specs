@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-```yaml
+``` yaml
 openapi-type: data-plane
 tag: package-2022-04-07-preview
 ```
 
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - preview/2022-04-07-preview/communicationservicescallingserver.json
+```
 ### Tag: package-2021-06-15-preview
 
 These settings apply only when `--tag=package-2021-06-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06-15-preview'
+``` yaml $(tag) == 'package-2021-06-15-preview'
 input-file:
   - preview/2021-06-15-preview/communicationservicescallingserver.json
 title:
@@ -44,7 +53,7 @@ title:
 
 These settings apply only when `--tag=package-2021-08-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08-30-preview'
+``` yaml $(tag) == 'package-2021-08-30-preview'
 input-file:
   - preview/2021-08-30-preview/communicationservicescallingserver.json
 title:
@@ -74,4 +83,3 @@ This is not used by Autorest itself.
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-

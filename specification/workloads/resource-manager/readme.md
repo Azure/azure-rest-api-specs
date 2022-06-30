@@ -36,8 +36,11 @@ These settings apply only when `--tag=package-2021-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-12-01-preview'
 input-file:
+  - Microsoft.Workloads/preview/2021-12-01-preview/phpWorkloads.json
+  - Microsoft.Workloads/preview/2021-12-01-preview/SAPVirtualInstance.json
   - Microsoft.Workloads/preview/2021-12-01-preview/operations.json
   - Microsoft.Workloads/preview/2021-12-01-preview/monitors.json
+  - Microsoft.Workloads/preview/2021-12-01-preview/skus.json
 ```
 
 ---
