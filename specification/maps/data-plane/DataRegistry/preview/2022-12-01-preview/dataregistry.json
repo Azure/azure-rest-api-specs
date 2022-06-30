@@ -670,12 +670,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataRegistry"
-          }
+          },
+          "readOnly": true
         }
-      },
-      "required": [
-        "dataRegistries"
-      ]
+      }
     },
     "DataFormat": {
       "description": "Data format of the uploaded content for validation purpose.",
@@ -705,7 +703,8 @@
       "properties": {
         "id": {
           "description": "The operationId",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/LongRunningOperationStatus"
@@ -713,11 +712,7 @@
         "error": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
         }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
+      }
     },
     "LongRunningOperationStatus": {
       "description": "The status of a long running operation.",

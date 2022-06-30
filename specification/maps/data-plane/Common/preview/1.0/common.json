@@ -547,23 +547,52 @@
       ]
     },
     "MapsErrorDetail": {
-      "type": "object",
       "description": "The error detail.",
+      "type": "object",
       "readOnly": true,
       "properties": {
         "code": {
+          "description": "One of a server-defined set of error codes.",
           "type": "string",
-          "description": "The error code."
+          "readOnly": true
         },
         "message": {
+          "description": "A human-readable representation of the error.",
           "type": "string",
-          "description": "The error message.",
           "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapsErrorDetail"
+          },
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
         }
-      },
-      "required": [
-        "code"
-      ]
+      }
+    },
+    "MapsInnerError": {
+      "description": "An object containing more specific information than the current object about the error.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
+        }
+      }
     }
   },
   "parameters": {
