@@ -9,16 +9,16 @@
 	"consumes": [],
 	"produces": ["application/json"],
 	"paths": {
-		"/wayfinding/route": {
+		"/wayfinding/path": {
 			"get": {
 				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Wayfinding Service API is part of Creator. Wayfinding API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) along with Routesets to calculate the best path from one point in a ***[DAVSTA REVIEW]*** ***building*** to another.",
-				"operationId": "wayfindingGetRoute",
+				"operationId": "wayfindingGetPath",
 				"parameters": [
 					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
 					{"$ref": "#/parameters/SubscriptionKey"},
 					{"$ref": "#/parameters/ApiVersion"},
 					{"$ref": "#/parameters/RoutesetId"},
-					{"$ref": "#/parameters/SubscriptionKey"},
+					{"$ref": "#/parameters/FacilityId"},
 					{"$ref": "#/parameters/Query"},
 					{"$ref": "#/parameters/Avoid"},
 					{"$ref": "#/parameters/Width"}
@@ -95,7 +95,7 @@
 			"name": "facilityId",
 			"type": "string",
 			"in": "query",
-			"description": "The identifier of the facility in which the Wayfinding path is generated.",
+			"description": "[DAVSTA REVISED] The identifier of the facility in which to search for the Wayfinding path.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
@@ -103,13 +103,13 @@
 			"name": "query",
 			"type": "string",
 			"in": "query",
-			"description": "The Coordinate points and level ordinals of the starting location and ending location in the building, delimited by a colon. A minimum of two coordinates is required. The starting coordinates and ending coordinates are followed by the respective level ordinal numbers for each location in the building. The query format is as follows: {startLat},{startLon},{startLevelOrdinal}:{endLat},{endLon},{endLevelOrdinal}.",
+			"description": "[DAVSTA REVIEW] The Coordinate points and levels of the starting location and ending location in the building, delimited by a colon. A minimum of two coordinates is required. The starting coordinates and ending coordinates are followed by the respective level ordinal numbers for each location in the building. The query format is as follows: {startLat},{startLon},{startLevelOrdinal}:{endLat},{endLon},{endLevelOrdinal}.[DAVSTA REVISED] The two points in the facility beween which to find the shortest path. Each point is represented by its latitude, longitude and level [within the facility], delimited by a colon. The query format is as follows: {fromLat},{fromLon},{fromLevel}:{toLat},{toLon},{toLevel}.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
 		"Avoid": {
 			"name": "avoid",
-			"description": "Specifies something that the wayfinding service should avoid when determining the path. Can be specified to avoid vertical penetration object such as elevator or stairs when going from one floor level to another.",
+			"description": "Specifies something that the wayfinding service should avoid when determining the path.[DAVSTA REVISED] Valid avoid values are: 'elevator', 'escalator' and 'stair'.",
 			"type": "array",
 			"items": { "type": "string" },
 			"in": "query",
@@ -155,7 +155,7 @@
             "type": "object",
             "properties": {
                 "summary": { "description": "The leg summary", "$ref": "#/definitions/LegSummary" },
-                "points": { "description": "The leg shape points", "type": "array", "items": { "$ref": "#/definitions/Point" } }
+                "points": { "description": "The leg shape points.[DAVSTA REVISED] The level is the same when start and end levels are the same, otherwise the first point is at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
             }
         },
 		"Path": {
