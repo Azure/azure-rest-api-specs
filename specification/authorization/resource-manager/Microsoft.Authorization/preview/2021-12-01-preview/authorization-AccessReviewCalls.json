@@ -3299,6 +3299,13 @@
             "$ref": "#/definitions/AccessReviewDecisionInsight"
           },
           "description": "This is the collection of insights for this decision item."
+        },
+        "principalResourceMembership": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewDecisionPrincipalResourceMembership",
+          "description": "Details of the membership type.",
+          "x-nullable": true
         }
       },
       "description": "Approval Step."
@@ -3440,6 +3447,27 @@
         }
       },
       "description": "Record All Decisions payload."
+    },
+    "AccessReviewDecisionPrincipalResourceMembership": {
+      "type": "object",
+      "properties": {
+        "membershipTypes": {
+          "type": "array",
+          "description": "Every decision item in an access review represents a principal's membership to a resource. This property represents details of the membership. Examples of this detail might be whether the principal has direct access or indirect access",
+          "items": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "indirect"
+            ],
+            "x-ms-enum": {
+              "name": "AccessReviewDecisionPrincipalResourceMembershipType",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "description": "Target of the decision."
     },
     "AccessReviewDecisionIdentity": {
       "type": "object",
