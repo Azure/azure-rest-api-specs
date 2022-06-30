@@ -1096,6 +1096,273 @@
       },
       "description": "API Authentication Settings."
     },
+    "AuthorizationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Authorization list representation."
+    },
+    "AuthorizationContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AuthorizationContractProperties",
+          "description": "Properties of the Authorization Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Authorization contract."
+    },
+    "AuthorizationContractProperties": {
+      "properties": {
+        "authorizationType": {
+          "type": "string",
+          "description": "Authorization type options",
+          "enum": [
+            "OAuth2"
+          ],
+          "x-ms-client-name": "AuthorizationType",
+          "x-ms-enum": {
+            "name": "AuthorizationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "OAuth2",
+                "description": "OAuth2 authorization type",
+                "name": "OAuth2"
+              }
+            ]
+          }
+        },
+        "oauth2grantType": {
+          "type": "string",
+          "description": "OAuth2 grant type options",
+          "enum": [
+            "AuthorizationCode",
+            "ClientCredentials"
+          ],
+          "x-ms-client-name": "OAuth2GrantType",
+          "x-ms-enum": {
+            "name": "OAuth2GrantType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AuthorizationCode",
+                "description": "Authorization Code grant",
+                "name": "AuthorizationCode"
+              },
+              {
+                "value": "ClientCredentials",
+                "description": "Client Credential grant",
+                "name": "ClientCredentials"
+              }
+            ]
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Authorization parameters"
+        },
+        "error": {
+          "description": "",
+          "$ref": "#/definitions/AuthorizationError"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the Authorization"
+        }
+      },
+      "description": "Authorization details."
+    },
+    "AuthorizationError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      },
+      "description": "Authorization error details."
+    },
+    "AuthorizationAccessPolicyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationAccessPolicyContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Authorization Access Policy list representation."
+    },
+    "AuthorizationAccessPolicyContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AuthorizationAccessPolicyContractProperties",
+          "description": "Properties of the Authorization Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Authorization access policy contract."
+    },
+    "AuthorizationAccessPolicyContractProperties": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Tenant Id"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The Object Id"
+        }
+      },
+      "description": "Authorization Access Policy details."
+    },
+    "AuthorizationLoginRequestContract": {
+      "properties": {
+        "postLoginRedirectUrl": {
+          "type": "string",
+          "description": "The post redirect url after login is completed."
+        }
+      },
+      "description": "Authorization login request contract."
+    },
+    "AuthorizationLoginResponseContract": {
+      "properties": {
+        "loginLink": {
+          "type": "string",
+          "description": "The login link"
+        }
+      },
+      "description": "Authorization login response contract."
+    },
+    "AuthorizationProviderCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationProviderContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Authorization Provider list representation."
+    },
+    "AuthorizationProviderContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AuthorizationProviderContractProperties",
+          "description": "Properties of the Authorization Provider Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Authorization Provider contract."
+    },
+    "AuthorizationProviderContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Authorization Provider name. Must be 1 to 300 characters long.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "identityProvider": {
+          "type": "string",
+          "description": "Identity provider name. Must be 1 to 300 characters long."
+        },
+        "oauth2": {
+          "description": "OAuth2 settings",
+          "$ref": "#/definitions/AuthorizationProviderOAuth2Settings"
+        }
+      },
+      "description": "Authorization Provider details."
+    },
+    "AuthorizationProviderOAuth2Settings": {
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "Redirect url to be set in the OAuth application."
+        },
+        "grantTypes": {
+          "description": "OAuth2 settings",
+          "$ref": "#/definitions/AuthorizationProviderOAuth2GrantTypes"
+        }
+      },
+      "description": "OAuth2 settings details"
+    },
+    "AuthorizationProviderOAuth2GrantTypes": {
+      "properties": {
+        "authorizationCode": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "OAuth2 authorization code grant parameters"
+        },
+        "clientCredentials": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "OAuth2 client credential grant parameters"
+        }
+      },
+      "description": "Authorization Provider oauth2 grant types settings"
+    },
     "AuthorizationServerCollection": {
       "properties": {
         "value": {
