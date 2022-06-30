@@ -2083,6 +2083,312 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/reservedRoutes": {
+      "get": {
+        "tags": [
+          "ReservedRoutes"
+        ],
+        "description": "Lists all of the existing reserved routes within a profile.",
+        "operationId": "ReservedRoutes_ListByProfile",
+        "x-ms-examples": {
+          "ReservedRoutes_ListByProfile": {
+            "$ref": "./examples/ReservedRoutes_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReservedRouteListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/reservedRoutes/{reservedRouteName}": {
+      "get": {
+        "tags": [
+          "ReservedRoutes"
+        ],
+        "description": "Gets an existing reserved route within a profile.",
+        "operationId": "ReservedRoutes_Get",
+        "x-ms-examples": {
+          "ReservedRoutes_Get": {
+            "$ref": "./examples/ReservedRoutes_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRouteName",
+            "in": "path",
+            "description": "Name of the reserved route which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReservedRoutes"
+        ],
+        "description": "Creates a new reserved route within the specified profile.",
+        "operationId": "ReservedRoutes_Create",
+        "x-ms-examples": {
+          "ReservedRoutes_Create": {
+            "$ref": "./examples/ReservedRoutes_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRouteName",
+            "in": "path",
+            "description": "Name of the reserved route which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRoute",
+            "in": "body",
+            "description": "Reserved Route properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new reserved route has been created.",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ReservedRoutes"
+        ],
+        "description": "Updates an existing reserved route within a profile.",
+        "operationId": "ReservedRoutes_Update",
+        "x-ms-examples": {
+          "ReservedRoutes_Update": {
+            "$ref": "./examples/ReservedRoutes_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRouteName",
+            "in": "path",
+            "description": "Name of the reserved route which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRouteUpdateProperties",
+            "in": "body",
+            "description": "Reserved route properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservedRouteUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ReservedRoute"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReservedRoutes"
+        ],
+        "description": "Deletes an existing reserved route within a profile.",
+        "operationId": "ReservedRoutes_Delete",
+        "x-ms-examples": {
+          "ReservedRoutes_Delete": {
+            "$ref": "./examples/ReservedRoutes_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reservedRouteName",
+            "in": "path",
+            "description": "Name of the reserved route which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the reserved route was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets": {
       "get": {
         "tags": [
@@ -5033,6 +5339,68 @@
         }
       }
     },
+    "ReservedRoute": {
+      "description": "Reserved route is used for registering path of domains.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservedRouteProperties"
+        }
+      }
+    },
+    "ReservedRouteProperties": {
+      "description": "The JSON object that contains the properties of the Reserved route.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservedRouteUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "ReservedRouteUpdateParameters": {
+      "type": "object",
+      "description": "Reserved route properties needed for reserved route creation or update.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservedRouteUpdatePropertiesParameters"
+        }
+      }
+    },
+    "ReservedRouteUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the reserved route to create.",
+      "type": "object",
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the reserved route.",
+          "type": "string",
+          "readOnly": true
+        },
+        "domains": {
+          "description": "The configuration specifying domains that reserved route registers to.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paths": {
+          "description": "The configuration specifying paths that reserved route registers to.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "LoadBalancingSettingsParameters": {
       "description": "Round-Robin load balancing settings for a backend pool",
       "type": "object",
@@ -5064,6 +5432,24 @@
             "$ref": "#/definitions/AFDOriginGroup"
           },
           "description": "List of CDN origin groups within an endpoint"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of origin objects if there are any."
+        }
+      }
+    },
+    "ReservedRouteListResult": {
+      "description": "Result of the request to list reserved routes. It contains a list of reserved routes objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservedRoute"
+          },
+          "description": "List of CDN reserved routes within an profile"
         },
         "nextLink": {
           "type": "string",
