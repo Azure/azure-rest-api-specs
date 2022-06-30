@@ -9,7 +9,7 @@
     "/availablePhoneNumbers/countries": {
       "get": {
         "tags": [
-          "Browse for available countries, cities and area codes"
+          "Browse for available countries, localities and area codes"
         ],
         "summary": "Gets the list of supported countries.",
         "operationId": "PhoneNumbers_ListAvailableCountries",
@@ -74,10 +74,10 @@
     "/availablePhoneNumbers/countries/{countryCode}/localities": {
       "get": {
         "tags": [
-          "Browse for available countries, cities and area codes"
+          "Browse for available countries, localities and area codes"
         ],
         "summary": "Gets the list of cities or towns with available phone numbers.",
-        "operationId": "PhoneNumbers_ListAvailableCities",
+        "operationId": "PhoneNumbers_ListAvailableLocalities",
         "consumes": [
           "application/json"
         ],
@@ -149,7 +149,7 @@
     "/availablePhoneNumbers/countries/{countryCode}/areaCodes": {
       "get": {
         "tags": [
-          "Browse for available countries, cities and area codes"
+          "Browse for available countries, localities and area codes"
         ],
         "summary": "Gets the list of available area codes.",
         "operationId": "PhoneNumbers_ListAreaCodes",
@@ -231,7 +231,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AreaCodes"
+              "$ref": "#/definitions/AreaCodesResult"
             }
           },
           "default": {
@@ -255,9 +255,9 @@
     "/availablePhoneNumbers/countries/{countryCode}/offerings": {
       "get": {
         "tags": [
-          "Browse for available countries, cities and area codes"
+          "Browse for available countries, localities and area codes"
         ],
-        "summary": "List available offerings of capabilities with rates for the given country/region",
+        "summary": "List available offerings with rates for the given country/region",
         "operationId": "PhoneNumbers_ListOfferings",
         "produces": [
           "application/json"
@@ -1229,7 +1229,7 @@
         }
       }
     },
-    "AreaCode": {
+    "AreaCodeResult": {
       "description": "An area code.",
       "type": "object",
       "properties": {
@@ -1239,7 +1239,7 @@
         }
       }
     },
-    "AreaCodes": {
+    "AreaCodesResult": {
       "description": "The list of available area codes.",
       "required": [
         "areaCodes"
@@ -1250,7 +1250,7 @@
           "description": "Represents a list of available toll-free area codes.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AreaCode"
+            "$ref": "#/definitions/AreaCodeResult"
           }
         },
         "nextLink": {
@@ -1347,8 +1347,8 @@
         }
       }
     },
-    "CountryCapability": {
-      "description": "Represents a phone number capability offering.",
+    "PhoneNumberOffering": {
+      "description": "Represents a phone number offering.",
       "required": [
         "cost"
       ],
@@ -1393,7 +1393,7 @@
           "description": "Represents the underlying list of offerings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CountryCapability"
+            "$ref": "#/definitions/PhoneNumberOffering"
           }
         },
         "nextLink": {
