@@ -76,6 +76,9 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
@@ -138,14 +141,14 @@
         "tags": [
           "Runtime"
         ],
-        "operationId": "Runtime_Put",
+        "operationId": "Runtime_Create",
         "description": "Create a runtime.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
         },
         "x-ms-examples": {
           "Put a runtime": {
-            "$ref": "./examples/putRuntime.json"
+            "$ref": "./examples/createRuntime.json"
           }
         },
         "parameters": [
@@ -312,6 +315,7 @@
   },
   "definitions": {
     "Runtime": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -360,6 +364,7 @@
       "description": "Runtime properties"
     },
     "RuntimeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

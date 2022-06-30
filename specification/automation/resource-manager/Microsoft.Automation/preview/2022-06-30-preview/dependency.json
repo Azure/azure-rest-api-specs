@@ -211,6 +211,9 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
@@ -415,6 +418,7 @@
   },
   "definitions": {
     "ActivityParameter": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -464,6 +468,7 @@
       "description": "Definition of the activity parameter."
     },
     "ActivityParameterSet": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -480,6 +485,7 @@
       "description": "Definition of the activity parameter set."
     },
     "ActivityParameterValidationSet": {
+      "type": "object",
       "properties": {
         "memberValue": {
           "type": "string",
@@ -489,6 +495,7 @@
       "description": "Definition of the activity parameter validation set."
     },
     "ActivityOutputType": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -502,6 +509,7 @@
       "description": "Definition of the activity output type."
     },
     "ActivityProperties": {
+      "type": "object",
       "properties": {
         "definition": {
           "type": "string",
@@ -541,6 +549,7 @@
       "description": "Properties of the activity."
     },
     "Activity": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -560,6 +569,7 @@
       "description": "Definition of the activity."
     },
     "ActivityListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -576,6 +586,7 @@
       "description": "The response model for the list activity operation."
     },
     "DependencyErrorInfo": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -589,6 +600,7 @@
       "description": "Definition of the dependency error info type."
     },
     "DependencyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -605,6 +617,7 @@
       "description": "The response model for the list dependency operation."
     },
     "ContentHash": {
+      "type": "object",
       "properties": {
         "algorithm": {
           "type": "string",
@@ -622,6 +635,7 @@
       "description": "Definition of the runbook property type."
     },
     "ContentLink": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
@@ -639,6 +653,7 @@
       "description": "Definition of the content link."
     },
     "DependencyCreateOrUpdateProperties": {
+      "type": "object",
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
@@ -651,6 +666,7 @@
       "description": "The parameters supplied to the create or update dependency properties."
     },
     "DependencyCreateOrUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DependencyCreateOrUpdateProperties",
@@ -679,6 +695,7 @@
       "description": "The parameters supplied to the create or update dependency operation."
     },
     "DependencyProperties": {
+      "type": "object",
       "properties": {
         "isGlobal": {
           "type": "boolean",
@@ -756,6 +773,7 @@
       "description": "Definition of the dependency property type."
     },
     "DependencyUpdateProperties": {
+      "type": "object",
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
@@ -765,6 +783,7 @@
       "description": "The parameters supplied to the update properties."
     },
     "DependencyUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DependencyUpdateProperties",
@@ -790,6 +809,7 @@
       "description": "The parameters supplied to the update dependency operation."
     },
     "Dependency": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DependencyProperties",
