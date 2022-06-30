@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2022-03-03",
+    "api-version": "2022-01-03",
     "galleryName": "myGalleryName",
     "galleryImageName": "myGalleryImageName",
     "galleryImageVersionName": "1.0.0"
@@ -27,12 +27,14 @@
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
                     }
                   ]
-                }
+                },
+                "excludeFromLatest": false
               },
               {
                 "name": "East US",
                 "regionalReplicaCount": 2,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
               }
             ],
             "replicaCount": 1,
@@ -55,6 +57,16 @@
                 },
                 "lun": 1,
                 "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "ReportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
               }
             ]
           },
