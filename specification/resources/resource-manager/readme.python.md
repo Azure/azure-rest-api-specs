@@ -17,8 +17,7 @@ combine-operation-files: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(python)
-multiapi: true
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05

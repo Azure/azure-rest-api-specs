@@ -12,8 +12,7 @@ no-namespace-folders: true
 ```
 ### Python multi-api
 
-``` yaml $(python)
-multiapi: true
+``` yaml $(python) && $(multiapi)
 clear-output-folder: true
 batch:
   - tag: package-2015-05
@@ -22,14 +21,13 @@ batch:
   - tag: package-2018-06-17-preview
   - tag: package-2019-10-17-preview
   - tag: package-2020-02-02-preview
-  - tag: package-2020-02-02-only
+  - tag: package-2020-02-02
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
   - tag: package-2020-11-only
   - tag: package-2021-03-08-only
   - tag: package-2021-08
   - tag: package-2021-10
-  - tag: package-2022-04-01-only
   - multiapiscript: true
 ```
 
@@ -92,15 +90,6 @@ namespace: azure.mgmt.applicationinsights.v2020_02_02_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_02_02_preview
 ```
 
-### Tag: package-2020-02-02-only and python
-
-These settings apply only when `--tag=package-2020-02-02-only --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02-02-only' && $(python)
-namespace: azure.mgmt.applicationinsights.v2020_02_02
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_02_02
-```
-
 ### Tag: package-2020-03-01-preview and python
 
 These settings apply only when `--tag=package-2020-03-01-preview --python` is specified on the command line.
@@ -155,14 +144,6 @@ namespace: azure.mgmt.applicationinsights.v2021_10
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_10
 ```
 
-### Tag: package-2022-04-01-only and python
-
-These settings apply only when `--tag=package-2022-04-01-only --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-04-01-only' && $(python)
-namespace: azure.mgmt.applicationinsights.v2022_04_01
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2022_04_01
-```
 
 ```yaml $(python)
 modelerfour:

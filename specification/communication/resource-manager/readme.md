@@ -28,7 +28,7 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-10-01-preview
+tag: package-2020-08-20
 ```
 
 ### Tag: package-2020-08-20
@@ -73,6 +73,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions

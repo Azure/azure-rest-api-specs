@@ -606,7 +606,7 @@
           "description": "Contents of the ledger entry."
         },
         "collectionId": {
-          "type": "string",
+          "$ref": "#/definitions/Collection",
           "readOnly": true
         },
         "transactionId": {
@@ -680,7 +680,7 @@
       ],
       "properties": {
         "collectionId": {
-          "type": "string"
+          "$ref": "#/definitions/Collection"
         }
       },
       "type": "object"
@@ -947,8 +947,7 @@
       "required": true,
       "description": "The user id, either an AAD object ID or certificate fingerprint.",
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "x-ms-parameter-location": "method"
     }
   }
 }

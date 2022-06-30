@@ -26,7 +26,7 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2022-04-03-preview/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
@@ -100,7 +100,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-cli-extensions

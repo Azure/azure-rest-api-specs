@@ -26,24 +26,14 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05
-```
-
-
-### Tag: package-2022-05
-
-These settings apply only when `--tag=package-2022-05` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-05'
-input-file:
-  - Microsoft.DigitalTwins/stable/2022-05-31/digitaltwins.json
+tag: package-2021-06-30-preview
 ```
 
 ### Tag: package-2021-06-30-preview
 
 These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06-30-preview'
+```yaml $(tag) == 'package-2021-06-30-preview'
 input-file:
   - Microsoft.DigitalTwins/preview/2021-06-30-preview/digitaltwins.json
 ```
@@ -89,6 +79,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -121,7 +112,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-# 
+#
 
 ### Suppression
 

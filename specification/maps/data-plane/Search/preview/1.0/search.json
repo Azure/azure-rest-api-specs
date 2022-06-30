@@ -1015,9 +1015,8 @@
           },
           {
             "name": "number",
-            "x-ms-client-name": "streetNumber",
             "in": "query",
-            "description": "Street number as a string. If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
+            "description": "If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
             "type": "string"
           },
           {
@@ -2229,7 +2228,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Brand"
+            "$ref": "#/definitions/BrandName"
           }
         },
         "openingHours": {
@@ -2338,8 +2337,8 @@
         }
       }
     },
-    "Brand": {
-      "description": "The brand associated with the POI",
+    "BrandName": {
+      "description": "The name of the brand for the POI being returned",
       "type": "object",
       "properties": {
         "name": {
@@ -2449,7 +2448,7 @@
           "readOnly": true
         },
         "countrySubdivisionName": {
-          "description": "The full name of a first level of country administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and United Kingdom.",
+          "description": "The full name of a first level of country administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and Great Britain.",
           "type": "string",
           "readOnly": true
         },

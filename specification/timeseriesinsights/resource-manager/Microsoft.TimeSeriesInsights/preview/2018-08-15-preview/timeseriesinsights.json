@@ -1612,6 +1612,9 @@
         },
         {
           "$ref": "#/definitions/EnvironmentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/ResourceProperties"
         }
       ],
       "required": [
@@ -1645,6 +1648,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/EnvironmentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/ResourceProperties"
         }
       ],
       "description": "Properties of the long-term environment."
@@ -1902,6 +1908,7 @@
     },
     "EventHubEventSourceUpdateParameters": {
       "type": "object",
+      "x-ms-discriminator-value": "Microsoft.EventHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1917,6 +1924,7 @@
       "description": "Parameters supplied to the Update Event Source operation to update an EventHub event source."
     },
     "IoTHubEventSourceUpdateParameters": {
+      "x-ms-discriminator-value": "Microsoft.IoTHub",
       "type": "object",
       "properties": {
         "properties": {
