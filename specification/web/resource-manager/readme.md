@@ -92,7 +92,7 @@ directive:
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+```yaml $(tag) == 'package-2022-03' || $(tag) == 'package-2022-03-only'
 input-file:
   - Microsoft.CertificateRegistration/stable/2022-03-01/AppServiceCertificateOrders.json
   - Microsoft.CertificateRegistration/stable/2022-03-01/CertificateOrdersDiagnostics.json
