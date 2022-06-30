@@ -5,8 +5,10 @@
     "scope": {
       "type": "string",
       "enum": [
-        "ResourceGroup"
-      ]
+        "ResourceGroup",
+        "None"
+      ],
+      "default": "ResourceGroup"
     },
     "variables": {
       "$ref": "#/definitions/Variables"
@@ -41,7 +43,7 @@
   "definitions": {
     "Name": {
       "type": "string",
-      "pattern": "^[A-Za-z_][A-Za-z0-9_-]*$"
+      "pattern": "^[A-Za-z_$][A-Za-z0-9_-]*$"
     },
     "JsonPointer": {
       "type": "string",
@@ -94,13 +96,26 @@
                   }
                 },
                 "then": {
-                  "properties": {
-                    "type": {},
-                    "value": {
-                      "type": "string"
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "prefix": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
                     }
-                  },
-                  "additionalProperties": false
+                  ]
                 }
               },
               {
@@ -311,9 +326,11 @@
     },
     "StepRestBase": {
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/StepBase"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
       "properties": {
         "outputVariables": {
           "type": "object",
@@ -361,18 +378,29 @@
           "additionalProperties": false,
           "patternProperties": {
             "^([0-9]{3})$": {
-              "type": "object",
-              "properties": {
-                "headers": {
+              "oneOf": [
+                {
                   "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "properties": {
+                    "headers": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "body":{
+                      "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                    }
+                  },
+                  "additionalProperties": false
                 },
-                "body":{
-                  "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/JsonPatchOpTest"
+                  }
                 }
-              }
+              ]
             }
           }
         },
@@ -505,9 +533,6 @@
         },
         {
           "$ref": "#/definitions/JsonPatchOpMove"
-        },
-        {
-          "$ref": "#/definitions/JsonPatchOpTest"
         }
       ]
     },
@@ -586,16 +611,48 @@
     "JsonPatchOpTest": {
       "type": "object",
       "required": [
-        "test",
-        "value"
+        "test"
       ],
       "properties": {
         "test": {
           "$ref": "#/definitions/JsonPointer"
-        },
-        "value": {}
+        }
       },
-      "additionalProperties": false
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "value"
+              ],
+              "properties": {
+                "test": {},
+                "value": {}
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "expression"
+              ],
+              "properties": {
+                "test": {},
+                "expression": {
+                  "type": "string",
+                  "examples": [
+                    "to.not.have.property('b')",
+                    "to.match(/^foo/)",
+                    "to.be.not.undefined"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
     }
   }
 }

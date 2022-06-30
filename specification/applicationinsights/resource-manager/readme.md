@@ -257,6 +257,15 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
+### Tag: package-2022-04-01-only
+
+These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+input-file:
+  - Microsoft.Insights/stable/2022-04-01/workbooks_API.json
+```
+
 ### Tag: package-2022-02-01
 
 These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
@@ -513,6 +522,15 @@ input-file:
 - Microsoft.Insights/stable/2020-02-02/components_API.json
 ```
 
+### Tag: package-2020-02-02-only
+
+These settings apply only when `--tag=package-2020-02-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-02-only'
+input-file:
+- Microsoft.Insights/stable/2020-02-02/components_API.json
+```
+
 ### Tag: package-2019-10-17-preview
 
 These settings apply only when `--tag=package-2019-10-17-preview` is specified on the command line.
@@ -590,7 +608,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
@@ -615,8 +632,8 @@ csharp:
   azure-arm: true
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApplicationInsights.Management
-  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.ApplicationInsights/src/Generated
+  namespace: Microsoft.Azure.Management.ApplicationInsights
+  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.Management.ApplicationInsights/src/Generated
   clear-output-folder: true
 ```
 
