@@ -4,9 +4,12 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "monitorName": "mySapMonitor",
-    "tagsParameter": {
+    "body": {
       "tags": {
         "testkey": "testvalue"
+      },
+      "identity": {
+        "type": "None"
       }
     }
   },
@@ -27,6 +30,9 @@
           "lastModifiedBy": "user@xyz.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "identity": {
+          "type": "None"
         },
         "properties": {
           "provisioningState": "Succeeded",

@@ -482,10 +482,12 @@
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the project name for the model."
         },
         "deploymentName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
         }
       },
       "allOf": [
@@ -1118,15 +1120,18 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "neutral": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
       "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
@@ -1321,14 +1326,16 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
-      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
     "EntitiesTaskParameters": {
       "type": "object",
