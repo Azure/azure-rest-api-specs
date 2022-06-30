@@ -13,6 +13,7 @@ ruby:
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2021-05 
   - tag: package-2019-06
   - tag: package-2016-06
 ```
@@ -34,5 +35,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-06' && $(ruby)
 namespace: "Azure::HybridDataManager::Mgmt::V2016-06-01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybriddatamanager/lib
+```
+
+### Tag: package-2021-05 and ruby
+
+These settings apply only when `--tag=package-2021-05 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2021-05' && $(ruby)
+namespace: "Azure::HybridDataManager::Mgmt::2021-05-01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybriddatamanager/lib
 ```

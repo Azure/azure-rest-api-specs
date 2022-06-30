@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-01",
+    "version": "2021-05-01",
     "title": "HybridDataManagementClient"
   },
   "host": "management.azure.com",
@@ -43,11 +43,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_ListGET11": {
-            "$ref": "./examples/Operations_List-GET-example-11.json"
-          }
         }
       }
     },
@@ -82,11 +77,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "DataManagers_ListGET21": {
-            "$ref": "./examples/DataManagers_List-GET-example-21.json"
-          }
         }
       }
     },
@@ -124,11 +114,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "DataManagers_ListByResourceGroupGET31": {
-            "$ref": "./examples/DataManagers_ListByResourceGroup-GET-example-31.json"
-          }
         }
       }
     },
@@ -165,11 +150,6 @@
             "schema": {
               "$ref": "#/definitions/DataManager"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataManagers_GetGET41": {
-            "$ref": "./examples/DataManagers_Get-GET-example-41.json"
           }
         }
       },
@@ -219,12 +199,7 @@
             "description": "Accepted request for Create."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_CreatePUT41": {
-            "$ref": "./examples/DataManagers_Create-PUT-example-41.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -260,12 +235,7 @@
             "description": "Data Manager Resource deleted."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_DeleteDELETE41": {
-            "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -319,12 +289,7 @@
             "description": "Accepted request for Data Manager Update."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_UpdatePATCH43": {
-            "$ref": "./examples/DataManagers_Update-PATCH-example-43.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
@@ -364,11 +329,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataServices_ListByDataManagerGET51": {
-            "$ref": "./examples/DataServices_ListByDataManager-GET-example-51.json"
-          }
         }
       }
     },
@@ -412,11 +372,6 @@
             "schema": {
               "$ref": "#/definitions/DataService"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataServices_GetGET62": {
-            "$ref": "./examples/DataServices_Get-GET-example-62.json"
           }
         }
       }
@@ -473,11 +428,6 @@
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "JobDefinitions_ListByDataServiceGET71": {
-            "$ref": "./examples/JobDefinitions_ListByDataService-GET-example-71.json"
-          }
         }
       }
     },
@@ -528,11 +478,6 @@
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobDefinitions_GetGET81": {
-            "$ref": "./examples/JobDefinitions_Get-GET-example-81.json"
           }
         }
       },
@@ -596,12 +541,7 @@
             "description": "Accepted request for create/update."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_CreateOrUpdatePUT83": {
-            "$ref": "./examples/JobDefinitions_CreateOrUpdate-PUT-example-83.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -651,12 +591,107 @@
             "description": "Completed request for Delete JobDefinition."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_DeleteDELETE81": {
-            "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/cancel": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method cancels all the running or waiting jobs in a job definition.",
+        "operationId": "JobDefinitions_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition cancellation accepted."
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/checkStatus": {
+      "get": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method checks whether job scheduling is in-progress for the job definition.",
+        "operationId": "JobDefinitions_GetStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "There is no job scheduling in progress for the job definition."
+          },
+          "202": {
+            "description": "Job scheduling for the job definition is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
@@ -718,11 +753,6 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByJobDefinitionGET91": {
-            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-91.json"
-          }
         }
       }
     },
@@ -788,11 +818,6 @@
               "$ref": "#/definitions/Job"
             }
           }
-        },
-        "x-ms-examples": {
-          "Jobs_GetGET101": {
-            "$ref": "./examples/Jobs_Get-GET-example-101.json"
-          }
         }
       }
     },
@@ -852,12 +877,7 @@
             "description": "Completed request for job Cancel."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Jobs_CancelPOST111": {
-            "$ref": "./examples/Jobs_Cancel-POST-example-111.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
@@ -916,10 +936,53 @@
             "description": "Complete request for Job resume."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Jobs_ResumePOST121": {
-            "$ref": "./examples/Jobs_Resume-POST-example-121.json"
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/retryjob": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method retries the first failed or cancelled job that has not already been skipped for the job definition.",
+        "operationId": "JobDefinitions_RetryJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition retry successful."
           }
         }
       }
@@ -982,10 +1045,53 @@
             "description": "Completed request for Job run. Run has started."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_RunPOST132": {
-            "$ref": "./examples/JobDefinitions_Run-POST-example-132.json"
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/skipjob": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method skips last executed failed or cancelled job.",
+        "operationId": "JobDefinitions_SkipJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition skip successful."
           }
         }
       }
@@ -1042,11 +1148,6 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByDataServiceGET141": {
-            "$ref": "./examples/Jobs_ListByDataService-GET-example-141.json"
-          }
         }
       }
     },
@@ -1095,11 +1196,6 @@
         "x-ms-odata": "#/definitions/DataStoreFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataStores_ListByDataManagerGET151": {
-            "$ref": "./examples/DataStores_ListByDataManager-GET-example-151.json"
-          }
         }
       }
     },
@@ -1143,14 +1239,6 @@
             "schema": {
               "$ref": "#/definitions/DataStore"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataStores_GetGET161": {
-            "$ref": "./examples/DataStores_Get-GET-example-161.json"
-          },
-          "DataStores_GetGET162": {
-            "$ref": "./examples/DataStores_Get-GET-example-162.json"
           }
         }
       },
@@ -1207,15 +1295,7 @@
             "description": "Accepted request for create/update."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataStores_CreateOrUpdate_DataSinkPUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-162.json"
-          },
-          "DataStores_CreateOrUpdate_DataSourcePUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-162.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1258,15 +1338,7 @@
             "description": "Completed request for Delete Data Store."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataStores_Delete_DataSinkDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-161.json"
-          },
-          "DataStores_Delete_DataSourceDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-161.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes": {
@@ -1306,11 +1378,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataStoreTypes_ListByDataManagerGET171": {
-            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-171.json"
-          }
         }
       }
     },
@@ -1354,14 +1421,6 @@
             "schema": {
               "$ref": "#/definitions/DataStoreType"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataStoreTypes_GetGET182": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-182.json"
-          },
-          "DataStoreTypes_GetGET183": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-183.json"
           }
         }
       }
@@ -1411,11 +1470,6 @@
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "JobDefinitions_ListByDataManagerGET191": {
-            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-191.json"
-          }
         }
       }
     },
@@ -1464,11 +1518,6 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByDataManagerGET201": {
-            "$ref": "./examples/Jobs_ListByDataManager-GET-example-201.json"
-          }
         }
       }
     },
@@ -1509,11 +1558,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PublicKeys_ListByDataManagerGET211": {
-            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-211.json"
-          }
         }
       }
     },
@@ -1557,11 +1601,6 @@
             "schema": {
               "$ref": "#/definitions/PublicKey"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PublicKeys_GetGET222": {
-            "$ref": "./examples/PublicKeys_Get-GET-example-222.json"
           }
         }
       }
@@ -2041,7 +2080,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2208,11 +2252,35 @@
             "westeurope",
             "westindia",
             "westus",
-            "westus2"
+            "westus2",
+            "usgovtexas",
+            "usgovvirginia"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RunLocation",
+            "modelAsString": false
+          }
+        },
+        "jobDefinitionSchemaVersion": {
+          "description": "Schema version of the job definition.",
+          "type": "string"
+        },
+        "jobDefinitionState": {
+          "description": "State of the job definition.",
+          "enum": [
+            "Created",
+            "Queueing",
+            "Waiting",
+            "Running",
+            "Complete",
+            "Cancelling",
+            "Cancelled",
+            "Paused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobDefinitionState",
             "modelAsString": false
           }
         },
@@ -2287,7 +2355,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2358,6 +2431,131 @@
           "description": "Number of items to be processed by the job in total",
           "type": "integer"
         },
+        "itemsDeleted": {
+          "format": "int64",
+          "description": "Number of items deleted by the job as of now",
+          "type": "integer"
+        },
+        "totalItemsToDelete": {
+          "format": "int64",
+          "description": "Number of items to be deleted by the job in total",
+          "type": "integer"
+        },
+        "filesCopiedCounter": {
+          "format": "int64",
+          "description": "Of the items copied by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "filesDeletedCounter": {
+          "format": "int64",
+          "description": "Of the items deleted by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Number of bytes actually copied by the job as of now",
+          "type": "integer"
+        },
+        "backupStartTime": {
+          "format": "date-time",
+          "description": "Time getting the backup started",
+          "type": "string"
+        },
+        "backupEndTime": {
+          "format": "date-time",
+          "description": "Time getting the backup ended",
+          "type": "string"
+        },
+        "estimationConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage started",
+          "type": "string"
+        },
+        "estimationConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage ended",
+          "type": "string"
+        },
+        "directoryParserStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory started",
+          "type": "string"
+        },
+        "directoryParserEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory ended",
+          "type": "string"
+        },
+        "purgeDetectionStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory started",
+          "type": "string"
+        },
+        "purgeDetectionEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory ended",
+          "type": "string"
+        },
+        "estimationStartTime": {
+          "format": "date-time",
+          "description": "Time estimating files started",
+          "type": "string"
+        },
+        "estimationEndTime": {
+          "format": "date-time",
+          "description": "Time estimating files ended",
+          "type": "string"
+        },
+        "postEstimationStartTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files started",
+          "type": "string"
+        },
+        "postEstimationEndTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files ended",
+          "type": "string"
+        },
+        "copyConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage started",
+          "type": "string"
+        },
+        "copyConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage ended",
+          "type": "string"
+        },
+        "copyStartTime": {
+          "format": "date-time",
+          "description": "Time copying files started",
+          "type": "string"
+        },
+        "copyEndTime": {
+          "format": "date-time",
+          "description": "Time copying files ended",
+          "type": "string"
+        },
+        "postCopyStartTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot started",
+          "type": "string"
+        },
+        "postCopyEndTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot ended",
+          "type": "string"
+        },
+        "cleanupComputeStartTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute started",
+          "type": "string"
+        },
+        "cleanupComputeEndTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute ended",
+          "type": "string"
+        },
         "details": {
           "$ref": "#/definitions/JobDetails",
           "description": "Details of a job run. This field will only be sent for expand details filter."
@@ -2369,6 +2567,16 @@
         "dataSinkName": {
           "description": "Name of the data sink on which the job was triggered.",
           "type": "string"
+        },
+        "copyErrors": {
+          "format": "int64",
+          "description": "Number of copy errors",
+          "type": "integer"
+        },
+        "unsupportedFiles": {
+          "format": "int64",
+          "description": "Number of unsupported files",
+          "type": "integer"
         }
       }
     },
@@ -2393,7 +2601,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {
