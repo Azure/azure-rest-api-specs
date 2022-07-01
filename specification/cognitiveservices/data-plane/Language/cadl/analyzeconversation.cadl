@@ -1,0 +1,648 @@
+@doc("The input ConversationItem and its optional parameters")
+model ConversationAnalysisOptions {
+	conversationItem: ConversationItemBase;
+}
+
+@knownValues(AnalyzeConversationTaskKindKV)
+model AnalyzeConversationTaskKind is string {}
+enum AnalyzeConversationTaskKindKV {
+	Conversation,
+}
+
+@knownValues(AnalyzeConversationTaskResultsKindKV)
+model AnalyzeConversationTaskResultsKind is string {}
+enum AnalyzeConversationTaskResultsKindKV {
+	ConversationResult,
+}
+
+@doc("The base class of a conversation input task.")
+model AnalyzeConversationTask {
+	kind: AnalyzeConversationTaskKind;
+}
+
+@doc("The base class of a conversation task result.")
+model AnalyzeConversationTaskResult {
+	kind: AnalyzeConversationTaskResultsKind;
+}
+
+@doc("The input for a custom conversation task.")
+model ConversationalTask {
+	analysisInput: ConversationAnalysisOptions;
+	parameters: ConversationTaskParameters;
+}
+
+@doc("Input parameters necessary for a Conversation task.")
+model ConversationTaskParameters {
+	@doc("The name of the project to use.")
+	projectName: string;
+	@doc("The name of the deployment to use.")
+	deploymentName: string;
+	@doc("If true, the service will return more detailed information in the response.")
+	verbose?: boolean;
+	@doc("If true, the service will keep the query for further review.")
+	isLoggingEnabled?: boolean;
+	stringIndexType?: StringIndexType;
+	@doc("The name of a target project to forward the request to.")
+	directTarget?: string;
+	@doc("A dictionary representing the parameters for each target project.")
+	targetProjectParameters?: Map<string, string>;
+}
+
+@doc("The results of a Conversation task.")
+model ConversationalTaskResult {
+	result: AnalyzeConversationResult;
+}
+
+@doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
+model ConversationItemBase {
+	@doc("The ID of a conversation item.")
+	id: string;
+	@doc("The participant ID of a conversation item.")
+	participantId: string;
+	@doc("The override language of a conversation item in BCP 47 language representation.")
+	language?: string;
+	modality?: Modality;
+}
+
+@doc("The text modality of an input conversation.")
+model TextConversationItem {
+	@doc("The text input")
+	text: string;
+}
+
+@knownValues(targetProjectKindKV)
+model targetProjectKind is string {}
+enum targetProjectKindKV {
+	Luis,
+	Conversation,
+	QuestionAnswering,
+	NonLinked,
+}
+
+@doc("This is the parameter set of either the Orchestration project itself or one of the target services.")
+model AnalysisParameters {
+	@doc("The type of a target service.")
+	targetProjectKind: targetProjectKind;
+	@doc("The API version to use when call a specific target service.")
+	apiVersion?: string;
+}
+
+@doc("A wrap up of non-linked intent response.")
+model NoneLinkedTargetIntentResult {
+	@doc("The actual response from a Conversation project.")
+	result?: ConversationResult;
+}
+
+@doc("This is a set of request parameters for LUIS Generally Available projects.")
+model LuisParameters {
+	@doc("The utterance to predict.")
+	query?: string;
+	@doc("This customizes how the service calls LUIS Generally Available projects.")
+	callingOptions?: LuisCallingOptions;
+}
+
+@doc("This customizes how the service calls LUIS Generally Available projects.")
+model LuisCallingOptions {
+	@doc("Enable verbose response.")
+	verbose?: boolean;
+	@doc("Save log to add in training utterances later.")
+	log?: boolean;
+	@doc("Set true to show all intents.")
+	show-all-intents?: boolean;
+	@doc("The timezone offset for the location of the request.")
+	timezoneOffset?: number;
+	@doc("Enable spell checking.")
+	spellCheck?: boolean;
+	@doc("The subscription key to use when enabling Bing spell check")
+	bing-spell-check-subscription-key?: string;
+}
+
+@doc("This is a set of request parameters for Customized Conversation projects.")
+model ConversationParameters {
+	callingOptions?: ConversationCallingOptions;
+}
+
+@doc("The option to set to call a Conversation project.")
+model ConversationCallingOptions {
+	@doc("The language of the query in BCP 47 language representation..")
+	language?: string;
+	@doc("If true, the service will return more detailed information.")
+	verbose?: boolean;
+	@doc("If true, the query will be saved for customers to further review in authoring, to improve the model quality.")
+	isLoggingEnabled?: boolean;
+}
+
+@doc("This is a set of request parameters for Question Answering knowledge bases.")
+model QuestionAnsweringParameters {
+	@doc("The options sent to a Question Answering KB.")
+	callingOptions?: AnswersOptions;
+}
+
+@doc("Represents a conversation analysis response.")
+model AnalyzeConversationResult {
+	@doc("The conversation utterance given by the caller.")
+	query: string;
+	@doc("The system detected language for the query in BCP 47 language representation..")
+	detectedLanguage?: string;
+	@doc("The prediction result of a conversation project.")
+	prediction: BasePrediction;
+}
+
+@knownValues(projectKindKV)
+model projectKind is string {}
+enum projectKindKV {
+	Conversation,
+	Orchestration,
+}
+
+@doc("This is the base class of prediction")
+model BasePrediction {
+	@doc("The type of the project.")
+	projectKind: projectKind;
+	@doc("The intent with the highest score.")
+	topIntent?: string;
+}
+
+@doc("This represents the prediction result of an Orchestration project.")
+model OrchestrationPrediction {
+	@doc("A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.")
+	intents: Map<string, string>;
+}
+
+@knownValues(targetProjectKindKV)
+model targetProjectKind is string {}
+enum targetProjectKindKV {
+	Luis,
+	Conversation,
+	QuestionAnswering,
+	NonLinked,
+}
+
+@doc("This is the base class of an intent prediction")
+model TargetIntentResult {
+	@doc("This discriminator property specifies the type of the target project that returns the response.")
+	targetProjectKind: targetProjectKind;
+	@doc("The API version used to call a target service.")
+	apiVersion?: string;
+	@doc("The prediction score and it ranges from 0.0 to 1.0.")
+	confidenceScore: float64;
+}
+
+@doc("A wrap up of Conversation project response.")
+model ConversationTargetIntentResult {
+	@doc("The actual response from a Conversation project.")
+	result?: ConversationResult;
+}
+
+@doc("The response returned by a Conversation project.")
+model ConversationResult {
+	@doc("The same query given in request.")
+	query: string;
+	@doc("The detected language from the query in BCP 47 language representation..")
+	detectedLanguage?: string;
+	@doc("The predicted result for the query.")
+	prediction?: ConversationPrediction;
+}
+
+@doc("Represents the prediction section of a Conversation project.")
+model ConversationPrediction {
+	@doc("The intent classification results.")
+	intents: ConversationIntent[];
+	@doc("The entity extraction results.")
+	entities: ConversationEntity[];
+}
+
+@doc("The intent classification result of a Conversation project.")
+model ConversationIntent {
+	@doc("A predicted class.")
+	category: string;
+	@doc("The confidence score of the class from 0.0 to 1.0.")
+	confidenceScore: float64;
+}
+
+@doc("The entity extraction result of a Conversation project.")
+model ConversationEntity {
+	@doc("The entity category.")
+	category: string;
+	@doc("The predicted entity text.")
+	text: string;
+	@doc("The starting index of this entity in the query.")
+	offset: int32;
+	@doc("The length of the text.")
+	length: int32;
+	@doc("The entity confidence score.")
+	confidenceScore: float64;
+	@doc("The collection of entity resolution objects.")
+	resolutions?: BaseResolution[];
+	@doc("The collection of entity extra information objects.")
+	extraInformation?: BaseExtraInformation[];
+}
+
+@knownValues(ExtraInformationKindKV)
+model ExtraInformationKind is string {}
+enum ExtraInformationKindKV {
+	EntitySubtype,
+	ListKey,
+}
+
+@doc("The abstract base object for entity extra information.")
+model BaseExtraInformation {
+	@doc("The extra information object kind.")
+	extraInformationKind: ExtraInformationKind;
+}
+
+@doc("The concrete entity Subtype model of extra information.")
+model EntitySubtype {
+	@doc("The Subtype of an extracted entity type.")
+	value?: string;
+}
+
+@doc("The list key extra data kind.")
+model ListKey {
+	@doc("The canonical form of the extracted entity.")
+	key?: string;
+}
+
+@knownValues(ResolutionKindKV)
+model ResolutionKind is string {}
+enum ResolutionKindKV {
+	Boolean,
+	DateTime,
+	Number,
+	Ordinal,
+	Speed,
+	Weight,
+	Length,
+	Volume,
+	Area,
+	Age,
+	Information,
+	Temperature,
+	Currency,
+	NumericRange,
+	TemporalSpan,
+}
+
+@doc("The abstract base class for entity resolutions.")
+model BaseResolution {
+	@doc("The entity resolution object kind.")
+	resolutionKind: ResolutionKind;
+}
+
+@doc("Represents resolutions for quantities.")
+model QuantityResolution {
+	@doc("The numeric value that the extracted text denotes.")
+	value: float64;
+}
+
+@knownValues(AgeUnitKV)
+model AgeUnit is string {}
+enum AgeUnitKV {
+	Unspecified,
+	Year,
+	Month,
+	Week,
+	Day,
+}
+
+@doc("Represents the Age entity resolution model.")
+model AgeResolution {
+	@doc("The Age Unit of measurement")
+	unit: AgeUnit;
+}
+
+@knownValues(VolumeUnitKV)
+model VolumeUnit is string {}
+enum VolumeUnitKV {
+	Unspecified,
+	CubicMeter,
+	CubicCentimeter,
+	CubicMillimeter,
+	Hectoliter,
+	Decaliter,
+	Liter,
+	Centiliter,
+	Milliliter,
+	CubicYard,
+	CubicInch,
+	CubicFoot,
+	CubicMile,
+	FluidOunce,
+	Teaspoon,
+	Tablespoon,
+	Pint,
+	Quart,
+	Cup,
+	Gill,
+	Pinch,
+	FluidDram,
+	Barrel,
+	Minim,
+	Cord,
+	Peck,
+	Bushel,
+	Hogshead,
+}
+
+@doc("Represents the volume entity resolution model.")
+model VolumeResolution {
+	@doc("The Volume Unit of measurement")
+	unit: VolumeUnit;
+}
+
+@knownValues(SpeedUnitKV)
+model SpeedUnit is string {}
+enum SpeedUnitKV {
+	Unspecified,
+	MetersPerSecond,
+	KilometersPerHour,
+	KilometersPerMinute,
+	KilometersPerSecond,
+	MilesPerHour,
+	Knot,
+	FootPerSecond,
+	FootPerMinute,
+	YardsPerMinute,
+	YardsPerSecond,
+	MetersPerMillisecond,
+	CentimetersPerMillisecond,
+	KilometersPerMillisecond,
+}
+
+@doc("Represents the speed entity resolution model.")
+model SpeedResolution {
+	@doc("The speed Unit of measurement")
+	unit: SpeedUnit;
+}
+
+@knownValues(AreaUnitKV)
+model AreaUnit is string {}
+enum AreaUnitKV {
+	Unspecified,
+	SquareKilometer,
+	SquareHectometer,
+	SquareDecameter,
+	SquareDecimeter,
+	SquareMeter,
+	SquareCentimeter,
+	SquareMillimeter,
+	SquareInch,
+	SquareFoot,
+	SquareMile,
+	SquareYard,
+	Acre,
+}
+
+@doc("Represents the area entity resolution model.")
+model AreaResolution {
+	@doc("The area Unit of measurement")
+	unit: AreaUnit;
+}
+
+@knownValues(LengthUnitKV)
+model LengthUnit is string {}
+enum LengthUnitKV {
+	Unspecified,
+	Kilometer,
+	Hectometer,
+	Decameter,
+	Meter,
+	Decimeter,
+	Centimeter,
+	Millimeter,
+	Micrometer,
+	Nanometer,
+	Picometer,
+	Mile,
+	Yard,
+	Inch,
+	Foot,
+	LightYear,
+	Pt,
+}
+
+@doc("Represents the length entity resolution model.")
+model LengthResolution {
+	@doc("The length Unit of measurement")
+	unit: LengthUnit;
+}
+
+@knownValues(InformationUnitKV)
+model InformationUnit is string {}
+enum InformationUnitKV {
+	Unspecified,
+	Bit,
+	Kilobit,
+	Megabit,
+	Gigabit,
+	Terabit,
+	Petabit,
+	Byte,
+	Kilobyte,
+	Megabyte,
+	Gigabyte,
+	Terabyte,
+	Petabyte,
+}
+
+@doc("Represents the information (data) entity resolution model.")
+model InformationResolution {
+	@doc("The information (data) Unit of measurement.")
+	unit: InformationUnit;
+}
+
+@knownValues(TemperatureUnitKV)
+model TemperatureUnit is string {}
+enum TemperatureUnitKV {
+	Unspecified,
+	Fahrenheit,
+	Kelvin,
+	Rankine,
+	Celsius,
+}
+
+@doc("Represents the temperature entity resolution model.")
+model TemperatureResolution {
+	@doc("The temperature Unit of measurement.")
+	unit: TemperatureUnit;
+}
+
+@knownValues(WeightUnitKV)
+model WeightUnit is string {}
+enum WeightUnitKV {
+	Unspecified,
+	Kilogram,
+	Gram,
+	Milligram,
+	Gallon,
+	MetricTon,
+	Ton,
+	Pound,
+	Ounce,
+	Grain,
+	PennyWeight,
+	LongTonBritish,
+	ShortTonUS,
+	ShortHundredWeightUS,
+	Stone,
+	Dram,
+}
+
+@doc("Represents the weight entity resolution model.")
+model WeightResolution {
+	@doc("The weight Unit of measurement.")
+	unit: WeightUnit;
+}
+
+@doc("Represents the currency entity resolution model.")
+model CurrencyResolution {
+	@doc("The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.")
+	ISO4217?: string;
+	@doc("The money amount captured in the extracted entity")
+	value: float64;
+	@doc("The unit of the amount captured in the extracted entity")
+	unit: string;
+}
+
+@doc("A resolution for boolean expressions")
+model BooleanResolution {
+	value: boolean;
+}
+
+@knownValues(DateTimeSubKindKV)
+model DateTimeSubKind is string {}
+enum DateTimeSubKindKV {
+	Time,
+	Date,
+	DateTime,
+	Duration,
+	Set,
+}
+
+@doc("A resolution for datetime entity instances.")
+model DateTimeResolution {
+	timex: TimeExpression;
+	@doc("The DateTime SubKind")
+	dateTimeSubKind: DateTimeSubKind;
+	@doc("The actual time that the extracted text denote.")
+	value: string;
+	modifier?: TemporalModifier;
+}
+
+@knownValues(NumberKindKV)
+model NumberKind is string {}
+enum NumberKindKV {
+	Integer,
+	Decimal,
+	Power,
+	Fraction,
+	Percent,
+	Unspecified,
+}
+
+@doc("A resolution for numeric entity instances.")
+model NumberResolution {
+	@doc("The type of the extracted number entity.")
+	numberKind: NumberKind;
+	@doc("A numeric representation of what the extracted text denotes.")
+	value: string;
+}
+
+@knownValues(RelativeToKV)
+model RelativeTo is string {}
+enum RelativeToKV {
+	Current,
+	End,
+	Start,
+}
+
+@doc("A resolution for ordinal numbers entity instances.")
+model OrdinalResolution {
+	@doc("The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\"")
+	offset: string;
+	@doc("The reference point that the ordinal number denotes.")
+	relativeTo: RelativeTo;
+	@doc("A simple arithmetic expression that the ordinal denotes.")
+	value: string;
+}
+
+@doc("represents the resolution of a date and/or time span.")
+model TemporalSpanResolution {
+	begin?: TimeExpression;
+	end?: TimeExpression;
+	@doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
+	duration?: string;
+	modifier?: TemporalModifier;
+}
+
+@knownValues(RangeKindKV)
+model RangeKind is string {}
+enum RangeKindKV {
+	Number,
+	Speed,
+	Weight,
+	Length,
+	Volume,
+	Area,
+	Age,
+	Information,
+	Temperature,
+	Currency,
+}
+
+@doc("represents the resolution of numeric intervals.")
+model NumericRangeResolution {
+	@doc("The kind of range that the resolution object represents.")
+	rangeKind: RangeKind;
+	@doc("The beginning value of  the interval.")
+	minimum: float64;
+	@doc("The ending value of the interval.")
+	maximum: float64;
+}
+
+@knownValues(TemporalModifierKV)
+model TemporalModifier is string {}
+enum TemporalModifierKV {
+	AfterApprox,
+	Before,
+	BeforeStart,
+	Approx,
+	ReferenceUndefined,
+	SinceEnd,
+	AfterMid,
+	Start,
+	After,
+	BeforeEnd,
+	Until,
+	End,
+	Less,
+	Since,
+	AfterStart,
+	BeforeApprox,
+	Mid,
+	More,
+}
+
+@doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
+model TimeExpression {
+}
+
+@doc("It is a wrap up of LUIS Generally Available response.")
+model LuisTargetIntentResult {
+	@doc("The actual response from a LUIS Generally Available application.")
+	result?: Map<string, string>;
+}
+
+@doc("It is a wrap up a Question Answering KB response.")
+model QuestionAnsweringTargetIntentResult {
+	@doc("The generated answer by a Question Answering KB.")
+	result?: AnswersResult;
+}
+
+@knownValues(InputModalityKV)
+model InputModality is string {}
+enum InputModalityKV {
+	transcript,
+	text,
+}
+

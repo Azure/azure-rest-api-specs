@@ -1,0 +1,685 @@
+@knownValues(ExportedProjectFormatKV)
+model ExportedProjectFormat is string {}
+enum ExportedProjectFormatKV {
+	Conversation,
+	Luis,
+}
+
+@knownValues(StringIndexTypeKV)
+model StringIndexType is string {}
+enum StringIndexTypeKV {
+	Utf16CodeUnit,
+}
+
+@doc("The job ID.")
+model ConversationalAnalysisAuthoringJobIdPathParameter {
+}
+
+@doc("The trained model label.")
+model ConversationalAnalysisAuthoringTrainedModelLabelPathParameter {
+}
+
+@knownValues(ProjectKindKV)
+model ProjectKind is string {}
+enum ProjectKindKV {
+	Conversation,
+	Orchestration,
+}
+
+@knownValues(CompositionSettingKV)
+model CompositionSetting is string {}
+enum CompositionSettingKV {
+	returnLongestOverlap,
+	requireExactOverlap,
+	separateComponents,
+	combineComponents,
+}
+
+model ConversationalAnalysisAuthoringConfusionMatrix {
+}
+
+@doc("Represents a cell in a confusion matrix.")
+model ConversationalAnalysisAuthoringConfusionMatrixCell {
+	@doc("Represents normalized value in percentages.")
+	normalizedValue: float64;
+	@doc("Represents raw value.")
+	rawValue: float64;
+}
+
+model ConversationalAnalysisAuthoringConfusionMatrixRow {
+}
+
+@doc("Represents an entity with its components.")
+model ConversationalAnalysisAuthoringConversationExportedEntity {
+	@doc("The category of the entity.")
+	category: string;
+	@doc("The behavior to follow when the entity's components overlap with each other.")
+	compositionSetting?: ConversationalAnalysisAuthoringCompositionSetting;
+	@doc("The list component of the entity.")
+	list?: ConversationalAnalysisAuthoringExportedEntityList;
+	@doc("The prebuilt entities components.")
+	prebuilts?: ConversationalAnalysisAuthoringExportedPrebuiltEntity[];
+}
+
+@doc("Represents an exported intent of a conversational project.")
+model ConversationalAnalysisAuthoringConversationExportedIntent {
+	@doc("The intent category.")
+	category: string;
+}
+
+@doc("Represents the exported assets of a conversational project.")
+model ConversationalAnalysisAuthoringConversationExportedProjectAssets {
+	@doc("The intents defined in the project.")
+	intents?: ConversationalAnalysisAuthoringConversationExportedIntent[];
+	@doc("The entities defined in the project.")
+	entities?: ConversationalAnalysisAuthoringConversationExportedEntity[];
+	@doc("The utterances defined in the project.")
+	utterances?: ConversationalAnalysisAuthoringConversationExportedUtterance[];
+}
+
+@doc("Represents an exported utterance for a conversational project.")
+model ConversationalAnalysisAuthoringConversationExportedUtterance {
+	@doc("Represents the entity labels of the utterance.")
+	entities?: ConversationalAnalysisAuthoringExportedUtteranceEntityLabel[];
+	@doc("The utterance text.")
+	text: string;
+	@doc("Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language?: string;
+	@doc("The intent of the utterance.")
+	intent: string;
+	@doc("The dataset for this utterance. Allowed values are 'Train' and 'Test'.")
+	dataset?: string;
+}
+
+@doc("Represents the options for creating or updating a project deployment.")
+model ConversationalAnalysisAuthoringCreateDeploymentOptions {
+	@doc("Represents the trained model label.")
+	trainedModelLabel: string;
+}
+
+@doc("Represents the options used to create or update a project.")
+model ConversationalAnalysisAuthoringCreateProjectOptions {
+	@doc("Represents the project kind.")
+	projectKind: ConversationalAnalysisAuthoringProjectKind;
+	@doc("The project settings.")
+	settings?: ConversationalAnalysisAuthoringProjectSettings;
+	@doc("The new project name.")
+	projectName: string;
+	@doc("Whether the project would be used for multiple languages or not.")
+	multilingual?: boolean;
+	@doc("The project description.")
+	description?: string;
+	@doc("The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language: string;
+}
+
+@doc("Represents the state of a deployment job.")
+model ConversationalAnalysisAuthoringDeploymentJobState {
+}
+
+@doc("Represents the evaluation result summary for the project's entities.")
+model ConversationalAnalysisAuthoringEntitiesEvaluationSummary {
+	@doc("Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.")
+	confusionMatrix: ConversationalAnalysisAuthoringConfusionMatrix;
+	@doc("Represents the entities evaluation summary.")
+	entities: Map<string, string>;
+	@doc("Represents the micro F1")
+	microF1: float64;
+	@doc("Represents the micro precision")
+	microPrecision: float64;
+	@doc("Represents the micro recall")
+	microRecall: float64;
+	@doc("Represents the macro F1")
+	macroF1: float64;
+	@doc("Represents the macro precision")
+	macroPrecision: float64;
+	@doc("Represents the macro recall")
+	macroRecall: float64;
+}
+
+@doc("Represents the evaluation result for an entity.")
+model ConversationalAnalysisAuthoringEntityEvaluationSummary {
+	@doc("Represents the model precision")
+	f1: float64;
+	@doc("Represents the model recall")
+	precision: float64;
+	@doc("Represents the model F1 score")
+	recall: float64;
+	@doc("Represents the count of true positive")
+	truePositiveCount: int32;
+	@doc("Represents the count of true negative")
+	trueNegativeCount: int32;
+	@doc("Represents the count of false positive")
+	falsePositiveCount: int32;
+	@doc("Represents the count of false negative")
+	falseNegativeCount: int32;
+}
+
+@knownValues(EvaluationKindKV)
+model EvaluationKind is string {}
+enum EvaluationKindKV {
+	percentage,
+	manual,
+}
+
+@doc("Represents the options used running the evaluation.")
+model ConversationalAnalysisAuthoringEvaluationOptions {
+	@doc("Represents the evaluation kind. By default, the evaluation kind is set to percentage.")
+	kind?: ConversationalAnalysisAuthoringEvaluationKind;
+	@doc("Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.")
+	trainingSplitPercentage?: int32;
+	@doc("Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.")
+	testingSplitPercentage?: int32;
+}
+
+@doc("Represent a list of utterances' evaluation results.")
+model ConversationalAnalysisAuthoringEvaluationResults {
+	@doc("The utterances evaluation results.")
+	value: ConversationalAnalysisAuthoringUtteranceEvaluationResult[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents the evaluation result summary.")
+model ConversationalAnalysisAuthoringEvaluationSummary {
+	@doc("Contains the data related to entities evaluation.")
+	entitiesEvaluation: ConversationalAnalysisAuthoringEntitiesEvaluationSummary;
+	@doc("Contains the data related to intents evaluation.")
+	intentsEvaluation: ConversationalAnalysisAuthoringIntentsEvaluationSummary;
+	@doc("The options that were used while running the evaluation.")
+	evaluationOptions?: ConversationalAnalysisAuthoringEvaluationOptions;
+}
+
+@doc("Defines the orchestration details for a Conversational project target.")
+model ConversationalAnalysisAuthoringExportedConversationOrchestration {
+	@doc("The name of the targeted project.")
+	projectName: string;
+	@doc("The name of the targeted deployment.")
+	deploymentName: string;
+}
+
+@doc("Represents the orchestration options for a Conversational project target.")
+model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions {
+	@doc("The Conversational project target details.")
+	conversationOrchestration: ConversationalAnalysisAuthoringExportedConversationOrchestration;
+}
+
+@doc("Represents a list component of an entity.")
+model ConversationalAnalysisAuthoringExportedEntityList {
+	@doc("The sub-lists of the list component.")
+	sublists?: ConversationalAnalysisAuthoringExportedEntitySublist[];
+}
+
+@doc("Represents a list of synonyms inside a list component")
+model ConversationalAnalysisAuthoringExportedEntityListSynonym {
+	@doc("Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language?: string;
+	@doc("The list of synonyms.")
+	values?: string[];
+}
+
+@doc("Represents a sub-list inside a list component.")
+model ConversationalAnalysisAuthoringExportedEntitySublist {
+	@doc("The key of the sub-list.")
+	listKey?: string;
+	@doc("The phrases of that correspond to the sub-list.")
+	synonyms?: ConversationalAnalysisAuthoringExportedEntityListSynonym[];
+}
+
+@doc("Defines the orchestration details for a LUIS application target.")
+model ConversationalAnalysisAuthoringExportedLuisOrchestration {
+	@doc("The LUIS application ID.")
+	appId: string;
+	@doc("The targeted version Id.")
+	appVersion?: string;
+	@doc("The targeted slot name.")
+	slotName?: string;
+}
+
+@doc("Represents the orchestration options for a LUIS application target.")
+model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions {
+	@doc("The LUIS application target details.")
+	luisOrchestration: ConversationalAnalysisAuthoringExportedLuisOrchestration;
+}
+
+@doc("Represents the options used to define the orchestration behavior of an intent.")
+model ConversationalAnalysisAuthoringExportedOrchestrationOptions {
+	@doc("The kind of the target used in the orchestration flow.")
+	targetProjectKind: ConversationalAnalysisAuthoringOrchestrationTargetProjectKind;
+}
+
+@doc("Represents an exported prebuilt entity component")
+model ConversationalAnalysisAuthoringExportedPrebuiltEntity {
+	@doc("The prebuilt entity category.")
+	category: string;
+}
+
+@doc("Represents an exported project.")
+model ConversationalAnalysisAuthoringExportedProject {
+	@doc("The version of the exported file.")
+	projectFileVersion: string;
+	@doc("Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.")
+	stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+	@doc("Represents the project metadata.")
+	metadata: ConversationalAnalysisAuthoringCreateProjectOptions;
+	@doc("Represents the project assets.")
+	assets?: ConversationalAnalysisAuthoringExportedProjectAssets;
+}
+
+@doc("Represents the assets of an exported project.")
+model ConversationalAnalysisAuthoringExportedProjectAssets {
+	@doc("The type of project containing the assets.")
+	projectKind: ConversationalAnalysisAuthoringProjectKind;
+}
+
+@knownValues(ExportedProjectFormatKV)
+model ExportedProjectFormat is string {}
+enum ExportedProjectFormatKV {
+	Conversation,
+	Luis,
+}
+
+@doc("Defines the orchestration details for a Question Answering project target.")
+model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration {
+	@doc("The name of the target project.")
+	projectName: string;
+}
+
+@doc("Represents the orchestration options for a Question Answering project target.")
+model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions {
+	@doc("The Question Answering project details.")
+	questionAnsweringOrchestration: ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration;
+}
+
+@doc("Represents an entity label for an utterance.")
+model ConversationalAnalysisAuthoringExportedUtteranceEntityLabel {
+	@doc("The category of the entity label.")
+	category: string;
+	@doc("Start position for the entity text.")
+	offset: int32;
+	@doc("Length for the entity text.")
+	length: int32;
+}
+
+@doc("Represents the state of an export job.")
+model ConversationalAnalysisAuthoringExportProjectJobState {
+	@doc("The URL to use in order to download the exported project.")
+	resultUrl?: string;
+}
+
+@doc("Represents the state of an import job.")
+model ConversationalAnalysisAuthoringImportProjectJobState {
+}
+
+@doc("The evaluation summary for an intent.")
+model ConversationalAnalysisAuthoringIntentEvaluationSummary {
+	@doc("Represents the model precision")
+	f1: float64;
+	@doc("Represents the model recall")
+	precision: float64;
+	@doc("Represents the model F1 score")
+	recall: float64;
+	@doc("Represents the count of true positive")
+	truePositiveCount: int32;
+	@doc("Represents the count of true negative")
+	trueNegativeCount: int32;
+	@doc("Represents the count of false positive")
+	falsePositiveCount: int32;
+	@doc("Represents the count of false negative")
+	falseNegativeCount: int32;
+}
+
+@doc("Represents the evaluation summary for the project's intents.")
+model ConversationalAnalysisAuthoringIntentsEvaluationSummary {
+	@doc("Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.")
+	confusionMatrix: ConversationalAnalysisAuthoringConfusionMatrix;
+	@doc("Represents the intents evaluation summary.")
+	intents: Map<string, string>;
+	@doc("Represents the micro F1")
+	microF1: float64;
+	@doc("Represents the micro precision")
+	microPrecision: float64;
+	@doc("Represents the micro recall")
+	microRecall: float64;
+	@doc("Represents the macro F1")
+	macroF1: float64;
+	@doc("Represents the macro precision")
+	macroPrecision: float64;
+	@doc("Represents the macro recall")
+	macroRecall: float64;
+}
+
+@doc("Represents a job's state.")
+model ConversationalAnalysisAuthoringJobState {
+	@doc("The job ID.")
+	jobId: string;
+	@doc("The creation date time of the job.")
+	createdDateTime: zonedDateTime;
+	@doc("The last date time the job was updated.")
+	lastUpdatedDateTime: zonedDateTime;
+	@doc("The expiration date time of the job.")
+	expirationDateTime?: zonedDateTime;
+	@doc("The job status.")
+	status: ConversationalAnalysisAuthoringJobStatus;
+	@doc("The warnings that were encountered while executing the job.")
+	warnings?: ConversationalAnalysisAuthoringWarning[];
+	@doc("The errors encountered while executing the job.")
+	errors?: Error[];
+}
+
+@knownValues(JobStatusKV)
+model JobStatus is string {}
+enum JobStatusKV {
+	notStarted,
+	running,
+	succeeded,
+	failed,
+	cancelled,
+	cancelling,
+	partiallyCompleted,
+}
+
+@doc("Represents an exported intent for an orchestration project.")
+model ConversationalAnalysisAuthoringOrchestrationExportedIntent {
+	@doc("Specifies the behavior of this intent in the orchestration flow.")
+	orchestration?: ConversationalAnalysisAuthoringExportedOrchestrationOptions;
+	@doc("The intent category.")
+	category: string;
+}
+
+@doc("Represents the assets of an orchestration project.")
+model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets {
+	@doc("Represents the intents of the project.")
+	intents?: ConversationalAnalysisAuthoringOrchestrationExportedIntent[];
+	@doc("Represents the utterances of the project.")
+	utterances?: ConversationalAnalysisAuthoringOrchestrationExportedUtterance[];
+}
+
+@doc("Represents an utterance of an orchestration project.")
+model ConversationalAnalysisAuthoringOrchestrationExportedUtterance {
+	@doc("The utterance text.")
+	text: string;
+	@doc("Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language?: string;
+	@doc("The intent of the utterance.")
+	intent: string;
+	@doc("The dataset for this utterance. Allowed values are 'Train' and 'Test'.")
+	dataset?: string;
+}
+
+@knownValues(OrchestrationTargetProjectKindKV)
+model OrchestrationTargetProjectKind is string {}
+enum OrchestrationTargetProjectKindKV {
+	Luis,
+	Conversation,
+	QuestionAnswering,
+}
+
+@doc("Represents a list of the retrieved supported prebuilt entities.")
+model ConversationalAnalysisAuthoringPrebuiltEntities {
+	@doc("The supported prebuilt entities.")
+	value: ConversationalAnalysisAuthoringPrebuiltEntity[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents a supported prebuilt entity.")
+model ConversationalAnalysisAuthoringPrebuiltEntity {
+	@doc("The prebuilt entity category.")
+	category: string;
+	@doc("The description.")
+	description: string;
+	@doc("English examples for the entity.")
+	examples: string;
+}
+
+@doc("Represents the state of a project deletion job.")
+model ConversationalAnalysisAuthoringProjectDeletionJobState {
+}
+
+@doc("Represents a project deployment.")
+model ConversationalAnalysisAuthoringProjectDeployment {
+	@doc("Represents deployment name.")
+	deploymentName: string;
+	@doc("Represents deployment modelId.")
+	modelId: string;
+	@doc("Represents deployment last trained time.")
+	lastTrainedDateTime: zonedDateTime;
+	@doc("Represents deployment last deployed time.")
+	lastDeployedDateTime: zonedDateTime;
+	@doc("Represents deployment expiration date in the runtime.")
+	deploymentExpirationDate: plainDate;
+	@doc("Represents model training config version.")
+	modelTrainingConfigVersion: string;
+}
+
+@doc("Represents a list of retrieved deployments.")
+model ConversationalAnalysisAuthoringProjectDeployments {
+	@doc("The list of retrieved deployments.")
+	value: ConversationalAnalysisAuthoringProjectDeployment[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@knownValues(ProjectKindKV)
+model ProjectKind is string {}
+enum ProjectKindKV {
+	Conversation,
+	Orchestration,
+}
+
+@doc("Represents the metadata of a project.")
+model ConversationalAnalysisAuthoringProjectMetadata {
+	@doc("Represents the project creation datetime.")
+	createdDateTime: zonedDateTime;
+	@doc("Represents the project creation datetime.")
+	lastModifiedDateTime: zonedDateTime;
+	@doc("Represents the project last trained datetime.")
+	lastTrainedDateTime?: zonedDateTime;
+	@doc("Represents the project last deployed datetime.")
+	lastDeployedDateTime?: zonedDateTime;
+	@doc("Represents the project kind.")
+	projectKind: ConversationalAnalysisAuthoringProjectKind;
+	@doc("The project settings.")
+	settings?: ConversationalAnalysisAuthoringProjectSettings;
+	@doc("The new project name.")
+	projectName: string;
+	@doc("Whether the project would be used for multiple languages or not.")
+	multilingual?: boolean;
+	@doc("The project description.")
+	description?: string;
+	@doc("The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language: string;
+}
+
+@doc("Represents the settings used to define the project behavior.")
+model ConversationalAnalysisAuthoringProjectSettings {
+	@doc("The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\".")
+	confidenceThreshold: float64;
+}
+
+@doc("Represents a list of retrieved projects' metadata.")
+model ConversationalAnalysisAuthoringProjectsMetadata {
+	@doc("The list of projects.")
+	value: ConversationalAnalysisAuthoringProjectMetadata[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents a trained model.")
+model ConversationalAnalysisAuthoringProjectTrainedModel {
+	@doc("The trained model label.")
+	label: string;
+	@doc("The model ID.")
+	modelId: string;
+	@doc("The last trained date time of the model.")
+	lastTrainedDateTime: zonedDateTime;
+	@doc("The duration of the model's last training request in seconds.")
+	lastTrainingDurationInSeconds: int32;
+	@doc("The model expiration date.")
+	modelExpirationDate: plainDate;
+	@doc("The model training config version.")
+	modelTrainingConfigVersion: string;
+}
+
+@doc("Represents a list of retrieved trained models.")
+model ConversationalAnalysisAuthoringProjectTrainedModels {
+	@doc("The list of retrieved jobs.")
+	value: ConversationalAnalysisAuthoringProjectTrainedModel[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@knownValues(StringIndexTypeKV)
+model StringIndexType is string {}
+enum StringIndexTypeKV {
+	Utf16CodeUnit,
+}
+
+@doc("Represents the detailed state of a training sub-operation.")
+model ConversationalAnalysisAuthoringSubTrainingJobState {
+	@doc("Represents progress percentage.")
+	percentComplete: int32;
+	@doc("Represents the start date time.")
+	startDateTime?: zonedDateTime;
+	@doc("Represents the end date time.")
+	endDateTime?: zonedDateTime;
+	@doc("Represents the status of the sub-operation.")
+	status: ConversationalAnalysisAuthoringJobStatus;
+}
+
+@doc("Represents a supported language.")
+model ConversationalAnalysisAuthoringSupportedLanguage {
+	@doc("The language name.")
+	languageName: string;
+	@doc("The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	languageCode: string;
+}
+
+@doc("Represents a list of retrieved languages.")
+model ConversationalAnalysisAuthoringSupportedLanguages {
+	@doc("The list of the languages.")
+	value: ConversationalAnalysisAuthoringSupportedLanguage[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents the options for swapping two deployments together.")
+model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
+	@doc("Represents the first deployment name.")
+	firstDeploymentName: string;
+	@doc("Represents the second deployment name.")
+	secondDeploymentName: string;
+}
+
+@doc("Represents a training config version.")
+model ConversationalAnalysisAuthoringTrainingConfigVersion {
+	@doc("Represents the version of the config.")
+	trainingConfigVersion: string;
+	@doc("Represents the training config version expiration date.")
+	modelExpirationDate: plainDate;
+}
+
+@doc("Represents a list of training config versions.")
+model ConversationalAnalysisAuthoringTrainingConfigVersions {
+	@doc("The list of the training config versions.")
+	value: ConversationalAnalysisAuthoringTrainingConfigVersion[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents the options for starting a new training job.")
+model ConversationalAnalysisAuthoringTrainingJobOptions {
+	@doc("Represents the output model label.")
+	modelLabel: string;
+	@doc("Represents training config version. By default, \"latest\" value is used which uses the latest released training config version.")
+	trainingConfigVersion?: string;
+	@doc("Represents the mode of the training operation.")
+	trainingMode: ConversationalAnalysisAuthoringTrainingMode;
+	@doc("Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.")
+	evaluationOptions?: ConversationalAnalysisAuthoringEvaluationOptions;
+}
+
+@doc("Represents the output of a training job.")
+model ConversationalAnalysisAuthoringTrainingJobResult {
+	@doc("Represents trained model label.")
+	modelLabel: string;
+	@doc("Represents training config version.")
+	trainingConfigVersion: string;
+	@doc("Represents the mode of the training operation.")
+	trainingMode?: ConversationalAnalysisAuthoringTrainingMode;
+	@doc("Represents the model training status.")
+	trainingStatus: ConversationalAnalysisAuthoringSubTrainingJobState;
+	@doc("Represents model evaluation status.")
+	evaluationStatus?: ConversationalAnalysisAuthoringSubTrainingJobState;
+	@doc("Represents the estimated end date time for training and evaluation.")
+	estimatedEndDateTime?: zonedDateTime;
+}
+
+@doc("Represents a list of retrieved training jobs.")
+model ConversationalAnalysisAuthoringTrainingJobs {
+	@doc("The list of jobs.")
+	value: ConversationalAnalysisAuthoringTrainingJobState[];
+	@doc("The next page link.")
+	nextLink: string;
+}
+
+@doc("Represents the state of a training job.")
+model ConversationalAnalysisAuthoringTrainingJobState {
+	@doc("Represents training tasks detailed result.")
+	result: ConversationalAnalysisAuthoringTrainingJobResult;
+}
+
+@knownValues(TrainingModeKV)
+model TrainingMode is string {}
+enum TrainingModeKV {
+	advanced,
+	standard,
+}
+
+@doc("Represents the comparison between the expected and predicted entities for an utterance.")
+model ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult {
+	@doc("Represents the expected entity labels.")
+	expectedEntities: ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult[];
+	@doc("Represents the predicted entity labels.")
+	predictedEntities: ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult[];
+}
+
+@doc("Represents the evaluation output of an entity label or prediction.")
+model ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult {
+	@doc("Represents the entity category.")
+	category: string;
+	@doc("Represents the entity offset index relative to the original text.")
+	offset: int32;
+	@doc("Represents the entity length.")
+	length: int32;
+}
+
+@doc("Represents the evaluation result for an utterance.")
+model ConversationalAnalysisAuthoringUtteranceEvaluationResult {
+	@doc("Represents the utterance text.")
+	text: string;
+	@doc("Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.")
+	language: string;
+	@doc("Represents the entities results for the utterance.")
+	entitiesResult: ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult;
+	@doc("Represents the intents results for the utterance.")
+	intentsResult: ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult;
+}
+
+@doc("Represents the comparison between the expected and the predicted intent for an utterance.")
+model ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult {
+	@doc("Represents the utterance's expected intent.")
+	expectedIntent: string;
+	@doc("Represents the utterance's predicted intent.")
+	predictedIntent: string;
+}
+
+@doc("Represents a warning that was encountered while executing the request.")
+model ConversationalAnalysisAuthoringWarning {
+	@doc("The warning code.")
+	code: string;
+	@doc("The warning message.")
+	message: string;
+}
+
