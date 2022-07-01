@@ -1065,7 +1065,8 @@
             },
             "description": "Subnet first address, scope, and/or last address."
           },
-          "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints."
+          "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints.",
+          "x-ms-identifiers": []
         },
         "customHeaders": {
           "type": "array",
@@ -1083,7 +1084,8 @@
             },
             "description": "Custom header name and value."
           },
-          "description": "List of custom headers."
+          "description": "List of custom headers.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Class representing a Traffic Manager endpoint properties."
@@ -1167,7 +1169,8 @@
           "description": "The query experiences produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/QueryExperience"
-          }
+          },
+          "x-ms-identifiers": ["endpointId", "queryCount"]
         }
       },
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
@@ -1190,14 +1193,16 @@
           "description": "The endpoints used in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/HeatMapEndpoint"
-          }
+          },
+          "x-ms-identifiers": ["resourceId", "endpointId"]
         },
         "trafficFlows": {
           "type": "array",
           "description": "The traffic flows produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/TrafficFlow"
-          }
+          },
+          "x-ms-identifiers": ["sourceIp", "latitude", "longitude"]
         }
       },
       "description": "Class representing a Traffic Manager HeatMap properties."
@@ -1338,7 +1343,8 @@
             },
             "description": "Custom header name and value."
           },
-          "description": "List of custom headers."
+          "description": "List of custom headers.",
+          "x-ms-identifiers": []
         },
         "expectedStatusCodeRanges": {
           "type": "array",
@@ -1358,7 +1364,8 @@
             },
             "description": "Min and max value of a status code range."
           },
-          "description": "List of expected status code ranges."
+          "description": "List of expected status code ranges.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
@@ -1521,6 +1528,7 @@
           "items": {
             "$ref": "#/definitions/Region"
           },
+          "x-ms-identifiers": ["code", "name"],
           "description": "The list of Regions grouped under this Region in the Geographic Hierarchy."
         }
       },
@@ -1651,6 +1659,7 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": ["code", "message", "target"],
           "description": "Error details"
         }
       },
