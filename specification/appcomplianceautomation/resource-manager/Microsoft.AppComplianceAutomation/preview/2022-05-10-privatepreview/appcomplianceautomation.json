@@ -69,6 +69,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "OperationResults_Get": {
             "$ref": "./examples/OperationResults_Get.json"
@@ -267,7 +271,7 @@
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourcePatch"
             }
           },
           {
@@ -540,6 +544,9 @@
     "ResourceMetadata": {
       "type": "object",
       "description": "Single resource Id's metadata.",
+      "required": [
+        "resourceId"
+      ],
       "properties": {
         "resourceId": {
           "description": "Resource Id.",
@@ -570,6 +577,11 @@
     "ReportProperties": {
       "type": "object",
       "description": "Report's properties.",
+      "required": [
+        "timeZone",
+        "triggerTime",
+        "resources"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -668,7 +680,19 @@
       "properties": {
         "properties": {
           "description": "Report property.",
-          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReportProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ReportResourcePatch": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation report resource update properties.",
+      "properties": {
+        "properties": {
+          "description": "Report property.",
           "$ref": "#/definitions/ReportProperties"
         }
       }
@@ -978,7 +1002,6 @@
         "properties": {
           "description": "Snapshot's property'.",
           "readOnly": true,
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SnapshotProperties"
         }
       }
