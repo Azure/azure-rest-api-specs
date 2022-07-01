@@ -27,7 +27,7 @@ These are the global settings for the vmware.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-10-01-preview
+tag: package-2022-01-10-preview
 ```
 
 ### Tag: package-2020-10-01-preview
