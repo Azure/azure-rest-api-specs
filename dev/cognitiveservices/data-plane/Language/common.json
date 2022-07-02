@@ -723,13 +723,10 @@
         }
       }
     },
-    "AbstractiveSummarizationTaskParametersBase": {
+    "SummarizationTaskParametersBase": {
       "type": "object",
-      "description": "Supported parameters for an Abstractive Summarization task.",
+      "description": "Supported parameters for both Abstractive Summarization and Extractive Summarization task.",
       "properties": {
-        "summaryLength": {
-          "$ref": "#/definitions/SummaryLengthType"
-        },
         "phraseControls": {
           "type": "array",
           "items": {
@@ -740,6 +737,27 @@
           "$ref": "#/definitions/StringIndexType"
         }
       }
+    },
+    "AbstractiveSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
+        "summaryLength": {
+          "$ref": "#/definitions/SummaryLengthType"
+        },
+        "labFeatures": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Experimental features. Microsoft doesn't offer support for experimental features, but you can engage with summarization working group directly to try out early capabilities without API or SDK upgrade."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTaskParametersBase"
+        }
+      ]
     },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
