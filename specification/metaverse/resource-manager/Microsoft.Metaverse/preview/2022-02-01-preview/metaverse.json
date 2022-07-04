@@ -561,6 +561,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/listSasUri": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
+        "operationId": "Event_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_ListSasUri": {
+            "$ref": "./examples/Event_ListSasUri.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Metaverse/metaverses": {
       "get": {
         "tags": [
@@ -981,7 +1039,7 @@
         "tags": [
           "Metaverse"
         ],
-        "description": "List a SAS uri that can be used to upload and download files from a managed storage account.",
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
         "operationId": "Metaverse_ListSasUri",
         "consumes": [
           "application/json"
@@ -1945,6 +2003,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/listSasUri": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
+        "operationId": "Template_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_ListSasUri": {
+            "$ref": "./examples/Template_ListSasUri.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/accessPolicies": {
       "get": {
         "tags": [
@@ -2245,6 +2361,13 @@
           "format": "date-time",
           "description": "The close time of the event.",
           "type": "string"
+        },
+        "tagList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         },
         "spaceTemplateId": {
           "description": "The id of the template associated with the event.",
@@ -2550,10 +2673,7 @@
     "SasRequest": {
       "type": "object",
       "properties": {
-        "fileId": {
-          "type": "string"
-        },
-        "blobType": {
+        "blobName": {
           "type": "string"
         }
       }
