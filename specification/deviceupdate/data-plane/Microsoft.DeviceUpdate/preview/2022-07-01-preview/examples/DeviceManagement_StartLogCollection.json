@@ -2,13 +2,25 @@
   "parameters": {
     "endpoint": "contoso.api.adu.microsoft.com",
     "instanceId": "blue",
-    "operationId": "SampleOperationId",
-    "api-version": "2022-07-01-preview"
+    "operationId": "LogCollectionId",
+    "api-version": "2022-07-01-preview",
+    "logCollection": {
+      "deviceList": [
+        {
+          "deviceId": "DeviceA"
+        },
+        {
+          "deviceId": "DeviceB",
+          "moduleId": "ModuleB"
+        }
+      ],
+      "description": "Log collection description"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "operationId": "SampleOperationId",
+        "operationId": "LogCollectionId",
         "deviceList": [
           {
             "deviceId": "DeviceA"
@@ -18,7 +30,7 @@
             "moduleId": "ModuleB"
           }
         ],
-        "description": "Example diagnostics operation",
+        "description": "og collection description",
         "createdDateTime": "2021-09-30T02:23:41.59Z",
         "lastActionDateTime": "2021-09-30T02:23:41.59Z",
         "status": "NotStarted"
