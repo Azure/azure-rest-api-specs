@@ -1,0 +1,846 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2022-06-30-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{runtimeDependencyName}/activities/{activityName}": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_Get",
+        "description": "Retrieve the activity in the runtimeDependency identified by name and activity name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "Get Activity in a runtimeDependency": {
+            "$ref": "./examples/getActivityInARuntimeDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtime."
+          },
+          {
+            "name": "runtimeDependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtimeDependency."
+          },
+          {
+            "name": "activityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of activity."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{runtimeDependencyName}/activities": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_ListByRuntimeDependency",
+        "description": "Retrieve a list of activities in the runtimeDependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "List activities by a runtimeDependency": {
+            "$ref": "./examples/listActivitiesByRuntimeDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtime."
+          },
+          {
+            "name": "runtimeDependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtimeDependency."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivityListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies/{runtimeDependencyName}": {
+      "delete": {
+        "tags": [
+          "RuntimeDependency"
+        ],
+        "operationId": "RuntimeDependency_Delete",
+        "description": "Delete the runtimeDependency by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeDependencyoperations"
+        },
+        "x-ms-examples": {
+          "Delete a runtimeDependency": {
+            "$ref": "./examples/deleteRuntimeDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtime."
+          },
+          {
+            "name": "runtimeDependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtimeDependency name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RuntimeDependency"
+        ],
+        "operationId": "RuntimeDependency_Get",
+        "description": "Retrieve the runtimeDependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeDependencyoperations"
+        },
+        "x-ms-examples": {
+          "Get a runtimeDependency": {
+            "$ref": "./examples/getRuntimeDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtime."
+          },
+          {
+            "name": "runtimeDependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtimeDependency name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeDependency"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RuntimeDependency"
+        ],
+        "operationId": "RuntimeDependency_CreateOrUpdate",
+        "description": "Create or Update the runtimeDependency identified by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeDependencyoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a runtimeDependency": {
+            "$ref": "./examples/createOrUpdateRuntimeDependency.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtime."
+          },
+          {
+            "name": "runtimeDependencyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of runtimeDependency."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeDependencyCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for runtimeDependency."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RuntimeDependency"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeDependency"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}/dependencies": {
+      "get": {
+        "tags": [
+          "RuntimeDependency"
+        ],
+        "operationId": "RuntimeDependency_ListByRuntime",
+        "description": "Retrieve a list of dependencies.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeDependencyoperations"
+        },
+        "x-ms-examples": {
+          "List dependencies by runtime": {
+            "$ref": "./examples/listRuntimeDependenciesByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeDependencyListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/RuntimeDependency"
+      }
+    }
+  },
+  "definitions": {
+    "ActivityParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the activity parameter."
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional."
+        },
+        "isDynamic": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter is dynamic."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the position of the activity parameter."
+        },
+        "valueFromPipeline": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object."
+        },
+        "valueFromPipelineByPropertyName": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name. "
+        },
+        "valueFromRemainingArguments": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the activity parameter."
+        },
+        "validationSet": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameterValidationSet"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets or sets the validation set of activity parameter."
+        }
+      },
+      "description": "Definition of the activity parameter."
+    },
+    "ActivityParameterSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter set."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameter"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets or sets the parameters of the activity parameter set."
+        }
+      },
+      "description": "Definition of the activity parameter set."
+    },
+    "ActivityParameterValidationSet": {
+      "type": "object",
+      "properties": {
+        "memberValue": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity parameter validation set member."
+        }
+      },
+      "description": "Definition of the activity parameter validation set."
+    },
+    "ActivityOutputType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the activity output type."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the activity output type."
+        }
+      },
+      "description": "Definition of the activity output type."
+    },
+    "ActivityProperties": {
+      "type": "object",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "description": "Gets or sets the user name of the activity."
+        },
+        "parameterSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityParameterSet"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets or sets the parameter sets of the activity."
+        },
+        "outputTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityOutputType"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets or sets the output types of the activity."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Properties of the activity."
+    },
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the activity."
+        },
+        "properties": {
+          "$ref": "#/definitions/ActivityProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the activity."
+        }
+      },
+      "description": "Definition of the activity."
+    },
+    "ActivityListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          },
+          "description": "Gets or sets a list of activities."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list activity operation."
+    },
+    "RuntimeDependencyErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message."
+        }
+      },
+      "description": "Definition of the runtimeDependency error info type."
+    },
+    "RuntimeDependencyListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuntimeDependency"
+          },
+          "description": "Gets or sets a list of dependencies."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list runtimeDependency operation."
+    },
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the uri of the runbook content."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content link."
+    },
+    "RuntimeDependencyCreateOrUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the runtimeDependency content link."
+        }
+      },
+      "required": [
+        "contentLink"
+      ],
+      "description": "The parameters supplied to the create or update runtimeDependency properties."
+    },
+    "RuntimeDependencyCreateOrUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeDependencyCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runtimeDependency create properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update runtimeDependency operation."
+    },
+    "RuntimeDependencyProperties": {
+      "type": "object",
+      "properties": {
+        "isGlobal": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Gets or sets the isGlobal flag of the runtimeDependency."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets or sets the version of the runtimeDependency."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Gets or sets the size in bytes of the runtimeDependency."
+        },
+        "activityCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Gets or sets the activity count of the runtimeDependency."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets or sets the provisioning state of the runtimeDependency.",
+          "enum": [
+            "Created",
+            "Creating",
+            "StartingImportModuleRunbook",
+            "RunningImportModuleRunbook",
+            "ContentRetrieved",
+            "ContentDownloaded",
+            "ContentValidated",
+            "ConnectionTypeImported",
+            "ContentStored",
+            "ModuleDataStored",
+            "ActivitiesStored",
+            "ModuleImportRunbookComplete",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the contentLink of the runtimeDependency."
+        },
+        "error": {
+          "$ref": "#/definitions/RuntimeDependencyErrorInfo",
+          "readOnly": true,
+          "description": "Gets or sets the error info of the runtimeDependency."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        },
+        "isComposite": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Gets or sets type of runtimeDependency, if its composite or not."
+        }
+      },
+      "description": "Definition of the runtimeDependency property type."
+    },
+    "RuntimeDependencyUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the runtimeDependency content link."
+        }
+      },
+      "description": "The parameters supplied to the update properties."
+    },
+    "RuntimeDependencyUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeDependencyUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runtimeDependency update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the update runtimeDependency operation."
+    },
+    "RuntimeDependency": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeDependencyProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runtimeDependency properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the runtimeDependency type."
+    }
+  },
+  "parameters": {}
+}

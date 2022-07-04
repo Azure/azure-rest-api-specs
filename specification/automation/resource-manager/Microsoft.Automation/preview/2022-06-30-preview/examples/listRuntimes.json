@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "testaccount",
+    "api-version": "2022-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/runtimes/TestRuntime",
+            "name": "TestRuntime",
+            "type": "Microsoft.Automation/AutomationAccounts/Runtimes",
+            "properties": {
+              "language": "PowerShell",
+              "languageVersion": "7.1",
+              "builtInDependencies": {
+                "Az": "6.0.1"
+              }
+            },
+            "systemData": {
+              "createdBy": "foo@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2018-04-24T16:30:55+00:00",
+              "lastModifiedBy": "foo@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
