@@ -55,6 +55,10 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.UserMetricsModel
+  - suppress: NestedResourcesMustHaveListOperation
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.HeatMapModel
 ```
 
 ### Tag: package-2018-08
