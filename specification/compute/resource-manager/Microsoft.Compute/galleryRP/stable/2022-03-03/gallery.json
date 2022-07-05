@@ -579,7 +579,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery image.": {
+          "Get name of latest gallery image version.": {
             "$ref": "./examples/galleryExamples/GalleryImage_GetLatestVersionName.json"
           }
         }
@@ -2085,6 +2085,9 @@
           "items": {
             "$ref": "#/definitions/GalleryApplicationCustomAction"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application."
         }
       },
@@ -2127,7 +2130,7 @@
           "$ref": "#/definitions/GalleryApplicationVersionPublishingProfile"
         },
         "safetyProfile": {
-          "$ref": "#definitions/GalleryApplicationVersionSafetyProfile"
+          "$ref": "#/definitions/GalleryApplicationVersionSafetyProfile"
         },
         "provisioningState": {
           "readOnly": true,
@@ -2211,9 +2214,13 @@
         },
         "parameters": {
           "type": "array",
+          "description": "The parameters that this custom action uses",
           "items": {
             "$ref": "#/definitions/GalleryApplicationCustomActionParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2769,7 +2776,7 @@
     "GalleryImageVersionStorageProfile": {
       "properties": {
         "source": {
-          "$ref": "#/definitions/GalleryImageVersionFullSource"
+          "$ref": "#/definitions/GalleryArtifactVersionFullSource"
         },
         "osDiskImage": {
           "$ref": "#/definitions/GalleryOSDiskImage"
@@ -2787,7 +2794,7 @@
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "GalleryImageVersionFullSource": {
+    "GalleryArtifactVersionFullSource": {
       "properties": {
         "communityGalleryImageId": {
           "type": "string",
@@ -2798,17 +2805,14 @@
         {
           "$ref": "#/definitions/GalleryArtifactVersionSource"
         }
-      ]
+      ],
+      "description": "The source of the gallery artifact version."
     },
     "GalleryArtifactVersionSource": {
       "properties": {
         "id": {
           "type": "string",
           "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
-        },
-        "uri": {
-          "type": "string",
-          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
         }
       },
       "description": "The gallery artifact version source."
@@ -2861,10 +2865,24 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
+          "$ref": "#/definitions/GalleryDiskImageSource"
         }
       },
       "description": "This is the disk image base class."
+    },
+    "GalleryDiskImageSource": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      ],
+      "description": "The source for the disk image."
     },
     "GalleryArtifactSafetyProfileBase": {
       "properties": {
@@ -2872,11 +2890,12 @@
           "type": "boolean",
           "description": "Indicates whether or not removing this Gallery Image Version from replicated regions is allowed."
         }
-      }
+      },
+      "description": "This is the safety profile of the Gallery Artifact Version."
     },
     "GalleryImageVersionSafetyProfile": {
       "properties": {
-        "ReportedForPolicyViolation": {
+        "reportedForPolicyViolation": {
           "type": "boolean",
           "description": "Indicates whether this image has been reported as violating Microsoft's policies."
         },
@@ -2894,7 +2913,7 @@
           "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
         }
       ],
-      "description": "This is the storage profile of a Gallery Image Version."
+      "description": "This is the safety profile of the Gallery Image Version."
     },
     "PolicyViolation": {
       "properties": {
@@ -2916,7 +2935,8 @@
           "type": "string",
           "description": "Describes specific details about why this policy violation was reported."
         }
-      }
+      },
+      "desription": "A policy violation reported against a gallery artifact."
     },
     "ReplicationStatus": {
       "properties": {
