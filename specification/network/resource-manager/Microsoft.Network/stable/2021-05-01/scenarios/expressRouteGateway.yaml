@@ -1,0 +1,69 @@
+scope: ResourceGroup
+
+variables:
+  expressRouteGatewayName: scenario_gateway
+
+prepareSteps:
+  - step: VirtualWan_Create
+    exampleFile: ../examples/VirtualWANPut.json
+    resourceUpdate:
+      - replace: /properties/type
+        value: Standard
+    outputVariables:
+      virtualWanID:
+        fromResponse: /id
+  - step: VirtualHub_Create
+    exampleFile: ../examples/VirtualHubPut.json
+    resourceUpdate:
+      - replace: /properties/virtualWan/id
+        value: $(virtualWanID)
+    outputVariables:
+      vhubID:
+        fromResponse: /id
+
+#  - step: ExpressRouteCircuit_Create
+#    exampleFile: ../examples/ExpressRouteCircuitCreate.json
+#  - step: ExpressRouteCircuitPeering_Create
+#    exampleFile: ../examples/ExpressRouteCircuitPeeringCreate.json
+#    outputVariables:
+#      circuitPeeringID:
+#        fromResponse: /id
+
+scenarios:
+  - scenario:  ExpressRouteGateway
+    description: Microsoft.Network/expressRouteGateways
+    steps:
+      - step: ExpressRouteGateway_Create
+        exampleFile: ../examples/ExpressRouteGatewayCreate.json
+        resourceUpdate:
+          - replace: /properties/virtualHub/id
+            value: $(vhubID)
+      - step: ExpressRouteGateway_UpdateTags
+        exampleFile: ../examples/ExpressRouteGatewayUpdateTags.json
+      - step: ExpressRouteGateway_Get
+        exampleFile: ../examples/ExpressRouteGatewayGet.json
+      - step: ExpressRouteGateway_ListBySubscription
+        exampleFile: ../examples/ExpressRouteGatewayListBySubscription.json
+      - step: ExpressRouteGateway_ListByResourceGroup
+        exampleFile: ../examples/ExpressRouteGatewayListByResourceGroup.json
+
+#  - scenario:  ExpressRouteConnection
+#    description: Microsoft.Network/expressRouteGateways/expressRouteConnections
+#    variables:
+#      connectionName: scenario_conn
+#    steps:
+#      - step: ExpressRouteConnection_Create
+#        exampleFile: ../examples/ExpressRouteConnectionCreate.json
+#        resourceUpdate:
+#          - replace: /properties/expressRouteCircuitPeering/id
+#            value: $(circuitPeeringID)
+#      - step: ExpressRouteConnection_Get
+#        exampleFile: ../examples/ExpressRouteConnectionGet.json
+#      - step: ExpressRouteConnection_List
+#        exampleFile: ../examples/ExpressRouteConnectionList.json
+#      - step: ExpressRouteConnection_Delete
+#        exampleFile: ../examples/ExpressRouteConnectionDelete.json
+
+cleanUpSteps:
+  - step: ExpressRouteGateway_Delete
+    exampleFile: ../examples/ExpressRouteGatewayDelete.json

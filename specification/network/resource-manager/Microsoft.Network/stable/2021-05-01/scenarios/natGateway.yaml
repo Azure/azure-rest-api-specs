@@ -1,0 +1,23 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario:  NatGateway
+    description: Microsoft.Network/natGateways
+    variables:
+      natGatewayName: scenario_natgateway
+    steps:
+      - step: NatGateway_Create
+        exampleFile: ../examples/NatGatewayCreateOrUpdate.json
+        resourceUpdate:
+          - remove: /properties/publicIpAddresses
+          - remove: /properties/publicIpPrefixes
+      - step: NatGateway_UpdateTags
+        exampleFile: ../examples/NatGatewayUpdateTags.json
+      - step: NatGateway_Get
+        exampleFile: ../examples/NatGatewayGet.json
+      - step: NatGateway_List
+        exampleFile: ../examples/NatGatewayList.json
+      - step: NatGateway_ListAll
+        exampleFile: ../examples/NatGatewayListAll.json
+      - step: NatGateway_Delete
+        exampleFile: ../examples/NatGatewayDelete.json

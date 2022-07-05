@@ -1,0 +1,40 @@
+scope: ResourceGroup
+
+variables:
+  loadBalancerName: scenario_loadbalancer
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    outputVariables:
+      vnetID:
+        fromResponse: /id
+      subnetID:
+        fromResponse: /properties/subnets/0/id
+  - step: LoadBalancer_Create
+    exampleFile: ../examples/LoadBalancerCreate.json
+    resourceUpdate:
+      - replace: /properties/frontendIPConfigurations/0/properties/subnet/id
+        value: $(subnetID)
+      - replace: /sku/name
+        value: Standard
+
+scenarios:
+  - scenario:  LoadBalancerBackendAddressPool
+    description: Microsoft.Network/loadBalancers/backendAddressPools
+    variables:
+      backendAddressPoolName: scenario_backend
+    steps:
+      - step: LoadBalancerBackendAddressPool_Create
+        exampleFile: ../examples/LBBackendAddressPoolWithBackendAddressesPut.json
+        resourceUpdate:
+          - replace: /properties/loadBalancerBackendAddresses/0/properties/virtualNetwork/id
+            value: $(vnetID)
+          - replace: /properties/loadBalancerBackendAddresses/1/properties/virtualNetwork/id
+            value: $(vnetID)
+      - step: LoadBalancerBackendAddressPool_Get
+        exampleFile: ../examples/LBBackendAddressPoolWithBackendAddressesGet.json
+      - step: LoadBalancerBackendAddressPool_List
+        exampleFile: ../examples/LBBackendAddressPoolListWithBackendAddressesPoolType.json
+      - step: LoadBalancerBackendAddressPool_Delete
+        exampleFile: ../examples/LoadBalancerBackendAddressPoolDelete.json

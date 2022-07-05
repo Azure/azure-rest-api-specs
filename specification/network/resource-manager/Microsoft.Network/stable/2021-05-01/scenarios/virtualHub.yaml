@@ -1,0 +1,37 @@
+scope: ResourceGroup
+
+variables:
+    virtualWANName: scenario_vwan
+
+prepareSteps:
+  - step: VirtualWan_Create
+    exampleFile: ../examples/VirtualWANPut.json
+    outputVariables:
+      virtualWanID:
+        fromResponse: /id
+
+scenarios:
+  - scenario:  VirtualHub
+    description: Microsoft.Network/virtualHubs
+    variables:
+      virtualHubName: scenario_vhub
+    steps:
+      - step: VirtualHub_Create
+        exampleFile: ../examples/VirtualHubPut.json
+        resourceUpdate:
+          - replace: /properties/virtualWan/id
+            value: $(virtualWanID)
+      - step: VirtualHub_UpdateTags
+        exampleFile: ../examples/VirtualHubUpdateTags.json
+      - step: VirtualHub_Get
+        exampleFile: ../examples/VirtualHubGet.json
+      - step: VirtualHub_List
+        exampleFile: ../examples/VirtualHubList.json
+      - step: VirtualHub_ListByResourceGroup
+        exampleFile: ../examples/VirtualHubListByResourceGroup.json
+
+cleanUpSteps:
+  - step: VirtualWan_Delete
+    exampleFile: ../examples/VirtualWANDelete.json
+  - step: VirtualHub_Delete
+    exampleFile: ../examples/VirtualHubDelete.json

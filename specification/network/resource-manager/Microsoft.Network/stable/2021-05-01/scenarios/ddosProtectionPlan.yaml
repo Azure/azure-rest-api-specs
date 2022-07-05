@@ -1,0 +1,22 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: DdosProtectionPlan
+    description: Microsoft.Network/ddosProtectionPlans CRUD
+    steps:
+      - step: DdosProtectionPlan_Create
+        exampleFile: ../examples/DdosProtectionPlanCreate.json
+      - step: DdosProtectionPlan_UpdateTags
+        exampleFile: ../examples/DdosProtectionPlanUpdateTags.json
+      - step: DdosProtectionPlan_Get
+        exampleFile: ../examples/DdosProtectionPlanGet.json
+      - step: DdosProtectionPlan_List
+        exampleFile: ../examples/DdosProtectionPlanList.json
+      - step: DdosProtectionPlan_ListAll
+        exampleFile: ../examples/DdosProtectionPlanListAll.json
+      - step: DdosProtectionPlan_Delete
+        exampleFile: ../examples/DdosProtectionPlanDelete.json

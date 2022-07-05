@@ -1,0 +1,42 @@
+scope: ResourceGroup
+
+variables:
+  routeTableName: go-scenario-rt
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+  - step: RouteTable_Create
+    exampleFile: ../examples/RouteTableCreate.json
+    requestUpdate:
+      - replace: /resourceGroupName
+        value: $(resourceGroupName)
+
+scenarios:
+  - scenario: RouteTable
+    description: Microsoft.Network/routeTables CRUD
+    steps:
+      - step: RouteTable_UpdateTags
+        exampleFile: ../examples/RouteTableUpdateTags.json
+      - step: RouteTable_Get
+        exampleFile: ../examples/RouteTableGet.json
+      - step: RouteTable_List
+        exampleFile: ../examples/RouteTableList.json
+      - step: RouteTable_ListAll
+        exampleFile: ../examples/RouteTableListAll.json
+
+  - scenario: RouteTableRoute
+    description: Microsoft.Network/routeTables route CRUD
+    steps:
+      - step: RouteTableRoute_Create
+        exampleFile: ../examples/RouteTableRouteCreate.json
+      - step: RouteTableRoute_Get
+        exampleFile: ../examples/RouteTableRouteGet.json
+      - step: RouteTableRoute_List
+        exampleFile: ../examples/RouteTableRouteList.json
+      - step: RouteTableRoute_Delete
+        exampleFile: ../examples/RouteTableRouteDelete.json
+
+cleanUpSteps:
+  - step: RouteTable_Delete
+    exampleFile: ../examples/RouteTableDelete.json

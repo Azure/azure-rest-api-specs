@@ -1,0 +1,30 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: NetworkSecurityGroups
+    description: Microsoft.Network/networkSecurityGroups
+    steps:
+      - step: SecurityGroups_BeginCreateOrUpdate
+        exampleFile: ../examples/NetworkSecurityGroupCreate.json
+
+      - step: SecurityGroups_CreateWithRule
+        exampleFile: ../examples/NetworkSecurityGroupCreateWithRule.json
+
+      - step: SecurityGroups_Get
+        exampleFile: ../examples/NetworkSecurityGroupGet.json
+
+      - step: SecurityGroups_UpdateTags
+        exampleFile: ../examples/NetworkSecurityGroupUpdateTags.json
+
+      - step: SecurityGroups_List
+        exampleFile: ../examples/NetworkSecurityGroupList.json
+
+      - step: SecurityGroups_ListAll
+        exampleFile: ../examples/NetworkSecurityGroupListAll.json
+
+      - step: SecurityGroups_Delete
+        exampleFile: ../examples/NetworkSecurityGroupDelete.json

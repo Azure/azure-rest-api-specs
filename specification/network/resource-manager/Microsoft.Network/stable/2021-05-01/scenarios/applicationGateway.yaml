@@ -1,0 +1,37 @@
+scope: ResourceGroup
+
+variables:
+  userAssignedIdentities:
+    type: string
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: ApplicationGateway
+    description: Microsoft.Network/applicationGateways CRUD
+    steps:
+      - step: ApplicationGateway_Create
+        exampleFile: ../examples/ApplicationGatewayCreate.json
+#        resourceUpdate:
+#          - remove: /identity/userAssignedIdentities/\"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1\"
+#          - add: /identity/userAssignedIdentities
+#            value: \"/subscriptions/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1\":{}
+      - step: ApplicationGateway_UpdateTags
+        exampleFile: ../examples/ApplicationGatewayUpdateTags.json
+      - step: ApplicationGateway_Get
+        exampleFile: ../examples/ApplicationGatewayGet.json
+      - step: ApplicationGateway_List
+        exampleFile: ../examples/ApplicationGatewayList.json
+      - step: ApplicationGateway_ListAll
+        exampleFile: ../examples/ApplicationGatewayListAll.json
+      - step: ApplicationGateway_BackendHealth
+        exampleFile: ../examples/ApplicationGatewayBackendHealthGet.json
+      - step: ApplicationGateway_Stop
+        exampleFile: ../examples/ApplicationGatewayStop.json
+      - step: ApplicationGateway_Start
+        exampleFile: ../examples/ApplicationGatewayStart.json
+      - step: ApplicationGateway_Delete
+        exampleFile: ../examples/ApplicationGatewayDelete.json
+

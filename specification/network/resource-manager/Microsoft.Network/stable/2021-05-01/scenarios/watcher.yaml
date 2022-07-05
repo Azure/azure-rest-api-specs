@@ -1,0 +1,20 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario:  Watcher
+    description: Microsoft.Network/networkWatchers
+    variables:
+      networkWatcherName: scenario_watcher
+    steps:
+      - step: Watcher_Create
+        exampleFile: ../examples/NetworkWatcherCreate.json
+      - step: Watcher_UpdateTag
+        exampleFile: ../examples/NetworkWatcherUpdateTags.json
+      - step: Watcher_Get
+        exampleFile: ../examples/NetworkWatcherGet.json
+      - step: Watcher_List
+        exampleFile: ../examples/NetworkWatcherList.json
+      - step: Watcher_ListAll
+        exampleFile: ../examples/NetworkWatcherListAll.json
+      - step: Watcher_Delete
+        exampleFile: ../examples/NetworkWatcherDelete.json

@@ -1,0 +1,20 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario:  IPGroup
+    description: Microsoft.Network/ipGroups
+    variables:
+      ipGroupsName: scenario_ipGroup
+    steps:
+      - step: IPGroup_Create
+        exampleFile: ../examples/IpGroupsCreate.json
+      - step: IPGroup_UpdateTags
+        exampleFile: ../examples/IpGroupsUpdateTags.json
+      - step: IPGroup_Get
+        exampleFile: ../examples/IpGroupsGet.json
+      - step: IPGroup_List
+        exampleFile: ../examples/IpGroupsListBySubscription.json
+      - step: IPGroup_ListByResourceGroup
+        exampleFile: ../examples/IpGroupsListByResourceGroup.json
+      - step: IPGroup_Delete
+        exampleFile: ../examples/IpGroupsDelete.json

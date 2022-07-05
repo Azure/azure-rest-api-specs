@@ -1,0 +1,30 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    outputVariables:
+      subnetID:
+        fromResponse: /properties/subnets/0/id
+
+scenarios:
+  - scenario:  Profile
+    description: Microsoft.Network/networkProfiles
+    variables:
+      networkProfileName: scenario_profile
+    steps:
+      - step: Profile_Create
+        exampleFile: ../examples/NetworkProfileCreateConfigOnly.json
+        resourceUpdate:
+          - replace: /properties/containerNetworkInterfaceConfigurations/0/properties/ipConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+      - step: Profile_UpdateTags
+        exampleFile: ../examples/NetworkProfileUpdateTags.json
+      - step: Profile_Get
+        exampleFile: ../examples/NetworkProfileGetConfigOnly.json
+      - step: Profile_List
+        exampleFile: ../examples/NetworkProfileList.json
+      - step: Profile_ListAll
+        exampleFile: ../examples/NetworkProfileListAll.json
+      - step: Profile_Delete
+        exampleFile: ../examples/NetworkProfileDelete.json

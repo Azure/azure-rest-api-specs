@@ -1,0 +1,22 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario:  ApplicationSecurityGroup
+    description: Microsoft.Network/applicationSecurityGroups
+    steps:
+      - step: ApplicationSecurityGroup_Create
+        exampleFile: ../examples/ApplicationSecurityGroupCreate.json
+      - step: ApplicationSecurityGroup_UpdateTag
+        exampleFile: ../examples/ApplicationSecurityGroupCreate.json
+      - step: ApplicationSecurityGroup_Get
+        exampleFile: ../examples/ApplicationSecurityGroupGet.json
+      - step: ApplicationSecurityGroup_List
+        exampleFile: ../examples/ApplicationSecurityGroupList.json
+      - step: ApplicationSecurityGroup_ListAll
+        exampleFile: ../examples/ApplicationSecurityGroupListAll.json
+      - step: ApplicationSecurityGroup_Delete
+        exampleFile: ../examples/ApplicationSecurityGroupDelete.json

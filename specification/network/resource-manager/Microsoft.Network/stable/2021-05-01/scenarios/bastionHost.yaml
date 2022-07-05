@@ -1,0 +1,49 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    resourceUpdate:
+      - replace: /properties/subnets/0/name
+        value: AzureBastionSubnet
+    outputVariables:
+      subnetID:
+        fromResponse: /properties/subnets/0/id
+  - step: PublicIpAddress_CreateDefaults
+    exampleFile: ../examples/PublicIpAddressCreateDefaults.json
+    resourceUpdate:
+      - add: /sku/name
+        value: Standard
+      - add: /sku/tier
+        value: Global
+      - add: /properties/publicIPAllocationMethod
+        value: Static
+    outputVariables:
+      publicIP:
+        fromResponse: /id
+
+scenarios:
+  - scenario:  BastionHost
+    description: Microsoft.Network/bastionHosts
+    variables:
+      bastionHostName: scenario_bastionhost
+    steps:
+      - step: BastionHost_Create
+        exampleFile: ../examples/BastionHostPut.json
+        resourceUpdate:
+          - add: /properties/location
+            value: eastus
+          - replace: /properties/ipConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+          - replace: /properties/ipConfigurations/0/properties/publicIPAddress/id
+            value: $(publicIP)
+      - step: BastionHost_Update
+        exampleFile: ../examples/BastionHostPatch.json
+      - step: BastionHost_Get
+        exampleFile: ../examples/BastionHostGet.json
+      - step: BastionHost_List
+        exampleFile: ../examples/BastionHostListBySubscription.json
+      - step: BastionHost_ListByResourceGroup
+        exampleFile: ../examples/BastionHostListByResourceGroup.json
+      - step: BastionHost_Delete
+        exampleFile: ../examples/BastionHostDelete.json

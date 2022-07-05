@@ -1,0 +1,26 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: LocalNetworkGateway
+    description: Microsoft.Network/localNetworkGateways CRUD
+    steps:
+      - step: LocalNetworkGateway_Create
+        exampleFile: ../examples/LocalNetworkGatewayCreate.json
+        resourceUpdate:
+          - remove: /properties/fqdn
+#          - remove: /properties/gatewayIpAddress
+      - step: LocalNetworkGateway_UpdateTags
+        exampleFile: ../examples/LocalNetworkGatewayUpdateTags.json
+        requestUpdate:
+          - replace: /localNetworkGatewayName
+            value: localgw
+      - step: LocalNetworkGateway_Get
+        exampleFile: ../examples/LocalNetworkGatewayGet.json
+      - step: LocalNetworkGateway_List
+        exampleFile: ../examples/LocalNetworkGatewayList.json
+      - step: LocalNetworkGateway_Delete
+        exampleFile: ../examples/LocalNetworkGatewayDelete.json

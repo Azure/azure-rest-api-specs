@@ -1,0 +1,20 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario:  VirtualWan
+    description: Microsoft.Network/networkWatchers
+    variables:
+      virtualWANName: scenario_vwan
+    steps:
+      - step: VirtualWan_Create
+        exampleFile: ../examples/VirtualWANPut.json
+      - step: VirtualWan_UpdateTags
+        exampleFile: ../examples/VirtualWANUpdateTags.json
+      - step: VirtualWan_Get
+        exampleFile: ../examples/VirtualWANGet.json
+      - step: VirtualWan_List
+        exampleFile: ../examples/VirtualWANList.json
+      - step: VirtualWan_ListByResourceGroup
+        exampleFile: ../examples/VirtualWANListByResourceGroup.json
+      - step: VirtualWan_Delete
+        exampleFile: ../examples/VirtualWANDelete.json

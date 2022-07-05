@@ -1,0 +1,58 @@
+scope: ResourceGroup
+
+variables:
+  serviceEndpointPolicyName: testPolicy
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+  - step: ServiceEndpointPolicy_Create
+    exampleFile: ../examples/ServiceEndpointPolicyCreate.json
+    requestUpdate:
+      - replace: /resourceGroupName
+        value: $(resourceGroupName)
+      - replace: /serviceEndpointPolicyName
+        value: $(serviceEndpointPolicyName)
+
+
+scenarios:
+  - scenario: ServiceEndpointPolicy
+    description: Microsoft.Network/serviceEndpointPolicies CRUD
+    variables:
+      test: test
+    steps:
+      - step: ServiceEndpointPolicy_Get
+        exampleFile: ../examples/ServiceEndpointPolicyGet.json
+#        requestUpdate:
+#          - replace: /serviceEndpointPolicyName
+#            value: $(serviceEndpointPolicyName)
+      - step: ServiceEndpointPolicy_UpdateTags
+        exampleFile: ../examples/ServiceEndpointPolicyUpdateTags.json
+#        requestUpdate:
+#          - replace: /serviceEndpointPolicyName
+#            value: $(serviceEndpointPolicyName)
+      - step: ServiceEndpointPolicy_List
+        exampleFile: ../examples/ServiceEndpointPolicyList.json
+      - step: ServiceEndpointPolicy_ListAll
+        exampleFile: ../examples/ServiceEndpointPolicyListAll.json
+
+  - scenario: ServiceEndpointPolicyDefinition
+    description: Microsoft.Network/serviceEndpointPolicies definition CRUD
+    steps:
+      - step: ServiceEndpointPolicyDefinition_Create
+        exampleFile: ../examples/ServiceEndpointPolicyDefinitionCreate.json
+      - step: ServiceEndpointPolicyDefinition_Get
+        exampleFile: ../examples/ServiceEndpointPolicyDefinitionGet.json
+      - step: ServiceEndpointPolicyDefinition_List
+        exampleFile: ../examples/ServiceEndpointPolicyDefinitionList.json
+      - step: ServiceEndpointPolicyDefinition_Delete
+        exampleFile: ../examples/ServiceEndpointPolicyDefinitionDelete.json
+
+cleanUpSteps:
+  - step: ServiceEndpointPolicy_Delete
+    exampleFile: ../examples/ServiceEndpointPolicyDelete.json
+    requestUpdate:
+      - replace: /resourceGroupName
+        value: $(resourceGroupName)
+      - replace: /serviceEndpointPolicyName
+        value: $(serviceEndpointPolicyName)

@@ -1,0 +1,33 @@
+scope: ResourceGroup
+
+variables:
+  virtualNetworkName: scenarios_vn
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: VirtualNetworks
+    description: Microsoft.Network/virtualNetworks
+    steps:
+      - step: VirtualNetworks_BeginCreateOrUpdate
+        exampleFile: ../examples/VirtualNetworkCreate.json
+
+      - step: VirtualNetworks_CreateWithSubnet
+        exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+
+      - step: VirtualNetworks_Get
+        exampleFile: ../examples/VirtualNetworkGet.json
+
+      - step: VirtualNetworks_List
+        exampleFile: ../examples/VirtualNetworkList.json
+
+      - step: VirtualNetworks_ListAll
+        exampleFile: ../examples/VirtualNetworkListAll.json
+
+      - step: VirtualNetworks_ListUsage
+        exampleFile: ../examples/VirtualNetworkListUsage.json
+
+      - step: VirtualNetworks_Delete
+        exampleFile: ../examples/VirtualNetworkDelete.json
