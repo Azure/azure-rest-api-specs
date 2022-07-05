@@ -88,6 +88,9 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
+          },
+          "Succesful Healthcare Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareRequest.json"
           }
         }
       }
@@ -902,6 +905,11 @@
             "name": "relationType",
             "modelAsString": true
           }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         },
         "entities": {
           "description": "The entities in the relation.",
