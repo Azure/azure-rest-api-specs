@@ -1031,8 +1031,8 @@
         "tags": [
           "Entity"
         ],
-        "description": "Delete business metadata from an entity.",
-        "operationId": "Entity_DeleteBusinessAttributes",
+        "description": "Delete business metadata attributes from an entity.",
+        "operationId": "Entity_DeleteBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1057,13 +1057,13 @@
             "required": false,
             "in": "body",
             "schema": {
-              "description": "BusinessAttribute",
+              "description": "BusinessMetadataAttributes",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
               }
             },
-            "description": "BusinessAttribute"
+            "description": "BusinessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1076,8 +1076,8 @@
         "tags": [
           "Entity"
         ],
-        "description": "Add or update business attributes",
-        "operationId": "Entity_AddOrUpdateBusinessAttributes",
+        "description": "Add or update business metadata attributes",
+        "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1102,13 +1102,13 @@
             "required": false,
             "in": "body",
             "schema": {
-              "description": "BusinessAttribute",
+              "description": "BusinessMetadataAttributes",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
               }
             },
-            "description": "BusinessAttribute"
+            "description": "BusinessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1138,7 +1138,8 @@
             "description": "Template File"
           },
           "400": {
-            "description": "If the provided fileType is not supported"
+            "description": "If the provided fileType is not supported",
+            "x-ms-error-response": true
           }
         }
       }
@@ -1149,7 +1150,7 @@
           "Entity"
         ],
         "description": "Upload the file for creating Business Metadata in BULK",
-        "operationId": "Entity_ImportBusinessAttributes",
+        "operationId": "Entity_ImportBusinessMetadata",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1237,7 +1238,8 @@
                 ]
               }
             },
-            "description": "If Business Metadata definition has invalid or missing information"
+            "description": "If Business Metadata definition has invalid or missing information",
+            "x-ms-error-response": true
           },
           "409": {
             "examples": {
@@ -1272,7 +1274,8 @@
                 ]
               }
             },
-            "description": "If Business Metadata already exists (duplicate qualifiedName)"
+            "description": "If Business Metadata already exists (duplicate qualifiedName)",
+            "x-ms-error-response": true
           }
         }
       }
@@ -1980,6 +1983,9 @@
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
             "$ref": "./examples/Glossary_GetGlossaryTerm.json"
+          },
+          "Glossary_GetGlossaryTerm_WithoutAssets": {
+            "$ref": "./examples/Glossary_GetGlossaryTerm_WithoutAssets.json"
           }
         },
         "parameters": [
@@ -1988,6 +1994,18 @@
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "name": "excludeRelationshipTypes",
+            "in": "query",
+            "description": "An array of relationship types which need to be excluded.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "excludeRelationshipTypeList"
           }
         ],
         "responses": {
@@ -2028,6 +2046,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -2913,6 +2934,11 @@
         ],
         "description": "Export Glossary Terms as csv file",
         "operationId": "Glossary_ExportGlossaryTermsAsCsv",
+        "x-ms-examples": {
+          "Glossary_ExportGlossaryTermsAsCsv": {
+            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
+          }
+        },
         "produces": [
           "text/csv"
         ],
@@ -3037,7 +3063,7 @@
           "Discovery_Query_Id": {
             "$ref": "./examples/Discovery_Query_Id.json"
           },
-          "Discovery_Query_Type": {
+          "Discovery_Query_EntityType": {
             "$ref": "./examples/Discovery_Query_Type.json"
           },
           "Discovery_Query_AssetType": {
@@ -3057,6 +3083,12 @@
           },
           "Discovery_Query_Collection": {
             "$ref": "./examples/Discovery_Query_Collection.json"
+          },
+          "Discovery_Query_SystemTime": {
+            "$ref": "./examples/Discovery_Query_SystemTime.json"
+          },
+          "Discovery_Query_BusinessMetadataAttribute": {
+            "$ref": "./examples/Discovery_Query_BusinessMetadataAttribute.json"
           }
         },
         "parameters": [
@@ -3703,7 +3735,8 @@
                 ]
               }
             },
-            "description": "Bad query parameters"
+            "description": "Bad query parameters",
+            "x-ms-error-response": true
           },
           "404": {
             "examples": {
@@ -3881,7 +3914,8 @@
                 ]
               }
             },
-            "description": "If no lineage is found for the given entity"
+            "description": "If no lineage is found for the given entity",
+            "x-ms-error-response": true
           }
         }
       }
@@ -4029,7 +4063,7 @@
     "/atlas/v2/types/businessmetadatadef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
         "description": "Get the businessMetadata definition for the given guid",
         "operationId": "Types_GetBusinessMetadataDefByGuid",
@@ -4054,7 +4088,8 @@
             "description": "On successful lookup of the the businessMetadata definition by it's guid"
           },
           "404": {
-            "description": "On Failed lookup for the given guid"
+            "description": "On Failed lookup for the given guid",
+            "x-ms-error-response": true
           }
         }
       }
@@ -4087,7 +4122,8 @@
             "description": "On successful lookup of the the businessMetadata definition by it's name"
           },
           "404": {
-            "description": "On Failed lookup for the given name"
+            "description": "On Failed lookup for the given name",
+            "x-ms-error-response": true
           }
         }
       }

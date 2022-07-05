@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.managementgroups
 package-name: azure-mgmt-managementgroups
-package-version: 2019-05-01
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 ``` yaml $(python) 
