@@ -1,0 +1,30 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: DiskAccess
+    description: Microsoft.Compute/diskAccesses CRUD
+    variables:
+      diskAccessName: scenario_diskaccess
+    steps:
+      - step: DiskAccess_Create
+        exampleFile: ../examples/CreateADiskAccess.json
+      - step: DiskAccess_Update
+        exampleFile: ../examples/UpdateADiskAccess.json
+      - step: DiskAccess_Get
+        exampleFile: ../examples/GetInformationAboutADiskAccess.json
+      - step: DiskAccess_List
+        exampleFile: ../examples/ListDiskAccessesInASubscription.json
+      - step: DiskAccess_ListByResourceGroup
+        exampleFile: ../examples/ListDiskAccessesInAResourceGroup.json
+      - step: DiskAccess_Delete
+        exampleFile: ../examples/DeleteADiskAccess.json
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+scope: ResourceGroup
+
+variables:
+  azureTenantId:
+    type: string
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: DiskEncryptionSet
+    description: Microsoft.Compute/diskEncryptionSets CRUD
+    variables:
+      vaultName:
+        type: string
+      diskEncryptionSetName: scenario_des
+    steps:
+      - step: KeyVault_CreateVault
+        armTemplate: ./peArmTemplate/Create_Vault.json
+      - step: KeyVault_CreateKey
+        armTemplate: ./peArmTemplate/Create_Key.json
+      - step: DiskEncryptionSet_Create
+        exampleFile: ../examples/CreateADiskEncryptionSet.json
+        resourceUpdate:
+          - replace: /properties/activeKey/sourceVault/id
+            value: $(vaultID)
+          - replace: /properties/activeKey/keyUrl
+            value: $(keyUri)
+      - step: DiskEncryptionSet_Get
+        exampleFile: ../examples/GetInformationAboutADiskEncryptionSetWithAutoKeyRotationError.json
+      - step: DiskEncryptionSet_Update
+        exampleFile: ../examples/UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabled.json
+      - step: DiskEncryptionSet_List
+        exampleFile: ../examples/ListDiskEncryptionSetsInASubscription.json
+      - step: DiskEncryptionSet_ListByResourceGroup
+        exampleFile: ../examples/ListDiskEncryptionSetsInAResourceGroup.json
+      - step: DiskEncryptionSet_ListAssociatedResources
+        exampleFile: ../examples/ListDiskEncryptionSetAssociatedResources.json
+      - step: DiskEncryptionSet_Delete
+        exampleFile: ../examples/DeleteADiskEncryptionSet.json
+
+
+
+
+

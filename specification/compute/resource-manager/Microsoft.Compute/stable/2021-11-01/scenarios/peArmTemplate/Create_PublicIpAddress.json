@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "defaultValue": "template_publicIpAddress",
+      "metadata": {
+        "description": "Name of Application Insights resource."
+      }
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "eastus",
+      "apiVersion": "2021-05-01",
+      "properties": {}
+    }
+  ],
+  "outputs": {
+    "publicIPID": {
+      "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('name'))]",
+      "type": "string"
+    }
+  }
+}

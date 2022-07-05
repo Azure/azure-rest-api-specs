@@ -1,0 +1,33 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: AvailabilitySet
+    description: Microsoft.Compute/availabilitySets
+    variables:
+      availabilitySetName: scenario_abs
+    steps:
+      - step: AvailabilitySet_Create
+        exampleFile: ../examples/compute/CreateAnAvailabilitySet.json
+      - step: AvailabilitySet_Update
+        exampleFile: ../examples/compute/AvailabilitySets_Update_MinimumSet_Gen.json
+      - step: AvailabilitySet_Get
+        exampleFile: ../examples/compute/AvailabilitySets_Get_MaximumSet_Gen.json
+      - step: AvailabilitySet_List
+        exampleFile: ../examples/compute/AvailabilitySets_List_MaximumSet_Gen.json
+      - step: AvailabilitySet_ListBySubscription
+        exampleFile: ../examples/compute/ListAvailabilitySetsInASubscription.json
+      - step: AvailabilitySet_ListAvailableSizes
+        exampleFile: ../examples/compute/AvailabilitySets_ListAvailableSizes_MaximumSet_Gen.json
+      - step: AvailabilitySet_Delete
+        exampleFile: ../examples/compute/AvailabilitySets_Delete_MaximumSet_Gen.json
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+scope: ResourceGroup
+
+variables:
+  subnetID:
+    type: string
+  publicIPID:
+    type: string
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: VirtualMachine
+    description: Microsoft.Compute/virtualMachines CRUD
+    steps:
+      - step: NetworkAndSubnet_Create
+        armTemplate: peArmTemplate/Create_Network_And_Subnet.json
+      - step: PublicIpAddress_Create
+        armTemplate: peArmTemplate/Create_PublicIpAddress.json
+      - step: NetworkInterface_Create
+        armTemplate: peArmTemplate/Create_NetworkInterface.json
+
+      - step: VirtualMachine_Create
+        exampleFile: ../examples/compute/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json
+        resourceUpdate:
+          - replace: /properties/networkProfile/networkInterfaces/0/id
+            value: $(nicID)
+          - replace: /properties/osProfile/adminUsername
+            value: goscenario
+          - replace: /properties/osProfile/adminPassword
+            value: QWE!@#123
+      - step: VirtualMachine_Get
+        exampleFile: ../examples/compute/GetVirtualMachine.json
+      - step: VirtualMachine_List
+        exampleFile: ../examples/compute/VirtualMachines_List_MinimumSet_Gen.json
+      - step: VirtualMachine_ListAll
+        exampleFile: ../examples/compute/VirtualMachines_ListAll_MinimumSet_Gen.json
+      - step: VirtualMachine_Delete
+        exampleFile: ../examples/compute/ForceDeleteVirtualMachine.json
+
+

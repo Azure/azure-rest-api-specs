@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "defaultValue": "asc-api-ai-instance",
+      "metadata": {
+        "description": "Name of Application Insights resource."
+      }
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "eastus",
+      "tags": {},
+      "apiVersion": "2021-05-01",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "test-1",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "subnetID": {
+      "value": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('name')), '2021-05-01').Subnets[0].ID]",
+      "type": "string"
+    }
+  }
+}

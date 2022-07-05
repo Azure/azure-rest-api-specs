@@ -1,0 +1,96 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "defaultValue": "scenariovault1",
+      "metadata": {
+        "description": "Name of Application Insights resource."
+      }
+    },
+    "azureTenantId": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "type": "Microsoft.KeyVault/vaults",
+      "location": "eastus",
+      "apiVersion": "2021-10-01",
+      "properties": {
+        "tenantId": "[parameters('azureTenantId')]",
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
+        "accessPolicies": [
+          {
+            "tenantId": "[parameters('azureTenantId')]",
+            "objectId": "00000000-0000-0000-0000-000000000000",
+            "permissions": {
+              "keys": [
+                "encrypt",
+                "decrypt",
+                "wrapKey",
+                "unwrapKey",
+                "sign",
+                "verify",
+                "get",
+                "list",
+                "create",
+                "update",
+                "import",
+                "delete",
+                "backup",
+                "restore",
+                "recover",
+                "purge"
+              ],
+              "secrets": [
+                "get",
+                "list",
+                "set",
+                "delete",
+                "backup",
+                "restore",
+                "recover",
+                "purge"
+              ],
+              "certificates": [
+                "get",
+                "list",
+                "delete",
+                "create",
+                "import",
+                "update",
+                "managecontacts",
+                "getissuers",
+                "listissuers",
+                "setissuers",
+                "deleteissuers",
+                "manageissuers",
+                "recover",
+                "purge"
+              ]
+            }
+          }
+        ],
+        "enabledForDeployment": true,
+        "enabledForDiskEncryption": true,
+        "enabledForTemplateDeployment": true,
+        "publicNetworkAccess": "Enabled"
+      }
+    }
+  ],
+  "outputs": {
+    "vaultID": {
+      "value": "[resourceId('Microsoft.KeyVault/vaults', parameters('name'))]",
+      "type": "string"
+    },
+    "vaultName": {
+      "type": "string",
+      "value": "[parameters('name')]"}
+  }
+}

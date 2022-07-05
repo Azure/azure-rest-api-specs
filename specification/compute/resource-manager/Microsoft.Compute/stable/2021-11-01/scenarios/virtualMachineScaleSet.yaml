@@ -1,0 +1,40 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: VirtualMachineScaleSets
+    description: Microsoft.Compute/virtualMachineScaleSets CRUD
+    variables:
+      vmScaleSetName: scenario_vmss
+    steps:
+      - step: NetworkAndSubnet_Create
+        armTemplate: peArmTemplate/Create_Network_And_Subnet.json
+      - step: VirtualMachineScaleSets_Create
+        exampleFile: ../examples/compute/CreateAScaleSetWithScaleInPolicy.json
+        resourceUpdate:
+          - replace: /properties/virtualMachineProfile/networkProfile/networkInterfaceConfigurations/0/properties/ipConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+          - replace: /sku/capactiy
+            value: 1
+          # osProfile
+          - replace: /properties/virtualMachineProfile/osProfile/computerNamePrefix
+            value: test
+          - replace: /properties/virtualMachineProfile/osProfile/adminUsername
+            value: goscenacrio
+          - add: /properties/virtualMachineProfile/osProfile/adminPassword
+            value: QWEqwe123*
+      - step: VirtualMachineScaleSets_Update
+        exampleFile: ../examples/compute/VirtualMachineScaleSets_Update_MinimumSet_Gen.json
+      - step: VirtualMachineScaleSets_Get
+        exampleFile: ../examples/compute/GetVirtualMachineScaleSet.json
+      - step: VirtualMachineScaleSets_List
+        exampleFile: ../examples/compute/VirtualMachineScaleSets_List_MaximumSet_Gen.json
+      - step: VirtualMachineScaleSets_ListAll
+        exampleFile: ../examples/compute/VirtualMachineScaleSets_ListAll_MaximumSet_Gen.json
+      - step: VirtualMachineScaleSets_Delete
+        exampleFile: ../examples/compute/ForceDeleteVirtualMachineScaleSets.json
+
+
