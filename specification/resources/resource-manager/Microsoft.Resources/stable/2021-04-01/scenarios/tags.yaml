@@ -1,0 +1,36 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario: Tags
+    description: Microsoft.Resource/tags
+    steps:
+      - step: ResourceGroup_Create
+        exampleFile: ../examples/CreateResourceGroup.json
+        outputVariables:
+          resourceGroupID:
+            fromResponse: /id
+
+      - step: PutTagsSubscription
+        exampleFile: ../examples/PutTagsSubscription.json
+        requestUpdate:
+          - replace: /scope
+            value: subscriptions/$(subscriptionId)
+
+      - step: PutTagsResource
+        exampleFile: ../examples/PutTagsResource.json
+        requestUpdate:
+          - replace: /scope
+            value: $(resourceGroupID)
+
+      - step: ResourceGroup_GetTagsSubscription
+        exampleFile: ../examples/GetTagsSubscription.json
+        requestUpdate:
+          - replace: /scope
+            value: subscriptions/$(subscriptionId)
+        
+      - step: ResourceGroup_GetTagsResource
+        exampleFile: ../examples/GetTagsResource.json
+        requestUpdate:
+          - replace: /scope
+            value: $(resourceGroupID)
+

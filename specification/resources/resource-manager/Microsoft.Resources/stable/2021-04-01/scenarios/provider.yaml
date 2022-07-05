@@ -1,0 +1,22 @@
+scope: ResourceGroup
+
+scenarios:
+  - scenario: Provider
+    description: Provider
+    variables:
+      resourceProviderNamespace: Microsoft.Storage
+    steps:
+      - step: ResourceGroup_GetNamedProviderAtTenant
+        exampleFile: ../examples/GetNamedProviderAtTenant.json
+
+      - step: ResourceGroup_GetProvider
+        exampleFile: ../examples/GetProvider.json
+
+      - step: ResourceGroup_GetProviderPermissions
+        exampleFile: ../examples/GetProviderPermissions.json
+
+      - step: ResourceGroup_GetProviders
+        exampleFile: ../examples/GetProviders.json
+
+      - step: ResourceGroup_GetProviderResourceTypes
+        exampleFile: ../examples/GetProviderResourceTypes.json
