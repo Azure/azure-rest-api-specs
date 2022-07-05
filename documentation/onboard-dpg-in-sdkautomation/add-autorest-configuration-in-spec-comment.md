@@ -1,4 +1,4 @@
-# Add Autorest Configuration in Spec Comment
+# Add Autorest Configuration for Dataplane SDK
 
 ## Prerequisites
 There should be a basic readme.md together with swagger, and you can refer to the [sample](../samplefiles-dp).
