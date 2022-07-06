@@ -575,7 +575,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
+              "$ref": "#/definitions/ServiceConfigListResult"
             }
           },
           "default": {
@@ -623,7 +623,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
+              "$ref": "#/definitions/ServiceConfigListResult"
             }
           },
           "default": {
@@ -1879,15 +1879,15 @@
         }
       ]
     },
-    "ClusterInstanceServiceConfigsResult": {
+    "ServiceConfigListResult": {
       "type": "object",
       "description": "Cluster/SessionCluster instance service configs api response.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Cluster/SessionCluster instance service config in the array.",
+          "description": "Cluster/SessionCluster instance service config array.",
           "items": {
-            "$ref": "#/definitions/ClusterInstanceServiceConfig"
+            "$ref": "#/definitions/ServiceConfigResult"
           },
           "x-ms-identifiers": []
         },
@@ -1898,21 +1898,25 @@
         }
       }
     },
-    "ClusterInstanceServiceConfig": {
+    "ServiceConfigResult": {
       "type": "object",
       "description": "Cluster/SessionCluster instance service config.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties. Define service config properties.",
-          "$ref": "#/definitions/ClusterInstanceServiceConfigProperties"
+          "description": "Cluster/SessionCluster instance service config properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceConfigListResultProperties"
+            }
+          ]
         }
       }
     },
-    "ClusterInstanceServiceConfigProperties": {
+    "ServiceConfigListResultProperties": {
       "type": "object",
       "properties": {
-        "serviceConfigName": {
+        "serviceName": {
           "type": "string",
           "description": "Service Config Name."
         },
@@ -1924,7 +1928,7 @@
           "type": "string",
           "description": "Content in the service config file."
         },
-        "component": {
+        "componentName": {
           "type": "string",
           "description": "Component Name."
         },
@@ -1945,17 +1949,18 @@
         "defaultKeys": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ClusterInstanceServiceConfigEntity"
+            "$ref": "#/definitions/ServiceConfigListResultValueEntity"
           }
         }
       },
       "required": [
-        "serviceConfigName",
+        "serviceName",
+        "componentName",
         "fileName"
       ],
       "description": "Service config response."
     },
-    "ClusterInstanceServiceConfigEntity": {
+    "ServiceConfigListResultValueEntity": {
       "type": "object",
       "description": "Default config details.",
       "properties": {
