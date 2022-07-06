@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft.Dashboard",
     "description": "The Microsoft.Dashboard Rest API spec.",
-    "version": "2022-05-01-preview"
+    "version": "2022-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -287,6 +287,12 @@
         "responses": {
           "200": {
             "description": "OK. Successfully update the workspace for Grafana resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "202": {
+            "description": "Accepted. The operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ManagedGrafana"
             }
