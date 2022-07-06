@@ -35,6 +35,29 @@
   },
   "paths": {},
   "definitions": {
+    "ReferencedResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another resource.",
+      "x-ms-azure-resource": true
+    },
+    "CustomLocationResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$",
+          "description": "Azure ARC custom location resource ID."
+        }
+      },
+      "description": "Reference to an Azure ARC custom location resource.",
+      "x-ms-azure-resource": true
+    },
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -46,10 +69,25 @@
         "Deleting",
         "Failed",
         "Canceled",
-        "Deleted"
+        "Deleted",
+        "Converging"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NFVIType": {
+      "type": "string",
+      "description": "The NFVI type.",
+      "enum": [
+        "Unknown",
+        "AzureArcKubernetes",
+        "AzureStackEdge",
+        "AzureCore"
+      ],
+      "x-ms-enum": {
+        "name": "NFVIType",
         "modelAsString": true
       }
     },
@@ -66,18 +104,36 @@
       },
       "description": "Tags object for patch operations."
     },
-    "NFVIType": {
-      "type": "string",
-      "description": "Nfvi type.",
-      "enum": [
-        "Unknown",
-        "AzureArcKubernetes",
-        "AzureStackEdge",
-        "Azure"
-      ],
-      "x-ms-enum": {
-        "name": "NfviType",
-        "modelAsString": true
+    "GenericParameters": {
+      "type": "object",
+      "description": "The parameters for the generic object."
+    },
+    "ConfigurationGroup": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "The configuration group in form of {key, value}."
+    },
+    "ConfigurationGroups": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigurationGroup"
+      },
+      "description": "The configuration object for the specified cluster."
+    },
+    "ManagedResourceGroupConfiguration": {
+      "description": "Managed resource group configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
+        }
       }
     },
     "PublisherScope": {
@@ -92,6 +148,48 @@
         "name": "PublisherScope",
         "modelAsString": true
       }
+    }
+  },
+  "parameters": {
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service site.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkServiceDesignNameParameter": {
+      "name": "networkServiceDesignName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service design.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationGroupValueNameParameter": {
+      "name": "configurationGroupValueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the configuration group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SiteNetworkServiceNameParameter": {
+      "name": "siteNetworkServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

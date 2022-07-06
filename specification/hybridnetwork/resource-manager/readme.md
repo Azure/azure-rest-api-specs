@@ -95,6 +95,19 @@ input-file:
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/networkFunctionVendor.json
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendorNetworkFunction.json
 ```
+### Tag: package-2022-09-01-preview
+
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/common.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/operation.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/site.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/siteNetworkService.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/configurationGroupValues.json
+```
 
 ---
 
