@@ -226,16 +226,16 @@
           "final-state-via": "original-uri"
         },
         "responses": {
-          "200": {
-            "description": "Succeeded",
-            "schema": {
-              "$ref": "#/definitions/Environment"
-            }
-          },
           "201": {
             "description": "Created. Operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
