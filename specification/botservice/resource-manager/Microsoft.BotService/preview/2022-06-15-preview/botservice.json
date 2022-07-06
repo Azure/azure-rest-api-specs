@@ -256,6 +256,9 @@
               "$ref": "#/definitions/Error"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1641,12 +1644,18 @@
         "msaAppId": {
           "type": "string",
           "description": "Microsoft App Id for the bot",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "msaAppTenantId": {
           "type": "string",
           "description": "Microsoft App Tenant Id for the bot",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "msaAppMSIResourceId": {
           "type": "string",
@@ -1708,7 +1717,10 @@
         "tenantId": {
           "type": "string",
           "description": "The Tenant Id for the bot",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "publicNetworkAccess": {
           "description": "Whether the bot is in an isolated network",
