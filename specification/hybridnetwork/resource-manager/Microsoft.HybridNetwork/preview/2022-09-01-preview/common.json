@@ -104,6 +104,79 @@
       },
       "description": "Tags object for patch operations."
     },
+    "NetworkFunctionApplication": {
+      "description": "Network function application definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the network function application."
+        },
+        "dependsOnProfile": {
+          "description": "Depends on profile definition.",
+          "$ref": "#/definitions/DependsOnProfile"
+        }
+      }
+    },
+    "DependsOnProfile": {
+      "description": "Depends on profile definition.",
+      "type": "object",
+      "properties": {
+        "installDependsOn": {
+          "type": "array",
+          "description": "Application installation operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "uninstallDependsOn": {
+          "type": "array",
+          "description": "Application deletion operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "updateDependsOn": {
+          "type": "array",
+          "description": "Application update operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ArtifactProfile": {
+      "description": "Artifact profile properties.",
+      "type": "object",
+      "properties": {
+        "artifactStore": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The reference to artifact store."
+        }
+      }
+    },
+    "MappingRuleProfile": {
+      "description": "Mapping rule profile properties.",
+      "type": "object",
+      "properties": {
+        "applicationEnablement": {
+          "type": "string",
+          "description": "The application enablement.",
+          "enum": [
+            "Unknown",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationEnablement",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "GenericParameters": {
       "type": "object",
       "description": "The parameters for the generic object."
@@ -151,6 +224,16 @@
     }
   },
   "parameters": {
+    "PublisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher.",
+      "x-ms-parameter-location": "method"
+    },
     "SiteNameParameter": {
       "name": "siteName",
       "in": "path",
@@ -171,6 +254,16 @@
       "description": "The name of the network service design.",
       "x-ms-parameter-location": "method"
     },
+    "NetworkServiceDesignGroupNameParameter": {
+      "name": "networkServiceDesignGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service design group.",
+      "x-ms-parameter-location": "method"
+    },
     "ConfigurationGroupValueNameParameter": {
       "name": "configurationGroupValueName",
       "in": "path",
@@ -178,7 +271,27 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "maxLength": 64,
-      "description": "The name of the configuration group.",
+      "description": "The name of the configuration group value.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationGroupSchemaNameParameter": {
+      "name": "configurationGroupSchemaName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the configuration group schema.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkServiceDesignVersionNameParameter": {
+      "name": "networkServiceDesignVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service design version.",
       "x-ms-parameter-location": "method"
     },
     "SiteNetworkServiceNameParameter": {
@@ -188,7 +301,47 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "maxLength": 64,
-      "description": "The name of the network service.",
+      "description": "The name of the site network service.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionGroupNameParameter": {
+      "name": "networkFunctionDefinitionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network function definition group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionVersionNameParameter": {
+      "name": "networkFunctionDefinitionVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network function definition version.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactStoreParameter": {
+      "name": "artifactStoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact store.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactManifestParameter": {
+      "name": "artifactManifestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact manifest.",
       "x-ms-parameter-location": "method"
     }
   }

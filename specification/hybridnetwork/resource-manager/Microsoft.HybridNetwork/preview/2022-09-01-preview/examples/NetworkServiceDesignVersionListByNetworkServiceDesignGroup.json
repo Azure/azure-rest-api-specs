@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestVersion",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/TestNetworkFunctionDefinitionVersionName",
+            "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups/TestNetworkServiceDesignVersionName",
+            "location": "eastus",
+            "properties": {
+              "versionState": "Active",
+              "configurationgroupsSchemaReferences": {
+                "SIMPLVM_Configuration": {
+                  "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/networkServiceDesignGroups/NSD_BTSDIN/configurationGroupSchemas/SIMPLVM_Configuration_Schema"
+                },
+                "SasAndSimon_Configuration": {
+                  "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/networkServiceDesignGroups/NSD_BTSDIN/configurationGroupSchemas/SasAndSimon_Configuration_Schema"
+                },
+                "perimetaConfiguration": {
+                  "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/networkServiceDesignGroups/NSD_BTSDIN/configurationGroupSchemas/perimetaConfiguration_Schema"
+                },
+                "interconnects": {
+                  "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/networkServiceDesignGroups/NSD_BTSDIN/configurationGroupSchemas/international-interconnects_Schema"
+                },
+                "interconnectgroups": {
+                  "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/networkServiceDesignGroups/NSD_BTSDIN/configurationGroupSchemas/interconnect_Schema"
+                }
+              },
+              "resourceElementsTemplates": [
+                {
+                  "name": "SIMPLVM",
+                  "type": "ArmResourceDefinition",
+                  "dependsOnProfile": {
+                    "installDependsOn": []
+                  },
+                  "configuration": {
+                    "templateType": "ArmTemplate",
+                    "parameterValues": "\"publisherName\": \"{configurationparameters('SIMPLVM_Configuration').publisherName}\",\r\n                \"skuGroupName\": \"{configurationparameters('SIMPLVM_Configuration').skuGroupName}\",\r\n                \"skuVersion\": \"{configurationparameters('SIMPLVM_Configuration').skuVersion}\",\r\n                \"skuOfferingLocation\": \"{configurationparameters('SIMPLVM_Configuration').skuOfferingLocation}\",\r\n                \"nfviType\": \"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviType}\",\r\n                \"nfviId\": \"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviId}\",\r\n                \"allowSoftwareUpdates\": \"{configurationparameters('SIMPLVM_Configuration').allowSoftwareUpdates}\",\r\n                \"virtualNetworkName\": \"{configurationparameters('SIMPLVM_Configuration').vnetName}\",\r\n                \"subnetName\": \"{configurationparameters('SIMPLVM_Configuration').subnetName}\",\r\n                \"subnetAddressPrefix\": \"{configurationparameters('SIMPLVM_Configuration').subnetAddressPrefix}\",\r\n                \"managedResourceGroup\": \"{configurationparameters('SNSSelf').managedResourceGroupName}\",\r\n                \"ConfigurationDefinitionnames\": [\r\n                  \"Perimeta\"\r\n  ",
+                    "artifactProfile": {
+                      "artifactStoreReference": {
+                        "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/ArtifactStore/store1"
+                      },
+                      "templateName": "simplVMArmTemplate",
+                      "templateVersion": "1.0.0"
+                    }
+                  }
+                },
+                {
+                  "name": "Perimeta",
+                  "type": "ConfigurationDefinition",
+                  "dependsOnProfile": {
+                    "installDependsOn": [
+                      "SIMPLVM"
+                    ]
+                  },
+                  "configuration": {
+                    "configurationGenerationType": "HandlebarTemplate",
+                    "parameterValues": "\"indexConfigurations\": \"{configurationparameters('perimetaConfiguration').resourceElementsIndexConfiguration}\",\r\n\t\t\t\t\t\t\t\t\"Comment: optional paramter required.\": \"\",\r\n\t\t\t\t\t\t\t\t\"international-interconnects\": \"{configurationparameters('interconnects').international-interconnects}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-groups\": \"{configurationparameters('interconnectgroups').interconnect-groups}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-group-assignments\": \"{configurationparameters('interconnectgroups').interconnect-group-assignments}\",\r\n\t\t\t\t\t\t\t\t\"domestic-interconnects\": \"{configurationparameters('interconnects').domestic-interconnects}\"",
+                    "artifactProfile": {
+                      "artifactStoreReference": {
+                        "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/ArtifactStore/store1"
+                      },
+                      "templateName": "simplVMArmTemplate",
+                      "templateVersion": "1.0.0"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
