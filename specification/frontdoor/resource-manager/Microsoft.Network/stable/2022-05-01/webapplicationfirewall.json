@@ -71,7 +71,46 @@
         },
         "x-ms-examples": {
           "Get all Policies in a Resource Group": {
-            "$ref": "./examples/WafListPolicies.json"
+            "$ref": "./examples/WafListPoliciesUnderResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Lists all of the protection policies within a subscription.",
+        "operationId": "Policies_List",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all Policies in a Resource Group": {
+            "$ref": "./examples/WafListPoliciesUnderSubscription.json"
           }
         }
       }
@@ -918,7 +957,8 @@
         "Allow",
         "Block",
         "Log",
-        "Redirect"
+        "Redirect",
+        "AnomalyScoring"
       ],
       "x-ms-enum": {
         "name": "ActionType",
@@ -931,7 +971,8 @@
       "enum": [
         "Block",
         "Log",
-        "Redirect"
+        "Redirect",
+        "AnomalyScoring"
       ],
       "x-ms-enum": {
         "name": "ManagedRuleSetActionType",
