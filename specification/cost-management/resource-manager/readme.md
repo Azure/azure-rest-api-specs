@@ -37,15 +37,16 @@ azure-validator: false
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-08'
+``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.insights.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
 ```
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-06'
+```yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.CostManagement/preview/2022-06-01-preview/scheduledActions.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
@@ -56,7 +57,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-04'
+```yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
@@ -67,7 +68,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
 ```
