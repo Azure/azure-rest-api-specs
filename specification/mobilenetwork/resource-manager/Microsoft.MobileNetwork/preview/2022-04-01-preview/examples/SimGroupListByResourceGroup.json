@@ -2,17 +2,16 @@
   "parameters": {
     "api-version": "2022-04-01-preview",
     "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "mobileNetworkName": "testMobileNetwork"
+    "resourceGroupName": "rg1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "testSite",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
-            "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+            "name": "testSimGroup",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup",
+            "type": "Microsoft.MobileNetwork/simGroups",
             "systemData": {
               "createdBy": "user1",
               "createdByType": "User",
@@ -21,14 +20,16 @@
               "lastModifiedByType": "User",
               "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
             },
-            "location": "testLocation",
+            "location": "eastus",
+            "tags": {},
             "properties": {
               "provisioningState": "Succeeded",
-              "networkFunctions": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/networkFunctions/testNf"
-                }
-              ]
+              "encryptionKey": {
+                "keyUrl": "https://contosovault.vault.azure.net/keys/azureKey"
+              },
+              "mobileNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+              }
             }
           }
         ]

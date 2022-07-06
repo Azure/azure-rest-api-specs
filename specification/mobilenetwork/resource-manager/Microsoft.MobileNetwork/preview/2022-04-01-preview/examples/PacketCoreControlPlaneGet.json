@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2022-03-01-preview",
+    "api-version": "2022-04-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "packetCoreControlPlaneName": "TestPacketCoreCP"
@@ -26,13 +26,28 @@
           "mobileNetwork": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
           },
-          "customLocation": {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+          "platform": {
+            "type": "AKS-HCI",
+            "azureStackEdgeDevice": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/TestAzureStackEdgeDevice"
+            },
+            "connectedCluster": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/TestConnectedCluster"
+            },
+            "customLocation": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+            }
           },
           "coreNetworkTechnology": "5GC",
           "version": "0.2.0",
           "controlPlaneAccessInterface": {
             "name": "N2"
+          },
+          "sku": "testSku",
+          "localDiagnosticsAccess": {
+            "httpsServerCertificate": {
+              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress"
+            }
           }
         }
       }

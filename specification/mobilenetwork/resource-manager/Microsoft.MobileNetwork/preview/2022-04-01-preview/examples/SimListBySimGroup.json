@@ -1,7 +1,9 @@
 {
   "parameters": {
-    "api-version": "2022-03-01-preview",
-    "subscriptionId": "subid"
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "simGroupName": "testSimGroup"
   },
   "responses": {
     "200": {
@@ -9,8 +11,8 @@
         "value": [
           {
             "name": "testSim",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sims/testSim",
-            "type": "Microsoft.MobileNetwork/sims",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup/sims/testSim",
+            "type": "Microsoft.MobileNetwork/simGroups/sims",
             "systemData": {
               "createdBy": "user1",
               "createdByType": "User",
@@ -19,15 +21,11 @@
               "lastModifiedByType": "User",
               "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
             },
-            "location": "testLocation",
             "properties": {
               "provisioningState": "Succeeded",
               "simState": "Enabled",
               "integratedCircuitCardIdentifier": "8900000000000000000",
               "internationalMobileSubscriberIdentity": "00000",
-              "mobileNetwork": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
-              },
               "deviceType": "Video camera",
               "simPolicy": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"

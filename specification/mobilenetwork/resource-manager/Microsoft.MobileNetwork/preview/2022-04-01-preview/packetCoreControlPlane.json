@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage packet core control plane resources",
-    "version": "2022-03-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}": {
       "delete": {
         "tags": [
-          "PacketCoreControlPlanes"
+          "PacketCoreControlPlane"
         ],
         "operationId": "PacketCoreControlPlanes_Delete",
         "description": "Deletes the specified packet core control plane.",
@@ -84,7 +84,7 @@
       },
       "get": {
         "tags": [
-          "PacketCoreControlPlanes"
+          "PacketCoreControlPlane"
         ],
         "operationId": "PacketCoreControlPlanes_Get",
         "description": "Gets information about the specified packet core control plane.",
@@ -124,10 +124,10 @@
       },
       "put": {
         "tags": [
-          "PacketCoreControlPlanes"
+          "PacketCoreControlPlane"
         ],
         "operationId": "PacketCoreControlPlanes_CreateOrUpdate",
-        "description": "Creates or updates a PacketCoreControlPlane.",
+        "description": "Creates or updates a packet core control plane.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -183,10 +183,10 @@
       },
       "patch": {
         "tags": [
-          "PacketCoreControlPlanes"
+          "PacketCoreControlPlane"
         ],
         "operationId": "PacketCoreControlPlanes_UpdateTags",
-        "description": "Updates a PacketCoreControlPlane update tags.",
+        "description": "Updates packet core control planes tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -201,7 +201,7 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update PacketCoreControlPlane tags."
+            "description": "Parameters supplied to update packet core control plane tags."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -237,7 +237,7 @@
           "PacketCoreControlPlanes"
         ],
         "operationId": "PacketCoreControlPlanes_ListBySubscription",
-        "description": "Lists all the packetCoreControlPlanes in a subscription.",
+        "description": "Lists all the packet core control planes in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -276,7 +276,7 @@
           "PacketCoreControlPlanes"
         ],
         "operationId": "PacketCoreControlPlanes_ListByResourceGroup",
-        "description": "Lists all the packetCoreControlPlanes in a resource group.",
+        "description": "Lists all the packet core control planes in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -311,6 +311,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/supportedPacketCoreControlPlaneVersions": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlanes"
+        ],
+        "operationId": "PacketCoreControlPlanes_SupportedVersions",
+        "description": "Get the set of packet core control plane versions that are currently supported.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get supported packet core control plane versions successful.",
+            "schema": {
+              "$ref": "#/definitions/SupportedPacketCoreControlPlaneVersionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get supported packet core control plane versions": {
+            "$ref": "./examples/SupportedPacketCoreControlPlaneVersions.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -321,6 +360,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PacketCoreControlPlanePropertiesFormat",
           "description": "Packet core control plane Properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve the ingress certificate from Azure key vault."
         },
         "systemData": {
           "x-ms-client-flatten": true,
@@ -340,7 +383,7 @@
       "description": "Packet core control plane resource."
     },
     "PacketCoreControlPlanePropertiesFormat": {
-      "description": "PacketCoreControlPlane properties.",
+      "description": "Packet core control plane properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -350,15 +393,15 @@
         },
         "mobileNetwork": {
           "$ref": "./common.json#/definitions/MobileNetworkResourceId",
-          "description": "Mobile network that this packet core control plane belongs to"
+          "description": "Mobile network in which this packet core control plane is deployed."
         },
-        "customLocation": {
-          "$ref": "./common.json#/definitions/CustomLocationResourceId",
-          "description": "Azure ARC custom location where the packet core is deployed."
+        "platform": {
+          "$ref": "#/definitions/PlatformConfiguration",
+          "description": "The platform where the packet core is deployed."
         },
         "coreNetworkTechnology": {
           "$ref": "./ts29571.json#/definitions/CoreNetworkType",
-          "description": "The core network technology generation."
+          "description": "The core network technology generation (5G core or EPC / 4G core)."
         },
         "version": {
           "type": "string",
@@ -366,12 +409,25 @@
         },
         "controlPlaneAccessInterface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
-          "description": "The control plane interface on the access network. In 5G networks this is called as N2 interface whereas in 4G networks this is called as S1-MME interface."
+          "description": "The control plane interface on the access network. For 5G networks, this is the N2 interface. For 4G networks, this is the S1-MME interface."
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/BillingSku",
+          "description": "The SKU defining the throughput and SIM allowances for this packet core control plane deployment."
+        },
+        "localDiagnosticsAccess": {
+          "$ref": "#/definitions/LocalDiagnosticsAccessConfiguration",
+          "description": "The kubernetes ingress configuration to control access to packet core diagnostics over local APIs."
+        },
+        "interopSettings": {
+          "type": "object",
+          "description": "Settings to allow interoperability with third party components e.g. RANs and UEs."
         }
       },
       "required": [
         "mobileNetwork",
-        "controlPlaneAccessInterface"
+        "controlPlaneAccessInterface",
+        "sku"
       ]
     },
     "PacketCoreControlPlaneListResult": {
@@ -391,6 +447,91 @@
         }
       },
       "description": "Response for packet core control planes API service call."
+    },
+    "PlatformConfiguration": {
+      "description": "The platform where the packet core is deployed.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "The platform type where packet core is deployed."
+        },
+        "azureStackEdgeDevice": {
+          "$ref": "./common.json#/definitions/AzureStackEdgeDeviceResourceId",
+          "description": "The Azure Stack Edge device where where the packet core is deployed. If the device is part of a fault tolerant pair, either device in the pair can be specified."
+        },
+        "connectedCluster": {
+          "$ref": "./common.json#/definitions/ConnectedClusterResourceId",
+          "description": "Azure Arc connected cluster where the packet core is deployed."
+        },
+        "customLocation": {
+          "$ref": "./common.json#/definitions/CustomLocationResourceId",
+          "description": "Azure Arc custom location where the packet core is deployed."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PlatformType": {
+      "type": "string",
+      "description": "The platform type where packet core is deployed. The contents of this enum can change.",
+      "enum": [
+        "AKS-HCI",
+        "BaseVM"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AKS-HCI",
+            "description": "If this option is chosen, you must set one of \"azureStackEdgeDevice\", \"connectedCluster\" or \"customLocation\". If multiple are set then \"customLocation\" will take precedence over \"connectedCluster\" which takes precedence over \"azureStackEdgeDevice\"."
+          },
+          {
+            "value": "BaseVM",
+            "description": "If this option is chosen, you must set one of \"connectedCluster\" or \"customLocation\". If multiple are set then \"customLocation\" will take precedence over \"connectedCluster\"."
+          }
+        ]
+      }
+    },
+    "LocalDiagnosticsAccessConfiguration": {
+      "description": "The kubernetes ingress configuration to control access to packet core diagnostics over local APIs.",
+      "type": "object",
+      "properties": {
+        "httpsServerCertificate": {
+          "$ref": "#/definitions/KeyVaultCertificate",
+          "description": "The HTTPS server TLS certificate used to secure local access to diagnostics."
+        }
+      }
+    },
+    "KeyVaultCertificate": {
+      "description": "An Azure key vault certificate.",
+      "type": "object",
+      "properties": {
+        "certificateUrl": {
+          "type": "string",
+          "description": "The certificate URL, unversioned. For example: https://contosovault.vault.azure.net/certificates/ingress."
+        }
+      }
+    },
+    "SupportedPacketCoreControlPlaneVersionResult": {
+      "type": "object",
+      "properties": {
+        "supportedVersions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A supported version of packet core control plane"
+          },
+          "description": "The supported packet core control plane versions."
+        },
+        "recommendedVersion": {
+          "type": "string",
+          "description": "The recommended version to use for new packet core control plane deployments."
+        }
+      },
+      "description": "Response for supported packet core control plane versions API call."
     }
   }
 }

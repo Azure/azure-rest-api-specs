@@ -3,7 +3,7 @@
     "api-version": "2022-04-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "mobileNetworkName": "testMobileNetwork",
+    "simGroupName": "testSimGroup",
     "parameters": {
       "tags": {
         "tag1": "value1",
@@ -14,9 +14,9 @@
   "responses": {
     "200": {
       "body": {
-        "name": "testMobileNetwork",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork",
-        "type": "Microsoft.MobileNetwork/mobileNetworks",
+        "name": "testSimGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup",
+        "type": "Microsoft.MobileNetwork/simGroups",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -32,9 +32,11 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "publicLandMobileNetworkIdentifier": {
-            "mcc": "001",
-            "mnc": "01"
+          "encryptionKey": {
+            "keyUrl": "https://contosovault.vault.azure.net/keys/azureKey"
+          },
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
           }
         }
       }

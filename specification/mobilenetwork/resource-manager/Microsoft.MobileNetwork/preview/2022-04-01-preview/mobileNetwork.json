@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage mobile network resources",
-    "version": "2022-03-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}": {
       "delete": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_Delete",
         "description": "Deletes the specified mobile network.",
@@ -84,7 +84,7 @@
       },
       "get": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_Get",
         "description": "Gets information about the specified mobile network.",
@@ -124,7 +124,7 @@
       },
       "put": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_CreateOrUpdate",
         "description": "Creates or updates a mobile network.",
@@ -183,10 +183,10 @@
       },
       "patch": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_UpdateTags",
-        "description": "Updates a mobile network update tags.",
+        "description": "Updates mobile network tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -315,10 +315,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/listSimIds": {
       "post": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetworkSIMIDs"
         ],
         "operationId": "MobileNetworks_ListSimIds",
-        "description": "List sim ids under a mobile network.",
+        "description": "Lists the IDs of all provisioned SIMs in a mobile network",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -335,7 +335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List sim profile ids successful.",
+            "description": "List SIM IDs successful.",
             "schema": {
               "$ref": "#/definitions/SimIdListResult"
             }
@@ -354,7 +354,7 @@
           }
         },
         "x-ms-examples": {
-          "List sim profile ids by network": {
+          "List the IDs of all provisioned SIMs in a mobile network": {
             "$ref": "./examples/SimIdListByMobileNetwork.json"
           }
         },
@@ -367,7 +367,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}": {
       "delete": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_Delete",
         "description": "Deletes the specified mobile network site.",
@@ -417,7 +417,7 @@
       },
       "get": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_Get",
         "description": "Gets information about the specified mobile network site.",
@@ -460,7 +460,7 @@
       },
       "put": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_CreateOrUpdate",
         "description": "Creates or updates a mobile network site.",
@@ -522,10 +522,10 @@
       },
       "patch": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_UpdateTags",
-        "description": "Updates a site update tags.",
+        "description": "Updates site tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -618,13 +618,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/simGroups/{simGroupName}": {
       "delete": {
         "tags": [
-          "Sims"
+          "SIMGroup"
         ],
-        "operationId": "Sims_Delete",
-        "description": "Deletes the specified sim.",
+        "operationId": "SimGroups_Delete",
+        "description": "Deletes the specified SIM group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -634,6 +634,287 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SIM group": {
+            "$ref": "./examples/SimGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "SIMGroup"
+        ],
+        "operationId": "SimGroups_Get",
+        "description": "Gets information about the specified SIM group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting SIM group resource.",
+            "schema": {
+              "$ref": "#/definitions/SimGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SIM group": {
+            "$ref": "./examples/SimGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SIMGroup"
+        ],
+        "operationId": "SimGroups_CreateOrUpdate",
+        "description": "Creates or updates a SIM group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimGroup"
+            },
+            "description": "Parameters supplied to the create or update SIM group operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting SIM group resource.",
+            "schema": {
+              "$ref": "#/definitions/SimGroup"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting SIM group resource.",
+            "schema": {
+              "$ref": "#/definitions/SimGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SIM group": {
+            "$ref": "./examples/SimGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SIMGroup"
+        ],
+        "operationId": "SimGroups_UpdateTags",
+        "description": "Updates SIM group tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update SIM group tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting SIM group resource.",
+            "schema": {
+              "$ref": "#/definitions/SimGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SIM group tags": {
+            "$ref": "./examples/SimGroupUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/simGroups": {
+      "get": {
+        "tags": [
+          "SIMGroups"
+        ],
+        "operationId": "SimGroups_ListBySubscription",
+        "description": "Gets all the SIM groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SIM group resources.",
+            "schema": {
+              "$ref": "#/definitions/SimGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SIM groups in a subscription": {
+            "$ref": "./examples/SimGroupListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/simGroups": {
+      "get": {
+        "tags": [
+          "SIMGroups"
+        ],
+        "operationId": "SimGroups_ListByResourceGroup",
+        "description": "Gets all the SIM groups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SIM group resources.",
+            "schema": {
+              "$ref": "#/definitions/SimGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SIM groups in a resource group": {
+            "$ref": "./examples/SimGroupListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/simGroups/{simGroupName}/sims/{simName}": {
+      "delete": {
+        "tags": [
+          "SIM"
+        ],
+        "operationId": "Sims_Delete",
+        "description": "Deletes the specified SIM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/SimNameParameter"
@@ -657,7 +938,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete sim": {
+          "Delete SIM": {
             "$ref": "./examples/SimDelete.json"
           }
         },
@@ -668,10 +949,10 @@
       },
       "get": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_Get",
-        "description": "Gets information about the specified sim.",
+        "description": "Gets information about the specified SIM.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -683,12 +964,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
+          },
+          {
             "$ref": "./common.json#/parameters/SimNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting sim resource.",
+            "description": "Request successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
@@ -701,17 +985,17 @@
           }
         },
         "x-ms-examples": {
-          "Get sim": {
+          "Get SIM": {
             "$ref": "./examples/SimGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_CreateOrUpdate",
-        "description": "Creates or updates a Sim.",
+        "description": "Creates or updates a SIM.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -721,6 +1005,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/SimNameParameter"
@@ -732,18 +1019,18 @@
             "schema": {
               "$ref": "#/definitions/Sim"
             },
-            "description": "Parameters supplied to the create or update sim operation."
+            "description": "Parameters supplied to the create or update SIM operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting sim resource.",
+            "description": "Update successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting sim resource.",
+            "description": "Create successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
@@ -756,7 +1043,7 @@
           }
         },
         "x-ms-examples": {
-          "Create sim": {
+          "Create SIM": {
             "$ref": "./examples/SimCreate.json"
           }
         },
@@ -764,75 +1051,32 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-      },
-      "patch": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/simGroups/{simGroupName}/sims": {
+      "get": {
         "tags": [
-          "Sims"
+          "SIMs"
         ],
-        "operationId": "Sims_UpdateTags",
-        "description": "Updates a sim update tags.",
+        "operationId": "Sims_ListBySimGroup",
+        "description": "Gets all the SIMs in a SIM group.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SimNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update sim tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting sim resource.",
-            "schema": {
-              "$ref": "#/definitions/Sim"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update sim tags": {
-            "$ref": "./examples/SimUpdateTags.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/sims": {
-      "get": {
-        "tags": [
-          "Sims"
-        ],
-        "operationId": "Sims_ListBySubscription",
-        "description": "Gets all the sims in a subscription.",
-        "parameters": [
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SimGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of sim resources.",
+            "description": "Request successful. The operation returns a list of SIM resources.",
             "schema": {
               "$ref": "#/definitions/SimListResult"
             }
@@ -845,50 +1089,8 @@
           }
         },
         "x-ms-examples": {
-          "List sims in a subscription": {
-            "$ref": "./examples/SimListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims": {
-      "get": {
-        "tags": [
-          "Sims"
-        ],
-        "operationId": "Sims_ListByResourceGroup",
-        "description": "Gets all the Sims in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of sim resources.",
-            "schema": {
-              "$ref": "#/definitions/SimListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List sims in a resource group": {
-            "$ref": "./examples/SimListByResourceGroup.json"
+          "List SIMs in a SIM group": {
+            "$ref": "./examples/SimListBySimGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -934,7 +1136,7 @@
         },
         "publicLandMobileNetworkIdentifier": {
           "$ref": "./ts29571.json#/definitions/PlmnId",
-          "description": "The unique public land mobile network identifier for the network. This is made up of the Mobile Country Code and Mobile Network Code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks."
+          "description": "The unique public land mobile network identifier for the network. This is made up of the mobile country code and mobile network code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks."
         },
         "serviceKey": {
           "type": "string",
@@ -964,13 +1166,17 @@
       },
       "description": "Response for mobile networks API service call."
     },
-    "Sim": {
+    "SimGroup": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SimPropertiesFormat",
-          "description": "Sim Properties."
+          "$ref": "#/definitions/SimGroupPropertiesFormat",
+          "description": "SIM group Properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve the encryption key from Azure key vault."
         },
         "systemData": {
           "x-ms-client-flatten": true,
@@ -987,21 +1193,93 @@
       "required": [
         "properties"
       ],
-      "description": "Sim resource."
+      "description": "SIM group resource."
     },
-    "SimPropertiesFormat": {
+    "SimGroupPropertiesFormat": {
       "type": "object",
-      "description": "Sim properties.",
+      "description": "SIM group properties.",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the sim resource."
+          "description": "The provisioning state of the SIM group resource."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/KeyVaultKey",
+          "description": "A key to encrypt the SIM data that belongs to this SIM group."
+        },
+        "mobileNetwork": {
+          "$ref": "./common.json#/definitions/MobileNetworkResourceId",
+          "description": "Mobile network that this SIM belongs to"
+        }
+      }
+    },
+    "KeyVaultKey": {
+      "description": "An Azure key vault key.",
+      "type": "object",
+      "properties": {
+        "keyUrl": {
+          "type": "string",
+          "description": "The key URL, unversioned. For example: https://contosovault.vault.azure.net/keys/azureKey."
+        }
+      }
+    },
+    "SimGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimGroup"
+          },
+          "description": "A list of SIM groups in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for list SIM groups API service call."
+    },
+    "Sim": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SimPropertiesFormat",
+          "description": "SIM Properties."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "SIM resource."
+    },
+    "SimPropertiesFormat": {
+      "type": "object",
+      "description": "SIM properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the SIM resource."
         },
         "simState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/SimState",
-          "description": "The state of the sim resource."
+          "description": "The state of the SIM resource."
         },
         "internationalMobileSubscriberIdentity": {
           "type": "string",
@@ -1010,12 +1288,12 @@
             "create",
             "read"
           ],
-          "description": "The International Mobile Subscriber Identity (IMSI) for the sim."
+          "description": "The international mobile subscriber identity (IMSI) for the SIM."
         },
         "integratedCircuitCardIdentifier": {
           "type": "string",
           "pattern": "^89[0-9]{17,18}$",
-          "description": "The Integrated Circuit Card ID (ICC Id) for the sim."
+          "description": "The integrated circuit card ID (ICCID) for the SIM."
         },
         "authenticationKey": {
           "type": "string",
@@ -1025,7 +1303,7 @@
             "create",
             "update"
           ],
-          "description": "The ki value for the sim."
+          "description": "The Ki value for the SIM."
         },
         "operatorKeyCode": {
           "type": "string",
@@ -1035,19 +1313,15 @@
             "create",
             "update"
           ],
-          "description": "The Opc value for the sim."
-        },
-        "mobileNetwork": {
-          "$ref": "./common.json#/definitions/MobileNetworkResourceId",
-          "description": "Mobile network that this sim belongs to"
+          "description": "The Opc value for the SIM."
         },
         "deviceType": {
           "type": "string",
-          "description": "An optional free-form text field that can be used to record the device type this sim is associated with, for example 'Video camera'. The Azure portal allows Sims to be grouped and filtered based on this value."
+          "description": "An optional free-form text field that can be used to record the device type this SIM is associated with, for example 'Video camera'. The Azure portal allows SIMs to be grouped and filtered based on this value."
         },
         "simPolicy": {
           "$ref": "./common.json#/definitions/SimPolicyResourceId",
-          "description": "The simPolicy used by this sim."
+          "description": "The SIM policy used by this SIM."
         },
         "staticIpConfiguration": {
           "type": "array",
@@ -1056,7 +1330,7 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "A list of static IP addresses assigned to this sim. Each address is assigned at a defined network scope, made up of {attached data network, slice}.",
+          "description": "A list of static IP addresses assigned to this SIM. Each address is assigned at a defined network scope, made up of {attached data network, slice}.",
           "x-ms-identifiers": [
             "attachedDataNetwork",
             "slice"
@@ -1069,23 +1343,23 @@
     },
     "SimStaticIpProperties": {
       "type": "object",
-      "description": "Static IP configuration for a sim, scoped to a particular attached data network and slice.",
+      "description": "Static IP configuration for a SIM, scoped to a particular attached data network and slice.",
       "properties": {
         "attachedDataNetwork": {
           "$ref": "./common.json#/definitions/AttachedDataNetworkResourceId",
-          "description": "The attached data network on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+          "description": "The attached data network on which the static IP address will be used. The combination of attached data network and slice defines the network scope of the IP address."
         },
         "slice": {
           "$ref": "./common.json#/definitions/SliceResourceId",
-          "description": "The network slice on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+          "description": "The network slice on which the static IP address will be used. The combination of attached data network and slice defines the network scope of the IP address."
         },
         "staticIp": {
           "type": "object",
-          "description": "The static IP configuration for the sim to use at the defined network scope.",
+          "description": "The static IP configuration for the SIM to use at the defined network scope.",
           "properties": {
             "ipv4Address": {
               "$ref": "./ts29571.json#/definitions/Ipv4Addr",
-              "description": "The IPv4 address assigned to the sim at this network scope. This address must be in the userEquipmentStaticAddressPoolPrefix defined in the attachedDataNetwork."
+              "description": "The IPv4 address assigned to the SIM at this network scope. This address must be in the userEquipmentStaticAddressPoolPrefix defined in the attached data network."
             }
           }
         }
@@ -1099,7 +1373,7 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "A list of sim profile ids in a resource group."
+          "description": "A list of SIM IDs."
         },
         "nextLink": {
           "type": "string",
@@ -1107,7 +1381,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for list sim ids API service call."
+      "description": "Response for list SIM IDs API service call."
     },
     "SimListResult": {
       "type": "object",
@@ -1117,7 +1391,7 @@
           "items": {
             "$ref": "#/definitions/Sim"
           },
-          "description": "A list of Sims in a resource group."
+          "description": "A list of SIMs in a resource group."
         },
         "nextLink": {
           "type": "string",
@@ -1125,7 +1399,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for list Sims API service call."
+      "description": "Response for list SIMs API service call."
     },
     "Site": {
       "type": "object",
@@ -1156,14 +1430,14 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the site resource. **TODO**: Confirm if this is needed"
+          "description": "The provisioning state of the site resource."
         },
         "networkFunctions": {
           "type": "array",
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "An array of ids of the network functions deployed on the site, maintained by the user."
+          "description": "An array of IDs of the network functions deployed on the site, maintained by the user."
         }
       }
     },
@@ -1175,7 +1449,7 @@
           "items": {
             "$ref": "#/definitions/Site"
           },
-          "description": "A list of sites in a resource group."
+          "description": "A list of sites in a mobile network."
         },
         "nextLink": {
           "type": "string",
