@@ -49,7 +49,7 @@
           }
         },
         "parameters": [
-		  {
+		      {
             "$ref": "#/parameters/scopeGetInsightsParameter"
           },
           {
@@ -69,108 +69,111 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
-	  },
-    "definitions": {
-      "InsightsCollectionResponse": {
-        "description": "Result of listing Insights. It contains a list of available insight values.",
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "The list of Insight values.",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "$ref": "#/definitions/Insights"
-            }
-          },
-          "nextLink": {
-            "description": "The link (url) to the next page of results.",
-            "type": "string",
-            "readOnly": true
+	  }
+  },
+  "definitions": {
+    "InsightsCollectionResponse": {
+      "description": "Result of listing Insights. It contains a list of available insight values.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Insight values.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Insights"
           }
-        }
-      },
-      "Insights": {
-        "description": "States and configurations of Cost Analysis.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/InsightsProperties",
-            "title": "Insights properties"
-          }
-        }
-      },
-      "InsightsProperties": {
-        "type": "object",
-        "description": "The properties of the Insights.",
-        "properties": {
-          "status": {
-            "description": "Insight status kept from storage.",
-            "type": "string"
-          },
-          "eventDate": {
-            "description": "The date of event resulting in this anomaly.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "scope": {
-            "description": "Cost Management scope for Insights in storage. This includes 'subscriptions/{subscriptionId}' for subscription scope",
-            "type": "string"
-          },
-          "impactTerm": {
-            "description": "The period where the impact was observed.",
-            "type": "string"
-          },
-          "impactResolution": {
-            "description": "Date when the user last modified this view.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "timeDetected": {
-            "description": "The datetime when this anomaly was detected.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "severity": {
-            "description": "Severity of anomaly to be used for surfacing High severity anomalies first.",
-            "type": "string"
-          },
-          "details": {
-            "description": "Details of anomaly.",
-            "type": "string"
-          },
-          "justification": {
-            "description": "Justification as why the impact qualifies as anomaly.",
-            "type": "string"
-          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "parameters": {
-      "apiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Version of the API to be used with the client request. The current version for Insights is 2020-08-01-preview"
-      },
-      "scopeGetInsightsParameter": {
-        "name": "scope",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The scope associated with Insights operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId} for BillingProfile scope.",
-        "x-ms-parameter-location": "method",
-        "x-ms-skip-url-encoding": true
+    "Insights": {
+      "description": "States and configurations of Cost Analysis.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InsightsProperties",
+          "title": "Insights properties"
+        }
       }
+    },
+    "InsightsProperties": {
+      "type": "object",
+      "description": "The properties of the Insights.",
+      "properties": {
+        "status": {
+          "description": "Insight status kept from storage.",
+          "type": "string"
+        },
+        "eventDate": {
+          "description": "The date of event resulting in this anomaly.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "scope": {
+          "description": "Cost Management scope for Insights in storage. This includes 'subscriptions/{subscriptionId}' for subscription scope",
+          "type": "string"
+        },
+        "impactTerm": {
+          "description": "The period where the impact was observed.",
+          "type": "string"
+        },
+        "impactResolution": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeDetected": {
+          "description": "The datetime when this anomaly was detected.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "severity": {
+          "description": "Severity of anomaly to be used for surfacing High severity anomalies first.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Details of anomaly.",
+          "type": "string"
+        },
+        "justification": {
+          "description": "Justification as why the impact qualifies as anomaly.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version for Insights is 2020-08-01-preview"
+    },
+    "scopeGetInsightsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with Insights operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId} for BillingProfile scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
