@@ -28,7 +28,26 @@ These are the global settings for the SQL virtual machine API.
 title: SqlVirtualMachineManagementClient
 description: 'The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.'
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2022-02
+```
+
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
 ```
 
 
@@ -36,10 +55,11 @@ tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2021-11-01-preview/sqlvm.json
 ```
+
 ### Tag: package-2017-03-01-preview
 
 These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
@@ -63,7 +83,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell

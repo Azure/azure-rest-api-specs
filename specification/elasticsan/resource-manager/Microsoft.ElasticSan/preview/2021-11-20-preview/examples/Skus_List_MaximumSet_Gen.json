@@ -1,51 +1,50 @@
 {
   "parameters": {
     "api-version": "2021-11-20-preview",
-    "$filter": "aaaaaaaaaaaa"
+    "$filter": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "sku": {
-              "name": "Standard_LRS",
-              "tier": "Standard"
-            },
+            "sku": [
+              {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+              }
+            ],
             "locationInfo": [
               {
-                "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "location": "aaaaa",
                 "zones": [
-                  "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                  "a"
                 ]
               }
             ],
-            "san": {
-              "maxSizeTiB": 2,
-              "minSizeTiB": 20,
-              "minIncrementSizeTiB": 24,
-              "iopsPerBaseTiB": 29,
-              "mbpsPerBaseTiB": 18,
-              "maxIops": 26,
+            "elasticSan": {
+              "maxSizeTiB": 18,
+              "minSizeTiB": 23,
+              "minIncrementSizeTiB": 8,
+              "iopsPerBaseTiB": 7,
+              "mbpsPerBaseTiB": 15,
               "maxMBps": 12,
-              "maxVolumeGroupCount": 26
+              "maxVolumeGroupCount": 8
             },
             "volumeGroup": {
-              "maxVolumeCount": 2
+              "maxVolumeCount": 5
             },
             "volume": {
-              "maxSizeGiB": 29,
-              "minSizeGiB": 10,
-              "minIncrementSizeGiB": 17,
-              "maxIopsPerGiB": 6,
-              "maxMBpsPerGiB": 30,
-              "maxIops": 17,
-              "maxMBps": 21,
-              "maxConnectedClientCount": 15
+              "maxSizeGiB": 26,
+              "minSizeGiB": 8,
+              "minIncrementSizeGiB": 25,
+              "iopsPerBaseGiB": 18,
+              "maxIops": 22,
+              "maxMBps": 29
             }
           }
         ],
-        "nextLink": "aaaaaaaaaaaaaaaaaaaa"
+        "nextLink": "aaaaaaaaaaaaaaaaa"
       }
     }
   }
