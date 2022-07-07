@@ -2363,6 +2363,7 @@
           "type": "string"
         },
         "tagList": {
+          "description": "The mesh tag list associated with the event.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2517,11 +2518,12 @@
       ],
       "properties": {
         "etag": {
+          "description": "Gets or sets the etag.",
           "type": "string",
           "readOnly": true
         },
         "tags": {
-          "description": "The insensitive version of dictionary.",
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2656,12 +2658,15 @@
       }
     },
     "SasData": {
+      "description": "Contains a SAS URI.",
       "type": "object",
       "properties": {
         "sasUri": {
+          "description": "A SAS URI that can be used for uploading files to a managed storage account. This is not an Azure Resource Manager identifier.",
           "type": "string"
         },
         "headers": {
+          "description": "Blob headers that should be used when uploading files.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2674,6 +2679,7 @@
       "type": "object",
       "properties": {
         "blobName": {
+          "description": "The name of the blob to be accessed in the managed storage account. This is not an Azure Resource Manager identifier.",
           "type": "string"
         }
       }
@@ -2834,6 +2840,11 @@
           },
           "x-ms-identifiers": []
         },
+        "isGlobal": {
+          "description": "Whether or not the template is global.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         }
@@ -2868,6 +2879,7 @@
       }
     },
     "TemplateCreationState": {
+      "description": "The states for a space template's creation.",
       "enum": [
         "Completed",
         "InProgress",
