@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Sphere Gen 2 Management",
     "version": "2022-09-01-privatepreview",
-    "description": "Use these APIs to manage Azure Sphere Gen 2 in your Azure subscription",
+    "description": "Use these APIs to manage Azure Sphere Gen 2 in your Azure subscription.",
     "x-cadl-generated": [
       {
         "emitter": "@azure-tools/cadl-autorest"
@@ -44,6 +44,12 @@
     },
     {
       "name": "ProvisioningPackages"
+    },
+    {
+      "name": "Certificates"
+    },
+    {
+      "name": "DeviceRegistrations"
     },
     {
       "name": "Operations"
@@ -123,6 +129,92 @@
         "x-ms-examples": {
           "List Catalogs by Subscription": {
             "$ref": "./examples/listCatalogsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_ListBySubscription",
+        "description": "List Certificate resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Certificates by Subscription": {
+            "$ref": "./examples/listCertificatesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/deviceRegistrations": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_ListBySubscription",
+        "description": "List DeviceRegistration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DeviceRegistrations by Subscription": {
+            "$ref": "./examples/listDeviceRegistrationsBySubscription.json"
           }
         }
       }
@@ -434,6 +526,417 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_ListByCatalog",
+        "description": "List Certificate resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Certificates by ResourceGroup": {
+            "$ref": "./examples/listCertificatesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/certificates/{serialNumber}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_Get",
+        "description": "Get a Certificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Certificate.serialNumber"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a Certificate": {
+            "$ref": "./examples/getCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/deviceRegistrations": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_ListByCatalog",
+        "description": "List DeviceRegistration resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DeviceRegistrations by ResourceGroup": {
+            "$ref": "./examples/listDeviceRegistrationsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/deviceRegistrations/{networkDeviceIdentifier}": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Get",
+        "description": "Get a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a DeviceRegistration": {
+            "$ref": "./examples/getDeviceRegistration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_CreateOrUpdate",
+        "description": "Create a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or update a DeviceRegistration": {
+            "$ref": "./examples/putDeviceRegistration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Update",
+        "description": "Update a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Updates a DeviceRegistration": {
+            "$ref": "./examples/patchDeviceRegistration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Delete",
+        "description": "Delete a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a DeviceRegistration": {
+            "$ref": "./examples/deleteDeviceRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/deviceRegistrations/{networkDeviceIdentifier}/generateAuthToken": {
+      "post": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_GenerateAuthToken",
+        "description": "Generates an authentication JWT token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationGenerateAuthTokenResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "An action DeviceRegistration over generateAuthToken": {
+            "$ref": "./examples/generateAuthTokenDeviceRegistration.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/provisioningPackages": {
       "get": {
         "tags": [
@@ -741,7 +1244,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProvisioningPackageFormatResponse"
+              "$ref": "#/definitions/ProvisioningPackageFormatActionResponse"
             }
           },
           "default": {
@@ -755,6 +1258,66 @@
         "x-ms-examples": {
           "An action ProvisioningPackage over format": {
             "$ref": "./examples/formatProvisioningPackage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereGen2/catalogs/{catalogName}/startDevicesActivation": {
+      "post": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_StartDevicesActivation",
+        "description": "Bulk activation of devices.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "description": "Request parameters to start a devices activation process.",
+            "schema": {
+              "$ref": "#/definitions/StartDevicesActivationActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Start bulk activation of devices response.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "An action Catalog over startDevicesActivation": {
+            "$ref": "./examples/startDevicesActivationCatalog.json"
           }
         }
       }
@@ -819,7 +1382,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state",
+          "description": "Resource provisioning state.",
           "readOnly": true
         },
         "policies": {
@@ -855,6 +1418,197 @@
         }
       },
       "description": "The updatable properties of the Catalog."
+    },
+    "Certificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere catalog certificate.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "x-cadl-name": "Certificate[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a Certificate list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "CertificateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start timestamp of the certificate."
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration timestamp of the certificate."
+        },
+        "certificate": {
+          "type": "string",
+          "description": "Base64 representation of the catalog certificate."
+        }
+      },
+      "description": "The properties of Certificate.",
+      "required": [
+        "notBefore",
+        "notAfter",
+        "certificate"
+      ]
+    },
+    "DeviceRegistration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceRegistrationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere device registration.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeviceRegistrationGenerateAuthTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Base64 encoded device authentication JWT token."
+        }
+      },
+      "description": "Output values of the generate auth token response.",
+      "required": [
+        "token"
+      ]
+    },
+    "DeviceRegistrationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceRegistration"
+          },
+          "x-cadl-name": "DeviceRegistration[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a DeviceRegistration list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceRegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "provisioningPackageName": {
+          "type": "string",
+          "description": "Provisioning package name.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "attestationPublicKey": {
+          "type": "string",
+          "description": "Attestation public key of the device.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "signedChallenge": {
+          "type": "string",
+          "description": "Signed proof of possession challenge."
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Type of device",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "The properties of DeviceRegistration.",
+      "required": [
+        "provisioningPackageName",
+        "attestationPublicKey",
+        "deviceType"
+      ]
+    },
+    "DeviceRegistrationUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceRegistrationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the DeviceRegistration."
+    },
+    "DeviceRegistrationUpdateProperties": {
+      "type": "object",
+      "properties": {},
+      "description": "The updatable properties of the DeviceRegistration."
     },
     "Policies": {
       "type": "object",
@@ -893,12 +1647,20 @@
         }
       ]
     },
-    "ProvisioningPackageFormatResponse": {
+    "ProvisioningPackageFormatActionResponse": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "description": "Provisioning package resource identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the provisioning package."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the provisioning package format."
         },
         "properties": {
           "type": "object",
@@ -946,6 +1708,8 @@
       "description": "Values of the format provisioning package response.",
       "required": [
         "id",
+        "name",
+        "version",
         "properties"
       ]
     },
@@ -975,7 +1739,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state",
+          "description": "Resource provisioning state.",
           "readOnly": true
         },
         "challenge": {
@@ -1024,7 +1788,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource",
+      "description": "Provisioning state of the resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -1038,6 +1802,19 @@
         "name": "ProvisioningState",
         "modelAsString": false
       }
+    },
+    "StartDevicesActivationActionRequest": {
+      "type": "object",
+      "properties": {
+        "packageLocation": {
+          "type": "string",
+          "description": "URI with the location of the activation package."
+        }
+      },
+      "description": "Start bulk activation of devices request.",
+      "required": [
+        "packageLocation"
+      ]
     }
   },
   "parameters": {
@@ -1046,6 +1823,22 @@
       "in": "path",
       "required": true,
       "description": "Name of the catalog",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Certificate.serialNumber": {
+      "name": "serialNumber",
+      "in": "path",
+      "required": true,
+      "description": "Serial number of the certificate. Use 'active' to retrieve the latest.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceRegistration.networkDeviceIdentifier": {
+      "name": "networkDeviceIdentifier",
+      "in": "path",
+      "required": true,
+      "description": "Network device identifier.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
