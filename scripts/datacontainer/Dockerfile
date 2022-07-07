@@ -1,7 +1,9 @@
-FROM mcr.microsoft.com/oss/mirror/docker.io/library/ubuntu:20.04
+FROM alpine:3.8
+
+RUN apk update && \
+    apk add git
 
 RUN mkdir -p /usr/data/specrepo/
-
 COPY .git /usr/data/specrepo/.git
 
 WORKDIR /usr/data/scripts/
