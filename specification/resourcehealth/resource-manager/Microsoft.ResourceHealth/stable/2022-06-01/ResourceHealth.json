@@ -316,6 +316,7 @@
                     "properties": {
                       "groupId": {
                         "type": "integer",
+                        "format": "int32",
                         "description": "Recommended action group Id for the service health event."
                       },
                       "actionText": {
@@ -360,6 +361,7 @@
             },
             "priority": {
               "type": "integer",
+              "format": "int32",
               "description": "Priority level of the event. Has value from 0 to 23. 0 is the highest priority. Service issue events have higher priority followed by planned maintenance and health advisory. Critical events have higher priority followed by error, warning and informational. Furthermore, active events have higher priority than resolved."
             },
             "lastUpdateTime": {
@@ -373,6 +375,7 @@
             },
             "duration": {
               "type": "integer",
+              "format":"int32",
               "description": "The expected duration of the event in seconds."
             },
             "impactType": {
@@ -536,6 +539,10 @@
         "name": {
           "type": "string",
           "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "type": "object",
