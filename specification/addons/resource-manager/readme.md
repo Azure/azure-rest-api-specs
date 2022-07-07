@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Addons RP for test.
 
 ---
 ## Getting Started 
-To build the SDK for Addons,  simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Addons,   simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
