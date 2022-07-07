@@ -3179,7 +3179,16 @@
         },
         "creatorRoleAssignment": {
           "description": "The role definition assigned to the environment creator on backing resources.",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "roles": {
+              "type": "object",
+              "description": "A map of roles to assign to the environment creator.",
+              "additionalProperties": {
+                "$ref": "#/definitions/EnvironmentRole"
+              }
+            }
+          }
         },
         "userRoleAssignments": {
           "description": "Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.",
@@ -3389,6 +3398,11 @@
         },
         "healthCheckStatus": {
           "$ref": "vdi.json#/definitions/HealthCheckStatus",
+          "readOnly": true
+        },
+        "domainJoinType": {
+          "description": "AAD Join type of the network. This is populated based on the referenced Network Connection.",
+          "$ref": "vdi.json#/definitions/DomainJoinType",
           "readOnly": true
         }
       },
