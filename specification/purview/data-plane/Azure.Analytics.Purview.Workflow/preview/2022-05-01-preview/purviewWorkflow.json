@@ -3,7 +3,7 @@
   "info": {
     "title": "Purview Workflow Service REST API Document",
     "version": "2022-05-01-preview",
-    "description": "This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
+    "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
@@ -45,9 +45,11 @@
   "paths": {
     "/workflow/mine/approvals/{approvalRequestId}": {
       "get": {
+        "tags": [
+          "Approval"
+        ],
         "description": "Get approval request by ApprovalRequestId",
-        "summary": "getWorkflowMineApprovalsApprovalrequestid",
-        "operationId": "getWorkflowMineApprovalsApprovalrequestid",
+        "operationId": "ApprovalRequest_GetApprovalRequestByApprovalRequestId",
         "x-ms-examples": {
           "ApprovalRequest_Get": {
             "$ref": "./examples/ApprovalRequest_Get.json"
@@ -59,19 +61,10 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "approvalRequestId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/approvalRequestId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -79,11 +72,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ApprovalWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/Approval"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -94,9 +86,11 @@
         }
       },
       "post": {
+        "tags": [
+          "Approval"
+        ],
         "description": "Approve or reject an approval request",
-        "summary": "postWorkflowMineApprovalsApprovalrequestid",
-        "operationId": "postWorkflowMineApprovalsApprovalrequestid",
+        "operationId": "ApprovalRequest_ApproveOrRejectApprovalRequest",
         "x-ms-examples": {
           "ApprovalRequest_ApproveOrReject": {
             "$ref": "./examples/ApprovalRequest_ApproveOrReject.json"
@@ -111,37 +105,18 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "approvalRequestId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/approvalRequestId"
           },
           {
             "name": "approvalResponse",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "Approval response, approve or reject an approval request.",
             "schema": {
-              "$ref": "#/definitions/ApprovalResponseDto"
+              "$ref": "#/definitions/ApprovalResponse"
             }
           },
           {
@@ -150,8 +125,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "headers": {}
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -164,9 +138,11 @@
     },
     "/workflow/definitions/{workflowDefinitionId}": {
       "get": {
-        "description": "",
-        "summary": "getWorkflowDefinitionsWorkflowdefinitionid",
-        "operationId": "getWorkflowDefinitionsWorkflowdefinitionid",
+        "tags": [
+          "WorkflowDefinition"
+        ],
+        "description": "Get a specific workflow definition.",
+        "operationId": "WorkflowDefinition_GetWorkflowDefinitionByWorkflowDefinitionId",
         "x-ms-examples": {
           "WorkflowDefinition_Get": {
             "$ref": "./examples/WorkflowDefinition_Get.json"
@@ -178,19 +154,10 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -198,11 +165,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WorkflowDefinitionWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/WorkflowDefinition"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -213,9 +179,11 @@
         }
       },
       "put": {
-        "description": "",
-        "summary": "putWorkflowDefinitionsWorkflowdefinitionid",
-        "operationId": "putWorkflowDefinitionsWorkflowdefinitionid",
+        "tags": [
+          "WorkflowDefinition"
+        ],
+        "description": "Create or update a workflow definition.",
+        "operationId": "WorkflowDefinition_CreateOrUpdateWorkflowDefinition",
         "x-ms-examples": {
           "WorkflowDefinition_CreateOrUpdate": {
             "$ref": "./examples/WorkflowDefinition_CreateOrUpdate.json"
@@ -230,37 +198,18 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId"
           },
           {
             "name": "workflowDefinitionCreateOrUpdateCommand",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "The workflow definition.",
             "schema": {
-              "$ref": "#/definitions/WorkflowDefinitionCreateOrUpdateCommandDto"
+              "$ref": "#/definitions/WorkflowDefinitionCreateOrUpdateCommand"
             }
           },
           {
@@ -269,11 +218,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WorkflowDefinitionWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/WorkflowDefinition"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -284,9 +232,11 @@
         }
       },
       "delete": {
-        "description": "",
-        "summary": "deleteWorkflowDefinitionsWorkflowdefinitionid",
-        "operationId": "deleteWorkflowDefinitionsWorkflowdefinitionid",
+        "tags": [
+          "WorkflowDefinition"
+        ],
+        "description": "Delete a workflow definition.",
+        "operationId": "WorkflowDefinition_DeleteWorkflowDefinitionByWorkflowDefinitionId",
         "x-ms-examples": {
           "WorkflowDefinition_Delete": {
             "$ref": "./examples/WorkflowDefinition_Delete.json"
@@ -298,19 +248,10 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -318,8 +259,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "headers": {}
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -332,13 +272,18 @@
     },
     "/workflow/definitions": {
       "get": {
-        "description": "",
-        "summary": "getWorkflowDefinitions",
-        "operationId": "getWorkflowDefinitions",
+        "tags": [
+          "WorkflowDefinition"
+        ],
+        "description": "List all workflow definitions.",
+        "operationId": "WorkflowDefinition_ListWorkflowDefinitions",
         "x-ms-examples": {
           "WorkflowDefinitions_List": {
             "$ref": "./examples/WorkflowDefinitions_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -346,18 +291,14 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
             "name": "workflowType",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": ""
+            "description": "The workflow type for filtering purpose."
           },
           {
             "$ref": "#/parameters/api-version"
@@ -365,54 +306,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_WorkflowDefinitionMetadataWebDto"
-            },
-            "headers": {}
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ListResult_WorkflowDefinitionMetadata"
             }
-          }
-        }
-      }
-    },
-    "/workflow/mine/definitions": {
-      "get": {
-        "description": "",
-        "summary": "getWorkflowMineDefinitions",
-        "operationId": "getWorkflowMineDefinitions",
-        "x-ms-examples": {
-          "WorkflowMineDefinitions_List": {
-            "$ref": "./examples/WorkflowMineDefinitions_List.json"
-          }
-        },
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListResultWebDto_WorkflowDefinitionNameWebDto"
-            },
-            "headers": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -425,9 +322,11 @@
     },
     "/workflow/mine/runs/query-definition": {
       "post": {
-        "description": "",
-        "summary": "postWorkflowMineRunsQuery-definition",
-        "operationId": "postWorkflowMineRunsQuery-definition",
+        "tags": [
+          "CanTriggerRunResponse"
+        ],
+        "description": "Query workflow definition for specific workflow type",
+        "operationId": "WorkflowRun_QueryWorkflowDefinition",
         "x-ms-examples": {
           "WorkflowDefinition_Query": {
             "$ref": "./examples/WorkflowDefinitions_Query.json"
@@ -442,27 +341,13 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
             "name": "triggerQuery",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "The query parameters.",
             "schema": {
               "example": {
                 "requestType": "CreateTermRequest",
@@ -476,11 +361,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CanTriggerRunResponseDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/CanTriggerRunResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -493,9 +377,11 @@
     },
     "/workflow/mine/runs": {
       "post": {
-        "description": "",
-        "summary": "postWorkflowMineRuns",
-        "operationId": "postWorkflowMineRuns",
+        "tags": [
+          "TriggerQuery"
+        ],
+        "description": "Trigger a workflow run for requstor",
+        "operationId": "WorkflowRun_TriggerWorkflowRun",
         "x-ms-examples": {
           "WorkflowRun_Create": {
             "$ref": "./examples/WorkflowRun_Create.json"
@@ -510,28 +396,16 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
             "name": "requestEventPayloadWebRequest",
             "in": "body",
             "required": true,
-            "description": "",
-            "schema": {}
+            "description": "The request event payload to trigger workflow run.",
+            "schema": {
+              "$ref": "#/definitions/TriggerQuery"
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -539,13 +413,12 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "string",
               "default": "",
               "format": "uuid"
-            },
-            "headers": {}
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -558,9 +431,11 @@
     },
     "/workflow/mine/runs/{workflowRunId}/cancel": {
       "post": {
-        "description": "",
-        "summary": "postWorkflowMineRunsWorkflowRunIdCancel",
-        "operationId": "postWorkflowMineRunsWorkflowRunIdCancel",
+        "tags": [
+          "RunCancelReply"
+        ],
+        "description": "Cancel a workflow run.",
+        "operationId": "WorkflowRun_CancelWorkflowRun",
         "x-ms-examples": {
           "WorkflowRun_Cancel": {
             "$ref": "./examples/WorkflowRun_Cancel.json"
@@ -575,37 +450,18 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowRunId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/workflowRunId"
           },
           {
             "name": "runCancelReply",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "Reply of canceling a workflow run.",
             "schema": {
-              "$ref": "#/definitions/RunCancelReplyWebDto"
+              "$ref": "#/definitions/RunCancelReply"
             }
           },
           {
@@ -614,8 +470,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "headers": {}
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -628,13 +483,18 @@
     },
     "/workflow/definitions/{workflowDefinitionId}/runs": {
       "get": {
-        "description": "",
-        "summary": "getWorkflowDefinitionsWorkflowdefinitionidRuns",
-        "operationId": "getWorkflowDefinitionsWorkflowdefinitionidRuns",
+        "tags": [
+          "WorkflowRunMetadata"
+        ],
+        "description": "List workflow runs of a workflow definition",
+        "operationId": "WorkflowRuns_ListWorkflowRunsByWorkflowDefinitionId",
         "x-ms-examples": {
           "WorkflowDefinitionWorkflowRun_List": {
             "$ref": "./examples/WorkflowDefinitionWorkflowRun_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -642,65 +502,28 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId"
           },
           {
-            "name": "window",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/window"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/continuationToken"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
+            "$ref": "#/parameters/limit"
           },
           {
-            "name": "sortKey",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/sortKey"
           },
           {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": ""
+            "$ref": "#/parameters/isDescending"
           },
           {
-            "name": "status[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/status[]"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -708,11 +531,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_WorkflowRunMetadataWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/ListResult_WorkflowRunMetadata"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -725,13 +547,18 @@
     },
     "/workflow/mine/runs/history": {
       "get": {
-        "description": "",
-        "summary": "getWorkflowMineRunsHistory",
-        "operationId": "getWorkflowMineRunsHistory",
+        "tags": [
+          "WorkflowRunMetadata"
+        ],
+        "description": "List workflow runs history.",
+        "operationId": "WorkflowRunsHistory_ListWorkflowRunsHistory",
         "x-ms-examples": {
           "WorkflowRunHistory_List": {
             "$ref": "./examples/WorkflowRunHistory_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -739,67 +566,28 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "window",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/window"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/continuationToken"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
+            "$ref": "#/parameters/limit"
           },
           {
-            "name": "sortKey",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/sortKey"
           },
           {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": ""
+            "$ref": "#/parameters/isDescending"
           },
           {
-            "name": "status[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/status[]"
           },
           {
-            "name": "workflowDefinitionId[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId[]"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -807,11 +595,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_WorkflowRunMetadataWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/ListResult_WorkflowRunMetadata"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -824,9 +611,11 @@
     },
     "/workflow/mine/runs/{workflowRunId}/detail": {
       "get": {
-        "description": "",
-        "summary": "getWorkflowMineRunsWorkflowRunIdDetail",
-        "operationId": "getWorkflowMineRunsWorkflowRunIdDetail",
+        "tags": [
+          "RunDetail"
+        ],
+        "description": "Get workflow run detail.",
+        "operationId": "WorkflowRun_GetWorkflowRunDetail",
         "x-ms-examples": {
           "WorkflowRunDetail_Get": {
             "$ref": "./examples/WorkflowRunDetail_Get.json"
@@ -838,19 +627,10 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "workflowRunId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/workflowRunId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -858,61 +638,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunDetailWebDto"
-            },
-            "headers": {}
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/RunDetail"
             }
-          }
-        }
-      }
-    },
-    "/workflow/templates/glossary-terms/{template-name}": {
-      "get": {
-        "description": "",
-        "summary": "getWorkflowTemplatesGlossary-termsTemplate-name",
-        "operationId": "getWorkflowTemplatesGlossary-termsTemplate-name",
-        "x-ms-examples": {
-          "WorkflowTemplatesOfGlossaryTerms_Get": {
-            "$ref": "./examples/WorkflowTemplatesOfGlossaryTerms_Get.json"
-          }
-        },
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
-          },
-          {
-            "name": "template-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": ""
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/WorkflowTemplatesOfGlossaryTerms"
-            },
-            "headers": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -925,13 +654,18 @@
     },
     "/workflow/mine/requests/sent": {
       "get": {
+        "tags": [
+          "Approval"
+        ],
         "description": "List current user's sent pending requests",
-        "summary": "getWorkflowMineRequestsSent",
-        "operationId": "getWorkflowMineRequestsSent",
+        "operationId": "SentApprovalRequests_ListSentApprovalRequests",
         "x-ms-examples": {
-          "ApprovalRequest_List_Get": {
+          "Sent_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -939,74 +673,31 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "window",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/window"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/continuationToken"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
+            "$ref": "#/parameters/limit"
           },
           {
-            "name": "sortKey",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/sortKey"
           },
           {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": ""
+            "$ref": "#/parameters/isDescending"
           },
           {
-            "name": "type[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/type[]"
           },
           {
-            "name": "keyword",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/keyword"
           },
           {
-            "name": "workflowId[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId[]"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1014,11 +705,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_ApprovalWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/ListResult_Approval"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1031,13 +721,18 @@
     },
     "/workflow/mine/requests/received": {
       "get": {
+        "tags": [
+          "Approval"
+        ],
         "description": "List current user's pending received requests",
-        "summary": "getWorkflowMineRequestsReceived",
-        "operationId": "getWorkflowMineRequestsReceived",
+        "operationId": "ReceivedApprovalRequests_ListReceivedApprovalRequests",
         "x-ms-examples": {
-          "ApprovalRequest_List": {
+          "Received_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -1045,74 +740,31 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "window",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/window"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/continuationToken"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
+            "$ref": "#/parameters/limit"
           },
           {
-            "name": "sortKey",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/sortKey"
           },
           {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": ""
+            "$ref": "#/parameters/isDescending"
           },
           {
-            "name": "type[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/type[]"
           },
           {
-            "name": "keyword",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/keyword"
           },
           {
-            "name": "workflowId[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId[]"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1120,11 +772,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_ApprovalWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/ListResult_Approval"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1137,13 +788,18 @@
     },
     "/workflow/mine/requests/history": {
       "get": {
+        "tags": [
+          "Approval"
+        ],
         "description": "List current user's completed requests(both received and sent)",
-        "summary": "getWorkflowMineRequestsHistory",
-        "operationId": "getWorkflowMineRequestsHistory",
+        "operationId": "ApprovalRequestsHistory_ListApprovalRequestsHistory",
         "x-ms-examples": {
-          "ApprovalRequest_List_Get": {
+          "History_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "deprecated": false,
         "produces": [
@@ -1151,84 +807,34 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "window",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/window"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/continuationToken"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
+            "$ref": "#/parameters/limit"
           },
           {
-            "name": "sortKey",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/sortKey"
           },
           {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": ""
+            "$ref": "#/parameters/isDescending"
           },
           {
-            "name": "type[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/type[]"
           },
           {
-            "name": "status[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/status[]"
           },
           {
-            "name": "keyword",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/keyword"
           },
           {
-            "name": "workflowId[]",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": ""
+            "$ref": "#/parameters/workflowDefinitionId[]"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1236,11 +842,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListResultWebDto_ApprovalWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/ListResult_Approval"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1253,9 +858,11 @@
     },
     "/workflow/mine/tasks/{taskRequestId}": {
       "get": {
+        "tags": [
+          "TaskRequest"
+        ],
         "description": "Get a task",
-        "summary": "getWorkflowMineTasksTaskRequestId",
-        "operationId": "getWorkflowMineTasksTaskRequestId",
+        "operationId": "TaskRequest_GetTaskRequestByTaskRequestId",
         "x-ms-examples": {
           "TaskRequest_Get": {
             "$ref": "./examples/TaskRequest_Get.json"
@@ -1267,19 +874,10 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "taskRequestId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
+            "$ref": "#/parameters/taskRequestId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1287,11 +885,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TaskRequestWebDto"
-            },
-            "headers": {}
+              "$ref": "#/definitions/TaskRequest"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1302,9 +899,11 @@
         }
       },
       "post": {
+        "tags": [
+          "TaskRequest"
+        ],
         "description": "Update a task",
-        "summary": "postWorkflowMineTasksTaskRequestId",
-        "operationId": "postWorkflowMineTasksTaskRequestId",
+        "operationId": "TaskRequest_UpdateTaskRequest",
         "x-ms-examples": {
           "TaskRequest_Update": {
             "$ref": "./examples/TaskRequest_Update.json"
@@ -1319,37 +918,18 @@
         ],
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Client Request Id"
+            "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "taskRequestId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": ""
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "enum": [
-              "application/json"
-            ],
-            "type": "string",
-            "description": ""
+            "$ref": "#/parameters/taskRequestId"
           },
           {
             "name": "taskUpdateCommand",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "Request body of updating task.",
             "schema": {
-              "$ref": "#/definitions/TaskUpdateCommandDto"
+              "$ref": "#/definitions/TaskUpdateCommand"
             }
           },
           {
@@ -1358,8 +938,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "headers": {}
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1399,8 +978,8 @@
         "content"
       ]
     },
-    "ActionDetailWebDto": {
-      "title": "ActionDetailWebDto",
+    "ActionDetail": {
+      "title": "ActionDetail",
       "type": "object",
       "properties": {
         "startTime": {
@@ -1420,8 +999,8 @@
         "status"
       ]
     },
-    "ApprovalDetailsWebDto": {
-      "title": "ApprovalDetailsWebDto",
+    "ApprovalDetails": {
+      "title": "ApprovalDetails",
       "type": "object",
       "properties": {
         "approvalType": {
@@ -1441,15 +1020,14 @@
         "approvers"
       ]
     },
-    "ApprovalResponseDto": {
-      "title": "ApprovalResponseDto",
+    "ApprovalResponse": {
+      "title": "ApprovalResponse",
       "type": "object",
       "properties": {
         "response": {
           "type": "string"
         },
         "comment": {
-          "example": "Thanks for contributing!",
           "type": "string"
         }
       },
@@ -1457,8 +1035,8 @@
         "response"
       ]
     },
-    "ApprovalWebDto": {
-      "title": "ApprovalWebDto",
+    "Approval": {
+      "title": "Approval",
       "type": "object",
       "properties": {
         "type": {
@@ -1477,7 +1055,6 @@
           "format": "uuid"
         },
         "requestorId": {
-          "example": "7790ea59-4874-4b14-b120-3ec34c64f9ed",
           "type": "string"
         },
         "submittedTime": {
@@ -1489,7 +1066,7 @@
           "format": "date-time"
         },
         "approval": {
-          "$ref": "#/definitions/ApprovalDetailsWebDto"
+          "$ref": "#/definitions/ApprovalDetails"
         },
         "requestEventPayload": {}
       },
@@ -1512,7 +1089,6 @@
           "type": "string"
         },
         "category": {
-          "example": "DataCatalog",
           "type": "string"
         },
         "action": {
@@ -1524,25 +1100,8 @@
         "action"
       ]
     },
-    "Approved": {
-      "title": "Approved",
-      "type": "object",
-      "properties": {
-        "approvalComment": {
-          "example": "Thanks for contributing!",
-          "type": "string"
-        },
-        "responseTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "responseTime"
-      ]
-    },
-    "CanTriggerRunResponseDto": {
-      "title": "CanTriggerRunResponseDto",
+    "CanTriggerRunResponse": {
+      "title": "CanTriggerRunResponse",
       "type": "object",
       "properties": {
         "type": {
@@ -1554,215 +1113,20 @@
         }
       },
       "required": [
-        "workflowDefinitionId"
+        "type"
       ]
     },
-    "BadRequestError": {
-      "title": "BadRequestError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "Canceled": {
-      "title": "Canceled",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "comment": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
-    "Canceled1": {
-      "title": "Canceled1",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
-    "Canceling": {
-      "title": "Canceling",
-      "type": "object",
-      "properties": {
-        "requestTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "requestTime"
-      ]
-    },
-    "Completed": {
-      "title": "Completed",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
-    "ConflictError": {
-      "title": "ConflictError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "CreateTermRequestWebRequestDto": {
-      "title": "CreateTermRequestWebRequestDto",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "payload"
-      ]
-    },
-    "CreateTermRequestWebResponseDto": {
-      "title": "CreateTermRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "targetValue",
-        "payload"
-      ]
-    },
-    "CreateTermRequestWebResponseDto1": {
-      "title": "CreateTermRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "CreateTermTriggerQuery": {
-      "title": "CreateTermTriggerQuery",
-      "type": "object",
-      "properties": {
-        "parentTermId": {
-          "example": "5bf9020b-6eb3-4584-969c-337c4db15b62",
-          "type": "string"
-        }
-      }
-    },
-    "DeleteTermRequestWebRequestDto": {
-      "title": "DeleteTermRequestWebRequestDto",
-      "type": "object",
-      "properties": {
-        "glossaryTermId": {
-          "example": "31d18ce8-9190-45a5-9a9a-640ba57b031e",
-          "type": "string"
-        },
-        "forceDeleteChildren": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "glossaryTermId"
-      ]
-    },
-    "DeleteTermRequestWebResponseDto": {
-      "title": "DeleteTermRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "glossaryTermId": {
-          "example": "5bb95596-3cdc-4bad-be76-f645e6bf7e43",
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue",
-        "glossaryTermId"
-      ]
-    },
-    "DeleteTermRequestWebResponseDto1": {
-      "title": "DeleteTermRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "DeleteTermTriggerQuery": {
-      "title": "DeleteTermTriggerQuery",
-      "type": "object",
-      "properties": {
-        "glossaryTermId": {
-          "example": "5bf9020b-6eb3-4584-969c-337c4db15b62",
-          "type": "string"
-        }
-      },
-      "required": [
-        "glossaryTermId"
-      ]
-    },
-    "DetailWebDto": {
-      "title": "DetailWebDto",
+    "Detail": {
+      "title": "Detail",
       "type": "object",
       "properties": {
         "trigger": {
-          "$ref": "#/definitions/TriggerDetailWebDto"
+          "$ref": "#/definitions/TriggerDetail"
         },
         "actions": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ActionDetailWebDto"
+            "$ref": "#/definitions/ActionDetail"
           }
         }
       },
@@ -1771,161 +1135,32 @@
         "actions"
       ]
     },
-    "Failed": {
-      "title": "Failed",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
-    "ForbiddenError": {
-      "title": "ForbiddenError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "GrantDataAccessRequestWebResponseDto": {
-      "title": "GrantDataAccessRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "targetValue",
-        "payload"
-      ]
-    },
-    "GrantDataAccessRequestWebResponseDto1": {
-      "title": "GrantDataAccessRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "GrantDataAccessTriggerQuery": {
-      "title": "GrantDataAccessTriggerQuery",
-      "type": "object",
-      "properties": {
-        "dataAssetGuid": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "dataAssetGuid"
-      ]
-    },
-    "GrantDataAccessWebRequestDto": {
-      "title": "GrantDataAccessWebRequestDto",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "payload"
-      ]
-    },
-    "ImportTermsRequestWebRequestDto": {
-      "title": "ImportTermsRequestWebRequestDto",
-      "type": "object",
-      "properties": {
-        "fileName": {
-          "type": "string"
-        },
-        "fileContent": {
-          "description": "Base64 encoded file content used to import terms in batch.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "fileName",
-        "fileContent"
-      ]
-    },
-    "ImportTermsRequestWebResponseDto": {
-      "title": "ImportTermsRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "fileName": {
-          "type": "string"
-        },
-        "fileContent": {
-          "description": "Base64 encoded file content used to import terms in batch.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue",
-        "fileName",
-        "fileContent"
-      ]
-    },
-    "ImportTermsRequestWebResponseDto1": {
-      "title": "ImportTermsRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "InternalServerError": {
-      "title": "InternalServerError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "ListResultWebDto_ApprovalWebDto": {
-      "title": "ListResultWebDto_ApprovalWebDto",
+    "ListResult_Approval": {
+      "title": "ListResult_Approval",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApprovalWebDto"
+            "$ref": "#/definitions/Approval"
+          },
+          "x-ms-identifiers": [
+            "approvalId"
+          ]
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ListResult_WorkflowDefinitionMetadata": {
+      "title": "ListResult_WorkflowDefinitionMetadata",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowDefinitionMetadata"
           }
         },
         "nextLink": {
@@ -1933,14 +1168,14 @@
         }
       }
     },
-    "ListResultWebDto_WorkflowDefinitionNameWebDto": {
-      "title": "ListResultWebDto_WorkflowDefinitionNameWebDto",
+    "ListResult_WorkflowRunMetadata": {
+      "title": "ListResult_WorkflowRunMetadata",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkflowDefinitionNameWebDto"
+            "$ref": "#/definitions/WorkflowRunMetadata"
           }
         },
         "nextLink": {
@@ -1948,110 +1183,12 @@
         }
       }
     },
-    "ListResultWebDto_WorkflowDefinitionMetadataWebDto": {
-      "title": "ListResultWebDto_WorkflowDefinitionMetadataWebDto",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WorkflowDefinitionMetadataWebDto"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
+    "TriggerQuery": {
+      "title": "TriggerQuery",
+      "type": "object"
     },
-    "ListResultWebDto_WorkflowRunMetadataWebDto": {
-      "title": "ListResultWebDto_WorkflowRunMetadataWebDto",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WorkflowRunMetadataWebDto"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "NotFoundError": {
-      "title": "NotFoundError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "PreconditionFailedError": {
-      "title": "PreconditionFailedError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "PurviewErrorMessage": {
-      "title": "PurviewErrorMessage",
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "code",
-        "message",
-        "target"
-      ]
-    },
-    "Rejected": {
-      "title": "Rejected",
-      "type": "object",
-      "properties": {
-        "approvalComment": {
-          "example": "Thanks for contributing!",
-          "type": "string"
-        },
-        "responseTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "responseTime"
-      ]
-    },
-    "RunCancelReplyWebDto": {
-      "title": "RunCancelReplyWebDto",
+    "RunCancelReply": {
+      "title": "RunCancelReply",
       "type": "object",
       "properties": {
         "comment": {
@@ -2059,8 +1196,8 @@
         }
       }
     },
-    "RunDetailWebDto": {
-      "title": "RunDetailWebDto",
+    "RunDetail": {
+      "title": "RunDetail",
       "type": "object",
       "properties": {
         "id": {
@@ -2079,7 +1216,6 @@
           "format": "date-time"
         },
         "requestor": {
-          "example": "2b7ce802-bd3f-4bb2-9323-30284c529ef7",
           "type": "string"
         },
         "requestEventPayload": {},
@@ -2088,7 +1224,7 @@
           "type": "object"
         },
         "detail": {
-          "$ref": "#/definitions/DetailWebDto"
+          "$ref": "#/definitions/Detail"
         }
       },
       "required": [
@@ -2103,8 +1239,8 @@
         "detail"
       ]
     },
-    "SimpleTaskDetailWebDto": {
-      "title": "SimpleTaskDetailWebDto",
+    "SimpleTaskDetail": {
+      "title": "SimpleTaskDetail",
       "type": "object",
       "properties": {
         "taskType": {
@@ -2129,7 +1265,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TaskChangeHistory"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2138,42 +1275,14 @@
         "status"
       ]
     },
-    "Skipped": {
-      "title": "Skipped",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
-    "Succeeded": {
-      "title": "Succeeded",
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "endTime"
-      ]
-    },
     "TaskChangeHistory": {
       "title": "TaskChangeHistory",
       "type": "object",
       "properties": {
         "updatedBy": {
-          "example": "2d912e2a-5edf-4a1e-aa65-a8921e406805",
           "type": "string"
         },
         "comment": {
-          "example": "Task Comment",
           "type": "string"
         },
         "updatedTime": {
@@ -2194,8 +1303,8 @@
         "newStatus"
       ]
     },
-    "TaskRequestWebDto": {
-      "title": "TaskRequestWebDto",
+    "TaskRequest": {
+      "title": "TaskRequest",
       "type": "object",
       "properties": {
         "workflowRunId": {
@@ -2211,7 +1320,6 @@
           "format": "uuid"
         },
         "requestorId": {
-          "example": "73427eb5-326a-401f-ade8-115a077d6e89",
           "type": "string"
         },
         "submittedTime": {
@@ -2223,7 +1331,7 @@
           "format": "date-time"
         },
         "taskDetail": {
-          "$ref": "#/definitions/SimpleTaskDetailWebDto"
+          "$ref": "#/definitions/SimpleTaskDetail"
         },
         "requestEventPayload": {}
       },
@@ -2243,11 +1351,9 @@
       "type": "object",
       "properties": {
         "value": {
-          "example": "Not Started",
           "type": "string"
         },
         "statusType": {
-          "example": "Start",
           "type": "string"
         }
       },
@@ -2256,16 +1362,14 @@
         "statusType"
       ]
     },
-    "TaskUpdateCommandDto": {
-      "title": "TaskUpdateCommandDto",
+    "TaskUpdateCommand": {
+      "title": "TaskUpdateCommand",
       "type": "object",
       "properties": {
         "newStatus": {
-          "example": "Not Started",
           "type": "string"
         },
         "comment": {
-          "example": "Task Comment",
           "type": "string"
         }
       },
@@ -2273,24 +1377,8 @@
         "newStatus"
       ]
     },
-    "TooManyRequestsError": {
-      "title": "TooManyRequestsError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "TriggerDetailWebDto": {
-      "title": "TriggerDetailWebDto",
+    "TriggerDetail": {
+      "title": "TriggerDetail",
       "type": "object",
       "properties": {
         "startTime": {
@@ -2304,133 +1392,8 @@
         "status"
       ]
     },
-    "UnauthorizedError": {
-      "title": "UnauthorizedError",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/PurviewErrorMessage"
-        }
-      },
-      "required": [
-        "requestId",
-        "error"
-      ]
-    },
-    "UpdateAssetAttributesRequestWebResponseDto": {
-      "title": "UpdateAssetAttributesRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "targetValue",
-        "payload"
-      ]
-    },
-    "UpdateAssetAttributesRequestWebResponseDto1": {
-      "title": "UpdateAssetAttributesRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "UpdateAssetAttributesTriggerQuery": {
-      "title": "UpdateAssetAttributesTriggerQuery",
-      "type": "object",
-      "properties": {
-        "guid": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "guid"
-      ]
-    },
-    "UpdateAssetAttributesWebRequestDto": {
-      "title": "UpdateAssetAttributesWebRequestDto",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "payload"
-      ]
-    },
-    "UpdateTermRequestWebRequestDto": {
-      "title": "UpdateTermRequestWebRequestDto",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "payload"
-      ]
-    },
-    "UpdateTermRequestWebResponseDto": {
-      "title": "UpdateTermRequestWebResponseDto",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "targetValue",
-        "payload"
-      ]
-    },
-    "UpdateTermRequestWebResponseDto1": {
-      "title": "UpdateTermRequestWebResponseDto1",
-      "type": "object",
-      "properties": {
-        "targetValue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "targetValue"
-      ]
-    },
-    "UpdateTermTriggerQuery": {
-      "title": "UpdateTermTriggerQuery",
-      "type": "object",
-      "properties": {
-        "glossaryTermId": {
-          "example": "5bf9020b-6eb3-4584-969c-337c4db15b62",
-          "type": "string"
-        },
-        "parentTermId": {
-          "example": "5bf9020b-6eb3-4584-969c-337c4db15b62",
-          "type": "string"
-        }
-      },
-      "required": [
-        "glossaryTermId"
-      ]
-    },
-    "WorkflowDefinitionCreateOrUpdateCommandDto": {
-      "title": "WorkflowDefinitionCreateOrUpdateCommandDto",
+    "WorkflowDefinitionCreateOrUpdateCommand": {
+      "title": "WorkflowDefinitionCreateOrUpdateCommand",
       "type": "object",
       "properties": {
         "workflowType": {
@@ -2443,7 +1406,6 @@
           }
         },
         "workflowName": {
-          "example": "Create Term Approval Workflow",
           "type": "string"
         },
         "isEnabled": {
@@ -2453,7 +1415,6 @@
           "type": "object"
         },
         "description": {
-          "example": "This is an approval workflow to review the submitted glossary term before it gets merged into the glossary.",
           "type": "string"
         }
       },
@@ -2465,8 +1426,8 @@
         "description"
       ]
     },
-    "WorkflowDefinitionMetadataWebDto": {
-      "title": "WorkflowDefinitionMetadataWebDto",
+    "WorkflowDefinitionMetadata": {
+      "title": "WorkflowDefinitionMetadata",
       "type": "object",
       "properties": {
         "id": {
@@ -2487,7 +1448,6 @@
           "format": "date-time"
         },
         "createdBy": {
-          "example": "911a4581-ecff-4442-8c68-061cef147ecb",
           "type": "string"
         },
         "lastUpdateTime": {
@@ -2495,18 +1455,15 @@
           "format": "date-time"
         },
         "updatedBy": {
-          "example": "911a4581-ecff-4442-8c68-061cef147ecb",
           "type": "string"
         },
         "workflowName": {
-          "example": "Create Term Approval Workflow",
           "type": "string"
         },
         "isEnabled": {
           "type": "boolean"
         },
         "description": {
-          "example": "This is an approval workflow to review the submitted glossary term before it gets merged into the glossary.",
           "type": "string"
         }
       },
@@ -2522,42 +1479,8 @@
         "description"
       ]
     },
-    "WorkflowDefinitionNameWebDto": {
-      "title": "WorkflowDefinitionNameWebDto",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "workflowName": {
-          "example": "Create Term Approval Workflow",
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "workflowName"
-      ]
-    },
-    "WorkflowTemplatesOfGlossaryTerms": {
-      "title": "WorkflowTemplatesOfGlossaryTerms",
-      "type": "object",
-      "properties": {
-        "triggers": {
-          "type": "object"
-        },
-        "actions": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "triggers",
-        "actions"
-      ]
-    },
-    "WorkflowDefinitionWebDto": {
-      "title": "WorkflowDefinitionWebDto",
+    "WorkflowDefinition": {
+      "title": "WorkflowDefinition",
       "type": "object",
       "properties": {
         "id": {
@@ -2578,7 +1501,6 @@
           "format": "date-time"
         },
         "createdBy": {
-          "example": "f9ef0ee6-e4df-415c-84af-e8873c252af0",
           "type": "string"
         },
         "lastUpdateTime": {
@@ -2586,11 +1508,9 @@
           "format": "date-time"
         },
         "updatedBy": {
-          "example": "f9ef0ee6-e4df-415c-84af-e8873c252af0",
           "type": "string"
         },
         "workflowName": {
-          "example": "Create Term Approval Workflow",
           "type": "string"
         },
         "isEnabled": {
@@ -2600,7 +1520,6 @@
           "type": "object"
         },
         "description": {
-          "example": "This is an approval workflow to review the submitted glossary term before it gets merged into the glossary.",
           "type": "string"
         }
       },
@@ -2617,8 +1536,8 @@
         "description"
       ]
     },
-    "WorkflowRunMetadataWebDto": {
-      "title": "WorkflowRunMetadataWebDto",
+    "WorkflowRunMetadata": {
+      "title": "WorkflowRunMetadata",
       "type": "object",
       "properties": {
         "id": {
@@ -2634,11 +1553,16 @@
           "format": "date-time"
         },
         "requestor": {
-          "example": "b85d0732-3e80-4828-bc43-24e3c4dec306",
           "type": "string"
         },
-        "requestEventPayload": {},
-        "status": {}
+        "requestEventPayload": {
+          "description": "",
+          "type": "object"
+        },
+        "status": {
+          "description": "Workflow run status.",
+          "type": "object"
+        }
       },
       "required": [
         "id",
@@ -2650,19 +1574,50 @@
       ]
     },
     "ErrorResponse": {
-      "description": "An error response from the service",
+      "description": "Default error response model",
+      "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "Error response status."
-        },
-        "requestId": {
-          "type": "string",
-          "description": "The request ID."
-        },
         "error": {
-          "type": "object",
-          "description": "The error message details."
+          "description": "Gets or sets the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ],
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets or sets the target.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
@@ -2676,6 +1631,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "x-ms-client-request-id": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "Client Request Id",
+      "x-ms-parameter-location": "client"
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/",
@@ -2684,6 +1647,120 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "window": {
+      "name": "window",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Time window of filtering items.",
+      "x-ms-parameter-location": "method"
+    },
+    "limit": {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The page size to get the items at one time.",
+      "x-ms-parameter-location": "method"
+    },
+    "continuationToken": {
+      "name": "continuationToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The continuation token used for getting the next page of items.",
+      "x-ms-parameter-location": "method"
+    },
+    "sortKey": {
+      "name": "sortKey",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The key used for sorting the items.",
+      "x-ms-parameter-location": "method"
+    },
+    "isDescending": {
+      "name": "isDescending",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "List items in an ascending order or a descending order by submitted time.",
+      "x-ms-parameter-location": "method"
+    },
+    "type[]": {
+      "name": "type[]",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Filter items by workflow request type.",
+      "x-ms-parameter-location": "method"
+    },
+    "keyword": {
+      "name": "keyword",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Filter items by keyword in workflow name.",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowDefinitionId": {
+      "name": "workflowDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The workflow definition id (GUID).",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowRunId": {
+      "name": "workflowRunId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The workflow run id (GUID).",
+      "x-ms-parameter-location": "method"
+    },
+    "taskRequestId": {
+      "name": "taskRequestId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The task request id (GUID)",
+      "x-ms-parameter-location": "method"
+    },
+    "approvalRequestId": {
+      "name": "approvalRequestId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The approval request id (GUID)",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowDefinitionId[]": {
+      "name": "workflowDefinitionId[]",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Filter items by workflow definition id list.",
+      "x-ms-parameter-location": "method"
+    },
+    "status[]": {
+      "name": "status[]",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Filter workflow runs by workflow run status.",
+      "x-ms-parameter-location": "method"
     }
   },
   "tags": []

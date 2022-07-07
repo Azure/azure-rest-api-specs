@@ -241,6 +241,51 @@ where:
   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/xxx.get
 reason: It doesn't support file annotation in example file.
 ```
+``` yaml
+directive:
+  - suppress: R3006
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Currently systemData is not allowed.
+```
+
+``` yaml
+directive:
+  - suppress: R2020
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Workflow definition is not a resource.
+```
+
+``` yaml
+directive:
+  - suppress: R3023
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: No operations endpoint as not ARM resource provider.
+```
+
+
+``` yaml
+directive:
+  - suppress: R2062
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Workflow is not ARM resource.
+```
+
+``` yaml
+directive:
+  - suppress: R4011
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: The delete workflow definition operation have the required responses.
+```
 
 # Code Generation
 
