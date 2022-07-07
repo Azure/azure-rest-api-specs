@@ -468,6 +468,16 @@
           "description": "User friendly suffix that is appended to the revision name",
           "type": "string"
         },
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "containers": {
           "description": "List of container definitions for the Container App.",
           "type": "array",
