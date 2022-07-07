@@ -88,6 +88,9 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
+          },
+          "Succesful Healthcare Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareRequest.json"
           }
         }
       }
@@ -460,10 +463,10 @@
         "displayName": {
           "description": "Optional display name for the analysis job.",
           "type": "string"
-        },        
+        },
         "defaultLanguage": {
-            "description": "Default language to use for records requesting automatic language detection.",
-            "type": "string"
+          "description": "Default language to use for records requesting automatic language detection.",
+          "type": "string"
         },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -486,10 +489,12 @@
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the project name for the model."
         },
         "deploymentName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
         }
       },
       "allOf": [
@@ -901,6 +906,11 @@
             "modelAsString": true
           }
         },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
+        },
         "entities": {
           "description": "The entities in the relation.",
           "type": "array",
@@ -1115,15 +1125,18 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "neutral": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
       "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
@@ -1318,14 +1331,16 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
-      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
     "EntitiesTaskParameters": {
       "type": "object",

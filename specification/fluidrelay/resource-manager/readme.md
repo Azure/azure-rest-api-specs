@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-05-11
+tag: package-2022-06-01
 ```
 
 ### Tag: package-2021-03-12-preview
@@ -94,6 +94,24 @@ input-file:
   - Microsoft.FluidRelay/stable/2022-05-11/fluidrelay.json
 ```
 
+### Tag: package-2022-05-26
+
+These settings apply only when `--tag=package-2022-05-26` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-26'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-05-26/fluidrelay.json
+```
+
+### Tag: package-2022-06-01
+
+These settings apply only when `--tag=package-2022-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06-01'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-06-01/fluidrelay.json
+```
+
 ---
 
 # Code Generation
@@ -109,6 +127,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
