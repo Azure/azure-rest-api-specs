@@ -4877,6 +4877,18 @@
         "modelAsString": true
       }
     },
+    "CloudTieringLowDiskModeState": {
+      "type": "string",
+      "description": "Type of the cloud tiering low disk mode state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CloudTieringLowDiskModeState",
+        "modelAsString": true
+      }
+    },
     "ServerEndpointSyncActivityState": {
       "type": "string",
       "description": "Type of the sync activity state",
@@ -5262,6 +5274,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Most recent access time of tiered files",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudTieringLowDiskMode": {
+      "type": "object",
+      "description": "Information regarding the low disk mode state",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/CloudTieringLowDiskModeState",
+          "description": "Low disk mode state",
           "readOnly": true
         }
       }
