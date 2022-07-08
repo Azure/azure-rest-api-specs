@@ -11,9 +11,9 @@ If you want to generate sdk with single client, please copy the following config
 ~~~
 # azure-sdk-for-js
 ``` yaml
-output-folder: sdk/<ServiveName>/<PackageFolder>
+output-folder: sdk/<ServiceName>/<PackageFolder>
 require:
- - specification/<ServiveName>/data-plane/readme.md
+ - specification/<ServiceName>/data-plane/readme.md
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.
@@ -33,11 +33,11 @@ batch:
 ```
 
 ``` yaml $(package-A)
-output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
+output-folder: sdk/<ServiceName>/<PackageFolder>/src/<SubFolderName>
 ```
 
 ``` yaml $(package-B)
-output-folder: sdk/<ServiveName>/<PackageFolder>/src/<SubFolderName>
+output-folder: sdk/<ServiceName>/<PackageFolder>/src/<SubFolderName>
 ```
 ~~~
 - `output-folder`: The relative path of destination to generate SDK.
