@@ -11,7 +11,7 @@ If you want to generate sdk with single client, please copy the following config
 ~~~
 # azure-sdk-for-python
 ``` yaml
-output-folder: sdk/<ServiveName>/<PackageName>
+output-folder: sdk/<ServiceName>/<PackageName>
 require:
  - specification/<RPName>/data-plane/readme.md
 ```
@@ -25,9 +25,9 @@ If you want to generate sdk with multi client, please copy the following configu
 # azure-sdk-for-python
 ``` yaml
 tag: false
-output-folder: sdk/<ServiveName>/<PackageName>
+output-folder: sdk/<ServiceName>/<PackageName>
 require:
- - specification/<ServiveName>/data-plane/readme.md
+ - specification/<ServiceName>/data-plane/readme.md
 batch:
  - package-A: true
  - package-B: true
