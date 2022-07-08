@@ -2690,6 +2690,24 @@
       ],
       "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
     },
+    "CustomAbstractiveSummarizationLROResults": {
+      "type": "object",
+      "description": "An object representing the results for an Custom Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarizationLROResults"
+    },
     "AbstractiveSummarizationResultBase": {
       "type": "object",
       "description": "An object representing the summarization results of each document.",
