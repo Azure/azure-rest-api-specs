@@ -649,16 +649,6 @@
             "name"
           ]
         },
-        "ipRestrictionRules": {
-          "description": "Rules to restrict incoming IP address.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IpRestrictionRules"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
           "type": "boolean"
@@ -766,41 +756,6 @@
         "certificateId": {
           "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
-        }
-      }
-    },
-    "IpRestrictionRules": {
-      "description": "Rules to restrict incoming IP address.",
-      "type": "object",
-      "required": [
-        "name",
-        "ipAddress",
-        "action"
-      ],
-      "properties": {
-        "name": {
-          "description": "Name.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of ip restriction rule",
-          "type": "string"
-        },
-        "ipAddress": {
-          "description": "ipAddress is the CIDR to match incoming traffic against",
-          "type": "string"
-        },
-        "action": {
-          "description": "ALLOW or DENY set ip address's",
-          "enum": [
-            "ALLOW",
-            "DENY"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "action",
-            "modelAsString": true
-          }
         }
       }
     },
