@@ -12,7 +12,7 @@ If you want to generate sdk with single client, please copy the following config
 ~~~
 # azure-sdk-for-java
 ``` yaml
-output-folder: sdk/<ServiveName>/<PackageName>
+output-folder: sdk/<ServiceName>/<PackageName>
 namespace: <Namespace>
 data-plane: true
 require:
@@ -29,11 +29,11 @@ If you want to generate sdk with multi client, please copy the following configu
 # azure-sdk-for-java
 ``` yaml
 tag: false
-output-folder: sdk/<ServiveName>/<PackageName>
+output-folder: sdk/<ServiceName>/<PackageName>
 namespace: <Namespace>
 data-plane: true
 require:
- - specification/<ServiveName>/data-plane/readme.md
+ - specification/<ServiceName>/data-plane/readme.md
 batch:
  - package-A: true
  - package-B: true
