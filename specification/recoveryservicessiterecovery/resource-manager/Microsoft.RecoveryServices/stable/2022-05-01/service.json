@@ -2298,6 +2298,160 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/pauseReplication": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Pause replication.",
+        "description": "The operation to initiate pause replication of the item.",
+        "operationId": "ReplicationMigrationItems_PauseReplication",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pauseReplicationInput",
+            "in": "body",
+            "description": "Pause replication input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PauseReplicationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pause replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_PauseReplication.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/resumeReplication": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Resume replication.",
+        "description": "The operation to initiate resume replication of the item.",
+        "operationId": "ReplicationMigrationItems_ResumeReplication",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resumeReplicationInput",
+            "in": "body",
+            "description": "Resume replication input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeReplicationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Resume replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_ResumeReplication.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/resync": {
       "post": {
         "tags": [
@@ -17961,6 +18115,11 @@
           "type": "string",
           "readOnly": true
         },
+        "replicationStatus": {
+          "description": "The replication status.",
+          "type": "string",
+          "readOnly": true
+        },
         "migrationState": {
           "description": "The migration status.",
           "enum": [
@@ -17974,7 +18133,13 @@
             "Replicating",
             "MigrationInProgress",
             "MigrationSucceeded",
-            "MigrationFailed"
+            "MigrationFailed",
+            "ResumeInProgress",
+            "ResumeInitiated",
+            "SuspendingProtection",
+            "ProtectionSuspended",
+            "MigrationCompletedWithInformation",
+            "MigrationPartiallySucceeded"
           ],
           "type": "string",
           "readOnly": true,
@@ -18052,7 +18217,9 @@
               "TestMigrate",
               "TestMigrateCleanup",
               "Migrate",
-              "StartResync"
+              "StartResync",
+              "PauseReplication",
+              "ResumeReplication"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -18503,6 +18670,24 @@
           "type": "string"
         }
       }
+    },
+    "PauseReplicationInput": {
+      "description": "Pause replication input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PauseReplicationInputProperties",
+          "description": "Pause replication input properties."
+        }
+      }
+    },
+    "PauseReplicationInputProperties": {
+      "description": "Pause replication input properties.",
+      "type": "object",
+      "properties": {}
     },
     "PlannedFailoverInput": {
       "description": "Input definition for planned failover.",
@@ -21415,6 +21600,46 @@
         }
       }
     },
+    "ResumeReplicationInput": {
+      "description": "Resume replication input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResumeReplicationInputProperties",
+          "description": "Resume replication input properties."
+        }
+      }
+    },
+    "ResumeReplicationInputProperties": {
+      "description": "Resume replication input properties.",
+      "required": [
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ResumeReplicationProviderSpecificInput",
+          "description": "The provider specific input for resume replication."
+        }
+      }
+    },
+    "ResumeReplicationProviderSpecificInput": {
+      "description": "Resume replication provider specific input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "ResyncInput": {
       "description": "Resync input.",
       "required": [
@@ -23561,6 +23786,10 @@
           "description": "The target network Id.",
           "type": "string"
         },
+        "testNetworkId": {
+          "description": "The test network Id.",
+          "type": "string"
+        },
         "vmNics": {
           "description": "The network details.",
           "type": "array",
@@ -23609,6 +23838,12 @@
           "type": "integer",
           "readOnly": true
         },
+        "resumeProgressPercentage": {
+          "format": "int32",
+          "description": "The resume progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
         "initialSeedingRetryCount": {
           "format": "int64",
           "description": "The initial seeding retry count.",
@@ -23618,6 +23853,12 @@
         "resyncRetryCount": {
           "format": "int64",
           "description": "The resync retry count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resumeRetryCount": {
+          "format": "int64",
+          "description": "The resume retry count.",
           "type": "integer",
           "readOnly": true
         },
@@ -23959,6 +24200,25 @@
           "description": "The target location.",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtResumeReplicationInput": {
+      "description": "VMwareCbt specific resume replication input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResumeReplicationProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "deleteMigrationResources": {
+          "description": "A value indicating whether Migration resources to be deleted.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
