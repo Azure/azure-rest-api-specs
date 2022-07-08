@@ -154,12 +154,18 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "events": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -278,6 +284,7 @@
             "links": {
               "type": "array",
               "description": "Useful links of event.",
+              "x-ms-identifiers": [],
               "items": {
                 "$ref": "#/definitions/link"
               }
@@ -295,6 +302,7 @@
             "impact": {
               "type": "array",
               "description": "List services impacted by the service health event.",
+              "x-ms-identifiers": [],
               "items": {
                 "$ref": "#/definitions/impact"
               }
@@ -310,6 +318,7 @@
                 "actions": {
                   "type": "array",
                   "description": "Recommended actions for the service health event.",
+                  "x-ms-identifiers": [],
                   "items": {
                     "type": "object",
                     "description": "Recommended action for the service health event.",
@@ -334,6 +343,7 @@
             },
             "faqs": {
               "type": "array",
+              "x-ms-identifiers": [],
               "description": "Frequently asked questions for the service health event.",
               "items": {
                 "$ref": "#/definitions/faq"
@@ -375,7 +385,7 @@
             },
             "duration": {
               "type": "integer",
-              "format":"int32",
+              "format": "int32",
               "description": "The expected duration of the event in seconds."
             },
             "impactType": {
@@ -402,6 +412,7 @@
       ]
     },
     "link": {
+      "type": "object",
       "description": "Useful links for service health event.",
       "properties": {
         "type": {
@@ -445,6 +456,7 @@
       }
     },
     "faq": {
+      "type": "object",
       "description": "Frequently asked question for the service health event",
       "properties": {
         "question": {
@@ -462,6 +474,7 @@
       }
     },
     "impact": {
+      "type": "object",
       "description": "Azure service impacted by the service health event.",
       "properties": {
         "impactedService": {
@@ -471,6 +484,7 @@
         "impactedRegions": {
           "type": "array",
           "description": "List regions impacted by the service health event.",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/impactedServiceRegion"
           }
@@ -478,6 +492,7 @@
       }
     },
     "impactedServiceRegion": {
+      "type": "object",
       "description": "Azure region impacted by the service health event.",
       "properties": {
         "impactedRegion": {
@@ -512,6 +527,7 @@
         "updates": {
           "type": "array",
           "description": "List of updates for given service health event.",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/update"
           }
@@ -519,6 +535,7 @@
       }
     },
     "update": {
+      "type": "object",
       "description": "Update for service health event.",
       "properties": {
         "summary": {
@@ -533,6 +550,7 @@
       }
     },
     "operationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -548,6 +566,7 @@
       "description": "Lists the operations response."
     },
     "operation": {
+      "type": "object",
       "description": "Operation available in the resourcehealth resource provider.",
       "properties": {
         "name": {
