@@ -12,7 +12,7 @@ Please copy the following configuration into spec PR comment.
 # azure-sdk-for-net-track2
 ``` yaml
 title: <Title>
-output-folder: sdk/<ServiveName>/<NameSpace>
+output-folder: sdk/<ServiceName>/<NameSpace>
 require:
  - specification/<RPName>/data-plane/readme.md
 ```
