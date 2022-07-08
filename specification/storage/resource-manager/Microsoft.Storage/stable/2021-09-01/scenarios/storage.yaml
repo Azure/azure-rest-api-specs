@@ -1,0 +1,244 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: ResourceGroup
+variables:
+  storageAccountName:
+    type: string
+    prefix: teststorage
+  blobContainerName:
+    type: string
+    prefix: testcontainer
+
+prepareSteps:
+  # Create storage account and blob container for testing
+  - step: StorageAccounts_CheckNameAvailability
+    exampleFile: ../examples/StorageAccountCheckNameAvailability.json
+  - step: StorageAccounts_Create
+    exampleFile: ../examples/StorageAccountCreate.json
+    requestUpdate:
+      - remove: /parameters/extendedLocation
+      - remove: /parameters/properties/routingPreference
+      - remove: /parameters/properties/encryption
+      - replace: /parameters/properties/isHnsEnabled
+        value: false
+      - replace: /parameters/properties/isSftpEnabled
+        value: false
+    variables:
+      accountName: $(storageAccountName)
+  - step: BlobContainers_Create
+    exampleFile: ../examples/BlobContainersPut.json
+    #use requestUpdate to update containername
+    requestUpdate:
+      - replace: /containerName
+        value: $(blobContainerName)
+    variables:
+      accountName: $(storageAccountName)
+
+
+cleanUpSteps:
+  # Delete storage account and blob container created
+  - step: BlobContainers_Delete
+    exampleFile: ../examples/BlobContainersDelete.json
+    variables:
+      accountName: $(storageAccountName)
+      containerName: $(blobContainerName)
+  - step: StorageAccounts_Delete
+    exampleFile: ../examples/StorageAccountDelete.json
+    variables:
+      accountName: $(storageAccountName)
+
+scenarios:
+  - scenario: BlobServiceOperationsTest
+    variables:
+      accountName: $(storageAccountName)
+    steps:
+      - step: BlobServices_GetServiceProperties
+        exampleFile: ../examples/BlobServicesGet.json
+      - step: BlobServices_SetServiceProperties
+        exampleFile: ../examples/BlobServicesPut.json
+        requestUpdate:
+          - remove: /parameters/properties/changeFeed
+          - remove: /parameters/properties/isVersioningEnabled
+          - replace: /parameters/properties/defaultServiceVersion
+            value: "2017-04-17"
+          # XML error, remove cors temporarily
+          # - remove: /parameters/properties/cors/corsRules/2/exposedHeaders/2
+          - remove: /parameters/properties/cors
+      - step: BlobServices_List
+        exampleFile: ../examples/BlobServicesList.json
+  - scenario: BlobContainersOperationsTest
+    variables:
+      accountName: $(storageAccountName)
+      containerName: $(blobContainerName)
+    steps:
+      - step: BlobContainers_Get
+        exampleFile: ../examples/BlobContainersGet.json
+      - step: BlobContainers_Update
+        exampleFile: ../examples/BlobContainersPatch.json
+        requestUpdate:
+          - remove: /blobContainer/properties/publicAccess
+      - step: BlobContainers_List
+        exampleFile: ../examples/BlobContainersList.json
+      - step: BlobContainersLease_Acquire
+        exampleFile: ../examples/BlobContainersLease_Acquire.json
+      - step: BlobContainersLease_Break
+        exampleFile: ../examples/BlobContainersLease_Break.json
+
+  - scenario: LegalHoldOperationsTest
+    variables:
+      accountName: $(storageAccountName)
+      containerName: $(blobContainerName)
+    steps:
+      - step: BlobContainers_SetLegalHold
+        exampleFile: ../examples/BlobContainersSetLegalHold.json
+      - step: BlobContainers_ClearLegalHold
+        exampleFile: ../examples/BlobContainersClearLegalHold.json
+
+  - scenario: EcryptionScopeOperationsTests
+    variables:
+      accountName: $(storageAccountName)
+      encryptionScopeName:
+        type: string
+        prefix: encryptionScope
+    steps:
+      - step: EncryptionScopes_Put
+        exampleFile: ../examples/StorageAccountPutEncryptionScope.json
+      - step: EncryptionScopes_Patch
+        exampleFile: ../examples/StorageAccountPatchEncryptionScope.json
+        requestUpdate:
+          - remove: /encryptionScope/properties
+  
+  - scenario: ImmutabilityPolicyOperationsTests
+    variables:
+      accountName: $(storageAccountName)
+      containerName: $(blobContainerName)
+    steps:
+      - step: BlobContainers_CreateOrUpdateImmutabilityPolicy
+        exampleFile: ../examples/BlobContainersPutImmutabilityPolicy.json 
+        requestUpdate:
+          - remove: /parameters/properties/allowProtectedAppendWrites
+          - add: /parameters/properties/allowProtectedAppendWritesAll
+            value: true
+      - step: BlobContainers_GetImmutabilityPolicy
+        exampleFile: ../examples/BlobContainersGetImmutabilityPolicy.json
+      - step: BlobContainers_DeleteImmutabilityPolicy
+        exampleFile: ../examples/BlobContainersDeleteImmutabilityPolicy.json
+      - step: BlobContainers_ObjectLevelWorm
+        exampleFile: ../examples/ObjectLevelWormContainerMigration.json
+
+  - scenario: ObjectReplicationTest
+    variables:
+      sourceAccountName:
+        type: string
+        prefix: sourceacount
+      targetAccountName:
+        type: string
+        prefix: targetaccount
+      sourceContainerName:
+        type: string
+        prefix: sourcecontainer
+      targetContainerName:
+        type: string
+        prefix: targetcontainer
+    steps:
+      - step: CreateSourceStorageAccounts
+        exampleFile: ../examples/StorageAccountCreate.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(sourceAccountName)
+          - replace: /parameters/kind
+            value: StorageV2
+          - remove: /parameters/extendedLocation
+          - remove: /parameters/properties/routingPreference
+          - remove: /parameters/properties/encryption
+          - replace: /parameters/properties/isHnsEnabled
+            value: false
+          - replace: /parameters/properties/isSftpEnabled
+            value: false
+          # Allow replication
+          - add: /parameters/properties/allowCrossTenantReplication
+            value: true
+          - add: /parameters/properties/supportsHttpsTrafficOnly
+            value: true
+      - step: CreateTargetStorageAccounts
+        exampleFile: ../examples/StorageAccountCreate.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(targetAccountName)
+          - replace: /parameters/kind
+            value: StorageV2
+          - remove: /parameters/extendedLocation
+          - remove: /parameters/properties/routingPreference
+          - remove: /parameters/properties/encryption
+          - replace: /parameters/properties/isHnsEnabled
+            value: false
+          - replace: /parameters/properties/isSftpEnabled
+            value: false
+          # Allow replication 
+          - add: /parameters/properties/allowCrossTenantReplication
+            value: true
+          - add: /parameters/properties/supportsHttpsTrafficOnly
+            value: true
+      - step: CreateSourceBlobContainer
+        exampleFile: ../examples/BlobContainersPut.json
+        requestUpdate:
+          - replace: /containerName
+            value: $(sourceContainerName)
+          - replace: /accountName
+            value: $(sourceAccountName)
+      - step: CreateTargetBlobContainer
+        exampleFile: ../examples/BlobContainersPut.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(targetAccountName)
+          - replace: /containerName
+            value: $(targetContainerName)
+      - step: Enable_Changefeed_and_Versioning_for_SourceContainer
+        exampleFile: ../examples/BlobServicesPut.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(sourceAccountName)
+          - remove: /parameters/properties/cors
+          - remove: /parameters/properties/defaultServiceVersion
+          - remove: /parameters/properties/deleteRetentionPolicy
+      - step: Enable_Changefeed_and_Versioning_for_TargetContainer
+        exampleFile: ../examples/BlobServicesPut.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(targetAccountName)
+          - remove: /parameters/properties/cors
+          - remove: /parameters/properties/defaultServiceVersion
+          - remove: /parameters/properties/deleteRetentionPolicy
+      - step: ObjectReplicationPolicies_CreateOrUpdate
+        exampleFile: ../examples/StorageAccountCreateObjectReplicationPolicyOnSource.json
+        requestUpdate:
+          - replace: /accountName
+            value: $(sourceAccountName)
+          - replace: /properties/properties/sourceAccount
+            value: $(sourceAccountName)
+          - replace: /properties/properties/destinationAccount
+            value: $(targetAccountName)
+          - remove: /properties/properties/rules/0/ruleId
+          - replace: /properties/properties/rules/0/sourceContainer
+            value: $(sourceContainerName)
+          - replace: /properties/properties/rules/0/destinationContainer
+            value: $(targetContainerName)
+        outputVariables:
+          replicationPoliceId:
+            fromResponse: /name
+      - step: ObjectReplicationPolicies_Get
+        exampleFile: ../examples/StorageAccountDeleteObjectReplicationPolicy.json
+        variables:
+          objectReplicationPolicyId: $(replicationPoliceId)
+        requestUpdate:
+          - replace: /accountName
+            value: $(sourceAccountName)
+        
+      - step: ObjectReplicationPolicies_Delete
+        exampleFile: ../examples/StorageAccountDeleteObjectReplicationPolicy.json
+        variables:
+          objectReplicationPolicyId: $(replicationPoliceId)
+        requestUpdate:
+          - replace: /accountName
+            value: $(sourceAccountName)
+    
