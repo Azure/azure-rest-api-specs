@@ -24,20 +24,28 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the agfood.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2021-03-31-preview
-
+tag: package-preview-2021-04
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.AgFoodPlatform/preview/2021-04-20-preview/agfood.json
+```
 ### Tag: package-2021-03-31-preview
 
 These settings apply only when `--tag=package-2021-03-31-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-31-preview'
+``` yaml $(tag) == 'package-2021-03-31-preview'
 input-file:
   - Microsoft.AgFoodPlatform/preview/2021-03-31-preview/agfood.json
 ```
