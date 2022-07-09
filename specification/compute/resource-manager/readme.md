@@ -272,7 +272,7 @@ input-file:
 
 ### Tag: package-2022-04-04-only
 
-These settings apply only when `--tag=package-2022-04-04-oly` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-04-only` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-04-only'
 input-file:
