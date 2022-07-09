@@ -11,6 +11,7 @@
       "location": "westus",
       "properties": {
         "cacheSizeGB": 3072,
+        "scalingFactor": 2.0,
         "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
         "networkSettings": {
           "mtu": 1500,
@@ -86,7 +87,7 @@
         }
       },
       "sku": {
-        "name": "Standard_2G"
+        "name": "Standard_E_Scalable"
       }
     }
   },
@@ -110,6 +111,7 @@
         },
         "properties": {
           "cacheSizeGB": 3072,
+          "scalingFactor": 2.0,
           "health": {
             "state": "Transitioning",
             "statusDescription": "Cache is being created.",
@@ -249,7 +251,7 @@
           ]
         },
         "sku": {
-          "name": "Standard_2G"
+          "name": "Standard_E_Scalable"
         }
       }
     }
