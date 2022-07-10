@@ -361,7 +361,7 @@
       "properties": {
         "errors": {
           "type": "array",
-          "description": "Errors by document id or conversation id.",
+          "description": "Errors by document id.",
           "items": {
             "$ref": "#/definitions/InputError"
           }
@@ -759,30 +759,6 @@
         }
       ]
     },
-    "AbstractiveSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an pre-build Abstractive Summarization task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
-        },
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "CustomAbstractiveSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an custom Abstractive Summarization task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
-        },
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
-      ]
-    },
     "CustomTaskParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
@@ -810,9 +786,9 @@
       "properties": {
         "errors": {
           "type": "array",
-          "description": "Errors by document id or conversation id.",
+          "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/InputError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -833,6 +809,24 @@
         "deploymentName"
       ]
     },
+    "DocumentError": {
+      "type": "object",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "common.json#/definitions/Error"
+        }
+      }
+    },
     "SummaryLengthType": {
       "enum": [
         "short",
@@ -845,7 +839,7 @@
       "type": "string",
       "description": "Control the length range of the summary. The model will try the best to control the output length into the specified range, but not guaranteed. Aspect 'chapterTitle' won't be affected by this length control, because chapter title is always short and has different linguistic characteristics.",
       "x-ms-enum": {
-        "modelAsString": true,
+        "modelAsString": false,
         "name": "SummaryLengthType",
         "values": [
           {
@@ -901,7 +895,7 @@
       "type": "string",
       "description": "The strategy to use in phrase control.",
       "x-ms-enum": {
-        "modelAsString": true,
+        "modelAsString": false,
         "name": "PhraseControlStrategy",
         "values": [
           {

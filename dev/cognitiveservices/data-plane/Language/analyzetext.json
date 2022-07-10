@@ -88,9 +88,6 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
-          },
-          "Succesful Healthcare Request": {
-            "$ref": "./examples/text/SuccessfulHealthcareRequest.json"
           }
         }
       }
@@ -139,6 +136,15 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Submit Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
+          },
+          "Successful Submit Custom Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulCustomSummarizationTaskSubmit.json"
+          },
+          "Successful Submit Extractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulExtractiveSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -186,6 +192,15 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulCustomSummarizationTaskResult.json"
+          },
+          "Successful Get Extractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulExtractiveSummarizationTaskResult.json"
           }
         }
       }
@@ -2644,7 +2659,7 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParameters"
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
         }
       },
       "allOf": [
@@ -2662,7 +2677,7 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "common.json#/definitions/CustomAbstractiveSummarizationTaskParameters"
+          "$ref": "#/definitions/CustomAbstractiveSummarizationTaskParameters"
         }
       },
       "allOf": [
@@ -2671,6 +2686,30 @@
         }
       ],
       "x-ms-discriminator-value": "CustomAbstractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an pre-build Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "CustomAbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an custom Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
+        }
+      ]
     },
     "AbstractiveSummarizationLROResults": {
       "type": "object",

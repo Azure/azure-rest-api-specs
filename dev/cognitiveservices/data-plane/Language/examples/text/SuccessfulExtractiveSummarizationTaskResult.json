@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "{api-version}",
+    "Endpoint": "{Endpoint}",
+    "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "createdDateTime": "2020-10-01T15:00:45Z",
+        "displayName": "Document Extractive Summarization Task Example",
+        "expirationDateTime": "2020-10-03T15:01:03Z",
+        "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
+        "lastUpdatedDateTime": "2020-10-01T15:01:03Z",
+        "status": "succeeded",
+        "tasks": {
+          "completed": 1,
+          "failed": 0,
+          "inProgress": 0,
+          "total": 1,
+          "items": [
+            {
+              "kind": "ExtractiveSummarizationLROResults",
+              "taskName": "Document Extractive Summarization Task 1",
+              "lastUpdateDateTime": "2020-10-01T15:01:03Z",
+              "status": "succeeded",
+              "results": {
+                "documents": [
+                  {
+                    "sentences": [
+                        {
+                            "text": "At Microsoft, we have been on a quest to advance AI beyond existing techniques, by taking a more holistic, human-centric approach to learning and understanding.",
+                            "rankScore": 1.0,
+                            "offset": 0,
+                            "length": 160
+                        },
+                        {
+                            "text": "In my role, I enjoy a unique perspective in viewing the relationship among three attributes of human cognition: monolingual text (X), audio or visual sensory signals, (Y) and multilingual (Z).",
+                            "rankScore": 0.9582327572675664,
+                            "offset": 324,
+                            "length": 192
+                        },
+                        {
+                            "text": "At the intersection of all three, there's magic—what we call XYZ-code as illustrated in Figure 1—a joint representation to create more powerful AI that can speak, hear, see, and understand humans better.",
+                            "rankScore": 0.9294747193132348,
+                            "offset": 517,
+                            "length": 203
+                        }
+                    ],
+                    "id": "1",
+                    "warnings": []
+                  }
+                ],
+                "errors": [],
+                "modelVersion": "2022-10-01-preview"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
