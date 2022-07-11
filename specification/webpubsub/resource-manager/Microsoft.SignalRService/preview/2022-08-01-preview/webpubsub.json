@@ -3,7 +3,7 @@
   "info": {
     "title": "WebPubSubManagementClient",
     "description": "REST API for Azure WebPubSub Service",
-    "version": "2021-10-01"
+    "version": "2022-08-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1377,7 +1377,7 @@
           "type": "string"
         },
         "userEventPattern": {
-          "description": "Gets or sets the matching pattern for event names.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name\r\n    2. Combine multiple events with \",\", for example \"event1,event2\", it matches event \"event1\" and \"event2\"\r\n    3. The single event name, for example, \"event1\", it matches \"event1\"",
+          "description": "Gets or sets the matching pattern for event names.\r\nThere are 3 kinds of patterns supported:\r\n    1. \"*\", it matches any event name\r\n    2. Combine multiple events with \",\", for example \"event1,event2\", it matches event \"event1\" and \"event2\"\r\n    3. A single event name, for example, \"event1\", it matches \"event1\"",
           "type": "string"
         },
         "systemEvents": {
@@ -1385,12 +1385,117 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "auth": {
           "$ref": "#/definitions/UpstreamAuthSettings"
         }
       }
+    },
+    "EventHubEndpoint": {
+      "description": "An Event Hub endpoint. \r\nThe managed identity of Web PubSub service must be enabled, and the identity should have the \"Azure Event Hubs Data sender\" role to access Event Hub.",
+      "required": [
+        "eventHubName",
+        "fullyQualifiedNamespace"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventListenerEndpoint"
+        }
+      ],
+      "properties": {
+        "fullyQualifiedNamespace": {
+          "description": "The fully qualified namespace name of the Event Hub resource. For example, \"example.servicebus.windows.net\".",
+          "type": "string"
+        },
+        "eventHubName": {
+          "description": "The name of the Event Hub.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "eventHub"
+    },
+    "EventListener": {
+      "description": "A setting defines which kinds of events should be sent to which endpoint.",
+      "required": [
+        "endpoint",
+        "filter"
+      ],
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/EventListenerFilter"
+        },
+        "endpoint": {
+          "$ref": "#/definitions/EventListenerEndpoint"
+        }
+      }
+    },
+    "EventListenerEndpoint": {
+      "description": "An endpoint specifying where Web PubSub should send events to.",
+      "required": [
+        "listenerEndpointType"
+      ],
+      "type": "object",
+      "properties": {
+        "listenerEndpointType": {
+          "enum": [
+            "eventHub"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "listenerEndpointType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "listenerEndpointType"
+    },
+    "EventListenerFilter": {
+      "description": "A base class for event filter which determines whether an event should be sent to an event listener.",
+      "required": [
+        "listenerFilterType"
+      ],
+      "type": "object",
+      "properties": {
+        "listenerFilterType": {
+          "enum": [
+            "eventName"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "listenerFilterType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "listenerFilterType"
+    },
+    "EventNameFilter": {
+      "description": "Filter events by their name.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventListenerFilter"
+        }
+      ],
+      "properties": {
+        "systemEvents": {
+          "description": "Gets ot sets a list of system events. Supported events: \"connected\" and \"disconnected\". Blocking event \"connect\" is not supported because it requires a response.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "userEventPattern": {
+          "description": "Gets or sets a matching pattern for event names.\r\nThere are 3 kinds of patterns supported:\r\n    1. \"*\", it matches any event name\r\n    2. Combine multiple events with \",\", for example \"event1,event2\", it matches events \"event1\" and \"event2\"\r\n    3. A single event name, for example, \"event1\", it matches \"event1\"",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "eventName"
     },
     "KeyType": {
       "description": "The type of access key.",
@@ -1434,9 +1539,7 @@
           "items": {
             "$ref": "#/definitions/LiveTraceCategory"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1541,9 +1644,7 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1592,14 +1693,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebPubSubRequestType"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "deny": {
           "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebPubSubRequestType"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1660,9 +1763,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1735,7 +1836,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
@@ -1760,7 +1862,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
@@ -1791,7 +1894,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1812,14 +1916,16 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredZoneNames": {
           "description": "Required private DNS zone names",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "shareablePrivateLinkResourceTypes": {
           "description": "The list of resources that are onboarded to private link service",
@@ -1945,9 +2051,7 @@
           "items": {
             "$ref": "#/definitions/ResourceLogCategory"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2005,10 +2109,7 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "x-ms-identifiers": [
-            "name",
-            "unit"
-          ]
+          "x-ms-identifiers": []
         },
         "logSpecifications": {
           "description": "Specifications of the Logs for Azure Monitoring.",
@@ -2016,9 +2117,7 @@
           "items": {
             "$ref": "#/definitions/LogSpecification"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2081,7 +2180,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
@@ -2170,7 +2270,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRServiceUsage"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2240,7 +2341,8 @@
             "format": "int32",
             "type": "integer"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scaleType": {
           "readOnly": true,
@@ -2258,12 +2360,8 @@
           "items": {
             "$ref": "#/definitions/Sku"
           },
-          "x-ms-identifiers": [
-            "resourceType",
-            "/sku/name",
-            "/sku/tier"
-          ],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2368,7 +2466,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebPubSubHub"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2387,9 +2486,15 @@
           "items": {
             "$ref": "#/definitions/EventHandler"
           },
-          "x-ms-identifiers": [
-            "urlTemplate"
-          ]
+          "x-ms-identifiers": []
+        },
+        "eventListeners": {
+          "description": "Event listener settings for forwarding your client events to listeners.\r\nEvent listener is transparent to Web PubSub clients, and it doesn't return any result to clients nor interrupt the lifetime of clients.\r\nOne event can be sent to multiple listeners, as long as it matches the filters in those listeners. The order of the array elements doesn't matter.\r\nMaximum count of event listeners among all hubs is 30.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventListener"
+          },
+          "x-ms-identifiers": []
         },
         "anonymousConnectPolicy": {
           "description": "The settings for configuring if anonymous connections are allowed for this hub: \"allow\" or \"deny\". Default to \"deny\".",
@@ -2440,9 +2545,7 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointACL"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2487,7 +2590,8 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sharedPrivateLinkResources": {
           "description": "The list of shared private link resources.",
@@ -2495,7 +2599,8 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "tls": {
           "$ref": "#/definitions/WebPubSubTlsSettings"
@@ -2579,7 +2684,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebPubSubResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",

@@ -17,10 +17,28 @@
               }
             }
           }
-        ]
+        ],
+        "eventListeners": [
+          {
+            "filter": {
+              "listenerFilterType": "eventName",
+              "systemEvents": [
+                "connected",
+                "disconnected"
+              ],
+              "userEventPattern": "*"
+            },
+            "endpoint": {
+              "listenerEndpointType": "eventHub",
+              "fullyQualifiedNamespace": "example.servicebus.windows.net",
+              "eventHubName": "eventHubName1"
+            }
+          }
+        ],
+        "anonymousConnectPolicy": "allow"
       }
     },
-    "api-version": "2021-10-01",
+    "api-version": "2022-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "myWebPubSubService",
@@ -45,7 +63,25 @@
                 }
               }
             }
-          ]
+          ],
+          "eventListeners": [
+            {
+              "filter": {
+                "listenerFilterType": "eventName",
+                "systemEvents": [
+                  "connected",
+                  "disconnected"
+                ],
+                "userEventPattern": "*"
+              },
+              "endpoint": {
+                "listenerEndpointType": "eventHub",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net",
+                "eventHubName": "eventHubName1"
+              }
+            }
+          ],
+          "anonymousConnectPolicy": "allow"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
         "name": "exampleHub",
@@ -70,7 +106,25 @@
                 }
               }
             }
-          ]
+          ],
+          "eventListeners": [
+            {
+              "filter": {
+                "listenerFilterType": "eventName",
+                "systemEvents": [
+                  "connected",
+                  "disconnected"
+                ],
+                "userEventPattern": "*"
+              },
+              "endpoint": {
+                "listenerEndpointType": "eventHub",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net",
+                "eventHubName": "eventHubName1"
+              }
+            }
+          ],
+          "anonymousConnectPolicy": "allow"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
         "name": "exampleHub",
