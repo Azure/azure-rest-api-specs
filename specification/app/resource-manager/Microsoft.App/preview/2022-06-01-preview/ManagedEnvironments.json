@@ -660,6 +660,45 @@
         }
       }
     },
+    "EnviornmentSkuProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/container-apps/"
+          },
+          "enum": [
+            "Consumption",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Managed Environment."
+              },
+              {
+                "value": "Premium",
+                "description": "Premium SKU of Managed Environment."
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the SKU (number of deployed nodes of the SKU). For Consumption SKU capacity must be specified as 0."
+        }
+      },
+      "required": [
+        "name",
+        "capacity"
+      ],
+      "description": "Managed Environment resource SKU properties."      
+    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -841,6 +880,17 @@
               "description": "Custom domain configuration for the environment"
             }
           },
+          "sku": {
+            "$ref": "#/definitions/EnviornmentSkuProperties",
+            "description": "SKU properties of the Environment."
+          },
+          "workloadProfiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/WorkloadProfile"
+            },
+            "description": "Workload profiles of the Managed Environment."
+          },
           "x-ms-client-flatten": true
         }
       }
@@ -882,6 +932,157 @@
             "update"
           ],
           "x-ms-secret": true
+        }
+      }
+    },
+    "WorkloadProfile": {
+      "properties": {
+        "workloadProfileType": {
+          "$ref": "#/definitions/WorkloadProfileType",
+          "description": "Workload profile type for the workloads to run on."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the workload profile",
+          "type": "string",
+          "readOnly": true
+        },
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The maximum capacity."
+        }
+      },
+      "required": [
+        "workloadProfileType"
+      ],
+      "description": "Description of a workload profile."
+    },
+    "Certificate": {
+      "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the certificate.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "DeleteFailed",
+                "Pending"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "value": {
+              "format": "byte",
+              "description": "PFX or PEM blob",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "CertificateCollection": {
+      "description": "Collection of Certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificatePatch": {
+      "description": "A certificate to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     }
