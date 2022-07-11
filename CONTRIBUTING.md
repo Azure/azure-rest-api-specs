@@ -47,7 +47,7 @@ Because the first rule is to avoid breaking changes and because we want APIs to 
 
 ## Coding Style
 
-REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) format.
+REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://aka.ms/cadl/rpaas-start)format.
 
 The REST API should also adhere to the conventions documented in the [Azure API Style Guide](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md).
 
@@ -68,6 +68,8 @@ If you want to contribute to the repository, follow these steps:
   5. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
   6. Contact the ARM API Review board or Azure API Stewardship team to request PR review. 
 
+Microsoft employees can try out the experience at [OpenAPI Hub](https://aka.ms/openapihub) for [adding a new API version using OpenAPI Hub](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
+
 ## Pull Request checks
 
 Every PR in this repo will go through a series of PR checks, including:
@@ -87,3 +89,4 @@ Every PR in this repo will go through a series of PR checks, including:
 - SDK Breaking Change -
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
+There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.
