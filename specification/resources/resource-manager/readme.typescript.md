@@ -36,6 +36,9 @@ typescript:
 typescript:
   package-name: "@azure/arm-policy"
   output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy"
+
+modelerfour: 
+  treat-type-object-as-anything: true 
 ```
 
 ```yaml $(typescript) && $(package-resources) && !$(profile-content)

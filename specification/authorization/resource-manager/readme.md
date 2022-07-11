@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2021-12-01-preview-only
 ```
 
 ### Suppression
@@ -80,6 +80,15 @@ directive:
   - suppress: R2015
     from: common-types.json
     reason: common-types doesn't need to reference api version.
+```
+
+### Tag: package-2021-12-01-preview-only
+
+These settings apply only when `--tag=package-2021-12-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2020-10-01
@@ -438,7 +447,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

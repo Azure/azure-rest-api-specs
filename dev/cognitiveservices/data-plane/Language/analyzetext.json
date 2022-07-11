@@ -88,6 +88,9 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
+          },
+          "Succesful Healthcare Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareRequest.json"
           }
         }
       }
@@ -461,6 +464,10 @@
           "description": "Optional display name for the analysis job.",
           "type": "string"
         },
+        "defaultLanguage": {
+          "description": "Default language to use for records requesting automatic language detection.",
+          "type": "string"
+        },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
         },
@@ -482,10 +489,12 @@
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the project name for the model."
         },
         "deploymentName": {
-          "type": "string"
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
         }
       },
       "allOf": [
@@ -564,6 +573,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -612,6 +624,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -891,6 +906,11 @@
             "modelAsString": true
           }
         },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
+        },
         "entities": {
           "description": "The entities in the relation.",
           "type": "array",
@@ -1021,6 +1041,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ],
       "required": [
@@ -1102,15 +1125,18 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "neutral": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
       "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
@@ -1305,14 +1331,16 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
         },
         "negative": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
         }
       },
-      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
     "EntitiesTaskParameters": {
       "type": "object",
@@ -1370,6 +1398,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1499,6 +1530,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1668,6 +1702,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1965,6 +2002,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2105,6 +2145,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2509,6 +2552,15 @@
         }
       }
     },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
     "DocumentError": {
       "type": "object",
       "required": [
@@ -2625,7 +2677,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       }
     },
