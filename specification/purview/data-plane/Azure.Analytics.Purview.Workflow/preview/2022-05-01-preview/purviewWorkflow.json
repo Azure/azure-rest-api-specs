@@ -136,6 +136,59 @@
         }
       }
     },
+    "/workflow/mine/approvals/{approvalRequestId}/reassign": {
+      "post": {
+        "tags": [
+          "Approval"
+        ],
+        "description": "Reassign an approval request.",
+        "operationId": "ApprovalRequest_Reassign",
+        "x-ms-examples": {
+          "ApprovalRequest_Reassign": {
+            "$ref": "./examples/ApprovalRequest_Reassign.json"
+          }
+        },
+        "deprecated": false,
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-ms-client-request-id"
+          },
+          {
+            "$ref": "#/parameters/approvalRequestId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "ApprovalReassignCommand",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApprovalReassignCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/workflow/definitions/{workflowDefinitionId}": {
       "get": {
         "tags": [
@@ -947,6 +1000,56 @@
           }
         }
       }
+    },
+    "/workflow/mine/tasks/{taskRequestId}/reassign": {
+      "post": {
+        "description": "Reassign a task.",
+        "operationId": "TaskRequest_Reassign",
+        "x-ms-examples": {
+          "TaskRequest_Reassign": {
+            "$ref": "./examples/TaskRequest_Reassign.json"
+          }
+        },
+        "deprecated": false,
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-ms-client-request-id"
+          },
+          {
+            "$ref": "#/parameters/taskRequestId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "TaskReassignCommand",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TaskReassignCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1171,6 +1274,8 @@
         },
         "actions": {
           "type": "object",
+          "title": "Actions",
+          "description": "The workflow definition actions.",
           "additionalProperties": {
             "$ref": "#/definitions/ActionDetail"
           }
@@ -1741,6 +1846,74 @@
         "requestor",
         "requestEventPayload",
         "status"
+      ]
+    },
+    "ApprovalReassignCommand": {
+      "title": "ApprovalReassignCommand",
+      "type": "object",
+      "properties": {
+        "reassignments": {
+          "type": "array",
+          "title": "Reassignments",
+          "description": "The request body of reassigning an approval request.",
+          "items": {
+            "$ref": "#/definitions/ApprovalReassignment"
+          }
+        }
+      }
+    },
+    "ApprovalReassignment": {
+      "title": "ApprovalReassignment",
+      "type": "object",
+      "properties": {
+        "reassignFrom": {
+          "type": "string",
+          "title": "ReassignFrom",
+          "description": "Reassign approval request from someone(GUID)."
+        },
+        "reassignTo": {
+          "type": "string",
+          "title": "ReassignTo",
+          "description": "Reassign approval request to someone(GUID)."
+        }
+      },
+      "required": [
+        "reassignFrom",
+        "reassignTo"
+      ]
+    },
+    "TaskReassignCommand": {
+      "title": "TaskReassignCommand",
+      "type": "object",
+      "properties": {
+        "reassignments": {
+          "type": "array",
+          "title": "Reassignments",
+          "description": "The request body of reassigning a task request.",
+          "items": {
+            "$ref": "#/definitions/TaskReassignment"
+          }
+        }
+      }
+    },
+    "TaskReassignment": {
+      "title": "TaskReassignment",
+      "type": "object",
+      "properties": {
+        "reassignFrom": {
+          "type": "string",
+          "title": "ReassignFrom",
+          "description": "Reassign task request from someone(GUID)."
+        },
+        "reassignTo": {
+          "type": "string",
+          "title": "ReassignTo",
+          "description": "Reassign task request to someone(GUID)."
+        }
+      },
+      "required": [
+        "reassignFrom",
+        "reassignTo"
       ]
     },
     "ErrorResponse": {
