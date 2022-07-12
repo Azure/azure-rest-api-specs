@@ -1,21 +1,22 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "TrunkStatus Service",
-    "description": "TrunkStatus Service",
+    "title": "Trunks Service",
+    "description": "Trunks Service",
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
     "version": "2022-07-01-preview1"
   },
   "paths": {
-    "/sip/trunks/status": {
+    "/sip/trunks": {
       "get": {
         "tags": [
-          "TrunksStatus"
+          "Trunk"
         ],
-        "summary": "Gets list of all the trunks SBC status for resource",
-        "operationId": "GetTrunksStatus",
+        "description": "This endpoint gets a list of all Trunks from SIP configuration for resource.",
+        "summary": "Gets a list of all Trunks from SIP configuration for resource.",
+        "operationId": "GetTrunks",
         "produces": [
           "application/json"
         ],
@@ -28,7 +29,7 @@
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/Trunks"
+              "$ref": "#/definitions/ListOfTrunks"
             }
           },
           "default": {
@@ -39,19 +40,20 @@
           }
         },
         "x-ms-examples": {
-          "Gets all the trunks SBC status for resource": {
-            "$ref": "./examples/GetTrunksStatus.json"
+          "Get trunks of SIP configuration for resource.": {
+            "$ref": "./examples/GetTrunks.json"
           }
         }
       }
     },
-    "/sip/trunks/{fqdn}/status": {
+    "/sip/trunks/{fqdn}": {
       "get": {
         "tags": [
-          "TrunkStatus"
+          "Trunk"
         ],
-        "summary": "Gets SBC status for trunk",
-        "operationId": "GetTrunkStatus",
+        "description": "This endpoint gets single Trunk from SIP configuration for resource",
+        "summary": "Get single Trunk from SIP configuration for resource",
+        "operationId": "GetTrunk",
         "produces": [
           "application/json"
         ],
@@ -62,7 +64,7 @@
           {
             "in": "path",
             "name": "fqdn",
-            "description": "FQDN of the trunk to get status for",
+            "description": "Case insensitive FQDN of the trunk.",
             "required": true,
             "type": "string",
             "maxLength": 256
@@ -72,7 +74,7 @@
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/SBCStatus"
+              "$ref": "#/definitions/Trunk"
             }
           },
           "default": {
@@ -84,21 +86,49 @@
         },
         "x-ms-examples": {
           "Gets SBC status for trunk": {
-            "$ref": "./examples/GetTrunkStatus.json"
+            "$ref": "./examples/GetTrunk.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Trunks": {
+    "ListOfTrunks": {
       "description": "SIP trunks for routing calls",
       "type": "object",
       "properties": {
-        "values": {
+        "value": {
           "description": "Represents an array of SIP trunks for routing calls",
           "maxLength": 250,
           "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trunk"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Trunk": {
+      "description": "Represents a SIP trunk for routing calls. See RFC 4904.",
+      "type": "object",
+      "required": [
+        "fqdn"
+      ],
+      "properties": {
+        "fqdn": {
+          "description": "Trunk's FQDN of the paired SBC",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "sipSignalingPort": {
+          "format": "int32",
+          "description": "SIP signaling port of the trunk.",
+          "type": "integer"
+        },
+        "sbcStatus": {
+          "type": "object",
           "items": {
             "$ref": "#/definitions/SBCStatus"
           }
@@ -108,19 +138,12 @@
     "SBCStatus": {
       "description": "Represents a trunk's SBC status",
       "required": [
-        "fqdn",
         "tls",
         "ping",
-        "trunkOverallStatus",
-        "lastUpdateTime"
+        "overallStatus"
       ],
       "type": "object",
       "properties": {
-        "fqdn": {
-          "description": "Trunk's FQDN of the paired SBC",
-          "maxLength": 256,
-          "type": "string"
-        },
         "tls": {
           "description": "The status of the TLS connections between Direct Routing and the SBC",
           "maxLength": 256,
@@ -154,11 +177,6 @@
             "InactiveNoRecentPingsAndCalls",
             "InactiveNoRecentCalls"
           ]
-        },
-        "lastUpdateTime": {
-          "description": "The last time the status has been updated",
-          "maxLength": 256,
-          "type": "string"
         }
       }
     }
