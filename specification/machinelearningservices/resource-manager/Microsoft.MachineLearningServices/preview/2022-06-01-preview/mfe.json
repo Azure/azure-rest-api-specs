@@ -6728,7 +6728,7 @@
         },
         "resources": {
           "description": "Indicates compute configuration for the job.\r\nIf not provided, will default to the defaults defined in ResourceConfiguration.",
-          "$ref": "#/definitions/ResourceConfiguration",
+          "$ref": "#/definitions/DeploymentResourceConfiguration",
           "x-nullable": true
         },
         "retrySettings": {
@@ -10913,6 +10913,15 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "DeploymentResourceConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceConfiguration"
+        }
+      ],
       "additionalProperties": false
     },
     "JobResourceConfiguration": {
