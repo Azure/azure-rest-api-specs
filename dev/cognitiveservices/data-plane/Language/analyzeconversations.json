@@ -133,6 +133,10 @@
           "Successful Conversation Summarization Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
           }
+          ,
+          "Successful Conversation Sentiment Analysis Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentSubmit.json"
+          }          
         },
         "x-ms-long-running-operation": true
       }
@@ -176,6 +180,9 @@
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Sentiment Analysis Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentTaskStatusRequest.json"
           }
         }
       }
@@ -1568,7 +1575,7 @@
       "enum": [
         "ConversationalPIIResults",
         "ConversationalSummarizationResults",
-        "ConversationalSentiment"
+        "ConversationalSentimentResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -2097,6 +2104,201 @@
         "aspect",
         "text"
       ]
+    },
+    "AnalyzeConversationalSentimentTask": {
+      "type": "object",
+      "description": "Task definition for a sentiment analysis in conversations.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ConversationalSentimentTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentTask"
+    },
+    "ConversationalSentimentTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Conversational sentiment analysis task.",
+      "properties": {
+        "predictionSource": {
+          "type": "string",
+          "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "$ref": "#/definitions/TranscriptContentType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationSentimentResult": {
+      "type": "object",
+      "description": "Result from the sentiment analysis operation performed on a list of conversations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ConversationSentimentResults"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentResults"
+    },
+    "ConversationSentimentResults": {
+      "type": "object",
+      "description": "The result from sentiment analysis operation for each conversation.",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConversationSentimentResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationSentimentResult": {
+      "description": "The result from sentiment analysis operation for each conversation item.",
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Enumeration of PII detection and redaction operation results for all the conversation items in a conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationSentimentItemResult"
+          }
+        }
+      }
+    },        
+    "ConversationSentimentItemResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "participantId",
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "participantId": {
+          "type": "string"
+        },
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment"
+        },                
+        "confidenceScores": {
+          "type": "object",
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
+          }
+        }
+      }
+    },
+    "Sentiment": {
+      "type": "string",
+      "description": "Predicted sentiment.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "TextSentiment",
+        "modelAsString": true
+      }
+    },
+    "SentenceSentiment": {
+      "type": "object",
+      "required": [
+        "text",
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment"
+        },
+        "confidenceScores": {
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
     },
     "AnalyzeConversationJobState": {
       "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
