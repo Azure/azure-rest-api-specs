@@ -585,6 +585,9 @@
         "description": "Starts a Dev Box",
         "operationId": "DevBox_Start",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "responses": {
           "202": {
             "description": "The request was accepted",
@@ -637,6 +640,9 @@
         "description": "Stops a Dev Box",
         "operationId": "DevBox_Stop",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "responses": {
           "202": {
             "description": "The request was accepted",
@@ -734,10 +740,7 @@
           "description": "The URL to get the next set of results.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Pool": {
       "type": "object",
@@ -796,10 +799,7 @@
           "description": "The URL to get the next set of results.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Schedule": {
       "type": "object",
@@ -871,10 +871,7 @@
           "description": "The URL to get the next set of results.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DevBox": {
       "type": "object",
