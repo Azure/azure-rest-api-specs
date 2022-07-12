@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-account-2021-11
 opt-in-extensible-enums: true
 ```
 
@@ -60,6 +60,21 @@ directive:
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].put'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}"].get'
     from: Accounts.json
+```
+
+### Tag: package-account-2021-11
+
+These settings apply only when `--tag=package-account-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-account-2021-11'
+input-file:
+  - Microsoft.Media/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-11-01/streamingservice.json
 ```
 
 ### Tag: package-2021-11
@@ -252,7 +267,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

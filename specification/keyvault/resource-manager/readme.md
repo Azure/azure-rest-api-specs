@@ -26,15 +26,28 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2022-07
 ```
 
 
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.KeyVault/stable/2022-07-01/common.json
+  - Microsoft.KeyVault/stable/2022-07-01/keys.json
+  - Microsoft.KeyVault/stable/2022-07-01/keyvault.json
+  - Microsoft.KeyVault/stable/2022-07-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2022-07-01/providers.json
+  - Microsoft.KeyVault/stable/2022-07-01/secrets.json
+```
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.KeyVault/preview/2021-11-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-11-01-preview/keys.json
@@ -48,7 +61,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.KeyVault/stable/2021-10-01/common.json
   - Microsoft.KeyVault/stable/2021-10-01/keys.json
@@ -209,11 +222,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

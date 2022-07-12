@@ -26,15 +26,30 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03
+tag: package-preview-2022-05
+
+directive:
+  - where:
+      - $.definitions.Machine.properties
+    suppress:
+      - BodyTopLevelProperties
 ```
 
 
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2022-05-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2022-05-10-preview/privateLinkScopes.json
+```
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.HybridCompute/stable/2022-03-10/HybridCompute.json
   - Microsoft.HybridCompute/stable/2022-03-10/privateLinkScopes.json
@@ -180,7 +195,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
