@@ -1,3 +1,36 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "./common.cadl";
+
+using Azure.Core.Operations;
+using Cadl.Rest;
+using Cadl.Http;
+
+@server(
+  "{Endpoint}/language",
+  "Language Service",
+  {
+    Endpoint: Endpoint,
+  }
+)
+@serviceTitle("Microsoft Cognitive Language Service - Analyze Conversations Authoring")
+@serviceVersion("2022-05-01")
+@doc("The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.")
+namespace Microsoft.Language.AnalyzeConversations.Authoring;
+
+
+interface ConversationAnalysis {
+	@route("/:analyze-conversations")
+	@doc("Analyzes the input conversation utterance.")
+	op AnalyzeConversation is ResourceAction<{}, AnalyzeConversationTaskResult, AnalyzeConversationTaskBody>;
+}
+
+model AnalyzeConversationTaskBody {
+	@body __body__: AnalyzeConversationTask;
+}
+
+
 @doc("The input ConversationItem and its optional parameters")
 model ConversationAnalysisOptions {
 	conversationItem: ConversationItemBase;
@@ -16,17 +49,16 @@ enum AnalyzeConversationTaskResultsKindKV {
 }
 
 @doc("The base class of a conversation input task.")
-model AnalyzeConversationTask {
-	kind: AnalyzeConversationTaskKind;
-}
+@discriminator("kind") // AnalyzeConversationTaskKind
+model AnalyzeConversationTask {}
 
 @doc("The base class of a conversation task result.")
-model AnalyzeConversationTaskResult {
-	kind: AnalyzeConversationTaskResultsKind;
-}
+@discriminator("kind") // AnalyzeConversationTaskResultsKind
+model AnalyzeConversationTaskResult {}
 
 @doc("The input for a custom conversation task.")
-model ConversationalTask {
+model ConversationalTask extends AnalyzeConversationTask {
+	kind: "Conversation";
 	analysisInput: ConversationAnalysisOptions;
 	parameters: ConversationTaskParameters;
 }
@@ -49,7 +81,8 @@ model ConversationTaskParameters {
 }
 
 @doc("The results of a Conversation task.")
-model ConversationalTaskResult {
+model ConversationalTaskResult extends AnalyzeConversationTaskResult {
+	kind: "ConversationResult";
 	result: AnalyzeConversationResult;
 }
 
@@ -61,7 +94,7 @@ model ConversationItemBase {
 	participantId: string;
 	@doc("The override language of a conversation item in BCP 47 language representation.")
 	language?: string;
-	modality?: Modality;
+	modality?: InputModality;
 }
 
 @doc("The text modality of an input conversation.")
@@ -80,21 +113,22 @@ enum targetProjectKindKV {
 }
 
 @doc("This is the parameter set of either the Orchestration project itself or one of the target services.")
+@discriminator("targetProjectKind") // targetProjectKind enum
 model AnalysisParameters {
-	@doc("The type of a target service.")
-	targetProjectKind: targetProjectKind;
 	@doc("The API version to use when call a specific target service.")
 	apiVersion?: string;
 }
 
 @doc("A wrap up of non-linked intent response.")
-model NoneLinkedTargetIntentResult {
+model NoneLinkedTargetIntentResult extends TargetIntentResult {
+	kind: "NonLinked";
 	@doc("The actual response from a Conversation project.")
 	result?: ConversationResult;
 }
 
 @doc("This is a set of request parameters for LUIS Generally Available projects.")
-model LuisParameters {
+model LuisParameters extends AnalysisParameters {
+	targetProjectKind: "Luis";
 	@doc("The utterance to predict.")
 	query?: string;
 	@doc("This customizes how the service calls LUIS Generally Available projects.")
@@ -108,17 +142,18 @@ model LuisCallingOptions {
 	@doc("Save log to add in training utterances later.")
 	log?: boolean;
 	@doc("Set true to show all intents.")
-	show-all-intents?: boolean;
+	"show-all-intents"?: boolean;
 	@doc("The timezone offset for the location of the request.")
-	timezoneOffset?: number;
+	timezoneOffset?: int32;
 	@doc("Enable spell checking.")
 	spellCheck?: boolean;
 	@doc("The subscription key to use when enabling Bing spell check")
-	bing-spell-check-subscription-key?: string;
+	"bing-spell-check-subscription-key"?: string;
 }
 
 @doc("This is a set of request parameters for Customized Conversation projects.")
-model ConversationParameters {
+model ConversationParameters extends AnalysisParameters {
+	targetProjectKind: "Conversation";
 	callingOptions?: ConversationCallingOptions;
 }
 
@@ -133,7 +168,8 @@ model ConversationCallingOptions {
 }
 
 @doc("This is a set of request parameters for Question Answering knowledge bases.")
-model QuestionAnsweringParameters {
+model QuestionAnsweringParameters extends AnalysisParameters{
+	targetProjectKind: "Conversation";
 	@doc("The options sent to a Question Answering KB.")
 	callingOptions?: AnswersOptions;
 }
@@ -156,32 +192,22 @@ enum projectKindKV {
 }
 
 @doc("This is the base class of prediction")
+@discriminator("projectKind")
 model BasePrediction {
-	@doc("The type of the project.")
-	projectKind: projectKind;
 	@doc("The intent with the highest score.")
 	topIntent?: string;
 }
 
 @doc("This represents the prediction result of an Orchestration project.")
-model OrchestrationPrediction {
+model OrchestrationPrediction extends BasePrediction {
+	projectKind: "Orchestration";
 	@doc("A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.")
 	intents: Map<string, string>;
 }
 
-@knownValues(targetProjectKindKV)
-model targetProjectKind is string {}
-enum targetProjectKindKV {
-	Luis,
-	Conversation,
-	QuestionAnswering,
-	NonLinked,
-}
-
 @doc("This is the base class of an intent prediction")
+@discriminator("targetProjectKind")
 model TargetIntentResult {
-	@doc("This discriminator property specifies the type of the target project that returns the response.")
-	targetProjectKind: targetProjectKind;
 	@doc("The API version used to call a target service.")
 	apiVersion?: string;
 	@doc("The prediction score and it ranges from 0.0 to 1.0.")
@@ -189,7 +215,8 @@ model TargetIntentResult {
 }
 
 @doc("A wrap up of Conversation project response.")
-model ConversationTargetIntentResult {
+model ConversationTargetIntentResult extends TargetIntentResult {
+	targetProjectKind: "Conversation";
 	@doc("The actual response from a Conversation project.")
 	result?: ConversationResult;
 }
@@ -205,7 +232,8 @@ model ConversationResult {
 }
 
 @doc("Represents the prediction section of a Conversation project.")
-model ConversationPrediction {
+model ConversationPrediction extends BasePrediction {
+	projectKind: "Conversation";
 	@doc("The intent classification results.")
 	intents: ConversationIntent[];
 	@doc("The entity extraction results.")
@@ -246,19 +274,19 @@ enum ExtraInformationKindKV {
 }
 
 @doc("The abstract base object for entity extra information.")
-model BaseExtraInformation {
-	@doc("The extra information object kind.")
-	extraInformationKind: ExtraInformationKind;
-}
+@discriminator("extraInformationKind")
+model BaseExtraInformation {}
 
 @doc("The concrete entity Subtype model of extra information.")
-model EntitySubtype {
+model EntitySubtype extends BaseExtraInformation {
+	extraInformationKind: "EntitySubtype";
 	@doc("The Subtype of an extracted entity type.")
 	value?: string;
 }
 
 @doc("The list key extra data kind.")
-model ListKey {
+model ListKey extends BaseExtraInformation {
+	extraInformationKind: "ListKey";
 	@doc("The canonical form of the extracted entity.")
 	key?: string;
 }
@@ -284,10 +312,8 @@ enum ResolutionKindKV {
 }
 
 @doc("The abstract base class for entity resolutions.")
-model BaseResolution {
-	@doc("The entity resolution object kind.")
-	resolutionKind: ResolutionKind;
-}
+@discriminator("resolutionKind")
+model BaseResolution {}
 
 @doc("Represents resolutions for quantities.")
 model QuantityResolution {
@@ -306,7 +332,9 @@ enum AgeUnitKV {
 }
 
 @doc("Represents the Age entity resolution model.")
-model AgeResolution {
+model AgeResolution extends BaseResolution{
+	resolutionKind: "Age";
+	...QuantityResolution;
 	@doc("The Age Unit of measurement")
 	unit: AgeUnit;
 }
@@ -345,7 +373,9 @@ enum VolumeUnitKV {
 }
 
 @doc("Represents the volume entity resolution model.")
-model VolumeResolution {
+model VolumeResolution extends BaseResolution {
+	resolutionKind: "Volume";
+	...QuantityResolution;
 	@doc("The Volume Unit of measurement")
 	unit: VolumeUnit;
 }
@@ -370,7 +400,9 @@ enum SpeedUnitKV {
 }
 
 @doc("Represents the speed entity resolution model.")
-model SpeedResolution {
+model SpeedResolution extends BaseResolution {
+	resolutionKind: "Speed";
+	...QuantityResolution;
 	@doc("The speed Unit of measurement")
 	unit: SpeedUnit;
 }
@@ -394,7 +426,9 @@ enum AreaUnitKV {
 }
 
 @doc("Represents the area entity resolution model.")
-model AreaResolution {
+model AreaResolution extends BaseResolution {
+	resolutionKind: "Area";
+	...QuantityResolution;
 	@doc("The area Unit of measurement")
 	unit: AreaUnit;
 }
@@ -422,7 +456,9 @@ enum LengthUnitKV {
 }
 
 @doc("Represents the length entity resolution model.")
-model LengthResolution {
+model LengthResolution extends BaseResolution {
+	resolutionKind: "Length";
+	...QuantityResolution;
 	@doc("The length Unit of measurement")
 	unit: LengthUnit;
 }
@@ -446,7 +482,9 @@ enum InformationUnitKV {
 }
 
 @doc("Represents the information (data) entity resolution model.")
-model InformationResolution {
+model InformationResolution extends BaseResolution {
+	resolutionKind: "Information";
+	...QuantityResolution;
 	@doc("The information (data) Unit of measurement.")
 	unit: InformationUnit;
 }
@@ -462,7 +500,9 @@ enum TemperatureUnitKV {
 }
 
 @doc("Represents the temperature entity resolution model.")
-model TemperatureResolution {
+model TemperatureResolution extends BaseResolution {
+	resolutionKind: "Temperature";
+	...QuantityResolution;
 	@doc("The temperature Unit of measurement.")
 	unit: TemperatureUnit;
 }
@@ -489,23 +529,26 @@ enum WeightUnitKV {
 }
 
 @doc("Represents the weight entity resolution model.")
-model WeightResolution {
+model WeightResolution extends BaseResolution {
+	resolutionKind: "Weight";
+	...QuantityResolution;
 	@doc("The weight Unit of measurement.")
 	unit: WeightUnit;
 }
 
 @doc("Represents the currency entity resolution model.")
-model CurrencyResolution {
+model CurrencyResolution extends BaseResolution {
+	resolutionKind: "Currency";
+	...QuantityResolution;
 	@doc("The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.")
 	ISO4217?: string;
-	@doc("The money amount captured in the extracted entity")
-	value: float64;
 	@doc("The unit of the amount captured in the extracted entity")
 	unit: string;
 }
 
 @doc("A resolution for boolean expressions")
-model BooleanResolution {
+model BooleanResolution extends BaseResolution {
+	resolutionKind: "Boolean";
 	value: boolean;
 }
 
@@ -520,7 +563,8 @@ enum DateTimeSubKindKV {
 }
 
 @doc("A resolution for datetime entity instances.")
-model DateTimeResolution {
+model DateTimeResolution extends BaseResolution {
+	resolutionKind: "DateTime";
 	timex: TimeExpression;
 	@doc("The DateTime SubKind")
 	dateTimeSubKind: DateTimeSubKind;
@@ -541,7 +585,8 @@ enum NumberKindKV {
 }
 
 @doc("A resolution for numeric entity instances.")
-model NumberResolution {
+model NumberResolution extends BaseResolution {
+	resolutionKind: "Number";
 	@doc("The type of the extracted number entity.")
 	numberKind: NumberKind;
 	@doc("A numeric representation of what the extracted text denotes.")
@@ -557,7 +602,8 @@ enum RelativeToKV {
 }
 
 @doc("A resolution for ordinal numbers entity instances.")
-model OrdinalResolution {
+model OrdinalResolution extends BaseResolution {
+	resolutionKind: "Ordinal";
 	@doc("The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\"")
 	offset: string;
 	@doc("The reference point that the ordinal number denotes.")
@@ -567,7 +613,8 @@ model OrdinalResolution {
 }
 
 @doc("represents the resolution of a date and/or time span.")
-model TemporalSpanResolution {
+model TemporalSpanResolution extends BaseResolution {
+	resolutionKind: "TemporalSpan";
 	begin?: TimeExpression;
 	end?: TimeExpression;
 	@doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
@@ -591,7 +638,8 @@ enum RangeKindKV {
 }
 
 @doc("represents the resolution of numeric intervals.")
-model NumericRangeResolution {
+model NumericRangeResolution extends BaseResolution {
+	resolutionKind: "NumericRange";
 	@doc("The kind of range that the resolution object represents.")
 	rangeKind: RangeKind;
 	@doc("The beginning value of  the interval.")
@@ -628,17 +676,20 @@ model TimeExpression {
 }
 
 @doc("It is a wrap up of LUIS Generally Available response.")
-model LuisTargetIntentResult {
+model LuisTargetIntentResult extends TargetIntentResult {
+	targetProjectKind: "Luis";
 	@doc("The actual response from a LUIS Generally Available application.")
 	result?: Map<string, string>;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
-model QuestionAnsweringTargetIntentResult {
+model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
+	targetProjectKind: "QuestionAnswering";
 	@doc("The generated answer by a Question Answering KB.")
 	result?: AnswersResult;
 }
 
+@doc("Enumeration of supported conversational modalities.")
 @knownValues(InputModalityKV)
 model InputModality is string {}
 enum InputModalityKV {
