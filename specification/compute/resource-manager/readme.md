@@ -277,6 +277,7 @@ These settings apply only when `--tag=package-2022-07-11-only` is specified on t
 ```yaml $(tag) == 'package-2022-07-11-only'
 input-file:
   - Microsoft.Compute/stable/2022-07-11/common.json
+  - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineImage.json
 ```
 
 ### Tag: package-2022-04-04
