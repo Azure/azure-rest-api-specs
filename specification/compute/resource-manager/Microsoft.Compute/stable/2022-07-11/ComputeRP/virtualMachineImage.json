@@ -3,7 +3,7 @@
   "info": {
     "title": "ComputeManagementClient",
     "description": "The Compute Management Client.",
-    "version": "2022-03-01"
+    "version": "2022-07-11"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -864,6 +864,16 @@
     },
     "OSDiskImage": {
       "properties": {
+        "sizeInGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The image size in GB."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The image size in bytes."
+        },
         "operatingSystem": {
           "type": "string",
           "description": "The operating system of the osDiskImage.",
