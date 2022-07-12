@@ -44,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponentsCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentsCollection"
             }
           },
           "default": {
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -150,7 +150,7 @@
             "description": "Configuration details of the Dapr Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           {
@@ -161,7 +161,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -268,7 +268,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprSecretsCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSecretsCollection"
             }
           },
           "default": {
@@ -282,127 +282,6 @@
           "List Container Apps Secrets": {
             "$ref": "./examples/DaprComponents_ListSecrets.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "DaprComponentsCollection": {
-      "description": "Dapr Components ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DaprComponent"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DaprComponent": {
-      "description": "Dapr Component.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Dapr Component resource specific properties",
-          "type": "object",
-          "properties": {
-            "componentType": {
-              "description": "Component type",
-              "type": "string"
-            },
-            "version": {
-              "description": "Component version",
-              "type": "string"
-            },
-            "ignoreErrors": {
-              "description": "Boolean describing if the component errors are ignores",
-              "type": "boolean"
-            },
-            "initTimeout": {
-              "description": "Initialization timeout",
-              "type": "string"
-            },
-            "secrets": {
-              "description": "Collection of secrets used by a Dapr component",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/Secret"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "metadata": {
-              "description": "Component metadata",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DaprMetadata"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "scopes": {
-              "description": "Names of container apps that can use this Dapr component",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DaprMetadata": {
-      "description": "Dapr component metadata.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Metadata property name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Metadata property value.",
-          "type": "string"
-        },
-        "secretRef": {
-          "description": "Name of the Dapr Component secret from which to pull the metadata property value.",
-          "type": "string"
-        }
-      }
-    },
-    "DaprSecretsCollection": {
-      "description": "Dapr component Secrets Collection ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of secrets used by a Dapr component",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/Secret"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     }

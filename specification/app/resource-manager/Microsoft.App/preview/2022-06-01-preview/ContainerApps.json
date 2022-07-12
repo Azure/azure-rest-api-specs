@@ -463,6 +463,9 @@
         }
       ],
       "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
         "identity": {
           "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
@@ -487,7 +490,15 @@
               }
             },
             "managedEnvironmentId": {
-              "description": "Resource ID of the Container App's environment.",
+              "description": "Deprecated. Resource ID of the Container App's environment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "environmentId": {
+              "description": "Resource ID of environment.",
               "type": "string",
               "x-ms-mutability": [
                 "create",

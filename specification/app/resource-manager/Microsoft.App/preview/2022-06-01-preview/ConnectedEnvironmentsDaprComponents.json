@@ -15,14 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents": {
       "get": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "DaprComponents"
         ],
-        "summary": "Get all storages for a managedEnvironment.",
-        "description": "Get all storages for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_List",
+        "summary": "Get the Dapr Components for a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -31,9 +30,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
@@ -45,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStoragesCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentsCollection"
             }
           },
           "default": {
@@ -56,20 +55,22 @@
           }
         },
         "x-ms-examples": {
-          "List environments storages by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_List.json"
+          "List Dapr Components": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}": {
       "get": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "DaprComponents"
         ],
-        "summary": "Get storage for a managedEnvironment.",
-        "description": "Get storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_Get",
+        "summary": "Get a dapr component.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -78,16 +79,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "componentName",
             "in": "path",
-            "description": "Name of the storage.",
+            "description": "Name of the Dapr Component.",
             "required": true,
             "type": "string"
           },
@@ -99,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -110,18 +111,18 @@
           }
         },
         "x-ms-examples": {
-          "get a environments storage properties by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_Get.json"
+          "Get Dapr Component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "DaprComponents"
         ],
-        "summary": "Create or update storage for a managedEnvironment.",
-        "description": "Create or update storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_CreateOrUpdate",
+        "summary": "Creates or updates a Dapr Component.",
+        "description": "Creates or updates a Dapr Component in a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -130,26 +131,26 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "componentName",
             "in": "path",
-            "description": "Name of the storage.",
+            "description": "Name of the Dapr Component.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageEnvelope",
+            "name": "daprComponentEnvelope",
             "in": "body",
-            "description": "Configuration details of storage.",
+            "description": "Configuration details of the Dapr Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           {
@@ -160,7 +161,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentStorage"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -170,19 +171,20 @@
             }
           }
         },
+        "x-ms-long-running-operation": false,
         "x-ms-examples": {
-          "Create or update environments storage": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate.json"
+          "Create or update dapr component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ManagedEnvironmentsStorages"
+          "DaprComponents"
         ],
-        "summary": "Delete storage for a managedEnvironment.",
-        "description": "Delete storage for a managedEnvironment.",
-        "operationId": "ManagedEnvironmentsStorages_Delete",
+        "summary": "Delete a Dapr Component.",
+        "description": "Delete a Dapr Component from a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -191,16 +193,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "environmentName",
+            "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the Environment.",
+            "description": "Name of the connected environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storageName",
+            "name": "componentName",
             "in": "path",
-            "description": "Name of the storage.",
+            "description": "Name of the Dapr Component.",
             "required": true,
             "type": "string"
           },
@@ -210,10 +212,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Delete operation completed"
           },
           "204": {
-            "description": "Storage does not exist"
+            "description": "Environment does not exist"
           },
           "default": {
             "description": "Common error response.",
@@ -223,47 +225,62 @@
           }
         },
         "x-ms-examples": {
-          "List environments storages by subscription": {
-            "$ref": "./examples/ManagedEnvironmentsStorages_Delete.json"
+          "Delete dapr component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Delete.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "ManagedEnvironmentStoragesCollection": {
-      "description": "Collection of Storage for Environments",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of storage resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedEnvironmentStorage"
-          }
-        }
+        },
+        "x-ms-long-running-operation": false
       }
     },
-    "ManagedEnvironmentStorage": {
-      "description": "Storage resource for managedEnvironment.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Storage properties",
-          "type": "object",
-          "properties": {
-            "azureFile": {
-              "$ref": "./CommonDefinitions.json#/definitions/AzureFileProperties",
-              "description": "Azure file properties"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets": {
+      "post": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "List secrets for a dapr component",
+        "operationId": "ConnectedEnvironmentsDaprComponents_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSecretsCollection"
             }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_ListSecrets.json"
           }
         }
       }

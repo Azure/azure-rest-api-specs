@@ -40,12 +40,16 @@ input-file:
   - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
   - Microsoft.App/preview/2022-06-01-preview/ContainerApps.json
   - Microsoft.App/preview/2022-06-01-preview/ContainerAppsRevisions.json
-  - Microsoft.App/preview/2022-06-01-preview/DaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2022-06-01-preview/Diagnostics.json
   - Microsoft.App/preview/2022-06-01-preview/Global.json
   - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironments.json
   - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-06-01-preview/SourceControls.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
 ```
 ### Tag: package-2022-05
 
