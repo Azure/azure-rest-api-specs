@@ -1,6 +1,9 @@
+import "@cadl-lang/rest";
+// using Cadl.Rest;
+using Cadl.Http;
+
 @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
-model Endpoint {
-}
+model Endpoint is string {}
 
 @doc("The name of the project to use.")
 model ProjectNameQueryParameter {
@@ -18,96 +21,15 @@ model DeploymentNameQueryParameter {
 model DeploymentNamePathParameter {
 }
 
-@doc("Client API version.")
-model ApiVersionParameter {
-}
+model ListQueryParams {
+	@doc("The maximum number of resources to return from the collection.")
+	@query top?: int32;
 
-@doc("The maximum number of resources to return from the collection.")
-model TopParameter {
-}
+	@doc("An offset into the collection of the first resource to be returned.")
+	@query skip?: int32;
 
-@doc("An offset into the collection of the first resource to be returned.")
-model SkipParameter {
-}
-
-@doc("The maximum number of resources to include in a single response.")
-model MaxPageSizeParameter {
-}
-
-@doc("Error response.")
-model ErrorResponse {
-	@doc("The error object.")
-	error: Error;
-}
-
-@doc("The error object.")
-model Error {
-	@doc("One of a server-defined set of error codes.")
-	code: ErrorCode;
-	@doc("A human-readable representation of the error.")
-	message: string;
-	@doc("The target of the error.")
-	target?: string;
-	@doc("An array of details about specific errors that led to this reported error.")
-	details?: Error[];
-	@doc("An object containing more specific information than the current object about the error.")
-	innererror?: InnerErrorModel;
-}
-
-@doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel {
-	@doc("One of a server-defined set of error codes.")
-	code: InnerErrorCode;
-	@doc("Error message.")
-	message: string;
-	@doc("Error details.")
-	details?: Map<string, string>;
-	@doc("Error target.")
-	target?: string;
-	@doc("An object containing more specific information than the current object about the error.")
-	innererror?: InnerErrorModel;
-}
-
-@knownValues(ErrorCodeKV)
-model ErrorCode is string {}
-enum ErrorCodeKV {
-	InvalidRequest,
-	InvalidArgument,
-	Unauthorized,
-	Forbidden,
-	NotFound,
-	ProjectNotFound,
-	OperationNotFound,
-	AzureCognitiveSearchNotFound,
-	AzureCognitiveSearchIndexNotFound,
-	TooManyRequests,
-	AzureCognitiveSearchThrottling,
-	AzureCognitiveSearchIndexLimitReached,
-	InternalServerError,
-	ServiceUnavailable,
-	Timeout,
-	QuotaExceeded,
-	Conflict,
-	Warning,
-}
-
-@knownValues(InnerErrorCodeKV)
-model InnerErrorCode is string {}
-enum InnerErrorCodeKV {
-	InvalidRequest,
-	InvalidParameterValue,
-	KnowledgeBaseNotFound,
-	AzureCognitiveSearchNotFound,
-	AzureCognitiveSearchThrottling,
-	ExtractionFailure,
-	InvalidRequestBodyFormat,
-	EmptyRequest,
-	MissingInputDocuments,
-	InvalidDocument,
-	ModelVersionIncorrect,
-	InvalidDocumentBatch,
-	UnsupportedLanguageCode,
-	InvalidCountryHint,
+	@doc("The maximum number of resources to include in a single response.")
+	@query maxpagesize?: int32;
 }
 
 @doc("Language of the text records. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.")

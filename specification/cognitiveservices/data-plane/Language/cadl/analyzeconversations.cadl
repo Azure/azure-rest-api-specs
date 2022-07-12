@@ -14,10 +14,10 @@ using Cadl.Http;
     Endpoint: Endpoint,
   }
 )
-@serviceTitle("Microsoft Cognitive Language Service - Analyze Conversations Authoring")
+@serviceTitle("Microsoft Cognitive Language Service - Analyze Conversations")
 @serviceVersion("2022-05-01")
-@doc("The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.")
-namespace Microsoft.Language.AnalyzeConversations.Authoring;
+@doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
+namespace Microsoft.Language.AnalyzeConversations.Runtime;
 
 
 interface ConversationAnalysis {

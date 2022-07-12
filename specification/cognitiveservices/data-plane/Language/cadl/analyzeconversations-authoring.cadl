@@ -1,15 +1,103 @@
-@knownValues(ExportedProjectFormatKV)
-model ExportedProjectFormat is string {}
-enum ExportedProjectFormatKV {
-	Conversation,
-	Luis,
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "./common.cadl";
+
+using Azure.Core.Operations;
+using Cadl.Rest;
+using Cadl.Http;
+
+@server(
+  "{Endpoint}/language",
+  "Language Service",
+  {
+    Endpoint: Endpoint,
+  }
+)
+@serviceTitle("Microsoft Cognitive Language Service - Analyze Conversations Authoring")
+@serviceVersion("2022-05-01")
+@doc("The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.")
+namespace Microsoft.Language.AnalyzeConversations.Authoring;
+
+// interface ConversationalAnalysisAuthoringLifetime<TResource> {
+//   op create is ResourceCreateOrUpdate<TResource>;
+//   op read is ResourceRead<TResource>;
+//   op delete is ResourceDelete<TResource>;
+//   op list is ResourceList<TResource>;
+// }
+
+
+@route("/authoring/analyze-conversations/")
+interface Project { // extends ConversationalAnalysisAuthoringLifetime<ConversationalAnalysisAuthoringProjectMetadata> {
+	op ListProjects is ResourceList<ConversationalAnalysisAuthoringProjectMetadata>;
+	op GetProject is ResourceRead<ConversationalAnalysisAuthoringProjectMetadata>;
+	op CreateProject is ResourceCreateOrUpdate<ConversationalAnalysisAuthoringProjectMetadata>;
+	op DeleteProject is ResourceDelete<ConversationalAnalysisAuthoringProjectMetadata>;
+
+	op Export is ResourceAction<ConversationalAnalysisAuthoringProjectMetadata, {}>;
+	op Import is ResourceAction<ConversationalAnalysisAuthoringProjectMetadata, {}>;
+	op Train is ResourceAction<ConversationalAnalysisAuthoringProjectMetadata, {}, ConversationalAnalysisAuthoringTrainingJobOptionsBody>;
+
+	//op GetExportStatus is ResourceRead<ConversationalAnalysisAuthoringProjectMetadata, {@path jobId: int}>;
+	//op GetImportStatus is ResourceRead<ConversationalAnalysisAuthoringProjectMetadata, {@path jobId: int}>;
+
+	//op ListTrainingJobs is ResourceList ?
+	//op GetTrainingStatus is ResourceRead<ConversationalAnalysisAuthoringProjectMetadata, {@path jobId: int}>;
+	//op CancelTrainingJob is ResourceAction<ConversationalAnalysisAuthoringProjectMetadata, {@path jobId: int}>;
 }
 
-@knownValues(StringIndexTypeKV)
-model StringIndexType is string {}
-enum StringIndexTypeKV {
-	Utf16CodeUnit,
+
+// @route("/authoring/analyze-conversations/")
+// interface Models {
+// 	@route("/models")
+// 	op ListTrainedModels is ResourceList<ConversationalAnalysisAuthoringProjectMetadata>;
+// 	op GetTrainedModel is ResourceRead<ConversationalAnalysisAuthoringProjectTrainedModel>;
+// 	op DeleteTrainedModel is ResourceRead<ConversationalAnalysisAuthoringProjectTrainedModel>;
+
+// 	op GetModelEvaluationResults is ResourceRead ?
+// 	op GetModelEvaluationSummary is ResourceRead ?
+//}
+
+@route("/authoring/analyze-conversations/")
+interface Deployments {
+	op ListDeployments is ResourceList<ConversationalAnalysisAuthoringProjectDeployment>;
+	op GetDeployment is ResourceRead<ConversationalAnalysisAuthoringProjectDeployment>;
+	op DeployDeployment is LongRunningResourceCreateOrReplace<ConversationalAnalysisAuthoringProjectDeployment>;
+	op DeleteDeployment is ResourceDelete<ConversationalAnalysisAuthoringProjectDeployment>;
+
+	op SwapDeployments is ResourceAction<ConversationalAnalysisAuthoringProjectMetadata, {}, ConversationalAnalysisAuthoringSwapDeploymentsOptionsBody>;
+	//op GetSwapDeploymentsStatus is ResourceRead<ConversationalAnalysisAuthoringProjectMetadata, {@path jobId: int}>;
 }
+
+@route("/authoring/analyze-conversations/")
+interface Jobs {
+	op GetDeploymentStatus is ResourceRead<ConversationalAnalysisAuthoringJobState>;
+}
+
+@route("projects/global/")
+interface Global {
+  @get
+  @route("languages")
+  getSupportedLanguages(
+    ...ListQueryParams,
+    ...Azure.Core.ApiVersionParameter
+  ): OkResponse<ConversationalAnalysisAuthoringSupportedLanguages> | ErrorResponse;
+
+  @get
+  @route("prebuilt-entities")
+  GetSupportedPrebuiltEntities(
+    ...ListQueryParams,
+    ...Azure.Core.ApiVersionParameter
+  ): OkResponse<ConversationalAnalysisAuthoringTrainingConfigVersions> | ErrorResponse;
+
+  @get
+  @route("training-config-versions")
+  listTrainingConfigVersions(
+    ...ListQueryParams,
+    ...Azure.Core.ApiVersionParameter
+  ): OkResponse<ConversationalAnalysisAuthoringTrainingConfigVersions> | ErrorResponse;
+}
+
 
 @doc("The job ID.")
 model ConversationalAnalysisAuthoringJobIdPathParameter {
@@ -17,13 +105,6 @@ model ConversationalAnalysisAuthoringJobIdPathParameter {
 
 @doc("The trained model label.")
 model ConversationalAnalysisAuthoringTrainedModelLabelPathParameter {
-}
-
-@knownValues(ProjectKindKV)
-model ProjectKind is string {}
-enum ProjectKindKV {
-	Conversation,
-	Orchestration,
 }
 
 @knownValues(CompositionSettingKV)
@@ -54,7 +135,7 @@ model ConversationalAnalysisAuthoringConversationExportedEntity {
 	@doc("The category of the entity.")
 	category: string;
 	@doc("The behavior to follow when the entity's components overlap with each other.")
-	compositionSetting?: ConversationalAnalysisAuthoringCompositionSetting;
+	compositionSetting?: CompositionSetting;
 	@doc("The list component of the entity.")
 	list?: ConversationalAnalysisAuthoringExportedEntityList;
 	@doc("The prebuilt entities components.")
@@ -100,7 +181,7 @@ model ConversationalAnalysisAuthoringCreateDeploymentOptions {
 @doc("Represents the options used to create or update a project.")
 model ConversationalAnalysisAuthoringCreateProjectOptions {
 	@doc("Represents the project kind.")
-	projectKind: ConversationalAnalysisAuthoringProjectKind;
+	projectKind: ProjectKind;
 	@doc("The project settings.")
 	settings?: ConversationalAnalysisAuthoringProjectSettings;
 	@doc("The new project name.")
@@ -165,7 +246,7 @@ enum EvaluationKindKV {
 @doc("Represents the options used running the evaluation.")
 model ConversationalAnalysisAuthoringEvaluationOptions {
 	@doc("Represents the evaluation kind. By default, the evaluation kind is set to percentage.")
-	kind?: ConversationalAnalysisAuthoringEvaluationKind;
+	kind?: EvaluationKind;
 	@doc("Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.")
 	trainingSplitPercentage?: int32;
 	@doc("Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.")
@@ -245,7 +326,7 @@ model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions {
 @doc("Represents the options used to define the orchestration behavior of an intent.")
 model ConversationalAnalysisAuthoringExportedOrchestrationOptions {
 	@doc("The kind of the target used in the orchestration flow.")
-	targetProjectKind: ConversationalAnalysisAuthoringOrchestrationTargetProjectKind;
+	targetProjectKind: OrchestrationTargetProjectKind;
 }
 
 @doc("Represents an exported prebuilt entity component")
@@ -259,7 +340,7 @@ model ConversationalAnalysisAuthoringExportedProject {
 	@doc("The version of the exported file.")
 	projectFileVersion: string;
 	@doc("Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.")
-	stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+	stringIndexType: StringIndexType;
 	@doc("Represents the project metadata.")
 	metadata: ConversationalAnalysisAuthoringCreateProjectOptions;
 	@doc("Represents the project assets.")
@@ -269,7 +350,7 @@ model ConversationalAnalysisAuthoringExportedProject {
 @doc("Represents the assets of an exported project.")
 model ConversationalAnalysisAuthoringExportedProjectAssets {
 	@doc("The type of project containing the assets.")
-	projectKind: ConversationalAnalysisAuthoringProjectKind;
+	projectKind: ProjectKind;
 }
 
 @knownValues(ExportedProjectFormatKV)
@@ -349,9 +430,12 @@ model ConversationalAnalysisAuthoringIntentsEvaluationSummary {
 	macroRecall: float64;
 }
 
+@parentResource(ConversationalAnalysisAuthoringProjectDeployment)
 @doc("Represents a job's state.")
 model ConversationalAnalysisAuthoringJobState {
+	@key
 	@doc("The job ID.")
+	@segment("jobs")
 	jobId: string;
 	@doc("The creation date time of the job.")
 	createdDateTime: zonedDateTime;
@@ -360,7 +444,7 @@ model ConversationalAnalysisAuthoringJobState {
 	@doc("The expiration date time of the job.")
 	expirationDateTime?: zonedDateTime;
 	@doc("The job status.")
-	status: ConversationalAnalysisAuthoringJobStatus;
+	status: JobStatus;
 	@doc("The warnings that were encountered while executing the job.")
 	warnings?: ConversationalAnalysisAuthoringWarning[];
 	@doc("The errors encountered while executing the job.")
@@ -438,9 +522,13 @@ model ConversationalAnalysisAuthoringProjectDeletionJobState {
 }
 
 @doc("Represents a project deployment.")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringProjectDeployment {
+	@key
+	@segment("deployments")
 	@doc("Represents deployment name.")
 	deploymentName: string;
+
 	@doc("Represents deployment modelId.")
 	modelId: string;
 	@doc("Represents deployment last trained time.")
@@ -470,6 +558,11 @@ enum ProjectKindKV {
 
 @doc("Represents the metadata of a project.")
 model ConversationalAnalysisAuthoringProjectMetadata {
+	@key
+	@segment("projects")
+	@doc("The new project name.")
+	projectName: string;
+
 	@doc("Represents the project creation datetime.")
 	createdDateTime: zonedDateTime;
 	@doc("Represents the project creation datetime.")
@@ -479,11 +572,9 @@ model ConversationalAnalysisAuthoringProjectMetadata {
 	@doc("Represents the project last deployed datetime.")
 	lastDeployedDateTime?: zonedDateTime;
 	@doc("Represents the project kind.")
-	projectKind: ConversationalAnalysisAuthoringProjectKind;
+	projectKind: ProjectKind;
 	@doc("The project settings.")
 	settings?: ConversationalAnalysisAuthoringProjectSettings;
-	@doc("The new project name.")
-	projectName: string;
 	@doc("Whether the project would be used for multiple languages or not.")
 	multilingual?: boolean;
 	@doc("The project description.")
@@ -545,7 +636,7 @@ model ConversationalAnalysisAuthoringSubTrainingJobState {
 	@doc("Represents the end date time.")
 	endDateTime?: zonedDateTime;
 	@doc("Represents the status of the sub-operation.")
-	status: ConversationalAnalysisAuthoringJobStatus;
+	status: JobStatus;
 }
 
 @doc("Represents a supported language.")
@@ -562,6 +653,10 @@ model ConversationalAnalysisAuthoringSupportedLanguages {
 	value: ConversationalAnalysisAuthoringSupportedLanguage[];
 	@doc("The next page link.")
 	nextLink: string;
+}
+
+model ConversationalAnalysisAuthoringSwapDeploymentsOptionsBody {
+	@body __body__: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
 }
 
 @doc("Represents the options for swapping two deployments together.")
@@ -588,6 +683,10 @@ model ConversationalAnalysisAuthoringTrainingConfigVersions {
 	nextLink: string;
 }
 
+model ConversationalAnalysisAuthoringTrainingJobOptionsBody {
+	@body __body__: ConversationalAnalysisAuthoringTrainingJobOptions;
+}
+
 @doc("Represents the options for starting a new training job.")
 model ConversationalAnalysisAuthoringTrainingJobOptions {
 	@doc("Represents the output model label.")
@@ -595,7 +694,7 @@ model ConversationalAnalysisAuthoringTrainingJobOptions {
 	@doc("Represents training config version. By default, \"latest\" value is used which uses the latest released training config version.")
 	trainingConfigVersion?: string;
 	@doc("Represents the mode of the training operation.")
-	trainingMode: ConversationalAnalysisAuthoringTrainingMode;
+	trainingMode: TrainingMode;
 	@doc("Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.")
 	evaluationOptions?: ConversationalAnalysisAuthoringEvaluationOptions;
 }
@@ -607,7 +706,7 @@ model ConversationalAnalysisAuthoringTrainingJobResult {
 	@doc("Represents training config version.")
 	trainingConfigVersion: string;
 	@doc("Represents the mode of the training operation.")
-	trainingMode?: ConversationalAnalysisAuthoringTrainingMode;
+	trainingMode?: TrainingMode;
 	@doc("Represents the model training status.")
 	trainingStatus: ConversationalAnalysisAuthoringSubTrainingJobState;
 	@doc("Represents model evaluation status.")
