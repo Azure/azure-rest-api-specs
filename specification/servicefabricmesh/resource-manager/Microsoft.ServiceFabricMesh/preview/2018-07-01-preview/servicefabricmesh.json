@@ -156,6 +156,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No Content - the specified application was not found."
           },
@@ -1658,16 +1661,56 @@
     },
     "ErrorModel": {
       "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorErrorModel",
+          "description": "Error model information"
+        }
+      },
+      "description": "The error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorErrorModel": {
+      "description": "Error model information",
+      "properties": {
         "code": {
-          "type": "string",
-          "description": "The error code."
+          "type": "string"
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "Error message."
+        },
+        "innerError": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "description": "List of error message details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetailsModel"
+          }
         }
       },
-      "description": "The error details."
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorDetailsModel": {
+      "description": "Error model details information",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ContainerCodePackageProperties": {
       "description": "Describes a container and its runtime properties.",
