@@ -27,7 +27,7 @@ These are the global settings for the OperationalInsights API.
 ```yaml !$(python) || !$(track2)
 title: OperationalInsightsManagementClient
 ```
-```yaml $(python) && $(track2)
+```yaml $(python)
 title: LogAnalyticsManagementClient
 ```
 
@@ -272,7 +272,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
