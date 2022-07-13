@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DatabricksAccessConnectorClient",
-    "version": "2022-04-01-preview",
+    "version": "2022-10-01-preview",
     "description": "These APIs allow end users to operate on Azure Databricks Access Connector resources."
   },
   "host": "management.azure.com",
@@ -126,8 +126,11 @@
         "operationId": "AccessConnectors_CreateOrUpdate",
         "description": "Creates or updates azure databricks accessConnector.",
         "x-ms-examples": {
-          "Create an azure databricks accessConnector": {
+          "Create an azure databricks accessConnector with SystemAssigned Identity": {
             "$ref": "./examples/AccessConnectorCreateOrUpdate.json"
+          },
+          "Create an azure databricks accessConnector with UserAssigned Identity": {
+            "$ref": "./examples/AccessConnectorCreateOrUpdateWithUserAssigned.json"
           }
         },
         "parameters": [
@@ -369,11 +372,20 @@
           "description": "The identity type.",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
             "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
           }
         }
       },
@@ -381,6 +393,22 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "UserIdentity": {
+      "type": "object",
+      "description": "A resource identity that is managed by the user of the service.",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of the user-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client ID of the user-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "AccessConnectorUpdate": {
       "description": "An update to an azure databricks accessConnector.",
