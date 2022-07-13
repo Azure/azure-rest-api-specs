@@ -32,6 +32,11 @@ model ListQueryParams {
 	@query maxpagesize?: int32;
 }
 
+model StringIndexTypeParams {
+	@doc("Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.")
+	@query stringIndexType: StringIndexType;
+}
+
 @doc("Language of the text records. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.")
 model Language {
 }

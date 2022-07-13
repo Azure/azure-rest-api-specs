@@ -48,16 +48,30 @@ interface Project { // extends Lifetime<ProjectMetadata> {
 }
 
 
-// @route("/authoring/analyze-conversations/")
-// interface Models {
-// 	@route("/models")
-// 	op ListTrainedModels is ResourceList<ProjectMetadata>;
-// 	op GetTrainedModel is ResourceRead<ProjectTrainedModel>;
-// 	op DeleteTrainedModel is ResourceRead<ProjectTrainedModel>;
+@route("/authoring/analyze-conversations/")
+interface Models {
+	op ListTrainedModels is ResourceList<ProjectTrainedModel>;
+	op GetTrainedModel is ResourceRead<ProjectTrainedModel>;
+	op DeleteTrainedModel is ResourceDelete<ProjectTrainedModel>;
 
-// 	op GetModelEvaluationResults is ResourceRead ?
-// 	op GetModelEvaluationSummary is ResourceRead ?
-//}
+	@route("/evaluation/result")
+	op getModelEvaluationResults is ResourceList<UtteranceEvaluationResult,
+	 {
+    ...ListQueryParams,
+	...StringIndexTypeParams,
+	 }>;
+
+//   @get
+//   @route("/evaluation/result")
+//   @listsResource(UtteranceEvaluationResult)
+//   getModelEvaluationResults(
+//     ...ListQueryParams,
+// 	...StringIndexTypeParams,
+//     ...Azure.Core.ApiVersionParameter
+//   ): OkResponse<EvaluationResults> | ErrorResponse;
+	// op GetModelEvaluationResults is ResourceRead ?
+	// op GetModelEvaluationSummary is ResourceRead ?
+}
 
 @route("/authoring/analyze-conversations/")
 interface Deployments {
@@ -67,15 +81,18 @@ interface Deployments {
 	op DeleteDeployment is ResourceDelete<ProjectDeployment>;
 
 	op SwapDeployments is ResourceAction<ProjectMetadata, {}, SwapDeploymentsOptionsBody>;
-	//op GetSwapDeploymentsStatus is ResourceRead<ProjectMetadata, {@path jobId: int}>;
 }
 
 @route("/authoring/analyze-conversations/")
 interface Jobs {
-	op GetDeploymentStatus is ResourceRead<JobState>;
+  @doc("Gets the status of an existing deployment job.")
+  getDeploymentStatus is ResourceRead<DeploymentJob>;
+
+  @doc("Gets the status of an existing swap deployment job.")
+  getSwapDeploymentsStatus is ResourceRead<SwapDeploymentsJob>;
 }
 
-@route("projects/global/")
+@route("/projects/global/")
 interface Global {
   @get
   @route("languages")
@@ -89,7 +106,7 @@ interface Global {
   GetSupportedPrebuiltEntities(
     ...ListQueryParams,
     ...Azure.Core.ApiVersionParameter
-  ): OkResponse<TrainingConfigVersions> | ErrorResponse;
+  ): OkResponse<PrebuiltEntities> | ErrorResponse;
 
   @get
   @route("training-config-versions")
@@ -195,8 +212,22 @@ model CreateProjectOptions {
 	language: string;
 }
 
-@doc("Represents the state of a deployment job.")
-model DeploymentJobState {
+@parentResource(ProjectDeployment)
+model DeploymentJob {
+  ...Job;
+
+  @key("jobId")
+  @segment("jobs")
+  id: string;
+}
+
+@parentResource(ProjectDeployment)
+model SwapDeploymentsJob {
+  ...Job;
+
+  @key("jobId")
+  @segment("swap/jobs")
+  id: string;
 }
 
 @doc("Represents the evaluation result summary for the project's entities.")
@@ -255,12 +286,7 @@ model EvaluationOptions {
 }
 
 @doc("Represent a list of utterances' evaluation results.")
-model EvaluationResults {
-	@doc("The utterances evaluation results.")
-	value: UtteranceEvaluationResult[];
-	@doc("The next page link.")
-	nextLink: string;
-}
+model EvaluationResults is Page<UtteranceEvaluationResult> {}
 
 @doc("Represents the evaluation result summary.")
 model EvaluationSummary {
@@ -431,25 +457,33 @@ model IntentsEvaluationSummary {
 	macroRecall: float64;
 }
 
-@parentResource(ProjectDeployment)
-@doc("Represents a job's state.")
-model JobState {
-	@key
-	@doc("The job ID.")
-	@segment("jobs")
-	jobId: string;
-	@doc("The creation date time of the job.")
-	createdDateTime: zonedDateTime;
-	@doc("The last date time the job was updated.")
-	lastUpdatedDateTime: zonedDateTime;
-	@doc("The expiration date time of the job.")
-	expirationDateTime?: zonedDateTime;
-	@doc("The job status.")
-	status: JobStatus;
-	@doc("The warnings that were encountered while executing the job.")
-	warnings?: Warning[];
-	@doc("The errors encountered while executing the job.")
-	errors?: Error[];
+model Job {
+  @doc("The job ID.")
+  jobId: string;
+
+  @doc("The creation date time of the job.")
+  @format("date-time")
+  @visibility("read")
+  createdDateTime: string;
+
+  @doc("The the last date time the job was updated.")
+  @format("date-time")
+  @visibility("read")
+  lastUpdatedDateTime: string;
+
+  @doc("The expiration date time of the job.")
+  @format("date-time")
+  @visibility("read")
+  expirationDateTime: string;
+
+  @doc("The job status.")
+  status: JobStatus;
+
+  @doc("The warnings that were encountered while executing the job.")
+  warnings: Warning[];
+
+  @doc("The errors encountered while executing the job.")
+  errors: Error;
 }
 
 @knownValues(JobStatusKV)
@@ -501,12 +535,7 @@ enum OrchestrationTargetProjectKindKV {
 }
 
 @doc("Represents a list of the retrieved supported prebuilt entities.")
-model PrebuiltEntities {
-	@doc("The supported prebuilt entities.")
-	value: PrebuiltEntity[];
-	@doc("The next page link.")
-	nextLink: string;
-}
+model PrebuiltEntities is Page<PrebuiltEntity> {}
 
 @doc("Represents a supported prebuilt entity.")
 model PrebuiltEntity {
@@ -540,14 +569,6 @@ model ProjectDeployment {
 	deploymentExpirationDate: plainDate;
 	@doc("Represents model training config version.")
 	modelTrainingConfigVersion: string;
-}
-
-@doc("Represents a list of retrieved deployments.")
-model ProjectDeployments {
-	@doc("The list of retrieved deployments.")
-	value: ProjectDeployment[];
-	@doc("The next page link.")
-	nextLink: string;
 }
 
 @knownValues(ProjectKindKV)
@@ -590,18 +611,13 @@ model ProjectSettings {
 	confidenceThreshold: float64;
 }
 
-@doc("Represents a list of retrieved projects' metadata.")
-model ProjectsMetadata {
-	@doc("The list of projects.")
-	value: ProjectMetadata[];
-	@doc("The next page link.")
-	nextLink: string;
-}
-
 @doc("Represents a trained model.")
 model ProjectTrainedModel {
+	@key("trainedModelLabel")
+	@segment("models")
 	@doc("The trained model label.")
 	label: string;
+
 	@doc("The model ID.")
 	modelId: string;
 	@doc("The last trained date time of the model.")
@@ -612,14 +628,6 @@ model ProjectTrainedModel {
 	modelExpirationDate: plainDate;
 	@doc("The model training config version.")
 	modelTrainingConfigVersion: string;
-}
-
-@doc("Represents a list of retrieved trained models.")
-model ProjectTrainedModels {
-	@doc("The list of retrieved jobs.")
-	value: ProjectTrainedModel[];
-	@doc("The next page link.")
-	nextLink: string;
 }
 
 @knownValues(StringIndexTypeKV)
@@ -707,12 +715,7 @@ model TrainingJobResult {
 }
 
 @doc("Represents a list of retrieved training jobs.")
-model TrainingJobs {
-	@doc("The list of jobs.")
-	value: TrainingJobState[];
-	@doc("The next page link.")
-	nextLink: string;
-}
+model TrainingJobs is Page<TrainingJobState> {}
 
 @doc("Represents the state of a training job.")
 model TrainingJobState {
