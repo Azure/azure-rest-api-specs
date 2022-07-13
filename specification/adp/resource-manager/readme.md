@@ -10,7 +10,7 @@ To build the SDKs for My API,   simply install AutoRest via `npm` (`npm install 
 
 > `autorest readme.md`
 
-To see additional help  and options, run:
+To see additional help   and options, run:
 
 > `autorest --help`
 
