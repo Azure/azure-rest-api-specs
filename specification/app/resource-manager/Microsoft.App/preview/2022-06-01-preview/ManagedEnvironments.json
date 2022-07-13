@@ -697,7 +697,7 @@
         "name",
         "capacity"
       ],
-      "description": "Managed Environment resource SKU properties."      
+      "description": "Managed Environment resource SKU properties."
     },
     "VnetConfiguration": {
       "type": "object",
@@ -882,14 +882,14 @@
             "customDomainConfiguration": {
               "$ref": "#/definitions/CustomDomainConfiguration",
               "description": "Custom domain configuration for the environment"
-            }
-          },
-          "workloadProfiles": {
-            "type": "array",
-            "items": {
-              "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfile"
             },
-            "description": "Workload profiles available for Managed Environment."
+            "workloadProfiles": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfile"
+              },
+              "description": "Workload profiles available for Managed Environment."
+            }
           },
           "x-ms-client-flatten": true
         }
