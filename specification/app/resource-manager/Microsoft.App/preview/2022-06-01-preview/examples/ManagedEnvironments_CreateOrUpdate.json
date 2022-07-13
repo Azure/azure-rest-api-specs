@@ -6,6 +6,10 @@
     "api-version": "2022-06-01-preview",
     "environmentEnvelope": {
       "location": "East US",
+      "sku": {
+        "name": "Premium",
+        "capacity": 10
+      },
       "properties": {
         "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
         "appLogsConfiguration": {
@@ -19,7 +23,24 @@
           "dnsSuffix": "www.my-name.com",
           "certificateValue": "PFX-or-PEM-blob",
           "certificatePassword": "private key password"
-        }
+        },
+        "workloadProfiles": [
+          {
+            "workloadProfileType": "General Purpose",
+            "minimum": 3,
+            "maximum": 12
+          },
+          {
+            "workloadProfileType": "Memory Optimized",
+            "minimum": 3,
+            "maximum": 6
+          },
+          {
+            "workloadProfileType": "Compute Optimized",
+            "minimum": 3,
+            "maximum": 6
+          }
+        ]
       }
     }
   },
@@ -30,6 +51,10 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "deploymentErrors": null,
@@ -47,7 +72,27 @@
             "subjectName": "CN=www.my-name.com",
             "expirationDate": "2022-11-06T04:00:00Z",
             "thumbprint": "CERTIFICATE_THUMBPRINT"
-          }
+          },
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "General Purpose",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 12
+            },
+            {
+              "workloadProfileType": "Memory Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "workloadProfileType": "Compute Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            }
+          ]
         }
       }
     },
@@ -57,6 +102,10 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "InitializationInProgress",
           "deploymentErrors": null,
@@ -74,7 +123,27 @@
             "subjectName": "CN=www.my-name.com",
             "expirationDate": "2022-11-06T04:00:00Z",
             "thumbprint": "CERTIFICATE_THUMBPRINT"
-          }
+          },
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "General Purpose",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 12
+            },
+            {
+              "workloadProfileType": "Memory Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "workloadProfileType": "Compute Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            }
+          ]
         }
       }
     }
