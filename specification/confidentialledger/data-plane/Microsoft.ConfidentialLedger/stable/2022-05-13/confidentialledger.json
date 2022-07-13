@@ -6,12 +6,12 @@
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{ledgerUri}",
+    "hostTemplate": "{ledgerEndpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "ledgerUri",
+        "name": "ledgerEndpoint",
         "description": "The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com",
         "required": true,
         "type": "string",
@@ -68,6 +68,10 @@
             "$ref": "./examples/ledger/GetConsortiumMembers.json"
           }
         },
+        "x-ms-pageable": {
+          "itemName": "consortium",
+          "nextLinkName": "nextLink"
+        },
         "summary": "Gets the consortium members.",
         "description": "Consortium members can manage the Confidential Ledger.",
         "parameters": [
@@ -77,9 +81,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of consortium members.",
+            "description": "Paged list of consortium members.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/PagedConsortium"
             }
           },
           "default": {
@@ -130,6 +134,10 @@
             "$ref": "./examples/ledger/ListCollections.json"
           }
         },
+        "x-ms-pageable": {
+          "itemName": "collection",
+          "nextLinkName": "nextLink"
+        },
         "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
         "description": "Collection ids are user-created collections of ledger entries",
         "parameters": [
@@ -141,7 +149,7 @@
           "200": {
             "description": "List of collections",
             "schema": {
-              "$ref": "#/definitions/CollectionArray"
+              "$ref": "#/definitions/PagedCollections"
             }
           },
           "default": {
@@ -499,6 +507,22 @@
       },
       "type": "object"
     },
+    "PagedConsortium": {
+      "description": "Paginated consortium list returned in response to a query.",
+      "type": "object",
+      "required": [
+        "consortium"
+      ],
+      "properties": {
+        "consortium": {
+          "$ref": "#/definitions/Consortium"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
     "Consortium": {
       "description": "List of members in the consortium.",
       "required": [
@@ -831,6 +855,19 @@
         "$ref": "#/definitions/Collection"
       },
       "type": "array"
+    },
+    "PagedCollections": {
+      "description": "Paginated collections returned in response to a query.",
+      "properties": {
+        "collection": {
+          "$ref": "#/definitions/CollectionArray"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "TransactionId": {
       "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
