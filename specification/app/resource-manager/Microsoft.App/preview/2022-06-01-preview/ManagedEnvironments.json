@@ -661,6 +661,8 @@
       }
     },
     "EnvironmentSkuProperties": {
+      "description": "Managed Environment resource SKU properties.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -696,8 +698,7 @@
       "required": [
         "name",
         "capacity"
-      ],
-      "description": "Managed Environment resource SKU properties."
+      ]
     },
     "VnetConfiguration": {
       "type": "object",
@@ -935,7 +936,9 @@
         }
       }
     },
-    "WorkloadProfile": {
+    "WorkloadProfile": {      
+      "description": "Description of a workload profile.",
+      "type": "object",
       "properties": {
         "workloadProfileType": {
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
@@ -959,8 +962,7 @@
       },
       "required": [
         "workloadProfileType"
-      ],
-      "description": "Description of a workload profile."
+      ]
     },
     "Certificate": {
       "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
