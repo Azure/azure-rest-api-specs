@@ -11,4 +11,10 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
+directive:
+  - where-operation: monitors_Create
+    transform: $["x-ms-long-running-operation"] = false
+
+  - where-operation: monitors_Delete
+    transform: $["x-ms-long-running-operation"] = false
 ```
