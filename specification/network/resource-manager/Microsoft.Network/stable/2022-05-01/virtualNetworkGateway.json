@@ -2775,6 +2775,12 @@
           "$ref": "#/definitions/VpnClientConfiguration",
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
+        "VirtualNetworkGatewayPolicyGroups":
+        {
+          "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup",
+          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the avalialbe VirtualNetworkGatewayPolicyGroup for the gateway."
+
+        },
         "bgpSettings": {
           "$ref": "#/definitions/BgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
@@ -3010,6 +3016,13 @@
         "aadIssuer": {
           "type": "string",
           "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "vngClientConnectionConfigurations":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VngClientConnectionConfiguration"
+          },
+          "description": "per ip address pool connection policy for virtual network gateway P2S client."
         }
       },
       "description": "VpnClientConfiguration for P2S client."
@@ -3620,6 +3633,91 @@
         "pfsGroup"
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
+    },
+    "VngClientConnectionConfiguration":
+    {
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+          "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
+        },
+        "virtualNetworkGatewayPolicyGroups":
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "List of references to virtualNetworkGatewayPolicyGroups"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "A vpn client connection configuration for client connection configuration."
+    },
+    "VirtualNetworkGatewayPolicyGroup":
+    {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Shows if this is a Default VirtualNetworkGatewayPolicyGroup or not."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority for VirtualNetworkGatewayPolicyGroup."
+        },
+        "policyMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupMember"
+          },
+          "description": "Multiple PolicyMembers for VirtualNetworkGatewayPolicyGroup.",
+          "x-ms-identifiers": []
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of references to vngClientConnectionConfigurations."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VirtualNetworkGatewayPolicyGroup resource."
+        }
+      },
+      "description": "Parameters for VirtualNetworkGatewayPolicyGroup."
+    },
+    "VirtualNetworkGatewayPolicyGroupMember": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the VirtualNetworkGatewayPolicyGroupMember."
+        },
+        "attributeType": {
+          "type": "string",
+          "description": "The Vpn Policy member attribute type.",
+          "enum": [
+            "CertificateGroupId",
+            "AADGroupId",
+            "RadiusAzureGroupId"
+          ],
+          "x-ms-enum": {
+            "name": "VpnPolicyMemberAttributeType",
+            "modelAsString": true
+          }
+        },
+        "attributeValue": {
+          "type": "string",
+          "description": "The value of Attribute used for this VirtualNetworkGatewayPolicyGroupMember."
+        }
+      },
+      "description": "Vpn Client Connection configuration PolicyGroup member",
+      "type": "object"
     },
     "TrafficSelectorPolicy": {
       "properties": {
