@@ -13,12 +13,36 @@
         "type": "Microsoft.App/managedEnvironments",
         "location": "North Central US",
         "tags": {},
+        "sku": {
+          "name": "Premium",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "deploymentErrors": null,
           "defaultDomain": "jlaw-demo1.k4apps.io",
           "staticIp": "20.42.33.145",
-          "zoneRedundant": true
+          "zoneRedundant": true,
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "General Purpose",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 12
+            },
+            {
+              "workloadProfileType": "Memory Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "workloadProfileType": "Compute Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            }
+          ]
         }
       }
     }

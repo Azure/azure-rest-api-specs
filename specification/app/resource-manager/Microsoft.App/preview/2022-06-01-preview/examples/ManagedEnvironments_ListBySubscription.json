@@ -13,28 +13,56 @@
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
+            "sku": {
+              "name": "Premium",
+              "capacity": 10
+            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,
               "defaultDomain": "jlaw-demo1.k4apps.io",
               "staticIp": "20.42.33.145",
-              "appLogsConfiguration": null,
-              "zoneRedundant": true
+              "zoneRedundant": true,
+              "workloadProfiles": [
+                {
+                  "workloadProfileType": "General Purpose",
+                  "provisioningState": "Succeeded",
+                  "minimum": 3,
+                  "maximum": 12
+                },
+                {
+                  "workloadProfileType": "Memory Optimized",
+                  "provisioningState": "Succeeded",
+                  "minimum": 3,
+                  "maximum": 6
+                },
+                {
+                  "workloadProfileType": "Compute Optimized",
+                  "provisioningState": "Succeeded",
+                  "minimum": 3,
+                  "maximum": 6
+                }
+              ]
             }
-          },
+          },          
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/demo1",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/demo1",
             "name": "demo1",
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
+            "sku": {
+              "name": "Consumption",
+              "capacity": 0
+            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,
               "defaultDomain": "demo1.k4apps.io",
               "staticIp": "52.142.21.61",
               "appLogsConfiguration": null,
-              "zoneRedundant": true
+              "zoneRedundant": true,
+              "workloadProfiles": []
             }
           }
         ]

@@ -6,6 +6,10 @@
     "api-version": "2022-06-01-preview",
     "environmentEnvelope": {
       "location": "East US",
+      "sku": {
+        "name": "Premium",
+        "capacity": 10
+      },
       "properties": {
         "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
         "appLogsConfiguration": {
@@ -14,7 +18,24 @@
             "sharedKey": "string"
           }
         },
-        "zoneRedundant": true
+        "zoneRedundant": true,
+        "workloadProfiles": [
+          {
+            "workloadProfileType": "General Purpose",
+            "minimum": 3,
+            "maximum": 12
+          },
+          {
+            "workloadProfileType": "Memory Optimized",
+            "minimum": 3,
+            "maximum": 6
+          },
+          {
+            "workloadProfileType": "Compute Optimized",
+            "minimum": 3,
+            "maximum": 6
+          }
+        ]
       }
     }
   },
@@ -25,6 +46,10 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "deploymentErrors": null,
@@ -35,7 +60,27 @@
               "customerId": "string"
             }
           },
-          "zoneRedundant": true
+          "zoneRedundant": true,
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "General Purpose",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 12
+            },
+            {
+              "workloadProfileType": "Memory Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "workloadProfileType": "Compute Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            }
+          ]
         }
       }
     },
@@ -45,6 +90,10 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "InitializationInProgress",
           "deploymentErrors": null,
@@ -55,7 +104,27 @@
               "customerId": "string"
             }
           },
-          "zoneRedundant": true
+          "zoneRedundant": true,
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "General Purpose",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 12
+            },
+            {
+              "workloadProfileType": "Memory Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "workloadProfileType": "Compute Optimized",
+              "provisioningState": "Succeeded",
+              "minimum": 3,
+              "maximum": 6
+            }
+          ]
         }
       }
     }
