@@ -491,9 +491,6 @@
           }
         },
         "x-ms-examples": {
-          "Caches_Create": {
-            "$ref": "./examples/Caches_Create.json"
-          },
           "Caches_CreateOrUpdate": {
             "$ref": "./examples/Caches_CreateOrUpdate.json"
           },
@@ -1034,12 +1031,6 @@
           }
         },
         "x-ms-examples": {
-          "StorageTargets_Create": {
-            "$ref": "./examples/StorageTargets_Create.json"
-          },
-          "StorageTargets_Update": {
-            "$ref": "./examples/StorageTargets_Update.json"
-          },
           "StorageTargets_CreateOrUpdate": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate.json"
           },
@@ -1905,29 +1896,13 @@
           "description": "Properties of the Cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this Cache, in GB, when scalingFactor is 1.0",
+              "description": "The size of this Cache, in GB.",
               "type": "integer",
               "format": "int32",
               "x-ms-mutability": [
                 "read",
                 "create"
               ]
-            },
-            "scalingFactor": {
-              "description": "Multiplier that sets the current storage and throughput capacity of the cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than its base size.",
-              "type": "number",
-              "format": "double",
-              "enum": [
-                1.0,
-                1.33,
-                2.0,
-                4.0
-              ],
-              "default": 1.0,
-              "x-ms-enum": {
-                "name": "ScalingFactor",
-                "modelAsString": true
-              }
             },
             "health": {
               "description": "Health of the Cache.",
