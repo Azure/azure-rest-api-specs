@@ -235,6 +235,7 @@ input-file:
   - Microsoft.Network/stable/2022-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2022-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2022-05-01/cloudServiceSwap.json
 ```
 ### Tag: package-2022-01
 
