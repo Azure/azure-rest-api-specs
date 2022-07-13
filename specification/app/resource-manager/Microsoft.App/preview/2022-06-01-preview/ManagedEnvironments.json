@@ -809,6 +809,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/EnviornmentSkuProperties",
+          "description": "SKU properties of the Environment."
+        },
         "properties": {
           "description": "Managed environment resource specific properties",
           "type": "object",
@@ -879,10 +883,6 @@
               "$ref": "#/definitions/CustomDomainConfiguration",
               "description": "Custom domain configuration for the environment"
             }
-          },
-          "sku": {
-            "$ref": "#/definitions/EnviornmentSkuProperties",
-            "description": "SKU properties of the Environment."
           },
           "workloadProfiles": {
             "type": "array",
