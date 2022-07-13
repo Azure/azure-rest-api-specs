@@ -10,6 +10,5 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/networkfunction/arm-networkfunction"
   payload-flattening-threshold: 1
   generate-metadata: true
-title: 
-  AzureTrafficCollectorClient
+title: AzureTrafficCollectorClient
 ```
