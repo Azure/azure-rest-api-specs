@@ -13,8 +13,5 @@ typescript:
   generate-metadata: true
 directive:
   - where-operation: monitors_Create
-    transform: $["x-ms-long-running-operation"] = false
-
-  - where-operation: monitors_Delete
-    transform: $["x-ms-long-running-operation"] = false
+    transform: $["x-ms-long-running-operation-options"] = undefined
 ```
