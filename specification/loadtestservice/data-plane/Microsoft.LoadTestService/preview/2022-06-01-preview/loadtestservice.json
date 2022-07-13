@@ -5,7 +5,16 @@
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "version": "2022-06-01-preview"
   },
-  "host": "<dataPlaneURL>",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": true,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -769,7 +778,7 @@
         "tags": [
           "Test"
         ],
-        "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten.",
+        "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as multipart/form-data.",
         "operationId": "Test_UploadTestFile",
         "consumes": [
           "multipart/form-data"
@@ -1858,15 +1867,19 @@
       "type": "object",
       "properties": {
         "clientmetric": {
-          "description": "The client metric on which the criteria should be applied. Allowed values - ‘response_time_ms’ , ‘latency’, ‘error’.",
+          "description": "The client metric on which the criteria should be applied. Allowed values - ‘response_time_ms’ , ‘latency’, ‘error’, ‘requests’, ‘requests_per_sec’.",
           "type": "string"
         },
         "aggregate": {
-          "description": "The aggregation function to be applied on the client metric. Allowed functions - ‘percentage’ - for error metric , ‘avg’ - for response_time_ms and latency metric.",
+          "description": "The aggregation function to be applied on the client metric. Allowed functions - ‘percentage’ - for error metric ,‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’, ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec, ‘count’ - for requests.",
           "type": "string"
         },
         "condition": {
           "description": "The comparison operator. Supported types ‘>’ ",
+          "type": "string"
+        },
+        "requestName": {
+          "description": "Request name for which the Pass fail criteria has to be applied.",
           "type": "string"
         },
         "value": {
@@ -2476,6 +2489,16 @@
       "maxLength": 50,
       "minLength": 2,
       "pattern": "^[a-z0-9_-]*$"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "URL to perform data plane API operations on the resource.",
+      "required": true,
+      "type": "string",
+      "format": "uri",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {

@@ -58,6 +58,9 @@
           },
           "Create an Event Grid input": {
             "$ref": "./examples/Input_Create_EventGrid.json"
+          },
+          "Create a reference file input": {
+            "$ref": "./examples/Input_Create_Reference_File.json"
           }
         },
         "parameters": [
@@ -690,6 +693,33 @@
         "type"
       ]
     },
+    "FileReferenceInputDataSource": {
+      "type": "object",
+      "description": "Describes a file input data source that contains reference data.",
+      "x-ms-discriminator-value": "File",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileReferenceInputDataSourceProperties",
+          "description": "The properties that are associated with a file input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FileReferenceInputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a file input containing reference data.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file."
+        }
+      }
+    },
     "BlobReferenceInputDataSource": {
       "type": "object",
       "description": "Describes a blob input data source that contains reference data.",
@@ -1185,7 +1215,8 @@
       "x-ms-enum": {
         "name": "CompressionType",
         "modelAsString": true
-      }
+      },
+      "default": "None"
     },
     "AzureSqlReferenceInputDataSource": {
       "type": "object",

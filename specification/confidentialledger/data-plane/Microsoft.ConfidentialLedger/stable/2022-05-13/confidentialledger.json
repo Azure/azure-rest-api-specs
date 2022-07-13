@@ -31,7 +31,7 @@
   "paths": {
     "/app/governance/constitution": {
       "get": {
-        "operationId": "ConfidentialLedger_GetConstitution",
+        "operationId": "GetConstitution",
         "x-ms-examples": {
           "GetConstitution": {
             "$ref": "./examples/ledger/GetConstitution.json"
@@ -62,7 +62,7 @@
     },
     "/app/governance/members": {
       "get": {
-        "operationId": "ConfidentialLedger_GetConsortiumMembers",
+        "operationId": "GetConsortiumMembers",
         "x-ms-examples": {
           "GetConsortiumMembers": {
             "$ref": "./examples/ledger/GetConsortiumMembers.json"
@@ -97,7 +97,7 @@
     },
     "/app/enclaveQuotes": {
       "get": {
-        "operationId": "ConfidentialLedger_GetEnclaveQuotes",
+        "operationId": "GetEnclaveQuotes",
         "x-ms-examples": {
           "GetEnclaveQuotes": {
             "$ref": "./examples/ledger/GetEnclaveQuotes.json"
@@ -128,7 +128,7 @@
     },
     "/app/collections": {
       "get": {
-        "operationId": "ConfidentialLedger_ListCollections",
+        "operationId": "ListCollections",
         "x-ms-examples": {
           "GetCollectionIds": {
             "$ref": "./examples/ledger/ListCollections.json"
@@ -163,7 +163,7 @@
     },
     "/app/transactions": {
       "get": {
-        "operationId": "ConfidentialLedger_ListLedgerEntries",
+        "operationId": "ListLedgerEntries",
         "x-ms-examples": {
           "GetLedgerEntries": {
             "$ref": "./examples/ledger/ListLedgerEntries.json"
@@ -205,7 +205,7 @@
         }
       },
       "create": {
-        "operationId": "ConfidentialLedger_CreateLedgerEntry",
+        "operationId": "CreateLedgerEntry",
         "x-ms-examples": {
           "CreateLedgerEntry": {
             "$ref": "./examples/ledger/CreateLedgerEntry.json"
@@ -254,7 +254,7 @@
     },
     "/app/transactions/{transactionId}": {
       "get": {
-        "operationId": "ConfidentialLedger_GetLedgerEntry",
+        "operationId": "GetLedgerEntry",
         "x-ms-examples": {
           "GetLedgerEntry": {
             "$ref": "./examples/ledger/GetLedgerEntry.json"
@@ -291,7 +291,7 @@
     },
     "/app/transactions/{transactionId}/receipt": {
       "get": {
-        "operationId": "ConfidentialLedger_GetReceipt",
+        "operationId": "GetReceipt",
         "x-ms-examples": {
           "GetReceipt": {
             "$ref": "./examples/ledger/GetReceipt.json"
@@ -324,7 +324,7 @@
     },
     "/app/transactions/{transactionId}/status": {
       "get": {
-        "operationId": "ConfidentialLedger_GetTransactionStatus",
+        "operationId": "GetTransactionStatus",
         "x-ms-examples": {
           "GetTransactionStatus": {
             "$ref": "./examples/ledger/GetTransactionStatus.json"
@@ -357,7 +357,7 @@
     },
     "/app/transactions/current": {
       "get": {
-        "operationId": "ConfidentialLedger_GetCurrentLedgerEntry",
+        "operationId": "GetCurrentLedgerEntry",
         "x-ms-examples": {
           "GetCurrentLedgerEntry": {
             "$ref": "./examples/ledger/GetCurrentLedgerEntry.json"
@@ -391,7 +391,7 @@
     },
     "/app/users/{userId}": {
       "delete": {
-        "operationId": "ConfidentialLedger_DeleteUser",
+        "operationId": "DeleteUser",
         "x-ms-examples": {
           "DeleteUser": {
             "$ref": "./examples/ledger/DeleteUser.json"
@@ -419,7 +419,7 @@
         }
       },
       "get": {
-        "operationId": "ConfidentialLedger_GetUser",
+        "operationId": "GetUser",
         "x-ms-examples": {
           "GetUser": {
             "$ref": "./examples/ledger/GetUser.json"
@@ -450,7 +450,7 @@
         }
       },
       "patch": {
-        "operationId": "ConfidentialLedger_CreateOrUpdateUser",
+        "operationId": "CreateOrUpdateUser",
         "x-ms-examples": {
           "CreateOrUpdateUser": {
             "$ref": "./examples/ledger/CreateOrUpdateUser.json"
@@ -630,7 +630,7 @@
           "description": "Contents of the ledger entry."
         },
         "collectionId": {
-          "$ref": "#/definitions/Collection",
+          "type": "string",
           "readOnly": true
         },
         "transactionId": {
@@ -704,7 +704,7 @@
       ],
       "properties": {
         "collectionId": {
-          "$ref": "#/definitions/Collection"
+          "type": "string"
         }
       },
       "type": "object"
@@ -847,7 +847,8 @@
         "collectionId": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "CollectionArray": {
       "description": "A list of identifiers for ledger collections.",
