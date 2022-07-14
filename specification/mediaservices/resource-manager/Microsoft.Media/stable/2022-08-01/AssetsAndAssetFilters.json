@@ -447,6 +447,16 @@
       "type": "object",
       "description": "The HLS setting for a text track."
     },
+    "DashSettings": {
+      "properties": {
+        "roles": {
+          "type": "string",
+          "description": "The role for the DASH setting."
+        }
+      },
+      "type": "object",
+      "description": "The DASH setting for a track."
+    },
     "TrackBase": {
       "discriminator": "@odata.type",
       "properties": {
@@ -468,7 +478,41 @@
           "$ref": "#/definitions/TrackBase"
         }
       ],
-      "properties": {},
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The file name to the source file. This file is located in the storage container of the asset."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the audio track on a video player. In HLS, this maps to the NAME attribute of EXT-X-MEDIA."
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The RFC5646 language code for the audio track."
+        },
+        "hlsSettings": {
+          "$ref": "#/definitions/HlsSettings",
+          "description": "The HLS specific setting for the audio track."
+        },
+        "dashSettings": {
+          "$ref": "#/definitions/DashSettings",
+          "description": "The DASH specific setting for the audio track."
+        },
+        "mpeg4TrackId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The MPEG-4 audio track ID for the audio track.",
+          "x-nullable": true
+        },
+        "bitRate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The stream bit rate for the audio track.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "type": "object",
       "description": "Represents an audio track in the asset."
     },

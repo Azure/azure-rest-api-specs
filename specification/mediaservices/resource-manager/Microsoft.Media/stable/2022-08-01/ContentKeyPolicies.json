@@ -212,6 +212,38 @@
           "type": "boolean",
           "description": "A flag indicating whether test devices can use the license."
         },
+        "securityLevel": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "SL150",
+            "SL2000",
+            "SL3000"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityLevel",
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Represents a SecurityLevel that is unavailable in current API version."
+              },
+              {
+                "value": "SL150",
+                "description": "For clients under development or test. No protection against unauthorized use."
+              },
+              {
+                "value": "SL2000",
+                "description": "For hardened devices and applications consuming commercial content. Software or hardware protection."
+              },
+              {
+                "value": "SL3000",
+                "description": "For hardened devices only. Hardware protection."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The security level."
+        },
         "beginDate": {
           "type": "string",
           "format": "date-time",
