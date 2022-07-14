@@ -10,7 +10,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   },
@@ -170,7 +170,7 @@
             "name": "ApprovalReassignCommand",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "The request body of reassigning an approval request.",
             "schema": {
               "$ref": "#/definitions/ApprovalReassignCommand"
             }
@@ -1032,7 +1032,7 @@
             "name": "TaskReassignCommand",
             "in": "body",
             "required": true,
-            "description": "",
+            "description": "The request body of reassigning a task request.",
             "schema": {
               "$ref": "#/definitions/TaskReassignCommand"
             }
@@ -1183,7 +1183,7 @@
         },
         "requestorId": {
           "type": "string",
-          "title": "RequstorId",
+          "title": "RequestorId",
           "description": "The person(GUID) who created the approval request."
         },
         "submittedTime": {
@@ -1383,7 +1383,7 @@
         },
         "requestor": {
           "type": "string",
-          "title": "Requstor",
+          "title": "Requestor",
           "description": "The person(GUID) who created the workflow run."
         },
         "requestEventPayload": {
@@ -1453,7 +1453,7 @@
             "$ref": "#/definitions/TaskChangeHistory"
           },
           "title": "ChangeHistory",
-          "description": "The change hostory of a workflow task request.",
+          "description": "The change history of a workflow task request.",
           "x-ms-identifiers": []
         }
       },
@@ -1518,7 +1518,7 @@
         },
         "requestorId": {
           "type": "string",
-          "title": "RequstorId",
+          "title": "RequestorId",
           "description": "The person(GUID) who created the task request."
         },
         "submittedTime": {
@@ -1825,7 +1825,7 @@
         },
         "requestor": {
           "type": "string",
-          "title": "Requstor",
+          "title": "Requestor",
           "description": "The person who create the workflow run."
         },
         "requestEventPayload": {
@@ -1982,12 +1982,13 @@
       "description": "Client Request Id",
       "x-ms-parameter-location": "client"
     },
-    "Endpoint": {
+    "endpoint": {
       "name": "Endpoint",
       "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
+      "format": "uri",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
