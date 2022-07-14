@@ -36,6 +36,8 @@ title: MonitorManagementClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2022-06
+modelerfour:
+  lenient-model-deduplication: true
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
