@@ -1,0 +1,205 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/cadl-autorest";
+
+@armNamespace
+@serviceTitle("Microsoft.NetworkAnalytics")
+@serviceVersion("2022-01-01-preview")
+namespace Microsoft.NetworkAnalytics;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+using Autorest;
+using OpenAPI;
+
+
+@doc("A NetworkAnalyticsProviderHub resource")
+model AnalyticsStorageResources is TrackedResource < StorageProperties > {
+    @doc("Storage resource Properties")
+    @key("storageName")
+    @segment("analyticsStorage")
+    @path
+    name: string;
+}
+
+@doc("Details of the NetworkAnalytics Storage.")
+model StorageProperties {
+    @doc("StorageProperties")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @visibility("create")
+    @doc("Managed Resource Group Configuration.")
+    managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
+    @doc("Common Storage Account Properties.")
+    commonStorageAccountProperties: CommonStorageAccountProperties;
+    @visibility("create")
+    @doc("Bronze Storage Account Properties.")
+    bronzeStorageAccountProperties: BronzeStorageAccountProperties;
+    @doc("Azure DataExplorer Cluster Properties.")
+    azureDataExplorerProperties: AzureDataExplorerProperties;
+}
+
+@doc("The status of the current operation.")
+@knownValues(ProvisioningStateKV)
+model ProvisioningState is string { }
+enum ProvisioningStateKV {
+    Succeeded,
+    Failed,
+    Canceled,
+    Provisioning,
+    Updating,
+    Deleting,
+    Accepted,
+}
+
+@doc("ManagedResourceGroup related Properties")
+model ManagedResourceGroupConfiguration {
+    @doc("Name of MRG")
+    name: string;
+    @doc("MRG location")
+    location: string;
+}
+
+@doc("Common Storage Account Properties.")
+model CommonStorageAccountProperties {
+    @visibility("create")
+    @doc("unique Identifier Name")
+    uniqueIdentifierName: string;
+    @visibility("create")
+    @doc("system Identity Name")
+    systemIdentityName: string;
+    @visibility("create")
+    @doc("Allow or disallow public network access to Storage Account.")
+    publicNetworkAccess: string;
+    @doc("Network rule set")
+    networkacls ?: NetworkAcls;
+    @visibility("create")
+    @doc("Blob Services")
+    blobServices: BlobServices;
+    @doc("Private End Point")
+    privateEndPoint: PrivateEndPoint;
+}
+
+@doc("Configuration for BronzeAccount")
+model BronzeStorageAccountProperties {
+    @doc("Enables Secure File Transfer Protocol, if set to true")
+    isSftpEnabled: string;
+}
+
+@doc("ADx Properties")
+model AzureDataExplorerProperties {
+    @doc("ADx Name")
+    @visibility("create")
+    name: string;
+    @visibility("create")
+    @doc("ADx location")
+    location: string;
+    @visibility("create")
+    @doc("Virtual Network Configuration")
+    virtualNetworkConfiguration: VirtualNetworkConfiguration;
+    @doc("Kusto Cluster Principal Assignments")
+    kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
+}
+
+
+@doc("ADx Role assignments")
+model KustoClusterPrincipalAssignments {
+    @doc("Kusto cluster name")
+    name: string;
+    @doc("The principal ID of resource identity")
+    principalId: string;
+    @doc("Kusto roles")
+    role: string;
+    @doc("The tenant ID of resource.")
+    tenantId: string;
+    @doc("Principal type.")
+    principalType: string;
+}
+
+@doc("Private End Point Resource")
+model PrivateEndPoint {
+    @doc("Resource ID of a subnet")
+    subnetId: string;
+    @doc("The private link resource service id")
+    privateLinkServiceId: string;
+    @doc("The private link resource group id.")
+    groupIds: string[];
+    @doc("The private link resource customDnsConfigs.")
+    customDnsConfigs: string;
+}
+
+@doc("Resource Location")
+model Location is string { }
+
+@doc("Virtual Network Rule")
+model VirtualNetworkRule {
+    @doc("Resource ID of a subnet")
+    id: string;
+    @doc("The action of virtual network rule.")
+    action ?: string;
+    @doc("Gets the state of virtual network rule.")
+    state ?: string;
+}
+
+@doc("IP rule with specific IP or IP range in CIDR format.")
+model IPRules {
+    @doc("IP Rules Value")
+    value ? : string;
+    @doc("The action of virtual network rule.")
+    action: string;
+}
+
+@doc("Resource Access Rules.")
+model ResourceAccessRules {
+    @doc("The tenant ID of resource.")
+    tenantId: string;
+    @doc("Resource ID")
+    resourceId: string;
+}
+
+@doc("Network rule set")
+model NetworkAcls {
+    @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices")
+    bypass: string;
+    @doc("Virtual Network Rule")
+    virtualNetworkRule: VirtualNetworkRule[];
+    @doc("IP rule with specific IP or IP range in CIDR format.")
+    @extension("x-ms-identifiers", [])
+    ipRules: IPRules[];
+    @doc("Resource Access Rules.")
+     @extension("x-ms-identifiers", [])
+    resourceAccessRules: ResourceAccessRules[];
+    @doc("Default Action")
+    defaultAction: string;
+}
+
+@doc("Restore Policy")
+model RestorePolicy {
+    @doc("Restore Policy enabled or disabled boolean value")
+    enabled: boolean;
+    @doc("Restore Policy in days")
+    days: int32;
+}
+
+@doc("Configuration for creating Blob Service")
+model BlobServices {
+    @doc("Restore Policy")
+    restorePolicy: RestorePolicy;
+}
+
+
+@doc("Virtual Network Configuration")
+model VirtualNetworkConfiguration {
+    @doc("Resource ID of a subnet")
+    subnetId: string;
+    @doc("Engine Public IP ID")
+    enginePublicIpId: string;
+    @doc("Data Management Public Ip ID")
+    dataManagementPublicIpId: string;
+}
+
+@armResourceOperations
+interface Storage extends ResourceOperations<AnalyticsStorageResources, StorageProperties> { }

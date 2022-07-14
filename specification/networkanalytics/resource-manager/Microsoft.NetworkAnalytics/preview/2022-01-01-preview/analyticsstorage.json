@@ -1,0 +1,833 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.NetworkAnalytics",
+    "version": "2022-01-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Storage"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NetworkAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/analyticsStorage": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_ListBySubscription",
+        "description": "List AnalyticsStorageResources resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List AnalyticsStorageResources resources by subscription ID": {
+            "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/analyticsStorage": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_ListByResourceGroup",
+        "description": "List AnalyticsStorageResources resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List AnalyticsStorageResources resources by resource group": {
+            "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/analyticsStorage/{storageName}": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Get",
+        "description": "Get a AnalyticsStorageResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResources"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a AnalyticsStorageResources": {
+            "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_CreateOrUpdate",
+        "description": "Create a AnalyticsStorageResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResources"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResources"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a AnalyticsStorageResources": {
+            "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Update",
+        "description": "Update a AnalyticsStorageResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResourcesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsStorageResources"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a AnalyticsStorageResources": {
+            "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Delete",
+        "description": "Delete a AnalyticsStorageResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a AnalyticsStorageResources": {
+            "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AnalyticsStorageResources": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A NetworkAnalyticsProviderHub resource",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AnalyticsStorageResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyticsStorageResources"
+          },
+          "x-cadl-name": "AnalyticsStorageResources[]",
+          "description": "The AnalyticsStorageResources items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a AnalyticsStorageResources list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "AnalyticsStorageResourcesUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/AnalyticsStorageResourcesUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the AnalyticsStorageResources."
+    },
+    "AnalyticsStorageResourcesUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "commonStorageAccountProperties": {
+          "$ref": "#/definitions/CommonStorageAccountProperties",
+          "description": "Common Storage Account Properties."
+        },
+        "azureDataExplorerProperties": {
+          "$ref": "#/definitions/AzureDataExplorerProperties",
+          "description": "Azure DataExplorer Cluster Properties."
+        }
+      },
+      "description": "The updatable properties of the AnalyticsStorageResources."
+    },
+    "AzureDataExplorerProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "ADx Name"
+        },
+        "location": {
+          "type": "string",
+          "description": "ADx location"
+        },
+        "virtualNetworkConfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual Network Configuration"
+        },
+        "kustoClusterPrincipalAssignments": {
+          "$ref": "#/definitions/KustoClusterPrincipalAssignments",
+          "description": "Kusto Cluster Principal Assignments"
+        }
+      },
+      "description": "ADx Properties",
+      "required": [
+        "name",
+        "location",
+        "virtualNetworkConfiguration",
+        "kustoClusterPrincipalAssignments"
+      ]
+    },
+    "BlobServices": {
+      "type": "object",
+      "properties": {
+        "restorePolicy": {
+          "$ref": "#/definitions/RestorePolicy",
+          "description": "Restore Policy"
+        }
+      },
+      "description": "Configuration for creating Blob Service",
+      "required": [
+        "restorePolicy"
+      ]
+    },
+    "BronzeStorageAccountProperties": {
+      "type": "object",
+      "properties": {
+        "isSftpEnabled": {
+          "type": "string",
+          "description": "Enables Secure File Transfer Protocol, if set to true"
+        }
+      },
+      "description": "Configuration for BronzeAccount",
+      "required": [
+        "isSftpEnabled"
+      ]
+    },
+    "CommonStorageAccountProperties": {
+      "type": "object",
+      "properties": {
+        "uniqueIdentifierName": {
+          "type": "string",
+          "description": "unique Identifier Name"
+        },
+        "systemIdentityName": {
+          "type": "string",
+          "description": "system Identity Name"
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Allow or disallow public network access to Storage Account."
+        },
+        "networkacls": {
+          "$ref": "#/definitions/NetworkAcls",
+          "description": "Network rule set"
+        },
+        "blobServices": {
+          "$ref": "#/definitions/BlobServices",
+          "description": "Blob Services"
+        },
+        "privateEndPoint": {
+          "$ref": "#/definitions/PrivateEndPoint",
+          "description": "Private End Point"
+        }
+      },
+      "description": "Common Storage Account Properties.",
+      "required": [
+        "uniqueIdentifierName",
+        "systemIdentityName",
+        "publicNetworkAccess",
+        "blobServices",
+        "privateEndPoint"
+      ]
+    },
+    "IPRules": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "IP Rules Value"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action of virtual network rule."
+        }
+      },
+      "description": "IP rule with specific IP or IP range in CIDR format.",
+      "required": [
+        "action"
+      ]
+    },
+    "KustoClusterPrincipalAssignments": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Kusto cluster name"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity"
+        },
+        "role": {
+          "type": "string",
+          "description": "Kusto roles"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "principalType": {
+          "type": "string",
+          "description": "Principal type."
+        }
+      },
+      "description": "ADx Role assignments",
+      "required": [
+        "name",
+        "principalId",
+        "role",
+        "tenantId",
+        "principalType"
+      ]
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of MRG"
+        },
+        "location": {
+          "type": "string",
+          "description": "MRG location"
+        }
+      },
+      "description": "ManagedResourceGroup related Properties",
+      "required": [
+        "name",
+        "location"
+      ]
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices"
+        },
+        "virtualNetworkRule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "x-cadl-name": "VirtualNetworkRule[]",
+          "description": "Virtual Network Rule"
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRules"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IPRules[]",
+          "description": "IP rule with specific IP or IP range in CIDR format."
+        },
+        "resourceAccessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceAccessRules"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ResourceAccessRules[]",
+          "description": "Resource Access Rules."
+        },
+        "defaultAction": {
+          "type": "string",
+          "description": "Default Action"
+        }
+      },
+      "description": "Network rule set",
+      "required": [
+        "bypass",
+        "virtualNetworkRule",
+        "ipRules",
+        "resourceAccessRules",
+        "defaultAction"
+      ]
+    },
+    "PrivateEndPoint": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "privateLinkServiceId": {
+          "type": "string",
+          "description": "The private link resource service id"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The private link resource group id."
+        },
+        "customDnsConfigs": {
+          "type": "string",
+          "description": "The private link resource customDnsConfigs."
+        }
+      },
+      "description": "Private End Point Resource",
+      "required": [
+        "subnetId",
+        "privateLinkServiceId",
+        "groupIds",
+        "customDnsConfigs"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceAccessRules": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID"
+        }
+      },
+      "description": "Resource Access Rules.",
+      "required": [
+        "tenantId",
+        "resourceId"
+      ]
+    },
+    "RestorePolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Restore Policy enabled or disabled boolean value"
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Restore Policy in days"
+        }
+      },
+      "description": "Restore Policy",
+      "required": [
+        "enabled",
+        "days"
+      ]
+    },
+    "StorageProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "StorageProperties",
+          "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed Resource Group Configuration."
+        },
+        "commonStorageAccountProperties": {
+          "$ref": "#/definitions/CommonStorageAccountProperties",
+          "description": "Common Storage Account Properties."
+        },
+        "bronzeStorageAccountProperties": {
+          "$ref": "#/definitions/BronzeStorageAccountProperties",
+          "description": "Bronze Storage Account Properties."
+        },
+        "azureDataExplorerProperties": {
+          "$ref": "#/definitions/AzureDataExplorerProperties",
+          "description": "Azure DataExplorer Cluster Properties."
+        }
+      },
+      "description": "Details of the NetworkAnalytics Storage.",
+      "required": [
+        "managedResourceGroupConfiguration",
+        "commonStorageAccountProperties",
+        "bronzeStorageAccountProperties",
+        "azureDataExplorerProperties"
+      ]
+    },
+    "VirtualNetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "enginePublicIpId": {
+          "type": "string",
+          "description": "Engine Public IP ID"
+        },
+        "dataManagementPublicIpId": {
+          "type": "string",
+          "description": "Data Management Public Ip ID"
+        }
+      },
+      "description": "Virtual Network Configuration",
+      "required": [
+        "subnetId",
+        "enginePublicIpId",
+        "dataManagementPublicIpId"
+      ]
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action of virtual network rule."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        }
+      },
+      "description": "Virtual Network Rule",
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "parameters": {
+    "AnalyticsStorageResources.storageName": {
+      "name": "storageName",
+      "in": "path",
+      "required": true,
+      "description": "Storage resource Properties",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
