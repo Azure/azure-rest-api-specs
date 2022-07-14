@@ -8,6 +8,7 @@ using Azure.Core.Operations;
 using Cadl.Rest;
 using Cadl.Http;
 
+
 @server(
   "{Endpoint}/language",
   "Language Service",
@@ -22,11 +23,13 @@ using Cadl.Http;
 namespace Microsoft.Language.AnalyzeConversations.Authoring;
 
 // interface Lifetime<TResource> {
-//   op create is ResourceCreateOrUpdate<TResource>;
-//   op read is ResourceRead<TResource>;
-//   op delete is ResourceDelete<TResource>;
-//   op list is ResourceList<TResource>;
+// 	op create is ResourceCreateOrUpdate<TResource>;
+// 	op read is ResourceRead<TResource>;
+// 	op delete is ResourceDelete<TResource>;
+// 	op list is ResourceList<TResource>;
 // }
+@segmentSeparator("/:")
+op MyCustomResourceAction<TResource, TResponse, TParams = {}> is ResourceAction<TResource, TResponse, TParams>;
 
 interface Project { // extends Lifetime<ProjectMetadata> {
 	op ListProjects is ResourceList<ProjectMetadata>;
@@ -34,10 +37,9 @@ interface Project { // extends Lifetime<ProjectMetadata> {
 	op CreateProject is ResourceCreateOrUpdate<ProjectMetadata>;
 	op DeleteProject is ResourceDelete<ProjectMetadata>;
 
-	@segmentSeparator("/:")
-	op Export is ResourceAction<ProjectMetadata, {}>;
-	op Import is ResourceAction<ProjectMetadata, {}>;
-	op Train is ResourceAction<ProjectMetadata, {}, TrainingJobOptionsBody>;
+	op Export is MyCustomResourceAction<ProjectMetadata, {}>;
+	op Import is MyCustomResourceAction<ProjectMetadata, {}>;
+	op Train is MyCustomResourceAction<ProjectMetadata, {}, TrainingJobOptionsBody>;
 
 	//op GetExportStatus is ResourceRead<ProjectMetadata, {@path jobId: int}>;
 	//op GetImportStatus is ResourceRead<ProjectMetadata, {@path jobId: int}>;
@@ -72,7 +74,7 @@ interface Deployments {
 	op DeployDeployment is LongRunningResourceCreateOrReplace<ProjectDeployment>;
 	op DeleteDeployment is ResourceDelete<ProjectDeployment>;
 
-	op SwapDeployments is ResourceAction<ProjectMetadata, {}, SwapDeploymentsOptionsBody>;
+	op SwapDeployments is MyCustomResourceAction<ProjectMetadata, {}, SwapDeploymentsOptionsBody>;
 }
 
 interface Jobs {
