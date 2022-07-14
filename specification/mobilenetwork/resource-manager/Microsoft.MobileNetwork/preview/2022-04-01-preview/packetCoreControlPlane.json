@@ -312,29 +312,63 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/supportedPacketCoreControlPlaneVersions": {
+    "/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions/{versionName}": {
       "get": {
         "tags": [
-          "PacketCoreControlPlanes"
+          "PacketCoreControlPlaneVersion"
         ],
-        "operationId": "PacketCoreControlPlanes_SupportedVersions",
-        "description": "Get the set of packet core control plane versions that are currently supported.",
+        "operationId": "PacketCoreControlPlaneVersions_Get",
+        "description": "Gets information about the specified packet core control plane version.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core control plane version."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting packet core control plane version resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneVersion"
+            }
           },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet core control plane version": {
+            "$ref": "./examples/PacketCoreControlPlaneVersionGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlaneVersion"
+        ],
+        "operationId": "PacketCoreControlPlaneVersions_ListByResourceGroup",
+        "description": "Lists all supported packet core control planes versions.",
+        "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Get supported packet core control plane versions successful.",
             "schema": {
-              "$ref": "#/definitions/SupportedPacketCoreControlPlaneVersionResult"
+              "$ref": "#/definitions/PacketCoreControlPlaneVersionListResult"
             }
           },
           "default": {
@@ -346,8 +380,11 @@
         },
         "x-ms-examples": {
           "Get supported packet core control plane versions": {
-            "$ref": "./examples/SupportedPacketCoreControlPlaneVersions.json"
+            "$ref": "./examples/PacketCoreControlPlaneVersionListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -515,23 +552,117 @@
         }
       }
     },
-    "SupportedPacketCoreControlPlaneVersionResult": {
+    "PacketCoreControlPlaneVersion": {
+      "description": "Packet core control plane version resource.",
       "type": "object",
       "properties": {
-        "supportedVersions": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "A supported version of packet core control plane"
-          },
-          "description": "The supported packet core control plane versions."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PacketCoreControlPlaneVersionPropertiesFormat",
+          "description": "Packet core control plane version properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "PacketCoreControlPlaneVersionPropertiesFormat": {
+      "description": "Packet core control plane version properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the packet core control plane version resource."
+        },
+        "versionState": {
+          "type": "string",
+          "description": "The state of this packet core control plane version.",
+          "enum": [
+            "Unknown",
+            "Preview",
+            "Validating",
+            "ValidationFailed",
+            "Active",
+            "Deprecated"
+          ],
+          "x-ms-enum": {
+            "name": "versionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "The state of this version is unknown."
+              },
+              {
+                "value": "Preview",
+                "description": "This version is a preview and is not suitable for production use."
+              },
+              {
+                "value": "Validating",
+                "description": "This version is currently being validated."
+              },
+              {
+                "value": "ValidationFailed",
+                "description": "This version failed validation."
+              },
+              {
+                "value": "Active",
+                "description": "This version is active and suitable for production use."
+              },
+              {
+                "value": "Deprecated",
+                "description": "This version is deprecated and is no longer supported."
+              }
+            ]
+          }
         },
         "recommendedVersion": {
           "type": "string",
-          "description": "The recommended version to use for new packet core control plane deployments."
+          "description": "Indicates whether this is the recommended version to use for new packet core control plane deployments.",
+          "enum": [
+            "Recommended",
+            "NotRecommended"
+          ],
+          "x-ms-enum": {
+            "name": "recommendedVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Recommended",
+                "description": "This is the recommended version to use for new packet core control plane deployments."
+              },
+              {
+                "value": "NotRecommended",
+                "description": "This is not the recommended version to use for new packet core control plane deployments."
+              }
+            ]
+          }
         }
-      },
-      "description": "Response for supported packet core control plane versions API call."
+      }
+    },
+    "PacketCoreControlPlaneVersionListResult": {
+      "description": "Response for packet core control plane version API service call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCoreControlPlaneVersion"
+          },
+          "description": "A list of supported packet core control plane versions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
     }
   }
 }
