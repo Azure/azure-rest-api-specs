@@ -7796,11 +7796,11 @@
       "properties": {
         "notebook": {
           "description": "Synapse notebook reference.",
-          "$ref": "../artifacts.json#/definitions/SynapseNotebookReference"
+          "$ref": "#/definitions/SynapseNotebookReference"
         },
         "sparkPool": {
           "description": "The name of the big data pool which will be used to execute the notebook.",
-          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference"
+          "$ref": "#/definitions/BigDataPoolParametrizationReference"
         },
         "parameters": {
           "description": "Notebook parameters.",
@@ -7830,6 +7830,85 @@
         "notebook"
       ]
     },
+    "SynapseNotebookReference": {
+      "description": "Synapse notebook reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse notebook reference type.",
+          "enum": [
+            "NotebookReference"
+          ],
+          "x-ms-enum": {
+            "name": "NotebookReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference notebook name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "BigDataPoolParametrizationReference": {
+      "description": "Big data pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Big data pool reference type.",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "NotebookParameter": {
+      "description": "Notebook parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Notebook parameter type.",
+          "$ref": "#/definitions/NotebookParameterType"
+        }
+      }
+    },
+    "NotebookParameterType": {
+      "description": "Notebook parameter type.",
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookParameterType",
+        "modelAsString": true
+      }
+    },
     "SynapseSparkJobDefinitionActivity": {
       "description": "Execute spark job activity.",
       "type": "object",
@@ -7856,7 +7935,7 @@
       "properties": {
         "sparkJob": {
           "description": "Synapse spark job reference.",
-          "$ref": "../artifacts.json#/definitions/SynapseSparkJobReference"
+          "$ref": "#/definitions/SynapseSparkJobReference"
         },
         "args": {
           "x-ms-client-name": "arguments",
@@ -7882,7 +7961,7 @@
           }
         },
         "targetBigDataPool": {
-          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference",
+          "$ref": "#/definitions/BigDataPoolParametrizationReference",
           "description": "The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide."
         },
         "executorSize": {
@@ -7904,6 +7983,31 @@
       },
       "required": [
         "sparkJob"
+      ]
+    },
+    "SynapseSparkJobReference": {
+      "description": "Synapse spark job reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse spark job reference type.",
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkJobReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference spark job name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
       ]
     }
   }
