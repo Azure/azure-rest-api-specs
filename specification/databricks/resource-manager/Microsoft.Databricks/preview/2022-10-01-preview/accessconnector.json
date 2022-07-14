@@ -319,7 +319,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityData"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Azure Databricks accessConnector properties",
@@ -352,64 +352,6 @@
         }
       }
     },
-    "IdentityData": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
-    },
-    "UserIdentity": {
-      "type": "object",
-      "description": "A resource identity that is managed by the user of the service.",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of the user-assigned identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "clientId": {
-          "description": "The client ID of the user-assigned identity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "AccessConnectorUpdate": {
       "description": "An update to an azure databricks accessConnector.",
       "type": "object",
@@ -422,8 +364,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
