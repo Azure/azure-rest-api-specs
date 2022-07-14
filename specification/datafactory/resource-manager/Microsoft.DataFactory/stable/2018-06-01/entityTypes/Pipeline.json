@@ -7823,7 +7823,8 @@
         },
         "numExecutors": {
           "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
@@ -7943,7 +7944,8 @@
           "type": "array",
           "items": {
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "file": {
           "type": "object",
@@ -7958,7 +7960,8 @@
           "type": "array",
           "items": {
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetBigDataPool": {
           "$ref": "#/definitions/BigDataPoolParametrizationReference",
@@ -7978,7 +7981,8 @@
         },
         "numExecutors": {
           "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
