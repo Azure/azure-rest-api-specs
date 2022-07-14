@@ -20,17 +20,11 @@ directive:
 
   - where-operation: PhpWorkloads_CreateOrUpdate
     transform: $["x-ms-long-running-operation-options"] = undefined
-  
-  - where-operation: PhpWorkloads_Delete
-    transform: $["x-ms-long-running-operation-options"] = undefined
 
   - where-operation: WordpressInstances_CreateOrUpdate
     transform: $["x-ms-long-running-operation-options"] = undefined
 
   - where-operation: SAPVirtualInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
-
-  - where-operation: SAPVirtualInstances_Delete
     transform: $["x-ms-long-running-operation-options"] = undefined
 
   - where-operation: SAPCentralInstances_Create
@@ -39,8 +33,6 @@ directive:
   - where-operation: SAPCentralInstances_Update
     transform: $["x-ms-long-running-operation-options"] = undefined
     
-  - where-operation: SAPCentralInstances_Delete
-    transform: $["x-ms-long-running-operation-options"] = undefined
     
   - where-operation: SAPDatabaseInstances_Create
     transform: $["x-ms-long-running-operation-options"] = undefined
@@ -48,16 +40,10 @@ directive:
   - where-operation: SAPDatabaseInstances_Update
     transform: $["x-ms-long-running-operation-options"] = undefined
     
-  - where-operation: SAPDatabaseInstances_Delete
-    transform: $["x-ms-long-running-operation-options"] = undefined
-        
   - where-operation: SAPApplicationServerInstances_Create
     transform: $["x-ms-long-running-operation-options"] = undefined
         
   - where-operation: SAPApplicationServerInstances_Update
-    transform: $["x-ms-long-running-operation-options"] = undefined
-        
-  - where-operation: SAPApplicationServerInstances_Delete
     transform: $["x-ms-long-running-operation-options"] = undefined
             
   - where-operation: SAPVirtualInstances_Start
