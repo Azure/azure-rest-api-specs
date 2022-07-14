@@ -1,0 +1,31 @@
+{
+  "operationId": "CreateBackupPolicy",
+  "description": "This example shows how to create a backup policy which takes backup every 10 minutes which shall get deleted after 20 days, with file share as the backup location.",
+  "parameters": {
+    "api-version": "6.4",
+    "BackupPolicyDescription": {
+      "Name": "FileShare10MinBackupPolicy",
+      "AutoRestoreOnDataLoss": false,
+      "MaxIncrementalBackups": 3,
+      "Schedule": {
+        "ScheduleKind": "FrequencyBased",
+        "Interval": "PT10M"
+      },
+      "Storage": {
+        "StorageKind": "FileShare",
+        "FriendlyName": "FileShare_myshare",
+        "Path": "\\\\myshare\\backupshare",
+        "PrimaryUserName": "backupaccount",
+        "PrimaryPassword": "password"
+      },
+      "RetentionPolicy": {
+        "RetentionPolicyType": "Basic",
+        "MinimumNumberOfBackups": 20,
+        "RetentionDuration": "P20D"
+      }
+    }
+  },
+  "responses": {
+    "201": {}
+  }
+}

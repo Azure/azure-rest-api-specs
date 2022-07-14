@@ -446,13 +446,16 @@
       ]
     },
     "DatasetCompression": {
-      "discriminator": "type",
       "description": "The compression method used on a dataset.",
       "type": "object",
       "properties": {
         "type": {
           "type": "object",
           "description": "Type of dataset compression. Type: string (or Expression with resultType string)."
+        },
+        "level": {
+          "type": "object",
+          "description": "The dataset compression level. Type: string (or Expression with resultType string)."
         }
       },
       "additionalProperties": {
@@ -461,92 +464,6 @@
       "required": [
         "type"
       ]
-    },
-    "DatasetBZip2Compression": {
-      "x-ms-discriminator-value": "BZip2",
-      "description": "The BZip2 compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {}
-    },
-    "DatasetGZipCompression": {
-      "x-ms-discriminator-value": "GZip",
-      "description": "The GZip compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The GZip compression level."
-        }
-      }
-    },
-    "DatasetDeflateCompression": {
-      "x-ms-discriminator-value": "Deflate",
-      "description": "The Deflate compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The Deflate compression level."
-        }
-      }
-    },
-    "DatasetZipDeflateCompression": {
-      "x-ms-discriminator-value": "ZipDeflate",
-      "description": "The ZipDeflate compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The ZipDeflate compression level."
-        }
-      }
-    },
-    "DatasetTarCompression": {
-      "x-ms-discriminator-value": "Tar",
-      "description": "The Tar archive method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {}
-    },
-    "DatasetTarGZipCompression": {
-      "x-ms-discriminator-value": "TarGZip",
-      "description": "The TarGZip compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The TarGZip compression level."
-        }
-      }
     },
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",

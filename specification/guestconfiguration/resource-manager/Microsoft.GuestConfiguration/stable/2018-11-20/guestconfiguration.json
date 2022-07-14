@@ -200,6 +200,105 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_SubscriptionList",
+        "description": "List all guest configuration assignments for a subscription.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a subscription": {
+            "$ref": "./examples/listSubGuestConfigurationAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_RGList",
+        "description": "List all guest configuration assignments for a resource group.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a resource group": {
+            "$ref": "./examples/listRGGuestConfigurationAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "tags": [
@@ -806,6 +905,12 @@
           "type": "string",
           "description": "Uri of the storage where guest configuration package is uploaded."
         },
+        "contentType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the content type of the configuration. Possible values could be Builtin or Custom.",
+          "x-nullable": true
+        },
         "contentHash": {
           "type": "string",
           "description": "Combined hash of the guest configuration package and configuration parameters."
@@ -830,6 +935,13 @@
             "$ref": "#/definitions/ConfigurationParameter"
           },
           "description": "The configuration parameters for the guest configuration."
+        },
+        "configurationProtectedParameter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationParameter"
+          },
+          "description": "The protected configuration parameters for the guest configuration."
         },
         "configurationSetting": {
           "$ref": "#/definitions/ConfigurationSetting",
@@ -938,6 +1050,20 @@
           "description": "Id of the latest report for the guest configuration assignment. ",
           "x-nullable": true
         },
+        "vmssVMList": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/VMSSVMInfo"
+          },
+          "description": "The list of VM Compliance data for VMSS"
+        },
+        "parameterHash": {
+          "type": "string",
+          "readOnly": true,
+          "description": "parameter hash for the guest configuration assignment. ",
+          "x-nullable": true
+        },
         "context": {
           "type": "string",
           "description": "The source which initiated the guest configuration assignment. Ex: Azure Policy"
@@ -1043,6 +1169,11 @@
           "$ref": "#/definitions/AssignmentReportDetails",
           "description": "Details of the assignment report.",
           "x-nullable": true
+        },
+        "vmssResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id of the VMSS."
         }
       },
       "description": "Report for the guest configuration assignment. Report contains information such as compliance status, reason, and more."
@@ -1192,6 +1323,48 @@
         }
       },
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
+    },
+    "VMSSVMInfo": {
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID of the VM."
+        },
+        "vmResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id of the VM."
+        },
+        "complianceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "latestReportId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of the latest report for the guest configuration assignment. ",
+          "x-nullable": true
+        },
+        "lastComplianceChecked": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Date and time when last compliance status was checked.",
+          "x-nullable": true
+        }
+      },
+      "description": "Information about VMSS VM"
     }
   },
   "parameters": {}
