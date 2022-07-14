@@ -17,6 +17,7 @@ using Cadl.Http;
 )
 @serviceTitle("Microsoft Cognitive Language Service - Analyze Conversations Authoring")
 @serviceVersion("2022-05-01")
+@route("/authoring/analyze-conversations/")
 @doc("The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.")
 namespace Microsoft.Language.AnalyzeConversations.Authoring;
 
@@ -27,14 +28,13 @@ namespace Microsoft.Language.AnalyzeConversations.Authoring;
 //   op list is ResourceList<TResource>;
 // }
 
-
-@route("/authoring/analyze-conversations/")
 interface Project { // extends Lifetime<ProjectMetadata> {
 	op ListProjects is ResourceList<ProjectMetadata>;
 	op GetProject is ResourceRead<ProjectMetadata>;
 	op CreateProject is ResourceCreateOrUpdate<ProjectMetadata>;
 	op DeleteProject is ResourceDelete<ProjectMetadata>;
 
+	@segmentSeparator("/:")
 	op Export is ResourceAction<ProjectMetadata, {}>;
 	op Import is ResourceAction<ProjectMetadata, {}>;
 	op Train is ResourceAction<ProjectMetadata, {}, TrainingJobOptionsBody>;
@@ -48,32 +48,24 @@ interface Project { // extends Lifetime<ProjectMetadata> {
 }
 
 
-@route("/authoring/analyze-conversations/")
 interface Models {
 	op ListTrainedModels is ResourceList<ProjectTrainedModel>;
 	op GetTrainedModel is ResourceRead<ProjectTrainedModel>;
 	op DeleteTrainedModel is ResourceDelete<ProjectTrainedModel>;
 
-	@route("/evaluation/result")
-	op getModelEvaluationResults is ResourceList<UtteranceEvaluationResult,
-	 {
-    ...ListQueryParams,
-	...StringIndexTypeParams,
-	 }>;
+	// Those two are blocked by https://github.com/Azure/cadl-azure/issues/1658
+	// @route("/evaluation/result")
+	// op getModelEvaluationResults is ResourceList<UtteranceEvaluationResult,
+	//  {
+    // ...ListQueryParams,
+	// ...StringIndexTypeParams,
+	//  }>;
 
-//   @get
-//   @route("/evaluation/result")
-//   @listsResource(UtteranceEvaluationResult)
-//   getModelEvaluationResults(
-//     ...ListQueryParams,
-// 	...StringIndexTypeParams,
-//     ...Azure.Core.ApiVersionParameter
-//   ): OkResponse<EvaluationResults> | ErrorResponse;
-	// op GetModelEvaluationResults is ResourceRead ?
-	// op GetModelEvaluationSummary is ResourceRead ?
+
+	// @route("/evaluation/summary-result")
+	// op getModelEvaluationSummary is ResourceRead<EvaluationSummary>;
 }
 
-@route("/authoring/analyze-conversations/")
 interface Deployments {
 	op ListDeployments is ResourceList<ProjectDeployment>;
 	op GetDeployment is ResourceRead<ProjectDeployment>;
@@ -83,7 +75,6 @@ interface Deployments {
 	op SwapDeployments is ResourceAction<ProjectMetadata, {}, SwapDeploymentsOptionsBody>;
 }
 
-@route("/authoring/analyze-conversations/")
 interface Jobs {
   @doc("Gets the status of an existing deployment job.")
   getDeploymentStatus is ResourceRead<DeploymentJob>;
@@ -611,6 +602,7 @@ model ProjectSettings {
 	confidenceThreshold: float64;
 }
 
+@parentResource(ProjectMetadata)
 @doc("Represents a trained model.")
 model ProjectTrainedModel {
 	@key("trainedModelLabel")
