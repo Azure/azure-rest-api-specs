@@ -14,4 +14,10 @@ typescript:
 directive:
   - where-operation: monitors_Create
     transform: $["x-ms-long-running-operation-options"] = undefined
+
+  - where-operation: ProviderInstances_Get
+    transform: $["x-ms-long-running-operation-options"] = undefined
+
+  - where-operation: ProviderInstances_Create
+    transform: $["x-ms-long-running-operation-options"] = undefined
 ```
