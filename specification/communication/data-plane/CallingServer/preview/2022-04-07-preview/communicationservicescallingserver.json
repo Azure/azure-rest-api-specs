@@ -2,8 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-04-07-preview",
-    "title": "Azure Communication Service ServerCalling APIs",
-    "description": "Azure Communication CallingServer Service"
+    "title": "Azure Communication Service ServerCalling APIs"
   },
   "schemes": [
     "https"
@@ -112,7 +111,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": "Returns the redirect call response."
           }
         },
@@ -146,7 +145,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": "Returns the reject call response."
           }
         },
@@ -242,7 +241,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": "Returns the terminate call response."
           }
         },
@@ -297,7 +296,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/content:play": {
+    "/calling/callConnections/{callConnectionId}:play": {
       "post": {
         "tags": [
           "MidConnections"
@@ -309,7 +308,7 @@
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection ID.",
+            "description": "",
             "required": true,
             "type": "string"
           },
@@ -327,16 +326,45 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Returns the play audio response.",
-            "schema": {
-              "$ref": "#/definitions/PlayResponse"
-            }
+          "202": {
+            "description": "Returns the play audio response."
           }
         },
         "x-ms-examples": {
           "Plays audio to participants in the call.": {
             "$ref": "./examples/Content_Play.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:cancelAllMediaOperations": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Cancel all media operations in a call.",
+        "description": "Cancel all media operations in a call.",
+        "operationId": "Content_CancelAllMediaOperations",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the cancel all media operations response."
+          }
+        },
+        "x-ms-examples": {
+          "Cancel all media operations in a call.": {
+            "$ref": "./examples/Content_CancelAllMediaOperations.json"
           }
         }
       }
@@ -365,10 +393,7 @@
           "200": {
             "description": "Returns the get participants response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AcsCallParticipantDto"
-              }
+              "$ref": "#/definitions/GetParticipantsResponse"
             }
           }
         },
@@ -467,13 +492,13 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:get": {
-      "post": {
+    "/calling/callConnections/{callConnectionId}/participants/{participantMri}": {
+      "get": {
         "tags": [
           "MidConnections"
         ],
-        "summary": "Get a participant from a call.",
-        "description": "Get a participant from a call.",
+        "summary": "Get participant from a call.",
+        "description": "Get participant from a call.",
         "operationId": "CallConnections_GetParticipant",
         "parameters": [
           {
@@ -484,13 +509,11 @@
             "type": "string"
           },
           {
-            "name": "getParticipantsRequest",
-            "in": "body",
-            "description": "The get participant request.",
+            "name": "participantMri",
+            "in": "path",
+            "description": "MRI of the participants to retrieve.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetParticipantRequest"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -505,7 +528,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a participant from a call.": {
+          "Get participant from a call.": {
             "$ref": "./examples/CallConnections_GetParticipant.json"
           }
         }
@@ -536,7 +559,7 @@
           "200": {
             "description": "Returns the start call recording response.",
             "schema": {
-              "$ref": "#/definitions/StartCallRecordingResponse"
+              "$ref": "#/definitions/RecordingStatusResponse"
             }
           }
         },
@@ -570,7 +593,7 @@
           "200": {
             "description": "Returns the recording properties.",
             "schema": {
-              "$ref": "#/definitions/GetCallRecordingStateResponse"
+              "$ref": "#/definitions/RecordingStatusResponse"
             }
           }
         },
@@ -599,7 +622,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Returns the stop call recording response."
           }
         },
@@ -610,7 +633,7 @@
         }
       }
     },
-    "/calling/recordings/{recordingId}/:pause": {
+    "/calling/recordings/{recordingId}:pause": {
       "post": {
         "tags": [
           "Content_Recording"
@@ -630,7 +653,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Returns the pause call recording response."
           }
         },
@@ -641,7 +664,7 @@
         }
       }
     },
-    "/calling/recordings/{recordingId}/:resume": {
+    "/calling/recordings/{recordingId}:resume": {
       "post": {
         "tags": [
           "Content_Recording"
@@ -661,90 +684,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Returns the resume call recording response."
           }
         },
         "x-ms-examples": {
           "Resume recording the call.": {
             "$ref": "./examples/ServerCalls_ResumeRecording.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/operations": {
-      "get": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Get all operations associated with a call connection.",
-        "description": "Get all operations associated with a call connection.",
-        "operationId": "CallConnections_ListOperations",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the list operations response.",
-            "schema": {
-              "$ref": "#/definitions/OperationsCollection"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "get": {
-            "$ref": "./examples/CallConnections_ListOperations.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/operations/{operationId}": {
-      "get": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Get the operation associated with a call connection.",
-        "description": "Get the operation associated with a call connection.",
-        "operationId": "CallConnections_GetOperation",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the operation response.",
-            "schema": {
-              "$ref": "#/definitions/OperationResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "get": {
-            "$ref": "./examples/CallConnections_GetOperation.json"
           }
         }
       }
@@ -767,7 +713,8 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/CallSourceDto"
+          "$ref": "#/definitions/CallSourceDto",
+          "description": "The source of the call."
         },
         "subject": {
           "description": "The subject.",
@@ -779,12 +726,29 @@
         }
       }
     },
+    "CommunicationIdentifierModelKind": {
+      "description": "Type of CommunicationIdentifierModel.",
+      "enum": [
+        "unknown",
+        "communicationUser",
+        "phoneNumber",
+        "microsoftTeamsUser"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentifierModelKind",
+        "modelAsString": true
+      }
+    },
     "CommunicationIdentifierModel": {
       "type": "object",
       "properties": {
         "rawId": {
           "description": "Full ID of the identifier.",
           "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentifierModelKind"
         },
         "communicationUser": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
@@ -811,7 +775,8 @@
           "description": "The alternate identity of the source of the call if dialing out to a pstn number"
         },
         "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identifier of the source of the call"
         }
       }
     },
@@ -889,12 +854,8 @@
           "type": "string"
         },
         "source": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "$ref": "#/definitions/CallSourceDto",
           "description": "The source of the call."
-        },
-        "alternateCallerId": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The alternate identity of the source of the call if dialing out to a pstn number"
         },
         "targets": {
           "description": "The targets of the call.",
@@ -1005,70 +966,18 @@
         }
       }
     },
-    "CallingOperationStatusDto": {
-      "description": "The status of the operation",
-      "enum": [
-        "notStarted",
-        "running",
-        "completed",
-        "failed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallingOperationStatusDto",
-        "modelAsString": true
-      }
-    },
     "TransferCallResponse": {
-      "required": [
-        "status"
-      ],
       "type": "object",
       "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatusDto"
-        },
         "operationContext": {
           "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultDetails": {
-          "$ref": "#/definitions/CallingOperationResultDetailsDto",
-          "description": "The result info for the operation."
-        }
-      }
-    },
-    "CallingOperationResultDetailsDto": {
-      "required": [
-        "code",
-        "subcode"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "format": "int32",
-          "description": "The result code associated with the operation.",
-          "type": "integer"
-        },
-        "subcode": {
-          "format": "int32",
-          "description": "The subcode that further classifies the result.",
-          "type": "integer"
-        },
-        "message": {
-          "description": "The message is a detail explanation of subcode.",
           "type": "string"
         }
       }
     },
     "PlayRequest": {
       "required": [
-        "playSourceInfo",
-        "playTo"
+        "playSourceInfo"
       ],
       "type": "object",
       "properties": {
@@ -1127,26 +1036,17 @@
         }
       }
     },
-    "PlayResponse": {
-      "required": [
-        "status"
-      ],
+    "GetParticipantsResponse": {
       "type": "object",
       "properties": {
-        "operationId": {
-          "description": "The operation id.",
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsCallParticipantDto"
+          }
+        },
+        "nextLink": {
           "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatusDto"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultDetails": {
-          "$ref": "#/definitions/CallingOperationResultDetailsDto",
-          "description": "The result info for the operation."
         }
       }
     },
@@ -1192,25 +1092,17 @@
       }
     },
     "AddParticipantsResponse": {
-      "required": [
-        "status"
-      ],
       "type": "object",
       "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatusDto"
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsCallParticipantDto"
+          }
         },
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
-        },
-        "resultDetails": {
-          "$ref": "#/definitions/CallingOperationResultDetailsDto",
-          "description": "The result info for the operation."
         }
       }
     },
@@ -1235,33 +1127,11 @@
       }
     },
     "RemoveParticipantsResponse": {
-      "required": [
-        "status"
-      ],
       "type": "object",
       "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatusDto"
-        },
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
-        },
-        "resultDetails": {
-          "$ref": "#/definitions/CallingOperationResultDetailsDto",
-          "description": "The result info for the operation."
-        }
-      }
-    },
-    "GetParticipantRequest": {
-      "type": "object",
-      "properties": {
-        "participant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
         }
       }
     },
@@ -1357,32 +1227,108 @@
         }
       }
     },
-    "StartCallRecordingResponse": {
-      "description": "The response payload of start call recording operation.",
-      "type": "object",
-      "properties": {
-        "recordingId": {
-          "description": "The recording id of the started recording",
-          "type": "string"
-        }
-      }
-    },
-    "RecordingState": {
+    "RecordingStatus": {
       "enum": [
         "active",
         "inactive"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RecordingState",
+        "name": "RecordingStatus",
         "modelAsString": true
       }
     },
-    "GetCallRecordingStateResponse": {
+    "CallingOperationStatusDto": {
+      "description": "The status of the operation",
+      "enum": [
+        "notStarted",
+        "running",
+        "completed",
+        "failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallingOperationStatusDto",
+        "modelAsString": true
+      }
+    },
+    "RecordingStatusResponse": {
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
-        "recordingState": {
-          "$ref": "#/definitions/RecordingState"
+        "recordingId": {
+          "type": "string"
+        },
+        "recordingStatus": {
+          "$ref": "#/definitions/RecordingStatus"
+        },
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CallingOperationStatusDto"
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "resultDetails": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "The result info for the operation."
+        }
+      }
+    },
+    "ResultInformation": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "subCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationErrorResponse": {
+      "description": "The Communication Services error response",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommunicationError"
+        }
+      }
+    },
+    "CommunicationError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/CommunicationError"
         }
       }
     }
@@ -1404,6 +1350,43 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    }
+  },
+  "responses": {
+    "400": {
+      "description": "BadRequest",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "401": {
+      "description": "Unauthorized",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "403": {
+      "description": "Forbidden",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "404": {
+      "description": "NotFound",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "500": {
+      "description": "InternalServerError",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
     }
   },
   "x-ms-parameterized-host": {
