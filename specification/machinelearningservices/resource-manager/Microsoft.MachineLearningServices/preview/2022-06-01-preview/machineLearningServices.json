@@ -1002,61 +1002,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/customServices": {
-      "post": {
-        "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
-        ],
-        "operationId": "Compute_Update_CustomServices",
-        "description": "Updates the custom services list. The list of custom services provided shall be overwritten",
-        "x-ms-examples": {
-          "Update Custom Services": {
-            "$ref": "./examples/Compute/updateCustomService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ComputeNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "customServices",
-            "required": true,
-            "description": "New list of Custom Service",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CustomService"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response describing why the request failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes": {
       "post": {
         "tags": [
@@ -3645,7 +3590,6 @@
         },
         "customServices": {
           "type": "array",
-          "readOnly": true,
           "description": "List of Custom Services added to the compute.",
           "x-nullable": true,
           "items": {
@@ -4769,6 +4713,7 @@
           "description": "Describes the Image Specifications"
         },
         "environmentVariables": {
+          "type": "object",
           "description": "Environment Variable for the container",
           "additionalProperties": {
             "$ref": "#/definitions/EnvironmentVariable"
@@ -4793,9 +4738,7 @@
           }
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "Image": {
       "type": "object",
@@ -4810,7 +4753,7 @@
           "title": "Type of the image",
           "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images",
           "x-ms-enum": {
-            "name": "type",
+            "name": "ImageType",
             "modelAsString": true
           }
         },
@@ -4819,9 +4762,7 @@
           "description": "Image reference URL"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-       }
+      "additionalProperties": true
     },
     "EnvironmentVariable": {
       "type": "object",
@@ -4836,7 +4777,7 @@
           "description": "Type of the Environment Variable. Possible values are: local - For local variable, azureml - For azureml variables",
           "type": "string",
           "x-ms-enum": {
-            "name": "type",
+            "name": "EnvironmentVariableType",
             "modelAsString": true
           }
         },
@@ -4845,9 +4786,7 @@
           "description": "Value of the Environment variable"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "Docker": {
       "type": "object",
@@ -4857,9 +4796,7 @@
           "description": "Indicate whether container shall run in privileged or non-privileged mode."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "Endpoint": {
       "type": "object",
@@ -4913,7 +4850,7 @@
           "title": "Type of Volume Definition",
           "description": "Type of Volume Definition. Possible Values: bind,volume,tmpfs,mpipe",
           "x-ms-enum": {
-            "name": "type",
+            "name": "VolumeDefinitionType",
             "modelAsString": true
           },
           "type": "string"
