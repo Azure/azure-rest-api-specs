@@ -612,7 +612,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
@@ -3594,7 +3593,10 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomService"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "connectivityEndpoints": {
           "readOnly": true,
@@ -4728,14 +4730,21 @@
           "description": "Configuring the endpoints for the container",
           "items": {
             "$ref": "#/definitions/Endpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "volumes": {
           "type": "array",
           "description": "Configuring the volumes for the container",
           "items": {
             "$ref": "#/definitions/VolumeDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "source",
+            "target"
+          ]
         }
       },
       "additionalProperties": true
