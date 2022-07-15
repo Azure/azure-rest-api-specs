@@ -132,7 +132,6 @@
       "properties": {
         "value": {
           "description": "Current page of results.",
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Project"
@@ -140,10 +139,12 @@
         },
         "nextLink": {
           "description": "URL to get the next set of results if there are any.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Project": {
       "description": "Project details.",
@@ -210,16 +211,18 @@
       "type": "object",
       "properties": {
         "code": {
-          "readOnly": true,
           "type": "string",
           "description": "The error code."
         },
         "message": {
-          "readOnly": true,
           "type": "string",
           "description": "The error message."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "EnableStatus": {
       "description": "Enable or disable status. Indicates whether the property applied to is either enabled or disabled.",
