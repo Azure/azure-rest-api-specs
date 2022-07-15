@@ -660,46 +660,6 @@
         }
       }
     },
-    "EnvironmentSkuProperties": {
-      "description": "Managed Environment resource SKU properties.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the Sku.",
-          "externalDocs": {
-            "url": "https://aka.ms/container-apps-pricing"
-          },
-          "enum": [
-            "Consumption",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Consumption",
-                "description": "Consumption SKU of Managed Environment."
-              },
-              {
-                "value": "Premium",
-                "description": "Premium SKU of Managed Environment."
-              }
-            ]
-          }
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Capacity of the SKU (number of deployed nodes of the SKU). For Consumption SKU capacity must be specified as 0."
-        }
-      },
-      "required": [
-        "name",
-        "capacity"
-      ]
-    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -885,7 +845,7 @@
               "description": "Custom domain configuration for the environment"
             },
             "workloadProfiles": {
-              "description": "Workload profiles available for Managed Environment.",
+              "description": "Workload profiles configured for the Managed Environment.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/WorkloadProfile"
@@ -938,7 +898,7 @@
       }
     },
     "WorkloadProfile": {
-      "description": "Description of a workload profile.",
+      "description": "Workload profile to scope container app execution.",
       "type": "object",
       "properties": {
         "workloadProfileType": {
@@ -963,6 +923,46 @@
       },
       "required": [
         "workloadProfileType"
+      ]
+    },
+    "EnvironmentSkuProperties": {
+      "description": "Managed Environment resource SKU properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://aka.ms/container-apps-pricing"
+          },
+          "enum": [
+            "Consumption",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Managed Environment."
+              },
+              {
+                "value": "Premium",
+                "description": "Premium SKU of Managed Environment."
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the SKU (number of deployed nodes of the SKU). For Consumption SKU capacity must be specified as 0."
+        }
+      },
+      "required": [
+        "name",
+        "capacity"
       ]
     }
   },
