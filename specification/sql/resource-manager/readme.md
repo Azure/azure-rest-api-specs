@@ -272,8 +272,10 @@ input-file:
  - ./Microsoft.Sql/preview/2021-11-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/Usages.json
+ - ./Microsoft.Sql/preview/2021-11-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/VirtualNetworkRules.json
- - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json 
+ - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json
+ - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadGroups.json
 ```
 ### Tag: package-composite-v5
 
@@ -446,6 +448,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -504,7 +507,6 @@ input-file:
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
-- Microsoft.Sql/preview/2022-05-01-preview/Virtualclusters.json
 
 
 # Needed when there is more than one input file
@@ -564,6 +566,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -620,7 +623,6 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
-- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 
 # Needed when there is more than one input file
@@ -672,6 +674,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -765,6 +768,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -817,7 +821,6 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
-- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 # Needed when there is more than one input file
 override-info:
@@ -863,6 +866,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
@@ -880,7 +884,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
-- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 # Needed when there is more than one input file
 override-info:
@@ -927,6 +930,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -1070,6 +1074,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-08-01-preview/TimeZones.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/Usages.json
+- ./Microsoft.Sql/preview/2021-08-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/WorkloadGroups.json
@@ -1187,6 +1192,7 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/Usages.json
+ - ./Microsoft.Sql/preview/2021-05-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/WorkloadGroups.json
@@ -1301,6 +1307,7 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
+ - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadGroups.json
@@ -1419,6 +1426,7 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
   - Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
   - Microsoft.Sql/preview/2020-11-01-preview/TransparentDataEncryptions.json
+  - Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
   - Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
   - Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
@@ -1537,6 +1545,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryptions.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadGroups.json
@@ -1654,6 +1663,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryptions.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadGroups.json
@@ -1824,6 +1834,7 @@ input-file:
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
