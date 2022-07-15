@@ -28,6 +28,13 @@ These settings apply only when `--tag=release_1_0_preview` is specified on the c
 input-file: preview/v1.0-preview/Face.json
 ```
 
+### Release 1.1-preview
+These settings apply only when `--tag=release_1_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview'
+input-file: preview/v1.1-preview/Face.json
+```
+
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
@@ -74,6 +81,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v1.0/Face.json
   - $(this-folder)/preview/v1.0-preview/Face.json
+  - $(this-folder)/preview/v1.1-preview/Face.json
 
 ```
 
