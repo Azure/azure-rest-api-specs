@@ -226,6 +226,12 @@
           "final-state-via": "original-uri"
         },
         "responses": {
+          "200": {
+            "description": "Succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
           "201": {
             "description": "Created. Operation will complete asynchronously.",
             "schema": {
@@ -389,7 +395,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "action",
+            "name": "body",
             "in": "body",
             "description": "Action properties overriding the environment's default values.",
             "required": true,
@@ -453,7 +459,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "action",
+            "name": "body",
             "in": "body",
             "description": "Action properties overriding the environment's default values.",
             "required": true,
@@ -517,7 +523,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "action",
+            "name": "body",
             "in": "body",
             "description": "Action properties overriding the environment's default values.",
             "required": true,
