@@ -38,6 +38,133 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-11'
 input-file:
+ - ./Microsoft.Sql/preview/2022-05-01-preview/BackupShortTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/BlobAuditing.json
+ - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseAdvisors.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseAutomaticTuning.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseColumns.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseExtensions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseOperations.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseRecommendedActions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/Databases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseSchemas.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseTables.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseUsages.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseVulnerabilityAssessmentRuleBaselines.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DatabaseVulnerabilityAssessmentScans.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DataWarehouseUserActivities.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DeletedServers.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/DistributedAvailabilityGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ElasticPoolOperations.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ElasticPools.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/EncryptionProtectors.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/EndpointCertificates.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/FailoverGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/FirewallRules.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/InstancePools.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/IPv6FirewallRules.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobAgents.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobCredentials.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobExecutions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/Jobs.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobStepExecutions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobSteps.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobTargetExecutions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobTargetGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/JobVersions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/LedgerDigestUploads.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/LocationCapabilities.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/LongTermRetentionBackups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/LongTermRetentionManagedInstanceBackups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/LongTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/MaintenanceWindowOptions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/MaintenanceWindows.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedBackupShortTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseColumns.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseQueries.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseSchemas.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseSecurityEvents.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseSensitivityLabels.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseTables.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseTransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseVulnerabilityAssessmentScans.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceAdministrators.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceEncryptionProtectors.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceKeys.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceOperations.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstancePrivateEndpointConnections.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstancePrivateLinkResources.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstances.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceTdeCertificates.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedServerDnsAliases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedServerSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/Operations.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/OutboundFirewallRules.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/PrivateEndpointConnections.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/PrivateLinkResources.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/RecoverableDatabases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/RecoverableManagedDatabases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ReplicationLinks.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/RestorableDroppedDatabases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/RestorableDroppedManagedDatabases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/RestorePoints.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SensitivityLabels.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerAdvancedThreatProtectionSettings.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerAdvisors.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerAutomaticTuning.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerAzureADAdministrators.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerConnectionPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerDevOpsAudit.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerDnsAliases.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerKeys.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerOperations.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/Servers.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerTrustCertificates.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerTrustGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/ServerVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlAgent.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentBaseline.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentScanResult.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentScans.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentsSettings.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SubscriptionUsages.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SyncAgents.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SyncGroups.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/SyncMembers.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/TdeCertificates.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/TimeZones.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/TransparentDataEncryptions.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/Usages.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualNetworkRules.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/WorkloadClassifiers.json
+ - ./Microsoft.Sql/preview/2022-05-01-preview/WorkloadGroups.json
+```
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
  - ./Microsoft.Sql/preview/2021-11-01-preview/BackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
@@ -145,10 +272,8 @@ input-file:
  - ./Microsoft.Sql/preview/2021-11-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/Usages.json
- - ./Microsoft.Sql/preview/2021-11-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/VirtualNetworkRules.json
- - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json
- - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadGroups.json
+ - ./Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json 
 ```
 ### Tag: package-composite-v5
 
@@ -247,7 +372,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/SyncMembers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
@@ -322,7 +446,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -381,6 +504,7 @@ input-file:
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2022-05-01-preview/Virtualclusters.json
 
 
 # Needed when there is more than one input file
@@ -440,7 +564,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -497,6 +620,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 
 # Needed when there is more than one input file
@@ -548,7 +672,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -642,7 +765,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -695,6 +817,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 # Needed when there is more than one input file
 override-info:
@@ -740,7 +863,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
@@ -758,6 +880,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 # Needed when there is more than one input file
 override-info:
@@ -804,7 +927,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -948,7 +1070,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-08-01-preview/TimeZones.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/Usages.json
-- ./Microsoft.Sql/preview/2021-08-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/WorkloadGroups.json
@@ -1066,7 +1187,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/Usages.json
- - ./Microsoft.Sql/preview/2021-05-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/WorkloadGroups.json
@@ -1181,7 +1301,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
- - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadGroups.json
@@ -1300,7 +1419,6 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
   - Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
   - Microsoft.Sql/preview/2020-11-01-preview/TransparentDataEncryptions.json
-  - Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
   - Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
   - Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
@@ -1419,7 +1537,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryptions.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadGroups.json
@@ -1537,7 +1654,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryptions.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadGroups.json
@@ -1708,7 +1824,6 @@ input-file:
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/usages.json
- - ./Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
