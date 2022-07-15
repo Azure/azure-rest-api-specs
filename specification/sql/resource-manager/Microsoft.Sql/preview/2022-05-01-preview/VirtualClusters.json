@@ -302,7 +302,7 @@
       }
     },
     "VirtualClusterDnsServersProperties": {
-      "description": "The managed instance dns servers's properties.",
+      "description": "The properties of dns servers on virutal cluster.",
       "type": "object",
       "properties": {
         "status": {
@@ -313,7 +313,11 @@
             "InProgress"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DNSRefreshOperationStatus",
+            "modelAsString": true
+          }
         }
       }
     },
