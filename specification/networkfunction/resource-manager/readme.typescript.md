@@ -6,8 +6,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "networkfunction"
-  output-folder: "$(typescript-sdks-folder)/packages/networkfunction"
+  package-name: "@azure/arm-networkfunction"
+  output-folder: "$(typescript-sdks-folder)/sdk/networkfunction/arm-networkfunction"
   payload-flattening-threshold: 1
   generate-metadata: true
+title: AzureTrafficCollectorClient
 ```
