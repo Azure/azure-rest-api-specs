@@ -6,7 +6,10 @@
     "playRequest": {
       "playSourceInfo": {
         "sourceType": "File",
-        "playSourceId": "string"
+        "playSourceId": "string",
+        "fileSource": {
+           "uri": "https://some.file.azure.com/sample.wav"
+        }
       },
       "playTo": [
         {
@@ -29,17 +32,8 @@
       }
     },
   "responses": {
-    "200": {
-      "body": {
-        "operationId": "string",
-        "status": "notStarted",
-        "operationContext": "string",
-        "resultDetails": {
-          "code": 0,
-          "subcode": 0,
-          "message": "string"
-        }
-      }
+    "202": {
+      "body": {}
     }
   }
 }

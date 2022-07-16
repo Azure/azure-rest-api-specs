@@ -1021,6 +1021,9 @@
         "playSourceId": {
           "description": "Defines the identifier to be used for caching related media",
           "type": "string"
+        },
+        "fileSource": {
+          "$ref": "#/definitions/FileSource"
         }
       }
     },
@@ -1033,6 +1036,18 @@
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
           "type": "boolean"
+        }
+      }
+    },
+    "FileSource": {
+      "required": [
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Uri for the audio file to be played",
+          "type": "string"
         }
       }
     },
@@ -1238,24 +1253,7 @@
         "modelAsString": true
       }
     },
-    "CallingOperationStatusDto": {
-      "description": "The status of the operation",
-      "enum": [
-        "notStarted",
-        "running",
-        "completed",
-        "failed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallingOperationStatusDto",
-        "modelAsString": true
-      }
-    },
     "RecordingStatusResponse": {
-      "required": [
-        "status"
-      ],
       "type": "object",
       "properties": {
         "recordingId": {
@@ -1263,37 +1261,6 @@
         },
         "recordingStatus": {
           "$ref": "#/definitions/RecordingStatus"
-        },
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatusDto"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultDetails": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "The result info for the operation."
-        }
-      }
-    },
-    "ResultInformation": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "subCode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "message": {
-          "type": "string"
         }
       }
     },
