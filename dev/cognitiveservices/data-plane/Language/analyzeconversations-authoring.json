@@ -303,6 +303,9 @@
         "x-ms-examples": {
           "Successful Import Project": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportProject.json"
+          },
+          "Successful Import Summarization Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportSummarizationProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -965,6 +968,9 @@
         "x-ms-examples": {
           "Successful Get Model Evaluation Summary": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json"
+          },
+          "Successful Get Summarization Model Evaluation Summary": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSummarizationModelEvaluationSummary.json"
           }
         }
       }
@@ -3029,6 +3035,10 @@
         "projectKind": {
           "description": "Represents the project type that the evaluation ran on.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
+        },
+        "evaluationOptions": {
+          "description": "The options that were used while running the evaluation.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
         }
       },
       "discriminator": "projectKind"
@@ -3063,6 +3073,10 @@
         }
       ],
       "properties": {
+        "storageInputContainerName": {
+          "description": "The storage container name.",
+          "type": "string"
+        },
         "conversations": {
           "description": "The list of conversations belonging to the project.",
           "type": "array",
