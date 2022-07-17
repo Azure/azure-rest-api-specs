@@ -49,6 +49,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -234,6 +239,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -505,6 +513,16 @@
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
+      }
+    },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "schema": {
+        "type": "string"
       }
     },
     "alertState": {

@@ -33,6 +33,11 @@ directive:
     set:
       parameter-name: instance-view-type
   - where:
+      subject: MachineExtension
+      parameter-name: enable-automatic-upgrade
+    set:
+      parameter-name: enable-auto-upgrade
+  - where:
       subject: PrivateEndpointConnections
       parameter-name: private-link-service-connection-state
     set:

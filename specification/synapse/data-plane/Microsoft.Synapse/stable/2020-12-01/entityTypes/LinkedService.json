@@ -2690,6 +2690,104 @@
         "clientId"
       ]
     },
+    "SapOdpLinkedService": {
+      "x-ms-discriminator-value": "SapOdp",
+      "description": "SAP ODP Linked Service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to SAP ODP linked service type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOdpLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOdpLinkedServiceTypeProperties": {
+      "description": "Properties specific to this linked service type.",
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Host name of the SAP instance where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "systemNumber": {
+          "type": "object",
+          "description": "System number of the SAP system where the table is located. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "description": "Client ID of the client on the SAP system where the table is located. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string)."
+        },
+        "language": {
+          "type": "object",
+          "description": "Language of the SAP system where the table is located. The default value is EN. Type: string (or Expression with resultType string)."
+        },
+        "systemId": {
+          "type": "object",
+          "description": "SystemID of the SAP system where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "Username to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to access the SAP server where the table is located.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "messageServer": {
+          "type": "object",
+          "description": "The hostname of the SAP Message Server. Type: string (or Expression with resultType string)."
+        },
+        "messageServerService": {
+          "type": "object",
+          "description": "The service name or port number of the Message Server. Type: string (or Expression with resultType string)."
+        },
+        "sncMode": {
+          "type": "object",
+          "description": "SNC activation indicator to access the SAP server where the table is located. Must be either 0 (off) or 1 (on). Type: string (or Expression with resultType string)."
+        },
+        "sncMyName": {
+          "type": "object",
+          "description": "Initiator's SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncPartnerName": {
+          "type": "object",
+          "description": "Communication partner's SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncLibraryPath": {
+          "type": "object",
+          "description": "External security product's library to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncQop": {
+          "type": "object",
+          "description": "SNC Quality of Protection. Allowed value include: 1, 2, 3, 8, 9. Type: string (or Expression with resultType string)."
+        },
+        "x509CertificatePath": {
+          "type": "object",
+          "description": "SNC X509 certificate file path. Type: string (or Expression with resultType string)."
+        },
+        "logonGroup": {
+          "type": "object",
+          "description": "The Logon Group for the SAP System. Type: string (or Expression with resultType string)."
+        },
+        "subscriberName": {
+          "type": "object",
+          "description": "The subscriber name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RestServiceLinkedService": {
       "x-ms-discriminator-value": "RestService",
       "description": "Rest Service linked service.",
@@ -2729,7 +2827,8 @@
             "Anonymous",
             "Basic",
             "AadServicePrincipal",
-            "ManagedServiceIdentity"
+            "ManagedServiceIdentity",
+            "OAuth2ClientCredential"
           ],
           "x-ms-enum": {
             "name": "RestServiceAuthenticationType",
@@ -2767,6 +2866,26 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "clientId": {
+          "type": "object",
+          "description": "The client ID associated with your application. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret associated with your application.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "tokenEndpoint": {
+          "type": "object",
+          "description": "The token endpoint of the authorization server to acquire access token. Type: string (or Expression with resultType string)."
+        },
+        "resource": {
+          "type": "object",
+          "description": "The target service or resource to which the access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "scope": {
+          "type": "object",
+          "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -6503,6 +6622,43 @@
         "tenantId",
         "servicePrincipalId",
         "servicePrincipalKey"
+      ]
+    },
+    "AzureSynapseArtifactsLinkedService": {
+      "x-ms-discriminator-value": "AzureSynapseArtifacts",
+      "description": "Azure Synapse Analytics (Artifacts) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSynapseArtifactsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSynapseArtifactsLinkedServiceTypeProperties": {
+      "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "object",
+          "description": "https://<workspacename>.dev.azuresynapse.net, Azure Synapse Analytics workspace URL. Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "endpoint"
       ]
     }
   }
