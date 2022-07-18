@@ -253,6 +253,8 @@ These settings apply only when `--tag=package-2019-01-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
+- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
@@ -323,12 +325,26 @@ These settings apply only when `--tag=package-2019-08-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
+- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
 - Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
 - Microsoft.Security/stable/2019-08-01/iotRecommendations.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2019-01-only
+
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2019-01-only'
+input-file:
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -401,6 +417,19 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-01-only
+
+These settings apply only when `--tag=package-2021-01-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-01-only'
+input-file:
+- Microsoft.Security/stable/2021-01-01/alerts.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-2021-05-preview-only
 
 These settings apply only when `--tag=package-2021-05-preview-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -426,7 +455,18 @@ input-file:
 override-info:
   title: SecurityCenter
 ```
+### Tag: package-2021-07-only
 
+These settings apply only when `--tag=package-2021-07-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-07-only'
+input-file:
+- Microsoft.Security/stable/2021-07-01/settings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
 ---
 
 # Code Generation
