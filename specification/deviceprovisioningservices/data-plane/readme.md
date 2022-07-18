@@ -26,18 +26,27 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10-01
+tag: package-preview-2021-11
 ```
 
 
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.Devices/preview/2021-11-01-preview/service.json
+```
 ### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10-01'
+``` yaml $(tag) == 'package-2021-10-01'
 input-file:
   - Microsoft.Devices/stable/2021-10-01/service.json
 ```
+
 ---
 
 # Code Generation
