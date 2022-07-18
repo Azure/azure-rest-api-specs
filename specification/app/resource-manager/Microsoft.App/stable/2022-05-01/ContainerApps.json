@@ -634,11 +634,11 @@
             "name"
           ]
         },
-        "ipRestrictionRules": {
+        "ipSecurityRestrictionRules": {
           "description": "Rules to restrict incoming IP address.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpRestrictionRules"
+            "$ref": "#/definitions/IpSecurityRestrictionRules"
           },
           "x-ms-identifiers": [
             "name"
@@ -762,7 +762,7 @@
         }
       }
     },
-    "IpRestrictionRules": {
+    "IpSecurityRestrictionRules": {
       "description": "Rules to restrict incoming IP address.",
       "type": "object",
       "required": [
@@ -772,7 +772,7 @@
       ],
       "properties": {
         "name": {
-          "description": "Name.",
+          "description": "Name for the ip restriction rule.",
           "type": "string"
         },
         "description": {
@@ -780,14 +780,14 @@
           "type": "string"
         },
         "ipAddress": {
-          "description": "ipAddress is the CIDR to match incoming traffic against",
+          "description": "CIDR notation to match incoming ip address",
           "type": "string"
         },
         "action": {
-          "description": "ALLOW or DENY set ip address's",
+          "description": "Allow or Deny rules to determine for incoming ip",
           "enum": [
-            "ALLOW",
-            "DENY"
+            "Allow",
+            "Deny"
           ],
           "type": "string",
           "x-ms-enum": {
