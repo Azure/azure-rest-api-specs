@@ -70,6 +70,13 @@
               "$ref": "#/definitions/AgreementTerms"
             }
           },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
+            }
+          },
           "default": {
             "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
             "schema": {
@@ -122,6 +129,13 @@
               "$ref": "#/definitions/AgreementTerms"
             }
           },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
+            }
+          },
           "default": {
             "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
             "schema": {
@@ -148,6 +162,13 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -195,6 +216,13 @@
               "$ref": "#/definitions/OldAgreementTerms"
             }
           },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
+            }
+          },
           "default": {
             "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
             "schema": {
@@ -235,6 +263,13 @@
             "description": "OK. The request was successfully processed and the terms were rejected.",
             "schema": {
               "$ref": "#/definitions/OldAgreementTerms"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -279,6 +314,13 @@
               "$ref": "#/definitions/OldAgreementTerms"
             }
           },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
+            }
+          },
           "default": {
             "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
             "schema": {
@@ -310,6 +352,13 @@
             "description": "Terms returned successfully",
             "schema": {
               "$ref": "#/definitions/AgreementTermsList"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -386,12 +435,13 @@
           "description": "The value of the array.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgreementTerms"
+            "$ref": "#/definitions/OldAgreementTerms"
           }
         }
       }
     },
     "AgreementTerms": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AgreementProperties",
@@ -407,6 +457,7 @@
       "description": "Terms properties for provided Publisher/Offer/Plan tuple"
     },
     "AgreementProperties": {
+      "type": "object",
       "properties": {
         "publisher": {
           "type": "string",
@@ -500,20 +551,30 @@
       },
       "description": "Old Agreement Terms definition"
     },
+    "UnsupportedMediaTypeErrorResponse": {
+      "description": "Error response that indicates the media type in the request is unsupported.",
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "description": "The details of the error."
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
-        "Error": {
+        "error": {
           "type": "object",
           "description": "The details of the error.",
           "properties": {
-            "Code": {
+            "code": {
               "description": "Error code.",
               "type": "string",
               "readOnly": true
             },
-            "Message": {
+            "message": {
               "description": "Error message indicating why the operation failed.",
               "type": "string",
               "readOnly": true
@@ -532,6 +593,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.MarketplaceOrdering",
@@ -555,9 +617,11 @@
     },
     "OperationListResult": {
       "description": "Result of the request to list MarketplaceOrdering operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -572,6 +636,7 @@
     },
     "Resource": {
       "description": "ARM resource.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,

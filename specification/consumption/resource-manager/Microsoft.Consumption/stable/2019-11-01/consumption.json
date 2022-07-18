@@ -775,7 +775,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservationSummaries"
@@ -972,7 +972,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservationDetails"
@@ -1059,7 +1059,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -1119,7 +1119,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -2079,6 +2079,11 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. Possible values could be 'On Demand', 'Reservation', 'Spot'.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2108,6 +2113,12 @@
         "billingAccountId": {
           "description": "Billing Account identifier.",
           "type": "string",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "Effective Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         },
         "pricingModel": {
@@ -3620,7 +3631,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -4151,7 +4161,8 @@
           "description": "The type of threshold",
           "type": "string",
           "enum": [
-            "Actual"
+            "Actual",
+            "Forecasted"
           ],
           "x-ms-enum": {
             "name": "ThresholdType",
@@ -5192,7 +5203,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationsSummariesParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5201,7 +5212,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5210,7 +5221,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5219,7 +5230,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5228,7 +5239,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationTransactionsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",

@@ -6,7 +6,10 @@
     "api-version": "2021-05-01",
     "workspaceInfo": {
       "identity": {
-        "type": "SystemAssigned"
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1": {}
+        }
       },
       "properties": {
         "defaultDataLakeStorage": {
@@ -38,6 +41,10 @@
         },
         "encryption": {
           "cmk": {
+            "kekIdentity": {
+              "userAssignedIdentity": "/subscriptions/b64d7b94-73e7-4d36-94b2-7764ea3fd74a/resourcegroups/SynapseCI/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1",
+              "useSystemAssignedIdentity": false
+            },
             "key": {
               "name": "default",
               "keyVaultUrl": "https://vault.azure.net/keys/key1"
@@ -63,7 +70,13 @@
         "type": "Microsoft.Synapse/workspaces",
         "location": "East US",
         "identity": {
-          "type": "SystemAssigned",
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1": {
+              "clientId": "ffffffff-8888-4444-8888-333333333333",
+              "principalId": "eeeeeeee-9999-4444-8888-333333333333"
+            }
+          },
           "principalId": "f4b0f1c2-xxxx-43db-xxxx-ccd99e1afd22",
           "tenantId": "72f988bf-xxxx-41af-xxxx-2d7cd011db47"
         },
@@ -112,6 +125,10 @@
           "encryption": {
             "doubleEncryptionEnabled": true,
             "cmk": {
+              "kekIdentity": {
+                "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1",
+                "useSystemAssignedIdentity": false
+              },
               "status": "Consistent",
               "key": {
                 "name": "default",
@@ -132,6 +149,17 @@
         "name": "workspace1",
         "type": "Microsoft.Synapse/workspaces",
         "location": "East US",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1": {
+              "clientId": "ffffffff-8888-4444-8888-333333333333",
+              "principalId": "eeeeeeee-9999-4444-8888-333333333333"
+            }
+          },
+          "principalId": "f4b0f1c2-xxxx-43db-xxxx-ccd99e1afd22",
+          "tenantId": "72f988bf-xxxx-41af-xxxx-2d7cd011db47"
+        },
         "properties": {
           "defaultDataLakeStorage": {
             "accountUrl": "https://accountname.dfs.core.windows.net",
@@ -160,7 +188,7 @@
             "doubleEncryptionEnabled": true,
             "cmk": {
               "kekIdentity": {
-                "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami",
+                "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1",
                 "useSystemAssignedIdentity": false
               },
               "status": "Consistent",

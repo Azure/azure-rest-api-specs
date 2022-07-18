@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406",
+    "collectionId": "56a1a02d-8cf8-45df-bf37-d5f7120fcb3d",
+    "offerId": "contoso.logger",
+    "api-version": "2022-03-01",
+    "payload": {
+      "properties": {
+        "offerId": "contoso.logger",
+        "eTag": "\"9301f4fd-0000-0100-0000-5e248b350332\"",
+        "plansContext": [
+          {
+            "context": "a5edbe7d-9f73-47fd-834a-0d6142f4c7a1",
+            "planIds": [
+              "log4db",
+              "log4file"
+            ]
+          },
+          {
+            "context": "45b604af-19bb-448e-a761-4a6be7374b2f",
+            "planIds": [
+              "log4web"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Marketplace/privateStores/a0e28e55-90c4-41d8-8e34-bb7ef7775406/collections/56a1a02d-8cf8-45df-bf37-d5f7120fcb3d/offers/contoso.logger",
+        "type": "Microsoft.Marketplace/privateStores/collections/offers",
+        "name": "contoso.logger",
+        "properties": {
+          "uniqueOfferId": "contoso.logger",
+          "offerDisplayName": "Contoso Log4All",
+          "publisherDisplayName": "Contoso",
+          "eTag": "\"9301f4fd-0000-0100-0000-5e248b350000\"",
+          "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406",
+          "createdAt": "2022-03-05T13:55:33.351Z",
+          "modifiedAt": "2021-04-22T14:17:41.8520203Z",
+          "specificPlanIdsLimitation": [
+            "log4db",
+            "log4file",
+            "log4web"
+          ],
+          "updateSuppressedDueIdempotence": true,
+          "iconFileUris": {
+            "small": "https://some-images.contoso.com/image/apps.12345678-7654"
+          },
+          "plans": [
+            {
+              "skuId": "001",
+              "planId": "log4db",
+              "planDisplayName": "log4db",
+              "accessibility": "Public",
+              "altStackReference": null,
+              "stackType": "arm"
+            },
+            {
+              "skuId": "002",
+              "planId": "log4file",
+              "planDisplayName": "log4file",
+              "accessibility": "Public",
+              "altStackReference": null,
+              "stackType": "arm"
+            },
+            {
+              "skuId": "003",
+              "planId": "log4web",
+              "planDisplayName": "log4web",
+              "accessibility": "Public",
+              "altStackReference": null,
+              "stackType": "arm"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

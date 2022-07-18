@@ -111,7 +111,11 @@
           "type": "string",
           "format": "byte"
         }
-      }
+      },
+      "required": [
+        "password",
+        "sslCertBase64"
+      ]
     },
     "ContainerRegistrySetup": {
       "description": "Container registry start setup return.",
@@ -163,6 +167,10 @@
           "description": "The status of the container registry setup.",
           "$ref": "#/definitions/SetupStatus",
           "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if previous setup was failed.",
+          "type": "string"
         }
       }
     },

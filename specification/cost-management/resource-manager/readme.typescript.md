@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-costmanagement"
   output-folder: "$(typescript-sdks-folder)/sdk/cost-management/arm-costmanagement"
-  clear-output-folder: true
   generate-metadata: true
 ```

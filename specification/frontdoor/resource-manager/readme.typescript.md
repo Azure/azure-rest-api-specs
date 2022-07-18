@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-frontdoor"
   output-folder: "$(typescript-sdks-folder)/sdk/frontdoor/arm-frontdoor"
-  clear-output-folder: true
   generate-metadata: true
 ```

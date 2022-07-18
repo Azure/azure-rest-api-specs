@@ -11631,7 +11631,7 @@
           "description": "Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         }
       },
-      "title": "The schedule according to which Jobs will be created"
+      "title": "The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time."
     },
     "JobConstraints": {
       "type": "object",
@@ -12675,7 +12675,7 @@
           "format": "int32",
           "default": -1,
           "title": "The maximum number of tasks that can be executed in parallel for the job.",
-          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API. This property is currently in private preview."
         },
         "displayName": {
           "type": "string",
@@ -12928,7 +12928,8 @@
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
-          "title": "The schedule according to which Jobs will be created."
+          "title": "The schedule according to which Jobs will be created.",
+          "description": "All times are fixed respective to UTC and are not impacted by daylight saving time."
         },
         "jobSpecification": {
           "$ref": "#/definitions/JobSpecification",
@@ -12968,7 +12969,8 @@
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
-          "title": "The schedule according to which Jobs will be created."
+          "title": "The schedule according to which Jobs will be created.",
+          "description": "All times are fixed respective to UTC and are not impacted by daylight saving time."
         },
         "jobSpecification": {
           "$ref": "#/definitions/JobSpecification",
@@ -13138,7 +13140,7 @@
           "format": "int32",
           "default": -1,
           "title": "The maximum number of tasks that can be executed in parallel for the job.",
-          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API. This property is currently in private preview."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -13228,7 +13230,7 @@
           "format": "int32",
           "default": -1,
           "title": "The maximum number of tasks that can be executed in parallel for the job.",
-          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API. This property is currently in private preview."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -16107,7 +16109,7 @@
         "schedule": {
           "$ref": "#/definitions/Schedule",
           "title": "The schedule according to which Jobs will be created.",
-          "description": "If you do not specify this element, the existing schedule is left unchanged."
+          "description": "All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged."
         },
         "jobSpecification": {
           "$ref": "#/definitions/JobSpecification",
@@ -16131,7 +16133,7 @@
         "schedule": {
           "$ref": "#/definitions/Schedule",
           "title": "The schedule according to which Jobs will be created.",
-          "description": "If you do not specify this element, it is equivalent to passing the default schedule: that is, a single Job scheduled to run immediately."
+          "description": "All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, it is equivalent to passing the default schedule: that is, a single Job scheduled to run immediately."
         },
         "jobSpecification": {
           "$ref": "#/definitions/JobSpecification",
@@ -16212,7 +16214,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of tasks that can be executed in parallel for the job.",
-          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API. This property is currently in private preview."
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",

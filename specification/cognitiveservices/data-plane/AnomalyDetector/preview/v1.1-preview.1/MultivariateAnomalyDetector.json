@@ -1,0 +1,1222 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1-preview.1",
+    "title": "Anomaly Detector Client",
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the above three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraging labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis."
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "MultivariateAnomalyDetection"
+    }
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/multivariate/models": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Create and train a multivariate anomaly detection model.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and ID of the model."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "operationId": "TrainMultivariateModel",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Training request",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
+          }
+        ],
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ],
+        "x-ms-examples": {
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
+          }
+        },
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be in a single CSV file in which the first column is timestamp and the second column is value."
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "List Multivariate Models",
+        "operationId": "ListMultivariateModel",
+        "parameters": [
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "description": "$skip indicates how many models will be skipped."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 5,
+            "description": "$top indicates how many models will be fetched."
+          }
+        ],
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ],
+        "x-ms-examples": {
+          "List Multivariate model": {
+            "$ref": "./examples/ListModel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "models"
+        },
+        "description": "List models of a subscription"
+      }
+    },
+    "/multivariate/models/{modelId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "format": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get multivariate model details successfully.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Get Multivariate Model",
+        "description": "Get detailed information of multivariate model, including the training status and variables used in the model.",
+        "operationId": "GetMultivariateModel",
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ],
+        "x-ms-examples": {
+          "Get multivariate model": {
+            "$ref": "./examples/GetModel.json"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "format": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
+      }
+    },
+    "/multivariate/models/{modelId}/detect": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Submit a multivariate model detection task successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and ID of the detection result."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Detect Multivariate Anomaly",
+        "description": "Submit detection multivariate anomaly task with the trained model of modelId, the input schema should be the same with the training request. Thus request will be complete asynchronously and will return a resultId for querying the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be as follows: the first column is timestamp and the second column is value.",
+        "operationId": "DetectAnomaly",
+        "x-ms-examples": {
+          "Detect anomaly with multivariate Model": {
+            "$ref": "./examples/DetectAnomaly.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "format": "uuid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "Detect anomaly request",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DetectionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
+      }
+    },
+    "/multivariate/results/{resultId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "resultId",
+            "description": "Result identifier.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Multivariate Anomaly Detection Result by Result Id.",
+            "schema": {
+              "$ref": "#/definitions/DetectionResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get detection result": {
+            "$ref": "./examples/GetResult.json"
+          }
+        },
+        "summary": "Get Multivariate Anomaly Detection Result",
+        "operationId": "GetDetectionResult",
+        "description": "Get multivariate anomaly detection result based on resultId returned by the DetectAnomalyAsync api",
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
+      }
+    },
+    "/multivariate/models/{modelId}/export": {
+      "get": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export the multivariate model as a zip package.",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Export model": {
+            "$ref": "./examples/ExportModel.json"
+          }
+        },
+        "summary": "Export Multivariate Anomaly Detection Model as Zip file",
+        "description": "Export multivariate anomaly detection model based on modelId",
+        "operationId": "ExportModel",
+        "produces": [
+          "application/zip",
+          "application/json"
+        ],
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
+      }
+    },
+    "/multivariate/models/{modelId}/last/detect": {
+      "post": {
+        "summary": "Detect anomalies in the last a few points of the request body.",
+        "description": "Synchronized API for anomaly detection.",
+        "operationId": "LastDetectAnomaly",
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "format": "uuid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "Request for last detection.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LastDetectionRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detection has successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/LastDetectionResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly with multivariate Model": {
+            "$ref": "./examples/LastDetectAnomaly.json"
+          }
+        },
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Model": {
+      "required": [
+        "createdTime",
+        "lastUpdatedTime",
+        "modelId"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Model identifier.",
+          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was created.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was last updated.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "modelInfo": {
+          "$ref": "#/definitions/ModelInfo"
+        }
+      },
+      "type": "object",
+      "description": "Response of getting a model."
+    },
+    "ModelStatus": {
+      "type": "string",
+      "description": "Model training status.",
+      "x-ms-enum": {
+        "name": "modelStatus",
+        "modelAsString": false
+      },
+      "example": "READY",
+      "readOnly": true,
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "ModelInfo": {
+      "required": [
+        "endTime",
+        "source",
+        "startTime"
+      ],
+      "properties": {
+        "slidingWindow": {
+          "type": "integer",
+          "description": "An optional field, indicating how many previous points will be used to compute the anomaly score of the subsequent point.",
+          "example": 20
+        },
+        "alignPolicy": {
+          "$ref": "#/definitions/AlignPolicy"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source link to the input variables. Each variable should be a csv file with two columns, `timestamp` and `value`. By default, the file name of the variable will be used as its variable name.",
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the start time of training data. Should be date-time.",
+          "example": "2019-04-01T00:00:00Z"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the end time of training data. Should be date-time.",
+          "example": "2019-04-02T00:00:00Z"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "An optional field. The name of the model whose maximum length is 24.",
+          "example": "DevOps-MultiAD",
+          "maxLength": 24
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error messages when failed to create a model.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "diagnosticsInfo": {
+          "$ref": "#/definitions/DiagnosticsInfo"
+        }
+      },
+      "type": "object",
+      "description": "Train result of a model including status, errors and diagnose info for model and variables."
+    },
+    "ErrorResponse": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message explaining the error reported by the service."
+        }
+      },
+      "type": "object"
+    },
+    "DiagnosticsInfo": {
+      "properties": {
+        "modelState": {
+          "$ref": "#/definitions/ModelState"
+        },
+        "variableStates": {
+          "type": "array",
+          "example": [
+            {
+              "variable": "ad_input",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "ad_on_timer_output",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "ingestion",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "data_in_speed",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "cpu",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "ad_series_init",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "F-Link_last_check_point_duration",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "data_out_speed",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            },
+            {
+              "variable": "ad_output",
+              "filledNARatio": 0,
+              "effectiveCount": 1441,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-02T00:00:00Z"
+            }
+          ],
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "AlignPolicy": {
+      "properties": {
+        "alignMode": {
+          "type": "string",
+          "description": "An optional field, indicating how we align different variables to the same time-range. Either Inner or Outer. ",
+          "example": "Outer",
+          "enum": [
+            "Inner",
+            "Outer"
+          ],
+          "x-ms-enum": {
+            "name": "alignMode",
+            "modelAsString": false
+          }
+        },
+        "fillNAMethod": {
+          "type": "string",
+          "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to NotFill, when the alignMode is Outer.",
+          "example": "Linear",
+          "enum": [
+            "Previous",
+            "Subsequent",
+            "Linear",
+            "Zero",
+            "Fixed",
+            "NotFill"
+          ],
+          "x-ms-enum": {
+            "name": "fillNAMethod",
+            "modelAsString": true
+          }
+        },
+        "paddingValue": {
+          "type": "number",
+          "description": "An optional field. Required when fillNAMethod is Fixed."
+        }
+      },
+      "type": "object"
+    },
+    "ModelState": {
+      "properties": {
+        "epochIds": {
+          "type": "array",
+          "description": "Epoch id",
+          "example": [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100
+          ],
+          "items": {
+            "type": "integer"
+          }
+        },
+        "trainLosses": {
+          "type": "array",
+          "example": [
+            0.6291328072547913,
+            0.1671326905488968,
+            0.12354248017072678,
+            0.10259664058685303,
+            0.09584927558898926,
+            0.09069952368736267,
+            0.08686016499996185,
+            0.08603022992610931,
+            0.08287354558706284,
+            0.08235538005828857
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "validationLosses": {
+          "type": "array",
+          "example": [
+            0.9573427438735962,
+            0.3182229995727539,
+            0.3402646481990814,
+            0.27653488516807556,
+            0.2574014365673065,
+            0.26928603649139404,
+            0.2637230455875397,
+            0.2590833008289337,
+            0.2597166895866394,
+            0.25973501801490784
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "latenciesInSeconds": {
+          "type": "array",
+          "example": [
+            0.3398594856262207,
+            0.3659665584564209,
+            0.37360644340515137,
+            0.35134077072143555,
+            0.33703041076660156,
+            0.31876277923583984,
+            0.32833099365234375,
+            0.3503587245941162,
+            0.3080024719238281,
+            0.3327946662902832
+          ],
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "VariableState": {
+      "properties": {
+        "variable": {
+          "type": "string",
+          "description": "Variable name."
+        },
+        "filledNARatio": {
+          "type": "number",
+          "description": "Proportion of NaN values filled of the variable.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "effectiveCount": {
+          "type": "integer",
+          "description": "Number of effective points counted."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the variable."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the variable."
+        }
+      },
+      "type": "object"
+    },
+    "ModelSnapshot": {
+      "required": [
+        "createdTime",
+        "lastUpdatedTime",
+        "modelId",
+        "status",
+        "variablesCount"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Model identifier.",
+          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was created.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was last updated.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus"
+        },
+        "displayName": {
+          "type": "string",
+          "example": "DevOps-Test"
+        },
+        "variablesCount": {
+          "type": "integer",
+          "description": "Total number of variables.",
+          "example": 18
+        }
+      },
+      "type": "object"
+    },
+    "ModelList": {
+      "required": [
+        "currentCount",
+        "maxCount",
+        "models"
+      ],
+      "properties": {
+        "models": {
+          "type": "array",
+          "description": "List of models",
+          "items": {
+            "$ref": "#/definitions/ModelSnapshot"
+          }
+        },
+        "currentCount": {
+          "type": "integer",
+          "description": "Current count of trained multivariate models.",
+          "example": 10
+        },
+        "maxCount": {
+          "type": "integer",
+          "description": "Max number of models that can be trained for this subscription.",
+          "example": 20
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch more models."
+        }
+      },
+      "type": "object",
+      "description": "Response of listing models."
+    },
+    "DetectionRequest": {
+      "required": [
+        "source",
+        "endTime",
+        "startTime"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source link to the input variables. Each variable should be a csv with two columns, `timestamp` and `value`. The file name of the variable will be used as its name. The variables used in detection should be exactly the same with those used in the training phase.",
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the start time of data for detection. Should be date-time.",
+          "example": "2019-04-01T00:15:00Z"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the end time of data for detection. Should be date-time.",
+          "example": "2019-04-01T00:40:00Z"
+        }
+      },
+      "type": "object",
+      "description": "Detection request."
+    },
+    "DetectionResult": {
+      "required": [
+        "resultId",
+        "results",
+        "summary"
+      ],
+      "properties": {
+        "resultId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
+        },
+        "summary": {
+          "$ref": "#/definitions/DetectionResultSummary"
+        },
+        "results": {
+          "type": "array",
+          "description": "Detection result for each timestamp.",
+          "items": {
+            "$ref": "#/definitions/AnomalyState"
+          }
+        }
+      },
+      "type": "object",
+      "description": "Response of the given resultId."
+    },
+    "DetectionResultSummary": {
+      "required": [
+        "setupInfo",
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
+          "example": "READY",
+          "enum": [
+            "CREATED",
+            "RUNNING",
+            "READY",
+            "FAILED"
+          ],
+          "x-ms-enum": {
+            "name": "DetectionStatus",
+            "modelAsString": false
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error message when detection is failed.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "variableStates": {
+          "type": "array",
+          "example": [
+            {
+              "variable": "ad_input",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "ad_on_timer_output",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "ad_output",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "ad_series_init",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "cpu",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "data_in_speed",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "data_out_speed",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "last_check_point_duration",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "ingestion",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            }
+          ],
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          }
+        },
+        "setupInfo": {
+          "$ref": "#/definitions/DetectionRequest"
+        }
+      },
+      "type": "object"
+    },
+    "AnomalyState": {
+      "required": [
+        "timestamp"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "timestamp",
+          "example": "2020-01-01T00:00:00Z"
+        },
+        "value": {
+          "$ref": "#/definitions/AnomalyValue"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error message for the current timestamp",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "AnomalyValue": {
+      "required": [
+        "isAnomaly",
+        "score",
+        "severity"
+      ],
+      "properties": {
+        "isAnomaly": {
+          "type": "boolean",
+          "description": "True if an anomaly is detected at the current timestamp.",
+          "example": true
+        },
+        "severity": {
+          "type": "number",
+          "description": "Indicates the significance of the anomaly. The higher the severity, the more significant the anomaly.",
+          "example": 0.8,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "score": {
+          "type": "number",
+          "description": "Raw score from the model.",
+          "example": 0.3,
+          "minimum": 0,
+          "maximum": 2
+        },
+        "interpretation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyInterpretation"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "LastDetectionRequest": {
+      "required": [
+        "detectingPoints",
+        "variables"
+      ],
+      "properties": {
+        "variables": {
+          "type": "array",
+          "description": "variables",
+          "items": {
+            "$ref": "#/definitions/VariableValues"
+          }
+        },
+        "detectingPoints": {
+          "type": "integer",
+          "description": "number of timestamps on which the model detects",
+          "example": 2
+        }
+      },
+      "type": "object"
+    },
+    "VariableValues": {
+      "required": [
+        "name",
+        "timestamps",
+        "values"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "variable name",
+          "example": "variable_1"
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "timestamps",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "values",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "LastDetectionResult": {
+      "properties": {
+        "variableStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyState"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "AnomalyInterpretation": {
+      "properties": {
+        "variable": {
+          "type": "string"
+        },
+        "contributionScore": {
+          "type": "number"
+        },
+        "correlationChanges": {
+          "$ref": "#/definitions/CorrelationChanges"
+        }
+      },
+      "type": "object"
+    },
+    "CorrelationChanges": {
+      "properties": {
+        "changedVariables": {
+          "type": "array",
+          "description": "correlated variables",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changedValues": {
+          "type": "array",
+          "description": "changes in correlation",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "v1.1-preview.1"
+      ],
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

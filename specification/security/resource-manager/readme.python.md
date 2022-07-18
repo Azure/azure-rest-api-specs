@@ -2,6 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
+
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION

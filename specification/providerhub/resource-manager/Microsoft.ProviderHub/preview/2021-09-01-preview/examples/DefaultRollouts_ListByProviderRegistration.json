@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of default rollouts for given subscription id.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week01",
+            "name": "Microsoft.Contoso/2020week01",
+            "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "specification": {
+                "expeditedRollout": {
+                  "enabled": true
+                },
+                "canary": {
+                  "regions": [
+                    "brazilus",
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                },
+                "lowTraffic": {
+                  "regions": [
+                    "southeastasia"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "mediumTraffic": {
+                  "regions": [
+                    "uksouth",
+                    "indiawest"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "restOfTheWorldGroupOne": {
+                  "regions": [
+                    "koreacentral",
+                    "francecentral",
+                    "australiacentral",
+                    "westus",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                },
+                "restOfTheWorldGroupTwo": {
+                  "regions": [
+                    "germanynorth",
+                    "norwayeast",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                }
+              },
+              "status": {
+                "completedRegions": [
+                  "brazilus",
+                  "eastus2euap",
+                  "centraluseuap",
+                  "allcompletedregions"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+            "name": "Microsoft.Contoso/2020week10",
+            "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+            },
+            "properties": {
+              "provisioningState": "Cancelled",
+              "specification": {
+                "canary": {
+                  "regions": [
+                    "brazilus",
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                },
+                "lowTraffic": {
+                  "regions": [
+                    "southeastasia"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "mediumTraffic": {
+                  "regions": [
+                    "uksouth",
+                    "indiawest"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "restOfTheWorldGroupOne": {
+                  "regions": [
+                    "koreacentral",
+                    "francecentral",
+                    "australiacentral",
+                    "westus",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                },
+                "restOfTheWorldGroupTwo": {
+                  "regions": [
+                    "germanynorth",
+                    "norwayeast",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                }
+              },
+              "status": {
+                "completedRegions": [
+                  "brazilus",
+                  "eastus2euap",
+                  "centraluseuap",
+                  "allcompletedregions"
+                ],
+                "failedOrSkippedRegions": {
+                  "westus2": {
+                    "code": "RolloutStoppedByUser",
+                    "message": "Rollout was explicitly stopped by the user."
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

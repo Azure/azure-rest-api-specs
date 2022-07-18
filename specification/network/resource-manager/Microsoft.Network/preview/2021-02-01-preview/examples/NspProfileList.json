@@ -1,0 +1,36 @@
+{
+  "title": "List NSP Profiles",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "profile1",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1",
+            "type": "Microsoft.Network/networkSecurityPerimeters/profiles",
+            "location": "resource location",
+            "properties": {
+              "accessRulesVersion": "0"
+            }
+          },
+          {
+            "name": "profile2",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile2",
+            "type": "Microsoft.Network/networkSecurityPerimeters/profiles",
+            "location": "resource location",
+            "properties": {
+              "accessRulesVersion": "0"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroup/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles?api-version=2021-02-01-preview&$skipToken=10"
+      }
+    }
+  }
+}

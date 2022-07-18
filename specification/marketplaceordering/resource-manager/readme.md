@@ -67,6 +67,11 @@ These settings apply only when `--tag=package-2015-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2015-06-01'
 input-file:
 - Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.UnsupportedMediaTypeErrorResponse.properties.Message
+  suppress: R3016
+  reason: This requires a change in code thats in production for several years
 ```
 
 
@@ -90,6 +95,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace_ordering']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 

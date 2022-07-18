@@ -6797,6 +6797,7 @@
           "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
           "enum": [
             "SystemAssigned",
+            "SystemAssigned, UserAssigned",
             "UserAssigned"
           ],
           "type": "string",
@@ -8460,7 +8461,11 @@
               "ResourceGroup",
               "AzureSubscription"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TopicTypeSourceScope",
+              "modelAsString": true
+            }
           }
         }
       }

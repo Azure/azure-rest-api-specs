@@ -77,7 +77,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "Resource Identifier",
+            "description": "Maintenance Configuration Name",
             "required": true,
             "type": "string"
           },
@@ -1129,7 +1129,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "Resource Identifier",
+            "description": "Maintenance Configuration Name",
             "required": true,
             "type": "string"
           },
@@ -1189,7 +1189,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "Resource Identifier",
+            "description": "Maintenance Configuration Name",
             "required": true,
             "type": "string"
           },
@@ -1250,7 +1250,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "Resource Identifier",
+            "description": "Maintenance Configuration Name",
             "required": true,
             "type": "string"
           },
@@ -1307,7 +1307,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "Resource Identifier",
+            "description": "Maintenance Configuration Name",
             "required": true,
             "type": "string"
           },
@@ -1791,7 +1791,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "There are pending updates to be installed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Updates installation are in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "All updates are successfully applied."
+              },
+              {
+                "value": "RetryNow",
+                "description": "Updates installation failed but are ready to retry again."
+              },
+              {
+                "value": "RetryLater",
+                "description": "Updates installation failed and should be retried later."
+              }
+            ]
           }
         },
         "resourceId": {
@@ -1930,7 +1952,7 @@
           "type": "string"
         },
         "recurEvery": {
-          "description": "Rate at which a Maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules. Daily schedule are formatted as recurEvery: [Frequency as integer]['Day(s)']. If no frequency is provided, the default frequency is 1. Daily schedule examples are recurEvery: Day, recurEvery: 3Days.  Weekly schedule are formatted as recurEvery: [Frequency as integer]['Week(s)'] [Optional comma separated list of weekdays Monday-Sunday]. Weekly schedule examples are recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Monthly schedules are formatted as [Frequency as integer]['Month(s)'] [Comma separated list of month days] or [Frequency as integer]['Month(s)'] [Week of Month (First, Second, Third, Fourth, Last)] [Weekday Monday-Sunday]. Monthly schedule examples are recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday.",
+          "description": "Rate at which a Maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules. Daily schedule are formatted as recurEvery: [Frequency as integer]['Day(s)']. If no frequency is provided, the default frequency is 1. Daily schedule examples are recurEvery: Day, recurEvery: 3Days.  Weekly schedule are formatted as recurEvery: [Frequency as integer]['Week(s)'] [Optional comma separated list of weekdays Monday-Sunday]. Weekly schedule examples are recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Monthly schedules are formatted as [Frequency as integer]['Month(s)'] [Comma separated list of month days] or [Frequency as integer]['Month(s)'] [Week of Month (First, Second, Third, Fourth, Last)] [Weekday Monday-Sunday] [Optional Offset(No. of days)]. Offset value must be between -6 to 6 inclusive. Monthly schedule examples are recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday, recurEvery: Month Last Sunday Offset-3, recurEvery: Month Third Sunday Offset6.",
           "type": "string"
         }
       }
@@ -1963,7 +1985,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Host",
+                "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "OSImage",
+                "description": "This maintenance scope controls os image installation on VM/VMSS"
+              },
+              {
+                "value": "Extension",
+                "description": "This maintenance scope controls extension installation on VM/VMSS"
+              },
+              {
+                "value": "InGuestPatch",
+                "description": "This maintenance scope controls installation of windows and linux packages on VM/VMSS"
+              },
+              {
+                "value": "SQLDB",
+                "description": "This maintenance scope controls installation of SQL server platform updates."
+              },
+              {
+                "value": "SQLManagedInstance",
+                "description": "This maintenance scope controls installation of SQL managed instance platform update."
+              }
+            ]
           }
         },
         "maintenanceWindow": {
@@ -1972,7 +2020,7 @@
           "x-ms-client-flatten": true
         },
         "visibility": {
-          "description": "Gets or sets the visibility of the configuration",
+          "description": "Gets or sets the visibility of the configuration. The default value is 'Custom'",
           "enum": [
             "Custom",
             "Public"
@@ -1980,7 +2028,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Visibility",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Custom",
+                "description": "Only visible to users with permissions."
+              },
+              {
+                "value": "Public",
+                "description": "Visible to all users."
+              }
+            ]
           }
         },
         "installPatches": {
@@ -2287,7 +2345,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Host",
+                "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "OSImage",
+                "description": "This maintenance scope controls os image installation on VM/VMSS"
+              },
+              {
+                "value": "Extension",
+                "description": "This maintenance scope controls extension installation on VM/VMSS"
+              },
+              {
+                "value": "InGuestPatch",
+                "description": "This maintenance scope controls installation of windows and linux packages on VM/VMSS"
+              },
+              {
+                "value": "SQLDB",
+                "description": "This maintenance scope controls installation of SQL server platform updates."
+              },
+              {
+                "value": "SQLManagedInstance",
+                "description": "This maintenance scope controls installation of SQL managed instance platform update."
+              }
+            ]
           }
         },
         "impactType": {
@@ -2301,7 +2385,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ImpactType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Pending updates has no impact on resource."
+              },
+              {
+                "value": "Freeze",
+                "description": "Pending updates can freeze network or disk io operation on resource."
+              },
+              {
+                "value": "Restart",
+                "description": "Pending updates can cause resource to restart."
+              },
+              {
+                "value": "Redeploy",
+                "description": "Pending updates can redeploy resource."
+              }
+            ]
           }
         },
         "status": {
@@ -2316,7 +2418,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "There are pending updates to be installed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Updates installation are in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "All updates are successfully applied."
+              },
+              {
+                "value": "RetryNow",
+                "description": "Updates installation failed but are ready to retry again."
+              },
+              {
+                "value": "RetryLater",
+                "description": "Updates installation failed and should be retried later."
+              }
+            ]
           }
         },
         "impactDurationInSec": {

@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-managementpartner"
   output-folder: "$(typescript-sdks-folder)/sdk/managementpartner/arm-managementpartner"
-  clear-output-folder: true
   generate-metadata: true
 ```
