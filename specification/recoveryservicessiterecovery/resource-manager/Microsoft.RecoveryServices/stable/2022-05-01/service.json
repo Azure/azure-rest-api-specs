@@ -18115,6 +18115,11 @@
           "type": "string",
           "readOnly": true
         },
+        "recoveryServicesProviderId": {
+          "description": "The recovery services provider ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
         "replicationStatus": {
           "description": "The replication status.",
           "type": "string",
@@ -18161,6 +18166,17 @@
         },
         "lastTestMigrationStatus": {
           "description": "The status of the last test migration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastMigrationTime": {
+          "format": "date-time",
+          "description": "The last migration time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastMigrationStatus": {
+          "description": "The status of the last migration.",
           "type": "string",
           "readOnly": true
         },
@@ -23735,6 +23751,11 @@
           "type": "string",
           "readOnly": true
         },
+        "storageAccountId": {
+          "description": "The replication storage account ARM Id. This is applicable only for the blob based replication test hook.",
+          "type": "string",
+          "readOnly": true
+        },
         "targetVmName": {
           "description": "Target VM name.",
           "type": "string"
@@ -24151,8 +24172,18 @@
           "type": "string",
           "readOnly": true
         },
+        "seedBlobUri": {
+          "description": "The uri of the seed blob.",
+          "type": "string",
+          "readOnly": true
+        },
         "targetManagedDiskId": {
           "description": "The ARM Id of the target managed disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetBlobUri": {
+          "description": "The uri of the target blob.",
           "type": "string",
           "readOnly": true
         },
