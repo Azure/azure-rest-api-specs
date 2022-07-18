@@ -636,7 +636,8 @@
             "CspmMonitorAzureDevOps",
             "DefenderForServersGcp",
             "DefenderForContainersGcp",
-            "DefenderForDatabasesGcp"
+            "DefenderForDatabasesGcp",
+            "CspmPremiumAws"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -1239,6 +1240,64 @@
         }
       ],
       "properties": {}
+    },
+    "cspmPremiumAwsOffering":{
+      "type": "object",
+      "description": "The CSPM premium monitoring for AWS offering",
+      "x-ms-discriminator-value": "CspmPremiumAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "cspm": {
+          "type": "object",
+          "description": "The cspm connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "cloudRoleArn": {
+                  "type": "string",
+                  "description": "The cloud role ARN in AWS for this feature"
+                },
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode for the vm scan.",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "scanningMode",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "description": "VM tags that indicates that VM should not be scanned",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
