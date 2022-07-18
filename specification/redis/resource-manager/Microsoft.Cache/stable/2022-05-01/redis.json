@@ -1946,8 +1946,7 @@
             },
             "preferred-data-persistence-auth-method": {
               "type": "string",
-              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS",
-              "readOnly": true
+              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS"
             },
             "zonal-configuration": {
               "type": "string",
@@ -2436,6 +2435,10 @@
         "container": {
           "type": "string",
           "description": "Container name to export to."
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
@@ -2456,6 +2459,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
