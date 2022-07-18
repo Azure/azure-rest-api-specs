@@ -540,7 +540,7 @@ override-info:
 
 These settings apply only when `--tag=package-2021-05-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
-``` yaml $(tag) == 'package-package-2021-05-preview-only'
+``` yaml $(tag) == 'package-2021-05-preview-only'
 input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
