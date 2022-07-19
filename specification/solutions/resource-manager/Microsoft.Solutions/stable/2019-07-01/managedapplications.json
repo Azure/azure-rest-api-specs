@@ -124,6 +124,11 @@
         ],
         "operationId": "Applications_Delete",
         "description": "Deletes the managed application.",
+        "x-ms-examples": {
+          "Get a managed application": {
+            "$ref": "./examples/deleteApplication.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -361,6 +366,11 @@
         ],
         "operationId": "ApplicationDefinitions_Delete",
         "description": "Deletes the managed application definition.",
+        "x-ms-examples": {
+          "Get a managed application": {
+            "$ref": "./examples/deleteApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -582,6 +592,11 @@
         ],
         "operationId": "Applications_ListBySubscription",
         "description": "Gets all the applications within a subscription.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/listApplicationsBySubscription.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,6 +631,11 @@
         ],
         "operationId": "Applications_GetById",
         "description": "Gets the managed application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/getApplicationById.json"
+          }
+        },
         "parameters": [
           {
             "name": "applicationId",
@@ -650,6 +670,11 @@
         ],
         "operationId": "Applications_DeleteById",
         "description": "Deletes the managed application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/deleteApplicationById.json"
+          }
+        },
         "parameters": [
           {
             "name": "applicationId",
@@ -685,6 +710,11 @@
         ],
         "operationId": "Applications_CreateOrUpdateById",
         "description": "Creates a new managed application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/createOrUpdateApplicationById.json"
+          }
+        },
         "parameters": [
           {
             "name": "applicationId",
@@ -735,6 +765,11 @@
         ],
         "operationId": "Applications_UpdateById",
         "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/updateApplicationById.json"
+          }
+        },
         "parameters": [
           {
             "name": "applicationId",
@@ -779,6 +814,11 @@
         ],
         "operationId": "JitRequests_Get",
         "description": "Gets the JIT request.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/getJitRequest.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -825,6 +865,11 @@
         ],
         "operationId": "jitRequests_CreateOrUpdate",
         "description": "Creates or updates the JIT request.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/createOrUpdateJitRequest.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -887,6 +932,11 @@
         ],
         "operationId": "JitRequests_Update",
         "description": "Updates the JIT request.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/updateJitRequest.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -942,6 +992,11 @@
         ],
         "operationId": "jitRequests_Delete",
         "description": "Deletes the JIT request.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/deleteJitRequest.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -990,6 +1045,11 @@
         ],
         "operationId": "jitRequests_ListBySubscription",
         "description": "Retrieves all JIT requests within the subscription.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/listJitRequestsBySubscription.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1021,6 +1081,11 @@
         ],
         "operationId": "jitRequests_ListByResourceGroup",
         "description": "Retrieves all JIT requests within the resource group.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/listJitRequestsByResourceGroup.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1062,6 +1127,11 @@
         ],
         "operationId": "Applications_RefreshPermissions",
         "description": "Refresh Permissions for application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/refreshApplicationPermissions.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2276,7 +2346,6 @@
     },
     "JitSchedulingType": {
       "description": "The JIT request scheduling type.",
-      "readOnly": true,
       "enum": [
         "NotSpecified",
         "Once",
