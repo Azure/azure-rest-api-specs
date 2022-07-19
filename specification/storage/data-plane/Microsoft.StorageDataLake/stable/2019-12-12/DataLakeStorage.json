@@ -3,7 +3,7 @@
   "info": {
     "description": "Azure Data Lake Storage provides storage for Hadoop and other big data workloads.",
     "title": "Azure Data Lake Storage REST API",
-    "version": "2021-04-10",
+    "version": "2021-10-04",
     "x-ms-code-generation-settings": {
       "internalConstructors": true,
       "name": "DataLakeStorageClient"
@@ -158,6 +158,10 @@
         "x-ms-encryption-context": {
           "description": " If the encryption context property value is set it will return the set value.",
           "type": "string"
+        },
+        "x-ms-encryption-scope": {
+          "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
+          "type": "string"
         }
       }
     },
@@ -251,6 +255,14 @@
               "Content-Type": {
                 "description": "The content type of list filesystem response. The default content type is application/json.",
                 "type": "string"
+              },
+              "x-ms-default-encryption-scope": {
+                "description": "The encryption scope set as default on the filesystem.",
+                "type": "string"
+              },
+              "x-ms-deny-encryption-scope-override": {
+                "description": "The value of this header is set to true if every file uploaded to this filesystem will be encrypted with default encryption. When this header is `false`, a client can upload a file with an encryption scope other than the default scope.",
+                "type": "boolean"
               }
             },
             "schema": {
@@ -366,6 +378,10 @@
               "x-ms-namespace-enabled": {
                 "description": "A boolean string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
                 "type": "string"
+              },
+              "x-ms-default-encryption-scope": {
+                "description": "The encryption scope set as default on the filesystem.",
+                "type": "string"
               }
             }
           },
@@ -377,6 +393,13 @@
           {
             "name": "x-ms-properties",
             "description": "User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-default-encryption-scope",
+            "description": "The encryption scope set as default on the filesystem.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -484,6 +507,10 @@
               "x-ms-continuation": {
                 "description": "If the number of paths to be listed exceeds the maxResults limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths.",
                 "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
+                "type": "string"
               }
             },
             "schema": {
@@ -573,6 +600,14 @@
               "x-ms-namespace-enabled": {
                 "description": "A boolean string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
                 "type": "string"
+              },
+              "x-ms-default-encryption-scope": {
+                "description": "The encryption scope set as default on the filesystem.",
+                "type": "string"
+              },
+              "x-ms-deny-encryption-scope-override: true/false": {
+                "description": "The value of this header is set to true if every file uploaded to this filesystem will be encrypted with default encryption. When this header is `false`, a client can upload a file with an encryption scope other than the default scope.",
+                "type": "boolean"
               }
             }
           },
@@ -734,6 +769,10 @@
               },
               "x-ms-encryption-key-sha256": {
                 "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
                 "type": "string"
               }
             }
@@ -1103,6 +1142,10 @@
               },
               "x-ms-encryption-key-sha256": {
                 "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
                 "type": "string"
               }
             },
@@ -1667,6 +1710,10 @@
               "x-ms-encryption-context": {
                 "description": " If the encryption context property value is set it will return the set value.",
                 "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
+                "type": "string"
               }
             },
             "schema": {
@@ -1768,6 +1815,10 @@
               },
               "x-ms-encryption-context": {
                 "description": " If the encryption context property value is set it will return the set value.",
+                "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
                 "type": "string"
               }
             },
@@ -1968,6 +2019,10 @@
               },
               "x-ms-encryption-context": {
                 "description": " If the encryption context property value is set it will return the set value.",
+                "type": "string"
+              },
+              "x-ms-encryption-scope": {
+                "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
                 "type": "string"
               }
             }
