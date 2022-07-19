@@ -623,13 +623,21 @@
           "description": "The identity type",
           "enum": [
             "None",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedIdentityType",
             "modelAsString": true
           }
+        },
+        "principalId": {
+          "format": "uuid",
+          "description": "System Assigned Identity ObjectId.",
+          "type": "string",
+          "readOnly": true
         },
         "tenantId": {
           "description": "The Azure Active Directory tenant id.",
