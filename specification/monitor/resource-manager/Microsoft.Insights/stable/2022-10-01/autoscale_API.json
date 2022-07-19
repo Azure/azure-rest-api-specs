@@ -827,7 +827,7 @@
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
     },
-    "AutoscaleSettingResource": {
+    "Resource": {
       "type": "object",
       "required": [
         "location",
@@ -864,11 +864,6 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AutoscaleSetting",
-          "description": "The autoscale setting of the resource."
-        },
         "systemData": {
           "readOnly": true,
           "description": "The system metadata related to the response.",
@@ -878,6 +873,27 @@
       "x-ms-azure-resource": true,
       "description": "The autoscale setting resource."
     },
+    "AutoscaleSettingResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "The autoscale setting of the resource."
+        }
+      },
+      "description": "The autoscale setting resource."
+    },
+
+
     "AutoscaleSettingResourcePatch": {
       "type": "object",
       "description": "The autoscale setting object for patch operations.",
