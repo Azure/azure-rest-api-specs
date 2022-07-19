@@ -39,15 +39,6 @@ input-file:
   - Microsoft.NetworkCloud/preview/2022-04-29-preview/networkcloud.json
 ```
 
-### Tag: package-2021-10-21-preview
-
-These settings apply only when `--tag=package-2021-10-21-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-10-21-preview'
-input-file:
-  - Microsoft.NetworkCloud/preview/2021-10-21-preview/networkcloud.json
-```
-
 ---
 
 # Code Generation
@@ -61,9 +52,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
