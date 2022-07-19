@@ -3,9 +3,29 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "applicationName": "myManagedApplication",
-    "api-version": "2021-02-01-preview"
+    "api-version": "2021-02-01-preview",
+	"parameters": {
+      "properties": {
+        "authorizationAudience": "authorizationAudience",
+		"userAssignedIdentities": [
+			"IdentityOne",
+			"IdentityTwo"
+			]
+		}
+    }
   },
   "responses": {
-    "200": {}
+    "200": {
+	"headers": {},
+      "body": {
+      "properties": {
+        "authorizationAudience": "authorizationAudience",
+		"userAssignedIdentities": [
+			"IdentityOne",
+			"IdentityTwo"
+			]
+		}
+      }
+	}
   }
 }

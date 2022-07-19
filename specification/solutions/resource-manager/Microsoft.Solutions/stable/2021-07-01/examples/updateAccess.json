@@ -3,9 +3,37 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "applicationName": "myManagedApplication",
-    "api-version": "2021-07-01"
+    "api-version": "2021-07-01",
+	"parameters": {
+      "properties": {
+        "approver": "amauser",
+        "status": "Elevate",
+		"subStatus": "Approved",
+		"metadata": {
+            "originRequestId": "originRequestId",
+            "requestorId": "RequestorId",
+            "tenantDisplayName": "TenantDisplayName",
+			"subjectDisplayName": "SubjectDisplayName"
+          }
+		}
+      }
   },
   "responses": {
-    "202": {}
+    "202": {
+	"headers": {},
+      "body": {
+      "properties": {
+        "approver": "amauser",
+        "status": "Elevate",
+		"subStatus": "Approved",
+		"metadata": {
+            "originRequestId": "originRequestId",
+            "requestorId": "RequestorId",
+            "tenantDisplayName": "TenantDisplayName",
+			"subjectDisplayName": "SubjectDisplayName"
+          }
+		}
+      }
+	}
   }
 }

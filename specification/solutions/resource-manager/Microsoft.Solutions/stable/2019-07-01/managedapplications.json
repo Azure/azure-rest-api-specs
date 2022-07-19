@@ -288,12 +288,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Created - Returns information about the managed application, including provisioning status.",
-            "schema": {
-              "$ref": "#/definitions/Application"
-            }
-          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
@@ -303,7 +297,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}": {
@@ -405,17 +400,13 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted - Returns this status until the asynchronous operation has completed."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "put": {
         "tags": [
@@ -483,8 +474,7 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions": {
@@ -792,8 +782,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Created - Returns information about the managed application, including provisioning status.",
+          "202": {
+            "description": "Accepted - Returns information about the managed application, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -804,7 +794,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/jitRequests/{jitRequestName}": {
@@ -907,12 +898,6 @@
         "responses": {
           "201": {
             "description": "Created - Returns information about the JIT request.",
-            "schema": {
-              "$ref": "#/definitions/JitRequestDefinition"
-            }
-          },
-          "200": {
-            "description": "Ok - Returns information about existing JIT request.",
             "schema": {
               "$ref": "#/definitions/JitRequestDefinition"
             }
@@ -1388,17 +1373,13 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted - Returns this status until the asynchronous operation has completed."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "put": {
         "tags": [
@@ -1466,8 +1447,7 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
@@ -2556,15 +2536,15 @@
           "type": "string",
           "description": "The origin request id."
         },
-        "RequestorId": {
+        "requestorId": {
           "type": "string",
           "description": "The requestor id."
         },
-        "TenantDisplayName": {
+        "tenantDisplayName": {
           "type": "string",
           "description": "The publisher's tenant name."
         },
-        "SubjectDisplayName": {
+        "subjectDisplayName": {
           "type": "string",
           "description": "The subject display name."
         }
