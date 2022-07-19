@@ -110,6 +110,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "NotFound."
+          },
           "200": {
             "description": "OK - Returns the managed application.",
             "schema": {
@@ -295,7 +298,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+            "description": "Accepted - Returns this status until the asynchronous operation has completed.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -346,6 +352,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "NotFound."
+          },
           "200": {
             "description": "OK - Returns the managed application definition.",
             "schema": {
@@ -645,6 +654,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "NotFound."
+          },
           "200": {
             "description": "OK - Returns the managed application.",
             "schema": {
@@ -841,6 +853,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "NotFound."
+          },
           "200": {
             "description": "OK - Returns the JIT request",
             "schema": {
@@ -1326,6 +1341,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "NotFound."
+          },
           "200": {
             "description": "OK - Returns the managed application definition.",
             "schema": {
