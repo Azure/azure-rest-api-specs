@@ -13,13 +13,13 @@ typescript:
   generate-metadata: true
 directive:
   - where-operation: monitors_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: ProviderInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: PhpWorkloads_CreateOrUpdate
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: WordpressInstances_CreateOrUpdate
     transform: $["x-ms-long-running-operation-options"] = undefined
@@ -32,7 +32,6 @@ directive:
 
   - where-operation: SAPCentralInstances_Update
     transform: $["x-ms-long-running-operation-options"] = undefined
-    
     
   - where-operation: SAPDatabaseInstances_Create
     transform: $["x-ms-long-running-operation-options"] = undefined
