@@ -150,6 +150,27 @@
             "format": "int32"
           },
           {
+            "name": "directPeeringType",
+            "in": "query",
+            "description": "The direct peering type.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Edge",
+              "Transit",
+              "Cdn",
+              "Internal",
+              "Ix",
+              "IxRs",
+              "Voice",
+              "EdgeZoneForOperators"
+            ],
+            "x-ms-enum": {
+              "name": "directPeeringType",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -912,6 +933,61 @@
         "x-ms-examples": {
           "Create or update a registered prefix for the peering": {
             "$ref": "./examples/CreateRegisteredPrefix.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Validates an existing registered prefix with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_Validate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredPrefixName",
+            "in": "path",
+            "description": "The name of the registered prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a registered prefix associated with the peering": {
+            "$ref": "./examples/ValidateRegisteredPrefix.json"
           }
         }
       },
@@ -2705,7 +2781,9 @@
             "ProvisioningFailed",
             "ProvisioningCompleted",
             "Validating",
-            "Active"
+            "Active",
+            "TypeChangeRequested",
+            "TypeChangeInProgress"
           ],
           "type": "string",
           "readOnly": true,
@@ -2758,7 +2836,9 @@
             "ProvisioningFailed",
             "ProvisioningCompleted",
             "Validating",
-            "Active"
+            "Active",
+            "TypeChangeRequested",
+            "TypeChangeInProgress"
           ],
           "type": "string",
           "readOnly": true,
