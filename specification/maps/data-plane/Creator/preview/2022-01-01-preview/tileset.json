@@ -85,7 +85,7 @@
     },
     "DescriptionTileset": {
       "name": "description",
-      "description": "User provided description of the tileset.",
+      "description": "User provided description of the tileset. Maximum length 1024 characters.",
       "type": "string",
       "in": "query",
       "x-ms-parameter-location": "method"
@@ -239,7 +239,7 @@
         }
       }
     },
-    "/tilesets/configurations": {
+    "/tilesets:fetchConfiguration": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default [tileset configuration](/rest/api/documentation-preview/tileset/get-configuration?#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/documentation-preview/tileset/create)",
         "operationId": "Tileset_GetConfiguration",
@@ -272,7 +272,7 @@
         }
       }
     },
-    "/tilesets/configurations/validate": {
+    "/tilesets:validateConfiguration": {
       "post": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a [tileset configuration](/rest/api/documentation-preview/tileset/validate-configuration?#tilesetconfiguration).",
         "operationId": "Tileset_ValidateConfiguration",
