@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "YourSubscriptionId",
-    "api-version": "2021-12-01",
+    "api-version": "2022-05-01-preview",
     "User-Agent": [
       "vscode-restclient"
     ],
@@ -15,23 +15,21 @@
       "360"
     ],
     "configurationsRequest": {
-      "configurationFilters": [
-        {
-          "hierarchyInformation": {
-            "productFamilyName": "azurestackedge",
-            "productLineName": "azurestackedge",
-            "productName": "azurestackedgegpu"
-          },
-          "filterableProperty": [
-            {
-              "type": "ShipToCountries",
-              "supportedValues": [
-                "US"
-              ]
-            }
-          ]
-        }
-      ]
+      "configurationFilter": {
+        "hierarchyInformation": {
+          "productFamilyName": "azurestackedge",
+          "productLineName": "azurestackedge",
+          "productName": "azurestackedgegpu"
+        },
+        "filterableProperty": [
+          {
+            "type": "ShipToCountries",
+            "supportedValues": [
+              "US"
+            ]
+          }
+        ]
+      }
     }
   },
   "responses": {
