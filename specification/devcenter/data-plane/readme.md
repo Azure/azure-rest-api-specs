@@ -26,7 +26,6 @@ These are the global settings for the devcenter.
 
 ```yaml
 openapi-type: data-plane
-openapi-subtype: providerHub
 azure-arm: false
 tag: package-2022-03-01-preview
 ```
