@@ -644,6 +644,16 @@
         }
       }
     },
+    "ipSecurityRestrictionRules": {
+      "description": "Rules to restrict incoming IP address.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IpSecurityRestrictionRules"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
     "RegistryCredentials": {
       "description": "Container App Private Registry",
       "type": "object",
@@ -753,6 +763,41 @@
         "certificateId": {
           "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
+        }
+      }
+    },
+    "IpSecurityRestrictionRules": {
+      "description": "Rules to restrict incoming IP address.",
+      "type": "object",
+      "required": [
+        "name",
+        "ipAddress",
+        "action"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name for the IP restriction rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Describe the IP restriction rules that are being sent to the container-app. This is an optional field.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "CIDR notation to match incoming IP address",
+          "type": "string"
+        },
+        "action": {
+          "description": "Allow or Deny rules to determine for incoming IP",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
         }
       }
     },
