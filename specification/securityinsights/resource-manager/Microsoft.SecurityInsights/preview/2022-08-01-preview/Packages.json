@@ -124,6 +124,9 @@
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageInstallationProperties"
           }
         ],
         "responses": {
@@ -275,6 +278,10 @@
           "description": "The description of the package",
           "type": "string"
         },
+        "publisherDisplayName": {
+          "description": "The publisher display name of the package",
+          "type": "string"
+        },
         "source": {
           "description": "The source of the package",
           "$ref": "#/definitions/Source",
@@ -334,6 +341,10 @@
             "description": "One threat analytics technique."
           }
         },
+        "icon": {
+          "description": "The URL to the icon file.",
+          "type": "string"
+        },
         "mainTemplate": {
           "description": "The url to the template of the package.",
           "type": "string"
@@ -346,6 +357,24 @@
         "displayName"
       ],
       "type": "object"
+    },
+    "PackageInstallationProperties": {
+      "type": "object",
+      "description": "Package installation properties.",
+      "properties": {
+        "packageKind": {
+          "description": "package kind.",
+          "enum": [
+            "Solution",
+            "Standalone"
+          ],
+          "type": "string"
+        },
+        "version": {
+          "description": "version of the package to be installed.",
+          "type": "string"
+        }
+      }
     },
     "Source": {
       "type": "object",
@@ -487,6 +516,16 @@
       "name": "PackageId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PackageInstallationProperties": {
+      "description": "Package installation properties",
+      "in": "body",
+      "name": "packageInstallationProperties",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PackageInstallationProperties"
+      },
       "x-ms-parameter-location": "method"
     }
   }
