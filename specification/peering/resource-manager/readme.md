@@ -28,15 +28,15 @@ These are the global settings for the Peering API.
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
-tag: package-2022-06
+tag: package-2022-06-01
 ```
 
 
-### Tag: package-2022-06
+### Tag: package-2022-06-01
 
-These settings apply only when `--tag=package-2022-06` is specified on the command line.
+These settings apply only when `--tag=package-2022-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06'
+```yaml $(tag) == 'package-2022-06-01'
 input-file:
   - Microsoft.Peering/stable/2022-06-01/peering.json
 ```
