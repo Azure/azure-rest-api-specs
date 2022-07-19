@@ -1,8 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "applicationName": "myManagedApplication",
+	"applicationId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
     "api-version": "2020-08-21-preview",
     "parameters": {
       "properties": {
@@ -33,9 +31,24 @@
         }
       }
     },
-    "202": {
-      "headers": {
-        "location": "https://url.to.query"
+    "201": {
+      "headers": {},
+      "body": {
+        "name": "myManagedApplication",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+        "type": "Microsoft.Solutions/applications",
+        "managedBy": null,
+        "plan": null,
+        "identity": null,
+        "kind": "ServiceCatalog",
+        "sku": null,
+        "properties": {
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "outputs": null,
+          "parameters": null,
+          "provisioningState": "Created"
+        }
       }
     }
   }

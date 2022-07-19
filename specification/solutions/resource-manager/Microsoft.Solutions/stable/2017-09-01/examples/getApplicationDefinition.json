@@ -2,10 +2,11 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "managedApplicationName": "myManagedApplicationDef",
+    "applicationDefinitionName": "myManagedApplicationDef",
     "api-version": "2017-09-01"
   },
   "responses": {
+	"404": {},
     "200": {
       "headers": {},
       "body": {
@@ -14,7 +15,6 @@
         "type": "Microsoft.Solutions/applicationDefinitions",
         "location": "East US 2",
         "managedBy": null,
-        "resourceGroup": "rg",
         "tags": null,
         "identity": null,
         "sku": null,
@@ -39,7 +39,7 @@
           ],
           "description": "myManagedApplicationDef description",
           "displayName": "myManagedApplicationDef",
-          "lockLevel": null,
+          "lockLevel": "ReadOnly",
           "packageFileUri": "https://path/to/packagezipfile"
         }
       }

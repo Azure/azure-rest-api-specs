@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-managedapplications-2021-02` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2021-02'
 input-file:
-- Microsoft.Solutions/stable/2021-02-01-preview/managedapplications.json
+- Microsoft.Solutions/preview/2021-02-01-preview/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2020-08
@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-managedapplications-2020-08` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2020-08'
 input-file:
-- Microsoft.Solutions/stable/2020-08-21-preview/managedapplications.json
+- Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2019-07
