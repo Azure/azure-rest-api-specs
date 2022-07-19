@@ -41,7 +41,7 @@
         },
         "x-ms-examples": {
           "Get a list of all Trunks health configured for resource.": {
-            "$ref": "./examples/GetTrunksHealth.json"
+            "$ref": "./examples/GetTrunksHealths.json"
           }
         }
       }
@@ -86,7 +86,7 @@
         },
         "x-ms-examples": {
           "Gets Trunk health.": {
-            "$ref": "./examples/GetTrunkHealth.json"
+            "$ref": "./examples/GetTrunksHealth.json"
           }
         }
       }
@@ -127,29 +127,34 @@
         },
         "tls": {
           "description": "The status of the TLS connections between Direct Routing and the SBC",
-          "maxLength": 256,
           "type": "string",
           "enum": [
             "NoData",
             "OK",
             "CertExpiring",
             "CertExpired"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "TlsStatusType",
+            "modelAsString": true
+          }
         },
         "ping": {
           "description": "The status of options message send by SBC",
-          "maxLength": 256,
           "type": "string",
           "enum": [
             "NoData",
             "OK",
             "PingError",
             "PingExpired"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PingStatusType",
+            "modelAsString": true
+          }
         },
         "overallStatus": {
           "description": "The overall status of SBC",
-          "maxLength": 256,
           "type": "string",
           "enum": [
             "NoData",
@@ -157,7 +162,11 @@
             "InactiveNoRecentPings",
             "InactiveNoRecentPingsAndCalls",
             "InactiveNoRecentCalls"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "TrunkOverallStatusType",
+            "modelAsString": true
+          }
         }
       }
     }
