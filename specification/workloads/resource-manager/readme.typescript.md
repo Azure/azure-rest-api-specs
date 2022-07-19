@@ -22,32 +22,32 @@ directive:
     transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: WordpressInstances_CreateOrUpdate
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: SAPVirtualInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: SAPCentralInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 
   - where-operation: SAPCentralInstances_Update
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
     
   - where-operation: SAPDatabaseInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
     
   - where-operation: SAPDatabaseInstances_Update
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
     
   - where-operation: SAPApplicationServerInstances_Create
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
         
   - where-operation: SAPApplicationServerInstances_Update
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
             
   - where-operation: SAPVirtualInstances_Start
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
             
   - where-operation: SAPVirtualInstances_Stop
-    transform: $["x-ms-long-running-operation-options"] = undefined
+    transform: delete $["x-ms-long-running-operation-options"]
 ```
