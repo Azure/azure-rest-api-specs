@@ -28,10 +28,20 @@ These are the global settings for the managedApplication.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-managedapplications-2021-07
+tag: package-managedapplications-2021-02
+tag: package-managedapplications-2020-08
+tag: package-managedapplications-2019-07
+tag: package-managedapplications-2018-06
+tag: package-managedapplications-2017-09
 ```
 
 ``` yaml $(package-managedapplications)
 tag: package-managedapplications-2021-07
+tag: package-managedapplications-2021-02
+tag: package-managedapplications-2020-08
+tag: package-managedapplications-2019-07
+tag: package-managedapplications-2018-06
+tag: package-managedapplications-2017-09
 ```
 
 
@@ -42,6 +52,51 @@ These settings apply only when `--tag=package-managedapplications-2021-07` is sp
 ``` yaml $(tag) == 'package-managedapplications-2021-07'
 input-file:
 - Microsoft.Solutions/stable/2021-07-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2021-02
+
+These settings apply only when `--tag=package-managedapplications-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2021-02'
+input-file:
+- Microsoft.Solutions/stable/2021-02-01-preview/managedapplications.json
+```
+
+### Tag: package-managedapplications-2020-08
+
+These settings apply only when `--tag=package-managedapplications-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2020-08'
+input-file:
+- Microsoft.Solutions/stable/2020-08-21-preview/managedapplications.json
+```
+
+### Tag: package-managedapplications-2019-07
+
+These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+input-file:
+- Microsoft.Solutions/stable/2019-07-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2018-06
+
+These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2018-06'
+input-file:
+- Microsoft.Solutions/stable/2018-06-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2017-09
+
+These settings apply only when `--tag=package-managedapplications-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2017-09'
+input-file:
+- Microsoft.Solutions/stable/2017-09-01/managedapplications.json
 ```
 
 ---
