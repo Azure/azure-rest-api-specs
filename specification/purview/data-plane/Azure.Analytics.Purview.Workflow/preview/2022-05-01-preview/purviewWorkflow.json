@@ -90,7 +90,7 @@
           "Approval"
         ],
         "description": "Approve or reject an approval request",
-        "operationId": "ApprovalRequest_ApproveOrReject",
+        "operationId": "ApprovalRequests_ApproveOrReject",
         "x-ms-examples": {
           "ApprovalRequest_ApproveOrReject": {
             "$ref": "./examples/ApprovalRequest_ApproveOrReject.json"
@@ -149,10 +149,6 @@
           }
         },
         "deprecated": false,
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "consumes": [
           "application/json"
         ],
@@ -379,7 +375,7 @@
           "CanTriggerRunResponse"
         ],
         "description": "Query workflow definition for specific workflow type",
-        "operationId": "WorkflowRun_QueryWorkflowDefinition",
+        "operationId": "WorkflowRuns_QueryWorkflowDefinition",
         "x-ms-examples": {
           "WorkflowDefinition_Query": {
             "$ref": "./examples/WorkflowDefinitions_Query.json"
@@ -402,10 +398,7 @@
             "required": true,
             "description": "The query parameters.",
             "schema": {
-              "example": {
-                "requestType": "CreateTermRequest",
-                "parentTermId": "b82eee0b-c5da-40e1-a4bc-72ec38d0cd09"
-              }
+              "$ref": "#/definitions/TriggerQuery"
             }
           },
           {
@@ -468,8 +461,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           "default": {
@@ -487,7 +479,7 @@
           "RunCancelReply"
         ],
         "description": "Cancel a workflow run.",
-        "operationId": "WorkflowRun_Cancel",
+        "operationId": "WorkflowRuns_Cancel",
         "x-ms-examples": {
           "WorkflowRun_Cancel": {
             "$ref": "./examples/WorkflowRun_Cancel.json"
@@ -603,7 +595,7 @@
           "WorkflowRunMetadata"
         ],
         "description": "List workflow runs history.",
-        "operationId": "WorkflowRunsHistory_List",
+        "operationId": "WorkflowRuns_ListHistory",
         "x-ms-examples": {
           "WorkflowRunHistory_List": {
             "$ref": "./examples/WorkflowRunHistory_List.json"
@@ -667,7 +659,7 @@
           "RunDetail"
         ],
         "description": "Get workflow run detail.",
-        "operationId": "WorkflowRunDetail_Get",
+        "operationId": "WorkflowRuns_GetDetail",
         "x-ms-examples": {
           "WorkflowRunDetail_Get": {
             "$ref": "./examples/WorkflowRunDetail_Get.json"
@@ -710,7 +702,7 @@
           "Approval"
         ],
         "description": "List current user's sent pending requests",
-        "operationId": "SentApprovalRequests_List",
+        "operationId": "ApprovalRequests_ListSentApprovalRequest",
         "x-ms-examples": {
           "Sent_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
@@ -777,7 +769,7 @@
           "Approval"
         ],
         "description": "List current user's pending received requests",
-        "operationId": "ReceivedApprovalRequests_List",
+        "operationId": "ApprovalRequests_ListReceivedApprovalRequest",
         "x-ms-examples": {
           "Received_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
@@ -844,7 +836,7 @@
           "Approval"
         ],
         "description": "List current user's completed requests(both received and sent)",
-        "operationId": "ApprovalRequestsHistory_List",
+        "operationId": "ApprovalRequests_ListHistoryApprovalRequest",
         "x-ms-examples": {
           "History_ApprovalRequest_List": {
             "$ref": "./examples/ApprovalRequest_List.json"
@@ -1011,10 +1003,6 @@
           }
         },
         "deprecated": false,
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "consumes": [
           "application/json"
         ],
@@ -1169,11 +1157,12 @@
         },
         "workflowRunId": {
           "type": "string",
+          "title": "WorkflowRunId",
           "description": "The workflow run id (GUID)."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "workflowDefinitionId",
+          "title": "WorkflowDefinitionId",
           "description": "The workflow definition id(GUID)."
         },
         "approvalId": {
@@ -1254,7 +1243,7 @@
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "workflowDefinitionId",
+          "title": "WorkflowDefinitionId",
           "description": "The workflow definition id(GUID)."
         }
       },
@@ -1869,12 +1858,12 @@
         "reassignFrom": {
           "type": "string",
           "title": "ReassignFrom",
-          "description": "Reassign approval request from someone(GUID)."
+          "description": "Reassign approval request from AAD user or AAD group."
         },
         "reassignTo": {
           "type": "string",
           "title": "ReassignTo",
-          "description": "Reassign approval request to someone(GUID)."
+          "description": "Reassign approval request to AAD user or AAD group."
         }
       },
       "required": [
@@ -1903,12 +1892,12 @@
         "reassignFrom": {
           "type": "string",
           "title": "ReassignFrom",
-          "description": "Reassign task request from someone(GUID)."
+          "description": "Reassign task request from AAD user or AAD group."
         },
         "reassignTo": {
           "type": "string",
           "title": "ReassignTo",
-          "description": "Reassign task request to someone(GUID)."
+          "description": "Reassign task request to AAD user or AAD group."
         }
       },
       "required": [
