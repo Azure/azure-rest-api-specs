@@ -26,11 +26,46 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2022-05
 azure-validator: false
 ```
 
 ---
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
+```
+
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.CostManagement/preview/2022-06-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+```
+
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
@@ -40,16 +75,6 @@ input-file:
   - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
 ```
 
-### Tag: package-preview-2022-04
-
-These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-04'
-input-file:
-  - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
-  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
-  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
-```
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
@@ -295,7 +320,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
