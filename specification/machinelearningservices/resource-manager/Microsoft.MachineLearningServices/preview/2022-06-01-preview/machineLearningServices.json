@@ -4837,9 +4837,10 @@
         "published": {
           "format": "int32",
           "type": "integer",
-          "description": "Port over which the application is exposed from container."
+          "description": "Port over which the application is exposed from container.",
+          "x-nullable": true
         },
-        "host_ip": {
+        "hostIp": {
           "description": "Host IP over which the application is exposed from the container",
           "type": "string"
         }
@@ -4864,9 +4865,10 @@
           },
           "type": "string"
         },
-        "read_only": {
+        "readOnly": {
           "type": "boolean",
-          "description": "Indicate whether to mount volume as read_only"
+          "description": "Indicate whether to mount volume as readOnly",
+          "x-nullable": true
         },
         "source": {
           "type": "string",
@@ -4899,7 +4901,8 @@
       "properties": {
         "nocopy": {
           "type": "boolean",
-          "description": "Indicate whether volume is nocopy"
+          "description": "Indicate whether volume is nocopy",
+          "x-nullable": true
         }
       }
     },
@@ -4910,9 +4913,10 @@
           "type": "string",
           "description": "Type of Bind Option"
         },
-        "create_host_path": {
+        "createHostPath": {
           "type": "boolean",
-          "description": "Indicate whether to create host path."
+          "description": "Indicate whether to create host path.",
+          "x-nullable": true
         },
         "selinux": {
           "type": "string",
