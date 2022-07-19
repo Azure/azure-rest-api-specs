@@ -14,7 +14,7 @@
       }
     ]
   },
-  "basePath": "/",
+  "basePath": "/workflow",
   "schemes": [
     "https"
   ],
@@ -43,13 +43,13 @@
     }
   ],
   "paths": {
-    "/workflow/mine/approvals/{approvalRequestId}": {
+    "/mine/approvals/{approvalRequestId}": {
       "get": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "Get approval request by ApprovalRequestId",
-        "operationId": "ApprovalRequest_GetByApprovalRequestId",
+        "operationId": "ApprovalRequests_GetByApprovalRequestId",
         "x-ms-examples": {
           "ApprovalRequest_Get": {
             "$ref": "./examples/ApprovalRequest_Get.json"
@@ -87,7 +87,7 @@
       },
       "post": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "Approve or reject an approval request",
         "operationId": "ApprovalRequests_ApproveOrReject",
@@ -136,13 +136,13 @@
         }
       }
     },
-    "/workflow/mine/approvals/{approvalRequestId}/reassign": {
+    "/mine/approvals/{approvalRequestId}/reassign": {
       "post": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "Reassign an approval request.",
-        "operationId": "ApprovalRequest_Reassign",
+        "operationId": "ApprovalRequests_Reassign",
         "x-ms-examples": {
           "ApprovalRequest_Reassign": {
             "$ref": "./examples/ApprovalRequest_Reassign.json"
@@ -185,7 +185,7 @@
         }
       }
     },
-    "/workflow/definitions/{workflowDefinitionId}": {
+    "/definitions/{workflowDefinitionId}": {
       "get": {
         "tags": [
           "WorkflowDefinition"
@@ -319,7 +319,7 @@
         }
       }
     },
-    "/workflow/definitions": {
+    "/definitions": {
       "get": {
         "tags": [
           "WorkflowDefinition"
@@ -369,10 +369,10 @@
         }
       }
     },
-    "/workflow/mine/runs/query-definition": {
+    "/mine/runs/query-definition": {
       "post": {
         "tags": [
-          "CanTriggerRunResponse"
+          "WorkflowRuns"
         ],
         "description": "Query workflow definition for specific workflow type",
         "operationId": "WorkflowRuns_QueryWorkflowDefinition",
@@ -421,10 +421,10 @@
         }
       }
     },
-    "/workflow/mine/runs": {
+    "/mine/runs": {
       "post": {
         "tags": [
-          "TriggerQuery"
+          "WorkflowRuns"
         ],
         "description": "Trigger a workflow run for requestor",
         "operationId": "WorkflowRuns_Create",
@@ -473,10 +473,10 @@
         }
       }
     },
-    "/workflow/mine/runs/{workflowRunId}/cancel": {
+    "/mine/runs/{workflowRunId}/cancel": {
       "post": {
         "tags": [
-          "RunCancelReply"
+          "WorkflowRuns"
         ],
         "description": "Cancel a workflow run.",
         "operationId": "WorkflowRuns_Cancel",
@@ -525,13 +525,13 @@
         }
       }
     },
-    "/workflow/definitions/{workflowDefinitionId}/runs": {
+    "/definitions/{workflowDefinitionId}/runs": {
       "get": {
         "tags": [
-          "WorkflowRunMetadata"
+          "WorkflowRuns"
         ],
         "description": "List workflow runs of a workflow definition",
-        "operationId": "WorkflowRuns_List",
+        "operationId": "WorkflowRuns_ListByWorkflowDefinitionId",
         "x-ms-examples": {
           "WorkflowDefinitionWorkflowRun_List": {
             "$ref": "./examples/WorkflowDefinitionWorkflowRun_List.json"
@@ -589,10 +589,10 @@
         }
       }
     },
-    "/workflow/mine/runs/history": {
+    "/mine/runs/history": {
       "get": {
         "tags": [
-          "WorkflowRunMetadata"
+          "WorkflowRuns"
         ],
         "description": "List workflow runs history.",
         "operationId": "WorkflowRuns_ListHistory",
@@ -653,10 +653,10 @@
         }
       }
     },
-    "/workflow/mine/runs/{workflowRunId}/detail": {
+    "/mine/runs/{workflowRunId}/detail": {
       "get": {
         "tags": [
-          "RunDetail"
+          "WorkflowRuns"
         ],
         "description": "Get workflow run detail.",
         "operationId": "WorkflowRuns_GetDetail",
@@ -696,10 +696,10 @@
         }
       }
     },
-    "/workflow/mine/requests/sent": {
+    "/mine/requests/sent": {
       "get": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "List current user's sent pending requests",
         "operationId": "ApprovalRequests_ListSentApprovalRequest",
@@ -763,10 +763,10 @@
         }
       }
     },
-    "/workflow/mine/requests/received": {
+    "/mine/requests/received": {
       "get": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "List current user's pending received requests",
         "operationId": "ApprovalRequests_ListReceivedApprovalRequest",
@@ -830,10 +830,10 @@
         }
       }
     },
-    "/workflow/mine/requests/history": {
+    "/mine/requests/history": {
       "get": {
         "tags": [
-          "Approval"
+          "ApprovalRequests"
         ],
         "description": "List current user's completed requests(both received and sent)",
         "operationId": "ApprovalRequests_ListHistoryApprovalRequest",
@@ -900,13 +900,13 @@
         }
       }
     },
-    "/workflow/mine/tasks/{taskRequestId}": {
+    "/mine/tasks/{taskRequestId}": {
       "get": {
         "tags": [
-          "TaskRequest"
+          "TaskRequests"
         ],
         "description": "Get a task",
-        "operationId": "TaskRequest_GetByTaskRequestId",
+        "operationId": "TaskRequests_GetByTaskRequestId",
         "x-ms-examples": {
           "TaskRequest_Get": {
             "$ref": "./examples/TaskRequest_Get.json"
@@ -944,10 +944,10 @@
       },
       "post": {
         "tags": [
-          "TaskRequest"
+          "TaskRequests"
         ],
         "description": "Update a task",
-        "operationId": "TaskRequest_UpdateByTaskRequestId",
+        "operationId": "TaskRequests_UpdateByTaskRequestId",
         "x-ms-examples": {
           "TaskRequest_Update": {
             "$ref": "./examples/TaskRequest_Update.json"
@@ -993,7 +993,7 @@
         }
       }
     },
-    "/workflow/mine/tasks/{taskRequestId}/reassign": {
+    "/mine/tasks/{taskRequestId}/reassign": {
       "post": {
         "description": "Reassign a task.",
         "operationId": "TaskRequest_Reassign",
@@ -1047,7 +1047,6 @@
       "properties": {
         "content": {
           "type": "string",
-          "title": "content",
           "description": "The input content of actions."
         }
       },
@@ -1061,12 +1060,10 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "Type",
           "description": "The output content of actions."
         },
         "content": {
           "type": "object",
-          "title": "Content",
           "description": "The content of actions output."
         }
       },
@@ -1081,12 +1078,10 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "StartTime",
           "description": "The start time of actions."
         },
         "status": {
           "type": "object",
-          "title": "Status",
           "description": "The status of actions."
         },
         "output": {
@@ -1107,17 +1102,14 @@
       "properties": {
         "approvalType": {
           "type": "string",
-          "title": "ApprovalType",
           "description": "The approval type of an approval request."
         },
         "status": {
           "type": "string",
-          "title": "Status",
           "description": "The status of an approval request."
         },
         "approvers": {
           "type": "object",
-          "title": "Approvers",
           "description": "The list of approvers"
         }
       },
@@ -1133,12 +1125,10 @@
       "properties": {
         "response": {
           "type": "string",
-          "title": "Response",
           "description": "The response to an approval request, approve or reject. "
         },
         "comment": {
           "type": "string",
-          "title": "Comment",
           "description": "The comment of approving or rejecting an approval request."
         }
       },
@@ -1152,39 +1142,32 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "Type",
           "description": "The workflow request type."
         },
         "workflowRunId": {
           "type": "string",
-          "title": "WorkflowRunId",
           "description": "The workflow run id (GUID)."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "WorkflowDefinitionId",
           "description": "The workflow definition id(GUID)."
         },
         "approvalId": {
           "type": "string",
-          "title": "ApprovalId",
           "description": "The approval request id(GUID)."
         },
         "requestorId": {
           "type": "string",
-          "title": "RequestorId",
           "description": "The person(GUID) who created the approval request."
         },
         "submittedTime": {
           "type": "string",
           "format": "date-time",
-          "title": "SubmittedTime",
           "description": "The submitted time of an approval request."
         },
         "lastUpdatedTime": {
           "type": "string",
           "format": "date-time",
-          "title": "LastUpdatedTime",
           "description": "The last update time of an approval request."
         },
         "approval": {
@@ -1192,7 +1175,6 @@
         },
         "requestEventPayload": {
           "type": "object",
-          "title": "RequestEventPayload",
           "description": "Workflow approval request event details."
         }
       },
@@ -1213,17 +1195,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "Type",
           "description": "The workflow Type."
         },
         "category": {
           "type": "string",
-          "title": "Category",
           "description": "The workflow type category."
         },
         "action": {
           "type": "string",
-          "title": "Action",
           "description": "The workflow action."
         }
       },
@@ -1238,12 +1217,10 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "Type",
           "description": "The workflow definition type."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "WorkflowDefinitionId",
           "description": "The workflow definition id(GUID)."
         }
       },
@@ -1257,13 +1234,11 @@
       "properties": {
         "trigger": {
           "type": "object",
-          "title": "Trigger",
           "description": "The workflow definition trigger.",
           "$ref": "#/definitions/TriggerDetail"
         },
         "actions": {
           "type": "object",
-          "title": "Actions",
           "description": "The workflow definition actions.",
           "additionalProperties": {
             "$ref": "#/definitions/ActionDetail"
@@ -1284,7 +1259,6 @@
           "items": {
             "$ref": "#/definitions/Approval"
           },
-          "title": "Value",
           "description": "The value of approval request list.",
           "x-ms-identifiers": [
             "approvalId"
@@ -1294,7 +1268,10 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ListResult_WorkflowDefinitionMetadata": {
       "title": "ListResult_WorkflowDefinitionMetadata",
@@ -1305,14 +1282,16 @@
           "items": {
             "$ref": "#/definitions/WorkflowDefinitionMetadata"
           },
-          "title": "Value",
           "description": "The value of workflow definition list."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ListResult_WorkflowRunMetadata": {
       "title": "ListResult_WorkflowRunMetadata",
@@ -1323,14 +1302,16 @@
           "items": {
             "$ref": "#/definitions/WorkflowRunMetadata"
           },
-          "title": "Value",
           "description": "The value of workflow run list."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "TriggerQuery": {
       "title": "TriggerQuery",
@@ -1342,7 +1323,6 @@
       "properties": {
         "comment": {
           "type": "string",
-          "title": "Comment",
           "description": "The comment of canceling a workflow run."
         }
       }
@@ -1353,12 +1333,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "Id",
           "description": "The workflow run id(GUID)."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "WorkflowDefinitionId",
           "description": "The workflow definition id(GUID)."
         },
         "workflowType": {
@@ -1367,27 +1345,22 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "StartTime",
           "description": "The start time of workflow run."
         },
         "requestor": {
           "type": "string",
-          "title": "Requestor",
           "description": "The person(GUID) who created the workflow run."
         },
         "requestEventPayload": {
           "type": "object",
-          "title": "RequestEventPayload",
           "description": "Workflow run request event details."
         },
         "status": {
           "type": "object",
-          "title": "Status",
           "description": "The workflow run status."
         },
         "definition": {
           "type": "object",
-          "title": "Definition",
           "description": "The workflow definition of this workflow run."
         },
         "detail": {
@@ -1412,17 +1385,14 @@
       "properties": {
         "taskType": {
           "type": "string",
-          "title": "TaskType",
           "description": "Task type."
         },
         "taskTitle": {
           "type": "string",
-          "title": "TaskTitle",
           "description": "The task title of a task definition."
         },
         "taskBody": {
           "type": "string",
-          "title": "TaskBody",
           "description": "The task definition body detail."
         },
         "assignedTo": {
@@ -1430,7 +1400,6 @@
           "items": {
             "type": "string"
           },
-          "title": "AssignedTo",
           "description": "The person who has been assigned the task request."
         },
         "status": {
@@ -1441,7 +1410,6 @@
           "items": {
             "$ref": "#/definitions/TaskChangeHistory"
           },
-          "title": "ChangeHistory",
           "description": "The change history of a workflow task request.",
           "x-ms-identifiers": []
         }
@@ -1458,18 +1426,15 @@
       "properties": {
         "updatedBy": {
           "type": "string",
-          "title": "UpdatedBy",
           "description": "The person(GUID) who updated a task."
         },
         "comment": {
           "type": "string",
-          "title": "Comment",
           "description": "The comment of a updated task."
         },
         "updatedTime": {
           "type": "string",
           "format": "date-time",
-          "title": "UpdatedTime",
           "description": "The updated time of task status change history."
         },
         "oldStatus": {
@@ -1492,34 +1457,28 @@
       "properties": {
         "workflowRunId": {
           "type": "string",
-          "title": "WorkflowRunId",
           "description": "The workflow run id (GUID)."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "WorkflowDefinitionId",
           "description": "The GUID of workflow definition."
         },
         "taskRequestId": {
           "type": "string",
-          "title": "TaskRequestId",
           "description": "Task request id (GUID)."
         },
         "requestorId": {
           "type": "string",
-          "title": "RequestorId",
           "description": "The person(GUID) who created the task request."
         },
         "submittedTime": {
           "type": "string",
           "format": "date-time",
-          "title": "SubmittedTime",
           "description": "The submitted time of a task request."
         },
         "lastUpdatedTime": {
           "type": "string",
           "format": "date-time",
-          "title": "LastUpdatedTime",
           "description": "The last update time of a task request."
         },
         "taskDetail": {
@@ -1527,7 +1486,6 @@
         },
         "requestEventPayload": {
           "type": "object",
-          "title": "RequestEventPayload",
           "description": "Task request event details."
         }
       },
@@ -1548,12 +1506,10 @@
       "properties": {
         "value": {
           "type": "string",
-          "title": "Value",
           "description": "Task status value."
         },
         "statusType": {
           "type": "string",
-          "title": "StatusType",
           "description": "Task status type."
         }
       },
@@ -1568,12 +1524,10 @@
       "properties": {
         "newStatus": {
           "type": "string",
-          "title": "NewStatus",
           "description": "The new status will be used to update the task."
         },
         "comment": {
           "type": "string",
-          "title": "Comment",
           "description": "The comment when update a task."
         }
       },
@@ -1588,12 +1542,10 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "StartTime",
           "description": "The start time of trigger in workflow run detail."
         },
         "status": {
           "type": "object",
-          "title": "Status",
           "description": "The status of trigger in workflow run detail."
         }
       },
@@ -1614,27 +1566,22 @@
           "items": {
             "type": "string"
           },
-          "title": "associatedEntityIds",
           "description": "The associated entity guid list."
         },
         "workflowName": {
           "type": "string",
-          "title": "WorkflowName",
           "description": "The workflow name of workflow definition."
         },
         "isEnabled": {
           "type": "boolean",
-          "title": "IsEnabled",
           "description": "Whether the workflow definition enabled or not."
         },
         "definition": {
           "type": "object",
-          "title": "Definition",
           "description": "The workflow definition detail."
         },
         "description": {
           "type": "string",
-          "title": "Description",
           "description": "Description of a workflow definition."
         }
       },
@@ -1652,7 +1599,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "Id",
           "description": "The GUID of workflow definition."
         },
         "workflowType": {
@@ -1663,44 +1609,36 @@
           "items": {
             "type": "string"
           },
-          "title": "associatedEntityIds",
           "description": "The associated entity guid list."
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "title": "",
           "description": "The created time of a workflow definition."
         },
         "createdBy": {
           "type": "string",
-          "title": "CreatedBy",
           "description": "The person who created the workflow definition."
         },
         "lastUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "LastUpdateTime",
           "description": "The last update time of a workflow definition."
         },
         "updatedBy": {
           "type": "string",
-          "title": "UpdatedBy",
           "description": "The person who updated the workflow definition."
         },
         "workflowName": {
           "type": "string",
-          "title": "WorkflowName",
           "description": "The workflow name of workflow definition."
         },
         "isEnabled": {
           "type": "boolean",
-          "title": "IsEnabled",
           "description": "Whether the workflow definition enabled or not."
         },
         "description": {
           "type": "string",
-          "title": "Description",
           "description": "Description of a workflow definition."
         }
       },
@@ -1722,7 +1660,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "Id",
           "description": "The GUID of workflow definition."
         },
         "workflowType": {
@@ -1733,49 +1670,40 @@
           "items": {
             "type": "string"
           },
-          "title": "associatedEntityIds",
           "description": "The associated entity guid list."
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "title": "CreatedTime",
           "description": "The created time of a workflow definition."
         },
         "createdBy": {
           "type": "string",
-          "title": "CreatedBy",
           "description": "The person who created the workflow definition."
         },
         "lastUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "LastUpdateTime",
           "description": "The last update time of a workflow definition."
         },
         "updatedBy": {
           "type": "string",
-          "title": "UpdatedBy",
           "description": "The person who updated the workflow definition."
         },
         "workflowName": {
           "type": "string",
-          "title": "WorkflowName",
           "description": "The workflow name of workflow definition."
         },
         "isEnabled": {
           "type": "boolean",
-          "title": "IsEnabled",
           "description": "Whether the workflow definition enabled or not."
         },
         "definition": {
           "type": "object",
-          "title": "Definition",
           "description": "The workflow definition detail."
         },
         "description": {
           "type": "string",
-          "title": "Description",
           "description": "Description of a workflow definition."
         }
       },
@@ -1798,33 +1726,27 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "Id",
           "description": "The GUID of workflow run."
         },
         "workflowDefinitionId": {
           "type": "string",
-          "title": "WorkflowDefinitionId",
           "description": "The GUID of workflow definition."
         },
         "startTime": {
           "type": "string",
-          "title": "StartTime",
           "description": "Workflow run start time.",
           "format": "date-time"
         },
         "requestor": {
           "type": "string",
-          "title": "Requestor",
           "description": "The person who create the workflow run."
         },
         "requestEventPayload": {
           "type": "object",
-          "title": "RequestEventPayload",
           "description": "Workflow run request event details."
         },
         "status": {
           "type": "object",
-          "title": "Status",
           "description": "Workflow run status."
         }
       },
@@ -1843,7 +1765,6 @@
       "properties": {
         "reassignments": {
           "type": "array",
-          "title": "Reassignments",
           "description": "The request body of reassigning an approval request.",
           "items": {
             "$ref": "#/definitions/ApprovalReassignment"
@@ -1857,12 +1778,10 @@
       "properties": {
         "reassignFrom": {
           "type": "string",
-          "title": "ReassignFrom",
           "description": "Reassign approval request from AAD user or AAD group."
         },
         "reassignTo": {
           "type": "string",
-          "title": "ReassignTo",
           "description": "Reassign approval request to AAD user or AAD group."
         }
       },
@@ -1877,7 +1796,6 @@
       "properties": {
         "reassignments": {
           "type": "array",
-          "title": "Reassignments",
           "description": "The request body of reassigning a task request.",
           "items": {
             "$ref": "#/definitions/TaskReassignment"
@@ -1891,12 +1809,10 @@
       "properties": {
         "reassignFrom": {
           "type": "string",
-          "title": "ReassignFrom",
           "description": "Reassign task request from AAD user or AAD group."
         },
         "reassignTo": {
           "type": "string",
-          "title": "ReassignTo",
           "description": "Reassign task request to AAD user or AAD group."
         }
       },
@@ -1910,13 +1826,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "description": "Gets or sets the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ErrorModel"
         }
       }
     },
@@ -1926,8 +1836,7 @@
       "properties": {
         "code": {
           "description": "Gets or sets the code.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "details": {
           "description": "Gets or sets the details.",
@@ -1938,20 +1847,21 @@
           },
           "x-ms-identifiers": [
             "code"
-          ],
-          "readOnly": true
+          ]
         },
         "message": {
           "description": "Gets or sets the messages.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "target": {
           "description": "Gets or sets the target.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     }
   },
   "parameters": {
