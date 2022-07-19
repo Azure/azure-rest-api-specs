@@ -5225,6 +5225,65 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/datawarehousequeries": {
+      "get": {
+        "operationId": "SqlPoolsDatawareHouseQueries_Get",
+        "summary": "Get SQL pool DatawareHouse Queries ",
+        "description": "Get SQL pool DatawareHouse Queries  ",
+        "tags": [
+          "SqlPools,DatawareHouseQueries"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseQueries"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a SQL Analytics pool": {
+            "$ref": "./examples/GetDatawareHouseQueries.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7621,6 +7680,22 @@
           "items": {
             "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
           }
+        }
+      }
+    },
+    "DataWarehouseQueries": {
+      "description": "data warehouse queries",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataWarehouseQueries",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     }
