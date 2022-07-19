@@ -1,0 +1,595 @@
+{
+  "x-generator": "NSwag v13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Search API",
+    "version": "2022-02-02"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "text/plain",
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Marketplace/search": {
+      "post": {
+        "tags": [
+          "Authenticated-Arm-Search"
+        ],
+        "summary": "Returns a list of azure private store marketplace catalog offers and total count and facets",
+        "operationId": "Search_PostArm",
+        "x-ms-examples": {
+          "Search_Post": {
+            "$ref": "./examples/Search_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "privateStoreId",
+            "in": "header",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "x-ms-app",
+            "x-originalName": "callingApp",
+            "in": "header",
+            "x-nullable": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of azure private store marketplace catalog offers and total count and facets",
+            "schema": {
+              "$ref": "#/definitions/SearchResponseDto"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Store": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell",
+        "DakotaDownstream"
+      ],
+      "enum": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell",
+        "DakotaDownstream"
+      ],
+      "x-ms-enum": {
+        "name": "Store",
+        "modelAsString": true
+      }
+    },
+    "PricingType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Free",
+        "FreeTrial",
+        "Byol",
+        "Payg",
+        "Ri"
+      ],
+      "enum": [
+        "Free",
+        "FreeTrial",
+        "Byol",
+        "Payg",
+        "Ri"
+      ],
+      "x-ms-enum": {
+        "name": "PricingType",
+        "modelAsString": true
+      }
+    },
+    "FacetsResponseDto": {
+      "type": "object",
+      "properties": {
+        "facets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetsItemDto"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FacetsItemDto": {
+      "type": "object",
+      "properties": {
+        "facetName": {
+          "type": "string"
+        },
+        "facetValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetValueDto"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FacetValueDto": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SearchResponseDto": {
+      "type": "object",
+      "properties": {
+        "facets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetsItemDto"
+          },
+          "x-ms-identifiers": []
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchItemDto"
+          },
+          "x-ms-identifiers": [
+            "legacyId"
+          ]
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SearchItemDto": {
+      "type": "object",
+      "properties": {
+        "ampAppsPopularity": {
+          "type": "number",
+          "format": "double"
+        },
+        "ampCsPopularity": {
+          "type": "number",
+          "format": "double"
+        },
+        "applicableProducts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSourceAppsPopularity": {
+          "type": "number",
+          "format": "double"
+        },
+        "appSourceCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSourceCsPopularity": {
+          "type": "number",
+          "format": "double"
+        },
+        "appSourceIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azurePortalCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bigId": {
+          "type": "string"
+        },
+        "cspStates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "determinedStorefronts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "isAzureBenefitEligible": {
+          "type": "boolean"
+        },
+        "isCoreVm": {
+          "type": "boolean"
+        },
+        "isPreferredSolution": {
+          "type": "boolean"
+        },
+        "isAdditionalPurchaseRequired": {
+          "type": "boolean"
+        },
+        "isPowerBICertified": {
+          "type": "boolean"
+        },
+        "isIndustryCloud": {
+          "type": "boolean"
+        },
+        "isMicrosoftProduct": {
+          "type": "boolean"
+        },
+        "isPreview": {
+          "type": "boolean"
+        },
+        "language": {
+          "type": "string"
+        },
+        "legacyId": {
+          "type": "string"
+        },
+        "offerType": {
+          "type": "string"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanDto"
+          },
+          "x-ms-identifiers": [
+            "legacyPlanId"
+          ]
+        },
+        "pricingTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "vmGenerations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmImageTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmSecurityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "smallIconUri": {
+          "type": "string"
+        },
+        "mediumIconUri": {
+          "type": "string"
+        },
+        "largeIconUri": {
+          "type": "string"
+        },
+        "wideIconUri": {
+          "type": "string"
+        },
+        "heroIconUri": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanDto": {
+      "type": "object",
+      "properties": {
+        "cspState": {
+          "type": "string"
+        },
+        "legacyPlanId": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "architectureType": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/PlanMetadataDto"
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OperatingSystemDto"
+        }
+      }
+    },
+    "PlanMetadataDto": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "type": "string"
+        }
+      }
+    },
+    "OperatingSystemDto": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateStoreAllow": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "AllowedByAdmin",
+        "AllowedByDefault",
+        "NonAllowed"
+      ],
+      "enum": [
+        "AllowedByAdmin",
+        "AllowedByDefault",
+        "NonAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateStoreAllow",
+        "modelAsString": true
+      }
+    },
+    "SearchRequest": {
+      "type": "object",
+      "required": [
+        "languages",
+        "stores"
+      ],
+      "properties": {
+        "searchQuery": {
+          "type": "string"
+        },
+        "publisherName": {
+          "type": "string"
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "take": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isAzureBenefitEligible": {
+          "type": "boolean"
+        },
+        "isMicrosoftProduct": {
+          "type": "boolean"
+        },
+        "isThirdParty": {
+          "type": "boolean"
+        },
+        "isCoreVm": {
+          "type": "boolean"
+        },
+        "isPreferredSolution": {
+          "type": "boolean"
+        },
+        "isAdditionalPurchaseRequired": {
+          "type": "boolean"
+        },
+        "isPowerBICertified": {
+          "type": "boolean"
+        },
+        "isIndustryCloud": {
+          "type": "boolean"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Store"
+          }
+        },
+        "select": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sortBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "offerTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "privateStoreAllowances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateStoreAllow"
+          }
+        },
+        "appSourceIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatingSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSourceCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureIndustries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azurePortalCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
