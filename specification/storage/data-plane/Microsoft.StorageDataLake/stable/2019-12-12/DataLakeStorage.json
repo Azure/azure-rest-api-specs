@@ -875,7 +875,7 @@
           },
           {
             "name": "x-ms-permissions",
-            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read, write, or execute permission.  The sticky bit is also supported.  Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported.",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read (4), write (2), or execute (1) permission. Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported. The sticky bit is also supported and is represented by 1st digit in 4-digit octal notation (e.g. 1766 represents sticky bit=enabled, owner=rwx, owning group=rw and others=rw). Invalid in conjunction with x-ms-acl.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -1301,7 +1301,7 @@
           },
           {
             "name": "x-ms-permissions",
-            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read, write, or execute permission.  The sticky bit is also supported.  Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported. Invalid in conjunction with x-ms-acl.",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read (4), write (2), or execute (1) permission. Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported. The sticky bit is also supported and is represented by 1st digit in 4-digit octal notation (e.g. 1766 represents sticky bit=enabled, owner=rwx, owning group=rw and others=rw). Invalid in conjunction with x-ms-acl.",
             "in": "header",
             "required": false,
             "type": "string"
