@@ -968,6 +968,120 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}/updateAccess": {
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Applications_UpdateAccess",
+        "description": "Update access for application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/updateAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAccessDefinition"
+            },
+            "description": "Request body parameters to list tokens."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccessDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}/listTokens": {
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Applications_ListTokens",
+        "description": "List tokens for application.",
+        "x-ms-examples": {
+          "Lists applications": {
+            "$ref": "./examples/listToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListTokenRequest"
+            },
+            "description": "Request body parameters to list tokens."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of managed identity tokens.",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityTokenResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2081,6 +2195,147 @@
         "name": "ApplicationManagementMode",
         "modelAsString": true
       }
+    },
+    "UpdateAccessDefinition": {
+      "properties": {
+        "approver": {
+          "type": "string",
+          "description": "The approver name."
+        },
+        "metadata": {
+          "$ref": "#/definitions/JitRequestMetadata",
+          "description": "The JIT request metadata."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The JIT status."
+        },
+        "subStatus": {
+          "$ref": "#/definitions/SubStatus",
+          "description": "The JIT status."
+        }
+      },
+      "required": [
+        "metadata",
+        "status",
+        "subStatus"
+      ],
+      "description": "Update access request definition."
+    },
+    "JitRequestMetadata": {
+      "properties": {
+        "originRequestId": {
+          "type": "string",
+          "description": "The origin request id."
+        },
+        "RequestorId": {
+          "type": "string",
+          "description": "The requestor id."
+        },
+        "TenantDisplayName": {
+          "type": "string",
+          "description": "The publisher's tenant name."
+        },
+        "SubjectDisplayName": {
+          "type": "string",
+          "description": "The subject display name."
+        }
+      },
+      "description": "The JIT request metadata."
+    },
+    "Status": {
+      "description": "The JIT status.",
+      "enum": [
+        "NotSpecified",
+        "Elevate",
+        "Remove"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "SubStatus": {
+      "description": "The sub status.",
+      "enum": [
+        "NotSpecified",
+        "Approved",
+        "Denied",
+        "Failed",
+        "Expired",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Substatus",
+        "modelAsString": true
+      }
+    },
+    "ListTokenRequest": {
+      "properties": {
+        "authorizationAudience": {
+          "type": "string",
+          "description": "The authorization audience."
+        },
+        "userAssignedIdentities": {
+          "description": "The user assigned identities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "description": "List token request body."
+    },
+    "ManagedIdentityTokenResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIdentityToken"
+          },
+          "description": "The array of managed identity tokens."
+        }
+      },
+      "description": "The array of managed identity tokens."
+    },
+    "ManagedIdentityToken": {
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "The requested access token."
+        },
+        "expires_in": {
+          "type": "string",
+          "description": "The number of seconds the access token will be valid."
+        },
+        "expires_on": {
+          "type": "string",
+          "description": "The timespan when the access token expires. This is represented as the number of seconds from epoch."
+        },
+        "not_before": {
+          "type": "string",
+          "description": "The timespan when the access token takes effect. This is represented as the number of seconds from epoch."
+        },
+        "authorizationAudience": {
+          "type": "string",
+          "description": "The aud (audience) the access token was request for. This is the same as what was provided in the listTokens request."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Azure resource ID for the issued token. This is either the managed application ID or the user-assigned identity ID."
+        },
+        "token_type": {
+          "type": "string",
+          "description": "The type of the token."
+        }
+      },
+      "description": "The managed identity token for the managed app resource."
+    },
+    "UserAssignedIdentity": {
+        "type": "string",
+        "description": "The fully qualified resource id of user assigned identity."
     }
   },
   "parameters": {
