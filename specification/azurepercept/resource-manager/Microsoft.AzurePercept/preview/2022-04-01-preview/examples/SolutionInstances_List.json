@@ -22,7 +22,7 @@
               "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
             },
             "properties": {
-              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/targets/myTarget",
+              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myDevice",
               "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
               "description": "User provided SolutionInstance description",
               "reportedStatus": {
@@ -34,32 +34,29 @@
               },
               "accounts": [
                 {
-                  "kind": "ava",
-                  "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.videoAnalyzers/my-ava-account"
-                },
-                {
                   "kind": "computervision",
                   "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
                 }
               ],
-              "configurations": [
-                {
-                  "operation": "add",
-                  "componentName": "component1",
-                  "value": {
-                    "AVA.graphInstances": "{AVA graph instance}"
-                  }
-                },
-                {
-                  "operation": "override",
-                  "componentName": "component2",
-                  "value": {
-                    "edgeAgent.properties.desired": {
-                      "createOptions": "createOptions"
+              "configurations": {
+                "parameters": [
+                  {
+                    "name": "param1",
+                    "stringValue": "newAVAimageULR"
+                  },
+                  {
+                    "name": "param2",
+                    "stringValue": "newSAimageULR"
+                  },
+                  {
+                    "name": "objectParam",
+                    "objectValue": {
+                      "abc": "cde"
                     }
                   }
-                }
-              ]
+                ]
+              },
+              "enableLogs": true
             }
           },
           {
@@ -75,7 +72,7 @@
               "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
             },
             "properties": {
-              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/targets/myOtherTarget",
+              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myOtherDevice",
               "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/myOtherSolution",
               "description": "User provided SolutionInstance description",
               "reportedStatus": {
@@ -87,32 +84,29 @@
               },
               "accounts": [
                 {
-                  "kind": "ava",
-                  "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.videoAnalyzers/my-ava-account"
-                },
-                {
                   "kind": "computervision",
                   "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
                 }
               ],
-              "configurations": [
-                {
-                  "operation": "add",
-                  "componentName": "component1",
-                  "value": {
-                    "AVA.graphInstances": "{AVA graph instance}"
-                  }
-                },
-                {
-                  "operation": "override",
-                  "componentName": "component2",
-                  "value": {
-                    "edgeAgent.properties.desired": {
-                      "createOptions": "createOptions"
+              "configurations": {
+                "parameters": [
+                  {
+                    "name": "param1",
+                    "stringValue": "newAVAimageULR"
+                  },
+                  {
+                    "name": "param2",
+                    "stringValue": "newSAimageULR"
+                  },
+                  {
+                    "name": "objectParam",
+                    "objectValue": {
+                      "abc": "cde"
                     }
                   }
-                }
-              ]
+                ]
+              },
+              "enableLogs": true
             }
           }
         ]

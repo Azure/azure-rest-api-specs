@@ -4,7 +4,6 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "accountName": "myAccount",
-    "deviceName": "myDevice",
     "sensorName": "mySensor"
   },
   "responses": {
@@ -28,6 +27,12 @@
           "mediaProfile1.Name": "profile_1 jpeg",
           "mediaProfile1.SourceConfigToken": "profile_1_jpeg"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.AzurePrecept/locations/{region}/operationsStatuses/{OperationId}",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{resource-group}/providers/Microsoft.Resources/accounts/{accountName}/devices/{deviceName}/sensors/{sensorName}/operationStatuses/{operation-id}"
       }
     }
   }

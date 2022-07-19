@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "sensorName": "mySensor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sensorResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/sensors/{sensorName}",
+        "dataRecord": {
+          "deviceId": "mydevice",
+          "blobUri": "https://contosostorageaccount.blob.core.windows.net/device-upload-container/mydevice/myfile.txt",
+          "blobName": "mydevice/myfile.txt",
+          "lastUpdatedTime": "2021-07-31T00:26:50+00:00",
+          "blobSizeInBytes": 11,
+          "enqueuedTimeUtc": "2021-07-31T00:26:51.5134008Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.AzurePrecept/locations/{region}/operationsStatuses/{OperationId}",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{resource-group}/providers/Microsoft.Resources/accounts/{accountName}/devices/{deviceName}/sensors/{sensorName}/operationStatuses/{operation-id}"
+      }
+    }
+  }
+}
