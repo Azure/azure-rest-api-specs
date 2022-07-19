@@ -43,6 +43,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2022-07-15/privateEndpointConnection.json
   - Microsoft.DocumentDB/stable/2022-07-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2022-07-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-07-15/mongorbac.json
   - Microsoft.DocumentDB/stable/2022-07-15/restorable.json
   - Microsoft.DocumentDB/stable/2022-07-15/services.json
 ```
