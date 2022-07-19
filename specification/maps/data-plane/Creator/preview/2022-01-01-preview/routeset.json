@@ -1,7 +1,7 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "2022-01-01",
+		"version": "2022-09-01",
 		"title": "Azure Maps Routeset Service.",
 		"description": "APIs for managing routesets."
 	},
@@ -46,21 +46,21 @@
 	},
 	"definitions": {
 		"Routeset": {
-			"description": "Detail information for the routeset.",
+			"description": "Detailed information for the routeset.",
 			"type": "object",
 			"properties": {
 				"routesetid": {
-					"description": "The unique routeset id for the routeset.",
+					"description": "The unique ID of the routeset.",
 					"type": "string",
 					"readOnly": true
 				},
 				"ontology": {
-					"description": "The ontology of the source dataset. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
+					"description": "The ontology of the source dataset. For more information about Azure Maps Creator ontologies, see the [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) article.",
 					"type": "string",
 					"readOnly": true
 				},
 				"datasetId": {
-					"description": "The unique dataset Id used to create the routeset.",
+					"description": "The unique ID of the dataset used to create the routeset.",
 					"type": "string",
 					"readOnly": true
 				},
@@ -85,7 +85,7 @@
 					"format": "date-time",
 					"readOnly": true
 				}
-			}
+			}2022-09-01
 		}
 	},
 	"responses": {},
@@ -96,14 +96,14 @@
 			"type": "string",
 			"in": "query",
 			"required": true,
-			"default": "2022-01-01",
+			"default": "2022-09-01",
 			"x-ms-parameter-location": "client"
 		},
 		"DatasetId": {
 			"name": "datasetId",
 			"type": "string",
 			"in": "path",
-			"description": "The identifier for the dataset to query from.",
+			"description": "The ID of the dataset that the routeset was created from.",
 			"required": true,
 			"x-ms-parameter-location": "method"
 		},
@@ -116,7 +116,7 @@
 		},
 		"RoutesetId": {
 			"name": "routesetId",
-			"description": "The identifier for the routeset to query from.",
+			"description": "The ID of the routeset to query from.",
 			"type": "string",
 			"in": "path",
 			"required": true,
@@ -124,7 +124,7 @@
 		},
 		"SubscriptionKey": {
 			"name": "subscription-key",
-			"description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
 			"type": "string",
 			"in": "query",
 			"required": true,
@@ -132,7 +132,7 @@
 		},
 		"RoutesetOperationId": {
 			"name": "routesetOperationId",
-			"description": "The ID to query the status for the routeset create request.",
+			"description": "The ID used to query the status of the routeset creation.",
 			"type": "string",
 			"in": "path",
 			"required": true,
@@ -142,7 +142,7 @@
 	"paths": {
 		"/routesets": {
 			"post": {
-				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create routes that are consumed by the Azure Maps Wayfinding service. The created routeset can be used to create paths within facilities and can be queried via the Azure Maps Wayfinding Service. To make a dataset, use the [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create).\n\n### Submit Create Request\n\nTo create your routeset you will make a `POST` request with an empty body. The `datasetId` query parameter will be used as the source of the routeset data.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create routes that are consumed by the Azure Maps Wayfinding service to create paths within facilities.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
 				"operationId": "routesetCreate",
 				"x-ms-long-running-operation": true,
 				"x-ms-long-running-operation-options": {
@@ -170,7 +170,7 @@
 				}
 			},
 			"get": {
-				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all routesets created.",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
 				"operationId": "routesetList",
 				"parameters": [
 					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
@@ -192,7 +192,7 @@
 		},
 		"/routesets/{routesetId}": {
 			"get": {
-				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a routeset.",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a routeset.",
 				"operationId": "routesetGet",
 				"x-ms-examples": {
 				  "Get details for a previously created dataset": {
@@ -218,10 +218,10 @@
 				}
 			},
 			"delete": {
-				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created routeset. You can use this API if a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `routesetId` of the routeset to delete.",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
 				"operationId": "routesetDelete",
 				"x-ms-examples": {
-					"Delete previously created routeset": {
+					"Delete an existing routeset": {
 					  "$ref": "./examples/Routeset_Delete.json"
 					}
 				  },
@@ -243,7 +243,7 @@
 		},
 		"/routesets/operations/{operationId}": {
 			"get": {
-			  "description": "This API allows the caller to view the current progress of a routeset operation and the path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
+			  "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
 			  "operationId": "routesetGetOperation",
 			  "x-ms-examples": {
 				"Get the status of an operation which is still running": { "$ref": "./examples/Routeset_GetOperationStillRunning.json" },
