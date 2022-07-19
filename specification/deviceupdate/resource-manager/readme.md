@@ -1,6 +1,6 @@
 # Device Update
 
-> see https://aka.ms/autorest
+> see <https://aka.ms/autorest>
 
 This is the AutoRest configuration file for deviceupdate.
 
@@ -27,7 +27,16 @@ These are the global settings for the deviceupdate.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-01-preview
+tag: package-2022-10-01
+```
+
+### Tag: package-2022-04-01-preview
+
+These settings apply only when `--tag=package-2022-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-01'
+input-file:
+  - Microsoft.DeviceUpdate/preview/2022-04-10-01/deviceupdate.json
 ```
 
 ### Tag: package-2022-04-01-preview
