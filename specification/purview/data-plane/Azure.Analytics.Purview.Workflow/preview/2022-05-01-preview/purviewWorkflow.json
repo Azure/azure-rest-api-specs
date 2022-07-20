@@ -26,19 +26,19 @@
   ],
   "securityDefinitions": {
     "azure_auth": {
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      },
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow."
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "https://purview.azure.net/.default": "Default authorization scope."
+      }
     }
   },
   "security": [
     {
       "azure_auth": [
-        "user_impersonation"
+        "https://purview.azure.net/.default"
       ]
     }
   ],
@@ -1189,8 +1189,8 @@
         "requestEventPayload"
       ]
     },
-    "ApprovalWorkflow": {
-      "title": "ApprovalWorkflow",
+    "WorkflowTypeDetail": {
+      "title": "WorkflowTypeDetail",
       "type": "object",
       "properties": {
         "type": {
@@ -1340,7 +1340,7 @@
           "description": "The workflow definition id(GUID)."
         },
         "workflowType": {
-          "$ref": "#/definitions/ApprovalWorkflow"
+          "$ref": "#/definitions/WorkflowTypeDetail"
         },
         "startTime": {
           "type": "string",
@@ -1559,7 +1559,7 @@
       "type": "object",
       "properties": {
         "workflowType": {
-          "$ref": "#/definitions/ApprovalWorkflow"
+          "$ref": "#/definitions/WorkflowTypeDetail"
         },
         "associatedEntityIds": {
           "type": "array",
@@ -1602,7 +1602,7 @@
           "description": "The GUID of workflow definition."
         },
         "workflowType": {
-          "$ref": "#/definitions/ApprovalWorkflow"
+          "$ref": "#/definitions/WorkflowTypeDetail"
         },
         "associatedEntityIds": {
           "type": "array",
@@ -1663,7 +1663,7 @@
           "description": "The GUID of workflow definition."
         },
         "workflowType": {
-          "$ref": "#/definitions/ApprovalWorkflow"
+          "$ref": "#/definitions/WorkflowTypeDetail"
         },
         "associatedEntityIds": {
           "type": "array",
