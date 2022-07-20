@@ -28,21 +28,9 @@ input-file:
   - analyzetext-authoring.json
   - analyzeconversations.json
   - analyzeconversations-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-10-01
-
-These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_10_01'
-input-file: 
   - questionanswering.json
   - questionanswering-authoring.json
-title: 
+title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
