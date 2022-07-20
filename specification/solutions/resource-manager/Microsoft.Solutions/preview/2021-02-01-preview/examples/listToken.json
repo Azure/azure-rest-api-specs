@@ -4,24 +4,30 @@
     "resourceGroupName": "rg",
     "applicationName": "myManagedApplication",
     "api-version": "2021-02-01-preview",
-	"parameters": {
-    "authorizationAudience": "authorizationAudience",
-    "userAssignedIdentities": [
-      "IdentityOne",
-      "IdentityTwo"
+    "parameters": {
+      "authorizationAudience": "authorizationAudience",
+      "userAssignedIdentities": [
+        "IdentityOne",
+        "IdentityTwo"
       ]
     }
   },
   "responses": {
     "200": {
-	"headers": {},
+      "headers": {},
       "body": {
-      "authorizationAudience": "authorizationAudience",
-      "userAssignedIdentities": [
-        "IdentityOne",
-        "IdentityTwo"
+        "value": [
+          {
+            "access_token": "access_token",
+            "expires_in": "1500",
+            "expires_on": "1500",
+            "not_before": "1500",
+            "authorizationAudience": "authorizationAudience",
+            "resourceId": "resourceId",
+            "token_type": "Bearer"
+          }
         ]
       }
-	  }
+    }
   }
 }

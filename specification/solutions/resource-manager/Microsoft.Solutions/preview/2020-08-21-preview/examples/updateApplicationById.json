@@ -1,6 +1,6 @@
 {
   "parameters": {
-	"applicationId": "subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+    "applicationId": "subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
     "api-version": "2020-08-21-preview",
     "parameters": {
       "properties": {
@@ -12,7 +12,9 @@
   },
   "responses": {
     "202": {
-      "headers": {},
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Solutions/pathToOperationResult"
+      },
       "body": {
         "name": "myManagedApplication",
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
