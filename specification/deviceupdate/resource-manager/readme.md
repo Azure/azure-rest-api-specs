@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-10-01'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2022-10-01/deviceupdate.json
+  - Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
 ```
 
 ### Tag: package-2022-04-01-preview
