@@ -4778,12 +4778,11 @@
       "properties": {
         "type": {
           "enum": [
-            "local",
-            "azureml"
+            "local"
           ],
           "default": "local",
           "title": "Type of Environment Variable",
-          "description": "Type of the Environment Variable. Possible values are: local - For local variable, azureml - For azureml variables",
+          "description": "Type of the Environment Variable. Possible values are: local - For local variable",
           "type": "string",
           "x-ms-enum": {
             "name": "EnvironmentVariableType",
@@ -4842,7 +4841,8 @@
         },
         "hostIp": {
           "description": "Host IP over which the application is exposed from the container",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -4856,7 +4856,7 @@
             "tmpfs",
             "npipe"
           ],
-          "default": "volume",
+          "default": "bind",
           "title": "Type of Volume Definition",
           "description": "Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe",
           "x-ms-enum": {
@@ -4867,20 +4867,21 @@
         },
         "readOnly": {
           "type": "boolean",
-          "description": "Indicate whether to mount volume as readOnly",
+          "description": "Indicate whether to mount volume as readOnly. Default value for this is false.",
           "x-nullable": true
         },
         "source": {
           "type": "string",
-          "description": "Source of the mount"
+          "description": "Source of the mount. For bind mounts this is the host path."
         },
         "target": {
           "type": "string",
-          "description": "Target of the mount"
+          "description": "Target of the mount. For bind mounts this is the path in the container."
         },
         "consistency": {
           "type": "string",
-          "description": "Consistency of the volume"
+          "description": "Consistency of the volume",
+          "x-nullable": true
         },
         "bind": {
           "$ref": "#/definitions/BindOptions",
@@ -4920,7 +4921,7 @@
         },
         "selinux": {
           "type": "string",
-          "description": "Mention the selinux"
+          "description": "Mention the selinux options."
         }
       }
     },
