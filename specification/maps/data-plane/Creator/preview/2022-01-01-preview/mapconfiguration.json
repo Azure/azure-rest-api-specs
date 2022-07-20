@@ -92,7 +92,7 @@
     },
     "Alias": {
       "name": "alias",
-      "description": "The alias of the map configuration.",
+      "description": "The alias of the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -197,6 +197,9 @@
           {
             "$ref": "#/parameters/MapConfigurationId"
           }
+        ],
+        "produces": [
+          "application/zip"
         ],
         "responses": {
           "200": {
@@ -313,7 +316,7 @@
           "readOnly": true
         },
         "alias": {
-          "description": "The alias used for the map configuration. Maximum length 1024 characters.",
+          "description": "The alias used for the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
           "type": "string",
           "readOnly": true
         },

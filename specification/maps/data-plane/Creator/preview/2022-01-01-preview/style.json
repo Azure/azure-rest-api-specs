@@ -92,7 +92,7 @@
     },
     "Alias": {
       "name": "alias",
-      "description": "The alias of the style.",
+      "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -197,6 +197,9 @@
           {
             "$ref": "#/parameters/StyleId"
           }
+        ],
+        "produces": [
+          "application/zip"
         ],
         "responses": {
           "200": {
@@ -313,7 +316,7 @@
           "readOnly": true
         },
         "alias": {
-          "description": "The alias of the style.",
+          "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
           "type": "string",
           "readOnly": true
         },
