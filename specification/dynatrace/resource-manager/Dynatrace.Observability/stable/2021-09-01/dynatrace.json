@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2021-09-01-preview"
+    "version": "2021-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1382,8 +1382,7 @@
       },
       "description": "The response of a MonitorResource list operation.",
       "required": [
-        "value",
-        "nextLink"
+        "value"
       ]
     },
     "TagRule": {
@@ -1446,8 +1445,7 @@
       },
       "description": "The response of a TagRule list operation.",
       "required": [
-        "value",
-        "nextLink"
+        "value"
       ]
     },
     "DynatraceSingleSignOnResource": {
@@ -1496,8 +1494,7 @@
       },
       "description": "The response of a DynatraceSingleSignOnResource list operation.",
       "required": [
-        "value",
-        "nextLink"
+        "value"
       ]
     },
     "SecureString": {
@@ -1769,11 +1766,11 @@
       "type": "object",
       "properties": {
         "firstName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "First Name of the user"
         },
         "lastName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "Last Name of the user"
         },
         "emailAddress": {
@@ -1796,15 +1793,15 @@
       "type": "object",
       "properties": {
         "usageType": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different usage type like PAYG/COMMITTED. this could be enum"
         },
         "billingCycle": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum"
         },
         "planDetails": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "plan id as published by Dynatrace"
         },
         "effectiveDate": {
@@ -2135,11 +2132,6 @@
         "name": "SSOStatus",
         "modelAsString": true
       }
-    },
-    "MediumString": {
-      "type": "string",
-      "maxLength": 50,
-      "description": "Shorthand for setting length limit."
     },
     "email": {
       "type": "string",
