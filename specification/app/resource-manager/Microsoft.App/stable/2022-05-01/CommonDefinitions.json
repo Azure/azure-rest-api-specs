@@ -96,58 +96,6 @@
         }
       }
     },
-    "InitContainer": {
-      "description": "Init Container has all fields of normal container besides probes.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Container image tag.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Custom container name.",
-          "type": "string"
-        },
-        "command": {
-          "description": "Container start command.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "args": {
-          "description": "Container start command arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "env": {
-          "description": "Container environment variables.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVar"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/ContainerResources",
-          "description": "Container resource requirements."
-        },
-        "volumeMounts": {
-          "description": "Container volume mounts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VolumeMount"
-          },
-          "x-ms-identifiers": [
-            "volumeName"
-          ]
-        }
-      }
-    },
     "ContainerResources": {
       "description": "Container App container resource requirements.",
       "type": "object",
@@ -519,16 +467,6 @@
         "revisionSuffix": {
           "description": "User friendly suffix that is appended to the revision name",
           "type": "string"
-        },
-        "initContainers": {
-          "description": "List of specialized containers that run before app containers.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InitContainer"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         },
         "containers": {
           "description": "List of container definitions for the Container App.",
