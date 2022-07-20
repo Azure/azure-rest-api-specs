@@ -4723,7 +4723,8 @@
         },
         "docker": {
           "description": "Describes the docker settings for the image",
-          "$ref": "#/definitions/Docker"
+          "$ref": "#/definitions/Docker",
+          "x-nullable": true
         },
         "endpoints": {
           "type": "array",
@@ -4801,7 +4802,8 @@
       "properties": {
         "privileged": {
           "type": "boolean",
-          "description": "Indicate whether container shall run in privileged or non-privileged mode."
+          "description": "Indicate whether container shall run in privileged or non-privileged mode.",
+          "x-nullable": true
         }
       },
       "additionalProperties": true
@@ -4885,15 +4887,18 @@
         },
         "bind": {
           "$ref": "#/definitions/BindOptions",
-          "description": "Bind Options of the mount"
+          "description": "Bind Options of the mount",
+          "x-nullable": true
         },
         "volume": {
           "$ref": "#/definitions/VolumeOptions",
-          "description": "Volume Options of the mount"
+          "description": "Volume Options of the mount",
+          "x-nullable": true
         },
         "tmpfs": {
           "$ref": "#/definitions/TmpfsOptions",
-          "description": "tmpfs option of the mount"
+          "description": "tmpfs option of the mount",
+          "x-nullable": true
         }
       }
     },
@@ -4912,7 +4917,8 @@
       "properties": {
         "propagation": {
           "type": "string",
-          "description": "Type of Bind Option"
+          "description": "Type of Bind Option",
+          "x-nullable": true
         },
         "createHostPath": {
           "type": "boolean",
@@ -4921,7 +4927,8 @@
         },
         "selinux": {
           "type": "string",
-          "description": "Mention the selinux options."
+          "description": "Mention the selinux options.",
+          "x-nullable": true
         }
       }
     },
