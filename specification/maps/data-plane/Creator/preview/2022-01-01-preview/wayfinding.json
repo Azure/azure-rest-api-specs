@@ -1,7 +1,7 @@
 {
     "swagger":"2.0",
     "info": {
-      "version":"2022-01-01",
+      "version":"2022-09-01",
       "title":"Azure Maps Wayfinding Service",
       "description": "Azure Maps Wayfinding REST APIs"
     },
@@ -11,7 +11,7 @@
 	"paths": {
 		"/wayfinding/path": {
 			"get": {
-				"description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Wayfinding Service API is part of Creator. Wayfinding API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) along with Routesets to calculate the best path from one point in a facility to another.",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator. Wayfinding API adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one point in a facility to another.",
 				"operationId": "wayfindingGetPath",
 				"parameters": [
 					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
@@ -72,7 +72,7 @@
 			"type": "string",
 			"in": "query",
 			"required": true,
-			"default": "2022-01-01",
+			"default": "2022-09-01",
 			"x-ms-parameter-location": "client"
 		},
 		"RoutesetId": {
@@ -85,7 +85,7 @@
 		},
 		"SubscriptionKey": {
 			"name": "subscription-key",
-			"description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
 			"type": "string",
 			"in": "query",
 			"required": true,
@@ -103,22 +103,20 @@
 			"name": "query",
 			"type": "string",
 			"in": "query",
-			"description": "The two points in the facility beween which to find the shortest path. Each point is represented by its latitude, longitude and a level ordinal. The query format is as follows: {fromLat},{fromLon},{fromLevelOrdinal}:{toLat},{toLon},{toLevelOrdinal}.",
+			"description": "The starting and end points of the route you are searching for in a facility. Each point is represented by its latitude, longitude and a level ordinal. The query format is as follows: {fromLat},{fromLon},{fromLevelOrdinal}:{toLat},{toLon},{toLevelOrdinal}.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
 		"Avoid": {
 			"name": "avoid",
-			"description": "Specifies [**v-munksteve to REVIEW**] ***something*** that the wayfinding service should avoid when determining the path. Valid avoid values are: 'elevator', 'escalator' and 'stair'.",
-			"type": "array",
+			"description": "(Optional) Use when you need to avoid using either elevators, escalators, or stairs in your route. Valid values are: 'elevator', 'escalator' and 'stair'. Multiple values can be selected.",			"type": "array",
 			"items": { "type": "string" },
 			"in": "query",
 			"x-ms-parameter-location": "client"
 		},
 		"Width": {
 			"name": "width",
-			"description": "The minimum width of entrances and doors within the building that can be used in the Wayfinding path. For example, if you specified a width of 2.0, the calculated Wayfinding path will be plotted along a route that avoids doors and entrances less than 2.0 meters wide. The default width is 0.0.",
-			"type": "number",
+			"description": "The minimum width (in meters) of openings within the building that can be used in a wayfinding route. For example, if you specified a width of 2.0, the calculated wayfinding path will be plotted along a route that avoids any opening less than 2.0 meters wide. The default width is 0.0.",			"type": "number",
 			"in": "query",
 			"x-ms-parameter-location": "client"
 		}
@@ -135,47 +133,47 @@
             "description": "Summary object for a route leg.",
             "type":"object",
             "properties": {
-                "travelMode": { "type": "string", "description": "Travel mode property. Default mode is walking, can also be stairs or elevator."},
-                "lengthInMeters": { "type": "number", "description": "The length, in meters, of this section of the path."},
-                "travelTimeInSeconds": { "type": "integer", "description": "The traversal time, in seconds, for this section of the path."},
-                "startLevel": { "type": "integer", "description": "The level of floor where this section of the route starts."},
-                "endLevel": { "type": "integer", "description": "The level of floor where this section of the route ends."}
+                "travelMode": { "type": "string", "description": "The mode of travel can be walking (default), elevator, escalator or stairs."},
+                "lengthInMeters": { "type": "number", "description": "The length, in meters, of this leg of the route."},
+                "travelTimeInSeconds": { "type": "integer", "description": "The travel time, in seconds, for this leg of the route."},
+                "startLevel": { "type": "integer", "description": "The floor where this leg of the route starts."},
+                "endLevel": { "type": "integer", "description": "The floor where this leg of the route ends."}
             }
         },
         "RouteSummary": {
-            "description": "Summary object for the full route.",
+            "description": "Summary object for the route.[***DAVSTA*** How is route summary different from path summary?]",
             "type":"object",
             "properties": {
-                "lengthInMeters": { "type": "number", "description": "The length, in meters, of the entire path."},
-                "travelTimeInSeconds": { "type": "integer", "description": "The traversal time, in seconds, for the entire path."}
+                "lengthInMeters": { "type": "number", "description": "The length, in meters, of the entire route."},
+                "travelTimeInSeconds": { "type": "integer", "description": "The total amount of time, in seconds, to complete the entire route."}
             }
         },
         "Leg": {
-            "description": "A route section on the same traversal mode.",
+            "description": "One section of the overall route.",
             "type": "object",
             "properties": {
                 "summary": { "description": "The leg summary", "$ref": "#/definitions/LegSummary" },
-                "points": { "description": "The leg shape points.[**v-munksteve to REVIEW**] Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
+                "points": { "description": "The leg shape points.[***DAVSTA*** We need to discuss] Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
             }
         },
 		"Path": {
-            "description": "The path between the two endpoints requested.",
+            "description": "***DAVSTA REVIEW: Question: How is route different from path? Why not use route instead of path for this property name?**** The directions given to travel between the start and end points.",
             "type": "object",
             "properties": {
                 "summary": { "description": "The full path summary", "$ref": "#/definitions/RouteSummary" },
-                "legs": { "description": "The different traversal modes in this path", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
+                "legs": { "description": "The different travel modes in this route.[***DAVSTA*** We need to discuss]", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
             }
 		},
 		"WayfindResult": {
-			"description": "This object is returned from a successful Wayfinding call.",
+			"description": "The object returned when completing a successful Wayfinding call.",
 			"type": "object",
 			"properties": {
 				"formatVersion": {
-					"description": "Format Version property.",
+					"description": "The format version of the wayfinding object.[***DAVSTA*** We need to discuss]",
 					"type": "string"
 				},
 				"paths": {
-					"description": "an array of wayfind results",
+					"description": "An array of wayfinding results.[***DAVSTA*** We need to discuss - is this an array of legs of the route? Need to understand the difference between a route and a path]",
 					"type": "array",
 					"items": { "$ref": "#/definitions/Path" }
 				}
