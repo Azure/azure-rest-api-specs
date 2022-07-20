@@ -294,7 +294,7 @@
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/UpdateAccessDefinition"
+              "$ref": "#/definitions/ApplicationPatchable"
             }
           },
           "default": {
@@ -785,7 +785,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -797,7 +797,7 @@
           "202": {
             "description": "Accepted - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             }
           },
           "default": {
@@ -1211,7 +1211,7 @@
             "schema": {
               "$ref": "#/definitions/UpdateAccessDefinition"
             },
-            "description": "Request body parameters to list tokens."
+            "description": "Request body parameters to update access."
           }
         ],
         "responses": {
@@ -1329,6 +1329,7 @@
           }
         ],
         "responses": {
+          "404": {},
           "200": {
             "description": "OK - Returns the managed application definition.",
             "schema": {

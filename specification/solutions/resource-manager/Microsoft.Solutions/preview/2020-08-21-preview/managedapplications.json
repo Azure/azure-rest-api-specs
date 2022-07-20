@@ -300,7 +300,7 @@
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             }
           },
           "default": {
@@ -790,7 +790,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -802,7 +802,7 @@
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             }
           },
           "default": {
@@ -918,12 +918,6 @@
         "responses": {
           "201": {
             "description": "Created - Returns information about the JIT request.",
-            "schema": {
-              "$ref": "#/definitions/JitRequestDefinition"
-            }
-          },
-          "200": {
-            "description": "Ok - Returns information about existing JIT request.",
             "schema": {
               "$ref": "#/definitions/JitRequestDefinition"
             }
@@ -1222,7 +1216,7 @@
             "schema": {
               "$ref": "#/definitions/UpdateAccessDefinition"
             },
-            "description": "Request body parameters to list tokens."
+            "description": "Request body parameters to update access."
           }
         ],
         "responses": {
