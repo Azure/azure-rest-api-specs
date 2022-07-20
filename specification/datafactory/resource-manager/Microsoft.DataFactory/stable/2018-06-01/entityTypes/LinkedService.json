@@ -6878,6 +6878,43 @@
         "servicePrincipalId",
         "servicePrincipalKey"
       ]
+    },
+    "AzureSynapseArtifactsLinkedService": {
+      "x-ms-discriminator-value": "AzureSynapseArtifacts",
+      "description": "Azure Synapse Analytics (Artifacts) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSynapseArtifactsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSynapseArtifactsLinkedServiceTypeProperties": {
+      "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "object",
+          "description": "https://<workspacename>.dev.azuresynapse.net, Azure Synapse Analytics workspace URL. Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
     }
   }
 }

@@ -17,11 +17,11 @@ npm install
 npm run prettier-fix
 ```
 
-Or if you want to fix specified service:
+Or if you want to fix specified service, use the complete path, not relative:
 
 ```
 npm install
-npm run prettier -- --write "specification/<service>/**/*.json"
+npm run prettier -- --write "<path to repo>/azure-rest-api-specs/specification/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
@@ -33,9 +33,9 @@ Run Model Validation locally:
 npm install -g oav
 oav validate-example <swagger-spec-path>
 ```
-Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
+Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
-Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
+Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
 
 ## Semantic Validation
@@ -44,9 +44,9 @@ Run Semantic Validation locally:
 npm install -g oav
 oav validate-spec <swagger-spec-path>
 ```
-Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
+Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
-Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
+Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## Breaking Change Check
 - An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
@@ -65,9 +65,9 @@ run oad locally (the breaking change is reported by oad tool):
 npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path> 
 ```
-Please see [readme](https://github.com/Azure/openapi-diff/blob/master/README.md) for how to install or run tool in details.
+Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
-Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for detailed description of all oad rules.
+Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
 ## Linter Diff Validation
 
@@ -86,9 +86,9 @@ autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-v
 autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
 
-Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
+Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/main/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
-Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
+Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
 
 ## Avocado
 
@@ -115,7 +115,7 @@ Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md
 This CI check is to run [autorest.modelerfour](https://github.com/Azure/autorest.modelerfour) for each changing tag in a PR.
 Since the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended ensure this validation is passed without any error and warning.
 The `modelerfour` has several plugins. If a plugin report an error, you can refer to the following plugin documentations:
-- [PreChecker](https://github.com/Azure/autorest/blob/master/docs/openapi/prechecker.md)
+- [PreChecker](https://github.com/Azure/autorest/blob/main/docs/openapi/prechecker.md)
 
 ### Run locally:
 
