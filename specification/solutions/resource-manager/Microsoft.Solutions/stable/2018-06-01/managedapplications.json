@@ -1558,6 +1558,10 @@
           "type": "string",
           "description": "The fully qualified path of managed application definition Id."
         },
+        "publisherPackageId": {
+          "type": "string",
+          "description": "The publisher package Id."
+        },
         "parameters": {
           "type": "object",
           "description": "Name and value pairs that define the managed application parameters. It can be a JObject or a well formed JSON string."
@@ -1592,11 +1596,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationAuthorization"
           },
-          "readOnly": true
-        },
-        "managementMode": {
-          "$ref": "#/definitions/ApplicationManagementMode",
-          "description": "The managed application management mode.",
           "readOnly": true
         },
         "customerSupport": {
