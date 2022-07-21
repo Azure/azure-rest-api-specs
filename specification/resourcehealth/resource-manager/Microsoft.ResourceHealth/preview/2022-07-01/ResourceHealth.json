@@ -249,7 +249,7 @@
           }
         },
         "x-ms-examples": {
-          "GetHealthHistoryByResource": {
+          "GetOperationsList": {
             "$ref": "./examples/Operations_List.json"
           }
         }
@@ -415,7 +415,7 @@
           }
         },
         "x-ms-examples": {
-          "GetEmergingIssues": {
+          "GetEmergingIssuesList": {
             "$ref": "./examples/EmergingIssues_List.json"
           }
         },
@@ -494,7 +494,7 @@
           }
         },
         "x-ms-examples": {
-          "GetMetadata": {
+          "GetMetadataEntity": {
             "$ref": "./examples/Metadata_GetEntity.json"
           }
         }
@@ -503,6 +503,7 @@
   },
   "definitions": {
     "events": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -910,6 +911,7 @@
       }
     },
     "statusActiveEvent": {
+      "type": "object",
       "description": "Active event type of emerging issue.",
       "properties": {
         "title": {
@@ -1004,6 +1006,7 @@
         },
         "statusBanners": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/statusBanner"
           },
@@ -1011,6 +1014,7 @@
         },
         "statusActiveEvents": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/statusActiveEvent"
           },
@@ -1497,33 +1501,6 @@
         "name": {
           "type": "string",
           "description": "The impacted region name."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "description": "The error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "The error message.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "description": "The error details.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       }
     }
