@@ -1176,7 +1176,7 @@
         },
         "parent": {
           "title": "Parent",
-          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "$ref": "#/definitions/ParentGroupBagInfo",
           "x-nullable": true
         },
         "state": {
@@ -1356,6 +1356,18 @@
         "Microsoft.Management/managementGroups",
         "/subscriptions"
       ],
+      "x-ms-enum": {
+        "name": "ManagementGroupChildType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Microsoft.Management/managementGroups"
+          },
+          {
+            "value": "/subscriptions"
+          }
+        ]
+      },
       "description": "The type of child resource."
     },
     "OperationResults": {
@@ -1593,6 +1605,24 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "ParentGroupBagInfo": {
+      "description": "The ID, name and displayName of the parent management group.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the parent management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the parent management group."
         }
       }
     },
@@ -1926,6 +1956,24 @@
         "edit",
         "delete"
       ],
+      "x-ms-enum": {
+        "name": "Permissions",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "noaccess"
+          },
+          {
+            "value": "view"
+          },
+          {
+            "value": "edit"
+          },
+          {
+            "value": "delete"
+          }
+        ]
+      },
       "description": "The users specific permissions to this item."
     },
     "CheckNameAvailabilityRequest": {

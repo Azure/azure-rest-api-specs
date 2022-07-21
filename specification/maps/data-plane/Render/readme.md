@@ -40,6 +40,14 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: 2022-08-01
+
+These settings apply only when `--tag=2022-08-01` is specified on the command line.
+``` yaml $(tag) == '2022-08-01'
+input-file:
+  - stable/2022-08-01/render.json
+```
+
 ### Tag: 2.1-preview
 
 These settings apply only when `--tag=2.1` is specified on the command line.
