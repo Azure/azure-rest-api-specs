@@ -2315,6 +2315,17 @@
         "name": "AccessScope"
       }
     },
+    "ContentContributor": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
     "EventBase": {
       "type": "object",
       "properties": {
@@ -2505,6 +2516,13 @@
         "backgroundImageId": {
           "description": "The id for the metaverse background image. This is not an Azure Resource Manager id.",
           "type": "string"
+        },
+        "contentContributors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentContributor"
+          },
+          "x-ms-identifiers": []
         },
         "metaverseId": {
           "description": "The id for the metaverse. This is not an Azure Resource Manager id.",
