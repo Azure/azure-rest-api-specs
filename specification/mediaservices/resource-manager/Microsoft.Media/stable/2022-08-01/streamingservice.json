@@ -486,6 +486,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEventOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a live event operation status.",
+        "operationId": "LiveEvents_AsyncOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the LiveEvent operation status": {
+            "$ref": "examples/async-operation-result.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/operationLocations/{operationId}": {
+      "get": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a live event operation status.",
+        "operationId": "LiveEvents_OperationLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveEvent"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the LiveEvent operation status": {
+            "$ref": "examples/liveevent-operation-location.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/liveOutputs": {
       "get": {
         "tags": [
@@ -694,6 +792,107 @@
         "x-ms-examples": {
           "Delete a LiveOutput": {
             "$ref": "examples/liveoutput-delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveOutputOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "LiveOutputs"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a Live Output operation status.",
+        "operationId": "LiveOutputs_AsyncOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the LiveOutput operation status": {
+            "$ref": "examples/async-operation-result.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/liveOutputs/{liveOutputName}/operationLocations/{operationId}": {
+      "get": {
+        "tags": [
+          "LiveOutputs"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a Live Output operation status.",
+        "operationId": "LiveOutputs_OperationLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "#/parameters/LiveOutputName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveOutput"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the LiveOutput operation status": {
+            "$ref": "examples/liveoutput-operation-location.json"
           }
         }
       }
@@ -1156,6 +1355,104 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpointOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "StreamingEndpoints"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a streaming endpoint operation status.",
+        "operationId": "StreamingEndpoints_AsyncOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the streaming endpoint operation status": {
+            "$ref": "examples/async-operation-result.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}/operationLocations/{operationId}": {
+      "get": {
+        "tags": [
+          "StreamingEndpoints"
+        ],
+        "summary": "Get operation status.",
+        "description": "Get a streaming endpoint operation status.",
+        "operationId": "StreamingEndpoints_OperationLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/StreamingEndpointName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StreamingEndpoint"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the streaming endpoint operation status": {
+            "$ref": "examples/streamingendpoint-operation-location.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1189,6 +1486,11 @@
           "format": "duration",
           "type": "string",
           "description": "ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window."
+        },
+        "rewindWindowLength": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 time between 1 minute to the duration of archiveWindowLength to control seek-able window length during Live. The service won't use this property once LiveOutput stops. The archived VOD will have full content with original ArchiveWindowLength. For example, use PT1H30M to indicate 1 hour and 30 minutes of rewind window length. Service will use implicit default value 30m only if Live Event enables LL."
         },
         "manifestName": {
           "type": "string",
@@ -2110,6 +2412,51 @@
           "description": "The result of the List StreamingEndpoint skus."
         }
       },
+      "type": "object"
+    },
+    "AsyncOperationResult": {
+      "properties": {
+        "error": {
+          "description": "The error object",
+          "$ref": "#/definitions/AsyncOperationErrorDetail"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation Id of the async operation."
+        },
+        "status": {
+          "description": "Operation status of the async operation.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "AsyncOperationStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The status of an async operation.",
+      "type": "object"
+    },
+    "AsyncOperationErrorDetail": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Id of the entity on which the operation is performed."
+        }
+      },
+      "description": "The error detail of an async operation result.",
       "type": "object"
     }
   },
