@@ -493,7 +493,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -555,7 +558,9 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchCondition"
-          }
+          },
+          "x-ms-identifiers": [
+          ]
         },
         "action": {
           "description": "Describes what action to be applied when rule matches.",
@@ -660,7 +665,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
         }
       }
     },
@@ -690,14 +699,19 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleExclusion"
           },
-          "description": "Describes the exclusions that are applied to all rules in the set."
+          "description": "Describes the exclusions that are applied to all rules in the set.",
+          "x-ms-identifiers": [
+          ]
         },
         "ruleGroupOverrides": {
           "description": "Defines the rule group overrides to apply to the rule set.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupOverride"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
         }
       }
     },
@@ -716,14 +730,19 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleExclusion"
           },
-          "description": "Describes the exclusions that are applied to all rules in the group."
+          "description": "Describes the exclusions that are applied to all rules in the group.",
+          "x-ms-identifiers": [
+          ]
         },
         "rules": {
           "description": "List of rules that will be disabled. If none specified, all rules in the group will be disabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleOverride"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleId"
+          ]
         }
       }
     },
@@ -750,7 +769,9 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleExclusion"
           },
-          "description": "Describes the exclusions that are applied to this specific rule."
+          "description": "Describes the exclusions that are applied to this specific rule.",
+          "x-ms-identifiers": [
+          ]
         }
       }
     },
@@ -815,7 +836,10 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupDefinition"
           },
-          "description": "Rule groups of the managed rule set."
+          "description": "Rule groups of the managed rule set.",
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
         }
       }
     },
@@ -838,7 +862,10 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleDefinition"
           },
-          "description": "List of rules within the managed rule group."
+          "description": "List of rules within the managed rule group.",
+          "x-ms-identifiers": [
+            "ruleId"
+          ]
         }
       }
     },
