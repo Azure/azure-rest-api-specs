@@ -10,16 +10,16 @@ model EventHubCaptureFileCreatedEventData {
   partitionId?: string;
 
   @doc("The file size.")
-  sizeInBytes?: integer;
+  sizeInBytes?: int64;
 
   @doc("The number of events in the file.")
-  eventCount?: integer;
+  eventCount?: int64;
 
   @doc("The smallest sequence number from the queue.")
-  firstSequenceNumber?: integer;
+  firstSequenceNumber?: int64;
 
   @doc("The last sequence number from the queue.")
-  lastSequenceNumber?: integer;
+  lastSequenceNumber?: int64;
 
   @doc("The first time from the queue.")
   firstEnqueueTime?: zonedDateTime;
