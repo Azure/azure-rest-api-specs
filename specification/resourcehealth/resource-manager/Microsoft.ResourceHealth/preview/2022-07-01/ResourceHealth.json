@@ -61,7 +61,7 @@
           },
           "default": {
             "description": "DefaultErrorResponse",
-            "schema": { 
+            "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
@@ -1343,55 +1343,6 @@
               "items": {
                 "$ref": "#/definitions/serviceImpactingEvent"
               }
-            }
-          }
-        }
-      }
-    },
-    "operationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/operation"
-          },
-          "description": "List of operations available in the resourcehealth resource provider."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "Lists the operations response."
-    },
-    "operation": {
-      "type": "object",
-      "description": "Operation available in the resourcehealth resource provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation."
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
             }
           }
         }
