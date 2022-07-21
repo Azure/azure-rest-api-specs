@@ -370,16 +370,14 @@
         },
         "thumbnail": {
           "description": "The thumbnail for the style picker in client SDK.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "baseMap": {
           "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Please refer to the available values for [base map types](/rest/api/documentation-preview/map-configuration/create?#baseMapType).",
-          "type": "string"
+          "$ref": "#/definitions/BaseMapType"
         },
         "layers": {
           "description": "To configure the style for tileset. You can have one style for the whole tileset. And you can have different styles for different layers in one tileset, for example, one style for `indoor unit` layer and another style for `indoor facility` layer. And you have also have one style for different tileset",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/TilesetStyleTuple"
           }
