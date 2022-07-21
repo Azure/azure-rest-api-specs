@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Cognitive Language Service",
+    "title": "Microsoft Cognitive Language Service - Text Analysis",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-05-01"
+    "version": "2022-02-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -186,46 +186,6 @@
           }
         }
       }
-    },
-    "/analyze-text/jobs/{jobId}:cancel": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "description": "Cancel a long-running Text Analysis job.",
-        "operationId": "AnalyzeText_CancelJob",
-        "summary": "Cancel a long-running Text Analysis job",
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Cancel Job request has been received.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Job Delete Request": {
-            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
     }
   },
   "definitions": {
@@ -255,9 +215,10 @@
         "KeyPhraseExtraction",
         "EntityLinking",
         "Healthcare",
+        "ExtractiveSummarization",
         "CustomEntityRecognition",
-        "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomSingleClassification",
+        "CustomMultiClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -290,9 +251,10 @@
         "KeyPhraseExtractionLROResults",
         "EntityLinkingLROResults",
         "HealthcareLROResults",
+        "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
-        "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
+        "CustomSingleClassificationLROResults",
+        "CustomMultiClassificationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -536,12 +498,10 @@
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
+          "type": "string"
         },
         "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
+          "type": "string"
         }
       },
       "allOf": [
@@ -634,7 +594,7 @@
         "documents"
       ]
     },
-    "CustomSingleLabelClassificationTaskParameters": {
+    "CustomSingleClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
@@ -643,12 +603,12 @@
         }
       ]
     },
-    "CustomSingleLabelClassificationLROTask": {
+    "CustomSingleClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomSingleClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -656,9 +616,9 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+      "x-ms-discriminator-value": "CustomSingleClassification"
     },
-    "CustomLabelClassificationResult": {
+    "CustomSingleClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -667,7 +627,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/ClassificationDocumentResult"
+                "$ref": "#/definitions/SingleClassificationDocumentResult"
               }
             ]
           }
@@ -680,6 +640,22 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "SingleClassificationDocumentResult": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "$ref": "#/definitions/ClassificationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "classification"
       ]
     },
     "ClassificationResult": {
@@ -696,11 +672,11 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the recognized class."
+          "description": "Confidence score between 0 and 1 of the recognized classification."
         }
       }
     },
-    "CustomMultiLabelClassificationTaskParameters": {
+    "CustomMultiClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
@@ -709,12 +685,12 @@
         }
       ]
     },
-    "CustomMultiLabelClassificationLROTask": {
+    "CustomMultiClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomMultiLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomMultiClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -722,12 +698,36 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassification"
+      "x-ms-discriminator-value": "CustomMultiClassification"
     },
-    "ClassificationDocumentResult": {
+    "CustomMultiClassificationResult": {
       "type": "object",
       "properties": {
-        "class": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/MultiClassificationDocumentResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "MultiClassificationDocumentResult": {
+      "type": "object",
+      "properties": {
+        "classifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
@@ -740,7 +740,7 @@
         }
       ],
       "required": [
-        "class"
+        "classifications"
       ]
     },
     "HealthcareTaskParameters": {
@@ -1158,18 +1158,15 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
+          "format": "double"
         },
         "neutral": {
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
+          "format": "double"
         },
         "negative": {
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
+          "format": "double"
         }
       },
       "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
@@ -1364,16 +1361,14 @@
       "properties": {
         "positive": {
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
+          "format": "double"
         },
         "negative": {
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
+          "format": "double"
         }
       },
-      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
+      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
     },
     "EntitiesTaskParameters": {
       "type": "object",
@@ -1415,9 +1410,6 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
     },
@@ -1544,9 +1536,6 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
     },
@@ -1713,9 +1702,6 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
@@ -1980,6 +1966,141 @@
       "type": "array",
       "uniqueItems": true
     },
+    "ExtractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Extractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "default": 3
+        },
+        "sortBy": {
+          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "ExtractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Extractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "ExtractiveSummarizationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "default": "Offset",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text.",
+            "value": "Offset"
+          },
+          {
+            "name": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.",
+            "value": "Rank"
+          }
+        ]
+      }
+    },
+    "ExtractedSummaryDocumentResult": {
+      "type": "object",
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "description": "A ranked list of sentences representing the extracted summary.",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "sentences"
+      ]
+    },
+    "ExtractedSummarySentence": {
+      "type": "object",
+      "required": [
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
     "KeyPhraseTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Key Phrase Extraction task.",
@@ -2015,9 +2136,6 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
@@ -2085,9 +2203,6 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "LanguageDetectionResults"
     },
@@ -2172,6 +2287,52 @@
       },
       "type": "object"
     },
+    "JobMetadata": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "partiallySucceeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
+      ],
+      "type": "object"
+    },
     "JobState": {
       "properties": {
         "displayName": {
@@ -2186,9 +2347,10 @@
           "type": "string"
         },
         "jobId": {
+          "format": "uuid",
           "type": "string"
         },
-        "lastUpdatedDateTime": {
+        "lastUpdateDateTime": {
           "format": "date-time",
           "type": "string"
         },
@@ -2197,14 +2359,14 @@
             "notStarted",
             "running",
             "succeeded",
-            "partiallyCompleted",
+            "partiallySucceeded",
             "failed",
             "cancelled",
             "cancelling"
           ],
           "type": "string",
           "x-ms-enum": {
-            "modelAsString": true,
+            "modelAsString": false,
             "name": "State"
           }
         },
@@ -2220,7 +2382,7 @@
       },
       "required": [
         "jobId",
-        "lastUpdatedDateTime",
+        "lastUpdateDateTime",
         "createdDateTime",
         "status"
       ]
@@ -2297,7 +2459,7 @@
             "cancelling"
           ],
           "x-ms-enum": {
-            "modelAsString": true,
+            "modelAsString": false,
             "name": "State"
           }
         }
@@ -2362,11 +2524,11 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
-    "CustomSingleLabelClassificationLROResult": {
+    "CustomSingleClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResult"
+          "$ref": "#/definitions/CustomSingleClassificationResult"
         }
       },
       "allOf": [
@@ -2377,13 +2539,13 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
+      "x-ms-discriminator-value": "CustomSingleClassificationLROResults"
     },
-    "CustomMultiLabelClassificationLROResult": {
+    "CustomMultiClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResult"
+          "$ref": "#/definitions/CustomMultiClassificationResult"
         }
       },
       "allOf": [
@@ -2394,7 +2556,7 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
+      "x-ms-discriminator-value": "CustomMultiClassificationLROResults"
     },
     "EntityLinkingLROResult": {
       "type": "object",
@@ -2429,6 +2591,23 @@
         "results"
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
+    },
+    "ExtractiveSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
     },
     "HealthcareLROResult": {
       "type": "object",
