@@ -2332,6 +2332,10 @@
         "containerRegistry": {
           "description": "ARM id of the container registry associated with this workspace.",
           "type": "string"
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionUpdateProperties",
+          "description": "The encryption settings of the workspace."
         }
       }
     },
@@ -4745,6 +4749,30 @@
           "type": "string"
         }
       }
+    },
+	  "EncryptionUpdateProperties": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/EncryptionKeyVaultUpdateProperties",
+          "description": "Customer Key vault properties."
+        }
+      },
+      "required": [
+        "keyVaultProperties"
+      ],
+      "type": "object"
+    },
+    "EncryptionKeyVaultUpdateProperties": {
+      "properties": {
+        "keyIdentifier": {
+          "description": "Key vault uri to access the encryption key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "keyIdentifier"
+      ],
+      "type": "object"
     },
     "ComputeInstanceSshSettings": {
       "type": "object",
