@@ -2474,6 +2474,122 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
+      "post": {
+        "operationId": "SqlResources_SqlDatabaseRetrieveThroughputDistribution",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerRetrieveThroughputDistribution": {
+            "$ref": "./examples/CosmosDBSqlDatabaseRetrieveThroughputDistribution.json"
+          }
+        },
+        "description": "Retrieve throughput distribution for an Azure Cosmos DB SQL database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "retrieveThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetrieveThroughputParameters"
+            },
+            "description": "The parameters to provide for retrieving throughput distribution for the current SQL database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The retrieve throughput distribution for SQL database operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The retrieve throughput distribution for SQL database operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
+      "post": {
+        "operationId": "SqlResources_SqlDatabaseRedistributeThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerRedistributeThroughput": {
+            "$ref": "./examples/CosmosDBSqlDatabaseRedistributeThroughput.json"
+          }
+        },
+        "description": "Redistribute throughput for an Azure Cosmos DB SQL database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "redistributeThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedistributeThroughputParameters"
+            },
+            "description": "The parameters to provide for redistributing throughput for the current SQL database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The redistribution throughput for SQL database operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The redistribution throughput for SQL database operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
@@ -3460,6 +3576,64 @@
             "description": "The MongoDB database migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
+      "post": {
+        "operationId": "MongoDBResources_MongoDBDatabaseRetrieveThroughputDistribution",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionRetrieveThroughputDistribution": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseRetrieveThroughputDistribution.json"
+          }
+        },
+        "description": "Retrieve throughput distribution for an Azure Cosmos DB MongoDB database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "retrieveThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetrieveThroughputParameters"
+            },
+            "description": "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The retrieve throughput distribution for MongoDB database operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The retrieve throughput distribution for MongoDB database operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "default": {
