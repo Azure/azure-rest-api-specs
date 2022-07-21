@@ -42,11 +42,12 @@ tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-07'
+``` yaml $(tag) == 'package-preview-2022-07'
 input-file:
-  - Microsoft.ContainerService/preview/2022-07-02-preview/fleets.json
   - Microsoft.ContainerService/preview/2022-07-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-07-02-preview/fleets.json
 ```
+
 ### Tag: package-2022-06
 
 These settings apply only when `--tag=package-2022-06` is specified on the command line.
