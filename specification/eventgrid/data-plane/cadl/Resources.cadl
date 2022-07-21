@@ -1,5 +1,4 @@
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.")
-model ResourceWriteSuccessData {
+model ResourceBaseEventData {
   @doc("The tenant ID of the resource.")
   tenantId?: string;
 
@@ -33,294 +32,33 @@ model ResourceWriteSuccessData {
   @doc("The details of the operation.")
   httpRequest?: ResourceHttpRequest;
 }
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.")
+model ResourceWriteSuccessData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails.")
-model ResourceWriteFailureData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceWriteFailureData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.")
-model ResourceWriteCancelData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceWriteCancelData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds.")
-model ResourceDeleteSuccessData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceDeleteSuccessData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails.")
-model ResourceDeleteFailureData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceDeleteFailureData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled.")
-model ResourceDeleteCancelData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceDeleteCancelData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds.")
-model ResourceActionSuccessData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceActionSuccessData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails.")
-model ResourceActionFailureData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceActionFailureData is ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled.")
-model ResourceActionCancelData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Map<string, string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+model ResourceActionCancelData is ResourceBaseEventData;
 
 @doc("The details of the HTTP request.")
 model ResourceHttpRequest {
