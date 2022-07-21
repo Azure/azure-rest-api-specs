@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-09-01-preview",
+    "alias": "test-alias",
+    "ImportContent": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "background",
+          "source-layer": "bg-source",
+          "minzoom": 18,
+          "maxzoom": 20,
+          "layout": {
+            "visibility": "none",
+            "symbol-placement": "point",
+            "symbol-avoid-edges": true,
+            "text-field": "{name}",
+            "text-keep-upright": true,
+            "text-font": [
+              "SegoeUi-SemiBold"
+            ],
+            "text-letter-spacing": 0.1,
+            "text-size": {
+              "stops": [
+                [
+                  18.5,
+                  6.5
+                ],
+                [
+                  19,
+                  8
+                ],
+                [
+                  19.5,
+                  9.5
+                ],
+                [
+                  20,
+                  11
+                ]
+              ]
+            },
+            "text-anchor": "center"
+          },
+          "paint": {
+            "text-color": "rgb(0, 0, 0)",
+            "text-halo-color": "rgb(255, 255, 255)",
+            "text-halo-width": 1,
+            "text-halo-blur": 0.5
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/styles/operations/{operationId}?api-version=2022-09-01-preview",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    }
+  }
+}

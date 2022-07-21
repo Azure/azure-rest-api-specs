@@ -2,14 +2,13 @@
   "parameters": {
     "geography": "us",
     "api-version": "2022-09-01-preview",
-    "datasetId": "[dataset-Id]",
-    "description": "Example description.",
-    "TilesetConfiguration": {
+    "datasetId": "[datasetId]",
+    "TilesetRecipe": {
       "version": 1,
       "layers": {
         "Indoor unit": {
-          "minZoom": 10,
-          "maxZoom": 18,
+          "minzoom": 10,
+          "maxzoom": 18,
           "features": {
             "featureClasses": [
               "unit",
@@ -40,10 +39,13 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Operation-Location": "https://us.atlas.microsoft.com/tilesets/operations/{operationId}?api-version=2022-09-01-preview",
-        "Access-Control-Expose-Headers": "Operation-Location"
+    "200": {
+      "body": {
+        "valid": false,
+        "warnings": [],
+        "errors": [
+          "minzoom 12 cannot be larger than maxzoom 11 for Indoor unit layer."
+        ]
       }
     }
   }
