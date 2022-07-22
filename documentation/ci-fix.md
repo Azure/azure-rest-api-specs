@@ -109,6 +109,16 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
+## Service API Readiness Test
+
+This CI check is to test service API readiness, by running API Scenario test to verify:
+- Service APIs are deployed to Azure
+- API behavior is consistent with Swagger definition
+- [InProgress] API behavior is compliant with Azure API guidelines, including [ARM RPC](https://github.com/Azure/azure-resource-manager-rpc) and [Microsoft Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+
+Note: Currently only applicable to management plane APIs, and target ARM region is `US West Central` - the SDP pilot region.
+
+Refer to [API Scenario documentation](./api-scenario/readmd.md) for detailed description and how-to-fix guidance.
 
 ## SDK Track2 Validation
 
