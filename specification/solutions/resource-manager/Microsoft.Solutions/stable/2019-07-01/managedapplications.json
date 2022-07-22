@@ -111,7 +111,8 @@
         ],
         "responses": {
           "404": {
-            "description": "NotFound."
+            "description": "NotFound.",
+            "x-ms-error-response": false
           },
           "200": {
             "description": "OK - Returns the managed application.",
@@ -363,7 +364,8 @@
         ],
         "responses": {
           "404": {
-            "description": "NotFound."
+            "description": "NotFound.",
+            "x-ms-error-response": false
           },
           "200": {
             "description": "OK - Returns the managed application definition.",
@@ -759,7 +761,8 @@
         ],
         "responses": {
           "404": {
-            "description": "NotFound."
+            "description": "NotFound.",
+            "x-ms-error-response": false
           },
           "200": {
             "description": "OK - Returns the managed application.",
@@ -967,7 +970,8 @@
         ],
         "responses": {
           "404": {
-            "description": "NotFound."
+            "description": "NotFound.",
+            "x-ms-error-response": false
           },
           "200": {
             "description": "OK - Returns the JIT request",
@@ -1293,7 +1297,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -1399,6 +1403,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1502,7 +1510,8 @@
         ],
         "responses": {
           "404": {
-            "description": "NotFound."
+            "description": "NotFound.",
+            "x-ms-error-response": false
           },
           "200": {
             "description": "OK - Returns the managed application definition.",
