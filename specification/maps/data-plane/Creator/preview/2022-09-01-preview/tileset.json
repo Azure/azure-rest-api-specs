@@ -502,6 +502,30 @@
           }
         }
       }
+    },
+    "ValidationErrors": {
+      "description": "Tileset configuration validation errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation error code.",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Validation error message.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "description": "The list of validation errors.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }

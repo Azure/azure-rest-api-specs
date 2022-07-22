@@ -27,7 +27,8 @@ These are the global settings for Creator Client.
 ``` yaml
 title: CreatorClient
 openapi-type: data-plane
-tag: package-preview-2022-09
+tag: 2.0-preview
+# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -51,7 +52,6 @@ input-file:
   - preview/2.0/wfs.json
 ```
 ### Tag: 2.0-preview
-# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 These settings apply only when `--tag=2.0-preview` is specified on the command line.
 
 ``` yaml $(tag) == '2.0-preview'
