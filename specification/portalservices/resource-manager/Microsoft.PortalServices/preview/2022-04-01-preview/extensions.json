@@ -1492,66 +1492,140 @@
     "PortalExtensionListSourcesResult": {
       "type": "object",
       "description": "The list of sources in the extension",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFolder"
+        }
+      ]
+    },
+    "PortalExtensionListSourcesFolder": {
+      "type": "object",
+      "description": "The content metadata of a folder",
       "properties": {
-        "assetTypes": {
-          "type": "array",
-          "description": "The asset type source metadata.",
-          "x-ms-identifiers": [],
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The name of the asset type."
-              },
-              "path": {
-                "type": "string",
-                "description": "The path to the file."
-              }
-            }
+        "folders": {
+          "type": "object",
+          "description": "The list of child folders",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFolder"
           }
         },
-        "svgs": {
-          "type": "array",
-          "description": "The svg source metadata.",
-          "x-ms-identifiers": [],
-          "items": {
-            "type": "object",
-            "properties": {
-              "image": {
-                "type": "string",
-                "description": "The runtime svg content."
-              },
-              "path": {
-                "type": "string",
-                "description": "The path to the file."
-              }
-            }
-          }
-        },
-        "views": {
-          "type": "array",
-          "description": "The view source metadata.",
-          "x-ms-identifiers": [],
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The name of the view."
-              },
-              "kind": {
-                "type": "string",
-                "description": "The kind of view."
-              },
-              "path": {
-                "type": "string",
-                "description": "The path to the file."
-              }
-            }
+        "files": {
+          "type": "object",
+          "description": "The list of child files",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFile"
           }
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "PortalExtensionListSourcesFile": {
+      "type": "object",
+      "description": "The content metadata of a file",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "description": "The content kind",
+          "type": "string",
+          "enum": [
+            "AssetType",
+            "View",
+            "Svg",
+            "Other"
+          ],
+          "default": "Other",
+          "x-ms-enum": {
+            "name": "ListSourcesFileKind",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "description": "The last time stamp the file was modified.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "lastModifiedAt"
+      ]
+    },
+    "PortalExtensionListSourcesSvgFile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "Svg",
+      "properties": {
+        "image": {
+          "description": "The SVG image content.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "PortalExtensionListSourcesAssetTypeFile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "AssetType",
+      "properties": {
+        "name": {
+          "description": "The name of the asset type.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "PortalExtensionListSourcesViewFile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "View",
+      "properties": {
+        "name": {
+          "description": "The name of the view.",
+          "type": "string"
+        },
+        "viewKind": {
+          "description": "The kind of view.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "viewKind"
+      ],
+      "additionalProperties": false
+    },
+    "PortalExtensionListSourcesOtherFile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "Other",
+      "properties": {},
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
     },
     "ExtensionSlot": {
       "type": "object",
