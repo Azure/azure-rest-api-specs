@@ -10,10 +10,10 @@
       "body": {
         "value": [
           {
-            "category": "Windows",
+            "category": "monitor",
             "endpoints": [
                 {
-                    "domainName": "www.windows.com",
+                    "domainName": "gcs.prod.monitoring.core.windows.net",
                     "endpointDetails": [
                         {
                             "port": "443",
@@ -24,20 +24,39 @@
             ]
           },
           {
-            "category": "Azure Storage",
+            "category": "aad-cdn",
             "endpoints": [
                 {
-                    "domainName": "www.azure.management.com",
+                    "domainName": "aadcdn.msftauth.net",
                     "endpointDetails": [
                         {
                             "port": "443",
                             "protocol": "Https"
-                        },
-                        {
-                            "port": "23",
-                            "protocol": "Tcp"
                         }
                     ]
+                }
+            ]
+          },
+          {
+            "category": "configuration",
+            "endpoints": [
+                {
+                    "domainName": "hdiconfigactions-secondary.blob.core.windows.net",
+                    "endpointDetails": [
+                      {
+                          "port": "443",
+                          "protocol": "Https"
+                      }
+                  ]
+                },
+                {
+                    "domainName": "hdiconfigactions.blob.core.windows.net",
+                    "endpointDetails": [
+                      {
+                          "port": "443",
+                          "protocol": "Https"
+                      }
+                  ]
                 }
             ]
           }
