@@ -118,19 +118,35 @@ For example, here is a [SDK PR](https://github.com/Azure/azure-sdk-for-go/pull/1
 cd $WORKSPACE
 git clone git@github.com:azure-sdk/azure-sdk-for-go.git
 cd azure-sdk-for-go
-gh pr checkout 17811
+git checkout -t origin/sdkAuto/armcompute
 ```
 
 2. Copy the generated package to your test project
+
+Shell:
 ```sh
 cp -r sdk/resourcemanager/compute/armcompute $WORKSPACE/test-project
 ```
 
+PowerShell:
+```pwsh
+Copy-Item -Path sdk/resourcemanager/compute/armcompute -Destination $WORKSPACE/test-project -Recurse
+```
+
 3. Change go.mod in your test project to replace the `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute` module with local code
+
+Shell:
 ```sh
 cd $WORKSPACE/test-project
 echo "
 replace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute" >> go.mod
+go mod tidy
+```
+
+PowerShell:
+```pwsh
+cd $WORKSPACE/test-project
+Add-Content go.mod "`nreplace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute"
 go mod tidy
 ```
 
