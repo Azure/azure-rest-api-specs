@@ -249,6 +249,9 @@
               "$ref": "#/definitions/MarketplacesListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -880,7 +883,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrder",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -929,7 +932,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -981,7 +984,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_List",
-        "description": "Lists the reservations details for the defined scope and provided date range.",
+        "description": "Lists the reservations details for the defined scope and provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1194,7 +1197,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_List",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing account scope. Note: The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1206,7 +1209,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1243,7 +1246,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_ListByBillingProfile",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1255,7 +1258,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3768,7 +3771,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -3889,7 +3892,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -5253,7 +5256,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {

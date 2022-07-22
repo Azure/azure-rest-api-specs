@@ -29,7 +29,7 @@ These settings apply only when `--tag=release_2022_05_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_05_15_preview'
 input-file:
-  - preview/2022-05-15-preview/textanalytics.json
+  - preview/2022-05-15-preview/analyzetext.json
   - preview/2022-05-15-preview/analyzeconversations.json
   - preview/2022-05-15-preview/analyzetext-authoring.json
   - preview/2022-05-15-preview/analyzeconversations-authoring.json
@@ -46,7 +46,7 @@ These settings apply only when `--tag=release_2022_05_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2022_05_01'
 input-file:
-  - stable/2022-05-01/textanalytics.json
+  - stable/2022-05-01/analyzetext.json
   - stable/2022-05-01/analyzetext-authoring.json
   - stable/2022-05-01/analyzeconversations-authoring.json
   - stable/2022-05-01/analyzeconversations.json
@@ -61,7 +61,7 @@ These settings apply only when `--tag=release_2022_03_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_03_01_preview'
 input-file:
-  - preview/2022-03-01-preview/textanalytics.json
+  - preview/2022-03-01-preview/analyzetext.json
   - preview/2022-03-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
@@ -75,7 +75,7 @@ These settings apply only when `--tag=release_2022_02_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_02_01_preview'
 input-file:
-- preview/2022-02-01-preview/textanalytics.json
+- preview/2022-02-01-preview/analyzetext.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -88,7 +88,7 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file:
-- preview/2021-11-01-preview/textanalytics.json
+- preview/2021-11-01-preview/analyzetext.json
 - preview/2021-11-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
