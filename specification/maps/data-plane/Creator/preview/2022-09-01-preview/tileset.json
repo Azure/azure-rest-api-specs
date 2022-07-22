@@ -405,8 +405,8 @@
           "description": "Tileset configuration which is used to build the tileset.",
           "$ref": "#/definitions/TilesetConfiguration"
         },
-        "defaultStyleSetId": {
-          "description": "The default generated style set id for the tileset",
+        "defaultMapConfigurationId": {
+          "description": "The default generated map configuration id for the tileset",
           "type": "string",
           "readOnly": true
         }
@@ -491,41 +491,64 @@
           "description": "The list of validation warnings.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ValidationWarning"
           }
         },
         "errors": {
           "description": "The list of validation errors.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ValidationError"
           }
         }
       }
     },
-    "ValidationErrors": {
+    "ValidationError": {
       "description": "Tileset configuration validation errors.",
       "type": "object",
       "properties": {
         "code": {
           "description": "Validation error code.",
-          "type": "boolean"
+          "$ref": "#/definitions/TilesetConfigurationErrorCode"
         },
         "message": {
           "description": "Validation error message.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "target": {
-          "description": "The list of validation errors.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "description": "The target element for the validation error.",
+          "type": "string"
         }
       }
+    },
+    "ValidationWarning": {
+      "description": "Tileset configuration validation errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation warning code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Validation warning message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target element for the validation warning.",
+          "type": "string"
+        }
+      }
+    },
+    "TilesetConfigurationErrorCode": {
+      "description": "The possible error code for tileset configuration validation request.",
+      "type": "string",
+      "enum": [
+        "DuplicateLayerNameFound",
+        "UndefinedFeatureClasses",
+        "DuplicateFeatureClassFound",
+        "CustomLayerNameNotSupported",
+        "CustomOntologyNotSupported"
+      ]
     }
   }
 }
