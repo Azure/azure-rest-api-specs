@@ -2161,7 +2161,7 @@
             "SoftDeleted"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "WorkspaceProvisioningState",
             "modelAsString": true
           },
           "readOnly": true,
@@ -2266,6 +2266,16 @@
           "description": "Whether to allow workspace soft deleting",
           "default": false,
           "type": "boolean"
+        },
+        "softDeletedAt": {
+          "description": "The timestamp when the workspace was soft deleted",
+          "type": "string",
+          "readOnly": true
+        },
+        "scheduledPurgeDate": {
+          "description": "The timestamp when the soft deleted workspace is going to be purged",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3229,7 +3239,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "ComputeProvisioningState",
             "modelAsString": true
           },
           "readOnly": true
