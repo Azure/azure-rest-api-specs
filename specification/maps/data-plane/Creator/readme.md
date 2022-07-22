@@ -38,7 +38,7 @@ credential-scopes: 'https://atlas.microsoft.com/.default'
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - preview/2022-09-01-preview/tileset.json
   - preview/2022-09-01-preview/style.json
@@ -51,7 +51,7 @@ input-file:
   - preview/2.0/wfs.json
 ```
 ### Tag: 2.0-preview
-
+# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 These settings apply only when `--tag=2.0-preview` is specified on the command line.
 
 ``` yaml $(tag) == '2.0-preview'

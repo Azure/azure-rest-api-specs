@@ -422,7 +422,8 @@
       "properties": {
         "version": {
           "description": "The version of Azure Maps Tiling service configuration reference that the tileset configuration uses. Currently only version 1 is allowed. Using any version other the current version or a previous version will result in an error.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "layers": {
           "description": "The names of the layers and their configuration options. The configuration layers object contains key-value pairs associating the names of tile layers with their configuration. For each key-value pair, the key is the name of the layer, and the value is a LayerObject containing the configuration and options for the layer. Each layer must have a name. This is the unique identifier for the layer of data in your final tileset. In any tileset, each layer name must be unique. The layer name must be a string with only underscores (_) and alphanumeric characters. The corresponding LayerObject for each layer name describes how that vector tile layer should be created. It specifies which feature classes to retrieve feature data, the precision of the data through zoom levels, and how to transform features and render them into tiles.",
@@ -448,11 +449,13 @@
         },
         "minZoom": {
           "description": "The lowest zoom level for the layer to build.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maxZoom": {
           "description": "The highest zoom level for the layer to build.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

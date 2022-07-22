@@ -3,7 +3,7 @@
     "geography": "us",
     "api-version": "2022-09-01-preview",
     "datasetId": "[datasetId]",
-    "TilesetRecipe": {
+    "TilesetConfiguration": {
       "version": 1,
       "layers": {
         "Indoor unit": {
@@ -44,7 +44,11 @@
         "valid": false,
         "warnings": [],
         "errors": [
-          "minzoom 12 cannot be larger than maxzoom 11 for Indoor unit layer."
+          {
+            "code": "CustomLayerNameNotSupported",
+            "message": "Custom layerName 'Indoor test' is not supported yet.",
+            "target": "Indoor test"
+          }
         ]
       }
     }
