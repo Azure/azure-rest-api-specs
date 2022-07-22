@@ -409,7 +409,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
@@ -420,6 +419,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/ReplicationLinks.json
 
 
 # Needed when there is more than one input file
