@@ -2478,7 +2478,7 @@
       "post": {
         "operationId": "SqlResources_SqlDatabaseRetrieveThroughputDistribution",
         "x-ms-examples": {
-          "CosmosDBSqlContainerRetrieveThroughputDistribution": {
+          "CosmosDBSqlDatabaseRetrieveThroughputDistribution": {
             "$ref": "./examples/CosmosDBSqlDatabaseRetrieveThroughputDistribution.json"
           }
         },
@@ -2536,7 +2536,7 @@
       "post": {
         "operationId": "SqlResources_SqlDatabaseRedistributeThroughput",
         "x-ms-examples": {
-          "CosmosDBSqlContainerRedistributeThroughput": {
+          "CosmosDBSqlDatabaseRedistributeThroughput": {
             "$ref": "./examples/CosmosDBSqlDatabaseRedistributeThroughput.json"
           }
         },
@@ -3591,7 +3591,7 @@
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabaseRetrieveThroughputDistribution",
         "x-ms-examples": {
-          "CosmosDBMongoDBCollectionRetrieveThroughputDistribution": {
+          "CosmosDBMongoDBDatabaseRetrieveThroughputDistribution": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseRetrieveThroughputDistribution.json"
           }
         },
@@ -3632,6 +3632,64 @@
           },
           "200": {
             "description": "The retrieve throughput distribution for MongoDB database operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
+      "post": {
+        "operationId": "MongoDBResources_MongoDBDatabaseRedistributeThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseRedistributeThroughput": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseRedistributeThroughput.json"
+          }
+        },
+        "description": "Redistribute throughput for an Azure Cosmos DB MongoDB database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "redistributeThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedistributeThroughputParameters"
+            },
+            "description": "The parameters to provide for redistributing throughput for the current MongoDB database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The redistribution throughput for MongoDB database operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The redistribution throughput for MongoDB database operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
