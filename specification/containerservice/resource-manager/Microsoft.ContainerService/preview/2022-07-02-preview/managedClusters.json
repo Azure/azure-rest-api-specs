@@ -3379,7 +3379,15 @@
           "description": "AKS will associate the specified agent pool with the Capacity Reservation Group."
         },
         "hostGroupID": {
-          "type": "string",
+	        "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/hostGroups"
+              }
+            ]
+          },
           "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
           "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
         }
