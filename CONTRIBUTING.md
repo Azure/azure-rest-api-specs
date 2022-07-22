@@ -75,7 +75,7 @@ Microsoft employees can try out the experience at [OpenAPI Hub](https://aka.ms/o
 Every PR in this repo will go through a series of PR checks, including:
 
 - Breaking Changes - checks for incompatible changes in an existing api-version
-- Cross Version Breaking Changes - checks for changes in a new api-version that are incompatible with prior versions
+- Breaking Changes (Cross-Version) - checks for changes in a new api-version that are incompatible with prior versions
 - LintDiff - checks the new or changed portions of the API for compliance with the Azure REST API Guidelines and API Style Guide
 - Avocado - checks that new or changed files comply with the directory structure convention for this repo.
 - Model Validation -
