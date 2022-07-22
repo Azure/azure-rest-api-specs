@@ -171,6 +171,15 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
+### Tag: package-preview-2018-09
+
+These settings apply only when `--tag=package-preview-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2018-09'
+input-file:
+  - Microsoft.Solutions/preview/2018-09-01-preview/managedapplications.json
+```
+
 
 ### Tag: package-subscriptions-2021-01
 
@@ -661,6 +670,33 @@ These settings apply only when `--tag=package-managedapplications-2018-06` is sp
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
 input-file:
 - Microsoft.Solutions/stable/2018-06-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2018-03
+
+These settings apply only when `--tag=package-managedapplications-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2018-03'
+input-file:
+- Microsoft.Solutions/stable/2018-03-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2018-02
+
+These settings apply only when `--tag=package-managedapplications-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2018-02'
+input-file:
+- Microsoft.Solutions/stable/2018-02-01/managedapplications.json
+```
+
+### Tag: package-managedapplications-2017-12
+
+These settings apply only when `--tag=package-managedapplications-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2017-12'
+input-file:
+- Microsoft.Solutions/stable/2017-12-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2017-09
