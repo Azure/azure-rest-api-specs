@@ -242,12 +242,18 @@
         ],
         "responses": {
           "202": {
-            "description": "The notification succeeded",
+            "description": "The notification request accepted",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -294,12 +300,18 @@
         ],
         "responses": {
           "202": {
-            "description": "The notification succeeded",
+            "description": "The notification request accepted",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -566,23 +578,23 @@
       "description": "The details of the test notification results.",
       "type": "object",
       "properties": {
-        "Context": {
+        "context": {
           "type": "object",
           "$ref": "#/definitions/Context"
         },
-        "State": {
+        "state": {
           "type": "string",
           "description": "The overall state"
         },
-        "CompletedTime": {
+        "completedTime": {
           "type": "string",
           "description": "The completed time"
         },
-        "CreatedTime": {
+        "createdTime": {
           "type": "string",
           "description": "The created time"
         },
-        "ActionDetails": {
+        "actionDetails": {
           "x-ms-identifiers": [],
           "type": "array",
           "items": {
@@ -592,7 +604,7 @@
         }
       },
       "required": [
-        "State"
+        "state"
       ]
     },
     "ActionDetail": {
@@ -629,11 +641,11 @@
       "description": "The context info",
       "type": "object",
       "properties": {
-        "NotificationSource": {
+        "notificationSource": {
           "type": "string",
           "description": "The source of the notification request"
         },
-        "ContextType": {
+        "contextType": {
           "type": "string",
           "description": "The context id type"
         }
