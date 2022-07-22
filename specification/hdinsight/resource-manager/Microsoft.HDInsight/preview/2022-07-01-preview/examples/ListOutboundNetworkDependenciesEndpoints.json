@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "clusterName": "cluster-name",
+    "resourceGroupName": "resource-group",
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "category": "Windows",
+            "endpoints": [
+                {
+                    "domainName": "www.windows.com",
+                    "endpointDetails": [
+                        {
+                            "port": "443",
+                            "protocol": "Https"
+                        }
+                    ]
+                }
+            ]
+          },
+          {
+            "category": "Azure Storage",
+            "endpoints": [
+                {
+                    "domainName": "www.azure.management.com",
+                    "endpointDetails": [
+                        {
+                            "port": "443",
+                            "protocol": "Https"
+                        },
+                        {
+                            "port": "23",
+                            "protocol": "Tcp"
+                        }
+                    ]
+                }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

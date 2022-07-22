@@ -126,6 +126,7 @@ input-file:
   - Microsoft.HDInsight/preview/2022-07-01-preview/privateLinkResources.json
   - Microsoft.HDInsight/preview/2022-07-01-preview/scriptActions.json
   - Microsoft.HDInsight/preview/2022-07-01-preview/virtualMachines.json
+  - Microsoft.HDInsight/preview/2022-07-01-preview/outboundNetworkDependenciesEndpoints.json
 ```
 ### Tag: package-2021-06
 
