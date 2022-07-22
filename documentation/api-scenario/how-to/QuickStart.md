@@ -5,7 +5,7 @@
  https://opensource.org/licenses/MIT
 -->
 
-# API Scenario test quick start
+# Quick start with API Scenario test
 
 ## Install
 
@@ -17,11 +17,14 @@ npm install -g oav@latest
 
 ### OAV Features
 
-- Very easy to use and run.
-- Support postman collection format. Debug easily.
-- Request response validation. `oav` implement a powerful validation algorithm and help developer to detect service issue in the early phase.
+- Very easy to use and run. It supports running API Scenario with ARM Dogfood/Canary/Production environments, and local environment as well.
+- Support Postman collection format. Debug easily.
+- Traffic schema validation and Azure API guidelines validation. `oav` implements a powerful validation algorithm and help developer to detect service issue in the early phase.
+- Generating high quality Swagger examples from API test traffic.
 - Validation result report. After each run API scenario, developer will get a validation report which contains detected issue in API test.
 - Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
+
+See `oav run -h` to find all available options.
 
 ## Create AAD app
 
@@ -42,10 +45,8 @@ First, create a folder `scenarios` under the api version folder. All API scenari
 Now write your basic API scenario. For more detail about API scenario file format, please refer to
 [API Scenario Definition Reference](../references/ApiScenarioDefinition.md).
 
-If Swagger examples are ready, you can use them to write your API scenario:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
-
 scope: ResourceGroup
 variables:
   configStoreName:
@@ -64,11 +65,10 @@ scenarios:
         exampleFile: ../examples/ConfigurationStoresGet.json
 ```
 
-or use operation based step:
+or use operation based step if Swagger examples are not ready or you want to create more scenarios without writing Swagger examples.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
-
 scope: ResourceGroup
 variables:
   configStoreName:
@@ -98,7 +98,7 @@ scenarios:
         operationId: ConfigurationStores_Get
 ```
 
-#### 2. create your env file
+#### 2. Create env file
 
 The `env.json` file contains required API scenario variables such as, subscriptionId, AAD applicationId, AAD applicationSecret.
 
@@ -118,11 +118,11 @@ The `env.json` file contains required API scenario variables such as, subscripti
 oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/appconfigQuickStart.yaml --tag=package-2022-05-01 -e env.json --verbose
 ```
 
-#### 4. Debug with postman
+#### 4. Debug with Postman
 
-Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the API scenario with postman.
+Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the API scenario with Postman.
 
-When run `run`, it automatically generate postman collection and postman env in `.apitest/<apiScenarioFile>/<runId>/<scenario>` folder. Here is the output folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202207221820-cyq4mk` is the runId, generated uniquely for each run command.
+When run `run`, it automatically generate Postman collection and postman env in `.apitest/<apiScenarioFile>/<runId>/<scenario>` folder. Here is the output folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202207221820-cyq4mk` is the runId, generated uniquely for each run command.
 
 ```
 .apitest
@@ -137,15 +137,15 @@ When run `run`, it automatically generate postman collection and postman env in 
 
 Postman is a widely used GUI API testing tool. And you could use Postman import the generated postman collection and env for your local debug.
 
-![import-postman-collection](./import-postman-collection.png)
+![import-Postman-collection](./import-postman-collection.png)
 
-After you import postman collection, you will get such requests. Now you could debug API test with postman locally.
+After you import Postman collection, you will get such requests. Now you could debug API test with postman locally.
 
-![postman-collection-signalr](./postman-collection-signalr.PNG)
+![Postman-collection-signalr](./postman-collection-signalr.PNG)
 
-#### 5. manual update example value
+#### 5. Manual update API Scenario or example
 
-After debug with postman, you need to rewrite back all the updated values and run `oav run <api-scenario-file> -e <env.json>` again. The result should be successful.
+After debug with Postman, you need to rewrite back all the updated values and run `oav run <api-scenario-file> -e <env.json>` again. The result should be successful.
 
 ## Feedback
 
