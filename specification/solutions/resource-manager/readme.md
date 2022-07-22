@@ -28,28 +28,10 @@ These are the global settings for the managedApplication.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-managedapplications-2021-07
-tag: package-managedapplications-2021-02
-tag: package-managedapplications-2020-08
-tag: package-managedapplications-2019-07
-tag: package-managedapplications-2018-09
-tag: package-managedapplications-2018-06
-tag: package-managedapplications-2018-03
-tag: package-managedapplications-2018-02
-tag: package-managedapplications-2017-12
-tag: package-managedapplications-2017-09
 ```
 
 ``` yaml $(package-managedapplications)
 tag: package-managedapplications-2021-07
-tag: package-managedapplications-2021-02
-tag: package-managedapplications-2020-08
-tag: package-managedapplications-2019-07
-tag: package-managedapplications-2018-09
-tag: package-managedapplications-2018-06
-tag: package-managedapplications-2018-03
-tag: package-managedapplications-2018-02
-tag: package-managedapplications-2017-12
-tag: package-managedapplications-2017-09
 ```
 
 
