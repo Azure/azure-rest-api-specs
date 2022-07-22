@@ -118,7 +118,7 @@ This CI check is to test service API readiness, by running API Scenario test to 
 
 Note: Currently only applicable to management plane APIs, and target ARM region is `US West Central` - the SDP pilot region.
 
-Refer to [API Scenario documentation](./api-scenario/readmd.md) for detailed description and how-to-fix guidance.
+To fix the CI check, download the `api-test-report` from Azure DevOps pipeline artifacts where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readmd.md) to run and debug it locally. After local debug, commit the API Scenario file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
 
 ## SDK Track2 Validation
 
