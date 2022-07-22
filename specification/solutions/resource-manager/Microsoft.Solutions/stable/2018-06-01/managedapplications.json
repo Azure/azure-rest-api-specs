@@ -128,7 +128,7 @@
         "operationId": "Applications_Delete",
         "description": "Deletes the managed application.",
         "x-ms-examples": {
-          "Get a managed application": {
+          "Deletes a managed application": {
             "$ref": "./examples/deleteApplication.json"
           }
         },
@@ -180,7 +180,7 @@
           "Applications"
         ],
         "operationId": "Applications_CreateOrUpdate",
-        "description": "Creates a new managed application.",
+        "description": "Creates or updates a managed application.",
         "x-ms-examples": {
           "Create or update managed application": {
             "$ref": "./examples/createOrUpdateApplication.json"
@@ -249,9 +249,9 @@
           "Applications"
         ],
         "operationId": "Applications_Update",
-        "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
+        "description": "Updates an existing managed application.",
         "x-ms-examples": {
-          "Create or update managed application": {
+          "Updates managed application": {
             "$ref": "./examples/updateApplication.json"
           }
         },
@@ -371,7 +371,7 @@
         "operationId": "ApplicationDefinitions_Delete",
         "description": "Deletes the managed application definition.",
         "x-ms-examples": {
-          "Get a managed application": {
+          "Deletes a managed application definition": {
             "$ref": "./examples/deleteApplicationDefinition.json"
           }
         },
@@ -422,7 +422,7 @@
           "ApplicationDefinitions"
         ],
         "operationId": "ApplicationDefinitions_CreateOrUpdate",
-        "description": "Creates a new managed application definition.",
+        "description": "Creates or updates a managed application definition.",
         "x-ms-examples": {
           "Create or update managed application definition": {
             "$ref": "./examples/createOrUpdateApplicationDefinition.json"
@@ -484,6 +484,61 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationDefinitions"
+        ],
+        "operationId": "ApplicationDefinitions_Update",
+        "description": "Updates the managed application definition.",
+        "x-ms-examples": {
+          "Update managed application definition": {
+            "$ref": "./examples/updateApplicationDefinition.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinitionPatchable"
+            },
+            "description": "Parameters supplied to the update a managed application definition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the managed application definition, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions": {
@@ -494,7 +549,7 @@
         "operationId": "ApplicationDefinitions_ListByResourceGroup",
         "description": "Lists the managed application definitions in a resource group.",
         "x-ms-examples": {
-          "List managed application definitions": {
+          "Lists the managed application definitions in a resource group": {
             "$ref": "./examples/listApplicationDefinitionsByResourceGroup.json"
           }
         },
@@ -541,9 +596,9 @@
           "Applications"
         ],
         "operationId": "Applications_ListByResourceGroup",
-        "description": "Gets all the applications within a resource group.",
+        "description": "Lists all the applications within a resource group.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Lists all the applications within a resource group": {
             "$ref": "./examples/listApplicationsByResourceGroup.json"
           }
         },
@@ -584,15 +639,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applicationDefinitions": {
+      "get": {
+        "tags": [
+          "ApplicationDefinitions"
+        ],
+        "operationId": "ApplicationDefinitions_ListBySubscription",
+        "description": "Lists the managed application definitions in a subscription.",
+        "x-ms-examples": {
+          "Lists the managed application definitions in a subscription": {
+            "$ref": "./examples/listApplicationDefinitionsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of managed application definitions.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applications": {
       "get": {
         "tags": [
           "Applications"
         ],
         "operationId": "Applications_ListBySubscription",
-        "description": "Gets all the applications within a subscription.",
+        "description": "Lists all the applications within a subscription.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Lists all the applications within a subscription": {
             "$ref": "./examples/listApplicationsBySubscription.json"
           }
         },
@@ -631,7 +725,7 @@
         "operationId": "Applications_GetById",
         "description": "Gets the managed application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Get application by id": {
             "$ref": "./examples/getApplicationById.json"
           }
         },
@@ -673,7 +767,7 @@
         "operationId": "Applications_DeleteById",
         "description": "Deletes the managed application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Delete application by id": {
             "$ref": "./examples/deleteApplicationById.json"
           }
         },
@@ -711,9 +805,9 @@
           "Applications"
         ],
         "operationId": "Applications_CreateOrUpdateById",
-        "description": "Creates a new managed application.",
+        "description": "Creates or updates a managed application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Create or update application by id": {
             "$ref": "./examples/createOrUpdateApplicationById.json"
           }
         },
@@ -766,9 +860,9 @@
           "Applications"
         ],
         "operationId": "Applications_UpdateById",
-        "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
+        "description": "Updates an existing managed application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Update application by id": {
             "$ref": "./examples/updateApplicationById.json"
           }
         },
@@ -818,7 +912,7 @@
         "operationId": "JitRequests_Get",
         "description": "Gets the JIT request.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Gets the JIT request": {
             "$ref": "./examples/getJitRequest.json"
           }
         },
@@ -872,7 +966,7 @@
         "operationId": "jitRequests_CreateOrUpdate",
         "description": "Creates or updates the JIT request.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Creates or updates the JIT request": {
             "$ref": "./examples/createOrUpdateJitRequest.json"
           }
         },
@@ -933,7 +1027,7 @@
         "operationId": "JitRequests_Update",
         "description": "Updates the JIT request.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Updates the JIT request": {
             "$ref": "./examples/updateJitRequest.json"
           }
         },
@@ -993,7 +1087,7 @@
         "operationId": "jitRequests_Delete",
         "description": "Deletes the JIT request.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Deletes the JIT request": {
             "$ref": "./examples/deleteJitRequest.json"
           }
         },
@@ -1044,9 +1138,9 @@
           "JitRequests"
         ],
         "operationId": "jitRequests_ListBySubscription",
-        "description": "Retrieves all JIT requests within the subscription.",
+        "description": "Lists all JIT requests within the subscription.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Lists jitRequests by subscription": {
             "$ref": "./examples/listJitRequestsBySubscription.json"
           }
         },
@@ -1082,7 +1176,7 @@
         "operationId": "jitRequests_ListByResourceGroup",
         "description": "Retrieves all JIT requests within the resource group.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Lists jitRequests by resourcegroup": {
             "$ref": "./examples/listJitRequestsByResourceGroup.json"
           }
         },
@@ -1128,7 +1222,7 @@
         "operationId": "Applications_RefreshPermissions",
         "description": "Refresh Permissions for application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Refresh Permissions for application": {
             "$ref": "./examples/refreshApplicationPermissions.json"
           }
         },
@@ -1181,7 +1275,7 @@
         "operationId": "Applications_UpdateAccess",
         "description": "Update access for application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "Update access for application": {
             "$ref": "./examples/updateAccess.json"
           }
         },
@@ -1238,7 +1332,7 @@
         "operationId": "Applications_ListTokens",
         "description": "List tokens for application.",
         "x-ms-examples": {
-          "Lists applications": {
+          "List token for application": {
             "$ref": "./examples/listToken.json"
           }
         },
@@ -1353,7 +1447,7 @@
         "operationId": "ApplicationDefinitions_DeleteById",
         "description": "Deletes the managed application definition.",
         "x-ms-examples": {
-          "Get managed application definition": {
+          "Deletes managed application definition": {
             "$ref": "./examples/deleteApplicationDefinition.json"
           }
         },
@@ -1404,7 +1498,7 @@
           "ApplicationDefinitions"
         ],
         "operationId": "ApplicationDefinitions_CreateOrUpdateById",
-        "description": "Creates a new managed application definition.",
+        "description": "Creates or updates a managed application definition.",
         "x-ms-examples": {
           "Create or update managed application definition": {
             "$ref": "./examples/createOrUpdateApplicationDefinition.json"
@@ -1700,22 +1794,6 @@
           "type": "object",
           "description": "The createUiDefinition json for the backing template with Microsoft.Solutions/applications resource. It can be a JObject or well-formed JSON string."
         },
-        "notificationPolicy": {
-          "$ref": "#/definitions/ApplicationNotificationPolicy",
-          "description": "The managed application notification policy."
-        },
-        "lockingPolicy": {
-          "$ref": "#/definitions/ApplicationPackageLockingPolicyDefinition",
-          "description": "The managed application locking policy."
-        },
-        "deploymentPolicy": {
-          "$ref": "#/definitions/ApplicationDeploymentPolicy",
-          "description": "The managed application deployment policy."
-        },
-        "managementPolicy": {
-          "$ref": "#/definitions/ApplicationManagementPolicy",
-          "description": "The managed application management policy that determines publisher's access to the managed resource group."
-        },
         "policies": {
           "description": "The managed application provider policies.",
           "type": "array",
@@ -1728,6 +1806,19 @@
         "lockLevel"
       ],
       "description": "The managed application definition properties."
+    },
+    "ApplicationDefinitionPatchable": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application definition tags"
+        }
+      },
+      "description": "Information about an application definition request."
     },
     "Plan": {
       "properties": {
@@ -2118,27 +2209,6 @@
       },
       "description": "Managed application locking policy."
     },
-    "ApplicationDeploymentPolicy": {
-      "properties": {
-        "deploymentMode": {
-          "$ref": "#/definitions/DeploymentMode",
-          "description": "The managed application deployment mode."
-        }
-      },
-      "required": [
-        "deploymentMode"
-      ],
-      "description": "Managed application deployment policy."
-    },
-    "ApplicationManagementPolicy": {
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/ApplicationManagementMode",
-          "description": "The managed application management mode."
-        }
-      },
-      "description": "Managed application management policy."
-    },
     "ApplicationPolicy": {
       "properties": {
         "name": {
@@ -2493,32 +2563,6 @@
             }
           }
         }
-      }
-    },
-    "DeploymentMode": {
-      "description": "The deployment mode.",
-      "enum": [
-        "NotSpecified",
-        "Incremental",
-        "Complete"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DeploymentMode",
-        "modelAsString": true
-      }
-    },
-    "ApplicationManagementMode": {
-      "description": "The management mode.",
-      "enum": [
-        "NotSpecified",
-        "Unmanaged",
-        "Managed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ApplicationManagementMode",
-        "modelAsString": true
       }
     },
     "UpdateAccessDefinition": {
