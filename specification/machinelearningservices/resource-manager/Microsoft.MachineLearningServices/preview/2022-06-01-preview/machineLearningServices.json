@@ -2157,7 +2157,8 @@
             "Deleting",
             "Succeeded",
             "Failed",
-            "Canceled"
+            "Canceled",
+            "SoftDeleted"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -2258,6 +2259,11 @@
         },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
+          "default": false,
+          "type": "boolean"
+        },
+        "softDeleteEnabled": {
+          "description": "Whether to allow workspace soft deleting",
           "default": false,
           "type": "boolean"
         }
