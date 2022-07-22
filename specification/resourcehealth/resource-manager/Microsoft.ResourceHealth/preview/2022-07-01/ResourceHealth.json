@@ -466,6 +466,53 @@
         }
       }
     },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current": {
+      "get": {
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
+        "operationId": "ChildAvailabilityStatuses_GetByResource",
+        "description": "Gets current availability status for a single resource",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the current availability status for a single resource",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatus"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCurrentHealthByResource": {
+            "$ref": "./examples/ChildAvailabilityStatus_GetByResource.json"
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses": {
       "get": {
         "tags": [
@@ -1270,6 +1317,8 @@
       }
     },
     "impactedResourceListResult": {
+      "type": "object",
+      "description": "The List impactedResourceStatus operation response.",
       "properties": {
         "value": {
           "type": "array",
@@ -1285,8 +1334,7 @@
       },
       "required": [
         "value"
-      ],
-      "description": "The List impactedResourceStatus operation response."
+      ]
     },
     "impactedResourceStatus": {
       "type": "object",
