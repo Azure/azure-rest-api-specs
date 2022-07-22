@@ -123,8 +123,8 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-- Microsoft.Compute/previous-versions/stable/2017-12-01/compute.json
-- Microsoft.Compute/previous-versions/stable/2017-03-30/disk.json
+- Microsoft.Compute/ComputeRP/stable/2017-12-01/compute.json
+- Microsoft.Compute/DiskRP/stable/2017-03-30/disk.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01 and java
@@ -134,9 +134,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
 input-file:
-  - Microsoft.Compute/previous-versions/stable/2020-06-01/compute.json
-  - Microsoft.Compute/previous-versions/stable/2020-06-01/runCommands.json
-  - Microsoft.Compute/previous-versions/stable/2019-04-01/skus.json
-  - Microsoft.Compute/previous-versions/stable/2019-07-01/disk.json
-  - Microsoft.Compute/previous-versions/stable/2019-12-01/gallery.json
+  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
+  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
+  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
+  - Microsoft.Compute/DiskRP/stable/2019-07-01/disk.json
+  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
 ```
