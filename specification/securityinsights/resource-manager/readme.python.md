@@ -17,3 +17,11 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
 ```
+
+```
+directive:
+  - from: swagger-document
+    where: $.definitions.IncidentOwnerInfo.properties.ownerType
+    transform: >
+        $['x-ms-enum']['name'] = 'ownerTypeEnum';
+```
