@@ -747,9 +747,9 @@
           "OutboundNetworkDependenciesEndpoints"
         ],
         "operationId": "Clusters_ListOutboundNetworkDependenciesEndpoints",
-        "description": "Gets the network endpoints of all outbound dependencies of a HDInsight cluster.",
+        "description": "Get all the outbound network dependencies endpoints in a HDInsight cluster.",
         "x-ms-examples": {
-          "Get all private link resources in a specific HDInsight cluster.": {
+          "Get all the outbound network dependencies endpoints in a HDInsight cluster.": {
             "$ref": "./examples/ListOutboundNetworkDependenciesEndpoints.json"
           }
         },
@@ -780,6 +780,9 @@
               "$ref": "#/definitions/OutboundNetworkDependenciesEndpointListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1129,7 +1132,7 @@
           "format": "int32",
           "description": "The instance count of the cluster."
         },
-        "VMGroupName": {
+        "vmGroupName": {
           "type": "string",
           "description": "The name of the virtual machine group.",
           "x-ms-mutability": [
@@ -2241,7 +2244,13 @@
           "description": "Array of outbound network dependencies endpoints",
           "items": {
             "$ref": "#/definitions/OutboundNetworkDependenciesEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The link (url) to the next page of results."
         }
       },
       "description": "A list of outbound network dependencies endpoints"
@@ -2258,7 +2267,8 @@
           "description": "Array of endpoints",
           "items": {
             "$ref": "#/definitions/OutboundNetworkDependenciesEndpointProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "A outbound network dependencies endpoint"
@@ -2275,7 +2285,8 @@
           "description": "Array of endpoint details",
           "items": {
             "$ref": "#/definitions/OutboundNetworkDependenciesEndpointDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Outbound network dependencies endpoint properties"
