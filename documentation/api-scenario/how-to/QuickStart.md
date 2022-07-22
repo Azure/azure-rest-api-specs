@@ -141,7 +141,7 @@ Postman is a widely used GUI API testing tool. And you could use Postman import 
 
 After you import Postman collection, you will get such requests. Now you could debug API test with postman locally.
 
-![Postman-collection-signalr](./postman-collection-signalr.PNG)
+![Postman-collection-signalr](./postman-collection-list.PNG)
 
 #### 5. Manual update API Scenario or example
 
