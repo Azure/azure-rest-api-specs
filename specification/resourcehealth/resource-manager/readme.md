@@ -149,6 +149,7 @@ batch:
   - tag: package-2020-05-01-preview
   - tag: package-2018-07-01
   - tag: package-2020-05-01
+  - tag: package-preview-2022-07
 ```
 
 ### Tag: package-2017-07 and java
@@ -225,6 +226,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.resourcehealth.v2020_05_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-07 and java
+
+These settings apply only when `--tag=package-preview-2022-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2022_07_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2022_07_preview
 regenerate-manager: true
 generate-interface: true
 ```
