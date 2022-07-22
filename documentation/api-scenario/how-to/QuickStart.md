@@ -5,11 +5,11 @@
  https://opensource.org/licenses/MIT
 -->
 
-# API test quick start
+# API Scenario test quick start
 
 ## Install
 
-`oav` is an open-source powerful tool for swagger validation, example generation, and API testing. GitHub: https://github.com/Azure/oav.
+`oav` is an open-source powerful tool for swagger validation, example generation, and API Scenario testing. GitHub: https://github.com/Azure/oav.
 
 ```sh
 npm install -g oav@latest
@@ -20,7 +20,7 @@ npm install -g oav@latest
 - Very easy to use and run.
 - Support postman collection format. Debug easily.
 - Request response validation. `oav` implement a powerful validation algorithm and help developer to detect service issue in the early phase.
-- Validation result report. After each run API scenario, developer will get a validation report which contains detect issue in api test.
+- Validation result report. After each run API scenario, developer will get a validation report which contains detected issue in API test.
 - Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
 
 ## Create AAD app
@@ -31,7 +31,7 @@ For how to create AAD app, please follow this doc https://docs.microsoft.com/en-
 
 ## Authoring steps
 
-We will write API scenario file for SignalR service as an example.
+We will write API scenario file for AppConfiguration service as an example.
 
 #### 1. Write your first API scenario file
 
@@ -42,18 +42,60 @@ First, create a folder `scenarios` under the api version folder. All API scenari
 Now write your basic API scenario. For more detail about API scenario file format, please refer to
 [API Scenario Definition Reference](../references/ApiScenarioDefinition.md).
 
+If Swagger examples are ready, you can use them to write your API scenario:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 
 scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+
 scenarios:
   - scenario: quickStart
-    description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
+    description: Quick start with AppConfiguration ConfigurationStores
     steps:
-      - step: SignalR_CreateOrUpdate
-        exampleFile: ../examples/SignalR_CreateOrUpdate.json
-      - step: SignalR_Delete
-        exampleFile: ../examples/SignalR_Delete.json
+      - step: Operations_CheckNameAvailability
+        exampleFile: ../examples/CheckNameAvailable.json
+      - step: ConfigurationStores_Create
+        exampleFile: ../examples/ConfigurationStoresCreate.json
+      - step: ConfigurationStores_Get
+        exampleFile: ../examples/ConfigurationStoresGet.json
+```
+
+or use operation based step:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+
+scenarios:
+  - scenario: quickStart
+    description: Quick start with AppConfiguration ConfigurationStores
+    steps:
+      - step: Operations_CheckNameAvailability
+        operationId: Operations_CheckNameAvailability
+        parameters:
+          checkNameAvailabilityParameters:
+            name: $(configStoreName)
+            type: Microsoft.AppConfiguration/configurationStores
+      - step: ConfigurationStores_Create
+        operationId: ConfigurationStores_Create
+        parameters:
+          configStoreCreationParameters:
+            location: $(location)
+            sku:
+              name: Standard
+            tags:
+              myTag: myTagValue
+      - step: ConfigurationStores_Get
+        operationId: ConfigurationStores_Get
 ```
 
 #### 2. create your env file
@@ -63,36 +105,34 @@ The `env.json` file contains required API scenario variables such as, subscripti
 ```json
 {
   "subscriptionId": "<my subscription id>",
-  "location": "westus",
+  "location": "westcentralus",
   "tenantId": "<AAD app tenantId>",
   "client_id": "<my add client_id>",
   "client_secret": "<my aad client_secret>"
 }
 ```
 
-#### 3. Run api test
+#### 3. Run API Scenario test
 
 ```sh
-oav run /home/user/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/scenarios/signalR.yaml -e env.json
+oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/appconfigQuickStart.yaml --tag=package-2022-05-01 -e env.json --verbose
 ```
 
 #### 4. Debug with postman
 
 Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the API scenario with postman.
 
-When run `run`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<apiScenarioFile>/<runId>/<apiScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
+When run `run`, it automatically generate postman collection and postman env in `.apitest/<apiScenarioFile>/<runId>/<scenario>` folder. Here is the output folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202207221820-cyq4mk` is the runId, generated uniquely for each run command.
 
 ```
-generated
-└── Microsoft.SignalRService
-    └── 2020-07-01-preview
-        └── signalR
-            └── 202105120922-5c3x5
-                ├── signalR_0
-                │   ├── collection.json
-                │   └── env.json
-                |   |__ report.json
-                └── signalR_0.json
+.apitest
+└── appconfigQuickStart.yaml
+    └── 202207221820-cyq4mk
+        ├── quickStart
+        │   ├── collection.json
+        │   ├── env.json
+        │   └── report.json
+        └── quickStart.json
 ```
 
 Postman is a widely used GUI API testing tool. And you could use Postman import the generated postman collection and env for your local debug.

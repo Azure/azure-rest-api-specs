@@ -1,10 +1,10 @@
 # API Scenario Documentation
 
-API Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. API scenario can be used for service functional test, API quality validation and SDK/CLIs test generation.
+API Scenario is a YAML file defining RESTful API usage scenarios of your service with a sequence of API calls. API scenario can be used for service API functional test, API quality validation and SDK/CLIs test generation.
 
 ## Features
 
-- Simple to use: Intuitive step definition based on Swagger operations and examples.
+- Simple to use: Intuitive step definition based on Swagger operations or examples, describing parameters and expected responses with scoped variables.
 - ARM Template integration: Support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
 - Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner. More runners will be supported, like SDKs in different languages.
 
