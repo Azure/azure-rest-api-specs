@@ -11,17 +11,11 @@ namespace: azure.mgmt.securityinsight
 package-name: azure-mgmt-securityinsight
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
-```
-
-```
-directive:
-  - from: swagger-document
-    where: $.definitions.IncidentOwnerInfo.properties.ownerType
-    transform: >
-        $['x-ms-enum']['name'] = 'ownerTypeEnum';
 ```
