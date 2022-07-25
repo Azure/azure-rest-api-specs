@@ -18,7 +18,7 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
 ```
 
-```
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 
