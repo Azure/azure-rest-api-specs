@@ -1421,6 +1421,13 @@
               "type": "object",
               "format": "file"
             }
+          },
+          {
+            "name": "flush",
+            "in": "query",
+            "description": "Valid only for append calls. This parameter allows the caller to flush during an append call. Default value is \"false\" , if \"true\" the data will be flushed with the append call. Note that when using flush=true, the following headers are not supported - \"x-ms-cache-control\", \"x-ms-content-encoding\", \"x-ms-content-type\", \"x-ms-content-language\", \"x-ms-content-md5\", \"x-ms-content-disposition\". To set these headers during flush, please use action=flush",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
