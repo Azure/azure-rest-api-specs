@@ -205,28 +205,31 @@
 					{
 						"in": "query",
 						"name": "interval",
-						"description": "\"Time span for the events to aggregate. For example, PT5M (5 mins). For information about the time format,\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+						"description": "\"Time interval for aggregation of events. Allowed intervals 5 minute, 1 hour, 6 hour, 12 hour and 1 day. For example, PT5M (5 mins). For information about the time format,\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+						"required": true,
 						"type": "string",
 						"format": "date-span"
 					},
 					{
 						"in": "query",
 						"name": "startTime",
-						"description": "Start time of the time series.",
+						"description": "Start of aggregation time interval.",
+						"required": true,
 						"type": "string",
 						"format": "date-time"
 					},
 					{
 						"in": "query",
 						"name": "endTime",
-						"description": "End time of the time series.",
+						"description": "End of aggregation time interval.",
+						"required": true,
 						"type": "string",
 						"format": "date-time"
 					},
 					{
 						"in": "query",
 						"name": "window",
-						"description": "Rolling or Expanding. Defaults to Rolling.",
+						"description": "Rolling or Expanding time. Rolling compatible with 1 hour, 6 hour, 12 hour and 1 day time intervals. Expanding compatible with 5 minute time interval only. Defaults to Rolling.",
 						"type": "string",
 						"enum": [
 							"Rolling",
@@ -240,7 +243,7 @@
 					{
 						"in": "query",
 						"name": "filter",
-						"description": "An expression to filter the time series.",
+						"description": "An expression to filter result array.",
 						"type": "string"
 					}
 				],
@@ -311,7 +314,7 @@
 					{
 						"in": "query",
 						"name": "filter",
-						"description": "An expression to filter the evaluations against evaluations metadata. Only evaluations where the expression evaluations to true are included in the response.",
+						"description": "An expression to filter the evaluations against evaluations metadata. Only evaluations where the expression evaluates to true are included in the response.",
 						"type": "string"
 					},
 					{
