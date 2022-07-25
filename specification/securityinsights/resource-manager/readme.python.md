@@ -11,6 +11,8 @@ namespace: azure.mgmt.securityinsight
 package-name: azure-mgmt-securityinsight
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
@@ -20,8 +22,8 @@ output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/
 
 ```
 directive:
-  - from: swagger-document
-    where: $.definitions.IncidentOwnerInfo.properties.ownerType
+  - from: EntityTypes.json
+    where: $.definitions.AccountEntityProperties.properties.ntDomain
     transform: >
-        $['x-ms-enum']['name'] = 'ownerTypeEnum';
+        $['description'] = 'The NetBIOS domain name as it appears in the alert format - domain/username. Examples: NT AUTHORITY.';
 ```
