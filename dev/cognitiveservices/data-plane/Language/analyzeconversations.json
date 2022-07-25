@@ -1767,7 +1767,8 @@
             "$ref": "#/definitions/WordLevelTiming"
           }
         },
-        "utteranceLevelTiming": {
+        "audioTiming": {
+          "description": "Conversation item level audio timing. This still can help on AI quality if word level audio timings are not available.",
           "$ref": "#/definitions/AudioTiming"
         }
       }
@@ -2057,7 +2058,7 @@
           "type": "array",
           "description": "The context list of the summary.",
           "items": {
-            "$ref": "common.json#/definitions/ItemizedSummaryContext"
+            "$ref": "#/definitions/ItemizedSummaryContext"
           }
         }
       },
@@ -2246,6 +2247,7 @@
       "properties": {
         "summaryAspects": {
           "type": "array",
+          "description": "Specify the aspects for the conversational summarization task.",
           "items": {
             "type": "string",
             "enum": [
@@ -2370,6 +2372,24 @@
         },
         {
           "$ref": "common.json#/definitions/CustomResult"
+        }
+      ]
+    },
+    "ItemizedSummaryContext": {
+      "type": "object",
+      "description": "The context of the summary with conversation item id.",
+      "required": [
+        "conversationItemId"
+      ],
+      "properties": {
+        "conversationItemId": {
+          "type": "string",
+          "description": "Reference to the id of ConversationItem."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/SummaryContext"
         }
       ]
     }

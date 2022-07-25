@@ -729,6 +729,7 @@
       "properties": {
         "phraseControls": {
           "type": "array",
+          "description": "Control the phrases to be used in the summary.",
           "items": {
             "$ref": "#/definitions/PhraseControl"
           }
@@ -932,24 +933,6 @@
           "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
         }
       }
-    },
-    "ItemizedSummaryContext": {
-      "type": "object",
-      "description": "The context of the summary with item id.",
-      "required": [
-        "conversationItemId"
-      ],
-      "properties": {
-        "conversationItemId": {
-          "type": "string",
-          "description": "Reference to the id of ConversationItem."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryContext"
-        }
-      ]
     },
     "AbstractiveSummarizationEvaluationSummary": {
       "description": "Represents the evaluation summary for a custom abstractive summarization project.",
