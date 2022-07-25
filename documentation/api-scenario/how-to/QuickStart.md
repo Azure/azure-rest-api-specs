@@ -9,10 +9,10 @@
 
 ## Install
 
-`oav` is an open-source powerful tool for swagger validation, example generation, and API Scenario testing. GitHub: https://github.com/Azure/oav.
+`oav` is an open-source powerful tool for swagger validation, API Scenario testing, and examples generation. GitHub: https://github.com/Azure/oav.
 
 ```sh
-npm install -g oav@latest
+npm install -g oav
 ```
 
 ### OAV Features
