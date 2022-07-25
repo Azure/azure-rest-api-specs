@@ -2025,13 +2025,13 @@
           }
         ],
         "responses": {
+          "headers": {
+            "Azure-AsyncOperation": {
+              "description": "URL to query for status of the operation.",
+              "type": "string"
+            }
+          },
           "202": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
             "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
