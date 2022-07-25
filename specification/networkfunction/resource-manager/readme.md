@@ -26,7 +26,7 @@ These are the global settings for the networkfunction.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-05-01
+tag: package-2022-08-01
 ```
 
 ### Tag: package-2021-09-01-preview
