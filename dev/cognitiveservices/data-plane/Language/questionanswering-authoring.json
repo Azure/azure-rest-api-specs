@@ -41,6 +41,990 @@
     ]
   },
   "paths": {
+    "/query-knowledgebases/projects": {
+      "get": {
+        "summary": "Gets all projects for a user.",
+        "operationId": "QuestionAnsweringProjects_ListProjects",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "responses": {
+          "200": {
+            "description": "The metadata of all projects.",
+            "schema": {
+              "$ref": "#/definitions/ProjectsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectsListProjects.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}": {
+      "get": {
+        "summary": "Get the requested project metadata.",
+        "operationId": "QuestionAnsweringProjects_GetProjectDetails",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata for the specified project.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulGetProject.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Create or update a project.",
+        "operationId": "QuestionAnsweringProjects_CreateProject",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "description": "Parameters needed to create the project.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of the updated project, if it already exists.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "201": {
+            "description": "The metadata of the created project, if it doesn't exist.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the project.",
+        "operationId": "QuestionAnsweringProjects_DeleteProject",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulDeleteProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of a Project delete job.",
+        "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Project delete job status.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeleteJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/:export": {
+      "post": {
+        "summary": "Export project metadata and assets.",
+        "operationId": "QuestionAnsweringProjects_Export",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportExportFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetKindParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Export job status, project metadata, and assets.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobState"
+            }
+          },
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitExportJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of an Export job, once job completes, returns the project metadata, and assets.",
+        "operationId": "QuestionAnsweringProjects_GetExportStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Export job status, project metadata, and assets.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectExportJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/:import": {
+      "post": {
+        "summary": "Import project assets.",
+        "operationId": "QuestionAnsweringProjects_Import",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Project assets the needs to be imported.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImportJobOptions"
+            }
+          },
+          {
+            "$ref": "#/parameters/ImportExportFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetKindParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitImportJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of an Import job.",
+        "operationId": "QuestionAnsweringProjects_GetImportStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Import job status.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectImportJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
+      "put": {
+        "summary": "Deploy project to production.",
+        "operationId": "QuestionAnsweringProjects_DeployProject",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitDeployJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of a Deploy job.",
+        "operationId": "QuestionAnsweringProjects_GetDeployStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Deploy job state.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeployJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/deployments": {
+      "get": {
+        "summary": "List all deployments of a project.",
+        "operationId": "QuestionAnsweringProjects_ListDeployments",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "responses": {
+          "200": {
+            "description": "List of deployments of a project.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeployments"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectListDeployments.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/synonyms": {
+      "get": {
+        "summary": "Gets all the synonyms of a project.",
+        "operationId": "QuestionAnsweringProjects_GetSynonyms",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "responses": {
+          "200": {
+            "description": "All the synonyms of a project.",
+            "schema": {
+              "$ref": "#/definitions/SynonymAssets"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSynonyms.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates all the synonyms of a project.",
+        "operationId": "QuestionAnsweringProjects_UpdateSynonyms",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "All the synonyms of a project.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SynonymAssets"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Synonyms update successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSynonyms.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/sources": {
+      "get": {
+        "summary": "Gets all the sources of a project.",
+        "operationId": "QuestionAnsweringProjects_GetSources",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "responses": {
+          "200": {
+            "description": "All the sources of a project.",
+            "schema": {
+              "$ref": "#/definitions/QnaSources"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSources.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates the sources of a project.",
+        "operationId": "QuestionAnsweringProjects_UpdateSources",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Update sources parameters of a project.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSourcesOptions"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of update sources job.",
+        "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Update sources job state.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/qnas": {
+      "get": {
+        "summary": "Gets all the QnAs of a project.",
+        "operationId": "QuestionAnsweringProjects_GetQnas",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceFilterParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "responses": {
+          "200": {
+            "description": "All the QnAs of a project.",
+            "schema": {
+              "$ref": "#/definitions/QnaAssets"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulGetQnas.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates the QnAs of a project.",
+        "operationId": "QuestionAnsweringProjects_UpdateQnas",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Update QnAs parameters of a project.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateQnaOptions"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnas.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of update QnAs job.",
+        "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Update QnAs job state.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnasJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/feedback": {
+      "post": {
+        "summary": "Update Active Learning feedback.",
+        "operationId": "QuestionAnsweringProjects_AddFeedback",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Feedback for Active Learning.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveLearningFeedback"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Feedback recorded successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateActiveLearningFeedback.json"
+          }
+        }
+      }
+    },
     "/authoring/query-knowledgebases/projects": {
       "get": {
         "summary": "Gets all projects for a user.",
@@ -308,7 +1292,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitExportJob.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitExportJob_WithAuthoringPrefix.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -351,7 +1335,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectExportJobStatus.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectExportJobStatus_withAuthoringPrefix.json"
           }
         }
       }
@@ -406,7 +1390,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitImportJob.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitImportJob_WithAuthoringPrefix.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -493,7 +1477,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitDeployJob.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitDeployJob_WithAuthoringPrefix.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -786,7 +1770,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSources.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSources_WithAuthoringPrefix.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -932,7 +1916,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnas.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnas_WithAuthoringPrefix.json"
           }
         },
         "x-ms-long-running-operation": true
