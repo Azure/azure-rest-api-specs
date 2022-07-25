@@ -443,6 +443,438 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "List all custom certificates.",
+        "operationId": "WebPubSubCustomCertificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom certificates of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebPubSubCustomCertificates_List": {
+            "$ref": "./examples/WebPubSubCustomCertificates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Get a custom certificate.",
+        "operationId": "WebPubSubCustomCertificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubCustomCertificates_Get": {
+            "$ref": "./examples/WebPubSubCustomCertificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Create or update a custom certificate.",
+        "operationId": "WebPubSubCustomCertificates_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebPubSubCustomCertificates_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubCustomCertificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Delete a custom certificate.",
+        "operationId": "WebPubSubCustomCertificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubCustomCertificates_Delete": {
+            "$ref": "./examples/WebPubSubCustomCertificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customDomains": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "List all custom domains.",
+        "operationId": "WebPubSubCustomDomains_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom domains of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebPubSubCustomDomains_List": {
+            "$ref": "./examples/WebPubSubCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customDomains/{name}": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Get a custom domain.",
+        "operationId": "WebPubSubCustomDomains_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom domain.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubCustomDomains_Get": {
+            "$ref": "./examples/WebPubSubCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Create or update a custom domain.",
+        "operationId": "WebPubSubCustomDomains_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The response describes the custom domain and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebPubSubCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Delete a custom domain.",
+        "operationId": "WebPubSubCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebPubSubCustomDomains_Delete": {
+            "$ref": "./examples/WebPubSubCustomDomains_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs": {
       "get": {
         "tags": [
@@ -1343,6 +1775,145 @@
         "modelAsString": true
       }
     },
+    "CustomCertificate": {
+      "description": "A custom certificate.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomCertificateProperties"
+        }
+      }
+    },
+    "CustomCertificateList": {
+      "description": "Custom certificates list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom certificates of this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomCertificateProperties": {
+      "description": "Custom certificate properties.",
+      "required": [
+        "keyVaultBaseUri",
+        "keyVaultSecretName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "keyVaultBaseUri": {
+          "description": "Base uri of the KeyVault that stores certificate.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretName": {
+          "description": "Certificate secret name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretVersion": {
+          "description": "Certificate secret version.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "CustomDomain": {
+      "description": "A custom domain",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomDomainProperties"
+        }
+      }
+    },
+    "CustomDomainList": {
+      "description": "Custom domains list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom domains that bind to this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDomain"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainProperties": {
+      "description": "Properties of a custom domain.",
+      "required": [
+        "customCertificate",
+        "domainName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "domainName": {
+          "description": "The custom domain name.",
+          "type": "string"
+        },
+        "customCertificate": {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
     "Dimension": {
       "description": "Specifications of the Dimension of metrics.",
       "type": "object",
@@ -2055,6 +2626,16 @@
         }
       }
     },
+    "ResourceReference": {
+      "description": "Reference to a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string"
+        }
+      }
+    },
     "ResourceSku": {
       "description": "The billing information of the resource.",
       "required": [
@@ -2489,7 +3070,7 @@
           "x-ms-identifiers": []
         },
         "eventListeners": {
-          "description": "Event listener settings for forwarding your client events to listeners.\r\nEvent listener is transparent to Web PubSub clients, and it doesn't return any result to clients nor interrupt the lifetime of clients.\r\nOne event can be sent to multiple listeners, as long as it matches the filters in those listeners. The order of the array elements doesn't matter.\r\nMaximum count of event listeners among all hubs is 30.",
+          "description": "Event listener settings for forwarding your client events to listeners.\r\nEvent listener is transparent to Web PubSub clients, and it doesn't return any result to clients nor interrupt the lifetime of clients.\r\nOne event can be sent to multiple listeners, as long as it matches the filters in those listeners. The order of the array elements doesn't matter.\r\nMaximum count of event listeners among all hubs is 10.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EventListener"
