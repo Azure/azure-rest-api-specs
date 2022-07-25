@@ -115,7 +115,7 @@ The `env.json` file contains required API scenario variables such as, subscripti
 #### 3. Run API Scenario test
 
 ```sh
-oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/appconfigQuickStart.yaml --tag=package-2022-05-01 -e env.json --verbose
+oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/quickstart.yaml --tag=package-2022-05-01 -e env.json --verbose
 ```
 
 #### 4. Debug with Postman
@@ -126,7 +126,7 @@ When run `run`, it automatically generate Postman collection and postman env in 
 
 ```
 .apitest
-└── appconfigQuickStart.yaml
+└── quickstart.yaml
     └── 202207221820-cyq4mk
         ├── quickStart
         │   ├── collection.json
@@ -137,11 +137,11 @@ When run `run`, it automatically generate Postman collection and postman env in 
 
 Postman is a widely used GUI API testing tool. And you could use Postman import the generated postman collection and env for your local debug.
 
-![import-Postman-collection](./import-postman-collection.png)
+![import-postman-collection](./import-postman-collection.png)
 
 After you import Postman collection, you will get such requests. Now you could debug API test with postman locally.
 
-![Postman-collection-signalr](./postman-collection-list.PNG)
+![postman-collection-list](./postman-collection-list.PNG)
 
 #### 5. Manual update API Scenario or example
 
