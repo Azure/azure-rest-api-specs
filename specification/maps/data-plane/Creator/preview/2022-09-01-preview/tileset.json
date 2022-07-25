@@ -390,11 +390,13 @@
         "minZoom": {
           "description": "The lowest tile zoom level tile generated for the tileset.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "maxZoom": {
           "description": "The highest tile zoom level tile generated for the tileset.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "bbox": {
@@ -548,7 +550,33 @@
         "DuplicateFeatureClassFound",
         "CustomLayerNameNotSupported",
         "CustomOntologyNotSupported"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DuplicateLayerNameFound",
+            "description": "The layer name should be unique."
+          },
+          {
+            "value": "UndefinedFeatureClasses",
+            "description": "Feature class should be defined in ontology definition, and the feature class name is case sensitive."
+          },
+          {
+            "value": "DuplicateFeatureClassFound",
+            "description": "Feature class name should be unique."
+          },
+          {
+            "value": "CustomLayerNameNotSupported",
+            "description": "Custom layer name is not supported right now."
+          },
+          {
+            "value": "CustomOntologyNotSupported",
+            "description": "Custom ontology is not supported right now, 'Facility-2.0' is the supported ontology."
+          }
+        ]
+      }
     }
   }
 }
