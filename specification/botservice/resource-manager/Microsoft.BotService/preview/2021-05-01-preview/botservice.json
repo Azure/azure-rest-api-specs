@@ -812,6 +812,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listQnAMakerEndpointKeys": {
+      "post": {
+        "tags": [
+          "ListQnAMakerEndpointKeys"
+        ],
+        "description": "Lists the QnA Maker endpoint keys",
+        "operationId": "QnAMakerEndpointKeys_Get",
+        "x-ms-examples": {
+          "List QnAMaker Endpoint Keys": {
+            "$ref": "./examples/ListQnAMakerEndpointKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QnAMakerEndpointKeysRequestBody"
+            },
+            "description": "The request body parameters to provide for the check name availability request"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is retrieved successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/QnAMakerEndpointKeysResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections/{connectionName}/listWithSecrets": {
       "post": {
         "tags": [
@@ -3064,6 +3109,42 @@
         "BotOpenIdMetadata": {
           "description": "Same as toBotFromChannelOpenIdMetadataUrl, used by SDK < v4.12",
           "type": "string"
+        }
+      }
+    },
+    "QnAMakerEndpointKeysRequestBody": {
+      "description": "The request body for a request to Bot Service Management to list qnqmaker endpoint keys.",
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "description": "the host name of the qnqmaker endpoint",
+          "type": "string"
+        },
+        "authkey": {
+          "description": "Subscription key which provides access to this API.",
+          "type": "string"
+        }
+      }
+    },
+    "QnAMakerEndpointKeysResponse": {
+      "type": "object",
+      "description": "Schema for EndpointKeys generate/refresh operations.",
+      "properties": {
+        "primaryEndpointKey": {
+          "type": "string",
+          "description": "Primary Access Key."
+        },
+        "secondaryEndpointKey": {
+          "type": "string",
+          "description": "Secondary Access Key."
+        },
+        "installedVersion": {
+          "type": "string",
+          "description": "Current version of runtime."
+        },
+        "lastStableVersion": {
+          "type": "string",
+          "description": "Latest version of runtime."
         }
       }
     },
