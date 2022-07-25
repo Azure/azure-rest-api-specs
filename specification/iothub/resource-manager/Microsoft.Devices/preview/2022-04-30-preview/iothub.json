@@ -287,6 +287,12 @@
             }
           },
           "200": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state.",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
@@ -2032,6 +2038,12 @@
             }
           },
           "200": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "This is returned as a response to the status polling request for the delete operation.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
@@ -4489,10 +4501,10 @@
         "keyVaultProperties": {
           "description": "The properties of the KeyVault key.",
           "type": "array",
-          "x-ms-identifiers ": [],
           "items": {
             "$ref": "#/definitions/KeyVaultKeyProperties"
-          }
+          },
+          "x-ms-identifiers ": ["keyIdentifier"]
         }
       }
     },
