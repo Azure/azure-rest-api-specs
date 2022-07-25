@@ -19,3 +19,11 @@ modelerfour:
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
 ```
+
+```
+directive:
+  - from: EntityTypes.json
+    where: $.definitions.AccountEntityProperties.properties.ntDomain
+    transform: >
+        $['description'] = 'The NetBIOS domain name as it appears in the alert format - domain/username. Examples: NT AUTHORITY.';
+```
