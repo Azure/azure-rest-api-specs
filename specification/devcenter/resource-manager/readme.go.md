@@ -18,12 +18,12 @@ azure-arm: true
 directive:
 - rename-model:
     from: DevCenterSku
-    to: DCSku
+    to: SkuInfo
 - from: vdi.json
   where: "$.definitions.SkuListResult.properties.value.items"
   transform: >-
     return {
-            "$ref": "commonDefinitions.json#/definitions/DCSku"
+            "$ref": "commonDefinitions.json#/definitions/SkuInfo"
           }
 ```
 
