@@ -5757,24 +5757,20 @@
         "target": {
           "type": "string"
         },
-        "value": {
-          "description": "Value details of the workspace connection.",
-          "type": "string"
-        },
-        "valueFormat": {
-          "description": "format for the workspace connection value",
-          "type": "string",
-          "enum": [
-            "JSON"
-          ],
-          "x-ms-enum": {
-            "name": "ValueFormat",
-            "modelAsString": true
-          }
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IValue"
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false,
       "discriminator": "authType"
+    },
+    "IValue": {
+      "type": "object",
+      "additionalProperties": false
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
