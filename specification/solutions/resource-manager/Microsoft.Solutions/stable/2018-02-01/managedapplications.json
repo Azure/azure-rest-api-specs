@@ -170,6 +170,9 @@
           "204": {
             "description": "NoContent"
           },
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
@@ -304,6 +307,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPatchable"
+            }
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
@@ -806,6 +815,9 @@
           "204": {
             "description": "NoContent"
           },
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
@@ -912,6 +924,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPatchable"
+            }
+          },
           "202": {
             "description": "Accepted - Returns information about the managed application, including provisioning status.",
             "schema": {
@@ -971,6 +989,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK."
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
@@ -1156,6 +1177,61 @@
           },
           "201": {
             "description": "Created - Returns information about the managed application definition, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationDefinitions"
+        ],
+        "operationId": "ApplicationDefinitions_Update",
+        "description": "Updates the managed application definition.",
+        "x-ms-examples": {
+          "Update managed application definition": {
+            "$ref": "./examples/updateApplicationDefinition.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinitionPatchable"
+            },
+            "description": "Parameters supplied to the update a managed application definition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the managed application definition, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/ApplicationDefinition"
             }
@@ -1380,11 +1456,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationDefinitionArtifact"
           }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
         },
         "description": {
           "type": "string",

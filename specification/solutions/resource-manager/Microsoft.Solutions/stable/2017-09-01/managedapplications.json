@@ -167,6 +167,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -304,6 +307,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPatchable"
+            }
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
@@ -813,6 +822,9 @@
           "204": {
             "description": "NoContent"
           },
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
@@ -919,6 +931,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPatchable"
+            }
+          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
@@ -1102,11 +1120,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationArtifact"
           }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
         },
         "description": {
           "type": "string",
