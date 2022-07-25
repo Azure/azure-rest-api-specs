@@ -2001,7 +2001,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "eventHub"
+      "x-ms-discriminator-value": "EventHub"
     },
     "EventListener": {
       "description": "A setting defines which kinds of events should be sent to which endpoint.",
@@ -2022,42 +2022,42 @@
     "EventListenerEndpoint": {
       "description": "An endpoint specifying where Web PubSub should send events to.",
       "required": [
-        "listenerEndpointType"
+        "type"
       ],
       "type": "object",
       "properties": {
-        "listenerEndpointType": {
+        "type": {
           "enum": [
-            "eventHub"
+            "EventHub"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "listenerEndpointType",
+            "name": "EventListenerEndpointDiscriminator",
             "modelAsString": true
           }
         }
       },
-      "discriminator": "listenerEndpointType"
+      "discriminator": "type"
     },
     "EventListenerFilter": {
       "description": "A base class for event filter which determines whether an event should be sent to an event listener.",
       "required": [
-        "listenerFilterType"
+        "type"
       ],
       "type": "object",
       "properties": {
-        "listenerFilterType": {
+        "type": {
           "enum": [
-            "eventName"
+            "EventName"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "listenerFilterType",
+            "name": "EventListenerFilterDiscriminator",
             "modelAsString": true
           }
         }
       },
-      "discriminator": "listenerFilterType"
+      "discriminator": "type"
     },
     "EventNameFilter": {
       "description": "Filter events by their name.",
@@ -2081,7 +2081,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "eventName"
+      "x-ms-discriminator-value": "EventName"
     },
     "KeyType": {
       "description": "The type of access key.",
