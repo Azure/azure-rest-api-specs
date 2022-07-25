@@ -526,7 +526,7 @@ The json path used in JsonPatchOp is in format of [JsonPointer](https://datatrac
   - [JsonTestOpEqual](#jsontestopequal)
   - [JsonTestOpExpression](#jsontestopexpression)
 
-### JsonTestOpEqual
+#### JsonTestOpEqual
 
 **Example**
 
