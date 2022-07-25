@@ -501,6 +501,7 @@
     },
     "AmazonS3DatasetTypeProperties": {
       "description": "Amazon S3 dataset properties.",
+      "type": "object",
       "properties": {
         "bucketName": {
           "type": "object",
@@ -558,6 +559,7 @@
     },
     "AvroDatasetTypeProperties": {
       "description": "Avro dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -565,7 +567,7 @@
         },
         "avroCompressionCodec": {
           "type": "object",
-          "description": "The data avroCompressionCodec. Type: string (or Expression with resultType string)."
+          "description": "A string from AvroCompressionCodecEnum or an expression"
         },
         "avroCompressionLevel": {
           "type": "integer",
@@ -577,7 +579,7 @@
         "location"
       ]
     },
-    "AvroCompressionCodec": {
+    "AvroCompressionCodecEnum": {
       "type": "string",
       "enum": [
         "none",
@@ -587,7 +589,7 @@
         "bzip2"
       ],
       "x-ms-enum": {
-        "name": "avroCompressionCodec",
+        "name": "AvroCompressionCodec",
         "modelAsString": true
       }
     },
@@ -610,6 +612,7 @@
     },
     "ExcelDatasetTypeProperties": {
       "description": "Excel dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -663,6 +666,7 @@
     },
     "ParquetDatasetTypeProperties": {
       "description": "Parquet dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -670,12 +674,25 @@
         },
         "compressionCodec": {
           "type": "object",
-          "description": "The data compressionCodec. Type: string (or Expression with resultType string)."
+          "description": "A string from ParquetCompressionCodecEnum or an expression"
         }
       },
       "required": [
         "location"
       ]
+    },
+    "ParquetCompressionCodecEnum": {
+      "type": "string",
+      "enum": [
+        "none",
+        "gzip",
+        "snappy",
+        "lzo"
+      ],
+      "x-ms-enum": {
+        "name": "ParquetCompressionCodecEnum",
+        "modelAsString": true
+      }
     },
     "DelimitedTextDataset": {
       "x-ms-discriminator-value": "DelimitedText",
@@ -696,6 +713,7 @@
     },
     "DelimitedTextDatasetTypeProperties": {
       "description": "DelimitedText dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -781,6 +799,7 @@
     },
     "JsonDatasetTypeProperties": {
       "description": "Json dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -818,6 +837,7 @@
     },
     "XmlDatasetTypeProperties": {
       "description": "Xml dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -859,6 +879,7 @@
     },
     "OrcDatasetTypeProperties": {
       "description": "ORC dataset properties.",
+      "type": "object",
       "properties": {
         "location": {
           "$ref": "#/definitions/DatasetLocation",
@@ -939,6 +960,7 @@
     },
     "AzureBlobDatasetTypeProperties": {
       "description": "Azure Blob dataset properties.",
+      "type": "object",
       "properties": {
         "folderPath": {
           "type": "object",
@@ -992,6 +1014,7 @@
     },
     "AzureTableDatasetTypeProperties": {
       "description": "Azure Table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1021,6 +1044,7 @@
     },
     "AzureSqlTableDatasetTypeProperties": {
       "description": "Azure SQL dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1055,6 +1079,7 @@
     },
     "AzureSqlMITableDatasetTypeProperties": {
       "description": "Azure SQL Managed Instance dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1089,6 +1114,7 @@
     },
     "AzureSqlDWTableDatasetTypeProperties": {
       "description": "Azure SQL Data Warehouse dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1123,6 +1149,7 @@
     },
     "CassandraTableDatasetTypeProperties": {
       "description": "Cassandra dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1172,6 +1199,7 @@
     },
     "CosmosDbSqlApiCollectionDatasetTypeProperties": {
       "description": "CosmosDB (SQL API) Collection dataset properties.",
+      "type": "object",
       "properties": {
         "collectionName": {
           "type": "object",
@@ -1204,6 +1232,7 @@
     },
     "DocumentDbCollectionDatasetTypeProperties": {
       "description": "DocumentDB Collection dataset properties.",
+      "type": "object",
       "properties": {
         "collectionName": {
           "type": "object",
@@ -1233,6 +1262,7 @@
     },
     "DynamicsEntityDatasetTypeProperties": {
       "description": "Dynamics entity dataset properties.",
+      "type": "object",
       "properties": {
         "entityName": {
           "type": "object",
@@ -1259,6 +1289,7 @@
     },
     "DynamicsCrmEntityDatasetTypeProperties": {
       "description": "Dynamics CRM entity dataset properties.",
+      "type": "object",
       "properties": {
         "entityName": {
           "type": "object",
@@ -1285,6 +1316,7 @@
     },
     "CommonDataServiceForAppsEntityDatasetTypeProperties": {
       "description": "Common Data Service for Apps entity dataset properties.",
+      "type": "object",
       "properties": {
         "entityName": {
           "type": "object",
@@ -1311,6 +1343,7 @@
     },
     "AzureDataLakeStoreDatasetTypeProperties": {
       "description": "Azure Data Lake Store dataset properties.",
+      "type": "object",
       "properties": {
         "folderPath": {
           "type": "object",
@@ -1349,6 +1382,7 @@
     },
     "AzureBlobFSDatasetTypeProperties": {
       "description": "Azure Data Lake Storage Gen2 dataset properties.",
+      "type": "object",
       "properties": {
         "folderPath": {
           "type": "object",
@@ -1390,6 +1424,7 @@
     },
     "Office365DatasetTypeProperties": {
       "description": "Office365 dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1423,6 +1458,7 @@
     },
     "FileShareDatasetTypeProperties": {
       "description": "On-premises file system dataset properties.",
+      "type": "object",
       "properties": {
         "folderPath": {
           "type": "object",
@@ -1476,6 +1512,7 @@
     },
     "MongoDbCollectionDatasetTypeProperties": {
       "description": "MongoDB database dataset properties.",
+      "type": "object",
       "properties": {
         "collectionName": {
           "type": "object",
@@ -1508,6 +1545,7 @@
     },
     "MongoDbAtlasCollectionDatasetTypeProperties": {
       "description": "MongoDB Atlas database dataset properties.",
+      "type": "object",
       "properties": {
         "collection": {
           "type": "object",
@@ -1540,6 +1578,7 @@
     },
     "MongoDbV2CollectionDatasetTypeProperties": {
       "description": "MongoDB database dataset properties.",
+      "type": "object",
       "properties": {
         "collection": {
           "type": "object",
@@ -1572,6 +1611,7 @@
     },
     "CosmosDbMongoDbApiCollectionDatasetTypeProperties": {
       "description": "CosmosDB (MongoDB API) database dataset properties.",
+      "type": "object",
       "properties": {
         "collection": {
           "type": "object",
@@ -1601,6 +1641,7 @@
     },
     "ODataResourceDatasetTypeProperties": {
       "description": "OData dataset properties.",
+      "type": "object",
       "properties": {
         "path": {
           "type": "object",
@@ -1627,6 +1668,7 @@
     },
     "OracleTableDatasetTypeProperties": {
       "description": "On-premises Oracle dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1692,6 +1734,7 @@
     },
     "TeradataTableDatasetTypeProperties": {
       "description": "Teradata dataset properties.",
+      "type": "object",
       "properties": {
         "database": {
           "type": "object",
@@ -1725,6 +1768,7 @@
     },
     "AzureMySqlTableDatasetTypeProperties": {
       "description": "Azure MySQL database dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1755,6 +1799,7 @@
     },
     "AmazonRedshiftTableDatasetTypeProperties": {
       "description": "Amazon Redshift table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1789,6 +1834,7 @@
     },
     "Db2TableDatasetTypeProperties": {
       "description": "Db2 table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1823,6 +1869,7 @@
     },
     "RelationalTableDatasetTypeProperties": {
       "description": "Relational table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1849,6 +1896,7 @@
     },
     "InformixTableDatasetTypeProperties": {
       "description": "Informix table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1875,6 +1923,7 @@
     },
     "OdbcTableDatasetTypeProperties": {
       "description": "ODBC table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1901,6 +1950,7 @@
     },
     "MySqlTableDatasetTypeProperties": {
       "description": "MySql table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1927,6 +1977,7 @@
     },
     "PostgreSqlTableDatasetTypeProperties": {
       "description": "PostgreSQL table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1961,6 +2012,7 @@
     },
     "MicrosoftAccessTableDatasetTypeProperties": {
       "description": "Microsoft Access table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -1987,6 +2039,7 @@
     },
     "SalesforceObjectDatasetTypeProperties": {
       "description": "Salesforce object dataset properties.",
+      "type": "object",
       "properties": {
         "objectApiName": {
           "type": "object",
@@ -2013,6 +2066,7 @@
     },
     "SalesforceServiceCloudObjectDatasetTypeProperties": {
       "description": "Salesforce Service Cloud object dataset properties.",
+      "type": "object",
       "properties": {
         "objectApiName": {
           "type": "object",
@@ -2039,6 +2093,7 @@
     },
     "SybaseTableDatasetTypeProperties": {
       "description": "Sybase table dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2079,6 +2134,7 @@
     },
     "SapCloudForCustomerResourceDatasetTypeProperties": {
       "description": "Sap Cloud For Customer OData resource dataset properties.",
+      "type": "object",
       "properties": {
         "path": {
           "type": "object",
@@ -2111,6 +2167,7 @@
     },
     "SapEccResourceDatasetTypeProperties": {
       "description": "Sap ECC OData resource dataset properties.",
+      "type": "object",
       "properties": {
         "path": {
           "type": "object",
@@ -2140,6 +2197,7 @@
     },
     "SapHanaTableDatasetTypeProperties": {
       "description": "SAP HANA Table properties.",
+      "type": "object",
       "properties": {
         "schema": {
           "type": "object",
@@ -2173,6 +2231,7 @@
     },
     "SapOpenHubTableDatasetTypeProperties": {
       "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+      "type": "object",
       "properties": {
         "openHubDestinationName": {
           "type": "object",
@@ -2210,6 +2269,7 @@
     },
     "SqlServerTableDatasetTypeProperties": {
       "description": "On-premises SQL Server dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2275,6 +2335,7 @@
     },
     "RestResourceDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
+      "type": "object",
       "properties": {
         "relativeUrl": {
           "type": "object",
@@ -2320,6 +2381,7 @@
     },
     "SapTableResourceDatasetTypeProperties": {
       "description": "SAP Table Resource properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2390,6 +2452,7 @@
     },
     "WebTableDatasetTypeProperties": {
       "description": "Web table dataset properties.",
+      "type": "object",
       "properties": {
         "index": {
           "type": "object",
@@ -2426,6 +2489,7 @@
     },
     "AzureSearchIndexDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
+      "type": "object",
       "properties": {
         "indexName": {
           "type": "object",
@@ -2455,6 +2519,7 @@
     },
     "HttpDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
+      "type": "object",
       "properties": {
         "relativeUrl": {
           "type": "object",
@@ -2484,6 +2549,7 @@
     },
     "GenericDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2527,6 +2593,7 @@
     },
     "AzurePostgreSqlTableDatasetTypeProperties": {
       "description": "Azure PostgreSQL dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2595,6 +2662,7 @@
     },
     "DrillDatasetTypeProperties": {
       "description": "Drill Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2646,6 +2714,7 @@
     },
     "GoogleBigQueryDatasetTypeProperties": {
       "description": "Google BigQuery Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2680,6 +2749,7 @@
     },
     "GreenplumDatasetTypeProperties": {
       "description": "Greenplum Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2731,6 +2801,7 @@
     },
     "HiveDatasetTypeProperties": {
       "description": "Hive Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2782,6 +2853,7 @@
     },
     "ImpalaDatasetTypeProperties": {
       "description": "Impala Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2918,6 +2990,7 @@
     },
     "PhoenixDatasetTypeProperties": {
       "description": "Phoenix Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -2952,6 +3025,7 @@
     },
     "PrestoDatasetTypeProperties": {
       "description": "Presto Dataset Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -3037,6 +3111,7 @@
     },
     "SparkDatasetTypeProperties": {
       "description": "Spark Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -3122,6 +3197,7 @@
     },
     "NetezzaTableDatasetTypeProperties": {
       "description": "Netezza dataset properties.",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -3156,6 +3232,7 @@
     },
     "VerticaDatasetTypeProperties": {
       "description": "Vertica Properties",
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "object",
@@ -3227,6 +3304,7 @@
     },
     "DynamicsAXResourceDatasetTypeProperties": {
       "description": "Dynamics AX OData resource dataset properties.",
+      "type": "object",
       "properties": {
         "path": {
           "type": "object",
@@ -3276,6 +3354,7 @@
     },
     "AzureDataExplorerDatasetTypeProperties": {
       "description": "Azure Data Explorer (Kusto) dataset properties.",
+      "type": "object",
       "properties": {
         "table": {
           "type": "object",
@@ -3322,6 +3401,7 @@
     },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
+      "type": "object",
       "properties": {
         "schema": {
           "type": "object",
@@ -3352,6 +3432,7 @@
     },
     "SharePointOnlineListDatasetTypeProperties": {
       "description": "Sharepoint online list dataset properties.",
+      "type": "object",
       "properties": {
         "listName": {
           "type": "object",
@@ -3378,6 +3459,7 @@
     },
     "AzureDatabricksDeltaLakeDatasetTypeProperties": {
       "description": "Azure Databricks Delta Lake Dataset Properties",
+      "type": "object",
       "properties": {
         "table": {
           "type": "object",

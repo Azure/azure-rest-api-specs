@@ -77,6 +77,7 @@
     },
     "ScheduleTrigger": {
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -187,7 +188,7 @@
               "Saturday"
             ],
             "x-ms-enum": {
-              "name": "DayOfWeek",
+              "name": "DaysOfWeek",
               "modelAsString": false
             }
           },
@@ -340,7 +341,7 @@
           "Microsoft.Storage.BlobDeleted"
         ],
         "x-ms-enum": {
-          "name": "BlobEventType",
+          "name": "BlobEventTypes",
           "modelAsString": true
         }
       },
