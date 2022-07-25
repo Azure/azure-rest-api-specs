@@ -470,6 +470,11 @@
           },
           "description": "List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the disk."
+        },
         "sku": {
           "$ref": "#/definitions/DiskSku"
         },
@@ -710,6 +715,15 @@
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "incrementalSnapshotFamilyId": {
+          "type": "string",
+          "description": "The id of the family of incremental snapshot for the same disk."
+        },
+        "burstingEnabledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time when bursting was enabled."
         },
         "tier": {
           "type": "string",
