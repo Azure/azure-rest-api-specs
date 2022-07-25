@@ -176,6 +176,12 @@ directive:
     from: appconfiguration.json
     where: $.definitions.OperationDefinition.properties.isDataAction
     reason: This is a standardized ARM API.
+  - suppress: R4015
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
+  - suppress: R3010
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
 ```
 
 
