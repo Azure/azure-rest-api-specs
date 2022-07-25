@@ -30,6 +30,53 @@
               "adminUserName": "azureuser",
               "sshPort": 22
             },
+            "customServices": [
+              {
+                "name": "rstudio-workbench",
+                "image": {
+                  "type": "docker",
+                  "reference": "ghcr.io/azure/rstudio-workbench:latest"
+                },
+                "environmentVariables": {
+                  "RSP_LICENSE": {
+                    "type": "local",
+                    "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                  }
+                },
+                "docker": {
+                  "privileged": true
+                },
+                "endpoints": [
+                  {
+                    "protocol": "http",
+                    "name": "connect",
+                    "target": 8787,
+                    "published": 4444,
+                    "hostIp": null
+                  }
+                ],
+                "volumes": [
+                  {
+                    "type": "bind",
+                    "source": "/mnt/azureuser/",
+                    "target": "/home/testuser/",
+                    "readOnly": true,
+                    "consistency": "test",
+                    "bind": {
+                      "propagation": "test",
+                      "createHostPath": true,
+                      "selinux": "test"
+                    },
+                    "volume": {
+                      "nocopy": true
+                    },
+                    "tmpfs": {
+                      "size": 10
+                    }
+                  }
+                ]
+              }
+            ],
             "computeInstanceAuthorizationType": "personal",
             "personalComputeInstanceSettings": {
               "assignedUser": {
