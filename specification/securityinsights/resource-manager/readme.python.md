@@ -11,6 +11,8 @@ namespace: azure.mgmt.securityinsight
 package-name: azure-mgmt-securityinsight
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
