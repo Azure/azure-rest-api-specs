@@ -18,6 +18,41 @@
           "sshSettings": {
             "sshPublicAccess": "Disabled"
           },
+          "customServices": [
+            {
+              "name": "rstudio-workbench",
+              "image": {
+                "type": "docker",
+                "reference": "ghcr.io/azure/rstudio-workbench:latest"
+              },
+              "environmentVariables": {
+                "RSP_LICENSE": {
+                  "type": "local",
+                  "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                }
+              },
+              "docker": {
+                "privileged": true
+              },
+              "endpoints": [
+                {
+                  "protocol": "http",
+                  "name": "connect",
+                  "target": 8787,
+                  "published": 4444,
+                  "hostIp": null
+                }
+              ],
+              "volumes": [
+                {
+                  "type": "bind",
+                  "source": "/mnt/azureuser/",
+                  "target": "/home/testuser/",
+                  "readOnly": true
+                }
+              ]
+            }
+          ],
           "computeInstanceAuthorizationType": "personal",
           "personalComputeInstanceSettings": {
             "assignedUser": {

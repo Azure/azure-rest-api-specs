@@ -1001,6 +1001,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/customServices": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_UpdateCustomServices",
+        "description": "Updates the custom services list. The list of custom services provided shall be overwritten",
+        "x-ms-examples": {
+          "Update Custom Services": {
+            "$ref": "./examples/Compute/updateCustomServices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "customServices",
+            "required": true,
+            "description": "New list of Custom Services.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomService"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes": {
       "post": {
         "tags": [
@@ -3642,6 +3697,17 @@
           "$ref": "#/definitions/ComputeInstanceSshSettings",
           "x-nullable": true
         },
+        "customServices": {
+          "type": "array",
+          "description": "List of Custom Services added to the compute.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CustomService"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "connectivityEndpoints": {
           "readOnly": true,
           "description": "Describes all connectivity endpoints available for this ComputeInstance.",
@@ -4765,7 +4831,7 @@
     "EncryptionKeyVaultUpdateProperties": {
       "properties": {
         "keyIdentifier": {
-          "description": "Key vault uri to access the encryption key.",
+          "description": "Key Vault uri to access the encryption key.",
           "type": "string"
         }
       },
@@ -4773,6 +4839,246 @@
         "keyIdentifier"
       ],
       "type": "object"
+    },
+    "CustomService": {
+      "type": "object",
+      "description": "Specifies the custom service configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Custom Service"
+        },
+        "image": {
+          "$ref": "#/definitions/Image",
+          "description": "Describes the Image Specifications"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment Variable for the container",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          }
+        },
+        "docker": {
+          "description": "Describes the docker settings for the image",
+          "$ref": "#/definitions/Docker",
+          "x-nullable": true
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Configuring the endpoints for the container",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Configuring the volumes for the container",
+          "items": {
+            "$ref": "#/definitions/VolumeDefinition"
+          },
+          "x-ms-identifiers": [
+            "source",
+            "target"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "default": "docker",
+          "enum": [
+            "docker",
+            "azureml"
+          ],
+          "type": "string",
+          "title": "Type of the image",
+          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images",
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true
+          }
+        },
+        "reference": {
+          "type": "string",
+          "description": "Image reference URL"
+        }
+      },
+      "additionalProperties": true
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "local"
+          ],
+          "default": "local",
+          "title": "Type of Environment Variable",
+          "description": "Type of the Environment Variable. Possible values are: local - For local variable",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentVariableType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the Environment variable"
+        }
+      },
+      "additionalProperties": true
+    },
+    "Docker": {
+      "type": "object",
+      "properties": {
+        "privileged": {
+          "type": "boolean",
+          "description": "Indicate whether container shall run in privileged or non-privileged mode.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "Endpoint": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "enum": [
+            "tcp",
+            "udp",
+            "http"
+          ],
+          "default": "tcp",
+          "title": "Endpoint Communication Protocol",
+          "description": "Protocol over which communication will happen over this endpoint",
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Endpoint"
+        },
+        "target": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Application port inside the container."
+        },
+        "published": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Port over which the application is exposed from container.",
+          "x-nullable": true
+        },
+        "hostIp": {
+          "description": "Host IP over which the application is exposed from the container",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "VolumeDefinition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "bind",
+            "volume",
+            "tmpfs",
+            "npipe"
+          ],
+          "default": "bind",
+          "title": "Type of Volume Definition",
+          "description": "Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe",
+          "x-ms-enum": {
+            "name": "VolumeDefinitionType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Indicate whether to mount volume as readOnly. Default value for this is false.",
+          "x-nullable": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the mount. For bind mounts this is the host path."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the mount. For bind mounts this is the path in the container."
+        },
+        "consistency": {
+          "type": "string",
+          "description": "Consistency of the volume",
+          "x-nullable": true
+        },
+        "bind": {
+          "$ref": "#/definitions/BindOptions",
+          "description": "Bind Options of the mount",
+          "x-nullable": true
+        },
+        "volume": {
+          "$ref": "#/definitions/VolumeOptions",
+          "description": "Volume Options of the mount",
+          "x-nullable": true
+        },
+        "tmpfs": {
+          "$ref": "#/definitions/TmpfsOptions",
+          "description": "tmpfs option of the mount",
+          "x-nullable": true
+        }
+      }
+    },
+    "VolumeOptions": {
+      "type": "object",
+      "properties": {
+        "nocopy": {
+          "type": "boolean",
+          "description": "Indicate whether volume is nocopy",
+          "x-nullable": true
+        }
+      }
+    },
+    "BindOptions": {
+      "type": "object",
+      "properties": {
+        "propagation": {
+          "type": "string",
+          "description": "Type of Bind Option",
+          "x-nullable": true
+        },
+        "createHostPath": {
+          "type": "boolean",
+          "description": "Indicate whether to create host path.",
+          "x-nullable": true
+        },
+        "selinux": {
+          "type": "string",
+          "description": "Mention the selinux options.",
+          "x-nullable": true
+        }
+      }
+    },
+    "TmpfsOptions": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Mention the Tmpfs size"
+        }
+      }
     },
     "ComputeInstanceSshSettings": {
       "type": "object",
