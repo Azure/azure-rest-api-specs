@@ -716,6 +716,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -730,22 +739,18 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Job definition cancellation accepted."
-          }
+          },
+          "default": {
+            "schema":{
+              "$ref": "#/definitions/Error"
+            }
+         }
         }
       }
     },
@@ -1041,6 +1046,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -1055,22 +1069,18 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Job definition retry successful."
-          }
+          },
+          "default": {
+            "schema":{
+              "$ref": "#/definitions/Error"
+            }
+         }
         },
         "x-ms-examples": {
           "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobPOST141": {
@@ -1160,6 +1170,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -1174,22 +1193,18 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Job definition skip successful."
-          }
+          },
+          "default": {
+            "schema":{
+              "$ref": "#/definitions/Error"
+            }
+         }
         },
         "x-ms-examples": {
           "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobPOST161": {
