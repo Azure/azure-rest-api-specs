@@ -2,7 +2,7 @@
 
 ## API Scenario Definition File
 
-See [API Scenario Definition File Schema](./v1.1/schema.json#L1)
+See [API Scenario Definition File Schema](./v1.2/schema.json#L1)
 
 File should be in format of yaml.
 
@@ -19,9 +19,7 @@ scenarios:
   - description: test_network_public_ip
     steps:
       - step: Create_publicIPAddresses_pubipdns
-        resourceName: publicIPAddresses_pubipdns
         exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-        operationId: PublicIPAddresses_CreateOrUpdate
     variables:
       publicIpAddressName: pubipdns
 ```
@@ -30,7 +28,7 @@ scenarios:
 
 - **scope**
   - **Type:** Required, Enum
-  - **Enum:** ResourceGroup
+  - **Enum:** ResourceGroup, Subscription, Tenant
   - Now only "ResourceGroup" is supported.
     - **ResourceGroup:** All of the following API scenario and steps should be under some resourceGroup. It means:
       - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
@@ -38,19 +36,22 @@ scenarios:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
-      - For details of how variables works please see [Variables](./Variables.md)
+      - For details of how variables work please see [Variables](./Variables.md)
 - **variables**
-  - **Type:** Optional, Map of strings
+  - **Type:** Optional, Map of strings or variable containers
   - See [Variables](./Variables.md)
 - **prepareSteps**
   - **Type:** Optional, Array of [Step](#step)
   - Steps that should run before every API scenario steps.
 - **scenarios**
   - **Type:** Required, Array of [Scenario](#scenario)
+- **cleanUpSteps**
+  - **Type:** Optional, Array of [Step](#step)
+  - Steps that should run after every API scenario steps.
 
 ## Scenario
 
-See [Scenario Schema](./v1.1/schema.json#L83).
+See [Scenario Schema](./v1.2/schema.json#L249).
 
 It defines one API scenario that could go through on its own.
 
@@ -61,7 +62,6 @@ description: test_network_public_ip
 shareScope: true
 steps:
   - step: Create_publicIPAddresses_pubipdns
-    resourceName: publicIPAddresses_pubipdns
     exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
     operationId: PublicIPAddresses_CreateOrUpdate
 variables:
@@ -76,10 +76,10 @@ variables:
 - **shareScope**
   - **Type:** Optional, Boolean or String
   - **Default:** true
-  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other tests. If it's true or it's the same string setting for different API scenario, then they share the same scope, which means:
-    - These tests will run under the same scope (e.g. ResourceGroup). They may launch in parallel.
-    - **prepareSteps** will only run once in the scope. The variables will be shared.
-  - By default all the API scenario in one definition file will be launched in the same scope. If shareScope is false then it will not share anything with other API scenarios in the same file.
+  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other scenarios.  If true or the same string value for different API scenario, they share the same scope, which means:
+    - These API scenarios will run under the same scope (e.g. ResourceGroup).
+    - **prepareSteps** and **cleanUpSteps** will run only once in the scope. The variables will be shared.
+  - By default all the API scenario in one definition file will be launched in the same scope.  If shareScope is false, the API scenarios will not share anything with others in the same file.
 - **variables**
   - **Type:** Optional, Map of strings
   - See [Variables](./Variables.md)
@@ -89,30 +89,33 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.1/schema.json#L114).
+See [Step Schema](./v1.2/schema.json#L280).
 
 Defines one step in API scenario.
 
 Should be one of the following:
 
 - [Step REST Call](#step-rest-call)
-  - [REST Call](#rest-call)
-  - [REST Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
+  - [REST Operation](#rest-operation)
+  - [REST Example](#rest-example)
 - [Step ARM Template](#step-arm-template)
 - [Step ARM Deployment Script](#step-arm-deployment-script)
 
 All of the above definitions share the following fields:
 
-- **variables**
-  - **Type:** Optional, Map of Strings
-  - See [Variables](./Variables.md)
 - **step**
   - **Type:** Required, String
   - Step name. Must be unique in the same file.
+- **description**
+  - **Type:** Optional, String
+  - A brief explanation about the step
+- **variables**
+  - **Type:** Optional, Map of Strings or variables
+  - See [Variables](./Variables.md)
 
 ## Step ARM Template
 
-See [Step ARM Template Schema](./v1.1/schema.json#L250).
+See [Step ARM Template Schema](./v1.2/schema.json#L427).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -129,10 +132,9 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
   - **Type:** Required, String
   - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
 
-
 ## Step ARM Deployment Script
 
-See [Step ARM Deployment Script Schema](./v1.1/schema.json#L266).
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L448).
 
 Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -186,98 +188,104 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 ## Step REST Call
 
-See [Step REST Call Schema](./v1.1/schema.json#L208)
+Step to run a rest call defined in swagger operation. This may not be just one http call.
 
-Step to run a swagger operation defined rest call. This may not be just one http call.
-
-- If the operation is a long running operation (LRO), then follow the LRO polling strategy.
+- If the operation is a long running operation (LRO), then follow the LRO polling strategy:
   - Response statusCode must be 200 if the LRO succeeded, no matter what code the initial response is.
   - If the LRO is PUT/PATCH, the runner should automatically insert a GET after the polling to verify the resource update result.
 - If the operation is DELETE, then after the operation, the runner should automatically insert a GET to verify resource cannot be found.
 
-Rest call step could be defined either by an example file, or by resourceName tracking and update.
+REST call step could be defined either by an operation, or by an example file. REST call will have computed **requestParameter** and **responseExpected** after parsing and loading.
 
-Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading:
+### REST Operation
 
-- **requestParameter**
+See [Step Operation Schema](./v1.2/schema.json#L339)
 
-### REST Call
+**Example:**
+```yml
+- step: createPublicIPAddress
+  operationId: PublicIPAddresses_CreateOrUpdate
+```
+
+**Fields:**
+
+- **operationId:**
+  - **Type:** Required, String
+  - OperationId defined in Swagger.
+- **parameters:**
+  - **Type:** Optional, Map from parameter name to parameter value
+- **responses:**
+  - **Type:** Optional, Map from expected response code to response headers and body.
+- **outputVariables**
+  - **Type:** Optional, Map from variable name to object with property:
+    - **type**: Required, String
+    - **fromRequest**
+      - **Type:** Required, String
+      - Path to the request field to be used as variable.
+    - **fromResponse**
+      - **Type:** Required, String
+      - Path to the response field to be used as variable.
+
+### REST Example
+
+See [Step Example Schema](./v1.2/schema.json#L389)
 
 **Example:**
 
 ```yaml
 - step: Create_publicIPAddresses_pubipdns
-  resourceName: publicIPAddresses_pubipdns
   exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-  operationId: PublicIPAddresses_CreateOrUpdate
-  statusCode: 200
 ```
 
 **Fields:**
 
 - **exampleFile**
-  - **Type:** Optional, String
+  - **Type:** Required, String
   - Path to example file. Should be in format of "x-ms-example" files.
-- **operationId**
-  - **Type:** Optional, String
-  - OperationId defined in swagger operation. It could be skipped if the example file is referenced by only one operation so we could detect the operationId.
-- **statusCode:**
-  - **Type:** Optional, Number
-  - **Default:** 200
-  - Expected response code.
-  - For LRO it must be 200 to indicate succeeded result, and must be 400 to indicate failed result.
 - **requestUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applied to the requestParameters before sending it.
+  - Updates that apply to the **requestParameters** before sending it, with `/parameters` in example as root of Json path.
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applied to the responseExpected.
+  - Updates that apply to the **responseExpected**, with `/responses` in example as root of Json path.
 - **outputVariables**
   - **Type:** Optional, Map from variable name to object with property:
+    - **type**: Required, String
+    - **fromRequest**
+      - **Type:** Required, String
+      - Path to the request field to be used as variable.
     - **fromResponse**
       - **Type:** Required, String
       - Path to the response field to be used as variable.
 
-### Rest Call by ResourceName Tracking and Update
+**Conventions:**
 
-**Example**
+When the scope is `ResourceGroup` and the request is a PUT/PATCH, the **requestUpdate** JsonPatchOp items starting with body parameter name SHOULD be applied to the response body (if any) for all successful status codes, excluding writeOnly properties - `x-ms-secret: true` or `x-ms-mutability` doesn't contain `read`.
 
-```yaml
-- step: Create_publicIPAddresses_pubipdns
-  resourceName: publicIPAddresses_pubipdns
-  exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-  operationId: PublicIPAddresses_CreateOrUpdate
-  statusCode: 200
+The **responseUpdate** SHOULD be applied after the **requestUpdate**, providing option to override the behavior by convention.
 
-- step: Update_publicIPAddresses
-  resourceName: publicIPAddresses_pubipdns
-  resourceUpdate:
-    - replace: /properties/location
-      value: westus
+The behavior of applying **requestUpdate** to the response body should follow JSON merge-patch ([RFC 7396](https://tools.ietf.org/html/rfc7396)).
+
+The whole process is illustrated as below pseudo-code:
 ```
-
-Different steps with the same resourceName will be tracked by the API scenario. It knows that you are trying to update the same resource. You can use the first request with example to specify the request and resource id, then the following step with the same resourceName will use the same resource id to update the resource. For the
-
-**Fields:**
-
-- **resourceName**
-  - **Type:** Required, String
-  - The user-defined resource name of the resource to be tracked. It's only used as a name of that resource and do not need to be same as the actual resource name.
-- **resourceUpdate**
-  - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Array of changes to be applied to the resource.
-
-resourceUpdate will help to automate compute the request body and the expected response body. The algorithm will be:
-
-- Get the expected response body from previous step with same `resourceName`, or from current step with example loaded.
-- For each change in `resourceUpdate`, apply the change to the expected response body, mark as `computedAllProperties`.
-- Let new request body parameter value to be: `computedAllProperties` without `readOnly` fields and `x-ms-mutability` fields that don't contains `update`.
-- Let new response expected to be: `computedAllProperties` without `x-ms-secrets` fields and `x-ms-mutability` fields that don't contain `read`.
-- Let the operationId to be: resource PUT operationId.
+if (scope is 'ResourceGroup' && operation.verb in ('PUT', 'PATCH')) {
+  updatedRequestBody = apply_JsonPatchOp(initialRequestBody, requestUpdate.body);
+  mergePatch = generate_JsonMergePatch(initialRequestBody, updatedRequestBody);
+  for (each successful status code) {
+    if (response.body is not empty) {
+      updatedResponseBody = apply_JsonMergePatch(initialResponseBody, mergePatch);
+      updatedResponseBody = exclude_WriteOnly_Properties(updatedResponseBody);
+      updatedResponseBody = apply_JsonPatchOp(updatedResponseBody, responseUpdate.body);
+    }
+  }
+}
+```
 
 ### JsonPatchOp
 
-JsonPatchOp is used to define the update operation on json. You could add, remove, replace, move, copy and merge on json path.
+See [Json Patch Operation Schema](./v1.2/schema.json#L490)
+
+JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, move, and test on json path.
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
 
 - [JsonPatchOp](#jsonpatchop)

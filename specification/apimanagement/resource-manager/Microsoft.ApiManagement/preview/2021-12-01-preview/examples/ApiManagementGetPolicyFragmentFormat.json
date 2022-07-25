@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "id": "policyFragment1",
+    "format": "rawxml"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyFragments/policyFragment1",
+        "type": "Microsoft.ApiManagement/service/policyFragments",
+        "name": "policyFragment1",
+        "properties": {
+          "format": "rawxml",
+          "description": "A policy fragment example",
+          "value": "<fragment><set-header name=\"correlationid\" exists-action=\"skip\">\r\n\t\t\t<value>@{\n                var guidBinary = new byte[16];\n                Array.Copy(Guid.NewGuid().ToByteArray(), 0, guidBinary, 0, 10);\n                long time = DateTime.Now.Ticks;\n                byte[] bytes = new byte[6];\n                unchecked\n                {\n                       bytes[5] = (byte)(time >> 40);\n                       bytes[4] = (byte)(time >> 32);\n                       bytes[3] = (byte)(time >> 24);\n                       bytes[2] = (byte)(time >> 16);\n                       bytes[1] = (byte)(time >> 8);\n                       bytes[0] = (byte)(time);\n                }\n                Array.Copy(bytes, 0, guidBinary, 10, 6);\n                return new Guid(guidBinary).ToString();\n            }\n            </value>\r\n\t\t</set-header></fragment>"
+        }
+      }
+    }
+  }
+}

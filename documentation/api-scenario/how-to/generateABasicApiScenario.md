@@ -8,10 +8,16 @@ We use `oav` tools to generate basic API scenario. `oav` analyze swagger file an
 
 `oav` support rule based API scenario file generation. We use this command to generate API scenario file.
 
-`oav generate-static-api-scenario --readme <readme> --tag <tag> --rules <generated-rules>`
+`oav generate-api-scenario static --readme <readme> --tag <tag> --specs <specs> --rules <generated-rules>`
+
+OR
+
+`oav generate-api-scenario static --readme <readme> --tag <tag> --specs <specs> --dependency <dependency-path>`
 
 - readme: swagger readme file.
 - tag: which tag to generate. oav will analyze swagger file under the tag and generate API scenario.
+- specs: one or more spec file paths. type: array.
+- dependency: The file path of the RESTler dependency. It cannot be used with `rules`.
 - rules: Currently support two types. `resource-put-delete`, `operations-list`. Default: `resource-put-delete`
   - `resource-put-delete`: generate resource put and delete API scenario.
   - `operations-list`: generate operations list API scenario. `operations-list` is the simplest API which must be defined in swagger.

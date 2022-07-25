@@ -8,7 +8,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureadexternalidentities
 package-version: 1.0.0b2
 no-namespace-folders: true
-python-base-folder: azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities
 ```
 
 ### Python multi-api
@@ -34,7 +33,7 @@ perform-load: false
 These settings apply only when `--tag=package-2021-04-01 --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ```yaml $(tag) =='package-2021-04-01'&& $(python)
-namespace: $(python-base-namespace).v2021_04_01
+namespace: azure.mgmt.azureadexternalidentities.v2021_04_01
 output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2021_04_01
 ```
 
@@ -43,8 +42,8 @@ output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azurea
 These settings apply only when `--tag=package-2020-05-01-preview --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ```yaml $(tag) =='package-2020-05-01-preview'&& $(python)
-namespace: $(python-base-namespace).v2020_05_01_preview
-output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2021_04_01
+namespace: azure.mgmt.azureadexternalidentities.v2020_05_01_preview
+output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2020_05_01_preview
 ```
 
 ### Tag: package-2019-01-01-preview and python
@@ -52,6 +51,7 @@ output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azurea
 These settings apply only when `--tag=package-2019-01-01-preview --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ```yaml $(tag) =='package-2019-01-01-preview'&& $(python)
-namespace: $(python-base-namespace).v2019_01_01_preview
-output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2021_04_01
+namespace: azure.mgmt.azureadexternalidentities.v2019_01_01_preview
+output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2019_01_01_preview
 ```
+

@@ -12,8 +12,10 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2022-07
   - tag: package-preview-2022-04
   - tag: package-2022-03
+  - tag: package-preview-2022-01-15
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
@@ -22,6 +24,16 @@ batch:
   - tag: package-preview-2020-10
   - tag: package-2020-07-01-preview
   - tag: package-2019-11-01-preview
+```
+
+### Tag: package-2022-07 and ruby
+
+These settings apply only when `--tag=package-2022-07 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2022-07' && $(ruby)
+namespace: "Azure::KubernetesConfiguration::Mgmt::V2022_07_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration/lib
 ```
 
 ### Tag: package-preview-2022-04 and ruby
@@ -40,6 +52,16 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ```yaml $(tag) == 'package-2022-03' && $(ruby)
 namespace: "Azure::KubernetesConfiguration::Mgmt::V2022_03_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration/lib
+```
+
+### Tag: package-preview-2022-01-15 and ruby
+
+These settings apply only when `--tag=package-preview-2022-01-15 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-preview-2022-01-15' && $(ruby)
+namespace: "Azure::KubernetesConfiguration::Mgmt::V2022_01_15_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration/lib
 ```
 
