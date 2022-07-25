@@ -87,7 +87,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeter"
+              "$ref": "#/definitions/NetworkSecurityPerimeterRequest"
             },
             "description": "Parameter supplied to create or update the network security perimeter."
           }
@@ -249,7 +249,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspProfile"
+              "$ref": "#/definitions/NspProfileRequest"
             },
             "description": "Parameters that hold the NspProfile resource to be created/updated."
           }
@@ -417,7 +417,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspAccessRule"
+              "$ref": "#/definitions/NspAccessRuleRequest"
             },
             "description": "Parameters that hold the NspAccessRule resource to be created/updated."
           }
@@ -542,6 +542,9 @@
         },
         {
           "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
@@ -582,7 +585,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspAssociation"
+              "$ref": "#/definitions/NspAssociationRequest"
             },
             "description": "Parameters that hold the NspAssociation resource to be created/updated."
           }
@@ -738,6 +741,41 @@
       ],
       "description": "The Network Security Perimeter resource"
     },
+    "NetworkSecurityPerimeterRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
+          "description": "The network security perimeter properties"
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network security perimeter identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRequest"
+        }
+      ],
+      "description": "The Network Security Perimeter resource"
+    },
     "NetworkSecurityPerimeterListResult": {
       "type": "object",
       "properties": {
@@ -800,6 +838,36 @@
       ],
       "description": "The network security perimeter profile resource"
     },
+    "NspProfileRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspProfileProperties",
+          "description": "Properties of the network security perimeter profile"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the network security perimeter profile in ARM id format."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRequest"
+        }
+      ],
+      "description": "The network security perimeter profile resource"
+    },
     "NspProfileListResult": {
       "type": "object",
       "properties": {
@@ -854,6 +922,36 @@
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The NSP access rule resource"
+    },
+    "NspAccessRuleRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "description": "Properties of the NSP access rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the access rule that is unique within a profile. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "NSP access rule identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRequest"
         }
       ],
       "description": "The NSP access rule resource"
@@ -972,6 +1070,36 @@
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The NSP resource association resource"
+    },
+    "NspAssociationRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAssociationProperties",
+          "description": "Properties of the NSP resource association."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "NSP resource association identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRequest"
         }
       ],
       "description": "The NSP resource association resource"
@@ -1189,6 +1317,28 @@
         "name": "nspProvisioningState",
         "modelAsString": true
       }
+    },
+    "ResourceRequest": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Common resource representation.",
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
