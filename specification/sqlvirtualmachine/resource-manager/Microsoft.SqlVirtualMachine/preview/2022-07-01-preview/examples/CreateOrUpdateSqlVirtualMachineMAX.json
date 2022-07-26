@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
-    "sqlVirtualMachineName":"testvm",
+    "sqlVirtualMachineName": "testvm",
     "api-version": "2022-07-01-preview",
     "parameters": {
       "location": "northeurope",
@@ -10,7 +10,7 @@
         "sqlServerLicenseType": "PAYG",
         "sqlImageSku": "Enterprise",
         "sqlManagement": "Full",
-        "leastPrivilegeMode":"Enabled",
+        "leastPrivilegeMode": "Enabled",
         "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
         "serverConfigurationsManagementSettings": {
           "sqlConnectivityUpdateSettings": {
@@ -30,15 +30,15 @@
           "additionalFeaturesServerConfigurations": {
             "isRServicesEnabled": false
           },
-            "sqlInstanceSettings": {
-              "collation": "SQL_Latin1_General_CP1_CI_AS",
-              "maxDop": 8,
-              "minServerMemoryMB":  0,
-              "maxServerMemoryMB": 128,
-              "isOptimizeForAdHocWorkloadsEnabled": true,
-              "isLpimEnabled": true,
-              "isIfiEnabled": true
-            }
+          "sqlInstanceSettings": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxDop": 8,
+            "minServerMemoryMB": 0,
+            "maxServerMemoryMB": 128,
+            "isOptimizeForAdHocWorkloadsEnabled": true,
+            "isLpimEnabled": true,
+            "isIfiEnabled": true
+          }
         },
         "keyVaultCredentialSettings": {
           "enable": false
@@ -50,30 +50,30 @@
           "maintenanceWindowDuration": 60
         },
         "autoBackupSettings": {
-            "enable": true,
-            "retentionPeriod": 17,
-            "enableEncryption": true,
-            "password": "<Password>",
-            "backupScheduleType": "Manual",
-            "backupSystemDbs": true,
-            "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
-            "storageContainerName": "testcontainer",
-            "storageAccessKey": "<primary storage access key>",
-            "fullBackupFrequency": "Daily",
-            "fullBackupStartTime": 6,
-            "fullBackupWindowHours": 11,
-            "logBackupFrequency": 10
+          "enable": true,
+          "retentionPeriod": 17,
+          "enableEncryption": true,
+          "password": "<Password>",
+          "backupScheduleType": "Manual",
+          "backupSystemDbs": true,
+          "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
+          "storageContainerName": "testcontainer",
+          "storageAccessKey": "<primary storage access key>",
+          "fullBackupFrequency": "Daily",
+          "fullBackupStartTime": 6,
+          "fullBackupWindowHours": 11,
+          "logBackupFrequency": 10
         },
         "assessmentSettings": {
+          "enable": true,
+          "runImmediately": true,
+          "schedule": {
             "enable": true,
-            "runImmediately": true,
-            "schedule": {
-                "enable": true,
-                "weeklyInterval": 1,
-                "monthlyOccurrence": null,
-                "dayOfWeek": "Sunday",
-                "startTime": "23:17"
-            }
+            "weeklyInterval": 1,
+            "monthlyOccurrence": null,
+            "dayOfWeek": "Sunday",
+            "startTime": "23:17"
+          }
         }
       }
     }
@@ -86,7 +86,7 @@
           "provisioningState": "Updating",
           "sqlServerLicenseType": "PAYG",
           "sqlImageSku": "Enterprise",
-          "leastPrivilegeMode":"Enabled",
+          "leastPrivilegeMode": "Enabled",
           "sqlManagement": "Full"
         },
         "location": "northeurope",
@@ -102,7 +102,7 @@
           "provisioningState": "Provisioning",
           "sqlServerLicenseType": "PAYG",
           "sqlImageSku": "Unknown",
-          "leastPrivilegeMode":"NotSet",
+          "leastPrivilegeMode": "NotSet",
           "sqlManagement": "Full"
         },
         "location": "northeurope",
