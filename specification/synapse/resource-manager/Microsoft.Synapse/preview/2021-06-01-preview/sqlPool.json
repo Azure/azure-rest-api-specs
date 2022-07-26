@@ -5276,7 +5276,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get a SQL Analytics pool": {
+          "Get DataWarehouseQueries of SQL Analytics pool workload group": {
             "$ref": "./examples/GetDatawareHouseQueries.json"
           }
         }
@@ -7682,18 +7682,13 @@
       }
     },
     "DataWarehouseQueries": {
-      "description": "data warehouse queries",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataWarehouseQueries",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueries"
+          },
+          "description": "The list of data warehouse queries in the Sql pool."
         }
       }
     }
