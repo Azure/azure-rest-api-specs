@@ -107,6 +107,29 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "IncludeEntityTypes": {
+      "name": "includeEntityTypes",
+      "in": "query",
+      "description": "Specifies the entity types that you want to return in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Point": {
+      "name": "point",
+      "in": "query",
+      "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lat,lon",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -303,6 +326,49 @@
             "description": "Partial Content. Api would return 206 when part of the batchItem fail to get a response.",
             "schema": {
               "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/geocode/latlng": {
+      "get": {
+        "description": "**Reverse Geocode to an Address**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often  this is needed in tracking applications where you  receive a GPS feed from the device or asset and  wish to know what address where the coordinate is  located. This endpoint will return address  information for a given coordinate.",
+        "operationId": "Search_GetSearchAddressReverse",
+        "produces": [
+          "application/geo+json"
+        ],
+        "x-ms-client-name": "ReverseSearchAddress",
+        "x-ms-examples": {
+          "Search latlng: -122.138681, 47.630358": {
+            "$ref": "./examples/ReversedGeocoding.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "$ref": "#/parameters/Point"
+          },
+          {
+            "$ref": "#/parameters/IncludeEntityTypes"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeocodingResponse"
             }
           },
           "default": {
