@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/assistedQueries/d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+            "name": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+            "type": "Microsoft.SecurityInsights/assistedQueries",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "systemData": {
+              "createdAt": "2022-06-24T00:12:26.4374731Z",
+              "createdBy": "john@contoso.com",
+              "createdByType": "user",
+              "lastModifiedAt": "2022-06-24T00:12:26.4376594Z",
+              "lastModifiedBy": "john@contoso.com",
+              "lastModifiedByType": "user"
+            },
+            "properties": {
+              "queryId": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+              "correlationId": "77e4fc3d-9028-4bf2-8b3a-839a7e6dfc04",
+              "naturalLanguage": "get top 10 users",
+              "kustoQueryLanguage": "imNetworkSession\n| where TimeGenerated > ago(1d)\n| summarize distinct_machines = dcount(DvcHostname) by User\n| sort by distinct_machines desc\n| take 10\n",
+				      "documentType": "assistedQuery"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
