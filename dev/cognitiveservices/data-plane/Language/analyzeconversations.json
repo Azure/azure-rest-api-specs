@@ -2126,9 +2126,12 @@
       "properties": {
         "predictionSource": {
           "type": "string",
-          "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
-        }
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }        
       },
       "allOf": [
         {
@@ -2188,7 +2191,7 @@
       ],
       "properties": {
         "conversationItems": {
-          "description": "Enumeration of PII detection and redaction operation results for all the conversation items in a conversation.",
+          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationSentimentItemResult"
@@ -2207,9 +2210,11 @@
       ],
       "properties": {
         "id": {
+          "description": "The identifier for the conversation item",
           "type": "string"
         },
         "participantId": {
+          "description": "The identifier for the speaker",
           "type": "string"
         },
         "sentiment": {
@@ -2238,7 +2243,25 @@
       ],
       "x-ms-enum": {
         "name": "TextSentiment",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "positive",
+            "description": "Positive sentiment."
+          },
+          {
+            "value": "neutral",
+            "description": "Neutral sentiment."
+          },
+          {
+            "value": "negative",
+            "description": "Negative sentiment."
+          },
+          {
+            "value": "mixed",
+            "description": "Mixed sentiment."
+          }                   
+        ]
       }
     },
     "SentenceSentiment": {
