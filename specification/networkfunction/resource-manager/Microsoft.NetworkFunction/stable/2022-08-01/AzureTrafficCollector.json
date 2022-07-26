@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-08-01",
+    "version": "2022-05-01",
     "title": "Azure Traffic Collector",
     "description": "Azure Traffic Collector service",
     "license": {
@@ -766,11 +766,20 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Collector policy resource."
@@ -1020,8 +1029,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2022-05-01",
-        "2022-08-01"
+        "2022-05-01"
       ],
       "default": "2022-05-01",
       "x-ms-enum": {
