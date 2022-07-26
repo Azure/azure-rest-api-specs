@@ -31,11 +31,11 @@ openapi-type: arm
 tag: package-2022-07
 ```
 
-### Tag: package-2022-07
+### Tag: package-preview-2022-07
 
-These settings apply only when `--tag=package-2022-07` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+```yaml $(tag) == 'package-preview-2022-07'
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2022-07-01-preview/sqlvm.json
 ```
