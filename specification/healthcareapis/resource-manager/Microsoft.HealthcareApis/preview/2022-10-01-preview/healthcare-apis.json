@@ -2362,7 +2362,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a Analytics Connector Service": {
-            "$ref": "./examples/analyticsconnectors/AnalyticsConnector_Patch.json"
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_Patch.json"
           }
         },
         "parameters": [
@@ -2376,10 +2376,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/analyticsConnectorName"
+            "$ref": "#/parameters/workspaceName"
           },
           {
-            "$ref": "#/parameters/workspaceName"
+            "$ref": "#/parameters/analyticsConnectorName"
           },
           {
             "name": "analyticsConnectorPatchResource",
@@ -2435,10 +2435,10 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/analyticsConnectorName"
+            "$ref": "#/parameters/workspaceName"
           },
           {
-            "$ref": "#/parameters/workspaceName"
+            "$ref": "#/parameters/analyticsConnectorName"
           }
         ],
         "responses": {
@@ -4382,7 +4382,7 @@
       "description": "Analytics Connector definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceTags"
+          "$ref": "#/definitions/TaggedResource"
         },
         {
           "$ref": "#/definitions/ServiceManagedIdentity"
@@ -4427,7 +4427,7 @@
         "dataDestinationConfiguration"
       ]
     },
-    "AnalyticsConnectorDataSource": {
+    "": {
       "type": "object",
       "description": "Data source for Analytics Connector. The target resource must be in the same workspace with the Analytics Connector.",
       "properties": {
@@ -4436,7 +4436,11 @@
           "description": "Type of data source.",
           "enum": [
             "fhirservice"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "analyticsConnectorDataSourceType",
+            "modelAsString": true
+          }
         }
       },
       "additionalProperties": {
@@ -4466,7 +4470,11 @@
           "enum": [
             "STU3",
             "R4"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "fhirServiceVersion",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -4483,7 +4491,11 @@
           "description": "Type of data mapping.",
           "enum": [
             "fhirToParquet"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "analyticsConnectorMappingType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4523,7 +4535,11 @@
           "description": "Type of data destination.",
           "enum": [
             "datalake"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "analyticsConnectorDataDestinationType",
+            "modelAsString": true
+          }
         },
         "name": {
           "type": "string",
