@@ -11,11 +11,20 @@ namespace: azure.mgmt.securityinsight
 package-name: azure-mgmt-securityinsight
 package-version: 1.0.0b1
 clear-output-folder: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
+```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+
+directive:
+  - from: EntityTypes.json
+    where: $.definitions.AccountEntityProperties.properties.ntDomain
+    transform: >
+        $['description'] = 'The NetBIOS domain name as it appears in the alert format - domain/username. Examples: NT AUTHORITY.';
 ```
