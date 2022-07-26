@@ -114,6 +114,41 @@
       ],
       "discriminator": "type"
     },
+    "CapabilityJobData": {
+      "description": "The capability job data definition.",
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "The device template which defines the target capability for the job.",
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "description": "The path to the target capability within the device template.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value used to update the target capability, if any.",
+          "$ref": "#/definitions/AnyValue"
+        }
+      },
+      "required": [
+        "target",
+        "path"
+      ]
+    },
+    "CloudPropertyJobData": {
+      "description": "The cloud property job data.",
+      "x-ms-discriminator-value": "cloudProperty",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        },
+        {
+          "$ref": "#/definitions/CapabilityJobData"
+        }
+      ]
+    },
     "Collection": {
       "description": "The paged results of entities.",
       "type": "object",
@@ -132,6 +167,38 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "CommandJobData": {
+      "description": "The command job data definition.",
+      "x-ms-discriminator-value": "command",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        },
+        {
+          "$ref": "#/definitions/CapabilityJobData"
+        }
+      ]
+    },
+    "DateJobScheduleEnd": {
+      "description": "The date based end definition of job schedule.",
+      "x-ms-discriminator-value": "date",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobScheduleEnd"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "The date when to end the scheduled job.",
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "date"
       ]
     },
     "Device": {
@@ -169,7 +236,7 @@
           "type": "boolean"
         },
         "organizations": {
-          "description": "List of organization IDs that the device is a part of, only one organization support today, multiple organizations will be supported soon.",
+          "description": "List of organization IDs that the device is a part of, only one organization is supported today, multiple organizations will be supported soon.",
           "type": "array",
           "items": {
             "type": "string"
@@ -209,12 +276,14 @@
         "connectionTimeout": {
           "description": "Connection timeout in seconds to wait for a disconnected device to come online. Defaults to 0 seconds.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 30
         },
         "responseTimeout": {
           "description": "Response timeout in seconds to wait for a command completion on a device. Defaults to 30 seconds.",
           "type": "integer",
+          "format": "int32",
           "minimum": 5,
           "maximum": 30
         },
@@ -228,6 +297,7 @@
         "responseCode": {
           "description": "The status code of the device command response.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -303,7 +373,7 @@
           "type": "string"
         },
         "organizations": {
-          "description": "List of organization IDs of the device group, only one organization support today, multiple organizations will be supported soon.",
+          "description": "List of organization IDs of the device group, only one organization is supported today, multiple organizations will be supported soon.",
           "type": "array",
           "items": {
             "type": "string"
@@ -335,10 +405,69 @@
         "value"
       ]
     },
+    "DeviceGroupDeviceCollection": {
+      "description": "The paged results of devices belonging to the device group.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of devices belonging to the device group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of devices in the group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DeviceProperties": {
       "description": "Property values associated with the device.",
       "type": "object",
       "additionalProperties": true
+    },
+    "DeviceRelationship": {
+      "type": "object",
+      "description": "An object representing the relationship between an upstream and a downstream device.",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of this relationship.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The device ID of the source (parent) device.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The device ID of the target (child) device.",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceRelationshipCollection": {
+      "description": "The paged results of device relationships.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of device relationships.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceRelationship"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of device relationships.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DeviceTelemetry": {
       "description": "The device telemetry definition.",
@@ -412,6 +541,26 @@
         "value"
       ]
     },
+    "DeviceTemplateMigrationJobData": {
+      "description": "The device template migration job data definition.",
+      "x-ms-discriminator-value": "deviceTemplateMigration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "template": {
+          "description": "The target device template to which devices will be migrated.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "template"
+      ]
+    },
     "EmailUser": {
       "description": "The email user definition.",
       "x-ms-discriminator-value": "email",
@@ -431,8 +580,85 @@
         "email"
       ]
     },
+    "EnrollmentGroup": {
+      "description": "The enrollment group definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the enrollment group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the enrollment group.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Whether the devices using the group are allowed to connect to IoT Central.",
+          "type": "boolean",
+          "default": true
+        },
+        "type": {
+          "description": "Type of devices that connect through the group.",
+          "type": "string",
+          "enum": [
+            "iot",
+            "iotEdge"
+          ],
+          "x-ms-enum": {
+            "name": "EnrollmentGroupType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "iot",
+                "name": "IoT devices",
+                "description": "Regular (non-Edge) IoT devices"
+              },
+              {
+                "value": "iotEdge",
+                "name": "IoT Edge devices",
+                "description": "IoT Edge devices"
+              }
+            ]
+          }
+        },
+        "attestation": {
+          "description": "The attestation mechanism for the enrollment group.",
+          "$ref": "#/definitions/GroupAttestation"
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict in enrollment group updates.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "attestation",
+        "type"
+      ]
+    },
+    "EnrollmentGroupCollection": {
+      "description": "The paged results of enrollment groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of enrollment groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentGroup"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of enrollment groups.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Error": {
-      "description": "The response error definition",
+      "description": "The response error definition.",
       "type": "object",
       "properties": {
         "error": {
@@ -539,6 +765,390 @@
         "container"
       ]
     },
+    "GroupAttestation": {
+      "description": "The attestation definition for an enrollment group.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the attestation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "GroupSymmetricKeyAttestation": {
+      "description": "The symmetric key attestation definition.",
+      "x-ms-discriminator-value": "symmetricKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupAttestation"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "symmetricKey": {
+          "description": "The symmetric key credentials for this attestation.",
+          "$ref": "#/definitions/SymmetricKey"
+        }
+      }
+    },
+    "GroupX509Attestation": {
+      "description": "The X509 attestation definition.",
+      "x-ms-discriminator-value": "x509",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupAttestation"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "x509": {
+          "description": "The X.509 credentials for this attestation.",
+          "$ref": "#/definitions/SigningX509"
+        }
+      }
+    },
+    "Job": {
+      "description": "The job definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "scheduledJobId": {
+          "description": "Id of the scheduled job definition that created this job.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the job.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Detailed description of the job.",
+          "type": "string"
+        },
+        "group": {
+          "description": "The ID of the device group on which to execute the job.",
+          "type": "string"
+        },
+        "batch": {
+          "description": "The batching configuration for the job.",
+          "$ref": "#/definitions/JobBatch"
+        },
+        "cancellationThreshold": {
+          "description": "The cancellation threshold for the job.",
+          "$ref": "#/definitions/JobCancellationThreshold"
+        },
+        "data": {
+          "description": "The capabilities being updated by the job and the values with which they are being updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobData"
+          },
+          "minItems": 1
+        },
+        "start": {
+          "description": "The start time of the job",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "end": {
+          "description": "The end time of the job",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "progress": {
+          "description": "The progress statistics of the job.",
+          "$ref": "#/definitions/JobProgress",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Indicates whether the job is starting, running, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "organizations": {
+          "description": "List of organizations of the job, only one organization is supported today, multiple organizations will be supported soon.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "group",
+        "data"
+      ]
+    },
+    "JobBatch": {
+      "description": "The job batch definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Whether batching is done on a specified number of devices or a percentage of the total devices.",
+          "type": "string",
+          "enum": [
+            "number",
+            "percentage"
+          ],
+          "x-ms-enum": {
+            "name": "JobBatchType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "number",
+                "name": "Number",
+                "description": "Job Batching based on number of devices."
+              },
+              {
+                "value": "percentage",
+                "name": "Percentage",
+                "description": "Job Batching based percentage of total applied devices."
+              }
+            ]
+          }
+        },
+        "value": {
+          "description": "The number or percentage of devices on which batching is done.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "JobCancellationThreshold": {
+      "description": "The job cancellation threshold definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Whether the cancellation threshold is per a specified number of devices or a percentage of the total devices.",
+          "type": "string",
+          "enum": [
+            "number",
+            "percentage"
+          ],
+          "x-ms-enum": {
+            "name": "JobCancellationThresholdType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "number",
+                "name": "Number",
+                "description": "Job cancellation threshold based on specified number of devices."
+              },
+              {
+                "value": "percentage",
+                "name": "Percentage",
+                "description": "Job cancellation threshold based on percentage of total devices."
+              }
+            ]
+          }
+        },
+        "value": {
+          "description": "The number or percentage of devices on which the cancellation threshold is applied.",
+          "type": "number"
+        },
+        "batch": {
+          "description": "Whether the cancellation threshold applies per-batch or to the overall job.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "JobCollection": {
+      "description": "The paged results of jobs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of jobs.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobData": {
+      "description": "The job data definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the job data.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "JobDeviceStatus": {
+      "description": "The job device status definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the device whose job status is being provided.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Indicates whether the job is starting, running, etc. for the given device.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobDeviceStatusCollection": {
+      "description": "The paged results of job device statuses.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of job device statuses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobDeviceStatus"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of job device statuses.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobProgress": {
+      "description": "progress summary for a scheduled job.",
+      "type": "object",
+      "properties": {
+        "total": {
+          "description": "The total number of entities targeted by the job.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pending": {
+          "description": "The number of entities for which the job is not yet running.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "completed": {
+          "description": "The number of entities for which the job has completed.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "failed": {
+          "description": "The number of entities for which the job has failed.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "JobSchedule": {
+      "description": "The schedule definition of job.",
+      "type": "object",
+      "properties": {
+        "recurrence": {
+          "description": "The recurrence of the scheduled job. If not provided, the job will run once at the specified start time.",
+          "type": "string",
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly"
+          ],
+          "x-ms-enum": {
+            "name": "JobRecurrence",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "daily",
+                "name": "Daily",
+                "description": "The job will run once daily"
+              },
+              {
+                "value": "weekly",
+                "name": "Weekly",
+                "description": "The job will run once every week"
+              },
+              {
+                "value": "monthly",
+                "name": "Monthly",
+                "description": "The job will run once every month"
+              }
+            ]
+          }
+        },
+        "start": {
+          "description": "The start time for the scheduled job",
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "description": "The specification of when to end the scheduled job.",
+          "$ref": "#/definitions/JobScheduleEnd"
+        }
+      },
+      "required": [
+        "start"
+      ]
+    },
+    "JobScheduleEnd": {
+      "description": "The end definition of job schedule.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the job schedule end.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "OccurrencesJobScheduleEnd": {
+      "description": "The occurences based end definition of job schedule.",
+      "x-ms-discriminator-value": "occurrences",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobScheduleEnd"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "occurrences": {
+          "description": "The number of occurrences after which to end the scheduled job.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 999
+        }
+      },
+      "required": [
+        "occurrences"
+      ]
+    },
     "Organization": {
       "description": "The organization definition.",
       "type": "object",
@@ -559,6 +1169,7 @@
       }
     },
     "OrganizationCollection": {
+      "description": "The paged results of organizations.",
       "type": "object",
       "properties": {
         "value": {
@@ -592,6 +1203,18 @@
       },
       "required": [
         "roles"
+      ]
+    },
+    "PropertyJobData": {
+      "description": "The property job data definition.",
+      "x-ms-discriminator-value": "property",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        },
+        {
+          "$ref": "#/definitions/CapabilityJobData"
+        }
       ]
     },
     "Role": {
@@ -646,6 +1269,96 @@
         "value"
       ]
     },
+    "ScheduledJob": {
+      "description": "The scheduled job definition.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "description": "ETag used to prevent conflict in scheduled job updates.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique ID of the scheduled job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the scheduled job.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Detailed description of the scheduled job.",
+          "type": "string"
+        },
+        "group": {
+          "description": "The ID of the device group on which to execute the scheduled job.",
+          "type": "string"
+        },
+        "batch": {
+          "description": "The batching configuration for the scheduled job.",
+          "$ref": "#/definitions/JobBatch"
+        },
+        "cancellationThreshold": {
+          "description": "The cancellation threshold for the scheduled job.",
+          "$ref": "#/definitions/JobCancellationThreshold"
+        },
+        "data": {
+          "description": "Data related to the operation being performed by this job. All entries must be of the same type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobData"
+          },
+          "minItems": 1
+        },
+        "organizations": {
+          "description": "List of organizations of the job, only one organization is supported today, multiple organizations will be supported soon.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "schedule": {
+          "description": "The schedule at which to execute the job.",
+          "$ref": "#/definitions/JobSchedule"
+        },
+        "enabled": {
+          "description": "Whether the scheduled job is enabled.",
+          "type": "boolean"
+        },
+        "completed": {
+          "description": "Whether the scheduled job has completed.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "schedule",
+        "group",
+        "data"
+      ]
+    },
+    "ScheduledJobCollection": {
+      "description": "The paged results of scheduled job definitions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of scheduled jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduledJob"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of scheduled jobs.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ServicePrincipalUser": {
       "description": "The service principal user definition.",
       "x-ms-discriminator-value": "servicePrincipal",
@@ -669,6 +1382,54 @@
         "tenantId",
         "objectId"
       ]
+    },
+    "SigningX509": {
+      "description": "The X509 definition.",
+      "type": "object",
+      "properties": {
+        "signingCertificates": {
+          "description": "The X.509 signing certificates for this credential.",
+          "$ref": "#/definitions/SigningX509Certificates"
+        }
+      }
+    },
+    "SigningX509Certificate": {
+      "description": "The X509 certificate definition.",
+      "type": "object",
+      "properties": {
+        "verified": {
+          "description": "Whether the certificate has been verified.",
+          "type": "boolean",
+          "default": false
+        },
+        "certificate": {
+          "description": "The string representation of this certificate.",
+          "type": "string"
+        },
+        "info": {
+          "description": "Information about this certificate.",
+          "readOnly": true,
+          "$ref": "#/definitions/X509CertificateInfo"
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict across multiple updates",
+          "type": "string"
+        }
+      }
+    },
+    "SigningX509Certificates": {
+      "description": "The X509 certificates definition.",
+      "type": "object",
+      "properties": {
+        "primary": {
+          "description": "The primary X.509 certificate for this credential.",
+          "$ref": "#/definitions/SigningX509Certificate"
+        },
+        "secondary": {
+          "description": "The secondary X.509 certificate for this credential.",
+          "$ref": "#/definitions/SigningX509Certificate"
+        }
+      }
     },
     "SymmetricKey": {
       "description": "The symmetric key definition.",
@@ -721,7 +1482,7 @@
       ]
     },
     "TpmAttestation": {
-      "description": "The attestation of TPM.",
+      "description": "The TPM attestation definition.",
       "x-ms-discriminator-value": "tpm",
       "allOf": [
         {
@@ -856,6 +1617,30 @@
       "required": [
         "primary"
       ]
+    },
+    "X509VerificationCertificate": {
+      "description": "The X509 verification certificate definition.",
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "The string representation of this certificate.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate"
+      ]
+    },
+    "X509VerificationCode": {
+      "description": "The X509 certificate verification code.",
+      "type": "object",
+      "properties": {
+        "verificationCode": {
+          "description": "The X509 certificate verification code.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "paths": {
@@ -1239,10 +2024,53 @@
         }
       }
     },
+    "/deviceGroups/{deviceGroupId}/devices": {
+      "get": {
+        "operationId": "DeviceGroups_GetDevices",
+        "summary": "Get the devices of a device group",
+        "description": "Get the list of devices by device group ID.",
+        "x-ms-examples": {
+          "Get device group by ID": {
+            "$ref": "./examples/devicegroups_getdevices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupDeviceCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/deviceTemplates": {
       "get": {
         "operationId": "DeviceTemplates_List",
-        "summary": "Get the list of device templates in an application.",
+        "summary": "Get the list of device templates in an application with basic ODATA support ($top, $filter, $orderby), [more details](https://aka.ms/iotcentralodatasupport).",
         "x-ms-examples": {
           "List device templates": {
             "$ref": "./examples/devicetemplates_list.json"
@@ -1451,7 +2279,7 @@
     "/devices": {
       "get": {
         "operationId": "Devices_List",
-        "summary": "Get the list of devices in an application.",
+        "summary": "Get the list of devices in an application with basic ODATA support ($top, $filter, $orderby), [more details](https://aka.ms/iotcentralodatasupport).",
         "x-ms-examples": {
           "List devices": {
             "$ref": "./examples/devices_list.json"
@@ -3127,6 +3955,233 @@
         }
       }
     },
+    "/devices/{deviceId}/relationships": {
+      "get": {
+        "operationId": "Devices_ListRelationships",
+        "summary": "Given the ID for an upstream device, will return the upstream and the downstream relationships associated with that gateway. These downstream relationships are only those associated with the direct downstream level (they don’t work recursively).",
+        "description": "List all relationships based on device ID",
+        "x-ms-examples": {
+          "List device relationships": {
+            "$ref": "./examples/devices_relationships_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationshipCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/relationships/{relationshipId}": {
+      "get": {
+        "operationId": "Devices_GetRelationship",
+        "summary": "Given the ID for a device and a relationship ID associated with this device, get the details of the relationship.",
+        "description": "Get device relationship by ID",
+        "x-ms-examples": {
+          "Get device relationship by ID": {
+            "$ref": "./examples/devices_relationships_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_CreateRelationship",
+        "summary": "Given the ID for a device and a relationship ID associated with this device, create a new relationship for between the given device and a second device specified in the body.",
+        "description": "Create a device relationship",
+        "x-ms-examples": {
+          "Create a new device relationship": {
+            "$ref": "./examples/devices_relationships_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device relationship body.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateRelationship",
+        "summary": "Patch a given relationship given the relationship ID and a given device ID.",
+        "description": "Update device relationship",
+        "x-ms-examples": {
+          "Update a device relationship": {
+            "$ref": "./examples/devices_relationships_update.json"
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device relationship patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Devices_RemoveRelationship",
+        "summary": "Given the ID for a device and an associated relationship ID, delete the relationship. The given device ID can be that of the upstream or downstream device.",
+        "description": "Delete a device relationship",
+        "x-ms-examples": {
+          "Delete a device relationship": {
+            "$ref": "./examples/devices_relationships_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/devices/{deviceId}/telemetry/{telemetryName}": {
       "get": {
         "operationId": "Devices_GetTelemetryValue",
@@ -3154,6 +4209,440 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/enrollmentGroups": {
+      "get": {
+        "operationId": "EnrollmentGroups_List",
+        "summary": "Get the list of enrollment groups in an application",
+        "x-ms-examples": {
+          "List enrollment groups": {
+            "$ref": "./examples/enrollmentgroups_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroupCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/{enrollmentGroupId}": {
+      "get": {
+        "operationId": "EnrollmentGroups_Get",
+        "summary": "Get an enrollment group by ID",
+        "description": "Get details about an enrollment group by ID.",
+        "x-ms-examples": {
+          "Get an enrollment group by ID": {
+            "$ref": "./examples/enrollmentgroups_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EnrollmentGroups_Create",
+        "summary": "Create an enrollment group",
+        "description": "Create an enrollment group.",
+        "x-ms-examples": {
+          "Get an enrollment group": {
+            "$ref": "./examples/enrollmentgroups_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Enrollment group body.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EnrollmentGroups_Update",
+        "summary": "Update an enrollment group",
+        "description": "Update an enrollment group.",
+        "x-ms-examples": {
+          "Update an enrollment group by ID": {
+            "$ref": "./examples/enrollmentgroups_update.json"
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Enrollment group patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EnrollmentGroups_Remove",
+        "summary": "Delete an enrollment group",
+        "description": "Delete an enrollment group by ID.",
+        "x-ms-examples": {
+          "Remove an enrollment group by ID": {
+            "$ref": "./examples/enrollmentgroups_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}": {
+      "get": {
+        "operationId": "EnrollmentGroups_GetX509",
+        "summary": "Get the primary or secondary x509 certificate of an enrollment group",
+        "description": "Get details about the primary or secondary x509 certificate of an enrollment group, if it exists.",
+        "x-ms-examples": {
+          "Get primary or secondary X509": {
+            "$ref": "./examples/enrollmentgroups_getx509.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SigningX509Certificate"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EnrollmentGroups_CreateX509",
+        "summary": "Sets the primary or secondary x509 certificate of an enrollment group",
+        "description": "Sets the primary or secondary x509 certificate of an enrollment group.",
+        "x-ms-examples": {
+          "Set primary or secondary X509": {
+            "$ref": "./examples/enrollmentgroups_setx509.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Certificate definition.",
+            "schema": {
+              "$ref": "#/definitions/SigningX509Certificate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SigningX509Certificate"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EnrollmentGroups_RemoveX509",
+        "summary": "Removes the primary or secondary x509 certificate of an enrollment group",
+        "description": "Removes the primary or secondary x509 certificate of an enrollment group.",
+        "x-ms-examples": {
+          "Remove primary or secondary X509": {
+            "$ref": "./examples/enrollmentgroups_removex509.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}/generateVerificationCode": {
+      "post": {
+        "operationId": "EnrollmentGroups_GenerateVerificationCodeX509",
+        "summary": "Generate a verification code for the primary or secondary x509 certificate of an enrollment group",
+        "description": "Generate a verification code for the primary or secondary x509 certificate of an enrollment group.",
+        "x-ms-examples": {
+          "Generate primary or secondary X509 verification code": {
+            "$ref": "./examples/enrollmentgroups_generateverificationcodex509.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/X509VerificationCode"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/{enrollmentGroupId}/certificates/{entry}/verify": {
+      "post": {
+        "operationId": "EnrollmentGroups_VerifyX509",
+        "summary": "Verify the primary or secondary x509 certificate of an enrollment group",
+        "description": "Verify the primary or secondary x509 certificate of an enrollment group by providing a certificate with the signed verification code.",
+        "x-ms-examples": {
+          "Verify primary or secondary X509 verification code": {
+            "$ref": "./examples/enrollmentgroups_verifyx509.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/EnrollmentGroupId"
+          },
+          {
+            "$ref": "#/parameters/Entry"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Certificate for the signed verification code.",
+            "schema": {
+              "$ref": "#/definitions/X509VerificationCertificate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
           },
           "default": {
             "description": "An error response received from the IoT Central Service.",
@@ -3306,6 +4795,297 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "Jobs_List",
+        "summary": "Get the list of jobs in an application",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/jobs_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "summary": "Get a job by ID",
+        "description": "Get details about a running or completed job by job ID.",
+        "x-ms-examples": {
+          "Get a job by ID": {
+            "$ref": "./examples/jobs_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_Create",
+        "summary": "Execute a new job",
+        "description": "Create and execute a new job via its job definition.",
+        "x-ms-examples": {
+          "Execute a new job": {
+            "$ref": "./examples/jobs_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Job definition.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/devices": {
+      "get": {
+        "operationId": "Jobs_GetDevices",
+        "summary": "Get device statuses",
+        "description": "Get the list of individual device statuses by job ID.",
+        "x-ms-examples": {
+          "Get device statuses": {
+            "$ref": "./examples/jobs_devices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobDeviceStatusCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/rerun/{rerunId}": {
+      "put": {
+        "operationId": "Jobs_Rerun",
+        "summary": "Rerun a job on failed devices",
+        "description": "Execute a rerun of an existing job on all failed devices.",
+        "x-ms-examples": {
+          "Rerun a job on failed devices": {
+            "$ref": "./examples/jobs_rerun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "in": "path",
+            "name": "rerunId",
+            "description": "Unique ID of the job rerun.",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/resume": {
+      "post": {
+        "operationId": "Jobs_Resume",
+        "summary": "Resume a stopped job",
+        "description": "Resume execution of an existing stopped job.",
+        "x-ms-examples": {
+          "Resume a stopped job": {
+            "$ref": "./examples/jobs_resume.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/stop": {
+      "post": {
+        "operationId": "Jobs_Stop",
+        "summary": "Stop a running job",
+        "description": "Stop execution of a job that is currently running.",
+        "x-ms-examples": {
+          "Stop a running job": {
+            "$ref": "./examples/jobs_stop.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/JobId"
           }
         ],
         "responses": {
@@ -3617,6 +5397,259 @@
         }
       }
     },
+    "/scheduledJobs": {
+      "get": {
+        "operationId": "ScheduledJobs_List",
+        "summary": "Get the list of scheduled job definitions in an application",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledJobCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/scheduledJobs/{scheduledJobId}": {
+      "get": {
+        "operationId": "ScheduledJobs_Get",
+        "summary": "Get a scheduled job by ID",
+        "description": "Get details about a scheduled job by ID.",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ScheduledJobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ScheduledJobs_Create",
+        "summary": "Create or update a scheduled job",
+        "description": "Create or update a scheduled job by ID.",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ScheduledJobId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Scheduled job definition.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledJob"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ScheduledJobs_Update",
+        "summary": "Update a scheduled job via patch",
+        "description": "Update an existing scheduled job by ID.",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_update.json"
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ScheduledJobId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Scheduled job patch.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ScheduledJobs_Remove",
+        "summary": "Delete a scheduled job",
+        "description": "Delete an existing scheduled job by ID.",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ScheduledJobId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/scheduledJobs/{scheduledJobId}/jobs": {
+      "get": {
+        "operationId": "ScheduledJobs_ListJobs",
+        "summary": "Get the list of jobs for a scheduled job definition",
+        "x-ms-examples": {
+          "List jobs": {
+            "$ref": "./examples/scheduledjobs_list_jobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ScheduledJobId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "operationId": "Users_List",
@@ -3885,6 +5918,54 @@
       "type": "string",
       "required": true
     },
+    "EnrollmentGroupId": {
+      "in": "path",
+      "name": "enrollmentGroupId",
+      "description": "Unique ID of the enrollment group.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "required": true
+    },
+    "Entry": {
+      "in": "path",
+      "name": "entry",
+      "description": "Entry of certificate only support primary and secondary.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateEntry",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "primary",
+            "name": "Primary",
+            "description": "The entry of primary certificate"
+          },
+          {
+            "value": "secondary",
+            "name": "Secondary",
+            "description": "The entry of secondary certificate"
+          }
+        ]
+      },
+      "required": true
+    },
+    "JobId": {
+      "in": "path",
+      "name": "jobId",
+      "description": "Unique ID of the job.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_-]*$",
+      "required": true
+    },
     "ModuleName": {
       "in": "path",
       "name": "moduleName",
@@ -3896,11 +5977,29 @@
     "OrganizationId": {
       "in": "path",
       "name": "organizationId",
-      "description": "Unique ID of the organization.",
+      "description": "Unique ID for the organization.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 48,
       "pattern": "^(?!-)[a-z0-9-]{1,48}[a-z0-9]$",
+      "required": true
+    },
+    "RelationshipId": {
+      "in": "path",
+      "name": "relationshipId",
+      "description": "Unique ID of a relationship between devices.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
+    "ScheduledJobId": {
+      "in": "path",
+      "name": "scheduledJobId",
+      "description": "Unique ID of the scheduled job.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_-]*$",
       "required": true
     },
     "Subdomain": {
@@ -3922,9 +6021,9 @@
     "UserId": {
       "in": "path",
       "name": "userId",
-      "description": "Unique ID of the user.",
-      "type": "string",
+      "description": "Unique ID for the user.",
       "x-ms-parameter-location": "method",
+      "type": "string",
       "maxLength": 48,
       "pattern": "^[a-zA-Z0-9-_]*$",
       "required": true
