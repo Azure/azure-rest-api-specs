@@ -404,6 +404,14 @@
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the DDoS protection plan resource."
         },
+        "publicIpAddresses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "The list of public IPs associated with the DDoS protection plan resource. This list is read-only."
+        },
         "virtualNetworks": {
           "readOnly": true,
           "type": "array",

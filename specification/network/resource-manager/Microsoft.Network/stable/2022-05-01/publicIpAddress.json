@@ -360,6 +360,53 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}/ddosProtectionStatus": {
+      "post": {
+        "operationId": "GetPublicIpAddressDdosProtectionStatus",
+        "description": "Gets the Ddos Protection Status of a Public IP Address",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "publicIpAddressName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the public IP address."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the Ddos Protection Status of this Public IP.",
+            "schema": {
+              "$ref": "#/definitions/PublicIpDdosProtectionStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Prepare Network Policies": {
+            "$ref": "./examples/SubnetPrepareNetworkPolicies.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -557,28 +604,24 @@
     },
     "DdosSettings": {
       "properties": {
-        "ddosCustomPolicy": {
-          "readOnly": false,
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The DDoS custom policy associated with the public IP."
-        },
-        "protectionCoverage": {
+        "protectionMode": {
           "readOnly": false,
           "type": "string",
           "enum": [
-            "Basic",
-            "Standard"
+            "VirtualNetworkInherited",
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
-            "name": "DdosSettingsProtectionCoverage",
+            "name": "DdosSettingsProtectionMode",
             "modelAsString": true
           },
-          "description": "The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized."
+          "description": "The DDoS protection mode of the public IP"
         },
-        "protectedIP": {
+        "ddosProtectionPlan": {
           "readOnly": false,
-          "type": "boolean",
-          "description": "Enables DDoS protection on the public IP."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled"
         }
       },
       "description": "Contains the DDoS protection settings of the public IP."
@@ -595,6 +638,27 @@
         }
       },
       "description": "Contains the IpTag associated with the object."
+    },
+    "PublicIpDdosProtectionStatusResult": {
+      "properties": {
+        "PublicIPAddressId": {
+          "type": "string",
+          "description": "Public IP ARM resource ID"
+        },
+        "PublicIpAddress": {
+          "type": "string",
+          "description": "IP Address of the Public IP Resource"
+        },
+        "IsWorkloadProtected": {
+          "type": "boolean",
+          "description": "Value indicating whether the IP address is DDoS workload protected or not."
+        },
+        "DdosProtectionPlanId": {
+          "type": "string",
+          "description": " DDoS protection plan Resource Id of a if IP address is protected through a plan."
+        }
+      },
+      "description": "Response for GetPublicIpAddressDdosProtectionStatusOperation API service call."
     }
   }
 }
