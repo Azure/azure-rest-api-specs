@@ -33,11 +33,11 @@
             "sqlInstanceSettings": {
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "maxDop": 8,
-              "optimizeForAdHocWorkloads": true,
-              "minMemory": 0,
-              "maxMemory": 128,
-              "isLPIMEnabled": true,
-              "isIFIEnabled": true
+              "minServerMemoryMB":  0,
+              "maxServerMemoryMB": 128,
+              "isOptimizeForAdHocWorkloadsEnabled": true,
+              "isLpimEnabled": true,
+              "isIfiEnabled": true
             }
         },
         "keyVaultCredentialSettings": {
@@ -57,7 +57,7 @@
             "backupScheduleType": "Manual",
             "backupSystemDbs": true,
             "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
-            "storagecontainername": "testcontainer",
+            "storageContainerName": "testcontainer",
             "storageAccessKey": "<primary storage access key>",
             "fullBackupFrequency": "Daily",
             "fullBackupStartTime": 6,
@@ -102,7 +102,7 @@
           "provisioningState": "Provisioning",
           "sqlServerLicenseType": "PAYG",
           "sqlImageSku": "Unknown",
-          "leastPrivilegeMode":"Enabled",
+          "leastPrivilegeMode":"NotSet",
           "sqlManagement": "Full"
         },
         "location": "northeurope",
