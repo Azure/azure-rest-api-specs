@@ -276,7 +276,7 @@ These settings apply only when `--tag=package-2022-04-04-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-04-04-only'
 input-file:
-  - Microsoft.Compute/CloudServiceRP/stable/2022-04-04/common.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/common.json
   - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/CloudServiceRP/cloudService.json
 ```
 
