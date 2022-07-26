@@ -2199,6 +2199,267 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors": {
+      "get": {
+        "tags": [
+          "AnalyticsConnectors"
+        ],
+        "description": "Lists all Analytics Connectors for the given workspace.",
+        "operationId": "AnalyticsConnectors_ListByWorkspace",
+        "x-ms-examples": {
+          "List Analytics Connectors": {
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of AnalyticsConnectors.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnectorCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}": {
+      "get": {
+        "tags": [
+          "AnalyticsConnectors"
+        ],
+        "description": "Gets the properties of the specified Analytics Connector.",
+        "operationId": "AnalyticsConnectors_Get",
+        "x-ms-examples": {
+          "Get a Analytics Connector Service": {
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/analyticsConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AnalyticsConnectors"
+        ],
+        "description": "Creates or updates a Analytics Connector resource with the specified parameters.",
+        "operationId": "AnalyticsConnectors_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a Analytics Connectors Service": {
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/analyticsConnectorName"
+          },
+          {
+            "name": "analyticsConnector",
+            "description": "The parameters for creating or updating a Analytics Connector resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AnalyticsConnectors"
+        ],
+        "description": "Patch Analytics Connector Service details.",
+        "operationId": "AnalyticsConnector_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a Analytics Connector Service": {
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnector_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/analyticsConnectorName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "analyticsConnectorPatchResource",
+            "description": "The parameters for updating a Analytics Connector.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnectorPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Patch request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnalyticsConnectors"
+        ],
+        "description": "Deletes a Analytics Connector.",
+        "operationId": "AnalyticsConnectors_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a Analytics Connectors": {
+            "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/analyticsConnectorName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.HealthcareApis/operations": {
       "get": {
         "tags": [
@@ -4086,6 +4347,211 @@
         "modelAsString": true
       },
       "readOnly": true
+    },
+    "AnalyticsConnectorCollection": {
+      "description": "A collection of Analytics Connectors.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of AnalyticsConnectors.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Analytics Connectors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyticsConnector"
+          }
+        }
+      }
+    },
+    "AnalyticsConnectorPatchResource": {
+      "type": "object",
+      "description": "AnalyticsConnector patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "AnalyticsConnector": {
+      "type": "object",
+      "description": "Analytics Connector definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Analytics Connector configuration.",
+          "$ref": "#/definitions/AnalyticsConnectorProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "AnalyticsConnectorProperties": {
+      "type": "object",
+      "description": "Analytics Connector Properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "dataSourceConfiguration": {
+          "description": "Data source for Analytics Connector.",
+          "$ref": "#/definitions/AnalyticsConnectorDataSource"
+        },
+        "dataMappingConfiguration": {
+          "description": "Data mapping configuration for Analytics Connector.",
+          "$ref": "#/definitions/AnalyticsConnectorMapping"
+        },
+        "dataDestinationConfiguration": {
+          "description": "Data destination configuration for Analytics Connector.",
+          "$ref": "#/definitions/AnalyticsConnectorDataDestination"
+        }
+      },
+      "required": [
+        "dataSourceConfiguration",
+        "dataMappingConfiguration",
+        "dataDestinationConfiguration"
+      ]
+    },
+    "AnalyticsConnectorDataSource": {
+      "type": "object",
+      "description": "Data source for Analytics Connector. The target resource must be in the same workspace with the Analytics Connector.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of data source.",
+          "enum": [
+            "fhirservice"
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "Additional properties for concrete data sources."
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AnalyticsConnectorFhirServiceDataSource": {
+      "type": "object",
+      "description": "The FHIR service data source for Analytics Connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyticsConnectorDataSource"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of FHIR service."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of FHIR Service.",
+          "enum": [
+            "STU3",
+            "R4"
+          ]
+        }
+      },
+      "required": [
+        "url",
+        "kind"
+      ]
+    },
+    "AnalyticsConnectorMapping": {
+      "type": "object",
+      "description": "Data mapping configuration for Analytics Connector.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of data mapping.",
+          "enum": [
+            "fhirToParquet"
+          ]
+        }
+      }
+    },
+    "AnalyticsConnectorFhirToParquetMapping": {
+      "type": "object",
+      "description": "FHIR Service data mapping configuration for Analytics Connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyticsConnectorMapping"
+        }
+      ],
+      "properties": {
+        "filterConfigurationReference": {
+          "type": "string",
+          "description": "Artifact reference for filter configurations."
+        },
+        "extensionSchemaReference": {
+          "type": "string",
+          "description": "Artifact reference for extension schema."
+        },
+        "transformationSchemaReference": {
+          "type": "string",
+          "description": "Artifact reference for data transformation schema."
+        },
+        "anonymizationSchemaReference": {
+          "type": "string",
+          "description": "Artifact reference for data anonymization schema."
+        }
+      }
+    },
+    "AnalyticsConnectorDataDestination": {
+      "type": "object",
+      "description": "Data destination configuration for Analytics Connector.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of data destination.",
+          "enum": [
+            "datalake"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of data destination."
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "Additional properties for concrete data destinations."
+      }
+    },
+    "AnalyticsConnectorDataLakeDataDestination": {
+      "type": "object",
+      "description": "The Data Lake data destination for Analytics Connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyticsConnectorDataDestination"
+        }
+      ],
+      "properties": {
+        "dataLakeName": {
+          "type": "string",
+          "description": "The name for the Data Lake."
+        }
+      },
+      "required": [
+        "dataLakeName"
+      ]
     }
   },
   "parameters": {
@@ -4176,6 +4642,16 @@
       "required": true,
       "type": "string",
       "description": "The name of FHIR Service resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "analyticsConnectorName": {
+      "name": "analyticsConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of Analytics Connector resource.",
       "x-ms-parameter-location": "method",
       "minLength": 3,
       "maxLength": 24
