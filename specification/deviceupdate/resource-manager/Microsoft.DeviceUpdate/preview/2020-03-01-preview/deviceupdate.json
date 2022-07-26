@@ -675,7 +675,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -716,14 +716,14 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -759,7 +759,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "privateEndpointConnection",
@@ -767,7 +767,7 @@
             "description": "The parameters for creating a private endpoint connection.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -775,7 +775,7 @@
           "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -815,7 +815,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -1030,6 +1030,55 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_UpdatePrivateEndpointProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointUpdate",
+            "in": "body",
+            "description": "The parameters for updating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update private endpoint in private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyPrivateEndpointUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_PrivateEndpointUpdate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
       "get": {
         "tags": [
@@ -1207,6 +1256,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     }
@@ -1249,7 +1303,7 @@
               "readOnly": true
             },
             "publicNetworkAccess": {
-              "description": "Whether or not public network access is allowed for the container registry.",
+              "description": "Whether or not public network access is allowed for the account.",
               "default": "Enabled",
               "enum": [
                 "Enabled",
@@ -1259,6 +1313,13 @@
               "x-ms-enum": {
                 "name": "PublicNetworkAccess",
                 "modelAsString": true
+              }
+            },
+            "privateEndpointConnections": {
+              "description": "List of private endpoint connections associated with the account.",
+              "type": "array",
+              "items": {
+                "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
               }
             }
           }
@@ -1489,7 +1550,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties"
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceProperties"
         }
       ],
       "properties": {
@@ -1536,7 +1597,20 @@
         {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "description": "Private endpoint connection proxy object property bag.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+              "description": "The provisioning state of the private endpoint connection proxy resource."
+            }
+          }
+        }
+      }
     },
     "PrivateEndpointConnectionProxyProperties": {
       "description": "Private endpoint connection proxy object properties.",
@@ -1552,10 +1626,6 @@
           "description": "Remote private endpoint details.",
           "$ref": "#/definitions/RemotePrivateEndpoint"
         },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
-          "description": "The provisioning state of the private endpoint connection proxy resource."
-        },
         "status": {
           "description": "Operation status.",
           "type": "string"
@@ -1570,10 +1640,21 @@
           "description": "Remote endpoint resource ID.",
           "type": "string"
         },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
         "vnetTrafficTag": {
           "description": "Virtual network traffic tag.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "manualPrivateLinkServiceConnections": {
           "description": "List of private link service connections that need manual approval.",
@@ -1602,6 +1683,32 @@
           "items": {
             "$ref": "#/definitions/ConnectionDetails"
           }
+        }
+      }
+    },
+    "PrivateEndpointUpdate": {
+      "description": "Private endpoint update details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string"
         }
       }
     },
@@ -1636,7 +1743,7 @@
         },
         "remotePrivateLinkServiceConnectionState": {
           "description": "Remote private link service connection state",
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         },
         "remotePrivateEndpointConnection": {
           "description": "Remote private endpoint connection details.",

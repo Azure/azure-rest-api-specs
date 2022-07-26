@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-privatedns"
   output-folder: "$(typescript-sdks-folder)/sdk/privatedns/arm-privatedns"
-  clear-output-folder: true
   generate-metadata: true
 ```

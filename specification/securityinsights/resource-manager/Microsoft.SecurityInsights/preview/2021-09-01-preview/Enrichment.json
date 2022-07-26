@@ -1,0 +1,381 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/ip/geodata/": {
+      "get": {
+        "x-ms-examples": {
+          "Get geodata for a single IP address": {
+            "$ref": "./examples/enrichment/GetGeodataByIp.json"
+          }
+        },
+        "tags": [
+          "Enrichment"
+        ],
+        "description": "Get geodata for a single IP address",
+        "operationId": "IPGeodata_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnrichmentIpAddress"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EnrichmentIpGeodata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed to enrich this ip.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/domain/whois/": {
+      "get": {
+        "x-ms-examples": {
+          "Get whois information for a single domain name": {
+            "$ref": "./examples/enrichment/GetWhoisByDomainName.json"
+          }
+        },
+        "tags": [
+          "Enrichment"
+        ],
+        "description": "Get whois information for a single domain name",
+        "operationId": "DomainWhois_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnrichmentDomain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EnrichmentDomainWhois"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed to enrich this domain.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "EnrichmentIpAddress": {
+      "description": "IP address (v4 or v6) to be enriched",
+      "in": "query",
+      "name": "ipAddress",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EnrichmentDomain": {
+      "description": "Domain name to be enriched",
+      "in": "query",
+      "name": "domain",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "EnrichmentDomainWhois": {
+      "description": "Whois information for a given domain and associated metadata",
+      "properties": {
+        "domain": {
+          "description": "The domain for this whois record",
+          "type": "string"
+        },
+        "server": {
+          "description": "The hostname of this registrar's whois server",
+          "type": "string"
+        },
+        "created": {
+          "description": "The timestamp at which this record was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The timestamp at which this record was last updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expires": {
+          "description": "The timestamp at which this record will expire",
+          "format": "date-time",
+          "type": "string"
+        },
+        "parsedWhois": {
+          "description": "The whois record for a given domain",
+          "$ref": "#/definitions/EnrichmentDomainWhoisDetails"
+        }
+      },
+      "type": "object"
+    },
+    "EnrichmentDomainWhoisDetails": {
+      "description": "The whois record for a given domain",
+      "properties": {
+        "registrar": {
+          "description": "The registrar associated with this domain",
+          "$ref": "#/definitions/EnrichmentDomainWhoisRegistrarDetails"
+        },
+        "contacts": {
+          "description": "The set of contacts associated with this domain",
+          "$ref": "#/definitions/EnrichmentDomainWhoisContacts"
+        },
+        "nameServers": {
+          "description": "A list of name servers associated with this domain",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statuses": {
+          "description": "The set of status flags for this whois record",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "EnrichmentDomainWhoisRegistrarDetails": {
+      "description": "The registrar associated with this domain",
+      "properties": {
+        "name": {
+          "description": "The name of this registrar",
+          "type": "string"
+        },
+        "abuseContactEmail": {
+          "description": "This registrar's abuse contact email",
+          "type": "string"
+        },
+        "abuseContactPhone": {
+          "description": "This registrar's abuse contact phone number",
+          "type": "string"
+        },
+        "ianaId": {
+          "description": "This registrar's Internet Assigned Numbers Authority id",
+          "type": "string"
+        },
+        "url": {
+          "description": "This registrar's URL",
+          "type": "string"
+        },
+        "whoisServer": {
+          "description": "The hostname of this registrar's whois server",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnrichmentDomainWhoisContacts": {
+      "description": "The set of contacts associated with this domain",
+      "properties": {
+        "admin": {
+          "description": "The admin contact for this whois record",
+          "$ref": "#/definitions/EnrichmentDomainWhoisContact"
+        },
+        "billing": {
+          "description": "The billing contact for this whois record",
+          "$ref": "#/definitions/EnrichmentDomainWhoisContact"
+        },
+        "registrant": {
+          "description": "The registrant contact for this whois record",
+          "$ref": "#/definitions/EnrichmentDomainWhoisContact"
+        },
+        "tech": {
+          "description": "The technical contact for this whois record",
+          "$ref": "#/definitions/EnrichmentDomainWhoisContact"
+        }
+      },
+      "type": "object"
+    },
+    "EnrichmentDomainWhoisContact": {
+      "description": "An individual contact associated with this domain",
+      "properties": {
+        "name": {
+          "description": "The name of this contact",
+          "type": "string"
+        },
+        "org": {
+          "description": "The organization for this contact",
+          "type": "string"
+        },
+        "street": {
+          "description": "A list describing the street address for this contact",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "description": "The city for this contact",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state for this contact",
+          "type": "string"
+        },
+        "postal": {
+          "description": "The postal code for this contact",
+          "type": "string"
+        },
+        "country": {
+          "description": "The country for this contact",
+          "type": "string"
+        },
+        "phone": {
+          "description": "The phone number for this contact",
+          "type": "string"
+        },
+        "fax": {
+          "description": "The fax number for this contact",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email address for this contact",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnrichmentIpGeodata": {
+      "description": "Geodata information for a given IP address",
+      "properties": {
+        "asn": {
+          "description": "The autonomous system number associated with this IP address",
+          "type": "string"
+        },
+        "carrier": {
+          "description": "The name of the carrier for this IP address",
+          "type": "string"
+        },
+        "city": {
+          "description": "The city this IP address is located in",
+          "type": "string"
+        },
+        "cityCf": {
+          "description": "A numeric rating of confidence that the value in the 'city' field is correct, on a scale of 0-100",
+          "type": "integer",
+          "format": "int32"
+        },
+        "continent": {
+          "description": "The continent this IP address is located on",
+          "type": "string"
+        },
+        "country": {
+          "description": "The county this IP address is located in",
+          "type": "string"
+        },
+        "countryCf": {
+          "description": "A numeric rating of confidence that the value in the 'country' field is correct on a scale of 0-100",
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipAddr": {
+          "description": "The dotted-decimal or colon-separated string representation of the IP address",
+          "type": "string"
+        },
+        "ipRoutingType": {
+          "description": "A description of the connection type of this IP address",
+          "type": "string"
+        },
+        "latitude": {
+          "description": "The latitude of this IP address",
+          "type": "string"
+        },
+        "longitude": {
+          "description": "The longitude of this IP address",
+          "type": "string"
+        },
+        "organization": {
+          "description": "The name of the organization for this IP address",
+          "type": "string"
+        },
+        "organizationType": {
+          "description": "The type of the organization for this IP address",
+          "type": "string"
+        },
+        "region": {
+          "description": "The geographic region this IP address is located in",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state this IP address is located in",
+          "type": "string"
+        },
+        "stateCf": {
+          "description": "A numeric rating of confidence that the value in the 'state' field is correct on a scale of 0-100",
+          "type": "integer",
+          "format": "int32"
+        },
+        "stateCode": {
+          "description": "The abbreviated name for the state this IP address is located in",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

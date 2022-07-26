@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datashare"
   output-folder: "$(typescript-sdks-folder)/sdk/datashare/arm-datashare"
-  clear-output-folder: true
   generate-metadata: true
 ```

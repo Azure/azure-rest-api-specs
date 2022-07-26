@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisOperationsList": {
+            "$ref": "./examples/RedisOperations_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1663,6 +1668,9 @@
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1839,6 +1847,10 @@
               "type": "string",
               "description": "The storage account connection string for storing rdb file"
             },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
             "aof-storage-connection-string-0": {
               "type": "string",
               "description": "First storage account connection string"
@@ -1867,6 +1879,15 @@
               "type": "string",
               "description": "The max clients config",
               "readOnly": true
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
+              "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
             }
           },
           "additionalProperties": {
@@ -2389,7 +2410,8 @@
         "maintenanceWindow": {
           "type": "string",
           "format": "duration",
-          "description": "ISO8601 timespan specifying how much time cache patching can take. "
+          "description": "ISO8601 timespan specifying how much time cache patching can take.",
+          "default": "PT5H"
         }
       },
       "required": [
@@ -2420,6 +2442,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "required": [

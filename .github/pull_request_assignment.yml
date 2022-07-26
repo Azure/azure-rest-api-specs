@@ -12,12 +12,7 @@
       - "specification/confidentialledger/data-plane/**"
     reviewers:
       - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
+
 
 - rule:
     # eventgrid data-plane PR
@@ -25,6 +20,13 @@
       - "specification/eventgrid/data-plane/**"
     reviewers:
       - lmazuel
+      
+- rule:
+    # storage data-plane PR
+    paths:
+      - "specification/storage/data-plane/**"
+    reviewers:
+      - tg-msft
 
 - rule:
     # synapse data-plane PR
@@ -65,13 +67,22 @@
       - leni-msft
       - ruowan
       - jianyexi
-      - zhenglaizhang
-      
+      - xiaoxuqi-ms
+   
       
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
+    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker)/**"
     reviewers:
       - raych1
+      - xiaoxuqi-ms
+
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights|eventgrid)/**"
+    reviewers:
+      - akning-ms
+      
       
 - rule:
     paths: "specification/@(security|edgeorder|synapse)/**"
@@ -79,10 +90,10 @@
       - ruowan
       
 - rule:
-    paths: "specification/sql/**"
+    paths: "specification/powerplatform/**"
     reviewers:
-      - zhenglaizhang
-      
+      - honghr
+            
 - rule:
     paths: "specification/signalr/**"
     reviewers:
@@ -111,7 +122,7 @@
 
 - rule:
     paths:
-      - "specification/datafactory/**"
+      - "specification/@(resources|datafactory)/**"
     reviewers:
       - leni-msft
 
@@ -147,11 +158,20 @@
       - weidongxu-microsoft
       
 - rule:
-    paths:
-      - "specification/keyvault/**"
+    paths: 
+      - "specification/securityinsights/**"
     reviewers:
-      - zhenglaizhang
+      - dw511214992
+      
 
+- rule:
+    paths:
+      - "specification/videoanalyzer/resource-manager/**"
+      - "specification/cognitiveservices/resource-manager/**"
+      - "specification/dataprotection/**"
+    reviewers:
+      - xiaoxuqi-ms
+      
 - rule:
     paths:
       - "documentation/**"
@@ -170,7 +190,6 @@
     reviewers:
       - akning-ms
       - raych1
-      - zhenglaizhang
 
 - rule:
     # manager-plane PR
@@ -185,9 +204,13 @@
       - leni-msft
       - ruowan
       - jianyexi
-      - zhenglaizhang
       - chunyu3
       - changlong-liu
       - msyyc
       - qiaozha
-      - weidong
+      - dw511214992
+      - honghr
+      - tianxchen-ms
+      - tadelesh
+      - xiaoxuqi-ms
+      - live1206

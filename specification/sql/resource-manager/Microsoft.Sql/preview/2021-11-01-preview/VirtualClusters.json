@@ -1,0 +1,405 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/virtualClusters": {
+      "get": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Gets a list of all virtualClusters in the subscription.",
+        "operationId": "VirtualClusters_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual clusters.",
+            "schema": {
+              "$ref": "#/definitions/VirtualClusterListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtualClusters": {
+            "$ref": "./examples/VirtualClusterList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters": {
+      "get": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Gets a list of virtual clusters in a resource group.",
+        "operationId": "VirtualClusters_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual clusters.",
+            "schema": {
+              "$ref": "#/definitions/VirtualClusterListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotEnabledForFeature - User subscription not enabled for feature user attempted to use.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 VirtualClusterDoesNotExist - The virtual cluster does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 VirtualClusterNotInSubscriptionResourceGroup - Specified virtual cluster does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionDoesNotHaveVirtualCluster - The requested virtual cluster was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 VirtualClusterRemovalAlreadyInProgress - Removal of virtual cluster is already in progress with request\n\n * 409 VirtualClusterRemovalFailed - Request to drop virtual cluster failed. Check if there are active dependent resources.\n\n * 409 ConflictingVirtualClusterOperation - An operation is currently in progress for the virtual cluster.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtual clusters by resource group": {
+            "$ref": "./examples/VirtualClusterListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}": {
+      "get": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Gets a virtual cluster.",
+        "operationId": "VirtualClusters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified virtual cluster.",
+            "schema": {
+              "$ref": "#/definitions/VirtualCluster"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotEnabledForFeature - User subscription not enabled for feature user attempted to use.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 VirtualClusterDoesNotExist - The virtual cluster does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 VirtualClusterNotInSubscriptionResourceGroup - Specified virtual cluster does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionDoesNotHaveVirtualCluster - The requested virtual cluster was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 VirtualClusterRemovalAlreadyInProgress - Removal of virtual cluster is already in progress with request\n\n * 409 VirtualClusterRemovalFailed - Request to drop virtual cluster failed. Check if there are active dependent resources.\n\n * 409 ConflictingVirtualClusterOperation - An operation is currently in progress for the virtual cluster.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          }
+        },
+        "x-ms-examples": {
+          "Get virtual cluster": {
+            "$ref": "./examples/VirtualClusterGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Deletes a virtual cluster.",
+        "operationId": "VirtualClusters_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the virtual cluster."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotEnabledForFeature - User subscription not enabled for feature user attempted to use.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 VirtualClusterDoesNotExist - The virtual cluster does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 VirtualClusterNotInSubscriptionResourceGroup - Specified virtual cluster does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionDoesNotHaveVirtualCluster - The requested virtual cluster was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 VirtualClusterRemovalAlreadyInProgress - Removal of virtual cluster is already in progress with request\n\n * 409 VirtualClusterRemovalFailed - Request to drop virtual cluster failed. Check if there are active dependent resources.\n\n * 409 ConflictingVirtualClusterOperation - An operation is currently in progress for the virtual cluster.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Deleting the virtual cluster is in progress."
+          },
+          "204": {
+            "description": "The specified virtual cluster does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete virtual cluster": {
+            "$ref": "./examples/VirtualClusterDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Updates a virtual cluster.",
+        "operationId": "VirtualClusters_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested virtual cluster resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualClusterUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the virtual cluster.",
+            "schema": {
+              "$ref": "#/definitions/VirtualCluster"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotEnabledForFeature - User subscription not enabled for feature user attempted to use.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 VirtualClusterDoesNotExist - The virtual cluster does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 VirtualClusterNotInSubscriptionResourceGroup - Specified virtual cluster does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionDoesNotHaveVirtualCluster - The requested virtual cluster was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 VirtualClusterRemovalAlreadyInProgress - Removal of virtual cluster is already in progress with request\n\n * 409 VirtualClusterRemovalFailed - Request to drop virtual cluster failed. Check if there are active dependent resources.\n\n * 409 ConflictingVirtualClusterOperation - An operation is currently in progress for the virtual cluster.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Updating virtual cluster is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update virtual cluster with tags": {
+            "$ref": "./examples/VirtualClusterUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}/updateManagedInstanceDnsServers": {
+      "post": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.",
+        "operationId": "VirtualClusters_UpdateDnsServers",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully synchronized the DNS server settings.",
+            "schema": {
+              "$ref": "#/definitions/UpdateManagedInstanceDnsServersOperation"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name."
+          }
+        },
+        "x-ms-examples": {
+          "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.": {
+            "$ref": "./examples/UpdateManagedInstanceDnsServers.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DnsRefreshConfigurationProperties": {
+      "description": "DNS refresh configuration properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the DNS refresh operation.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateManagedInstanceDnsServersOperation": {
+      "description": "A recoverable managed database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsRefreshConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualCluster": {
+      "description": "An Azure SQL virtual cluster.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualClusterProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualClusterListResult": {
+      "description": "A list of virtual clusters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualCluster"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualClusterProperties": {
+      "description": "The properties of a virtual cluster.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "Subnet resource ID for the virtual cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "childResources": {
+          "description": "List of resources in this virtual cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "maintenanceConfigurationId": {
+          "description": "Specifies maintenance configuration id to apply to this virtual cluster.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "VirtualClusterUpdate": {
+      "description": "An update request for an Azure SQL Database virtual cluster.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualClusterProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

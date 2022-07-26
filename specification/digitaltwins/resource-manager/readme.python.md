@@ -3,7 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-digitaltwins
@@ -15,9 +15,12 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2022-05
+  - tag: package-2021-06-30-preview
   - tag: package-2020-12
   - tag: package-2020-10
   - tag: package-2020-03-01-preview
@@ -26,10 +29,28 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/
-clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-2022-05 and python
+
+These settings apply only when `--tag=package-2022-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-05' && $(python)
+namespace: azure.mgmt.digitaltwins.v2022_05_31
+output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2022_05_31
+```
+
+### Tag: package-2021-06-30-preview and python
+
+These settings apply only when `--tag=package-2021-06-30-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-06-30-preview' && $(python)
+namespace: azure.mgmt.digitaltwins.v2021_06_30_preview
+output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2021_06_30_preview
+```
 
 ### Tag: package-2020-12 and python
 
@@ -62,7 +83,7 @@ output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/
 ```
 
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

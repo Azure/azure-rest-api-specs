@@ -52,6 +52,12 @@
           },
           "Create a stream IoT Hub input with Avro serialization": {
             "$ref": "./examples/Input_Create_Stream_IoTHub_Avro.json"
+          },
+          "Create a Gateway Message Bus input": {
+            "$ref": "./examples/Input_Create_GatewayMessageBus.json"
+          },
+          "Create a reference file input": {
+            "$ref": "./examples/Input_Create_Reference_File.json"
           }
         },
         "parameters": [
@@ -547,7 +553,7 @@
         "sourcePartitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The partition count of the blob input data source. Range 1 - 256."
+          "description": "The partition count of the blob input data source. Range 1 - 1024."
         }
       }
     },
@@ -657,6 +663,33 @@
         "type"
       ]
     },
+    "FileReferenceInputDataSource": {
+      "type": "object",
+      "description": "Describes a file input data source that contains reference data.",
+      "x-ms-discriminator-value": "File",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileReferenceInputDataSourceProperties",
+          "description": "The properties that are associated with a file input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FileReferenceInputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a file input containing reference data.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file."
+        }
+      }
+    },
     "BlobReferenceInputDataSource": {
       "type": "object",
       "description": "Describes a blob input data source that contains reference data.",
@@ -693,6 +726,9 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
+          "x-ms-identifiers": [
+            "accountName"
+          ],
           "description": "A list of one or more Azure Storage accounts. Required on PUT (CreateOrReplace) requests."
         },
         "container": {
@@ -710,6 +746,10 @@
         "timeFormat": {
           "type": "string",
           "description": "The time format. Wherever {time} appears in pathPattern, the value of this property is used as the time format instead."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
@@ -774,6 +814,7 @@
           "items": {
             "$ref": "#/definitions/DiagnosticCondition"
           },
+          "x-ms-identifiers": [],
           "description": "A collection of zero or more conditions applicable to the resource, or to the job overall, that warrant customer attention."
         }
       }
@@ -1052,7 +1093,8 @@
       "x-ms-enum": {
         "name": "CompressionType",
         "modelAsString": true
-      }
+      },
+      "default": "None"
     },
     "AzureSqlReferenceInputDataSource": {
       "type": "object",
@@ -1112,6 +1154,42 @@
         "deltaSnapshotQuery": {
           "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
+        }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSource": {
+      "description": "Describes a blob input data source that contains stream data.",
+      "type": "object",
+      "x-ms-discriminator-value": "GatewayMessageBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayMessageBusStreamInputDataSourceProperties",
+          "description": "The properties that are associated with a gateway message bus input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayMessageBusStreamInputDataSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus input containing stream data.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayMessageBusSourceProperties"
+        }
+      ]
+    },
+    "GatewayMessageBusSourceProperties": {
+      "description": "The properties that are associated with a gateway message bus datasource.",
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "The name of the Service Bus topic."
         }
       }
     },
