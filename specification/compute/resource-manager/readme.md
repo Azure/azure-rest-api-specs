@@ -241,33 +241,33 @@ These settings apply only when `--tag=package-2022-07-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-02'
 input-file:
-  - Microsoft.Compute/stable/2022-04-04/common.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/computeRPCommon.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachine.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineImage.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/virtualMachineExtensionImage.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/availabilitySet.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/proximityPlacementGroup.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/dedicatedHost.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/sshPublicKey.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/image.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/restorePoint.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
-  - Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskRPCommon.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/disk.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskAccess.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskEncryptionSet.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskRestorePoint.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/snapshot.json
-  - Microsoft.Compute/stable/2021-07-01/skus.json
-  - Microsoft.Compute/stable/2022-01-03/GalleryRP/galleryRPCommon.json
-  - Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
-  - Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
-  - Microsoft.Compute/stable/2022-01-03/GalleryRP/communityGallery.json
-  - Microsoft.Compute/stable/2022-04-04/CloudServiceRP/cloudService.json
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/image.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2022-03-01/ComputeRP/runCommand.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/CloudServiceRP/cloudService.json
 ```
 
 ### Tag: package-2022-07-02-only
@@ -276,13 +276,13 @@ These settings apply only when `--tag=package-2022-07-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-07-02-only'
 input-file:
-  - Microsoft.Compute/stable/2022-07-02/common.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskRPCommon.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/disk.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskAccess.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskEncryptionSet.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/diskRestorePoint.json
-  - Microsoft.Compute/stable/2022-07-02/DiskRP/snapshot.json
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
 ```
 
 ### Tag: package-2022-04-04
