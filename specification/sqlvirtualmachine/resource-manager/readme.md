@@ -28,7 +28,7 @@ These are the global settings for the SQL virtual machine API.
 title: SqlVirtualMachineManagementClient
 description: 'The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.'
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2022-07
 ```
 
 ### Tag: package-preview-2022-07
