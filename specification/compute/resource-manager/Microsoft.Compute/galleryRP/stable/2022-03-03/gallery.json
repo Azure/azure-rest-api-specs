@@ -2188,6 +2188,7 @@
       "description": "The publishing profile of a gallery image version."
     },
     "GalleryApplicationVersionSafetyProfile": {
+      "type": "object",
       "properties": {},
       "allOf": [
         {
@@ -2197,6 +2198,7 @@
       "description": "The safety profile of the Gallery Application Version."
     },
     "GalleryApplicationCustomAction": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2228,6 +2230,7 @@
       "description": "A custom action that can be performed with a Gallery Application Version."
     },
     "GalleryApplicationCustomActionParameter": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2793,6 +2796,7 @@
       "description": "This is the storage profile of a Gallery Image Version."
     },
     "GalleryArtifactVersionFullSource": {
+      "type": "object",
       "properties": {
         "communityGalleryImageId": {
           "type": "string",
@@ -2869,10 +2873,15 @@
       "description": "This is the disk image base class."
     },
     "GalleryDiskImageSource": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
           "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "The Storage Account Id that contains the vhd blob being used as a source for this artifact version."
         }
       },
       "allOf": [
@@ -2883,6 +2892,7 @@
       "description": "The source for the disk image."
     },
     "GalleryArtifactSafetyProfileBase": {
+      "type": "object",
       "properties": {
         "allowDeletionOfReplicatedLocations": {
           "type": "boolean",
@@ -2892,10 +2902,12 @@
       "description": "This is the safety profile of the Gallery Artifact Version."
     },
     "GalleryImageVersionSafetyProfile": {
+      "type": "object",
       "properties": {
         "reportedForPolicyViolation": {
           "type": "boolean",
-          "description": "Indicates whether this image has been reported as violating Microsoft's policies."
+          "description": "Indicates whether this image has been reported as violating Microsoft's policies.",
+          "readOnly": true
         },
         "policyViolations": {
           "type": "array",
@@ -2903,7 +2915,8 @@
             "$ref": "#/definitions/PolicyViolation"
           },
           "x-ms-identifiers": [],
-          "description": "A list of Policy Violations that have been reported for this Gallery Image Version."
+          "description": "A list of Policy Violations that have been reported for this Gallery Image Version.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2914,6 +2927,7 @@
       "description": "This is the safety profile of the Gallery Image Version."
     },
     "PolicyViolation": {
+      "type": "object",
       "properties": {
         "category": {
           "type": "string",
@@ -3176,6 +3190,7 @@
       }
     },
     "LatestGalleryImageVersion": {
+      "type": "object",
       "readOnly": true,
       "description": "The gallery image version with latest version in a particular region.",
       "properties": {
