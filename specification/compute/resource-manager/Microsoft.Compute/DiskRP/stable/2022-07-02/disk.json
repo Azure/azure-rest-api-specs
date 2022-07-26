@@ -141,6 +141,9 @@
           },
           "Create a managed disk from an Azure Compute Gallery community image.": {
             "$ref": "./examples/diskExamples/Disk_Create_FromAnAzureComputeGalleryCommunityImage.json"
+          },
+          "Create a managed disk with optimizedForFrequentAttach.": {
+            "$ref": "./examples/diskExamples/Disk_Create_WithOptimizedForFrequentAttach.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -213,6 +216,12 @@
           },
           "Update a managed disk to add architecture.": {
             "$ref": "./examples/diskExamples//Disk_Update_ToAddArchitecture.json"
+          },
+          "Update a managed disk to disable optimizedForFrequentAttach.": {
+            "$ref": "./examples/diskExamples//Disk_Update_DisableOptimizedForFrequentAttach.json"
+          },
+          "Update a managed disk with diskControllerTypes.": {
+            "$ref": "./examples/diskExamples//Disk_Update_AddDiskControllerTypes.json"
           }
         }
       },
@@ -741,6 +750,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "optimizedForFrequentAttach": {
+          "type": "boolean",
+          "description": "This property allows you to improve the reliability and performance of your disks that are frequently (greater than 5) moved between VMs by detaching and attaching. This property should be set for disks that are moved frequently (greater than 5 moves) as it can reduce the reliability of the disk otherwise."
         }
       },
       "required": [
@@ -837,6 +850,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "optimizedForFrequentAttach": {
+          "type": "boolean",
+          "description": "This property allows you to improve the reliability and performance of your disks that are frequently (greater than 5) moved between VMs by detaching and attaching. This property should be set for disks that are moved frequently (greater than 5 moves) as it can reduce the reliability of the disk otherwise."
         }
       },
       "description": "Disk resource update properties."
