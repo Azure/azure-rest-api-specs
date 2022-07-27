@@ -716,15 +716,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -739,12 +730,26 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Job definition cancellation accepted."
+          }
+        },
+        "x-ms-examples": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CancelJobPOST91": {
+            "$ref": "./examples/JobDefinitions_CancelJob-POST-example-91.json"
           }
         }
       }
