@@ -192,7 +192,7 @@
           "PATCH"
         ],
         "summary": "Update an existing IoT Hubs tags.",
-        "description": "Update an existing IoT Hub tag. to update other fields use the CreateOrUpdate method",
+        "description": "Update an existing IoT Hub tags. to update other fields use the CreateOrUpdate method",
         "x-ms-long-running-operation": true,
         "operationId": "IotHubResource_Update",
         "x-ms-examples": {
@@ -293,24 +293,12 @@
             }
           },
           "200": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
             "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state.",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
             }
           },
           "204": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
             "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the Iot hub metadata in the service and the status of the delete operation is set to a completed state."
           },
           "404": {
@@ -2050,24 +2038,12 @@
             }
           },
           "200": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
             "description": "This is returned as a response to the status polling request for the delete operation.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "204": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
             "description": "PrivateEndpoint does not exist."
           },
           "default": {
@@ -4388,7 +4364,10 @@
           "type": "string"
         },
         "inputBlobName": {
-          "description": "The blob name to be used when importing from the provided input blob container.",
+          "descrip          "x-ms-identifiers": [
+            "keyIdentifier"
+          ]
+from the provided input blob container.",
           "type": "string"
         },
         "outputBlobName": {
@@ -4464,7 +4443,7 @@
       "type": "object",
       "properties": {
         "principalId": {
-          "description": "Principal Id",
+          "desiption": "Principal Id s",
           "type": "string",
           "readOnly": true
         },
@@ -4522,9 +4501,7 @@
           "items": {
             "$ref": "#/definitions/KeyVaultKeyProperties"
           },
-          "x-ms-identifiers": [
-            "keyIdentifier"
-          ]
+          "x-ms-identifiers": ["keyIdentifier"]
         }
       }
     },
