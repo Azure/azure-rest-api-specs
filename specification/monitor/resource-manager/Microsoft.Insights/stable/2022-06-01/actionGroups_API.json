@@ -241,6 +241,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The notification details",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
           "202": {
             "description": "The notification request accepted",
             "headers": {
@@ -299,6 +305,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The notification details",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
           "202": {
             "description": "The notification request accepted",
             "headers": {
@@ -887,6 +899,7 @@
         "groupShortName": {
           "type": "string",
           "maxLength": 12,
+          "minLength": 2,
           "description": "The short name of the action group. This will be used in SMS messages."
         },
         "enabled": {
@@ -897,6 +910,8 @@
         "emailReceivers": {
           "x-ms-identifiers": [],
           "type": "array",
+          "minLength": 2,
+          "maxLength": 3,
           "items": {
             "$ref": "#/definitions/EmailReceiver"
           },
@@ -998,6 +1013,7 @@
         },
         "emailAddress": {
           "type": "string",
+          "pattern": "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$",
           "description": "The email address of this receiver."
         },
         "useCommonAlertSchema": {
