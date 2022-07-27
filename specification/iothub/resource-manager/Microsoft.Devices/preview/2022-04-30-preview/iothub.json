@@ -3554,8 +3554,18 @@
       "description": "Error details.",
       "type": "object",
       "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
         "httpStatusCode": {
           "description": "The HTTP status code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
           "type": "string",
           "readOnly": true
         },
@@ -3563,22 +3573,6 @@
           "description": "The error details.",
           "type": "string",
           "readOnly": true
-        },
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            }
-          }
         }
       }
     },
