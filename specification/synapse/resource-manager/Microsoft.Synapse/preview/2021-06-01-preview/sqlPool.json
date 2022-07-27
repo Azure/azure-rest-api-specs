@@ -5271,18 +5271,20 @@
             "description": ""
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
-          "Get DataWarehouseQueries of SQL Analytics pool workload group": {
+          "Get Sql pool DataWarehouseQueries": {
             "$ref": "./examples/GetDatawareHouseQueries.json"
           }
         }
       }
     }
-
     },
   "definitions": {
     "SqlPoolInfoListResult": {
@@ -7682,16 +7684,16 @@
       }
     },
     "DataWarehouseQueries": {
-      "description": "The list of data warehouse queries in the Sql pool.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataWarehouseQueries"
-          }
+          },
+          "description": "The list of datawarehouse queries."
         }
-      }
+      },
+      "description": "The response to a list datawarehouse queries."
     }
   },
     "parameters": {
