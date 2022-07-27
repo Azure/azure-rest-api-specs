@@ -40,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2022-06-15
+tag: package-2022-07-27-only
 ```
 
 ### Suppression
@@ -247,6 +247,16 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}"]'
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+```
+
+### Tag: package-2022-07-27-only
+
+These settings apply only when `--tag=package-2022-07-27-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07-27-only'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/stable/2022-04-01/workbooks_API.json
 ```
 
 ### Tag: package-2022-06-15
