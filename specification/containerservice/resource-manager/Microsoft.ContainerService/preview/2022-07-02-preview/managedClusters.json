@@ -903,7 +903,7 @@
         ],
         "operationId": "AgentPools_AbortLatestOperation",
         "summary": "Aborts last operation running on agent pool.",
-        "description": "Aborting last running operation on agent pool.  We return a 204 no content code here to indicate that the operation has been accepted and am abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the agent pool to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
+        "description": "Aborting last running operation on agent pool. We return a 204 no content code here to indicate that the operation has been accepted and an abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the agent pool to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -926,7 +926,7 @@
           }
         ],
         "responses": {
-         "204": {
+          "204": {
             "description": "NoContent"
           },
           "default": {
@@ -934,6 +934,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Abort operation on agent pool": {
+            "$ref": "./examples/AgentPoolsAbortOperation.json"
           }
         }
       }
@@ -1400,11 +1405,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/abort": {
       "post": {
         "tags": [
-          "managedCluster"
+          "ManagedClusters"
         ],
-        "operationId": "ManagedCluster_AbortLatestOperation",
+        "operationId": "ManagedClusters_AbortLatestOperation",
         "summary": "Aborts last operation running on managed cluster.",
-        "description": "Aborting last running operation on managed cluster.  We return a 204 no content code here to indicate that the operation has been accepted and am abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the managed cluster to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
+        "description": "Aborting last running operation on managed cluster.  We return a 204 no content code here to indicate that the operation has been accepted and an abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the managed cluster to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1424,10 +1429,15 @@
             "description": "NoContent"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Abort operation on managed cluster": {
+            "$ref": "./examples/ManagedClustersAbortOperation.json"
           }
         }
       }
