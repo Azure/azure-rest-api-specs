@@ -7,7 +7,24 @@
     "api-version": "2022-10-01-preview",
     "analyticsConnector": {
       "location": "westus",
-      "properties": {}
+      "properties": {
+        "dataSourceConfiguration": {
+          "type": "fhirservice",
+          "url": "https://workspace-examplefhir.fhir.azurehealthcareapis.com",
+          "kind": "R4"
+        },
+        "dataMappingConfiguration": {
+          "type": "fhirToParquet",
+          "filterConfigurationReference": "acrexample.azurecr.io/blah@sha256xxx",
+          "extensionSchemaReference": "acrexample.azurecr.io/blah@sha256aaa/Extension",
+          "transformationSchemaReference": "acrexample.azurecr.io/blah@sha256bbb",
+          "anonymizationSchemaReference": "acrexample.azurecr.io/blah@sha256ccc"
+        },
+        "dataDestinationConfiguration": {
+          "type": "datalake",
+          "dataLakeName": "exampledatalake"
+        }
+      }
     }
   },
   "responses": {
