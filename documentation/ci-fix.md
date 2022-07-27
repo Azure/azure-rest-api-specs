@@ -143,6 +143,19 @@ autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest 
 autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
 
+## Cadl Validation
+
+This validator is to ensure the cadl & swagger files in PR are consistent and the 'cadl' folder contains 'examples' and 'package.json'
+
+### How to fix
+| Error Code | solution |
+|---| ---|
+|MissingPakcageJson| adding the package.json to the cadl folder|
+|MissingCadlFile| adding the related cadl files into 'cadl' folder, like [https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl](https://github.com/Azure/azure-rest-api-specs-pr/tree/586cb177f1bab647da7ac60907fa3aa695b67ae1/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl)|
+|MissingExamplesDirectory| the example files should be kept in the 'cadl/examples' folder, you should also check in it in PR. |
+|InConsistentSwagger| the generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl, and check in it |
+|SwaggerNotExistInPR| the occurs when there is cadl file in the PR but the swagger is not present in the PR, so you need to add the swagger to the PR |
+
 ## Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance. 
