@@ -1558,7 +1558,7 @@
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
+      "description": "Enumeration of supported analysis tasks on a collection of conversation.",
       "enum": [
         "ConversationalPIITask",
         "ConversationalSummarizationTask",
@@ -2205,8 +2205,7 @@
         "id",
         "participantId",
         "sentiment",
-        "confidenceScores",
-        "sentences"
+        "confidenceScores"
       ],
       "properties": {
         "id": {
@@ -2218,85 +2217,15 @@
           "type": "string"
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment"
+          "$ref": "common.json#/definitions/Sentiment"
         },                
         "confidenceScores": {
           "type": "object",
           "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          }
         }
       }
     },
-    "Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment.",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "TextSentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "positive",
-            "description": "Positive sentiment."
-          },
-          {
-            "value": "neutral",
-            "description": "Neutral sentiment."
-          },
-          {
-            "value": "negative",
-            "description": "Negative sentiment."
-          },
-          {
-            "value": "mixed",
-            "description": "Mixed sentiment."
-          }                   
-        ]
-      }
-    },
-    "SentenceSentiment": {
-      "type": "object",
-      "required": [
-        "text",
-        "sentiment",
-        "confidenceScores",
-        "offset",
-        "length"
-      ],
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The sentence text."
-        },
-        "sentiment": {
-          "$ref": "#/definitions/Sentiment"
-        },
-        "confidenceScores": {
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
-          "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The sentence offset from the start of the predictionSource."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the sentence."
-        }
-      }
-    },
+
     "SentimentConfidenceScores": {
       "type": "object",
       "required": [
