@@ -10717,6 +10717,32 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
           }
+      }
+    },
+    "CriticalJobHistoryDetails": {
+      "description": "Critical past job details of the migraton item.",
+      "type": "object",
+      "properties": {
+        "jobName": {
+          "description": "The job name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobId": {
+          "description": "The ARM Id of the job being executed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobStatus": {
+          "description": "The job state.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
