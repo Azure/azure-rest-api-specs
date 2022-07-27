@@ -176,7 +176,7 @@ Specification files and AutoRest configuration files in one RP folder are better
 ## Next steps
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
 
-External Contributors can read [Getting Started with Azure API Specifications](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/getting-started-with-azure-api-specifications.md).
+External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 ---
 _This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
