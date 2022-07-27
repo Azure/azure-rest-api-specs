@@ -108,10 +108,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "IncludeEntityTypes": {
-      "name": "includeEntityTypes",
+    "PickType": {
+      "name": "pickType",
       "in": "query",
-      "description": "Specifies the entity types that you want to return in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.",
+      "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response. One exception to this rule is when both PopulatedPlace and Neighborhood entity types are specified and information is found for both. In this case, the information for both entity types is returned. Also, more than one Neighborhood may be returned because the area covered by two different neighborhoods can overlap.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -334,17 +334,16 @@
         }
       }
     },
-    "/geocode/latlng": {
+    "/reverseGeocode": {
       "get": {
-        "description": "**Reverse Geocode to an Address**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often  this is needed in tracking applications where you  receive a GPS feed from the device or asset and  wish to know what address where the coordinate is  located. This endpoint will return address  information for a given coordinate.",
-        "operationId": "Search_GetSearchAddressReverse",
+        "description": "**Reverse Geocode a point.**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.",
+        "operationId": "Search_GetReverseGeocode",
         "produces": [
           "application/geo+json"
         ],
-        "x-ms-client-name": "ReverseSearchAddress",
         "x-ms-examples": {
-          "Search latlng: -122.138681, 47.630358": {
-            "$ref": "./examples/ReversedGeocoding.json"
+          "Search point -122.138681, 47.630358": {
+            "$ref": "./examples/ReverseGeocoding.json"
           }
         },
         "parameters": [
@@ -361,7 +360,7 @@
             "$ref": "#/parameters/Point"
           },
           {
-            "$ref": "#/parameters/IncludeEntityTypes"
+            "$ref": "#/parameters/PickType"
           }
         ],
         "responses": {
@@ -650,7 +649,7 @@
           "properties": {
             "type": {
               "type": "string",
-              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
+              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection\n* Address\n* Neighborhood\n* PopulatedPlace\n* Postcode1\n* AdminDivision1\n* AdminDivision2\n* CountryRegion",
               "readOnly": true
             },
             "confidence": {
