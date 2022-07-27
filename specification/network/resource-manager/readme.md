@@ -97,6 +97,14 @@ input-file:
   - Microsoft.Network/stable/2022-01-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2022-01-01/expressRouteProviderPort.json
 ```
+### Tag: package-2022-07-preview
+
+These settings apply only when `--tag=2022-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07-preview-only'
+input-file:
+  - Microsoft.Network/preview/2022-07-01-preview/networkManagerNetworkVerifier.json
+ ```
 
 ### Tag: package-2022-04-preview
 
