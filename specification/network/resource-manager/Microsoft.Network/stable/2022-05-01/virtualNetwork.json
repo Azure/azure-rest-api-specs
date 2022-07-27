@@ -2178,7 +2178,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PublicIpDdosProtectionStatusResult"
+            "$ref": "./publicIpAddress.json#/definitions/PublicIpDdosProtectionStatusResult"
           },
           "description": "The Ddos Protection Status Result for each public ip under a virtual network."
         },
@@ -2188,27 +2188,6 @@
         }
       },
       "description": "Response for GetVirtualNetworkDdosProtectionStatusOperation."
-    },
-    "PublicIpDdosProtectionStatusResult": {
-      "properties": {
-        "PublicIPAddressId": {
-          "type": "string",
-          "description": "Public IP ARM resource ID"
-        },
-        "PublicIpAddress": {
-          "type": "string",
-          "description": "IP Address of the Public IP Resource"
-        },
-        "IsWorkloadProtected": {
-          "type": "boolean",
-          "description": "Value indicating whether the IP address is DDoS workload protected or not."
-        },
-        "DdosProtectionPlanId": {
-          "type": "string",
-          "description": " DDoS protection plan Resource Id of a if IP address is protected through a plan."
-        }
-      },
-      "description": "Object for each PublicIpAddress in GetVirtualNetworkDdosProtectionStatusOperation API service call."
     }
   }
 }
