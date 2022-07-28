@@ -6,20 +6,12 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-workloads"
-  output-folder: "$(typescript-sdks-folder)/sdk/workloads/arm-workloads"
+  package-name: "@azure/arm-workloads-sapvirtualinstance"
+  output-folder: "$(typescript-sdks-folder)/sdk/workloads/arm-sapvirtualinstance"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
 directive:
-  - where-operation: monitors_Create
-    transform: delete $["x-ms-long-running-operation-options"]
-  - where-operation: ProviderInstances_Create
-    transform: delete $["x-ms-long-running-operation-options"]
-  - where-operation: PhpWorkloads_CreateOrUpdate
-    transform: delete $["x-ms-long-running-operation-options"]
-  - where-operation: WordpressInstances_CreateOrUpdate
-    transform: delete $["x-ms-long-running-operation-options"]
   - where-operation: SAPVirtualInstances_Create
     transform: delete $["x-ms-long-running-operation-options"]
   - where-operation: SAPCentralInstances_Create

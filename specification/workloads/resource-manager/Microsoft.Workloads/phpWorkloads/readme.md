@@ -27,20 +27,20 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-12-01-preview
+tag: package-preview-2022-09
 ```
 
-### Tag: package-2021-12-01-preview
 
-These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
+### Tag: package-preview-2022-09
 
-``` yaml $(tag) == 'package-2021-12-01-preview'
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - Microsoft.Workloads/preview/2021-12-01-preview/phpWorkloads.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/SAPVirtualInstance.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/operations.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/monitors.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/skus.json
+  - preview/2022-09-01-preview/phpWorkloads.json
+  - preview/2022-09-01-preview/skus.json
+  - ../common-types/v1/commonTypes.json
+  - ../operations/preview/2022-09-01-preview/operations.json
 ```
 
 ---
