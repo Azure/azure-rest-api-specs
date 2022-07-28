@@ -9,14 +9,14 @@
     "version": "2022-07-01-preview1"
   },
   "paths": {
-    "/sip/trunksHealth": {
+    "/sip/trunkHealths": {
       "get": {
         "tags": [
-          "TrunksHealth"
+          "TrunkHealths"
         ],
         "description": "This endpoint gets a list of all Trunks health configured for resource.",
         "summary": "Gets a list of all Trunks health configured for resource.",
-        "operationId": "GetTrunksHealth",
+        "operationId": "GetTrunkHealths",
         "produces": [
           "application/json"
         ],
@@ -29,7 +29,7 @@
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/ListOfTrunksHealth"
+              "$ref": "#/definitions/TrunkHealthCollection"
             }
           },
           "default": {
@@ -41,12 +41,12 @@
         },
         "x-ms-examples": {
           "Get a list of all Trunks health configured for resource.": {
-            "$ref": "./examples/GetTrunksHealths.json"
+            "$ref": "./examples/GetTrunkHealths.json"
           }
         }
       }
     },
-    "/sip/trunksHealth/{fqdn}": {
+    "/sip/trunkHealths/{fqdn}": {
       "get": {
         "tags": [
           "TrunkHealth"
@@ -86,20 +86,20 @@
         },
         "x-ms-examples": {
           "Gets Trunk health.": {
-            "$ref": "./examples/GetTrunksHealth.json"
+            "$ref": "./examples/GetTrunkHealth.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ListOfTrunksHealth": {
-      "description": "Health of SIP trunks.",
+    "TrunkHealthCollection": {
+      "description": "Trunk health collection of SIP trunks.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Represents an array of SIP trunks health.",
-          "maxLength": 250,
+          "description": "Represents an array of SIP trunk healths.",
+          "maxItems": 250,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrunkHealth"
@@ -111,13 +111,13 @@
       ]
     },
     "TrunkHealth": {
-      "description": "Represents health of a SIP trunk for routing calls.",
+      "description": "Represents health state of a SIP trunk for routing calls.",
       "type": "object",
       "required": [
         "fqdn",
         "tls",
         "ping",
-        "overallStatus"
+        "trunkOverallStatus"
       ],
       "properties": {
         "fqdn": {
@@ -126,46 +126,161 @@
           "type": "string"
         },
         "tls": {
+          "type": "object",
           "description": "The status of the TLS connections between Direct Routing and the SBC",
-          "type": "string",
-          "enum": [
-            "NoData",
-            "OK",
-            "CertExpiring",
-            "CertExpired"
+          "required": [
+            "tlsStatus"
           ],
-          "x-ms-enum": {
-            "name": "TlsStatusType",
-            "modelAsString": true
+          "properties": {
+            "tlsStatus": {
+              "type": "string",
+              "description": "The status of the TLS connections between Direct Routing and the SBC",
+              "enum": [
+                "Unknown",
+                "Ok",
+                "Warning",
+                "Error"
+              ],
+              "x-ms-enum": {
+                "name": "Tls",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Unknown",
+                    "description": "Indicates an unknown health status."
+                  },
+                  {
+                    "value": "Ok",
+                    "description": "Indicates the health state is okay."
+                  },
+                  {
+                    "value": "Warning",
+                    "description": "Indicates the health state is at a warning level."
+                  },
+                  {
+                    "value": "Error",
+                    "description": "Indicates the health state is at an error level."
+                  }
+                ]
+              }
+            },
+            "certificateStatus": {
+              "type": "string",
+              "description": "The status of the SBC certificate",
+              "enum": [
+                "Ok",
+                "Expiring",
+                "Expired"
+              ],
+              "x-ms-enum": {
+                "name": "certificateStatus",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Ok",
+                    "description": "Indicates the certificate is okay."
+                  },
+                  {
+                    "value": "Expiring",
+                    "description": "Indicates the certificate is expiring."
+                  },
+                  {
+                    "value": "Expired",
+                    "description": "Indicates the certificate is expired."
+                  }
+                ]
+              }
+            }
           }
         },
         "ping": {
-          "description": "The status of options message send by SBC",
           "type": "string",
+          "description": "The status of options message sent by SBC",
           "enum": [
-            "NoData",
-            "OK",
-            "PingError",
-            "PingExpired"
+            "Unknown",
+            "Ok",
+            "Warning",
+            "Error"
           ],
           "x-ms-enum": {
-            "name": "PingStatusType",
-            "modelAsString": true
+            "name": "ping",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Indicates an unknown health status."
+              },
+              {
+                "value": "Ok",
+                "description": "Indicates the health state is okay."
+              },
+              {
+                "value": "Warning",
+                "description": "Indicates the health state is at a warning level."
+              },
+              {
+                "value": "Error",
+                "description": "Indicates the health state is at an error level."
+              }
+            ]
           }
         },
-        "overallStatus": {
+        "trunkOverallStatus": {
+          "type": "object",
           "description": "The overall status of SBC",
-          "type": "string",
-          "enum": [
-            "NoData",
-            "Active",
-            "InactiveNoRecentPings",
-            "InactiveNoRecentPingsAndCalls",
-            "InactiveNoRecentCalls"
+          "required": [
+            "overallStatus"
           ],
-          "x-ms-enum": {
-            "name": "TrunkOverallStatusType",
-            "modelAsString": true
+          "properties": {
+            "overallStatus": {
+              "type": "string",
+              "description": "The overall status of SBC",
+              "enum": [
+                "Unknown",
+                "Active",
+                "Inactive"
+              ],
+              "x-ms-enum": {
+                "name": "overallStatus",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Unknown",
+                    "description": "Indicates an unknown status."
+                  },
+                  {
+                    "value": "Active",
+                    "description": "Indicates the SBC is active."
+                  },
+                  {
+                    "value": "Inactive",
+                    "description": "Indicates the SBC is inactive."
+                  }
+                ]
+              }
+            },
+            "inactiveReasons ": {
+              "type": "string",
+              "description": "The inactive status reasons",
+              "enum": [
+                "NoRecentCalls",
+                "NoRecentPings"
+              ],
+              "x-ms-enum": {
+                "name": "inactiveReasons ",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "NoRecentCalls",
+                    "description": "No recent pings."
+                  },
+                  {
+                    "value": "NoRecentCalls",
+                    "description": "No recent calls."
+                  }
+                ]
+              }
+            }
           }
         }
       }
