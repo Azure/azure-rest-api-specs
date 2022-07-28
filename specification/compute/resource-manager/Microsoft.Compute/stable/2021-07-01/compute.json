@@ -10629,6 +10629,28 @@
       ],
       "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details."
     },
+    "DiskSecurityProfileProperties": {
+      "type": "object",
+      "properties": {
+        "securityEncryptionType": {
+          "type": "string",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. <br><br> Default: It can be set for only Confidential VMs.",
+          "enum": [
+            "VMGuestStateOnly",
+            "DiskWithVMGuestState"
+          ],
+          "x-ms-enum": {
+            "name": "securityEncryptionTypes",
+            "modelAsString": true
+          }
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk that is used for Customer Managed Key encrypted ConfidentialVM OS Disk and VMGuest blob."
+        }
+      },
+      "description": "Specifies the Security profile settings for the managed disk."
+    },
     "KeyVaultKeyReference": {
       "properties": {
         "keyUrl": {
@@ -10782,6 +10804,10 @@
         "diskEncryptionSet": {
           "$ref": "#/definitions/DiskEncryptionSetParameters",
           "description": "Specifies the customer managed disk encryption set resource id for the managed disk."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/DiskSecurityProfileProperties",
+          "description": "Specifies the security profile for the managed disk."
         }
       },
       "allOf": [
@@ -10982,9 +11008,10 @@
         },
         "securityType": {
           "type": "string",
-          "description": "Specifies the SecurityType of the virtual machine. It is set as TrustedLaunch to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set as TrustedLaunch.",
+          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set.",
           "enum": [
-            "TrustedLaunch"
+            "TrustedLaunch",
+            "ConfidentialVM"
           ],
           "x-ms-enum": {
             "name": "SecurityTypes",
