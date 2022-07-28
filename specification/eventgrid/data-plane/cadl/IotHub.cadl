@@ -1,18 +1,3 @@
-@doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData {}
-
-@doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData {}
-
-@doc("Event data for Microsoft.Devices.DeviceConnected event.")
-model IotHubDeviceConnectedEventData {}
-
-@doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
-model IotHubDeviceDisconnectedEventData {}
-
-@doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData {}
-
 @doc("Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).")
 model DeviceLifeCycleEventProperties {
   @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
@@ -23,33 +8,6 @@ model DeviceLifeCycleEventProperties {
 
   @doc("Information about the device twin, which is the cloud representation of application device metadata.")
   twin?: DeviceTwinInfo;
-}
-
-@doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
-model DeviceConnectionStateEventProperties {
-  @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
-  deviceId?: string;
-
-  @doc("The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
-  moduleId?: string;
-
-  @doc("Name of the IoT Hub where the device was created or deleted.")
-  hubName?: string;
-
-  @doc("Information about the device connection state event.")
-  deviceConnectionStateEventInfo?: DeviceConnectionStateEventInfo;
-}
-
-@doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
-model DeviceTelemetryEventProperties {
-  @doc("The content of the message from the device.")
-  body?: Map<string, string>;
-
-  @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
-  properties?: Map<string, string>;
-
-  @doc("System properties help identify contents and source of the messages.")
-  systemProperties?: Map<string, string>;
 }
 
 @doc("Information about the device twin, which is the cloud representation of application device metadata.")
@@ -88,6 +46,33 @@ model DeviceTwinInfo {
   x509Thumbprint?: Map<string, string>;
 }
 
+@doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
+model DeviceConnectionStateEventProperties {
+  @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
+  deviceId?: string;
+
+  @doc("The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
+  moduleId?: string;
+
+  @doc("Name of the IoT Hub where the device was created or deleted.")
+  hubName?: string;
+
+  @doc("Information about the device connection state event.")
+  deviceConnectionStateEventInfo?: DeviceConnectionStateEventInfo;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
+model DeviceTelemetryEventProperties {
+  @doc("The content of the message from the device.")
+  body?: Map<string, string>;
+
+  @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
+  properties?: Map<string, string>;
+
+  @doc("System properties help identify contents and source of the messages.")
+  systemProperties?: Map<string, string>;
+}
+
 @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
 model DeviceTwinProperties {
   @doc("Metadata information for the properties JSON document.")
@@ -108,3 +93,18 @@ model DeviceConnectionStateEventInfo {
   @doc("Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number.")
   sequenceNumber?: string;
 }
+
+@doc("Event data for Microsoft.Devices.DeviceCreated event.")
+model IotHubDeviceCreatedEventData is DeviceLifeCycleEventProperties;
+
+@doc("Event data for Microsoft.Devices.DeviceDeleted event.")
+model IotHubDeviceDeletedEventData is DeviceLifeCycleEventProperties;
+
+@doc("Event data for Microsoft.Devices.DeviceConnected event.")
+model IotHubDeviceConnectedEventData is DeviceConnectionStateEventProperties;
+
+@doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
+model IotHubDeviceDisconnectedEventData is DeviceConnectionStateEventProperties;
+
+@doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
+model IotHubDeviceTelemetryEventData is DeviceTelemetryEventProperties;
