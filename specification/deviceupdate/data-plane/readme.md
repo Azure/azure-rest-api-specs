@@ -1,5 +1,5 @@
 # DeviceUpdate
-
+ 
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Device Update for IoT Hub.
