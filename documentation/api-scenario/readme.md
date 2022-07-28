@@ -1,12 +1,10 @@
 # API Scenario Documentation
 
-API Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. API scenario can be used for service functional test, API quality validation and SDK/CLIs test generation.
-
-_**Caution**: This project is in early preview phase, hence breaking changes should be expected._
+API Scenario is a YAML file defining RESTful API usage scenarios of your service with a sequence of API calls. API scenario can be used for service API functional test, API quality validation and SDK/CLIs test generation.
 
 ## Features
 
-- Simple to use: Intuitive step definition based on Swagger operations and examples.
+- Simple to use: Intuitive step definition based on Swagger operations or examples, describing parameters and expected responses with scoped variables.
 - ARM Template integration: Support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
 - Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner. More runners will be supported, like SDKs in different languages.
 
@@ -18,7 +16,7 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 
 - [Example: Write and run your first API scenario file](./how-to/QuickStart.md)
 - [Example: Generate a basic API scenario file](./how-to/generateABasicApiScenario.md)
-- [Example: use armTemplate to generate unique resourceName](./how-to/apiScenarioWithARMTemplate.md)
+- [Example: Integrate with ARM Template](./how-to/integrateWithArmTemplate.md)
 - [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
