@@ -28,7 +28,7 @@ If the configured language is not found here, generation for this readme.md will
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
-5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified then checkout __secondaryRepository__ and __secondaryBranch__ instead. If sdk automation finds there is a branch whose name is same as spec PR's source branch in sdk __mainRepository__ or __secondaryRepository__, the branch will be used.
+5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified then checkout __secondaryRepository__ and __secondaryBranch__ instead.
 
 6. Get `swagger_to_sdk_config.json` from cloned SDK repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config see [SwaggerToSdkConfig](#swaggertosdkconfig).
 
