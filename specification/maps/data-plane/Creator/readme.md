@@ -40,13 +40,14 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - preview/2022-09-01-preview/alias.json
-  - preview/2022-09-01-preview/data.json
+  - preview/2.0/alias.json
+  - preview/2.0/data.json
   - preview/2022-09-01-preview/dataset.json
-  - preview/2022-09-01-preview/dwgconversion.json
-  - preview/2022-09-01-preview/featurestate.json
-  - preview/2022-09-01-preview/tileset.json
-  - preview/2022-09-01-preview/wfs.json
+  - preview/2.0/dwgconversion.json
+  - preview/2.0/featurestate.json
+  - preview/1.0/spatial.json
+  - preview/2.0/tileset.json
+  - preview/2.0/wfs.json
 ```
 ### Tag: 2.0-preview
 
