@@ -1,0 +1,612 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/assistedQueries": {
+      "get": {
+        "x-ms-examples": {
+          "Get all queries.": {
+            "$ref": "./examples/assistedQueries/GetQueries.json"
+          }
+        },
+        "tags": [
+          "Queries"
+        ],
+        "description": "Gets all queries.",
+        "operationId": "Queries_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/assistedQueries/{queryId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a query.": {
+            "$ref": "./examples/assistedQueries/GetQueryById.json"
+          }
+        },
+        "tags": [
+          "Queries"
+        ],
+        "description": "Gets a query",
+        "operationId": "Queries_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a query.": {
+            "$ref": "./examples/assistedQueries/DeleteQuery.json"
+          }
+        },
+        "tags": [
+          "Queries"
+        ],
+        "description": "Delete a query.",
+        "operationId": "Queries_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the delete operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a query.": {
+            "$ref": "./examples/assistedQueries/CreateQuery.json"
+          }
+        },
+        "tags": [
+          "Queries"
+        ],
+        "description": "Create or update a query.",
+        "operationId": "Queries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          },
+          "201": {
+            "description": "Created. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+            "schema": {
+              "$ref": "#/definitions/Query"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/assistedQueries/{queryId}/editedQueries": {
+      "get": {
+        "x-ms-examples": {
+          "Get all edited queries.": {
+            "$ref": "./examples/assistedQueries/GetEditedQueries.json"
+          }
+        },
+        "tags": [
+          "EditedQueries"
+        ],
+        "description": "Gets all edited queries.",
+        "operationId": "EditedQueries_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EditedQueryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/assistedQueries/{queryId}/editedQueries/{editedQueryId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an edited query.": {
+            "$ref": "./examples/assistedQueries/GetEditedQueryById.json"
+          }
+        },
+        "tags": [
+          "EditedQueries"
+        ],
+        "description": "Gets an edited query",
+        "operationId": "EditedQueries_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          },
+          {
+            "$ref": "#/parameters/EditedQueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EditedQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an edited query.": {
+            "$ref": "./examples/assistedQueries/DeleteEditedQuery.json"
+          }
+        },
+        "tags": [
+          "EditedQueries"
+        ],
+        "description": "Delete an edited queries.",
+        "operationId": "EditedQueries_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          },
+          {
+            "$ref": "#/parameters/EditedQueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an edited query.": {
+            "$ref": "./examples/assistedQueries/CreateEditedQuery.json"
+          }
+        },
+        "tags": [
+          "EditedQueries"
+        ],
+        "description": "Creates or updates an edited query.",
+        "operationId": "EditedQueries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/QueryId"
+          },
+          {
+            "$ref": "#/parameters/EditedQueryId"
+          },
+          {
+            "$ref": "#/parameters/EditedQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EditedQuery"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EditedQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QueryList": {
+      "description": "List all the queries.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of queries.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of queries.",
+          "items": {
+            "$ref": "#/definitions/Query"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Query": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Query in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryProperties",
+          "description": "Query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "QueryProperties": {
+      "description": "Describes Query properties",
+      "properties": {
+        "queryId": {
+          "description": "The id (a Guid) of the query",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "The id (a Guid) of the correlationId",
+          "type": "string"
+        },
+        "naturalLanguage": {
+          "description": "The natural language",
+          "type": "string"
+        },
+        "kustoQueryLanguage": {
+          "description": "the kusto query for a natural language",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "A type of the document (is 'assistedQuery')",
+          "type": "string"
+        },
+        "executionResult": {
+          "description": "The result of the execution to get kusto query from  natural language input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "naturalLanguage"
+      ],
+      "type": "object"
+    },
+    "EditedQueryList": {
+      "description": "List all the Edited Queries.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of edited queries.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of edited queries.",
+          "items": {
+            "$ref": "#/definitions/EditedQuery"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "EditedQuery": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Edited Query in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EditedQueryProperties",
+          "description": "Edited Query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "EditedQueryProperties": {
+      "description": "Describes Edited Query properties",
+      "properties": {
+        "queryId": {
+          "description": "The id (a Guid) of the query",
+          "type": "string"
+        },
+        "editedQueryId": {
+          "description": "The id (a Guid) of the edited query",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "The id (a Guid) of the correlationId",
+          "type": "string"
+        },
+        "kustoQueryLanguage": {
+          "description": "the kusto query for a natural language",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "A type of the document (is 'assistedQuery')",
+          "type": "string"
+        },
+        "executionResult": {
+          "description": "The result of the execution to get kusto query from  natural language input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kustoQueryLanguage"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "QueryId": {
+      "description": "Query Id",
+      "in": "path",
+      "name": "queryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Query": {
+      "description": "The Query",
+      "in": "body",
+      "name": "query",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Query"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EditedQuery": {
+      "description": "The edited query",
+      "in": "body",
+      "name": "editedQuery",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EditedQuery"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EditedQueryId": {
+      "description": "Edited Query Id (GUID)",
+      "in": "path",
+      "name": "editedQueryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
