@@ -405,8 +405,13 @@
               "type": "string"
             },
             "daprAIConnectionString": {
-              "description": "Dapr Application insights connection string of the connectedEnvironment",
-              "type": "string"
+              "type": "string",
+              "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ],
+              "x-ms-secret": true
             }
           },
           "x-ms-client-flatten": true
