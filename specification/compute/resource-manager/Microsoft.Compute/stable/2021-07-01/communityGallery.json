@@ -168,6 +168,99 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImages"
+        ],
+        "operationId": "CommunityGalleryImages_List",
+        "description": "List community gallery images inside a gallery.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery.": {
+            "$ref": "./examples/communityGallery/ListCommunityGalleryImages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImageVersions"
+        ],
+        "operationId": "CommunityGalleryImageVersions_List",
+        "description": "List community gallery image versions inside an image.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryImageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery.": {
+            "$ref": "./examples/communityGallery/ListCommunityGalleryImageVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -212,6 +305,25 @@
         }
       ],
       "description": "Specifies information about the Community Gallery that you want to create or update."
+    },
+    "CommunityGalleryImageList": {
+      "description": "The List Community Gallery Images operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImage"
+          },
+          "description": "A list of community gallery images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery images. Call ListNext() with this to fetch the next page of community gallery images."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CommunityGalleryImage": {
       "properties": {
@@ -291,6 +403,14 @@
         },
         "purchasePlan": {
           "$ref": "#/definitions/ImagePurchasePlan"
+        },
+        "privacyStatementUri": {
+          "type": "string",
+          "description": "The uri to describe the privacy statement issued from community gallery publisher."
+        },
+        "eula": {
+          "type": "string",
+          "description": "The uri to describe the eula issued from community gallery publisher."
         }
       },
       "required": [
@@ -390,6 +510,25 @@
       },
       "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
     },
+    "CommunityGalleryImageVersionList": {
+      "description": "The List Community Gallery Image versions operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImageVersion"
+          },
+          "description": "A list of community gallery image versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery image versions. Call ListNext() with this to fetch the next page of community gallery image versions."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "CommunityGalleryImageVersion": {
       "properties": {
         "properties": {
@@ -415,9 +554,81 @@
           "type": "string",
           "format": "date-time",
           "description": "The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/CommunityGalleryImageVersionStorageProfile"
         }
       },
       "description": "Describes the properties of a gallery image version."
+    },
+    "CommunityGalleryImageVersionStorageProfile": {
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/CommunityGalleryOSDiskImage"
+        },
+        "dataDiskImages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryDataDiskImage"
+          },
+          "description": "A list of data disk images."
+        }
+      },
+      "description": "This is the storage profile of a Gallery Image Version."
+    },
+    "CommunityGalleryOSDiskImage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommunityGalleryDiskImage"
+        }
+      ],
+      "description": "This is the OS disk image."
+    },
+    "CommunityGalleryDataDiskImage": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommunityGalleryDiskImage"
+        }
+      ],
+      "required": [
+        "lun"
+      ],
+      "description": "This is the data disk image."
+    },
+    "CommunityGalleryDiskImage": {
+      "properties": {
+        "sizeInGB": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "This property indicates the size of the VHD to be created."
+        },
+        "hostCaching": {
+          "type": "string",
+          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "HostCaching",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "This is the disk image base class."
     },
     "CloudError": {
       "x-ms-external": true,

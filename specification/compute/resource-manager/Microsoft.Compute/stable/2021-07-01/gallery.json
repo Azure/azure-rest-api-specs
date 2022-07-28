@@ -104,6 +104,9 @@
           },
           "Create or update a simple gallery with soft deletion enabled.": {
             "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryWithSoftDeletionEnabled.json"
+          },
+          "Create a community gallery.": {
+            "$ref": "./examples/gallery/CreateACommunityGallery.json"
           }
         }
       },
@@ -219,6 +222,9 @@
           },
           "Get a gallery with select permissions.": {
             "$ref": "./examples/gallery/GetAGalleryWithSelectPermissions.json"
+          },
+          "Get a community gallery.": {
+            "$ref": "./examples/gallery/GetACommunityGallery.json"
           }
         }
       },
@@ -1706,6 +1712,9 @@
           "Add sharing id to the sharing profile of a gallery.": {
             "$ref": "./examples/gallery/AddToSharingProfileInAGallery.json"
           },
+          "share a gallery to community.": {
+            "$ref": "./examples/gallery/EnableACommunityGallery.json"
+          },
           "reset sharing profile of a gallery.": {
             "$ref": "./examples/gallery/ResetSharingProfileInAGallery.json"
           }
@@ -1770,6 +1779,10 @@
         },
         "softDeletePolicy": {
           "$ref": "#/definitions/SoftDeletePolicy"
+        },
+        "sharingStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/SharingStatus"
         }
       },
       "description": "Describes the properties of a Shared Image Gallery."
@@ -1789,10 +1802,11 @@
       "properties": {
         "permissions": {
           "type": "string",
-          "description": "This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups**",
+          "description": "This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups** <br><br> **Community** ",
           "enum": [
             "Private",
-            "Groups"
+            "Groups",
+            "Community"
           ],
           "x-ms-enum": {
             "name": "GallerySharingPermissionTypes",
@@ -1806,6 +1820,12 @@
             "$ref": "#/definitions/SharingProfileGroup"
           },
           "description": "A list of sharing profile groups."
+        },
+        "communityGalleryInfo": {
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryInfo"
+          },
+          "description": "Information of community gallery if current gallery is shared to community."
         }
       }
     },
@@ -1814,7 +1834,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**",
+          "description": "This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants** ",
           "enum": [
             "Subscriptions",
             "AADTenants"
@@ -1833,6 +1853,40 @@
         }
       }
     },
+    "CommunityGalleryInfo": {
+      "description": "Information of community gallery if current gallery is shared to community",
+      "properties": {
+        "publisherUri": {
+          "type": "string",
+          "description": "The link to the publisher website. Visible to all users."
+        },
+        "publisherContact": {
+          "type": "string",
+          "description": "Community gallery publisher support email. The email address of the publisher. Visible to all users."
+        },
+        "eula": {
+          "type": "string",
+          "description": "Community gallery publisher eula."
+        },
+        "publicNamePrefix": {
+          "type": "string",
+          "description": "The prefix of the gallery name that will be displayed publicly. Visible to all users."
+        },
+        "communityGalleryEnabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Contains info about whether community gallery sharing is enabled."
+        },
+        "publicNames": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Community gallery public name list."
+        }
+      }
+    },
     "SoftDeletePolicy": {
       "type": "object",
       "properties": {
@@ -1842,6 +1896,53 @@
         }
       },
       "description": "Contains information about the soft deletion policy of the gallery."
+    },
+    "SharingStatus": {
+      "properties": {
+        "aggregatedState": {
+          "type": "string",
+          "$ref": "#/definitions/SharingState",
+          "description": "Aggregated sharing state of current gallery."
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionalSharingStatus"
+          },
+          "description": "Summary of all regional sharing status."
+        }
+      },
+      "description": "Sharing status of current gallery."
+    },
+    "SharingState": {
+      "readOnly": true,
+      "type": "string",
+      "title": "The sharing state of the gallery.",
+      "description": "The sharing state of the gallery, which only appears in the response.",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Failed",
+        "Unknown"
+      ]
+    },
+    "RegionalSharingStatus": {
+      "description": "Gallery regional sharing status",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Region name"
+        },
+        "state": {
+          "type": "string",
+          "$ref": "#/definitions/SharingState",
+          "description": "Gallery sharing state in current region"
+        },
+        "details": {
+          "type": "string",
+          "description": "Details of gallery regional sharing failure."
+        }
+      }
     },
     "GalleryApplication": {
       "properties": {
@@ -2412,12 +2513,41 @@
       "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact."
     },
     "OSDiskImageEncryption": {
+      "properties": {
+        "securityProfile": {
+          "type": "object",
+          "$ref": "#/definitions/OSDiskImageSecurityProfile",
+          "description": "This property specifies the security profile of an OS disk image."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/DiskImageEncryption"
         }
       ],
       "description": "Contains encryption settings for an OS disk image."
+    },
+    "OSDiskImageSecurityProfile": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "all types of security profile",
+          "enum": [
+            "EncryptedVMGuestStateOnlyWithPmk",
+            "EncryptedWithPmk",
+            "EncryptedWithCmk"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityProfileType",
+            "modelAsString": false
+          }
+        },
+        "secureVMDiskEncryptionSetId": {
+          "type": "string",
+          "description": "secure VM disk encryption set id"
+        }
+      },
+      "description": "Contains security profile for an OS disk image."
     },
     "DataDiskImageEncryption": {
       "properties": {
@@ -2863,7 +2993,8 @@
           "enum": [
             "Add",
             "Remove",
-            "Reset"
+            "Reset",
+            "EnableCommunity"
           ],
           "x-ms-enum": {
             "name": "SharingUpdateOperationTypes",
