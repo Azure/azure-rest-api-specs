@@ -7,7 +7,7 @@ This repository is the canonical source for REST API specifications for Microsof
 ## Getting started
 If you're a Microsoft employee looking for information about all of the repositories and steps for Azure SDK Libraries Releases, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). To get access to the wiki, you need to request access to the [Azure SDK Release Partners](https://aka.ms/azsdk/join/azuresdkpartners) security group. This is a MyAccess group and requests to join will need to be approved by your manager.
 
-External Contributors can read [Getting Started with Azure API Specifications](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/getting-started-with-azure-api-specifications.md).
+External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 
 
