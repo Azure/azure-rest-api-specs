@@ -1,0 +1,42 @@
+{
+  "title": "AnalysisIntent_List",
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkVerifierName": "testNetworkVerifier"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
+          "properties": {
+            "sourceResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+            "destinationResourceId": "internet",
+            "ipTrafficProperties": {
+              "sourceIps": [
+                "*"
+              ],
+              "destinationIps": [
+                "*"
+              ],
+              "sourcePorts": [
+                "*"
+              ],
+              "destinationPorts": [
+                "*"
+              ],
+              "protocols": "TCP"
+            }
+          },
+          "name": "testAnalysisIntent",
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
+          "description": "This is a test Analysis Intent",
+          "tags": {},
+          "location": "eastus2euap"
+        }
+      ]
+    }
+  }
+}
