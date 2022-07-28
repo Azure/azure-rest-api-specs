@@ -1189,6 +1189,47 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
+      "get": {
+        "tags": [
+          "SKU"
+        ],
+        "operationId": "Skus_List",
+        "description": "Gets information about skus in specified location for the given subscription id",
+        "parameters": [{
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/LocationParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "x-ms-examples": {
+        "SkusList": {
+          "$ref": "./examples/RedisEnterpriseSkusList.json"
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "The request succeeded, response body contains the requested details.",
+          "schema": {
+            "$ref": "#/definitions/RegionSkuDetails"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": null
+      }
+      }
     }
   },
   "definitions": {
@@ -1747,6 +1788,105 @@
         }
       }
     },
+    "RegionSkuDetails": {
+      "title": "Region Sku Details",
+      "description": "List of Region SKU Detail",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionSkuDetail"
+          },
+          "description": "List of SkuDetails",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LocationInfo": {
+      "type": "object",
+      "description": "Information about location (for example: features that it supports)",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location name"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "description": "List of capabilities",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuDetail": {
+      "type": "object",
+      "title": "Sku Detail",
+      "description": "Information about Sku",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
+          "enum": [
+            "Enterprise_E10",
+            "Enterprise_E20",
+            "Enterprise_E50",
+            "Enterprise_E100",
+            "EnterpriseFlash_F300",
+            "EnterpriseFlash_F700",
+            "EnterpriseFlash_F1500"
+          ],
+          "x-ms-enum": {
+            "name": "Name",
+            "modelAsString": true
+          }
+        },
+        "defaultMaxMemory": {
+          "type": "number",
+          "description": "The memory limit"
+        },
+        "defaultMaxFlash": {
+          "type": "number",
+          "description": "The memory limit in flash tier caches"
+        }
+      }
+    },
+    "Capability": {
+      "type": "object",
+      "title": "Capability",
+      "description": "Information about what features the location supports",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Feature name"
+        },
+        "value":{
+          "type": "boolean",
+          "description": "Indicates whether feature is supported or not"
+        }
+      }
+    },
+    "RegionSkuDetail": {
+      "title": "Region Sku Detail",
+      "description": "Details about the location requested and the available skus in the location",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type which has the SKU, such as Microsoft.Cache/redisEnterprise"
+        },
+        "locationInfo": {
+          "$ref": "#/definitions/LocationInfo",
+          "description": "Details about location and its capabilities"
+        },
+        "skuDetails": {
+          "$ref": "#/definitions/SkuDetail",
+          "description": "Details about available skus"
+        }
+      }
+    },
     "ForceUnlinkParameters": {
       "title": "Forcibly unlink another database from this database.",
       "type": "object",
@@ -1780,6 +1920,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the database.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location of the resource",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
