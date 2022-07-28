@@ -755,7 +755,32 @@
         ]
       }
     },
-        
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
+    }
   },
   "parameters": {
     "Endpoint": {

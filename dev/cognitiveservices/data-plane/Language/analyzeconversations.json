@@ -2128,9 +2128,6 @@
           "type": "string",
           "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
-        },
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
         }        
       },
       "allOf": [
@@ -2221,36 +2218,9 @@
         },                
         "confidenceScores": {
           "type": "object",
-          "$ref": "#/definitions/SentimentConfidenceScores"
+          "$ref": "common.json#/definitions/SentimentConfidenceScores"
         }
       }
-    },
-
-    "SentimentConfidenceScores": {
-      "type": "object",
-      "required": [
-        "positive",
-        "neutral",
-        "negative"
-      ],
-      "properties": {
-        "positive": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
-        },
-        "neutral": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
-        },
-        "negative": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
-        }
-      },
-      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
     },
     "AnalyzeConversationJobState": {
       "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
