@@ -9,7 +9,7 @@ go:
   namespace: machinelearningservices
 ```
 
-``` yaml $(go) && $(track2)
+```yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/machinelearning/armmachinelearning
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
