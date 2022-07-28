@@ -10,8 +10,7 @@ model ContainerRegistryChartPushedEventData is ContainerRegistryArtifactEventDat
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.")
 model ContainerRegistryChartDeletedEventData is ContainerRegistryArtifactEventData;
 
-@doc("The content of the event request message.")
-model ContainerRegistryEventData {
+model ContainerRegistryBaseEventData {
   @doc("The event ID.")
   id?: string;
 
@@ -23,6 +22,12 @@ model ContainerRegistryEventData {
 
   @doc("The location of the event.")
   location?: string;
+}
+
+@doc("The content of the event request message.")
+model ContainerRegistryEventData {
+
+  ...ContainerRegistryBaseEventData;
 
   @doc("The target of the event.")
   target?: ContainerRegistryEventTarget;
@@ -42,17 +47,7 @@ model ContainerRegistryEventData {
 
 @doc("The content of the event request message.")
 model ContainerRegistryArtifactEventData {
-  @doc("The event ID.")
-  id?: string;
-
-  @doc("The time at which the event occurred.")
-  timestamp?: zonedDateTime;
-
-  @doc("The action that encompasses the provided event.")
-  action?: string;
-
-  @doc("The location of the event.")
-  location?: string;
+  ...ContainerRegistryBaseEventData;
 
   @doc("The target of the event.")
   target?: ContainerRegistryArtifactEventTarget;
@@ -61,46 +56,42 @@ model ContainerRegistryArtifactEventData {
   connectedRegistry?: ContainerRegistryEventConnectedRegistry;
 }
 
-@doc("The target of the event.")
-model ContainerRegistryEventTarget {
-  @doc("The MIME type of the referenced object.")
+model ContainerRegistryBaseEventTarget<TmediaType, Tsize, Tdigest, Trepository, Ttag> {
+  @doc(TmediaType)
   mediaType?: string;
 
-  @doc("The number of bytes of the content. Same as Length field.")
+  @doc(Tsize)
   size?: int64;
 
-  @doc("The digest of the content, as defined by the Registry V2 HTTP API Specification.")
+  @doc(Tdigest)
   digest?: string;
 
-  @doc("The number of bytes of the content. Same as Size field.")
-  length?: int64;
-
-  @doc("The repository name.")
+  @doc(Trepository)
   repository?: string;
 
-  @doc("The direct URL to the content.")
-  url?: string;
-
-  @doc("The tag name.")
+  @doc(Ttag)
   tag?: string;
+}
+@doc("The target of the event.")
+model ContainerRegistryEventTarget extends ContainerRegistryBaseEventTarget<
+    "The MIME type of the referenced object.",
+    "The number of bytes of the content. Same as Length field.",
+    "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
+    "The repository name.",
+    "The tag name."
+    > {
+  @doc("The number of bytes of the content. Same as Size field.")
+  length?: int64;
 }
 
 @doc("The target of the event.")
-model ContainerRegistryArtifactEventTarget {
-  @doc("The MIME type of the artifact.")
-  mediaType?: string;
-
-  @doc("The size in bytes of the artifact.")
-  size?: int64;
-
-  @doc("The digest of the artifact.")
-  digest?: string;
-
-  @doc("The repository name of the artifact.")
-  repository?: string;
-
-  @doc("The tag of the artifact.")
-  tag?: string;
+model ContainerRegistryArtifactEventTarget extends ContainerRegistryBaseEventTarget<
+    "The MIME type of the artifact.",
+    "The size in bytes of the artifact.",
+    "The digest of the artifact.",
+    "The repository name of the artifact.",
+    "The tag of the artifact."
+    > {
 
   @doc("The name of the artifact.")
   name?: string;
