@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "resourceName": "contoso",
+    "api-version": "2022-04-04-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.OpenEnergyPlatform/energyServices/contoso/privateEndpointConnectionProxies/peexample01",
+            "name": "peexample01",
+            "type": "Microsoft.OpenEnergyPlatform/energyServices/privateEndpointConnectionProxies",
+            "remotePrivateEndpoint": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}",
+              "manualPrivateLinkServiceConnections": [
+                {
+                  "name": "{plsConnectionName}",
+                  "groupIds": [
+                    "EnergyService"
+                  ],
+                  "requestMessage": "Please approve my connection, thanks."
+                }
+              ],
+              "privateLinkServiceProxies": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}",
+                  "groupConnectivityInformation": [
+                    {
+                      "groupId": "EnergyService",
+                      "memberName": "oak"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

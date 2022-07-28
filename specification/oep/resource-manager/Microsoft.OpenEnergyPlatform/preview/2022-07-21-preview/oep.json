@@ -3,7 +3,7 @@
   "info": {
     "title": "Open Energy Platform Management Service APIs",
     "description": "Open Energy Platform Management Service APIs",
-    "version": "2021-06-01-preview"
+    "version": "2022-07-21-preview"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
@@ -24,7 +24,7 @@
             "required": true,
             "schema": {
               "description": "NameAvailabilityRequest object.",
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -32,7 +32,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -55,7 +55,7 @@
           "UserRPOepResource"
         ],
         "description": "Returns list of oep resources..",
-        "operationId": "OepResources_ListByResourceGroup",
+        "operationId": "EnergyServices_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -71,11 +71,14 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OepResourceList"
+              "$ref": "#/definitions/EnergyServiceList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -94,7 +97,7 @@
           "UserRPOepResource"
         ],
         "description": "Lists a collection of oep resources under the given Azure Subscription ID.",
-        "operationId": "OepResources_ListBySubscriptionId",
+        "operationId": "EnergyServices_ListBySubscription",
         "x-ms-examples": {
           "OepResource_ListBySubscriptionId": {
             "$ref": "./examples/OepResource_ListBySubscriptionId.json"
@@ -115,12 +118,15 @@
           "200": {
             "description": "Returned when the operation is successful.",
             "schema": {
-              "$ref": "#/definitions/OepResourceList"
+              "$ref": "#/definitions/EnergyServiceList"
             }
           },
           "default": {
             "x-nullable": false,
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -131,7 +137,7 @@
           "UserRPOepResource"
         ],
         "description": "Returns oep resource for a given name.",
-        "operationId": "OepResources_Get",
+        "operationId": "EnergyServices_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -154,11 +160,14 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OepResource"
+              "$ref": "#/definitions/EnergyService"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -172,7 +181,7 @@
           "UserRPOepResource"
         ],
         "description": "Method that gets called if subscribed for ResourceCreationBegin trigger.",
-        "operationId": "OepResources_Create",
+        "operationId": "EnergyServices_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -197,7 +206,7 @@
             "description": "Request body.",
             "schema": {
               "description": "Request body.",
-              "$ref": "#/definitions/OepResource"
+              "$ref": "#/definitions/EnergyService"
             }
           }
         ],
@@ -205,13 +214,13 @@
           "200": {
             "description": "The OEP resource created.",
             "schema": {
-              "$ref": "#/definitions/OepResource"
+              "$ref": "#/definitions/EnergyService"
             }
           },
           "201": {
             "description": "The OEP resource will be created asynchronously",
             "schema": {
-              "$ref": "#/definitions/OepResource"
+              "$ref": "#/definitions/EnergyService"
             }
           },
           "default": {
@@ -228,7 +237,7 @@
         }
       },
       "patch": {
-        "operationId": "OepResources_Update",
+        "operationId": "EnergyServices_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -250,7 +259,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/OepPatchResource"
+              "$ref": "#/definitions/EnergyResourceUpdate"
             }
           }
         ],
@@ -258,11 +267,14 @@
           "200": {
             "description": "Updates the oep resource.",
             "schema": {
-              "$ref": "#/definitions/OepResource"
+              "$ref": "#/definitions/EnergyService"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -273,7 +285,7 @@
       },
       "delete": {
         "description": "Deletes oep resource",
-        "operationId": "OepResources_Delete",
+        "operationId": "EnergyServices_Delete",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -304,12 +316,179 @@
             "description": "Returned when the operation returns no content."
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
           "OepResource_Delete": {
             "$ref": "./examples/OepResource_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/addPartition": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called if new partition is to be added in a resource.",
+        "operationId": "EnergyServices_AddPartition",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "add partition action payload",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The data partitions will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_AddPartition_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_AddPartition_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/removePartition": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called if new partition is to be removed from a resource.",
+        "operationId": "EnergyServices_RemovePartition",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "remove partition action payload",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The data partitions will be deleted asynchronously",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_RemovePartition_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_RemovePartition_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/listPartitions": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called when list of partitions is requested.",
+        "operationId": "EnergyServices_ListPartitions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_ListPartitions_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ListPartitions_MaximumSet_Gen.json"
           }
         }
       }
@@ -903,10 +1082,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -917,40 +1102,34 @@
       }
     }
   },
+  "parameters": {
+    "DataPartitionIdParameter": {
+      "name": "dataPartitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The data partition id.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The group ID of the private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyIdParameter": {
+      "name": "privateEndpointConnectionProxyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the private endpoint connection proxy object.",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "definitions": {
-    "CheckNameAvailabilityRequest": {
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "CheckNameAvailabilityResponse": {
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "reason": {
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OepResourceList": {
+    "EnergyServiceList": {
       "description": "The list of oep resources.",
       "type": "object",
       "properties": {
@@ -962,20 +1141,71 @@
           "description": "The list of oep resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OepResource"
+            "$ref": "#/definitions/EnergyService"
           }
         }
       }
     },
-    "Item": {
+    "DataPartitionsList": {
       "type": "object",
+      "description": "List of data partitions",
+      "properties": {
+        "dataPartitionNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPartitionNames"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataPartitionNames": {
+      "type": "object",
+      "description": "The list of Energy services resource's Data Partition Names.",
       "properties": {
         "name": {
           "type": "string"
         }
       }
     },
-    "OepProperties": {
+    "DataPartitionAddOrRemoveRequest": {
+      "description": "Defines the partition add/ delete action properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DataPartitionNames"
+        }
+      }
+    },
+    "DataPartitionProperties": {
+      "description": "Defines the properties of an individual data partition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the data partition",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Name of the data partition",
+          "type": "string"
+        }
+      }
+    },
+    "DataPartitionsListResult": {
+      "type": "object",
+      "description": "List of data partitions.",
+      "properties": {
+        "dataPartitionInfo": {
+          "type": "array",
+          "description": "List of data partitions along with their properties in a given OEP resource.",
+          "items": {
+            "$ref": "#/definitions/DataPartitionProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EnergyServiceProperties": {
       "type": "object",
       "properties": {
         "dnsName": {
@@ -1006,7 +1236,7 @@
         "dataPartitionNames": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Item"
+            "$ref": "#/definitions/DataPartitionNames"
           },
           "x-ms-identifiers": []
         },
@@ -1032,7 +1262,7 @@
         }
       }
     },
-    "OepResource": {
+    "EnergyService": {
       "required": [
         "location"
       ],
@@ -1044,7 +1274,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OepProperties"
+          "$ref": "#/definitions/EnergyServiceProperties"
         },
         "tags": {
           "description": "Resource tags.",
@@ -1059,7 +1289,7 @@
         }
       }
     },
-    "TrackedResourceUpdate": {
+    "EnergyResourceUpdate": {
       "description": "The resource model definition used for updating a tracked ARM resource.",
       "type": "object",
       "properties": {
@@ -1071,15 +1301,6 @@
           }
         }
       }
-    },
-    "OepPatchResource": {
-      "type": "object",
-      "description": "OepResource patch properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
     },
     "PrivateLinkResourceListResult": {
       "description": "The available private link resources for an Account",
@@ -1384,24 +1605,6 @@
         "name": "PrivateEndpointConnectionProxyProvisioningState",
         "modelAsString": true
       }
-    }
-  },
-  "parameters": {
-    "GroupIdParameter": {
-      "name": "groupId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The group ID of the private link resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointConnectionProxyIdParameter": {
-      "name": "privateEndpointConnectionProxyId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the private endpoint connection proxy object.",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

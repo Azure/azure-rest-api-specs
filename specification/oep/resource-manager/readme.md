@@ -27,7 +27,7 @@ These are the global settings for the oep.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-04-preview
+tag: package-2022-07-21-preview
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -48,6 +48,15 @@ input-file:
   - Microsoft.OpenEnergyPlatform/preview/2022-04-04-preview/oep.json
 ```
 
+### Tag: package-2022-07-21-preview
+
+These settings apply only when `--tag=package-2022-07-21-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07-21-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2022-07-21-preview/oep.json
+```
+
 ## Suppression
 ``` yaml
 directive:
@@ -59,6 +68,10 @@ directive:
     from: oep.json
     where: $.definitions.DataPartitionsList.properties
     reason: DataPartitionsList is a proxy resource
+  - suppress: BodyTopLevelProperties
+    from: oep.json
+    where: $.definitions.PrivateEndpointConnectionProxy.properties
+    reason: Internal NRP resource, all properties are top level properties
 ```    
 ---
 
