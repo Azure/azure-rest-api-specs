@@ -339,6 +339,13 @@ directive:
   - suppress: R4009
     reason: systemData will be in the next API version
     from: Microsoft.Synapse/stable/2020-12-01/library.json
+    suppress:
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
+  - from: Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+    where :
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/datawarehousequeries.delete.responses'
+
 ```
 
 ---
