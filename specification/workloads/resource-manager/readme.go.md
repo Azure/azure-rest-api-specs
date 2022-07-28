@@ -15,10 +15,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/workloads/armworkloads
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
-directive:
-- rename-model:
-    from: 'SAPVirtualInstanceError'
-    to: 'InstanceError'
 ```
 
 ### Go multi-api
