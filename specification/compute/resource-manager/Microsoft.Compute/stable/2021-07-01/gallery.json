@@ -2412,12 +2412,41 @@
       "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact."
     },
     "OSDiskImageEncryption": {
+      "properties": {
+        "securityProfile": {
+          "type": "object",
+          "$ref": "#/definitions/OSDiskImageSecurityProfile",
+          "description": "This property specifies the security profile of an OS disk image."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/DiskImageEncryption"
         }
       ],
       "description": "Contains encryption settings for an OS disk image."
+    },
+    "OSDiskImageSecurityProfile": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "all types of security profile",
+          "enum": [
+            "EncryptedVMGuestStateOnlyWithPmk",
+            "EncryptedWithPmk",
+            "EncryptedWithCmk"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityProfileType",
+            "modelAsString": false
+          }
+        },
+        "secureVMdiskEncryptionSetId": {
+          "type": "string",
+          "description": "secure VM disk encryption set id"
+        }
+      },
+      "description": "Contains security profile for an OS disk image."
     },
     "DataDiskImageEncryption": {
       "properties": {
