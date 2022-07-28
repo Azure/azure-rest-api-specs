@@ -37,6 +37,18 @@
 						"schema": {
 							"$ref": "#/definitions/ServiceConfiguration"
 						}
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				},
 				"x-ms-examples": {
@@ -85,6 +97,12 @@
 					},
 					"default": {
 						"description": "Updating defaultReward, rewardWaitTime and rewardAggregation when changing learning mode from Online to Apprentice mode and vice versa is not allowed. Make the mode change and then change the additional settings with an additional API call.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -123,6 +141,18 @@
 						"description": "Success",
 						"schema": {
 							"$ref": "#/definitions/PolicyContract"
+						}
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				},
@@ -172,6 +202,12 @@
 					},
 					"default": {
 						"description": "Invalid policy configuration.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -208,6 +244,18 @@
 						"description": "Success",
 						"schema": {
 							"$ref": "#/definitions/PolicyContract"
+						}
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				},
@@ -248,47 +296,40 @@
 					},
 					{
 						"in": "query",
-						"name": "interval",
-						"description": "\"Time interval for aggregation of events. Allowed intervals 5 minute, 1 hour, 6 hour, 12 hour and 1 day. For example, PT5M (5 mins). For information about the time format,\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
-						"required": true,
-						"type": "string",
-						"format": "date-span"
+						"name": "intervalInMinutes",
+						"description": "\"Time interval for aggregation of events in minutes. Allowed intervals: 5 minutes, 60 minutes, 360 minutes, 720 minutes and 1440 minutes. Defaults to 5 minutes.",
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"in": "query",
 						"name": "startTime",
 						"description": "Start of aggregation time interval.",
-						"required": true,
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"required": true
 					},
 					{
 						"in": "query",
 						"name": "endTime",
 						"description": "End of aggregation time interval.",
-						"required": true,
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"required": true
 					},
 					{
 						"in": "query",
 						"name": "window",
-						"description": "Rolling or Expanding time. Rolling compatible with 1 hour, 6 hour, 12 hour and 1 day time intervals. Expanding compatible with 5 minute time interval only. Defaults to Rolling.",
+						"description": "Rolling or Expanding time. Rolling compatible with 60 minutes, 360 minutes, 720 minutes and 1440 minutes intervals. Expanding compatible with 5 minute time interval only. Defaults to Expanding.",
 						"type": "string",
 						"enum": [
-							"Rolling",
-							"Expanding"
+							"Expanding",
+							"Rolling"
 						],
 						"x-ms-enum": {
 							"name": "Window",
 							"modelAsString": true
 						}
-					},
-					{
-						"in": "query",
-						"name": "filter",
-						"description": "An expression to filter result array.",
-						"type": "string"
 					}
 				],
 				"responses": {
@@ -300,6 +341,12 @@
 					},
 					"default": {
 						"description": "Offline Evaluation not found.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -339,7 +386,19 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
+					},
+					"default": {
+						"description": "Offline Evaluation not found.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				},
 				"x-ms-examples": {
@@ -347,81 +406,8 @@
 						"$ref": "./examples/Evaluations_Delete.json"
 					}
 				}
-			}
-		},
-		"/evaluations": {
-			"get": {
-				"tags": [
-					"Evaluations20220901Preview"
-				],
-				"summary": "List Offline Evaluations.",
-				"description": "List of all Offline Evaluations.",
-				"operationId": "Evaluations_List",
-				"consumes": [],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"description": "Client API version."
-					},
-					{
-						"in": "query",
-						"name": "filter",
-						"description": "An expression to filter the evaluations against evaluations metadata. Only evaluations where the expression evaluates to true are included in the response.",
-						"type": "string"
-					},
-					{
-						"in": "query",
-						"name": "orderby",
-						"description": "The ordering. Defaults to creation time in descending order.",
-						"type": "string",
-						"default": "creationTime desc"
-					},
-					{
-						"in": "query",
-						"name": "top",
-						"description": "The maximum number of resources to return from the collection. Defaults to maximum value of integer.",
-						"type": "integer",
-						"format": "int32",
-						"default": 2147483647
-					},
-					{
-						"in": "query",
-						"name": "skip",
-						"description": "An offset into the collection of the first resource to be returned. Defaults to 0.",
-						"type": "integer",
-						"format": "int32",
-						"default": 0
-					},
-					{
-						"in": "query",
-						"name": "maxpagesize",
-						"description": "The maximum number of resources to include in a single response. Defaults to 100.",
-						"type": "integer",
-						"format": "int32",
-						"default": 100
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/Evaluations"
-						}
-					}
-				},
-				"x-ms-examples": {
-					"Successful Evaluations_List request": {
-						"$ref": "./examples/Evaluations_List.json"
-					}
-				}
 			},
-			"post": {
+			"put": {
 				"tags": [
 					"Evaluations20220901Preview"
 				],
@@ -443,8 +429,16 @@
 						"description": "Client API version."
 					},
 					{
-						"name": "evaluation",
+						"in": "path",
+						"name": "evaluationId",
+						"description": "Id of the Offline Evaluation to create.",
+						"required": true,
+						"type": "string",
+						"maxLength": 256
+					},
+					{
 						"in": "body",
+						"name": "evaluation",
 						"description": "The Offline Evaluation job definition.",
 						"required": true,
 						"schema": {
@@ -453,20 +447,17 @@
 					}
 				],
 				"responses": {
-					"201": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/EvaluationDetails"
-						},
-						"headers": {
-							"Location": {
-								"description": "Location of the Offline Evaluation status and data.",
-								"type": "string"
-							}
-						}
+					"200": {
+						"description": "Success"
 					},
 					"default": {
 						"description": "Invalid contract.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -475,6 +466,81 @@
 				"x-ms-examples": {
 					"Successful Evaluations_Create request": {
 						"$ref": "./examples/Evaluations_Create.json"
+					}
+				}
+			}
+		},
+		"/evaluations": {
+			"get": {
+				"tags": [
+					"Evaluations20220901Preview"
+				],
+				"summary": "List Offline Evaluations.",
+				"description": "List of all Offline Evaluations.",
+				"operationId": "Evaluations_List",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"description": "Client API version."
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"description": "An expression to filter the evaluations against evaluation metadata. Only evaluations where the expression evaluates to true are included in the response.\r\nHere is an example, metadata=evaluationType eq 'Manual'.",
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "top",
+						"description": "The maximum number of resources to return from the collection. Defaults to maximum value of integer.",
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An offset into the collection of the first resource to be returned. Defaults to 0.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "maxpagesize",
+						"description": "The maximum number of resources to include in a single response. Defaults to 100.",
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/Evaluations"
+						}
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Successful Evaluations_List request": {
+						"$ref": "./examples/Evaluations_List.json"
 					}
 				}
 			}
@@ -521,10 +587,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid reward request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -568,10 +640,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid activate event request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -617,10 +695,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Learning Settings not found in evaluation.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -641,6 +725,9 @@
 				"summary": "Delete Feature Importance.",
 				"description": "Delete the Feature Importance associated with the Id.",
 				"operationId": "FeatureImportances_Delete",
+				"produces": [
+					"application/json"
+				],
 				"parameters": [
 					{
 						"name": "api-version",
@@ -660,7 +747,19 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				},
 				"x-ms-examples": {
@@ -705,6 +804,12 @@
 					},
 					"default": {
 						"description": "Feature importance not found.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -713,6 +818,68 @@
 				"x-ms-examples": {
 					"Successful FeatureImportances_Get request": {
 						"$ref": "./examples/FeatureImportances_Get.json"
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"FeatureImportances20220901Preview"
+				],
+				"summary": "Create Feature Importance.",
+				"description": "Submit a new Feature Importance job.",
+				"operationId": "FeatureImportances_Create",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"description": "Client API version."
+					},
+					{
+						"in": "path",
+						"name": "featureImportanceId",
+						"description": "Id of the Feature Importance to create.",
+						"required": true,
+						"type": "string",
+						"maxLength": 256
+					},
+					{
+						"in": "body",
+						"name": "featureImportance",
+						"description": "The Feature Importance job definition.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/FeatureImportanceContract"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"default": {
+						"description": "Invalid contract.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Successful FeatureImportances_Create request": {
+						"$ref": "./examples/FeatureImportances_Create.json"
 					}
 				}
 			}
@@ -738,18 +905,10 @@
 					},
 					{
 						"in": "query",
-						"name": "orderby",
-						"description": "The ordering. Defaults to creation time in descending order.",
-						"type": "string",
-						"default": "creationTime desc"
-					},
-					{
-						"in": "query",
 						"name": "top",
 						"description": "The maximum number of resources to return from the collection. Defaults to maximum value of integer.",
 						"type": "integer",
-						"format": "int32",
-						"default": 2147483647
+						"format": "int32"
 					},
 					{
 						"in": "query",
@@ -764,8 +923,7 @@
 						"name": "maxpagesize",
 						"description": "The maximum number of resources to include in a single response. Defaults to 100.",
 						"type": "integer",
-						"format": "int32",
-						"default": 100
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -774,67 +932,23 @@
 						"schema": {
 							"$ref": "#/definitions/FeatureImportances"
 						}
-					}
-				},
-				"x-ms-examples": {
-					"Successful FeatureImportances_List request": {
-						"$ref": "./examples/FeatureImportances_List.json"
-					}
-				}
-			},
-			"post": {
-				"tags": [
-					"FeatureImportances20220901Preview"
-				],
-				"summary": "Create Feature Importance.",
-				"description": "Submit a new Feature Importance job.",
-				"operationId": "FeatureImportances_Create",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"description": "Client API version."
-					},
-					{
-						"in": "body",
-						"name": "featureImportance",
-						"description": "The Feature Importance job definition.",
-						"schema": {
-							"$ref": "#/definitions/FeatureImportanceContract"
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/FeatureImportanceDetails"
-						},
-						"headers": {
-							"Location": {
-								"description": "Location of the Feature importance status and data.",
-								"type": "string"
-							}
-						}
 					},
 					"default": {
-						"description": "Invalid contract.",
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				},
 				"x-ms-examples": {
-					"Successful FeatureImportances_Create request": {
-						"$ref": "./examples/FeatureImportances_Create.json"
+					"Successful FeatureImportances_List request": {
+						"$ref": "./examples/FeatureImportances_List.json"
 					}
 				}
 			}
@@ -874,10 +988,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -925,10 +1045,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -962,7 +1088,19 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				},
 				"x-ms-examples": {
@@ -1002,6 +1140,12 @@
 					},
 					"default": {
 						"description": "Log properties not found.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1052,6 +1196,12 @@
 					},
 					"default": {
 						"description": "Requested resource does not exist on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1097,10 +1247,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Given model file is not signed or does not have a valid signature.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1134,10 +1290,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Model reset failed.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1176,6 +1338,18 @@
 						"description": "Success",
 						"schema": {
 							"$ref": "#/definitions/ModelProperties"
+						}
+					},
+					"default": {
+						"description": "A generic error has occurred on the server.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				},
@@ -1228,10 +1402,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid reward request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1274,10 +1454,16 @@
 				],
 				"responses": {
 					"204": {
-						"description": "Success"
+						"description": "No Content"
 					},
 					"default": {
 						"description": "Invalid activate event request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1324,13 +1510,19 @@
 				],
 				"responses": {
 					"201": {
-						"description": "Success",
+						"description": "Created",
 						"schema": {
 							"$ref": "#/definitions/MultiSlotRankResponse"
 						}
 					},
 					"default": {
 						"description": "Invalid request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1377,13 +1569,19 @@
 				],
 				"responses": {
 					"201": {
-						"description": "Success",
+						"description": "Created",
 						"schema": {
 							"$ref": "#/definitions/RankResponse"
 						}
 					},
 					"default": {
 						"description": "Invalid request.",
+						"headers": {
+							"x-ms-error-code": {
+								"type": "string",
+								"description": "Error code for specific error that occurred."
+							}
+						},
 						"schema": {
 							"$ref": "#/definitions/ErrorResponse"
 						}
@@ -1398,93 +1596,59 @@
 		}
 	},
 	"definitions": {
-		"ServiceConfiguration": {
-			"description": "The configuration of the service.",
-			"required": [
-				"rewardWaitTime",
-				"defaultReward",
-				"rewardAggregation",
-				"explorationPercentage",
-				"modelExportFrequency",
-				"logRetentionDays"
-			],
+		"BillingMeter": {
 			"type": "object",
 			"properties": {
-				"rewardWaitTime": {
-					"format": "duration",
-					"description": "The time span waited until a request is marked with the default reward\r\nand should be between 5 seconds and 2 days.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+				"name": {
 					"type": "string"
 				},
-				"defaultReward": {
-					"format": "float",
-					"description": "The reward given if a reward is not received within the specified wait time.",
-					"maximum": 1,
-					"minimum": -1,
+				"quantity": {
+					"format": "double",
 					"type": "number"
-				},
-				"rewardAggregation": {
-					"description": "The function used to process rewards, if multiple reward scores are received before rewardWaitTime is over.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"explorationPercentage": {
-					"format": "float",
-					"description": "The percentage of rank responses that will use exploration.",
-					"maximum": 1,
-					"minimum": 0,
-					"type": "number"
-				},
-				"modelExportFrequency": {
-					"format": "duration",
-					"description": "Personalizer will start using the most updated trained model for online ranks automatically every specified time period.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
-					"type": "string"
-				},
-				"logMirrorEnabled": {
-					"description": "Flag indicates whether log mirroring is enabled.",
-					"type": "boolean"
-				},
-				"logMirrorSasUri": {
-					"description": "Azure storage account container SAS URI for log mirroring.",
-					"type": "string"
-				},
-				"logRetentionDays": {
-					"format": "int32",
-					"description": "Number of days historical logs are to be maintained. -1 implies the logs will never be deleted.",
-					"maximum": 2147483647,
-					"minimum": -1,
-					"type": "integer"
-				},
-				"lastConfigurationEditDate": {
+				}
+			}
+		},
+		"Data": {
+			"type": "object",
+			"properties": {
+				"timeStamp": {
 					"format": "date-time",
-					"description": "Last time model training configuration was updated",
-					"type": "string"
-				},
-				"learningMode": {
-					"description": "Learning Modes for Personalizer",
-					"enum": [
-						"Online",
-						"Apprentice",
-						"LoggingOnly"
-					],
+					"description": "Timestamp of the aggregation.",
 					"type": "string",
-					"x-ms-enum": {
-						"name": "LearningMode",
-						"modelAsString": true
-					}
+					"readOnly": true
 				},
-				"isAutoOptimizationEnabled": {
-					"description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
-					"type": "boolean"
+				"expectedReward": {
+					"format": "float",
+					"description": "Average reward.",
+					"type": "number",
+					"readOnly": true
 				},
-				"autoOptimizationFrequency": {
-					"format": "duration",
-					"description": "Frequency of automatic optimization. Only relevant if IsAutoOptimizationEnabled is true.\r\nFor example, PT5M (5 mins). For information about the time format,\r\n\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
-					"type": "string"
-				},
-				"autoOptimizationStartDate": {
+				"confidenceInterval": {
+					"description": "Confidence interval.",
+					"type": "array",
+					"items": {
+						"format": "float",
+						"type": "number"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"DateRange": {
+			"description": "A date range starting at From and ending at To.",
+			"type": "object",
+			"properties": {
+				"from": {
 					"format": "date-time",
-					"description": "Date when the first automatic optimization evaluation must be performed. Only relevant if IsAutoOptimizationEnabled is true.",
-					"type": "string"
+					"description": "Start date for the range.",
+					"type": "string",
+					"readOnly": true
+				},
+				"to": {
+					"format": "date-time",
+					"description": "End date for the range.",
+					"type": "string",
+					"readOnly": true
 				}
 			}
 		},
@@ -1497,6 +1661,522 @@
 			"properties": {
 				"error": {
 					"$ref": "#/definitions/PersonalizerError"
+				}
+			}
+		},
+		"Evaluation": {
+			"description": "A counterfactual evaluation.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The ID of the evaluation.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the evaluation.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"startTime": {
+					"format": "date-time",
+					"description": "The start time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "The end time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"creationTime": {
+					"format": "date-time",
+					"description": "The creation time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"status": {
+					"description": "The status of the job processing the evaluation.",
+					"enum": [
+						"Succeeded",
+						"Running",
+						"Failed",
+						"NotSubmitted",
+						"Timeout",
+						"OptimalPolicyApplied",
+						"OnlinePolicyRetained",
+						"Canceled"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "EvaluationJobStatus",
+						"modelAsString": true
+					}
+				},
+				"evaluationType": {
+					"description": "The type of evaluation.",
+					"enum": [
+						"Manual",
+						"Auto"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "EvaluationType",
+						"modelAsString": true
+					}
+				},
+				"optimalPolicy": {
+					"description": "Optimal policy found by the evaluation job.",
+					"type": "string",
+					"readOnly": true
+				},
+				"content": {
+					"$ref": "#/definitions/EvaluationResult"
+				},
+				"description": {
+					"description": "Description of the evaluation job.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"EvaluationContract": {
+			"description": "A counterfactual evaluation.",
+			"required": [
+				"endTime",
+				"name",
+				"policies",
+				"startTime"
+			],
+			"type": "object",
+			"properties": {
+				"enablePolicyOptimization": {
+					"description": "True if the evaluation should explore for a more optimal learning settings.",
+					"type": "boolean"
+				},
+				"name": {
+					"description": "The name of the evaluation.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"startTime": {
+					"format": "date-time",
+					"description": "The start time of the evaluation.",
+					"type": "string"
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "The end time of the evaluation.",
+					"type": "string"
+				},
+				"policies": {
+					"description": "Additional learning settings to evaluate.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PolicyContract"
+					}
+				}
+			}
+		},
+		"EvaluationDetails": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The ID of the evaluation.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the evaluation.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"startTime": {
+					"format": "date-time",
+					"description": "The start time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "The end time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"creationTime": {
+					"format": "date-time",
+					"description": "The creation time of the evaluation.",
+					"type": "string",
+					"readOnly": true
+				},
+				"status": {
+					"description": "The status of the job processing the evaluation.",
+					"enum": [
+						"Succeeded",
+						"Running",
+						"Failed",
+						"NotSubmitted",
+						"Timeout",
+						"OptimalPolicyApplied",
+						"OnlinePolicyRetained",
+						"Canceled"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "EvaluationJobStatus",
+						"modelAsString": true
+					}
+				},
+				"evaluationType": {
+					"description": "Type of evaluation.",
+					"enum": [
+						"Manual",
+						"Auto"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "EvaluationType",
+						"modelAsString": true
+					}
+				}
+			}
+		},
+		"EvaluationResult": {
+			"type": "object",
+			"properties": {
+				"startTime": {
+					"format": "date-time",
+					"description": "Start time of the time series.",
+					"type": "string",
+					"readOnly": true
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "End time of the time series.",
+					"type": "string",
+					"readOnly": true
+				},
+				"intervalInMinutes": {
+					"format": "int32",
+					"description": "Aggregation window.",
+					"type": "integer",
+					"readOnly": true
+				},
+				"value": {
+					"description": "Time series of the learning settings results.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PolicyResult"
+					}
+				}
+			}
+		},
+		"Evaluations": {
+			"description": "Evaluations",
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EvaluationDetails"
+					}
+				},
+				"nextLink": {
+					"type": "string"
+				}
+			}
+		},
+		"FeatureImportance": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The ID of the feature importance.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the feature importance.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"startTime": {
+					"format": "date-time",
+					"description": "The start time of the feature importance.",
+					"type": "string",
+					"readOnly": true
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "The end time of the feature importance.",
+					"type": "string",
+					"readOnly": true
+				},
+				"creationTime": {
+					"format": "date-time",
+					"description": "The creation time of the feature importance.",
+					"type": "string",
+					"readOnly": true
+				},
+				"status": {
+					"description": "The status of the job processing the feature importance.",
+					"enum": [
+						"Succeeded",
+						"Running",
+						"Failed",
+						"NotSubmitted",
+						"Timeout",
+						"Canceled"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "FeatureImportanceStatus",
+						"modelAsString": true
+					}
+				},
+				"featureScores": {
+					"description": "Array of normalized feature scores sorted in descending order.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FeatureScore"
+					},
+					"readOnly": true
+				},
+				"description": {
+					"description": "Description of the feature importance job.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"FeatureImportanceContract": {
+			"required": [
+				"endTime",
+				"name",
+				"startTime"
+			],
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The name of the feature importance.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"startTime": {
+					"format": "date-time",
+					"description": "The start time of the feature importance.",
+					"type": "string"
+				},
+				"endTime": {
+					"format": "date-time",
+					"description": "The end time of the feature importance.",
+					"type": "string"
+				}
+			}
+		},
+		"FeatureImportanceDetails": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				},
+				"startTime": {
+					"format": "date-time",
+					"type": "string",
+					"readOnly": true
+				},
+				"endTime": {
+					"format": "date-time",
+					"type": "string",
+					"readOnly": true
+				},
+				"creationTime": {
+					"format": "date-time",
+					"type": "string",
+					"readOnly": true
+				},
+				"status": {
+					"description": "The status of the feature importance job.",
+					"enum": [
+						"Succeeded",
+						"Running",
+						"Failed",
+						"NotSubmitted",
+						"Timeout",
+						"Canceled"
+					],
+					"type": "string",
+					"readOnly": true,
+					"x-ms-enum": {
+						"name": "FeatureImportanceStatus",
+						"modelAsString": true
+					}
+				}
+			}
+		},
+		"FeatureImportances": {
+			"description": "FeatureImportances",
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FeatureImportanceDetails"
+					}
+				},
+				"nextLink": {
+					"type": "string"
+				}
+			}
+		},
+		"FeatureScore": {
+			"type": "object",
+			"properties": {
+				"namespace": {
+					"description": "Feature namespace",
+					"type": "string",
+					"readOnly": true
+				},
+				"featureName": {
+					"description": "Feature name",
+					"type": "string"
+				},
+				"score": {
+					"format": "float",
+					"description": "Feature score",
+					"type": "number",
+					"readOnly": true
+				}
+			}
+		},
+		"InternalError": {
+			"description": "An object containing more specific information than the parent object about the error.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "Detailed error code.",
+					"type": "string"
+				},
+				"innererror": {
+					"$ref": "#/definitions/InternalError"
+				}
+			}
+		},
+		"LogsProperties": {
+			"description": "Properties related to data used to train the model.",
+			"type": "object",
+			"properties": {
+				"dateRange": {
+					"$ref": "#/definitions/DateRange",
+					"readOnly": true
+				}
+			}
+		},
+		"ModelProperties": {
+			"description": "Properties related to the trained model.",
+			"type": "object",
+			"properties": {
+				"creationTime": {
+					"format": "date-time",
+					"description": "Creation time of the model.",
+					"type": "string",
+					"readOnly": true
+				},
+				"lastModifiedTime": {
+					"format": "date-time",
+					"description": "Last time the model was modified.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"MultiSlotRankRequest": {
+			"required": [
+				"actions",
+				"slots"
+			],
+			"type": "object",
+			"properties": {
+				"contextFeatures": {
+					"description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
+					"type": "array",
+					"items": {}
+				},
+				"actions": {
+					"description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RankableAction"
+					}
+				},
+				"slots": {
+					"description": "The set of slots the Personalizer service should select actions for.\r\nThe set should not contain more than 50 slots.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SlotRequest"
+					}
+				},
+				"eventId": {
+					"description": "Optionally pass an eventId that uniquely identifies this Rank event.\r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"deferActivation": {
+					"description": "Send false if it is certain the rewardActionId in rank results will be shown to the user, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the action specified in the rank results,\r\n(e.g. because the page is rendering later, or the Rank results may be overridden by code further downstream).\r\nYou must call the Activate Event API if the event output is shown to users, otherwise Rewards will be ignored.",
+					"default": false,
+					"type": "boolean"
+				}
+			}
+		},
+		"MultiSlotRankResponse": {
+			"type": "object",
+			"properties": {
+				"slots": {
+					"description": "Each slot has a corresponding rewardActionID which is the action ID recommended by Personalizer.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SlotResponse"
+					},
+					"readOnly": true
+				},
+				"eventId": {
+					"description": "The eventId for the round trip from request to response.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"MultiSlotRewardRequest": {
+			"description": "Reward given to a list of slots.",
+			"required": [
+				"reward"
+			],
+			"type": "object",
+			"properties": {
+				"reward": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SlotReward"
+					}
 				}
 			}
 		},
@@ -1537,6 +2217,7 @@
 						"InvalidModelImportSignature",
 						"InvalidModelImportFormat",
 						"FeatureImportanceAlreadyExists",
+						"EvaluationAlreadyExists",
 						"InvalidApiAccess",
 						"ModelFileAccessDenied",
 						"ProblemTypeIncompatibleWithAutoOptimization",
@@ -1670,6 +2351,10 @@
 								"description": "Feature importance with id {0} already exists."
 							},
 							{
+								"value": "EvaluationAlreadyExists",
+								"description": "Evaluation with id {0} already exists."
+							},
+							{
 								"value": "InvalidApiAccess",
 								"description": "Api is currently disabled for the instance."
 							},
@@ -1766,29 +2451,18 @@
 				},
 				"target": {
 					"description": "Error source element.",
-					"type": "string"
+					"type": "string",
+					"readOnly": true
 				},
 				"details": {
 					"description": "An array of details about specific errors that led to this reported error.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/PersonalizerError"
-					}
+					},
+					"readOnly": true
 				},
 				"innerError": {
-					"$ref": "#/definitions/InternalError"
-				}
-			}
-		},
-		"InternalError": {
-			"description": "An object containing more specific information than the parent object about the error.",
-			"type": "object",
-			"properties": {
-				"code": {
-					"description": "Detailed error code.",
-					"type": "string"
-				},
-				"innererror": {
 					"$ref": "#/definitions/InternalError"
 				}
 			}
@@ -1796,8 +2470,8 @@
 		"PolicyContract": {
 			"description": "Learning settings specifying how to train the model.",
 			"required": [
-				"name",
-				"arguments"
+				"arguments",
+				"name"
 			],
 			"type": "object",
 			"properties": {
@@ -1830,65 +2504,6 @@
 					"description": "Name of the learning settings.",
 					"maxLength": 256,
 					"type": "string"
-				}
-			}
-		},
-		"Summary": {
-			"type": "object",
-			"properties": {
-				"expectedReward": {
-					"format": "float",
-					"description": "Average reward.",
-					"type": "number",
-					"readOnly": true
-				},
-				"confidenceInterval": {
-					"description": "Confidence interval.",
-					"type": "array",
-					"items": {
-						"format": "float",
-						"type": "number"
-					},
-					"readOnly": true
-				}
-			}
-		},
-		"Data": {
-			"type": "object",
-			"properties": {
-				"timeStamp": {
-					"format": "date-time",
-					"description": "Timestamp of the aggregation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"expectedReward": {
-					"format": "float",
-					"description": "Average reward.",
-					"type": "number",
-					"readOnly": true
-				},
-				"confidenceInterval": {
-					"description": "Confidence interval.",
-					"type": "array",
-					"items": {
-						"format": "float",
-						"type": "number"
-					},
-					"readOnly": true
-				}
-			}
-		},
-		"TimeSeries": {
-			"type": "object",
-			"properties": {
-				"data": {
-					"description": "Time series.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Data"
-					},
-					"readOnly": true
 				}
 			}
 		},
@@ -1927,546 +2542,12 @@
 					}
 				},
 				"summary": {
-					"allOf": [
-						{
-							"$ref": "#/definitions/Summary"
-						}
-					],
+					"$ref": "#/definitions/Summary",
 					"readOnly": true
 				},
 				"timeseries": {
-					"allOf": [
-						{
-							"$ref": "#/definitions/TimeSeries"
-						}
-					],
+					"$ref": "#/definitions/TimeSeries",
 					"readOnly": true
-				}
-			}
-		},
-		"EvaluationResult": {
-			"type": "object",
-			"properties": {
-				"startTime": {
-					"format": "date-time",
-					"description": "Start time of the time series.",
-					"type": "string",
-					"readOnly": true
-				},
-				"endTime": {
-					"format": "date-time",
-					"description": "End time of the time series.",
-					"type": "string",
-					"readOnly": true
-				},
-				"interval": {
-					"format": "duration",
-					"description": "Aggregation window.",
-					"type": "string",
-					"readOnly": true
-				},
-				"value": {
-					"description": "Time series of the learning settings results.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/PolicyResult"
-					}
-				}
-			}
-		},
-		"Policy": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"description": "The name of the Learning Settings.",
-					"type": "string",
-					"readOnly": true
-				},
-				"arguments": {
-					"description": "The arguments of the Learning Settings.",
-					"type": "string",
-					"readOnly": true
-				},
-				"policySource": {
-					"description": "The source of the Learning Settings.",
-					"enum": [
-						"Online",
-						"Baseline",
-						"Random",
-						"Custom",
-						"OfflineExperimentation"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "PolicySource",
-						"modelAsString": true
-					}
-				}
-			}
-		},
-		"Evaluation": {
-			"description": "A counterfactual evaluation.",
-			"type": "object",
-			"properties": {
-				"id": {
-					"description": "The ID of the evaluation.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"description": "The name of the evaluation.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"startTime": {
-					"format": "date-time",
-					"description": "The start time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"endTime": {
-					"format": "date-time",
-					"description": "The end time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"creationTime": {
-					"format": "date-time",
-					"description": "The creation time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"status": {
-					"description": "The status of the job processing the evaluation.",
-					"enum": [
-						"completed",
-						"pending",
-						"failed",
-						"notSubmitted",
-						"timeout",
-						"optimalPolicyApplied",
-						"onlinePolicyRetained"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "EvaluationJobStatus",
-						"modelAsString": true
-					}
-				},
-				"evaluationType": {
-					"description": "The type of evaluation.",
-					"enum": [
-						"Manual",
-						"Auto"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "EvaluationType",
-						"modelAsString": true
-					}
-				},
-				"optimalPolicy": {
-					"description": "Optimal policy found by the evaluation job.",
-					"type": "string",
-					"readOnly": true
-				},
-				"content": {
-					"$ref": "#/definitions/EvaluationResult"
-				},
-				"description": {
-					"description": "Description of the evaluation job.",
-					"type": "string",
-					"readOnly": true
-				},
-				"policyResults": {
-					"description": "Need to maintain this variable to support older versions.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Policy"
-					}
-				}
-			}
-		},
-		"EvaluationDetails": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"description": "The ID of the evaluation.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"description": "The name of the evaluation.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"startTime": {
-					"format": "date-time",
-					"description": "The start time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"endTime": {
-					"format": "date-time",
-					"description": "The end time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"creationTime": {
-					"format": "date-time",
-					"description": "The creation time of the evaluation.",
-					"type": "string",
-					"readOnly": true
-				},
-				"status": {
-					"description": "The status of the job that was submitted to the job processor.",
-					"enum": [
-						"completed",
-						"pending",
-						"failed",
-						"notSubmitted",
-						"timeout",
-						"optimalPolicyApplied",
-						"onlinePolicyRetained"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "EvaluationJobStatus",
-						"modelAsString": true
-					}
-				},
-				"evaluationType": {
-					"description": "Type of evaluation.",
-					"enum": [
-						"Manual",
-						"Auto"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "EvaluationType",
-						"modelAsString": true
-					}
-				}
-			}
-		},
-		"Evaluations": {
-			"description": "Evaluations",
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/EvaluationDetails"
-					}
-				},
-				"nextLink": {
-					"type": "string"
-				}
-			}
-		},
-		"EvaluationContract": {
-			"description": "A counterfactual evaluation.",
-			"required": [
-				"name",
-				"startTime",
-				"endTime",
-				"policies"
-			],
-			"type": "object",
-			"properties": {
-				"enablePolicyOptimization": {
-					"description": "True if the evaluation should explore for a more optimal learning settings.",
-					"type": "boolean"
-				},
-				"name": {
-					"description": "The name of the evaluation.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"startTime": {
-					"format": "date-time",
-					"description": "The start time of the evaluation.",
-					"type": "string"
-				},
-				"endTime": {
-					"format": "date-time",
-					"description": "The end time of the evaluation.",
-					"type": "string"
-				},
-				"policies": {
-					"description": "Additional learning settings to evaluate.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/PolicyContract"
-					}
-				}
-			}
-		},
-		"RewardRequest": {
-			"description": "Reward given to a rank response.",
-			"required": [
-				"value"
-			],
-			"type": "object",
-			"properties": {
-				"value": {
-					"format": "float",
-					"description": "Reward to be assigned to an action. Value is a float calculated by your application, typically between 0 and 1, and must be between -1 and 1.",
-					"type": "number"
-				}
-			}
-		},
-		"LogsProperties": {
-			"description": "Properties related to data used to train the model.",
-			"type": "object",
-			"properties": {
-				"dateRange": {
-					"allOf": [
-						{
-							"$ref": "#/definitions/DateRange"
-						}
-					],
-					"readOnly": true
-				}
-			}
-		},
-		"FeatureScore": {
-			"type": "object",
-			"properties": {
-				"namespace": {
-					"type": "string",
-					"readOnly": true
-				},
-				"featureName": {
-					"type": "string"
-				},
-				"score": {
-					"format": "float",
-					"type": "number",
-					"readOnly": true
-				}
-			}
-		},
-		"FeatureImportance": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"startTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"endTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"creationTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"status": {
-					"enum": [
-						"completed",
-						"pending",
-						"failed",
-						"notSubmitted",
-						"timeout"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "JobStatus",
-						"modelAsString": true
-					}
-				},
-				"featureScores": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/FeatureScore"
-					},
-					"readOnly": true
-				},
-				"description": {
-					"description": "Description of the feature importance job.",
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"FeatureImportanceDetails": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				},
-				"startTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"endTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"creationTime": {
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"status": {
-					"enum": [
-						"completed",
-						"pending",
-						"failed",
-						"notSubmitted",
-						"timeout"
-					],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "JobStatus",
-						"modelAsString": true
-					}
-				}
-			}
-		},
-		"FeatureImportances": {
-			"description": "FeatureImportances",
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/FeatureImportanceDetails"
-					}
-				},
-				"nextLink": {
-					"type": "string"
-				}
-			}
-		},
-		"FeatureImportanceContract": {
-			"required": [
-				"endTime",
-				"name",
-				"startTime"
-			],
-			"type": "object",
-			"properties": {
-				"name": {
-					"description": "The name of the feature importance.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"startTime": {
-					"format": "date-time",
-					"description": "The start time of the feature importance.",
-					"type": "string"
-				},
-				"endTime": {
-					"format": "date-time",
-					"description": "The end time of the feature importance.",
-					"type": "string"
-				}
-			}
-		},
-		"DateRange": {
-			"description": "A date range starting at From and ending at To.",
-			"type": "object",
-			"properties": {
-				"from": {
-					"format": "date-time",
-					"description": "Start date for the range.",
-					"type": "string",
-					"readOnly": true
-				},
-				"to": {
-					"format": "date-time",
-					"description": "End date for the range.",
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"ModelProperties": {
-			"description": "Properties related to the trained model.",
-			"type": "object",
-			"properties": {
-				"creationTime": {
-					"format": "date-time",
-					"description": "Creation time of the model.",
-					"type": "string",
-					"readOnly": true
-				},
-				"lastModifiedTime": {
-					"format": "date-time",
-					"description": "Last time the model was modified.",
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"SlotReward": {
-			"required": [
-				"slotId",
-				"value"
-			],
-			"type": "object",
-			"properties": {
-				"slotId": {
-					"description": "Slot id for which we are sending the reward.",
-					"maxLength": 256,
-					"minLength": 1,
-					"type": "string"
-				},
-				"value": {
-					"format": "float",
-					"description": "Reward to be assigned to slotId. Value should be between -1 and 1 inclusive.",
-					"type": "number"
-				}
-			}
-		},
-		"MultiSlotRewardRequest": {
-			"description": "Reward given to a list of slots.",
-			"required": [
-				"reward"
-			],
-			"type": "object",
-			"properties": {
-				"reward": {
-					"description": "List of SlotRewards",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SlotReward"
-					}
 				}
 			}
 		},
@@ -2480,9 +2561,7 @@
 				"contextFeatures": {
 					"description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
 					"type": "array",
-					"items": {
-						"type": "object"
-					}
+					"items": {}
 				},
 				"actions": {
 					"description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
@@ -2507,138 +2586,6 @@
 					"description": "Send false if it is certain the rewardActionId in rank results will be shown to the user, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the action specified in the rank results,\r\n(e.g. because the page is rendering later, or the Rank results may be overridden by code further downstream).\r\nYou must call the Activate Event API if the event output is shown to users, otherwise Rewards will be ignored.",
 					"default": false,
 					"type": "boolean"
-				}
-			}
-		},
-		"RankableAction": {
-			"description": "An action with its associated features used for ranking.",
-			"required": [
-				"id",
-				"features"
-			],
-			"type": "object",
-			"properties": {
-				"id": {
-					"description": "Id of the action.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"features": {
-					"description": "List of dictionaries containing features.",
-					"type": "array",
-					"items": {
-						"type": "object"
-					}
-				}
-			}
-		},
-		"SlotRequest": {
-			"description": "A slot with it's associated features and list of excluded actions",
-			"required": [
-				"baselineAction",
-				"id"
-			],
-			"type": "object",
-			"properties": {
-				"id": {
-					"description": "Slot ID",
-					"type": "string"
-				},
-				"features": {
-					"description": "List of dictionaries containing slot features.",
-					"type": "array",
-					"items": {
-						"type": "object"
-					}
-				},
-				"excludedActions": {
-					"description": "List of excluded action Ids.",
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"baselineAction": {
-					"description": "The 'baseline action' ID for the slot.\r\nThe BaselineAction is the Id of the Action your application would use in that slot if Personalizer didn't exist.\r\nBaselineAction must be defined for every slot.\r\nBaselineAction should never be part of ExcludedActions.\r\nEach slot must have a unique BaselineAction which corresponds to an an action from the event's Actions list.",
-					"type": "string"
-				}
-			}
-		},
-		"MultiSlotRankRequest": {
-			"required": [
-				"actions",
-				"slots"
-			],
-			"type": "object",
-			"properties": {
-				"contextFeatures": {
-					"description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
-					"type": "array",
-					"items": {
-						"type": "object"
-					}
-				},
-				"actions": {
-					"description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RankableAction"
-					}
-				},
-				"slots": {
-					"description": "The set of slots the Personalizer service should select actions for.\r\nThe set should not contain more than 50 slots.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SlotRequest"
-					}
-				},
-				"eventId": {
-					"description": "Optionally pass an eventId that uniquely identifies this Rank event.\r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"deferActivation": {
-					"description": "Send false if it is certain the rewardActionId in rank results will be shown to the user, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the action specified in the rank results,\r\n(e.g. because the page is rendering later, or the Rank results may be overridden by code further downstream).\r\nYou must call the Activate Event API if the event output is shown to users, otherwise Rewards will be ignored.",
-					"default": false,
-					"type": "boolean"
-				}
-			}
-		},
-		"SlotResponse": {
-			"required": [
-				"id"
-			],
-			"type": "object",
-			"properties": {
-				"id": {
-					"description": "Id is the slot ID.",
-					"maxLength": 256,
-					"type": "string"
-				},
-				"rewardActionId": {
-					"description": "RewardActionID is the action ID recommended by Personalizer.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"MultiSlotRankResponse": {
-			"type": "object",
-			"properties": {
-				"slots": {
-					"description": "Each slot has a corresponding rewardActionID which is the action ID recommended by Personalizer.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SlotResponse"
-					},
-					"readOnly": true
-				},
-				"eventId": {
-					"description": "The eventId for the round trip from request to response.",
-					"maxLength": 256,
-					"type": "string",
-					"readOnly": true
 				}
 			}
 		},
@@ -2668,6 +2615,26 @@
 				}
 			}
 		},
+		"RankableAction": {
+			"description": "An action with its associated features used for ranking.",
+			"required": [
+				"features",
+				"id"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Id of the action.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"features": {
+					"description": "List of dictionaries containing features.",
+					"type": "array",
+					"items": {}
+				}
+			}
+		},
 		"RankedAction": {
 			"description": "A ranked action with its resulting probability.",
 			"type": "object",
@@ -2688,6 +2655,110 @@
 				}
 			}
 		},
+		"RewardRequest": {
+			"description": "Reward given to a rank response.",
+			"required": [
+				"value"
+			],
+			"type": "object",
+			"properties": {
+				"value": {
+					"format": "float",
+					"description": "Reward to be assigned to an action. Value is a float calculated by your application, typically between 0 and 1, and must be between -1 and 1.",
+					"type": "number"
+				}
+			}
+		},
+		"ServiceConfiguration": {
+			"description": "The configuration of the service.",
+			"required": [
+				"defaultReward",
+				"explorationPercentage",
+				"logRetentionDays",
+				"modelExportFrequency",
+				"rewardAggregation",
+				"rewardWaitTime"
+			],
+			"type": "object",
+			"properties": {
+				"rewardWaitTime": {
+					"format": "duration",
+					"description": "The time span waited until a request is marked with the default reward\r\nand should be between 5 seconds and 2 days.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+					"type": "string"
+				},
+				"defaultReward": {
+					"format": "float",
+					"description": "The reward given if a reward is not received within the specified wait time.",
+					"maximum": 1,
+					"minimum": -1,
+					"type": "number"
+				},
+				"rewardAggregation": {
+					"description": "The function used to process rewards, if multiple reward scores are received before rewardWaitTime is over.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"explorationPercentage": {
+					"format": "float",
+					"description": "The percentage of rank responses that will use exploration.",
+					"maximum": 1,
+					"minimum": 0,
+					"type": "number"
+				},
+				"modelExportFrequency": {
+					"format": "duration",
+					"description": "Personalizer will start using the most updated trained model for online ranks automatically every specified time period.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+					"type": "string"
+				},
+				"logMirrorEnabled": {
+					"description": "Flag indicates whether log mirroring is enabled.",
+					"type": "boolean"
+				},
+				"logMirrorSasUri": {
+					"description": "Azure storage account container SAS URI for log mirroring.",
+					"type": "string"
+				},
+				"logRetentionDays": {
+					"format": "int32",
+					"description": "Number of days historical logs are to be maintained. -1 implies the logs will never be deleted.",
+					"maximum": 2147483647,
+					"minimum": -1,
+					"type": "integer"
+				},
+				"lastConfigurationEditDate": {
+					"format": "date-time",
+					"description": "Last time model training configuration was updated",
+					"type": "string"
+				},
+				"learningMode": {
+					"description": "Learning Modes for Personalizer",
+					"enum": [
+						"Online",
+						"Apprentice",
+						"LoggingOnly"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "LearningMode",
+						"modelAsString": true
+					}
+				},
+				"isAutoOptimizationEnabled": {
+					"description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
+					"type": "boolean"
+				},
+				"autoOptimizationFrequency": {
+					"format": "duration",
+					"description": "Frequency of automatic optimization. Only relevant if IsAutoOptimizationEnabled is true.\r\nFor example, PT5M (5 mins). For information about the time format,\r\n\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+					"type": "string"
+				},
+				"autoOptimizationStartDate": {
+					"format": "date-time",
+					"description": "Date when the first automatic optimization evaluation must be performed. Only relevant if IsAutoOptimizationEnabled is true.",
+					"type": "string"
+				}
+			}
+		},
 		"ServiceStatus": {
 			"type": "object",
 			"properties": {
@@ -2701,12 +2772,131 @@
 					"type": "string"
 				}
 			}
+		},
+		"SlotRequest": {
+			"description": "A slot with it's associated features and list of excluded actions",
+			"required": [
+				"baselineAction",
+				"id"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Slot ID",
+					"type": "string"
+				},
+				"features": {
+					"description": "List of dictionaries containing slot features.",
+					"type": "array",
+					"items": {}
+				},
+				"excludedActions": {
+					"description": "List of excluded action Ids.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"baselineAction": {
+					"description": "The 'baseline action' ID for the slot.\r\nThe BaselineAction is the Id of the Action your application would use in that slot if Personalizer didn't exist.\r\nBaselineAction must be defined for every slot.\r\nBaselineAction should never be part of ExcludedActions.\r\nEach slot must have a unique BaselineAction which corresponds to an an action from the event's Actions list.",
+					"type": "string"
+				}
+			}
+		},
+		"SlotResponse": {
+			"required": [
+				"id"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Id is the slot ID.",
+					"maxLength": 256,
+					"type": "string"
+				},
+				"rewardActionId": {
+					"description": "RewardActionID is the action ID recommended by Personalizer.",
+					"maxLength": 256,
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"SlotReward": {
+			"required": [
+				"slotId",
+				"value"
+			],
+			"type": "object",
+			"properties": {
+				"slotId": {
+					"description": "Slot id for which we are sending the reward.",
+					"maxLength": 256,
+					"minLength": 1,
+					"type": "string"
+				},
+				"value": {
+					"format": "float",
+					"description": "Reward to be assigned to slotId. Value should be between -1 and 1 inclusive.",
+					"type": "number"
+				}
+			}
+		},
+		"Summary": {
+			"type": "object",
+			"properties": {
+				"expectedReward": {
+					"format": "float",
+					"description": "Average reward.",
+					"type": "number",
+					"readOnly": true
+				},
+				"confidenceInterval": {
+					"description": "Confidence interval.",
+					"type": "array",
+					"items": {
+						"format": "float",
+						"type": "number"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"TimeSeries": {
+			"type": "object",
+			"properties": {
+				"data": {
+					"description": "Time series.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Data"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"UsageResponse": {
+			"type": "object",
+			"properties": {
+				"apiType": {
+					"type": "string"
+				},
+				"serviceName": {
+					"type": "string"
+				},
+				"meters": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/BillingMeter"
+					}
+				}
+			}
 		}
 	},
 	"parameters": {
 		"Endpoint": {
-			"name": "Endpoint",
 			"in": "path",
+			"name": "Endpoint",
 			"description": "Supported Cognitive Services endpoint.",
 			"required": true,
 			"type": "string",
@@ -2716,16 +2906,13 @@
 	},
 	"securityDefinitions": {
 		"apim_key": {
+			"type": "apiKey",
 			"name": "Ocp-Apim-Subscription-Key",
-			"description": "The secret key for your Azure Cognitive Services subscription.",
-			"in": "header",
-			"type": "apiKey"
+			"in": "header"
 		}
 	},
 	"security": [
-		{
-			"apim_key": []
-		}
+		{}
 	],
 	"tags": [
 		{
