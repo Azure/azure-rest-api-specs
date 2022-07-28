@@ -24,7 +24,7 @@ To see additional help and options, run:
 
 These are the global settings for the Machine Learning Services API.
 
-``` yaml
+```yaml
 openapi-type: arm
 tag: package-preview-2022-06
 ```
@@ -44,7 +44,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-05-01'
+```yaml $(tag) == 'package-2022-05-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2022-05-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json
@@ -55,7 +55,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02-01-preview'
+```yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/mfe.json
@@ -66,7 +66,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-01-01-preview'
+```yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2022-01-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceFeatures.json
@@ -77,7 +77,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-01'
+```yaml $(tag) == 'package-2021-07-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-07-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
@@ -88,7 +88,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-04-01'
+```yaml $(tag) == 'package-2021-04-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-04-01/machineLearningServices.json
 ```
@@ -97,7 +97,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-01'
+```yaml $(tag) == 'package-2021-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-01-01/machineLearningServices.json
 ```
@@ -106,7 +106,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01-preview'
+```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
@@ -118,7 +118,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-01'
+```yaml $(tag) == 'package-2020-08-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-08-01/machineLearningServices.json
 ```
@@ -127,7 +127,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-06-01'
+```yaml $(tag) == 'package-2020-06-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
 ```
@@ -136,7 +136,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-05'
+```yaml $(tag) == 'package-preview-2020-05'
 input-file:
   - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
 ```
@@ -145,7 +145,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01'
+```yaml $(tag) == 'package-2020-04-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
 ```
@@ -154,7 +154,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-03-01'
+```yaml $(tag) == 'package-2020-03-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
 ```
@@ -163,7 +163,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-01'
+```yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
 ```
@@ -172,7 +172,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11-01'
+```yaml $(tag) == 'package-2019-11-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
 ```
@@ -181,7 +181,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-06-01'
+```yaml $(tag) == 'package-2019-06-01'
 input-file:
 - Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
 ```
@@ -190,7 +190,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-01'
+```yaml $(tag) == 'package-2019-05-01'
 input-file:
 - Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
 ```
@@ -199,7 +199,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-11-19` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11-19'
+```yaml $(tag) == 'package-2018-11-19'
 input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
@@ -208,7 +208,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-09-01-preview'
+```yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
@@ -218,7 +218,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-01-preview'
+```yaml $(tag) == 'package-2020-05-01-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
 ```
@@ -227,7 +227,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview'
+```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
 ```
@@ -236,7 +236,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-02-18-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-02-18-preview'
+```yaml $(tag) == 'package-2020-02-18-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json
 ```
@@ -245,7 +245,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-03-preview'
+```yaml $(tag) == 'package-2018-03-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json
 ```
@@ -259,7 +259,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
@@ -277,7 +277,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
