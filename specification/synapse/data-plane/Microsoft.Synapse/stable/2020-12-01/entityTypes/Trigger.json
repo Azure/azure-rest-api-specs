@@ -315,7 +315,7 @@
             },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
-              "$ref": "#/definitions/BlobEventTypes"
+              "$ref": "#/definitions/BlobEventTypeArray"
             },
             "scope": {
               "description": "The ARM resource ID of the Storage Account.",
@@ -332,7 +332,7 @@
         "typeProperties"
       ]
     },
-    "BlobEventTypes": {
+    "BlobEventTypeArray": {
       "type": "array",
       "items": {
         "type": "string",
@@ -446,7 +446,8 @@
               "description": "Triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
                 "$ref": "#/definitions/DependencyReference"
-              }
+              },
+              "x-ms-identifiers": []
             }
           },
           "required": [
@@ -669,7 +670,10 @@
               "items": {
                 "$ref": "../artifacts.json#/definitions/PipelineReference"
               },
-              "description": "Upstream Pipelines."
+              "description": "Upstream Pipelines.",
+              "x-ms-identifiers": [
+                "referenceName"
+              ]
             },
             "runDimension": {
               "description": "Run Dimension property that needs to be emitted by upstream pipelines.",
