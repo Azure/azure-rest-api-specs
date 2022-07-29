@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  vmName: test
+  adminPassword:
+    type: secureString
+
+prepareSteps:
+  - step: createDeps
+    armTemplate: ./templates/deps.json
+
+scenarios:
+  - scenario: VirtualMachineScenario
+    steps:
+      - step: createVM
+        operationId: VirtualMachines_CreateOrUpdate
+        parameters:
+          parameters:
+            location: $(location)
+            properties:
+              hardwareProfile:
+                vmSize: Standard_A2_v2
+              networkProfile:
+                networkInterfaces:
+                  - id: $(vmNicId)
+              storageProfile:
+                osDisk:
+                  createOption: fromImage
+                  caching: ReadWrite
+                imageReference:
+                  publisher: MicrosoftWindowsServer
+                  offer: WindowsServer
+                  sku: 2019-Datacenter
+                  version: latest
+              osProfile:
+                computerName: $(vmName)
+                adminUsername: azureuser
+                adminPassword: $(adminPassword)
+              additionalCapabilities: {}
