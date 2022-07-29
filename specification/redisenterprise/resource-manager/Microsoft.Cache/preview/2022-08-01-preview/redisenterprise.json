@@ -33,7 +33,6 @@
       }
     }
   },
-
   "paths": {
     "/providers/Microsoft.Cache/operations": {
       "get": {
@@ -1198,38 +1197,39 @@
         ],
         "operationId": "Skus_List",
         "description": "Gets information about skus in specified location for the given subscription id",
-        "parameters": [{
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/LocationParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "x-ms-examples": {
-        "SkusList": {
-          "$ref": "./examples/RedisEnterpriseSkusList.json"
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "The request succeeded, response body contains the requested details.",
-          "schema": {
-            "$ref": "#/definitions/RegionSkuDetails"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "SkusList": {
+            "$ref": "./examples/RedisEnterpriseSkusList.json"
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "responses": {
+          "200": {
+            "description": "The request succeeded, response body contains the requested details.",
+            "schema": {
+              "$ref": "#/definitions/RegionSkuDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": null
-      }
       }
     }
   },
@@ -1324,10 +1324,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
           "description": "Other properties of the cluster."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-           "readOnly" : true
         }
       },
       "required": [
@@ -1440,10 +1436,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseProperties",
           "description": "Other properties of the database."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-           "readOnly" : true
         }
       },
       "allOf": [
@@ -1871,7 +1863,7 @@
           "type": "string",
           "description": "Feature name"
         },
-        "value":{
+        "value": {
           "type": "boolean",
           "description": "Indicates whether feature is supported or not"
         }
