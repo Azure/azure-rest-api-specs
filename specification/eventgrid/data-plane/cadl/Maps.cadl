@@ -1,11 +1,11 @@
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
-model MapsGeofenceEnteredEventData {}
+model MapsGeofenceEnteredEventData is MapsGeofenceEventProperties;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
-model MapsGeofenceExitedEventData {}
+model MapsGeofenceExitedEventData is MapsGeofenceEventProperties;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
-model MapsGeofenceResultEventData {}
+model MapsGeofenceResultEventData is MapsGeofenceEventProperties;
 
 @doc("Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).")
 model MapsGeofenceEventProperties {
