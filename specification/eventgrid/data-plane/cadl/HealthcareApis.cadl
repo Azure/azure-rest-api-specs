@@ -1,5 +1,4 @@
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
-model HealthcareFhirResourceCreatedEventData {
+model HealthcareFhirResourceBaseEventData {
   @doc("Type of HL7 FHIR resource.")
   resourceType?: HealthcareFhirResourceType;
 
@@ -12,36 +11,15 @@ model HealthcareFhirResourceCreatedEventData {
   @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
   resourceVersionId?: int64;
 }
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
+model HealthcareFhirResourceCreatedEventData is HealthcareFhirResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.")
-model HealthcareFhirResourceUpdatedEventData {
-  @doc("Type of HL7 FHIR resource.")
-  resourceType?: HealthcareFhirResourceType;
-
-  @doc("Domain name of FHIR account for this resource.")
-  resourceFhirAccount?: string;
-
-  @doc("Id of HL7 FHIR resource.")
-  resourceFhirId?: string;
-
-  @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
-  resourceVersionId?: int64;
-}
+model HealthcareFhirResourceUpdatedEventData is HealthcareFhirResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.")
-model HealthcareFhirResourceDeletedEventData {
-  @doc("Type of HL7 FHIR resource.")
-  resourceType?: HealthcareFhirResourceType;
-
-  @doc("Domain name of FHIR account for this resource.")
-  resourceFhirAccount?: string;
-
-  @doc("Id of HL7 FHIR resource.")
-  resourceFhirId?: string;
-
-  @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
-  resourceVersionId?: int64;
-}
+model HealthcareFhirResourceDeletedEventData is HealthcareFhirResourceBaseEventData;
 
 @knownValues(HealthcareFhirResourceTypeKV)
 model HealthcareFhirResourceType is string {}
