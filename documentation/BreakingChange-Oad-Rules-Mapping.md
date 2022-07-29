@@ -53,4 +53,4 @@ This specification describes the relationship between [oad rules](https://github
 |[1046 - RemovedOptionalParameter](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1046.md) | breaking change | breaking change |
 
 1) existing version indicates that the change happens in an existing api-version.
-2) new version means the change is present in a new api-version.
+2) new version means the change happens in a new api-version.
