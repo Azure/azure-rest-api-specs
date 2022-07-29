@@ -71,6 +71,8 @@ input-file:
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
+- Microsoft.Monitor/preview/2021-06-03-preview/monitoringAccounts_API.json
+- Microsoft.Monitor/preview/2021-06-01-preview/operations_API.json
 ```
 
 ### Tag: package-2022-06-01-only
