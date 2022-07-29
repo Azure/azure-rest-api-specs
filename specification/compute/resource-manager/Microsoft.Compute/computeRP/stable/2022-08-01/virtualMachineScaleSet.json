@@ -231,6 +231,9 @@
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotRestorePolicy.json"
           },
+          "Create a scale set with the priority mix property enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPriorityMixPolicy.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -3618,6 +3621,24 @@
       },
       "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. <br><br> With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
     },
+    "PriorityMixPolicy": {
+      "type": "object",
+      "properties": {
+        "baseRegularPriorityCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Base number of regular priority VM's that will be created as this scale set scales out"
+        },
+        "regularPriorityPercentageAboveBase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of VM's with regular priority after the base regular priority count has been reached"
+        }
+      },
+      "description": "Specifies the desired targets for mixing Spot and Regular priority VMs in the same VMSS Flex instance"
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -4763,6 +4784,10 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "priorityMixPolicy": {
+          "$ref": "#/definitions/PriorityMixPolicy",
+          "description": "Specify the target splits for Spot and Regular priority VM's within a VMSS Flex instance"
         },
         "timeCreated": {
           "readOnly": true,
