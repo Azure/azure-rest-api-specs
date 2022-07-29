@@ -5,7 +5,7 @@ It describes the details of integrating DPG and ApiView in SDK Automation Pipeli
 Before go through this document, please go through [Service Onboard DPG with Swagger CI Pipeline](README.md) to be familiar with the user experience in service team side. Also, you need to be familiar with [SDK Automation Pipeline Framework](../sdkautomation/README.md).
 
 # WorkFlow
-![integrate-dpg-and-apiview](integrate-dpg-and-apiview.png)
+![integrate-dpg-and-apiview](imgs/integrate-dpg-and-apiview.png)
 
 __Description:__
 1. SDK Automation Pipeline is triggered in spec PR CI.

@@ -11,7 +11,7 @@ This Document describes the process of how to onboard DPG with SDK automation pi
 
 ## WorkFlow
 
-![workflow-for-service-team](workflow-service-team.png)
+![workflow-for-service-team](imgs/workflow-service-team.png)
 
 __Description:__
 1. Creates a swagger PR with [Guide to design and creation of Data Plane REST API and Client Libraries](https://aka.ms/azsdk/dpcodegen).
@@ -22,15 +22,22 @@ Otherwise, pipeline will try to find autorest configuration file in sdk reposito
 4. If any change needed, please update the autorest configuration in spec PR comment and regenerate the SDK by adding a comment `/azp run` to swagger PR.
 
 ## FAQ
+
+1. Where can I find the generated sdk and corresponding ApiView?
+
+   __Answer__: You can find them in spec PR comment. The generated SDK can be found in comment `Swagger Generation Artifacts`, and the corresponding ApiView Link can be found in comment `Generated ApiView`. Following screenshots comes from [example PR](https://github.com/Azure/azure-rest-api-specs/pull/20017)
+
+   ![](./imgs/example_generated_sdk.png)
+   ![](./imgs/example_generated_apiview.png)
  
-1. What should I do when I encounter error in generating SDK in swagger PR CI pipeline?
+3. What should I do when I encounter error in generating SDK in swagger PR CI pipeline?
    
    __Answer__: Please check the comment [Swagger Generation Artifacts] and the error message of failed pipeline. If you find the error messages ask you to fix autorest configuration comment or swagger, please fix it. If you cannot understand error message, please ask sdk owners for help with mail: azsdk-dpgsupport@microsoft.com.
 
-2. What should I do when it creates ApiView Failed?
+4. What should I do when it creates ApiView Failed?
 
    __Answer__: If the ApiView is created failed, you can find there is an error message: `Create ApiView failed. Please ensure your github account in Azure/Microsoft is public and re-trigger the CI. If issue still exists, please ask PR assignee for help`. If you want to get the ApiView, 
 please follow the action in error message, and make you github account's organization information public, then re-trigger the CI (You can re-trigger CI by comment `/azp run`, or close and reopen the PR). If it still cannot generate ApiView, please ask PR assignee for help. 
 
-3. Is there ApiView generated when there is no sdk generated in sdk automation pipeline?
+5. Is there ApiView generated when there is no sdk generated in sdk automation pipeline?
    __Answer__: No. Creating ApiView is based on the generated codes in sdk automation pipeline.
