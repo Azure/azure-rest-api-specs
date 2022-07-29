@@ -3628,7 +3628,7 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 100,
-          "description": "Base number of regular priority VM's that will be created as this scale set scales out"
+          "description": "Base number of regular priority VM's that will be created as this scale set scales out."
         },
         "regularPriorityPercentageAboveBase": {
           "type": "integer",
@@ -3637,7 +3637,7 @@
           "description": "Percentage of VM's with regular priority after the base regular priority count has been reached"
         }
       },
-      "description": "Specifies the desired targets for mixing Spot and Regular priority VMs in the same VMSS Flex instance"
+      "description": "Specifies the desired targets for mixing Spot and Regular priority VMs in the same VMSS Flex instance. This feature is only supported for Scale Sets with Flexible orchestration mode. <br><br>Minimum api-version: 2022-08-01"
     },
     "OrchestrationMode": {
       "type": "string",
@@ -4787,7 +4787,7 @@
         },
         "priorityMixPolicy": {
           "$ref": "#/definitions/PriorityMixPolicy",
-          "description": "Specify the target splits for Spot and Regular priority VM's within a VMSS Flex instance"
+          "description": "Specify the target splits for Spot and Regular priority VM's within a VMSS Flex instance. This feature is only supported for Scale Sets with Flexible orchestration mode. <br><br>Minimum api-version: 2022-08-01"
         },
         "timeCreated": {
           "readOnly": true,
