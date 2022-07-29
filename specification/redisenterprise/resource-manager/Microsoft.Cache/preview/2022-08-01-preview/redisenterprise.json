@@ -33,6 +33,7 @@
       }
     }
   },
+
   "paths": {
     "/providers/Microsoft.Cache/operations": {
       "get": {
@@ -1323,6 +1324,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
           "description": "Other properties of the cluster."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "required": [
@@ -1435,6 +1440,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseProperties",
           "description": "Other properties of the database."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "allOf": [
