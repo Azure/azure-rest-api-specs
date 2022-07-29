@@ -71,16 +71,6 @@ namespace: azure.mgmt.network.v2022_01_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_01_01
 ```
 
-### Tag: package-2021-08 and python
-
-These settings apply only when `--tag=package-2021-08 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2021-08'
-namespace: azure.mgmt.network.v2021_08_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_08_01
-```
-
 ### Tag: package-2021-02-preview-only and python
 
 These settings apply only when `--tag=package-2021-02-preview-only --python` is specified on the command line.
