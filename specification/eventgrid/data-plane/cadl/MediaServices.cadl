@@ -1,12 +1,4 @@
-enum MediaJobState {
-	Canceled,
-	Canceling,
-	Error,
-	Finished,
-	Processing,
-	Queued,
-	Scheduled,
-}
+import "@azure-tools/cadl-autorest"
 
 enum MediaJobState {
 	Canceled,
@@ -77,16 +69,6 @@ model MediaJobErrorDetail {
 	message?: string;
 }
 
-enum MediaJobState {
-	Canceled,
-	Canceling,
-	Error,
-	Finished,
-	Processing,
-	Queued,
-	Scheduled,
-}
-
 @doc("The event data for a Job output.")
 model MediaJobOutput {
 	@doc("The discriminator for derived types.")
@@ -117,16 +99,6 @@ model MediaJobOutputProgressEventData {
 	jobCorrelationData?: Map<string, string>;
 }
 
-enum MediaJobState {
-	Canceled,
-	Canceling,
-	Error,
-	Finished,
-	Processing,
-	Queued,
-	Scheduled,
-}
-
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.")
 model MediaJobOutputStateChangeEventData {
 	@doc("The previous state of the Job.")
@@ -138,16 +110,13 @@ model MediaJobOutputStateChangeEventData {
 }
 
 @doc("Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.")
-model MediaJobScheduledEventData {
-}
+model MediaJobScheduledEventData is MediaJobStateChangeEventData;
 
 @doc("Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.")
-model MediaJobProcessingEventData {
-}
+model MediaJobProcessingEventData is MediaJobStateChangeEventData;
 
 @doc("Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.")
-model MediaJobCancelingEventData {
-}
+model MediaJobCancelingEventData is MediaJobStateChangeEventData;
 
 @doc("Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.")
 model MediaJobFinishedEventData {
@@ -168,31 +137,30 @@ model MediaJobErroredEventData {
 }
 
 @doc("Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.")
-model MediaJobOutputCanceledEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceled")
+model MediaJobOutputCanceledEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.")
-model MediaJobOutputCancelingEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceling")
+model MediaJobOutputCancelingEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.")
-model MediaJobOutputErroredEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputErrored")
+model MediaJobOutputErroredEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.")
-model MediaJobOutputFinishedEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputFinished")
+model MediaJobOutputFinishedEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.")
-model MediaJobOutputProcessingEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputProcessing")
+model MediaJobOutputProcessingEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.")
-model MediaJobOutputScheduledEventData {
-}
+@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceled")
+model MediaJobOutputScheduledEventData is MediaJobOutputStateChangeEventData;
 
-@doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
-model MediaLiveEventEncoderConnectedEventData {
+model MediaLiveEventConnectionBaseData {
 	@doc("Gets the ingest URL provided by the live event.")
 	ingestUrl?: string;
 	@doc("Gets the stream Id.")
@@ -202,31 +170,21 @@ model MediaLiveEventEncoderConnectedEventData {
 	@doc("Gets the remote port.")
 	encoderPort?: string;
 }
+@doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
+model MediaLiveEventEncoderConnectedEventData is MediaLiveEventConnectionBaseData;
 
 @doc("Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.")
 model MediaLiveEventConnectionRejectedEventData {
-	@doc("Gets the ingest URL provided by the live event.")
-	ingestUrl?: string;
-	@doc("Gets the stream Id.")
-	streamId?: string;
-	@doc("Gets the remote IP.")
-	encoderIp?: string;
-	@doc("Gets the remote port.")
-	encoderPort?: string;
+	...MediaLiveEventConnectionBaseData;
+
 	@doc("Gets the result code.")
 	resultCode?: string;
 }
 
 @doc("Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.")
 model MediaLiveEventEncoderDisconnectedEventData {
-	@doc("Gets the ingest URL provided by the live event.")
-	ingestUrl?: string;
-	@doc("Gets the stream Id.")
-	streamId?: string;
-	@doc("Gets the remote IP.")
-	encoderIp?: string;
-	@doc("Gets the remote port.")
-	encoderPort?: string;
+	...MediaLiveEventConnectionBaseData;
+
 	@doc("Gets the result code.")
 	resultCode?: string;
 }
@@ -360,4 +318,3 @@ model MediaLiveEventChannelArchiveHeartbeatEventData {
 	@doc("Gets the latency result code.")
 	latencyResultCode: string;
 }
-
