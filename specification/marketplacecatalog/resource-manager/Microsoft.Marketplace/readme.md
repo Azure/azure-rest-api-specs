@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2022-07-31` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-31'
 input-file:
-  - Microsoft.Marketplace/stable/2022-07-31/marketplacecatalog.json
+  - stable/2022-07-31/marketplacecatalog.json
 ```
