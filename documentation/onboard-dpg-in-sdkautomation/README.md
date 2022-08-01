@@ -40,4 +40,5 @@ Otherwise, pipeline will try to find autorest configuration file in sdk reposito
 please follow the action in error message, and make you github account's organization information public, then re-trigger the CI (You can re-trigger CI by comment `/azp run`, or close and reopen the PR). If it still cannot generate ApiView, please ask PR assignee for help. 
 
 5. Is there ApiView generated when there is no sdk generated in sdk automation pipeline?
+
    __Answer__: No. Creating ApiView is based on the generated codes in sdk automation pipeline.
