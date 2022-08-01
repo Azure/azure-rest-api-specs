@@ -4530,11 +4530,26 @@
           "type": "string",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Inbound/Outbound to the managedCluster is allowed."
+              },
+              {
+                "value": "Disabled",
+                "description": "Inbound traffic to managedCluster is disabled, traffic from managedCluster is allowed."
+              },
+              {
+                "value": "SecuredByPerimeter",
+                "description": "Inbound/Outbound traffic is managed by Microsoft.Network/NetworkSecurityPerimeters."
+              }
+            ]
           },
           "title": "PublicNetworkAccess of the managedCluster",
           "description": "Allow or deny public network access for AKS"
