@@ -1,0 +1,86 @@
+{
+  "title": "AnalysisIntentPut",
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkVerifierName": "testNetworkVerifier",
+    "analysisIntentName": "testAnalysisIntent",
+    "parameters": {
+      "name": "testAnalysisIntent",
+      "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
+      "location": "eastus2euap",
+      "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
+      "properties": {
+        "description": "This is a test Analysis Intent",
+        "sourceResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+        "destinationResourceId": "internet",
+        "ipTrafficProperties": {
+          "sourceIps": [
+            "*"
+          ],
+          "destinationIps": [
+            "*"
+          ],
+          "sourcePorts": [
+            "*"
+          ],
+          "destinationPorts": [
+            "*"
+          ],
+          "protocols": "TCP"
+        }
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
+        "description": "This is a test Analysis Intent",
+        "properties": {
+          "type": null,
+          "ipTrafficProperties": {
+            "sourceIps": [
+              "*"
+            ],
+            "destinationIps": [
+              "*"
+            ],
+            "sourcePorts": [
+              "*"
+            ],
+            "destinationPorts": [
+              "*"
+            ],
+            "protocols": "TCP"
+          },
+          "provisioningState": "Succeeded",
+          "sourceResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+          "destinationResourceId": "internet"
+        },
+        "name": "testAnalysisIntent",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
+        "tags": {},
+        "location": "eastus2euap"
+      }
+    },
+    "404": {
+      "body": {
+        "code": "",
+        "message": "Parent Network Verifier Not Found",
+        "httpStatusCode": 404,
+        "activityId": ""
+      }
+    },
+    "409": {
+      "body": {
+        "code": "",
+        "message": "Analysis Intent Already Exists. Update Not Supported.",
+        "httpStatusCode": 409,
+        "activityId": ""
+      }
+    }
+  }
+}
