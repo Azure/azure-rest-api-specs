@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2022-02-01"
+    "version": "2022-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -78,11 +78,12 @@
   "definitions": {
     "ApplicationGatewayWafDynamicManifestResult": {
       "description": "Response for ApplicationGatewayWafDynamicManifest API service call.",
+      "type":"object",
       "properties": {
         "DefaultRuleSet": {
           "description": "The default ruleset.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefaultRuleSetPropertyFormat"          
+          "$ref": "#/definitions/DefaultRuleSetPropertyFormat"
         },
         "AvailableRuleSets": {
           "description": "The available rulesets.",
@@ -92,10 +93,11 @@
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
           }
         }
-      }   
+      }
     },
     "DefaultRuleSetPropertyFormat": {
       "description": "the default web application firewall rule set.",
+      "type":"object",
       "properties": {
         "ruleSetType": {
           "description": "The type of the web application firewall rule set.",
@@ -155,15 +157,14 @@
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
           },
           "description": "The rule groups of the web application firewall rule set.",
-          "x-ms-identifiers": [
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "ruleSetType",
         "ruleSetVersion",
         "ruleGroups"
-      ]      
+      ]
     },
     "ApplicationGatewayFirewallRuleGroup": {
       "description": "The rules of the web application firewall rule group.",
@@ -180,7 +181,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRule"
-          }          
+          }
         }
       }
     },
@@ -196,7 +197,7 @@
           "type": "string",
           "description": "The description of the web application firewall rule."
         }
-      }      
+      }
     }
   }
 }
