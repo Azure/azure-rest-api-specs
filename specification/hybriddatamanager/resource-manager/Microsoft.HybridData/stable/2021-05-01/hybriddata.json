@@ -168,23 +168,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\DataManagersTest\\DataManagers_CreateGET43": {
-            "$ref": "./examples/DataManagers_Create-GET-example-43.json"
-          },
-          "SessionRecords\\DataManagersTest\\DataManagers_CreateGET44": {
-            "$ref": "./examples/DataManagers_Create-GET-example-44.json"
-          },
-          "SessionRecords\\DataManagersTest\\DataManagers_DeleteGET44": {
-            "$ref": "./examples/DataManagers_Delete-GET-example-44.json"
-          },
           "SessionRecords\\DataManagersTest\\DataManagers_GetGET41": {
             "$ref": "./examples/DataManagers_Get-GET-example-41.json"
-          },
-          "SessionRecords\\DataManagersTest\\DataManagers_UpdateGET41": {
-            "$ref": "./examples/DataManagers_Update-GET-example-41.json"
-          },
-          "SessionRecords\\DataManagersTest\\DataManagers_UpdateGET42": {
-            "$ref": "./examples/DataManagers_Update-GET-example-42.json"
           }
         }
       },
@@ -405,6 +390,13 @@
         ],
         "parameters": [
           {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service that is being queried.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -412,13 +404,6 @@
           },
           {
             "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "name": "dataServiceName",
-            "in": "path",
-            "description": "The name of the data service that is being queried.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -472,6 +457,13 @@
         ],
         "parameters": [
           {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -479,13 +471,6 @@
           },
           {
             "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "name": "dataServiceName",
-            "in": "path",
-            "description": "The data service type of interest.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -532,15 +517,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service name of the job definition",
@@ -553,6 +529,15 @@
             "description": "The job definition name that is being queried.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -592,12 +577,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
@@ -622,6 +601,15 @@
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -659,15 +647,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -680,6 +659,15 @@
             "description": "The job definition name to be deleted.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -769,15 +757,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The name of the data service of the job definition.",
@@ -790,6 +769,15 @@
             "description": "The name of the job definition for which jobs are needed.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -842,15 +830,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The name of the data service of the job definition.",
@@ -870,6 +849,15 @@
             "description": "The job id of the job queried.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -891,14 +879,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_CancelGET112": {
-            "$ref": "./examples/Jobs_Cancel-GET-example-112.json"
-          },
           "SessionRecords\\JobsTest\\Jobs_GetGET111": {
             "$ref": "./examples/Jobs_Get-GET-example-111.json"
-          },
-          "SessionRecords\\JobsTest\\Jobs_ResumeGET112": {
-            "$ref": "./examples/Jobs_Resume-GET-example-112.json"
           }
         }
       }
@@ -917,15 +899,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -946,6 +919,15 @@
             "description": "The job id of the job queried.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -982,15 +964,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The name of the data service of the job definition.",
@@ -1010,6 +983,15 @@
             "description": "The job id of the job queried.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1099,15 +1081,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -1129,6 +1102,15 @@
             "schema": {
               "$ref": "#/definitions/RunParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1218,6 +1200,13 @@
         ],
         "parameters": [
           {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1225,13 +1214,6 @@
           },
           {
             "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "name": "dataServiceName",
-            "in": "path",
-            "description": "The name of the data service of interest.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1331,6 +1313,13 @@
         ],
         "parameters": [
           {
+            "name": "dataStoreName",
+            "in": "path",
+            "description": "The data store/repository name queried.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1338,13 +1327,6 @@
           },
           {
             "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "name": "dataStoreName",
-            "in": "path",
-            "description": "The data store/repository name queried.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1399,15 +1381,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataStoreName",
             "in": "path",
             "description": "The data store/repository name to be created or updated.",
@@ -1422,6 +1395,15 @@
             "schema": {
               "$ref": "#/definitions/DataStore"
             }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1462,6 +1444,13 @@
         ],
         "parameters": [
           {
+            "name": "dataStoreName",
+            "in": "path",
+            "description": "The data store/repository name to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1469,13 +1458,6 @@
           },
           {
             "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "name": "dataStoreName",
-            "in": "path",
-            "description": "The data store/repository name to be deleted.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1885,7 +1867,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AvailableProviderOperation"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "nextLink": {
           "description": "Link for the next set of operations.",
@@ -1950,7 +1933,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataManager"
-          }
+          },
+          "x-ms-identifiers": ["etag"]
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
@@ -2003,7 +1987,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataService"
-          }
+          },
+          "x-ms-identifiers": ["state"]
         },
         "nextLink": {
           "description": "Link for the next set of data services.",
@@ -2085,7 +2070,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStore"
-          }
+          },
+          "x-ms-identifiers": ["repositoryId"]
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
@@ -2131,7 +2117,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": ["keyIdentifier"]
         }
       }
     },
@@ -2163,7 +2150,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStoreType"
-          }
+          },
+          "x-ms-identifiers": ["repositoryType"]
         },
         "nextLink": {
           "description": "Link for the next set of data store types.",
@@ -2389,7 +2377,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobDefinition"
-          }
+          },
+          "x-ms-identifiers": ["dataSourceId"]
         },
         "nextLink": {
           "description": "Link for the next set of job definitions.",
@@ -2419,7 +2408,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schedule"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "state": {
           "description": "State of the job definition.",
@@ -2522,7 +2512,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": ["keyIdentifier"]
         }
       }
     },
@@ -2535,7 +2526,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobStages"
-          }
+          },
+          "x-ms-identifiers": ["stageName"]
         },
         "jobDefinition": {
           "$ref": "#/definitions/JobDefinition",
@@ -2546,7 +2538,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
-          }
+          },
+          "x-ms-identifiers": ["errorCode"]
         },
         "itemDetailsLink": {
           "description": "Item Details Link to download files or see details",
@@ -2600,7 +2593,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Job"
-          }
+          },
+          "x-ms-identifiers": ["status"]
         },
         "nextLink": {
           "description": "Link for the next set of jobs.",
@@ -2839,7 +2833,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
-          }
+          },
+          "x-ms-identifiers": ["errorCode"]
         }
       }
     },
@@ -2895,7 +2890,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublicKey"
-          }
+          },
+          "x-ms-identifiers": ["dataServiceLevel1Key"]
         },
         "nextLink": {
           "description": "Link for the next set of public keys.",
@@ -2991,7 +2987,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": ["keyIdentifier"]
         }
       }
     },
