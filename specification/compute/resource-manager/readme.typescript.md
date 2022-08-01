@@ -10,6 +10,9 @@ typescript:
   azure-arm: true
   generate-metadata: true
 
+modelerfour:
+  treat-type-object-as-anything: true
+
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: ComputeRP/virtualMachineScaleSet.json
