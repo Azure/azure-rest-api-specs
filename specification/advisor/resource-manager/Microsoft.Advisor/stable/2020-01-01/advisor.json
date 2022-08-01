@@ -781,6 +781,52 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/predict": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "summary": "Predicts a recommendation.",
+        "operationId": "Predict",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "predictionRequest",
+            "in": "body",
+            "description": "Parameters for predict recommendation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained prediction.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Predict": {
+            "$ref": "./examples/Predict.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1356,6 +1402,112 @@
           "items": {
             "$ref": "#/definitions/SuppressionContract"
           }
+        }
+      }
+    },
+    "PredictionRequest": {
+      "description": "Parameters for predict recommendation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PredictionRequestProperties",
+          "description": "Request properties for prediction recommendation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PredictionRequestProperties": {
+      "description": "Properties given for the predictor.",
+      "type": "object",
+      "properties": {
+        "predictionType": {
+          "description": "Type of the prediction.",
+          "enum": [
+            "PredictiveRightsizing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "predictionType",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties are arguments specific for each prediction type.",
+          "type": "object"
+        }
+      }
+    },
+    "PredictionResponse": {
+      "description": "Response used by predictions.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PredictionResponseProperties",
+          "description": "The properties of the prediction.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PredictionResponseProperties": {
+      "description": "Properties of the prediction",
+      "type": "object",
+      "properties": {
+        "extendedProperties": {
+          "description": "Extended properties",
+          "type": "object"
+        },
+        "predictionType": {
+          "description": "Type of the prediction.",
+          "enum": [
+            "PredictiveRightsizing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "predictionType",
+            "modelAsString": true
+          }
+        },
+        "category": {
+          "description": "The category of the recommendation.",
+          "enum": [
+            "HighAvailability",
+            "Security",
+            "Performance",
+            "Cost",
+            "OperationalExcellence"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "impact": {
+          "description": "The business impact of the recommendation.",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "impact",
+            "modelAsString": true
+          }
+        },
+        "impactedField": {
+          "description": "The resource type identified by Advisor.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation.",
+          "type": "string"
+        },
+        "shortDescription": {
+          "$ref": "#/definitions/ShortDescription",
+          "description": "A summary of the recommendation."
         }
       }
     }
