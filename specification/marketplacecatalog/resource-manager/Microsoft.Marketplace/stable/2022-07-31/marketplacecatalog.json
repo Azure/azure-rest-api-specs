@@ -223,6 +223,9 @@
         "Plans": {
           "type": "array",
           "x-nullable": true,
+          "x-ms-identifiers": [
+            "Id"
+          ],
           "items": {
             "$ref": "#/definitions/FuturePlan"
           }
@@ -310,6 +313,9 @@
         "terms": {
           "type": "array",
           "description": "List of applicable terms",
+          "x-ms-identifiers": [
+            "termId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Term"
@@ -361,6 +367,9 @@
         "Remediations": {
           "type": "array",
           "description": "Remediation actions for acquiring availability if RemediationRequired is true",
+          "x-ms-identifiers": [
+            "RemediationId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Remediation"
@@ -436,6 +445,9 @@
         "includedQuantityProperties": {
           "type": "array",
           "description": "Included quantity properties",
+          "x-ms-identifiers": [
+            "TermId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IncludedQuantityProperty"
@@ -521,6 +533,7 @@
         "termDescriptionParameters": {
           "type": "array",
           "description": "Term description parameters",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/TermDescriptionParameter"
@@ -591,12 +604,12 @@
       "properties": {
         "parameter": {
           "type": "string",
-          "description": "Parameter",
+          "description": "Term description parameter",
           "x-nullable": true
         },
         "value": {
           "type": "string",
-          "description": "Value",
+          "description": "Term description parameter value",
           "x-nullable": true
         }
       }
@@ -623,16 +636,16 @@
         },
         "title": {
           "type": "string",
-          "description": "Title",
+          "description": "Billing plan title",
           "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "Description",
+          "description": "Billing plan description",
           "x-nullable": true
         },
         "price": {
-          "description": "Price",
+          "description": "Billing plan price",
           "x-nullable": true,
           "allOf": [
             {
@@ -749,6 +762,9 @@
         "terms": {
           "type": "array",
           "description": "List of applicable terms",
+          "x-ms-identifiers": [
+            "termId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Term"
@@ -796,6 +812,9 @@
         "Remediations": {
           "type": "array",
           "description": "Remediation actions for acquiring availability if RemediationRequired is true",
+          "x-ms-identifiers": [
+            "RemediationId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Remediation"
@@ -930,7 +949,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Language"
+          "description": "Curated catalog item language"
         },
         "displayName": {
           "type": "string",
@@ -994,7 +1013,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "Summary",
+          "description": "Curated catalog item summary",
           "x-nullable": true
         },
         "longSummary": {
@@ -1004,7 +1023,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Description",
+          "description": "Curated catalog item description",
           "x-nullable": true
         },
         "offerType": {
@@ -1207,6 +1226,7 @@
         "competencies": {
           "type": "array",
           "description": "Competencies that apply to the offer",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Competency"
@@ -1229,6 +1249,7 @@
         "marketPricingDetails": {
           "type": "array",
           "description": "The pricing details of each market to the item",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MarketPricingDetailsItem"
@@ -1278,6 +1299,7 @@
         "filters": {
           "type": "array",
           "description": "List of filters for the item",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Filter"
@@ -1297,6 +1319,9 @@
         "artifacts": {
           "type": "array",
           "description": "List of artifacts",
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Artifact"
@@ -1322,6 +1347,7 @@
         "images": {
           "type": "array",
           "description": "List of Images",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageGroup"
@@ -1330,6 +1356,7 @@
         "videos": {
           "type": "array",
           "description": "List of product videos",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ProductVideo"
@@ -2031,6 +2058,9 @@
           "type": "array",
           "description": "Plan prices",
           "x-nullable": true,
+          "x-ms-identifiers": [
+            "planId"
+          ],
           "items": {
             "$ref": "#/definitions/PlanPrice"
           }
@@ -2268,7 +2298,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description",
+          "description": "Test drive description",
           "x-nullable": true
         },
         "userManual": {
@@ -2542,6 +2572,9 @@
         "artifacts": {
           "type": "array",
           "description": "Files related to the marketplace item",
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Artifact"
@@ -2679,6 +2712,7 @@
         "billingComponents": {
           "type": "array",
           "description": "Billing components",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/BillingComponent"
@@ -2687,6 +2721,7 @@
         "purchaseDurationDiscounts": {
           "type": "array",
           "description": "List of purchase duration discounts",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/PurchaseDurationDiscount"
@@ -2695,6 +2730,9 @@
         "upns": {
           "type": "array",
           "description": "List of user principal names(UPNs)",
+          "x-ms-identifiers": [
+            "TermId"
+          ],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/TermUpn"
@@ -3574,6 +3612,7 @@
         "competencies": {
           "type": "array",
           "description": "Competencies that apply to the offer",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Competency"
@@ -3596,6 +3635,7 @@
         "marketPricingDetails": {
           "type": "array",
           "description": "The pricing details of each market to the item",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MarketPricingDetailsItem"
@@ -3645,6 +3685,7 @@
         "filters": {
           "type": "array",
           "description": "List of filters for the item",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Filter"
@@ -3664,6 +3705,7 @@
         "artifacts": {
           "type": "array",
           "description": "List of artifacts",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Artifact"
@@ -3689,6 +3731,7 @@
         "images": {
           "type": "array",
           "description": "List of Images",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageGroup"
@@ -3697,6 +3740,7 @@
         "videos": {
           "type": "array",
           "description": "List of product videos",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ProductVideo"
@@ -4110,6 +4154,7 @@
       "properties": {
         "CurationCategoryIds": {
           "type": "array",
+          "x-ms-identifiers": [],
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/SearchSingleFacetResponse"
@@ -4937,6 +4982,9 @@
         "SaaSAddIns": {
           "type": "array",
           "x-nullable": true,
+          "x-ms-identifiers": [
+            "AssetId"
+          ],
           "items": {
             "$ref": "#/definitions/SaaSAddIn"
           }
@@ -5013,6 +5061,9 @@
         "planRestrictions": {
           "type": "array",
           "x-nullable": true,
+          "x-ms-identifiers": [
+            "legacyPlanId"
+          ],
           "items": {
             "$ref": "#/definitions/PlanRestrictions"
           }
