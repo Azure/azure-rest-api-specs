@@ -303,9 +303,6 @@
         "x-ms-examples": {
           "Successful Import Project": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportProject.json"
-          },
-          "Successful Import Summarization Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportSummarizationProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -955,7 +952,7 @@
           "200": {
             "description": "List of all evaluation results.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummaryBase"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummary"
             }
           },
           "default": {
@@ -968,9 +965,6 @@
         "x-ms-examples": {
           "Successful Get Model Evaluation Summary": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json"
-          },
-          "Successful Get Summarization Model Evaluation Summary": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSummarizationModelEvaluationSummary.json"
           }
         }
       }
@@ -1730,15 +1724,13 @@
         "intentsEvaluation": {
           "description": "Contains the data related to intents evaluation.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringIntentsEvaluationSummary"
+        },
+        "evaluationOptions": {
+          "description": "The options that were used while running the evaluation.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
         }
       },
-      "x-ms-client-name": "EvaluationSummary",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummaryBase"
-        }
-      ],
-      "x-ms-discriminator-value": "Conversation"
+      "x-ms-client-name": "EvaluationSummary"
     },
     "ConversationalAnalysisAuthoringExportedConversationOrchestration": {
       "description": "Defines the orchestration details for a Conversational project target.",
@@ -2439,8 +2431,7 @@
     "ConversationalAnalysisAuthoringProjectKind": {
       "enum": [
         "Conversation",
-        "Orchestration",
-        "ConversationSummarization"
+        "Orchestration"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2454,10 +2445,6 @@
           {
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-          },
-          {
-            "value": "ConversationSummarization",
-            "description": "A project to build custom conversation summarization model."
           }
         ]
       },
@@ -3020,89 +3007,6 @@
         }
       },
       "x-ms-client-name": "Warning"
-    },
-    "ConversationalAnalysisAuthoringEvaluationSummaryBase": {
-      "description": "Represents the generic evaluation result summary.",
-      "required": [
-        "projectKind"
-      ],
-      "type": "object",
-      "properties": {
-        "projectKind": {
-          "description": "Represents the project type that the evaluation ran on.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
-        },
-        "evaluationOptions": {
-          "description": "The options that were used while running the evaluation.",
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
-        }
-      },
-      "discriminator": "projectKind"
-    },
-    "ConversationalAnalysisAuthoringSummarizationEvaluationSummary": {
-      "description": "Represents the evaluation summary for a custom conversation summarization project.",
-      "required": [
-        "summarizationEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationSummaryBase"
-        }
-      ],
-      "properties": {
-        "summarizationEvaluation": {
-          "description": "Contains the data related to conversation summarization evaluation.",
-          "$ref": "common.json#/definitions/AbstractiveSummarizationEvaluationSummary"
-        }
-      },
-      "x-ms-discriminator-value": "ConversationSummarization"
-    },
-    "ConversationalAnalysisAuthoringSummarizationExportedProjectAssets": {
-      "description": "Represents the exported assets of a conversation summarization project.",
-      "type": "object",
-      "required": [
-        "conversations",
-        "storageInputContainerName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "properties": {
-        "storageInputContainerName": {
-          "description": "The storage container name.",
-          "type": "string"
-        },
-        "conversations": {
-          "description": "The list of conversations belonging to the project.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringSummarizationDataItem"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "ConversationSummarization",
-      "x-ms-client-name": "ConversationSummarizationExportedProjectAssets"
-    },
-    "ConversationalAnalysisAuthoringSummarizationDataItem": {
-      "description": "Represents an exported data item for a custom abstractive summarization project.",
-      "type": "object",
-      "required": [
-        "conversationLocation"
-      ],
-      "properties": {
-        "conversationLocation": {
-          "description": "The location of the input conversation to be summarized. The blob content format is JSON of Conversation object.",
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/ExportedCustomAbstractiveSummarizationDataItem"
-        }
-      ],
-      "x-ms-client-name": "ConversationalAnalysisAuthoringSummarizationDataItem"
     }
   },
   "parameters": {
@@ -3176,8 +3080,7 @@
       "type": "string",
       "enum": [
         "Conversation",
-        "Orchestration",
-        "ConversationSummarization"
+        "Orchestration"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3190,10 +3093,6 @@
           {
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-          },
-          {
-            "value": "ConversationSummarization",
-            "description": "A project to build custom conversation summarization model."
           }
         ]
       },

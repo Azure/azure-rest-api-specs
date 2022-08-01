@@ -727,6 +727,10 @@
       "type": "object",
       "description": "Supported parameters for both Abstractive Summarization and Extractive Summarization task.",
       "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "default": 3
+        },
         "phraseControls": {
           "type": "array",
           "description": "Control the phrases to be used in the summary.",
@@ -743,9 +747,6 @@
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
       "properties": {
-        "summaryLength": {
-          "$ref": "#/definitions/SummaryLengthType"
-        },
         "labFeatures": {
           "type": "object",
           "additionalProperties": {
@@ -759,116 +760,6 @@
           "$ref": "#/definitions/SummarizationTaskParametersBase"
         }
       ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ],
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
-    "SummaryLengthType": {
-      "enum": [
-        "short",
-        "mediumShort",
-        "medium",
-        "mediumLong",
-        "long",
-        "extraLong"
-      ],
-      "type": "string",
-      "description": "Control the length range of the summary. The model will try the best to control the output length into the specified range, but not guaranteed. Aspect 'chapterTitle' won't be affected by this length control, because chapter title is always short and has different linguistic characteristics.",
-      "x-ms-enum": {
-        "modelAsString": false,
-        "name": "SummaryLengthType",
-        "values": [
-          {
-            "value": "short",
-            "description": "0-30 words."
-          },
-          {
-            "value": "mediumShort",
-            "description": "30-60 words."
-          },
-          {
-            "value": "medium",
-            "description": "60-90 words."
-          },
-          {
-            "value": "mediumLong",
-            "description": "90-120 words."
-          },
-          {
-            "value": "long",
-            "description": "120-150 words."
-          },
-          {
-            "value": "extraLong",
-            "description": "> 150 words."
-          }
-        ]
-      }
     },
     "PhraseControl": {
       "type": "object",
@@ -931,72 +822,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
-        }
-      }
-    },
-    "AbstractiveSummarizationEvaluationSummary": {
-      "description": "Represents the evaluation summary for a custom abstractive summarization project.",
-      "required": [
-        "rouge1",
-        "rouge2",
-        "rougeL",
-        "bleu",
-        "chrF",
-        "bertScore"
-      ],
-      "type": "object",
-      "properties": {
-        "rouge1": {
-          "format": "float",
-          "description": "Represents the ROUGE-1 F1",
-          "type": "number"
-        },
-        "rouge2": {
-          "format": "float",
-          "description": "Represents the ROUGE-2 F1",
-          "type": "number"
-        },
-        "rougeL": {
-          "format": "float",
-          "description": "Represents the ROUGE-L F1",
-          "type": "number"
-        },
-        "bleu": {
-          "format": "float",
-          "description": "Represents the score of bilingual evaluation understudy",
-          "type": "number"
-        },
-        "chrF": {
-          "format": "float",
-          "description": "Represents the character n-gram F-score",
-          "type": "number"
-        },
-        "bertScore": {
-          "format": "float",
-          "description": "Represents the Bert score",
-          "type": "number"
-        }
-      },
-      "x-ms-client-name": "AbstractiveSummarizationEvaluationSummary"
-    },
-    "ExportedCustomAbstractiveSummarizationDataItem": {
-      "description": "Represents an exported data item for a custom abstractive summarization project.",
-      "required": [
-        "summaryLocation"
-      ],
-      "type": "object",
-      "properties": {
-        "summaryLocation": {
-          "description": "The location of the output summary.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Represents the language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        },
-        "dataset": {
-          "description": "The dataset split. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
         }
       }
     }

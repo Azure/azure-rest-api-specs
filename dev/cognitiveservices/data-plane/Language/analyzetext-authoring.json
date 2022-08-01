@@ -297,9 +297,6 @@
         "x-ms-examples": {
           "Successful Import Project": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulImportProject.json"
-          },
-          "Successful Import Summarization Project": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulImportSummarizationProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -962,9 +959,6 @@
         "x-ms-examples": {
           "Successful Get Model Evaluation Summary": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulGetModelEvaluationSummary.json"
-          },
-          "Successful Get Summarization Model Evaluation Summary": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSummarizationModelEvaluationSummary.json"
           }
         }
       }
@@ -2348,8 +2342,7 @@
       "enum": [
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "CustomEntityRecognition",
-        "CustomAbstractiveSummarization"
+        "CustomEntityRecognition"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2367,10 +2360,6 @@
           {
             "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
-          },
-          {
-            "value": "CustomAbstractiveSummarization",
-            "description": "For building an abstractive summarization model using your own data."
           }
         ]
       },
@@ -2908,68 +2897,6 @@
         }
       },
       "x-ms-client-name": "Warning"
-    },
-    "TextAnalysisAuthoringCustomAbstractiveSummarizationEvaluationSummary": {
-      "description": "Represents the evaluation summary for a custom abstractive summarization project.",
-      "required": [
-        "summarizationEvaluation"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "properties": {
-        "summarizationEvaluation": {
-          "description": "Contains the data related to abstractive summarization evaluation.",
-          "$ref": "common.json#/definitions/AbstractiveSummarizationEvaluationSummary"
-        }
-      },
-      "x-ms-discriminator-value": "CustomAbstractiveSummarization",
-      "x-ms-client-name": "CustomAbstractiveSummarizationEvaluationSummary"
-    },
-    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets": {
-      "description": "Represents the exported assets for an abstractive summarization project.",
-      "type": "object",
-      "required": [
-        "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "properties": {
-        "documents": {
-          "description": "The list of documents belonging to the project.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "CustomAbstractiveSummarization",
-      "x-ms-client-name": "ExportedCustomAbstractiveSummarizationProjectAssets"
-    },
-    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument": {
-      "description": "Represents an exported document for a custom abstractive summarization project.",
-      "type": "object",
-      "required": [
-        "documentLocation"
-      ],
-      "properties": {
-        "documentLocation": {
-          "description": "The location of the input document to be summarized. The blob content format is string, represent the document text.",
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/ExportedCustomAbstractiveSummarizationDataItem"
-        }
-      ],
-      "x-ms-client-name": "ExportedCustomAbstractiveSummarizationDocument"
     }
   },
   "parameters": {
@@ -3019,8 +2946,7 @@
       "enum": [
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "CustomEntityRecognition",
-        "CustomAbstractiveSummarization"
+        "CustomEntityRecognition"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3037,10 +2963,6 @@
           {
             "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
-          },
-          {
-            "value": "CustomAbstractiveSummarization",
-            "description": "For building an abstractive summarization model using your own data."
           }
         ]
       },
