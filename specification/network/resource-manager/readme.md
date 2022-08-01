@@ -103,7 +103,7 @@ These settings apply only when `--tag=2022-07-preview` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-07-preview'
 input-file:
-  - Microsoft.Network/preview/2022-07-01-preview/networkManagerNetworkVerifier.json
+  - Microsoft.Network/preview/2022-07-01-preview/networkVerifier.json
   - Microsoft.Network/preview/2022-04-01-preview/network.json
   - Microsoft.Network/preview/2022-04-01-preview/networkManager.json
   - Microsoft.Network/preview/2022-04-01-preview/networkManagerActiveConfiguration.json
