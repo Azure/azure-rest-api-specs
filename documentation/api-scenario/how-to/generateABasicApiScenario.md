@@ -1,63 +1,36 @@
-# Generate a basic API scenario file
+# Generate a basic API Scenario file
 
-## Prerequisite
+In this section, we will show you how to generate a basic API scenario file from Swagger. This is useful for quickly generating a basic API scenario file as baseline, and you can improve the API Scenario (adjusting step orders and providing meaningful values) and make it runnable.
 
-We use `oav` tools to generate basic API scenario. `oav` analyze swagger file and use swagger example as API scenario steps. So first, you need to install the latest oav.
+## Prerequisites
 
-## Introduction
+1. Install [oav](https://www.npmjs.com/package/oav)
 
-`oav` support rule based API scenario file generation. We use this command to generate API scenario file.
-
-`oav generate-api-scenario static --readme <readme> --tag <tag> --specs <specs> --rules <generated-rules>`
-
-OR
-
-`oav generate-api-scenario static --readme <readme> --tag <tag> --specs <specs> --dependency <dependency-path>`
-
-- readme: swagger readme file.
-- tag: which tag to generate. oav will analyze swagger file under the tag and generate API scenario.
-- specs: one or more spec file paths. type: array.
-- dependency: The file path of the RESTler dependency. It cannot be used with `rules`.
-- rules: Currently support two types. `resource-put-delete`, `operations-list`. Default: `resource-put-delete`
-  - `resource-put-delete`: generate resource put and delete API scenario.
-  - `operations-list`: generate operations list API scenario. `operations-list` is the simplest API which must be defined in swagger.
-
-Example:
-
-![](./genTestScenario.gif)
-
-This command will load and analyze swagger and generate a basic API scenario file (`resource-put-delete`).
-
-Result: the output contains two files
-
-- scenarios/signalR.yaml: The API scenario file.
-- readme.test.md: The entry for SDK test generation
-
-The generated API scenario file: The generated API scenario file contains two steps. Create signalR and delete it. It's a basic API scenario and developer can add more step based on the basic API scenario file.
-
+```bash
+npm i -g oav
 ```
-scope: ResourceGroup
-testScenarios:
-  - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
-    steps:
-      - step: SignalR_CreateOrUpdate
-        exampleFile: ../examples/SignalR_CreateOrUpdate.json
-      - step: SignalR_Delete
-        exampleFile: ../examples/SignalR_Delete.json
+2. Install [docker](https://docs.docker.com/get-docker/)
+
+## Steps
+
+1. Compile Swagger into dependencies.json with Restler.
+
+```bash
+docker run --rm -v $(pwd)/specification:/swagger -w /swagger/.restler_output mcr.microsoft.com/restlerfuzzer/restler:v8.5.0 dotnet /RESTler/restler/Restler.dll compile --api_spec /swagger/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json
 ```
 
-If you pass rule option `operations-list`, you will get such API scenario file.
+2. Generate a basic API Scenario file.
 
-```
-scope: ResourceGroup
-testScenarios:
-  - description: operationsList
-    steps:
-      - step: operationsList
-        exampleFile: ../examples/Operations_List.json
+The generated API Scenario file will contain all the operations in the Swagger file, ordered by the dependencies. At each step, the minimum required parameters will be filled in. 
 
+```bash
+oav generate-api-scenario static --specs specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json --dependency specification/.restler_output/Compile/dependencies.json -o specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios
 ```
 
-## Reference
+As an alternative, if Swagger examples are ready, you can add `--useExample` parameter to generate the API scenario file based on Swagger examples:
 
-- [oav](https://github.com/Azure/oav/tree/develop)
+```bash
+oav generate-api-scenario static --specs specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json --dependency specification/.restler_output/Compile/dependencies.json -o specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios --useExample
+```
+
+Next you can run the API scenario file with `oav run`. See how in [QuickStart](./QuickStart.md).
