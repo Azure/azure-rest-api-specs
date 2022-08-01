@@ -1379,10 +1379,33 @@
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
         },
-        "enableNATGateway": {
-          "type": "boolean",
-          "description": "Property only meant to be used for Premium SKU Service. This can be used to enable NAT Gateway.",
-          "default": false
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Unsupported",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Unsupported"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              },
+              {
+                "value": "Unsupported",
+                "description": "The service does not support enable Nat Gateway."
+              }
+            ]
+          }
         },
         "natOutboundAddresses": {
           "type": "array",
