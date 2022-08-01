@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "queryId": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+    "query": {
+      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+      "properties": {
+        "naturalLanguage": "get top 10 users"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/assistedQueries/d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+        "name": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "type": "Microsoft.SecurityInsights/assistedQueries",
+        "systemData": {
+          "createdAt": "2022-07-19T01:26:18.3800276Z",
+          "createdBy": "john@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-07-19T01:26:18.3800509Z",
+          "lastModifiedBy": "john@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "properties": {
+          "queryId": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+          "correlationId": "5a7c35eb-6ea4-41a2-8f96-fcaf1abb3af2",
+          "naturalLanguage": "get top 10 users",
+          "kustoQueryLanguage": "imNetworkSession\n| where TimeGenerated > ago(1d)\n| summarize dcount(TargetUserName) by TargetUserName\n| sort by dcount_TargetUserName desc\n| take 10\n",
+          "documentType": "assistedQuery"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/assistedQueries/d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+        "name": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "type": "Microsoft.SecurityInsights/assistedQueries",
+        "systemData": {
+          "createdAt": "2022-07-19T01:26:18.3800276Z",
+          "createdBy": "john@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-07-19T01:26:18.3800509Z",
+          "lastModifiedBy": "john@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "properties": {
+          "queryId": "d0cfe6b2-9ac0-0000-9919-dccaee2e4123",
+          "correlationId": "5a7c35eb-6ea4-41a2-8f96-fcaf1abb3af2",
+          "naturalLanguage": "get top 10 users",
+          "kustoQueryLanguage": "imNetworkSession\n| where TimeGenerated > ago(1d)\n| summarize dcount(TargetUserName) by TargetUserName\n| sort by dcount_TargetUserName desc\n| take 10\n",
+          "documentType": "assistedQuery"
+        }
+      }
+    }
+  }
+}
