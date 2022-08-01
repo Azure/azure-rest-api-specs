@@ -22,19 +22,18 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the IotHub API.
+These are the global settings for the Azure Iot Hub API.
 
 ``` yaml
-openapi-type: arm
-tag: package-preview-2021-11
+openapi-type: data-plane
 ```
 
 
 ### Tag: package-preview-2021-11
 
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+These settings apply only when `--tag=package-service-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+```yaml $(tag) == 'package-service-preview-2021-11'
 input-file:
   - Microsoft.Devices/preview/2021-11-01-preview/service.json
 ```
