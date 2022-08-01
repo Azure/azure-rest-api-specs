@@ -46,6 +46,40 @@
                 "container-app-2"
               ]
             }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
+            "name": "vaultdog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "version": "v1",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
+              "secretsStoreComponent": "my-secret-store",
+              "metadata": [
+                {
+                  "name": "url",
+                  "value": "<COSMOS-URL>"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ]
+            }
           }
         ]
       }
