@@ -159,7 +159,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
  - ./Microsoft.Sql/preview/2022-02-01-preview/BackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2022-02-01-preview/BlobAuditing.json
@@ -293,12 +293,11 @@ input-file:
  - ./Microsoft.Sql/preview/2022-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2022-02-01-preview/WorkloadGroups.json
 ```
-
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-11'
+```yaml $(tag) == 'package-preview-2021-11'
 input-file:
  - ./Microsoft.Sql/preview/2021-11-01-preview/BackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
