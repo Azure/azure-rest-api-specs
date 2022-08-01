@@ -39,6 +39,12 @@
             "schema": {
               "$ref": "#/definitions/AvailableProviderOperations"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -77,6 +83,12 @@
             "description": "List of data manager resources available under the subscription.",
             "schema": {
               "$ref": "#/definitions/DataManagerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -119,6 +131,12 @@
             "description": "List of data manager resources by resource group.",
             "schema": {
               "$ref": "#/definitions/DataManagerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -164,6 +182,12 @@
             "description": "Data Manager Resource object.",
             "schema": {
               "$ref": "#/definitions/DataManager"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -217,6 +241,12 @@
           },
           "202": {
             "description": "Accepted request for Create."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -258,6 +288,12 @@
           },
           "204": {
             "description": "Data Manager Resource deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -317,6 +353,12 @@
           },
           "202": {
             "description": "Accepted request for Data Manager Update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -359,6 +401,12 @@
             "description": "The list of data services.",
             "schema": {
               "$ref": "#/definitions/DataServiceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -415,7 +463,14 @@
             "schema": {
               "$ref": "#/definitions/DataService"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
+
         },
         "x-ms-examples": {
           "SessionRecords\\DataServicesTest\\DataServices_GetGET62": {
@@ -489,6 +544,12 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
@@ -548,6 +609,12 @@
             "description": "The job definition that matches the criteria.",
             "schema": {
               "$ref": "#/definitions/JobDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -621,6 +688,12 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -676,6 +749,12 @@
           },
           "204": {
             "description": "Completed request for Delete JobDefinition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -730,6 +809,12 @@
         "responses": {
           "200": {
             "description": "Job definition cancellation accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -792,6 +877,12 @@
             "description": "The list of jobs.",
             "schema": {
               "$ref": "#/definitions/JobList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -873,6 +964,12 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -936,6 +1033,12 @@
           },
           "204": {
             "description": "Completed request for job Cancel."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1000,6 +1103,12 @@
           },
           "204": {
             "description": "Complete request for Job resume."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1054,6 +1163,12 @@
         "responses": {
           "200": {
             "description": "Job definition retry successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1119,6 +1234,12 @@
           },
           "204": {
             "description": "Completed request for Job run. Run has started."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1173,6 +1294,12 @@
         "responses": {
           "200": {
             "description": "Job definition skip successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1229,6 +1356,12 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
@@ -1282,6 +1415,12 @@
             "schema": {
               "$ref": "#/definitions/DataStoreList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/DataStoreFilter",
@@ -1334,6 +1473,12 @@
             "description": "The data store/repository which matches the name given.",
             "schema": {
               "$ref": "#/definitions/DataStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1415,6 +1560,12 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1466,6 +1617,12 @@
           },
           "204": {
             "description": "Completed request for Delete Data Store."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1511,6 +1668,12 @@
             "description": "The list of data store types that are supported.",
             "schema": {
               "$ref": "#/definitions/DataStoreTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1566,6 +1729,12 @@
             "description": "The data store/repository type.",
             "schema": {
               "$ref": "#/definitions/DataStoreType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1631,6 +1800,12 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
@@ -1684,6 +1859,12 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
@@ -1729,6 +1910,12 @@
             "description": "The list of public keys.",
             "schema": {
               "$ref": "#/definitions/PublicKeyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1790,6 +1977,12 @@
             "description": "The public keys.",
             "schema": {
               "$ref": "#/definitions/PublicKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1871,6 +2064,39 @@
           "type": "string"
         }
       }
+    },
+    "CloudError": {
+      "description": "An error response from the service.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error details."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "An error response from the service.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of additional details about the error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
     },
     "CustomerSecret": {
       "description": "The pair of customer secret.",
