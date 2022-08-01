@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 scenarios:
@@ -14,18 +15,6 @@ scenarios:
           - replace: /parameters/properties/templateLink/uri
             value: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json
 
-      - step: PutDeploymentWithOnErrorDeploymentLastSuccessful
-        exampleFile: ../examples/PutDeploymentWithOnErrorDeploymentLastSuccessful.json
-
-      - step: PutDeploymentAtManagementGroup
-        exampleFile: ../examples/PutDeploymentAtManagementGroup.json
-
-      - step: PutDeploymentAtScope
-        exampleFile: ../examples/PutDeploymentAtScope.json
-
-      - step: PutDeploymentAtTenant
-        exampleFile: ../examples/PutDeploymentAtTenant.json
-
       - step: Deployments_WhatIf
         exampleFile: ../examples/PostDeploymentWhatIfOnResourceGroup.json
         requestUpdate:
@@ -33,9 +22,3 @@ scenarios:
             value: {}
           - add: /parameters/properties/templateLink/uri
             value: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json
-
-      - step: PostDeploymentWhatIfOnTenant
-        exampleFile: ../examples/PostDeploymentWhatIfOnTenant.json
-
-      - step: PostDeploymentWhatIfOnManagementGroup
-        exampleFile: ../examples/PostDeploymentWhatIfOnManagementGroup.json
