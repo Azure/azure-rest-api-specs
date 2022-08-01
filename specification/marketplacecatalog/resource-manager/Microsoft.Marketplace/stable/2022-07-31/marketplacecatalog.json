@@ -56,9 +56,16 @@
           },
           "400": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case request malformed",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -109,9 +116,16 @@
           },
           "400": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case request malformed",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -179,6 +193,28 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "ODataQueryOptionsOfCatalogItem": {},
     "FuturePricesItem": {
       "type": "object",
@@ -2287,7 +2323,7 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "Caption",
+          "description": "Caption of the product video",
           "x-nullable": true
         },
         "uri": {
@@ -2318,7 +2354,7 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "Caption",
+          "description": "Caption of preview image",
           "x-nullable": true
         },
         "uri": {
@@ -2340,7 +2376,7 @@
       "properties": {
         "context": {
           "type": "string",
-          "description": "context",
+          "description": "context of the image group",
           "x-nullable": true
         },
         "items": {
@@ -3261,7 +3297,7 @@
       "properties": {
         "language": {
           "type": "string",
-          "description": "Language"
+          "description": "Language of the offer"
         },
         "displayName": {
           "type": "string",
@@ -3325,7 +3361,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "Summary",
+          "description": "Summary of the catalog item",
           "x-nullable": true
         },
         "longSummary": {
@@ -3335,7 +3371,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Description",
+          "description": "Description of the catalog item",
           "x-nullable": true
         },
         "offerType": {
