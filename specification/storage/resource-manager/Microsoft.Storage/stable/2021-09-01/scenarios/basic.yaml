@@ -1,0 +1,418 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: ResourceGroup
+variables:
+  accountName:
+    type: string
+    prefix: accountnam
+  containerName:
+    type: string
+    prefix: containern
+  account2Name: $(accountN)2
+  container2Name: $(containerN)2
+  shareName:
+    type: string
+    prefix: sharename
+  username:
+    type: string
+    prefix: username
+  queueName:
+    type: string
+    prefix: queuename
+  tableName:
+    type: string
+    prefix: tablename
+  privateEndpointConnectionName:
+    type: string
+    prefix: privateend
+  encryptionScopeName:
+    type: string
+    prefix: encryption
+  privateEndpointName:
+    type: string
+    prefix: privateEndpoint
+  networkInterfaceName:
+    type: string
+    prefix: networkInterface
+  virtualNetworksName:
+    type: string
+    prefix: virtualNetwork
+  storageAccount_ExternalID: >-
+    /subscriptions/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.Storage/storageAccounts/$(accountName)
+  privateLinkServiceConnection_FCDN: $(accountName).blob.core.windows.net
+  deletedAccountName: $(accountName)
+scenarios:
+  - steps:
+    - step: StorageAccounts_CheckNameAvailability
+      exampleFile: ../examples/StorageAccountCheckNameAvailability.json
+    - step: StorageAccounts_Create
+      operationId: StorageAccounts_Create
+      parameters:
+        parameters:
+          location: $(location)
+          sku:
+            name: Standard_GRS
+          kind: StorageV2
+          properties:
+            changeFeed:
+              enabled: true
+            dnsEndpointType: Standard
+            defaultToOAuthAuthentication: false
+            publicNetworkAccess: Enabled
+            immutableStorageWithVersioning:
+              enabled: false
+            allowCrossTenantReplication: true
+            allowBlobPublicAccess: true
+            allowSharedKeyAccess: true
+            networkAcls:
+              bypass: AzureServices
+              defaultAction: Allow
+            supportsHttpsTrafficOnly: true
+    - step: BlobContainers_Create
+      exampleFile: ../examples/BlobContainersPut.json
+    - step: BlobContainers_List
+      exampleFile: ../examples/BlobContainersList.json
+    - step: BlobContainers_Get
+      exampleFile: ../examples/BlobContainersGet.json
+    - step: BlobContainers_Update
+      exampleFile: ../examples/BlobContainersPatch.json
+    - step: BlobContainers_SetLegalHold
+      exampleFile: ../examples/BlobContainersSetLegalHold.json
+    - step: BlobContainers_ClearLegalHold
+      exampleFile: ../examples/BlobContainersClearLegalHold.json
+    - step: StorageAccounts_List
+      exampleFile: ../examples/StorageAccountList.json
+    - step: StorageAccounts_ListByResourceGroup
+      exampleFile: ../examples/StorageAccountListByResourceGroup.json
+    - step: StorageAccounts_GetProperties
+      exampleFile: ../examples/StorageAccountGetProperties.json
+    - step: BlobServices_SetServiceProperties
+      exampleFile: ../examples/BlobServicesPut.json
+      requestUpdate:
+        - remove: /parameters/properties/cors
+        - remove: /parameters/properties/defaultServiceVersion
+        - copy: /parameters/properties/restorePolicy
+          from: /parameters/properties/deleteRetentionPolicy
+        - replace: /parameters/properties/restorePolicy/days
+          value: 5
+        - replace: /parameters/properties/deleteRetentionPolicy/days
+          value: 6
+    - step: BlobServices_List
+      exampleFile: ../examples/BlobServicesList.json
+    - step: BlobServices_GetServiceProperties
+      exampleFile: ../examples/BlobServicesGet.json
+    - step: TableServices_SetServiceProperties
+      exampleFile: ../examples/TableServicesPut.json
+      requestUpdate:
+        - remove: /parameters/properties/cors
+    - step: TableServices_List
+      exampleFile: ../examples/TableServicesList.json
+    - step: TableServices_GetServiceProperties
+      exampleFile: ../examples/TableServicesGet.json
+    - step: QueueServices_SetServiceProperties
+      exampleFile: ../examples/QueueServicesPut.json
+      requestUpdate:
+        - remove: /parameters/properties/cors
+    - step: QueueServices_List
+      exampleFile: ../examples/QueueServicesList.json
+    - step: QueueServices_GetServiceProperties
+      exampleFile: ../examples/QueueServicesGet.json
+    - step: FileServices_SetServiceProperties
+      exampleFile: ../examples/FileServicesPut.json
+      requestUpdate:
+        - remove: /parameters/properties/cors
+    - step: FileServices_List
+      exampleFile: ../examples/FileServicesList.json
+    - step: FileServices_GetServiceProperties
+      exampleFile: ../examples/FileServicesGet.json
+    # require UTC time generator
+    # - step: StorageAccounts_RestoreBlobRanges
+    #   exampleFile: ../examples/BlobRangesRestore.json
+    - step: StorageAccounts_Update
+      operationId: StorageAccounts_Update
+      parameters:
+        parameters:
+          properties:
+            allowSharedKeyAccess: true
+            deleteRetentionPolicy:
+              - enabled: true
+              - days: 7
+              - allowPermanentDelete: false
+            containerDeleteRetentionPolicy:
+              - enabled: true
+              - days: 7
+            changeFeed:
+              enabled: false
+    - step: StorageAccounts_RevokeUserDelegationKeys
+      exampleFile: ../examples/StorageAccountRevokeUserDelegationKeys.json
+    - step: StorageAccounts_ListServiceSAS
+      exampleFile: ../examples/StorageAccountListServiceSAS.json
+      requestUpdate:
+        - replace: /parameters/signedExpiry
+          value: "2030-05-24T11:32:48.8457197Z"
+    - step: StorageAccounts_ListKeys
+      exampleFile: ../examples/StorageAccountListKeys.json
+    - step: StorageAccounts_RegenerateKey
+      exampleFile: ../examples/StorageAccountRegenerateKey.json
+    - step: StorageAccounts_ListAccountSAS
+      exampleFile: ../examples/StorageAccountListAccountSAS.json
+      requestUpdate:
+        - replace: /parameters/signedExpiry
+          value: "2030-05-24T11:32:48.8457197Z"
+        - replace: /parameters/signedStart
+          value: "2022-05-24T11:32:48.8457197Z"
+    - step: BlobInventoryPolicies_CreateOrUpdate
+      exampleFile: ../examples/StorageAccountSetBlobInventoryPolicy.json
+      requestUpdate:
+        - replace: /properties/properties/policy/rules/0/destination
+          value: $(containerName)
+        - remove: /properties/properties/policy/rules/1
+    - step: BlobInventoryPolicies_List
+      exampleFile: ../examples/StorageAccountListBlobInventoryPolicy.json
+    - step: BlobInventoryPolicies_Get
+      exampleFile: ../examples/StorageAccountGetBlobInventoryPolicy.json
+    - step: BlobInventoryPolicies_Delete
+      exampleFile: ../examples/StorageAccountDeleteBlobInventoryPolicy.json
+    - step: BlobContainers_CreateOrUpdateImmutabilityPolicy
+      exampleFile: ../examples/BlobContainersPutImmutabilityPolicy.json
+      requestUpdate:
+        - remove: /parameters/properties/allowProtectedAppendWrites
+      outputVariables:
+        policy_etag:
+          fromResponse: /etag
+    - step: BlobContainers_GetImmutabilityPolicy
+      exampleFile: ../examples/BlobContainersGetImmutabilityPolicy.json
+    - step: BlobContainers_DeleteImmutabilityPolicy
+      exampleFile: ../examples/BlobContainersDeleteImmutabilityPolicy.json
+      requestUpdate:
+        - replace: /If-Match
+          value: $(policy_etag)
+    - step: BlobContainers_CreateOrUpdateImmutabilityPolicy_V2
+      exampleFile: ../examples/BlobContainersPutImmutabilityPolicy.json
+      requestUpdate:
+        - remove: /parameters/properties/allowProtectedAppendWrites
+      outputVariables:
+        policy_etag:
+          fromResponse: /etag
+    - step: BlobContainers_LockImmutabilityPolicy
+      exampleFile: ../examples/BlobContainersLockImmutabilityPolicy.json
+      requestUpdate:
+        - replace: /If-Match
+          value: $(policy_etag)
+      outputVariables:
+        policy_etag:
+          fromResponse: /etag
+    - step: BlobContainers_ExtendImmutabilityPolicy
+      exampleFile: ../examples/BlobContainersExtendImmutabilityPolicy.json
+      requestUpdate:
+        - replace: /If-Match
+          value: $(policy_etag)
+        - replace: /parameters/properties/immutabilityPeriodSinceCreationInDays
+          value: 4
+    - step: BlobContainers_ObjectLevelWorm
+      exampleFile: ../examples/ObjectLevelWormContainerMigration.json
+    - step: BlobContainers_Lease
+      exampleFile: ../examples/BlobContainersLease_Acquire.json
+    - step: BlobContainers_Lease_Break
+      exampleFile: ../examples/BlobContainersLease_Break.json
+    - step: FileShares_Create
+      exampleFile: ../examples/FileSharesPut.json
+    - step: FileShares_List
+      exampleFile: ../examples/FileSharesList.json
+    - step: FileShares_Get
+      exampleFile: ../examples/FileSharesGet.json
+    - step: FileShares_Update
+      exampleFile: ../examples/FileSharesPatch.json
+    - step: FileShares_Lease
+      exampleFile: ../examples/FileSharesLease_Acquire.json
+    - step: FileShares_Lease_Break
+      exampleFile: ../examples/FileSharesLease_Break.json
+    - step: FileShares_Delete
+      exampleFile: ../examples/FileSharesDelete.json
+    # 500 Internal Server Error
+    # - step: FileShares_Restore
+    #   exampleFile: ../examples/FileSharesRestore.json
+    #   requestUpdate:
+    #     - replace: /deletedShare/deletedShareName
+    #       value: $(shareName)
+    #     - replace: /deletedShare/deletedShareVersion
+    #       value: 1
+    - step: LocalUsers_CreateOrUpdate
+      exampleFile: ../examples/LocalUserCreate.json
+    - step: LocalUsers_List
+      exampleFile: ../examples/LocalUsersList.json
+    - step: LocalUsers_Get
+      exampleFile: ../examples/LocalUserGet.json
+    - step: LocalUsers_ListKeys
+      exampleFile: ../examples/LocalUserListKeys.json
+    - step: LocalUsers_RegeneratePassword
+      exampleFile: ../examples/LocalUserRegeneratePassword.json
+    - step: Table_Create
+      exampleFile: ../examples/TableOperationPut.json
+    - step: Table_List
+      exampleFile: ../examples/TableOperationList.json
+    - step: Table_Get
+      exampleFile: ../examples/TableOperationGet.json
+    - step: Table_Update
+      exampleFile: ../examples/TableOperationPatch.json
+    - step: Queue_Create
+      exampleFile: ../examples/QueueOperationPut.json
+    - step: Queue_List
+      exampleFile: ../examples/QueueOperationList.json
+    - step: Queue_Get
+      exampleFile: ../examples/QueueOperationGet.json
+    - step: Queue_Update
+      exampleFile: ../examples/QueueOperationPatch.json
+    - step: Queue_Delete
+      exampleFile: ../examples/QueueOperationDelete.json
+    - step: EncryptionScopes_Put
+      exampleFile: ../examples/StorageAccountPutEncryptionScope.json
+    - step: EncryptionScopes_List
+      exampleFile: ../examples/StorageAccountEncryptionScopeList.json
+    - step: EncryptionScopes_Get
+      exampleFile: ../examples/StorageAccountGetEncryptionScope.json
+    - step: EncryptionScopes_Patch
+      operationId: EncryptionScopes_Patch
+      parameters:
+        encryptionScope:
+          properties:
+            source: Microsoft.Storage
+            enabled: true
+    # Create virtual network and private endpoint for testing
+    - step: Create_PrivateEndpointConnection_Series
+      armTemplate: ./privateEndpoint.json
+    - step: PrivateEndpointConnections_List
+      exampleFile: ../examples/StorageAccountListPrivateEndpointConnections.json
+      outputVariables:
+        privateEndpointConnectionName:
+          fromResponse: /value/0/name
+    - step: PrivateEndpointConnections_Put
+      exampleFile: ../examples/StorageAccountPutPrivateEndpointConnection.json
+      requestUpdate:
+        - replace: /properties/properties/privateLinkServiceConnectionState/status
+          value: Rejected
+        - replace: /properties/properties/privateLinkServiceConnectionState/description
+          value: Auto-Rejected
+    - step: PrivateEndpointConnections_Get
+      exampleFile: ../examples/StorageAccountGetPrivateEndpointConnection.json
+    - step: PrivateEndpointConnections_Delete
+      exampleFile: ../examples/StorageAccountDeletePrivateEndpointConnection.json
+    - step: ManagementPolicies_CreateOrUpdate
+      exampleFile: ../examples/StorageAccountSetManagementPolicy.json
+    - step: ManagementPolicies_Get
+      exampleFile: ../examples/StorageAccountGetManagementPolicy.json
+    - step: ManagementPolicies_Delete
+      exampleFile: ../examples/StorageAccountDeleteManagementPolicy.json
+    - step: Operations_List
+      exampleFile: ../examples/OperationsList.json
+    - step: Usages_ListByLocation
+      exampleFile: ../examples/StorageAccountListLocationUsage.json
+    - step: Skus_List
+      exampleFile: ../examples/SKUList.json
+    - step: PrivateLinkResources_ListByStorageAccount
+      exampleFile: ../examples/StorageAccountListPrivateLinkResources.json
+    - step: StorageAccounts_Create_V2
+      operationId: StorageAccounts_Create
+      parameters:
+        accountName: $(account2Name)
+        parameters:
+          location: $(location)
+          sku:
+            name: Standard_GRS
+          kind: StorageV2
+          properties:
+            changeFeed:
+              enabled: true
+            dnsEndpointType: Standard
+            defaultToOAuthAuthentication: false
+            publicNetworkAccess: Enabled
+            immutableStorageWithVersioning:
+              enabled: false
+            allowCrossTenantReplication: true
+            allowBlobPublicAccess: true
+            allowSharedKeyAccess: true
+            networkAcls:
+              bypass: AzureServices
+              defaultAction: Allow
+            supportsHttpsTrafficOnly: true
+    - step: BlobContainers_Create_v2
+      operationId: BlobContainers_Create
+      parameters:
+        accountName: $(account2Name)
+        containerName: $(container2Name)
+        blobContainer:
+          properties:
+            publicAccess: Container
+            metadata:
+              metadata: "true"
+    - step: StorageAccounts_HierarchicalNamespaceMigration
+      operationId: StorageAccounts_HierarchicalNamespaceMigration
+      parameters:
+        accountName: $(account2Name)
+        requestType: HnsOnValidationRequest
+    # - step: StorageAccounts_AbortHierarchicalNamespaceMigration
+    #   exampleFile: ../examples/StorageAccountAbortHierarchicalNamespaceMigration.json
+    - step: EnableChangeFeedAndVersion_Source
+      operationId: BlobServices_SetServiceProperties
+      parameters:
+        accountName: $(accountName)
+        BlobServicesName: default
+        parameters:
+          properties:
+            isVersioningEnabled: true
+            changeFeed:
+              enabled: true
+              retentionInDays: 5
+    - step: EnableChangeFeedAndVersion_Target
+      operationId: BlobServices_SetServiceProperties
+      parameters:
+        accountName: $(account2Name)
+        BlobServicesName: default
+        parameters:
+          properties:
+            isVersioningEnabled: true
+            changeFeed:
+              enabled: true
+              retentionInDays: 5
+    - step: ObjectReplicationPolicies_CreateOrUpdate
+      exampleFile: >-
+        ../examples/StorageAccountCreateObjectReplicationPolicyOnDestination.json
+      requestUpdate:
+        - replace: /properties/properties/sourceAccount
+          value: /subscriptions/$(subscription-id)/resourceGroups/$(resourceGroupName)/providers/Microsoft.Storage/storageAccounts/$(account2Name)
+        - replace: /properties/properties/destinationAccount
+          value: /subscriptions/$(subscription-id)/resourceGroups/$(resourceGroupName)/providers/Microsoft.Storage/storageAccounts/$(accountName)
+        - replace: /properties/properties/rules/0/sourceContainer
+          value: $(container2Name)
+        - replace: /properties/properties/rules/0/destinationContainer
+          value: $(containerName)
+    - step: ObjectReplicationPolicies_List
+      exampleFile: ../examples/StorageAccountListObjectReplicationPolicies.json
+      outputVariables:
+        policyId:
+          fromResponse: /value/0/name
+    - step: ObjectReplicationPolicies_Get
+      operationId: ObjectReplicationPolicies_Get
+      parameters:
+        objectReplicationPolicyId: $(policyId)
+    - step: ObjectReplicationPolicies_Delete
+      operationId: ObjectReplicationPolicies_Delete
+      parameters:
+        objectReplicationPolicyId: $(policyId)
+    # - step: StorageAccounts_Failover
+    #   operationId: StorageAccounts_Failover
+    #   parameters:
+    #     accountName: $(accountName)
+    - step: Table_Delete
+      exampleFile: ../examples/TableOperationDelete.json
+    - step: LocalUsers_Delete
+      exampleFile: ../examples/LocalUserDelete.json
+    - step: BlobContainers_Delete
+      exampleFile: ../examples/BlobContainersDelete.json
+    - step: StorageAccounts_Delete
+      exampleFile: ../examples/StorageAccountDelete.json
+    - step: DeletedAccounts_List
+      exampleFile: ../examples/DeletedAccountList.json
+    - step: DeletedAccounts_Get
+      exampleFile: ../examples/DeletedAccountGet.json
+    
