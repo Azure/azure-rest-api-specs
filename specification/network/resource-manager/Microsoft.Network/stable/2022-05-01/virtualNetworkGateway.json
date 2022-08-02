@@ -2777,9 +2777,11 @@
         },
         "VirtualNetworkGatewayPolicyGroups":
         {
-          "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup",
-          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the avalialbe VirtualNetworkGatewayPolicyGroup for the gateway."
-
+          "type": "array",
+          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the avalialbe VirtualNetworkGatewayPolicyGroup for the gateway.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup"
+          }
         },
         "bgpSettings": {
           "$ref": "#/definitions/BgpSettings",
@@ -3645,7 +3647,7 @@
         {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "List of references to virtualNetworkGatewayPolicyGroups"
         }
