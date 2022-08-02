@@ -153,13 +153,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Contains the status URL on which clients are expected to poll the status of the delete operation.",
-                "type": "string"
-              }
-            }
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -211,15 +205,9 @@
             }
           },
           "201": {
-            "description": "Created. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Query"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Contains the status URL on which clients are expected to poll the status of the operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
