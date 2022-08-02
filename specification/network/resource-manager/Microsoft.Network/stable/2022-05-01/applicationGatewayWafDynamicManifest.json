@@ -78,7 +78,7 @@
   "definitions": {
     "ApplicationGatewayWafDynamicManifestResult": {
       "description": "Response for ApplicationGatewayWafDynamicManifest API service call.",
-      "type":"object",
+      "type": "object",
       "properties": {
         "DefaultRuleSet": {
           "description": "The default ruleset.",
@@ -91,13 +91,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "DefaultRuleSetPropertyFormat": {
       "description": "the default web application firewall rule set.",
-      "type":"object",
+      "type": "object",
       "properties": {
         "ruleSetType": {
           "description": "The type of the web application firewall rule set.",
@@ -111,6 +112,7 @@
     },
     "ApplicationGatewayFirewallRuleSet": {
       "description": "Properties of the web application firewall rule set.",
+      "type": "object",
       "properties": {
         "ruleSetType": {
           "type": "string",
@@ -168,6 +170,7 @@
     },
     "ApplicationGatewayFirewallRuleGroup": {
       "description": "The rules of the web application firewall rule group.",
+      "type": "object",
       "properties": {
         "ruleGroupName": {
           "type": "string",
@@ -181,12 +184,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ApplicationGatewayFirewallRule": {
       "description": "A web application firewall rule.",
+      "type": "object",
       "properties": {
         "ruleId": {
           "type": "integer",
