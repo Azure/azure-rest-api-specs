@@ -713,6 +713,16 @@ input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 ```
 
+### Tag: package-2018-09-01-python-only
+
+These settings apply only when `--tag=package-2018-09-01-python-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-python-only'
+input-file:
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
+```
+
 ### Tag: package-2018-06-01-preview-only
 
 These settings apply only when `--tag=package-2018-06-01-preview-only` is specified on the command line.
