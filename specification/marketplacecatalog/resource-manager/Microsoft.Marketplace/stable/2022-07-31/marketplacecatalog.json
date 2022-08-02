@@ -129,6 +129,39 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -167,6 +200,7 @@
       "name": "language",
       "in": "query",
       "required": false,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "description": "The language of the free texts"
     },
@@ -174,6 +208,7 @@
       "name": "market",
       "in": "query",
       "required": false,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "description": "The required market"
     }
@@ -210,7 +245,7 @@
           "type": "array",
           "x-nullable": true,
           "x-ms-identifiers": [
-            "Id"
+            "id"
           ],
           "items": {
             "$ref": "#/definitions/FuturePlan"
@@ -346,15 +381,15 @@
           "type": "string",
           "x-nullable": true
         },
-        "RemediationRequired": {
+        "remediationRequired": {
           "type": "boolean",
           "description": "A value indicating whether remediation is required to acquire availability"
         },
-        "Remediations": {
+        "remediations": {
           "type": "array",
           "description": "Remediation actions for acquiring availability if RemediationRequired is true",
           "x-ms-identifiers": [
-            "RemediationId"
+            "remediationId"
           ],
           "x-nullable": true,
           "items": {
@@ -385,11 +420,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "_ts": {
+        "ts": {
           "type": "integer",
           "format": "int64"
         },
-        "CurrentAvailabilityId": {
+        "currentAvailabilityId": {
           "type": "string",
           "x-nullable": true
         }
@@ -432,7 +467,7 @@
           "type": "array",
           "description": "Included quantity properties",
           "x-ms-identifiers": [
-            "TermId"
+            "termId"
           ],
           "x-nullable": true,
           "items": {
@@ -470,12 +505,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "TermId": {
+        "termId": {
           "type": "string",
           "description": "Term id",
           "x-nullable": true
         },
-        "Quantity": {
+        "quantity": {
           "type": "string",
           "description": "Quantity of terms",
           "x-nullable": true
@@ -667,12 +702,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "RemediationId": {
+        "remediationId": {
           "type": "string",
           "description": "Remediation identifier",
           "x-nullable": true
         },
-        "Type": {
+        "type": {
           "type": "string",
           "description": "Remediation type",
           "x-nullable": true
@@ -791,11 +826,11 @@
           "description": "Display rank",
           "format": "int32"
         },
-        "RemediationRequired": {
+        "remediationRequired": {
           "type": "boolean",
           "description": "A value indicating whether remediation is required to acquire availability"
         },
-        "Remediations": {
+        "remediations": {
           "type": "array",
           "description": "Remediation actions for acquiring availability if RemediationRequired is true",
           "x-ms-identifiers": [
@@ -1054,7 +1089,7 @@
             }
           ]
         },
-        "Markets": {
+        "markets": {
           "type": "array",
           "description": "Markets for the item",
           "x-nullable": true,
@@ -1062,7 +1097,7 @@
             "type": "string"
           }
         },
-        "IsvContactDetails": {
+        "isvContactDetails": {
           "type": "object",
           "description": "ISV contact details",
           "x-nullable": true,
@@ -1159,7 +1194,7 @@
             "type": "string"
           }
         },
-        "PrimaryIndustry": {
+        "primaryIndustry": {
           "type": "array",
           "description": "List of industry IDs the item belongs to",
           "x-nullable": true,
@@ -1167,7 +1202,7 @@
             "type": "string"
           }
         },
-        "PrimaryCategories": {
+        "primaryCategories": {
           "type": "array",
           "description": "List of category IDs the item belongs to",
           "x-nullable": true,
@@ -1705,20 +1740,20 @@
           "type": "string",
           "x-nullable": true
         },
-        "_ts": {
+        "ts": {
           "type": "integer",
           "format": "int64"
         },
-        "ItemType": {
+        "itemType": {
           "$ref": "#/definitions/CuratedCatalogItemType"
         },
-        "IsAllowedByDefault": {
+        "isAllowedByDefault": {
           "type": "boolean"
         },
-        "IsFirstParty": {
+        "isFirstParty": {
           "type": "boolean"
         },
-        "IsResellerOffer": {
+        "isResellerOffer": {
           "type": "boolean"
         },
         "isAzureBenefitEligible": {
@@ -2474,7 +2509,7 @@
           "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between",
           "x-nullable": true
         },
-        "Keywords": {
+        "keywords": {
           "type": "array",
           "description": "List of keywords",
           "x-nullable": true,
@@ -2793,7 +2828,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Properties": {
+        "properties": {
           "type": "object",
           "x-nullable": true,
           "additionalProperties": {}
@@ -4138,7 +4173,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "CurationCategoryIds": {
+        "curationCategoryIds": {
           "type": "array",
           "x-ms-identifiers": [],
           "x-nullable": true,
@@ -4152,11 +4187,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Value": {
+        "value": {
           "type": "string",
           "x-nullable": true
         },
-        "Count": {
+        "count": {
           "type": "integer",
           "format": "int64",
           "x-nullable": true
@@ -4937,35 +4972,35 @@
           "type": "string",
           "x-nullable": true
         },
-        "_ts": {
+        "ts": {
           "type": "integer",
           "format": "int64"
         },
-        "EntityId": {
+        "entityId": {
           "type": "string",
           "x-nullable": true
         },
-        "SpzaId": {
+        "spzaId": {
           "type": "string",
           "x-nullable": true
         },
-        "ActiveDirectoryAppId": {
+        "activeDirectoryAppId": {
           "type": "string",
           "x-nullable": true
         },
-        "Title": {
+        "title": {
           "type": "string",
           "x-nullable": true
         },
-        "ShortDescription": {
+        "shortDescription": {
           "type": "string",
           "x-nullable": true
         },
-        "IconUrl": {
+        "iconUrl": {
           "type": "string",
           "x-nullable": true
         },
-        "SaaSAddIns": {
+        "saaSAddIns": {
           "type": "array",
           "x-nullable": true,
           "x-ms-identifiers": [
@@ -4975,17 +5010,17 @@
             "$ref": "#/definitions/SaaSAddIn"
           }
         },
-        "HandOffUrl": {
+        "handOffUrl": {
           "type": "string",
           "x-nullable": true
         },
-        "IntegratedWithMicrosoftGraphApi": {
+        "integratedWithMicrosoftGraphApi": {
           "type": "boolean"
         },
-        "DisableSendEmailOnPurchase": {
+        "disableSendEmailOnPurchase": {
           "type": "boolean"
         },
-        "HideFromSaasBlade": {
+        "hideFromSaasBlade": {
           "type": "boolean"
         }
       }
@@ -4994,31 +5029,31 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "AssetId": {
+        "assetId": {
           "type": "string",
           "x-nullable": true
         },
-        "SpzaId": {
+        "spzaId": {
           "type": "string",
           "x-nullable": true
         },
-        "ProductId": {
+        "productId": {
           "type": "string",
           "x-nullable": true
         },
-        "Title": {
+        "title": {
           "type": "string",
           "x-nullable": true
         },
-        "ShortDescription": {
+        "shortDescription": {
           "type": "string",
           "x-nullable": true
         },
-        "IconUrl": {
+        "iconUrl": {
           "type": "string",
           "x-nullable": true
         },
-        "ProductType": {
+        "productType": {
           "type": "string",
           "x-nullable": true
         }
@@ -5084,19 +5119,19 @@
       "description": "Represents a feed of entities that includes additional information that OData formats support.",
       "additionalProperties": true,
       "properties": {
-        "NextPageLink": {
+        "nextPageLink": {
           "type": "string",
           "description": "Gets the link for the next page of items in the feed.",
           "format": "uri",
           "x-nullable": true
         },
-        "Count": {
+        "count": {
           "type": "integer",
           "description": "Gets the total count of items in the feed.",
           "format": "int64",
           "x-nullable": true
         },
-        "Items": {
+        "items": {
           "type": "array",
           "description": "Gets the collection of entities for this feed.",
           "x-nullable": true,
