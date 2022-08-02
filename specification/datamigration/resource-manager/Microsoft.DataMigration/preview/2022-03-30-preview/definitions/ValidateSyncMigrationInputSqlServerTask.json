@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ValidateSyncMigrationInputSqlServerTaskInput": {
+      "type": "object",
+      "description": "Input for task that validates migration input for SQL sync migrations",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Information for connecting to source SQL server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Information for connecting to target",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlDbSyncDatabaseInput"
+          }
+        }
+      },
+      "required": [
+        "targetConnectionInfo",
+        "sourceConnectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "ValidateSyncMigrationInputSqlServerTaskOutput": {
+      "type": "object",
+      "description": "Output for task that validates migration input for SQL sync migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Database identifier",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of database",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Errors associated with a selected database object",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

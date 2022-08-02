@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisOperationsList": {
+            "$ref": "./examples/RedisOperations_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1889,6 +1894,10 @@
               "type": "string",
               "description": "The storage account connection string for storing rdb file"
             },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
             "aof-storage-connection-string-0": {
               "type": "string",
               "description": "First storage account connection string"
@@ -1932,6 +1941,10 @@
               "type": "string",
               "description": "Zonal Configuration",
               "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
             }
           },
           "additionalProperties": {},

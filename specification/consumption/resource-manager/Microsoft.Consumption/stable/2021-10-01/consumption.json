@@ -249,6 +249,9 @@
               "$ref": "#/definitions/MarketplacesListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -778,7 +781,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservationSummaries"
@@ -880,7 +883,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrder",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -929,7 +932,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -975,13 +978,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_List",
-        "description": "Lists the reservations details for the defined scope and provided date range.",
+        "description": "Lists the reservations details for the defined scope and provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1062,7 +1065,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -1122,7 +1125,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -1152,6 +1155,9 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeParameter"
           },
           {
             "$ref": "#/parameters/regionParameter"
@@ -1191,7 +1197,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_List",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing account scope. Note: The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1203,7 +1209,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1240,7 +1246,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_ListByBillingProfile",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1252,7 +1258,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1654,7 +1660,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingProfile",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Azure credits for a billing account or a billing profile. The API is only supported for Microsoft Customer Agreements (MCA) billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1699,7 +1705,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingAccount",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1751,7 +1757,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByCustomer",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile and a customer. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Azure credits for a customer. The API is only supported for Microsoft Partner  Agreements (MPA) billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -3201,10 +3207,6 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "etag": {
-          "type": "string",
-          "description": "Resource etag."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3769,7 +3771,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -3890,7 +3892,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -5031,7 +5033,8 @@
             "PendingNewCredit",
             "PendingExpiredCredit",
             "UnKnown",
-            "NewCredit"
+            "NewCredit",
+            "CreditExpired"
           ],
           "x-ms-enum": {
             "name": "EventType",
@@ -5253,7 +5256,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5535,7 +5538,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationsSummariesParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5544,7 +5547,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5553,7 +5556,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5562,7 +5565,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationDetailsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5571,7 +5574,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationTransactionsParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",

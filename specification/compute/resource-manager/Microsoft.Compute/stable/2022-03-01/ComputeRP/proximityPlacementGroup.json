@@ -1,0 +1,455 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2022-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}": {
+      "put": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_CreateOrUpdate",
+        "description": "Create or update a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            },
+            "description": "Parameters supplied to the Create Proximity Placement Group operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Update",
+        "description": "Update a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupUpdate"
+            },
+            "description": "Parameters supplied to the Update Proximity Placement Group operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Delete",
+        "description": "Delete a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Get",
+        "description": "Retrieves information about a proximity placement group .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "name": "includeColocationStatus",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups": {
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_ListBySubscription",
+        "description": "Lists all proximity placement groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups": {
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_ListByResourceGroup",
+        "description": "Lists all proximity placement groups in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/proximityPlacementGroupExamples/ProximityPlacementGroup_ListByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProximityPlacementGroupProperties": {
+      "properties": {
+        "proximityPlacementGroupType": {
+          "type": "string",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
+          "enum": [
+            "Standard",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ProximityPlacementGroupType",
+            "modelAsString": true
+          }
+        },
+        "virtualMachines": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/SubResourceWithColocationStatus"
+          },
+          "description": "A list of references to all virtual machines in the proximity placement group."
+        },
+        "virtualMachineScaleSets": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/SubResourceWithColocationStatus"
+          },
+          "description": "A list of references to all virtual machine scale sets in the proximity placement group."
+        },
+        "availabilitySets": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/SubResourceWithColocationStatus"
+          },
+          "description": "A list of references to all availability sets in the proximity placement group."
+        },
+        "colocationStatus": {
+          "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus",
+          "description": "Describes colocation status of the Proximity Placement Group."
+        },
+        "intent": {
+          "type": "object",
+          "properties": {
+            "vmSizes": {
+              "type": "array",
+              "description": "Specifies possible sizes of virtual machines that can be created in the proximity placement group.",
+              "items": {
+                "type": "string",
+                "description": "Specifies the size of the virtual machine. Recommended way to get the list of available sizes is using these APIs: <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). <br><br> The available VM sizes depend on region and availability set."
+              }
+            }
+          },
+          "description": "Specifies the user intent of the proximity placement group."
+        }
+      },
+      "description": "Describes the properties of a Proximity Placement Group."
+    },
+    "ProximityPlacementGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProximityPlacementGroupProperties",
+          "description": "Describes the properties of a Proximity Placement Group."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the proximity placement group."
+    },
+    "ProximityPlacementGroupUpdate": {
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the proximity placement group."
+    },
+    "ProximityPlacementGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProximityPlacementGroup"
+          },
+          "description": "The list of proximity placement groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of proximity placement groups."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Proximity Placement Group operation response."
+    }
+  }
+}

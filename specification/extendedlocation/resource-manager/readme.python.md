@@ -12,7 +12,8 @@ no-namespace-folders: true
 
 ### Python multi-api
 
-``` yaml $(python) && $(multiapi)
+``` yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2021-03-15-preview

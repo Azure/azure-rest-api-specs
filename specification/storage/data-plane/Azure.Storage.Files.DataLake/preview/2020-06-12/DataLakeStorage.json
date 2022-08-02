@@ -700,6 +700,27 @@
           },
           {
             "$ref": "#/parameters/SourceIfUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Owner"
+          },
+          {
+            "$ref": "#/parameters/Group"
+          },
+          {
+            "$ref": "#/parameters/Acl"
+          },
+          {
+            "$ref": "#/parameters/ProposedLeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/LeaseDurationMethod"
+          },
+          {
+            "$ref": "#/parameters/PathExpiryOptionsOptional"
+          },
+          {
+            "$ref": "#/parameters/PathExpiryTime"
           }
         ],
         "responses": {
@@ -1018,12 +1039,7 @@
             }
           },
           {
-            "name": "x-ms-lease-duration",
-            "in": "header",
-            "description": "The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.",
-            "format": "int32",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/LeaseDuration"
           },
           {
             "name": "x-ms-lease-break-period",
@@ -2585,6 +2601,25 @@
       "x-ms-parameter-location": "method",
       "description": "Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
     },
+    "LeaseDuration": {
+      "name": "x-ms-lease-duration",
+      "in": "header",
+      "description": "The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.",
+      "format": "int32",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "client"
+    },
+    "LeaseDurationMethod": {
+      "name": "x-ms-lease-duration",
+      "x-ms-client-name": "leaseDuration",
+      "in": "header",
+      "description": "The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.",
+      "format": "int64",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
     "Prefix": {
       "name": "prefix",
       "in": "query",
@@ -2900,6 +2935,25 @@
       "x-ms-client-name": "ExpiryOptions",
       "in": "header",
       "required": true,
+      "type": "string",
+      "enum": [
+        "NeverExpire",
+        "RelativeToCreation",
+        "RelativeToNow",
+        "Absolute"
+      ],
+      "x-ms-enum": {
+        "name": "PathExpiryOptions",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Required. Indicates mode of the expiry time"
+    },
+    "PathExpiryOptionsOptional": {
+      "name": "x-ms-expiry-option",
+      "x-ms-client-name": "ExpiryOptions",
+      "in": "header",
+      "required": false,
       "type": "string",
       "enum": [
         "NeverExpire",
