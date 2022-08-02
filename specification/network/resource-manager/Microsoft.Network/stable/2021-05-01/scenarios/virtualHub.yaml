@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -18,8 +19,8 @@ scenarios:
     steps:
       - step: VirtualHub_Create
         exampleFile: ../examples/VirtualHubPut.json
-        resourceUpdate:
-          - replace: /properties/virtualWan/id
+        requestUpdate:
+          - replace: /virtualHubParameters/properties/virtualWan/id
             value: $(virtualWanID)
       - step: VirtualHub_UpdateTags
         exampleFile: ../examples/VirtualHubUpdateTags.json

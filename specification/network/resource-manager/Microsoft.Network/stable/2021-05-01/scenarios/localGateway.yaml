@@ -1,8 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
-
-prepareSteps:
-  - step: Generate_Unique_Name
-    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
 
 scenarios:
   - scenario: LocalNetworkGateway
@@ -10,8 +7,8 @@ scenarios:
     steps:
       - step: LocalNetworkGateway_Create
         exampleFile: ../examples/LocalNetworkGatewayCreate.json
-        resourceUpdate:
-          - remove: /properties/fqdn
+        requestUpdate:
+          - remove: /parameters/properties/fqdn
 #          - remove: /properties/gatewayIpAddress
       - step: LocalNetworkGateway_UpdateTags
         exampleFile: ../examples/LocalNetworkGatewayUpdateTags.json

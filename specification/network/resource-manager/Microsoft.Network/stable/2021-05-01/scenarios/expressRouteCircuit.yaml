@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -40,6 +41,9 @@ scenarios:
     steps:
       - step: ExpressRouteCircuitPeering_Create
         exampleFile: ../examples/ExpressRouteCircuitPeeringCreate.json
+        requestUpdate:
+          - add: /peeringParameters/properties/peeringType
+            value: AzurePrivatePeering
       - step: ExpressRouteCircuitPeering_Get
         exampleFile: ../examples/ExpressRouteCircuitPeeringGet.json
       - step: ExpressRouteCircuitPeering_List

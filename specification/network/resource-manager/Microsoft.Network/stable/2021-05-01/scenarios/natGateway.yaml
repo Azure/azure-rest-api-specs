@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 scenarios:
@@ -8,9 +9,9 @@ scenarios:
     steps:
       - step: NatGateway_Create
         exampleFile: ../examples/NatGatewayCreateOrUpdate.json
-        resourceUpdate:
-          - remove: /properties/publicIpAddresses
-          - remove: /properties/publicIpPrefixes
+        requestUpdate:
+          - remove: /parameters/properties/publicIpAddresses
+          - remove: /parameters/properties/publicIpPrefixes
       - step: NatGateway_UpdateTags
         exampleFile: ../examples/NatGatewayUpdateTags.json
       - step: NatGateway_Get

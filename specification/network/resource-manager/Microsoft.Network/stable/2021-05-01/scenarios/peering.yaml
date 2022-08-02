@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -15,8 +16,7 @@ prepareSteps:
     requestUpdate:
       - replace: /virtualNetworkName
         value: $(virtualNetworkName2)
-    resourceUpdate:
-      - replace: /properties/addressSpace/addressPrefixes/0
+      - replace: /parameters/properties/addressSpace/addressPrefixes/0
         value: 11.0.0.0/16
     outputVariables:
       vnetID2:

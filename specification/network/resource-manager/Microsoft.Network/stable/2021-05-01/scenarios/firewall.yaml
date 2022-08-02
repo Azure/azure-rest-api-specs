@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 scenarios:
@@ -8,8 +9,8 @@ scenarios:
     steps:
       - step: Firewall_Create
         exampleFile: ../examples/AzureFirewallPut.json
-        resourceUpdate:
-          - remove: /properties/ipConfigurations
+        requestUpdate:
+          - remove: /parameters/properties/ipConfigurations
       - step: Firewall_UpdateTag
         exampleFile: ../examples/AzureFirewallUpdateTags.json
       - step: Firewall_Get

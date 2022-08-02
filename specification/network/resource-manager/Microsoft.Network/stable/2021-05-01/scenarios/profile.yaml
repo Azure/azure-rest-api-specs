@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 prepareSteps:
@@ -15,8 +16,8 @@ scenarios:
     steps:
       - step: Profile_Create
         exampleFile: ../examples/NetworkProfileCreateConfigOnly.json
-        resourceUpdate:
-          - replace: /properties/containerNetworkInterfaceConfigurations/0/properties/ipConfigurations/0/properties/subnet/id
+        requestUpdate:
+          - replace: /parameters/properties/containerNetworkInterfaceConfigurations/0/properties/ipConfigurations/0/properties/subnet/id
             value: $(subnetID)
       - step: Profile_UpdateTags
         exampleFile: ../examples/NetworkProfileUpdateTags.json

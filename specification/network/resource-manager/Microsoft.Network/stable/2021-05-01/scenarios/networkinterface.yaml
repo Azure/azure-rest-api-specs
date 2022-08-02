@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -24,12 +25,12 @@ scenarios:
     steps:
       - step: NetworkInterface_Create
         exampleFile: ../examples/NetworkInterfaceCreate.json
-        resourceUpdate:
+        requestUpdate:
           - replace: /location
             value: westus
-          - replace: /properties/ipConfigurations/0/properties/publicIPAddress/id
+          - replace: /parameters/properties/ipConfigurations/0/properties/publicIPAddress/id
             value: $(publicIP)
-          - replace: /properties/ipConfigurations/0/properties/subnet/id
+          - replace: /parameters/properties/ipConfigurations/0/properties/subnet/id
             value: $(subnetID)
       - step: NetworkInterface_Get
         exampleFile: ../examples/NetworkInterfaceGet.json

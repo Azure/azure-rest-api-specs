@@ -1,23 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 prepareSteps:
   - step: VirtualNetworks_CreateWithSubnet
     exampleFile: ../examples/VirtualNetworkCreateSubnet.json
-    resourceUpdate:
-      - replace: /properties/subnets/0/name
+    requestUpdate:
+      - replace: /parameters/properties/subnets/0/name
         value: AzureBastionSubnet
     outputVariables:
       subnetID:
         fromResponse: /properties/subnets/0/id
   - step: PublicIpAddress_CreateDefaults
     exampleFile: ../examples/PublicIpAddressCreateDefaults.json
-    resourceUpdate:
-      - add: /sku/name
-        value: Standard
-      - add: /sku/tier
-        value: Global
-      - add: /properties/publicIPAllocationMethod
-        value: Static
+    requestUpdate:
+      - add: /parameters/sku
+        value:
+          "name": "Standard"
+          "tier": "Regional"
+      - add: /parameters/properties
+        value: 
+          "publicIPAllocationMethod": "Static"
     outputVariables:
       publicIP:
         fromResponse: /id
@@ -30,12 +32,12 @@ scenarios:
     steps:
       - step: BastionHost_Create
         exampleFile: ../examples/BastionHostPut.json
-        resourceUpdate:
-          - add: /properties/location
+        requestUpdate:
+          - add: /parameters/location
             value: eastus
-          - replace: /properties/ipConfigurations/0/properties/subnet/id
+          - replace: /parameters/properties/ipConfigurations/0/properties/subnet/id
             value: $(subnetID)
-          - replace: /properties/ipConfigurations/0/properties/publicIPAddress/id
+          - replace: /parameters/properties/ipConfigurations/0/properties/publicIPAddress/id
             value: $(publicIP)
       - step: BastionHost_Update
         exampleFile: ../examples/BastionHostPatch.json

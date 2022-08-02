@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -13,11 +14,12 @@ prepareSteps:
         fromResponse: /properties/subnets/0/id
   - step: LoadBalancer_Create
     exampleFile: ../examples/LoadBalancerCreate.json
-    resourceUpdate:
-      - replace: /properties/frontendIPConfigurations/0/properties/subnet/id
+    requestUpdate:
+      - replace: /parameters/properties/frontendIPConfigurations/0/properties/subnet/id
         value: $(subnetID)
-      - replace: /sku/name
-        value: Standard
+      - add: /parameters/sku
+        value: 
+          "name": Standard
 
 scenarios:
   - scenario:  LoadBalancerBackendAddressPool
@@ -27,10 +29,10 @@ scenarios:
     steps:
       - step: LoadBalancerBackendAddressPool_Create
         exampleFile: ../examples/LBBackendAddressPoolWithBackendAddressesPut.json
-        resourceUpdate:
-          - replace: /properties/loadBalancerBackendAddresses/0/properties/virtualNetwork/id
+        requestUpdate:
+          - replace: /parameters/properties/loadBalancerBackendAddresses/0/properties/virtualNetwork/id
             value: $(vnetID)
-          - replace: /properties/loadBalancerBackendAddresses/1/properties/virtualNetwork/id
+          - replace: /parameters/properties/loadBalancerBackendAddresses/1/properties/virtualNetwork/id
             value: $(vnetID)
       - step: LoadBalancerBackendAddressPool_Get
         exampleFile: ../examples/LBBackendAddressPoolWithBackendAddressesGet.json

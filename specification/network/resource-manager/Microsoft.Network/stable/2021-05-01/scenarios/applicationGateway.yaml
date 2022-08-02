@@ -1,12 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
-
-variables:
-  userAssignedIdentities:
-    type: string
-
-prepareSteps:
-  - step: Generate_Unique_Name
-    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
 
 scenarios:
   - scenario: ApplicationGateway
@@ -14,10 +7,12 @@ scenarios:
     steps:
       - step: ApplicationGateway_Create
         exampleFile: ../examples/ApplicationGatewayCreate.json
-#        resourceUpdate:
-#          - remove: /identity/userAssignedIdentities/\"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1\"
-#          - add: /identity/userAssignedIdentities
-#            value: \"/subscriptions/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1\":{}
+        # requestUpdate:
+        #   - replace: /parameters/identity
+        #     value:
+        #       type: UserAssigned
+        #       userAssignedIdentities:
+        #         /subscription/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1: {}
       - step: ApplicationGateway_UpdateTags
         exampleFile: ../examples/ApplicationGatewayUpdateTags.json
       - step: ApplicationGateway_Get
