@@ -711,6 +711,7 @@ These settings apply only when `--tag=package-2018-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2018-09-01-only'
 input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
 ```
 
 ### Tag: package-2018-06-01-preview-only
