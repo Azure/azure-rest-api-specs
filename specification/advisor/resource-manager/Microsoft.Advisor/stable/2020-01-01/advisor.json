@@ -371,7 +371,12 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/operationIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1519,14 +1524,6 @@
       "description": "The Azure subscription ID.",
       "required": true,
       "type": "string"
-    },
-    "operationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
-      "required": true,
-      "type": "string",
-      "format": "uuid"
     },
     "apiVersionParameter": {
       "name": "api-version",
