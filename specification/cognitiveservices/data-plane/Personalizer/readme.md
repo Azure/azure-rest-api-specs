@@ -57,7 +57,7 @@ These settings apply only when `--tag=release_2022_09_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_09_01_preview'
 input-file: 
-  - preview/v2022-09-01-preview/Personalizer.json
+  - preview/2022-09-01-preview/Personalizer.json
 ```
 
 ## CSharp Settings
