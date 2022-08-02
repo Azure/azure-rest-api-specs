@@ -2775,10 +2775,9 @@
           "$ref": "#/definitions/VpnClientConfiguration",
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
-        "VirtualNetworkGatewayPolicyGroups":
-        {
+        "virtualNetworkGatewayPolicyGroups": {
           "type": "array",
-          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the avalialbe VirtualNetworkGatewayPolicyGroup for the gateway.",
+          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the available VirtualNetworkGatewayPolicyGroup for the gateway.",
           "items": {
             "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup"
           }
@@ -3019,7 +3018,7 @@
           "type": "string",
           "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
         },
-        "vngClientConnectionConfigurations":{
+        "vngClientConnectionConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VngClientConnectionConfiguration"
@@ -3636,15 +3635,14 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
     },
-    "VngClientConnectionConfiguration":
-    {
+    "VngClientConnectionConfiguration": {
+      "type": "object",
       "properties": {
         "vpnClientAddressPool": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
         },
-        "virtualNetworkGatewayPolicyGroups":
-        {
+        "virtualNetworkGatewayPolicyGroups": {
           "type": "array",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
@@ -3657,8 +3655,7 @@
       ],
       "description": "A vpn client connection configuration for client connection configuration."
     },
-    "VirtualNetworkGatewayPolicyGroup":
-    {
+    "VirtualNetworkGatewayPolicyGroup": {
       "type": "object",
       "properties": {
         "isDefault": {
