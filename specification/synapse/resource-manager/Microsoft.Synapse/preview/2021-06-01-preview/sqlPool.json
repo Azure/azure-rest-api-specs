@@ -5271,7 +5271,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "consumes": [],
         "produces": [
@@ -7685,20 +7685,23 @@
     "DataWarehouseQueries": {
       "description": "The response to a list datawarehouse queries.",
       "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of datawarehouse queries.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataWarehouseQueriesProperties"
-          }
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataWarehouseQueriesProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "nextLink": {
+        "description": "Link to retrieve next page of results.",
+        "type": "string",
+        "readOnly": true
+      }
     },
     "DataWarehouseQueriesProperties": {
       "description": "Properties of a datawarehousequeries.",
