@@ -3635,7 +3635,7 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
     },
-    "VngClientConnectionConfiguration": {
+    "VngClientConnectionConfigurationProperties": {
       "type": "object",
       "properties": {
         "vpnClientAddressPool": {
@@ -3648,11 +3648,45 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "List of references to virtualNetworkGatewayPolicyGroups"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VngClientConnectionConfiguration resource."
         }
       },
+      "required": [
+        "vpnClientAddressPool",
+        "virtualNetworkGatewayPolicyGroups"
+      ],
+      "description": "Properties of VngClientConnectionConfiguration."
+    },
+    "VngClientConnectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VngClientConnectionConfigurationProperties",
+          "description": "Properties of the vpn client root certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "A vpn client connection configuration for client connection configuration."
     },
-    "VirtualNetworkGatewayPolicyGroup": {
+    "VirtualNetworkGatewayPolicyGroupProperties": {
       "type": "object",
       "properties": {
         "isDefault": {
@@ -3686,6 +3720,36 @@
           "description": "The provisioning state of the VirtualNetworkGatewayPolicyGroup resource."
         }
       },
+      "required": [
+        "priority",
+        "policyMembers",
+        "isDefault"
+      ],
+      "description": "Properties of VirtualNetworkGatewayPolicyGroup."
+    },
+    "VirtualNetworkGatewayPolicyGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupProperties",
+          "description": "Properties of tVirtualNetworkGatewayPolicyGroup."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "Parameters for VirtualNetworkGatewayPolicyGroup."
     },
     "VirtualNetworkGatewayPolicyGroupMember": {
