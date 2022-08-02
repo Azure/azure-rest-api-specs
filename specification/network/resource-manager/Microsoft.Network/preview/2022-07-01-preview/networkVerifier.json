@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft.Network/NetworkVerifiers",
+    "title": "Microsoft.Network/networkVerifiers",
     "version": "2022-07-01-preview"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/AnalysisIntents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents": {
       "get": {
         "tags": [
           "AnalysisIntent"
@@ -55,9 +55,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "AnalysisIntentList": {
             "$ref": "./examples/AnalysisIntentList.json"
@@ -65,7 +62,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/AnalysisIntents/{analysisIntentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}": {
       "get": {
         "tags": [
           "AnalysisIntent"
@@ -125,6 +122,7 @@
             }
           }
         },
+        "x-ms-error": true,
         "x-ms-examples": {
           "AnalysisIntentGet": {
             "$ref": "./examples/AnalysisIntentGet.json"
@@ -208,6 +206,7 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-error": true,
         "x-ms-examples": {
           "AnalysisIntentPut": {
             "$ref": "./examples/AnalysisIntentPut.json"
@@ -275,7 +274,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/AnalysisIntents/{analysisIntentName}/AnalysisRuns": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}/analysisRuns": {
       "get": {
         "tags": [
           "AnalysisRun"
@@ -332,9 +331,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "AnalysisRunList": {
             "$ref": "./examples/AnalysisRunList.json"
@@ -342,7 +338,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/AnalysisIntents/{analysisIntentName}/AnalysisRuns/{analysisRunName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}/analysisRuns/{analysisRunName}": {
       "get": {
         "tags": [
           "AnalysisRun"
@@ -396,6 +392,12 @@
               "$ref": "#/definitions/AnalysisRun"
             }
           },
+          "404": {
+            "description": "AnalysisRun Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -403,6 +405,7 @@
             }
           }
         },
+        "x-ms-error": true,
         "x-ms-examples": {
           "AnalysisRunGet": {
             "$ref": "./examples/AnalysisRunGet.json"
@@ -493,6 +496,7 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-error": true,
         "x-ms-examples": {
           "AnalysisRunPut": {
             "$ref": "./examples/AnalysisRunPut.json"
@@ -572,7 +576,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/ConfigurationSnapshots": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/configurationSnapshots": {
       "get": {
         "tags": [
           "ConfigurationSnapshot"
@@ -622,9 +626,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ConfigurationSnapshotList": {
             "$ref": "./examples/ConfigurationSnapshotList.json"
@@ -632,7 +633,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}/ConfigurationSnapshots/{configurationSnapshotName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/configurationSnapshots/{configurationSnapshotName}": {
       "get": {
         "tags": [
           "ConfigurationSnapshot"
@@ -692,6 +693,7 @@
             }
           }
         },
+        "x-ms-error": true,
         "x-ms-examples": {
           "ConfigurationSnapshotGet": {
             "$ref": "./examples/ConfigurationSnapshotGet.json"
@@ -775,6 +777,7 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-error": true,
         "x-ms-examples": {
           "ConfigurationSnapshotPut": {
             "$ref": "./examples/ConfigurationSnapshotPut.json"
@@ -842,7 +845,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers": {
       "get": {
         "tags": [
           "NetworkVerifier"
@@ -885,9 +888,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "NetworkVerifierList": {
             "$ref": "./examples/NetworkVerifierList.json"
@@ -895,7 +895,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkVerifiers/{networkVerifierName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}": {
       "get": {
         "tags": [
           "NetworkVerifier"
@@ -948,6 +948,7 @@
             }
           }
         },
+        "x-ms-error": true,
         "x-ms-examples": {
           "NetworkVerifierGet": {
             "$ref": "./examples/NetworkVerifierGet.json"
@@ -1315,11 +1316,11 @@
     "NetworkProtocols": {
       "format": "int32",
       "enum": [
-        0,
-        1,
-        2
+        "TCP",
+        "UDP",
+        "ICMP"
       ],
-      "type": "integer",
+      "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "NetworkProtocols"
@@ -1368,17 +1369,17 @@
     "ProvisioningState": {
       "format": "int32",
       "enum": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
       ],
-      "type": "integer",
+      "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
@@ -1392,5 +1393,47 @@
         }
       }
     }
-  }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The name of the resource group to which the netowrk verifier belongs.",
+      "required": true,
+      "type": "string",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
