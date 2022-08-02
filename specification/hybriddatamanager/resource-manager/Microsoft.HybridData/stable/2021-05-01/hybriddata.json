@@ -297,6 +297,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SessionRecords\\DataManagersTest\\DataManagers_DeleteDELETE41": {
             "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
@@ -758,6 +761,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+      },
         "x-ms-examples": {
           "SessionRecords\\JobDefinitionsTest\\JobDefinitions_DeleteDELETE81": {
             "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
@@ -1626,6 +1632,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSinkDELETE191": {
             "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-191.json"
@@ -2093,7 +2102,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers":["/properties/code"]
         }
       },
       "x-ms-external": true
@@ -2155,7 +2165,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataManager"
-          }
+          },
+          "x-ms-identifiers": ["/properties/etag"]
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
