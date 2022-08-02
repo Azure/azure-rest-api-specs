@@ -68,7 +68,7 @@
           }
         },
         "x-ms-examples": {
-          "Get list of service tags": {
+          "Gets a WAF manifest": {
             "$ref": "./examples/GetApplicationGatewayWafDynamicManifest.json"
           }
         }
@@ -183,24 +183,9 @@
         "rules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+            "$ref": "applicationGateway.json#/ApplicationGatewayFirewallRule"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "ApplicationGatewayFirewallRule": {
-      "description": "A web application firewall rule.",
-      "type": "object",
-      "properties": {
-        "ruleId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The identifier of the web application firewall rule."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the web application firewall rule."
         }
       }
     }
