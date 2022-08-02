@@ -1,12 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
-variables:
-  azureTenantId:
-    type: string
-
-prepareSteps:
-  - step: Generate_Unique_Name
-    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+# variables:
+#   azureTenantId:
+#     type: string
 
 scenarios:
   - scenario: DiskEncryptionSet
@@ -22,10 +19,10 @@ scenarios:
         armTemplate: ./peArmTemplate/Create_Key.json
       - step: DiskEncryptionSet_Create
         exampleFile: ../examples/CreateADiskEncryptionSet.json
-        resourceUpdate:
-          - replace: /properties/activeKey/sourceVault/id
+        requestUpdate:
+          - replace: /diskEncryptionSet/properties/activeKey/sourceVault/id
             value: $(vaultID)
-          - replace: /properties/activeKey/keyUrl
+          - replace: /diskEncryptionSet/properties/activeKey/keyUrl
             value: $(keyUri)
       - step: DiskEncryptionSet_Get
         exampleFile: ../examples/GetInformationAboutADiskEncryptionSetWithAutoKeyRotationError.json
