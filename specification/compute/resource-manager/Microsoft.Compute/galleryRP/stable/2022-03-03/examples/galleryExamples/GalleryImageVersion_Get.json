@@ -31,14 +31,12 @@
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
                     }
                   ]
-                },
-                "excludeFromLatest": false
+                }
               },
               {
                 "name": "East US",
                 "regionalReplicaCount": 2,
-                "storageAccountType": "Standard_LRS",
-                "excludeFromLatest": false
+                "storageAccountType": "Standard_LRS"
               }
             ],
             "replicaCount": 1,
@@ -58,16 +56,6 @@
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
-              }
-            ]
-          },
-          "safetyProfile": {
-            "allowDeletionOfReplicatedLocations": false,
-            "reportedForPolicyViolation": true,
-            "policyViolations": [
-              {
-                "category": "ImageFlaggedUnsafe",
-                "details": "This is the policy violation details."
               }
             ]
           },

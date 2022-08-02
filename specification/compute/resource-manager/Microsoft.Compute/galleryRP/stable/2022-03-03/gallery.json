@@ -525,66 +525,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/latestVersionName": {
-      "get": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_GetLatestVersionName",
-        "description": "Retrieves information about the latest image version in the Gallery Image.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery from which the Image Definitions are to be retrieved."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be retrieved."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "location",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The location to query for the latest version name."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LatestGalleryImageVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get name of latest gallery image version.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_GetLatestVersionName.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}": {
       "put": {
         "tags": [
@@ -672,9 +612,6 @@
           },
           "Create or update a simple Gallery Image Version using shared image as source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithImageVersionAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using community gallery image as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithCommunityImageVersionAsSource.json"
           },
           "Create or update a simple Gallery Image Version using mix of disks and snapshots as a source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
@@ -1885,7 +1822,9 @@
           "description": "A list of sharing profile groups."
         },
         "communityGalleryInfo": {
-          "$ref": "#/definitions/CommunityGalleryInfo",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryInfo"
+          },
           "description": "Information of community gallery if current gallery is shared to community."
         }
       }
@@ -2077,16 +2016,6 @@
             "name": "OperatingSystemTypes",
             "modelAsString": false
           }
-        },
-        "customActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryApplicationCustomAction"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application."
         }
       },
       "required": [
@@ -2127,9 +2056,6 @@
         "publishingProfile": {
           "$ref": "#/definitions/GalleryApplicationVersionPublishingProfile"
         },
-        "safetyProfile": {
-          "$ref": "#/definitions/GalleryApplicationVersionSafetyProfile"
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/GalleryProvisioningState"
@@ -2165,16 +2091,6 @@
         "enableHealthCheck": {
           "type": "boolean",
           "description": "Optional. Whether or not this application reports health."
-        },
-        "customActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryApplicationCustomAction"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "A list of custom actions that can be performed with this Gallery Application Version."
         }
       },
       "allOf": [
@@ -2186,86 +2102,6 @@
         "source"
       ],
       "description": "The publishing profile of a gallery image version."
-    },
-    "GalleryApplicationVersionSafetyProfile": {
-      "type": "object",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
-        }
-      ],
-      "description": "The safety profile of the Gallery Application Version."
-    },
-    "GalleryApplicationCustomAction": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
-        },
-        "script": {
-          "type": "string",
-          "description": "The script to run when executing this custom action."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description to help the users understand what this custom action does."
-        },
-        "parameters": {
-          "type": "array",
-          "description": "The parameters that this custom action uses",
-          "items": {
-            "$ref": "#/definitions/GalleryApplicationCustomActionParameter"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "name",
-        "script"
-      ],
-      "description": "A custom action that can be performed with a Gallery Application Version."
-    },
-    "GalleryApplicationCustomActionParameter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
-        },
-        "required": {
-          "type": "boolean",
-          "description": "Indicates whether this parameter must be passed when running the custom action."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob",
-          "enum": [
-            "String",
-            "ConfigurationDataBlob",
-            "LogOutputBlob"
-          ],
-          "x-ms-enum": {
-            "name": "GalleryApplicationCustomActionParameterType",
-            "modelAsString": false
-          }
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "The default value of the parameter.  Only applies to string types"
-        },
-        "description": {
-          "type": "string",
-          "description": "A description to help users understand what this parameter means"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version."
     },
     "UserArtifactSource": {
       "properties": {
@@ -2481,9 +2317,6 @@
         "storageProfile": {
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         },
-        "safetyProfile": {
-          "$ref": "#/definitions/GalleryImageVersionSafetyProfile"
-        },
         "replicationStatus": {
           "readOnly": true,
           "$ref": "#/definitions/ReplicationStatus"
@@ -2591,10 +2424,6 @@
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionImages"
-        },
-        "excludeFromLatest": {
-          "type": "boolean",
-          "description": "Contains the flag setting to hide an image when users specify version='latest'"
         }
       },
       "required": [
@@ -2777,7 +2606,7 @@
     "GalleryImageVersionStorageProfile": {
       "properties": {
         "source": {
-          "$ref": "#/definitions/GalleryArtifactVersionFullSource"
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
         },
         "osDiskImage": {
           "$ref": "#/definitions/GalleryOSDiskImage"
@@ -2795,26 +2624,15 @@
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "GalleryArtifactVersionFullSource": {
-      "type": "object",
-      "properties": {
-        "communityGalleryImageId": {
-          "type": "string",
-          "description": "The resource Id of the source Community Gallery Image.  Only required when using Community Gallery Image as a source."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
-        }
-      ],
-      "description": "The source of the gallery artifact version."
-    },
     "GalleryArtifactVersionSource": {
       "properties": {
         "id": {
           "type": "string",
           "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
         }
       },
       "description": "The gallery artifact version source."
@@ -2867,88 +2685,10 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/GalleryDiskImageSource"
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
         }
       },
       "description": "This is the disk image base class."
-    },
-    "GalleryDiskImageSource": {
-      "type": "object",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
-        },
-        "storageAccountId": {
-          "type": "string",
-          "description": "The Storage Account Id that contains the vhd blob being used as a source for this artifact version."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
-        }
-      ],
-      "description": "The source for the disk image."
-    },
-    "GalleryArtifactSafetyProfileBase": {
-      "type": "object",
-      "properties": {
-        "allowDeletionOfReplicatedLocations": {
-          "type": "boolean",
-          "description": "Indicates whether or not removing this Gallery Image Version from replicated regions is allowed."
-        }
-      },
-      "description": "This is the safety profile of the Gallery Artifact Version."
-    },
-    "GalleryImageVersionSafetyProfile": {
-      "type": "object",
-      "properties": {
-        "reportedForPolicyViolation": {
-          "type": "boolean",
-          "description": "Indicates whether this image has been reported as violating Microsoft's policies.",
-          "readOnly": true
-        },
-        "policyViolations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PolicyViolation"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of Policy Violations that have been reported for this Gallery Image Version.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
-        }
-      ],
-      "description": "This is the safety profile of the Gallery Image Version."
-    },
-    "PolicyViolation": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "Describes the nature of the policy violation.",
-          "enum": [
-            "Other",
-            "ImageFlaggedUnsafe",
-            "CopyrightValidation",
-            "IpTheft"
-          ],
-          "x-ms-enum": {
-            "name": "PolicyViolationCategory",
-            "modelAsString": true
-          }
-        },
-        "details": {
-          "type": "string",
-          "description": "Describes specific details about why this policy violation was reported."
-        }
-      },
-      "description": "A policy violation reported against a gallery artifact."
     },
     "ReplicationStatus": {
       "properties": {
@@ -3187,21 +2927,6 @@
       "x-ms-enum": {
         "name": "GalleryProvisioningState",
         "modelAsString": true
-      }
-    },
-    "LatestGalleryImageVersion": {
-      "type": "object",
-      "readOnly": true,
-      "description": "The gallery image version with latest version in a particular region.",
-      "properties": {
-        "latestVersionName": {
-          "type": "string",
-          "description": "The name of the latest version in the region."
-        },
-        "location": {
-          "type": "string",
-          "description": "region of the Gallery Image Version."
-        }
       }
     }
   },
