@@ -731,13 +731,6 @@
           "type": "integer",
           "default": 3
         },
-        "phraseControls": {
-          "type": "array",
-          "description": "Control the phrases to be used in the summary.",
-          "items": {
-            "$ref": "#/definitions/PhraseControl"
-          }
-        },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
@@ -747,12 +740,19 @@
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
       "properties": {
+        "phraseControls": {
+          "type": "array",
+          "description": "Control the phrases to be used in the summary.",
+          "items": {
+            "$ref": "#/definitions/PhraseControl"
+          }
+        },
         "labFeatures": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Experimental features. Microsoft doesn't offer support for experimental features, but you can engage with summarization working group directly to try out early capabilities without API or SDK upgrade."
+          "description": "Used for experimental features."
         }
       },
       "allOf": [

@@ -2001,6 +2001,57 @@
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationTask"
     },
+    "ConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an conversational summarization task.",
+      "required": [
+        "summaryAspects"
+      ],
+      "properties": {
+        "summaryAspects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "issue",
+              "resolution",
+              "chapterTitle",
+              "generic"
+            ],
+            "x-ms-enum": {
+              "name": "SummaryAspect",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "issue",
+                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "resolution",
+                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "chapterTitle",
+                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
+                },
+                {
+                  "value": "generic",
+                  "description": "A generic summary of any conversation. Always use generic aspect for custom summarization model."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        },
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
+      ]
+    },
     "AnalyzeConversationSummarizationResult": {
       "type": "object",
       "description": "Result for the summarization task on the conversation.",
@@ -2018,6 +2069,32 @@
         "results"
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationResults"
+    },
+    "SummaryResult": {
+      "type": "object",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConversationsSummaryResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
     },
     "ConversationsSummaryResult": {
       "type": "object",
@@ -2212,101 +2289,6 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/RequestStatistics"
-        }
-      ]
-    },
-    "ConversationSummarizationTaskParametersBase": {
-      "type": "object",
-      "description": "Supported parameters for an conversational summarization task.",
-      "required": [
-        "summaryAspects"
-      ],
-      "properties": {
-        "summaryAspects": {
-          "type": "array",
-          "description": "Specify the aspects for the conversational summarization task.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "issue",
-              "resolution",
-              "chapterTitle",
-              "generic"
-            ],
-            "x-ms-enum": {
-              "name": "SummaryAspect",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "issue",
-                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
-                },
-                {
-                  "value": "resolution",
-                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
-                },
-                {
-                  "value": "chapterTitle",
-                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
-                },
-                {
-                  "value": "generic",
-                  "description": "A generic summary of any conversation. Always use generic aspect for custom summarization model."
-                }
-              ]
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
-        }
-      ]
-    },
-    "ConversationSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an pre-build conversational summarization task.",
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        },
-        {
-          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
-        }
-      ]
-    },
-    "SummaryResultBase": {
-      "type": "object",
-      "description": "Result for the summarization task on the conversation.",
-      "required": [
-        "conversations"
-      ],
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ConversationsSummaryResult"
-              },
-              {
-                "$ref": "#/definitions/ConversationResultBase"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "SummaryResult": {
-      "type": "object",
-      "description": "Result for the pre-build summarization task on the conversation.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryResultBase"
-        },
-        {
-          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ]
     },
