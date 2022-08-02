@@ -7690,27 +7690,117 @@
           "description": "The list of datawarehouse queries.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataWarehouseQueries"
+            "$ref": "#/definitions/DataWarehouseQueriesProperties"
           }
         }
       }
-    }
-  },
-    "parameters": {
-      "DataMaskingPolicyNameParameter": {
-        "name": "dataMaskingPolicyName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "enum": [
-          "Default"
-        ],
-        "x-ms-enum": {
-          "modelAsString": false,
-          "name": "DataMaskingPolicyName"
+    },
+    "DataWarehouseQueriesProperties": {
+      "description": "Properties of a datawarehousequeries.",
+      "type": "object",
+      "properties": {
+        "QueryId": {
+          "description": "QueryId.",
+          "type": "string",
+          "readOnly": true
         },
-        "description": "The name of the data masking policy for which the masking rule applies.",
-        "x-ms-parameter-location": "method"
+        "startTime": {
+          "description": "The start time for queries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for queries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of requested queries.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "description": " Status of DataWarehouseQueries.",
+          "type": "sting",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": " QueryText Message",
+          "type": "sting",
+          "readOnly": true
+        },
+        "importance": {
+          "description": "DataWarehouseQueries Importance",
+          "type": "sting",
+          "readOnly": true
+        },
+        "groupName": {
+          "description": "Requested GroupName ",
+          "type": "sting",
+          "readOnly": true
+        },
+        "classifierName": {
+          "description": "Requested ClassifierName",
+          "type": "sting",
+          "readOnly": true
+        },
+        "resourceAllocationPercentage": {
+          "description": "AllocationPercentage of the Resource",
+          "type": "sting",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Error value",
+          "type": [ "string", "null" ],
+          "readOnly": true
+        },
+        "login": {
+          "description": "Login Details",
+          "type": "sting",
+          "readOnly": true
+        },
+        "progress": {
+          "description": "Progress value",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sessionId": {
+          "description": "SessionId for Resource",
+          "type": "sting",
+          "readOnly": true
+        },
+        "resourceClass": {
+          "description": "Requested ResourceClass",
+          "type": "sting",
+          "readOnly": true
+        },
+        "concurrencySlots": {
+          "description": "ConcurrencySlots",
+          "type": "sting",
+          "readOnly": true
+        }
       }
+      }
+    },
+  "parameters": {
+    "DataMaskingPolicyNameParameter": {
+      "name": "dataMaskingPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "DataMaskingPolicyName"
+      },
+      "description": "The name of the data masking policy for which the masking rule applies.",
+      "x-ms-parameter-location": "method"
     }
   }
+}
