@@ -1086,10 +1086,28 @@
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
         },
-        "enableNATGateway": {
-          "type": "boolean",
-          "description": "Property only meant to be used for Premium SKU Service. This can be used to enable NAT Gateway.",
-          "default": false
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
         },
         "natOutboundAddresses": {
           "type": "array",
@@ -1382,11 +1400,10 @@
         "natGatewayState": {
           "type": "string",
           "description": "Property can be used to enable NAT Gateway for this API Management service.",
-          "default": "Unsupported",
+          "default": "Disabled",
           "enum": [
             "Enabled",
-            "Disabled",
-            "Unsupported"
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "NatGatewayState",
@@ -1399,10 +1416,6 @@
               {
                 "value": "Disabled",
                 "description": "Nat Gateway is disabled for the service."
-              },
-              {
-                "value": "Unsupported",
-                "description": "The service does not support enable Nat Gateway."
               }
             ]
           }
