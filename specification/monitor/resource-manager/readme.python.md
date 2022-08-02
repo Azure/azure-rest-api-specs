@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
+  - tag: package-2022-04-01-only
   - tag: package-2022-02-01-preview-only
   - tag: package-2021-09-01-only
   - tag: package-2021-05-01-preview-only
@@ -49,6 +50,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
 perform-load: false
+```
+
+### Tag: package-2022-04-01-only and python
+
+These settings apply only when `--tag=package-2022-04-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+namespace: $(python-base-namespace).v2022_04_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2022_04_01
 ```
 
 ### Tag: package-2022-02-01-preview-only and python
