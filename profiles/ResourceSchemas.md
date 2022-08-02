@@ -244,6 +244,7 @@ batch:
       - ../specification/search/resource-manager/Microsoft.Search/2015-02-28/search.json
       - ../specification/search/resource-manager/Microsoft.Search/2015-08-19/search.json
       - ../specification/serialconsole/resource-manager/Microsoft.SerialConsole/2018-05-01/serialconsole.json
+      - ../specification/serialconsole/resource-manager/Microsoft.SerialConsole/2018-05-01/serialport.json
       - ../specification/servermanagement/resource-manager/Microsoft.ServerManagement/2015-07-01-preview/servermanagement.json
       - ../specification/servermanagement/resource-manager/Microsoft.ServerManagement/2016-07-01-preview/servermanagement.json
       - ../specification/service-map/resource-manager/Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
