@@ -231,6 +231,9 @@
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotRestorePolicy.json"
           },
+          "Create a scale set with priority mix policy": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPriorityMixPolicy.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -3618,6 +3621,26 @@
       },
       "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. <br><br> With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
     },
+    "PriorityMixPolicy": {
+      "type": "object",
+      "properties": {
+        "baseRegularPriorityCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The base number of regular priority VM's that will be created in this scale set as it scales out."
+        },
+        "regularPriorityPercentageAboveBase": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The percentage of VM instances, after the base regular priority count has been reached, that are expected to use regular priority."
+        }
+      },
+      "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. <br><br>With this property the customer is able to specify the base number of regular priority VM's created as the VMSS flex instance scales out and the split between Spot and Regular priority VM's after this base target has been reached."
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -4764,6 +4787,10 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "priorityMixPolicy": {
+          "$ref": "#/definitions/PriorityMixPolicy",
+          "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
         },
         "timeCreated": {
           "readOnly": true,
