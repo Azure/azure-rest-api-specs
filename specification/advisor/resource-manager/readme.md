@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.Advisor/stable/2022-02-01/advisor.json
+```
 ### Tag: package-2022-02-preview 
 
 These settings apply only when `--tag=package-2022-02-preview` is specified on the command line.
