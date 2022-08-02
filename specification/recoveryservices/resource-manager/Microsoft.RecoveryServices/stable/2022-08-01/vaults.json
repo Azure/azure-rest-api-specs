@@ -980,6 +980,24 @@
         }
       }
     },
+    "ImmutabilitySettings": {
+      "description": "Immutability Settings of vault",
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "Disabled",
+            "Unlocked",
+            "Locked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImmutabilityState",
+            "modelAsString": true
+          }
+        }
+      }
+    },	
     "MonitoringSettings": {
       "description": "Monitoring Settings of the vault",
       "type": "object",
@@ -1020,6 +1038,16 @@
       },
       "x-ms-azure-resource": true
     },
+    "SecuritySettings": {
+      "description": "Security Settings of the vault",
+      "type": "object",
+      "properties": {
+        "immutabilitySettings": {
+          "description": "Immutability Settings of a vault",
+          "$ref": "#/definitions/ImmutabilitySettings"
+        }
+      }
+    },	
     "Sku": {
       "description": "Identifies the unique system identifier for each Azure resource.",
       "required": [
@@ -1499,7 +1527,11 @@
               }
             }
           }
-        }
+        },
+        "securitySettings": {
+          "description": "Security Settings of the vault",
+          "$ref": "#/definitions/SecuritySettings"
+        }		
       }
     },
     "IdentityData": {
