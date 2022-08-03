@@ -339,6 +339,12 @@ directive:
   - suppress: R4009
     reason: systemData will be in the next API version
     from: Microsoft.Synapse/stable/2020-12-01/library.json
+    from: Microsoft.Synapse/preview/2021-06-01/sqlPool.json
+    where:
+    - $.definitions.DataWarehouseQueries
+  - suppress:
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
 ```
 
 ---
