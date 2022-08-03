@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-12-01-preview",
+    "version": "2022-08-01-preview",
     "title": "ArtifactsClient",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
@@ -493,6 +493,10 @@
         "properties": {
           "$ref": "#/definitions/LinkConnection",
           "description": "Properties of link connection"
+        },
+        "description": {
+          "type": "string",
+          "description": "Link connection description"
         }
       },
       "required": [
@@ -573,6 +577,23 @@
         "linkedService": {
           "$ref": "#/definitions/LinkedServiceReference",
           "description": "Linked service reference"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/LinkConnectionTargetDatabaseTypeProperties",
+          "description": "Target database type properties"
+        }
+      }
+    },
+    "LinkConnectionTargetDatabaseTypeProperties": {
+      "type": "object",
+      "properties": {
+        "crossTableTransaction": {
+          "type": "boolean",
+          "description": "Enable cross table transaction consistency on target database"
+        },
+        "dropExistingTargetTableOnStart": {
+          "type": "boolean",
+          "description": "Drop and recreate same existing target table on link connection target database"
         }
       }
     },
@@ -602,11 +623,19 @@
       "properties": {
         "coreCount": {
           "type": "integer",
-          "description": "Link connection's compute core count"
+          "description": "Compute core count used by the link connection",
+          "format": "int32"
         },
         "computeType": {
           "type": "string",
           "description": "Link connection's compute type"
+        },
+        "dataProcessIntervalMinutes": {
+          "type": "integer",
+          "description": "Link connection's data process interval in minutes",
+          "minimum": 20,
+          "maximum": 60,
+          "format": "int32"
         }
       }
     },
@@ -670,6 +699,10 @@
         "distributionOptions": {
           "$ref": "#/definitions/LinkTableRequestTargetDistributionOptions",
           "description": "Target table distribution options for link table request"
+        },
+        "structureOptions": {
+          "$ref": "#/definitions/LinkTableRequestTargetStructureOptions",
+          "description": "Target table structure options for link table request"
         }
       }
     },
@@ -683,6 +716,15 @@
         "distributionColumn": {
           "type": "string",
           "description": "Target table distribution column"
+        }
+      }
+    },
+    "LinkTableRequestTargetStructureOptions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Target table structure type"
         }
       }
     },
@@ -724,6 +766,14 @@
         "error": {
           "type": "object",
           "description": "Link connection error"
+        },
+        "refreshStatus": {
+          "$ref": "#/definitions/LinkConnectionRefreshStatus",
+          "description": "Link connection refresh status"
+        },
+        "landingZoneCredentialExpireTime": {
+          "type": "string",
+          "description": "Link connection landing zone credential expire time"
         }
       }
     },
@@ -748,7 +798,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Link table id"
+          "description": "ID provided by the client"
         },
         "status": {
           "type": "string",
@@ -765,6 +815,22 @@
         "stopTime": {
           "type": "object",
           "description": "Link table stop time"
+        },
+        "linkTableId": {
+          "type": "string",
+          "description": "Link table ID"
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Link table error code"
+        },
+        "lastProcessedData": {
+          "type": "string",
+          "description": "Link table last processed data time"
+        },
+        "lastTransactionCommitTime": {
+          "type": "string",
+          "description": "Link table last transaction commit time"
         }
       }
     },
@@ -773,7 +839,9 @@
       "properties": {
         "maxSegmentCount": {
           "type": "integer",
-          "description": "Max segment count to query table status"
+          "description": "Max segment count to query table status",
+          "format": "int32",
+          "maximum": 1000
         },
         "continuationToken": {
           "type": "object",
@@ -787,6 +855,19 @@
         "sasToken": {
           "$ref": "#/definitions/SecureString",
           "description": "Landing zone's sas token"
+        }
+      }
+    },
+    "LinkConnectionRefreshStatus": {
+      "type": "object",
+      "properties": {
+        "refreshStatus": {
+          "type": "string",
+          "description": "Link connection refresh status"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Link connection refresh error message"
         }
       }
     },
@@ -875,7 +956,8 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "format": "uri"
     },
     "LinkConnectionName": {
       "name": "linkConnectionName",

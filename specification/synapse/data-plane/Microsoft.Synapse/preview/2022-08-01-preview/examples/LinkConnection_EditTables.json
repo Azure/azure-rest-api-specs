@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "testWs.dev.azuresynapse.net",
     "linkConnectionName": "testLinkConnection",
-    "api-version": "2021-12-01-preview",
+    "api-version": "2022-08-01-preview",
     "editTablesRequest": {
       "linkTables": [
         {
@@ -16,6 +16,9 @@
             "schemaName": "exampleTargetSchema",
             "distributionOptions": {
               "type": "Round_RoBin"
+            },
+            "structureOptions": {
+              "type": "Clustered_ColumnStore"
             }
           },
           "operationType": "Add"

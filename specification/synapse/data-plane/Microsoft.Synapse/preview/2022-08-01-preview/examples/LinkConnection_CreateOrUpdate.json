@@ -2,12 +2,14 @@
   "parameters": {
     "endpoint": "testWs.dev.azuresynapse.net",
     "linkConnectionName": "testLinkConnection",
-    "api-version": "2021-12-01-preview",
+    "api-version": "2022-08-01-preview",
     "linkConnection": {
+      "description": "linkconnection description",
       "properties": {
         "compute": {
           "coreCount": 8,
-          "computeType": "General"
+          "computeType": "General",
+          "dataProcessIntervalMinutes": 60
         },
         "sourceDatabase": {
           "linkedService": {
@@ -23,6 +25,10 @@
           "linkedService": {
             "referenceName": "exampleTargetLinkedService",
             "type": "LinkedServiceReference"
+          },
+          "typeProperties": {
+            "crossTableTransaction": false,
+            "dropExistingTargetTableOnStart": true
           }
         },
         "landingZone": {
@@ -46,10 +52,12 @@
         "id": "/subscriptions/99c6ec47-aacb-485c-863c-018be33b9000/resourceGroups/testResourceGroup/providers/Microsoft.Synapse/workspaces/testWs/linkConnections/testLinkConnection",
         "name": "testLinkConnection",
         "type": "Microsoft.Synapse/workspaces/linkConnections",
+        "description": "linkconnection description",
         "properties": {
           "compute": {
             "coreCount": 8,
-            "computeType": "General"
+            "computeType": "General",
+            "dataProcessIntervalMinutes": 60
           },
           "sourceDatabase": {
             "linkedService": {
@@ -65,6 +73,10 @@
             "linkedService": {
               "referenceName": "exampleTargetLinkedService",
               "type": "LinkedServiceReference"
+            },
+            "typeProperties": {
+              "crossTableTransaction": false,
+              "dropExistingTargetTableOnStart": true
             }
           }
         }
