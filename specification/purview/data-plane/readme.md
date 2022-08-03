@@ -122,6 +122,23 @@ input-file:
 - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
 ```
 
+``` yaml
+openapi-type: data-plane
+tag: package-2022-02-01-preview
+title: PurviewDataPolicyClient
+```
+
+### Tag: package-2022-02-01-preview
+
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-preview'
+input-file:
+- Azure.Analytics.Purview.DataPolicies/2022-02-01-preview/purviewSqlDevopsPolicy.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ---
 
 # Code Generation
