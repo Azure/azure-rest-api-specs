@@ -651,7 +651,15 @@
           "description": "IP Address of the Public IP Resource"
         },
         "isWorkloadProtected": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "IsWorkloadProtected",
+            "modelAsString": true
+          },
           "description": "Value indicating whether the IP address is DDoS workload protected or not."
         },
         "ddosProtectionPlanId": {
