@@ -5917,7 +5917,7 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{resourceName}/inboundRoutes": {
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes": {
       "post": {
         "operationId": "VirtualHubs_GetInboundRoutes",
         "x-ms-examples": {
@@ -5931,14 +5931,14 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "groupName",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The resource group name of the VirtualHub."
           },
           {
-            "name": "resourceName",
+            "name": "virtualHubName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -5977,11 +5977,11 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{resourceName}/outboundRoutes": {
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/outboundRoutes": {
       "post": {
         "operationId": "VirtualHubs_GetOutboundRoutes",
         "x-ms-examples": {
-          "Inbound Routes for the Virtual Hub on a Particular Connection": {
+          "Outbound Routes for the Virtual Hub on a Particular Connection": {
             "$ref": "./examples/GetOutboundRoutes.json"
           }
         },
@@ -5991,14 +5991,14 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "groupName",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The resource group name of the VirtualHub."
           },
           {
-            "name": "resourceName",
+            "name": "virtualHubName",
             "in": "path",
             "required": true,
             "type": "string",
