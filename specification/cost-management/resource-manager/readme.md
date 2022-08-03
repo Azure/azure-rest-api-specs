@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.insights.json
-  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
 ```
+
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
