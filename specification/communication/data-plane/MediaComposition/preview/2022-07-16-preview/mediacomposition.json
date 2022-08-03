@@ -359,6 +359,24 @@
     }
   },
   "definitions": {
+    "ActivePresenter": {
+      "required": [
+        "call"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
+      "properties": {
+        "call": {
+          "description": "The id of the teams meeting or call",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "activePresenter"
+    },
     "AudiencePosition": {
       "description": "Position of the audience streams",
       "enum": [
@@ -373,12 +391,17 @@
         "modelAsString": true
       }
     },
-    "AutoGridLayoutOptions": {
+    "AutoGridLayout": {
       "description": "Configure the autogrid layout",
       "required": [
         "inputIds"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layout"
+        }
+      ],
       "properties": {
         "inputIds": {
           "description": "Input ids to be included in the layout",
@@ -391,95 +414,29 @@
           "description": "Toggle dominant speaker highlighting",
           "type": "boolean"
         }
-      }
-    },
-    "CommunicationCallIdentifierModel": {
-      "description": "Identifies a teams meeting or group call defined in inputs",
-      "required": [
-        "call"
-      ],
-      "type": "object",
-      "properties": {
-        "call": {
-          "description": "The id of the teams meeting or call",
-          "type": "string"
-        }
-      }
+      },
+      "x-ms-discriminator-value": "autoGrid"
     },
     "CommunicationError": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error target."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true,
-          "description": "Further details about specific errors that led to this error."
-        },
-        "innererror": {
-          "x-ms-client-name": "innerError",
-          "readOnly": true,
-          "$ref": "#/definitions/CommunicationError",
-          "description": "The inner error if any."
-        }
-      }
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "error"
-      ],
-      "properties": {
-        "error": {
-          "description": "The Communication Services error.",
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
     },
     "CommunicationIdentifierModel": {
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
       "type": "object",
       "properties": {
         "communicationUser": {
-          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+          "$ref": "#/definitions/CommunicationUserIdentifier"
         },
         "microsoftTeamsUser": {
-          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel"
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifier"
         }
       }
     },
-    "CommunicationUserIdentifierModel": {
-      "description": "A user that got created with an Azure Communication Services resource.",
-      "type": "object",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Id of the communication user."
-        }
-      }
+    "CommunicationUserIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "CompositionStreamState": {
       "description": "State of the composition stream",
@@ -494,12 +451,17 @@
         "modelAsString": true
       }
     },
-    "CustomLayoutOptions": {
+    "CustomLayout": {
       "description": "Configure custom layout",
       "required": [
         "inputGroups"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layout"
+        }
+      ],
       "properties": {
         "layers": {
           "description": "Configure layer to control the z-position of input groups",
@@ -515,15 +477,40 @@
             "$ref": "#/definitions/InputGroup"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "custom"
     },
-    "GridLayoutOptions": {
+    "DominantSpeaker": {
+      "required": [
+        "call"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
+      "properties": {
+        "call": {
+          "description": "The id of the teams meeting or call",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "dominantSpeaker"
+    },
+    "GridLayout": {
       "description": "Configure the grid layout",
       "required": [
         "columns",
+        "inputIds",
         "rows"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layout"
+        }
+      ],
       "properties": {
         "rows": {
           "format": "int32",
@@ -545,20 +532,46 @@
             }
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "grid"
     },
-    "GroupCall": {
-      "description": "Group call to be used as an input or output",
+    "GroupCallInput": {
+      "description": "Group call to be used as an input",
       "required": [
         "id"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "id": {
           "description": "Group call identifier",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "groupCall"
+    },
+    "GroupCallOutput": {
+      "description": "Group call to be used as an output",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaOutput"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "Group call identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "groupCall"
     },
     "Image": {
       "description": "An image input",
@@ -566,12 +579,18 @@
         "uri"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "uri": {
           "description": "Url of the image file",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "image"
     },
     "InputGroup": {
       "description": "Configure input group to be used in custom layouts",
@@ -645,6 +664,9 @@
     },
     "Layout": {
       "description": "Configure a layout",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
@@ -653,26 +675,12 @@
         "resolution": {
           "$ref": "#/definitions/Resolution"
         },
-        "grid": {
-          "$ref": "#/definitions/GridLayoutOptions"
-        },
-        "autoGrid": {
-          "$ref": "#/definitions/AutoGridLayoutOptions"
-        },
-        "presenter": {
-          "$ref": "#/definitions/PresenterLayoutOptions"
-        },
-        "presentation": {
-          "$ref": "#/definitions/PresentationLayoutOptions"
-        },
-        "custom": {
-          "$ref": "#/definitions/CustomLayoutOptions"
-        },
         "placeholderImageUri": {
           "description": "Set global placeholder image",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "LayoutType": {
       "description": "Kind of layout",
@@ -721,56 +729,34 @@
     },
     "MediaInput": {
       "description": "Media input to be used in the composition",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
           "$ref": "#/definitions/MediaInputType"
         },
-        "groupCall": {
-          "$ref": "#/definitions/GroupCall"
-        },
-        "room": {
-          "$ref": "#/definitions/GroupCall"
-        },
-        "teamsMeeting": {
-          "$ref": "#/definitions/TeamsMeeting"
-        },
-        "rtmp": {
-          "$ref": "#/definitions/RtmpStream"
-        },
-        "srt": {
-          "$ref": "#/definitions/SrtStream"
-        },
-        "participant": {
-          "$ref": "#/definitions/Participant"
-        },
-        "activePresenter": {
-          "$ref": "#/definitions/CommunicationCallIdentifierModel"
-        },
-        "dominantSpeaker": {
-          "$ref": "#/definitions/CommunicationCallIdentifierModel"
-        },
-        "screenShare": {
-          "$ref": "#/definitions/CommunicationCallIdentifierModel"
-        },
-        "image": {
-          "$ref": "#/definitions/Image"
+        "placeholderImageUri": {
+          "description": "Image url to be used if participant has no video stream",
+          "type": "string"
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "MediaInputType": {
       "description": "Kind of media input",
       "enum": [
-        "groupCall",
-        "room",
-        "teamsMeeting",
-        "srt",
-        "rtmp",
         "participant",
         "screenShare",
         "dominantSpeaker",
         "activePresenter",
-        "image"
+        "image",
+        "groupCall",
+        "room",
+        "teamsMeeting",
+        "srt",
+        "rtmp"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -779,28 +765,17 @@
       }
     },
     "MediaOutput": {
-      "description": "Media output to be used by the composition",
+      "description": "Media output to be used in the composition",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
           "$ref": "#/definitions/MediaOutputType"
-        },
-        "groupCall": {
-          "$ref": "#/definitions/GroupCall"
-        },
-        "room": {
-          "$ref": "#/definitions/GroupCall"
-        },
-        "teamsMeeting": {
-          "$ref": "#/definitions/TeamsMeeting"
-        },
-        "rtmp": {
-          "$ref": "#/definitions/RtmpStream"
-        },
-        "srt": {
-          "$ref": "#/definitions/SrtStream"
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "MediaOutputType": {
       "description": "Kind of media output",
@@ -817,39 +792,30 @@
         "modelAsString": true
       }
     },
-    "MicrosoftTeamsUserIdentifierModel": {
-      "description": "\"A Microsoft Teams user.",
-      "required": [
-        "userId"
-      ],
-      "type": "object",
-      "properties": {
-        "userId": {
-          "description": "The Id of the Microsoft Teams user",
-          "type": "string"
-        }
-      }
+    "MicrosoftTeamsUserIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
     "Participant": {
-      "description": "A meeting or group call participant",
       "required": [
         "call",
         "id"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "id": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "placeholderImageUri": {
-          "description": "Image url to be used if participant has no video stream",
-          "type": "string"
         },
         "call": {
           "description": "The id of the teams meeting or call",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "participant"
     },
     "Position": {
       "description": "The (x,y) position on scene or input group",
@@ -858,6 +824,11 @@
         "y"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        }
+      ],
       "properties": {
         "x": {
           "format": "int32",
@@ -871,13 +842,18 @@
         }
       }
     },
-    "PresentationLayoutOptions": {
+    "PresentationLayout": {
       "description": "Configure the presentation layout",
       "required": [
         "audienceIds",
         "presenterId"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layout"
+        }
+      ],
       "properties": {
         "presenterId": {
           "description": "Id of the presenter input",
@@ -893,15 +869,21 @@
         "audiencePosition": {
           "$ref": "#/definitions/AudiencePosition"
         }
-      }
+      },
+      "x-ms-discriminator-value": "presentation"
     },
-    "PresenterLayoutOptions": {
+    "PresenterLayout": {
       "description": "Configure the presenter layout",
       "required": [
         "presenterId",
         "supportId"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layout"
+        }
+      ],
       "properties": {
         "presenterId": {
           "description": "Id of the presenter input",
@@ -919,7 +901,8 @@
           "description": "Aspect ratio of the support stream.",
           "type": "number"
         }
-      }
+      },
+      "x-ms-discriminator-value": "presenter"
     },
     "Resolution": {
       "description": "The dimensions of the scene or objects in the scene",
@@ -941,26 +924,57 @@
         }
       }
     },
-    "RtmpMode": {
-      "description": "Rtmp mode",
-      "enum": [
-        "push",
-        "pull"
+    "RoomInput": {
+      "description": "A Room to be used as an input",
+      "required": [
+        "id"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RtmpMode",
-        "modelAsString": true
-      }
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "Room identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "room"
     },
-    "RtmpStream": {
-      "description": "Rtmp stream to be used as an input or output",
+    "RoomOutput": {
+      "description": "A Room to be used as an output",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaOutput"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "Room identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "room"
+    },
+    "RtmpInput": {
+      "description": "Rtmp stream to be used as an input",
       "required": [
         "resolution",
         "streamKey",
         "streamUrl"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "streamKey": {
           "description": "Stream key of the stream",
@@ -976,15 +990,82 @@
         "mode": {
           "$ref": "#/definitions/RtmpMode"
         }
+      },
+      "x-ms-discriminator-value": "rtmp"
+    },
+    "RtmpMode": {
+      "description": "Rtmp mode",
+      "enum": [
+        "push",
+        "pull"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RtmpMode",
+        "modelAsString": true
       }
     },
-    "SrtStream": {
-      "description": "Srt stream to be used as an input or output",
+    "RtmpOutput": {
+      "description": "Rtmp stream to be used as an output",
+      "required": [
+        "resolution",
+        "streamKey",
+        "streamUrl"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaOutput"
+        }
+      ],
+      "properties": {
+        "streamKey": {
+          "description": "Stream key of the stream",
+          "type": "string"
+        },
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "streamUrl": {
+          "description": "The url of the stream",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/definitions/RtmpMode"
+        }
+      },
+      "x-ms-discriminator-value": "rtmp"
+    },
+    "ScreenShare": {
+      "required": [
+        "call"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
+      "properties": {
+        "call": {
+          "description": "The id of the teams meeting or call",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "screenShare"
+    },
+    "SrtInput": {
+      "description": "Srt stream to be used as an input",
       "required": [
         "resolution",
         "streamUrl"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "resolution": {
           "$ref": "#/definitions/Resolution"
@@ -993,7 +1074,31 @@
           "description": "The url of the stream",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "srt"
+    },
+    "SrtOutput": {
+      "description": "Srt stream to be used as an output",
+      "required": [
+        "resolution",
+        "streamUrl"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaOutput"
+        }
+      ],
+      "properties": {
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "streamUrl": {
+          "description": "The url of the stream",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "srt"
     },
     "SupportPosition": {
       "description": "Position of the support stream",
@@ -1009,32 +1114,55 @@
         "modelAsString": true
       }
     },
-    "TeamsMeeting": {
-      "description": "A Teams meeting to be used as an input or output",
+    "TeamsMeetingInput": {
+      "description": "A Teams meeting to be used as an input",
       "required": [
         "teamsJoinUrl"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaInput"
+        }
+      ],
       "properties": {
         "teamsJoinUrl": {
-          "format": "uri",
           "description": "The url from Teams to join the meeting",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "teamsMeeting"
+    },
+    "TeamsMeetingOutput": {
+      "description": "A Teams meeting to be used as an output",
+      "required": [
+        "teamsJoinUrl"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaOutput"
+        }
+      ],
+      "properties": {
+        "teamsJoinUrl": {
+          "description": "The url from Teams to join the meeting",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "teamsMeeting"
+    },
+    "ValueType": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
     }
-  },
-  "securityDefinitions": {
-    "Authorization": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "An ACS (Azure Communication Services) user access token."
-    }
-  },
-  "security": [
-    {
-      "Authorization": []
-    }
-  ]
+  }
 }
