@@ -1,0 +1,198 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using OpenAPI;
+
+//
+// ** Service description **
+//
+
+// TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
+@serviceTitle("Confidential Ledger Service")
+@serviceVersion("2022-05-13")
+@server(
+  "{ledgerUri}",
+  "Confidential Ledger Service",
+  {
+    ledgerUri: string,
+  }
+)
+namespace Azure.Security.ConfidentialLedger;
+
+//
+// ** Parameter descriptions **
+//
+
+model TransactionIdParameter {
+  // TODO: update definition so this parameter comes from KeysOf in operation, when model support is added.
+  @path
+  @doc("Identifies a write transaction.")
+  transactionId: string;
+}
+
+model CollectionIdParameter {
+  @query
+  @doc("The collection id.")
+  collectionId?: string;
+}
+
+model UserIdParameter {
+  @path
+  @doc("The user id, either an AAD object ID or certificate fingerprint.")
+  @extension("x-ms-skip-url-encoding", true)
+  userId: string;
+}
+
+model UserDetailsParameter {
+  @body
+  @doc("Details about a Confidential Ledger user.")
+  userDetails: LedgerUser;
+
+  @header("content-type")
+  contentType: "application/merge-patch+json";
+}
+
+//
+// ** Model descriptions **
+//
+
+@doc("Identifier for collections.")
+model Collection {
+  collectionId: string;
+}
+
+@doc("A list of identifiers for ledger collections.")
+model CollectionArray {
+  items: Collection[];
+}
+
+model LedgerUser {
+  assignedRole: ConfidentialLedgerUserRoleName;
+  userId: string;
+}
+
+@doc("Represents an assignable role")
+enum ConfidentialLedgerUserRoleName {
+  Administrator,
+  Contributor,
+  Reader,
+}
+
+model LedgerEntry {
+  contents: string;
+  collectionId: string;
+  transactionId: string;
+}
+
+namespace ConfidentialLedger {
+  @route("/app/collections")
+  @summary("Retrieves a list of collection ids present in the Confidential Ledger")
+  @doc("Collection ids are user-created collections of ledger entries")
+  @get // TODO: rewrite the operations in terms of Azure.Core operations, e.g. Azure.Core.Operations.ResourceAction<TResource, TResponse, TParams>, Azure.Core.Operations.ResourceList<TResource, TParams> etc. // This will also take care of not passing ApiVersionParameter everywhere.
+  op listCollections(
+    ...Foundations.ApiVersionParameter
+  ): CollectionArray | Foundations.ErrorResponse;
+
+  @route("/app/enclaveQuotes")
+  @summary("Gets quotes for all nodes of the Confidential Ledger.")
+  @doc("A quote is an SGX enclave measurement that can be used to verify the validity of a node and its enclave.")
+  @get
+  op getEnclaveQuotes(...Foundations.ApiVersionParameter): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/governance/constitution")
+  @summary("Gets the constitution used for governance.")
+  @doc("The constitution is a script that assesses and applies proposals from consortium members.")
+  @get
+  op getConstitution(...Foundations.ApiVersionParameter): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/governance/members")
+  @summary("Gets the consortium members.")
+  @doc("Consortium members can manage the Confidential Ledger.")
+  @get
+  op getConsortiumMembers(
+    ...Foundations.ApiVersionParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  // TODO: Pageable operations excluded from August MVP
+  // @route("/app/transactions")
+  // @summary("Gets ledger entries from a collection corresponding to a range.")
+  // @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
+  // @get
+  // op GetLedgerEntries(
+  //   ...ApiVersionParameter
+  // );
+
+  // TODO: Long-running operations excluded from August MVP
+
+  @route("/app/transactions")
+  @summary("Writes a ledger entry.")
+  @doc("A collection id may optionally be specified.")
+  @post
+  op postLedgerEntry(
+    ...Foundations.ApiVersionParameter,
+    ...CollectionIdParameter,
+    @body entry: LedgerEntry
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/transactions/{transactionId}")
+  @summary("Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.")
+  @get
+  op getLedgerEntry(
+    ...Foundations.ApiVersionParameter,
+    ...CollectionIdParameter,
+    ...TransactionIdParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/transactions/{transactionId}/receipt")
+  @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
+  @get
+  op getReceipt(
+    ...Foundations.ApiVersionParameter,
+    ...TransactionIdParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/transactions/{transactionId}/status")
+  @summary("Gets the status of an entry identified by a transaction id.")
+  @get
+  op getTransactionStatus(
+    ...Foundations.ApiVersionParameter,
+    ...TransactionIdParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/transactions/current")
+  @summary("Gets the current value available in the ledger.")
+  @get
+  op getCurrentLedgerEntry(
+    ...Foundations.ApiVersionParameter,
+    ...CollectionIdParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/users/{userId}")
+  @summary("Deletes a user from the Confidential Ledger.")
+  @delete
+  op deleteUser(
+    ...Foundations.ApiVersionParameter,
+    ...UserIdParameter
+  ): NoContentResponse | Foundations.ErrorResponse;
+
+  @route("/app/users/{userId}")
+  @summary("Gets a user.")
+  @get
+  op getUser(
+    ...Foundations.ApiVersionParameter,
+    ...UserIdParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+
+  @route("/app/users/{userId}")
+  @summary("Adds a user or updates a user's fields.")
+  @patch
+  op createOrUpdateUser(
+    ...Foundations.ApiVersionParameter,
+    ...UserIdParameter,
+    ...UserDetailsParameter
+  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+}
