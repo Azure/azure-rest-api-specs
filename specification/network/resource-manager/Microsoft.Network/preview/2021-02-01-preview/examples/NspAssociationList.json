@@ -22,7 +22,8 @@
               "profile": {
                 "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
               },
-              "accessMode": "EnforceMode"
+              "accessMode": "Enforced",
+              "hasProvisioningIssues": "no"
             }
           },
           {
@@ -37,7 +38,24 @@
               "profile": {
                 "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
               },
-              "accessMode": "DryRunMode"
+              "accessMode": "Audit",
+              "hasProvisioningIssues": "no"
+            }
+          },
+          {
+            "name": "association3",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association3",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "properties": {
+              "provisioningState": "Failed",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "accessMode": "Learning",
+              "hasProvisioningIssues": "yes"
             }
           }
         ],

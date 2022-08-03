@@ -10,7 +10,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.cosmosdb
 package-name: azure-mgmt-cosmosdb
 package-version: 0.7.0
-clear-output-folder: false
+clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
 ```

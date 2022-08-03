@@ -172,7 +172,15 @@
             },
             "scheme": {
               "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
-              "type": "string"
+              "enum": [
+                "HTTP",
+                "HTTPS"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Scheme",
+                "modelAsString": true
+              }
             }
           }
         },
@@ -222,9 +230,9 @@
         "type": {
           "description": "The type of probe.",
           "enum": [
-            "liveness",
-            "readiness",
-            "startup"
+            "Liveness",
+            "Readiness",
+            "Startup"
           ],
           "type": "string",
           "x-ms-enum": {

@@ -5,10 +5,16 @@
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
     "networkSecurityPerimeterName": "nsp1",
-    "associationName": "association1"
+    "associationName": "association1",
+    "operationId": "operationId1"
   },
   "responses": {
     "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/operationResults/{operationId}?api-version={api-version}"
+      }
+    },
     "204": {}
   }
 }

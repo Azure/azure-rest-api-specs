@@ -2108,7 +2108,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -2122,7 +2125,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
@@ -2183,7 +2187,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -2197,7 +2204,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
@@ -2493,7 +2501,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the profile.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileProvisioningState",
+            "modelAsString": true
+          }
         },
         "frontDoorId": {
           "readOnly": true,
@@ -2661,7 +2680,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the endpoint.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5129,7 +5159,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the origin.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "OriginProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpointStatus": {
           "description": "The approval status for the connection to the Private Link",
@@ -5276,7 +5317,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the origin group.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "OriginGroupProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5472,7 +5524,7 @@
           }
         },
         "customHttpsProvisioningState": {
-          "description": "Provisioning status of Custom Https of the custom domain.",
+          "description": "Provisioning status of the custom domain.",
           "readOnly": true,
           "enum": [
             "Enabling",
@@ -5517,9 +5569,20 @@
           "type": "string"
         },
         "provisioningState": {
+          "description": "Provisioning status of Custom Https of the custom domain.",
           "readOnly": true,
-          "description": "Provisioning status of the custom domain.",
-          "type": "string"
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5873,7 +5936,14 @@
         "unit": {
           "type": "string",
           "readOnly": true,
-          "description": "Unit of the usage. e.g. Count."
+          "description": "Unit of the usage. e.g. count.",
+          "enum": [
+            "count"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceUsageUnit",
+            "modelAsString": true
+          }
         },
         "currentValue": {
           "type": "integer",
