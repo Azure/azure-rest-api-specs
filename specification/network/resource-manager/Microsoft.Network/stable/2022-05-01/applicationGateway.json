@@ -3580,14 +3580,30 @@
           "type": "string",
           "description": "The string representation of the web application firewall rule identifier."
         },
+        "state": {
+          "type": "string",
+          "description": "The string representation of the web application firewall rule state.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "description": "The string representation of the web application firewall rule action.",
+          "enum": [
+            "None",
+            "AnomalyScoring",
+            "Allow",
+            "Block",
+            "Log"
+          ]
+        },
         "description": {
           "type": "string",
           "description": "The description of the web application firewall rule."
         }
       },
-      "required": [
-        "ruleId"
-      ],
       "description": "A web application firewall rule."
     },
     "ApplicationGatewayAvailableSslOptions": {
