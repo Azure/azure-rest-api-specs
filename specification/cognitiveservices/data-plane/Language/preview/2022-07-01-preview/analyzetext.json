@@ -136,6 +136,9 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Healthcare Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -183,6 +186,9 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Text Analysis Health Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
           }
         }
       }
@@ -907,14 +913,19 @@
             "modelAsString": true
           }
         },
-        "entities": {
-          "description": "The entities in the relation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareRelationEntity"
+        "confidenceScore": {
+            "type": "number",
+            "format": "double",
+            "description": "Confidence score between 0 and 1 of the extracted relation."
+        },
+          "entities": {
+            "description": "The entities in the relation.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/HealthcareRelationEntity"
+            }
           }
         }
-      }
     },
     "HealthcareAssertion": {
       "type": "object",
