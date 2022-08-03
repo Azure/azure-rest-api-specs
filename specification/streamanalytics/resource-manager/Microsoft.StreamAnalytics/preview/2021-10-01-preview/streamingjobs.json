@@ -689,6 +689,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "$ref": "#/definitions/StreamingJobProperties",
           "description": "The properties that are associated with a streaming job.  Required on PUT (CreateOrReplace) requests.",
@@ -863,6 +867,11 @@
             "name": "SkuName",
             "modelAsString": true
           }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of the SKU."
         }
       }
     },
