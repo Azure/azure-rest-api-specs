@@ -1,0 +1,1312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Network/networkVerifiers",
+    "version": "2022-07-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents": {
+      "get": {
+        "tags": [
+          "AnalysisIntent"
+        ],
+        "summary": "Gets the list of Analysis Intent resources",
+        "operationId": "AnalysisIntentList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of AnalysisIntents",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisIntent"
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalysisIntentList": {
+            "$ref": "./examples/AnalysisIntentList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}": {
+      "get": {
+        "tags": [
+          "AnalysisIntent"
+        ],
+        "summary": "Gets the specific Analysis Intent resource",
+        "operationId": "AnalysisIntentGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "analysisIntent",
+            "schema": {
+              "$ref": "#/definitions/AnalysisIntent"
+            }
+          },
+          "404": {
+            "description": "analysisIntent Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalysisIntentGet": {
+            "$ref": "./examples/AnalysisIntentGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AnalysisIntent"
+        ],
+        "summary": "Creates the specific Analysis Intent resource via the DB Handler directly",
+        "operationId": "AnalysisIntentPut",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Analysis Intent resource object to create/update",
+            "schema": {
+              "$ref": "#/definitions/AnalysisIntent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "analysisIntent was created",
+            "schema": {
+              "$ref": "#/definitions/AnalysisIntent"
+            }
+          },
+          "404": {
+            "description": "Parent resource not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "analysisIntent already exists and cannot be updated",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AnalysisIntentPut": {
+            "$ref": "./examples/AnalysisIntentPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnalysisIntent"
+        ],
+        "summary": "Deletes the specific Analysis Intent resource",
+        "operationId": "AnalysisIntentDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "analysisIntent delete request accepted"
+          },
+          "204": {
+            "description": "analysisIntent delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AnalysisIntentDelete": {
+            "$ref": "./examples/AnalysisIntentDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}/analysisRuns": {
+      "get": {
+        "tags": [
+          "AnalysisRun"
+        ],
+        "summary": "Gets the list of Analysis Run resources",
+        "operationId": "AnalysisRunList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of AnalysisRuns",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisRun"
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalysisRunList": {
+            "$ref": "./examples/AnalysisRunList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/analysisIntents/{analysisIntentName}/analysisRuns/{analysisRunName}": {
+      "get": {
+        "tags": [
+          "AnalysisRun"
+        ],
+        "summary": "Gets the specific Analysis Run resource",
+        "operationId": "AnalysisRunGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisRunName",
+            "description": "The name of the Analysis Run resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AnalysisRun",
+            "schema": {
+              "$ref": "#/definitions/AnalysisRun"
+            }
+          },
+          "404": {
+            "description": "AnalysisRun Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalysisRunGet": {
+            "$ref": "./examples/AnalysisRunGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AnalysisRun"
+        ],
+        "summary": "Creates the specific Analysis Run resource via the Event Queue",
+        "operationId": "AnalysisRunPut",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisRunName",
+            "description": "The name of the Analysis Run resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Analysis Run resource object to create/update",
+            "schema": {
+              "$ref": "#/definitions/AnalysisRun"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "AnalysisRun was created",
+            "schema": {
+              "$ref": "#/definitions/AnalysisRun"
+            }
+          },
+          "404": {
+            "description": "Parent resource not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "AnalysisRun already exists and cannot be updated",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AnalysisRunPut": {
+            "$ref": "./examples/AnalysisRunPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnalysisRun"
+        ],
+        "summary": "Deletes the specific Analysis Run resource",
+        "operationId": "AnalysisRunDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisIntentName",
+            "description": "The name of the Analysis Intent resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "analysisRunName",
+            "description": "The name of the Analysis Run resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "AnalysisRun delete request accepted"
+          },
+          "204": {
+            "description": "AnalysisRun delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AnalysisRunDelete": {
+            "$ref": "./examples/AnalysisRunDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/configurationSnapshots": {
+      "get": {
+        "tags": [
+          "ConfigurationSnapshot"
+        ],
+        "summary": "Gets the list of Configuration Snapshot resources",
+        "operationId": "ConfigurationSnapshotList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ConfigurationSnapshots",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConfigurationSnapshot"
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationSnapshotList": {
+            "$ref": "./examples/ConfigurationSnapshotList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/configurationSnapshots/{configurationSnapshotName}": {
+      "get": {
+        "tags": [
+          "ConfigurationSnapshot"
+        ],
+        "summary": "Gets the specific Configuration Snapshot resource",
+        "operationId": "ConfigurationSnapshotGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "configurationSnapshotName",
+            "description": "The name of the Configuration Snapshot resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConfigurationSnapshot",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationSnapshot"
+            }
+          },
+          "404": {
+            "description": "ConfigurationSnapshot Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationSnapshotGet": {
+            "$ref": "./examples/ConfigurationSnapshotGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationSnapshot"
+        ],
+        "summary": "Creates/ the specific Configuration Snapshot resource",
+        "operationId": "ConfigurationSnapshotPut",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "configurationSnapshotName",
+            "description": "The name of the Configuration Snapshot resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Configuration Snapshot resource object to create/update",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationSnapshot"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "ConfigurationSnapshot was created",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationSnapshot"
+            }
+          },
+          "404": {
+            "description": "Parent resource not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "ConfigurationSnapshot already exists and cannot be updated",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConfigurationSnapshotPut": {
+            "$ref": "./examples/ConfigurationSnapshotPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationSnapshot"
+        ],
+        "summary": "Deletes the specific Configuration Snapshot resource",
+        "operationId": "ConfigurationSnapshotDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "configurationSnapshotName",
+            "description": "The name of the Configuration Snapshot resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ConfigurationSnapshot delete request accepted"
+          },
+          "204": {
+            "description": "ConfigurationSnapshot delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConfigurationSnapshotDelete": {
+            "$ref": "./examples/ConfigurationSnapshotDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers": {
+      "get": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Gets list of Network Verifier resources",
+        "operationId": "NetworkVerifierList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NetworkVerifiers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkVerifier"
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVerifierList": {
+            "$ref": "./examples/NetworkVerifierList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}": {
+      "get": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Gets the specific Network Verifier resource",
+        "operationId": "NetworkVerifierGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NetworkVerifier",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          },
+          "404": {
+            "description": "NetworkVerifier Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVerifierGet": {
+            "$ref": "./examples/NetworkVerifierGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Creates/Updates the specific Network Verifier resource",
+        "operationId": "NetworkVerifierPut",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Network Verifier resource object to create/update",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NetworkVerifier was updated",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          },
+          "201": {
+            "description": "NetworkVerifier was created",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "NetworkVerifierPut": {
+            "$ref": "./examples/NetworkVerifierPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Deletes the specific Network Verifier resource",
+        "operationId": "NetworkVerifierDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "NetworkVerifier delete request accepted"
+          },
+          "204": {
+            "description": "NetworkVerifier delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "NetworkVerifierDelete": {
+            "$ref": "./examples/NetworkVerifierDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnalysisIntent": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AnalysisIntentProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisIntentProperties": {
+      "required": [
+        "destinationResourceId",
+        "sourceResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "ipTrafficProperties": {
+          "$ref": "#/definitions/IPTrafficProperties"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "destinationResourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisRun": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AnalysisRunProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisRunProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "snapshotId": {
+          "type": "string"
+        },
+        "analysisResult": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ConfigurationSnapshot": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfigurationSnapshotProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "ConfigurationSnapshotProperties": {
+      "required": [
+        "scopes"
+      ],
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationSnapshotScope"
+          },
+          "x-ms-identifiers": []
+        },
+        "createTime": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ConfigurationSnapshotScope": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "activityId": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IPTrafficProperties": {
+      "type": "object",
+      "properties": {
+        "sourceIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourcePorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "$ref": "#/definitions/NetworkProtocols"
+        }
+      }
+    },
+    "NetworkProtocols": {
+      "format": "int32",
+      "enum": [
+        "TCP",
+        "UDP",
+        "ICMP"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NetworkProtocols"
+      }
+    },
+    "NetworkVerifier": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkVerifierProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkVerifierProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "format": "int32",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The name of the resource group to which the network verifier belongs.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
