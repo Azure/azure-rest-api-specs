@@ -101,7 +101,7 @@
           "type": "object",
           "allOf": [
               {
-                  "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+                  "$ref": "#/definitions/Resource"
               }
           ],
           "properties": {
@@ -149,13 +149,55 @@
               },
               "details": {
                   "description": "Lower-level background information about this insight. Note that details schema changes based on kind.",
-                  "type": "string"
+                  "type": "object"
               },
               "justification": {
                   "description": "High-level summary information about this insight. Note that justification schema changes based on kind.",
-                  "type": "string"
+                  "type": "object"
               }
           }
+      },
+      "Resource": {
+        "description": "The Resource model definition.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id."
+          },
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name."
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type."
+          },
+          "location": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Location of the resource."
+          },
+          "sku": {
+            "readOnly": true,
+            "type": "string",
+            "description": "SKU of the resource."
+          },
+          "eTag": {
+            "readOnly": true,
+            "type": "string",
+            "description": "ETag of the resource."
+          },
+          "kind": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type"
+          }
+        },
+        "x-ms-azure-resource": true
       }
   },
   "parameters": {
