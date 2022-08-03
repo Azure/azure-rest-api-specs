@@ -22,6 +22,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandTrunks"
           }
         ],
         "responses": {
@@ -42,6 +45,9 @@
         "x-ms-examples": {
           "Get SIP configuration for resource": {
             "$ref": "./examples/GetSipConfiguration.json"
+          },
+          "Get SIP configuration for resource with TrunkHealth expand": {
+            "$ref": "./examples/GetSipConfigurationWithExpand.json"
           }
         }
       },
@@ -126,6 +132,135 @@
           "format": "int32",
           "description": "Gets or sets SIP signaling port of the trunk.",
           "type": "integer"
+        },
+        "health": {
+          "description": "Represents health state of a SIP trunk for routing calls.",
+          "type": "object",
+          "required": [
+            "tls",
+            "ping",
+            "status"
+          ],
+          "properties": {
+            "tls": {
+              "type": "string",
+              "description": "The status of the TLS connections between Direct Routing and the SBC.",
+              "enum": [
+                "unknown",
+                "ok",
+                "certExpiring",
+                "certExpired"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "tls",
+                "values": [
+                  {
+                    "value": "unknown",
+                    "description": "Indicates an unknown status."
+                  },
+                  {
+                    "value": "ok",
+                    "description": "Indicates the status is okay."
+                  },
+                  {
+                    "value": "certExpiring",
+                    "description": "Indicates the SBC's certificate is expiring."
+                  },
+                  {
+                    "value": "certExpired",
+                    "description": "Indicates the SBC's certificate is expired."
+                  }
+                ]
+              }
+            },
+            "ping": {
+              "type": "string",
+              "description": "The status of options message sent by SBC",
+              "enum": [
+                "unknown",
+                "ok",
+                "expired",
+                "error"
+              ],
+              "x-ms-enum": {
+                "name": "ping",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "unknown",
+                    "description": "Indicates an unknown status."
+                  },
+                  {
+                    "value": "ok",
+                    "description": "Indicates the status is okay."
+                  },
+                  {
+                    "value": "expired",
+                    "description": "Indicates the status is expired."
+                  },
+                  {
+                    "value": "error",
+                    "description": "Indicates the status is at an error level."
+                  }
+                ]
+              }
+            },
+            "status": {
+              "type": "string",
+              "description": "The overall status of SBC",
+              "enum": [
+                "unknown",
+                "active",
+                "inactive"
+              ],
+              "x-ms-enum": {
+                "name": "status",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "unknown",
+                    "description": "Indicates an unknown health status."
+                  },
+                  {
+                    "value": "active",
+                    "description": "Indicates the SBC is active."
+                  },
+                  {
+                    "value": "inactive",
+                    "description": "Indicates the SBC is inactive."
+                  }
+                ]
+              }
+            },
+            "inactiveStatusReason": {
+              "type": "string",
+              "description": "The reason overall status of SBC is inactive",
+              "enum": [
+                "noRecentCalls",
+                "noRecentPings",
+                "noRecentCallsAndPings"
+              ],
+              "x-ms-enum": {
+                "name": "inactiveStatusReason",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "noRecentCalls",
+                    "description": "Indicates no recent calls."
+                  },
+                  {
+                    "value": "noRecentPings",
+                    "description": "Indicates ping status is expired."
+                  },
+                  {
+                    "value": "noRecentCallsAndPings",
+                    "description": "Indicates no recent calls and ping status is expired."
+                  }
+                ]
+              }
+            }
+          }
         }
       }
     },
@@ -219,6 +354,27 @@
     }
   },
   "parameters": {
+    "ExpandTrunks": {
+      "name": "expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Trunks expand. Optional.",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "trunkHealth"
+      ],
+      "x-ms-enum": {
+        "name": "ExpandEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "trunkHealth",
+            "description": "Health state of a SIP trunk for routing calls."
+          }
+        ]
+      }
+    },
     "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",
