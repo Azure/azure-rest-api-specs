@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Cognitive Language Service",
+    "title": "Microsoft Cognitive Language Service - Text Analysis",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-07-01-preview"
   },
@@ -136,6 +136,9 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Healthcare Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -183,6 +186,9 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Text Analysis Health Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
           }
         }
       }
@@ -703,6 +709,17 @@
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
+        "fhirVersion": {
+          "type": "string",
+          "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "enum": [
+            "4.0.1"
+          ],
+          "x-ms-enum": {
+            "name": "fhirVersion",
+            "modelAsString": true
+          }
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
@@ -766,6 +783,11 @@
           "items": {
             "$ref": "#/definitions/HealthcareRelation"
           }
+        },
+        "fhirBundle": {
+          "type": "object",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -902,6 +924,11 @@
             "name": "relationType",
             "modelAsString": true
           }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         },
         "entities": {
           "description": "The entities in the relation.",

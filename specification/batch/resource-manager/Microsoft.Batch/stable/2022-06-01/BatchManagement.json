@@ -2509,7 +2509,7 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_ListOutboundNetworkDependenciesEndpoints",
-        "description": "Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://docs.microsoft.com/en-us/azure/batch/batch-virtual-network.",
+        "description": "Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://docs.microsoft.com/azure/batch/batch-virtual-network",
         "x-ms-examples": {
           "ListOutboundNetworkDependencies": {
             "$ref": "./examples/BatchAccountListOutboundNetworkDependenciesEndpoints.json"
@@ -2944,7 +2944,7 @@
           "x-nullable": true,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for the Batch account.",
+          "title": "The Spot/low-priority core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamily": {
@@ -4099,7 +4099,7 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority compute nodes currently in the pool.",
+          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
           "readOnly": true
         },
         "scaleSettings": {
@@ -4329,7 +4329,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool.",
+          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
@@ -4563,7 +4563,9 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them."
         },
@@ -4593,7 +4595,8 @@
             "$ref": "#/definitions/VMExtension"
           },
           "x-ms-identifiers": [
-            "name"
+            "name",
+            "type"
           ],
           "title": "The virtual machine extension for the pool.",
           "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
@@ -4704,7 +4707,9 @@
           "items": {
             "$ref": "#/definitions/ContainerRegistry"
           },
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": [
+            "registryServer"
+          ],
           "title": "Additional private registries from which containers can be pulled.",
           "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
         }
@@ -5372,7 +5377,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -5473,7 +5478,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool."
+          "title": "The desired number of Spot/low-priority compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -5729,7 +5734,8 @@
             "$ref": "#/definitions/CloudErrorBody"
           },
           "x-ms-identifiers": [
-            "code"
+            "code",
+            "message"
           ],
           "description": "A list of additional details about the error."
         }

@@ -1,6 +1,6 @@
 # Readme Configuration Guide for Azure SDK for Go
 
-This file describe how to configure readme files to make it available for Azure SDK for Go code generation.
+This doc describe how to configure readme files to make it available for Azure SDK for Go code generation. Also, this doc will introduce how to generate and test Go SDK by yourself.
 
 ## Common Configuration
 
@@ -104,5 +104,50 @@ module-version: 0.1.0
 
 After configure all the readme files, autorest can be used to generate SDK.
 ~~~
-autorest --go --use=@autorest/go@latest --go --track2 --go-sdk-folder=/path/to/azure-sdk-for-go /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md
+autorest --use=@autorest/go@latest --go --track2 --go-sdk-folder=/path/to/azure-sdk-for-go /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md
 ~~~
+
+## Test with the generated Go SDK
+
+When you have a generated Go SDK either from swagger PR's automation or from local autorest execution, you could import them locally to test with your own test cases.
+
+For example, here is a [SDK PR](https://github.com/Azure/azure-sdk-for-go/pull/17811) which comes from [swagger PR's automation](https://github.com/Azure/azure-rest-api-specs/pull/19468). You could follow the following steps to test it.
+
+1. Clone the PR code to local
+```sh
+cd $WORKSPACE
+git clone git@github.com:azure-sdk/azure-sdk-for-go.git
+cd azure-sdk-for-go
+git checkout -t origin/sdkAuto/armcompute
+```
+
+2. Copy the generated package to your test project
+
+Shell:
+```sh
+cp -r sdk/resourcemanager/compute/armcompute $WORKSPACE/test-project
+```
+
+PowerShell:
+```pwsh
+Copy-Item -Path sdk/resourcemanager/compute/armcompute -Destination $WORKSPACE/test-project -Recurse
+```
+
+3. Change go.mod in your test project to replace the `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute` module with local code
+
+Shell:
+```sh
+cd $WORKSPACE/test-project
+echo "
+replace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute" >> go.mod
+go mod tidy
+```
+
+PowerShell:
+```pwsh
+cd $WORKSPACE/test-project
+Add-Content go.mod "`nreplace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute"
+go mod tidy
+```
+
+4. Now you could reuse or write new tests to test the generated packages.
