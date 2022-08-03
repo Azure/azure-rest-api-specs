@@ -17,16 +17,17 @@ scenarios:
         armTemplate: peArmTemplate/Create_PublicIpAddress.json
       - step: NetworkInterface_Create
         armTemplate: peArmTemplate/Create_NetworkInterface.json
-
       - step: VirtualMachine_Create
         exampleFile: ../examples/compute/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json
-        resourceUpdate:
-          - replace: /properties/networkProfile/networkInterfaces/0/id
+        requestUpdate:
+          - replace: /parameters/properties/networkProfile/networkInterfaces/0/id
             value: $(nicID)
-          - replace: /properties/osProfile/adminUsername
+          - replace: /parameters/properties/osProfile/adminUsername
             value: goscenario
-          - replace: /properties/osProfile/adminPassword
+          - replace: /parameters/properties/osProfile/adminPassword
             value: QWE!@#123
+          - replace: /parameters/properties/storageProfile/osDisk/managedDisk/storageAccountType
+            value: Standard_LRS
       - step: VirtualMachine_Get
         exampleFile: ../examples/compute/GetVirtualMachine.json
       - step: VirtualMachine_List
