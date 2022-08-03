@@ -375,6 +375,54 @@
           }
         }
       }
+    },
+    "/reverseGeocode/batch": {
+      "post": {
+        "description": "**Reverse Geocoding Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Reverse Geocoding Batch API sends batches of queries to [Reverse Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-reverse-geocoding) using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/reverseGeocode/batch?api-version=2022-09-01-preview\n```\n### POST Body for Batch Request\nTo send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _reverse geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"point\": \"-122.128275, 47.639429\"\n    },\n    {\n      \"point\": \"-122.341979399674, 47.6095253501216\"\n    }\n  ]\n}\n```\n\nA _reverse geocoding_ batchItem object can accept any of the supported _reverse geocoding_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-reverse-geocoding#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-reverse-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "operationId": "Search_GetReverseGeocodingBatch",
+        "x-ms-examples": {
+          "A Reverse Geocoding Batch API call containing 2 Reverse Geocoding queries": {
+            "$ref": "./examples/ReverseGeocodingBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "reverseGeocodingBatchRequestBody",
+            "in": "body",
+            "description": "The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReverseGeocodingBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "206": {
+            "description": "Partial Content. Api would return 206 when part of the batchItem fail to get a response.",
+            "schema": {
+              "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -560,6 +608,43 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GeocodingBatchRequestItem"
+          }
+        }
+      }
+    },
+    "ReverseGeocodingBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "properties": {
+        "optionalId": {
+          "description": "id of the request which would show in corresponding batchItem",
+          "type": "string"
+        },
+        "point": {
+          "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lat,lon",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "pickType": {
+          "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response. One exception to this rule is when both PopulatedPlace and Neighborhood entity types are specified and information is found for both. In this case, the information for both entity types is returned. Also, more than one Neighborhood may be returned because the area covered by two different neighborhoods can overlap.",
+          "type": "string"
+        }
+      }
+    },
+    "ReverseGeocodingBatchRequestBody": {
+      "description": "The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReverseGeocodingBatchRequestItem"
           }
         }
       }
