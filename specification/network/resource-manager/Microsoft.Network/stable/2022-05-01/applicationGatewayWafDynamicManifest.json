@@ -156,7 +156,7 @@
         "ruleGroups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+            "$ref": "applicationGateway.json#/definitions/ApplicationGatewayFirewallRuleGroup"
           },
           "description": "The rule groups of the web application firewall rule set.",
           "x-ms-identifiers": []
@@ -167,27 +167,6 @@
         "ruleSetVersion",
         "ruleGroups"
       ]
-    },
-    "ApplicationGatewayFirewallRuleGroup": {
-      "description": "The rules of the web application firewall rule group.",
-      "type": "object",
-      "properties": {
-        "ruleGroupName": {
-          "type": "string",
-          "description": "The name of the web application firewall rule group."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the web application firewall rule group."
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "$ref": "applicationGateway.json#/definitions/ApplicationGatewayFirewallRule"
-          },
-          "x-ms-identifiers": []
-        }
-      }
     }
   }
 }
