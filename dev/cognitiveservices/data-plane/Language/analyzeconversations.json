@@ -185,6 +185,46 @@
           }
         }
       }
+    },
+    "/analyze-conversations/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running Text Analysis conversations job.",
+        "operationId": "AnalyzeConversation_CancelJob",
+        "summary": "Cancel a long-running Text Analysis conversations job",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1752,16 +1792,16 @@
           "type": "string",
           "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
         },
-        "audioTimings": {
+        "wordLevelTimings": {
           "type": "array",
           "description": "The list of word level audio timing information",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
         },
-        "audioTiming": {
+        "conversationItemLevelTiming": {
           "description": "Conversation item level audio timing. This still can help on AI quality if word level audio timings are not available.",
-          "$ref": "#/definitions/AudioTiming"
+          "$ref": "#/definitions/ConversationItemLevelTiming"
         }
       }
     },
@@ -2016,7 +2056,7 @@
               "issue",
               "resolution",
               "chapterTitle",
-              "generic"
+              "narrative"
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
@@ -2035,8 +2075,8 @@
                   "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
                 },
                 {
-                  "value": "generic",
-                  "description": "A generic summary of any conversation."
+                  "value": "narrative",
+                  "description": "A generic narrative summary of any conversation. It generally convert the spoken language into written language, compress the length and keep the salient information."
                 }
               ]
             }
@@ -2289,6 +2329,15 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ]
+    },
+    "ConversationItemLevelTiming": {
+      "type": "object",
+      "description": "The conversation item level audio timing.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
         }
       ]
     },
