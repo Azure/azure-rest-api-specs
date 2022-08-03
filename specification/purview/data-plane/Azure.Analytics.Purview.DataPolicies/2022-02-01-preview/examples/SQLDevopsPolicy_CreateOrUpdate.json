@@ -1,0 +1,49 @@
+{
+	"parameters": {
+		"Endpoint": "{Endpoint}",
+		"api-version": "2022-02-01-preview",
+		"body": {
+			"version": 1,
+			"scope": {
+				"type": "DataSourceReference",
+				"referenceName": "example-server"
+			},
+			"decisionRules": [{
+				"purviewRoleName": "purviewdatarole_builtin_sqlperfmonitor",
+				"principals": [
+					"5b3a30f8-dee3-4a5e-bf48-feddbdf174b1"
+				],
+				"principalGroups": []
+			}]
+		}
+	},
+	"responses": {
+		"201": {
+			"headers": {
+				"x-ms-correlation-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+			},
+			"body": {
+				"policyName": "example-server_sqlperfmonitor",
+				"systemData": {
+					"createdBy": "5b3a30f8-dee3-abcd-bf48-feddbdf174b1",
+					"createdAt": "2022-08-03T11:45:17.0043813Z",
+					"lastModifiedBy": "5b3a30f8-dee3-abcd-bf48-feddbdf174b1",
+					"lastModifiedAt": "2022-08-03T11:45:17.0043813Z"
+				},
+				"version": 1,
+				"decisionRules": [{
+					"effect": "Permit",
+					"purviewRoleName": "purviewdatarole_builtin_sqlperfmonitor",
+					"principals": [
+						"5b3a30f8-dee3-abcd-bf48-feddbdf174b1"
+					],
+					"resourceAzurePath": "/subscriptions/56bb0a7b-861d-abcd-9220-9db0dd88e798/resourceGroups/example-rg/providers/Microsoft.Sql/servers/example-server/**"
+				}],
+				"scope": {
+					"type": "DataSourceReference",
+					"referenceName": "example-server"
+				}
+			}
+		}
+	}
+}

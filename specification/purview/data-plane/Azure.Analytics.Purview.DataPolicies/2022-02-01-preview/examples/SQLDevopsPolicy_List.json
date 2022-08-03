@@ -1,0 +1,82 @@
+{
+	"parameters": {
+		"Endpoint": "{Endpoint}",
+		"api-version": "2022-02-01-preview"
+	},
+	"responses": {
+		"200": {
+			"headers": {
+				"x-ms-request-id": "8f58266a-de42-40d5-b3c4-c6a7e159cfba"
+			},
+			"body": {
+				"value": [{
+						"policyName": "policytest-server_sqlsecurityauditor",
+						"systemData": {
+							"createdBy": "5b3a30f8-dee3-abcd-bf48-feddbdf174b1",
+							"createdAt": "2022-08-03T11:45:18.1745477Z",
+							"lastModifiedBy": "5b3a30f8-dee3-abcd-bf48-feddbdf174b1",
+							"lastModifiedAt": "2022-08-03T11:45:18.1745477Z"
+						},
+						"version": 1,
+						"decisionRules": [{
+							"effect": "Permit",
+							"purviewRoleName": "purviewdatarole_builtin_sqlsecurityauditor",
+							"principals": [
+								"5b3a30f8-dee3-abcd-bf48-feddbdf174b1"
+							],
+							"resourceAzurePath": "/subscriptions/56bb0a7b-861d-abcd-9220-9db0dd88e798/resourceGroups/example-rg/providers/Microsoft.Sql/servers/policytest/**"
+						}],
+						"scope": {
+							"type": "DataSourceReference",
+							"referenceName": "policytest-server"
+						}
+					},
+					{
+						"policyName": "policytest-server_sqlperfmonitor",
+						"systemData": {
+							"createdBy": "5b3a30f8-dee3-abcd-bf48-feddbdf174b1",
+							"createdAt": "2022-08-03T11:45:17.0043813Z",
+							"lastModifiedBy": "5b3a30f8-abcd-4a5e-bf48-feddbdf174b1",
+							"lastModifiedAt": "2022-08-03T11:45:17.0043813Z"
+						},
+						"version": 1,
+						"decisionRules": [{
+							"effect": "Permit",
+							"purviewRoleName": "purviewdatarole_builtin_sqlperfmonitor",
+							"principals": [
+								"5b3a30f8-dee3-abcd-bf48-feddbdf174b1"
+							],
+							"resourceAzurePath": "/subscriptions/56bb0a7b-861d-abcd-9220-9db0dd88e798/resourceGroups/example-rg/providers/Microsoft.Sql/servers/policytest/**"
+						}],
+						"scope": {
+							"type": "DataSourceReference",
+							"referenceName": "policytest-server"
+						}
+					},
+					{
+						"policyName": "AzureSqlDatabase-DS_sqlsecurityauditor",
+						"systemData": {
+							"createdBy": "da1e25ef-f7aa-abcd-b149-2c15dc151388",
+							"createdAt": "2022-07-28T06:12:59.4629138Z",
+							"lastModifiedBy": "da1e25ef-f7aa-abcd-b149-2c15dc151388",
+							"lastModifiedAt": "2022-07-28T06:12:59.4629138Z"
+						},
+						"version": 1,
+						"decisionRules": [{
+							"effect": "Permit",
+							"purviewRoleName": "purviewdatarole_builtin_sqlsecurityauditor",
+							"principals": [
+								"da1e25ef-f7aa-abcd-b149-2c15dc151388"
+							],
+							"resourceAzurePath": "/subscriptions/34fb3b81-27ab-abcd-9d0b-668896fd288c/resourceGroups/example-rg/providers/Microsoft.Sql/servers/abac-test-server/**"
+						}],
+						"scope": {
+							"type": "DataSourceReference",
+							"referenceName": "AzureSqlDatabase-DS"
+						}
+					}
+				]
+			}
+		}
+	}
+}
