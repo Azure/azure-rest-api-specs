@@ -1,17 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
   accountName: scenarioaccount
 
 prepareSteps:
-  - step: Generate_Unique_Name
-    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
   - step: StorageAccount_Create
     exampleFile: ../examples/StorageAccountCreate.json
-    resourceUpdate:
-      - replace: /kind
+    requestUpdate:
+      - replace: /parameters/kind
         value: StorageV2
-      - remove: /extendedLocation
+      - remove: /parameters/extendedLocation
 
 scenarios:
   - scenario: StorageAccount
@@ -46,8 +45,8 @@ scenarios:
         exampleFile: ../examples/BlobContainersPut.json
       - step: BlobContainer_Update
         exampleFile: ../examples/BlobContainersPatch.json
-        resourceUpdate:
-          - replace: /properties/publicAccess
+        requestUpdate:
+          - replace: /blobContainer/properties/publicAccess
             value: None
       - step: BlobContainer_Get
         exampleFile: ../examples/BlobContainersGetWithAllowProtectedAppendWritesAll.json
@@ -67,28 +66,22 @@ scenarios:
     steps:
       - step: FileShare_Create
         exampleFile: ../examples/FileSharesPut.json
-
       - step: FileShare_Update
         exampleFile: ../examples/FileSharesPatch.json
-
       - step: FileShare_Get
         exampleFile: ../examples/FileSharesGet_Stats.json
-
       - step: FileShare_List
         exampleFile: ../examples/DeletedFileSharesList.json
-
       - step: FileShare_LeaseAcquire
         exampleFile: ../examples/FileSharesLease_Acquire.json
         outputVariables:
           leaseId:
             fromResponse: /leaseId
-
       - step: FileShare_LeaseBreak
         exampleFile: ../examples/FileSharesLease_Break.json
-        requestUpdate: # post
+        requestUpdate:
           - replace: /parameters/leaseId
             value: $(leaseId)
-
       - step: FileShare_Delete
         exampleFile: ../examples/FileSharesDelete.json
 
