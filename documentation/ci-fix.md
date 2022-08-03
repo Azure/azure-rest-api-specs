@@ -111,11 +111,11 @@ Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md
 
 ## API Readiness Check
 
-This CI check is to make sure service are ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider. 
+This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider. 
 
-To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first and then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
+To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
 
-NOTE: If your RP is RPSaaS RP, since RPSaaS require swagger merge first. In this case, you could ignore this CI check.
+NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this case, you could ignore this CI check.
 
 
 ## Service API Readiness Test
