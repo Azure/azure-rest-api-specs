@@ -157,7 +157,6 @@ input-file:
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
 ## Suppression

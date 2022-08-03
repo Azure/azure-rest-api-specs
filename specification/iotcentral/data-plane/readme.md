@@ -17,7 +17,7 @@ These are the global settings for the IoT Central API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2022-07-31
+tag: package-2022-05-31
 ```
 
 ### Tag: package-1.2-preview
@@ -66,14 +66,6 @@ These settings apply only when `--tag=package-2022-06-30-preview` is specified o
 ```yaml $(tag) == 'package-2022-06-30-preview'
 input-file:
   - Microsoft.IoTCentral/preview/2022-06-30-preview/iotcentral.json
-```
-
-### Tag: package-2022-07-31
-These settings apply only when `--tag=package-2022-07-31` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-07-31'
-input-file:
-  - Microsoft.IoTCentral/stable/2022-07-31/iotcentral.json
 ```
 ---
 
