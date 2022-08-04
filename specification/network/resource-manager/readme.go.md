@@ -19,6 +19,10 @@ directive:
 - rename-model:
     from: ExplicitProxy
     to: ExplicitProxySettings
+- where-model: FirewallPolicyPropertiesFormat
+  rename-property:
+    from: explicitProxy
+    to: explicitProxySettings
 ```
 
 ### Go multi-api
