@@ -1310,12 +1310,19 @@
               "$ref": "#/definitions/VirtualNetworkDdosProtectionStatusResult"
             }
           },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
