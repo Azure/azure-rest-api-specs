@@ -245,6 +245,7 @@
       }
     },
     "AnalyzeConversationTask": {
+      "type": "object",
       "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -257,6 +258,7 @@
       }
     },
     "AnalyzeConversationTaskResult": {
+      "type": "object",
       "description": "The base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
@@ -269,6 +271,7 @@
       }
     },
     "ConversationalTask": {
+      "type": "object",
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -387,6 +390,7 @@
       "additionalProperties": true
     },
     "TextConversationItem": {
+      "type": "object",
       "description": "The text modality of an input conversation.",
       "allOf": [
         {
@@ -1551,6 +1555,7 @@
       }
     },
     "AnalyzeConversationJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -1573,6 +1578,7 @@
       ]
     },
     "AnalyzeConversationLROTask": {
+      "type": "object",
       "description": "The base class for an long running conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -1652,6 +1658,7 @@
       }
     },
     "MultiLanguageConversationAnalysisInput": {
+      "type": "object",
       "required": [
         "conversations"
       ],
@@ -1716,6 +1723,7 @@
       }
     },
     "TextConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "text",
       "required": [
         "conversationItems"
@@ -1736,6 +1744,7 @@
       }
     },
     "TranscriptConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "transcript",
       "required": [
         "conversationItems"
@@ -1940,6 +1949,7 @@
       ]
     },
     "ConversationPIIResult": {
+      "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
       "required": [
         "conversationItems"
