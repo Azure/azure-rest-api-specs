@@ -70,7 +70,7 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-changes)
-tag: package-policy-2022-08-preview
+tag: package-changes-2022-05
 ```
 
 
@@ -82,7 +82,12 @@ These settings apply only when `--tag=package-policy-2022-08-preview` is specifi
 input-file:
   - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
   - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
+
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
@@ -730,6 +735,14 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyExemptions.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariables.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariableValues.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
