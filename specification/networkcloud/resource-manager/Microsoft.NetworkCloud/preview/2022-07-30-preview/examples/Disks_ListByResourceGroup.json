@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2022-07-30-preview",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/disks/diskName",
+            "name": "diskName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/disks",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+            },
+            "properties": {
+              "storageProviderId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/storageAppliances/storageApplianceName",
+              "diskSizeGB": 120,
+              "storageClass": "Standard",
+              "provisioningState": "Succeeded",
+              "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+              "diskState": "Attached",
+              "hybridAksClustersAssociatedIds": [
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName"
+              ],
+              "virtualMachinesAssociatedIds": [
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+              ]
+            }
+          }
+        ],
+        "nextLink": "https://fully.qualified.hyperlink"
+      }
+    }
+  }
+}
