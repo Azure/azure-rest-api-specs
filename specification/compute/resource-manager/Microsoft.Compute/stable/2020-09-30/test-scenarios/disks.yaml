@@ -1,0 +1,29 @@
+scope: ResourceGroup
+testScenarios:
+  - description: Microsoft.Compute/disks Create an empty managed disk.
+    steps:
+      - step: Create an empty managed disk.
+        exampleFile: ../examples/CreateAnEmptyManagedDisk.json
+  - description: >-
+      Microsoft.Compute/disks Create a managed disk by importing an unmanaged
+      blob from the same subscription.
+    steps:
+      - step: >-
+          Create a managed disk by importing an unmanaged blob from the same
+          subscription.
+        exampleFile: >-
+          ../examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json
+  - description: Microsoft.Compute/disks Create a managed upload disk.
+    steps:
+      - step: Create a managed upload disk.
+        exampleFile: ../examples/CreateAManagedUploadDisk.json
+  - description: >-
+      Microsoft.Compute/disks Create an ultra managed disk with
+      logicalSectorSize 512E
+    steps:
+      - step: Create an ultra managed disk with logicalSectorSize 512E
+        exampleFile: ../examples/CreateAManagedDiskWithLogicalSectorSize.json
+  - description: Microsoft.Compute/disks Create an empty managed disk in extended location.
+    steps:
+      - step: Create an empty managed disk in extended location.
+        exampleFile: ../examples/CreateAnEmptyManagedDiskInExtendedLocation.json

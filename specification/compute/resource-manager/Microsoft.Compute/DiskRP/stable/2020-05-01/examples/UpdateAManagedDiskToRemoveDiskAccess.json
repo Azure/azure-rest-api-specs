@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-05-01",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "networkAccessPolicy": "AllowAll"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating",
+          "networkAccessPolicy": "AllowAll"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Succeeded",
+          "networkAccessPolicy": "AllowAll"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  }
+}

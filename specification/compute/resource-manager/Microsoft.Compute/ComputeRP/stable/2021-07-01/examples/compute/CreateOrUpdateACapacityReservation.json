@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-07-01",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "HR"
+      },
+      "sku": {
+        "name": "Standard_DS1_v2",
+        "capacity": 4
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationName": "myCapacityReservation"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 4
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 4
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
+        }
+      }
+    }
+  }
+}

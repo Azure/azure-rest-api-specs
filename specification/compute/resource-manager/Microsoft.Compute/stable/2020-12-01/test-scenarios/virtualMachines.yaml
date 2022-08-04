@@ -1,0 +1,208 @@
+scope: ResourceGroup
+testScenarios:
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with password
+      authentication.
+    steps:
+      - step: Create a vm with password authentication.
+        exampleFile: ../examples/CreateAVmWithPasswordAuthentication.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm with ssh authentication.
+    steps:
+      - step: Create a vm with ssh authentication.
+        exampleFile: ../examples/CreateAVmWithSshAuthentication.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm with premium storage.
+    steps:
+      - step: Create a vm with premium storage.
+        exampleFile: ../examples/CreateAVmWithPremiumStorage.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm in a Virtual Machine Scale
+      Set with customer assigned platformFaultDomain.
+    steps:
+      - step: >-
+          Create a vm in a Virtual Machine Scale Set with customer assigned
+          platformFaultDomain.
+        exampleFile: >-
+          ../examples/CreateAVmInAVirtualMachineScaleSetWithCustomerAssignedPlatformFaultDomain.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm in an availability set.
+    steps:
+      - step: Create a vm in an availability set.
+        exampleFile: ../examples/CreateAVmInAnAvailabilitySet.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm with boot diagnostics.
+    steps:
+      - step: Create a vm with boot diagnostics.
+        exampleFile: ../examples/CreateAVmWithBootDiagnostics.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with managed boot
+      diagnostics.
+    steps:
+      - step: Create a vm with managed boot diagnostics.
+        exampleFile: ../examples/CreateAVmWithManagedBootDiagnostics.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm with empty data disks.
+    steps:
+      - step: Create a vm with empty data disks.
+        exampleFile: ../examples/CreateAVmWithEmptyDataDisks.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with a marketplace image
+      plan.
+    steps:
+      - step: Create a vm with a marketplace image plan.
+        exampleFile: ../examples/CreateAVmWithAMarketplaceImagePlan.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm from a custom image.
+    steps:
+      - step: Create a vm from a custom image.
+        exampleFile: ../examples/CreateAVmFromACustomImage.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a platform-image vm with
+      unmanaged os and data disks.
+    steps:
+      - step: Create a platform-image vm with unmanaged os and data disks.
+        exampleFile: ../examples/CreateAPlatformImageVmWithUnmanagedOsAndDataDisks.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a custom-image vm from an
+      unmanaged generalized os image.
+    steps:
+      - step: Create a custom-image vm from an unmanaged generalized os image.
+        exampleFile: ../examples/CreateACustomImageVmFromAnUnmanagedGeneralizedOsImage.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: Microsoft.Compute/virtualMachines Create a vm with ephemeral os disk.
+    steps:
+      - step: Create a vm with ephemeral os disk.
+        exampleFile: ../examples/CreateAVmWithADiffOsDisk.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with DiskEncryptionSet
+      resource id in the os disk and data disk.
+    steps:
+      - step: >-
+          Create a vm with DiskEncryptionSet resource id in the os disk and data
+          disk.
+        exampleFile: ../examples/CreateAVmWithDiskEncryptionSetResource.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with ephemeral os disk
+      provisioning in Resource disk using placement property.
+    steps:
+      - step: >-
+          Create a vm with ephemeral os disk provisioning in Resource disk using
+          placement property.
+        exampleFile: >-
+          ../examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsResourceDisk.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with ephemeral os disk
+      provisioning in Cache disk using placement property.
+    steps:
+      - step: >-
+          Create a vm with ephemeral os disk provisioning in Cache disk using
+          placement property.
+        exampleFile: >-
+          ../examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with Host Encryption using
+      encryptionAtHost property.
+    steps:
+      - step: Create a vm with Host Encryption using encryptionAtHost property.
+        exampleFile: ../examples/CreateAVmWithEncryptionAtHost.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Windows vm with a patch setting
+      patchMode of AutomaticByOS.
+    steps:
+      - step: Create a Windows vm with a patch setting patchMode of AutomaticByOS.
+        exampleFile: ../examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByOS.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Windows vm with a patch setting
+      patchMode of AutomaticByPlatform.
+    steps:
+      - step: >-
+          Create a Windows vm with a patch setting patchMode of
+          AutomaticByPlatform.
+        exampleFile: >-
+          ../examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatform.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Windows vm with a patch setting
+      patchMode of Manual.
+    steps:
+      - step: Create a Windows vm with a patch setting patchMode of Manual.
+        exampleFile: ../examples/CreateAWindowsVmWithPatchSettingModeOfManual.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Windows vm with a patch setting
+      patchMode of AutomaticByPlatform and enableHotpatching set to true.
+    steps:
+      - step: >-
+          Create a Windows vm with a patch setting patchMode of
+          AutomaticByPlatform and enableHotpatching set to true.
+        exampleFile: >-
+          ../examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Linux vm with a patch setting
+      patchMode of AutomaticByPlatform.
+    steps:
+      - step: >-
+          Create a Linux vm with a patch setting patchMode of
+          AutomaticByPlatform.
+        exampleFile: >-
+          ../examples/CreateALinuxVmWithPatchSettingModeOfAutomaticByPlatform.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a Linux vm with a patch setting
+      patchMode of ImageDefault.
+    steps:
+      - step: Create a Linux vm with a patch setting patchMode of ImageDefault.
+        exampleFile: ../examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a vm with an extensions time
+      budget.
+    steps:
+      - step: Create a vm with an extensions time budget.
+        exampleFile: ../examples/CreateAVmWithExtensionsTimeBudget.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json
+  - description: >-
+      Microsoft.Compute/virtualMachines Create a VM with Uefi Settings of
+      secureBoot and vTPM.
+    steps:
+      - step: Create a VM with Uefi Settings of secureBoot and vTPM.
+        exampleFile: ../examples/CreateAVmWithUefiSettings.json
+      - step: Force delete a VM
+        exampleFile: ../examples/ForceDeleteVirtualMachine.json

@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-11-01",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "diskEncryptionSet": {
+      "properties": {
+        "activeKey": {
+          "sourceVault": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+          },
+          "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+        }
+      },
+      "tags": {
+        "department": "Development",
+        "project": "Encryption"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    }
+  }
+}
