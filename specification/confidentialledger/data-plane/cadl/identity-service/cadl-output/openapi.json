@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Confidential Ledger Identity Service",
+    "version": "2022-05-13"
+  },
+  "tags": [],
+  "paths": {
+    "/ledgerIdentity/{ledgerId}": {
+      "get": {
+        "operationId": "GetLedgerIdentity",
+        "summary": "Gets identity information for a Confidential Ledger instance.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ledgerId",
+            "in": "path",
+            "required": true,
+            "description": "Id of the Confidential Ledger instance to get information for",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "Azure.Core.Foundations.ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The API version to use for this operation.",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "schemas": {
+      "Azure.Core.Foundations.ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.Error"
+              }
+            ],
+            "description": "The error object."
+          }
+        },
+        "description": "A response containing error details.",
+        "required": [
+          "error"
+        ]
+      },
+      "Azure.Core.Foundations.Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "One of a server-defined set of error codes."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Azure.Core.Foundations.Error"
+            },
+            "x-cadl-name": "Azure.Core.Foundations.Error[]",
+            "description": "An array of details about specific errors that led to this reported error."
+          },
+          "innererror": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.InnerError"
+              }
+            ],
+            "description": "An object containing more specific information than the current object about the error."
+          }
+        },
+        "description": "The error object.",
+        "required": [
+          "code",
+          "message",
+          "details"
+        ]
+      },
+      "Azure.Core.Foundations.InnerError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "One of a server-defined set of error codes."
+          },
+          "innererror": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.InnerError"
+              }
+            ],
+            "description": "Inner error."
+          }
+        },
+        "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+        "required": [
+          "code"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{identityServiceUri}",
+      "description": "Confidential Ledger Service",
+      "variables": {
+        "identityServiceUri": {
+          "default": "https://identity.confidential-ledger.core.azure.com/"
+        }
+      }
+    }
+  ]
+}

@@ -6,24 +6,25 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-//@serviceTitle("Confidential Ledger Identity Service")
-//@serviceVersion("2022-05-13")
+// TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
+@serviceTitle("Confidential Ledger Identity Service")
+@serviceVersion("2022-05-13")
 @server(
   "{identityServiceUri}",
   "Confidential Ledger Service",
   {
-    identityServiceUri: string,
+    identityServiceUri?: string = "https://identity.confidential-ledger.core.azure.com/",
   }
 )
-namespace ConfidentialLedgerIdentityService {
-  @route("/ledgerIdentity/{ledgerId}")
-  @summary("Gets identity information for a Confidential Ledger instance.")
-  @get
-  op GetLedgerIdentity(
-    ...Foundations.ApiVersionParameter,
+namespace Azure.Security.ConfidentialLedger.Certificate;
 
-    @path
-    @doc("Id of the Confidential Ledger instance to get information for")
-    ledgerId: string
-  ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
-}
+@route("/ledgerIdentity/{ledgerId}")
+@summary("Gets identity information for a Confidential Ledger instance.")
+@get
+op GetLedgerIdentity(
+  ...Foundations.ApiVersionParameter,
+
+  @path
+  @doc("Id of the Confidential Ledger instance to get information for")
+  ledgerId: string
+): OkResponse | Foundations.ErrorResponse; // TODO: add return model
