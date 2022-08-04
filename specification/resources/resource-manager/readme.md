@@ -73,21 +73,6 @@ tag: package-templatespecs-2022-02
 tag: package-changes-2022-05
 ```
 
-
-### Tag: package-policy-2022-08-preview
-
-These settings apply only when `--tag=package-policy-2022-08-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-policy-2022-08-preview'
-input-file:
-  - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
-  - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
-
-# Needed when there is more than one input file
-override-info:
-  title: PolicyClient
-```
-
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
@@ -117,6 +102,8 @@ input-file:
 - Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
 - Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
 
 # Needed when there is more than one input file
 override-info:
