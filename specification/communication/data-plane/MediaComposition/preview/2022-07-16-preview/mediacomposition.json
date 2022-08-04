@@ -245,7 +245,7 @@
         }
       }
     },
-    "/mediaCompositions/{mediaCompositionId}/:start": {
+    "/mediaCompositions/{mediaCompositionId}:start": {
       "post": {
         "tags": [
           "MediaComposition"
@@ -301,7 +301,7 @@
         }
       }
     },
-    "/mediaCompositions/{mediaCompositionId}/:stop": {
+    "/mediaCompositions/{mediaCompositionId}:stop": {
       "post": {
         "tags": [
           "MediaComposition"
@@ -439,16 +439,12 @@
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "CompositionStreamState": {
-      "description": "State of the composition stream",
-      "enum": [
-        "notStarted",
-        "running",
-        "stopped"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CompositionStreamState",
-        "modelAsString": true
+      "description": "Provides the state of the media composition",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/StreamStatus"
+        }
       }
     },
     "CustomLayout": {
@@ -1099,6 +1095,19 @@
         }
       },
       "x-ms-discriminator-value": "srt"
+    },
+    "StreamStatus": {
+      "description": "State of the composition stream",
+      "enum": [
+        "notStarted",
+        "running",
+        "stopped"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StreamStatus",
+        "modelAsString": true
+      }
     },
     "SupportPosition": {
       "description": "Position of the support stream",
