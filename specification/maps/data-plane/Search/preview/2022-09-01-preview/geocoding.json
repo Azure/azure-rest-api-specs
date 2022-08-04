@@ -119,7 +119,7 @@
     "Point": {
       "name": "point",
       "in": "query",
-      "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lat,lon",
+      "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lon,lat",
       "required": true,
       "type": "array",
       "items": {
@@ -336,7 +336,7 @@
     },
     "/reverseGeocode": {
       "get": {
-        "description": "**Reverse Geocode a point.**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.",
+        "description": "**Reverse Geocode a point.**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Search_GetReverseGeocode",
         "produces": [
           "application/geo+json"
@@ -621,7 +621,7 @@
           "type": "string"
         },
         "point": {
-          "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lat,lon",
+          "description": "The coordinates of the location that you want to reverse geocode. Example: &point=lon,lat",
           "type": "array",
           "items": {
             "type": "number",
