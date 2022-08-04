@@ -80,7 +80,8 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
-  - Microsoft.Authorization/preview/2022-08-01-preview/policyExemptions.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
 ```
 ### Tag: package-changes-2022-05
 
@@ -857,6 +858,12 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariables.json
+    reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariableValues.json
+    reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
