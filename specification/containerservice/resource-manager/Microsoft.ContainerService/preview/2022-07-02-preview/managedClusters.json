@@ -6823,6 +6823,20 @@
         }
       }
     },
+    "ManagedClusterAzureMonitorProfileKubeStateMetrics": {
+      "type": "object",
+      "description": "Kube State Metrics for prometheus addon profile for the container service cluster",
+      "properties": {
+        "metricLabelsAllowlist": {
+          "type": "string",
+          "description": "Comma-separated list of Kubernetes annotations keys that will be used in the resource's labels metric. "
+        },
+        "metricAnnotationsAllowList": {
+          "type": "string",
+          "description": "Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric."
+        }
+      }
+    },
     "ManagedClusterAzureMonitorProfileMetrics": {
       "type": "object",
       "description": "Metrics profile for the prometheus service addon",
@@ -6832,14 +6846,7 @@
           "description": "Whether to enable the Prometheus collector"
         },
         "kubeStateMetrics": {
-          "metricLabelsAllowlist": {
-            "type": "string",
-            "description": "Comma-separated list of Kubernetes annotations keys that will be used in the resource's labels metric. "
-          },
-          "metricAnnotationsAllowList": {
-            "type": "string",
-            "description": "Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric."
-          }
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileKubeStateMetrics"
         }
       },
       "required": [
