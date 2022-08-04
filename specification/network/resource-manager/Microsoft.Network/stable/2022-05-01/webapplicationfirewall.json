@@ -689,12 +689,17 @@
           "description": "The state of the managed rule. Defaults to Disabled if not specified.",
           "type": "string",
           "enum": [
-            "Disabled"
+            "Disabled",
+            "Enabled"
           ],
           "x-ms-enum": {
             "name": "ManagedRuleEnabledState",
             "modelAsString": true
           }
+        },
+        "action": {
+          "description": "Describes the override action to be applied when rule matches.",
+          "$ref": "#/definitions/ActionType"
         }
       }
     },
@@ -809,6 +814,20 @@
           },
           "description": "The managed rule sets that are associated with the exclusion."
         }
+      }
+    },
+    "ActionType": {
+      "description": "Defines the action to take on rule match.",
+      "type": "string",
+      "enum": [
+        "AnomalyScoring",
+        "Allow",
+        "Block",
+        "Log"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true
       }
     }
   }
