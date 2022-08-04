@@ -66,10 +66,10 @@
             "description": "Parameters supplied to the Create Image operation."
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -157,10 +157,10 @@
             "description": "Parameters supplied to the Update Image operation."
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -179,7 +179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -212,10 +212,10 @@
             "description": "The name of the image."
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -231,7 +231,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -274,10 +274,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -290,7 +290,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -317,10 +317,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -333,7 +333,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -356,10 +356,10 @@
         "description": "Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -372,7 +372,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -457,11 +457,11 @@
     "ImageDisk": {
       "properties": {
         "snapshot": {
-          "$ref": "../common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The snapshot."
         },
         "managedDisk": {
-          "$ref": "../common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The managedDisk."
         },
         "blobUri": {
@@ -523,7 +523,7 @@
     "ImageProperties": {
       "properties": {
         "sourceVirtualMachine": {
-          "$ref": "../common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The source virtual machine from which Image is created."
         },
         "storageProfile": {
@@ -549,13 +549,13 @@
           "$ref": "#/definitions/ImageProperties"
         },
         "extendedLocation": {
-          "$ref": "../common.json#/definitions/ExtendedLocation",
+          "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Image."
         }
       },
       "allOf": [
         {
-          "$ref": "../common.json#/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ],
       "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
