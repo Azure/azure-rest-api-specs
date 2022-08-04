@@ -1387,6 +1387,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "CheckNameAvailabilityWithoutLocation_Execute",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "description": "Check the availability of name for server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if server name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DBforMySQL/getPrivateDnsZoneSuffix": {
       "post": {
         "tags": [
@@ -2300,6 +2345,16 @@
     "VirtualNetworkSubnetUsageResult": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location name."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The subscription id."
+        },
         "delegatedSubnetsUsage": {
           "description": "A list of delegated subnet usage",
           "type": "array",
