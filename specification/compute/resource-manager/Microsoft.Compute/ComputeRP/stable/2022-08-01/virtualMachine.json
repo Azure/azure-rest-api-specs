@@ -1968,7 +1968,7 @@
             }
           }
         },
-        "x-ms-examples":{
+        "x-ms-examples": {
           "VirtualMachineApplication_With_InstanceView" : {
             "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_Get_WithInstanceView.json"
           },
@@ -1982,7 +1982,7 @@
           "VirtualMachineApplications"
         ],
         "operationId": "VirtualMachineApplications_Delete",
-        "description": "The operation to get delete an application on a Virtual Machine.",
+        "description": "The operation to delete an application on a Virtual Machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2036,6 +2036,77 @@
         "x-ms-examples": {
           "Delete an application from a vm": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualMachineApplications"
+        ],
+        "operationId": "VirtualMachineApplications_Put",
+        "description": "The operation to add an VMapplication on a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to delete."
+          },
+          {
+            "name": "application",
+            "in": "body",
+            "required": true,
+            "description": "The definition of the VMApplication to add the virtual machine",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplication"
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "/computeRPCommon.json#/definitions/VMGalleryApplication"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "/computeRPCommon.json#/definitions/VMGalleryApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineApplication_Put": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_CreateOrUpdate.json"
           }
         }
       }
