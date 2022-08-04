@@ -1875,7 +1875,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine containing the extension."
+            "description": "The name of the virtual machine."
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1904,6 +1904,138 @@
           },
           "VirtualMachineApplications_List_MinimumSet": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_List_MinimumSet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmapplications/{applicationName}": {
+      "get": {
+        "tags": [
+          "VirtualMachineApplications"
+        ],
+        "operationId": "VirtualMachineApplications_Get",
+        "description": "The operation to get the status of an application on a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ]
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplicationWithInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples":{
+          "VirtualMachineApplication_With_InstanceView" : {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_Get_WithInstanceView.json"
+          },
+          "VirtualMachineApplication_No_InstnaceView": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_Get_NoInstanceView.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineApplications"
+        ],
+        "operationId": "VirtualMachineApplications_Delete",
+        "description": "The operation to get delete an application on a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to delete."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "Delete an application from a vm": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_Delete.json"
           }
         }
       }
