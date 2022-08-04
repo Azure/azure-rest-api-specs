@@ -3,7 +3,7 @@
   "info": {
     "title": "PolicyClient",
     "version": "2022-08-01-preview",
-    "description": "To use in policy authoring you can create a variable at a scope. Variables created at a scope can be shared between multiple policy definitions."
+    "description": "To query within your variable you can create variable values. These values can hold customer data to be shared between policy definitions."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,17 +34,17 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/variables/{variableName}": {
+    "/{scope}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
       "delete": {
         "tags": [
-          "Variables"
+          "VariableValues"
         ],
-        "operationId": "Variables_Delete",
-        "summary": "Deletes a variable.",
-        "description": "This operation deletes a variable, given its name and the scope it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "operationId": "VariableValues_Delete",
+        "summary": "Deletes a variable value.",
+        "description": "This operation deletes a variable value, given its name, the scope it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
         "x-ms-examples": {
-          "Delete a variable": {
-            "$ref": "./examples/deleteVariable.json"
+          "Delete a variable value": {
+            "$ref": "./examples/deleteVariableValue.json"
           }
         },
         "parameters": [
@@ -53,6 +53,9 @@
           },
           {
             "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableValueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -75,14 +78,14 @@
       },
       "put": {
         "tags": [
-          "Variables"
+          "VariableValues"
         ],
-        "operationId": "Variables_CreateOrUpdate",
-        "summary": "Creates or updates a variable.",
-        "description": " This operation creates or updates a variable with the given scope and name. Policy variables can only be used by a policy definition at the scope they are created or below.",
+        "operationId": "VariableValues_CreateOrUpdate",
+        "summary": "Creates or updates a variable value.",
+        "description": " This operation creates or updates a variable value with the given scope and name for a given variable. Variable values are scoped to the variable for which they are created for.",
         "x-ms-examples": {
-          "Create or update a variable": {
-            "$ref": "./examples/createOrUpdateVariable.json"
+          "Create or update a variable value": {
+            "$ref": "./examples/createOrUpdateVariableValue.json"
           }
         },
         "parameters": [
@@ -93,6 +96,9 @@
             "$ref": "#/parameters/VariableNameParameter"
           },
           {
+            "$ref": "#/parameters/VariableValueNameParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -100,22 +106,22 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Variable"
+              "$ref": "#/definitions/VariableValue"
             },
-            "description": "Parameters for the variable."
+            "description": "Parameters for the variable value."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the updated variable.",
+            "description": "OK - Returns information about the updated variable value.",
             "schema": {
-              "$ref": "#/definitions/Variable"
+              "$ref": "#/definitions/VariableValue"
             }
           },
           "201": {
-            "description": "Created - Returns information about the new variable.",
+            "description": "Created - Returns information about the new variable value.",
             "schema": {
-              "$ref": "#/definitions/Variable"
+              "$ref": "#/definitions/VariableValue"
             }
           },
           "default": {
@@ -128,14 +134,14 @@
       },
       "get": {
         "tags": [
-          "Variables"
+          "VariableValues"
         ],
-        "operationId": "Variables_Get",
-        "summary": "Retrieves a variable.",
-        "description": "This operation retrieves a single variable, given its name and the scope it was created at.",
+        "operationId": "VariableValues_Get",
+        "summary": "Retrieves a variable value.",
+        "description": "This operation retrieves a single variable value; given its name, scope it was created at and the variable it's created for.",
         "x-ms-examples": {
-          "Retrieve a variable": {
-            "$ref": "./examples/getVariable.json"
+          "Retrieve a variable value": {
+            "$ref": "./examples/getVariableValue.json"
           }
         },
         "parameters": [
@@ -146,14 +152,17 @@
             "$ref": "#/parameters/VariableNameParameter"
           },
           {
+            "$ref": "#/parameters/VariableValueNameParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the variable.",
+            "description": "OK - Returns information about the variable value.",
             "schema": {
-              "$ref": "#/definitions/Variable"
+              "$ref": "#/definitions/VariableValue"
             }
           },
           "default": {
@@ -165,17 +174,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
       "get": {
         "tags": [
-          "Variables"
+          "VariableValues"
         ],
-        "operationId": "Variables_List",
-        "summary": "Retrieves all variables that are at this subscription level.",
-        "description": "This operation retrieves the list of all variables associated with the given subscription.",
+        "operationId": "VariableValues_List",
+        "summary": "List variable values for a variable.",
+        "description": "This operation retrieves the list of all variable values associated with the given variable that is at a subscription level.",
         "x-ms-examples": {
-          "List variables that apply to a subscription": {
-            "$ref": "./examples/listVariablesForSubscription.json"
+          "List variable values that apply to a variable at subscription level": {
+            "$ref": "./examples/listVariableValuesForSubscription.json"
           }
         },
         "parameters": [
@@ -183,14 +192,17 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of variables.",
+            "description": "OK - Returns an array of variable values.",
             "schema": {
-              "$ref": "#/definitions/VariableListResult"
+              "$ref": "#/definitions/VariableValueListResult"
             }
           },
           "default": {
@@ -205,17 +217,17 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
       "get": {
         "tags": [
-          "Variables"
+          "VariableValues"
         ],
-        "operationId": "Variables_ListForManagementGroup",
-        "summary": "Retrieves all variables that are at this management group level.",
-        "description": "This operation retrieves the list of all variables applicable to the management group.",
+        "operationId": "VariableValues_ListForManagementGroup",
+        "summary": "List variable values at management group level.",
+        "description": "This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.",
         "x-ms-examples": {
-          "List variables that apply to a management group": {
-            "$ref": "./examples/listVariablesForManagementGroup.json"
+          "List variable values at a management group scope": {
+            "$ref": "./examples/listVariableValuesForManagementGroup.json"
           }
         },
         "parameters": [
@@ -224,13 +236,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },{
+            "$ref": "#/parameters/VariableNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of variables.",
+            "description": "OK - Returns an array of variable values.",
             "schema": {
-              "$ref": "#/definitions/VariableListResult"
+              "$ref": "#/definitions/VariableValueListResult"
             }
           },
           "default": {
@@ -256,37 +270,48 @@
       },
       "description": "An error response from a policy operation."
     },
-    "PolicyVariableColumn" :{
+    "PolicyVariableValueColumnValue" :{
       "required": [
-        "columnName"
+        "columnName",
+        "columnValue"
       ],
+      "properties": {
+        "columnName" : {
+          "type" : "string",
+          "description": "Column name for the variable value"
+        },
+        "columnValue" : {
+          "type" : "object",
+          "description": "Column value for the variable value, this can be an integer, double, boolean, null or a string."
+        }
+      },
       "type": "string",
       "description": "The name of this policy variable column."
     },
-    "PolicyVariableProperties": {
+    "PolicyVariableValueProperties": {
       "required": [
-        "columns"
+        "values"
       ],
       "properties": {
-        "columns": {
+        "values": {
           "type" : "array",
           "items": {
-            "$ref": "#/definitions/PolicyVariableColumn"
+            "$ref": "#/definitions/PolicyVariableValueColumnValue"
           },
-          "description": "Variable column definitions."
+          "description": "Variable value column value array."
         }
       },
-      "description": "The variable properties."
+      "description": "The variable value properties."
     },
-    "Variable": {
+    "VariableValue": {
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PolicyVariableProperties",
-          "description": "Properties for the variable."
+          "$ref": "#/definitions/PolicyVariableValueProperties",
+          "description": "Properties for the variable value."
         },
         "systemData": {
           "readOnly": true,
@@ -307,20 +332,20 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource (Microsoft.Authorization/variables)."
+          "description": "The type of the resource (Microsoft.Authorization/variables/values)."
         }
       },
-      "description": "The variable.",
+      "description": "The variable value.",
       "x-ms-azure-resource": true
     },
-    "VariableListResult": {
+    "VariableValueListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Variable"
+            "$ref": "#/definitions/VariableValue"
           },
-          "description": "An array of variables."
+          "description": "An array of variable values."
         },
         "nextLink": {
           "readOnly": true,
@@ -328,7 +353,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of variables."
+      "description": "List of variable values."
     }
   },
   "parameters": {
@@ -337,7 +362,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the variable to delete.",
+      "description": "The name of the variable to operate on.",
+      "x-ms-parameter-location": "method"
+    },
+    "VariableValueNameParameter": {
+      "name": "variableValueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the variable value to operate on.",
       "x-ms-parameter-location": "method"
     },
     "ScopeParameter": {
@@ -345,7 +378,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the variable. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}') or subscription (format: '/subscriptions/{subscriptionId}')",
+      "description": "The scope of the variable value. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}') or subscription (format: '/subscriptions/{subscriptionId}')",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
