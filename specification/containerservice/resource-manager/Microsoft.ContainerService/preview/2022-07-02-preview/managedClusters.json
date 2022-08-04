@@ -4455,8 +4455,8 @@
         "workloadAutoScalerProfile": {
           "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfile"
         },
-        "azureMonitorMetricsProfile": {
-          "$ref": "#/definitions/ManagedClusterAzureMonitorMetricsProfile"
+        "azureMonitorProfile": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfile"
         }
       },
       "description": "Properties of the managed cluster."
@@ -6814,16 +6814,16 @@
         "controlledValues"
       ]
     },
-    "ManagedClusterAzureMonitorMetricsProfile": {
+    "ManagedClusterAzureMonitorProfile": {
       "type": "object",
       "description": "Prometheus addon profile for the container service cluster",
       "properties": {
-        "Metrics": {
-          "$ref": "#/definitions/ManagedClusterAzureMonitorMetricsProfileMetrics"
+        "metrics": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileMetrics"
         }
       }
     },
-    "ManagedClusterAzureMonitorMetricsProfileMetrics": {
+    "ManagedClusterAzureMonitorProfileMetrics": {
       "type": "object",
       "description": "Metrics profile for the Prometheus service addon",
       "properties": {
@@ -6831,13 +6831,15 @@
           "type": "boolean",
           "description": "Whether to enable the Prometheus collector"
         },
-        "metricLabelsAllowlist": {
-          "type": "string",
-          "description": "Comma-separated list of Kubernetes annotations keys that will be used in the resource's labels metric. "
-        },
-        "metricAnnotationsAllowList": {
-          "type": "string",
-          "description": "Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric."
+        "kubeStateMetrics": {
+          "metricLabelsAllowlist": {
+            "type": "string",
+            "description": "Comma-separated list of Kubernetes annotations keys that will be used in the resource's labels metric. "
+          },
+          "metricAnnotationsAllowList": {
+            "type": "string",
+            "description": "Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric."
+          }
         }
       },
       "required": [
