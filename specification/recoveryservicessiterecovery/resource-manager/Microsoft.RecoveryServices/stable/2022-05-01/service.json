@@ -23784,7 +23784,8 @@
         },
         "sqlServerLicenseType": {
           "description": "The SQL Server license type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "dataMoverRunAsAccountId": {
           "description": "The data mover run as account Id.",
@@ -23807,7 +23808,8 @@
         },
         "targetVmSize": {
           "description": "The target VM size.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "targetLocation": {
           "description": "The target location.",
@@ -24275,6 +24277,15 @@
         "targetLocation": {
           "description": "The target location.",
           "type": "string",
+          "readOnly": true
+        },
+        "roleSizeToNicCountMap": {
+          "description": "The role size to NIC count map.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
           "readOnly": true
         }
       },
