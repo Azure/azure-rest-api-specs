@@ -70,15 +70,15 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-changes)
-tag: package-preview-2022-08
+tag: package-policy-2022-08-preview
 ```
 
 
-### Tag: package-preview-2022-08
+### Tag: package-policy-2022-08-preview
 
-These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+These settings apply only when `--tag=package-policy-2022-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-08'
+```yaml $(tag) == 'package-policy-2022-08-preview'
 input-file:
   - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
   - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json

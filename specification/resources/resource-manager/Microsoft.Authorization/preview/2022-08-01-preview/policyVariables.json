@@ -254,6 +254,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
+      "type": "object",
       "description": "An error response from a policy operation."
     },
     "PolicyVariableColumn" :{
@@ -279,9 +280,13 @@
           "items": {
             "$ref": "#/definitions/PolicyVariableColumn"
           },
+          "x-ms-identifiers": [
+            "columnName"
+          ],
           "description": "Variable column definitions."
         }
       },
+      "type": "object",
       "description": "The variable properties."
     },
     "Variable": {
@@ -316,6 +321,7 @@
           "description": "The type of the resource (Microsoft.Authorization/variables)."
         }
       },
+      "type": "object",
       "description": "The variable.",
       "x-ms-azure-resource": true
     },
@@ -334,6 +340,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "List of variables."
     }
   },
@@ -343,7 +350,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the variable to delete.",
+      "description": "The name of the variable to operate on.",
       "x-ms-parameter-location": "method"
     },
     "ScopeParameter": {
