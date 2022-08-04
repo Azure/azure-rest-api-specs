@@ -1854,6 +1854,59 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmapplications": {
+      "get": {
+        "tags": [
+          "VirtualMachineApplications"
+        ],
+        "operationId": "VirtualMachineApplications_List",
+        "description": "The operation to get all applications of a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the extension."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineApplicationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineApplications_List_MaximumSet": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_List_MaximumSet.json"
+          },
+          "VirtualMachineApplications_List_MinimumSet": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineApplications_List_MinimumSet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2038,6 +2091,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtension"
+          },
+          "description": "The list of extensions"
+        }
+      },
+      "description": "The List Extension operation response"
+    },
+    "VirtualMachineApplicationsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplication"
           },
           "description": "The list of extensions"
         }

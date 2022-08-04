@@ -1122,12 +1122,50 @@
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
+        },
+        "instanceView": {
+          "$ref" : "#/definitions/VMGalleryApplicationInstanceView",
+          "readOnly" : true,
+          "description": "Contains instanceView of the VMApplication if $expand=instanceView is specified"
         }
       },
       "required": [
         "packageReferenceId"
       ],
       "description": "Specifies the required information to reference a compute gallery application version"
+    },
+    "VMGalleryApplicationInstanceView": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description" : "The application name"
+        },
+        "version": {
+          "type": "string",
+          "description" : "The application version"
+        },
+        "result": {
+          "type": "string",
+          "description" : "The current status of the application"
+        },
+        "actionsPerformed" :{
+          "$ref": "#/definitions/VMGalleryApplicationInstanceViewAction"
+        }
+      }
+    },
+    "VMGalleryApplicationInstanceViewAction": {
+      "type" : "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The action performed"
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the operation"
+        }
+      }
     },
     "ApplicationProfile": {
       "type": "object",
