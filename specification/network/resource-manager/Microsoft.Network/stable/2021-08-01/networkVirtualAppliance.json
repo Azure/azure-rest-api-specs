@@ -262,6 +262,9 @@
         "x-ms-examples": {
           "Create NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualAppliancePut.json"
+          },
+          "Create SaaS NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -826,7 +829,7 @@
           "format": "int64",
           "minimum": 0,
           "maximum": 4294967295,
-          "description": "VirtualAppliance ASN."
+          "description": "VirtualAppliance ASN. Microsoft private, public and IANA reserved ASN's are not supported."
         },
         "sshPublicKey": {
           "type": "string",
@@ -861,6 +864,21 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState"
+        },
+        "deploymentType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The deployment type. Partner managed for the SaaS NVA"
+        },
+        "delegation": {
+          "description": "The delegation for the Virtual Appliance",
+          "readOnly": false,
+          "$ref": "#/definitions/DelegationProperties"
+        },
+        "partnerManagedResource": {
+          "description": "The delegation for the Virtual Appliance",
+          "readOnly": false,
+          "$ref": "#/definitions/PartnerManagedResourceProperties"
         }
       },
       "description": "Network Virtual Appliance definition."
@@ -1170,6 +1188,34 @@
         }
       },
       "description": "Properties of the Inbound Security Rules resource."
+    },
+    "DelegationProperties": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The delegation service name."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Properties of the delegation."
+    },
+    "PartnerManagedResourceProperties": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partner managed resource id."
+        },
+        "internalLoadBalancerId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partner managed ILB resource id"
+        }
+      },
+      "description": "Properties of the partner managed resource."
     }
   }
 }
