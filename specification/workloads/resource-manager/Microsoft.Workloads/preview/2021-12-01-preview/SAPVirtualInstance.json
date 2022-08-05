@@ -286,6 +286,9 @@
           },
           "SAPVirtualInstances_Create_WithOSConfig_HA_AvZone": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_HA_AvZone.json"
+          },
+          "SAPVirtualInstances_Create_Distributed_WithRestrictedDBVmSku": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_WithRestrictedDBVmSku.json"
           }
         },
         "description": "Creates an Virtual Instance for SAP.",
@@ -2446,6 +2449,11 @@
         "appResourceGroup": {
           "type": "string",
           "description": "The application resource group where SAP system resources will be deployed."
+        },
+        "IsRestrictedUse": {
+          "description": "A boolean, if true, specifies that the user is aware about the given infrastructure configuration to be restricted.",
+          "type": "boolean",
+          "default": false
         }
       },
       "discriminator": "deploymentType"
