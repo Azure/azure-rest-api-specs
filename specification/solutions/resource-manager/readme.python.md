@@ -17,7 +17,8 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-managedapplications-2021-07
@@ -136,4 +137,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-managedapplications-2017-09'
 namespace: azure.mgmt.managedapplication.v2017_09_01
 output-folder: $(python-sdks-folder)/managedapplication/azure-mgmt-managedapplication/azure/mgmt/managedapplication/v2017_09_01
+```
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 ```
