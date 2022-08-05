@@ -452,7 +452,7 @@
           "description": "List of custom libraries/packages associated with the spark pool.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LibraryInfo"
+            "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
           }
         },
         "sparkConfigProperties": {
@@ -563,45 +563,6 @@
         }
       }
     },
-    "LibraryInfo": {
-      "type": "object",
-      "description": "Library/package information of a Big Data pool powered by Apache Spark",
-      "title": "Information about a library/package created at the workspace level.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the library."
-        },
-        "path": {
-          "type": "string",
-          "description": "Storage blob path of library."
-        },
-        "containerName": {
-          "type": "string",
-          "description": "Storage blob container name."
-        },
-        "uploadedTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last update time of the library.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the library."
-        },
-        "provisioningStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning status of the library/package."
-        },
-        "creatorId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Creator Id of the library/package."
-        }
-      }
-    },
     "LibraryRequirements": {
       "type": "object",
       "description": "Library requirements for a Big Data pool powered by Apache Spark",
@@ -655,16 +616,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the workspace",
-      "x-ms-parameter-location": "method"
     }
   }
 }
