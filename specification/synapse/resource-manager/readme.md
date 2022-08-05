@@ -249,6 +249,14 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/keys.json
 - Microsoft.Synapse/stable/2020-12-01/library.json
 ```
+### Tag: package-2022-03-01-preview
+
+These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2022-03-01-preview/sparkConfiguration.json
+```
 
 ## Suppressions
 
