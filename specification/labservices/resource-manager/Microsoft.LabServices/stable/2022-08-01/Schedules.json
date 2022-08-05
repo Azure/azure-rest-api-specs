@@ -6,7 +6,9 @@
     "description": "REST API for managing Azure Lab Services schedules."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -18,8 +20,12 @@
       }
     }
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/schedules": {
       "parameters": [
@@ -43,7 +49,9 @@
         }
       ],
       "get": {
-        "tags": ["Schedule"],
+        "tags": [
+          "Schedule"
+        ],
         "summary": "Get all schedules for a lab.",
         "description": "Returns a list of all schedules for a lab.",
         "operationId": "Schedules_ListByLab",
@@ -90,7 +98,9 @@
         }
       ],
       "get": {
-        "tags": ["Schedule"],
+        "tags": [
+          "Schedule"
+        ],
         "summary": "Get a lab Schedule.",
         "description": "Returns the properties of a lab Schedule.",
         "operationId": "Schedules_Get",
@@ -115,7 +125,9 @@
         }
       },
       "put": {
-        "tags": ["Schedule"],
+        "tags": [
+          "Schedule"
+        ],
         "summary": "Create or update a lab schedule.",
         "description": "Operation to create or update a lab schedule.",
         "operationId": "Schedules_CreateOrUpdate",
@@ -157,10 +169,14 @@
         }
       },
       "patch": {
-        "tags": ["Schedule"],
+        "tags": [
+          "Schedule"
+        ],
         "summary": "Update a lab schedule.",
         "description": "Operation to update a lab schedule.",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "Schedules_Update",
         "parameters": [
           {
@@ -194,7 +210,9 @@
         }
       },
       "delete": {
-        "tags": ["Schedule"],
+        "tags": [
+          "Schedule"
+        ],
         "summary": "Deletes a schedule resource.",
         "description": "Operation to delete a schedule resource.",
         "operationId": "Schedules_Delete",
@@ -248,7 +266,9 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PagedSchedules": {
       "description": "Paged list of schedules.",
@@ -325,7 +345,10 @@
           "readOnly": true
         }
       },
-      "required": ["stopAt", "timeZoneId"]
+      "required": [
+        "stopAt",
+        "timeZoneId"
+      ]
     },
     "RecurrencePattern": {
       "description": "Recurrence pattern of a lab schedule.",
@@ -356,7 +379,10 @@
           "format": "date-time"
         }
       },
-      "required": ["frequency", "expirationDate"]
+      "required": [
+        "frequency",
+        "expirationDate"
+      ]
     },
     "WeekDay": {
       "type": "string",
@@ -407,7 +433,10 @@
     },
     "RecurrenceFrequency": {
       "type": "string",
-      "enum": ["Daily", "Weekly"],
+      "enum": [
+        "Daily",
+        "Weekly"
+      ],
       "description": "Schedule recurrence frequencies.",
       "x-ms-enum": {
         "name": "RecurrenceFrequency",

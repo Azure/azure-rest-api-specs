@@ -6,9 +6,15 @@
     "description": "REST API for managing Azure Lab Services resource SKUs."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -37,7 +43,9 @@
         }
       ],
       "get": {
-        "tags": ["Skus"],
+        "tags": [
+          "Skus"
+        ],
         "summary": "Gets the Azure Lab Services resource SKUs.",
         "description": "Returns a list of Azure Lab Services resource SKUs.",
         "operationId": "Skus_List",
@@ -84,7 +92,10 @@
         "tier": {
           "description": "The tier of the SKU.",
           "type": "string",
-          "enum": ["Standard", "Premium"],
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
           "x-ms-enum": {
             "name": "LabServicesSkuTier",
             "modelAsString": true
@@ -198,7 +209,11 @@
         "scaleType": {
           "description": "The localized name of the resource.",
           "type": "string",
-          "enum": ["None", "Manual", "Automatic"],
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
           "x-ms-enum": {
             "name": "ScaleType",
             "modelAsString": true,
@@ -249,7 +264,9 @@
         "type": {
           "description": "The type of restriction.",
           "type": "string",
-          "enum": ["Location"],
+          "enum": [
+            "Location"
+          ],
           "x-ms-enum": {
             "name": "RestrictionType",
             "modelAsString": true
@@ -267,7 +284,10 @@
         "reasonCode": {
           "description": "The reason for the restriction.",
           "type": "string",
-          "enum": ["QuotaId", "NotAvailableForSubscription"],
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
           "x-ms-enum": {
             "name": "RestrictionReasonCode",
             "modelAsString": true

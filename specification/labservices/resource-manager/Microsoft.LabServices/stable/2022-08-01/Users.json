@@ -6,7 +6,9 @@
     "description": "REST API for managing Azure Lab Services users."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -18,8 +20,12 @@
       }
     }
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users": {
       "parameters": [
@@ -43,7 +49,9 @@
         }
       ],
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get all users for a lab.",
         "description": "Returns a list of all users for a lab.",
         "operationId": "Users_ListByLab",
@@ -90,7 +98,9 @@
         }
       ],
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get a lab user.",
         "description": "Returns the properties of a lab user.",
         "operationId": "Users_Get",
@@ -115,7 +125,9 @@
         }
       },
       "put": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Create or update a lab user.",
         "description": "Operation to create or update a lab user.",
         "operationId": "Users_CreateOrUpdate",
@@ -167,10 +179,14 @@
         }
       },
       "patch": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Update a lab user.",
         "description": "Operation to update a lab user.",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "Users_Update",
         "parameters": [
           {
@@ -214,7 +230,9 @@
         }
       },
       "delete": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Deletes a user resource.",
         "description": "Operation to delete a user resource.",
         "operationId": "Users_Delete",
@@ -265,7 +283,9 @@
         }
       ],
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Invite a user to a lab.",
         "description": "Operation to invite a user to a lab.",
         "operationId": "Users_Invite",
@@ -327,7 +347,9 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PagedUsers": {
       "description": "Paged list of users.",
@@ -392,7 +414,10 @@
         "email": {
           "description": "Email address of the user.",
           "$ref": "LabServices.json#/definitions/emailAddress",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "registrationState": {
           "description": "State of the user's registration within the lab.",
@@ -417,11 +442,16 @@
           "readOnly": true
         }
       },
-      "required": ["email"]
+      "required": [
+        "email"
+      ]
     },
     "RegistrationState": {
       "type": "string",
-      "enum": ["NotRegistered", "Registered"],
+      "enum": [
+        "NotRegistered",
+        "Registered"
+      ],
       "description": "The user lab registration state.",
       "x-ms-enum": {
         "name": "RegistrationState",
@@ -440,7 +470,12 @@
     },
     "InvitationState": {
       "type": "string",
-      "enum": ["NotSent", "Sending", "Sent", "Failed"],
+      "enum": [
+        "NotSent",
+        "Sending",
+        "Sent",
+        "Failed"
+      ],
       "description": "The lab user invitation state.",
       "x-ms-enum": {
         "name": "InvitationState",
