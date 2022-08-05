@@ -256,18 +256,18 @@ input-file:
 - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
 - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
 - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json 
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/diskRPCommon.json
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/disk.json
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/diskAccess.json
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/diskEncryptionSet.json
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/diskRestorePoint.json
-- Microsoft.Compute/DiskRP/stable/2022-03-02/DiskRP/snapshot.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/diskRPCommon.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/disk.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/diskAccess.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/diskEncryptionSet.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/diskRestorePoint.json
+- Microsoft.Compute/DiskRP/stable/2022-03-02/snapshot.json
 - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-- Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/galleryRPCommon.json
-- Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/gallery.json
-- Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/sharedGallery.json
-- Microsoft.Compute/GalleryRP/stable/2022-01-03/GalleryRP/communityGallery.json
-- Microsoft.Compute/CloudserviceRP/stable/2022-04-04/CloudServiceRP/cloudService.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
+- Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-08-01-only
