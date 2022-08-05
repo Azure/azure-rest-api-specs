@@ -43,7 +43,7 @@
         "description": "Creates or updates a disk encryption set",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
@@ -52,7 +52,7 @@
             "$ref": "#/parameters/DiskEncryptionSetNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "diskEncryptionSet",
@@ -80,7 +80,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -105,7 +105,7 @@
         "description": "Updates (patches) a disk encryption set.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
@@ -114,7 +114,7 @@
             "$ref": "#/parameters/DiskEncryptionSetNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "diskEncryptionSet",
@@ -142,7 +142,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -167,7 +167,7 @@
         "description": "Gets information about a disk encryption set.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
@@ -176,7 +176,7 @@
             "$ref": "#/parameters/DiskEncryptionSetNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -189,7 +189,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -210,7 +210,7 @@
         "description": "Deletes a disk encryption set.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
@@ -219,7 +219,7 @@
             "$ref": "#/parameters/DiskEncryptionSetNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -235,7 +235,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -256,13 +256,13 @@
         "description": "Lists all the disk encryption sets under a resource group.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -275,7 +275,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -298,10 +298,10 @@
         "description": "Lists all the disk encryption sets under a subscription.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -314,7 +314,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -337,7 +337,7 @@
         "description": "Lists all resources that are encrypted with this disk encryption set.",
         "parameters": [
           {
-            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
@@ -346,7 +346,7 @@
             "$ref": "#/parameters/DiskEncryptionSetNameParameter"
           },
           {
-            "$ref": "../common.json#/parameters/ApiVersionParameter"
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -359,7 +359,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -412,7 +412,7 @@
         },
         "autoKeyRotationError": {
           "readOnly": true,
-          "$ref": "../common.json#/definitions/ApiError",
+          "$ref": "./common.json#/definitions/ApiError",
           "description": "The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed."
         },
         "federatedClientId": {
@@ -448,7 +448,7 @@
           "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
         },
         "userAssignedIdentities": {
-          "$ref": "../common.json#/definitions/UserAssignedIdentities",
+          "$ref": "./common.json#/definitions/UserAssignedIdentities",
           "description": "The list of user identities associated with the disk encryption set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
@@ -509,7 +509,7 @@
       },
       "allOf": [
         {
-          "$ref": "../common.json#/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ],
       "description": "disk encryption set resource."
