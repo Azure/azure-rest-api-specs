@@ -3,7 +3,7 @@
   "info": {
     "title": "RedisManagementClient",
     "description": "REST API for Azure Redis Cache Service.",
-    "version": "2020-06-01"
+    "version": "2022-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -77,7 +77,7 @@
         ],
         "operationId": "Redis_CheckNameAvailability",
         "x-ms-examples": {
-          "RedisCacheList": {
+          "RedisCacheCheckNameAvailability": {
             "$ref": "./examples/RedisCacheCheckNameAvailability.json"
           }
         },
@@ -119,7 +119,7 @@
         ],
         "operationId": "Redis_ListUpgradeNotifications",
         "x-ms-examples": {
-          "RedisCacheGet": {
+          "RedisCacheListUpgradeNotifications": {
             "$ref": "./examples/RedisCacheListUpgradeNotifications.json"
           }
         },
@@ -167,6 +167,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -177,6 +180,12 @@
         ],
         "operationId": "Redis_Create",
         "x-ms-examples": {
+          "RedisCacheCreateDefaultVersion": {
+            "$ref": "./examples/RedisCacheCreateDefaultVersion.json"
+          },
+          "RedisCacheCreateLatestVersion": {
+            "$ref": "./examples/RedisCacheCreateLatestVersion.json"
+          },
           "RedisCacheCreate": {
             "$ref": "./examples/RedisCacheCreate.json"
           }
@@ -246,6 +255,7 @@
           }
         },
         "description": "Update an existing Redis cache.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -280,6 +290,12 @@
         "responses": {
           "200": {
             "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "202": {
+            "description": "The existing redis cache was successfully updated. Check Azure-AsyncOperation headers to poll detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -866,7 +882,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisFirewallRuleCreateParameters"
+              "$ref": "#/definitions/RedisFirewallRule"
             },
             "description": "Parameters supplied to the create or update redis firewall rule operation."
           },
@@ -1354,6 +1370,7 @@
           }
         },
         "description": "Deletes the linked server from a redis cache (requires Premium SKU).",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1387,8 +1404,8 @@
           "200": {
             "description": "Linked server was successfully deleted."
           },
-          "204": {
-            "description": "Linked server was successfully deleted."
+          "202": {
+            "description": "The linked server 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1515,7 +1532,7 @@
         "operationId": "PrivateEndpointConnections_List",
         "description": "List all the private endpoint connections associated with the redis cache.",
         "x-ms-examples": {
-          "RedisCacheGetPrivateEndpointConnection": {
+          "RedisCacheListPrivateEndpointConnection": {
             "$ref": "./examples/RedisCacheListPrivateEndpointConnections.json"
           }
         },
@@ -1665,9 +1682,6 @@
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "204": {
-            "description": "No Content -- The private endpoint connection does not exist."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1780,6 +1794,56 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "operationId": "AsyncOperationStatus_Get",
+        "description": "For checking the ongoing status of an operation",
+        "x-ms-examples": {
+          "RedisCacheAsyncOperationStatus": {
+            "$ref": "./examples/RedisCacheAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location at which operation was triggered"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of asynchronous operation"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous operation status response",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1844,6 +1908,10 @@
               "type": "string",
               "description": "The storage account connection string for storing rdb file"
             },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
             "aof-storage-connection-string-0": {
               "type": "string",
               "description": "First storage account connection string"
@@ -1872,12 +1940,32 @@
               "type": "string",
               "description": "The max clients config",
               "readOnly": true
+            },
+            "preferred-data-archive-auth-method": {
+              "type": "string",
+              "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS",
+              "readOnly": true
+            },
+            "preferred-data-persistence-auth-method": {
+              "type": "string",
+              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS"
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
+              "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
             }
           },
-          "additionalProperties": {
-            "type": "string"
-          },
+          "additionalProperties": {},
           "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
+        },
+        "redisVersion": {
+          "type": "string",
+          "description": "Redis version. This should be in the form 'major[.minor]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'."
         },
         "enableNonSslPort": {
           "type": "boolean",
@@ -1887,7 +1975,12 @@
         "replicasPerMaster": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas to be created per master."
+          "description": "The number of replicas to be created per primary."
+        },
+        "replicasPerPrimary": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas to be created per primary."
         },
         "tenantSettings": {
           "type": "object",
@@ -1920,8 +2013,8 @@
             "Enabled",
             "Disabled"
           ],
-          "type": "string",
           "default": "Enabled",
+          "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
@@ -1980,11 +2073,6 @@
     },
     "RedisProperties": {
       "properties": {
-        "redisVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis version."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2044,6 +2132,9 @@
           "items": {
             "$ref": "#/definitions/RedisInstanceDetails"
           },
+          "x-ms-identifiers": [
+            "shardId"
+          ],
           "description": "List of the Redis instances associated with the cache"
         },
         "privateEndpointConnections": {
@@ -2062,68 +2153,6 @@
       ],
       "description": "Properties of the redis cache.",
       "x-ms-external": true
-    },
-    "Resource": {
-      "description": "The Resource definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "RedisCreateParameters": {
       "properties": {
@@ -2153,6 +2182,10 @@
             "type": "string"
           },
           "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         }
       },
       "required": [
@@ -2174,6 +2207,10 @@
             "type": "string"
           },
           "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         }
       },
       "description": "Parameters supplied to the Update Redis operation."
@@ -2207,22 +2244,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "RedisFirewallRuleCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisFirewallRuleProperties",
-          "description": "Properties required to create a firewall rule ."
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisFirewallRule"
         }
-      },
-      "required": [
-        "properties"
       ],
-      "description": "Parameters required for creating a firewall rule on redis cache."
+      "description": "Parameters required for creating a firewall rule on redis cache. (Note, you can just use the FirewallRule type instead now.)"
     },
     "RedisFirewallRuleProperties": {
       "description": "Specifies a range of IP addresses permitted to connect to the cache",
@@ -2271,6 +2303,10 @@
             "type": "string"
           },
           "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         }
       },
       "required": [
@@ -2278,7 +2314,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "A single Redis item in List or Get Operation."
@@ -2311,7 +2347,12 @@
         "isMaster": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Specifies whether the instance is a master node."
+          "description": "Specifies whether the instance is a primary node."
+        },
+        "isPrimary": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a primary node."
         }
       },
       "description": "Details of single instance of redis."
@@ -2396,6 +2437,10 @@
         "container": {
           "type": "string",
           "description": "Container name to export to."
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
@@ -2416,6 +2461,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
@@ -2469,6 +2518,7 @@
           "items": {
             "$ref": "#/definitions/ScheduleEntry"
           },
+          "x-ms-identifiers": [],
           "description": "List of patch schedules for a Redis cache."
         }
       },
@@ -2483,6 +2533,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "required": [
@@ -2490,7 +2545,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Response to put/get patch schedules for Redis cache."
@@ -2543,7 +2598,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2665,6 +2720,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the resource provider."
         },
         "nextLink": {
@@ -2722,6 +2780,10 @@
           "items": {
             "$ref": "#/definitions/UpgradeNotification"
           },
+          "x-ms-identifiers": [
+            "name",
+            "timestamp"
+          ],
           "description": "List of all notifications."
         },
         "nextLink": {
@@ -2731,6 +2793,23 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "Asynchronous operation status",
+      "properties": {
+        "properties": {
+          "description": "Additional properties from RP, only when operation is successful",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "x-ms-external": true
     }
   },
   "parameters": {
