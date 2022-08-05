@@ -881,7 +881,8 @@
             "description": "NetworkVerifier was updated",
             "schema": {
               "$ref": "#/definitions/NetworkVerifier"
-            }
+            },
+            "x-ms-azure-resource": true
           },
           "201": {
             "description": "NetworkVerifier was created",
@@ -958,16 +959,19 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/AnalysisIntentProperties"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -1011,16 +1015,19 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/AnalysisRunProperties"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -1060,16 +1067,19 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ConfigurationSnapshotProperties"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -1208,13 +1218,15 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/NetworkVerifierProperties"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -1239,19 +1251,22 @@
       }
     },
     "NetworkVerifierProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
+      "format": "int32",
       "enum": [
-        "Succeeded",
+        "Accepted",
+        "Creating",
         "Updating",
         "Deleting",
+        "Succeeded",
         "Failed",
-        "Creating"
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
       ],
+      "type": "string",
       "x-ms-enum": {
-        "name": "NetworkVerifierProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "name": "ProvisioningState"
       }
     },
     "ResourceProviderDefaultErrorResponse": {
