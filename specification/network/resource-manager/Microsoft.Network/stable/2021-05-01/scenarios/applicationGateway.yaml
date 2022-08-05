@@ -7,12 +7,12 @@ scenarios:
     steps:
       - step: ApplicationGateway_Create
         exampleFile: ../examples/ApplicationGatewayCreate.json
-        # requestUpdate:
-        #   - replace: /parameters/identity
-        #     value:
-        #       type: UserAssigned
-        #       userAssignedIdentities:
-        #         /subscription/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1: {}
+        requestUpdate:
+          - replace: /parameters/identity
+            value:
+              type: UserAssigned
+              userAssignedIdentities:
+                /subscription/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1: {}
       - step: ApplicationGateway_UpdateTags
         exampleFile: ../examples/ApplicationGatewayUpdateTags.json
       - step: ApplicationGateway_Get
