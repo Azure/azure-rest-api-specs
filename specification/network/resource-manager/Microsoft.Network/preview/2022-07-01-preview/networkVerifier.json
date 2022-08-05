@@ -881,8 +881,7 @@
             "description": "NetworkVerifier was updated",
             "schema": {
               "$ref": "#/definitions/NetworkVerifier"
-            },
-            "x-ms-azure-resource": true
+            }
           },
           "201": {
             "description": "NetworkVerifier was created",
@@ -897,6 +896,7 @@
             }
           }
         },
+        "x-ms-azure-resource": true,
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NetworkVerifierPut": {
@@ -1215,7 +1215,8 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "type": "string",
