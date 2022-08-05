@@ -1043,7 +1043,8 @@
           "enum": [
             "Unknown",
             "VirtualNetworkFunction",
-            "ContainerizedNetworkFunction"
+            "ContainerizedNetworkFunction",
+            "DelegatedNetworkFunction"
           ],
           "x-ms-mutability": [
             "read",
@@ -1088,6 +1089,22 @@
         }
       }
     },
+    "DelegatedNetworkFunctionNetworkFunctionDefinitionVersion": {
+      "description": "Delegated network function network function definition version properties        .",
+      "x-ms-discriminator-value": "DelegatedNetworkFunction",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "networkFunctionTemplate": {
+          "description": "Delegated network function template.",
+          "$ref": "#/definitions/DelegatedNetworkFunctionTemplate"
+        }
+      }
+    },
     "ContainerizedNetworkFunctionTemplate": {
       "description": "Containerized network function template.",
       "discriminator": "nfviType",
@@ -1128,10 +1145,37 @@
           "enum": [
             "Unknown",
             "AzureStackEdge",
-            "Azure"
+            "AzureCore",
+            "AzureOperatorDistributedServices"
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkFunctionNFVIType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "DelegatedNetworkFunctionTemplate": {
+      "description": "Delegated network function template.",
+      "discriminator": "nfviType",
+      "required": [
+        "nfviType"
+      ],
+      "type": "object",
+      "properties": {
+        "nfviType": {
+          "type": "string",
+          "description": "The network function type.",
+          "enum": [
+            "Unknown",
+            "AzureCore"
+          ],
+          "x-ms-enum": {
+            "name": "DelegatedNetworkFunctionNFVIType",
             "modelAsString": true
           },
           "x-ms-mutability": [
@@ -1219,7 +1263,7 @@
             "HelmPackage"
           ],
           "x-ms-enum": {
-            "name": "ArtifactType",
+            "name": "AzureArcKubernetesArtifactType",
             "modelAsString": true
           }
         }
@@ -1330,6 +1374,477 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionTemplate": {
+      "description": "Azure virtual network function template.",
+      "x-ms-discriminator-value": "AzureCore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesNetworkFunctionTemplate": {
+      "description": "Azure Operator Distributed Services network function template.",
+      "x-ms-discriminator-value": "AzureOperatorDistributedServices",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionApplication": {
+      "description": "Azure virtual network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "VhdImageFile",
+            "ArmTemplate"
+          ],
+          "x-ms-enum": {
+            "name": "AzureCoreArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesNetworkFunctionApplication": {
+      "description": "Azure Operator Distributed Services network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "ImageFile",
+            "ArmTemplate"
+          ],
+          "x-ms-enum": {
+            "name": "AzureOperatorDistributedServicesArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionVhdApplication": {
+      "description": "Azure core network function vhd application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "VhdImageFile",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure vhd image artifact profile.",
+          "$ref": "#/definitions/AzureCoreVhdImageArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureCoreVhdImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionArmTemplateApplication": {
+      "description": "Azure core network function Template application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ArmTemplate",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure template artifact profile.",
+          "$ref": "#/definitions/AzureCoreArmTemplateArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureCoreArmTemplateDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesNetworkFunctionImageApplication": {
+      "description": "Azure Operator Distributed Services network function image application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ImageFile",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure Operator Distributed Services image artifact profile.",
+          "$ref": "#/definitions/AzureOperatorDistributedServicesImageArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureOperatorDistributedServicesImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesNetworkFunctionArmTemplateApplication": {
+      "description": "Azure Operator Distributed Services network function Template application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ArmTemplate",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure Operator Distributed Services Template artifact profile.",
+          "$ref": "#/definitions/AzureOperatorDistributedServicesArmTemplateArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureOperatorDistributedServicesArmTemplateDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreVhdImageArtifactProfile": {
+      "description": "Azure vhd artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "vhdArtifactProfile": {
+          "description": "Vhd artifact profile.",
+          "$ref": "#/definitions/VhdImageArtifactProfile"
+        }
+      }
+    },
+    "AzureCoreArmTemplateArtifactProfile": {
+      "description": "Azure template artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "templateArtifactProfile": {
+          "description": "Template artifact profile.",
+          "$ref": "#/definitions/ArmTemplateArtifactProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesImageArtifactProfile": {
+      "description": "Azure Operator Distributed Services image artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "imageArtifactProfile": {
+          "description": "Image artifact profile.",
+          "$ref": "#/definitions/ImageArtifactProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesArmTemplateArtifactProfile": {
+      "description": "Azure Operator Distributed Services vhd artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "templateArtifactProfile": {
+          "description": "Template artifact profile.",
+          "$ref": "#/definitions/ArmTemplateArtifactProfile"
+        }
+      }
+    },
+    "AzureCoreVhdImageDeployMappingRuleProfile": {
+      "description": "Azure vhd deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "vhdImageMappingRuleProfile": {
+          "description": "The vhd mapping rule profile.",
+          "$ref": "#/definitions/VhdImageMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreArmTemplateDeployMappingRuleProfile": {
+      "description": "Azure template deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "templateMappingRuleProfile": {
+          "description": "The template mapping rule profile.",
+          "$ref": "#/definitions/ArmTemplateMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesImageDeployMappingRuleProfile": {
+      "description": "Azure Operator Distributed Services image deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "imageMappingRuleProfile": {
+          "description": "The vhd mapping rule profile.",
+          "$ref": "#/definitions/ImageMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorDistributedServicesArmTemplateDeployMappingRuleProfile": {
+      "description": "Azure Operator Distributed Services template deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "templateMappingRuleProfile": {
+          "description": "The template mapping rule profile.",
+          "$ref": "#/definitions/ArmTemplateMappingRuleProfile"
+        }
+      }
+    },
+    "VhdImageArtifactProfile": {
+      "description": "Vhd artifact profile.",
+      "type": "object",
+      "properties": {
+        "vhdName": {
+          "type": "string",
+          "description": "Vhd name."
+        },
+        "vhdVersion": {
+          "type": "string",
+          "description": "Vhd version."
+        }
+      }
+    },
+    "VhdImageMappingRuleProfile": {
+      "description": "Vhd mapping rule profile",
+      "type": "object",
+      "properties": {
+        "userConfiguration": {
+          "description": "List of values.",
+          "type": "string"
+        }
+      }
+    },
+    "ArmTemplateArtifactProfile": {
+      "description": "Template artifact profile.",
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "description": "Template name."
+        },
+        "templateVersion": {
+          "type": "string",
+          "description": "Template version."
+        }
+      }
+    },
+    "ArmTemplateMappingRuleProfile": {
+      "description": "Template mapping rule profile",
+      "type": "object",
+      "properties": {
+        "templateParameters": {
+          "description": "List of template parameters.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageArtifactProfile": {
+      "description": "Image artifact profile.",
+      "type": "object",
+      "properties": {
+        "imageName": {
+          "type": "string",
+          "description": "Image name."
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "Image version."
+        }
+      }
+    },
+    "ImageMappingRuleProfile": {
+      "description": "Image mapping rule profile",
+      "type": "object",
+      "properties": {
+        "userConfiguration": {
+          "description": "List of values.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureCoreDelegatedNetworkFunctionTemplate": {
+      "description": "Azure delegated network function template.",
+      "x-ms-discriminator-value": "AzureCore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DelegatedNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureCoreDelegatedNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureCoreDelegatedNetworkFunctionApplication": {
+      "description": "Azure delegated network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "ImageFile"
+          ],
+          "x-ms-enum": {
+            "name": "AzureCoreDelegatedArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureCoreDelegatedNetworkFunctionImageApplication": {
+      "description": "Azure core network function Image application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCoreDelegatedNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ImageFile",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure Image artifact profile.",
+          "$ref": "#/definitions/AzureCoreDelegatedImageArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureCoreDelegatedImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreDelegatedImageArtifactProfile": {
+      "description": "Azure Image artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "imageArtifactProfile": {
+          "description": "Image artifact profile.",
+          "$ref": "#/definitions/ImageArtifactProfile"
+        }
+      }
+    },
+    "AzureCoreDelegatedImageDeployMappingRuleProfile": {
+      "description": "Azure Image deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "imageMappingRuleProfile": {
+          "description": "The Image mapping rule profile.",
+          "$ref": "#/definitions/ImageMappingRuleProfile"
         }
       }
     },
