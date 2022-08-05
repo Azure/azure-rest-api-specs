@@ -767,13 +767,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of NetworkVerifiers",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkVerifier"
-              }
-            }
+            "$ref": "#/definitions/NetworkVerifierList"
           },
           "default": {
             "description": "Default error response.",
@@ -1208,7 +1202,6 @@
       }
     },
     "NetworkVerifier": {
-      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "name": {
@@ -1234,6 +1227,18 @@
         },
         "location": {
           "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NetworkVerifierList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkVerifier"
+          }
         }
       }
     },
