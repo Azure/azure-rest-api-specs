@@ -138,3 +138,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.managedapplication.v2017_09_01
 output-folder: $(python-sdks-folder)/managedapplication/azure-mgmt-managedapplication/azure/mgmt/managedapplication/v2017_09_01
 ```
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
