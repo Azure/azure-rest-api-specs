@@ -18224,7 +18224,9 @@
             "TestMigrationInProgress",
             "TestMigrationSucceeded",
             "TestMigrationFailed",
-            "TestMigrationCleanupInProgress"
+            "TestMigrationCleanupInProgress",
+            "TestMigrationCompletedWithInformation",
+            "TestMigrationPartiallySucceeded"
           ],
           "type": "string",
           "readOnly": true,
@@ -18293,7 +18295,8 @@
           "items": {
             "$ref": "#/definitions/CriticalJobHistoryDetails"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "eventCorrelationId": {
           "description": "The correlation Id for events associated with this migration item.",
