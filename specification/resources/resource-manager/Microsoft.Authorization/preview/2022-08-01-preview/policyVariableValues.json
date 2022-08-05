@@ -34,14 +34,14 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
       "delete": {
         "tags": [
           "VariableValues"
         ],
         "operationId": "VariableValues_Delete",
         "summary": "Deletes a variable value.",
-        "description": "This operation deletes a variable value, given its name, the scope it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "description": "This operation deletes a variable value, given its name, the subscription it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
         "x-ms-examples": {
           "Delete a variable value": {
             "$ref": "./examples/deleteVariableValue.json"
@@ -49,7 +49,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/VariableNameParameter"
@@ -82,7 +82,7 @@
         ],
         "operationId": "VariableValues_CreateOrUpdate",
         "summary": "Creates or updates a variable value.",
-        "description": " This operation creates or updates a variable value with the given scope and name for a given variable. Variable values are scoped to the variable for which they are created for.",
+        "description": " This operation creates or updates a variable value with the given subscription and name for a given variable. Variable values are scoped to the variable for which they are created for.",
         "x-ms-examples": {
           "Create or update a variable value": {
             "$ref": "./examples/createOrUpdateVariableValue.json"
@@ -90,7 +90,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/VariableNameParameter"
@@ -138,7 +138,7 @@
         ],
         "operationId": "VariableValues_Get",
         "summary": "Retrieves a variable value.",
-        "description": "This operation retrieves a single variable value; given its name, scope it was created at and the variable it's created for.",
+        "description": "This operation retrieves a single variable value; given its name, subscription it was created at and the variable it's created for.",
         "x-ms-examples": {
           "Retrieve a variable value": {
             "$ref": "./examples/getVariableValue.json"
@@ -146,7 +146,147 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableValueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the variable value.",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
+      "delete": {
+        "tags": [
+          "VariableValues"
+        ],
+        "operationId": "VariableValues_DeleteAtManagementGroup",
+        "summary": "Deletes a variable value.",
+        "description": "This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "x-ms-examples": {
+          "Delete a variable value at management group": {
+            "$ref": "./examples/deleteVariableValueAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableValueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the variable doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VariableValues"
+        ],
+        "operationId": "VariableValues_CreateOrUpdateAtManagementGroup",
+        "summary": "Creates or updates a variable value.",
+        "description": " This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.",
+        "x-ms-examples": {
+          "Create or update a variable value at management group": {
+            "$ref": "./examples/createOrUpdateVariableValueAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableValueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            },
+            "description": "Parameters for the variable value."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated variable value.",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new variable value.",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VariableValues"
+        ],
+        "operationId": "VariableValues_GetAtManagementGroup",
+        "summary": "Retrieves a variable value.",
+        "description": "This operation retrieves a single variable value; given its name,  management group it was created at and the variable it's created for.",
+        "x-ms-examples": {
+          "Retrieve a variable value at management group": {
+            "$ref": "./examples/getVariableValueAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "$ref": "#/parameters/VariableNameParameter"
@@ -380,15 +520,6 @@
       "type": "string",
       "description": "The name of the variable value to operate on.",
       "x-ms-parameter-location": "method"
-    },
-    "ScopeParameter": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}') or subscription (format: '/subscriptions/{subscriptionId}')",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

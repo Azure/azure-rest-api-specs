@@ -72,7 +72,6 @@ tag: package-templatespecs-2022-02
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
-
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
