@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-01",
+    "version": "2021-05-01",
     "title": "HybridDataManagementClient"
   },
   "host": "management.azure.com",
@@ -39,13 +39,19 @@
             "schema": {
               "$ref": "#/definitions/AvailableProviderOperations"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Operations_ListGET11": {
+          "SessionRecords\\OperationsTest\\Operations_ListGET11": {
             "$ref": "./examples/Operations_List-GET-example-11.json"
           }
         }
@@ -78,13 +84,19 @@
             "schema": {
               "$ref": "#/definitions/DataManagerList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "DataManagers_ListGET21": {
+          "SessionRecords\\DataManagersTest\\DataManagers_ListGET21": {
             "$ref": "./examples/DataManagers_List-GET-example-21.json"
           }
         }
@@ -120,13 +132,19 @@
             "schema": {
               "$ref": "#/definitions/DataManagerList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "DataManagers_ListByResourceGroupGET31": {
+          "SessionRecords\\DataManagersTest\\DataManagers_ListByResourceGroupGET31": {
             "$ref": "./examples/DataManagers_ListByResourceGroup-GET-example-31.json"
           }
         }
@@ -165,10 +183,16 @@
             "schema": {
               "$ref": "#/definitions/DataManager"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "DataManagers_GetGET41": {
+          "SessionRecords\\DataManagersTest\\DataManagers_GetGET41": {
             "$ref": "./examples/DataManagers_Get-GET-example-41.json"
           }
         }
@@ -217,11 +241,17 @@
           },
           "202": {
             "description": "Accepted request for Create."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataManagers_CreatePUT41": {
+          "SessionRecords\\DataManagersTest\\DataManagers_CreatePUT41": {
             "$ref": "./examples/DataManagers_Create-PUT-example-41.json"
           }
         }
@@ -258,11 +288,20 @@
           },
           "204": {
             "description": "Data Manager Resource deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
-          "DataManagers_DeleteDELETE41": {
+          "SessionRecords\\DataManagersTest\\DataManagers_DeleteDELETE41": {
             "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
           }
         }
@@ -317,11 +356,17 @@
           },
           "202": {
             "description": "Accepted request for Data Manager Update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataManagers_UpdatePATCH43": {
+          "SessionRecords\\DataManagersTest\\DataManagers_UpdatePATCH43": {
             "$ref": "./examples/DataManagers_Update-PATCH-example-43.json"
           }
         }
@@ -360,13 +405,22 @@
             "schema": {
               "$ref": "#/definitions/DataServiceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "DataServices_ListByDataManagerGET51": {
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET51": {
+            "$ref": "./examples/DataServices_Get-GET-example-51.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_ListByDataManagerGET51": {
             "$ref": "./examples/DataServices_ListByDataManager-GET-example-51.json"
           }
         }
@@ -412,11 +466,36 @@
             "schema": {
               "$ref": "#/definitions/DataService"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
+
         },
         "x-ms-examples": {
-          "DataServices_GetGET62": {
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET62": {
             "$ref": "./examples/DataServices_Get-GET-example-62.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET63": {
+            "$ref": "./examples/DataServices_Get-GET-example-63.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET64": {
+            "$ref": "./examples/DataServices_Get-GET-example-64.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET65": {
+            "$ref": "./examples/DataServices_Get-GET-example-65.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET66": {
+            "$ref": "./examples/DataServices_Get-GET-example-66.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET67": {
+            "$ref": "./examples/DataServices_Get-GET-example-67.json"
+          },
+          "SessionRecords\\DataServicesTest\\DataServices_GetGET68": {
+            "$ref": "./examples/DataServices_Get-GET-example-68.json"
           }
         }
       }
@@ -468,6 +547,12 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
@@ -475,7 +560,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "JobDefinitions_ListByDataServiceGET71": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_ListByDataServiceGET71": {
             "$ref": "./examples/JobDefinitions_ListByDataService-GET-example-71.json"
           }
         }
@@ -528,11 +613,23 @@
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "JobDefinitions_GetGET81": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET85": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate-GET-example-85.json"
+          },
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_GetGET81": {
             "$ref": "./examples/JobDefinitions_Get-GET-example-81.json"
+          },
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RunGET81": {
+            "$ref": "./examples/JobDefinitions_Run-GET-example-81.json"
           }
         }
       },
@@ -594,11 +691,17 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "JobDefinitions_CreateOrUpdatePUT83": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdatePUT83": {
             "$ref": "./examples/JobDefinitions_CreateOrUpdate-PUT-example-83.json"
           }
         }
@@ -649,12 +752,80 @@
           },
           "204": {
             "description": "Completed request for Delete JobDefinition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+      },
         "x-ms-examples": {
-          "JobDefinitions_DeleteDELETE81": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_DeleteDELETE81": {
             "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/cancel": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method cancels all the running or waiting jobs in a job definition.",
+        "operationId": "JobDefinitions_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition cancellation accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CancelJobPOST91": {
+            "$ref": "./examples/JobDefinitions_CancelJob-POST-example-91.json"
           }
         }
       }
@@ -713,6 +884,12 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
@@ -720,8 +897,14 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Jobs_ListByJobDefinitionGET91": {
-            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-91.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobGET102": {
+            "$ref": "./examples/JobDefinitions_RetryJob-GET-example-102.json"
+          },
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobGET102": {
+            "$ref": "./examples/JobDefinitions_SkipJob-GET-example-102.json"
+          },
+          "SessionRecords\\JobsTest\\Jobs_ListByJobDefinitionGET101": {
+            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-101.json"
           }
         }
       }
@@ -787,11 +970,17 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "Jobs_GetGET101": {
-            "$ref": "./examples/Jobs_Get-GET-example-101.json"
+          "SessionRecords\\JobsTest\\Jobs_GetGET111": {
+            "$ref": "./examples/Jobs_Get-GET-example-111.json"
           }
         }
       }
@@ -850,12 +1039,18 @@
           },
           "204": {
             "description": "Completed request for job Cancel."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Jobs_CancelPOST111": {
-            "$ref": "./examples/Jobs_Cancel-POST-example-111.json"
+          "SessionRecords\\JobsTest\\Jobs_CancelPOST121": {
+            "$ref": "./examples/Jobs_Cancel-POST-example-121.json"
           }
         }
       }
@@ -914,12 +1109,77 @@
           },
           "204": {
             "description": "Complete request for Job resume."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Jobs_ResumePOST121": {
-            "$ref": "./examples/Jobs_Resume-POST-example-121.json"
+          "SessionRecords\\JobsTest\\Jobs_ResumePOST131": {
+            "$ref": "./examples/Jobs_Resume-POST-example-131.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/retryjob": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method retries the first failed or cancelled job that has not already been skipped for the job definition.",
+        "operationId": "JobDefinitions_RetryJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition retry successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobPOST141": {
+            "$ref": "./examples/JobDefinitions_RetryJob-POST-example-141.json"
           }
         }
       }
@@ -980,12 +1240,77 @@
           },
           "204": {
             "description": "Completed request for Job run. Run has started."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "JobDefinitions_RunPOST132": {
-            "$ref": "./examples/JobDefinitions_Run-POST-example-132.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RunPOST152": {
+            "$ref": "./examples/JobDefinitions_Run-POST-example-152.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/skipjob": {
+      "post": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method skips last executed failed or cancelled job.",
+        "operationId": "JobDefinitions_SkipJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job definition skip successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobPOST161": {
+            "$ref": "./examples/JobDefinitions_SkipJob-POST-example-161.json"
           }
         }
       }
@@ -1037,6 +1362,12 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
@@ -1044,8 +1375,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Jobs_ListByDataServiceGET141": {
-            "$ref": "./examples/Jobs_ListByDataService-GET-example-141.json"
+          "SessionRecords\\JobsTest\\Jobs_ListByDataServiceGET171": {
+            "$ref": "./examples/Jobs_ListByDataService-GET-example-171.json"
           }
         }
       }
@@ -1090,6 +1421,12 @@
             "schema": {
               "$ref": "#/definitions/DataStoreList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/DataStoreFilter",
@@ -1097,8 +1434,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "DataStores_ListByDataManagerGET151": {
-            "$ref": "./examples/DataStores_ListByDataManager-GET-example-151.json"
+          "SessionRecords\\DataStoresTest\\DataStores_ListByDataManagerGET181": {
+            "$ref": "./examples/DataStores_ListByDataManager-GET-example-181.json"
           }
         }
       }
@@ -1143,14 +1480,38 @@
             "schema": {
               "$ref": "#/definitions/DataStore"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "DataStores_GetGET161": {
-            "$ref": "./examples/DataStores_Get-GET-example-161.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET194": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-194.json"
           },
-          "DataStores_GetGET162": {
-            "$ref": "./examples/DataStores_Get-GET-example-162.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET195": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-195.json"
+          },
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET194": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-194.json"
+          },
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET195": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-195.json"
+          },
+          "SessionRecords\\DataStoresTest\\DataStores_GetGET191": {
+            "$ref": "./examples/DataStores_Get-GET-example-191.json"
+          },
+          "SessionRecords\\DataStoresTest\\DataStores_GetGET192": {
+            "$ref": "./examples/DataStores_Get-GET-example-192.json"
+          },
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET191": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate-GET-example-191.json"
+          },
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET192": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate-GET-example-192.json"
           }
         }
       },
@@ -1205,15 +1566,21 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataStores_CreateOrUpdate_DataSinkPUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-162.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkPUT192": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-192.json"
           },
-          "DataStores_CreateOrUpdate_DataSourcePUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-162.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourcePUT192": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-192.json"
           }
         }
       },
@@ -1256,15 +1623,24 @@
           },
           "204": {
             "description": "Completed request for Delete Data Store."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+        },
         "x-ms-examples": {
-          "DataStores_Delete_DataSinkDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-161.json"
+          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSinkDELETE191": {
+            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-191.json"
           },
-          "DataStores_Delete_DataSourceDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-161.json"
+          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSourceDELETE191": {
+            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-191.json"
           }
         }
       }
@@ -1302,14 +1678,23 @@
             "schema": {
               "$ref": "#/definitions/DataStoreTypeList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "DataStoreTypes_ListByDataManagerGET171": {
-            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-171.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET201": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-201.json"
+          },
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_ListByDataManagerGET201": {
+            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-201.json"
           }
         }
       }
@@ -1354,14 +1739,32 @@
             "schema": {
               "$ref": "#/definitions/DataStoreType"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "DataStoreTypes_GetGET182": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-182.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET212": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-212.json"
           },
-          "DataStoreTypes_GetGET183": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-183.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET213": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-213.json"
+          },
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET214": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-214.json"
+          },
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET215": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-215.json"
+          },
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET216": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-216.json"
+          },
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET217": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-217.json"
           }
         }
       }
@@ -1406,6 +1809,12 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
@@ -1413,8 +1822,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "JobDefinitions_ListByDataManagerGET191": {
-            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-191.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_ListByDataManagerGET221": {
+            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-221.json"
           }
         }
       }
@@ -1459,6 +1868,12 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
@@ -1466,8 +1881,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Jobs_ListByDataManagerGET201": {
-            "$ref": "./examples/Jobs_ListByDataManager-GET-example-201.json"
+          "SessionRecords\\JobsTest\\Jobs_ListByDataManagerGET231": {
+            "$ref": "./examples/Jobs_ListByDataManager-GET-example-231.json"
           }
         }
       }
@@ -1505,14 +1920,29 @@
             "schema": {
               "$ref": "#/definitions/PublicKeyList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "PublicKeys_ListByDataManagerGET211": {
-            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-211.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET241": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-241.json"
+          },
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET241": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-241.json"
+          },
+          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET241": {
+            "$ref": "./examples/PublicKeys_Get-GET-example-241.json"
+          },
+          "SessionRecords\\PublicKeysTest\\PublicKeys_ListByDataManagerGET241": {
+            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-241.json"
           }
         }
       }
@@ -1557,11 +1987,17 @@
             "schema": {
               "$ref": "#/definitions/PublicKey"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "PublicKeys_GetGET222": {
-            "$ref": "./examples/PublicKeys_Get-GET-example-222.json"
+          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET252": {
+            "$ref": "./examples/PublicKeys_Get-GET-example-252.json"
           }
         }
       }
@@ -1638,6 +2074,40 @@
         }
       }
     },
+    "CloudError": {
+      "description": "An error response from the service.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error details."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "An error response from the service.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of additional details about the error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers":["/properties/code"]
+        }
+      },
+      "x-ms-external": true
+    },
     "CustomerSecret": {
       "description": "The pair of customer secret.",
       "required": [
@@ -1695,7 +2165,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataManager"
-          }
+          },
+          "x-ms-identifiers": ["/properties/etag"]
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
@@ -2041,7 +2512,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2208,11 +2684,35 @@
             "westeurope",
             "westindia",
             "westus",
-            "westus2"
+            "westus2",
+            "usgovtexas",
+            "usgovvirginia"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RunLocation",
+            "modelAsString": false
+          }
+        },
+        "jobDefinitionSchemaVersion": {
+          "description": "Schema version of the job definition.",
+          "type": "string"
+        },
+        "jobDefinitionState": {
+          "description": "State of the job definition.",
+          "enum": [
+            "Created",
+            "Queueing",
+            "Waiting",
+            "Running",
+            "Complete",
+            "Cancelling",
+            "Cancelled",
+            "Paused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobDefinitionState",
             "modelAsString": false
           }
         },
@@ -2287,7 +2787,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2358,6 +2863,131 @@
           "description": "Number of items to be processed by the job in total",
           "type": "integer"
         },
+        "itemsDeleted": {
+          "format": "int64",
+          "description": "Number of items deleted by the job as of now",
+          "type": "integer"
+        },
+        "totalItemsToDelete": {
+          "format": "int64",
+          "description": "Number of items to be deleted by the job in total",
+          "type": "integer"
+        },
+        "filesCopiedCounter": {
+          "format": "int64",
+          "description": "Of the items copied by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "filesDeletedCounter": {
+          "format": "int64",
+          "description": "Of the items deleted by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Number of bytes actually copied by the job as of now",
+          "type": "integer"
+        },
+        "backupStartTime": {
+          "format": "date-time",
+          "description": "Time getting the backup started",
+          "type": "string"
+        },
+        "backupEndTime": {
+          "format": "date-time",
+          "description": "Time getting the backup ended",
+          "type": "string"
+        },
+        "estimationConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage started",
+          "type": "string"
+        },
+        "estimationConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage ended",
+          "type": "string"
+        },
+        "directoryParserStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory started",
+          "type": "string"
+        },
+        "directoryParserEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory ended",
+          "type": "string"
+        },
+        "purgeDetectionStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory started",
+          "type": "string"
+        },
+        "purgeDetectionEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory ended",
+          "type": "string"
+        },
+        "estimationStartTime": {
+          "format": "date-time",
+          "description": "Time estimating files started",
+          "type": "string"
+        },
+        "estimationEndTime": {
+          "format": "date-time",
+          "description": "Time estimating files ended",
+          "type": "string"
+        },
+        "postEstimationStartTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files started",
+          "type": "string"
+        },
+        "postEstimationEndTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files ended",
+          "type": "string"
+        },
+        "copyConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage started",
+          "type": "string"
+        },
+        "copyConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage ended",
+          "type": "string"
+        },
+        "copyStartTime": {
+          "format": "date-time",
+          "description": "Time copying files started",
+          "type": "string"
+        },
+        "copyEndTime": {
+          "format": "date-time",
+          "description": "Time copying files ended",
+          "type": "string"
+        },
+        "postCopyStartTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot started",
+          "type": "string"
+        },
+        "postCopyEndTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot ended",
+          "type": "string"
+        },
+        "cleanupComputeStartTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute started",
+          "type": "string"
+        },
+        "cleanupComputeEndTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute ended",
+          "type": "string"
+        },
         "details": {
           "$ref": "#/definitions/JobDetails",
           "description": "Details of a job run. This field will only be sent for expand details filter."
@@ -2369,6 +2999,16 @@
         "dataSinkName": {
           "description": "Name of the data sink on which the job was triggered.",
           "type": "string"
+        },
+        "copyErrors": {
+          "format": "int64",
+          "description": "Number of copy errors",
+          "type": "integer"
+        },
+        "unsupportedFiles": {
+          "format": "int64",
+          "description": "Number of unsupported files",
+          "type": "integer"
         }
       }
     },
@@ -2393,7 +3033,12 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting",
+            "Cancelled_Skipped",
+            "Failed_Skipped",
+            "Cancelled_Retried",
+            "Failed_Retried"
           ],
           "type": "string",
           "x-ms-enum": {

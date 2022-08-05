@@ -23,6 +23,7 @@ azure-arm: true
 batch:
   - tag: package-2019-06
   - tag: package-2016-06
+  - tag: package-2021-05
 ```
 
 ### Tag: package-2019-06 and go
@@ -41,4 +42,12 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ```yaml $(tag) == 'package-2016-06' && $(go)
 output-folder: $(go-sdk-folder)/services/hybriddatamanager/mgmt/2016-06-01/$(namespace)
+```
+### Tag: package-2021-05 and go
+
+These settings apply only when `--tag=package-2021-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2021-05' && $(go)
+output-folder: $(go-sdk-folder)/services/hybriddatamanager/mgmt/2021-05-01/$(namespace)
 ```
