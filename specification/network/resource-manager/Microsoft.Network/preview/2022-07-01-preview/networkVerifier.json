@@ -997,7 +997,7 @@
           "$ref": "#/definitions/IPTrafficProperties"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         },
         "sourceResourceId": {
           "type": "string"
@@ -1049,7 +1049,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1102,7 +1102,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1234,8 +1234,24 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Creating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
       }
     },
     "ResourceProviderDefaultErrorResponse": {
