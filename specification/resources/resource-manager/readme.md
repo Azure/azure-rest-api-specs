@@ -127,7 +127,9 @@ input-file:
 - Microsoft.Authorization/stable/2020-05-01/locks.json
 ```
 
+
 ### Tag: package-resources-2021-04
+
 
 These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
 
@@ -152,7 +154,6 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
 ### Tag: package-locks-2017-04
 
 These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
@@ -161,6 +162,7 @@ These settings apply only when `--tag=package-locks-2017-04` is specified on the
 input-file:
 - Microsoft.Authorization/stable/2017-04-01/locks.json
 ```
+
 
 ### Tag: package-preview-2020-08
 
@@ -171,6 +173,7 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
+
 ### Tag: package-subscriptions-2021-01
 
 These settings apply only when `--tag=package-subscriptions-2021-01` is specified on the command line.
@@ -179,6 +182,7 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
+
 
 ### Tag: package-deploymentscripts-2020-10
 
@@ -910,7 +914,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -957,3 +960,4 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
