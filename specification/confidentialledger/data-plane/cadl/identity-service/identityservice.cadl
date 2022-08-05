@@ -18,6 +18,20 @@ using Azure.Core;
 )
 namespace Azure.Security.ConfidentialLedger.Certificate;
 
+//
+// ** Parameter descriptions **
+//
+
+@doc("Contains the information about a Confidential Ledger.")
+model LedgerIdentityInformation {
+  @visibility("read")
+  @doc("Id for the ledger.")
+  ledgerId?: string;
+
+  @doc("PEM-encoded certificate used for TLS by the Confidential Ledger.")
+  ledgerTlsCertificate: string;
+}
+
 @route("/ledgerIdentity/{ledgerId}")
 @summary("Gets identity information for a Confidential Ledger instance.")
 @get
@@ -27,4 +41,4 @@ op GetLedgerIdentity(
   @path
   @doc("Id of the Confidential Ledger instance to get information for")
   ledgerId: string
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerIdentityInformation | Foundations.ErrorResponse;

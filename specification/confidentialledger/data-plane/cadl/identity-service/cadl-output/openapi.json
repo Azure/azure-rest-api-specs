@@ -26,7 +26,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerIdentityInformation"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -56,6 +63,24 @@
       }
     },
     "schemas": {
+      "LedgerIdentityInformation": {
+        "type": "object",
+        "properties": {
+          "ledgerId": {
+            "type": "string",
+            "description": "Id for the ledger.",
+            "readOnly": true
+          },
+          "ledgerTlsCertificate": {
+            "type": "string",
+            "description": "PEM-encoded certificate used for TLS by the Confidential Ledger."
+          }
+        },
+        "description": "Contains the information about a Confidential Ledger.",
+        "required": [
+          "ledgerTlsCertificate"
+        ]
+      },
       "Azure.Core.Foundations.ErrorResponse": {
         "type": "object",
         "properties": {
