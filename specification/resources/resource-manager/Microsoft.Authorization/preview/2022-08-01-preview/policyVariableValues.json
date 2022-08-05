@@ -174,6 +174,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
+      "get": {
+        "tags": [
+          "VariableValues"
+        ],
+        "operationId": "VariableValues_List",
+        "summary": "List variable values for a variable.",
+        "description": "This operation retrieves the list of all variable values associated with the given variable that is at a subscription level.",
+        "x-ms-examples": {
+          "List variable values that apply to a variable at subscription level": {
+            "$ref": "./examples/listVariableValuesForSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of variable values.",
+            "schema": {
+              "$ref": "#/definitions/VariableValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
+      "get": {
+        "tags": [
+          "VariableValues"
+        ],
+        "operationId": "VariableValues_ListForManagementGroup",
+        "summary": "List variable values at management group level.",
+        "description": "This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.",
+        "x-ms-examples": {
+          "List variable values at a management group scope": {
+            "$ref": "./examples/listVariableValuesForManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of variable values.",
+            "schema": {
+              "$ref": "#/definitions/VariableValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
       "delete": {
         "tags": [
@@ -311,92 +397,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
-      "get": {
-        "tags": [
-          "VariableValues"
-        ],
-        "operationId": "VariableValues_List",
-        "summary": "List variable values for a variable.",
-        "description": "This operation retrieves the list of all variable values associated with the given variable that is at a subscription level.",
-        "x-ms-examples": {
-          "List variable values that apply to a variable at subscription level": {
-            "$ref": "./examples/listVariableValuesForSubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/VariableNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of variable values.",
-            "schema": {
-              "$ref": "#/definitions/VariableValueListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
-      "get": {
-        "tags": [
-          "VariableValues"
-        ],
-        "operationId": "VariableValues_ListForManagementGroup",
-        "summary": "List variable values at management group level.",
-        "description": "This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.",
-        "x-ms-examples": {
-          "List variable values at a management group scope": {
-            "$ref": "./examples/listVariableValuesForManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/VariableNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of variable values.",
-            "schema": {
-              "$ref": "#/definitions/VariableValueListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
