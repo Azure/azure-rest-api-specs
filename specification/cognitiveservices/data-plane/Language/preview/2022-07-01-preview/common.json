@@ -345,18 +345,36 @@
     "RequestStatistics": {
       "type": "object",
       "required": [
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
         "transactionsCount"
       ],
       "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
+        },
+        "validDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
         "transactionsCount": {
           "type": "integer",
           "format": "int64",
           "description": "Number of transactions for the request."
         }
       },
-      "additionalProperties": true,
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-    },
+        "additionalProperties": true,
+        "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+      },
     "PreBuiltResult": {
       "properties": {
         "errors": {
