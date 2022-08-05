@@ -6,9 +6,7 @@
     "description": "REST API for managing Azure Lab Services labs."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -20,12 +18,8 @@
       }
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labs": {
       "parameters": [
@@ -43,9 +37,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Get all labs for a subscription.",
         "description": "Returns a list of all labs for a subscription.",
         "operationId": "Labs_ListBySubscription",
@@ -59,7 +51,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -86,9 +78,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Get all labs for a subscription and resource group.",
         "description": "Returns a list of all labs in a resource group.",
         "operationId": "Labs_ListByResourceGroup",
@@ -102,7 +92,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -132,9 +122,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Get a lab resource.",
         "description": "Returns the properties of a lab resource.",
         "operationId": "Labs_Get",
@@ -148,7 +136,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -159,9 +147,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Create or update a lab resource.",
         "description": "Operation to create or update a lab resource.",
         "operationId": "Labs_CreateOrUpdate",
@@ -198,7 +184,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -213,14 +199,10 @@
         }
       },
       "patch": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Update a lab resource.",
         "description": "Operation to update a lab resource.",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "operationId": "Labs_Update",
         "parameters": [
           {
@@ -249,7 +231,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -264,9 +246,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Deletes a lab resource.",
         "description": "Operation to delete a lab resource.",
         "operationId": "Labs_Delete",
@@ -283,7 +263,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -314,9 +294,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Publish or re-publish a lab.",
         "description": "Publish or re-publish a lab. This will create or update all lab resources, such as virtual machines.",
         "operationId": "Labs_Publish",
@@ -330,7 +308,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -361,9 +339,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Lab"
-        ],
+        "tags": ["Lab"],
         "summary": "Manually sync the lab group.",
         "description": "Action used to manually kick off an AAD group sync job.",
         "operationId": "Labs_SyncGroup",
@@ -377,7 +353,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -414,9 +390,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "PagedLabs": {
       "description": "Paged list of labs.",
@@ -528,10 +502,7 @@
         "networkProfile": {
           "description": "The network profile for the lab, typically applied via a lab plan. This profile cannot be modified once a lab has been created.",
           "$ref": "#/definitions/LabNetworkProfile",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "state": {
           "description": "The lab state.",
@@ -594,10 +565,7 @@
         "createOption": {
           "description": "Indicates what lab virtual machines are created from.",
           "type": "string",
-          "enum": [
-            "Image",
-            "TemplateVM"
-          ],
+          "enum": ["Image", "TemplateVM"],
           "x-ms-enum": {
             "name": "CreateOption",
             "modelAsString": false,
@@ -612,18 +580,12 @@
               }
             ]
           },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "imageReference": {
           "description": "The image configuration for lab virtual machines.",
           "$ref": "#/definitions/ImageReference",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "osType": {
           "description": "The OS type of the image",
@@ -633,18 +595,12 @@
         "sku": {
           "description": "The SKU for the lab. Defines the type of virtual machines used in the lab.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "additionalCapabilities": {
           "description": "Additional VM capabilities.",
           "$ref": "#/definitions/VirtualMachineAdditionalCapabilities",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "usageQuota": {
           "description": "The initial quota alloted to each lab user. Must be a time span between 0 and 9999 hours.",
@@ -655,10 +611,7 @@
           "description": "Enabling this option will use the same password for all user VMs.",
           "default": "Disabled",
           "$ref": "LabServices.json#/definitions/enableState",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "adminUser": {
           "description": "Credentials for the admin user on the VM.",
@@ -695,23 +648,16 @@
         "username": {
           "description": "The username to use when signing in to lab VMs.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "password": {
           "description": "The password for the user. This is required for the TemplateVM createOption.",
           "type": "string",
           "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create"
-          ]
+          "x-ms-mutability": ["create"]
         }
       },
-      "required": [
-        "username"
-      ]
+      "required": ["username"]
     },
     "ImageReference": {
       "description": "Image reference information. Used in the virtual machine profile.",
@@ -746,13 +692,7 @@
     },
     "LabState": {
       "type": "string",
-      "enum": [
-        "Draft",
-        "Publishing",
-        "Scaling",
-        "Syncing",
-        "Published"
-      ],
+      "enum": ["Draft", "Publishing", "Scaling", "Syncing", "Published"],
       "description": "The state of a virtual machine.",
       "x-ms-enum": {
         "name": "LabState",
@@ -788,7 +728,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the lab that uniquely identifies it within containing lab account. Used in resource URIs.",
+      "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
       "minLength": 1,
       "maxLength": 100,
       "x-ms-parameter-location": "method"

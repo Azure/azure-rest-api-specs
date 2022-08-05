@@ -6,9 +6,7 @@
     "description": "REST API for managing Azure Lab Services lab plans."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -20,12 +18,8 @@
       }
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labPlans": {
       "parameters": [
@@ -43,9 +37,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Get all lab plans for a subscription.",
         "description": "Returns a list of all lab plans within a subscription",
         "operationId": "LabPlans_ListBySubscription",
@@ -59,7 +51,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -86,9 +78,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Get all lab plans for a subscription and resource group.",
         "description": "Returns a list of all lab plans for a subscription and resource group.",
         "operationId": "LabPlans_ListByResourceGroup",
@@ -102,7 +92,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -132,9 +122,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Retrieves a Lab Plan resource.",
         "description": "Retrieves the properties of a Lab Plan.",
         "operationId": "LabPlans_Get",
@@ -148,7 +136,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -159,9 +147,7 @@
         }
       },
       "put": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Updates or creates a Lab Plan resource.",
         "description": "Operation to create or update a Lab Plan resource.",
         "operationId": "LabPlans_CreateOrUpdate",
@@ -198,7 +184,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -213,14 +199,10 @@
         }
       },
       "patch": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Updates a Lab Plan resource.",
         "description": "Operation to update a Lab Plan resource.",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "operationId": "LabPlans_Update",
         "parameters": [
           {
@@ -249,7 +231,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -264,9 +246,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "LabPlan"
-        ],
+        "tags": ["LabPlan"],
         "summary": "Deletes a Lab Plan resource.",
         "description": "Operation to delete a Lab Plan resource. Deleting a lab plan does not delete labs associated with a lab plan, nor does it delete shared images added to a gallery via the lab plan permission container.",
         "operationId": "LabPlans_Delete",
@@ -283,7 +263,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -314,9 +294,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Save an image from a lab VM to the attached shared image gallery.",
         "description": "Saves an image from a lab VM to the attached shared image gallery.",
         "operationId": "LabPlans_SaveImage",
@@ -341,7 +319,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -376,11 +354,13 @@
           "description": "Lab plan resource properties",
           "$ref": "#/definitions/LabPlanProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "description": "Managed Identity Information",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         }
       },
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "PagedLabPlans": {
       "description": "Paged list of lab plans.",
@@ -424,6 +404,10 @@
           "description": "Lab plan resource update properties",
           "$ref": "#/definitions/LabPlanUpdateProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "description": "Managed Identity Information",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         }
       }
     },

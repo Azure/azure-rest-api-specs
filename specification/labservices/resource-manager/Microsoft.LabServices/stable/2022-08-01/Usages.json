@@ -6,15 +6,9 @@
     "description": "REST API for managing Azure Lab Services core usages."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -46,9 +40,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Usages"
-        ],
+        "tags": ["Usages"],
         "summary": "Gets the list of usages.",
         "description": "Returns list of usage per SKU family for the specified subscription in the specified region.",
         "operationId": "Usages_ListByLocation",
@@ -62,7 +54,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -87,8 +79,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Usage"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "The link to get the next page of Usage result.",
@@ -114,9 +105,7 @@
         "unit": {
           "description": "The unit details.",
           "type": "string",
-          "enum": [
-            "Count"
-          ],
+          "enum": ["Count"],
           "x-ms-enum": {
             "name": "UsageUnit",
             "modelAsString": true
@@ -139,6 +128,13 @@
         "localizedValue": {
           "description": "The localized name of the resource.",
           "type": "string"
+        },
+        "skuInstances": {
+          "description": "The instances of the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "value": {
           "description": "The name of the resource.",

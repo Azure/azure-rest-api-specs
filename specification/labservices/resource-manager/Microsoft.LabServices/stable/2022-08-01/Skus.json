@@ -6,15 +6,9 @@
     "description": "REST API for managing Azure Lab Services resource SKUs."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -43,15 +37,13 @@
         }
       ],
       "get": {
-        "tags": [
-          "Skus"
-        ],
-        "summary": "Gets all the Azure Lab Services resource SKUs.",
-        "description": "Returns a list of all the Azure Lab Services resource SKUs.",
+        "tags": ["Skus"],
+        "summary": "Gets the Azure Lab Services resource SKUs.",
+        "description": "Returns a list of Azure Lab Services resource SKUs.",
         "operationId": "Skus_List",
         "responses": {
           "200": {
-            "description": "The request was successful; response contains all Azure Lab Services virtual machine sizes.",
+            "description": "The request was successful; response contains Azure Lab Services resource skus.",
             "schema": {
               "$ref": "#/definitions/PagedLabServicesSkus"
             }
@@ -59,7 +51,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -92,10 +84,7 @@
         "tier": {
           "description": "The tier of the SKU.",
           "type": "string",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
+          "enum": ["Standard", "Premium"],
           "x-ms-enum": {
             "name": "LabServicesSkuTier",
             "modelAsString": true
@@ -121,9 +110,6 @@
           "items": {
             "$ref": "#/definitions/LabServicesSkuCapabilities"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "readOnly": true
         },
         "locations": {
@@ -140,7 +126,6 @@
           "items": {
             "$ref": "#/definitions/LabServicesSkuCost"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "restrictions": {
@@ -149,7 +134,6 @@
           "items": {
             "$ref": "#/definitions/LabServicesSkuRestrictions"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -164,7 +148,6 @@
           "items": {
             "$ref": "#/definitions/LabServicesSku"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -215,11 +198,7 @@
         "scaleType": {
           "description": "The localized name of the resource.",
           "type": "string",
-          "enum": [
-            "None",
-            "Manual",
-            "Automatic"
-          ],
+          "enum": ["None", "Manual", "Automatic"],
           "x-ms-enum": {
             "name": "ScaleType",
             "modelAsString": true,
@@ -270,9 +249,7 @@
         "type": {
           "description": "The type of restriction.",
           "type": "string",
-          "enum": [
-            "Location"
-          ],
+          "enum": ["Location"],
           "x-ms-enum": {
             "name": "RestrictionType",
             "modelAsString": true
@@ -290,10 +267,7 @@
         "reasonCode": {
           "description": "The reason for the restriction.",
           "type": "string",
-          "enum": [
-            "QuotaId",
-            "NotAvailableForSubscription"
-          ],
+          "enum": ["QuotaId", "NotAvailableForSubscription"],
           "x-ms-enum": {
             "name": "RestrictionReasonCode",
             "modelAsString": true

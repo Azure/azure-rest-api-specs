@@ -6,9 +6,7 @@
     "description": "REST API for managing Azure Lab Services virtual machines."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -20,12 +18,8 @@
       }
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines": {
       "parameters": [
@@ -49,9 +43,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Get all virtual machines for a lab.",
         "description": "Returns a list of all virtual machines for a lab.",
         "operationId": "VirtualMachines_ListByLab",
@@ -65,7 +57,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -98,9 +90,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Get a lab virtual machine.",
         "description": "Returns the properties for a lab virtual machine.",
         "operationId": "VirtualMachines_Get",
@@ -114,7 +104,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -144,9 +134,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Start a lab virtual machine.",
         "description": "Action to start a lab virtual machine.",
         "operationId": "VirtualMachines_Start",
@@ -160,7 +148,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -194,9 +182,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Stop a lab virtual machine.",
         "description": "Action to stop a lab virtual machine.",
         "operationId": "VirtualMachines_Stop",
@@ -210,7 +196,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -244,9 +230,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Re-image a lab virtual machine.",
         "description": "Re-image a lab virtual machine. The virtual machine will be deleted and recreated using the latest published snapshot of the reference environment of the lab.",
         "operationId": "VirtualMachines_Reimage",
@@ -260,7 +244,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -294,9 +278,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Redeploy a lab virtual machine to a different compute node. For troubleshooting connectivity.",
         "description": "Action to redeploy a lab virtual machine to a different compute node. For troubleshooting connectivity.",
         "operationId": "VirtualMachines_Redeploy",
@@ -310,7 +292,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -344,9 +326,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "VirtualMachine"
-        ],
+        "tags": ["VirtualMachine"],
         "summary": "Reset a lab virtual machine password.",
         "description": "Resets a lab virtual machine password.",
         "operationId": "VirtualMachines_ResetPassword",
@@ -371,7 +351,7 @@
           "default": {
             "description": "The default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/clouderror.json#/definitions/CloudError"
             }
           }
         },
@@ -408,9 +388,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "PagedVirtualMachines": {
       "description": "Paged list of lab services virtual machines.",
@@ -469,24 +447,16 @@
         "username": {
           "description": "The user whose password is being reset",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "password": {
           "description": "The password",
           "type": "string",
           "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create"
-          ]
+          "x-ms-mutability": ["create"]
         }
       },
-      "required": [
-        "username",
-        "password"
-      ]
+      "required": ["username", "password"]
     },
     "VirtualMachineState": {
       "type": "string",
@@ -578,10 +548,7 @@
     },
     "VirtualMachineType": {
       "type": "string",
-      "enum": [
-        "User",
-        "Template"
-      ],
+      "enum": ["User", "Template"],
       "description": "The type of the lab virtual machine.",
       "x-ms-enum": {
         "name": "VirtualMachineType",
