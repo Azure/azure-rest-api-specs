@@ -4720,9 +4720,25 @@
           "readOnly": true,
           "description": "Describes the port for connecting through SSH."
         },
-        "adminPublicKey": {
+        "adminPublicKeys": {
+          "type": "object",
+          "description": "List of keys (with friendly names) authorized for SSH.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SshPublicKeyReference"
+          }
+        }
+      }
+    },
+    "SshPublicKeyReference": {
+      "type": "object",
+      "properties": {
+        "source": {
           "type": "string",
-          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+          "default": "local"
+        },
+        "data": {
+          "type": "string",
+          "description": "SSH public key data as string (local)"
         }
       }
     },
