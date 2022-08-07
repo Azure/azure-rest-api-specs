@@ -16,63 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/locations/{location}/edgeZones/{edgeZone}/offers": {
-      "get": {
-        "tags": [
-          "ARM-Authenticated-Location-EdgeZones-Offers-Listing-By-Subscription"
-        ],
-        "summary": "Get a list of edge zone offers",
-        "operationId": "EdgeZonesOffers_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/EdgeZoneParameter"
-          },
-          {
-            "$ref": "#/parameters/LanguageParameter"
-          },
-          {
-            "$ref": "#/parameters/MarketParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "x-nullable": false,
-            "description": "Returns a list of edge zone offers",
-            "schema": {
-              "$ref": "#/definitions/PageResultOfCatalogItem"
-            }
-          },
-          "400": {
-            "x-nullable": false,
-            "x-ms-error-response": true,
-            "description": "In case request malformed",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeZonesOffers_List": {
-            "$ref": "./examples/EdgeZonesOffers_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/locations/{location}/edgeZones/{edgeZone}/products": {
       "get": {
         "tags": [
@@ -95,6 +38,12 @@
           },
           {
             "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -211,6 +160,22 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "description": "The required market"
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "description": "Properties to be returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The optional page continuation token that is used in the event of paginated result.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
