@@ -5839,7 +5839,7 @@
           "x-nullable": true
         },
         "fileShareName": {
-          "description": "[Required] TODO - File share name.",
+          "description": "[Required] The name of the Azure file share that the datastore points to.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -8307,7 +8307,7 @@
           },
           {
             "value": "TCNForecaster",
-            "description": "TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro."
+            "description": "TCNForecaster: Temporal Convolutional Networks Forecaster."
           },
           {
             "value": "ElasticNet",
@@ -12688,7 +12688,7 @@
       "additionalProperties": false
     },
     "SkuScaleType": {
-      "description": "TODO - SKU scale type",
+      "description": "Node scaling setting for the compute sku.",
       "enum": [
         "Automatic",
         "Manual",
@@ -12700,13 +12700,16 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Automatic"
+            "value": "Automatic",
+            "description": "Automatically scales node count."
           },
           {
-            "value": "Manual"
+            "value": "Manual",
+            "description": "Node count scaled upon user request."
           },
           {
-            "value": "None"
+            "value": "None",
+            "description": "Fixed set of nodes."
           }
         ]
       },

@@ -17,7 +17,8 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2019-09

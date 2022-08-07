@@ -11,4 +11,9 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
+
+modelerfour:
+  naming:
+    override:
+      outboundIPAddresses: $DO_NOT_NORMALIZE$outboundIpAddresses
 ```

@@ -26,7 +26,7 @@ These are the global settings for the networkfunction.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-05-01
+tag: package-2022-08-01
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -49,6 +49,15 @@ input-file:
   - Microsoft.NetworkFunction/stable/2022-05-01/AzureTrafficCollector.json
 ```
 
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01'
+input-file:
+  - Microsoft.NetworkFunction/stable/2022-08-01/AzureTrafficCollector.json
+```
+
 ---
 
 # Code Generation
@@ -62,7 +71,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

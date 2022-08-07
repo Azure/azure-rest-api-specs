@@ -5277,7 +5277,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
           "type": "string"
         },
         "clientId": {
@@ -5778,13 +5778,18 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
