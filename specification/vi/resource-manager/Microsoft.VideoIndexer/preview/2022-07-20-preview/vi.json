@@ -712,21 +712,21 @@
           "AccessToken"
         ],
         "operationId": "Generate_RestrictedViewerAccessToken",
-        "description": "Generate an Azure Video Indexer access token.",
+        "description": "Generate an Azure Video Indexer restricted viewer access token.",
         "x-ms-examples": {
-          "Generate accessToken for video restricted viewer #1": {
+          "Generate restricted viewer accessToken for video #1": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateVideoRestrictedViewerAccessToken1.json"
           },
-          "Generate accessToken for video restricted viewer #2": {
+          "Generate restricted viewer accessToken for video #2": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateVideoRestrictedViewerAccessToken2.json"
           },
-          "Generate accessToken for project restricted viewer #1": {
+          "Generate restricted viewer accessToken for project #1": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateProjectRestrictedViewerAccessToken1.json"
           },
-          "Generate accessToken for project restricted viewer #2": {
+          "Generate restricted viewer accessToken for project #2": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateProjectRestrictedViewerAccessToken2.json"
           },
-          "Generate accessToken for account restricted viewer": {
+          "Generate restricted viewer accessToken for account": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateAccountRestrictedViewerAccessToken.json"
           }
         },
@@ -747,7 +747,7 @@
             "in": "body",
             "name": "parameters",
             "x-ms-client-flatten": true,
-            "description": "The parameters for generating access token",
+            "description": "The parameters for generating restricted viewer access token",
             "schema": {
               "$ref": "#/definitions/GenerateRestrictedViewerAccessTokenParameters"
             }
@@ -769,13 +769,6 @@
           },
           "404": {
             "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
             "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
