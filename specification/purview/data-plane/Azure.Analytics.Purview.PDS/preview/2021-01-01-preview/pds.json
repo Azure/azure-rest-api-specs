@@ -1,0 +1,899 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Distribution Service REST API Document",
+    "description": "Purview distribution service enables various Azure RPs to fetch the policies and attributes for data governance.",
+    "version": "2021-01-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/datasourcepreferences": {
+      "get": {
+        "tags": [
+          "DatasourcePreferences"
+        ],
+        "description": "Get Datasource Preferences for a given scope.",
+        "operationId": "DatasourcePreferences1_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasourcePreferencesResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatasourcePreferences1_Get": {
+            "$ref": "./examples/DatasourcePreferences1_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/datasourcepreferences": {
+      "get": {
+        "tags": [
+          "DatasourcePreferences"
+        ],
+        "description": "Get Datasource Preferences for a given scope.",
+        "operationId": "DatasourcePreferences2_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasourcePreferencesResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatasourcePreferences2_Get": {
+            "$ref": "./examples/DatasourcePreferences2_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/datasourcepreferences": {
+      "get": {
+        "tags": [
+          "DatasourcePreferences"
+        ],
+        "description": "Get Datasource Preferences for a given scope.",
+        "operationId": "DatasourcePreferences3_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "description": "The resource provider namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasourcePreferencesResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatasourcePreferences3_Get": {
+            "$ref": "./examples/DatasourcePreferences3_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PolicyElements1_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PolicyElements1_Get": {
+            "$ref": "./examples/PolicyElements1_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PolicyElements2_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PolicyElements2_Get": {
+            "$ref": "./examples/PolicyElements2_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/policyelements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PolicyElements3_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "filter.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "description": "The resource provider namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "PolicyElements3_Get": {
+            "$ref": "./examples/PolicyElements3_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PolicyEvents1_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyEvents1_Get": {
+            "$ref": "./examples/PolicyEvents1_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PolicyEvents2_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyEvents2_Get": {
+            "$ref": "./examples/PolicyEvents2_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/policyevents": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PolicyEvents3_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "description": "The resource provider namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceType",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyEvents3_Get": {
+            "$ref": "./examples/PolicyEvents3_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountModelBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "gatewayEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "Consent": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        },
+        "excludedScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasourcePreferencesResponse": {
+      "type": "object",
+      "properties": {
+        "consent": {
+          "$ref": "#/definitions/Consent"
+        },
+        "accountInfo": {
+          "$ref": "#/definitions/AccountModelBase"
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "PolicyElement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "elementJson": {
+          "type": "string"
+        }
+      }
+    },
+    "PolicyElementEventModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "elementJson": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        }
+      }
+    },
+    "PolicyEventsResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "syncToken": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElementEventModel"
+          }
+        }
+      }
+    },
+    "PolicyResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "syncToken": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElement"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "boolean"
+        },
+        "classification": {
+          "type": "boolean"
+        },
+        "dug": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "uri",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api-version of the service.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/pds",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
