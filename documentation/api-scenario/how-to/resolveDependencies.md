@@ -2,11 +2,11 @@
 
 ## Background
 
-In some cases, we need to do more complex operations in some scenarios, like provisioning cross-RP resources as dependencies, calling cross-RP REST API in between the steps of a scenario, or executing some customized PowerShell/Azure CLI scripts. For example,
+In some cases, we need to do more complex operations in some scenarios, like provisioning cross-RP resources as dependencies, calling cross-RP REST API in between the steps of a scenario, or executing some customized PowerShell/Azure CLI scripts. Some concrete examples are:
 
-- Provisioning virtual network with subnet/publicIP/securityGroup and network interface before creating a VM.
-- Creating a private endpoint connection with Network RP between creating AppConfiguration ConfigurationStores and calling the private endpoint related REST APIs.
-- Upload a jar file to some storage blob after creating a Spring Cloud service.
+- Provisioning virtual network with subnet/publicIP/securityGroup and network interface with Network RP before creating a VM with Compute RP.
+- Creating a private endpoint connection with Network RP between creating AppConfiguration configuration stores and calling its private endpoint related REST APIs.
+- Uploading a jar file to some storage blob after creating a Spring Cloud service with AppPlatform RP.
 
 To support these complex scenarios, we introduce two key features in API Scenario:
 
