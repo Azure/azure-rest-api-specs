@@ -107,7 +107,7 @@ input-file:
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: applicationGateway.json
-    where: $.definitions.ApplicationGatewayFirewallRule.properties.s_RuleId
+    where: $.definitions.ApplicationGatewayFirewallRule.properties.s_ruleId
     reason: The property is not violating the rules however the name triggers camml case error. this is already shipped and modifing this will require changes in sveral components
 ```
 
