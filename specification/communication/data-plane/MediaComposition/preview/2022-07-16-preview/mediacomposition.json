@@ -38,7 +38,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MediaCompositionBody"
+              "$ref": "#/definitions/MediaComposition"
             }
           },
           "default": {
@@ -96,7 +96,7 @@
             "description": "The media composition being created",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MediaCompositionBody"
+              "$ref": "#/definitions/MediaComposition"
             }
           }
         ],
@@ -104,7 +104,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MediaCompositionBody"
+              "$ref": "#/definitions/MediaComposition"
             }
           },
           "default": {
@@ -162,7 +162,7 @@
             "required": true,
             "description": "The media composition updates",
             "schema": {
-              "$ref": "#/definitions/MediaCompositionBody"
+              "$ref": "#/definitions/MediaComposition"
             }
           }
         ],
@@ -170,7 +170,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MediaCompositionBody"
+              "$ref": "#/definitions/MediaComposition"
             }
           },
           "default": {
@@ -418,25 +418,13 @@
       "x-ms-discriminator-value": "autoGrid"
     },
     "CommunicationError": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
     },
     "CommunicationIdentifierModel": {
-      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
-      "type": "object",
-      "properties": {
-        "communicationUser": {
-          "$ref": "#/definitions/CommunicationUserIdentifier"
-        },
-        "microsoftTeamsUser": {
-          "$ref": "#/definitions/MicrosoftTeamsUserIdentifier"
-        }
-      }
-    },
-    "CommunicationUserIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
     "CompositionStreamState": {
       "description": "Provides the state of the media composition",
@@ -693,7 +681,7 @@
         "modelAsString": true
       }
     },
-    "MediaCompositionBody": {
+    "MediaComposition": {
       "description": "Body of a media composition",
       "type": "object",
       "properties": {
@@ -788,9 +776,6 @@
         "modelAsString": true
       }
     },
-    "MicrosoftTeamsUserIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
     "Participant": {
       "required": [
         "call",
@@ -820,11 +805,6 @@
         "y"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValueType"
-        }
-      ],
       "properties": {
         "x": {
           "format": "int32",
@@ -1160,18 +1140,7 @@
         }
       },
       "x-ms-discriminator-value": "teamsMeeting"
-    },
-    "ValueType": {
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string"
-        }
-      },
-      "discriminator": "kind"
     }
   }
 }
+
