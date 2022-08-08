@@ -104,16 +104,6 @@ These settings apply only when `--tag=2022-07-preview` is specified on the comma
 ``` yaml $(tag) == 'package-2022-07-preview'
 input-file:
   - Microsoft.Network/preview/2022-07-01-preview/networkVerifier.json
-  - Microsoft.Network/preview/2022-04-01-preview/network.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManager.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerActiveConfiguration.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerConnectivityConfiguration.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerEffectiveConfiguration.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerGroup.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerSecurityUserConfiguration.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerSecurityAdminConfiguration.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerConnection.json
-  - Microsoft.Network/preview/2022-04-01-preview/networkManagerScopeConnection.json
   - Microsoft.Network/stable/2021-08-01/applicationGateway.json
   - Microsoft.Network/stable/2021-08-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2021-08-01/availableDelegations.json
