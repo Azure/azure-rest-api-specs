@@ -15,8 +15,8 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 ## Quick starts
 
 - [Example: Write and run your first API scenario file](./how-to/QuickStart.md)
-- [Example: Generate a basic API scenario file](./how-to/generateABasicApiScenario.md)
-- [Example: Resolve external dependencies](./how-to/resolveDependencies.md)
+- [Example: Generate a basic API scenario file](./how-to/GenerateABasicApiScenario.md)
+- [Example: Resolve external dependencies](./how-to/ResolveDependencies.md)
 - [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
