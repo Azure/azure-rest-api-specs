@@ -100,6 +100,18 @@ input-file:
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2022-05-01/cloudServiceSwap.json
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: applicationGateway.json
+    where: $.definitions.ApplicationGatewayFirewallRule.properties.s_RuleId
+    reason: The property is not violating the rules however the name triggers camml case error. this is already shipped and modifing this will require changes in sveral components
+```
+
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
