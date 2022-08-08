@@ -384,7 +384,6 @@ csharp:
 batch:
  - tag: $(tag)
  - tag: package-sqlGen3-2020-04-01-preview
- - tag: package-preview-2021-06
 ```
 
 ## Go
