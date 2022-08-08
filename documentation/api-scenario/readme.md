@@ -31,4 +31,4 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 If you have any question or need support, feel free to contact us via:
 - [StackOverflow](https://stackoverflow.microsoft.com/posts/tagged/28051)
 - Teams channel: https://aka.ms/SwaggerSupport (for MS FTEs)
-- Sending email to vscswagger@microsoft.com.
+- Email: vscswagger@microsoft.com.
