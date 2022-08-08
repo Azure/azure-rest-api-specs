@@ -34,10 +34,7 @@
           "200": {
             "description": "List of AnalysisIntents",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AnalysisIntent"
-              }
+              "$ref": "#/definitions/AnalysisIntentList"
             }
           },
           "default": {
@@ -279,10 +276,7 @@
           "200": {
             "description": "List of AnalysisRuns",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AnalysisRun"
-              }
+              "$ref": "#/definitions/AnalysisRunList"
             }
           },
           "default": {
@@ -538,10 +532,7 @@
           "200": {
             "description": "List of ConfigurationSnapshots",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ConfigurationSnapshot"
-              }
+              "$ref": "#/definitions/ConfigurationSnapshotList"
             }
           },
           "default": {
@@ -980,6 +971,17 @@
         }
       }
     },
+    "AnalysisIntentList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalysisIntent"
+          }
+        }
+      }
+    },
     "AnalysisIntentProperties": {
       "required": [
         "destinationResourceId",
@@ -1036,6 +1038,17 @@
         }
       }
     },
+    "AnalysisRunList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalysisRun"
+          }
+        }
+      }
+    },
     "AnalysisRunProperties": {
       "type": "object",
       "properties": {
@@ -1085,6 +1098,17 @@
         },
         "location": {
           "type": "string"
+        }
+      }
+    },
+    "ConfigurationSnapshotList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationSnapshot"
+          }
         }
       }
     },
@@ -1272,7 +1296,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ProvisioningState"
+        "name": "NetworkVerifierProvisioningState"
       }
     },
     "ResourceProviderDefaultErrorResponse": {
