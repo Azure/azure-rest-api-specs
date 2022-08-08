@@ -63,7 +63,7 @@ input-file:
 These settings apply only when `--tag=2022-07-20-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-07-20-preview'
-version-with-underscores: 2022-07-20-preview
+version-with-underscores: 2022_07_20_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
 ```
