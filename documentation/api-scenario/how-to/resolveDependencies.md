@@ -1,4 +1,4 @@
-# Resolve cross-RP dependencies
+# Resolve external dependencies
 
 ## Background
 
