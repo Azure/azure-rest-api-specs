@@ -738,6 +738,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVerifiers": {
+      "get": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Gets list of Network Verifier resources at subscription level",
+        "operationId": "NetworkVerifierListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NetworkVerifiers",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifierList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVerifierList": {
+            "$ref": "./examples/NetworkVerifierListSubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers": {
       "get": {
         "tags": [
