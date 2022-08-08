@@ -28,6 +28,9 @@
             "description": "The name of the Network Verifier resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -81,6 +84,9 @@
             "description": "The name of the Analysis Intent resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -142,6 +148,9 @@
             "description": "The name of the Analysis Intent resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -216,6 +225,9 @@
             "description": "The name of the Analysis Intent resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -273,6 +285,9 @@
             "description": "The name of the Analysis Intent resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -333,6 +348,9 @@
             "description": "The name of the Analysis Run resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -401,6 +419,9 @@
             "description": "The name of the Analysis Run resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -482,6 +503,9 @@
             "description": "The name of the Analysis Run resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -532,6 +556,9 @@
             "description": "The name of the Network Verifier resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -585,6 +612,9 @@
             "description": "The name of the Configuration Snapshot resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -646,6 +676,9 @@
             "description": "The name of the Configuration Snapshot resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -720,6 +753,9 @@
             "description": "The name of the Configuration Snapshot resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -760,13 +796,19 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "List of NetworkVerifiers",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkVerifier"
+              }
             }
           },
           "default": {
@@ -777,7 +819,7 @@
           }
         },
         "x-ms-examples": {
-          "NetworkVerifierList": {
+          "NetworkVerifierListBySubscription": {
             "$ref": "./examples/NetworkVerifierListBySubscription.json"
           }
         }
@@ -788,7 +830,7 @@
         "tags": [
           "NetworkVerifier"
         ],
-        "summary": "Gets list of Network Verifier resources",
+        "summary": "Gets list of Network Verifier resources at resource group level",
         "operationId": "NetworkVerifierList",
         "produces": [
           "application/json"
@@ -799,6 +841,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -845,6 +890,9 @@
             "description": "The name of the Network Verifier resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -899,6 +947,9 @@
             "description": "The name of the Network Verifier resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -958,6 +1009,9 @@
             "description": "The name of the Network Verifier resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
