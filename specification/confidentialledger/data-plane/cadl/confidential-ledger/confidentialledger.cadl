@@ -27,17 +27,17 @@ namespace Azure.Security.ConfidentialLedger;
 // ** Parameter descriptions **
 //
 
+model CollectionIdParameter {
+  @query
+  @doc("The collection id.")
+  collectionId?: string;
+}
+
 model TransactionIdParameter {
   // TODO: update definition so this parameter comes from KeysOf in operation, when model support is added.
   @path
   @doc("Identifies a write transaction.")
   transactionId: string;
-}
-
-model CollectionIdParameter {
-  @query
-  @doc("The collection id.")
-  collectionId?: string;
 }
 
 model UserIdParameter {
@@ -48,6 +48,12 @@ model UserIdParameter {
 }
 
 model UserDetailsParameter {
+  @body
+  @doc("Details about a Confidential Ledger user.")
+  userDetails: LedgerUser;
+}
+
+model UserDetailsParameterForPatch {
   @body
   @doc("Details about a Confidential Ledger user.")
   userDetails: LedgerUser;
@@ -192,5 +198,5 @@ op getUser(
 op createOrUpdateUser(
   ...Foundations.ApiVersionParameter,
   ...UserIdParameter,
-  ...UserDetailsParameter
+  ...UserDetailsParameterForPatch
 ): OkResponse | Foundations.ErrorResponse; // TODO: add return model
