@@ -1715,9 +1715,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the details of the VirtualHub retrieved.",
+            "description": "Request successful. Returns the details of the RouteMap retrieved.",
             "schema": {
-              "$ref": "#/definitions/VirtualHub"
+              "$ref": "#/definitions/RouteMap"
             }
           },
           "default": {
@@ -8823,6 +8823,10 @@
     "VnetRoute": {
       "description": "List of routes that control routing from VirtualHub into a virtual network connection.",
       "properties": {
+        "staticRoutesConfig": {
+          "$ref": "#/definitions/StaticRoutesConfig",
+          "description": "Configuration for static routes on this HubVnetConnection."
+        },
         "staticRoutes": {
           "type": "array",
           "description": "List of all Static Routes.",
@@ -8837,6 +8841,20 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
+        }
+      }
+    },
+    "StaticRoutesConfig": {
+      "description": "Configuration for static routes on this HubVnetConnectionConfiguration for static routes on this HubVnetConnection.",
+      "properties": {
+        "propagateStaticRoutes": {
+          "description": "Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vnetLocalRouteOverrideCriteria": {
+          "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic whith destination in spoke.",
+          "$ref": "#/definitions/VnetLocalRouteOverrideCriteria"
         }
       }
     },
@@ -9084,8 +9102,6 @@
       "description": "The routing policy object used in a RoutingIntent resource.",
       "type": "object"
     },
-
-
     "RouteMap": {
       "properties": {
         "properties": {
@@ -9159,7 +9175,6 @@
       "description": "Properties of RouteMap resource",
       "type": "object"
     },
-
     "Rule": {
       "properties": {
         "name": {
@@ -9188,7 +9203,6 @@
       "description": "A RouteMap Rule.",
       "type": "object"
     },
-
     "Criterion": {
       "properties": {
         "routePrefix": {
@@ -9220,11 +9234,10 @@
       "description": "A matching criteria which matches routes based on route prefix, community, and AS path.",
       "type": "object"
     },
-
     "Action": {
       "properties": {
         "type": {
-          "type": "#/definitions/ActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "Type of action to be taken. Supported types are 'Remove', 'Add', 'Replace', and 'Drop.'"
         },
         "parameters": {
@@ -9234,13 +9247,10 @@
             "$ref": "#/definitions/Parameter"
           }
         }
-
       },
       "description": "Action to be taken on a route matching a RouteMap criterion.",
       "type": "object"
     },
-
-
     "Parameter": {
       "properties": {
         "routePrefix": {
@@ -9268,9 +9278,6 @@
       "description": "Parameters for an Action.",
       "type": "object"
     },
-
-
-
     "MatchCondition": {
       "type": "string",
       "description": "Supported match conditions on a route for a rule to be applied",
@@ -9311,6 +9318,18 @@
       ],
       "x-ms-enum": {
         "name": "ActionType",
+        "modelAsString": true
+      }
+    },
+    "VnetLocalRouteOverrideCriteria": {
+      "type": "string",
+      "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke vnet.",
+      "enum": [
+        "Contains",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "VnetLocalRouteOverrideCriteria",
         "modelAsString": true
       }
     }
