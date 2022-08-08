@@ -6,11 +6,11 @@
   },
   "tags": [],
   "paths": {
-    "/app/collections": {
+    "/app/governance/constitution": {
       "get": {
-        "operationId": "listCollections",
-        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
-        "description": "Collection ids are user-created collections of ledger entries",
+        "operationId": "GetConstitution",
+        "summary": "Gets the constitution used for governance.",
+        "description": "The constitution is a script that assesses and applies proposals from consortium members.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -22,7 +22,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CollectionArray"
+                  "$ref": "#/components/schemas/Constitution"
                 }
               }
             }
@@ -42,7 +42,7 @@
     },
     "/app/enclaveQuotes": {
       "get": {
-        "operationId": "getEnclaveQuotes",
+        "operationId": "GetEnclaveQuotes",
         "summary": "Gets quotes for all nodes of the Confidential Ledger.",
         "description": "A quote is an SGX enclave measurement that can be used to verify the validity of a node and its enclave.",
         "parameters": [
@@ -52,61 +52,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ConfidentialLedgerEnclaves"
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/app/governance/constitution": {
-      "get": {
-        "operationId": "getConstitution",
-        "summary": "Gets the constitution used for governance.",
-        "description": "The constitution is a script that assesses and applies proposals from consortium members.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/app/governance/members": {
-      "get": {
-        "operationId": "getConsortiumMembers",
-        "summary": "Gets the consortium members.",
-        "description": "Consortium members can manage the Confidential Ledger.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -123,7 +76,7 @@
     },
     "/app/transactions": {
       "post": {
-        "operationId": "postLedgerEntry",
+        "operationId": "CreateLedgerEntry",
         "summary": "Writes a ledger entry.",
         "description": "A collection id may optionally be specified.",
         "parameters": [
@@ -136,7 +89,22 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "The transaction id at which this write will become durable.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerWriteResult"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -162,8 +130,9 @@
     },
     "/app/transactions/{transactionId}": {
       "get": {
-        "operationId": "getLedgerEntry",
+        "operationId": "GetLedgerEntry",
         "summary": "Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.",
+        "description": "To return older ledger entries, the relevant sections of the ledger must be read from disk and validated. To prevent blocking within the enclave, the response will indicate whether the entry is ready and part of the response, or if the loading is still ongoing.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -177,7 +146,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerQueryResult"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -194,7 +170,7 @@
     },
     "/app/transactions/{transactionId}/receipt": {
       "get": {
-        "operationId": "getReceipt",
+        "operationId": "GetReceipt",
         "summary": "Gets a receipt certifying ledger contents at a particular transaction id.",
         "parameters": [
           {
@@ -206,7 +182,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionReceipt"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -223,7 +206,7 @@
     },
     "/app/transactions/{transactionId}/status": {
       "get": {
-        "operationId": "getTransactionStatus",
+        "operationId": "GetTransactionStatus",
         "summary": "Gets the status of an entry identified by a transaction id.",
         "parameters": [
           {
@@ -235,7 +218,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionStatus"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -252,7 +242,7 @@
     },
     "/app/transactions/current": {
       "get": {
-        "operationId": "getCurrentLedgerEntry",
+        "operationId": "GetCurrentLedgerEntry",
         "summary": "Gets the current value available in the ledger.",
         "parameters": [
           {
@@ -264,7 +254,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerEntry"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -281,7 +278,7 @@
     },
     "/app/users/{userId}": {
       "delete": {
-        "operationId": "deleteUser",
+        "operationId": "DeleteUser",
         "summary": "Deletes a user from the Confidential Ledger.",
         "parameters": [
           {
@@ -308,7 +305,7 @@
         }
       },
       "get": {
-        "operationId": "getUser",
+        "operationId": "GetUser",
         "summary": "Gets a user.",
         "parameters": [
           {
@@ -320,7 +317,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerUser"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -335,7 +339,7 @@
         }
       },
       "patch": {
-        "operationId": "createOrUpdateUser",
+        "operationId": "CreateOrUpdateUser",
         "summary": "Adds a user or updates a user's fields.",
         "parameters": [
           {
@@ -347,7 +351,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerUser"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -415,20 +426,22 @@
       }
     },
     "schemas": {
-      "CollectionArray": {
+      "Constitution": {
         "type": "object",
         "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Collection"
-            },
-            "x-cadl-name": "Collection[]"
+          "digest": {
+            "type": "string",
+            "description": "SHA256 digest of the constitution script."
+          },
+          "script": {
+            "type": "string",
+            "description": "Contents of the constitution."
           }
         },
-        "description": "A list of identifiers for ledger collections.",
+        "description": "The governance script for the application.",
         "required": [
-          "items"
+          "digest",
+          "script"
         ]
       },
       "Azure.Core.Foundations.ErrorResponse": {
@@ -448,22 +461,117 @@
           "error"
         ]
       },
+      "ConfidentialLedgerEnclaves": {
+        "type": "object",
+        "properties": {
+          "currentNodeId": {
+            "type": "string",
+            "description": "Id of the Confidential Ledger node responding to the request."
+          },
+          "enclaveQuotes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/EnclaveQuote"
+            },
+            "x-cadl-name": "Record<EnclaveQuote>"
+          }
+        },
+        "description": "Information about the enclaves running the Confidential Ledger.",
+        "required": [
+          "currentNodeId",
+          "enclaveQuotes"
+        ]
+      },
       "LedgerEntry": {
         "type": "object",
         "properties": {
           "contents": {
-            "type": "string"
+            "type": "string",
+            "description": "Contents of the ledger entry."
           },
           "collectionId": {
-            "type": "string"
+            "type": "string",
+            "description": "Id of the collection containing the entry",
+            "readOnly": true
           },
           "transactionId": {
-            "type": "string"
+            "type": "string",
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
+            "readOnly": true
           }
         },
+        "description": "An entry in the ledger.",
         "required": [
-          "contents",
-          "collectionId",
+          "contents"
+        ]
+      },
+      "LedgerWriteResult": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "string",
+            "description": "Id of the collection written to."
+          }
+        },
+        "description": "Returned as a result of a write to the Confidential Ledger, the transaction id in the response indicates when the write will become durable.",
+        "required": [
+          "collectionId"
+        ]
+      },
+      "LedgerQueryResult": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/LedgerQueryState"
+          },
+          "entry": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LedgerEntry"
+              }
+            ],
+            "description": "The ledger entry found as a result of the query. This is only available if the query is in Ready state."
+          }
+        },
+        "description": "The result of querying for a ledger entry from an older transaction id. The ledger entry is available in the response only if the returned state is Ready.",
+        "required": [
+          "state"
+        ]
+      },
+      "TransactionReceipt": {
+        "type": "object",
+        "properties": {
+          "receipt": {
+            "$ref": "#/components/schemas/ReceiptContents"
+          },
+          "state": {
+            "$ref": "#/components/schemas/LedgerQueryState"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read."
+          }
+        },
+        "description": "A receipt certifying the transaction at the specified id.",
+        "required": [
+          "state",
+          "transactionId"
+        ]
+      },
+      "TransactionStatus": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/TransactionState"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read."
+          }
+        },
+        "description": "Response returned to a query for the transaction status.",
+        "required": [
+          "state",
           "transactionId"
         ]
       },
@@ -471,27 +579,18 @@
         "type": "object",
         "properties": {
           "assignedRole": {
-            "$ref": "#/components/schemas/ConfidentialLedgerUserRoleName"
+            "$ref": "#/components/schemas/LedgerUserRole"
           },
           "userId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifier for the user. This must either be an AAD object id or a certificate fingerprint.",
+            "readOnly": true
           }
         },
+        "description": "Details about a Confidential Ledger user.",
         "required": [
           "assignedRole",
           "userId"
-        ]
-      },
-      "Collection": {
-        "type": "object",
-        "properties": {
-          "collectionId": {
-            "type": "string"
-          }
-        },
-        "description": "Identifier for collections.",
-        "required": [
-          "collectionId"
         ]
       },
       "Azure.Core.Foundations.Error": {
@@ -533,7 +632,93 @@
           "details"
         ]
       },
-      "ConfidentialLedgerUserRoleName": {
+      "EnclaveQuote": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "string",
+            "description": "Id assigned to this node."
+          },
+          "mrenclave": {
+            "type": "string",
+            "description": "MRENCLAVE value of the code running in the enclave."
+          },
+          "quoteVersion": {
+            "type": "string",
+            "description": "Version of the quote presented."
+          },
+          "raw": {
+            "type": "string",
+            "description": "Raw SGX quote, parsable by tools like Open Enclave's oeverify."
+          }
+        },
+        "description": "Contains the enclave quote.",
+        "required": [
+          "nodeId",
+          "quoteVersion",
+          "raw"
+        ]
+      },
+      "LedgerQueryState": {
+        "type": "string",
+        "description": "State of a ledger query.",
+        "enum": [
+          "Loading",
+          "Ready"
+        ]
+      },
+      "ReceiptContents": {
+        "type": "object",
+        "properties": {
+          "cert": {
+            "type": "string"
+          },
+          "leaf": {
+            "type": "string"
+          },
+          "leafComponents": {
+            "$ref": "#/components/schemas/ReceiptLeafComponents"
+          },
+          "nodeId": {
+            "type": "string"
+          },
+          "proof": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReceiptElement"
+            },
+            "x-cadl-name": "ReceiptElement[]"
+          },
+          "root": {
+            "type": "string"
+          },
+          "serviceEndorsements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-cadl-name": "string[]"
+          },
+          "signature": {
+            "type": "string"
+          }
+        },
+        "description": "Contents of a Confidential Ledger receipt",
+        "required": [
+          "nodeId",
+          "proof",
+          "signature"
+        ]
+      },
+      "TransactionState": {
+        "type": "string",
+        "description": "Represents the state of the transaction.",
+        "enum": [
+          "Committed",
+          "Pending"
+        ]
+      },
+      "LedgerUserRole": {
         "type": "string",
         "description": "Represents an assignable role",
         "enum": [
@@ -562,6 +747,31 @@
         "required": [
           "code"
         ]
+      },
+      "ReceiptLeafComponents": {
+        "type": "object",
+        "properties": {
+          "claimsDigest": {
+            "type": "string"
+          },
+          "commitEvidence": {
+            "type": "string"
+          },
+          "writeSetDigest": {
+            "type": "string"
+          }
+        }
+      },
+      "ReceiptElement": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "string"
+          },
+          "right": {
+            "type": "string"
+          }
+        }
       }
     }
   },

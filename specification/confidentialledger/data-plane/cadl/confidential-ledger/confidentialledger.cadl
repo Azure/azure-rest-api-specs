@@ -40,11 +40,16 @@ model TransactionIdParameter {
   transactionId: string;
 }
 
-model UserIdParameter {
-  @path
-  @doc("The user id, either an AAD object ID or certificate fingerprint.")
-  @extension("x-ms-skip-url-encoding", true)
-  userId: string;
+model TransactionIdFromParameter {
+  @query
+  @doc("Specify the first transaction ID in a range.")
+  fromTransactionId?: string;
+}
+
+model TransactionIdToParameter {
+  @query
+  @doc("Specify the last transaction ID in a range.")
+  toTransactionId?: string;
 }
 
 model UserDetailsParameter {
@@ -60,6 +65,13 @@ model UserDetailsParameterForPatch {
 
   @header("content-type")
   contentType: "application/merge-patch+json";
+}
+
+model UserIdParameter {
+  @path
+  @doc("The user id, either an AAD object ID or certificate fingerprint.")
+  @extension("x-ms-skip-url-encoding", true)
+  userId: string;
 }
 
 //
@@ -84,6 +96,9 @@ model ConfidentialLedgerEnclaves {
 model Consortium {
   @doc("List of members in the consortium")
   members: ConsortiumMember[];
+
+  @doc("URI from which to retrieve the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Describes a member of the consortium.")
@@ -163,6 +178,10 @@ enum LedgerUserRole {
 model LedgerWriteResult {
   @doc("Id of the collection written to.")
   collectionId: string;
+
+  @header("x-ms-ccf-transaction-id")
+  @doc("The transaction id at which this write will become durable.")
+  transactionId: string;
 }
 
 @doc("An item in the Merkle proof.")
@@ -259,92 +278,100 @@ model UserIdReadOnly {
   userId: string;
 }
 
-@route("/app/collections")
-@summary("Retrieves a list of collection ids present in the Confidential Ledger")
-@doc("Collection ids are user-created collections of ledger entries")
-@get // TODO: rewrite the operations in terms of Azure.Core operations, e.g. Azure.Core.Operations.ResourceAction<TResource, TResponse, TParams>, Azure.Core.Operations.ResourceList<TResource, TParams> etc. // This will also take care of not passing ApiVersionParameter everywhere.
-op listCollections(
-  ...Foundations.ApiVersionParameter
-): CollectionArray | Foundations.ErrorResponse;
+// Routes
+@route("/app/governance/constitution")
+@summary("Gets the constitution used for governance.")
+@doc("The constitution is a script that assesses and applies proposals from consortium members.")
+@get
+op GetConstitution(...Foundations.ApiVersionParameter): Constitution | Foundations.ErrorResponse;
+
+// TODO: Pageable operations excluded from August MVP
+// @route("/app/governance/members")
+// @summary("Gets the consortium members.")
+// @doc("Consortium members can manage the Confidential Ledger.")
+// @get
+// op ListConsortiumMembers(
+//   ...Foundations.ApiVersionParameter
+// ): Consortium | Foundations.ErrorResponse;
+// TODO: Long-running operations excluded from August MVP
 
 @route("/app/enclaveQuotes")
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
 @doc("A quote is an SGX enclave measurement that can be used to verify the validity of a node and its enclave.")
 @get
-op getEnclaveQuotes(...Foundations.ApiVersionParameter): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+op GetEnclaveQuotes(...Foundations.ApiVersionParameter): ConfidentialLedgerEnclaves | Foundations.ErrorResponse;
 
-@route("/app/governance/constitution")
-@summary("Gets the constitution used for governance.")
-@doc("The constitution is a script that assesses and applies proposals from consortium members.")
-@get
-op getConstitution(...Foundations.ApiVersionParameter): OkResponse | Foundations.ErrorResponse; // TODO: add return model
-
-@route("/app/governance/members")
-@summary("Gets the consortium members.")
-@doc("Consortium members can manage the Confidential Ledger.")
-@get
-op getConsortiumMembers(
-  ...Foundations.ApiVersionParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+// TODO: Pageable operations excluded from August MVP
+// @route("/app/collections")
+// @summary("Retrieves a list of collection ids present in the Confidential Ledger")
+// @doc("Collection ids are user-created collections of ledger entries")
+// @get // TODO: rewrite the operations in terms of Azure.Core operations, e.g. Azure.Core.Operations.ResourceAction<TResource, TResponse, TParams>, Azure.Core.Operations.ResourceList<TResource, TParams> etc. // This will also take care of not passing ApiVersionParameter everywhere.
+// op ListCollections(
+//   ...Foundations.ApiVersionParameter
+// ): PagedCollections | Foundations.ErrorResponse;
+// TODO: Long-running operations excluded from August MVP
 
 // TODO: Pageable operations excluded from August MVP
 // @route("/app/transactions")
 // @summary("Gets ledger entries from a collection corresponding to a range.")
 // @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
 // @get
-// op GetLedgerEntries(
-//   ...ApiVersionParameter
-// );
-
+// op ListLedgerEntries(
+//   ...Foundations.ApiVersionParameter,
+//   ...CollectionIdParameter,
+//   ...TransactionIdFromParameter,
+//   ...TransactionIdToParameter,
+// ): PagedLedgerEntries | Foundations.ErrorResponse;
 // TODO: Long-running operations excluded from August MVP
 
 @route("/app/transactions")
 @summary("Writes a ledger entry.")
 @doc("A collection id may optionally be specified.")
 @post
-op postLedgerEntry(
+op CreateLedgerEntry(
   ...Foundations.ApiVersionParameter,
   ...CollectionIdParameter,
   @body entry: LedgerEntry
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerWriteResult | Foundations.ErrorResponse;
 
 @route("/app/transactions/{transactionId}")
 @summary("Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.")
+@doc("To return older ledger entries, the relevant sections of the ledger must be read from disk and validated. To prevent blocking within the enclave, the response will indicate whether the entry is ready and part of the response, or if the loading is still ongoing.")
 @get
-op getLedgerEntry(
+op GetLedgerEntry(
   ...Foundations.ApiVersionParameter,
   ...CollectionIdParameter,
   ...TransactionIdParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerQueryResult | Foundations.ErrorResponse;
 
 @route("/app/transactions/{transactionId}/receipt")
 @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
 @get
-op getReceipt(
+op GetReceipt(
   ...Foundations.ApiVersionParameter,
   ...TransactionIdParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): TransactionReceipt | Foundations.ErrorResponse;
 
 @route("/app/transactions/{transactionId}/status")
 @summary("Gets the status of an entry identified by a transaction id.")
 @get
-op getTransactionStatus(
+op GetTransactionStatus(
   ...Foundations.ApiVersionParameter,
   ...TransactionIdParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): TransactionStatus | Foundations.ErrorResponse;
 
 @route("/app/transactions/current")
 @summary("Gets the current value available in the ledger.")
 @get
-op getCurrentLedgerEntry(
+op GetCurrentLedgerEntry(
   ...Foundations.ApiVersionParameter,
   ...CollectionIdParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerEntry | Foundations.ErrorResponse;
 
 @route("/app/users/{userId}")
 @summary("Deletes a user from the Confidential Ledger.")
 @delete
-op deleteUser(
+op DeleteUser(
   ...Foundations.ApiVersionParameter,
   ...UserIdParameter
 ): NoContentResponse | Foundations.ErrorResponse;
@@ -352,16 +379,16 @@ op deleteUser(
 @route("/app/users/{userId}")
 @summary("Gets a user.")
 @get
-op getUser(
+op GetUser(
   ...Foundations.ApiVersionParameter,
   ...UserIdParameter
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerUser | Foundations.ErrorResponse;
 
 @route("/app/users/{userId}")
 @summary("Adds a user or updates a user's fields.")
 @patch
-op createOrUpdateUser(
+op CreateOrUpdateUser(
   ...Foundations.ApiVersionParameter,
   ...UserIdParameter,
   ...UserDetailsParameterForPatch
-): OkResponse | Foundations.ErrorResponse; // TODO: add return model
+): LedgerUser | Foundations.ErrorResponse;
