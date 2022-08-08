@@ -68,30 +68,195 @@ model UserDetailsParameterForPatch {
 
 @doc("Identifier for collections.")
 model Collection {
+  @doc("Id of the collection")
   collectionId: string;
 }
 
-@doc("A list of identifiers for ledger collections.")
-model CollectionArray {
-  items: Collection[];
+@doc("Information about the enclaves running the Confidential Ledger.")
+model ConfidentialLedgerEnclaves {
+  @doc("Id of the Confidential Ledger node responding to the request.")
+  currentNodeId: string;
+
+  enclaveQuotes: Record<EnclaveQuote>;
 }
 
+@doc("List of members in the consortium.")
+model Consortium {
+  @doc("List of members in the consortium")
+  members: ConsortiumMember[];
+}
+
+@doc("Describes a member of the consortium.")
+model ConsortiumMember {
+  @doc("PEM-encoded certificate associated with the member.")
+  certificate: string;
+
+  @doc("Identifier assigned to the member.")
+  id: string;
+}
+
+@doc("The governance script for the application.")
+model Constitution {
+  @doc("SHA256 digest of the constitution script.")
+  digest: string;
+
+  @doc("Contents of the constitution.")
+  script: string;
+}
+
+@doc("Contains the enclave quote.")
+model EnclaveQuote {
+  @doc("Id assigned to this node.")
+  nodeId: string;
+
+  @doc("MRENCLAVE value of the code running in the enclave.")
+  mrenclave?: string;
+
+  @doc("Version of the quote presented.")
+  quoteVersion: string;
+
+  @doc("Raw SGX quote, parsable by tools like Open Enclave's oeverify.")
+  raw: string;
+}
+
+@doc("An entry in the ledger.")
+model LedgerEntry {
+  @doc("Contents of the ledger entry.")
+  contents: string;
+
+  @visibility("read")
+  @doc("Id of the collection containing the entry")
+  collectionId?: string;
+
+  ...TransactionIdOptionalReadOnly;
+}
+
+@doc("The result of querying for a ledger entry from an older transaction id. The ledger entry is available in the response only if the returned state is Ready.")
+model LedgerQueryResult {
+  state: LedgerQueryState;
+
+  @doc("The ledger entry found as a result of the query. This is only available if the query is in Ready state.")
+  entry?: LedgerEntry;
+}
+
+@doc("State of a ledger query.")
+enum LedgerQueryState {
+  Loading,
+  Ready,
+}
+
+@doc("Details about a Confidential Ledger user.")
 model LedgerUser {
-  assignedRole: ConfidentialLedgerUserRoleName;
-  userId: string;
+  assignedRole: LedgerUserRole;
+
+  ...UserIdReadOnly;
 }
 
 @doc("Represents an assignable role")
-enum ConfidentialLedgerUserRoleName {
+enum LedgerUserRole {
   Administrator,
   Contributor,
   Reader,
 }
 
-model LedgerEntry {
-  contents: string;
+@doc("Returned as a result of a write to the Confidential Ledger, the transaction id in the response indicates when the write will become durable.")
+model LedgerWriteResult {
+  @doc("Id of the collection written to.")
   collectionId: string;
+}
+
+@doc("An item in the Merkle proof.")
+model MerkleProofElement {
+  left: string;
+  right: string;
+}
+
+@doc("Paginated collections returned in response to a query.")
+model PagedCollections {
+  collections: Collection[];
+
+  @doc("URI from which to retrieve the next page of results.")
+  nextLink?: string;
+}
+
+@doc("Paginated ledger entries returned in response to a query.")
+model PagedLedgerEntries {
+  state: LedgerQueryState;
+
+  @doc("URI from which to retrieve the next page of results.")
+  nextLink?: string;
+
+  entries: LedgerEntry[];
+}
+
+alias Pem = string;
+
+@doc("Contents of a Confidential Ledger receipt")
+model ReceiptContents {
+  cert?: string;
+  leaf?: string;
+  leafComponents?: ReceiptLeafComponents;
+  nodeId: string;
+  proof: ReceiptElement[];
+  root?: string;
+  serviceEndorsements?: Pem[];
+  signature: string;
+}
+
+model ReceiptElement {
+  left?: string;
+  right?: string;
+}
+
+model ReceiptLeafComponents {
+  claimsDigest?: string;
+  commitEvidence?: string;
+  writeSetDigest?: string;
+}
+
+@doc("Object for assigning a role to a user.")
+model RoleAssignment {
+  roleName: LedgerUserRole;
+
+  @doc("Description of the role")
+  description?: string;
+}
+
+@doc("A receipt certifying the transaction at the specified id.")
+model TransactionReceipt {
+  receipt?: ReceiptContents;
+  state: LedgerQueryState;
+  ...TransactionId;
+}
+
+@doc("Represents the state of the transaction.")
+enum TransactionState {
+  Committed,
+  Pending,
+}
+
+@doc("Response returned to a query for the transaction status.")
+model TransactionStatus {
+  state: TransactionState;
+  ...TransactionId;
+}
+
+// Utility types
+model TransactionId {
+  @doc("A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.")
   transactionId: string;
+}
+
+model TransactionIdOptionalReadOnly {
+  @visibility("read")
+  @doc("A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.")
+  transactionId?: string;
+}
+
+model UserIdReadOnly {
+  @visibility("read")
+  @doc("Identifier for the user. This must either be an AAD object id or a certificate fingerprint.")
+  userId: string;
 }
 
 @route("/app/collections")
