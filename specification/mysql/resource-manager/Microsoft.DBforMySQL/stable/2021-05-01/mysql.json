@@ -1682,10 +1682,26 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "description": "Delegated subnet resource id used to setup vnet for a server."
         },
         "privateDnsZoneResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
           "description": "Private DNS zone resource id."
         }
       },
