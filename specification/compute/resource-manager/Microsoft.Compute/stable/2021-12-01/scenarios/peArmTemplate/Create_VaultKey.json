@@ -92,6 +92,9 @@
           "type": "keys",
           "location": "eastus",
           "apiVersion": "2021-10-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.KeyVault/vaults', parameters('name'))]"
+          ],
           "properties": {
             "kty": "RSA"
           }
@@ -105,7 +108,8 @@
       "type": "string"
     },
     "keyUri": {
-      "value": "[resourceId('Microsoft.KeyVault/vaults/keys', parameters('keyName')).KeyURIWithVersion]",
-      "type": "string"
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.KeyVault/vaults/keys', parameters('name'),parameters('keyName'))).KeyURIWithVersion]"
     }
+  }
 }
