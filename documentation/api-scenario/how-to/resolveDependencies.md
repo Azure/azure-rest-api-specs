@@ -1,11 +1,17 @@
-# Integrate with ARM Template
+# Resolve cross-RP dependencies
 
 ## Background
 
-In some cases, we need to do some more complex operations in some scenarios, for example,
+In some cases, we need to do more complex operations in some scenarios, like provisioning cross-RP resources as dependencies, calling cross-RP REST API in between the steps of a scenario, or executing some customized PowerShell/Azure CLI scripts. For example,
 
 - Provisioning virtual network with subnet/publicIP/securityGroup and network interface before creating a VM.
+- Creating a private endpoint connection with Network RP between creating AppConfiguration ConfigurationStores and calling the private endpoint related REST APIs.
 - Upload a jar file to some storage blob after creating a Spring Cloud service.
+
+To support these complex scenarios, we introduce two key features in API Scenario:
+
+- External operation reference in step definition: We support referencing external operations in step definition, which can be used to call cross-RP REST API before a scenario or in between the steps of a scenario.
+- ARM Template integration: We support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
 
 ## Examples
 
