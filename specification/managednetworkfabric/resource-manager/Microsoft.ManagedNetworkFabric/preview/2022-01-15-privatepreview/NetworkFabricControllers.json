@@ -49,9 +49,6 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "CreateNetworkFabricController": {
-            "$ref": "./examples/CreateNetworkFabricController.json"
-          },
           "NetworkFabricControllers_Create_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Create_MaximumSet_Gen.json"
           },
@@ -122,9 +119,6 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "GetNetworkFabricController": {
-            "$ref": "./examples/GetNetworkFabricController.json"
-          },
           "NetworkFabricControllers_Get_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Get_MaximumSet_Gen.json"
           },
@@ -179,9 +173,6 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "UpdateNetworkFabricController": {
-            "$ref": "./examples/UpdateNetworkFabricController.json"
-          },
           "NetworkFabricControllers_Update_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Update_MaximumSet_Gen.json"
           },
@@ -255,9 +246,6 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "DeleteNetworkFabricController": {
-            "$ref": "./examples/DeleteNetworkFabricController.json"
-          },
           "NetworkFabricControllers_Delete_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Delete_MaximumSet_Gen.json"
           },
@@ -318,9 +306,6 @@
         "summary": "List NetworkFabricControllers by resource group.",
         "description": "Implements NetworkFabricControllers list by resource group GET method.",
         "x-ms-examples": {
-          "ListByResourceGroupNetworkFabricController": {
-            "$ref": "./examples/ListByResourceGroupNetworkFabricController.json"
-          },
           "NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen.json"
           },
@@ -364,9 +349,6 @@
         "summary": "List NetworkFabricControllers by subscription.",
         "description": "Implements NetworkFabricControllers list by subscription GET method.",
         "x-ms-examples": {
-          "ListBySubscriptionNetworkFabricController": {
-            "$ref": "./examples/ListBySubscriptionNetworkFabricController.json"
-          },
           "NetworkFabricControllers_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_ListBySubscription_MaximumSet_Gen.json"
           },
@@ -400,6 +382,120 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/{networkFabricControllerName}/enableWorkloadManagementNetwork": {
+      "post": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_enableWorkloadManagementNetwork",
+        "description": "Enable workloadManagementNetwork.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricControllerName",
+            "description": "Name of the networkFabricController.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFabricControllers_enableWorkloadManagementNetwork_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_enableWorkloadManagementNetwork_MaximumSet_Gen.json"
+          },
+          "NetworkFabricControllers_enableWorkloadManagementNetwork_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_enableWorkloadManagementNetwork_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/{networkFabricControllerName}/disableWorkloadManagementNetwork": {
+      "post": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_disableWorkloadManagementNetwork",
+        "description": "Disable workloadManagementNetwork.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricControllerName",
+            "description": "Name of the networkFabricController.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFabricControllers_disableWorkloadManagementNetwork_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_disableWorkloadManagementNetwork_MaximumSet_Gen.json"
+          },
+          "NetworkFabricControllers_disableWorkloadManagementNetwork_MinimumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_disableWorkloadManagementNetwork_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -407,9 +503,9 @@
       "title": "Network Fabric Controller updatable properties",
       "type": "object",
       "properties": {
-        "expressRouteConnections": {
+        "infrastructureExpressRouteConnections": {
           "type": "array",
-          "description": "List of ExpressRouteConnections.",
+          "description": "List of Infrastructure ExpressRouteConnections.",
           "x-ms-identifiers": [
             "expressRouteCircuitId"
           ],
@@ -417,20 +513,14 @@
             "$ref": "#/definitions/ExpressRouteConnectionInformation"
           }
         },
-        "ipv4AddressSpaces": {
+        "workloadExpressRouteConnections": {
           "type": "array",
-          "description": "List of IPv4 Network Fabric Controller Address Spaces.",
+          "description": "List of Workload ExpressRouteConnections.",
+          "x-ms-identifiers": [
+            "expressRouteCircuitId"
+          ],
           "items": {
-            "type": "string",
-            "description": "IPv4 Network Fabric Controller Address Space."
-          }
-        },
-        "ipv6AddressSpaces": {
-          "type": "array",
-          "description": "List of IPv6 Network Fabric Controller Address Spaces.",
-          "items": {
-            "type": "string",
-            "description": "IPv6 Network Fabric Controller Address Space."
+            "$ref": "#/definitions/ExpressRouteConnectionInformation"
           }
         }
       }
@@ -448,6 +538,50 @@
         }
       ],
       "properties": {
+        "infrastructureServices": {
+          "type": "object",
+          "description": "InfrastructureServices IP ranges.",
+          "properties": {
+            "ipv4AddressSpaces": {
+              "type": "array",
+              "description": "List of IPv4 Network Fabric Controller Address Spaces.",
+              "items": {
+                "type": "string",
+                "description": "IPv4 Network Fabric Controller Address Space."
+              }
+            },
+            "ipv6AddressSpaces": {
+              "type": "array",
+              "description": "List of IPv6 Network Fabric Controller Address Spaces.",
+              "items": {
+                "type": "string",
+                "description": "IPv6 Network Fabric Controller Address Space."
+              }
+            }
+          }
+        },
+        "workloadServices": {
+          "type": "object",
+          "description": "WorkloadServices IP ranges.",
+          "properties": {
+            "ipv4AddressSpaces": {
+              "type": "array",
+              "description": "List of IPv4 Network Fabric Controller Address Spaces.",
+              "items": {
+                "type": "string",
+                "description": "IPv4 Network Fabric Controller Address Space."
+              }
+            },
+            "ipv6AddressSpaces": {
+              "type": "array",
+              "description": "List of IPv6 Network Fabric Controller Address Spaces.",
+              "items": {
+                "type": "string",
+                "description": "IPv6 Network Fabric Controller Address Space."
+              }
+            }
+          }
+        },
         "managedResourceGroupConfiguration": {
           "type": "object",
           "description": "Managed Resource Group configuration properties.",
@@ -462,16 +596,27 @@
             }
           }
         },
-        "expressRouteConnectionStatus": {
+        "networkFabricIds": {
           "type": "array",
-          "description": "List of ExpressRouteConnections statuses.",
-          "x-ms-identifiers": [
-            "expressRouteCircuitId"
-          ],
+          "description": "NetworkFabric Azure resource IDs from this Network Fabric Controller.",
           "items": {
-            "$ref": "#/definitions/ExpressRouteStatusDef"
+            "description": "NetworkFabric Azure resource ID.",
+            "type": "string"
           },
           "readOnly": true
+        },
+        "workloadManagementNetwork": {
+          "type": "boolean",
+          "description": "workloadManagementNetwork state.",
+          "readOnly": true
+        },
+        "ipv4AddressSpace": {
+          "type": "string",
+          "description": "IPv4 Network Fabric Controller Address Space."
+        },
+        "ipv6AddressSpace": {
+          "type": "string",
+          "description": "IPv6 Network Fabric Controller Address Space."
         },
         "operationalState": {
           "description": "Gets the operational state of the resource.",
@@ -539,7 +684,8 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "networkFabricControllerOperationalState"
-      }
+      },
+      "readOnly": true
     },
     "NetworkFabricController": {
       "type": "object",

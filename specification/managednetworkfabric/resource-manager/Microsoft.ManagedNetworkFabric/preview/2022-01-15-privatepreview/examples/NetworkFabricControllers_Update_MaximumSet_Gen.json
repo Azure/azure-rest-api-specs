@@ -1,78 +1,87 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
-    "resourceGroupName": "rgnetworkfabriccontrollers",
+    "subscriptionId": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgNetworkFabricControllers",
     "api-version": "2022-01-15-privatepreview",
-    "networkFabricControllerName": "aaaaaaaaaaaaaaaaaa",
+    "networkFabricControllerName": "a",
     "body": {
-      "tags": {},
       "properties": {
-        "ipv4AddressSpaces": [
-          "10.0.0.1/32",
-          "10.0.0.2/32"
-        ],
-        "expressRouteConnections": [
+        "infrastructureExpressRouteConnections": [
           {
-            "expressRouteCircuitId": "aaaaaaaaaaaaaaaaaaaaaaaa",
-            "expressRouteAuthorizationKey": "aaaaaaaaaaaaaaaaaaaaaaa"
+            "expressRouteCircuitId": "aaaaaaa",
+            "expressRouteAuthorizationKey": "aaaaaaaaaaaaaaaaaaaaaaaaa"
           }
         ],
-        "ipv6AddressSpaces": [
-          "aaaaaaaaaaaaaaa"
+        "workloadExpressRouteConnections": [
+          {
+            "expressRouteCircuitId": "aaaaaaa",
+            "expressRouteAuthorizationKey": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
         ]
+      },
+      "tags": {
+        "key8299": "aaaaaaaaaaaaaaaa"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "location": "westus",
-        "tags": {},
         "properties": {
-          "expressRouteConnections": [
-            {
-              "expressRouteCircuitId": "aaaaaaaaaaaaaaaaaaaaaaaa"
-            },
-            {
-              "expressRouteCircuitId": "circuit2"
-            }
-          ],
-          "ipv4AddressSpaces": [
-            "10.0.0.1/32",
-            "10.0.0.2/32"
-          ],
-          "ipv6AddressSpaces": [
-            "aaaaaaaaaaaaaaa",
-            "fc01::/8"
-          ],
-          "managedResourceGroupConfiguration": {
-            "name": "aaaaaaaaaaaaa",
-            "location": "aaaaaaaaaa"
+          "infrastructureServices": {
+            "ipv4AddressSpaces": [
+              "aaaaaaaa"
+            ],
+            "ipv6AddressSpaces": [
+              "aaaaaaaaa"
+            ]
           },
-          "expressRouteConnectionStatus": [
-            {
-              "expressRouteCircuitId": "circuit1",
-              "expressRouteStatus": "Connected"
-            },
-            {
-              "expressRouteCircuitId": "circuit1",
-              "expressRouteStatus": "Connected"
-            }
+          "workloadServices": {
+            "ipv4AddressSpaces": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "ipv6AddressSpaces": [
+              "aaaaa"
+            ]
+          },
+          "managedResourceGroupConfiguration": {
+            "name": "aaaa",
+            "location": "aaaaaaaaaaaaaaa"
+          },
+          "networkFabricIds": [
+            "aaaaaaaaaaaaaaaaa"
           ],
+          "workloadManagementNetwork": true,
+          "ipv4AddressSpace": "a",
+          "ipv6AddressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "operationalState": "Configuring",
           "provisioningState": "Succeeded",
-          "annotation": "aaaaaa"
+          "annotation": "aaaaaaa",
+          "infrastructureExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "aaaaaaa"
+            }
+          ],
+          "workloadExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "aaaaaaa"
+            }
+          ]
         },
-        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/testNetworkFabricController1",
-        "name": "testNetworkFabricController1",
-        "type": "microsoft.managedNetworkFabric/networkfabriccontrollers",
+        "tags": {
+          "key2415": "aaaaaaaaaaaaaaaaaaaa"
+        },
+        "location": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaaaaa",
+        "name": "aa",
+        "type": "aaaaaaaaaaaaaaaaaaaaaa",
         "systemData": {
-          "createdBy": "aaaaaaa",
+          "createdBy": "aaaaaaaaaaaaaaaaaaaa",
           "createdByType": "User",
-          "createdAt": "2022-05-16T12:52:02.559Z",
-          "lastModifiedBy": "aaaaaa",
+          "createdAt": "2022-08-05T08:16:41.964Z",
+          "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-05-16T12:52:02.560Z"
+          "lastModifiedAt": "2022-08-05T08:16:41.964Z"
         }
       }
     },
