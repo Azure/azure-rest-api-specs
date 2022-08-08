@@ -109,6 +109,25 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
+## API Readiness Check
+
+This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider. 
+
+To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
+
+NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this case, you could ignore this CI check.
+
+
+## Service API Readiness Test
+
+This CI check is to test service API readiness, by running API Scenario test to verify:
+- Service APIs are deployed to Azure
+- API behavior is consistent with Swagger definition
+- [InProgress] API behavior is compliant with Azure API guidelines, including [ARM RPC](https://github.com/Azure/azure-resource-manager-rpc) and [Microsoft Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+
+Note: Currently only applicable to management plane APIs, and target ARM region is `US West Central` - the SDP pilot region.
+
+To fix the check, download the artifact `api-test-report` from Azure pipeline where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readme.md) to run and debug it locally. After local debug, commit the API Scenario file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
 
 ## SDK Track2 Validation
 
@@ -132,6 +151,19 @@ autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest 
 ```
 autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
+
+## Cadl Validation
+
+This validator is to ensure the cadl & swagger files in PR are consistent and the 'cadl' folder contains 'examples' and 'package.json'
+
+### How to fix
+| Error Code | solution |
+|---| ---|
+|MissingPakcageJson| adding the package.json to the cadl folder|
+|MissingCadlFile| adding the related cadl files into 'cadl' folder, like [https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl](https://github.com/Azure/azure-rest-api-specs-pr/tree/586cb177f1bab647da7ac60907fa3aa695b67ae1/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl)|
+|MissingExamplesDirectory| the example files should be kept in the 'cadl/examples' folder, you should also check in it in PR. |
+|InConsistentSwagger| the generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl, and check in it |
+|SwaggerNotExistInPR| the occurs when there is cadl file in the PR but the swagger is not present in the PR, so you need to add the swagger to the PR |
 
 ## Suppression Process
 
