@@ -272,7 +272,16 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "./tileset.json#/definitions/LongRunningOperationResult"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
