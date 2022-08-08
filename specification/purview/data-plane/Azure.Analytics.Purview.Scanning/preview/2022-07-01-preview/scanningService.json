@@ -25,10 +25,14 @@
   "paths": {
     "/azureKeyVaults/{azureKeyVaultName}": {
       "get": {
-        "tags": ["AzureKeyVaults"],
+        "tags": [
+          "AzureKeyVaults"
+        ],
         "description": "Gets azureKeyVault information",
         "operationId": "KeyVaultConnections_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -61,11 +65,17 @@
         }
       },
       "put": {
-        "tags": ["AzureKeyVaults"],
+        "tags": [
+          "AzureKeyVaults"
+        ],
         "description": "Creates an instance of a azureKeyVault",
         "operationId": "KeyVaultConnections_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -112,10 +122,14 @@
         }
       },
       "delete": {
-        "tags": ["AzureKeyVaults"],
+        "tags": [
+          "AzureKeyVaults"
+        ],
         "description": "Deletes the azureKeyVault associated with the account",
         "operationId": "KeyVaultConnections_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -153,10 +167,14 @@
     },
     "/azureKeyVaults": {
       "get": {
-        "tags": ["AzureKeyVaults"],
+        "tags": [
+          "AzureKeyVaults"
+        ],
         "description": "List azureKeyVaults in account",
         "operationId": "KeyVaultConnections_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -188,10 +206,14 @@
     },
     "/classificationrules/{classificationRuleName}": {
       "get": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "Get a classification rule",
         "operationId": "ClassificationRules_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -224,11 +246,17 @@
         }
       },
       "put": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "Creates or Updates a classification rule",
         "operationId": "ClassificationRules_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -274,10 +302,14 @@
         }
       },
       "delete": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "Deletes a classification rule",
         "operationId": "ClassificationRules_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -315,10 +347,14 @@
     },
     "/classificationrules": {
       "get": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "List classification rules in Account",
         "operationId": "ClassificationRules_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -350,10 +386,14 @@
     },
     "/classificationrules/{classificationRuleName}/versions": {
       "get": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "Lists the rule versions of a classification rule",
         "operationId": "ClassificationRules_ListVersionsByClassificationRuleName",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -391,10 +431,14 @@
     },
     "/classificationrules/{classificationRuleName}/versions/{classificationRuleVersion}/:tag": {
       "post": {
-        "tags": ["ClassificationRules"],
+        "tags": [
+          "ClassificationRules"
+        ],
         "description": "Sets Classification Action on a specific classification rule version.",
         "operationId": "ClassificationRules_TagClassificationVersion",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -414,7 +458,10 @@
             "name": "action",
             "required": true,
             "type": "string",
-            "enum": ["Keep", "Delete"],
+            "enum": [
+              "Keep",
+              "Delete"
+            ],
             "x-ms-enum": {
               "name": "ClassificationAction",
               "modelAsString": true
@@ -447,10 +494,14 @@
     },
     "/collections/{collectionName}/scans": {
       "get": {
-        "tags": ["Collection"],
+        "tags": [
+          "Collection"
+        ],
         "description": "List scans of the collection",
         "operationId": "Scans_ListByCollection",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -488,10 +539,14 @@
     },
     "/credentials/{credentialName}": {
       "get": {
-        "tags": ["Credential"],
+        "tags": [
+          "Credential"
+        ],
         "description": "Gets credential information",
         "operationId": "Credential_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -524,11 +579,17 @@
         }
       },
       "put": {
-        "tags": ["Credential"],
+        "tags": [
+          "Credential"
+        ],
         "description": "Creates an instance of a credential",
         "operationId": "Credential_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -575,10 +636,14 @@
         }
       },
       "delete": {
-        "tags": ["Credential"],
+        "tags": [
+          "Credential"
+        ],
         "description": "Deletes the credentials associated with the account",
         "operationId": "Credential_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -616,10 +681,14 @@
     },
     "/credentials": {
       "get": {
-        "tags": ["Credential"],
+        "tags": [
+          "Credential"
+        ],
         "description": "List credentials in account",
         "operationId": "Credential_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -651,11 +720,17 @@
     },
     "/datasources/{dataSourceName}": {
       "put": {
-        "tags": ["DataSources"],
+        "tags": [
+          "DataSources"
+        ],
         "description": "Creates or Updates a data source",
         "operationId": "DataSources_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -701,10 +776,14 @@
         }
       },
       "get": {
-        "tags": ["DataSources"],
+        "tags": [
+          "DataSources"
+        ],
         "description": "Get a data source",
         "operationId": "DataSources_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -737,10 +816,14 @@
         }
       },
       "delete": {
-        "tags": ["DataSources"],
+        "tags": [
+          "DataSources"
+        ],
         "description": "Deletes a data source",
         "operationId": "DataSources_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -778,10 +861,14 @@
     },
     "/datasources": {
       "get": {
-        "tags": ["DataSources"],
+        "tags": [
+          "DataSources"
+        ],
         "description": "List data sources in Data catalog",
         "operationId": "DataSources_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -813,10 +900,14 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/filters/custom": {
       "get": {
-        "tags": ["Filters"],
+        "tags": [
+          "Filters"
+        ],
         "description": "Get a filter",
         "operationId": "Filters_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -855,11 +946,17 @@
         }
       },
       "put": {
-        "tags": ["Filters"],
+        "tags": [
+          "Filters"
+        ],
         "description": "Creates or updates a filter",
         "operationId": "Filters_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -913,10 +1010,14 @@
     },
     "/integrationruntimes/{integrationRuntimeName}": {
       "get": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Gets an integrationRuntime",
         "operationId": "IntegrationRuntimes_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -949,10 +1050,14 @@
         }
       },
       "delete": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Deletes an integrationRuntime",
         "operationId": "IntegrationRuntimes_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -988,11 +1093,17 @@
         }
       },
       "put": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Creates or Updates an instance of a integrationRuntime",
         "operationId": "IntegrationRuntimes_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1041,10 +1152,14 @@
     },
     "/integrationruntimes/{integrationRuntimeName}/status": {
       "get": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Gets an integrationRuntimeStatus",
         "operationId": "IntegrationRuntimes_Status",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1079,10 +1194,14 @@
     },
     "/integrationruntimes/{integrationRuntimeName}/:listAuthKeys": {
       "post": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Gets integrationRuntimeAuthKeys",
         "operationId": "IntegrationRuntimes_ListAuthKeys",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1117,11 +1236,17 @@
     },
     "/integrationruntimes/{integrationRuntimeName}/:regenerateAuthKey": {
       "post": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Regenerates integrationRuntimeAuthKey",
         "operationId": "IntegrationRuntimes_RegenerateAuthKey",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1163,10 +1288,14 @@
     },
     "/integrationruntimes": {
       "get": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Lists integrationruntimes in account",
         "operationId": "IntegrationRuntimes_ListByAccount",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1198,10 +1327,14 @@
     },
     "/integrationruntimes/{integrationRuntimeName}/disableInteractiveQuery": {
       "post": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Disables interactive querying",
         "operationId": "IntegrationRuntimes_DisableInteractiveQuery",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1217,7 +1350,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OperationResponse"
+              "$ref": "#/definitions/OkResult"
             }
           },
           "default": {
@@ -1236,11 +1369,17 @@
     },
     "/integrationruntimes/{integrationRuntimeName}/enableInteractiveQuery": {
       "post": {
-        "tags": ["IntegrationRuntimes"],
+        "tags": [
+          "IntegrationRuntimes"
+        ],
         "description": "Enables interactive querying",
         "operationId": "IntegrationRuntimes_EnableInteractiveQuery",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1263,7 +1402,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OperationResponse"
+              "$ref": "#/definitions/OkResult"
             }
           },
           "default": {
@@ -1282,10 +1421,14 @@
     },
     "/managedvirtualnetworks/{managedVNetName}": {
       "get": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Gets a ManagedVirtualNetwork",
         "operationId": "ManagedVirtualNetworks_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1318,11 +1461,17 @@
         }
       },
       "put": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Creates or Updates a ManagedVirtualNetwork",
         "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1371,10 +1520,14 @@
     },
     "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints/{managedPEName}": {
       "get": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Gets a ManagedPrivateEndpoint",
         "operationId": "ManagedVirtualNetworks_GetPE",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1413,10 +1566,14 @@
         }
       },
       "delete": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Deletes a ManagedPrivateEndpoint",
         "operationId": "ManagedVirtualNetworks_DeletePE",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1458,11 +1615,17 @@
         }
       },
       "put": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Creates a ManagedPrivateEndpoint",
         "operationId": "ManagedVirtualNetworks_CreateOrUpdatePE",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1517,10 +1680,14 @@
     },
     "/managedvirtualnetworks": {
       "get": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Gets a list of ManagedVirtualNetworks",
         "operationId": "ManagedVirtualNetworks_ListByAccount",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1552,10 +1719,14 @@
     },
     "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints": {
       "get": {
-        "tags": ["ManagedVirtualNetworks"],
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
         "description": "Gets a list of ManagedPrivateEndpoints",
         "operationId": "ManagedVirtualNetworks_ListPEByAccount",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1593,11 +1764,17 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}": {
       "put": {
-        "tags": ["Scan"],
+        "tags": [
+          "Scan"
+        ],
         "description": "Creates an instance of a scan",
         "operationId": "Scans_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1650,10 +1827,14 @@
         }
       },
       "get": {
-        "tags": ["Scan"],
+        "tags": [
+          "Scan"
+        ],
         "description": "Gets a scan information",
         "operationId": "Scans_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1692,10 +1873,14 @@
         }
       },
       "delete": {
-        "tags": ["Scan"],
+        "tags": [
+          "Scan"
+        ],
         "description": "Deletes the scan associated with the data source",
         "operationId": "Scans_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1739,10 +1924,14 @@
     },
     "/datasources/{dataSourceName}/scans": {
       "get": {
-        "tags": ["Scan"],
+        "tags": [
+          "Scan"
+        ],
         "description": "List scans in data source",
         "operationId": "Scans_ListByDataSource",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1780,10 +1969,14 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}": {
       "put": {
-        "tags": ["ScanResult"],
+        "tags": [
+          "ScanResult"
+        ],
         "description": "Runs the scan",
         "operationId": "ScanResult_RunScan",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1807,7 +2000,10 @@
             "in": "query",
             "name": "scanLevel",
             "type": "string",
-            "enum": ["Full", "Incremental"],
+            "enum": [
+              "Full",
+              "Incremental"
+            ],
             "x-ms-enum": {
               "name": "ScanLevelType",
               "modelAsString": true
@@ -1840,10 +2036,14 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}/:cancel": {
       "post": {
-        "tags": ["ScanResult"],
+        "tags": [
+          "ScanResult"
+        ],
         "description": "Cancels a scan",
         "operationId": "ScanResult_CancelScan",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1890,10 +2090,14 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs": {
       "get": {
-        "tags": ["ScanResult"],
+        "tags": [
+          "ScanResult"
+        ],
         "description": "Lists the scan history of a scan",
         "operationId": "ScanResult_ListScanHistory",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1937,10 +2141,14 @@
     },
     "/scanrulesets/{scanRulesetName}": {
       "get": {
-        "tags": ["ScanRulesets"],
+        "tags": [
+          "ScanRulesets"
+        ],
         "description": "Get a scan ruleset",
         "operationId": "ScanRulesets_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1973,11 +2181,17 @@
         }
       },
       "put": {
-        "tags": ["ScanRulesets"],
+        "tags": [
+          "ScanRulesets"
+        ],
         "description": "Creates or Updates a scan ruleset",
         "operationId": "ScanRulesets_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2023,10 +2237,14 @@
         }
       },
       "delete": {
-        "tags": ["ScanRulesets"],
+        "tags": [
+          "ScanRulesets"
+        ],
         "description": "Deletes a scan ruleset",
         "operationId": "ScanRulesets_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2064,10 +2282,14 @@
     },
     "/scanrulesets": {
       "get": {
-        "tags": ["ScanRulesets"],
+        "tags": [
+          "ScanRulesets"
+        ],
         "description": "List scan rulesets in Data catalog",
         "operationId": "ScanRulesets_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -2099,10 +2321,14 @@
     },
     "/systemScanRulesets": {
       "get": {
-        "tags": ["SystemScanRulesets"],
+        "tags": [
+          "SystemScanRulesets"
+        ],
         "description": "List all system scan rulesets for an account",
         "operationId": "SystemScanRulesets_ListAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -2134,10 +2360,14 @@
     },
     "/systemScanRulesets/datasources/{dataSourceType}": {
       "get": {
-        "tags": ["SystemScanRulesets"],
+        "tags": [
+          "SystemScanRulesets"
+        ],
         "description": "Get a system scan ruleset for a data source",
         "operationId": "SystemScanRulesets_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2204,10 +2434,14 @@
     },
     "/systemScanRulesets/versions/{version}": {
       "get": {
-        "tags": ["SystemScanRulesets"],
+        "tags": [
+          "SystemScanRulesets"
+        ],
         "description": "Get a scan ruleset by version",
         "operationId": "SystemScanRulesets_GetByVersion",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -2280,10 +2514,14 @@
     },
     "/systemScanRulesets/versions/latest": {
       "get": {
-        "tags": ["SystemScanRulesets"],
+        "tags": [
+          "SystemScanRulesets"
+        ],
         "description": "Get the latest version of a system scan ruleset",
         "operationId": "SystemScanRulesets_GetLatest",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -2349,10 +2587,14 @@
     },
     "/systemScanRulesets/versions": {
       "get": {
-        "tags": ["SystemScanRulesets"],
+        "tags": [
+          "SystemScanRulesets"
+        ],
         "description": "List system scan ruleset versions in Data catalog",
         "operationId": "SystemScanRulesets_ListVersionsByDataSource",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -2421,10 +2663,14 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/triggers/default": {
       "get": {
-        "tags": ["Triggers"],
+        "tags": [
+          "Triggers"
+        ],
         "description": "Gets trigger information",
         "operationId": "Triggers_GetTrigger",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2463,11 +2709,17 @@
         }
       },
       "put": {
-        "tags": ["Triggers"],
+        "tags": [
+          "Triggers"
+        ],
         "description": "Creates an instance of a trigger",
         "operationId": "Triggers_CreateTrigger",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2520,10 +2772,14 @@
         }
       },
       "delete": {
-        "tags": ["Triggers"],
+        "tags": [
+          "Triggers"
+        ],
         "description": "Deletes the trigger associated with the scan",
         "operationId": "Triggers_DeleteTrigger",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2659,7 +2915,9 @@
       }
     },
     "ClassificationRule": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2668,7 +2926,10 @@
       ],
       "properties": {
         "kind": {
-          "enum": ["System", "Custom"],
+          "enum": [
+            "System",
+            "Custom"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleType",
@@ -2780,21 +3041,18 @@
             "AzureDataExplorer",
             "AzureFileService",
             "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
             "AmazonPostgreSql",
             "AzurePostgreSql",
             "SqlServerDatabase",
             "AzureSqlDatabaseManagedInstance",
             "AzureSqlDataWarehouse",
             "AzureMySql",
-            "Hdfs",
             "AzureStorage",
             "Teradata",
             "Oracle",
             "SapS4Hana",
             "SapEcc",
-            "PowerBI",
-            "Trident"
+            "PowerBI"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2826,7 +3084,9 @@
       }
     },
     "Credential": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2966,7 +3226,10 @@
           "readOnly": true
         },
         "scanRulesetType": {
-          "enum": ["Custom", "System"],
+          "enum": [
+            "Custom",
+            "System"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2975,7 +3238,10 @@
           }
         },
         "scanLevelType": {
-          "enum": ["Full", "Incremental"],
+          "enum": [
+            "Full",
+            "Incremental"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -3038,7 +3304,9 @@
       }
     },
     "Scan": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3109,7 +3377,9 @@
       "discriminator": "kind"
     },
     "DataSource": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3181,7 +3451,10 @@
       }
     },
     "FilterProperties": {
-      "required": ["excludeUriPrefixes", "includeUriPrefixes"],
+      "required": [
+        "excludeUriPrefixes",
+        "includeUriPrefixes"
+      ],
       "type": "object",
       "properties": {
         "excludeUriPrefixes": {
@@ -3232,7 +3505,9 @@
       }
     },
     "IntegrationRuntime": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3241,7 +3516,10 @@
       ],
       "properties": {
         "kind": {
-          "enum": ["SelfHosted", "Managed"],
+          "enum": [
+            "SelfHosted",
+            "Managed"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IntegrationRuntimeType",
@@ -3252,7 +3530,9 @@
       "discriminator": "kind"
     },
     "IntegrationRuntimeStatus": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3261,7 +3541,10 @@
       ],
       "properties": {
         "kind": {
-          "enum": ["SelfHosted", "Managed"],
+          "enum": [
+            "SelfHosted",
+            "Managed"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IntegrationRuntimeType",
@@ -3305,6 +3588,16 @@
         "count": {
           "format": "int64",
           "type": "integer"
+        }
+      }
+    },
+    "OkResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -3492,7 +3785,10 @@
       ],
       "properties": {
         "scanRulesetType": {
-          "enum": ["Custom", "System"],
+          "enum": [
+            "Custom",
+            "System"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -3500,7 +3796,10 @@
           }
         },
         "status": {
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -3516,7 +3815,9 @@
       }
     },
     "ScanRuleset": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3581,7 +3882,9 @@
       }
     },
     "SystemScanRuleset": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3737,7 +4040,12 @@
       "type": "object",
       "properties": {
         "frequency": {
-          "enum": ["Week", "Month", "Day", "Hour"],
+          "enum": [
+            "Week",
+            "Month",
+            "Day",
+            "Hour"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerFrequency",
@@ -3797,7 +4105,10 @@
           "readOnly": true
         },
         "scanLevel": {
-          "enum": ["Full", "Incremental"],
+          "enum": [
+            "Full",
+            "Incremental"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -3858,7 +4169,10 @@
           "type": "string"
         },
         "ruleStatus": {
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
@@ -3896,11 +4210,15 @@
       "x-ms-discriminator-value": "System"
     },
     "ClassificationRulePattern": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
-          "enum": ["Regex"],
+          "enum": [
+            "Regex"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRulePatternType",
@@ -3918,7 +4236,10 @@
           "type": "number"
         },
         "classificationAction": {
-          "enum": ["Keep", "Delete"],
+          "enum": [
+            "Keep",
+            "Delete"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -3950,7 +4271,10 @@
           "type": "string"
         },
         "ruleStatus": {
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
@@ -4078,51 +4402,6 @@
         }
       },
       "x-ms-discriminator-value": "AccountKey"
-    },
-    "KeyVaultSecretAccessTokenCredentialTypeProperties": {
-      "type": "object",
-      "properties": {
-        "accessToken": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ]
-        }
-      }
-    },
-    "AccessTokenCredentialProperties": {
-      "type": "object",
-      "properties": {
-        "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretAccessTokenCredentialTypeProperties"
-            }
-          ]
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "AccessTokenAuthAzureKeyVaultCredential": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credential"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AccessTokenCredentialProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "AccessToken"
     },
     "KeyVaultSecretUserPassCredentialTypeProperties": {
       "type": "object",
@@ -4466,7 +4745,11 @@
           ]
         },
         "dataSourceCollectionMovingState": {
-          "enum": ["Active", "Moving", "Failed"],
+          "enum": [
+            "Active",
+            "Moving",
+            "Failed"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "DataSourceCollectionState",
@@ -5609,7 +5892,10 @@
           "readOnly": true
         },
         "autoUpdate": {
-          "enum": ["On", "Off"],
+          "enum": [
+            "On",
+            "Off"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -6624,7 +6910,10 @@
           "type": "string"
         },
         "scanRulesetType": {
-          "enum": ["Custom", "System"],
+          "enum": [
+            "Custom",
+            "System"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -6666,7 +6955,10 @@
           "type": "string"
         },
         "scanRulesetType": {
-          "enum": ["Custom", "System"],
+          "enum": [
+            "Custom",
+            "System"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
