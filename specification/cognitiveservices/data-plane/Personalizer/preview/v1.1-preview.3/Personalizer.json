@@ -1042,10 +1042,6 @@
     },
     "PersonalizerError": {
       "description": "The error object.",
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1094,6 +1090,7 @@
             "OperationNotAllowed"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "PersonalizerErrorCode",
             "modelAsString": true,
@@ -1267,18 +1264,21 @@
         },
         "message": {
           "description": "A message explaining the error reported by the service.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "target": {
           "description": "Error source element.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "details": {
           "description": "An array of details about specific errors that led to this reported error.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PersonalizerError"
-          }
+          },
+          "readOnly": true
         },
         "innerError": {
           "$ref": "#/definitions/InternalError"
