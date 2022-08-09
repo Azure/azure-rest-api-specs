@@ -115,6 +115,10 @@
           "format": "int32",
           "description": "Gets or sets SIP signaling port of the trunk.",
           "type": "integer"
+        },
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
         }
       }
     },
@@ -126,6 +130,10 @@
           "format": "int32",
           "description": "Gets or sets SIP signaling port of the trunk.",
           "type": "integer"
+        },
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
         }
       }
     },
@@ -162,30 +170,17 @@
         }
       }
     },
-    "DomainType": {
-      "type": "string",
-      "description": "Type of domain.\r\nCurrently only 'custom' type is supported.",
-      "enum": [
-        "custom"
-      ],
-      "x-ms-enum": {
-        "name": "DomainType",
-        "modelAsString": true,
-        "values":[
-          {
-            "value": "custom",
-            "description": "Custom domain is every domain that is configured by user (domain.com)."
-          }
-        ]
-     }
+    "Enabled": {
+      "type": "boolean",
+      "description": "Flag if domain is enabled or not.\r\nIf enabled it's used in configuration, if not enabled it's not used."
     },
     "Domain": {
       "description": "Represents Domain object as response of validation api.\r\nMap key is domain.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "Domain type",
-          "$ref": "#/definitions/DomainType"
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
         }
       }
     },
@@ -223,9 +218,9 @@
       "description": "Represents Domain that will be validated and used.\r\nMap key is domain.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "Domain Type",
-          "$ref": "#/definitions/DomainType"
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
         }
       }
     },

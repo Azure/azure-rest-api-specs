@@ -9,15 +9,16 @@
     "body": {
       "domains": {
         "xyz.biz": {
-          "type": "Custom"
+          "enabled": true
         },
         "abc.biz": {
-          "type": "Custom"
+          "enabled": true
         }
       },
       "trunks": {
         "vendor.xyz.biz": {
-          "sipSignalingPort": 5061
+          "sipSignalingPort": 5061,
+          "enabled": true
         }
       },
       "routes": [
@@ -39,15 +40,16 @@
       "body": {
         "domains": {
           "xyz.biz": {
-            "type": "Custom"
+            "enabled": true
           },
           "abc.biz": {
-            "type": "Custom"
+            "enabled": true
           }
         },
         "trunks": {
           "vendor.xyz.biz": {
-            "sipSignalingPort": 5061
+            "sipSignalingPort": 5061,
+            "enabled": true
           }
         },
         "routes": [
@@ -60,37 +62,6 @@
             ]
           }
         ]
-      }
-    },
-    "415": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "UnsupportedMediaType",
-          "message": "Unsupported Media Type."
-        }
-      }
-    },
-    "422": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "UnprocessableEntity",
-          "message": "One or more request inputs are not valid.",
-          "innererror": {
-            "code": "InvalidRegex",
-            "message": "Unsupported regex format provided."
-          }
-        }
-      }
-    },
-    "500": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "InternalError",
-          "message": "The server encountered an internal error."
-        }
       }
     }
   }
