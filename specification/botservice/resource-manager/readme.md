@@ -26,15 +26,24 @@ These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-05
+tag: package-preview-2021-07
 ```
 
 
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.BotService/preview/2021-07-09-preview/botservice.json
+  - Microsoft.BotService/preview/2021-07-09-preview/privatelinks.json
+```
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-05'
+``` yaml $(tag) == 'package-preview-2021-05'
 input-file:
   - Microsoft.BotService/preview/2021-05-01-preview/botservice.json
 directive:
@@ -48,6 +57,7 @@ directive:
     from: botservice.json
     reason: app settings for ValidateAuthority needs to be boolean
 ```
+
 ### Tag: package-2021-03-01
 
 These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
