@@ -4,13 +4,16 @@ scope: Subscription
 variables:
   resourceProviderNamespace:
     type: string
-  targetApiVersion:
-    type: string
   resourceType:
     type: string
+  targetRegion:
+    type: string
+  targetApiVersion:
+    type: string
 scenarios:
-  - steps:
-      - step: Providers_GetAtTenantScope
+  - scenario: checkServiceDeployment
+    steps:
+      - step: checkProviderAtTenantScope
         operationId: Providers_GetAtTenantScope
         responses:
           200:
@@ -18,11 +21,11 @@ scenarios:
               expression: >
                 to.satisfy(function (val) {
                   return val.some((t) => t.resourceType === "$(resourceType)"
-                    && t.locations.includes("West Central US")
+                    && t.locations.includes("$(targetRegion)")
                     && t.apiVersions.includes("$(targetApiVersion)"))
                 },
                 "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
-      - step: Providers_Get
+      - step: checkProviderAtSubscriptionScope
         operationId: Providers_Get
         responses:
           200:
@@ -30,11 +33,9 @@ scenarios:
               expression: >
                 to.satisfy(function (val) {
                   return val.some((t) => t.resourceType === "$(resourceType)"
-                    && t.locations.includes("West Central US")
+                    && t.locations.includes("$(targetRegion)")
                     && t.apiVersions.includes("$(targetApiVersion)"))
                 },
                 "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
-      # - step: ProviderResourceTypes_List
-      #   operationId: ProviderResourceTypes_List
-      - step: Providers_Register
+      - step: registerProviderForSubscription
         operationId: Providers_Register
