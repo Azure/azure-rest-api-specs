@@ -1,0 +1,125 @@
+scope: ResourceGroup
+variables:
+  resourceName: resourcena
+  agentPoolName: agentpooln
+  configName: configname
+  privateEndpointConnectionName: privateend
+  azureClientId:
+    type: string
+  azureClientSecret:
+    type: string
+scenarios:
+  - steps:
+      - step: ManagedClusters_CreateOrUpdate
+        exampleFile: ..\examples\ManagedClustersCreate_Update.json
+        requestUpdate:
+          - remove: /parameters/identity
+          - remove: /parameters/properties/enablePodSecurityPolicy
+          - remove: /parameters/properties/autoScalerProfile/new-pod-scale-up-delay
+          - remove: /parameters/properties/linuxProfile
+          - replace: /parameters/properties/agentPoolProfiles/0/vmSize
+            value: Standard_DS4_v2
+          - replace: /parameters/properties/networkProfile/networkPlugin
+            value: none
+          - replace: /parameters/properties/servicePrincipalProfile/clientId
+            value: $(azureClientId)
+          - replace: /parameters/properties/servicePrincipalProfile/secret
+            value: $(azureClientSecret)
+          - replace: /parameters/properties/diskEncryptionSetID
+            value: $(diskEncryptionSetID) #### 难 受
+      - step: ManagedClusters_GetOSOptions
+        exampleFile: ..\examples\ContainerServiceGetOSOptions.json
+      - step: ManagedClusters_List
+        exampleFile: ..\examples\ManagedClustersList.json
+      - step: ManagedClusters_ListByResourceGroup
+        exampleFile: ..\examples\ManagedClustersListByResourceGroup.json
+      - step: ManagedClusters_ListOutboundNetworkDependenciesEndpoints
+        exampleFile: ..\examples\OutboundNetworkDependenciesEndpointsList.json
+      - step: ManagedClusters_Get
+        exampleFile: ..\examples\ManagedClustersGet.json
+      # - variables:
+      #     commandId:
+      #       type: string
+      #       prefix: commandid
+      - step: ManagedClusters_GetCommandResult
+        exampleFile: ..\examples\RunCommandResultSucceed.json
+      - step: ManagedClusters_GetUpgradeProfile
+        exampleFile: ..\examples\ManagedClustersGetUpgradeProfile.json
+      - step: ManagedClusters_UpdateTags
+        exampleFile: ..\examples\ManagedClustersUpdateTags.json
+      # - variables:
+      #     roleName:
+      #       type: string
+      #       prefix: rolename
+      - step: ManagedClusters_GetAccessProfile
+        exampleFile: ..\examples\ManagedClustersGetAccessProfile.json
+      - step: ManagedClusters_Stop
+        exampleFile: ..\examples\ManagedClustersStop.json
+      # - step: ManagedClusters_ListClusterUserCredentials
+      #   exampleFile: ..\examples\ManagedClustersListClusterCredentialResult.json
+      # - step: ManagedClusters_ListClusterAdminCredentials
+      #   exampleFile: ..\examples\ManagedClustersListClusterCredentialResult.json
+      # - step: ManagedClusters_ListClusterMonitoringUserCredentials
+      #   exampleFile: ..\examples\ManagedClustersListClusterCredentialResult.json
+      # - step: ManagedClusters_ListClusterAdminCredentials
+      #   operationId: ManagedClusters_ListClusterAdminCredentials
+      - step: ManagedClusters_RunCommand
+        exampleFile: ..\examples\RunCommandRequest.json
+      - step: ManagedClusters_Start
+        exampleFile: ..\examples\ManagedClustersStart.json
+      - step: ManagedClusters_RotateClusterCertificates
+        exampleFile: ..\examples\ManagedClustersRotateClusterCertificates.json
+      - step: ManagedClusters_ResetAADProfile
+        exampleFile: ..\examples\ManagedClustersResetAADProfile.json
+      - step: ManagedClusters_ResetServicePrincipalProfile
+        exampleFile: ..\examples\ManagedClustersResetServicePrincipalProfile.json
+      - step: AgentPools_CreateOrUpdate
+        exampleFile: ..\examples\AgentPoolsCreate_Update.json
+      - step: AgentPools_List
+        exampleFile: ..\examples\AgentPoolsList.json
+      - step: AgentPools_GetUpgradeProfile
+        exampleFile: ..\examples\AgentPoolsGetUpgradeProfile.json
+      - step: AgentPools_Get
+        exampleFile: ..\examples\AgentPoolsGet.json
+      - step: AgentPools_GetAvailableAgentPoolVersions
+        exampleFile: ..\examples\AgentPoolsGetAgentPoolAvailableVersions.json
+      - step: AgentPools_UpgradeNodeImageVersion
+        exampleFile: ..\examples\AgentPoolsUpgradeNodeImageVersion.json
+      - step: Snapshots_CreateOrUpdate
+        exampleFile: ..\examples\SnapshotsCreate.json
+      - step: Snapshots_List
+        exampleFile: ..\examples\SnapshotsList.json
+      - step: Snapshots_ListByResourceGroup
+        exampleFile: ..\examples\SnapshotsListByResourceGroup.json
+      - step: Snapshots_Get
+        exampleFile: ..\examples\SnapshotsGet.json
+      - step: Snapshots_UpdateTags
+        exampleFile: ..\examples\SnapshotsUpdateTags.json
+      - step: PrivateEndpointConnections_Update
+        exampleFile: ..\examples\PrivateEndpointConnectionsUpdate.json
+      - step: PrivateEndpointConnections_List
+        exampleFile: ..\examples\PrivateEndpointConnectionsList.json
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ..\examples\PrivateEndpointConnectionsGet.json
+      - step: MaintenanceConfigurations_CreateOrUpdate
+        exampleFile: ..\examples\MaintenanceConfigurationsCreate_Update.json
+      - step: MaintenanceConfigurations_ListByManagedCluster
+        exampleFile: ..\examples\MaintenanceConfigurationsList.json
+      - step: MaintenanceConfigurations_Get
+        exampleFile: ..\examples\MaintenanceConfigurationsGet.json
+      - step: Operations_List
+        exampleFile: ..\examples\Operation_List.json
+      - step: PrivateLinkResources_List
+        exampleFile: ..\examples\PrivateLinkResourcesList.json
+      - step: ResolvePrivateLinkServiceId_POST
+        exampleFile: ..\examples\ResolvePrivateLinkServiceId.json
+      - step: MaintenanceConfigurations_Delete
+        exampleFile: ..\examples\MaintenanceConfigurationsDelete.json
+      - step: PrivateEndpointConnections_Delete
+        exampleFile: ..\examples\PrivateEndpointConnectionsDelete.json
+      - step: Snapshots_Delete
+        exampleFile: ..\examples\SnapshotsDelete.json
+      - step: AgentPools_Delete
+        exampleFile: ..\examples\AgentPoolsDelete.json
+      - step: ManagedClusters_Delete
+        exampleFile: ..\examples\ManagedClustersDelete.json
