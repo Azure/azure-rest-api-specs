@@ -2001,6 +2001,11 @@
           "format": "int32",
           "description": "The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure."
         },
+        "probeThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive successful or failed probes in order to allow or deny traffic from being delivered to this endpoint. After failing the number of consecutive probes equal to this value, the endpoint will be taken out of rotation and require the same number of successful consecutive probes to be placed back in rotation."
+        },
         "requestPath": {
           "type": "string",
           "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
