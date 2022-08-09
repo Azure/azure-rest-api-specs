@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DeviceUpdateClient",
-    "description": "Device Update for IoT Hub is an Azure service that enables customers to publish update for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.",
+    "description": "Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.",
     "version": "2022-10-01"
   },
   "x-ms-parameterized-host": {
@@ -123,7 +123,7 @@
             "schema": {
               "$ref": "#/definitions/ImportUpdateInput"
             },
-            "description": "The update to be imported."
+            "description": "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details)."
           }
         ],
         "responses": {
@@ -1031,7 +1031,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "orderBy",
-            "description": "Orders the set of groups returned. You can order by groupId, device count, created date, subgroupsWithNewUpdatesAvailableCount, subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount."
+            "description": "Orders the set of groups returned. You can order by groupId, deviceCount, createdDate, subgroupsWithNewUpdatesAvailableCount, subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4316,7 +4316,7 @@
       "format": "url",
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "Account endpoint.",
+      "description": "The Device Update for IoT Hub account endpoint (hostname only, no protocol).",
       "x-ms-parameter-location": "client",
       "x-ms-parameter-grouping": {
         "name": "account-options"
@@ -4328,7 +4328,7 @@
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "Account instance identifier.",
+      "description": "The Device Update for IoT Hub account instance identifier.",
       "x-ms-parameter-location": "client",
       "x-ms-parameter-grouping": {
         "name": "account-options"
@@ -4422,18 +4422,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "TagNameParameter": {
-      "name": "tagName",
-      "in": "path",
-      "description": "Tag name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "GroupIdParameter": {
       "name": "groupId",
       "in": "path",
-      "description": "Group identity.",
+      "description": "Group identifier.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
