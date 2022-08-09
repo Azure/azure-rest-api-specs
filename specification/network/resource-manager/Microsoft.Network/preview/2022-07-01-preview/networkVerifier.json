@@ -99,7 +99,7 @@
           "404": {
             "description": "analysisIntent Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -171,14 +171,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "analysisIntent already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -363,7 +363,7 @@
           "404": {
             "description": "AnalysisRun Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -442,14 +442,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "AnalysisRun already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -627,7 +627,7 @@
           "404": {
             "description": "ConfigurationSnapshot Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -699,14 +699,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "ConfigurationSnapshot already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -905,7 +905,7 @@
           "404": {
             "description": "NetworkVerifier Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -1246,20 +1246,50 @@
         }
       }
     },
-    "NetworkVerifierError": {
+    "Error": {
+      "description": "Common error representation.",
       "type": "object",
       "properties": {
         "code": {
+          "description": "Error code.",
           "type": "string"
         },
         "message": {
+          "description": "Error message.",
           "type": "string"
         },
-        "httpStatusCode": {
-          "format": "int32",
-          "type": "integer"
+        "target": {
+          "description": "Error target.",
+          "type": "string"
         },
-        "activityId": {
+        "details": {
+          "description": "Error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "innerError": {
+          "description": "Inner error message.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Common error details representation.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
           "type": "string"
         }
       }
