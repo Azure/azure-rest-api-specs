@@ -364,7 +364,7 @@
       "description": "Settings for data ingestion",
       "type": "object",
       "properties": {
-        "dataCollectionRule": {
+        "dataCollectionRuleResourceId": {
           "description": "The Azure resource Id of the default data collection rule for this monitoring account.",
           "type": "string",
           "readOnly": true,
@@ -372,7 +372,7 @@
             "read"
           ]
         },
-        "dataCollectionEndpoint": {
+        "dataCollectionEndpointResourceId": {
           "description": "The Azure resource Id of the default data collection endpoint for this monitoring account.",
           "type": "string",
           "readOnly": true,
@@ -408,8 +408,18 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the monitoring account. Set to Succeeded if everything is healthy.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Failed"
+          ],
           "type": "string",
           "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read"
           ]
@@ -444,48 +454,6 @@
           ],
           "x-ms-client-flatten": true
         },
-        "location": {
-          "description": "The region where the resource lives",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "description": "Full resource ID of the monitoring account",
-          "type": "string",
-          "readOnly": true,
-          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAccount",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string",
-          "readOnly": true,
-          "example": "myAccount",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "type": {
-          "description": "The type of the resource",
-          "type": "string",
-          "readOnly": true,
-          "example": "Microsoft.Monitor/accounts",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "etag": {
           "description": "Resource entity tag (ETag)",
           "type": "string",
@@ -507,6 +475,11 @@
           ]
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "MonitoringAccountResourceListResult": {
