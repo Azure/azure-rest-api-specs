@@ -171,10 +171,12 @@ enum LedgerQueryState {
 model LedgerUser {
   assignedRole: LedgerUserRole;
 
-  ...UserIdReadOnly;
+  @visibility("read")
+  @doc("Identifier for the user. This must either be an AAD object id or a certificate fingerprint.")
+  userId?: string;
 }
 
-@doc("Represents an assignable role")
+@doc("Represents an assignable role.")
 enum LedgerUserRole {
   Administrator,
   Contributor,
@@ -273,12 +275,6 @@ model TransactionIdOptionalReadOnly {
   transactionId?: string;
 }
 
-model UserIdReadOnly {
-  @visibility("read")
-  @doc("Identifier for the user. This must either be an AAD object id or a certificate fingerprint.")
-  userId: string;
-}
-
 // Routes
 @route("/app/governance/constitution")
 @summary("Gets the constitution used for governance.")
@@ -288,7 +284,7 @@ op GetConstitution(...Foundations.ApiVersionParameter): Constitution | Foundatio
 
 // TODO: Pageable operations excluded from August MVP
 @route("/app/governance/members")
-@summary("Gets the consortium members.")
+@summary("Lists the consortium members.")
 @doc("Consortium members can manage the Confidential Ledger.")
 @get
 op ListConsortiumMembers(
