@@ -94,11 +94,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a package.": {
+            "$ref": "./examples/packages/GetPackageById.json"
+          }
+        },
+        "tags": [
+          "Package"
+        ],
+        "description": "Gets a package byt its identifier.",
+        "operationId": "Packages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}/installPackage": {
       "post": {
         "x-ms-examples": {
           "Install a package to the workspace.": {
-            "$ref": "./examples/templates/InstallPackage.json"
+            "$ref": "./examples/packages/InstallPackage.json"
           }
         },
         "tags": [
@@ -148,7 +196,7 @@
         "post": {
           "x-ms-examples": {
             "Uninstall a package from the workspace.": {
-              "$ref": "./examples/templates/UninstallPackage.json"
+              "$ref": "./examples/packages/UninstallPackage.json"
             }
           },
           "tags": [
@@ -342,8 +390,8 @@
           "description": "The URL to the icon file.",
           "type": "string"
         },
-        "mainTemplate": {
-          "description": "The url to the template of the package.",
+        "packageContent": {
+          "description": "The JSON string of the package.",
           "type": "string"
         }
       },
