@@ -40,6 +40,40 @@
         }
       }
     },
+    "/app/governance/members": {
+      "get": {
+        "operationId": "ListConsortiumMembers",
+        "summary": "Gets the consortium members.",
+        "description": "Consortium members can manage the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Consortium"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app/enclaveQuotes": {
       "get": {
         "operationId": "GetEnclaveQuotes",
@@ -74,7 +108,82 @@
         }
       }
     },
+    "/app/collections": {
+      "get": {
+        "operationId": "ListCollections",
+        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
+        "description": "Collection ids are user-created collections of ledger entries",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedCollections"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app/transactions": {
+      "get": {
+        "operationId": "ListLedgerEntries",
+        "summary": "Gets ledger entries from a collection corresponding to a range.",
+        "description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionIdFromParameter"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionIdToParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedLedgerEntries"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "operationId": "CreateLedgerEntry",
         "summary": "Writes a ledger entry.",
@@ -401,6 +510,27 @@
         "in": "query",
         "required": false,
         "description": "The collection id.",
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "TransactionIdFromParameter": {
+        "name": "fromTransactionId",
+        "in": "query",
+        "required": false,
+        "description": "Specify the first transaction ID in a range.",
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "TransactionIdToParameter": {
+        "name": "toTransactionId",
+        "in": "query",
+        "required": false,
+        "description": "Specify the last transaction ID in a range.",
+        "x-ms-parameter-location": "method",
         "schema": {
           "type": "string"
         }
@@ -410,6 +540,7 @@
         "in": "path",
         "required": true,
         "description": "Identifies a write transaction.",
+        "x-ms-parameter-location": "method",
         "schema": {
           "type": "string"
         }
@@ -419,6 +550,7 @@
         "in": "path",
         "required": true,
         "description": "The user id, either an AAD object ID or certificate fingerprint.",
+        "x-ms-parameter-location": "method",
         "x-ms-skip-url-encoding": true,
         "schema": {
           "type": "string"
@@ -461,6 +593,27 @@
           "error"
         ]
       },
+      "Consortium": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsortiumMember"
+            },
+            "x-cadl-name": "ConsortiumMember[]",
+            "description": "List of members in the consortium"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "URI from which to retrieve the next page of results."
+          }
+        },
+        "description": "List of members in the consortium.",
+        "required": [
+          "members"
+        ]
+      },
       "ConfidentialLedgerEnclaves": {
         "type": "object",
         "properties": {
@@ -480,6 +633,50 @@
         "required": [
           "currentNodeId",
           "enclaveQuotes"
+        ]
+      },
+      "PagedCollections": {
+        "type": "object",
+        "properties": {
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Collection"
+            },
+            "x-cadl-name": "Collection[]"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "URI from which to retrieve the next page of results."
+          }
+        },
+        "description": "Paginated collections returned in response to a query.",
+        "required": [
+          "collections"
+        ]
+      },
+      "PagedLedgerEntries": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/LedgerQueryState"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "URI from which to retrieve the next page of results."
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LedgerEntry"
+            },
+            "x-cadl-name": "LedgerEntry[]"
+          }
+        },
+        "description": "Paginated ledger entries returned in response to a query.",
+        "required": [
+          "state",
+          "entries"
         ]
       },
       "LedgerEntry": {
@@ -632,6 +829,24 @@
           "details"
         ]
       },
+      "ConsortiumMember": {
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "type": "string",
+            "description": "PEM-encoded certificate associated with the member."
+          },
+          "id": {
+            "type": "string",
+            "description": "Identifier assigned to the member."
+          }
+        },
+        "description": "Describes a member of the consortium.",
+        "required": [
+          "certificate",
+          "id"
+        ]
+      },
       "EnclaveQuote": {
         "type": "object",
         "properties": {
@@ -657,6 +872,19 @@
           "nodeId",
           "quoteVersion",
           "raw"
+        ]
+      },
+      "Collection": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "string",
+            "description": "Id of the collection"
+          }
+        },
+        "description": "Identifier for collections.",
+        "required": [
+          "collectionId"
         ]
       },
       "LedgerQueryState": {
