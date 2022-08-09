@@ -910,12 +910,12 @@
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
           "description": "Workload profile type for the workloads to run on."
         },
-        "minimum": {
+        "minimumCount": {
           "type": "integer",
           "format": "int32",
           "description": "The minimum capacity."
         },
-        "maximum": {
+        "maximumCount": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum capacity."
@@ -923,8 +923,8 @@
       },
       "required": [
         "workloadProfileType",
-        "minimum",
-        "maximum"
+        "minimumCount",
+        "maximumCount"
       ]
     },
     "EnvironmentSkuProperties": {
