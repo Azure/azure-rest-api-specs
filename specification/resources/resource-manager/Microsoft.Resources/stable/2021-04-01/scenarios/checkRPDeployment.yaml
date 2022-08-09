@@ -14,18 +14,6 @@ variables:
 scenarios:
   - scenario: checkServiceDeployment
     steps:
-      - step: checkProviderAtTenantScope
-        operationId: Providers_GetAtTenantScope
-        responses:
-          200:
-            - test: /body/resourceTypes
-              expression: >
-                to.satisfy(function (val) {
-                  return val.some((t) => t.resourceType === "$(resourceType)"
-                    && t.locations.includes("$(targetRegion)")
-                    && t.apiVersions.includes("$(targetApiVersion)"))
-                },
-                "ResourceType '$(resourceType)' should be deployed in '$(targetRegion)' on apiVersion '$(targetApiVersion)'.")
       - step: checkProviderAtSubscriptionScope
         operationId: Providers_Get
         responses:
