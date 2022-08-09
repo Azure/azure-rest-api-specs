@@ -230,10 +230,3 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.storage.v2015_06_15
 output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2015_06_15
 ```
-
-``` yaml $(python)
-directive:
-  - from: swagger-document
-    where: $.definitions.LeaseContainerRequest
-    transform: $['properties']['action']['x-ms-enum']['name'] = 'LeaseContainerRequestEnum'
-```
