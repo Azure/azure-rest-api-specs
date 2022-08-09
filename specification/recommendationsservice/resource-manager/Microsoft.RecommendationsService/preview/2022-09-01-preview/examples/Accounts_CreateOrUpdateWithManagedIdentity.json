@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "body": {
+      "location": "West US",
+      "tags": {
+        "Environment": "Prod"
+      },
+      "properties": {
+        "configuration": "Capacity",
+        "endpointAuthentications": [
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid",
+            "principalType": "User"
+          }
+        ]
+      },
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "92e65ecf-0fae-432e-8272-fedb6edb96c7",
+          "tenantId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
+          "userAssignedIdentities": {
+            "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity": {
+              "principalId": "02f32674-4184-485f-8e03-8d05fc6acd9a",
+              "clientId": "ea55d893-56a7-4266-b250-93273eeac60c"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "92e65ecf-0fae-432e-8272-fedb6edb96c7",
+          "tenantId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
+          "userAssignedIdentities": {
+            "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity": {
+              "principalId": "02f32674-4184-485f-8e03-8d05fc6acd9a",
+              "clientId": "ea55d893-56a7-4266-b250-93273eeac60c"
+            }
+          }
+        }
+      }
+    }
+  }
+}
