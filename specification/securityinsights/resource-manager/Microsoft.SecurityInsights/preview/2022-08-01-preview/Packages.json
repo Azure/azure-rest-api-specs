@@ -358,12 +358,12 @@
         },
         "firstPublishDate": {
           "description": "The first publish date of the package",
-          "format": "date-time",
+          "format": "date",
           "type": "string"
         },
         "lastPublishDate": {
           "description": "The last publish date of the package",
-          "format": "date-time",
+          "format": "date",
           "type": "string"
         },
         "categories": {
@@ -414,7 +414,11 @@
             "Solution",
             "Standalone"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "packageKind",
+            "modelAsString": true
+          }
         },
         "version": {
           "description": "version of the package to be installed.",
@@ -498,7 +502,8 @@
           "description": "Dependencies of the package.",
           "items": {
             "$ref": "#/definitions/Criteria"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "operator": {
           "description": "operator of the criteria.",
