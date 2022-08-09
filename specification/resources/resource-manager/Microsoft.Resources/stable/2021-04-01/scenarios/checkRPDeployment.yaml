@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: Subscription
+variables:
+  resourceProviderNamespace:
+    type: string
+  targetApiVersion:
+    type: string
+  resourceType:
+    type: string
+scenarios:
+  - steps:
+    - step: Providers_GetAtTenantScope
+      operationId: Providers_GetAtTenantScope
+      responses:
+        200:
+          - test: /body/resourceTypes
+            expression: to.satisfy(function (val) { return val.some((t) => t.resourceType === "$(resourceType)" && t.locations.includes("West Central US") && t.apiVersions.includes("$(targetApiVersion)") ) }, "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
+    - step: Providers_Get
+      operationId: Providers_Get
+      responses:
+        200:
+          - test: /body/resourceTypes
+            expression: to.satisfy(function (val) { return val.some((t) => t.resourceType === "$(resourceType)" && t.locations.includes("West Central US") && t.apiVersions.includes("$(targetApiVersion)") ) }, "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
+    # - step: ProviderResourceTypes_List
+    #   operationId: ProviderResourceTypes_List
+    - step: Providers_Register
+      operationId: Providers_Register
