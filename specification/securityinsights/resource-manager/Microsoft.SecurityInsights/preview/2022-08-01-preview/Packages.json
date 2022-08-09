@@ -191,52 +191,53 @@
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}/uninstallPackage": {
-        "post": {
-          "x-ms-examples": {
-            "Uninstall a package from the workspace.": {
-              "$ref": "./examples/packages/UninstallPackage.json"
-            }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}/uninstallPackage": {
+      "post": {
+        "x-ms-examples": {
+          "Uninstall a package from the workspace.": {
+            "$ref": "./examples/packages/UninstallPackage.json"
+          }
+        },
+        "tags": [
+          "Packages"
+        ],
+        "description": "Uninstall a package from the workspace.",
+        "operationId": "Package_Uninstall",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
-          "tags": [
-            "Packages"
-          ],
-          "description": "Uninstall a package from the workspace.",
-          "operationId": "Package_Uninstall",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-            },
-            {
-              "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-            },
-            {
-              "$ref": "#/parameters/PackageIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-              }
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
       }
+    }
   },
   "definitions": {
     "PackageList": {
@@ -319,7 +320,7 @@
           "description": "The display name of the package",
           "type": "string"
         },
-        "discription": {
+        "description": {
           "description": "The description of the package",
           "type": "string"
         },
