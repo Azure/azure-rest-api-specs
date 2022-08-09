@@ -14,7 +14,12 @@
             "sharedKey": "string"
           }
         },
-        "zoneRedundant": true
+        "zoneRedundant": true,
+        "customDomainConfiguration": {
+          "dnsSuffix": "www.my-name.com",
+          "certificateValue": "PFX-or-PEM-blob",
+          "certificatePassword": "private key password"
+        }
       }
     }
   },
@@ -36,6 +41,13 @@
             }
           },
           "zoneRedundant": true,
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
           "eventStreamEndpoint": "testEndpoint"
         }
       }
@@ -57,6 +69,13 @@
             }
           },
           "zoneRedundant": true,
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
           "eventStreamEndpoint": "testEndpoint"
         }
       }
