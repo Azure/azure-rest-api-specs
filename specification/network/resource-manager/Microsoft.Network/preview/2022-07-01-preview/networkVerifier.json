@@ -99,7 +99,7 @@
           "404": {
             "description": "analysisIntent Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -171,14 +171,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "analysisIntent already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -363,7 +363,7 @@
           "404": {
             "description": "AnalysisRun Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -442,14 +442,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "AnalysisRun already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -627,7 +627,7 @@
           "404": {
             "description": "ConfigurationSnapshot Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -699,14 +699,14 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
           "409": {
             "description": "ConfigurationSnapshot already exists and cannot be updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -905,7 +905,7 @@
           "404": {
             "description": "NetworkVerifier Not Found",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifierError"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -1101,7 +1101,7 @@
           "$ref": "#/definitions/IPTrafficProperties"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         },
         "sourceResourceId": {
           "type": "string"
@@ -1167,7 +1167,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1234,7 +1234,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1246,7 +1246,7 @@
         }
       }
     },
-    "NetworkVerifierError": {
+    "Error": {
       "type": "object",
       "properties": {
         "code": {
@@ -1377,11 +1377,11 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
-    "NetworkVerifierProvisioningState": {
+    "ProvisioningState": {
       "enum": [
         "Accepted",
         "Creating",
@@ -1396,7 +1396,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "NetworkVerifierProvisioningState"
+        "name": "ProvisioningState"
       }
     },
     "ResourceProviderDefaultErrorResponse": {
