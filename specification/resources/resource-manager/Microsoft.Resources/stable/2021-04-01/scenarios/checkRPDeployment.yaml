@@ -8,6 +8,7 @@ variables:
     type: string
   targetRegion:
     type: string
+    value: West Central US
   targetApiVersion:
     type: string
 scenarios:
@@ -24,7 +25,7 @@ scenarios:
                     && t.locations.includes("$(targetRegion)")
                     && t.apiVersions.includes("$(targetApiVersion)"))
                 },
-                "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
+                "ResourceType '$(resourceType)' should be deployed in '$(targetRegion)' on apiVersion '$(targetApiVersion)'.")
       - step: checkProviderAtSubscriptionScope
         operationId: Providers_Get
         responses:
@@ -36,6 +37,6 @@ scenarios:
                     && t.locations.includes("$(targetRegion)")
                     && t.apiVersions.includes("$(targetApiVersion)"))
                 },
-                "ResourceType '$(resourceType)' not supported in 'West Central US' on apiVersion '$(targetApiVersion)'. Please check deployment.")
+                "ResourceType '$(resourceType)' should be deployed in '$(targetRegion)' on apiVersion '$(targetApiVersion)'.")
       - step: registerProviderForSubscription
         operationId: Providers_Register
