@@ -74,68 +74,6 @@
           "$ref": "#/definitions/ContainerResources",
           "description": "Container resource requirements."
         },
-        "probes": {
-          "description": "List of probes for the container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContainerAppProbe"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
-        },
-        "volumeMounts": {
-          "description": "Container volume mounts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VolumeMount"
-          },
-          "x-ms-identifiers": [
-            "volumeName"
-          ]
-        }
-      }
-    },
-    "InitContainer": {
-      "description": "Init Container has all fields of normal container besides probes.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Container image tag.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Custom container name.",
-          "type": "string"
-        },
-        "command": {
-          "description": "Container start command.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "args": {
-          "description": "Container start command arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "env": {
-          "description": "Container environment variables.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVar"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/ContainerResources",
-          "description": "Container resource requirements."
-        },
         "volumeMounts": {
           "description": "Container volume mounts.",
           "type": "array",
@@ -524,7 +462,7 @@
           "description": "List of specialized containers that run before app containers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InitContainer"
+            "$ref": "#/definitions/Container"
           },
           "x-ms-identifiers": [
             "name"
@@ -534,7 +472,22 @@
           "description": "List of container definitions for the Container App.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Container"
+            "allOf": {
+              "$ref": "#/definitions/Container",
+              "type": "object",
+              "properties": {
+                "probes": {
+                  "description": "List of probes for the container.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ContainerAppProbe"
+                  },
+                  "x-ms-identifiers": [
+                    "type"
+                  ]
+                }
+              }
+            }
           },
           "x-ms-identifiers": [
             "name"
