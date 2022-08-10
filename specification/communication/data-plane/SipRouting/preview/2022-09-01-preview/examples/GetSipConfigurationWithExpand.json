@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-09-01-preview",
+    "api-version": "2022-09-01-preview",
     "endpoint": "https://resourcename.communication.azure.com/"
   },
   "responses": {
@@ -11,18 +11,30 @@
           "vendor.xyz.biz": {
             "sipSignalingPort": 5061,
             "health": {
-              "tls": "unknown",
-              "ping": "unknown",
-              "status": "unknown"
+              "tls":{
+                "status": "unknown"
+              },
+              "ping": {
+                "status": "unknown"
+              },
+              "overall": {
+                "status": "unknown"
+              },
             }
           },
           "vendor.abc.biz": {
             "sipSignalingPort": 5061,
             "health": {
-              "tls": "certExpiring",
-              "ping": "ok",
-              "status": "inactive",
-              "inactiveStatusReason": "noRecentCalls"
+              "tls":{
+                "status": "certExpiring"
+              },
+              "ping": {
+                "status": "ok"
+              },
+              "overall": {
+                "status": "inactive",
+                "reason": "noRecentCalls"
+              },
             }
           }
         },
