@@ -56,6 +56,8 @@ directive:
     where:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
+      - $.paths["/{scope}/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata"].get.produces[0]
+
 
   - suppress: OperationIdNounConflictingModelNames
     reason: Metadata is already in plural form.
