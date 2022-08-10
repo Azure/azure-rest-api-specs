@@ -582,7 +582,31 @@
         },
         "httpReadBufferSize": {
           "type": "integer",
+          "description": "Dapr max size of http header read buffer in KB to handle when sending multi-KB headers. Default is 65KB.",
           "format": "int32"
+        },
+        "httpMaxRequestSize": {
+          "type": "integer",
+          "description": "Increasing max size of request body http and grpc servers parameter in MB to handle uploading of big files. Default is 4 MB.",
+          "format": "int32"
+        },
+        "logLevel": {
+          "description": "Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.",
+          "enum": [
+            "info",
+            "debug",
+            "warn",
+            "error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "logLevel",
+            "modelAsString": true
+          }
+        },
+        "enableApiLogging": {
+          "description": "Enables API logging for the Dapr sidecar",
+          "type": "boolean"
         }
       }
     },
