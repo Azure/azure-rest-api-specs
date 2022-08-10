@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "resourceName": "testHub",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2022-04-30-preview",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-04-30-preview"
+      },
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/IotHubs/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Disconnected",
+            "description": "Deleted",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-04-30-preview"
+      },
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/IotHubs/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Disconnected",
+            "description": "Deleted",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "204": {}
+  }
+}
