@@ -141,9 +141,8 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-10-01'
 input-file:
-- Microsoft.OperationalInsights/stable/2022-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Workspaces.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
 - Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
@@ -161,6 +160,9 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
 ```
 
 ### Tag: package-2020-08
