@@ -107,7 +107,8 @@
     "Trunk": {
       "description": "Represents a SIP trunk for routing calls. See RFC 4904.",
       "required": [
-        "sipSignalingPort"
+        "sipSignalingPort",
+        "enabled"
       ],
       "type": "object",
       "properties": {
@@ -176,6 +177,9 @@
     },
     "Domain": {
       "description": "Represents Domain object as response of validation api.\r\nMap key is domain.",
+      "required": [
+        "enabled"
+      ],
       "type": "object",
       "properties": {
         "enabled": {
