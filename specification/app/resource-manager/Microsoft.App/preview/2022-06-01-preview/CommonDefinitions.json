@@ -87,21 +87,27 @@
       }
     },
     "Container": {
-      "description": "Container App container definition.",
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/InitContainer",
-        "probes": {
-          "description": "List of probes for the container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContainerAppProbe"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/InitContainer"
+        },
+        {
+          "description": "Container App container definition.",
+          "type": "object",
+          "properties": {
+            "probes": {
+              "description": "List of probes for the container.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContainerAppProbe"
+              },
+              "x-ms-identifiers": [
+                "type"
+              ]
+            }
+          }
         }
-      }
+      ]
     },
     "ContainerResources": {
       "description": "Container App container resource requirements.",
