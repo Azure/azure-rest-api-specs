@@ -115,173 +115,171 @@
       }
     },
     "TrunkExpanded": {
+      "type": "object",
       "description": "Represents a SIP trunk for routing calls. See RFC 4904. Can be expanded with additional data.",
       "allOf": [
         {
           "$ref": "#/definitions/Trunk"
-        },
-        {
+        }
+      ],
+      "properties": {
+        "health": {
+          "description": "Represents health state of a SIP trunk for routing calls.",
           "type": "object",
+          "required": [
+            "tls",
+            "ping",
+            "overall"
+          ],
           "properties": {
-            "health": {
-              "description": "Represents health state of a SIP trunk for routing calls.",
+            "tls": {
               "type": "object",
+              "description": "The status of the TLS connections between Direct Routing and the SBC.",
               "required": [
-                "tls",
-                "ping",
-                "overall"
+                "status"
               ],
               "properties": {
-                "tls": {
-                  "type": "object",
+                "status": {
+                  "type": "string",
                   "description": "The status of the TLS connections between Direct Routing and the SBC.",
-                  "required": [
-                    "status"
+                  "enum": [
+                    "unknown",
+                    "ok",
+                    "certExpiring",
+                    "certExpired"
                   ],
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "description": "The status of the TLS connections between Direct Routing and the SBC.",
-                      "enum": [
-                        "unknown",
-                        "ok",
-                        "certExpiring",
-                        "certExpired"
-                      ],
-                      "x-ms-enum": {
-                        "modelAsString": true,
-                        "name": "tlsStatus",
-                        "values": [
-                          {
-                            "value": "unknown",
-                            "description": "Indicates an unknown status."
-                          },
-                          {
-                            "value": "ok",
-                            "description": "Indicates the status is okay."
-                          },
-                          {
-                            "value": "certExpiring",
-                            "description": "Indicates the SBC's certificate is expiring."
-                          },
-                          {
-                            "value": "certExpired",
-                            "description": "Indicates the SBC's certificate is expired."
-                          }
-                        ]
+                  "x-ms-enum": {
+                    "modelAsString": true,
+                    "name": "tlsStatus",
+                    "values": [
+                      {
+                        "value": "unknown",
+                        "description": "Indicates an unknown status."
+                      },
+                      {
+                        "value": "ok",
+                        "description": "Indicates the status is okay."
+                      },
+                      {
+                        "value": "certExpiring",
+                        "description": "Indicates the SBC certificate is expiring."
+                      },
+                      {
+                        "value": "certExpired",
+                        "description": "Indicates the SBC certificate is expired."
                       }
-                    }
+                    ]
                   }
-                },
-                "ping": {
-                  "type": "object",
+                }
+              }
+            },
+            "ping": {
+              "type": "object",
+              "description": "The status of options message sent by SBC.",
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string",
                   "description": "The status of options message sent by SBC.",
-                  "required": [
-                    "status"
+                  "enum": [
+                    "unknown",
+                    "ok",
+                    "expired",
+                    "error"
                   ],
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "description": "The status of options message sent by SBC.",
-                      "enum": [
-                        "unknown",
-                        "ok",
-                        "expired",
-                        "error"
-                      ],
-                      "x-ms-enum": {
-                        "name": "pingStatus",
-                        "modelAsString": true,
-                        "values": [
-                          {
-                            "value": "unknown",
-                            "description": "Indicates an unknown status."
-                          },
-                          {
-                            "value": "ok",
-                            "description": "Indicates the status is okay."
-                          },
-                          {
-                            "value": "expired",
-                            "description": "Indicates the status is expired."
-                          },
-                          {
-                            "value": "error",
-                            "description": "Indicates the status is at an error level."
-                          }
-                        ]
+                  "x-ms-enum": {
+                    "name": "pingStatus",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "value": "unknown",
+                        "description": "Indicates an unknown status."
+                      },
+                      {
+                        "value": "ok",
+                        "description": "Indicates the status is okay."
+                      },
+                      {
+                        "value": "expired",
+                        "description": "Indicates the status is expired."
+                      },
+                      {
+                        "value": "error",
+                        "description": "Indicates the status is at an error level."
                       }
-                    }
+                    ]
+                  }
+                }
+              }
+            },
+            "overall": {
+              "type": "object",
+              "description": "The overall health status of SBC.",
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "description": "The overall health status of SBC.",
+                  "enum": [
+                    "unknown",
+                    "active",
+                    "inactive"
+                  ],
+                  "x-ms-enum": {
+                    "name": "overallHealthStatus",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "value": "unknown",
+                        "description": "Indicates an unknown health status."
+                      },
+                      {
+                        "value": "active",
+                        "description": "Indicates the SBC is active."
+                      },
+                      {
+                        "value": "inactive",
+                        "description": "Indicates the SBC is inactive."
+                      }
+                    ]
                   }
                 },
-                "overall": {
-                  "type": "object",
-                  "description": "The overall health status of SBC.",
-                  "required": [
-                    "status"
+                "reason": {
+                  "type": "string",
+                  "description": "The reason overall status of SBC is inactive.",
+                  "enum": [
+                    "noRecentCalls",
+                    "noRecentPings",
+                    "noRecentCallsAndPings"
                   ],
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "description": "The overall health status of SBC.",
-                      "enum": [
-                        "unknown",
-                        "active",
-                        "inactive"
-                      ],
-                      "x-ms-enum": {
-                        "name": "overallHealthStatus",
-                        "modelAsString": true,
-                        "values": [
-                          {
-                            "value": "unknown",
-                            "description": "Indicates an unknown health status."
-                          },
-                          {
-                            "value": "active",
-                            "description": "Indicates the SBC is active."
-                          },
-                          {
-                            "value": "inactive",
-                            "description": "Indicates the SBC is inactive."
-                          }
-                        ]
+                  "x-ms-enum": {
+                    "name": "inactiveStatusReason",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "value": "noRecentCalls",
+                        "description": "Indicates no recent calls."
+                      },
+                      {
+                        "value": "noRecentPings",
+                        "description": "Indicates ping status is expired."
+                      },
+                      {
+                        "value": "noRecentCallsAndPings",
+                        "description": "Indicates no recent calls and ping status is expired."
                       }
-                    },
-                    "reason": {
-                      "type": "string",
-                      "description": "The reason overall status of SBC is inactive.",
-                      "enum": [
-                        "noRecentCalls",
-                        "noRecentPings",
-                        "noRecentCallsAndPings"
-                      ],
-                      "x-ms-enum": {
-                        "name": "inactiveStatusReason",
-                        "modelAsString": true,
-                        "values": [
-                          {
-                            "value": "noRecentCalls",
-                            "description": "Indicates no recent calls."
-                          },
-                          {
-                            "value": "noRecentPings",
-                            "description": "Indicates ping status is expired."
-                          },
-                          {
-                            "value": "noRecentCallsAndPings",
-                            "description": "Indicates no recent calls and ping status is expired."
-                          }
-                        ]
-                      }
-                    }
+                    ]
                   }
                 }
               }
             }
           }
         }
-      ]
+      }
     },
     "TrunkPatch": {
       "description": "Represents a SIP trunk patch.",
