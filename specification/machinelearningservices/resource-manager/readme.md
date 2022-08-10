@@ -29,7 +29,6 @@ openapi-type: arm
 tag: package-preview-2022-10
 ```
 
-
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
@@ -39,7 +38,9 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2022-10-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-10-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2022-10-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/registries.json
 ```
+
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
