@@ -472,22 +472,26 @@
           "description": "List of container definitions for the Container App.",
           "type": "array",
           "items": {
-            "allOf": {
-              "$ref": "#/definitions/Container",
-              "type": "object",
-              "properties": {
-                "probes": {
-                  "description": "List of probes for the container.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/ContainerAppProbe"
-                  },
-                  "x-ms-identifiers": [
-                    "type"
-                  ]
+            "allOf": [
+              {
+                "$ref": "#/definitions/Container"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "probes": {
+                    "description": "List of probes for the container.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/ContainerAppProbe"
+                    },
+                    "x-ms-identifiers": [
+                      "type"
+                    ]
+                  }
                 }
               }
-            }
+            ]
           },
           "x-ms-identifiers": [
             "name"
