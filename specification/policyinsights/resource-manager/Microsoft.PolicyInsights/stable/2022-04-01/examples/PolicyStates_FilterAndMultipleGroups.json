@@ -2,7 +2,7 @@
   "parameters": {
     "policyStatesResource": "latest",
     "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-    "api-version": "2019-10-01",
+    "api-version": "2022-04-01",
     "$filter": "IsCompliant eq false",
     "$apply": "groupby((PolicyAssignmentId, PolicySetDefinitionId, PolicyDefinitionId, PolicyDefinitionReferenceId, ResourceId))/groupby((PolicyAssignmentId, PolicySetDefinitionId, PolicyDefinitionId, PolicyDefinitionReferenceId), aggregate($count as NumNonCompliantResources))",
     "$orderby": "NumNonCompliantResources desc",
