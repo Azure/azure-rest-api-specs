@@ -8846,6 +8846,7 @@
     },
     "StaticRoutesConfig": {
       "description": "Configuration for static routes on this HubVnetConnectionConfiguration for static routes on this HubVnetConnection.",
+      "type": "object",
       "properties": {
         "propagateStaticRoutes": {
           "description": "Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.",
@@ -8853,7 +8854,7 @@
           "readOnly": true
         },
         "vnetLocalRouteOverrideCriteria": {
-          "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic whith destination in spoke.",
+          "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke.",
           "$ref": "#/definitions/VnetLocalRouteOverrideCriteria"
         }
       }
@@ -8936,6 +8937,7 @@
     },
     "EffectiveRouteMapRoute": {
       "description": "The effective RouteMap route configured on the connection resource.",
+      "type": "object",
       "properties": {
         "prefix": {
           "description": "The address prefix of the route.",
@@ -8956,6 +8958,7 @@
     },
     "GetInboundRoutesParameters": {
       "description": "The parameters specifying the connection resource whose inbound routes are being requested.",
+      "type": "object",
       "properties": {
         "resourceUri": {
           "type": "string",
@@ -8969,6 +8972,7 @@
     },
     "GetOutboundRoutesParameters": {
       "description": "The parameters specifying the connection resource whose outbound routes are being requested.",
+      "type": "object",
       "properties": {
         "resourceUri": {
           "type": "string",
@@ -9169,7 +9173,13 @@
           "description": "List of RouteMap rules to be applied.",
           "items": {
             "$ref": "#/definitions/Rule"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the RouteMap resource."
         }
       },
       "description": "Properties of RouteMap resource",
@@ -9186,14 +9196,16 @@
           "description": "List of matching criterion which will be applied to traffic.",
           "items": {
             "$ref": "#/definitions/Criterion"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "actions": {
           "type": "array",
           "description": "List of actions which will be applied on a match.",
           "items": {
             "$ref": "#/definitions/Action"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextStepIfMatched": {
           "$ref": "#/definitions/NextStep",
@@ -9245,7 +9257,8 @@
           "description": "List of parameters relevant to the action.For instance if type is drop then parameters has list of prefixes to be dropped.If type is add, parameters would have list of ASN numbers to be added",
           "items": {
             "$ref": "#/definitions/Parameter"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Action to be taken on a route matching a RouteMap criterion.",
