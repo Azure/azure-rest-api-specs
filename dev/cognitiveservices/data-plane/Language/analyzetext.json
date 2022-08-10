@@ -1987,16 +1987,20 @@
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
       "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "default": 3
+        },
         "sortBy": {
           "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        },
-        {
-          "$ref": "common.json#/definitions/SummarizationTaskParametersBase"
         }
       ]
     },

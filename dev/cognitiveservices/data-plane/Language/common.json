@@ -723,23 +723,17 @@
         }
       }
     },
-    "SummarizationTaskParametersBase": {
-      "type": "object",
-      "description": "Supported parameters for both Abstractive Summarization and Extractive Summarization task.",
-      "properties": {
-        "sentenceCount": {
-          "type": "integer",
-          "default": 3
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
-        }
-      }
-    },
     "AbstractiveSummarizationTaskParametersBase": {
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
       "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        },
         "phraseControls": {
           "type": "array",
           "description": "Control the phrases to be used in the summary.",
@@ -747,12 +741,7 @@
             "$ref": "#/definitions/PhraseControl"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummarizationTaskParametersBase"
-        }
-      ]
+      }
     },
     "PhraseControl": {
       "type": "object",
@@ -785,15 +774,15 @@
         "values": [
           {
             "value": "encourage",
-            "description": "The model is more favor to select the target phrase in the summary if there are multiple alternate."
+            "description": "The model will have higher probability to select the target phrase in the summary if there are multiple alternates."
           },
           {
             "value": "discourage",
-            "description": "The model is less favor to select the target phrase in the summary if there are multiple alternate."
+            "description": "The model will have lower probability to select the target phrase in the summary if there are multiple alternates."
           },
           {
             "value": "disallow",
-            "description": "The model will avoid to select the target phrase in the summary if that phrase is not in the input."
+            "description": "The model will avoid to select the target phrase in the summary."
           }
         ]
       }
