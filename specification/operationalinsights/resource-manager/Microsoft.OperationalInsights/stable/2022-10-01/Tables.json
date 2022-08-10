@@ -335,48 +335,48 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/cancelSearch": {
-    "post": {
-      "tags": [
-        "Tables"
-      ],
-      "x-ms-examples": {
-        "TablesGet": {
-          "$ref": "./examples/TablesMigrate.json"
-        }
-      },
-      "operationId": "Tables_CancelSearch",
-      "description": "Cancel a log analytics workspace search results table query run.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+      "post": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TablesSearchCancel.json"
+          }
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/TableNameParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK response definition."
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "operationId": "Tables_CancelSearch",
+        "description": "Cancel a log analytics workspace search results table query run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     }
-  }
-},
+  },
   "definitions": {
     "Column": {
       "type": "object",
@@ -686,7 +686,7 @@
           "readOnly": true,
           "type": "number",
           "multipleOf": 0.01,
-          "description": "The amount of scanned data in (Giga bytes)."
+          "description": "Search job: Amount of scanned data."
         }
       },
       "description": "Search job execution statistics."
