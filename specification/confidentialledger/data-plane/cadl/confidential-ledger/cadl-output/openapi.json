@@ -56,7 +56,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Consortium"
+                  "$ref": "#/components/schemas/PagedConsortiumMembers"
                 }
               }
             }
@@ -593,7 +593,7 @@
           "error"
         ]
       },
-      "Consortium": {
+      "PagedConsortiumMembers": {
         "type": "object",
         "properties": {
           "members": {
@@ -602,7 +602,7 @@
               "$ref": "#/components/schemas/ConsortiumMember"
             },
             "x-cadl-name": "ConsortiumMember[]",
-            "description": "List of members in the consortium"
+            "description": "The ConsortiumMember items on this page"
           },
           "nextLink": {
             "type": "string",
@@ -643,7 +643,8 @@
             "items": {
               "$ref": "#/components/schemas/Collection"
             },
-            "x-cadl-name": "Collection[]"
+            "x-cadl-name": "Collection[]",
+            "description": "The Collection items on this page"
           },
           "nextLink": {
             "type": "string",
@@ -661,16 +662,17 @@
           "state": {
             "$ref": "#/components/schemas/LedgerQueryState"
           },
-          "nextLink": {
-            "type": "string",
-            "description": "URI from which to retrieve the next page of results."
-          },
           "entries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LedgerEntry"
             },
-            "x-cadl-name": "LedgerEntry[]"
+            "x-cadl-name": "LedgerEntry[]",
+            "description": "The LedgerEntry items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "URI from which to retrieve the next page of results."
           }
         },
         "description": "Paginated ledger entries returned in response to a query.",

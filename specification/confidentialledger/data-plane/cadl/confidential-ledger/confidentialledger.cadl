@@ -99,12 +99,15 @@ model ConfidentialLedgerEnclaves {
   enclaveQuotes: Record<EnclaveQuote>;
 }
 
+@pagedResult
 @doc("List of members in the consortium.")
-model Consortium {
-  @doc("List of members in the consortium")
+model PagedConsortiumMembers {
+  @doc("The {name} items on this page", ConsortiumMember)
+  @items
   members: ConsortiumMember[];
 
   @doc("URI from which to retrieve the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -193,22 +196,30 @@ model LedgerWriteResult {
   transactionId: string;
 }
 
+@pagedResult
 @doc("Paginated collections returned in response to a query.")
 model PagedCollections {
+  @doc("The {name} items on this page", Collection)
+  @items
   collections: Collection[];
 
   @doc("URI from which to retrieve the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
+@pagedResult
 @doc("Paginated ledger entries returned in response to a query.")
 model PagedLedgerEntries {
   state: LedgerQueryState;
 
-  @doc("URI from which to retrieve the next page of results.")
-  nextLink?: string;
-
+  @doc("The {name} items on this page", LedgerEntry)
+  @items
   entries: LedgerEntry[];
+
+  @doc("URI from which to retrieve the next page of results.")
+  @nextLink
+  nextLink?: string;
 }
 
 alias Pem = string;
@@ -282,15 +293,13 @@ model TransactionIdOptionalReadOnly {
 @get
 op GetConstitution(...Foundations.ApiVersionParameter): Constitution | Foundations.ErrorResponse;
 
-// TODO: Pageable operations excluded from August MVP
 @route("/app/governance/members")
 @summary("Lists the consortium members.")
 @doc("Consortium members can manage the Confidential Ledger.")
 @get
 op ListConsortiumMembers(
   ...Foundations.ApiVersionParameter
-): Consortium | Foundations.ErrorResponse;
-// TODO: Long-running operations excluded from August MVP
+): PagedConsortiumMembers | Foundations.ErrorResponse;
 
 @route("/app/enclaveQuotes")
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
@@ -298,17 +307,14 @@ op ListConsortiumMembers(
 @get
 op GetEnclaveQuotes(...Foundations.ApiVersionParameter): ConfidentialLedgerEnclaves | Foundations.ErrorResponse;
 
-// TODO: Pageable operations excluded from August MVP
 @route("/app/collections")
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
 @doc("Collection ids are user-created collections of ledger entries")
-@get // TODO: rewrite the operations in terms of Azure.Core operations, e.g. Azure.Core.Operations.ResourceAction<TResource, TResponse, TParams>, Azure.Core.Operations.ResourceList<TResource, TParams> etc. // This will also take care of not passing ApiVersionParameter everywhere.
+@get
 op ListCollections(
   ...Foundations.ApiVersionParameter
 ): PagedCollections | Foundations.ErrorResponse;
-// TODO: Long-running operations excluded from August MVP
 
-// TODO: Pageable operations excluded from August MVP
 @route("/app/transactions")
 @summary("Gets ledger entries from a collection corresponding to a range.")
 @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
@@ -319,7 +325,6 @@ op ListLedgerEntries(
   ...TransactionIdFromParameter,
   ...TransactionIdToParameter,
 ): PagedLedgerEntries | Foundations.ErrorResponse;
-// TODO: Long-running operations excluded from August MVP
 
 @route("/app/transactions")
 @summary("Writes a ledger entry.")
