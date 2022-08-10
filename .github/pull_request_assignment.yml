@@ -12,12 +12,7 @@
       - "specification/confidentialledger/data-plane/**"
     reviewers:
       - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
+
 
 - rule:
     # eventgrid data-plane PR
@@ -62,6 +57,8 @@
     reviewers:
       - lirenhe
       - raych1
+    branches:
+      - network-
 
 
 - rule:
@@ -76,10 +73,25 @@
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker)/**"
+    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc)/**"
     reviewers:
       - raych1
       - xiaoxuqi-ms
+
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - raych1
+      - xiaoxuqi-ms
+    branches:
+      - dev-sql-
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights|eventgrid)/**"
+    reviewers:
+      - akning-ms
+      
       
 - rule:
     paths: "specification/@(security|edgeorder|synapse)/**"
@@ -113,16 +125,24 @@
 
 - rule:
     paths:
+      - "specification/monitor/**"
+    reviewers:
+      - ArcturusZhang
+
+- rule:
+    paths:
       - "specification/authorization/**"
     reviewers:
       - ruowan
 
 - rule:
     paths:
-      - "specification/@(resources|datafactory)/**"
+      - "specification/@(resources|datafactory|app)/**"
     reviewers:
       - leni-msft
-
+    branches:
+      - Microsoft.App-
+      
 - rule:
     paths:
       - "specification/storage/**"

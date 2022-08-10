@@ -219,9 +219,6 @@
           "204": {
             "description": "No Content"
           },
-          "200": {
-            "description": ""
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -229,7 +226,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
