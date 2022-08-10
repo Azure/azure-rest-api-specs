@@ -5750,6 +5750,47 @@
         ]
       },
       "description": "The type of a snapshot. The default is NodePool."
+    },
+    "GuardrailsProfile": {
+      "type": "object",
+      "properties": {
+        "systemExcludedNamespaces": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of namespaces specified by AKS to be excluded from Guardrails",
+          "items": {
+              "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of constraints to use"
+        },
+        "level": {
+          "type": "string",
+          "enum": ["Off", "Warning", "Enforcement"],
+          "description": "The guardrails level to be used"
+        },
+        "includedNamespaces": {
+          "description": "Customer-specified list of namespaces that must be included in guardrails",
+          "type": "array",
+          "items":{
+              "type":"string"
+          }
+        },
+        "excludedNamespaces": {
+          "description": "Customer-specified list of namespaces that must be excluded from guardrails",
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+        }
+      },
+      "required": [
+        "level",
+        "version"
+      ],
+      "description": "The Guardrails profile."
     }
   },
   "parameters": {
