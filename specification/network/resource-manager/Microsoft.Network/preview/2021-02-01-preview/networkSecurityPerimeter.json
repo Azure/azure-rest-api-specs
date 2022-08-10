@@ -746,6 +746,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NspAssociationReconcile"
+        ],
+        "operationId": "NspAssociationReconcile_Post",
+        "description": "Reconcile NSP association",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAssociationReconcile"
+            },
+            "description": "Parameters for NSP association reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP association.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociationReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationReconcile": {
+            "$ref": "./examples/NspAssociationReconcile.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}": {
       "parameters": [
         {
@@ -1229,6 +1285,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Version number that increases with every update to access rules within the profile."
+        },
+        "diagnosticSettingsVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Version number that increases with every update to diagnostic settings within the profile."
         }
       },
       "description": "Properties of NSP profile."
@@ -1433,6 +1494,11 @@
           "description": "Specifies if there are provisioning issues"
         }
       }
+    },
+    "NspAssociationReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP association."
     },
     "PerimeterAssociableResource": {
       "type": "object",
