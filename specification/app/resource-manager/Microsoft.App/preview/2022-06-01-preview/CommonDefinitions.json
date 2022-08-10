@@ -34,7 +34,7 @@
         }
       }
     },
-    "Container": {
+    "InitContainer": {
       "description": "Container App container definition.",
       "type": "object",
       "properties": {
@@ -85,6 +85,28 @@
           ]
         }
       }
+    },
+    "Container": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/InitContainer"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "probes": {
+              "description": "List of probes for the container.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContainerAppProbe"
+              },
+              "x-ms-identifiers": [
+                "type"
+              ]
+            }
+          }
+        }
+      ]
     },
     "ContainerResources": {
       "description": "Container App container resource requirements.",
@@ -462,7 +484,7 @@
           "description": "List of specialized containers that run before app containers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Container"
+            "$ref": "#/definitions/InitContainer"
           },
           "x-ms-identifiers": [
             "name"
@@ -472,26 +494,7 @@
           "description": "List of container definitions for the Container App.",
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Container"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "probes": {
-                    "description": "List of probes for the container.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/ContainerAppProbe"
-                    },
-                    "x-ms-identifiers": [
-                      "type"
-                    ]
-                  }
-                }
-              }
-            ]
+            "$ref": "#/definitions/Container"
           },
           "x-ms-identifiers": [
             "name"
