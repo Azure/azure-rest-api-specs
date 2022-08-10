@@ -271,7 +271,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
             }
           },
           "default": {
@@ -400,7 +400,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
             }
           },
           "default": {
@@ -442,7 +442,7 @@
         },
         "x-ms-examples": {
           "List operations": {
-            "$ref": "./examples/PolicyStates_ListOperations.json"
+            "$ref": "./examples/ComponentPolicyStates_ListOperations.json"
           }
         }
       }
@@ -461,10 +461,6 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
-        },
-        "@odata.nextLink": {
-          "description": "Odata next link; URL to get the next set of results.",
-          "type": "string"
         },
         "value": {
           "description": "Query results.",
@@ -492,6 +488,18 @@
           "description": "Timestamp for the component policy state record.",
           "type": "string",
           "format": "date-time"
+        },
+        "componentId": {
+          "description": "Component Id.",
+          "type": "string"
+        },
+        "componentType": {
+          "description": "Component type.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Component name.",
+          "type": "string"
         },
         "resourceId": {
           "description": "Resource ID.",
