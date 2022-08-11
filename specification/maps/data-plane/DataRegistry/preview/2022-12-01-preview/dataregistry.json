@@ -176,6 +176,9 @@
               "$ref": "#/definitions/DataRegistry"
             }
           },
+          "404": {
+            "description": "Resource not found."
+          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -225,13 +228,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource replacing: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "description": "Resource replacing: The request has been accepted for processing.",
             "schema": {
               "$ref": "#/definitions/DataRegistry"
             }
           },
           "201": {
-            "description": "Resource creating: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "description": "Resource creating: The request has been accepted for processing.",
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          },
+          "409": {
+            "description": "Resource conflicted: The request is conflicted with the processing job.",
             "schema": {
               "$ref": "#/definitions/DataRegistry"
             }
@@ -292,6 +301,15 @@
               "$ref": "#/definitions/DataRegistry"
             }
           },
+          "404": {
+            "description": "Resource not ready or not found."
+          },
+          "409": {
+            "description": "Resource conflicted: The request is conflicted with the processing job.",
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -335,6 +353,9 @@
         "responses": {
           "204": {
             "description": "Data registry unregister request completed successfully. The data registry was unregistered in Azure Maps Service."
+          },
+          "404": {
+            "description": "Resource not ready."
           },
           "default": {
             "description": "An unexpected error occurred.",
@@ -388,6 +409,9 @@
                 "description": "The content-type for the Download API response."
               }
             }
+          },
+          "404": {
+            "description": "Resource not ready or not found."
           },
           "default": {
             "description": "An unexpected error occurred.",
