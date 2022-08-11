@@ -35,7 +35,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of AnalysisIntents",
+            "description": "List of AnalysisIntent",
             "schema": {
               "$ref": "#/definitions/AnalysisIntentList"
             }
@@ -46,6 +46,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AnalysisIntentList": {
@@ -232,7 +235,7 @@
         ],
         "responses": {
           "202": {
-            "description": "analysisIntent delete request accepted"
+            "description": "analysisIntent delete request accepted and will complete asynchronously"
           },
           "204": {
             "description": "analysisIntent delete request succeeded"
@@ -292,7 +295,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of AnalysisRuns",
+            "description": "List of AnalysisRun",
             "schema": {
               "$ref": "#/definitions/AnalysisRunList"
             }
@@ -303,6 +306,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AnalysisRunList": {
@@ -433,11 +439,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "AnalysisRun was created",
-            "schema": {
-              "$ref": "#/definitions/AnalysisRun"
-            }
+          "202": {
+            "description": "AnalysisRun accepted and will complete asynchronously"
           },
           "404": {
             "description": "Parent resource not found",
@@ -461,6 +464,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "AnalysisRunPut": {
             "$ref": "./examples/AnalysisRunPut.json"
@@ -510,7 +516,7 @@
         ],
         "responses": {
           "202": {
-            "description": "AnalysisRun delete request accepted"
+            "description": "AnalysisRun delete request accepted and will complete asynchronously"
           },
           "204": {
             "description": "AnalysisRun delete request succeeded"
@@ -563,7 +569,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of ConfigurationSnapshots",
+            "description": "List of ConfigurationSnapshot",
             "schema": {
               "$ref": "#/definitions/ConfigurationSnapshotList"
             }
@@ -574,6 +580,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ConfigurationSnapshotList": {
@@ -690,11 +699,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "ConfigurationSnapshot was created",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationSnapshot"
-            }
+          "202": {
+            "description": "ConfigurationSnapshot accepted and will complete asynchronously"
           },
           "404": {
             "description": "Parent resource not found",
@@ -718,6 +724,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ConfigurationSnapshotPut": {
             "$ref": "./examples/ConfigurationSnapshotPut.json"
@@ -760,7 +769,7 @@
         ],
         "responses": {
           "202": {
-            "description": "ConfigurationSnapshot delete request accepted"
+            "description": "ConfigurationSnapshot delete request accepted and will complete asynchronously"
           },
           "204": {
             "description": "ConfigurationSnapshot delete request succeeded"
@@ -803,12 +812,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of NetworkVerifiers",
+            "description": "List of NetworkVerifier",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkVerifier"
-              }
+              "$ref": "#/definitions/NetworkVerifierList"
             }
           },
           "default": {
@@ -817,6 +823,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkVerifierListBySubscription": {
@@ -848,7 +857,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of NetworkVerifiers",
+            "description": "List of NetworkVerifier",
             "schema": {
               "$ref": "#/definitions/NetworkVerifierList"
             }
@@ -859,6 +868,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkVerifierList": {
@@ -980,7 +992,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NetworkVerifierPut": {
             "$ref": "./examples/NetworkVerifierPut.json"
@@ -1016,7 +1027,7 @@
         ],
         "responses": {
           "202": {
-            "description": "NetworkVerifier delete request accepted"
+            "description": "NetworkVerifier delete request accepted and will complete asynchronously"
           },
           "204": {
             "description": "NetworkVerifier delete request succeeded"
@@ -1101,7 +1112,7 @@
           "$ref": "#/definitions/IPTrafficProperties"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         },
         "sourceResourceId": {
           "minLength": 1,
@@ -1169,7 +1180,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1236,7 +1247,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -1406,26 +1417,21 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/NetworkVerifierProvisioningState"
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
-    "NetworkVerifierProvisioningState": {
+    "ProvisioningState": {
       "enum": [
-        "Accepted",
-        "Creating",
+        "Succeeded",
         "Updating",
         "Deleting",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleted",
-        "NotSpecified"
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "NetworkVerifierProvisioningState"
+        "name": "ProvisioningState"
       }
     },
     "ResourceProviderDefaultErrorResponse": {
