@@ -81,33 +81,6 @@
           "provisioningState": "Creating"
         }
       }
-    },
-    "202": {
-      "body": {
-        "name": "exampleconnector",
-        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/analyticsconnectors/exampleconnector",
-        "location": "westus",
-        "type": "Microsoft.HealthcareApis/workspaces/analyticsconnectors",
-        "properties": {
-          "dataSourceConfiguration": {
-            "type": "fhirservice",
-            "url": "https://workspace-examplefhir.fhir.azurehealthcareapis.com",
-            "kind": "R4"
-          },
-          "dataMappingConfiguration": {
-            "type": "fhirToParquet",
-            "filterConfigurationReference": "acrexample.azurecr.io/blah@sha256xxx",
-            "extensionSchemaReference": "acrexample.azurecr.io/blah@sha256aaa/Extension",
-            "transformationSchemaReference": "acrexample.azurecr.io/blah@sha256bbb",
-            "anonymizationSchemaReference": "acrexample.azurecr.io/blah@sha256ccc"
-          },
-          "dataDestinationConfiguration": {
-            "type": "datalake",
-            "dataLakeName": "exampledatalake"
-          },
-          "provisioningState": "Accepted"
-        }
-      }
     }
   }
 }
