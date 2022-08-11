@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/templates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all installed templates.": {
+            "$ref": "./examples/templates/GetTemplates.json"
+          }
+        },
+        "tags": [
+          "Templates"
+        ],
+        "description": "Gets all installed templates.",
+        "operationId": "Templates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TemplateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/templates/{templateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a template.": {
+            "$ref": "./examples/templates/GetTemplateById.json"
+          }
+        },
+        "tags": [
+          "Templates"
+        ],
+        "description": "Gets a template byt its identifier.",
+        "operationId": "Templates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TemplateList": {
+      "description": "List all the installed templates.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of templates.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of templates.",
+          "items": {
+            "$ref": "#/definitions/Template"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Template": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Template in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "template properties",
+          "$ref": "#/definitions/TemplateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "TemplateProperties": {
+      "description": "Describes template properties",
+      "properties": {
+        "contentId": {
+          "description": "The content Id of the template",
+          "type": "string"
+        },
+        "version": {
+          "description": "the version number of the template",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the template",
+          "type": "string"
+        },
+        "contentKind": {
+          "description": "A description of the template",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the template",
+          "$ref": "#/definitions/TemplateSource"
+        },
+        "mainTemplate": {
+          "description": "The JSON string of the template",
+          "type": "string"
+        },
+        "dependencies": {
+          "description": "Array of dependent templates.",
+          "items": {
+            "$ref": "#/definitions/TemplateProperties"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "contentId",
+        "version",
+        "displayName",
+        "contentKind",
+        "source"
+      ],
+      "type": "object"
+    },
+    "TemplateSource": {
+      "type": "object",
+      "description": "source of a template.",
+      "properties": {
+        "kind": {
+          "description": "Source kind.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Source name.",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "Source id.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TemplateIdParameter": {
+      "description": "template Id",
+      "in": "path",
+      "name": "templateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

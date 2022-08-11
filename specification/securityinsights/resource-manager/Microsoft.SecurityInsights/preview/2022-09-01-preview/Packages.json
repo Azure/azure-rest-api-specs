@@ -1,0 +1,583 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages": {
+      "get": {
+        "x-ms-examples": {
+          "Get all available packages.": {
+            "$ref": "./examples/packages/GetPackages.json"
+          }
+        },
+        "tags": [
+          "Packages"
+        ],
+        "description": "Gets all available packages.",
+        "operationId": "Packages_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a package.": {
+            "$ref": "./examples/packages/GetPackageById.json"
+          }
+        },
+        "tags": [
+          "Package"
+        ],
+        "description": "Gets a package byt its identifier.",
+        "operationId": "Packages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}/install": {
+      "post": {
+        "x-ms-examples": {
+          "Install a package to the workspace.": {
+            "$ref": "./examples/packages/InstallPackage.json"
+          }
+        },
+        "tags": [
+          "Packages"
+        ],
+        "description": "Install a package to the workspace.",
+        "operationId": "Package_Install",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageInstallationProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/packages/{packageId}/uninstall": {
+      "post": {
+        "x-ms-examples": {
+          "Uninstall a package from the workspace.": {
+            "$ref": "./examples/packages/UninstallPackage.json"
+          }
+        },
+        "tags": [
+          "Packages"
+        ],
+        "description": "Uninstall a package from the workspace.",
+        "operationId": "Package_Uninstall",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PackageList": {
+      "description": "List available packages.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of packages.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of packages.",
+          "items": {
+            "$ref": "#/definitions/Package"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Package": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Package in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "package properties",
+          "$ref": "#/definitions/PackageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "PackageProperties": {
+      "description": "Describes package properties",
+      "properties": {
+        "packageId": {
+          "description": "The package id",
+          "type": "string"
+        },
+        "packageKind": {
+          "description": "The package kind",
+          "enum": [
+            "Solution",
+            "Standalone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "packageKind"
+          }
+        },
+        "installedVersion": {
+          "description": "The version of the installed version, null or absent means not installed.",
+          "type": "string"
+        },
+        "isNew": {
+          "description": "Flag indicates if this is a newly published package.",
+          "type": "boolean"
+        },
+        "isPreview": {
+          "description": "Flag indicates if this package is in preview.",
+          "type": "boolean"
+        },
+        "isFeatured": {
+          "description": "Flag indicates if this package is among the featured list.",
+          "type": "boolean"
+        },
+        "version": {
+          "description": "the latest version number of the package",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the package",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the package",
+          "type": "string"
+        },
+        "publisherDisplayName": {
+          "description": "The publisher display name of the package",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the package",
+          "$ref": "#/definitions/PackageSource",
+          "type": "object"
+        },
+        "author": {
+          "description": "The author of the package",
+          "$ref": "#/definitions/Author",
+          "type": "object"
+        },
+        "support": {
+          "description": "The support tier of the package",
+          "$ref": "#/definitions/Support",
+          "type": "object"
+        },
+        "dependencies": {
+          "description": "The support tier of the package",
+          "$ref": "#/definitions/Dependency",
+          "type": "object"
+        },
+        "providers": {
+          "description": "The providers of the package.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The name of the provider."
+          }
+        },
+        "firstPublishDate": {
+          "description": "The first publish date of the package",
+          "format": "date",
+          "type": "string"
+        },
+        "lastPublishDate": {
+          "description": "The last publish date of the package",
+          "format": "date",
+          "type": "string"
+        },
+        "categories": {
+          "description": "The categories of the package",
+          "$ref": "#/definitions/Category",
+          "type": "object"
+        },
+        "threatAnalysisTactics": {
+          "description": "Threat analysis tactics.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "One threat analysis tactic."
+          }
+        },
+        "threatAnalyticsTechniques": {
+          "description": "Threat analytics techniques.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "One threat analytics technique."
+          }
+        },
+        "icon": {
+          "description": "The URL to the icon file.",
+          "type": "string"
+        },
+        "packageContent": {
+          "description": "The JSON string of the package.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "packageId",
+        "packageKind",
+        "version",
+        "displayName"
+      ],
+      "type": "object"
+    },
+    "PackageInstallationProperties": {
+      "type": "object",
+      "description": "Package installation properties.",
+      "properties": {
+        "packageKind": {
+          "description": "package kind.",
+          "enum": [
+            "Solution",
+            "Standalone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "packageKind",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "version of the package to be installed.",
+          "type": "string"
+        }
+      }
+    },
+    "PackageSource": {
+      "type": "object",
+      "description": "source of a package.",
+      "properties": {
+        "kind": {
+          "description": "Source kind.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Source name.",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "Source id.",
+          "type": "string"
+        }
+      }
+    },
+    "Author": {
+      "type": "object",
+      "description": "Author of a package.",
+      "properties": {
+        "name": {
+          "description": "Name of the author.",
+          "type": "string"
+        },
+        "email": {
+          "description": "email of the author.",
+          "type": "string"
+        },
+        "link": {
+          "description": "url to the web page of the author.",
+          "type": "string"
+        }
+      }
+    },
+    "Support": {
+      "type": "object",
+      "description": "Support tier of a package.",
+      "properties": {
+        "tier": {
+          "description": "Tier of the support.",
+          "enum": [
+            "Microsoft",
+            "Partner",
+            "Community"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "tier"
+          }
+        },
+        "name": {
+          "description": "email of the support.",
+          "type": "string"
+        },
+        "email": {
+          "description": "email of the support.",
+          "type": "string"
+        },
+        "link": {
+          "description": "url to the web page of the support.",
+          "type": "string"
+        }
+      }
+    },
+    "Dependency": {
+      "type": "object",
+      "description": "Dependencies of the package.",
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "description": "Dependencies of the package.",
+          "items": {
+            "$ref": "#/definitions/Criteria"
+          },
+          "x-ms-identifiers": []
+        },
+        "operator": {
+          "description": "operator of the criteria.",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "operator"
+          }
+        }
+      }
+    },
+    "Criteria": {
+      "type": "object",
+      "description": "One criteria of dependency.",
+      "properties": {
+        "contentId": {
+          "description": "content id of the template.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "content kind of the template.",
+          "type": "string"
+        },
+        "version": {
+          "description": "version number of the template.",
+          "type": "string"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "description": "Categories of the package.",
+      "properties": {
+        "domains": {
+          "description": "domains of the package.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "One domain."
+          }
+        },
+        "verticals": {
+          "description": "verticals of the package.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "One vertical."
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PackageIdParameter": {
+      "description": "package Id",
+      "in": "path",
+      "name": "packageId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PackageInstallationProperties": {
+      "description": "Package installation properties",
+      "in": "body",
+      "name": "packageInstallationProperties",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PackageInstallationProperties"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
