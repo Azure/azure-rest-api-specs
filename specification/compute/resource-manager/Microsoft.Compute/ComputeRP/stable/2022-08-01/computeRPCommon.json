@@ -1129,18 +1129,18 @@
       ],
       "description": "Specifies the required information to reference a compute gallery application version"
     },
-    "VMGalleryApplicationWithInstanceView" : {
-      "type" : "object",
+    "VMGalleryApplicationWithInstanceView": {
+      "type": "object",
       "properties": {
         "instanceView": {
-          "$ref" : "#/definitions/VMGalleryApplicationInstanceView",
-          "readOnly" : true,
+          "$ref": "#/definitions/VMGalleryApplicationInstanceView",
+          "readOnly": true,
           "description": "Contains instanceView of the VMApplication if $expand=instanceView is specified"
         }
       },
-      "allOf" : [
+      "allOf": [
         {
-          "$ref" : "#/definitions/VMGalleryApplication"
+          "$ref": "#/definitions/VMGalleryApplication"
         }
       ]
     },
@@ -1161,18 +1161,18 @@
       "properties": {
         "name": {
           "type": "string",
-          "description" : "The application name"
+          "description": "The application name"
         },
         "version": {
           "type": "string",
-          "description" : "The application version"
+          "description": "The application version"
         },
         "result": {
           "type": "string",
-          "description" : "The current status of the application"
+          "description": "The current status of the application"
         },
-        "actionsPerformed" :{
-          "type" :"array",
+        "actionsPerformed": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/VMGalleryApplicationInstanceViewAction"
           }
@@ -1180,7 +1180,7 @@
       }
     },
     "VMGalleryApplicationInstanceViewAction": {
-      "type" : "object",
+      "type": "object",
       "properties": {
         "operation": {
           "type": "string",
