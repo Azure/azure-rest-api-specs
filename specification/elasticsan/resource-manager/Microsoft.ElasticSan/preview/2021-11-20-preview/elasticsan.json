@@ -1170,6 +1170,9 @@
     "ElasticSan": {
       "type": "object",
       "description": "Response for ElasticSan request.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1192,9 +1195,9 @@
       "type": "object",
       "description": "Elastic San response properties.",
       "required": [
-        "availabilityZones",
         "baseSizeTiB",
-        "extendedCapacitySizeTiB"
+        "extendedCapacitySizeTiB",
+        "sku"
       ],
       "properties": {
         "sku": {
@@ -1491,6 +1494,9 @@
     },
     "Sku": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -1611,10 +1617,6 @@
     "VolumeGroupProperties": {
       "type": "object",
       "description": "VolumeGroup response properties.",
-      "required": [
-        "protocolType",
-        "encryption"
-      ],
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
@@ -1659,10 +1661,6 @@
     "VolumeGroupUpdateProperties": {
       "type": "object",
       "description": "VolumeGroup response properties.",
-      "required": [
-        "protocolType",
-        "encryption"
-      ],
       "properties": {
         "protocolType": {
           "description": "Type of storage target",
@@ -1781,9 +1779,6 @@
     "SourceCreationData": {
       "type": "object",
       "description": "Data source used when creating the volume.",
-      "required": [
-        "createSource"
-      ],
       "properties": {
         "createSource": {
           "type": "string",
