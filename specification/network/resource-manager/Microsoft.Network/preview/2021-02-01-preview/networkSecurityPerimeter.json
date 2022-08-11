@@ -785,7 +785,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{networkSecurityPerimeterProfile}/checkMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -797,34 +797,37 @@
           "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
         },
         {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
+          "$ref": "#/parameters/ProfileNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkSecurityPerimeterProfileParameter"
+          "$ref": "#/parameters/AccessRuleNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
       "post": {
         "tags": [
-          "NetworkSecurityPerimetersCheckMembers"
+          "NspAccessRulesReconcile"
         ],
-        "operationId": "NetworkSecurityPerimeters_CheckMembers",
-        "description": "Action to check members associated to an NSP Profile",
+        "operationId": "NspAccessRulesReconcile_Post",
+        "description": "Reconcile NSP access rules",
         "parameters": [
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckMembers"
+              "$ref": "#/definitions/NspAccessRuleReconcile"
             },
-            "description": "Parameter supplied to create the network security perimeter check members."
+            "description": "Parameters for NSP access rule reconcile"
           }
         ],
         "responses": {
           "200": {
-            "description": "Check members, nothing is getting created or updated.",
+            "description": "Reconcile NSP access rule.",
             "schema": {
-              "$ref": "#/definitions/CheckMembers"
+              "$ref": "#/definitions/NspAccessRuleReconcile"
             }
           },
           "default": {
@@ -835,8 +838,8 @@
           }
         },
         "x-ms-examples": {
-          "Post Check Members": {
-            "$ref": "./examples/NSPCheckMembersPost.json"
+          "NspAccessRuleReconcile": {
+            "$ref": "./examples/NspAccessRuleReconcile.json"
           }
         }
       }
@@ -1240,48 +1243,6 @@
       },
       "description": "Properties of the perimeter associable resources."
     },
-    "CheckMembers": {
-      "type": "object",
-      "properties": {
-        "memberDestinations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MemberDestination"
-          },
-          "x-ms-identifiers": [
-            "privateLinkResourceId"
-          ]
-        }
-      },
-      "description": "Request object for check members API."
-    },
-    "MemberDestination": {
-      "type": "object",
-      "properties": {
-        "privateLinkResourceId": {
-          "type": "string",
-          "description": "Private link resource Id."
-        },
-        "isMember": {
-          "type": "string",
-          "readOnly": true,
-          "description": "yes/no, if it is member or not.",
-          "enum": [
-            "yes",
-            "no"
-          ],
-          "x-ms-enum": {
-            "name": "isMember",
-            "modelAsString": true
-          }
-        },
-        "profile": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Network security perimeter profile."
-        }
-      }
-    },
     "NSPProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -1298,6 +1259,11 @@
         "name": "nspProvisioningState",
         "modelAsString": true
       }
+    },
+    "NspAccessRuleReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP reconcile."
     }
   },
   "parameters": {
