@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Cognitive Language Service",
+    "title": "Microsoft Cognitive Language Service - Text Analysis",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-07-01-preview"
   },
@@ -479,6 +479,10 @@
           "description": "Optional display name for the analysis job.",
           "type": "string"
         },
+        "defaultLanguage": {
+          "description": "Default language to use for records requesting automatic language detection.",
+          "type": "string"
+        },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
         },
@@ -500,9 +504,11 @@
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
+          "description": "This field indicates the project name for the model.",
           "type": "string"
         },
         "deploymentName": {
+          "description": "This field indicates the deployment name for the model.",
           "type": "string"
         }
       },
@@ -583,6 +589,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -631,6 +640,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -834,7 +846,7 @@
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
-            "ConditionQualifier",
+            "ConditionalQualifier",
             "MedicationClass",
             "MedicationName",
             "Dosage",
@@ -1061,6 +1073,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ],
       "required": [
@@ -1141,14 +1156,17 @@
       ],
       "properties": {
         "positive": {
+          "description": "Confidence score for positive sentiment",
           "type": "number",
           "format": "double"
         },
         "neutral": {
+          "description": "Confidence score for neutral sentiment",
           "type": "number",
           "format": "double"
         },
         "negative": {
+          "description": "Confidence score for negative sentiment",
           "type": "number",
           "format": "double"
         }
@@ -1344,10 +1362,12 @@
       ],
       "properties": {
         "positive": {
+          "description": "Confidence score for positive sentiment",
           "type": "number",
           "format": "double"
         },
         "negative": {
+          "description": "Confidence score for negative sentiment",
           "type": "number",
           "format": "double"
         }
@@ -1410,6 +1430,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1539,6 +1562,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1708,6 +1734,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2005,6 +2034,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2145,6 +2177,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2549,6 +2584,15 @@
         }
       }
     },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
     "DocumentError": {
       "type": "object",
       "required": [
@@ -2665,7 +2709,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       }
     },
