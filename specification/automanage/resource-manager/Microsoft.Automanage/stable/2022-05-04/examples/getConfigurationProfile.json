@@ -27,33 +27,7 @@
             "GuestConfiguration/Enable": true,
             "LogAnalytics/Enable": true,
             "BootDiagnostics/Enable": true
-          },
-          "overrides": [
-            {
-              "priority": 100,
-              "if": {
-                "field": "$.location",
-                "equals": "eastus"
-              },
-              "then": {
-                "LogAnalytics/Enable": true,
-                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/eastus",
-                "LogAnalytics/Reprovision": true
-              }
-            },
-            {
-              "priority": 200,
-              "if": {
-                "field": "$.location",
-                "equals": "centralcanada"
-              },
-              "then": {
-                "LogAnalytics/Enable": true,
-                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/centralcanada",
-                "LogAnalytics/Reprovision": true
-              }
-            }
-          ]
+          }
         },
         "systemData": {
           "createdBy": "user1@outlook.com",

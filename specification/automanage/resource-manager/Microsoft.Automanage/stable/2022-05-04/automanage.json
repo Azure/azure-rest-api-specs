@@ -2143,11 +2143,6 @@
           "title": "configuration",
           "$ref": "#/definitions/ConfigurationDictionary",
           "description": "configuration dictionary of the configuration profile."
-        },
-        "overrides": {
-          "title": "overrides",
-          "$ref": "#/definitions/Overrides",
-          "description": "overrides of the configuration profile."
         }
       }
     },
@@ -2157,14 +2152,6 @@
       "example": {
         "Antimalware/Enable": true
       }
-    },
-    "Overrides": {
-      "description": "The custom overrides for configuration profile",
-      "type": "array",
-      "items": {
-        "type": "object"
-      },
-      "x-ms-identifiers": []
     },
     "ConfigurationProfileUpdate": {
       "description": "Definition of the configuration profile.",
@@ -2204,6 +2191,11 @@
           "$ref": "#/definitions/ConfigurationProfileAssignmentProperties",
           "description": "Properties of the configuration profile assignment."
         },
+        "managedBy": {
+          "readOnly": true,
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
@@ -2233,18 +2225,7 @@
           "type": "string",
           "readOnly": true,
           "description": "The status of onboarding, which only appears in the response."
-        },
-        "profileOverrides": {
-          "$ref": "#/definitions/ConfigurationProfileAssignmentProfileOverrides",
-          "description": "The profileOverrides setting for the configuration profile assignment."
         }
-      }
-    },
-    "ConfigurationProfileAssignmentProfileOverrides": {
-      "description": "Data related to configuration profile assignment profile overrides.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "UpdateResource": {
@@ -2433,6 +2414,10 @@
           "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
         }
       }
+    },
+    "ManagedBy": {
+      "type": "string",
+      "description": "Azure resource id. Indicates if this resource is managed by another Azure resource."
     }
   },
   "parameters": {

@@ -26,6 +26,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
+azure-arm: true 
 tag: package-2022-02
 ```
 
