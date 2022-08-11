@@ -9138,6 +9138,7 @@
     },
     "ListRouteMapsResult": {
       "description": "List of RouteMaps and a URL nextLink to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -9240,7 +9241,7 @@
         },
         "matchCondition": {
           "$ref": "#/definitions/MatchCondition",
-          "description": "Matching behavior based on routePrefix, community, and AS path parameters. Currently supported behaviors are 'Contains', 'Equals', 'NotContains', 'NotEquals'."
+          "description": "Matching behavior for a rule to be applied, based on routePrefix, community, and AS path parameters."
         }
       },
       "description": "A matching criteria which matches routes based on route prefix, community, and AS path.",
@@ -9293,7 +9294,7 @@
     },
     "MatchCondition": {
       "type": "string",
-      "description": "Supported match conditions on a route for a rule to be applied",
+      "description": "Matching behavior for a rule to be applied, based on routePrefix, community, and AS path parameters.",
       "enum": [
         "Unknown",
         "Contains",
