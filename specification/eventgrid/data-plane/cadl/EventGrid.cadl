@@ -1,0 +1,103 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+
+@serviceTitle("EventGridClient")
+@serviceVersion("2018-01-01")
+@doc("Azure EventGrid Client")
+namespace Microsoft.EventGrid;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+
+@doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
+model EventGridEvent {
+  @doc("An unique identifier for the event.")
+  id: string;
+
+  @doc("The resource path of the event source.")
+  topic?: string;
+
+  @doc("A resource path relative to the topic path.")
+  subject: string;
+
+  @doc("Event data specific to the event type.")
+  data: object;
+  
+  @doc("The type of the event that occurred.")
+  eventType: string;
+
+  @doc("The time (in UTC) the event was generated.")
+  eventTime: zonedDateTime;
+
+  @doc("The schema version of the event metadata.")
+  @visibility("read")
+  metadataVersion?: string;
+
+  @doc("The schema version of the data object.")
+  dataVersion: string;
+    
+}
+
+@doc("Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema")
+model CloudEventEvent {
+  @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
+  id: string;
+
+  @doc("Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event.")
+  source: string;
+
+  @doc("Event data specific to the event type.")
+  data?: object;
+
+  @doc("Event data specific to the event type.")
+  data_base64?: bytes;
+  
+  @doc("Type of event related to the originating occurrence.")
+  type: string;
+
+  @doc("The time (in UTC) the event was generated, in RFC3339 format.")
+  time?: zonedDateTime;
+
+  @doc("The version of the CloudEvents specification which the event uses.")
+  specversion: string;
+
+  @doc("Identifies the schema that data adheres to.")
+  dataschema?: string;
+
+  @doc("Content type of data value.")
+  datacontenttype?: string;
+
+  @doc("This describes the subject of the event in the context of the event producer (identified by source).")
+  subject?: string;
+}
+
+@doc("Properties of an event published to an Event Grid topic using a custom schema")
+model CustomEventEvent {};
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.")
+model SubscriptionValidationEventData {
+  @doc("The validation code sent by Azure Event Grid to validate an event subscription. To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).")
+  @visibility("read")
+  validationCode?: string;
+
+  @doc("The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview). To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).")
+  @visibility("read")
+  validationUrl?: string;
+}
+
+@doc("To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response.")
+model SubscriptionValidationResponse {
+  @doc("The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription.")
+  validationResponse?: string;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent event.")
+model SubscriptionDeletedEventData {
+  @doc("The Azure resource ID of the deleted event subscription.")
+  @visibility("read")
+  eventSubscriptionId?: string;
+}
