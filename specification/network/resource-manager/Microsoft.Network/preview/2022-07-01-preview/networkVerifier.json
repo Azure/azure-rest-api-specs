@@ -539,6 +539,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVerifiers/locations/{location}/operationsStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperations"
+        ],
+        "summary": "Retrieves an async operation resource to track an async operation\r\nUsed to implement the behavior of Azure async operations provided by the Azure-AsyncOperation header",
+        "operationId": "AsyncOperationGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "location",
+            "description": "The regional location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The Id of the Async Operation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AsyncOperation",
+            "schema": {
+              "$ref": "#/definitions/OperationsStatus"
+            }
+          },
+          "404": {
+            "description": "Async Operation Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AsyncOperationGet": {
+            "$ref": "./examples/AsyncOperationGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVerifiers/{networkVerifierName}/configurationSnapshots": {
       "get": {
         "tags": [
@@ -1418,6 +1478,43 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "OperationsStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "subResourceType": {
+          "type": "string"
+        },
+        "subResourceName": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
