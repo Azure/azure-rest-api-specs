@@ -1,0 +1,63 @@
+scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+  privateEndpointConnectionName:
+    type: string
+    prefix: privateend
+  keyValueName:
+    type: string
+    prefix: keyvaluena
+scenarios:
+  - steps:
+      - step: Operations_CheckNameAvailability
+        exampleFile: ../examples/CheckNameAvailable.json
+      - step: Operations_RegionalCheckNameAvailability
+        exampleFile: ../examples/RegionalCheckNameAvailable.json
+      - step: ConfigurationStores_Create
+        exampleFile: ../examples/ConfigurationStoresCreate.json
+      - step: ConfigurationStores_List
+        exampleFile: ../examples/ConfigurationStoresList.json
+      - step: ConfigurationStores_ListByResourceGroup
+        exampleFile: ../examples/ConfigurationStoresListByResourceGroup.json
+      - step: ConfigurationStores_ListDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresList.json
+      - step: ConfigurationStores_GetDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresGet.json
+      - step: ConfigurationStores_Get
+        exampleFile: ../examples/ConfigurationStoresGet.json
+      - step: ConfigurationStores_Update
+        exampleFile: ../examples/ConfigurationStoresUpdate.json
+      - step: ConfigurationStores_PurgeDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresPurge.json
+      - step: ConfigurationStores_ListKeys
+        exampleFile: ../examples/ConfigurationStoresListKeys.json
+      - step: ConfigurationStores_RegenerateKey
+        exampleFile: ../examples/ConfigurationStoresRegenerateKey.json
+      - step: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreatePrivateEndpointConnection.json
+      - step: PrivateEndpointConnections_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ../examples/ConfigurationStoresGetPrivateEndpointConnection.json
+      - step: KeyValues_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreateKeyValue.json
+      - step: KeyValues_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListKeyValues.json
+      - step: KeyValues_Get
+        exampleFile: ../examples/ConfigurationStoresGetKeyValue.json
+      - step: PrivateLinkResources_ListByConfigurationStore
+        exampleFile: ../examples/PrivateLinkResourcesListByConfigurationStore.json
+      - variables:
+          groupName:
+            type: string
+            prefix: groupname
+        step: PrivateLinkResources_Get
+        exampleFile: ../examples/PrivateLinkResourceGet.json
+      - step: KeyValues_Delete
+        exampleFile: ../examples/ConfigurationStoresDeleteKeyValue.json
+      - step: PrivateEndpointConnections_Delete
+        exampleFile: ../examples/ConfigurationStoresDeletePrivateEndpointConnection.json
+      - step: ConfigurationStores_Delete
+        exampleFile: ../examples/ConfigurationStoresDelete.json
