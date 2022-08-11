@@ -6623,7 +6623,7 @@
           "type": "integer",
           "readOnly": false,
           "format": "int64",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 4294967295,
           "description": "VirtualRouter ASN."
         },
@@ -9240,8 +9240,8 @@
           }
         },
         "matchCondition": {
-          "$ref": "#/definitions/MatchCondition",
-          "description": "Match condition."
+          "$ref": "#/definitions/RouteMapMatchCondition",
+          "description": "Match condition to apply RouteMap rules."
         }
       },
       "description": "A matching criteria which matches routes based on route prefix, community, and AS path.",
@@ -9292,9 +9292,9 @@
       "description": "Parameters for an Action.",
       "type": "object"
     },
-    "MatchCondition": {
+    "RouteMapMatchCondition": {
       "type": "string",
-      "description": "Match condition.",
+      "description": "Match condition to apply RouteMap rules.",
       "enum": [
         "Unknown",
         "Contains",
@@ -9303,7 +9303,7 @@
         "NotEquals"
       ],
       "x-ms-enum": {
-        "name": "MatchCondition",
+        "name": "RouteMapMatchCondition",
         "modelAsString": true
       }
     },
