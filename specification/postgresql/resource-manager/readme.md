@@ -40,13 +40,22 @@ tag: package-preview-2022-03
 ```
 
 
-### Tag: package-preview-2022-03
+### Tag: package-flexibleserver-2022-03-preview
 
-These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-03'
+```yaml $(tag) == 'flexibleserver-2022-03-preview'
 input-file:
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/postgresql.json
 ```
