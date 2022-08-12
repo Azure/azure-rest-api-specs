@@ -676,6 +676,16 @@
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
           "type": "boolean"
+        },
+        "ipSecurityRestrictions": {
+          "description": "Rules to restrict incoming IP address.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestrictionRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -788,6 +798,41 @@
         "certificateId": {
           "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
+        }
+      }
+    },
+    "IpSecurityRestrictionRule": {
+      "description": "Rule to restrict incoming IP address.",
+      "type": "object",
+      "required": [
+        "name",
+        "ipAddressRange",
+        "action"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name for the IP restriction rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Describe the IP restriction rule that is being sent to the container-app. This is an optional field.",
+          "type": "string"
+        },
+        "ipAddressRange": {
+          "description": "CIDR notation to match incoming IP address",
+          "type": "string"
+        },
+        "action": {
+          "description": "Allow or Deny rules to determine for incoming IP. Note: Rules can only consist of ALL Allow or ALL Deny",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
         }
       }
     },
