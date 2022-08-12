@@ -360,6 +360,10 @@
         "securityDataUri": {
           "type": "string",
           "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM guest state."
+        },
+        "performancePlus": {
+          "type": "boolean",
+          "description": "Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled."
         }
       },
       "required": [
@@ -449,6 +453,10 @@
     "SupportedCapabilities": {
       "type": "object",
       "properties": {
+        "diskControllerTypes": {
+          "type": "string",
+          "description": "The disk controllers that an OS disk supports. If set it can be SCSI or SCSI, NVME or NVME, SCSI."
+        },
         "acceleratedNetwork": {
           "type": "boolean",
           "description": "True if the image from which the OS disk is created supports accelerated networking."

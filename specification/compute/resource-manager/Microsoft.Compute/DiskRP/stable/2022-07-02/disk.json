@@ -141,6 +141,9 @@
           },
           "Create a managed disk from an Azure Compute Gallery community image.": {
             "$ref": "./examples/diskExamples/Disk_Create_FromAnAzureComputeGalleryCommunityImage.json"
+          },
+          "Create a managed disk with optimizedForFrequentAttach.": {
+            "$ref": "./examples/diskExamples/Disk_Create_WithOptimizedForFrequentAttach.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -213,6 +216,12 @@
           },
           "Update a managed disk to add architecture.": {
             "$ref": "./examples/diskExamples//Disk_Update_ToAddArchitecture.json"
+          },
+          "Update a managed disk to disable optimizedForFrequentAttach.": {
+            "$ref": "./examples/diskExamples//Disk_Update_DisableOptimizedForFrequentAttach.json"
+          },
+          "Update a managed disk with diskControllerTypes.": {
+            "$ref": "./examples/diskExamples//Disk_Update_AddDiskControllerTypes.json"
           }
         }
       },
@@ -711,6 +720,12 @@
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         },
+        "burstingEnabledTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Latest time when bursting was last enabled on a disk."
+        },
         "tier": {
           "type": "string",
           "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
@@ -741,6 +756,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "optimizedForFrequentAttach": {
+          "type": "boolean",
+          "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
         }
       },
       "required": [
@@ -837,6 +856,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "optimizedForFrequentAttach": {
+          "type": "boolean",
+          "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
         }
       },
       "description": "Disk resource update properties."
