@@ -60,6 +60,9 @@
             "$ref": "#/parameters/ObjectIdParameter"
           },
           {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -95,7 +98,7 @@
         "operationId": "Administrators_Delete",
         "x-ms-examples": {
           "ServerDelete": {
-            "$ref": "./examples/AdmininistratorDelete.json"
+            "$ref": "./examples/AdministratorDelete.json"
           }
         },
         "description": "Deletes an Active Directory Administrator associated with the server.",
@@ -108,6 +111,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/ObjectIdParameter"
@@ -154,6 +160,9 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
             "$ref": "#/parameters/ObjectIdParameter"
           }
         ],
@@ -194,6 +203,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -365,13 +377,21 @@
     }
   },
   "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
     "ObjectIdParameter": {
       "name": "objectId",
       "in": "path",
       "required": true,
-      "type": "guid",
+      "type": "string",
       "description": "Guid of the objectId for the administrator.",
       "x-ms-parameter-location": "method"
-    },
+    }
   }
 }
