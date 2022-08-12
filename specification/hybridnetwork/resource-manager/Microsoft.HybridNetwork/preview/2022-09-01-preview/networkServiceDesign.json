@@ -728,6 +728,10 @@
     "networkServiceDesignVersionPropertiesFormat": {
       "description": "network service design version properties.",
       "type": "object",
+      "required": [
+        "configurationgroupsSchemaReferences",
+        "resourceElementsTemplates"
+      ],
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -776,11 +780,11 @@
     "NfviDetails": {
       "type": "object",
       "properties": {
-        "nfviName": {
+        "name": {
           "description": "The nfvi name.",
           "type": "string"
         },
-        "nfviType": {
+        "type": {
           "description": "The nfvi type.",
           "type": "string"
         }
@@ -799,7 +803,7 @@
           "description": "Name of the resource element template."
         },
         "type": {
-          "$ref": "#/definitions/type",
+          "$ref": "#/definitions/Type",
           "description": "The resource element template type."
         },
         "dependsOnProfile": {
@@ -809,13 +813,14 @@
       },
       "description": "The resource element template object."
     },
-    "type": {
+    "Type": {
       "type": "string",
       "description": "The resource element template type.",
       "enum": [
         "Unknown",
         "ArmResourceDefinition",
-        "ConfigurationDefinition"
+        "ConfigurationDefinition",
+        "NetworkFunctionDefinition"
       ],
       "x-ms-enum": {
         "name": "type",
@@ -891,6 +896,23 @@
           "description": "Artifact profile properties."
         }
       }
+    },
+    "NetworkFunctionDefinitionResourceElementTemplateDetails": {
+      "description": "The network function definition resource element template details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceElementTemplate"
+        }
+      ],
+      "properties": {
+        "configuration": {
+          "type": "object",
+          "$ref": "#/definitions/ArmResourceDefinitionResourceElementTemplate",
+          "description": "The resource element template type."
+        }
+      },
+      "x-ms-discriminator-value": "NetworkFunctionDefinition"
     },
     "NSDArtifactProfile": {
       "description": "Artifact profile properties.",

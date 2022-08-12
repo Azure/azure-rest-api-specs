@@ -359,7 +359,7 @@
         },
         "networkServiceDesignVersionReference": {
           "$ref": "./common.json#/definitions/ReferencedResource",
-          "description": "The network function design version details"
+          "description": "The network service design version details"
         },
         "desiredStateConfigurationGroupsValueReferences": {
           "type": "object",
@@ -367,6 +367,11 @@
             "$ref": "./common.json#/definitions/ReferencedResource"
           },
           "description": "The goal state of the site network service resource. This has references to the configuration group value objects that describe the desired state of the site network service."
+        },
+        "lastStateNetworkServiceDesignVersionReference": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The network service design version details"
         },
         "lastStateConfigurationGroupsValueReferences": {
           "type": "object",
