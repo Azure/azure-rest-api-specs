@@ -561,6 +561,11 @@
           "type": "boolean",
           "description": "Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed."
         },
+        "incrementalSnapshotFamilyId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Incremental snapshots for a disk share an incremental snapshot family id. The Get Page Range Diff API can only be called on incremental snapshots with the same family id."
+        },
         "encryption": {
           "$ref": "./diskRPCommon.json#/definitions/Encryption",
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
