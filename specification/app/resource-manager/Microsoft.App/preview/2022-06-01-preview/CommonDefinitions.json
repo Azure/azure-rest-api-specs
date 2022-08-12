@@ -332,7 +332,7 @@
       }
     },
     "HttpScaleRule": {
-      "description": "Container App container Custom scaling rule.",
+      "description": "Container App container Http scaling rule.",
       "type": "object",
       "properties": {
         "metadata": {
@@ -344,6 +344,29 @@
         },
         "auth": {
           "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        }
+      }
+    },
+    "TcpScaleRule": {
+      "description": "Container App container Tcp scaling rule.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata properties to describe tcp scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the tcp scale rule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleRuleAuth"
