@@ -507,6 +507,10 @@
           "description": "Domain user which will be used to join VMs to domain and login to VMs",
           "$ref": "#/definitions/DomainUserCredentials"
         },
+        "gmsaDetails": {
+          "description": "Gmsa Details for load balancer and vmss",
+          "$ref": "#/definitions/GmsaDetails"
+        },
         "azureHybridBenefit": {
           "description": "The properties to enable Azure Hybrid benefit for various SCOM infrastructure license",
           "$ref": "#/definitions/AzureHybridBenefitProperties"
@@ -576,6 +580,28 @@
             "update"
           ],
           "x-ms-secret": true
+        }
+      }
+    },
+    "GmsaDetails": {
+      "description": "Gmsa Details",
+      "type": "object",
+      "properties": {
+        "loadBalancerIP": {
+          "description": "Frontend IP configuration for Load Balancer, which should be an available IP in customer VNet",
+          "type": "string"
+        },
+        "gmsaAccount": {
+          "description": "gMSA account under which context all Management Server services will run",
+          "type": "string"
+        },
+        "managementServerGroupName": {
+          "description": "OnPrem AD Computer Group where we will join VMs for ease of management",
+          "type": "string"
+        },
+        "dnsName": {
+          "description": "Frontend DNS name for Load Balancer which will be used by Agents to initiate communication",
+          "type": "string"
         }
       }
     },
