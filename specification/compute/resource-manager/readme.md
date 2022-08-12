@@ -267,7 +267,7 @@ input-file:
   - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
   - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
   - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-04-04/cloudService.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-07-02-only
