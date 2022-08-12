@@ -9,6 +9,87 @@
     "https"
   ],
   "paths": {
+    "/providers/Microsoft.MachineLearningServices/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Registries REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AmlOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+		"x-ms-examples": {
+          "List registries.": {
+            "$ref": "./examples/Workspace/operationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/registries": {
+      "get": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "List registries by subscription",
+        "operationId": "Registries_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List registries.": {
+            "$ref": "./examples/Registries/listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries": {
       "get": {
         "tags": [
@@ -49,7 +130,7 @@
         },
         "x-ms-examples": {
           "List registries.": {
-            "$ref": "./examples/Registries/list.json"
+            "$ref": "./examples/Registries/list-SystemCreated.json"
           }
         },
         "x-ms-pageable": {
@@ -148,7 +229,7 @@
         },
         "x-ms-examples": {
           "Get Registry.": {
-            "$ref": "./examples/Registries/get.json"
+            "$ref": "./examples/Registries/get-SystemCreated.json"
           }
         }
       },
@@ -208,7 +289,7 @@
         },
         "x-ms-examples": {
           "Update Registry.": {
-            "$ref": "./examples/Registries/update.json"
+            "$ref": "./examples/Registries/update-SystemCreated.json"
           }
         }
       },
@@ -278,13 +359,65 @@
         },
         "x-ms-examples": {
           "CreateOrUpdate Registry.": {
-            "$ref": "./examples/Registries/createOrUpdate.json"
+            "$ref": "./examples/Registries/createOrUpdate-SystemCreated.json"
           }
         }
       }
-    },
+    }
   },
   "definitions": {
+    "AmlOperation": {
+      "description": "Azure Machine Learning registry REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.MachineLearningServices",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane",
+          "type": "boolean"
+        }
+      }
+    },
+    "AmlOperationListResult": {
+      "type": "object",
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmlOperation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of AML registry operations supported by the AML registry resource provider."
+        }
+      }
+    },
     "AcrDetails": {
       "description": "Details of ACR account to be used for the Registry",
       "type": "object",
@@ -350,6 +483,28 @@
           }
         }
       },
+      "additionalProperties": false
+    },
+	"PartialManagedServiceIdentity": {
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentityType"
+        },
+        "userAssignedIdentities": {
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PartialUserAssignedIdentity"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+	"PartialUserAssignedIdentity": {
+      "type": "object",
       "additionalProperties": false
     },
     "PartialSku": {
@@ -420,6 +575,7 @@
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
           },
+		  "x-ms-identifiers": [],
           "x-nullable": true
         }
       },
@@ -436,6 +592,7 @@
           "items": {
             "$ref": "#/definitions/AcrDetails"
           },
+		  "x-ms-identifiers": [],
           "x-nullable": true
         },
         "location": {
@@ -449,6 +606,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
           },
+		  "x-ms-identifiers": [],
           "x-nullable": true
         }
       },
@@ -730,7 +888,7 @@
         }
       },
       "additionalProperties": false
-    },
+    }
   },
   "securityDefinitions": {
     "azure_auth": {
