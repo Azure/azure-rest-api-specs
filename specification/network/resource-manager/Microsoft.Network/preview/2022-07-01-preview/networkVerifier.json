@@ -123,7 +123,7 @@
         "tags": [
           "AnalysisIntent"
         ],
-        "summary": "Creates the specific Analysis Intent resource via the DB Handler directly",
+        "summary": "Creates the specific Analysis Intent resource",
         "operationId": "AnalysisIntentPut",
         "consumes": [
           "application/json"
@@ -390,7 +390,7 @@
         "tags": [
           "AnalysisRun"
         ],
-        "summary": "Creates the specific Analysis Run resource via the Event Queue",
+        "summary": "Creates the specific Analysis Run resource asynchronously",
         "operationId": "AnalysisRunPut",
         "consumes": [
           "application/json"
@@ -440,7 +440,10 @@
         ],
         "responses": {
           "201": {
-            "description": "AnalysisRun created and will complete asynchronously"
+            "description": "AnalysisRun created and will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/AnalysisRun"
+            }
           },
           "404": {
             "description": "Parent resource not found",
@@ -714,7 +717,7 @@
         "tags": [
           "ConfigurationSnapshot"
         ],
-        "summary": "Creates/ the specific Configuration Snapshot resource",
+        "summary": "Creates the specific Configuration Snapshot resource",
         "operationId": "ConfigurationSnapshotPut",
         "consumes": [
           "application/json"
@@ -757,7 +760,10 @@
         ],
         "responses": {
           "201": {
-            "description": "ConfigurationSnapshot created and will complete asynchronously"
+            "description": "ConfigurationSnapshot created and will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationSnapshot"
+            }
           },
           "404": {
             "description": "Parent resource not found",
