@@ -79,6 +79,12 @@
               "$ref": "#/definitions/ActiveDirectoryAdministrator"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ActiveDirectoryAdministrator"
+            }
+          },
           "202": {
             "description": "Accepted"
           },
@@ -97,7 +103,7 @@
         ],
         "operationId": "Administrators_Delete",
         "x-ms-examples": {
-          "ServerDelete": {
+          "AdministratorDelete": {
             "$ref": "./examples/AdministratorDelete.json"
           }
         },
@@ -308,7 +314,8 @@
           "description": "The tenantId of the Active Directory administrator.",
           "x-ms-mutability": [
             "create",
-            "update"
+            "update",
+            "read"
           ]
         }
       },
@@ -341,11 +348,6 @@
           ]
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
       "description": "Represents a server."
     },
     "AdministratorListResult": {

@@ -685,6 +685,11 @@
           "default": null,
           "description": "Storage properties of a server."
         },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "default": null,
+          "description": "AuthConfig properties of a server."
+        },
         "backup": {
           "$ref": "#/definitions/Backup",
           "default": null,
@@ -819,6 +824,11 @@
             "read"
           ]
         },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "default": null,
+          "description": "AuthConfig properties of a server."
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to update a new PostgreSQL server.",
@@ -916,6 +926,26 @@
         }
       },
       "description": "Storage properties of a server"
+    },
+    "AuthConfig": {
+      "type": "object",
+      "properties": {
+        "activeDirectoryAuthEnabled": {
+          "type": "boolean",
+          "description": "If true, Azure Active Directory authentication is enabled."
+        },
+        "passwordAuthEnabled": {
+          "type": "boolean",
+          "default": "",
+          "description": "If true, Password authentication is enabled."
+        },
+        "tenantId": {
+          "type": "string",
+          "default": "",
+          "description": "Tenant id of the server."
+        }
+      },
+      "description": "Authentication configuration properties of a server"
     },
     "Backup": {
       "type": "object",
