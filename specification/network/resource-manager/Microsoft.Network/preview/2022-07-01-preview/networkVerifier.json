@@ -47,6 +47,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "AnalysisIntentList": {
             "$ref": "./examples/AnalysisIntentList.json"
@@ -303,6 +306,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AnalysisRunList": {
@@ -638,6 +644,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "ConfigurationSnapshotList": {
             "$ref": "./examples/ConfigurationSnapshotList.json"
@@ -881,6 +890,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "NetworkVerifierListBySubscription": {
             "$ref": "./examples/NetworkVerifierListBySubscription.json"
@@ -922,6 +934,9 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkVerifierList": {
@@ -1144,6 +1159,10 @@
             "$ref": "#/definitions/AnalysisIntent"
           }
         }
+      },
+      "nextLink": {
+        "description": "The link used to get the next page of operations.",
+        "type": "string"
       }
     },
     "AnalysisIntentProperties": {
@@ -1213,6 +1232,10 @@
             "$ref": "#/definitions/AnalysisRun"
           }
         }
+      },
+      "nextLink": {
+        "description": "The link used to get the next page of operations.",
+        "type": "string"
       }
     },
     "AnalysisRunProperties": {
@@ -1276,6 +1299,10 @@
             "$ref": "#/definitions/ConfigurationSnapshot"
           }
         }
+      },
+      "nextLink": {
+        "description": "The link used to get the next page of operations.",
+        "type": "string"
       }
     },
     "ConfigurationSnapshotProperties": {
@@ -1459,6 +1486,10 @@
             "$ref": "#/definitions/NetworkVerifier"
           }
         }
+      },
+      "nextLink": {
+        "description": "The link used to get the next page of operations.",
+        "type": "string"
       }
     },
     "NetworkVerifierProperties": {
@@ -1485,19 +1516,7 @@
         "status": {
           "$ref": "#/definitions/ProvisioningState"
         },
-        "subResourceType": {
-          "type": "string"
-        },
-        "subResourceName": {
-          "type": "string"
-        },
-        "resourceName": {
-          "type": "string"
-        },
-        "resourceGroupName": {
-          "type": "string"
-        },
-        "subscriptionId": {
+        "resourceId": {
           "type": "string"
         },
         "error": {
