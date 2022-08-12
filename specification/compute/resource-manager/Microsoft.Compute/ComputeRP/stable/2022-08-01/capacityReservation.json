@@ -838,6 +838,12 @@
     "CapacityReservationUtilization": {
       "type": "object",
       "properties": {
+        "actualReservedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The value provides the actual reserved count which was provisioned sucessfully and for which the customer is getting billed for the Capacity Reservation.<br><br>Minimum api-version: 2022-08-01."
+        },
         "virtualMachinesAllocated": {
           "type": "array",
           "items": {
