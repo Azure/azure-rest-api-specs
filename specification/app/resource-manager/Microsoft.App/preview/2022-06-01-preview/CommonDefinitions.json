@@ -34,8 +34,8 @@
         }
       }
     },
-    "InitContainer": {
-      "description": "Container App init container definition.",
+    "BaseContainer": {
+      "description": "Container App base container definition.",
       "type": "object",
       "properties": {
         "image": {
@@ -86,28 +86,36 @@
         }
       }
     },
-    "Container": {
+    "InitContainer": {
+      "description": "Container App init container definition",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/InitContainer"
-        },
-        {
-          "description": "Container App container definition.",
-          "type": "object",
-          "properties": {
-            "probes": {
-              "description": "List of probes for the container.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ContainerAppProbe"
-              },
-              "x-ms-identifiers": [
-                "type"
-              ]
-            }
-          }
+          "$ref": "#/definitions/BaseContainer"
         }
       ]
+    },
+    "Container": {
+      "description": "Container App container definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContainer"
+        }
+      ],
+      "properties": {
+        "description": "Container App container specific properties.",
+        "probes": {
+          "description": "List of probes for the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
     },
     "ContainerResources": {
       "description": "Container App container resource requirements.",
