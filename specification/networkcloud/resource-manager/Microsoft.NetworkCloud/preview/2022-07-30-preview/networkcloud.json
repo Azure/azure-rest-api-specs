@@ -2576,7 +2576,7 @@
         }
       },
       "put": {
-        "description": "Create a new disk or update the properties of the disk if it exists. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "description": "Create a new disk or update the properties of the disk if it exists. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Create or update the disk.",
         "operationId": "Disks_CreateOrUpdate",
         "parameters": [
@@ -7470,7 +7470,7 @@
       "title": "Node denotes the list of node that utilizes configuration.",
       "properties": {
         "bareMetalMachineId": {
-          "description": "The resource ID of the BareMetalMachine that hosts this node.",
+          "description": "The resource ID of the bare metal machine that hosts this node.",
           "type": "string",
           "readOnly": true
         },
@@ -7498,7 +7498,7 @@
           ]
         },
         "nodeName": {
-          "description": "The name of this node, as realized in the Hybrid AKS Provisioned Cluster.",
+          "description": "The name of this node, as realized in the Hybrid AKS provisioned cluster.",
           "type": "string",
           "readOnly": true
         },
@@ -8074,7 +8074,7 @@
       ],
       "properties": {
         "administratorCredentialsKeyVaultId": {
-          "description": "The administrator credentials for the storage appliance. Initially this entry would point to the factory defaults.",
+          "description": "The resource ID of the key vault containing administrator credentials for the storage appliance. Initially this entry would point to the factory defaults.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -8375,7 +8375,7 @@
           ]
         },
         "isolationDomainIds": {
-          "description": "The resource ID of a Network Fabric isolationDomain.",
+          "description": "The list of resource IDs representing the Network Fabric isolation domains. It can be any combination of l2IsolationDomain and l3IsolationDomain resources.",
           "type": "array",
           "minLength": 1,
           "items": {
@@ -8414,7 +8414,7 @@
           "readOnly": true
         },
         "vlans": {
-          "description": "The list of vlans that are selected from the isolationDomains for trunking.",
+          "description": "The list of vlans that are selected from the isolation domains for trunking.",
           "type": "array",
           "minLength": 1,
           "items": {
