@@ -25,7 +25,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/AmlOperationListResult"
+              "$ref": "machineLearningServices.json#/definitions/AmlOperationListResult"
             }
           },
           "default": {
@@ -378,58 +378,6 @@
     }
   },
   "definitions": {
-    "AmlOperation": {
-      "description": "Azure Machine Learning REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display name of operation",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.MachineLearningServices",
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation that users can perform.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The description for the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation applies to data-plane",
-          "type": "boolean"
-        }
-      }
-    },
-    "AmlOperationListResult": {
-      "type": "object",
-      "description": "An array of operations supported by the resource provider.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AmlOperation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of AML operations supported by the AML resource provider."
-        }
-      }
-    },
     "AcrDetails": {
       "description": "Details of ACR account to be used for the Registry",
       "type": "object",
