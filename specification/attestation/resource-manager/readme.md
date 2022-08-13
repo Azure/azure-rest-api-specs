@@ -1,13 +1,13 @@
 # Attestation
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Attestation.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Attestation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Attestation, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Attestation API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-01
+tag: package-2022-08
 ```
 
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.Attestation/stable/2022-08-01/attestation.json
+```
 ### Tag: package-2018-09-01
 
 These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
@@ -47,7 +56,6 @@ input-file:
 - Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
-
 ### Tag: package-2021-06-01
 
 These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
@@ -58,6 +66,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -81,7 +90,8 @@ swagger-to-sdk:
 See configuration in [readme.python.md](./readme.python.md)
 
 ---
-## C# 
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -102,6 +112,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Terraform
 
 See configuration in [readme.terraform.md](./readme.terraform.md)
-
-
-
