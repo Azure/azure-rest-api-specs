@@ -39,7 +39,7 @@
         "tags": [
           "Administrators"
         ],
-        "operationId": "Administrators_Add",
+        "operationId": "Administrators_Create",
         "x-ms-examples": {
           "Adds an Active DIrectory Administrator for the server": {
             "$ref": "./examples/AdministratorAdd.json"
@@ -48,19 +48,19 @@
         "description": "Creates a new server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
             "$ref": "#/parameters/ObjectIdParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -247,6 +247,10 @@
             "Group",
             "ServicePrincipal"
           ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "create",
             "update",
@@ -285,6 +289,10 @@
             "Group",
             "ServicePrincipal"
           ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "create",
             "update",
@@ -325,30 +333,28 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "The objectId of the Active Directory administrator.",
-          "x-ms-mutability": [
-            "create",
-            "update",
-            "read"
-          ]
+          "description": "The objectId of the Active Directory administrator."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the AAD administrator"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the AAD administrator. E.g. \"ServicePrincipal\" or \"User\""
         },
         "properties": {
           "$ref": "#/definitions/AdministratorProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the active directory administrator."
-        },
-        "type": {
-          "type": "string",
-          "description": "The objectId of the Active Directory administrator.",
-          "x-ms-mutability": [
-            "create",
-            "update",
-            "read"
-          ]
         }
       },
-      "description": "Represents a server."
+      "description": "Represents an Active Directory administrator.",
+      "x-ms-azure-resource": true
     },
     "AdministratorListResult": {
       "type": "object",
