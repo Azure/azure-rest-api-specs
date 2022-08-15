@@ -158,9 +158,8 @@
     },
     "BoundingBox": {
       "x-ms-client-name": "boundingBox",
-      "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+      "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
       "type": "array",
-      "readOnly": true,
       "items": {
         "type": "number",
         "format": "double"
@@ -254,6 +253,9 @@
               }
             ]
           }
+        },
+        "bbox": {
+          "$ref": "#/definitions/BoundingBox"
         }
       }
     },
