@@ -1,3 +1,4 @@
+
 {
   "swagger": "2.0",
   "info": {
@@ -3985,6 +3986,10 @@
             "Standard_L16s",
             "Standard_L8s_v2",
             "Standard_L16s_v2",
+            "Standard_L8s_v3",
+            "Standard_L16s_v3",
+            "Standard_L8as_v3",
+            "Standard_L16as_v3",
             "Standard_E64i_v3",
             "Standard_E80ids_v4",
             "Standard_E2a_v4",
@@ -4016,7 +4021,15 @@
             "Standard_E8s_v5+1TB_PS",
             "Standard_E8s_v5+2TB_PS",
             "Standard_E16s_v5+3TB_PS",
-            "Standard_E16s_v5+4TB_PS"
+            "Standard_E16s_v5+4TB_PS",
+            "Standard_E2d_v4",
+            "Standard_E4d_v4",
+            "Standard_E8d_v4",
+            "Standard_E16d_v4",
+            "Standard_E2d_v5",
+            "Standard_E4d_v5",
+            "Standard_E8d_v5",
+            "Standard_E16d_v5"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -4273,14 +4286,7 @@
           "description": "The original database name, before databaseNameOverride or databaseNamePrefix where applied."
         },
         "databaseShareOrigin": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Direct",
-            "DataShare",
-            "Other"
-          ],
-          "description": "The origin of the following setup."
+          "$ref": "#/definitions/DatabaseShareOrigin"
         }
       },
       "description": "Class representing the Kusto database properties."
@@ -5521,14 +5527,7 @@
           "description": "Table level sharing specifications"
         },
         "databaseShareOrigin": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Direct",
-            "DataShare",
-            "Other"
-          ],
-          "description": "The origin of the following setup."
+          "$ref": "#/definitions/DatabaseShareOrigin"
         }
       },
       "description": "A class representing follower database request."
@@ -6242,6 +6241,20 @@
         }
       },
       "description": "Represents an accepted audience trusted by the cluster."
+    },
+    "DatabaseShareOrigin": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Direct",
+        "DataShare",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseShareOrigin",
+        "modelAsString": true
+      },
+      "description": "The origin of the following setup."
     }
   },
   "parameters": {
