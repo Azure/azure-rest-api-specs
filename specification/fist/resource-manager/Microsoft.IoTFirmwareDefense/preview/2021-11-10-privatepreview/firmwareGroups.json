@@ -221,6 +221,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/generateUploadUrl": {
+      "post": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_GenerateUploadUrl",
+        "description": "The operation to get a url for file upload.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateUploadUrlParameters"
+            },
+            "description": "Parameters when requesting a URL to upload firmware."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UrlData"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Url for upload firmware": {
+            "$ref": "./examples/PostGenerateUploadUrl.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups": {
       "get": {
         "tags": [
@@ -321,6 +373,27 @@
           "description": "The uri to fetch the next page of asset."
         }
       }
+    },
+    "GenerateUploadUrlParameters": {
+      "type": "object",
+      "description": "Parameters for getting an upload URL",
+      "properties": {
+        "firmwareId": {
+          "type": "string",
+          "description": "A unique ID for the firmware to be uploaded."
+        }
+      }
+    },
+    "UrlData": {
+      "type": "object",
+      "properties": {
+        "uploadUrl": {
+          "description": "Url for file uploading.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Url data for file uploading."
     }
   },
   "parameters": {}
