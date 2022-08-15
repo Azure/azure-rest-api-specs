@@ -16,7 +16,16 @@
         "properties": {
           "resultStatistics": {
             "progress": 75.0,
-            "ingestedRecords": 5
+            "ingestedRecords": 5,
+            "scannedGb": 23.5
+          },
+          "searchResults": {
+            "query": "Heartbeat | where SourceSystem != '' | project SourceSystem",
+            "description": "This table was created using a Search Job with the following query: 'Heartbeat | where SourceSystem != '' | project SourceSystem'.",
+            "limit": 1000,
+            "startSearchTime": "2020-02-03T04:05:06Z",
+            "endSearchTime": "2020-02-02T04:05:06Z",
+            "sourceTable": "Heartbeat"
           },
           "schema": {
             "name": "table1_SRCH",
@@ -95,20 +104,14 @@
             "source": null,
             "solutions": [
               "LogManagement"
-            ],
-            "searchResults": {
-              "query": "Heartbeat | where SourceSystem != '' | project SourceSystem",
-              "description": "This table was created using a Search Job with the following query: 'Heartbeat | where SourceSystem != '' | project SourceSystem'.",
-              "limit": 1000,
-              "startSearchTime": "2020-02-03T04:05:06Z",
-              "endSearchTime": "2020-02-02T04:05:06Z",
-              "sourceTable": "Heartbeat"
-            }
+            ]
           },
           "provisioningState": "InProgress",
           "retentionInDays": 50,
           "totalRetentionInDays": 50,
           "archiveRetentionInDays": 0,
+          "retentionInDaysAsDefault": false,
+          "totalRetentionInDaysAsDefault": true,
           "plan": "Analytics"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/table1_SRCH",

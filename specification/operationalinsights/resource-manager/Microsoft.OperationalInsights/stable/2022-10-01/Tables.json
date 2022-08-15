@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
       "get": {
         "tags": [
           "Tables"
@@ -79,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
       "put": {
         "tags": [
           "Tables"
@@ -246,7 +246,7 @@
           "Tables"
         ],
         "x-ms-examples": {
-          "TablesGet": {
+          "TablesDelete": {
             "$ref": "./examples/TablesDelete.json"
           }
         },
@@ -292,18 +292,60 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/migrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/migrate": {
       "post": {
         "tags": [
           "Tables"
         ],
         "x-ms-examples": {
-          "TablesGet": {
+          "TablesMigrate": {
             "$ref": "./examples/TablesMigrate.json"
           }
         },
         "operationId": "Tables_Migrate",
         "description": "Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/cancelSearch": {
+      "post": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesSearchCancel": {
+            "$ref": "./examples/TablesSearchCancel.json"
+          }
+        },
+        "operationId": "Tables_CancelSearch",
+        "description": "Cancel a log analytics workspace search results table query run.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -557,16 +599,6 @@
             "type": "string"
           },
           "description": "List of solutions the table is affiliated with"
-        },
-        "searchResults": {
-          "readOnly": true,
-          "$ref": "#/definitions/SearchResults",
-          "description": "Parameters of the search job that initiated this table."
-        },
-        "restoredLogs": {
-          "readOnly": true,
-          "$ref": "#/definitions/RestoredLogs",
-          "description": "Parameters of the restore operation that initiated this table."
         }
       },
       "description": "Table's schema."
@@ -601,6 +633,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The table used in the search job."
+        },
+        "azureAsyncOperationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Search results table async operation id."
         }
       },
       "description": "Parameters of the search job that initiated this table."
@@ -621,6 +658,11 @@
         "sourceTable": {
           "type": "string",
           "description": "The table to restore data from."
+        },
+        "azureAsyncOperationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Search results table async operation id."
         }
       },
       "description": "Restore parameters."
@@ -639,6 +681,12 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of rows that were returned by the search job."
+        },
+        "scannedGb": {
+          "readOnly": true,
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Search job: Amount of scanned data."
         }
       },
       "description": "Search job execution statistics."
@@ -675,6 +723,7 @@
           "description": "Parameters of the restore operation that initiated this table."
         },
         "resultStatistics": {
+          "readOnly": true,
           "$ref": "#/definitions/ResultStatistics",
           "description": "Search job execution statistics."
         },
@@ -716,7 +765,8 @@
           "enum": [
             "Updating",
             "InProgress",
-            "Succeeded"
+            "Succeeded",
+            "Deleting"
           ],
           "x-ms-enum": {
             "name": "ProvisioningStateEnum",
@@ -736,6 +786,16 @@
               }
             ]
           }
+        },
+        "retentionInDaysAsDefault": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "True - Value originates from workspace retention in days, False - Customer specific."
+        },
+        "totalRetentionInDaysAsDefault": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "True - Value originates from retention in days, False - Customer specific."
         }
       },
       "description": "Table properties."
