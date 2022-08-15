@@ -250,7 +250,8 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking"
+        "EntityLinking",
+        "ZeroShotClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -287,7 +288,8 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults"
+        "EntityLinkingResults",
+        "ZeroShotClassificationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -468,6 +470,22 @@
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
+    },
+    "AnalyzeTextZeroShotClassifcationInput": {
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "parameters": {
+          "$ref": "#/definitions/ZeroShotClassificationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ZeroShotClassification"
     },
     "AnalyzeTextJobsInput": {
       "properties": {
@@ -2294,6 +2312,93 @@
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       }
+    },
+    "ZeroShotClassificationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Zero Shot Classification task.",
+      "properties": {
+        "classificationType": {
+          "type": "string",
+          "description": "Specifies the number of classes per document. Defaults to multi classification which may return more than one class for each document.",
+          "default": "Multi",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "ClassificationType",
+            "modelAsString": true
+          }
+        },
+        "classes" : {
+          "type": "array",
+          "description": "a list of classes to which input is classified to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "classes"
+        ]
+      }
+    },
+    "ZeroShotClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ZeroShotClassificationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ZeroShotClassificationResults"
+    },
+    "ZeroShotClassificationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ClassificationDocumentResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZeroShotResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "ZeroShotResult": {
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      },
+      "required": [
+        "errors"
+      ]
     },
     "AnalyzeTextJobState": {
       "allOf": [
