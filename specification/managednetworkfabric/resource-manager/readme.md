@@ -48,6 +48,9 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/AccessControlLists.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpCommunityLists.json
   - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRackSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDeviceSkus.json
 ```
 
 ---
