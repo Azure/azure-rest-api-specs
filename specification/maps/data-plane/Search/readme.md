@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - preview/2022-09-01-preview/geocoding.json
+  - preview/2022-09-01-preview/search.json
 ```
 ### Tag: 1.0
 
