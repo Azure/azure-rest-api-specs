@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MetaverseManagementClient",
-    "description": "Metaverse provider",
+    "description": "Metaverse Resource Provider",
     "version": "2022-02-01-preview"
   },
   "host": "management.azure.com",
@@ -2319,9 +2319,11 @@
       "type": "object",
       "properties": {
         "objectId": {
+          "description": "The content contributor's object id. This is not an Azure Resource Manager id.",
           "type": "string"
         },
         "role": {
+          "description": "The content contributor's role.",
           "type": "string"
         }
       }
@@ -2404,6 +2406,20 @@
         "bannerImage": {
           "description": "The banner image of the event.",
           "type": "string"
+        },
+        "roomCapacity": {
+          "format": "int32",
+          "description": "The room capacity of the event.",
+          "type": "integer"
+        },
+        "sessionCapacity": {
+          "format": "int32",
+          "description": "The session capacity of the event.",
+          "type": "integer"
+        },
+        "enableStageBroadcast": {
+          "description": "The enable stage broadcast flag of the event",
+          "type": "boolean"
         }
       }
     },
@@ -2518,6 +2534,7 @@
           "type": "string"
         },
         "contentContributors": {
+          "description": "The list of content contributors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContentContributor"
@@ -2734,6 +2751,20 @@
         },
         "author": {
           "type": "string"
+        },
+        "roomCapacity": {
+          "format": "int32",
+          "description": "Space Room Capacity",
+          "type": "integer"
+        },
+        "sessionCapacity": {
+          "format": "int32",
+          "description": "Space Session Capacity",
+          "type": "integer"
+        },
+        "enableStageBroadcast": {
+          "description": "Space Enable Stage Broadcast Flag",
+          "type": "boolean"
         }
       }
     },
