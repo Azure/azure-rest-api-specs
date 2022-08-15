@@ -5,11 +5,24 @@
     "storageSyncServiceName": "SampleStorageSyncService_1",
     "parameters": {
       "properties": {
-        "incomingTrafficPolicy": "AllowAllTraffic",
-		"identityType": "SystemAssigned, UserAssigned",
-		"identityID": "/subscriptions/9cfa5300-0883-4d44-9bc8-e75c4535b577/resourcegroups/jwusfgrp1101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/adminfrontdoorMI"
+        "incomingTrafficPolicy": "AllowAllTraffic"
       },
       "location": "WestUS",
+      "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": null,
+          "tenantId": null,
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": null,
+              "principalId": null
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": null,
+              "principalId": null
+            }
+          }
+      }
       "tags": {}
     },
     "api-version": "2022-09-01"
@@ -21,12 +34,35 @@
         "location": "WestUS",
         "properties": {
           "incomingTrafficPolicy": "AllowAllTraffic",
-		  "identityType": "SystemAssigned, UserAssigned",
-		  "identityID": "/subscriptions/9cfa5300-0883-4d44-9bc8-e75c4535b577/resourcegroups/jwusfgrp1101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/adminfrontdoorMI"
+          "identityType": "SystemAssigned, UserAssigned",
+          "identityID": "/subscriptions/9cfa5300-0883-4d44-9bc8-e75c4535b577/resourcegroups/jwusfgrp1101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/adminfrontdoorMI"
         },
         "tags": {},
         "id": "/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1",
-        "type": "Microsoft.StorageSync/storageSyncServices"
+        "type": "Microsoft.StorageSync/storageSyncServices",
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId1",
+              "principalId": "principalId1"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "clientId2",
+              "principalId": "principalId2"
+            }
+          }
+        }
       }
     },
     "202": {
