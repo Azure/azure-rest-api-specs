@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Geocoding Service",
+    "title": "Azure Maps Search Service",
     "version": "2022-09-01-preview",
-    "description": "Azure Maps Geocoding REST APIs"
+    "description": "Azure Maps Search REST APIs"
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -48,7 +48,6 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2022-09-01-preview",
       "x-ms-parameter-location": "client"
     },
     "Top": {
@@ -57,6 +56,7 @@
       "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "default": 5,
       "minimum": 1,
       "maximum": 20,
@@ -106,6 +106,118 @@
       "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityType": {
+      "name": "entityType",
+      "in": "query",
+      "description": "The geopolitical concept to return a boundary for.",
+      "required": false,
+      "type": "string",
+      "default": "countryRegion",
+      "enum": [
+        "countryRegion",
+        "adminDistrict",
+        "adminDistrict2",
+        "postalCode",
+        "postalCode2",
+        "postalCode3",
+        "postalCode4",
+        "neighborhood",
+        "locality"
+      ],
+      "x-ms-enum": {
+        "name": "EntityTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "countryRegion",
+            "value": "countryRegion",
+            "description": "Country or region."
+          },
+          {
+            "name": "adminDistrict",
+            "value": "adminDistrict",
+            "description": "First administrative level within the country/region level, such as a state or a province."
+          },
+          {
+            "name": "adminDistrict2",
+            "value": "adminDistrict2",
+            "description": "Second administrative level within the country/region level, such as a county."
+          },
+          {
+            "name": "postalCode",
+            "value": "postalCode",
+            "description": "The smallest post code category, such as a zip code."
+          },
+          {
+            "name": "postalCode2",
+            "value": "postalCode2",
+            "description": "The next largest post code category after postalCode that is created by aggregating postalCode areas."
+          },
+          {
+            "name": "postalCode3",
+            "value": "postalCode3",
+            "description": "The next largest post code category after postalCode2 that is created by aggregating postalCode2 areas."
+          },
+          {
+            "name": "postalCode4",
+            "value": "postalCode4",
+            "description": "The next largest post code category after postalCode3 that is created by aggregating postalCode3 areas."
+          },
+          {
+            "name": "neighborhood",
+            "value": "neighborhood",
+            "description": "A section of a populated place that is typically well-known, but often with indistinct boundaries."
+          },
+          {
+            "name": "locality",
+            "value": "locality",
+            "description": "A concentrated area of human settlement, such as a city, town or village."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Resolution": {
+      "name": "resolution",
+      "in": "query",
+      "description": "Resolution determines the amount of points to send back.",
+      "required": false,
+      "type": "string",
+      "default": "medium",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "huge"
+      ],
+      "x-ms-enum": {
+        "name": "ResolutionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "small",
+            "value": "small",
+            "description": "Return the boundary geometry with the least amount of points."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Return the boundary geometry with more or the same amount of points as small."
+          },
+          {
+            "name": "large",
+            "value": "large",
+            "description": "Return the boundary geometry with more or the same amount of points as medium."
+          },
+          {
+            "name": "huge",
+            "value": "huge",
+            "description": "Return the boundary geometry with more or the same amount of points as large."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   },
@@ -241,7 +353,7 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/parameters/ClientId"
           }
         ],
         "responses": {
@@ -258,14 +370,14 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/responses/default"
           }
         }
       }
     },
     "/geocode/batch": {
       "post": {
-        "description": "**Geocoding Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Geocoding Batch API sends batches of queries to [Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding) using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode/batch?api-version=2022-09-01-preview\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Geocoding Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Geocoding Batch API sends batches of queries to [Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding) using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode/batch?api-version=2022-02-01-preview\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search-v2/get-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Search_GetGeocodingBatch",
         "x-ms-examples": {
           "A Geocoding Batch API call containing 2 Geocoding queries": {
@@ -274,7 +386,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -306,61 +418,79 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/search/polygon": {
+      "get": {
+        "description": "**Get Polygon**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nSupplies polygon data of a geographical area outline such as a city or a country region.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.",
+        "operationId": "Search_GetPolygon",
+        "produces": [
+          "application/geo+json"
+        ],
+        "x-ms-examples": {
+          "Get polygon for a city at coordinates 47.612560,-122.204141": {
+            "$ref": "./examples/GetPolygon.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "$ref": "#/parameters/Location"
+          },
+          {
+            "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/EntityType"
+          },
+          {
+            "$ref": "#/parameters/Resolution"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Boundary"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/responses/default"
           }
         }
       }
     }
   },
   "definitions": {
-    "GeoJSONPoint": {
-      "type": "object",
-      "description": "A structure for Point Geometry",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
-          "type": "string",
-          "enum": [
-            "Point"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJSONPointTypeEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Point"
-              }
-            ]
-          }
-        },
-        "coordinates": {
-          "description": "Coordinates for the `Point` geometry.",
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      }
-    },
-    "Bbox": {
-      "description": "Information on the coordinate range for point Geometry.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
-      "type": "array",
-      "minItems": 4,
-      "maxItems": 4,
-      "items": {
-        "type": "number",
-        "format": "double"
-      }
-    },
     "UsageType": {
       "type": "string",
       "enum": [
         "Display",
         "Route"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "UsageTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Display"
+          },
+          {
+            "value": "Route"
+          }
+        ]
+      }
     },
     "GeocodePoints": {
       "description": "A collection of geocode points that differ in how they were calculated and their suggested use.",
@@ -369,7 +499,7 @@
         "type": "object",
         "properties": {
           "geometry": {
-            "$ref": "#/definitions/GeoJSONPoint"
+            "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/definitions/GeoJsonPoint"
           },
           "calculationMethod": {
             "description": "The method that was used to compute the geocode point.\n- `Interpolation`: The geocode point was matched to a point on a road using interpolation.\n- `InterpolationOffset`: The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street.\n- `Parcel`: The geocode point was matched to the center of a parcel.\n- `Rooftop`: The geocode point was matched to the rooftop of a building.",
@@ -379,7 +509,25 @@
               "InterpolationOffset",
               "Parcel",
               "Rooftop"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "CalculationMethodEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Interpolation"
+                },
+                {
+                  "value": "InterpolationOffset"
+                },
+                {
+                  "value": "Parcel"
+                },
+                {
+                  "value": "Rooftop"
+                }
+              ]
+            }
           },
           "usageTypes": {
             "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.",
@@ -402,6 +550,7 @@
         "top": {
           "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
           "type": "integer",
+          "format": "int32",
           "default": 5,
           "minimum": 1,
           "maximum": 20
@@ -532,11 +681,13 @@
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "totalRequests": {
               "description": "Total number of requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             }
           }
@@ -580,6 +731,7 @@
           "description": "ID for feature returned"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "type": {
@@ -602,12 +754,15 @@
           }
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONPoint"
+          "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/definitions/GeoJsonPoint"
         },
         "bbox": {
-          "$ref": "#/definitions/Bbox"
+          "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/definitions/BoundingBox"
         }
-      }
+      },
+      "required": [
+        "geometry"
+      ]
     },
     "GeocodingResponse": {
       "description": "This object is returned from a successful Geocoding call",
@@ -696,7 +851,22 @@
           "Good",
           "Ambiguous",
           "UpHierarchy"
-        ]
+        ],
+        "x-ms-enum": {
+          "name": "MatchCodesEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Good"
+            },
+            {
+              "value": "Ambiguous"
+            },
+            {
+              "value": "UpHierarchy"
+            }
+          ]
+        }
       }
     },
     "Confidence": {
@@ -706,7 +876,22 @@
         "High",
         "Medium",
         "Low"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ConfidenceEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "High"
+          },
+          {
+            "value": "Medium"
+          },
+          {
+            "value": "Low"
+          }
+        ]
+      }
     },
     "NextLink": {
       "type": "string",
@@ -716,7 +901,66 @@
       "type": "string",
       "enum": [
         "FeatureCollection"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "FeatureCollection"
+          }
+        ]
+      }
+    },
+    "Boundary": {
+      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/2022-08-01-preview/common.json#/definitions/GeoJsonFeature"
+        },
+        {
+          "$ref": "#/definitions/BoundaryProperties"
+        }
       ]
+    },
+    "BoundaryProperties": {
+      "description": "Properties of a Boundary object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name associated with the geographical area.",
+          "type": "string"
+        },
+        "copyright": {
+          "description": "The copyright string.",
+          "type": "string"
+        },
+        "copyrightURL": {
+          "description": "A URL that lists many of the data providers for Azure Maps and their related copyright information.",
+          "type": "string"
+        },
+        "sourcesByGeometriesArrayIndex": {
+          "description": "A dictionary of various data providers used to create the data in the result and the associated copyright information for them. A key in the dictionary is a geometry index in the GeometryCollection object.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BoundaryCopyright"
+          }
+        }
+      }
+    },
+    "BoundaryCopyright": {
+      "type": "object",
+      "properties": {
+        "sourceName": {
+          "description": "The name of the data provider",
+          "type": "string"
+        },
+        "copyright": {
+          "description": "The copyright string for the data provider",
+          "type": "string"
+        }
+      }
     }
   }
 }
