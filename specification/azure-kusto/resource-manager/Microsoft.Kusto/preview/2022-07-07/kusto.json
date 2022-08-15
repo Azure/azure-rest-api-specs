@@ -4003,6 +4003,12 @@
             "Standard_E4ads_v5",
             "Standard_E8ads_v5",
             "Standard_E16ads_v5",
+            "Standard_EC8as_v5+1TB_PS",
+            "Standard_EC8as_v5+2TB_PS",
+            "Standard_EC16as_v5+3TB_PS",
+            "Standard_EC16as_v5+4TB_PS",
+            "Standard_EC8ads_v5",
+            "Standard_EC16ads_v5",
             "Standard_E8s_v4+1TB_PS",
             "Standard_E8s_v4+2TB_PS",
             "Standard_E16s_v4+3TB_PS",
@@ -4161,6 +4167,14 @@
           "type": "object",
           "$ref": "#/definitions/TableLevelSharingProperties",
           "description": "Table level sharing specifications"
+        },
+        "databaseNameOverride": {
+          "type": "string",
+          "description": "Overrides original database name. Relevant only when attaching a specific database."
+        },
+        "databaseNamePrefix": {
+          "type": "string",
+          "description": "Adds a prefix to attached database name. When following entire cluster, that prefix would be added to all databases original names from leader cluster."
         }
       },
       "description": "Class representing the an attached database configuration properties of kind specific.",
@@ -4290,7 +4304,7 @@
         },
         "managedIdentityResourceId": {
           "type": "string",
-          "description": "Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id.  For user assigned identity (UAI) provide the UAI resource Id."
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub."
         },
         "managedIdentityObjectId": {
           "type": "string",
@@ -4519,7 +4533,7 @@
         },
         "managedIdentityResourceId": {
           "type": "string",
-          "description": "Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id.  For user assigned identity (UAI) provide the UAI resource Id."
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub and storage account."
         },
         "managedIdentityObjectId": {
           "type": "string",
