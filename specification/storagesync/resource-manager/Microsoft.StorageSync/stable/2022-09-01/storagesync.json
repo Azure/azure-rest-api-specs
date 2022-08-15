@@ -2651,6 +2651,98 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "GUID identifying the on-premises server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Registered Server object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisteredServerUpdateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_Update",
+        "description": "Update registered server.",
+        "x-ms-examples": {
+          "RegisteredServers_Update": {
+            "$ref": "./examples/RegisteredServers_Update.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered Server resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "parameters": [
           {
@@ -3421,6 +3513,14 @@
         "incomingTrafficPolicy": {
           "$ref": "#/definitions/IncomingTrafficPolicy",
           "description": "Incoming Traffic Policy"
+        },
+		"identityType": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
         }
       }
     },
@@ -3545,6 +3645,22 @@
       },
       "description": "The parameters used when creating a registered server."
     },
+    "RegisteredServerUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerUpdateParametersProperties",
+          "description": "The parameters used to update the registered server."
+        }
+      },
+      "description": "The parameters used when updating a registered server."
+    },
     "RegisteredServerCreateParametersProperties": {
       "description": "RegisteredServer Create Properties object.",
       "properties": {
@@ -3583,6 +3699,31 @@
         "friendlyName": {
           "type": "string",
           "description": "Friendly Name"
+        },
+		"identityType": {
+	      "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+	      "readOnly": true,
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
+        }
+      }
+    },
+    "RegisteredServerUpdateParametersProperties": {
+      "description": "RegisteredServer Create Properties object.",
+      "properties": {
+		"identityType": {
+	      "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+	      "readOnly": true,
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
         }
       }
     },
@@ -4136,6 +4277,14 @@
         "incomingTrafficPolicy": {
           "$ref": "#/definitions/IncomingTrafficPolicy",
           "description": "Incoming Traffic Policy"
+        },
+		"identityType": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
         }
       }
     },
@@ -4171,6 +4320,19 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource Last Operation Name"
+        },
+		"identityType": {
+	      "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+	      "readOnly": true,
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -4340,6 +4502,16 @@
           "type": "string",
           "description": "Server name",
           "readOnly": true
+        },
+		"identityType": {
+	      "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity Type"
+        },
+		"identityId": {
+	      "readOnly": true,
+          "type": "string",
+          "description": "Comma separated list of user assigned identities"
         }
       }
     },
