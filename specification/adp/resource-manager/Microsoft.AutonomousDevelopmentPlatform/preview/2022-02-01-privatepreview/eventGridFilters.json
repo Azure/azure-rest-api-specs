@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ADP Management API",
+    "version": "2022-02-01-privatepreview",
+    "description": "REST API for ADP Services, (internal APIs)"
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EventGridFilter"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AutonomousDevelopmentPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List the operations for Microsoft.AutonomousDevelopmentPlatform",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all provider operations": {
+            "$ref": "./examples/AdpOperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/{workspaceName}/eventGridFilters/{eventGridFilterName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceName"
+        },
+        {
+          "$ref": "#/parameters/EventGridFilterNameParameter"
+        }
+      ],
+      "patch": {
+        "description": "Update an existing EventGridFilters resource's properties.",
+        "operationId": "EventGridFilter_Update",
+        "summary": "Update",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response includes the updated filter configuration.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update resource": {
+            "$ref": "./examples/EventGridFilterUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Get an existing EventGridFilters resource and its properties",
+        "operationId": "EventGridFilter_Get",
+        "summary": "Get",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding AutonomousDevelopmentPlatformService.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get resource": {
+            "$ref": "./examples/EventGridFilterGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a eventgrid filter on an existing resource.",
+        "operationId": "EventGridFilter_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update resource": {
+            "$ref": "./examples/EventGridFilterCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a eventgrid filter.",
+        "operationId": "EventGridFilter_Delete",
+        "summary": "Delete",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been deleted successfully."
+          },
+          "204": {
+            "description": "The resource did not exist."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete resource": {
+            "$ref": "./examples/EventGridFilterDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/{workspaceName}/eventGridFilters": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceName"
+        }
+      ],
+      "get": {
+        "description": "Handles requests to list all EventGridFilters on a AutonomousDevelopmentPlatformService resource.",
+        "operationId": "EventGridFilters_ListByAutonomousDevelopmentPlatformServiceResource",
+        "summary": "List All EventGrid Filters on a AutonomousDevelopmentPlatformService Resource",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of EventGridFilters in a AutonomousDevelopmentPlatformService.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResourceList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List by resource group": {
+            "$ref": "./examples/EventGridFilterListByParent.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventGridFilterResource": {
+      "description": "A class representing an eventgrid filter resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridFilterProperties",
+          "description": "The properties of the service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventGridFilterProperties": {
+      "description": "A class that describes the properties of an EventGridFilters resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Pending"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "subjectBeginsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not start with this string",
+              "type": "string"
+            },
+            "subjectEndsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not end with this string",
+              "type": "string"
+            },
+            "includedEventTypes": {
+              "description": "Event types subscribed",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "subscriberIdentityInfo": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "clientPrincipalId": {
+              "description": "The client principal ID",
+              "type": "string"
+            },
+            "clientObjectId": {
+              "description": "The client object ID",
+              "type": "string"
+            },
+            "clientTenantId": {
+              "description": "The client tenant ID",
+              "type": "string"
+            },
+            "clientApplicationId": {
+              "description": "The client application ID",
+              "type": "string"
+            },
+            "clientAuthorizationSource": {
+              "description": "The client authorization source",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "EventGridFilterResourceList": {
+      "description": "Object that includes an array of workspaces and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of EventGridFilter resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGridFilterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WorkspaceName": {
+      "x-ms-parameter-location": "method",
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "description": "The Workspace name.",
+      "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
+      "maxLength": 46,
+      "type": "string"
+    },
+    "EventGridFilterNameParameter": {
+      "name": "eventGridFilterName",
+      "in": "path",
+      "description": "The name of the eventgrid filter.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

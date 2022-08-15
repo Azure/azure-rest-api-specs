@@ -68,6 +68,15 @@ input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2022-03-01-preview/workspaces.json
 ```
 
+### Tag: package-2022-02-01-privatepreview
+
+```yaml $(tag) == 'package-2022-02-01-privatepreview'
+version: 2022-02-01-privatepreview
+version-with-underscores: 2022_05_01_privatepreview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-02-01-privatepreview/eventGridFilters.json
+```
+
 ---
 
 # Code Generation
