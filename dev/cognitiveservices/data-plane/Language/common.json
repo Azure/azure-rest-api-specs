@@ -320,6 +320,24 @@
         }
       }
     },
+    "RequestWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered for the whole task/request.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        }
+      }
+    },
     "InputWarning": {
       "type": "object",
       "description": "Contains details of warnings encountered during a job execution.",
@@ -364,6 +382,13 @@
           "description": "Errors by document id.",
           "items": {
             "$ref": "#/definitions/InputError"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings for the job task.",
+          "items": {
+            "$ref": "#/definitions/RequestWarning"
           }
         },
         "statistics": {
