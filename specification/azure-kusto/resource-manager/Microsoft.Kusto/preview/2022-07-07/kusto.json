@@ -4170,11 +4170,11 @@
         },
         "databaseNameOverride": {
           "type": "string",
-          "description": "Overrides original database name. Relevant only when attaching a specific database."
+          "description": "Overrides the original database name. Relevant only when attaching to a specific database."
         },
         "databaseNamePrefix": {
           "type": "string",
-          "description": "Adds a prefix to attached database name. When following entire cluster, that prefix would be added to all databases original names from leader cluster."
+          "description": "Adds a prefix to the attached databases name. When following an entire cluster, that prefix would be added to all of the databases original names from leader cluster."
         }
       },
       "description": "Class representing the an attached database configuration properties of kind specific.",
@@ -4260,6 +4260,27 @@
             "modelAsString": true
           },
           "description": "The principals modification kind of the database"
+        },
+        "tableLevelSharingProperties": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/TableLevelSharingProperties",
+          "description": "Table level sharing specifications"
+        },
+        "originalDatabaseName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The original database name, before databaseNameOverride or databaseNamePrefix where applied."
+        },
+        "databaseShareOrigin": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Direct",
+            "DataShare",
+            "Other"
+          ],
+          "description": "The origin of the following setup."
         }
       },
       "description": "Class representing the Kusto database properties."
@@ -4323,6 +4344,11 @@
             "modelAsString": true
           },
           "default": "Single"
+        },
+        "retrievalStartDate": {
+          "description": "When defined, the data connection retrieves existing Event hub events created since the Retrieval start date. It can only retrieve events retained by the Event hub, based on its retention period.",
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
@@ -4376,6 +4402,11 @@
             "modelAsString": true
           },
           "default": "Single"
+        },
+        "retrievalStartDate": {
+          "description": "When defined, the data connection retrieves existing Event hub events created since the Retrieval start date. It can only retrieve events retained by the Event hub, based on its retention period.",
+          "type": "string",
+          "format": "date-time"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5482,6 +5513,22 @@
           "type": "string",
           "readOnly": true,
           "description": "The database name owned by this cluster that was followed. * in case following all databases."
+        },
+        "tableLevelSharingProperties": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/TableLevelSharingProperties",
+          "description": "Table level sharing specifications"
+        },
+        "databaseShareOrigin": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Direct",
+            "DataShare",
+            "Other"
+          ],
+          "description": "The origin of the following setup."
         }
       },
       "description": "A class representing follower database request."
