@@ -339,6 +339,44 @@
       },
       "discriminator": "actionType"
     },
+    "AutomationRuleBooleanCondition": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/AutomationRuleBooleanConditionSupportedOperator"
+        },
+        "innerConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "minItems": 2,
+          "maxItems": 10
+        }
+      }
+    },
+    "AutomationRuleBooleanConditionSupportedOperator": {
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "example": "And",
+      "x-ms-enum": {
+        "name": "AutomationRuleBooleanConditionSupportedOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "And",
+            "description": "Evaluates as true if all the item conditions are evaluted as true"
+          },
+          {
+            "value": "Or",
+            "description": "Evaluates as true if at least one of the item conditions are evaluted as true"
+          }
+        ]
+      }
+    },
     "AutomationRuleCondition": {
       "description": "Describes an automation rule condition.",
       "required": [
@@ -485,6 +523,63 @@
         }
       }
     },
+    "AutomationRulePropertyArrayConditionSupportedArrayConditionType": {
+      "enum": [
+        "AnyItem"
+      ],
+      "type": "string",
+      "example": "AnyItem",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayConditionSupportedArrayConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AnyItem",
+            "description": "Evaluate the condition as true if any item fulfills it"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayConditionSupportedArrayType": {
+      "enum": [
+        "CustomDetails",
+        "CustomDetailValues"
+      ],
+      "type": "string",
+      "example": "CustomDetails",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayConditionSupportedArrayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CustomDetails",
+            "description": "Evaluate the condition on the custom detail keys"
+          },
+          {
+            "value": "CustomDetailValues",
+            "description": "Evaluate the condition on a custom detail's values"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayValuesCondition": {
+      "type": "object",
+      "properties": {
+        "arrayType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayConditionSupportedArrayType"
+        },
+        "arrayConditionType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayConditionSupportedArrayConditionType"
+        },
+        "itemConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "maxItems": 10
+        }
+      }
+    },
     "AutomationRulePropertyChangedConditionSupportedChangedType": {
       "enum": [
         "ChangedFrom",
@@ -597,6 +692,9 @@
         "IncidentTactics",
         "IncidentLabel",
         "IncidentProviderName",
+        "IncidentUpdatedBySource",
+        "IncidentCustomDetailsKey",
+        "IncidentCustomDetailsValue",
         "AccountAadTenantId",
         "AccountAadUserId",
         "AccountName",
@@ -682,6 +780,18 @@
           {
             "value": "IncidentProviderName",
             "description": "The provider name of the incident"
+          },
+          {
+            "value": "IncidentUpdatedBySource",
+            "description": "The update source of the incident"
+          },
+          {
+            "value": "IncidentCustomDetailsKey",
+            "description": "The incident custom detail key"
+          },
+          {
+            "value": "IncidentCustomDetailsValue",
+            "description": "The incident custom detail value"
           },
           {
             "value": "AccountAadTenantId",
@@ -979,11 +1089,30 @@
         }
       }
     },
+    "BooleanConditionProperties": {
+      "description": "Describes an automation rule condition that applies a boolean operator (e.g AND, OR) to conditions",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRuleBooleanCondition"
+        }
+      },
+      "x-ms-discriminator-value": "Boolean",
+      "x-ms-client-flatten": true
+    },
     "ConditionType": {
       "enum": [
         "Property",
+        "PropertyArray",
         "PropertyChanged",
-        "PropertyArrayChanged"
+        "PropertyArrayChanged",
+        "Boolean"
       ],
       "type": "string",
       "example": "Property",
@@ -996,12 +1125,20 @@
             "description": "Evaluate an object property value"
           },
           {
+            "value": "PropertyArray",
+            "description": "Evaluate an object array property value"
+          },
+          {
             "value": "PropertyChanged",
             "description": "Evaluate an object property changed value"
           },
           {
             "value": "PropertyArrayChanged",
             "description": "Evaluate an object array property changed value"
+          },
+          {
+            "value": "Boolean",
+            "description": "Apply a boolean operator (e.g AND, OR) to conditions"
           }
         ]
       }
@@ -1081,6 +1218,23 @@
         }
       },
       "x-ms-discriminator-value": "PropertyArrayChanged",
+      "x-ms-client-flatten": true
+    },
+    "PropertyArrayConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates an array property's value",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyArrayValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyArray",
       "x-ms-client-flatten": true
     },
     "PropertyChangedConditionProperties": {
