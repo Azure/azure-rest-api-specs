@@ -5388,32 +5388,27 @@
       "type": "object",
       "properties": {
         "authType": {
-          "$ref": "#/definitions/ConnectionAuthType"
+          "$ref": "#/components/schemas/ConnectionAuthType"
         },
         "category": {
-          "$ref": "#/definitions/ConnectionCategory"
+          "$ref": "#/components/schemas/ConnectionCategory"
         },
         "target": {
-          "type": "string"
-        },
-        "value": {
-          "description": "Value details of the workspace connection.",
-          "type": "string"
-        },
-        "valueFormat": {
-          "description": "format for the workspace connection value",
           "type": "string",
-          "enum": [
-            "JSON"
-          ],
-          "x-ms-enum": {
-            "name": "ValueFormat",
-            "modelAsString": true
-          }
+          "nullable": true
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/components/schemas/IValue"
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false,
-      "discriminator": "authType"
+      "discriminator": {
+        "propertyName": "authType"
+      }
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
