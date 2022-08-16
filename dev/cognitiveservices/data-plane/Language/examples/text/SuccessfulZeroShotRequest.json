@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-10-01-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "ZeroShotClassification",
+      "parameters": {
+        "category": ["Health", "Politics", "Music", "Sports"],
+        "classificationType" : "Single"
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "text": "The WHO is issuing a warning about Monkey Pox."
+          },
+          {
+            "id": "2",
+            "language": "en",
+            "text": "Mo Salah plays in Liverpool FC in England."
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ZeroShotClassificationResults",
+        "results": {
+          "documents": [
+            {
+              "id": "1",
+              "class": [
+                {
+                  "category": "Health",
+                  "confidenceScore": 0.9
+                },
+                {
+                  "category": "Politics",
+                  "confidenceScore": 0.9
+                }
+              ],
+              "warnings": []
+            },
+            {
+              "id": "2",
+              "class": [
+                {
+                  "category": "Sports",
+                  "confidenceScore": 0.9
+                }
+              ],
+              "warnings": []
+            }
+          ],
+          "errors": []
+        }
+      }
+    }
+  }
+}
