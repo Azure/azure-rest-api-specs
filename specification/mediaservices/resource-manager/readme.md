@@ -75,7 +75,7 @@ input-file:
   - Microsoft.Media/stable/2022-08-01/ContentKeyPolicies.json
   - Microsoft.Media/stable/2021-11-01/Encoding.json
   - Microsoft.Media/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2021-11-01/streamingservice.json
+  - Microsoft.Media/stable/2022-08-01/streamingservice.json
 ```
 
 ### Tag: package-account-2021-11
@@ -279,7 +279,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
