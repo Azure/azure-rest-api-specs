@@ -824,69 +824,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/checkStatus": {
-      "get": {
-        "tags": [
-          "JobDefinitions"
-        ],
-        "description": "This method checks whether job scheduling is in-progress for the job definition.",
-        "operationId": "JobDefinitions_GetStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "dataServiceName",
-            "in": "path",
-            "description": "The data service type of the job definition.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobDefinitionName",
-            "in": "path",
-            "description": "Name of the job definition.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "There is no job scheduling in progress for the job definition."
-          },
-          "202": {
-            "description": "Job scheduling for the job definition is in progress."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_GetStausGET101": {
-            "$ref": "./examples/JobDefinitions_GetStaus-GET-example-101.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
       "get": {
         "tags": [
