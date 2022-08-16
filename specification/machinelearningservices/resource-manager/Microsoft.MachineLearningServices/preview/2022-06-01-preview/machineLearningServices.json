@@ -5788,27 +5788,25 @@
       "type": "object",
       "properties": {
         "authType": {
-          "$ref": "#/components/schemas/ConnectionAuthType"
+          "$ref": "#/definitions/ConnectionAuthType"
         },
         "category": {
-          "$ref": "#/components/schemas/ConnectionCategory"
+          "$ref": "#/definitions/ConnectionCategory"
         },
         "target": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "metadata": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/components/schemas/IValue"
-          },
-          "nullable": true
+            "$ref": "#/definitions/IValue"
+          }
         }
       },
-      "additionalProperties": false,
-      "discriminator": {
-        "propertyName": "authType"
-      }
+      "discriminator": "authType"
+    },
+    "IValue": {
+      "type": "object"
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
