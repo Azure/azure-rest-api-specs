@@ -86,9 +86,9 @@ input-file:
 - Microsoft.Resources/stable/2022-09-01/snapshots.json
 ```
 
-### Tag: package-changes-2022-05-01
+### Tag: package-changes-2022-05
 
-These settings apply only when `--tag=package-changes-2022-05-01` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-changes-2022-05'
 input-file:
