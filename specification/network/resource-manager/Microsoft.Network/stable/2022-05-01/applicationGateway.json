@@ -1263,8 +1263,8 @@
           "description": "Health of backend server.",
           "enum": [
             "Unknown",
-            "Up",
-            "Down",
+            "Healthy",
+            "Unhealthy",
             "Partial",
             "Draining"
           ],
@@ -1367,6 +1367,10 @@
         "verifyClientCertIssuerDN": {
           "type": "boolean",
           "description": "Verify client certificate issuer name on the application gateway."
+        },
+        "verifyClientRevocation": {
+          "type": "string",
+          "description": "Client certificate revocation validation for MTLS."
         }
       },
       "description": "Application gateway client authentication configuration."
