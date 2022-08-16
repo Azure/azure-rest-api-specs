@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-changes-2022-05
+tag: package-snapshots-2022-09
 ```
 
 ``` yaml $(package-privatelinks)
@@ -72,6 +72,20 @@ tag: package-templatespecs-2022-02
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
+
+``` yaml $(package-snapshots)
+tag: package-snapshots-2022-09
+```
+
+### Tag: package-snapshots-2022-09
+
+These settings apply only when `--tag=package-snapshots-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-snapshots-2022-09'
+input-file:
+- Microsoft.Resources/stable/2022-09-01/snapshots.json
+```
+
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
@@ -926,6 +940,7 @@ batch:
   - package-deploymentscripts: true
   - package-templatespecs: true
   - package-changes: true
+  - package-snapshots: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
