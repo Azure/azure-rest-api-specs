@@ -1486,6 +1486,122 @@
           }
         }
       }
+    },
+    "/testruns/{testRunId}/engineHealthMetrics": {
+      "post": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get all engine health metrics for a load test run.",
+        "operationId": "TestRun_GetTestRunEngineHealthMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name of the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Engine health metrics request model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EngineHealthMetricsRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested engine health metrics",
+            "schema": {
+              "$ref": "#/definitions/EngineHealthMetricsResults"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRunEngineHealthtMetrics": {
+            "$ref": "./examples/GetTestRunEngineHealthMetrics.json"
+          }
+        }
+      }
+    },
+    "/testruns/{testRunId}/engineHealthMetricsFilters": {
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get all filters that are supported for engine health metrics for a given load test run",
+        "operationId": "TestRun_GetTestRunEngineHealthMetricsFilters",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name for load test run, must be a valid URL character ^[a-z0-9_-]*$",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested engine health metrics filters",
+            "schema": {
+              "$ref": "#/definitions/EngineHealthMetricsFilters"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRunEngineHealthMetricsFilters": {
+            "$ref": "./examples/GetTestRunEngineHealthMetricsFilters.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1673,6 +1789,121 @@
         }
       }
     },
+    "EngineHealthFilters": {
+      "type": "object",
+      "properties": {
+        "engineIds": {
+          "description": "List of engine ids for the test run for which engine health metrics can be filtered.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EngineHealthMetricsFilters": {
+      "type": "object",
+      "properties": {
+        "testRunId": {
+          "description": "Test run name for which engine health metrics filters is required.",
+          "type": "string"
+        },
+        "filters": {
+          "$ref": "#/definitions/EngineHealthFilters"
+        },
+        "timeRange": {
+          "$ref": "#/definitions/TimeRange"
+        }
+      }
+    },
+    "EngineHealthMetricsRequestModel": {
+      "description": "Engine health metrics request payload",
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "engineIds": {
+          "description": "List of engine ids, maximum supported engines for query is 50. In case of empty, it will return metrics for maximum 50 engines.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupByInterval": {
+          "description": "For test duration less than 3 minutes group by time interval can be any one of 5s,10s,1m,5m.\\n\\nFor test duration greater than 3 minutes, group by time interval can be any one of 1m,5m,1h. Default value is 1m.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time",
+          "type": "string"
+        }
+      }
+    },
+    "EngineHealthMetricsResults": {
+      "type": "object",
+      "properties": {
+        "testRunId": {
+          "description": "Test run name for which engine health metrics results is required.",
+          "type": "string"
+        },
+        "timeSeries": {
+          "$ref": "#/definitions/EngineHealthMetricsSeries"
+        }
+      }
+    },
+    "EngineHealthMetricsSeries": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "CPU percentage time series data.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        },
+        "memory": {
+          "description": "Memory percentage time series data.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        },
+        "network": {
+          "description": "Total network throughput time series data.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        },
+        "vusers": {
+          "description": "Active users time series data.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        }
+      }
+    },
     "Error": {
       "description": "Error from a REST request.",
       "type": "object",
@@ -1695,6 +1926,14 @@
           "items": {
             "$ref": "#/definitions/Error"
           }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -2317,6 +2556,12 @@
           "description": "Subnet ID on which the load test instances should run.",
           "type": "string",
           "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
         }
       }
     },
