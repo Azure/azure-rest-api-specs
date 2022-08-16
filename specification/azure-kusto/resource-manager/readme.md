@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-preview-2022-07` is specified on t
 input-file:
   - Microsoft.Kusto/preview/2022-07-07/kusto.json
 ```
+
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
