@@ -63,11 +63,11 @@ directive:
 ```
 
 
-### Tag: package-2022-08
+### Tag: package-metadata-2022-08
 
-These settings apply only when `--tag=package-2022-08` is specified on the command line.
+These settings apply only when `--tag=package-metadata-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+```yaml $(tag) == 'package-metadata-2022-08'
 input-file:
   - Microsoft.Media/stable/2022-08-01/AccountFilters.json
   - Microsoft.Media/stable/2021-11-01/Accounts.json
@@ -77,6 +77,20 @@ input-file:
   - Microsoft.Media/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2022-08-01/streamingservice.json
 ```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.Media/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2022-08-01/streamingservice.json
 
 ### Tag: package-account-2021-11
 
