@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId1",
+    "resourceGroupName": "resourceGroup1",
+    "resourceProviderNamespace": "resourceProvider1",
+    "resourceType": "resourceType1",
+    "resourceName": "resourceName1",
+    "api-version": "2022-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId1/resourceGroups/resourceGroup1/providers/resourceProvider1/resourceType1/resourceName1/providers/Microsoft.Resources/snapshots/snapshotId1",
+            "name": "snapshotId1",
+            "type": "Microsoft.Resources/snapshots",
+            "properties": {
+              "allowBlobPublicAccess": true,
+              "creationTime": "2022-08-15T07:57:50.6791424Z",
+              "encryption": {
+                "keySource": "Microsoft.Storage",
+                "services": {
+                  "blob": {
+                    "enabled": true,
+                    "keyType": "Account",
+                    "lastEnabledTime": "2022-08-15T07:57:50.8197664Z"
+                  },
+                  "file": {
+                    "enabled": true,
+                    "keyType": "Account",
+                    "lastEnabledTime": "2022-08-15T07:57:50.8197664Z"
+                  }
+                }
+              },
+              "minimumTlsVersion": "TLS1_0",
+              "networkAcls": {
+                "bypass": "AzureServices",
+                "defaultAction": "Allow",
+                "ipRules": [],
+                "virtualNetworkRules": []
+              },
+              "primaryEndpoints": {
+                "blob": "https://storageaccount.blob.core.windows.net/",
+                "file": "https://storageaccount.file.core.windows.net/",
+                "queue": "https://storageaccount.queue.core.windows.net/",
+                "table": "https://storageaccount.table.core.windows.net/"
+              },
+              "primaryLocation": "westeurope",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "statusOfPrimary": "available",
+              "supportsHttpsTrafficOnly": false
+            }
+          },
+          {
+            "id": "/subscriptions/subscriptionId1/resourceGroups/resourceGroup1/providers/resourceProvider1/resourceType1/resourceName1/providers/Microsoft.Resources/snapshots/snapshotId2",
+            "name": "snapshotId2",
+            "type": "Microsoft.Resources/snapshots",
+            "properties": {
+              "allowBlobPublicAccess": true,
+              "creationTime": "2022-08-15T07:57:50.6791424Z",
+              "encryption": {
+                "keySource": "Microsoft.Storage",
+                "services": {
+                  "blob": {
+                    "enabled": true,
+                    "keyType": "Account",
+                    "lastEnabledTime": "2022-08-15T07:57:50.8197664Z"
+                  },
+                  "file": {
+                    "enabled": true,
+                    "keyType": "Account",
+                    "lastEnabledTime": "2022-08-15T07:57:50.8197664Z"
+                  }
+                }
+              },
+              "minimumTlsVersion": "TLS2_0",
+              "networkAcls": {
+                "bypass": "AzureServices",
+                "defaultAction": "Disable",
+                "ipRules": [],
+                "virtualNetworkRules": []
+              },
+              "primaryEndpoints": {
+                "blob": "https://storageaccount.blob.core.windows.net/",
+                "file": "https://storageaccount.file.core.windows.net/",
+                "queue": "https://storageaccount.queue.core.windows.net/",
+                "table": "https://storageaccount.table.core.windows.net/"
+              },
+              "primaryLocation": "westeurope",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "statusOfPrimary": "available",
+              "supportsHttpsTrafficOnly": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

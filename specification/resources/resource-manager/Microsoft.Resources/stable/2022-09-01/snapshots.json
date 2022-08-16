@@ -1,0 +1,255 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-01",
+    "title": "SnapshotsClient",
+    "description": "The Resource Snapshots Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/snapshots": {
+      "get": {
+        "tags": [
+          "ListSnapshots"
+        ],
+        "operationId": "Snapshots_List",
+        "x-ms-examples": {
+          "ListSnapshots": {
+            "$ref": "./examples/ListChanges.json"
+          }
+        },
+        "description": "Obtains a list of snapshots from the past 14 days for the target resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/snapshots/{snapshotId}": {
+      "get": {
+        "tags": [
+          "GetSnapshot"
+        ],
+        "operationId": "Snapshots_Get",
+        "x-ms-examples": {
+          "GetSnapshot": {
+            "$ref": "./examples/GetChange.json"
+          }
+        },
+        "description": "Obtains the specified snapshot for the target resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/snapshotIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "Snapshot": {
+      "type": "object",
+      "description": "A generic resource snapshot",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "SnapshotListResult": {
+      "description": "The list of snapshots",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of Snapshots"
+        },
+        "value": {
+          "description": "The list of snapshots",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource provider namespace.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource type.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "snapshotIdParameter": {
+      "name": "snapshotId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the snapshot",
+      "x-ms-parameter-location": "method"
+    },
+    "$top": {
+      "required": false,
+      "default": 20,
+      "description": "(Optional) Set the maximum number of results per response.",
+      "in": "query",
+      "maximum": 100,
+      "minimum": 1,
+      "name": "$top",
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
+    "$skipToken": {
+      "required": false,
+      "description": "(Optional) The page-continuation token",
+      "in": "query",
+      "name": "$skipToken",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
