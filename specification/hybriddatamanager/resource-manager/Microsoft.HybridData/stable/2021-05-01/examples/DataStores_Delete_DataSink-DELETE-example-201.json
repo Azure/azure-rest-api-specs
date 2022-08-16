@@ -3,12 +3,11 @@
     "subscriptionId": "management.azure.com",
     "resourceGroupName": "6e0219f5-327a-4365-904f-05eed4227ad7",
     "dataManagerName": "Microsoft.HybridData",
-    "dataServiceName": "TestAzureSDKOperations1",
-    "jobDefinitionName": "DataTransformation",
+    "dataStoreName": "TestAzureSDKOperations1",
     "url": "https://management.azure.com",
     "api-version": "2021-05-01",
     "x-ms-client-request-id": [
-      "d429164b-040c-4f1b-a193-3c06db9dbf66"
+      "86cf2b8f-e552-443f-97a4-2917f2dfef9a"
     ],
     "Accept-Language": [
       "en-US"
@@ -21,6 +20,13 @@
     ]
   },
   "responses": {
-    "200": {}
+    "404": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The Resource 'Microsoft.HybridData/dataManagers/TestAzureSDKOperations1' under resource group 'ResourceGroupForSDKTest' was not found. For more details please go to https://aka.ms/ARMResourceNotFoundFix"
+        }
+      }
+    }
   }
 }

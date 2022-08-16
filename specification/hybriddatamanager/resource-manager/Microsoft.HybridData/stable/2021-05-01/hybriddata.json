@@ -297,9 +297,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "SessionRecords\\DataManagersTest\\DataManagers_DeleteDELETE41": {
             "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
@@ -761,9 +758,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-      },
         "x-ms-examples": {
           "SessionRecords\\JobDefinitionsTest\\JobDefinitions_DeleteDELETE81": {
             "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
@@ -826,6 +820,69 @@
         "x-ms-examples": {
           "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CancelJobPOST91": {
             "$ref": "./examples/JobDefinitions_CancelJob-POST-example-91.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/checkStatus": {
+      "get": {
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "This method checks whether job scheduling is in-progress for the job definition.",
+        "operationId": "JobDefinitions_GetStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "There is no job scheduling in progress for the job definition."
+          },
+          "202": {
+            "description": "Job scheduling for the job definition is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_GetStausGET101": {
+            "$ref": "../examples/SessionRecords\\JobDefinitionsTest\\JobDefinitions_GetStaus-GET-example-101.json"
           }
         }
       }
@@ -897,14 +954,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobGET102": {
-            "$ref": "./examples/JobDefinitions_RetryJob-GET-example-102.json"
-          },
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobGET102": {
-            "$ref": "./examples/JobDefinitions_SkipJob-GET-example-102.json"
-          },
-          "SessionRecords\\JobsTest\\Jobs_ListByJobDefinitionGET101": {
-            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-101.json"
+          "SessionRecords\\JobsTest\\Jobs_ListByJobDefinitionGET111": {
+            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-111.json"
           }
         }
       }
@@ -979,8 +1030,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_GetGET111": {
-            "$ref": "./examples/Jobs_Get-GET-example-111.json"
+          "SessionRecords\\JobsTest\\Jobs_GetGET121": {
+            "$ref": "./examples/Jobs_Get-GET-example-121.json"
           }
         }
       }
@@ -1049,8 +1100,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_CancelPOST121": {
-            "$ref": "./examples/Jobs_Cancel-POST-example-121.json"
+          "SessionRecords\\JobsTest\\Jobs_CancelPOST131": {
+            "$ref": "./examples/Jobs_Cancel-POST-example-131.json"
           }
         }
       }
@@ -1119,8 +1170,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_ResumePOST131": {
-            "$ref": "./examples/Jobs_Resume-POST-example-131.json"
+          "SessionRecords\\JobsTest\\Jobs_ResumePOST141": {
+            "$ref": "./examples/Jobs_Resume-POST-example-141.json"
           }
         }
       }
@@ -1140,15 +1191,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -1161,6 +1203,15 @@
             "description": "Name of the job definition.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1178,8 +1229,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobPOST141": {
-            "$ref": "./examples/JobDefinitions_RetryJob-POST-example-141.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RetryJobPOST151": {
+            "$ref": "./examples/JobDefinitions_RetryJob-POST-example-151.json"
           }
         }
       }
@@ -1250,8 +1301,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RunPOST152": {
-            "$ref": "./examples/JobDefinitions_Run-POST-example-152.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_RunPOST162": {
+            "$ref": "./examples/JobDefinitions_Run-POST-example-162.json"
           }
         }
       }
@@ -1271,15 +1322,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -1292,6 +1334,15 @@
             "description": "Name of the job definition.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1309,8 +1360,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobPOST161": {
-            "$ref": "./examples/JobDefinitions_SkipJob-POST-example-161.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJobPOST171": {
+            "$ref": "../examples/SessionRecords\\JobDefinitionsTest\\JobDefinitions_SkipJob-POST-example-171.json"
           }
         }
       }
@@ -1375,8 +1426,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_ListByDataServiceGET171": {
-            "$ref": "./examples/Jobs_ListByDataService-GET-example-171.json"
+          "SessionRecords\\JobsTest\\Jobs_ListByDataServiceGET181": {
+            "$ref": "../examples/SessionRecords\\JobsTest\\Jobs_ListByDataService-GET-example-181.json"
           }
         }
       }
@@ -1434,8 +1485,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\DataStoresTest\\DataStores_ListByDataManagerGET181": {
-            "$ref": "./examples/DataStores_ListByDataManager-GET-example-181.json"
+          "SessionRecords\\DataStoresTest\\DataStores_ListByDataManagerGET191": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_ListByDataManager-GET-example-191.json"
           }
         }
       }
@@ -1489,29 +1540,29 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET194": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-194.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET204": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSink-GET-example-204.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET195": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-195.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET205": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSink-GET-example-205.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET194": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-194.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET204": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSource-GET-example-204.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET195": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-195.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET205": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSource-GET-example-205.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_GetGET191": {
-            "$ref": "./examples/DataStores_Get-GET-example-191.json"
+          "SessionRecords\\DataStoresTest\\DataStores_GetGET201": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_Get-GET-example-201.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_GetGET192": {
-            "$ref": "./examples/DataStores_Get-GET-example-192.json"
+          "SessionRecords\\DataStoresTest\\DataStores_GetGET202": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_Get-GET-example-202.json"
           },
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET191": {
-            "$ref": "./examples/JobDefinitions_CreateOrUpdate-GET-example-191.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET201": {
+            "$ref": "../examples/SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdate-GET-example-201.json"
           },
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET192": {
-            "$ref": "./examples/JobDefinitions_CreateOrUpdate-GET-example-192.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdateGET202": {
+            "$ref": "../examples/SessionRecords\\JobDefinitionsTest\\JobDefinitions_CreateOrUpdate-GET-example-202.json"
           }
         }
       },
@@ -1576,11 +1627,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkPUT192": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-192.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkPUT202": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSink-PUT-example-202.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourcePUT192": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-192.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourcePUT202": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSource-PUT-example-202.json"
           }
         }
       },
@@ -1632,15 +1683,12 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSinkDELETE191": {
-            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-191.json"
+          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSinkDELETE201": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_Delete_DataSink-DELETE-example-201.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSourceDELETE191": {
-            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-191.json"
+          "SessionRecords\\DataStoresTest\\DataStores_Delete_DataSourceDELETE201": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_Delete_DataSource-DELETE-example-201.json"
           }
         }
       }
@@ -1690,11 +1738,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET201": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-201.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET211": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-211.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_ListByDataManagerGET201": {
-            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-201.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_ListByDataManagerGET211": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_ListByDataManager-GET-example-211.json"
           }
         }
       }
@@ -1748,23 +1796,23 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET212": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-212.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET222": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-222.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET213": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-213.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET223": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-223.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET214": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-214.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET224": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-224.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET215": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-215.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET225": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-225.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET216": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-216.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET226": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-226.json"
           },
-          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET217": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-217.json"
+          "SessionRecords\\DataStoreTypesTest\\DataStoreTypes_GetGET227": {
+            "$ref": "../examples/SessionRecords\\DataStoreTypesTest\\DataStoreTypes_Get-GET-example-227.json"
           }
         }
       }
@@ -1822,8 +1870,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_ListByDataManagerGET221": {
-            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-221.json"
+          "SessionRecords\\JobDefinitionsTest\\JobDefinitions_ListByDataManagerGET231": {
+            "$ref": "../examples/SessionRecords\\JobDefinitionsTest\\JobDefinitions_ListByDataManager-GET-example-231.json"
           }
         }
       }
@@ -1881,8 +1929,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\JobsTest\\Jobs_ListByDataManagerGET231": {
-            "$ref": "./examples/Jobs_ListByDataManager-GET-example-231.json"
+          "SessionRecords\\JobsTest\\Jobs_ListByDataManagerGET241": {
+            "$ref": "../examples/SessionRecords\\JobsTest\\Jobs_ListByDataManager-GET-example-241.json"
           }
         }
       }
@@ -1932,17 +1980,17 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET241": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-GET-example-241.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSinkGET251": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSink-GET-example-251.json"
           },
-          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET241": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-GET-example-241.json"
+          "SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSourceGET251": {
+            "$ref": "../examples/SessionRecords\\DataStoresTest\\DataStores_CreateOrUpdate_DataSource-GET-example-251.json"
           },
-          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET241": {
-            "$ref": "./examples/PublicKeys_Get-GET-example-241.json"
+          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET251": {
+            "$ref": "../examples/SessionRecords\\PublicKeysTest\\PublicKeys_Get-GET-example-251.json"
           },
-          "SessionRecords\\PublicKeysTest\\PublicKeys_ListByDataManagerGET241": {
-            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-241.json"
+          "SessionRecords\\PublicKeysTest\\PublicKeys_ListByDataManagerGET251": {
+            "$ref": "../examples/SessionRecords\\PublicKeysTest\\PublicKeys_ListByDataManager-GET-example-251.json"
           }
         }
       }
@@ -1996,8 +2044,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET252": {
-            "$ref": "./examples/PublicKeys_Get-GET-example-252.json"
+          "SessionRecords\\PublicKeysTest\\PublicKeys_GetGET262": {
+            "$ref": "../examples/SessionRecords\\PublicKeysTest\\PublicKeys_Get-GET-example-262.json"
           }
         }
       }
@@ -2075,7 +2123,7 @@
           "items": {
             "$ref": "#/definitions/AvailableProviderOperation"
           },
-          "x-ms-identifiers":[]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of operations.",
@@ -2085,7 +2133,6 @@
     },
     "CloudError": {
       "description": "An error response from the service.",
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
@@ -2096,7 +2143,6 @@
     },
     "CloudErrorBody": {
       "description": "An error response from the service.",
-      "type": "object",
       "properties": {
         "code": {
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
@@ -2111,8 +2157,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers":["/code"]
+          }
         }
       },
       "x-ms-external": true
@@ -2174,7 +2219,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataManager"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
@@ -2227,7 +2273,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataService"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of data services.",
@@ -2260,14 +2307,16 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedDataSourceTypes": {
           "description": "Supported data store types which can be used as a source.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2309,7 +2358,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStore"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of data stores.",
@@ -2355,7 +2405,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2387,7 +2438,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStoreType"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of data store types.",
@@ -2424,14 +2476,16 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedDataServicesAsSource": {
           "description": "Supported data services where it can be used as a source.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2613,7 +2667,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of job definitions.",
@@ -2643,7 +2698,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schedule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "state": {
           "description": "State of the job definition.",
@@ -2746,7 +2802,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2759,7 +2816,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobStages"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "jobDefinition": {
           "$ref": "#/definitions/JobDefinition",
@@ -2824,7 +2882,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Job"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of jobs.",
@@ -3063,7 +3122,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3119,7 +3179,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublicKey"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link for the next set of public keys.",
@@ -3215,7 +3276,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSecret"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3232,7 +3294,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
