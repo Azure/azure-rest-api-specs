@@ -91,6 +91,7 @@ input-file:
   - Microsoft.Media/stable/2021-11-01/Encoding.json
   - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2022-08-01/streamingservice.json
+```
 
 ### Tag: package-account-2021-11
 
