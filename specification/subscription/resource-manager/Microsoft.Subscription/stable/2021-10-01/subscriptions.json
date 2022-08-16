@@ -859,6 +859,10 @@
         "acceptOwnershipState": {
           "$ref": "#/definitions/AcceptOwnershipState"
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+
+        },
         "billingOwner": {
           "description": "UPN of the billing owner",
           "readOnly": true,
@@ -1057,6 +1061,20 @@
       ],
       "x-ms-enum": {
         "name": "AcceptOwnership",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
         "modelAsString": true
       }
     },
