@@ -153,10 +153,7 @@
             }
           },
           "204": {
-            "description": " The request has succeeded but, no results returned",
-            "schema": {
-              "$ref": "#/definitions/UsageDetailsListResult"
-            }
+            "description": "No Content. The request has succeeded but returned no results."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1488,11 +1485,10 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
         "x-ms-examples": {
-          "description": {
-            "$ref": "./examples/AggregatedCostByManagementGroup.json"
+          "PriceSheetForBillingPeriod": {
+            "$ref": "./examples/OperationList.json"
           }
         },
-
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
