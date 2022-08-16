@@ -34,7 +34,53 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03
+tag: package-2022-06
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.ContainerService/stable/2022-06-01/managedClusters.json
+```
+
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.ContainerService/preview/2022-06-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-06-02-preview/fleets.json
+```
+
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.ContainerService/preview/2022-05-02-preview/managedClusters.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.ContainerService/stable/2022-04-01/managedClusters.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.ContainerService/preview/2022-04-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2022-03
@@ -44,10 +90,6 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.ContainerService/stable/2022-03-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-preview-2022-03
@@ -57,10 +99,6 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-03'
 input-file:
   - Microsoft.ContainerService/preview/2022-03-02-preview/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2022-02
@@ -70,10 +108,6 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.ContainerService/stable/2022-02-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-preview-2022-02
@@ -83,10 +117,6 @@ These settings apply only when `--tag=package-preview-2022-02` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.ContainerService/preview/2022-02-02-preview/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2022-01
@@ -96,10 +126,6 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 ``` yaml $(tag) == 'package-2022-01'
 input-file:
   - Microsoft.ContainerService/stable/2022-01-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-preview-2022-01
@@ -109,10 +135,6 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.ContainerService/preview/2022-01-02-preview/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-preview-2021-11
@@ -122,10 +144,6 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 ``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.ContainerService/preview/2021-11-01-preview/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-10
@@ -135,10 +153,6 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.ContainerService/stable/2021-10-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-09
@@ -148,10 +162,6 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.ContainerService/stable/2021-09-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-08
@@ -161,10 +171,6 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 ``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.ContainerService/stable/2021-08-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-07
@@ -174,10 +180,6 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.ContainerService/stable/2021-07-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-05
@@ -187,10 +189,6 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 ``` yaml $(tag) == 'package-2021-05'
 input-file:
   - Microsoft.ContainerService/stable/2021-05-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-03
@@ -200,10 +198,6 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.ContainerService/stable/2021-03-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-02
@@ -213,10 +207,6 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 ``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.ContainerService/stable/2021-02-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-12
@@ -226,10 +216,6 @@ These settings apply only when `--tag=package-2020-12` is specified on the comma
 ``` yaml $(tag) == 'package-2020-12'
 input-file:
   - Microsoft.ContainerService/stable/2020-12-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-11
@@ -239,10 +225,6 @@ These settings apply only when `--tag=package-2020-11` is specified on the comma
 ``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-09
@@ -523,10 +505,6 @@ These settings apply only when `--tag=package-2020-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-09-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-09-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-07-01-only
@@ -536,10 +514,6 @@ These settings apply only when `--tag=package-2020-07-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-07-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-06-01-only
@@ -549,10 +523,6 @@ These settings apply only when `--tag=package-2020-06-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-06-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-06-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-04-01-only
@@ -562,10 +532,6 @@ These settings apply only when `--tag=package-2020-04-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-04-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-04-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-03-01-only
@@ -575,10 +541,6 @@ These settings apply only when `--tag=package-2020-03-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-03-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-03-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-02-01-only
@@ -588,10 +550,6 @@ These settings apply only when `--tag=package-2020-02-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-02-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-01-01-only
@@ -773,7 +731,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node

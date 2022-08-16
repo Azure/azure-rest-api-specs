@@ -26,7 +26,16 @@ These are the global settings for the orbital.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-04-04-preview
+tag: package-2022-03-01
+```
+
+### Tag: package-2022-03-01
+
+These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03-01'
+input-file:
+  - Microsoft.Orbital/stable/2022-03-01/orbital.json
 ```
 
 ### Tag: package-2021-04-04-preview
@@ -51,7 +60,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions

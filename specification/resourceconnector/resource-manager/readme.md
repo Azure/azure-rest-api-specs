@@ -27,7 +27,7 @@ These are the global settings for the appliance.
 ```yaml
 name: appliances
 openapi-type: arm
-tag: package-2021-10-31-preview
+tag: package-2022-04-15-preview
 ```
 
 ### Tag: package-2021-10-31-preview
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2021-10-31-preview` is specified o
 ```yaml $(tag) == 'package-2021-10-31-preview'
 input-file:
   - Microsoft.ResourceConnector/preview/2021-10-31-preview/appliances.json
+```
+
+### Tag: package-2022-04-15-preview
+
+These settings apply only when `--tag=package-2022-04-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-15-preview'
+input-file:
+  - Microsoft.ResourceConnector/preview/2022-04-15-preview/appliances.json
 ```
 
 ---
@@ -53,6 +62,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

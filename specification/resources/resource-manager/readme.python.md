@@ -17,7 +17,8 @@ combine-operation-files: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
@@ -31,6 +32,7 @@ batch:
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
+  - multiapiscript-managedapplications: true
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
@@ -73,7 +75,7 @@ batch:
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
-  - tag: package-changes-2022-03-01-preview
+  - tag: package-changes-2022-05
   - multiapiscript-changes: true
 ```
 
@@ -142,6 +144,13 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
+```yaml $(multiapiscript-managedapplications)
+package-name: azure-mgmt-resource#managedapplications
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+perform-load: false
+```
+
 ```yaml $(multiapiscript-links)
 package-name: azure-mgmt-resource#links
 multiapiscript: true
@@ -149,14 +158,14 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
-### Tag: package-changes-2022-03-01-preview and python
+### Tag: package-changes-2022-05 and python
 
-These settings apply only when `--tag=package-changes-2022-03-01-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-05 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-changes-2022-03-01-preview'
-namespace: azure.mgmt.resource.changes.v2022_03_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01_preview
+``` yaml $(tag) == 'package-changes-2022-05'
+namespace: azure.mgmt.resource.changes.v2022_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_05_01
 ```
 
 ### Tag: package-privatelinks-2020-05 and python
@@ -225,8 +234,8 @@ These settings apply only when `--tag=package-managedapplications-2018-06 --pyth
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
-namespace: azure.mgmt.resource.managedapplications
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+namespace: azure.mgmt.resource.managedapplications.v2018_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2018_06_01
 ```
 
 ### Tag: package-policy-2021-06 and python
