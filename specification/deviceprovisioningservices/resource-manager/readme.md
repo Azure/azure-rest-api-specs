@@ -43,7 +43,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02'
+```yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.Devices/stable/2022-02-05/iotdps.json
 ```
