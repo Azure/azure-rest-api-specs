@@ -883,6 +883,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
     reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - suppress: TopLevelResourcesListBySubscription
+    from: snapshots.json
+    reason: A list of resource snapshots at a subscription scope doesn't make sense here. The purpose of the snapshots type is on a per resource scope 
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
