@@ -332,25 +332,14 @@
     "ActiveDirectoryAdministrator": {
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The objectId of the Active Directory administrator."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the AAD administrator"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the AAD administrator. E.g. \"ServicePrincipal\" or \"User\""
-        },
         "properties": {
           "$ref": "#/definitions/AdministratorProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the active directory administrator."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "description": "Represents an Active Directory administrator.",
