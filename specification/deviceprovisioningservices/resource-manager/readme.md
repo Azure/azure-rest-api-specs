@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
-  - Microsoft.Devices/preview/2022-08-07/iotdps.json
+  - Microsoft.Devices/preview/2022-08-07-preview/iotdps.json
 ```
 ### Tag: package-2022-02
 
