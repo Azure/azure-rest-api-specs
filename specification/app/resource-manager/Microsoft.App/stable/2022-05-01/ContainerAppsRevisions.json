@@ -436,17 +436,6 @@
               "type": "integer",
               "readOnly": true
             },
-            "trafficLabels": {
-              "description": "Traffic labels associated with this revision",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TrafficLabel"
-              },
-              "x-ms-identifiers": [
-                "label"
-              ],
-              "readOnly": true
-            },
             "provisioningError": {
               "description": "Optional Field - Platform Error Message",
               "type": "string",
@@ -484,22 +473,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TrafficLabel": {
-      "description": "Traffic label information",
-      "type": "object",
-      "properties": {
-        "label": {
-          "description": "Traffic label assigned to a revision",
-          "type": "string",
-          "readOnly": true
-        },
-        "fqdn": {
-          "description": "Fully qualified domain name of a labelled revision",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
