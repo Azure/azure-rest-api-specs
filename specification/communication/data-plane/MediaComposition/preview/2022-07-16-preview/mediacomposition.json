@@ -391,6 +391,27 @@
         "modelAsString": true
       }
     },
+    "AutoGridInputGroup": {
+      "required": [
+        "inputIds"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputGroup"
+        }
+      ],
+      "properties": {
+        "inputIds": {
+          "description": "Input and input group ids to be included in this input group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "autoGridBased"
+    },
     "AutoGridLayout": {
       "description": "Configure the autogrid layout",
       "required": [
@@ -481,6 +502,43 @@
         }
       },
       "x-ms-discriminator-value": "dominantSpeaker"
+    },
+    "GridInputGroup": {
+      "description": "Configure grid-based input group to be used in custom layouts",
+      "required": [
+        "columns",
+        "inputIds",
+        "rows"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputGroup"
+        }
+      ],
+      "properties": {
+        "inputIds": {
+          "description": "Input and input group ids to be included in this input group.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "rows": {
+          "format": "int32",
+          "description": "Number of rows",
+          "type": "integer"
+        },
+        "columns": {
+          "format": "int32",
+          "description": "Number of columns",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "gridBased"
     },
     "GridLayout": {
       "description": "Configure the grid layout",
@@ -578,43 +636,44 @@
     },
     "InputGroup": {
       "description": "Configure input group to be used in custom layouts",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
-        "inputIds": {
-          "description": "Input ids to be included in the layout.",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+        "kind": {
+          "$ref": "#/definitions/InputGroupType"
         },
         "position": {
           "$ref": "#/definitions/Position"
         },
         "width": {
-          "description": "The width of the input group container. Can be a pixel or percentage string",
+          "description": "The width of the input group container. Can be defined as pixels or percentage.",
+          "pattern": "^\\s*\\d+(\\.\\d+)?(%|px)?\\s*$",
           "type": "string"
         },
         "height": {
-          "description": "The height of the input group container. Can be a pixel or percentage string",
+          "description": "The height of the input group container. Can be defined as pixels or percentage.",
+          "pattern": "^\\s*\\d+(\\.\\d+)?(%|px)?\\s*$",
           "type": "string"
-        },
-        "rows": {
-          "format": "int32",
-          "description": "Number of rows",
-          "type": "integer"
-        },
-        "columns": {
-          "format": "int32",
-          "description": "Number of columns",
-          "type": "integer"
         },
         "layer": {
           "description": "The layer this input group should appear on",
           "type": "string"
         }
+      },
+      "discriminator": "kind"
+    },
+    "InputGroupType": {
+      "description": "Kind of input group",
+      "enum": [
+        "gridBased",
+        "autoGridBased"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InputGroupType",
+        "modelAsString": true
       }
     },
     "Layer": {
