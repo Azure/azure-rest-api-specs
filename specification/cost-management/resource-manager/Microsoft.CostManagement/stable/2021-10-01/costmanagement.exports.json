@@ -641,6 +641,32 @@
             "modelAsString": true
           }
         },
+        "grouping" :{
+          "description": "Grouping",         
+          "properties": {
+            "ColumnType": {
+              "description": "Cost management report column types.",
+              "type": "string",
+              "enum": [
+                "None",
+                "Tag",
+                "Metric",
+                "Dimension",
+                "TagKey",
+                "TagValue"
+
+              ],
+              "x-ms-enum": {
+                "name": "ColumnType"                
+              }
+            },
+            "Name": {
+              "description": "The name of the column(dimension, metric)/key(tag) to filter on",
+              "type": "string"
+            }
+
+        }
+      },
         "configuration": {
           "description": "The export dataset configuration.",
           "$ref": "#/definitions/ExportDatasetConfiguration"
