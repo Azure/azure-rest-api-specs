@@ -2270,6 +2270,15 @@
             "description": "The name of the application to query."
           },
           {
+            "name": "application",
+            "in": "body",
+            "required": true,
+            "description": "The definition of the VMApplication to add the virtual machine",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplication"
+            }
+          },
+          {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
@@ -4923,6 +4932,10 @@
         "userData": {
           "type": "string",
           "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "applicationProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
