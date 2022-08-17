@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=/home/leni/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName:
+    type: string
+    prefix: storagename
+
+scenarios:
+  - steps:
+      - step: checkName
+        operationId: StorageAccounts_CheckNameAvailability
+        parameters:
+          accountName:
+            name: $(storageAccountName)
+            type: Microsoft.Storage/storageAccounts
+        responses:
+          200:
+            body:
+              nameAvailable: true
+      - step: createStorageAccount
+        operationId: StorageAccounts_Create
+        parameters:
+          accountName: $(storageAccountName)
+          parameters:
+            sku:
+              name: Standard_LRS
+            kind: StorageV2
+            location: $(location)
+            properties:
+              encryption: {"services": {"blob": {}}, "keySource": "Microsoft.Storage"}

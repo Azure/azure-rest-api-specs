@@ -2,13 +2,14 @@
 scope: ResourceGroup
 
 variables:
+  resourceName:
+    type: string
+    prefix: sw
   azureTenantId:
     type: string
   vaultName: scenariosvault
 
 prepareSteps:
-  - step: Generate_Unique_Name
-    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
   - step: Vault_Create
     exampleFile: ../examples/createVault.json
     requestUpdate:
@@ -33,7 +34,7 @@ scenarios:
       - step: Vault_UpdateAccessPoliciesAdd
         exampleFile: ../examples/updateAccessPoliciesAdd.json
         requestUpdate:
-          - replace: /properties/accessPolicies/0/tenantId
+          - replace: /parameters/properties/accessPolicies/0/tenantId
             value: $(azureTenantId)
       - step: Vault_Get
         exampleFile: ../examples/getVault.json

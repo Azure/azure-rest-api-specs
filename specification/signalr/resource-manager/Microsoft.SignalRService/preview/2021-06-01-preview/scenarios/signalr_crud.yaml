@@ -2,7 +2,9 @@
 scope: ResourceGroup
 
 variables:
-  resourceName: signalrswaggertest6
+  resourceName:
+    type: string
+    prefix: sigr
   parameters:
     type: object
     value:
@@ -61,9 +63,6 @@ variables:
 
 scenarios:
   - steps:
-      - step: Generate_Unique_Name
-        armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
-
       - operationId: SignalR_CheckNameAvailability
         parameters:
           parameters:

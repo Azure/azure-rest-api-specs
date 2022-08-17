@@ -1,0 +1,118 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string",
+      "defaultValue": "demo"
+    }
+  },
+  "variables": {
+    "VNETName": "[concat(parameters('vmName'), '-VNET')]",
+    "SubnetName": "[concat(parameters('vmName'), '-Subnet')]",
+    "NSGName": "[concat(parameters('vmName'), '-NSG')]",
+    "PublicIPName": "[concat(parameters('vmName'), '-PublicIP')]",
+    "VMNicName": "[concat(parameters('vmName'), '-VMNic')]"
+  },
+  "resources": [
+    {
+      "name": "[variables('VNETName')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [],
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('SubnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('NSGName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "tags": {},
+      "dependsOn": [],
+      "properties": {
+        "securityRules": [
+          {
+            "name": "rdp",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1000,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('PublicIPName')]",
+      "apiVersion": "2018-01-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "[resourceGroup().location]",
+      "tags": {},
+      "dependsOn": [],
+      "properties": {
+        "publicIPAllocationMethod": "Static"
+      },
+      "sku": {
+        "name": "Standard"
+      }
+    },
+    {
+      "name": "[variables('VMNicName')]",
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "tags": {},
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('VNETName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', variables('NSGName'))]",
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('PublicIPName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfigmyVM",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('VNETName'), variables('SubnetName'))]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGName'))]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "vmNicId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/networkInterfaces', variables('VMNicName'))]"
+    }
+  }
+}

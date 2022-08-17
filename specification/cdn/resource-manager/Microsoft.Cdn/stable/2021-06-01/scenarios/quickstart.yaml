@@ -2,14 +2,21 @@
 
 scope: ResourceGroup
 
-prepareSteps:
-  - armTemplate: ./templates/Generate_Unique_name_template.json
+variables:
+  nameSeed:
+    type: string
+    prefix: ""
+  profileName: afdx-p-$(nameSeed)
+  originGroupName: afdx-og-$(nameSeed)
+  originName: afdx-o-$(nameSeed)
+  endpointName: afdx-ed-$(nameSeed)
+  routeName: afdx-r-$(nameSeed)
+  ruleSetName: ruleSet1
+  ruleName: rule1
 
 scenarios:
   - scenario: quickStart
     variables:
-      ruleSetName: ruleSet1
-      ruleName: rule1
       rule:
         type: object
         value:
@@ -199,11 +206,12 @@ scenarios:
           dateTimeBegin: "2022-03-15T05:00:00.000Z"
           dateTimeEnd: "2022-03-15T06:00:00.000Z"
 
-      - operationId: Rules_Delete
-        parameters:
-          ruleName: rule2
-      - operationId: Routes_Delete
-      - operationId: AFDOrigins_Delete
-      - operationId: AFDOriginGroups_Delete
-      - operationId: AFDEndpoints_Delete
-      - operationId: Profiles_Delete
+cleanUpSteps:
+  - operationId: Rules_Delete
+    parameters:
+      ruleName: rule2
+  - operationId: Routes_Delete
+  - operationId: AFDOrigins_Delete
+  - operationId: AFDOriginGroups_Delete
+  - operationId: AFDEndpoints_Delete
+  - operationId: Profiles_Delete

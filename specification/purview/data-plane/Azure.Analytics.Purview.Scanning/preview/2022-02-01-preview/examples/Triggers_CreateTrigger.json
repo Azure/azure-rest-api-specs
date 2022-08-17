@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "dataSourceName": "DataSource1",
+    "scanName": "Scan1",
+    "triggerName": "Trigger1",
+    "api-version": "2022-02-01-preview",
+    "body": {
+      "properties": {
+        "recurrenceInterval": null,
+        "scanLevel": "Incremental",
+        "recurrence": {
+          "startTime": "2021-02-12T14:59:00.416Z",
+          "endTime": "2021-02-25T00:00:00.000Z",
+          "interval": 1,
+          "frequency": "Month",
+          "schedule": {
+            "hours": [
+              23
+            ],
+            "minutes": [
+              56
+            ],
+            "monthDays": [
+              10
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "Trigger1",
+        "id": "datasources/AzureBlob-DSTDParv/scans/Scan-PUl/triggers/default",
+        "properties": {
+          "recurrence": {
+            "frequency": "Month",
+            "interval": 4,
+            "startTime": "2021-02-12T14:59:00.416Z",
+            "endTime": "2021-02-25T00:00:00Z",
+            "schedule": {
+              "minutes": [
+                56
+              ],
+              "hours": [
+                23
+              ],
+              "weekDays": null,
+              "monthDays": null,
+              "monthlyOccurrences": [
+                {
+                  "day": "Wednesday",
+                  "occurrence": 2
+                }
+              ]
+            }
+          },
+          "recurrenceInterval": null,
+          "createdAt": "2021-02-12T14:58:58.0478425Z",
+          "lastModifiedAt": "2021-02-12T15:39:53.6482996Z",
+          "lastScheduled": null,
+          "scanLevel": "Incremental"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "Trigger1",
+        "id": "datasources/AzureBlob-DSTDParv/scans/Scan-PUl/triggers/default",
+        "properties": {
+          "recurrence": {
+            "frequency": "Month",
+            "interval": 1,
+            "startTime": "2020-06-03T19:15:00Z",
+            "endTime": "2020-06-03T19:22:00Z",
+            "schedule": null
+          },
+          "recurrenceInterval": null,
+          "createdAt": "2020-06-11T05:15:04.1940429Z",
+          "lastModifiedAt": "2020-06-19T22:26:22.6514064Z",
+          "lastScheduled": null,
+          "scanLevel": "Incremental"
+        }
+      }
+    }
+  }
+}
