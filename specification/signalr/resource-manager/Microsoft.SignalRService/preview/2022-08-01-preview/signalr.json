@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2022-02-01"
+    "version": "2022-08-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -380,6 +380,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalR_Delete": {
             "$ref": "./examples/SignalR_Delete.json"
@@ -868,6 +871,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalRCustomDomains_Delete": {
             "$ref": "./examples/SignalRCustomDomains_Delete.json"
@@ -1123,6 +1129,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalRPrivateEndpointConnections_Delete": {
             "$ref": "./examples/SignalRPrivateEndpointConnections_Delete.json"
@@ -1492,6 +1501,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalRSharedPrivateLinkResources_Delete": {
             "$ref": "./examples/SignalRSharedPrivateLinkResources_Delete.json"
@@ -1775,7 +1787,9 @@
           "items": {
             "$ref": "#/definitions/LiveTraceCategory"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1880,7 +1894,9 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1999,7 +2015,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2287,7 +2305,9 @@
           "items": {
             "$ref": "#/definitions/ResourceLogCategory"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2345,6 +2365,20 @@
         "modelAsString": true
       }
     },
+    "ServerlessSettings": {
+      "description": "Serverless settings.",
+      "type": "object",
+      "properties": {
+        "connectionTimeoutInSeconds": {
+          "format": "int32",
+          "description": "Gets or sets Client Connection Timeout. Optional to be set.\r\nValue in seconds.\r\nDefault value is 30 seconds.\r\nCustomer should set the timeout to a shorter period if messages are expected to be sent in shorter intervals,\r\nand want the client to disconnect more quickly after the last message is sent.\r\nYou can set the timeout to a longer period if messages are expected to be sent in longer intervals,\r\nand they want to keep the same client connection alive during this session.\r\nThe service considers the client disconnected if it hasn't received a message (including keep-alive) in this interval.",
+          "default": 30,
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
     "ServerlessUpstreamSettings": {
       "description": "The settings for the Upstream when the service is in server-less mode.",
       "type": "object",
@@ -2381,7 +2415,10 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         },
         "logSpecifications": {
           "description": "Specifications of the Logs for Azure Monitoring.",
@@ -2389,7 +2426,9 @@
           "items": {
             "$ref": "#/definitions/LogSpecification"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2588,7 +2627,9 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointACL"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2669,6 +2710,9 @@
         },
         "cors": {
           "$ref": "#/definitions/SignalRCorsSettings"
+        },
+        "serverless": {
+          "$ref": "#/definitions/ServerlessSettings"
         },
         "upstream": {
           "$ref": "#/definitions/ServerlessUpstreamSettings"
@@ -2909,7 +2953,11 @@
             "$ref": "#/definitions/Sku"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceType",
+            "/sku/name",
+            "/sku/tier"
+          ]
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
