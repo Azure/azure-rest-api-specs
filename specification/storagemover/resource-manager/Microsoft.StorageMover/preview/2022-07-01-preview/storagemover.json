@@ -314,11 +314,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted Storage Mover."
+          },
           "202": {
-            "description": "Accepted. Delete operation is ongoing."
+            "description": "Accepted. Storage Mover delete operation is ongoing."
           },
           "204": {
-            "description": "NoContent -- storage mover does not exist in the subscription."
+            "description": "NoContent -- Storage Mover does not exist in the subscription."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -339,7 +342,7 @@
           "Agents"
         ],
         "operationId": "Agents_List",
-        "description": "Lists all agents in a Storage Mover.",
+        "description": "Lists all Agents in a Storage Mover.",
         "x-ms-examples": {
           "Agents_List": {
             "$ref": "./examples/Agents_List.json"
@@ -361,7 +364,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of agents.",
+            "description": "The list of Agents.",
             "schema": {
               "$ref": "#/definitions/AgentList"
             }
@@ -384,7 +387,7 @@
           "Agents"
         ],
         "operationId": "Agents_Get",
-        "description": "Gets an agent resource.",
+        "description": "Gets an Agent resource.",
         "x-ms-examples": {
           "Agents_Get": {
             "$ref": "./examples/Agents_Get.json"
@@ -409,7 +412,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The agent resource.",
+            "description": "The Agent resource.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -427,7 +430,7 @@
           "Agents"
         ],
         "operationId": "Agents_CreateOrUpdate",
-        "description": "Creates or updates an agent resource, which references a hybrid compute machine that can run jobs.",
+        "description": "Creates or updates an Agent resource, which references a hybrid compute machine that can run jobs.",
         "x-ms-examples": {
           "Agents_CreateOrUpdate": {
             "$ref": "./examples/Agents_CreateOrUpdate.json"
@@ -478,7 +481,7 @@
           "Agents"
         ],
         "operationId": "Agents_Update",
-        "description": "Creates or updates an agent resource.",
+        "description": "Creates or updates an Agent resource.",
         "x-ms-examples": {
           "Agents_Update": {
             "$ref": "./examples/Agents_Update.json"
@@ -511,7 +514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The agent resource.",
+            "description": "The Agent resource.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -529,7 +532,7 @@
           "Agents"
         ],
         "operationId": "Agents_Delete",
-        "description": "Deletes an agent resource.",
+        "description": "Deletes an Agent resource.",
         "x-ms-examples": {
           "Agents_Delete": {
             "$ref": "./examples/Agents_Delete.json"
@@ -553,11 +556,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted Agent."
+          },
           "202": {
             "description": "Accepted. Agent delete operation is ongoing."
           },
           "204": {
-            "description": "NoContent -- agent does not exist for this storage mover."
+            "description": "NoContent -- Agent does not exist for this Storage Mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -578,7 +584,7 @@
           "Endpoints"
         ],
         "operationId": "Endpoints_List",
-        "description": "Lists all endpoints in a Storage Mover.",
+        "description": "Lists all Endpoints in a Storage Mover.",
         "x-ms-examples": {
           "Endpoints_List": {
             "$ref": "./examples/Endpoints_List.json"
@@ -600,7 +606,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of endpoints.",
+            "description": "The list of Endpoints.",
             "schema": {
               "$ref": "#/definitions/EndpointList"
             }
@@ -623,7 +629,7 @@
           "Endpoints"
         ],
         "operationId": "Endpoints_Get",
-        "description": "Gets an endpoint resource.",
+        "description": "Gets an Endpoint resource.",
         "x-ms-examples": {
           "Endpoints_Get": {
             "$ref": "./examples/Endpoints_Get.json"
@@ -648,7 +654,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The endpoint resource.",
+            "description": "The Endpoint resource.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
@@ -666,7 +672,7 @@
           "Endpoints"
         ],
         "operationId": "Endpoints_CreateOrUpdate",
-        "description": "Creates or updates an endpoint resource, which represents a data transfer source or destination.",
+        "description": "Creates or updates an Endpoint resource, which represents a data transfer source or destination.",
         "x-ms-examples": {
           "Endpoints_CreateOrUpdate": {
             "$ref": "./examples/Endpoints_CreateOrUpdate.json"
@@ -717,7 +723,7 @@
           "Endpoints"
         ],
         "operationId": "Endpoints_Update",
-        "description": "Updates properties for an endpoint resource. Properties not specified in the request body will be unchanged.",
+        "description": "Updates properties for an Endpoint resource. Properties not specified in the request body will be unchanged.",
         "x-ms-examples": {
           "Endpoints_Update": {
             "$ref": "./examples/Endpoints_Update.json"
@@ -750,7 +756,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The endpoint resource.",
+            "description": "The Endpoint resource.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
@@ -768,7 +774,7 @@
           "Endpoints"
         ],
         "operationId": "Endpoints_Delete",
-        "description": "Deletes an endpoint resource.",
+        "description": "Deletes an Endpoint resource.",
         "x-ms-examples": {
           "Endpoints_Delete": {
             "$ref": "./examples/Endpoints_Delete.json"
@@ -792,11 +798,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted Endpoint."
+          },
           "202": {
             "description": "Accepted. Endpoint delete operation is ongoing."
           },
           "204": {
-            "description": "NoContent -- Endpoint does not exist for this storage mover."
+            "description": "NoContent -- Endpoint does not exist for this Storage Mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -817,7 +826,7 @@
           "Projects"
         ],
         "operationId": "Projects_List",
-        "description": "Lists all projects in a Storage Mover.",
+        "description": "Lists all Projects in a Storage Mover.",
         "x-ms-examples": {
           "Projects_List": {
             "$ref": "./examples/Projects_List.json"
@@ -839,7 +848,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of projects.",
+            "description": "The list of Projects.",
             "schema": {
               "$ref": "#/definitions/ProjectList"
             }
@@ -862,7 +871,7 @@
           "Projects"
         ],
         "operationId": "Projects_Get",
-        "description": "Gets a project resource.",
+        "description": "Gets a Project resource.",
         "x-ms-examples": {
           "Projects_Get": {
             "$ref": "./examples/Projects_Get.json"
@@ -887,7 +896,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The project resource.",
+            "description": "The Project resource.",
             "schema": {
               "$ref": "#/definitions/Project"
             }
@@ -905,7 +914,7 @@
           "Projects"
         ],
         "operationId": "Projects_CreateOrUpdate",
-        "description": "Creates or updates a project resource, which is a logical grouping of related jobs.",
+        "description": "Creates or updates a Project resource, which is a logical grouping of related jobs.",
         "x-ms-examples": {
           "Projects_CreateOrUpdate": {
             "$ref": "./examples/Projects_CreateOrUpdate.json"
@@ -956,7 +965,7 @@
           "Projects"
         ],
         "operationId": "Projects_Update",
-        "description": "Updates properties for a project resource. Properties not specified in the request body will be unchanged.",
+        "description": "Updates properties for a Project resource. Properties not specified in the request body will be unchanged.",
         "x-ms-examples": {
           "Projects_Update": {
             "$ref": "./examples/Projects_Update.json"
@@ -989,7 +998,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The project resource.",
+            "description": "The Project resource.",
             "schema": {
               "$ref": "#/definitions/Project"
             }
@@ -1007,7 +1016,7 @@
           "Projects"
         ],
         "operationId": "Projects_Delete",
-        "description": "Deletes a project resource.",
+        "description": "Deletes a Project resource.",
         "x-ms-examples": {
           "Projects_Delete": {
             "$ref": "./examples/Projects_Delete.json"
@@ -1031,11 +1040,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted Project."
+          },
           "202": {
             "description": "Accepted. Project delete operation is ongoing."
           },
           "204": {
-            "description": "NoContent -- project does not exist for this storage mover."
+            "description": "NoContent -- Project does not exist for this Storage Mover."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -1056,7 +1068,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_List",
-        "description": "Lists all job definitions in a project.",
+        "description": "Lists all Job Definitions in a Project.",
         "x-ms-examples": {
           "JobDefinitions_List": {
             "$ref": "./examples/JobDefinitions_List.json"
@@ -1081,7 +1093,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of job definitions.",
+            "description": "The list of Job Definitions.",
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
@@ -1104,7 +1116,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_Get",
-        "description": "Gets a job definition resource.",
+        "description": "Gets a Job Definition resource.",
         "x-ms-examples": {
           "JobDefinitions_Get": {
             "$ref": "./examples/JobDefinitions_Get.json"
@@ -1132,7 +1144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The job definition resource.",
+            "description": "The Job Definition resource.",
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
@@ -1150,7 +1162,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_CreateOrUpdate",
-        "description": "Creates or updates a job definition resource, which contains configuration for a single unit of managed data transfer.",
+        "description": "Creates or updates a Job Definition resource, which contains configuration for a single unit of managed data transfer.",
         "x-ms-examples": {
           "JobDefinitions_CreateOrUpdate": {
             "$ref": "./examples/JobDefinitions_CreateOrUpdate.json"
@@ -1204,7 +1216,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_Update",
-        "description": "Updates properties for a job definition resource. Properties not specified in the request body will be unchanged.",
+        "description": "Updates properties for a Job Definition resource. Properties not specified in the request body will be unchanged.",
         "x-ms-examples": {
           "JobDefinitions_Update": {
             "$ref": "./examples/JobDefinitions_Update.json"
@@ -1240,7 +1252,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The job definition resource.",
+            "description": "The Job Definition resource.",
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
@@ -1258,7 +1270,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_Delete",
-        "description": "Deletes a job definition resource.",
+        "description": "Deletes a Job Definition resource.",
         "x-ms-examples": {
           "Projects_Delete": {
             "$ref": "./examples/JobDefinitions_Delete.json"
@@ -1285,11 +1297,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted Job Definition."
+          },
           "202": {
-            "description": "Accepted. Delete operation is ongoing."
+            "description": "Accepted. Job Definition delete operation is ongoing."
           },
           "204": {
-            "description": "NoContent -- JobDefinition does not exist for this project."
+            "description": "NoContent -- Job Definition does not exist for this Project."
           },
           "default": {
             "description": "Error response describing why delete operation failed.",
@@ -1314,7 +1329,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_StartJob",
-        "description": "Requests an agent to start a new instance of this job definition, generating a new job run resource.",
+        "description": "Requests an Agent to start a new instance of this Job Definition, generating a new Job Run resource.",
         "x-ms-examples": {
           "JobDefinitions_StartJob": {
             "$ref": "./examples/JobDefinitions_StartJob.json"
@@ -1366,7 +1381,7 @@
           "JobDefinitions"
         ],
         "operationId": "JobDefinitions_StopJob",
-        "description": "Requests the agent of any active instance of this job definition to stop.",
+        "description": "Requests the Agent of any active instance of this Job Definition to stop.",
         "x-ms-examples": {
           "JobDefinitions_StopJob": {
             "$ref": "./examples/JobDefinitions_StopJob.json"
@@ -1414,7 +1429,7 @@
           "JobRuns"
         ],
         "operationId": "JobRuns_List",
-        "description": "Lists all job runs in a job definition.",
+        "description": "Lists all Job Runs in a Job Definition.",
         "x-ms-examples": {
           "JobRuns_List": {
             "$ref": "./examples/JobRuns_List.json"
@@ -1442,7 +1457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of job runs.",
+            "description": "The list of Job Runs.",
             "schema": {
               "$ref": "#/definitions/JobRunList"
             }
@@ -1465,7 +1480,7 @@
           "JobRuns"
         ],
         "operationId": "JobRuns_Get",
-        "description": "Gets a job run resource.",
+        "description": "Gets a Job Run resource.",
         "x-ms-examples": {
           "JobRuns_Get": {
             "$ref": "./examples/JobRuns_Get.json"
@@ -1496,7 +1511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The job run resource.",
+            "description": "The Job Run resource.",
             "schema": {
               "$ref": "#/definitions/JobRun"
             }
@@ -1517,16 +1532,16 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the agent."
+          "description": "A description for the Agent."
         },
         "agentVersion": {
           "type": "string",
-          "description": "The agent version.",
+          "description": "The Agent version.",
           "readOnly": true
         },
         "arcResourceId": {
           "type": "string",
-          "description": "The fully qualified resource ID of the hybrid compute resource for the agent.",
+          "description": "The fully qualified resource ID of the Hybrid Compute resource for the Agent.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1534,14 +1549,14 @@
         },
         "arcVmUuid": {
           "type": "string",
-          "description": "A GUID for this agent.",
+          "description": "The VM UUID of the Hybrid Compute resource for the Agent.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "agentStatus": {
-          "description": "The agent status.",
+          "description": "The Agent status.",
           "enum": [
             "Registering",
             "Offline",
@@ -1560,30 +1575,30 @@
         "lastStatusUpdate": {
           "type": "string",
           "format": "date-time",
-          "description": "The last updated time of the agent status.",
+          "description": "The last updated time of the Agent status.",
           "readOnly": true
         },
         "localIPAddress": {
           "type": "string",
-          "description": "Local IP address reported by the agent.",
+          "description": "Local IP address reported by the Agent.",
           "readOnly": true
         },
         "memoryInMB": {
           "type": "integer",
           "format": "int64",
-          "description": "Available memory reported by the agent, in MB.",
+          "description": "Available memory reported by the Agent, in MB.",
           "readOnly": true
         },
         "numberOfCores": {
           "type": "integer",
           "format": "int64",
-          "description": "Available compute cores reported by the agent.",
+          "description": "Available compute cores reported by the Agent.",
           "readOnly": true
         },
         "uptimeInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "Uptime of the agent in seconds.",
+          "description": "Uptime of the Agent in seconds.",
           "readOnly": true
         },
         "errorDetails": {
@@ -1619,7 +1634,7 @@
       ]
     },
     "Agent": {
-      "description": "The agent resource.",
+      "description": "The Agent resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1631,6 +1646,9 @@
           "description": "Resource system metadata."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -1642,12 +1660,12 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the agent."
+          "description": "A description for the Agent."
         }
       }
     },
     "AgentUpdateParameters": {
-      "description": "The agent resource.",
+      "description": "The Agent resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1657,7 +1675,7 @@
       }
     },
     "AgentList": {
-      "description": "List of agents.",
+      "description": "List of Agents.",
       "type": "object",
       "properties": {
         "value": {
@@ -1697,7 +1715,7 @@
       }
     },
     "StorageMover": {
-      "description": "The Storage Mover resource, which is a container for a group of Storage Mover agents and projects.",
+      "description": "The Storage Mover resource, which is a container for a group of Agents, Projects, and Endpoints.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1766,7 +1784,7 @@
       "discriminator": "endpointType",
       "properties": {
         "endpointType": {
-          "description": "The endpoint resource type.",
+          "description": "The Endpoint resource type.",
           "enum": [
             "AzureStorageBlobContainer",
             "NfsMount"
@@ -1783,7 +1801,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A description for the endpoint."
+          "description": "A description for the Endpoint."
         },
         "provisioningState": {
           "description": "The provisioning state of this resource.",
@@ -1803,7 +1821,7 @@
       ]
     },
     "Endpoint": {
-      "description": "The endpoint resource, which contains information about file sources and targets.",
+      "description": "The Endpoint resource, which contains information about file sources and targets.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1814,6 +1832,9 @@
           "description": "Resource system metadata."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -1821,17 +1842,17 @@
       ]
     },
     "EndpointBaseUpdateProperties": {
-      "description": "The endpoint resource, which contains information about file sources and targets.",
+      "description": "The Endpoint resource, which contains information about file sources and targets.",
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the endpoint."
+          "description": "A description for the Endpoint."
         }
       }
     },
     "EndpointBaseUpdateParameters": {
-      "description": "The endpoint resource.",
+      "description": "The Endpoint resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1840,7 +1861,7 @@
       }
     },
     "EndpointList": {
-      "description": "List of endpoints.",
+      "description": "List of Endpoints.",
       "type": "object",
       "properties": {
         "value": {
@@ -1954,7 +1975,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the job definition."
+          "description": "A description for the Job Definition."
         },
         "copyMode": {
           "type": "string",
@@ -1970,7 +1991,7 @@
         },
         "sourceName": {
           "type": "string",
-          "description": "The name of the source endpoint.",
+          "description": "The name of the source Endpoint.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1978,7 +1999,7 @@
         },
         "sourceResourceId": {
           "type": "string",
-          "description": "Fully qualified resource ID of the source endpoint.",
+          "description": "Fully qualified resource ID of the source Endpoint.",
           "readOnly": true
         },
         "sourceSubpath": {
@@ -1991,7 +2012,7 @@
         },
         "targetName": {
           "type": "string",
-          "description": "The name of the target endpoint.",
+          "description": "The name of the target Endpoint.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1999,7 +2020,7 @@
         },
         "targetResourceId": {
           "type": "string",
-          "description": "Fully qualified resource ID of the target endpoint.",
+          "description": "Fully qualified resource ID of the target Endpoint.",
           "readOnly": true
         },
         "targetSubpath": {
@@ -2012,12 +2033,12 @@
         },
         "latestJobRunName": {
           "type": "string",
-          "description": "The name of the job run in a non-terminal state, if exists.",
+          "description": "The name of the Job Run in a non-terminal state, if exists.",
           "readOnly": true
         },
         "latestJobRunResourceId": {
           "type": "string",
-          "description": "The fully qualified resource ID of the job run in a non-terminal state, if exists.",
+          "description": "The fully qualified resource ID of the Job Run in a non-terminal state, if exists.",
           "readOnly": true
         },
         "latestJobRunStatus": {
@@ -2036,16 +2057,16 @@
             "name": "JobRunStatus",
             "modelAsString": true
           },
-          "description": "The current status of the job run in a non-terminal state, if exists.",
+          "description": "The current status of the Job Run in a non-terminal state, if exists.",
           "readOnly": true
         },
         "agentName": {
           "type": "string",
-          "description": "Name of the agent to assign for new job runs of this definition."
+          "description": "Name of the Agent to assign for new Job Runs of this Job Definition."
         },
         "agentResourceId": {
           "type": "string",
-          "description": "Fully qualified resource id of the agent to assign for new job runs of this definition.",
+          "description": "Fully qualified resource id of the Agent to assign for new Job Runs of this Job Definition.",
           "readOnly": true
         },
         "provisioningState": {
@@ -2062,12 +2083,13 @@
         }
       },
       "required": [
+        "copyMode",
         "sourceName",
         "targetName"
       ]
     },
     "JobDefinition": {
-      "description": "The job definition resource.",
+      "description": "The Job Definition resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2079,6 +2101,9 @@
           "description": "Resource system metadata."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2091,7 +2116,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the job definition."
+          "description": "A description for the Job Definition."
         },
         "copyMode": {
           "type": "string",
@@ -2107,12 +2132,12 @@
         },
         "agentName": {
           "type": "string",
-          "description": "Name of the agent to assign for new job runs of this definition."
+          "description": "Name of the Agent to assign for new Job Runs of this Job Definition."
         }
       }
     },
     "JobDefinitionUpdateParameters": {
-      "description": "The job definition resource.",
+      "description": "The Job Definition resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2122,7 +2147,7 @@
       }
     },
     "JobDefinitionList": {
-      "description": "List of job definitions.",
+      "description": "List of Job Definitions.",
       "type": "object",
       "properties": {
         "value": {
@@ -2192,34 +2217,34 @@
             "name": "JobRunScanStatus",
             "modelAsString": true
           },
-          "description": "The status of agent's scanning of source."
+          "description": "The status of Agent's scanning of source."
         },
         "agentName": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of the agent assigned to this run."
+          "description": "Name of the Agent assigned to this run."
         },
         "agentResourceId": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource id of the agent assigned to this run."
+          "description": "Fully qualified resource id of the Agent assigned to this run."
         },
         "executionStartTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the run. Null if no agent reported that the job has started."
+          "description": "Start time of the run. Null if no Agent reported that the job has started."
         },
         "executionEndTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "End time of the run. Null if agent has not reported that the job has ended."
+          "description": "End time of the run. Null if Agent has not reported that the job has ended."
         },
         "lastStatusUpdate": {
           "type": "string",
           "format": "date-time",
-          "description": "The last updated time of the job run.",
+          "description": "The last updated time of the Job Run.",
           "readOnly": true
         },
         "itemsScanned": {
@@ -2349,7 +2374,7 @@
       }
     },
     "JobRun": {
-      "description": "The job run resource.",
+      "description": "The Job Run resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2368,18 +2393,18 @@
       ]
     },
     "JobRunResourceId": {
-      "description": "Response that identifies a JobRun.",
+      "description": "Response that identifies a Job Run.",
       "type": "object",
       "properties": {
         "jobRunResourceId": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource id of the JobRun."
+          "description": "Fully qualified resource id of the Job Run."
         }
       }
     },
     "JobRunList": {
-      "description": "List of job runs.",
+      "description": "List of Job Runs.",
       "type": "object",
       "properties": {
         "value": {
@@ -2402,7 +2427,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the project."
+          "description": "A description for the Project."
         },
         "provisioningState": {
           "description": "The provisioning state of this resource.",
@@ -2419,7 +2444,7 @@
       }
     },
     "Project": {
-      "description": "The project resource.",
+      "description": "The Project resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2443,12 +2468,12 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description for the project."
+          "description": "A description for the Project."
         }
       }
     },
     "ProjectUpdateParameters": {
-      "description": "The project resource.",
+      "description": "The Project resource.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2458,7 +2483,7 @@
       }
     },
     "ProjectList": {
-      "description": "List of project resources.",
+      "description": "List of Project resources.",
       "type": "object",
       "properties": {
         "value": {
@@ -2482,7 +2507,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the agent resource.",
+      "description": "The name of the Agent resource.",
       "x-ms-parameter-location": "method"
     },
     "StorageMoverNameParameter": {
@@ -2498,7 +2523,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the endpoint resource.",
+      "description": "The name of the Endpoint resource.",
       "x-ms-parameter-location": "method"
     },
     "JobDefinitionNameParameter": {
@@ -2506,7 +2531,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the job definition resource.",
+      "description": "The name of the Job Definition resource.",
       "x-ms-parameter-location": "method"
     },
     "JobRunNameParameter": {
@@ -2514,7 +2539,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the job run.",
+      "description": "The name of the Job Run resource.",
       "x-ms-parameter-location": "method"
     },
     "ProjectNameParameter": {
@@ -2522,7 +2547,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the project resource.",
+      "description": "The name of the Project resource.",
       "x-ms-parameter-location": "method"
     }
   }

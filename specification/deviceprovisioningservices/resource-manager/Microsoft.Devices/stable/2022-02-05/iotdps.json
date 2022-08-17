@@ -76,7 +76,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
       "get": {
         "tags": [
-          "GET"
+          "DpsCertificate"
         ],
         "operationId": "DpsCertificate_Get",
         "description": "Get the certificate from the provisioning service.",
@@ -142,7 +142,7 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "DpsCertificate"
         ],
         "summary": "Upload the certificate to the provisioning service.",
         "description": "Add new certificate or update an existing certificate.",
@@ -222,7 +222,7 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "DpsCertificate"
         ],
         "operationId": "DpsCertificate_Delete",
         "summary": "Delete the Provisioning Service Certificate.",
@@ -358,7 +358,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "Get the non-security related metadata of the provisioning service.",
         "description": "Get the metadata of the provisioning service without SAS keys.",
@@ -413,7 +413,7 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "IotDpsResource"
         ],
         "summary": "Create or update the metadata of the provisioning service.",
         "description": "Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
@@ -484,7 +484,7 @@
       },
       "patch": {
         "tags": [
-          "PATCH"
+          "IotDpsResource"
         ],
         "summary": "Update an existing provisioning service's tags.",
         "description": "Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method",
@@ -543,7 +543,7 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "IotDpsResource"
         ],
         "summary": "Delete the Provisioning Service",
         "description": "Deletes the Provisioning Service.",
@@ -605,7 +605,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
       "get": {
         "tags": [
-          "GET"
+          "DpsCertificate"
         ],
         "operationId": "DpsCertificate_List",
         "description": "Get all the certificates tied to the provisioning service.",
@@ -659,7 +659,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "Get all the provisioning services in a subscription.",
         "description": "List all the provisioning services for a given subscription id.",
@@ -699,7 +699,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "operationId": "IotDpsResource_ListByResourceGroup",
         "description": "Get a list of all provisioning services in the given resource group.",
@@ -749,7 +749,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "operationId": "IotDpsResource_GetOperationResult",
         "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
@@ -818,7 +818,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "Get the list of valid SKUs for a provisioning service.",
         "description": "Gets the list of valid SKUs and tiers for a provisioning service.",
@@ -872,7 +872,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
       "post": {
         "tags": [
-          "POST"
+          "DpsCertificate"
         ],
         "operationId": "DpsCertificate_GenerateVerificationCode",
         "description": "Generate verification code for Proof of Possession.",
@@ -1003,7 +1003,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
       "post": {
         "tags": [
-          "POST"
+          "DpsCertificate"
         ],
         "operationId": "DpsCertificate_VerifyCertificate",
         "summary": "Verify certificate's private key possession.",
@@ -1150,7 +1150,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
       "post": {
         "tags": [
-          "POST"
+          "IotDpsResource"
         ],
         "operationId": "IotDpsResource_CheckProvisioningServiceNameAvailability",
         "x-ms-examples": {
@@ -1196,7 +1196,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
       "post": {
         "tags": [
-          "POST"
+          "IotDpsResource"
         ],
         "operationId": "IotDpsResource_ListKeys",
         "x-ms-examples": {
@@ -1250,7 +1250,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
       "post": {
         "tags": [
-          "POST"
+          "IotDpsResource"
         ],
         "operationId": "IotDpsResource_ListKeysForKeyName",
         "x-ms-examples": {
@@ -1308,7 +1308,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "List private link resources",
         "description": "List private link resources for the given provisioning service",
@@ -1352,7 +1352,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources/{groupId}": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "Get the specified private link resource",
         "description": "Get the specified private link resource for the given provisioning service",
@@ -1399,7 +1399,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "List private endpoint connections",
         "description": "List private endpoint connection properties",
@@ -1443,7 +1443,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
-          "GET"
+          "IotDpsResource"
         ],
         "summary": "Get private endpoint connection",
         "description": "Get private endpoint connection properties",
@@ -1488,7 +1488,7 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "IotDpsResource"
         ],
         "summary": "Create or update private endpoint connection",
         "description": "Create or update the status of a private endpoint connection with the specified name",
@@ -1549,7 +1549,7 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "IotDpsResource"
         ],
         "summary": "Delete private endpoint connection",
         "description": "Delete private endpoint connection with the specified name",
