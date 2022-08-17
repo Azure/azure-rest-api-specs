@@ -359,6 +359,10 @@
   "definitions": {
     "CustomIpPrefixPropertiesFormat": {
       "properties": {
+        "asn": {
+          "type": "string",
+          "description": "The ASN for CIDR advertising. Should be an integer as string."
+        },
         "cidr": {
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
@@ -390,13 +394,37 @@
             "Provisioning",
             "Provisioned",
             "Commissioning",
+            "CommissionedNoInternetAdvertise"
             "Commissioned",
             "Decommissioning",
             "Deprovisioning",
-            "CommissionedNoInternetAdvertise"
+			"Deprovisioned",
           ],
           "x-ms-enum": {
             "name": "CommissionedState",
+            "modelAsString": true
+          }
+        },
+        "expressRouteAdvertise": {
+          "type": "boolean",
+          "description": "Whether to do express route advertise."
+        },
+        "geo": {
+          "type": "string",
+          "description": "The Geo for CIDR advertising. Should be an Geo code.",
+          "enum": [
+            "GLOBAL",
+			"AFRI",
+			"APAC",
+			"EURO",
+			"LATAM",
+			"NAM",
+			"ME",
+			"OCEANIA",
+			"AQ"
+          ],
+          "x-ms-enum": {
+            "name": "Geo",
             "modelAsString": true
           }
         },
