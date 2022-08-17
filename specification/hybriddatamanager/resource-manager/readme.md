@@ -52,7 +52,7 @@ input-file:
 - Microsoft.HybridData/stable/2016-06-01/hybriddata.json
 directive:
   - suppress:
-    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation) ...
+    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation) 
     - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
 ```
 
