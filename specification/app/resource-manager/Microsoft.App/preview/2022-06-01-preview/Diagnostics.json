@@ -315,10 +315,6 @@
               "$ref": "./AuthConfigs.json#/definitions/AuthConfig"
             }
           },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -581,7 +577,7 @@
           }
         },
         "x-ms-examples": {
-          "List Dapr Components": {
+          "Get the specified Dapr Component": {
             "$ref": "./examples/DaprComponents_Get_Secrets.json"
           }
         }
@@ -629,7 +625,7 @@
           }
         },
         "x-ms-examples": {
-          "List Dapr Components": {
+          "List Certificates": {
             "$ref": "./examples/Certificates_ListByManagedEnvironment.json"
           }
         }
@@ -643,7 +639,7 @@
         ],
         "summary": "Get the specified Certificate in a Managed Environment.",
         "description": "Get the specified Certificate of a Managed Environment used to host container apps.",
-        "operationId": "ManagedEnvironmentsDiagnostics_ListCertificates",
+        "operationId": "ManagedEnvironmentsDiagnostics_GetCertificates",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -684,7 +680,7 @@
           }
         },
         "x-ms-examples": {
-          "List Dapr Components": {
+          "Get the specified certificate": {
             "$ref": "./examples/Certificate_Get.json"
           }
         }
