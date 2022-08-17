@@ -36,10 +36,10 @@
         "description": "Queries component policy states under subscription scope.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -96,13 +96,13 @@
         "description": "Queries component policy states under resource group scope.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
-          },
-          {
             "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -159,10 +159,10 @@
         "description": "Queries component policy states for the resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
+            "$ref": "#/parameters/resourceIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceIdParameter"
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -231,9 +231,6 @@
         "description": "Queries component policy states for the subscription level policy definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
-          },
-          {
             "$ref": "#/parameters/subscriptionId"
           },
           {
@@ -241,6 +238,9 @@
           },
           {
             "$ref": "#/parameters/policyDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -294,9 +294,6 @@
         "description": "Queries component policy states for the subscription level policy assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
-          },
-          {
             "$ref": "#/parameters/subscriptionId"
           },
           {
@@ -304,6 +301,9 @@
           },
           {
             "$ref": "#/parameters/policyAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -357,9 +357,6 @@
         "description": "Queries component policy states for the resource group level policy assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
-          },
-          {
             "$ref": "#/parameters/subscriptionId"
           },
           {
@@ -370,6 +367,9 @@
           },
           {
             "$ref": "#/parameters/policyAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResourceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -450,6 +450,7 @@
   },
   "definitions": {
     "ComponentPolicyStatesQueryResults": {
+      "type":"object",
       "description": "Query results.",
       "properties": {
         "@odata.context": {
@@ -675,6 +676,7 @@
       }
     },
     "ComplianceDetail": {
+      "type": "object",
       "description": "The compliance state rollup.",
       "properties": {
         "complianceState": {
@@ -689,6 +691,7 @@
       }
     },
     "QueryFailure": {
+      "type": "object",
       "description": "Error response.",
       "properties": {
         "error": {
@@ -709,6 +712,7 @@
       }
     },
     "OperationsListResults": {
+      "type": "object",
       "description": "List of available operations.",
       "properties": {
         "@odata.count": {
@@ -730,6 +734,7 @@
       }
     },
     "Operation": {
+      "type": "object",
       "description": "Operation definition.",
       "properties": {
         "name": {
@@ -737,6 +742,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "description": "Display metadata associated with the operation.",
           "properties": {
             "provider": {
