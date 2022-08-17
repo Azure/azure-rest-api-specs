@@ -652,6 +652,45 @@
           "readOnly": true
         }
       }
+    },
+    "RerunTriggerListResponse": {
+      "description": "A list of rerun triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rerun triggers.",
+          "items": {
+            "$ref": "#/definitions/RerunTriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RerunTriggerResource": {
+      "description": "RerunTrigger resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
+          "description": "Properties of the rerun trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {

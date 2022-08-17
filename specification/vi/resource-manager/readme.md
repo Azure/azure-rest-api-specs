@@ -26,7 +26,8 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-
+      - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+      - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
@@ -44,9 +45,27 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-10-preview
+tag: package-2022-08-01
 ```
 
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=2022-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01'
+version-with-underscores: 2022_08_01
+input-file:
+  - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
+```
+### Tag: package-2022-04-13-preview
+
+These settings apply only when `--tag=2022-04-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-13-preview'
+version-with-underscores: 2022_04_13_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+```
 ### Tag: package-2021-11-10-preview
 
 These settings apply only when `--tag=2021-11-10-preview` is specified on the command line.
@@ -91,7 +110,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-cli-extensions

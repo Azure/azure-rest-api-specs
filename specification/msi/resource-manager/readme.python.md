@@ -17,10 +17,12 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
-  - tag: package-preview-2021-09
+  - tag: package-preview-2022-01
+  - tag: package-preview-2021-09-30
   - tag: package-2018-11-30
   - multiapiscript: true
 ```
@@ -30,12 +32,22 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/
 perform-load: false
 ```
 
-### Tag: package-preview-2021-09 and python
+### Tag: package-preview-2022-01 and python
 
-These settings apply only when `--tag=package-preview-2021-09 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2022-01'
+namespace: azure.mgmt.msi.v2022_01_31_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2022_01_31_preview
+```
+
+### Tag: package-preview-2021-09-30 and python
+
+These settings apply only when `--tag=package-preview-2021-09-30 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-09-30'
 namespace: azure.mgmt.msi.v2021_09_30_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2021_09_30_preview
 ```
