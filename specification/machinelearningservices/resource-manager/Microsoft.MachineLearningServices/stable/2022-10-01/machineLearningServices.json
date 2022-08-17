@@ -822,6 +822,9 @@
           "Create an ComputeInstance Compute": {
             "$ref": "./examples/Compute/createOrUpdate/ComputeInstance.json"
           },
+          "Create an ComputeInstance Compute with Schedules": {
+            "$ref": "./examples/Compute/createOrUpdate/ComputeInstanceWithSchedules.json"
+          },
           "Create an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/BasicAKSCompute.json"
           },
@@ -1259,6 +1262,56 @@
         ],
         "responses": {
           "202": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateSchedules": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_UpdateSchedules",
+        "description": "Updates schedules of a compute instance",
+        "x-ms-examples": {
+          "Update schedules of ComputeInstance": {
+            "$ref": "./examples/Compute/updateSchedules.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for updating schedules of specified ComputeInstance.",
+            "schema": {
+              "$ref": "#/definitions/ComputeSchedules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "Success."
           },
           "default": {
@@ -4837,30 +4890,20 @@
       "type": "object",
       "description": "Compute start stop schedule properties",
       "properties": {
-        "id": {
-          "description": "Schedule id.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "provisioningStatus": {
-          "type": "string",
-          "enum": [
-            "Completed",
-            "Provisioning",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningStatus",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current deployment state of schedule."
+        "allOf":{
+          "$ref": "#/definitions/ScheduleBase"
         },
         "action": {
           "$ref": "#/definitions/ComputePowerAction"
         },
-        "schedule": {
-          "$ref": "#/definitions/ScheduleBase"
+        "triggerType": {
+          "$ref": "#/definitions/TriggerType"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence"
+        },
+        "cron": {
+          "$ref": "#/definitions/Cron"
         }
       }
     },
@@ -4868,7 +4911,9 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Schedule id.",
           "type": "string",
+          "readOnly": true,
           "x-nullable": true
         },
         "provisioningStatus": {
@@ -4902,7 +4947,9 @@
           }
         ]
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "description": "The current deployment state of schedule."
     },
     "ScheduleStatus": {
       "enum": [
@@ -4934,6 +4981,121 @@
       "x-ms-enum": {
         "name": "ComputePowerAction",
         "modelAsString": true
+      }
+    },
+    "TriggerType": {
+      "type": "string",
+      "description": "The schedule trigger type.",
+      "enum": [
+        "Recurrence",
+        "Cron"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": true
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/RecurrenceFrequency"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      }
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "description": "The recurrence frequency.",
+      "enum": [
+        "NotSpecified",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month",
+        "Year"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": true
+      }
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "description": "The recurrence schedule",
+      "properties": {
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The minutes."
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The hours."
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": false
+            }
+          },
+          "description": "The days of the week."
+        }
+      }
+    },
+    "Cron": {
+      "type": "object",
+      "description": "The workflow trigger cron for ComputeStartStop schedule type.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The cron expression."
+        }
       }
     },
     "ComputeInstanceDataMount": {
