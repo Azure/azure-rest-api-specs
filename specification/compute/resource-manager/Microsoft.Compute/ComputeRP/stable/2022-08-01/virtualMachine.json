@@ -1945,7 +1945,11 @@
             "description": "The expand expression to apply on the operation.",
             "enum": [
               "instanceView"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1958,7 +1962,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplicationWithInstanceView"
+              "$ref": "./computeRPCommon.json#/definitions/VMGalleryApplication"
             }
           },
           "default": {

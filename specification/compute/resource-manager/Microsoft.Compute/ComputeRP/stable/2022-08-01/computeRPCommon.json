@@ -1122,6 +1122,11 @@
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VMGalleryApplicationInstanceView",
+          "readOnly": true,
+          "description": "Contains instanceView of the VMApplication if $expand=instanceView is specified"
         }
       },
       "required": [
@@ -1129,28 +1134,15 @@
       ],
       "description": "Specifies the required information to reference a compute gallery application version"
     },
-    "VMGalleryApplicationWithInstanceView": {
-      "type": "object",
-      "properties": {
-        "instanceView": {
-          "$ref": "#/definitions/VMGalleryApplicationInstanceView",
-          "readOnly": true,
-          "description": "Contains instanceView of the VMApplication if $expand=instanceView is specified"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/VMGalleryApplication"
-        }
-      ]
-    },
     "VirtualMachineApplicationsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMGalleryApplication"
           },
+          "x-ms-identifiers": ["packageReferenceId"],
           "description": "The list of extensions"
         }
       },
@@ -1175,7 +1167,9 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMGalleryApplicationInstanceViewAction"
-          }
+          },
+          "x-ms-identifiers": [],
+          "description": "actions performed on the application"
         }
       }
     },
