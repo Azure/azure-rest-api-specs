@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: VirtualMachineImage
+    description: Microsoft.Compute/image
+    variables:
+      publisherName: MicrosoftWindowsServer
+      offer: WindowsServer
+      skus: 2016-Datacenter
+      version: 2016.127.20180613
+    steps:
+      - step: VirtualMachineImage_ListPublishers
+        exampleFile: ../examples/compute/VirtualMachineImages_ListPublishers_MaximumSet_Gen.json
+      - step: VirtualMachineImage_ListOffers
+        exampleFile: ../examples/compute/VirtualMachineImages_ListOffers_MaximumSet_Gen.json
+      - step: VirtualMachineImage_ListSkus
+        exampleFile: ../examples/compute/VirtualMachineImages_ListSkus_MaximumSet_Gen.json
+      - step: VirtualMachineImage_List
+        exampleFile: ../examples/compute/VirtualMachineImages_List_MaximumSet_Gen.json
+        requestUpdate:
+          - replace: /$orderby
+            value: id
+          - remove: /$expand
+      - step: VirtualMachineImage_Get
+        exampleFile: ../examples/compute/VirtualMachineImages_Get_MaximumSet_Gen.json
