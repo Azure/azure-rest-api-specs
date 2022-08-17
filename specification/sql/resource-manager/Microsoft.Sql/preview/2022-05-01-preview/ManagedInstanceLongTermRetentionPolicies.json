@@ -182,6 +182,64 @@
             "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyCreateOrUpdate.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstanceLongTermRetentionPolicies"
+        ],
+        "description": "Deletes a managed database's long term retention policy.",
+        "operationId": "ManagedInstanceLongTermRetentionPolicies_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedInstanceLongTermRetentionPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted LTR policy for managed database.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMissingWeekOfYear - WeekOfYear is required to be set between 1 and 52 in order to set yearly retention.\n\n * 400 LTRNotSupportedForPerDBCMK - Long-term Backup Retention is not supported when Database-level CMK is configured in preview.\n\n * 400 LongTermRetentionPolicyNotSupported - Long Term Retention is not supported on this database.\n\n * 400 LongTermRetentionPolicyInvalid - Long Term Retention policy is invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes the LTR policy for the managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyDelete.json"
+          }
+        }
       }
     }
   },
