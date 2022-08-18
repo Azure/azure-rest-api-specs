@@ -167,10 +167,10 @@ This validator is to ensure the cadl & swagger files in PR are consistent and th
 
 ## Traffic Validation
 
-It generates traffics for all operations defined in swaggers under default tag readme.md by using [RESTLer](https://github.com/microsoft/restler-fuzzer). Then it validates the request and response pairs from these traffics against correspondent swaggers. Finally, it provides a html report that reflects swagger accuracy.
+It generates traffics for all operations defined in swaggers under default tag of readme.md by using [RESTLer](https://github.com/microsoft/restler-fuzzer). Then it validates the request and response pairs from these traffics against correspondent swaggers. Finally, it provides a html report that reflects swagger accuracy.
 
-### How to fix
-If user wants to fix errors or improve the coverage, please follow this [guidance](./restler/how-to-improve-test-coverage.md).
+### How to understand and improve the report
+Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
 
 ## Suppression Process
 
