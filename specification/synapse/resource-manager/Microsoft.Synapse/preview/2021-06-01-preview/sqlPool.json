@@ -7750,17 +7750,84 @@
         "operationType": {
           "description": "Type of operation",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "BackupAzureDatabaseOperation",
+            "BroadcastMoveOperation",
+            "CheckEncryptionStatusOperation",
+            "CopyOperation",
+            "CreateDiagnosticsOperation",
+            "DSQLCallBackOperation",
+            "DbccShowStatisticsOperation",
+            "DistributedExchangeOperation",
+            "DistributeReplicatedTableMoveOperation",
+            "DropDiagnosticsNotifyOperation",
+            "DropDiagnosticsSynchronizeOperation",
+            "ExternalBroadcastMove",
+            "ExternalExportControlMove",
+            "ExternalExportControlOperation",
+            "ExternalExportDistributedMove",
+            "ExternalExportDistributedOperation",
+            "ExternalExportReplicatedMove",
+            "ExternalExportReplicatedOperation",
+            "ExternalShuffleOperation",
+            "ExternalStatisticsOperation",
+            "HadoopBroadcastOperation",
+            "HadoopRoundRobinOperation",
+            "HadoopShuffleOperation",
+            "InsertBulkOperation",
+            "MetaDataCreateOperation",
+            "MoveOperation",
+            "OnOperation",
+            "PartitionMoveOperation",
+            "RandomIDOperation",
+            "RandomIDOperation",
+            "ReconfigureOperation",
+            "ReturnOperation",
+            "RoundRobinMoveOperation",
+            "SetIdentityInsertOperation",
+            "SetOptionsOperation",
+            "ShuffleMoveOperation",
+            "SingleSourceRoundRobinMoveOperation",
+            "TempTablePropertiesOperation",
+            "TrimMoveOperation"
+
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsOperationType"
+          }
         },
         "distributionType": {
           "description": "Type of distribution",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "AllAzureEndpoints",
+            "AllComputeNodes",
+            "AllDistributions",
+            "AllNodes",
+            "ComputeNode",
+            "Distribution",
+            "SubsetDistributions",
+            "SubsetNodes",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsDistributionType"
+          }
         },
         "locationType": {
           "description": "Type of location",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "Compute",
+            "Control",
+            "DMS"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsLocationType"
+          }
         },
         "rowCount": {
           "description": "Number of rows count",
