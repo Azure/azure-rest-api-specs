@@ -27,18 +27,18 @@ These are the global settings for the apisecurity.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2022-07
+tag: package-preview-2022-09
 ```
 
+### Tag: package-preview-2022-09
 
-### Tag: package-preview-2022-07
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-07'
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - Microsoft.ApiSecurity/preview/2022-07-01-privatepreview/apisecurity.json
+  - Microsoft.ApiSecurity/preview/2022-09-12-privatepreview/apisecurity.json
 ```
+
 ### Tag: package-preview-2022-03
 
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.

@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-12-privatepreview",
+    "title": "Azure Security API Security Resource Provider (v3)",
+    "description": "PP3 RP service OpenAPI Specification (CAS Resource Provider v3)"
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apiCollections/{casApiCollectionId}": {
+      "put": {
+        "description": "Onboard an APIM API Collection to Defender for APIs. The system will start monitoring the APIs within the APIM API Collection for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Onboard an APIM API Collection to Defender for APIs",
+        "tags": [
+          "OnboardToD4API",
+          "APIMConfig",
+          "default"
+        ],
+        "operationId": "V3APICollectionOnboarding_Create",
+        "x-ms-examples": {
+          "V3APICollectionOnboarding_Put_PropertySet": {
+            "$ref": "./examples/V3APICollectionOnboarding_Put_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "casApiCollectionId",
+            "description": "A string representing the apiCollections resource within the Microsoft.ApiSecurity provider namespace. This string has a specific format that you can view in the examples.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The version of the API that you are invoking.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed the Defender for APIs onboarding process for the APIM API Collection"
+          },
+          "204": {
+            "description": "Successfully completed the Defender for APIs onboarding process for the APIM API Collection"
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in Authorization header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Resource does not exist in Defender for APIs",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict occurred due to between multiple concurrent operations",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Offboard an APIM API Collection from Defender for APIs. The system will stop monitoring the APIs within the APIM API Collection for intrusive behaviors.",
+        "summary": "Offboard an APIM API Collection from Defender for APIs",
+        "tags": [
+          "OffboardFromD4API",
+          "APIMConfig",
+          "default"
+        ],
+        "operationId": "V3APICollectionOffboarding_Delete",
+        "x-ms-examples": {
+          "V3APICollectionOffboarding_Delete_PropertySet": {
+            "$ref": "./examples/V3APICollectionOffboarding_Delete_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "casApiCollectionId",
+            "description": "A string representing the apiCollections resource within the Microsoft.ApiSecurity provider namespace. This string has a specific format that you can view in the examples.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The version of the API that you are invoking.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed the Defender for APIs offboarding process for the APIM API Collection"
+          },
+          "204": {
+            "description": "Successfully completed the Defender for APIs offboarding process for the APIM API Collection"
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in Authorization header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Resource does not exist in Defender for APIs",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict occurred due to between multiple concurrent operations",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Determine whether an APIM API Collection is onboarded to Defender for APIs. If the APIM API Collection is onboarded to Defender for APIs, the system will monitor the APIs within the APIM API Collection for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Determine whether an APIM API Collection is onboarded to Defender for APIs",
+        "tags": [
+          "D4APIOnboardingStatus",
+          "APIMConfig",
+          "default"
+        ],
+        "operationId": "V3APICollectionOnboardingState_Get",
+        "x-ms-examples": {
+          "V3APICollectionOnboardingState_Get_PropertySet": {
+            "$ref": "./examples/V3APICollectionOnboardingState_Get_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "casApiCollectionId",
+            "description": "A string representing the apiCollections resource within the Microsoft.ApiSecurity provider namespace. This string has a specific format that you can view in the examples.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The version of the API that you are invoking.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "APIM API Collection is onboarded to Defender for APIs"
+          },
+          "204": {
+            "description": "APIM API Collection is onboarded to Defender for APIs"
+          },
+          "401": {
+            "description": "Access token in Authorization header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "APIM API Collection is not onboarded to Defender for APIs",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiSecurity/operations": {
+      "get": {
+        "tags": [
+          "Operations",
+          "default"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "V3Operations_List",
+        "x-ms-examples": {
+          "V3Operations_List_PropertySet": {
+            "$ref": "./examples/V3Operations_List_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JsonValueKind": {
+      "title": "JsonValueKind",
+      "example": 0,
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "x-ms-enum": {
+        "name": "JsonValueKind",
+        "modelAsString": false
+      }
+    },
+    "JsonElement": {
+      "title": "JsonElement",
+      "type": "object",
+      "properties": {
+        "valueKind": {
+          "$ref": "#/definitions/JsonValueKind"
+        }
+      }
+    },
+    "SystemData": {
+      "title": "SystemData",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "OnboardToD4API",
+      "description": ""
+    },
+    {
+      "name": "OffboardFromD4API",
+      "description": ""
+    },
+    {
+      "name": "D4APIOnboardingStatus",
+      "description": ""
+    },
+    {
+      "name": "APIMConfig",
+      "description": ""
+    },
+    {
+      "name": "ApiCollections",
+      "description": ""
+    },
+    {
+      "name": "Health",
+      "description": ""
+    }
+  ]
+}
