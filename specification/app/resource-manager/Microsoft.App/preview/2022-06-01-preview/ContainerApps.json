@@ -202,6 +202,9 @@
         "x-ms-examples": {
           "Create or Update Container App": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate.json"
+          },
+          "Create or Update Tcp App": {
+            "$ref": "./examples/ContainerApps_TcpApp_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -640,12 +643,18 @@
           "description": "Target Port in containers for traffic from ingress",
           "type": "integer"
         },
+        "exposedPort": {
+          "format": "int32",
+          "description": "Exposed Port in containers for TCP traffic from ingress",
+          "type": "integer"
+        },
         "transport": {
           "description": "Ingress transport protocol",
           "enum": [
             "auto",
             "http",
-            "http2"
+            "http2",
+            "tcp"
           ],
           "type": "string",
           "x-ms-enum": {
