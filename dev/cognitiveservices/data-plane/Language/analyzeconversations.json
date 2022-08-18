@@ -826,7 +826,8 @@
           "type": "string",
           "enum": [
             "EntitySubtype",
-            "ListKey"
+            "ListKey",
+            "RegexKey"
           ],
           "x-ms-enum": {
             "name": "ExtraInformationKind",
@@ -867,6 +868,26 @@
         "key": {
           "type": "string",
           "description": "The canonical form of the extracted entity."
+        }
+      }
+    },
+    "RegexKey": {
+      "description": "The regex key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "RegexKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the regex pattern used in extracting the entity."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The regex pattern used in extracting the entity."
         }
       }
     },
