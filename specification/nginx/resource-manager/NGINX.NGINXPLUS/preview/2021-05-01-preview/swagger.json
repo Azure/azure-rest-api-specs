@@ -885,8 +885,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage"
@@ -963,8 +962,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1076,15 +1074,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxPublicIPAddress"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "privateIPAddresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxPrivateIPAddress"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1104,6 +1100,25 @@
         },
         "networkInterfaceConfiguration": {
           "$ref": "#/definitions/NginxNetworkInterfaceConfiguration"
+        }
+      }
+    },
+    "NginxStorageAccount": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxLogging": {
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/NginxStorageAccount"
         }
       }
     },
@@ -1131,6 +1146,9 @@
         },
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },
@@ -1179,6 +1197,9 @@
       "properties": {
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },
@@ -1268,8 +1289,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
