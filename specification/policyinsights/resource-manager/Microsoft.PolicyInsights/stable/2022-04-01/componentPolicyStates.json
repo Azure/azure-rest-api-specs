@@ -416,36 +416,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.PolicyInsights/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "description": "Lists available operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of available operations.",
-            "schema": {
-              "$ref": "#/definitions/OperationsListResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List operations": {
-            "$ref": "./examples/ComponentPolicyStates_ListOperations.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -712,7 +682,7 @@
         }
       }
     },
-    "OperationsListResults": {
+    "ComponentPolicyStatesOperationsListResults": {
       "type": "object",
       "description": "List of available operations.",
       "properties": {
@@ -731,42 +701,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "Operation": {
-      "type": "object",
-      "description": "Operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name.",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
-        "display": {
-          "type": "object",
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider name.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource name on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation name.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Operation description.",
-              "type": "string"
-            }
-          }
         }
       }
     },
