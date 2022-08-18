@@ -1,0 +1,46 @@
+{
+  "tags": {},
+  "location": "eastus2",
+  "properties": {
+      "environment": "NonProd",
+      "sapProduct": "S4HANA",
+      "configuration": {
+          "configurationType": "DeploymentWithOSConfig",
+          "appLocation": "eastus",
+          "infrastructureConfiguration": {
+              "deploymentType": "SingleServer",
+              "appResourceGroup": "test-rg",
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/testsubnet",
+              "virtualMachineConfiguration": {
+                  "vmSize": "Standard_E32ds_v4",
+                  "imageReference": {
+                      "offer": "SLES-SAP",
+                      "publisher": "SUSE",
+                      "sku": "12-sp4-gen2",
+                      "version": "2022.02.01"
+                  },
+                  "osProfile": {
+                      "adminUsername": "azureappadmin",
+                      "osConfiguration": {
+                          "osType": "Linux",
+                          "disablePasswordAuthentication": true,
+                          "sshKeyPair": {
+                              "publicKey": "{{sshkey}}",
+                              "privateKey": "{{privateKey}}"
+                          }
+                      }
+                  }
+              }
+          },
+          "softwareConfiguration": {
+              "softwareInstallationType": "SAPInstallWithoutOSConfig",
+              "bomUrl": "https://teststorageaccount.blob.core.windows.net/sapbits/sapfiles/boms/S41909SPS03_v0011ms/S41909SPS03_v0011ms.yaml",
+              "softwareVersion": "SAP S/4HANA 1909 SPS 03",
+              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+          },
+          "osSapConfiguration": {
+              "sapFqdn": "sap.bpaas.com"
+          }
+      }
+  }
+}
