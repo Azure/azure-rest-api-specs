@@ -3719,6 +3719,11 @@
             "name"
           ]
         },
+        "osImageMetadata": {
+          "readOnly": true,
+          "description": "Returns the metadata about the current and latest version for this ComputeInstance",
+          "$ref": "#/definitions/ImageMetadata"
+        },
         "connectivityEndpoints": {
           "readOnly": true,
           "description": "Describes all connectivity endpoints available for this ComputeInstance.",
@@ -4850,6 +4855,24 @@
         "keyIdentifier"
       ],
       "type": "object"
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "description": "Specifies the Image Metadata about current ComputeInstance",
+      "properties": {
+        "currentImageVersion": {
+          "type": "string",
+          "description": "Indicates the current version of OS Base Image, Compute Instance is running on."
+        },
+        "latestImageVersion": {
+          "type": "string",
+          "description": "Indicates the latest OS Base Image available for the Compute Instance."
+        },
+        "isLatestOsImageVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the Compute Instance is running latest OS Base Image or not."
+        }
+      }
     },
     "CustomService": {
       "type": "object",
