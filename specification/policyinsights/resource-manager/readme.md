@@ -39,8 +39,6 @@ azure-validator: true
 semantic-validator: true
 model-validator: true
 message-format: json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Suppression
@@ -155,6 +153,8 @@ input-file:
 - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
 - Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ### Tag: package-2022-03
 
