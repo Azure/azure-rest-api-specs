@@ -21,14 +21,14 @@ output-folder: $(go-sdk-folder)/$(module-name)
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-preview-2022-09
+  - tag: package-preview-2022-10
 ```
 
-### Tag: package-preview-2022-09 and go
+### Tag: package-preview-2022-10 and go
 
-These settings apply only when `--tag=package-preview-2022-09 --go` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-10 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-preview-2022-09' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-09-01-preview/armphpworkloads
+``` yaml $(tag) == 'package-preview-2022-10' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-10-01-preview/armphpworkloads
 ```
