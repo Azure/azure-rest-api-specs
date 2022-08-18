@@ -351,7 +351,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
       "post": {
         "operationId": "ComponentPolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment",
         "description": "Queries component policy states for the resource group level policy assignment.",
@@ -450,7 +450,7 @@
   },
   "definitions": {
     "ComponentPolicyStatesQueryResults": {
-      "type":"object",
+      "type": "object",
       "description": "Query results.",
       "properties": {
         "@odata.context": {
@@ -695,6 +695,7 @@
       "description": "Error response.",
       "properties": {
         "error": {
+          "type": "object",
           "description": "Error definition.",
           "properties": {
             "code": {
@@ -740,6 +741,10 @@
         "name": {
           "description": "Operation name.",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "type": "object",
