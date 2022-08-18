@@ -409,6 +409,7 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2022-08-08/sourceControl.json
+- Microsoft.Automation/stable/2022-08-08/sourceControlSyncJob.json
 - Microsoft.Automation/stable/2022-08-08/sourceControlSyncJobStreams.json
 - Microsoft.Automation/stable/2022-08-08/variable.json
 ```

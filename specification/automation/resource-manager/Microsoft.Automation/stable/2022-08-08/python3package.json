@@ -36,133 +36,19 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities/{activityName}": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "operationId": "Activity_Get",
-        "description": "Retrieve the activity in the module identified by module name and activity name.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/activityoperations"
-        },
-        "x-ms-examples": {
-          "Get Activity in a module": {
-            "$ref": "./examples/getActivityInAModule.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of module."
-          },
-          {
-            "name": "activityName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of activity."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Activity"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities": {
-      "get": {
-        "tags": [
-          "Activity"
-        ],
-        "operationId": "Activity_ListByModule",
-        "description": "Retrieve a list of activities in the module identified by module name.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/activityoperations"
-        },
-        "x-ms-examples": {
-          "List activities by a module": {
-            "$ref": "./examples/listActivitiesByModule.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of module."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ActivityListResult"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}": {
       "delete": {
         "tags": [
-          "Module"
+          "Python3Package"
         ],
-        "operationId": "Module_Delete",
-        "description": "Delete the module by name.",
+        "operationId": "Python3Package_Delete",
+        "description": "Delete the python 3 package by name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
         "x-ms-examples": {
-          "Delete a module": {
-            "$ref": "./examples/deleteModule.json"
+          "Delete a python 3 package": {
+            "$ref": "./examples/deletePython3Package.json"
           }
         },
         "parameters": [
@@ -173,11 +59,11 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
+            "name": "packageName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The module name."
+            "description": "The python package name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -190,6 +76,9 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
@@ -200,16 +89,16 @@
       },
       "get": {
         "tags": [
-          "Module"
+          "Python3Package"
         ],
-        "operationId": "Module_Get",
-        "description": "Retrieve the module identified by module name.",
+        "operationId": "Python3Package_Get",
+        "description": "Retrieve the python 3 package identified by package name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
         "x-ms-examples": {
-          "Get a module": {
-            "$ref": "./examples/getModule.json"
+          "Get a python 3 package": {
+            "$ref": "./examples/getPython3Package.json"
           }
         },
         "parameters": [
@@ -220,11 +109,11 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
+            "name": "packageName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The module name."
+            "description": "The python package name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -250,16 +139,16 @@
       },
       "put": {
         "tags": [
-          "Module"
+          "Python3Package"
         ],
-        "operationId": "Module_CreateOrUpdate",
-        "description": "Create or Update the module identified by module name.",
+        "operationId": "Python3Package_CreateOrUpdate",
+        "description": "Create or Update the python 3 package identified by package name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
         "x-ms-examples": {
-          "Create or update a module": {
-            "$ref": "./examples/createOrUpdateModule.json"
+          "Create or update a python 3 package": {
+            "$ref": "./examples/createOrUpdatePython3Package.json"
           }
         },
         "parameters": [
@@ -270,20 +159,20 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
+            "name": "packageName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of module."
+            "description": "The name of python package."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/PythonPackageCreateParameters"
             },
-            "description": "The create or update parameters for module."
+            "description": "The create or update parameters for python package."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -315,16 +204,16 @@
       },
       "patch": {
         "tags": [
-          "Module"
+          "Python3Package"
         ],
-        "operationId": "Module_Update",
-        "description": "Update the module identified by module name.",
+        "operationId": "Python3Package_Update",
+        "description": "Update the python 3 package identified by package name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
         "x-ms-examples": {
           "Update a module": {
-            "$ref": "./examples/updateModule.json"
+            "$ref": "./examples/updatePython3Package.json"
           }
         },
         "parameters": [
@@ -335,20 +224,20 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
+            "name": "packageName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of module."
+            "description": "The name of python package."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModuleUpdateParameters"
+              "$ref": "#/definitions/PythonPackageUpdateParameters"
             },
-            "description": "The update parameters for module."
+            "description": "The update parameters for python package."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -373,19 +262,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages": {
       "get": {
         "tags": [
-          "Module"
+          "Python3Package"
         ],
-        "operationId": "Module_ListByAutomationAccount",
-        "description": "Retrieve a list of modules.",
+        "operationId": "Python3Package_ListByAutomationAccount",
+        "description": "Retrieve a list of python 3 packages.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
         "x-ms-examples": {
-          "List modules by automation account": {
-            "$ref": "./examples/listModulesByAutomationAccount.json"
+          "List python 3 packages by automation account": {
+            "$ref": "./examples/listPython3PackagesByAutomationAccount.json"
           }
         },
         "parameters": [
@@ -420,189 +309,11 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/objectDataTypes/{typeName}/fields": {
-      "get": {
-        "tags": [
-          "ObjectDataTypes"
-        ],
-        "operationId": "ObjectDataTypes_ListFieldsByModuleAndType",
-        "description": "Retrieve a list of fields of a given type identified by module name.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/objectdatatypeoperations"
-        },
-        "x-ms-examples": {
-          "Get a list of fields of a given type": {
-            "$ref": "./examples/listFieldsByModuleAndType.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of module."
-          },
-          {
-            "name": "typeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of type."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TypeFieldListResult"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/objectDataTypes/{typeName}/fields": {
-      "get": {
-        "tags": [
-          "ObjectDataTypes"
-        ],
-        "operationId": "ObjectDataTypes_ListFieldsByType",
-        "description": "Retrieve a list of fields of a given type across all accessible modules.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/objectdatatypeoperations"
-        },
-        "x-ms-examples": {
-          "Get a list of fields of a given type across all accessible modules": {
-            "$ref": "./examples/listFieldsByType.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "typeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of type."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TypeFieldListResult"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/types/{typeName}/fields": {
-      "get": {
-        "tags": [
-          "TypeFields"
-        ],
-        "operationId": "Fields_ListByType",
-        "description": "Retrieve a list of fields of a given type identified by module name.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/typefieldoperations"
-        },
-        "x-ms-examples": {
-          "Get a list of fields of a given type": {
-            "$ref": "./examples/listFieldsByModuleAndType.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of module."
-          },
-          {
-            "name": "typeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of type."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TypeFieldListResult"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
     }
   },
   "definitions": {
     "ActivityParameter": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -646,12 +357,14 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterValidationSet"
           },
+          "x-ms-identifiers": [],
           "description": "Gets or sets the validation set of activity parameter."
         }
       },
       "description": "Definition of the activity parameter."
     },
     "ActivityParameterSet": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -662,12 +375,14 @@
           "items": {
             "$ref": "#/definitions/ActivityParameter"
           },
+          "x-ms-identifiers": [],
           "description": "Gets or sets the parameters of the activity parameter set."
         }
       },
       "description": "Definition of the activity parameter set."
     },
     "ActivityParameterValidationSet": {
+      "type": "object",
       "properties": {
         "memberValue": {
           "type": "string",
@@ -677,6 +392,7 @@
       "description": "Definition of the activity parameter validation set."
     },
     "ActivityOutputType": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -690,6 +406,7 @@
       "description": "Definition of the activity output type."
     },
     "ActivityProperties": {
+      "type": "object",
       "properties": {
         "definition": {
           "type": "string",
@@ -700,6 +417,9 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterSet"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets the parameter sets of the activity."
         },
         "outputTypes": {
@@ -707,6 +427,9 @@
           "items": {
             "$ref": "#/definitions/ActivityOutputType"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets the output types of the activity."
         },
         "creationTime": {
@@ -729,6 +452,7 @@
       "description": "Properties of the activity."
     },
     "Activity": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -748,6 +472,7 @@
       "description": "Definition of the activity."
     },
     "ActivityListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -764,6 +489,7 @@
       "description": "The response model for the list activity operation."
     },
     "ModuleErrorInfo": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -777,6 +503,7 @@
       "description": "Definition of the module error info type."
     },
     "ModuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -793,6 +520,7 @@
       "description": "The response model for the list module operation."
     },
     "ContentHash": {
+      "type": "object",
       "properties": {
         "algorithm": {
           "type": "string",
@@ -810,6 +538,7 @@
       "description": "Definition of the runbook property type."
     },
     "ContentLink": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
@@ -826,7 +555,8 @@
       },
       "description": "Definition of the content link."
     },
-    "ModuleCreateOrUpdateProperties": {
+    "PythonPackageCreateProperties": {
+      "type": "object",
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
@@ -838,20 +568,13 @@
       ],
       "description": "The parameters supplied to the create or update module properties."
     },
-    "ModuleCreateOrUpdateParameters": {
+    "PythonPackageCreateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
+          "$ref": "#/definitions/PythonPackageCreateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the module create properties."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
         },
         "tags": {
           "type": "object",
@@ -867,6 +590,7 @@
       "description": "The parameters supplied to the create or update module operation."
     },
     "ModuleProperties": {
+      "type": "object",
       "properties": {
         "isGlobal": {
           "type": "boolean",
@@ -943,30 +667,9 @@
       },
       "description": "Definition of the module property type."
     },
-    "ModuleUpdateProperties": {
+    "PythonPackageUpdateParameters": {
+      "type": "object",
       "properties": {
-        "contentLink": {
-          "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the module content link."
-        }
-      },
-      "description": "The parameters supplied to the update properties."
-    },
-    "ModuleUpdateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModuleUpdateProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the module update properties."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -978,6 +681,7 @@
       "description": "The parameters supplied to the update module operation."
     },
     "Module": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModuleProperties",
@@ -997,6 +701,7 @@
       "description": "Definition of the module type."
     },
     "TypeField": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1010,12 +715,16 @@
       "description": "Information about a field of a type."
     },
     "TypeFieldListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TypeField"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets a list of fields."
         }
       },
