@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2022-02-22
+tag: package-2022-08-08
 ```
 
 ### Tag: package-2015-10
@@ -351,6 +351,68 @@ input-file:
 - Microsoft.Automation/stable/2022-02-22/hybridRunbookWorkerGroup.json
 ```
 
+### Tag: package-2022-08-08
+
+These settings apply only when `--tag=package-2022-08-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-08'
+input-file:
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/python2package.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2021-06-22/account.json
+- Microsoft.Automation/preview/2020-01-13-preview/certificate.json
+- Microsoft.Automation/preview/2020-01-13-preview/connection.json
+- Microsoft.Automation/preview/2020-01-13-preview/connectionType.json
+- Microsoft.Automation/preview/2020-01-13-preview/credential.json
+- Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2020-01-13-preview/module.json
+- Microsoft.Automation/preview/2020-01-13-preview/schedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/variable.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/job.json
+- Microsoft.Automation/stable/2021-06-22/operations.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
+- Microsoft.Automation/stable/2022-02-22/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2022-08-08/python3package.json
+- Microsoft.Automation/stable/2022-08-08/account.json
+- Microsoft.Automation/stable/2022-08-08/certificate.json
+- Microsoft.Automation/stable/2022-08-08/connection.json
+- Microsoft.Automation/stable/2022-08-08/connectionType.json
+- Microsoft.Automation/stable/2022-08-08/credential.json
+- Microsoft.Automation/stable/2022-08-08/dscConfiguration.json
+- Microsoft.Automation/stable/2022-08-08/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2022-08-08/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2022-08-08/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2022-08-08/job.json
+- Microsoft.Automation/stable/2022-08-08/jobSchedule.json
+- Microsoft.Automation/stable/2022-08-08/linkedWorkspace.json
+- Microsoft.Automation/stable/2022-08-08/module.json
+- Microsoft.Automation/stable/2022-08-08/python2package.json
+- Microsoft.Automation/stable/2022-08-08/runbook.json
+- Microsoft.Automation/stable/2022-08-08/schedule.json
+- Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2022-08-08/sourceControl.json
+- Microsoft.Automation/stable/2022-08-08/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2022-08-08/variable.json
+```
+
 ---
 ## Suppression
 ``` yaml
@@ -393,6 +455,9 @@ directive:
     reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: deletedAutomationAccount.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: python3package.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
