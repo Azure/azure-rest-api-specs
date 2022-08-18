@@ -3936,10 +3936,6 @@
           "type": "string",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/diskControllerType"
-          },
-          "x-ms-enum": {
-            "name": "DiskControllerTypes",
-            "modelAsString": true
           }
         }
       },
@@ -3965,6 +3961,12 @@
             "lun"
           ],
           "description": "The data disks."
+        },
+        "diskControllerType": {
+          "type": "string",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/diskControllerType"
+          }
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
