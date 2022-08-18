@@ -165,6 +165,13 @@ This validator is to ensure the cadl & swagger files in PR are consistent and th
 |InConsistentSwagger| the generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl, and check in it |
 |SwaggerNotExistInPR| the occurs when there is cadl file in the PR but the swagger is not present in the PR, so you need to add the swagger to the PR |
 
+## Traffic Validation
+
+It generates traffics for all operations defined in swaggers under default tag of readme.md by using [RESTLer](https://github.com/microsoft/restler-fuzzer). Then it validates the request and response pairs from these traffics against correspondent swaggers. Finally, it provides a html report that reflects swagger accuracy.
+
+### How to understand and improve the report
+Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
+
 ## Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance. 
