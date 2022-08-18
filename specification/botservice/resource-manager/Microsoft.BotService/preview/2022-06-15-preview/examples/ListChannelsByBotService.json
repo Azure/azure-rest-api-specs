@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "resourceName": "samplebotname",
+    "api-version": "2022-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "global",
+            "properties": {
+              "channelName": "EmailChannel",
+              "properties": {
+                "emailAddress": "a@b.com",
+                "password": "pwd",
+                "isEnabled": true
+              }
+            }
+          },
+          {
+            "location": "global",
+            "properties": {
+              "channelName": "FacebookChannel",
+              "properties": {
+                "appId": "id",
+                "callbackUrl": "appid",
+                "isEnabled": true,
+                "pages": [
+                  {
+                    "accessToken": null,
+                    "id": "id"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

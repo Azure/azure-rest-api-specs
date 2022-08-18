@@ -1925,12 +1925,12 @@
           "description": "Indicating whether all subscriptions are selected (=true) or not (=false).",
           "type": "boolean"
         },
-        "allItemsApproved": {
+        "approveAllItems": {
           "description": "Indicating whether all items are approved for this collection (=true) or not (=false).",
           "type": "boolean",
           "readOnly": true
         },
-        "allItemsApprovedModifiedAt": {
+        "approveAllItemsModifiedAt": {
           "description": "Gets the modified date of all items approved.",
           "format": "date-time",
           "type": "string",
@@ -3230,6 +3230,10 @@
       "description": "Microsoft.Marketplace REST API operation",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Operation ID",
+          "type": "string"
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"

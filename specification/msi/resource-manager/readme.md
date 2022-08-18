@@ -26,7 +26,17 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-09-30
+tag: package-preview-2022-01
+```
+
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2022-01-31-preview/ManagedIdentity.json
 ```
 
 
@@ -65,7 +75,7 @@ directive:
     where: $.definitions.SystemAssignedIdentity
     reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
   - suppress: RequiredReadOnlySystemData
-    reason: User-assigned and system-assigned identities do not support systemData. 
+    reason: User-assigned and system-assigned identities do not support systemData.
 ```
 
 ---
