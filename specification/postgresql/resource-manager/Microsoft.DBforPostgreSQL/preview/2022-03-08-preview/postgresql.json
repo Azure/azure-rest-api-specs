@@ -112,6 +112,9 @@
           "ServerUpdateWithAadAuthEnabled": {
             "$ref": "./examples/ServerUpdateWithAadAuthEnabled.json"
           },
+          "ServerUpdateWithDataEncryptionEnabled": {
+            "$ref": "./examples/ServerUpdateWithDataEncryptionEnabled.json"
+          },
           "ServerUpdateWithCustomerMaintenanceWindow": {
             "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
           }
@@ -811,6 +814,11 @@
           "default": null,
           "description": "AuthConfig properties of a server."
         },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "default": null,
+          "description": "Data encryption properties of a server."
+        },
         "backup": {
           "$ref": "#/definitions/Backup",
           "default": null,
@@ -899,6 +907,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Describes the identity of the application."
+        },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
@@ -958,6 +970,11 @@
           "default": null,
           "description": "AuthConfig properties of a server."
         },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "default": null,
+          "description": "Data encryption properties of a server."
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to update a new PostgreSQL server.",
@@ -985,6 +1002,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Describes the identity of the application."
         },
         "properties": {
           "$ref": "#/definitions/ServerPropertiesForUpdate",
@@ -1075,6 +1096,79 @@
         }
       },
       "description": "Authentication configuration properties of a server"
+    },
+    "DataEncryption": {
+      "type": "object",
+      "properties": {
+        "primaryKeyURI": {
+          "type": "string",
+          "description": "URI for the key for data encryption for primary server."
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Resource Id for the User assigned identity to be used for data enryption for primary server."
+        },
+        "type": {
+          "type": "string",
+          "description": "Data encryption type to depict if it is System assiged vs Azure Key vault.",
+          "enum": [
+            "SystemAssigned",
+            "AzureKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "ArmServerKeyType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Data encryption properties of a server"
+    },
+    "UserIdentity": {
+      "description": "Describes a single user-assigned identity associated with the application.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "the object identifier of the Service Principal which this identity represents."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "the client identifier of the Service Principal which this identity represents."
+        }
+      }
+    },
+    "UserAssignedIdentityMap": {
+      "type": "object",
+      "description": "Defines a map that contains user assigned identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserIdentity"
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentityMap",
+          "description": "represents user assigned identities map."
+        },
+        "type": {
+          "type": "string",
+          "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Information describing the identities associated with this application."
     },
     "Backup": {
       "type": "object",
