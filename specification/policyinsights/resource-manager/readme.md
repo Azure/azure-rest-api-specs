@@ -39,6 +39,8 @@ azure-validator: true
 semantic-validator: true
 model-validator: true
 message-format: json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Suppression
