@@ -1263,8 +1263,8 @@
           "description": "Health of backend server.",
           "enum": [
             "Unknown",
-            "Up",
-            "Down",
+            "Healthy",
+            "Unhealthy",
             "Partial",
             "Draining"
           ],
@@ -1367,6 +1367,18 @@
         "verifyClientCertIssuerDN": {
           "type": "boolean",
           "description": "Verify client certificate issuer name on the application gateway."
+        },
+        "verifyClientRevocation": {
+          "type": "string",
+          "description": "Verify client certificate revocation status.",
+          "enum": [
+            "None",
+            "OCSP"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayClientRevocationOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Application gateway client authentication configuration."
