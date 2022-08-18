@@ -593,7 +593,7 @@
         "policyEvaluationDetails": {
           "description": "Policy evaluation details.",
           "type": "object",
-          "$ref": "#/definitions/PolicyEvaluationDetails"
+          "$ref": "#/definitions/ComponentPolicyEvaluationDetails"
         },
         "policyDefinitionGroupNames": {
           "description": "Policy definition group names.",
@@ -622,7 +622,7 @@
         "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
-    "PolicyEvaluationDetails": {
+    "ComponentPolicyEvaluationDetails": {
       "type": "object",
       "description": "Policy evaluation details.",
       "properties": {
@@ -630,7 +630,7 @@
           "description": "Details of the evaluated expressions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExpressionEvaluationDetails"
+            "$ref": "#/definitions/ComponentExpressionEvaluationDetails"
           },
           "x-ms-identifiers": []
         },
@@ -640,7 +640,7 @@
         }
       }
     },
-    "ExpressionEvaluationDetails": {
+    "ComponentExpressionEvaluationDetails": {
       "type": "object",
       "description": "Evaluation details of policy language expressions.",
       "properties": {
