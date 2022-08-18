@@ -99,6 +99,9 @@ directive:
     from: policyStates.json
     reason: unnecessary check
 
+  - suppress: OperationsApiResponseSchema
+    from: policystates.json
+    reason: existing swagger does not contain isDataAction
 ```
 
 ``` yaml !$(python)
