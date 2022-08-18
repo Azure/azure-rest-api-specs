@@ -337,17 +337,20 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the active directory administrator."
         },
-        "id": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource ID for the administrator. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{resourceName}/administrators/{objectId}"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.DBforPostgreSQL/flexibleServers/administrators\""
+          "description": "The system metadata relating to this resource."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
       "description": "Represents an Active Directory administrator."
     },
     "AdministratorListResult": {
