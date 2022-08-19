@@ -102,6 +102,7 @@ directive:
     reason: unnecessary check
 
   - suppress: R4018 # OperationsApiResponseSchema
+    from: policyStates.json
 ```
 
 ``` yaml !$(python)
