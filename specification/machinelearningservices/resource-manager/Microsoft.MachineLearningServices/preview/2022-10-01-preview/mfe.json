@@ -7598,6 +7598,11 @@
           ],
           "x-nullable": true
         },
+        "autologgerSettings": {
+          "description": "Specifies settings for autologger.",
+          "$ref": "#/definitions/CommandJobAutologgerSettings",
+          "x-nullable": true
+        },
         "limits": {
           "description": "Command Job limit.",
           "$ref": "#/definitions/CommandJobLimits",
@@ -7642,6 +7647,24 @@
       },
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
+    },
+    "CommandJobAutologgerSettings": {
+      "type": "object",
+      "description": "Specifies settings for autologger.",
+      "properties": {
+        "mlflowAutologger": {
+          "type": "string",
+          "description": "Indicates whether mlflow autologger is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "mlflowAutologger",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "CommandJobLimits": {
       "description": "Command Job limit class.",
