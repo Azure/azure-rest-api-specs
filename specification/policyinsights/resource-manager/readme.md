@@ -28,8 +28,6 @@ These are the global settings for the PolicyInsights API.
 title: PolicyInsightsClient
 openapi-type: arm
 tag: package-2022-04
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Validations
