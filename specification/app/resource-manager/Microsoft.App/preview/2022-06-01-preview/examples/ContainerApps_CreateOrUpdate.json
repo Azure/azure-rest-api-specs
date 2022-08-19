@@ -80,6 +80,23 @@
               ]
             }
           ],
+          "initContainers": [
+            {
+              "image": "repo/testcontainerApp0:v4",
+              "name": "testinitcontainerApp0",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              },
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ]
+            }
+          ],
           "scale": {
             "minReplicas": 1,
             "maxReplicas": 5,
@@ -190,6 +207,23 @@
                 ]
               }
             ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ],
             "scale": {
               "minReplicas": 1,
               "maxReplicas": 5,
@@ -269,6 +303,23 @@
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
                 ]
               }
             ],

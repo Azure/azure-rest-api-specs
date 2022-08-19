@@ -83,6 +83,16 @@
                     }
                   }
                 ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testinitcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
                 "scale": {
                   "minReplicas": 1,
                   "maxReplicas": 5,

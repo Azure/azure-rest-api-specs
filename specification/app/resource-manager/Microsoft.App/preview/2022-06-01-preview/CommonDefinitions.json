@@ -34,8 +34,8 @@
         }
       }
     },
-    "Container": {
-      "description": "Container App container definition.",
+    "BaseContainer": {
+      "description": "Container App base container definition.",
       "type": "object",
       "properties": {
         "image": {
@@ -74,16 +74,6 @@
           "$ref": "#/definitions/ContainerResources",
           "description": "Container resource requirements."
         },
-        "probes": {
-          "description": "List of probes for the container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContainerAppProbe"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
-        },
         "volumeMounts": {
           "description": "Container volume mounts.",
           "type": "array",
@@ -92,6 +82,36 @@
           },
           "x-ms-identifiers": [
             "volumeName"
+          ]
+        }
+      }
+    },
+    "InitContainer": {
+      "description": "Container App init container definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContainer"
+        }
+      ]
+    },
+    "Container": {
+      "description": "Container App container definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContainer"
+        }
+      ],
+      "properties": {
+        "probes": {
+          "description": "List of probes for the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
           ]
         }
       }
@@ -494,6 +514,16 @@
         "revisionSuffix": {
           "description": "User friendly suffix that is appended to the revision name",
           "type": "string"
+        },
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InitContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "containers": {
           "description": "List of container definitions for the Container App.",
