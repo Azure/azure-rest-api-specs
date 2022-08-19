@@ -99,17 +99,25 @@
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
-		"Query": {
-			"name": "query",
-			"type": "string",
+		"From": {
+			"name": "from",
+			"type": "facilityPoint",
 			"in": "query",
-			"description": "The starting and end points of the route you are searching for in a facility. Each point is represented by its latitude, longitude and a level ordinal. The query format is as follows: {fromLat},{fromLon},{fromLevelOrdinal}:{toLat},{toLon},{toLevelOrdinal}.",
+			"description": "The origin of the path you are searching for in a facility. The `From` parameter is represented by its latitude, longitude and a level ordinal. The facilityPoint format is as follows: {fromLat},{fromLon},{fromLevelOrdinal}.",
+			"required": true,
+			"x-ms-parameter-location": "client"
+		},
+		"To": {
+			"name": "to",
+			"type": "facilityPoint",
+			"in": "query",
+			"description": "The origin and destination of the path you are searching for in a facility. The `To` parameter is represented by its latitude, longitude and a level ordinal. The facilityPoint format is as follows: {toLat},{toLon},{toLevelOrdinal}.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
 		"Avoid": {
 			"name": "avoid",
-			"description": "(Optional) Use when you need to avoid using either elevators, escalators, or stairs in your route. Valid values are: 'elevator', 'escalator' and 'stair'. Multiple values can be selected.",			"type": "array",
+			"description": "Use when you need to avoid using either elevators, escalators, or stairs in your route. Valid values are: 'elevator', 'escalator' and 'stair'. Multiple values can be selected.",			"type": "array",
 			"items": { "type": "string" },
 			"in": "query",
 			"x-ms-parameter-location": "client"
@@ -141,7 +149,7 @@
             }
         },
         "RouteSummary": {
-            "description": "Summary object for the route.[***DAVSTA*** How is route summary different from path summary?]",
+            "description": "Summary object for the route.",
             "type":"object",
             "properties": {
                 "lengthInMeters": { "type": "number", "description": "The length, in meters, of the entire route."},
@@ -149,31 +157,27 @@
             }
         },
         "Leg": {
-            "description": "One section of the overall route.",
+            "description": "A section of the route.",
             "type": "object",
             "properties": {
                 "summary": { "description": "The leg summary", "$ref": "#/definitions/LegSummary" },
-                "points": { "description": "The leg shape points.[***DAVSTA*** We need to discuss] Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
+                "points": { "description": "The leg shape points. Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
             }
         },
 		"Path": {
-            "description": "***DAVSTA REVIEW: Question: How is route different from path? Why not use route instead of path for this property name?**** The directions given to travel between the start and end points.",
+            "description": "The directions given to travel between the origin and destination.",
             "type": "object",
             "properties": {
                 "summary": { "description": "The full path summary", "$ref": "#/definitions/RouteSummary" },
-                "legs": { "description": "The different travel modes in this route.[***DAVSTA*** We need to discuss]", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
+                "legs": { "description": "The different travel modes in this route.", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
             }
 		},
 		"WayfindResult": {
 			"description": "The object returned when completing a successful Wayfinding call.",
 			"type": "object",
 			"properties": {
-				"formatVersion": {
-					"description": "The format version of the wayfinding object.[***DAVSTA*** We need to discuss]",
-					"type": "string"
-				},
 				"paths": {
-					"description": "An array of wayfinding results.[***DAVSTA*** We need to discuss - is this an array of legs of the route? Need to understand the difference between a route and a path]",
+					"description": "An array of wayfinding results.",
 					"type": "array",
 					"items": { "$ref": "#/definitions/Path" }
 				}
