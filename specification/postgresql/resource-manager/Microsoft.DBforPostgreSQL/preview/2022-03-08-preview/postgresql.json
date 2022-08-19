@@ -47,6 +47,9 @@
           "Create a new server with active directory authentication enabled": {
             "$ref": "./examples/ServerCreateWithAadAuthEnabled.json"
           },
+          "ServerCreateWithDataEncryptionEnabled": {
+            "$ref": "./examples/ServerCreateWithDataEncryptionEnabled.json"
+          },
           "Create a database as a point in time restore": {
             "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           }
@@ -1106,11 +1109,11 @@
         },
         "primaryUserAssignedIdentityId": {
           "type": "string",
-          "description": "Resource Id for the User assigned identity to be used for data enryption for primary server."
+          "description": "Resource Id for the User assigned identity to be used for data encryption for primary server."
         },
         "type": {
           "type": "string",
-          "description": "Data encryption type to depict if it is System assiged vs Azure Key vault.",
+          "description": "Data encryption type to depict if it is System assigned vs Azure Key vault.",
           "enum": [
             "SystemAssigned",
             "AzureKeyVault"
