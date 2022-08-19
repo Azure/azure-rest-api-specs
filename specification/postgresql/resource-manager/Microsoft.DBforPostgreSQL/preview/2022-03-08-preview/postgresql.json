@@ -55,6 +55,9 @@
           },
           "Create a database as a geo-restore in geo-paired location": {
             "$ref": "./examples/ServerCreateGeoRestore.json"
+          },
+          "ServerCreateReplica": {
+            "$ref": "./examples/ServerCreateReplica.json"
           }
         },
         "description": "Creates a new server.",
@@ -863,7 +866,7 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore'.",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -885,6 +888,15 @@
             "read"
           ]
         },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "ReplicationRole"
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replicas allowed for a server."
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to create a new PostgreSQL server.",
@@ -893,7 +905,8 @@
             "Create",
             "Update",
             "PointInTimeRestore",
-            "GeoRestore"
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1176,6 +1189,23 @@
         "type"
       ],
       "description": "Information describing the identities associated with this application."
+    },
+    "ReplicationRole": {
+      "type": "string",
+      "description": "Used to indicate role of the server in replication set.",
+      "enum": [
+        "Primary",
+        "Secondary",
+        "WalReplica",
+        "SyncReplica",
+        "AsyncReplica",
+        "GeoSyncReplica",
+        "GeoAsyncReplica"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationRole",
+        "modelAsString": true
+      }
     },
     "Backup": {
       "type": "object",
