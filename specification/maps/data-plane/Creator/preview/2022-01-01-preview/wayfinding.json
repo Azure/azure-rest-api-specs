@@ -19,7 +19,8 @@
 					{"$ref": "#/parameters/ApiVersion"},
 					{"$ref": "#/parameters/RoutesetId"},
 					{"$ref": "#/parameters/FacilityId"},
-					{"$ref": "#/parameters/Query"},
+					{"$ref": "#/parameters/From"},
+					{"$ref": "#/parameters/To"},
 					{"$ref": "#/parameters/Avoid"},
 					{"$ref": "#/parameters/Width"}
 				],
@@ -117,7 +118,7 @@
 		},
 		"Avoid": {
 			"name": "avoid",
-			"description": "Use when you need to avoid using either elevators, escalators, or stairs in your route. Valid values are: 'elevator', 'escalator' and 'stair'. Multiple values can be selected.",			"type": "array",
+			"description": "Use when you need to avoid using either elevators, escalators, or stairs in your route. Valid values are: 'elevators', 'escalators' and 'stairs'. Multiple values can be selected.",			"type": "array",
 			"items": { "type": "string" },
 			"in": "query",
 			"x-ms-parameter-location": "client"
@@ -141,7 +142,7 @@
             "description": "Summary object for a route leg.",
             "type":"object",
             "properties": {
-                "travelMode": { "type": "string", "description": "The mode of travel can be walking (default), elevator, escalator or stairs."},
+                "travelMode": { "type": "string", "description": "The mode of travel can be walking (default), elevators, escalators or stairs."},
                 "lengthInMeters": { "type": "number", "description": "The length, in meters, of this leg of the route."},
                 "travelTimeInSeconds": { "type": "integer", "description": "The travel time, in seconds, for this leg of the route."},
                 "startLevel": { "type": "integer", "description": "The floor where this leg of the route starts."},
