@@ -1,0 +1,2353 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PlayFab",
+    "version": "2022-07-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PlayerAccountPools"
+    },
+    {
+      "name": "Titles"
+    },
+    {
+      "name": "Segments"
+    },
+    {
+      "name": "TitleDataSets"
+    },
+    {
+      "name": "TitleInternalDataSets"
+    },
+    {
+      "name": "AutomationRules"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PlayFab/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List the operations for Microsoft.PlayFab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlayFab/playerAccountPools": {
+      "get": {
+        "operationId": "PlayerAccountPools_ListBySubscription",
+        "description": "List PlayerAccountPool resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlayerAccountPools_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlayFab/titles": {
+      "get": {
+        "operationId": "Titles_ListBySubscription",
+        "description": "List Title resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Titles_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Titles_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/playerAccountPools": {
+      "get": {
+        "operationId": "PlayerAccountPools_ListByResourceGroup",
+        "description": "List PlayerAccountPool resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlayerAccountPools_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/playerAccountPools/{playerAccountPoolName}": {
+      "put": {
+        "operationId": "PlayerAccountPools_CreateOrUpdate",
+        "description": "Create or update a Player Account Pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlayerAccountPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-examples": {
+          "PlayerAccountPools_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "PlayerAccountPools_Get",
+        "description": "Get a PlayerAccountPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlayerAccountPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-examples": {
+          "PlayerAccountPools_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Get_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_Get_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PlayerAccountPools_Update",
+        "description": "Update a PlayerAccountPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlayerAccountPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-examples": {
+          "PlayerAccountPools_Update_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Update_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_Update_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PlayerAccountPools_Delete",
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Delete a PlayerAccountPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlayerAccountPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "x-ms-examples": {
+          "PlayerAccountPools_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Delete_MaximumSet_Gen.json"
+          },
+          "PlayerAccountPools_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/PlayerAccountPools_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles": {
+      "get": {
+        "operationId": "Titles_ListByResourceGroup",
+        "description": "List Title resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Titles_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Titles_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}": {
+      "put": {
+        "operationId": "Titles_CreateOrUpdate",
+        "description": "Create or update a Title Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-examples": {
+          "Titles_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Titles_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Titles_Update",
+        "description": "Update a Title Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TitleResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-examples": {
+          "Titles_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_Update_MaximumSet_Gen.json"
+          },
+          "Titles_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Titles_Get",
+        "description": "Get a Title",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-examples": {
+          "Titles_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_Get_MaximumSet_Gen.json"
+          },
+          "Titles_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Titles_Delete",
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Delete a Title",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Titles"
+        ],
+        "x-ms-examples": {
+          "Titles_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Titles_Delete_MaximumSet_Gen.json"
+          },
+          "Titles_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Titles_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/automationRules": {
+      "get": {
+        "operationId": "AutomationRules_List",
+        "description": "List all AutomationRule by titleName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "AutomationRules"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AutomationRules_List_MaximumSet_Gen": {
+            "$ref": "./examples/AutomationRules_List_MaximumSet_Gen.json"
+          },
+          "AutomationRules_List_MinimumSet_Gen": {
+            "$ref": "./examples/AutomationRules_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/automationRules/{automationRuleName}": {
+      "put": {
+        "operationId": "AutomationRules_CreateOrUpdate",
+        "description": "Create or update a Title AutomationRule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "AutomationRules"
+        ],
+        "x-ms-examples": {
+          "AutomationRules_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/AutomationRules_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "AutomationRules_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/AutomationRules_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AutomationRules_Delete",
+        "description": "Delete a Title AutomationRule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "AutomationRules"
+        ],
+        "x-ms-examples": {
+          "AutomationRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/AutomationRules_Delete_MaximumSet_Gen.json"
+          },
+          "AutomationRules_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/AutomationRules_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "AutomationRules_Get",
+        "description": "Get a AutomationRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "AutomationRules"
+        ],
+        "x-ms-examples": {
+          "AutomationRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/AutomationRules_Get_MaximumSet_Gen.json"
+          },
+          "AutomationRules_Get_MinimumSet_Gen": {
+            "$ref": "./examples/AutomationRules_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/segments": {
+      "get": {
+        "operationId": "Segments_List",
+        "description": "List all Segment by titleName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SegmentListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Segments_List_MaximumSet_Gen": {
+            "$ref": "./examples/Segments_List_MaximumSet_Gen.json"
+          },
+          "Segments_List_MinimumSet_Gen": {
+            "$ref": "./examples/Segments_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/segments/{segmentName}": {
+      "put": {
+        "operationId": "Segments_CreateOrUpdate",
+        "description": "Create or update a Title Segment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SegmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/Segment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Segment"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ],
+        "x-ms-examples": {
+          "Segments_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Segments_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Segments_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Segments_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Segments_Delete",
+        "description": "Delete a Title Segment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SegmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ],
+        "x-ms-examples": {
+          "Segments_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Segments_Delete_MaximumSet_Gen.json"
+          },
+          "Segments_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Segments_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Segments_Get",
+        "description": "Get a Segment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SegmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Segment"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ],
+        "x-ms-examples": {
+          "Segments_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Segments_Get_MaximumSet_Gen.json"
+          },
+          "Segments_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Segments_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/titleDataSets": {
+      "get": {
+        "operationId": "TitleDataSets_List",
+        "description": "List all TitleDataSet by titleName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleDataSetListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleDataSets"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TitleDataSets_List_MaximumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_List_MaximumSet_Gen.json"
+          },
+          "TitleDataSets_List_MinimumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/titleDataSets/{titleDataSetName}": {
+      "put": {
+        "operationId": "TitleDataSets_CreateOrUpdate",
+        "description": "Create or update a TitleDataSet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleDataSetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/TitleDataSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleDataSet"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleDataSets_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TitleDataSets_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TitleDataSets_Delete",
+        "description": "Delete a TitleDataSet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleDataSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleDataSets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_Delete_MaximumSet_Gen.json"
+          },
+          "TitleDataSets_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "TitleDataSets_Get",
+        "description": "Get a TitleDataSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleDataSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleDataSet"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleDataSets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_Get_MaximumSet_Gen.json"
+          },
+          "TitleDataSets_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TitleDataSets_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/titleInternalDataSets": {
+      "get": {
+        "operationId": "TitleInternalDataSets_List",
+        "description": "List all TitleInternalDataSet by titleName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleInternalDataSetListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleInternalDataSets"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TitleInternalDataSets_List_MaximumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_List_MaximumSet_Gen.json"
+          },
+          "TitleInternalDataSets_List_MinimumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}/titleInternalDataSets/{titleInternalDataSetName}": {
+      "put": {
+        "operationId": "TitleInternalDataSets_CreateOrUpdate",
+        "description": "Create or update a TitleInternalDataSet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleInternalDataSetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/TitleInternalDataSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleInternalDataSet"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleInternalDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleInternalDataSets_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TitleInternalDataSets_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TitleInternalDataSets_Delete",
+        "description": "Delete a TitleInternalDataSet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleInternalDataSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleInternalDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleInternalDataSets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_Delete_MaximumSet_Gen.json"
+          },
+          "TitleInternalDataSets_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "TitleInternalDataSets_Get",
+        "description": "Get a TitleInternalDataSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TitleInternalDataSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TitleInternalDataSet"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TitleInternalDataSets"
+        ],
+        "x-ms-examples": {
+          "TitleInternalDataSets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_Get_MaximumSet_Gen.json"
+          },
+          "TitleInternalDataSets_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TitleInternalDataSets_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutomationRuleActions": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/AutomationRuleActionType",
+          "description": "Type of the Action"
+        },
+        "actionParameters": {
+          "type": "object",
+          "description": "Parameters of the Action"
+        }
+      },
+      "description": "Actions to be executed for AutomationRule",
+      "required": [
+        "actionType",
+        "actionParameters"
+      ]
+    },
+    "AutomationRuleActionType": {
+      "type": "string",
+      "enum": [
+        "ExecuteFunction"
+      ],
+      "x-ms-enum": {
+        "name": "AutomationRuleActionType",
+        "modelAsString": true
+      }
+    },
+    "ApiSettings": {
+      "type": "object",
+      "properties": {
+        "allowClientsToUpdatePlayerStatistics": {
+          "type": "boolean",
+          "description": "Setting to enable API allowing client to update user statistics."
+        }
+      },
+      "description": "Title API Settings"
+    },
+    "AutomationRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationRuleProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "The details about AutomationRule.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AutomationRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRule"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.AutomationRule[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a AutomationRule list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "AutomationRuleProperties": {
+      "type": "object",
+      "properties": {
+        "matchCondition": {
+          "$ref": "#/definitions/RuleNode",
+          "description": "Condition for defining AutomationRule."
+        },
+        "eventTrigger": {
+          "$ref": "#/definitions/AutomationRuleEventTrigger",
+          "description": "Event that triggers AutomationRule."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleActions"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.AutomationRuleActions[]",
+          "description": "Event that triggers AutomationRule.",
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of AutomationRule Resource",
+      "required": [
+        "matchCondition",
+        "eventTrigger",
+        "actions"
+      ]
+    },
+    "Azure.ResourceManager.ManagedSystemIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Active Directory tenant id of the principal.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier of this principal.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedSystemIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        }
+      },
+      "description": "The properties of the service-assigned identity associated with this resource/",
+      "required": [
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.ManagedSystemIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedSystemIdentityType",
+        "modelAsString": true
+      }
+    },
+    "ComparisonRuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Type of RuleNode"
+        },
+        "operation": {
+          "$ref": "#/definitions/NodeOperation",
+          "description": "Operation of Node's Condition"
+        },
+        "left": {
+          "$ref": "#/definitions/RuleNode",
+          "description": "Left Node of Comparison Node"
+        },
+        "right": {
+          "$ref": "#/definitions/RuleNode",
+          "description": "Right Node of ComparisonNode"
+        }
+      },
+      "description": "Comparison type RuleNode",
+      "required": [
+        "nodeType",
+        "operation",
+        "left",
+        "right"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleNode"
+        }
+      ],
+      "x-ms-discriminator-value": "Comparison"
+    },
+    "ConstantRuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Type of Node"
+        },
+        "value": {
+          "type": "object",
+          "description": "value of Constant Node"
+        }
+      },
+      "description": "Constant type RuleNode",
+      "required": [
+        "nodeType",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleNode"
+        }
+      ],
+      "x-ms-discriminator-value": "Constant"
+    },
+    "AutomationRuleEventTrigger": {
+      "type": "object",
+      "properties": {
+        "eventNamespace": {
+          "type": "string",
+          "description": "Namespace of Trigger Event"
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Name of Trigger Event"
+        }
+      },
+      "description": "Trigger Event for AutomationRule",
+      "required": [
+        "eventNamespace",
+        "eventName"
+      ]
+    },
+    "GeneralSettings": {
+      "type": "object",
+      "properties": {
+        "allowNonUniquePlayerDisplayNames": {
+          "type": "boolean",
+          "description": "Setting to allow non unique player display name."
+        },
+        "displayNameRandomSuffixLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Setting to enable addition of random suffix to player display name and specify it's length"
+        }
+      },
+      "description": "General Title Settings"
+    },
+    "KeyValuePair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of KeyValuePair."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of KeyValuePair."
+        }
+      },
+      "description": "KeyValuePair object",
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "LogicalRuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Type of Node"
+        },
+        "operation": {
+          "$ref": "#/definitions/NodeOperation",
+          "description": "Operation of Node's Condition"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleNode"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.RuleNode[]",
+          "description": "Children of Logical Node",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Logical type RuleNode",
+      "required": [
+        "nodeType",
+        "operation",
+        "children"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleNode"
+        }
+      ],
+      "x-ms-discriminator-value": "LogicalOperator"
+    },
+    "MinutesSinceRuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Type of Node"
+        },
+        "timeValue": {
+          "$ref": "#/definitions/RuleNode",
+          "description": "Minutes Since Time Value"
+        }
+      },
+      "description": "MinutesSince type RuleNode",
+      "required": [
+        "nodeType",
+        "timeValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleNode"
+        }
+      ],
+      "x-ms-discriminator-value": "MinutesSince"
+    },
+    "NodeOperation": {
+      "type": "string",
+      "enum": [
+        "IsEqualTo",
+        "IsNotEqualTo",
+        "IsGreaterThan",
+        "IsGreaterThanOrEqualTo",
+        "IsLessThan",
+        "IsLessThanOrEqualTo",
+        "And",
+        "Or"
+      ],
+      "x-ms-enum": {
+        "name": "NodeOperation",
+        "modelAsString": true
+      }
+    },
+    "PlayerAccountPool": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlayerAccountPoolProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedSystemIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A PlayerAccountPool",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PlayerAccountPoolListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlayerAccountPool"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.PlayerAccountPool[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a PlayerAccountPool list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "PlayerAccountPoolProperties": {
+      "type": "object",
+      "properties": {
+        "playFabPlayerAccountPoolId": {
+          "type": "string",
+          "description": "Id of publisher object in PlayFab backend associated to the PlayerAccountPool resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of PlayAccountPool"
+    },
+    "PlayerAccountPoolUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "description": "The updatable properties of the PlayerAccountPool."
+    },
+    "PropertyAccessRuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Type of Node"
+        },
+        "propertyPath": {
+          "type": "string",
+          "description": "Property Path of Node"
+        },
+        "type": {
+          "$ref": "#/definitions/PropertyType",
+          "description": "Children of Logical Node"
+        }
+      },
+      "description": "PropertyAccess type RuleNode",
+      "required": [
+        "nodeType",
+        "propertyPath",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleNode"
+        }
+      ],
+      "x-ms-discriminator-value": "PropertyAccess"
+    },
+    "PropertyType": {
+      "type": "string",
+      "enum": [
+        "NumberType",
+        "StringType",
+        "BooleanType",
+        "DateTimeType"
+      ],
+      "x-ms-enum": {
+        "name": "PropertyType",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Canceled",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "RuleNode": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string"
+        }
+      },
+      "description": "Condition about AutomationRule",
+      "discriminator": "nodeType",
+      "required": [
+        "nodeType"
+      ]
+    },
+    "Segment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SegmentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "The details about Segment.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SegmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Segment"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.Segment[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a Segment list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "SegmentProperties": {
+      "type": "object",
+      "properties": {
+        "enableMembershipChangeEvents": {
+          "type": "boolean",
+          "description": "EnableMembershipChangeEvents in PlayFab backend."
+        },
+        "segmentCondition": {
+          "$ref": "#/definitions/RuleNode",
+          "description": "Condition for defining Segment."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of Segment Resource",
+      "required": [
+        "segmentCondition"
+      ]
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TitleProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedSystemIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "Details about Title.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TitleDataSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TitleDataSetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "The details about TitleDataSet.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TitleDataSetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TitleDataSet"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.TitleDataSet[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a TitleDataSet list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TitleDataSetProperties": {
+      "type": "object",
+      "properties": {
+        "keyValuePairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.KeyValuePair[]",
+          "description": "List of KeyValuePairs",
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of TitleDataSet Resource",
+      "required": [
+        "keyValuePairs"
+      ]
+    },
+    "TitleInternalDataSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TitleInternalDataSetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "The details about TitleInternalDataSet.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TitleInternalDataSetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TitleInternalDataSet"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.TitleInternalDataSet[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a TitleInternalDataSet list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TitleInternalDataSetProperties": {
+      "type": "object",
+      "properties": {
+        "keyValuePairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.KeyValuePair[]",
+          "description": "List of KeyValuePairs",
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of TitleInternalDataSet Resource",
+      "required": [
+        "keyValuePairs"
+      ]
+    },
+    "TitleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Title"
+          },
+          "x-cadl-name": "Microsoft.PlayFab.Title[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a Title list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TitleProperties": {
+      "type": "object",
+      "properties": {
+        "playFabTitleId": {
+          "type": "string",
+          "description": "Id of title object in PlayFab backend.",
+          "readOnly": true
+        },
+        "playerAccountPoolId": {
+          "type": "string",
+          "description": "Azure resource Id of the PlayerAccountPool resource."
+        },
+        "settings": {
+          "$ref": "#/definitions/TitleSettings",
+          "description": "Setting pertaining to a Title"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of Title Resource",
+      "required": [
+        "playerAccountPoolId"
+      ]
+    },
+    "TitleResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedSystemIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/TitleUpdateProperties",
+          "description": "The updatable resource-specific properties for a Title."
+        }
+      },
+      "description": "The Update model for a Title Resource"
+    },
+    "TitleSettings": {
+      "type": "object",
+      "properties": {
+        "general": {
+          "$ref": "#/definitions/GeneralSettings",
+          "description": "General Title Settings"
+        },
+        "api": {
+          "$ref": "#/definitions/ApiSettings",
+          "description": "Title Api Settings"
+        }
+      },
+      "description": "Title Settings"
+    },
+    "TitleUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "playerAccountPoolId": {
+          "type": "string",
+          "description": "Azure resource Id of the PlayerAccountPool resource."
+        },
+        "settings": {
+          "$ref": "#/definitions/TitleSettings",
+          "description": "Setting pertaining to a Title"
+        }
+      },
+      "description": "The updatable resource-specific properties for a title"
+    }
+  },
+  "parameters": {
+    "AutomationRuleNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "automationRuleName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the AutomationRule Parameter.",
+      "type": "string"
+    },
+    "PlayerAccountPoolNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "playerAccountPoolName",
+      "in": "path",
+      "required": true,
+      "description": "PlayerAccountPool resource name",
+      "type": "string"
+    },
+    "SegmentNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "segmentName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the Segment Parameter.",
+      "type": "string"
+    },
+    "TitleDataSetNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "titleDataSetName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the TitleDataSet Parameter.",
+      "type": "string"
+    },
+    "TitleInternalDataSetNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "titleInternalDataSetName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the TitleInternalDataSet Parameter.",
+      "type": "string"
+    },
+    "TitleNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "titleName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the Title Parameter.",
+      "type": "string"
+    }
+  }
+}
