@@ -7779,7 +7779,16 @@
         "resourceClass": {
           "description": "Requested ResourceClass",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "xlargerc",
+            "largerc",
+            "mediumrc",
+            "smallrc"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DatawarehousequeriesResourceClass"
+          }
         },
         "concurrencySlots": {
           "description": "Requested ConcurrencySlots",
