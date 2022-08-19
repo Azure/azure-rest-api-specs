@@ -4889,10 +4889,12 @@
     "ComputeStartStopSchedule": {
       "type": "object",
       "description": "Compute start stop schedule properties",
+      "allOf": [
+        {
+        "$ref": "#/definitions/ScheduleBase"
+        }
+      ],
       "properties": {
-        "allOf":{
-          "$ref": "#/definitions/ScheduleBase"
-        },
         "action": {
           "$ref": "#/definitions/ComputePowerAction"
         },
@@ -5022,21 +5024,19 @@
     },
     "RecurrenceFrequency": {
       "type": "string",
-      "description": "The recurrence frequency.",
+      "description": "Enum to describe the frequency of a recurrence schedule",
       "enum": [
-        "NotSpecified",
-        "Second",
         "Minute",
         "Hour",
         "Day",
         "Week",
-        "Month",
-        "Year"
+        "Month"
       ],
       "x-ms-enum": {
         "name": "RecurrenceFrequency",
         "modelAsString": true
-      }
+      },
+      "additionalProperties": false
     },
     "RecurrenceSchedule": {
       "type": "object",
