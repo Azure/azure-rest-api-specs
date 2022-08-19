@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-06-01-preview"
+    "version": "2022-08-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -403,6 +403,9 @@
           },
           "Put node type with dedicated hosts": {
             "$ref": "./examples/NodeTypePutOperationDedicatedHost_example.json"
+          },
+          "Put node type with custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomImage_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -606,6 +609,10 @@
         "loadBalancerInboundNatPoolId": {
           "type": "string",
           "description": "The resource Id of the Load Balancer inbound NAT pool that the VM instances of the node type are associated with. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/inboundNatPools/<inboundNatPoolName>'."
+        },
+        "applicationGatewayBackendAddressPoolId": {
+          "type": "string",
+          "description": "The resource Id of application gateway backend address pool. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/applicationGateways/<applicationGatewayName>/backendAddressPools/<backendAddressPoolName>'."
         }
       },
       "description": "Describes the frontend configurations for the node type."
@@ -704,6 +711,10 @@
         },
         "force": {
           "description": "Force the action to go through.",
+          "type": "boolean"
+        },
+        "udWiseUpdate": {
+          "description": "Boolean to perform action UD by UD instead of all VMs together.",
           "type": "boolean"
         }
       },
@@ -899,6 +910,10 @@
         "evictionPolicy": {
           "$ref": "#/definitions/EvictionPolicyType",
           "description": "Specifies the eviction policy for virtual machines in a SPOT node type. Default is Delete."
+        },
+        "vmImageResourceId": {
+          "type": "string",
+          "description": "Indicates the resource id of the vm image. This parameter is used for custom vm image."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1508,7 +1523,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-06-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-08-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
