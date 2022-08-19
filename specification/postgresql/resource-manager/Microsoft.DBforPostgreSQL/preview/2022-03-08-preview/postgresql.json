@@ -126,6 +126,9 @@
           },
           "ServerUpdateWithCustomerMaintenanceWindow": {
             "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          },
+          "ServerUpdateWithMajorVersionUpgrade": {
+            "$ref": "./examples/ServerUpdateWithMajorVersionUpgrade.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -960,6 +963,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "PostgreSQL Server version."
         },
         "storage": {
           "$ref": "#/definitions/Storage",
