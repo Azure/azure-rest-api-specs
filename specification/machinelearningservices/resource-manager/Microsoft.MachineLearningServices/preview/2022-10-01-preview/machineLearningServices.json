@@ -3703,6 +3703,11 @@
             "modelAsString": true
           }
         },
+        "autologgerSettings": {
+          "description": "Specifies settings for autologger.",
+          "$ref": "#/definitions/ComputeInstanceAutologgerSettings",
+          "x-nullable": true
+        },
         "sshSettings": {
           "description": "Specifies policy and settings for SSH access.",
           "$ref": "#/definitions/ComputeInstanceSshSettings",
@@ -5088,6 +5093,24 @@
           "format": "int32",
           "type": "integer",
           "description": "Mention the Tmpfs size"
+        }
+      }
+    },
+    "ComputeInstanceAutologgerSettings": {
+      "type": "object",
+      "description": "Specifies settings for autologger.",
+      "properties": {
+        "mlflowAutologger": {
+          "type": "string",
+          "description": "Indicates whether mlflow autologger is enabled for notebooks.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "mlflowAutologger",
+            "modelAsString": true
+          }
         }
       }
     },
