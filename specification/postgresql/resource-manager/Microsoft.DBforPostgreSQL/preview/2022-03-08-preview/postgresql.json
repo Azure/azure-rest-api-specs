@@ -52,6 +52,9 @@
           },
           "Create a database as a point in time restore": {
             "$ref": "./examples/ServerCreatePointInTimeRestore.json"
+          },
+          "Create a database as a geo-restore in geo-paired location": {
+            "$ref": "./examples/ServerCreateGeoRestore.json"
           }
         },
         "description": "Creates a new server.",
@@ -860,7 +863,7 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore'.",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -868,7 +871,7 @@
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore'.",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -889,7 +892,8 @@
             "Default",
             "Create",
             "Update",
-            "PointInTimeRestore"
+            "PointInTimeRestore",
+            "GeoRestore"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
