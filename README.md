@@ -7,7 +7,7 @@ This repository is the canonical source for REST API specifications for Microsof
 ## Getting started
 If you're a Microsoft employee looking for information about all of the repositories and steps for Azure SDK Libraries Releases, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). To get access to the wiki, you need to request access to the [Azure SDK Release Partners](https://aka.ms/azsdk/join/azuresdkpartners) security group. This is a MyAccess group and requests to join will need to be approved by your manager.
 
-External Contributors can read [Getting Started with Azure API Specifications](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/getting-started-with-azure-api-specifications.md).
+External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 
 
@@ -176,7 +176,7 @@ Specification files and AutoRest configuration files in one RP folder are better
 ## Next steps
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
 
-External Contributors can read [Getting Started with Azure API Specifications](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/getting-started-with-azure-api-specifications.md).
+External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 ---
 _This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
