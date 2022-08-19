@@ -5402,7 +5402,7 @@
       "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
       "properties": {
         "frequency": {
-          "$ref": "#/definitions/RecurrenceFrequency"
+          "$ref": "./mfe.json/definitions/RecurrenceFrequency"
         },
         "interval": {
           "type": "integer",
@@ -5418,67 +5418,7 @@
           "description": "The time zone."
         },
         "schedule": {
-          "$ref": "#/definitions/RecurrenceSchedule"
-        }
-      }
-    },
-    "RecurrenceFrequency": {
-      "type": "string",
-      "description": "Enum to describe the frequency of a recurrence schedule",
-      "enum": [
-        "NotSpecified",
-        "Second",
-        "Minute",
-        "Hour",
-        "Day",
-        "Week",
-        "Month",
-        "Year"
-      ],
-      "x-ms-enum": {
-        "name": "RecurrenceFrequency",
-        "modelAsString": true
-      }
-    },
-    "RecurrenceSchedule": {
-      "type": "object",
-      "description": "The recurrence schedule",
-      "properties": {
-        "minutes": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "description": "The minutes."
-        },
-        "hours": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "description": "The hours."
-        },
-        "weekDays": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "x-ms-enum": {
-              "name": "DaysOfWeek",
-              "modelAsString": false
-            }
-          },
-          "description": "The days of the week."
+          "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
         }
       }
     },
