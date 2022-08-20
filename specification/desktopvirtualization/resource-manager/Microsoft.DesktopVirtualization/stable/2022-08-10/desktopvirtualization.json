@@ -49,6 +49,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceProviderOperationList"
             }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -2455,6 +2461,7 @@
   },
   "definitions": {
     "CloudError": {
+      "type":"object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -2476,11 +2483,13 @@
       }
     },
     "ResourceProviderOperationList": {
+      "type":"object",
       "description": "Result of the request to list operations.",
       "readOnly": true,
       "properties": {
         "value": {
           "type": "array",
+          "x-ms-identifiers":"",
           "items": {
             "$ref": "#/definitions/ResourceProviderOperation"
           },
@@ -2489,6 +2498,7 @@
       }
     },
     "ResourceProviderOperation": {
+      "type":"object",
       "description": "Supported operation of this resource provider.",
       "readOnly": true,
       "properties": {
@@ -2497,6 +2507,7 @@
           "type": "string"
         },
         "display": {
+          "type":"object",
           "description": "Display metadata associated with the operation.",
           "properties": {
             "provider": {
@@ -2543,6 +2554,7 @@
           "description": "Specifications of the Log for Azure Monitoring",
           "uniqueItems": false,
           "type": "array",
+          "x-ms-identifiers":"",
           "items": {
             "$ref": "#/definitions/LogSpecification"
           }
@@ -2891,6 +2903,7 @@
         },
         "maxSessionLimit": {
           "type": "integer",
+          "format":"int64",
           "description": "The max session limit of HostPool."
         },
         "loadBalancerType": {
@@ -2909,6 +2922,7 @@
         },
         "ring": {
           "type": "integer",
+          "format":"int64",
           "description": "The ring number of HostPool."
         },
         "validationEnvironment": {
@@ -3027,6 +3041,7 @@
         },
         "maxSessionLimit": {
           "type": "integer",
+          "format":"int64",
           "description": "The max session limit of HostPool."
         },
         "personalDesktopAssignmentType": {
@@ -3056,6 +3071,7 @@
         },
         "ring": {
           "type": "integer",
+          "format":"int64",
           "description": "The ring number of HostPool."
         },
         "validationEnvironment": {
@@ -3262,6 +3278,7 @@
         },
         "packageDependencies": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of package dependencies. ",
           "items": {
             "$ref": "#/definitions/MsixPackageDependencies"
@@ -3280,6 +3297,7 @@
         },
         "packageApplications": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of package applications. ",
           "items": {
             "$ref": "#/definitions/MsixPackageApplications"
@@ -3509,6 +3527,7 @@
         },
         "iconIndex": {
           "type": "integer",
+          "format":"int64",
           "description": "Index of the icon."
         },
         "iconHash": {
@@ -3604,6 +3623,7 @@
         },
         "iconIndex": {
           "type": "integer",
+          "format":"int64",
           "description": "Index of the icon."
         },
         "msixPackageFamilyName": {
@@ -3749,6 +3769,7 @@
         },
         "iconIndex": {
           "type": "integer",
+          "format":"int64",
           "description": "Index of the icon."
         }
       }
@@ -3838,6 +3859,7 @@
         },
         "packageDependencies": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of package dependencies. ",
           "items": {
             "$ref": "#/definitions/MsixPackageDependencies"
@@ -3857,6 +3879,7 @@
         },
         "packageApplications": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of package applications. ",
           "items": {
             "$ref": "#/definitions/MsixPackageApplications"
@@ -3942,6 +3965,7 @@
         },
         "sessions": {
           "type": "integer",
+          "format": "int64",
           "description": "Number of sessions on SessionHost."
         },
         "agentVersion": {
@@ -4079,6 +4103,7 @@
         },
         "sessionHostHealthCheckResults": {
           "type": "array",
+          "x-ms-identifiers":"",
           "readOnly": true,
           "description": "List of SessionHostHealthCheckReports",
           "items": {
@@ -4430,6 +4455,7 @@
         },
         "schedules": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of ScalingSchedule definitions.",
           "items": {
             "$ref": "#/definitions/ScalingSchedule"
@@ -4437,6 +4463,7 @@
         },
         "hostPoolReferences": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of ScalingHostPoolReference definitions.",
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
@@ -4456,16 +4483,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/ScalingScheduleDayOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -4591,6 +4609,22 @@
         }
       }
     },
+    "ScalingScheduleDayOfWeek": {
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+       ],
+       "type": "string",
+       "x-ms-enum": {
+         "name": "DayOfWeek",
+         "modelAsString": true
+       }
+    },
     "ScalingHostPoolReference": {
       "description": "Scaling plan reference to hostpool.",
       "type": "object",
@@ -4692,6 +4726,7 @@
         },
         "schedules": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of ScalingSchedule definitions.",
           "items": {
             "$ref": "#/definitions/ScalingSchedule"
@@ -4699,6 +4734,7 @@
         },
         "hostPoolReferences": {
           "type": "array",
+          "x-ms-identifiers":"",
           "description": "List of ScalingHostPoolReference definitions.",
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
