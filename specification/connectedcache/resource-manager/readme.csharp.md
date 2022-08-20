@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.ConnectedCache
-  output-folder: $(csharp-sdks-folder)/ConnectedCache/Microsoft.Azure.Management.ConnectedCache/src/Generated
+  namespace: Microsoft.ConnectedCache
+  output-folder: $(csharp-sdks-folder)/connectedcache/management/Microsoft.ConnectedCache/src/Generated
 ```

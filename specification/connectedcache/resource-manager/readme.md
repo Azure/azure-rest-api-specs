@@ -1,8 +1,8 @@
-# Microsoft ConnectedCache
+# Microsoft Connected Cache
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for deviceupdate.
+This is the AutoRest configuration file for connectedcache.
 
 ## Getting Started
 
@@ -22,12 +22,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the ConnectedCache
+These are the global settings for the connectedcache
 
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2019-12-04-preview
+tag: package-2022-03-21-preview
 ```
 
 ### Tag: package-2019-12-04-preview
@@ -37,11 +37,6 @@ These settings apply only when `--tag=package-2019-12-04-preview` is specified o
 ```yaml $(tag) == 'package-2019-12-04-preview'
 input-file:
   - Microsoft.ConnectedCache/preview/2019-12-04-preview/ConnectedCache.json
-```
-```yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2019-12-04-preview
 ```
 
 ### Tag: package-2021-09-15-preview
@@ -53,13 +48,21 @@ input-file:
   - Microsoft.ConnectedCache/preview/2021-09-15-preview/ConnectedCache.json
 ```
 
+### Tag: package-2022-03-21-preview
+These settings apply only when `--tag=package-2022-03-21-preview` is specified on the command line.
+```yaml $(tag) == 'package-2022-03-21-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2022-03-21-preview/ConnectedCache.json
+```
+
+
 ## Suppression
 
 ``` yaml
 directive:
   - suppress: ENUM_CASE_MISMATCH
     where: $.definitions.Identity.properties.type
-    from: deviceupdate.json
+    from: connectedcache.json
     reason: Managed Identity type can be case in-sensitive
 ```
 
@@ -74,12 +77,14 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-go
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_deviceupdate']
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## CSharp
 
@@ -89,6 +94,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
