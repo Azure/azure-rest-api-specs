@@ -674,6 +674,18 @@
       ],
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
+    "DiskControllerType": {
+      "type": "string",
+      "enum": [
+        "SCSI",
+        "NVMe"
+      ],
+      "x-ms-enum": {
+        "name": "DiskControllerTypes",
+        "modelAsString": true
+      },
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
+    },
     "KeyVaultSecretReference": {
       "properties": {
         "secretUrl": {
@@ -1055,16 +1067,8 @@
           "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "diskControllerType": {
-          "type": "string",
-          "description": "Specifies the disk controller type configured for the VM. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) contains V2. <br> For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes.<br><br>NOTE: This property will be set to the default disk controller type if not specified provided virtual machine is being created as a hyperVGeneration: V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. <br>You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. <br><br> Minimum api-version: 2022-08-01",
-          "enum": [
-            "SCSI",
-            "NVMe"
-          ],
-          "x-ms-enum": {
-            "name": "DiskControllerTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DiskControllerType",
+          "description": "Specifies the disk controller type configured for the VM. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) contains V2. <br> For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes.<br><br>NOTE: This property will be set to the default disk controller type if not specified provided virtual machine is being created as a hyperVGeneration: V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. <br>You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. <br><br> Minimum api-version: 2022-08-01"
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
