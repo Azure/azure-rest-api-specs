@@ -118,6 +118,72 @@
           }
         }
       }
+    },
+    "/sip/checkRouting/{targetNumber}": {
+      "get": {
+        "tags": [
+          "NumberRoutingValidation"
+        ],
+        "summary": "Gets the list of routes matching the target phone number, ordered by priority.",
+        "operationId": "CheckRoutingForNumber",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "targetNumber",
+            "description": "Phone number to test routing patterns against",
+            "required": true,
+            "type": "string",
+            "x-example": "+11234567890"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "By default only the route names are returned. You can include other route parameters with $expand.",
+            "required": false,
+            "type": "string",
+            "x-example": "numberPattern,trunks"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of matching routes",
+            "schema": {
+              "$ref": "#/definitions/RoutingForNumber"
+            },
+            "examples": {
+              "application/json": {
+                "targetNumber": "+11234567890",
+                "matchingRoutes": [
+                  {
+                    "name": "Seattle"
+                  },
+                  {
+                    "name": "US"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Check target phone number routing": {
+            "$ref": "./examples/CheckRoutingForNumber.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
