@@ -83,6 +83,27 @@
               "$ref": "#/definitions/SipConfiguration"
             }
           },
+          "415": {
+            "description": "Unsupported media type of the patch.",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "422": {
+            "description": "If the request is empty, unprocessable or inconsistent with the stored data.",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "All other api errors.",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
@@ -94,51 +115,6 @@
         "x-ms-examples": {
           "Patch SIP configuration for resource": {
             "$ref": "./examples/PatchSipConfiguration.json"
-          }
-        }
-      }
-    },
-    "/checkRouting/{targetNumber}": {
-      "get": {
-        "tags": [
-          "NumberRoutingValidation"
-        ],
-        "summary": "Returns the list of routes matching the target phone number, ordered by priority.",
-        "operationId": "CheckRoutingForNumber",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "targetNumber",
-            "description": "Phone number to test routing patterns against",
-            "required": true,
-            "type": "string",
-            "x-example": "+11234567890"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RoutingForNumber"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Check target phone number routing": {
-            "$ref": "./examples/CheckRoutingForNumber.json"
           }
         }
       }
@@ -340,8 +316,7 @@
     "TrunkRoute": {
       "description": "Represents a trunk route for routing calls.",
       "required": [
-        "name",
-        "numberPattern"
+        "name"
       ],
       "type": "object",
       "properties": {
@@ -367,20 +342,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "TrunkRouteSummary": {
-      "description": "A short representation of a trunk route, containing only the name.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Gets the name of the route.",
-          "maxLength": 256,
-          "type": "string"
         }
       }
     },
@@ -452,10 +413,6 @@
     },
     "RoutingForNumber": {
       "description": "Represents number routing validation details.",
-      "required": [
-        "matchingRoutes",
-        "targetNumber"
-      ],
       "type": "object",
       "properties": {
         "targetNumber": {
@@ -464,9 +421,10 @@
         },
         "matchingRoutes": {
           "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration. Only route names are displayed.",
+          "maxLength": 250,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrunkRouteSummary"
+            "$ref": "#/definitions/TrunkRoute"
           }
         }
       }
