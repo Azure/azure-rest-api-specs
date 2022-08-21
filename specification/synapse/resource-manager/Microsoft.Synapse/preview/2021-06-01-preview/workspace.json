@@ -897,11 +897,13 @@
             "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
+            "schema": {
+              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+            },
             "name": "trustedServiceByPassConfiguration",
-            "in": "path",
+            "in": "body",
             "description": "Trusted Service By Pass Configuration",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -918,12 +920,16 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": ""
+            "description": "Error"
           }
         },
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or update trusted service by pass configuration": {
             "$ref": "./examples/CreateOrUpdateTrustedServiceByPassConfiguration.json"
@@ -1585,15 +1591,11 @@
       "title": "Trusted Service By Pass Configuration properties",
       "description": "Workspace Trusted Service By Pass Configuration properties",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "TrustedServiceBypassConfigurationProperties",
           "trustedServiceBypassEnabled": {
             "description": "TrustedServiceBypassEnabled",
             "type": "boolean"
           }
         }
       }
-    }
     }
   }
