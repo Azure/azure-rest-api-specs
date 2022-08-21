@@ -897,38 +897,35 @@
             "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "description": "Trusted Service By Pass Configuration",
-            "schema": {
-              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-            },
-            "in": "body",
             "name": "trustedServiceByPassConfiguration",
-            "required": true
+            "in": "path",
+            "description": "Trusted Service By Pass Configuration",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
             },
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
           },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": "Error"
+            "description": ""
           }
         },
         "produces": [
           "application/json"
         ],
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update managed identity sql control settings": {
+          "Create or update trusted service by passcConfiguration": {
             "$ref": "./examples/CreateOrUpdateTrustedServiceByPassConfiguration.json"
           }
         }
@@ -1588,24 +1585,17 @@
       "description": "Trusted Service By Pass Configuration properties",
       "type": "object",
       "properties": {
-        "subscriptionId": {
-          "description": "Requested subscriptionId. of Trusted Service By Pass Configuration Workspace",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "Requested resourceGroup. of Trusted Service By Pass Configuration Workspace",
-          "type": "string",
-          "readOnly": true
-        },
-        "workspaceName": {
-          "description": "Requested workspaceName. of Trusted Service By Pass Configuration ",
-          "type": "string",
-          "readOnly": true
-        },
-        "trustedServiceBypassConfigurationInfo": {
-          "description": "Trusted Service By Pass Configuration Info.",
-          "type": "boolean"
+        "properties": {
+          "properties": {
+            "type": "object",
+            "description": "TrustedServiceBypassConfigurationProperties",
+            "properties": {
+              "trustedServiceBypassEnabled": {
+                "description": "TrustedServiceBypassEnabled",
+                "type": "boolean"
+              }
+            }
+          }
         }
       }
     }

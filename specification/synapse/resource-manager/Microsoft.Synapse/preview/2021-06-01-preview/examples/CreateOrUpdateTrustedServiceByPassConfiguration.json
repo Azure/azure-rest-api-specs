@@ -3,7 +3,20 @@
     "subscriptionId": "cde3513f-fbc4-414d-abc2-c4b2ad011bd8",
     "resourceGroupName": "kedodd2021synrg1",
     "workspaceName": "kedoddsynprodws",
-    "trustedServiceByPassConfiguration": {},
+    "trustedServiceByPassConfiguration": {
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "TrustedServiceBypassConfigurationProperties",
+          "properties": {
+            "trustedServiceBypassEnabled": {
+              "description": "TrustedServiceBypassEnabled",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "api-version": "2021-06-01-preview"
   },
   "responses": {
@@ -16,10 +29,11 @@
             "name": "default",
             "location": "null",
             "properties": {
-              "subscriptionId": "cde3513f-fbc4-414d-abc2-c4b2ad011bd8",
-              "resourceGroup": "kedodd2021synrg1",
-              "workspaceName": "kedoddsynprodws",
-              "trustedServiceBypassConfigurationInfo": false
+              "properties": {
+                "properties": {
+                  "trustedServiceBypassEnabled": false
+                }
+              }
             }
           }
         ]
