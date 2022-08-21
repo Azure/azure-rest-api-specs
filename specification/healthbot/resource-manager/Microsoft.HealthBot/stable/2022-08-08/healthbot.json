@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-24",
+    "version": "2022-08-08",
     "title": "Azure Health Bot",
     "description": "Azure Health Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
     "x-ms-code-generation-settings": {
@@ -223,6 +223,78 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthBot/healthBots/{botName}/listSecrets": {
+      "post": {
+        "operationId": "Bots_ListSecrets",
+        "x-ms-examples": {
+          "Bot List Secrets": {
+            "$ref": "./examples/ListSecrets.json"
+          }
+        },
+        "description": "List all secrets of a HealthBot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If secrets are retrieved successfully, the service should return 200 (OK)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthBot/healthBots/{botName}/regenerateApiJwtSecret": {
+      "post": {
+        "operationId": "Bots_RegenerateApiJwtSecret",
+        "x-ms-examples": {
+          "Bot List Secrets": {
+            "$ref": "./examples/RegenerateApiJwtSecret.json"
+          }
+        },
+        "description": "Regenerate the API JWT Secret of a HealthBot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If secret was regenerated successfully, the service should return 200 (OK)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthBot/healthBots": {
