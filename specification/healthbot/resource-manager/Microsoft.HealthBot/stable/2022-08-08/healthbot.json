@@ -250,7 +250,10 @@
         ],
         "responses": {
           "200": {
-            "description": "If secrets are retrieved successfully, the service should return 200 (OK)."
+            "description": "If secrets are retrieved successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/HealthBotKeysResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -286,7 +289,10 @@
         ],
         "responses": {
           "200": {
-            "description": "If secret was regenerated successfully, the service should return 200 (OK)."
+            "description": "If secret was regenerated successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/HealthBotKey"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -663,6 +669,34 @@
           ]
         }
       }
+    },
+    "HealthBotKey": {
+      "type": "object",
+      "description": "An entry of HealthBotKeysResponse",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the key."
+        }
+      }
+    },
+    "HealthBotKeysResponse": {
+      "properties": {
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthBotKey"
+          },
+          "description": "Array of Azure Health Bot Secrets.",
+          "minLength": 3,
+          "maxLength": 3
+        }
+      },
+      "description": "Health Bot Keys Response."
     },
     "SystemData": {
       "description": "Read only system data",
