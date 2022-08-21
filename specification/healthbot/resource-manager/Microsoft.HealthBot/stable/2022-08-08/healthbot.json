@@ -265,7 +265,7 @@
       "post": {
         "operationId": "Bots_RegenerateApiJwtSecret",
         "x-ms-examples": {
-          "Bot List Secrets": {
+          "Bot Regenerate API JWT Secret": {
             "$ref": "./examples/RegenerateApiJwtSecret.json"
           }
         },
@@ -750,6 +750,7 @@
               "items": {
                 "$ref": "#/definitions/Error"
               },
+              "x-ms-identifiers": [],
               "description": "The error details."
             },
             "additionalInfo": {
@@ -758,6 +759,7 @@
               "items": {
                 "$ref": "#/definitions/ErrorAdditionalInfo"
               },
+              "x-ms-identifiers": [],
               "description": "The error additional info."
             }
           }
@@ -791,7 +793,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",

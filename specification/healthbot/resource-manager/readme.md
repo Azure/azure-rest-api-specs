@@ -28,7 +28,7 @@ These are the global settings for the healthbot.
 title: HealthbotClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-06-10
+tag: package-2022-08-08
 ```
 
 ### Tag: package-2022-08-08
