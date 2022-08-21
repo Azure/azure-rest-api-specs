@@ -1572,30 +1572,33 @@
       "description": "The response to a list restorable dropped Sql pools request"
     },
     "TrustedServiceByPassConfiguration": {
-      "description": "Trusted Service By Pass Configuration",
       "type": "object",
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "Trusted Service By Pass Configuration",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
+          "title": "Trusted Service By Pass Configuration properties",
           "description": "Trusted Service By Pass Configuration properties",
-          "$ref": "#/definitions/TrustedServiceByPassConfigurationProperties",
+          "properties": {
+            "trustedServiceBypassConfigurationInfo": {
+              "description": "Trusted Service By pass Configuration Info",
+              "type": "object",
+              "properties": {
+                "trustedServiceBypassEnabled": {
+                  "description": "TrustedServiceBypassEnabled",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TrustedServiceByPassConfigurationProperties": {
-      "title": "Trusted Service By Pass Configuration properties",
-      "description": "Workspace Trusted Service By Pass Configuration properties",
-      "properties": {
-          "trustedServiceBypassEnabled": {
-            "description": "TrustedServiceBypassEnabled",
-            "type": "boolean"
-          }
         }
       }
     }
   }
+}
