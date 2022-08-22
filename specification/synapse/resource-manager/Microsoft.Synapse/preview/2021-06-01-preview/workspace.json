@@ -898,10 +898,7 @@
           },
           {
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-              }
+              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
             },
             "name": "trustedServiceByPassConfiguration",
             "in": "body",
@@ -912,12 +909,12 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-              }
+              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
             },
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
           },
           "default": {
             "schema": {
@@ -929,6 +926,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or update trusted service by pass configuration": {
             "$ref": "./examples/CreateOrUpdateTrustedServiceByPassConfiguration.json"
