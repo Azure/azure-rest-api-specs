@@ -860,6 +860,12 @@
       }
     },
     "MediaStreamingConfiguration": {
+      "required": [
+        "transportUrl",
+        "transportType",
+        "contentType",
+        "audioChannelType"
+      ],
       "type": "object",
       "properties": {
         "transportUrl": {
@@ -1517,7 +1523,9 @@
         "participantsUpdated",
         "recordingStateChanged",
         "playCompleted",
-        "playFailed"
+        "playFailed",
+        "recognizeCompleted",
+        "recognizeFailed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1798,6 +1806,91 @@
         },
         "resultInfo": {
           "$ref": "#/definitions/ResultInformation"
+        },
+        "type": {
+          "$ref": "#/definitions/AcsEventType"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        }
+      }
+    },
+    "RecognitionType": {
+      "description": "Determines the sub-type pf the recognize operation",
+      "enum": [
+        "dtmf"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecognitionType",
+        "modelAsString": true
+      }
+    },
+    "RecognizeCompleted": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Operation context",
+          "type": "string"
+        },
+        "recognitionType": {
+          "$ref": "#/definitions/RecognitionType"
+        },
+        "collectTonesResult": {
+          "$ref": "#/definitions/CollectTonesResult",
+          "description": "Defines the result for RecognitionType = Dtmf"
+        },
+        "resultInfo": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Defines the code, sub-code and message for the operation"
+        },
+        "type": {
+          "$ref": "#/definitions/AcsEventType"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectTonesResult": {
+      "type": "object",
+      "properties": {
+        "tones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RecognizeFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Operation context",
+          "type": "string"
+        },
+        "resultInfo": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Defines the code, sub-code and message for the operation"
         },
         "type": {
           "$ref": "#/definitions/AcsEventType"
