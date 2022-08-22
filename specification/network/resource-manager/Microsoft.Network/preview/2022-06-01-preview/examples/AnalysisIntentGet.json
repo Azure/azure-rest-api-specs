@@ -1,0 +1,49 @@
+{
+  "title": "AnalysisIntentGet",
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkVerifierName": "testNetworkVerifier",
+    "analysisIntentName": "testAnalysisIntent"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
+        "properties": {
+          "description": "This is a test Analysis Intent",
+          "type": null,
+          "ipTrafficProperties": {
+            "sourceIps": [
+              "*"
+            ],
+            "destinationIps": [
+              "*"
+            ],
+            "sourcePorts": [
+              "*"
+            ],
+            "destinationPorts": [
+              "*"
+            ],
+            "protocols": "TCP"
+          },
+          "provisioningState": "Succeeded",
+          "sourceResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+          "destinationResourceId": "internet"
+        },
+        "name": "testAnalysisIntent",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
+        "tags": {},
+        "location": "eastus2euap"
+      }
+    },
+    "404": {
+      "body": {
+        "code": "404",
+        "message": "AnalysisIntents Not Found"
+      }
+    }
+  }
+}
