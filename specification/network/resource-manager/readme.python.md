@@ -20,38 +20,6 @@ multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2022-01
-  - tag: package-2021-02
-  - tag: package-2021-02-preview-only
-  - tag: package-2020-11
-  - tag: package-2020-08
-  - tag: package-2020-07
-  - tag: package-2020-06
-  - tag: package-2020-05
-  - tag: package-2020-04
-  - tag: package-2020-03
-  - tag: package-2019-12
-  - tag: package-2019-11
-  - tag: package-2019-09
-  - tag: package-2019-08
-  - tag: package-2019-07
-  - tag: package-2019-06
-  - tag: package-2019-04
-  - tag: package-2019-02
-  - tag: package-2018-12
-  - tag: package-2018-11
-  - tag: package-2018-10
-  - tag: package-2018-08
-  - tag: package-2018-07
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2018-02
-  - tag: package-2018-01
-  - tag: package-2017-10
-  - tag: package-2017-06
-  - tag: package-2017-03
-  - tag: package-2016-12
-  - tag: package-2016-09
-  - tag: package-2015-06split
   - multiapiscript: true
 
 ```
