@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-07-01-preview"
+    "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -139,6 +139,9 @@
           },
           "Successful Healthcare Post Request": {
             "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
+          },
+          "Successful Submit Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -189,6 +192,9 @@
           },
           "Successful Get Text Analysis Health Request": {
             "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
+          },
+          "Successful Get Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
           }
         }
       }
@@ -264,7 +270,8 @@
         "ExtractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomMultiLabelClassification",
+        "AbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -300,7 +307,8 @@
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
+        "CustomMultiLabelClassificationLROResults",
+        "AbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -2718,6 +2726,133 @@
           "type": "string"
         }
       }
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AbstractiveSummarizationLROResults": {
+      "type": "object",
+      "description": "An object representing the results for an Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/AbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "AbstractiveSummarizationResultBase": {
+      "type": "object",
+      "description": "An object representing the summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the summarization result of a single document.",
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "summaries"
+      ]
+    },
+    "AbstractiveSummary": {
+      "type": "object",
+      "description": "An object representing a single summary with context for given document.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the summary."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/SummaryContext"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
     }
   },
   "parameters": {}

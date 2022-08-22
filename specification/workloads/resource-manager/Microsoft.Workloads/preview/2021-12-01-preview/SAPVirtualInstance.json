@@ -39,7 +39,7 @@
         "tags": [
           "SAPRecommendations"
         ],
-        "description": "Get SAP sizing recommendations.",
+        "description": "Get SAP sizing recommendations by providing input SAPS for application tier and memory required for database tier",
         "operationId": "SAPSizingRecommendations",
         "parameters": [
           {
@@ -95,7 +95,7 @@
         "tags": [
           "SAPSupportedSku"
         ],
-        "description": "Get SAP supported SKUs.",
+        "description": "Get a list of SAP supported SKUs for ASCS, Application and Database tier.",
         "operationId": "SAPSupportedSku",
         "parameters": [
           {
@@ -151,7 +151,7 @@
         "tags": [
           "SAPDiskConfigurations"
         ],
-        "description": "Get SAP Disk Configurations.",
+        "description": "Get the SAP Disk Configuration Layout prod/non-prod SAP System.",
         "operationId": "SAPDiskConfigurations",
         "parameters": [
           {
@@ -201,7 +201,7 @@
         "tags": [
           "SAPAvailabilityZoneDetails"
         ],
-        "description": "Get SAP Availability Zone Details.",
+        "description": "Get the recommended SAP Availability Zone Pair Details for your region.",
         "operationId": "SAPAvailabilityZoneDetails",
         "parameters": [
           {
@@ -263,32 +263,38 @@
           "Register existing SAP system as Virtual Instance for SAP solutions.": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover.json"
           },
-          "SAPVirtualInstances_Create_Distributed": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed.json"
-          },
-          "SAPVirtualInstances_Create_HA_AvSet": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvSet.json"
-          },
-          "SAPVirtualInstances_Create_HA_AvZone": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvZone.json"
-          },
-          "SAPVirtualInstances_Create_SingleServer": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
-          },
-          "SAPVirtualInstances_Create_WithOSConfig_SingleServer": {
+          "Create Infrastructure with OS configuration for Single Server System (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_SingleServer.json"
           },
-          "SAPVirtualInstances_Create_WithOSConfig_Distributed": {
+          "Create Infrastructure with OS configuration for Distributed System (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_Distributed.json"
           },
-          "SAPVirtualInstances_Create_WithOSConfig_HA_AvSet": {
+          "Create Infrastructure with OS configuration for HA System with Availability Set (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_HA_AvSet.json"
           },
-          "SAPVirtualInstances_Create_WithOSConfig_HA_AvZone": {
+          "Create Infrastructure with OS configuration for HA System with Availability Zone (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_HA_AvZone.json"
+          },
+          "Create Infrastructure only for Distributed System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed.json"
+          },
+          "Create Infrastructure only for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvSet.json"
+          },
+          "Create Infrastructure only for HA System with Availability Zone": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvZone.json"
+          },
+          "Create Infrastructure only for Single Server System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
+          },
+          "Install SAP Software on Single Server System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_SingleServer.json"
+          },
+          "Install SAP Software on Distributed System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_Distributed.json"
           }
         },
-        "description": "Creates an Virtual Instance for SAP.",
+        "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -304,7 +310,7 @@
           },
           {
             "in": "body",
-            "description": "The Virtual Instance for SAP request body.",
+            "description": "Virtual Instance for SAP solutions resource request body.",
             "name": "body",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
@@ -313,13 +319,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the created Virtual Instance for SAP.",
+            "description": "Describes the Virtual Instance for SAP solutions resource created.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
           },
           "200": {
-            "description": "Describes the successfully created Virtual Instance for SAP.",
+            "description": "Describes the Virtual Instance for SAP solutions resource which is created successfully.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -342,7 +348,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Get.json"
           }
         },
-        "description": "Gets an Virtual Instance for SAP.",
+        "description": "Gets a Virtual Instance for SAP solutions resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -359,7 +365,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the Virtual Instance for SAP.",
+            "description": "Describes the Virtual Instance for SAP solutions resource",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -382,7 +388,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Update.json"
           }
         },
-        "description": "Updates an Virtual Instance for SAP.",
+        "description": "Updates a Virtual Instance for SAP solutions resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -399,7 +405,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The Update Virtual Instance for SAP request body.",
+            "description": "Request body to update a Virtual Instance for SAP solutions resource.",
             "schema": {
               "$ref": "#/definitions/UpdateSAPVirtualInstanceRequest"
             }
@@ -407,7 +413,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the successfully updated Virtual Instance for SAP.",
+            "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
             }
@@ -437,7 +443,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Delete.json"
           }
         },
-        "description": "Deletes an Virtual Instance for SAP.",
+        "description": "Deletes a Virtual Instance for SAP solutions resource and its child resources, that is the associated Central Services Instance, Application Server Instances and Database Instance.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -488,7 +494,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Gets all Virtual Instances for SAP in a resource group.",
+        "description": "Gets all Virtual Instances for SAP solutions resources in a Resource Group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -502,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of all Virtual Instances for SAP.",
+            "description": "The list of all Virtual Instances for SAP solutions resources.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstanceList"
             }
@@ -530,7 +536,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Gets all Virtual Instances for SAP in the subscription.",
+        "description": "Gets all Virtual Instances for SAP solutions resources in a Subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -541,7 +547,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of all Virtual Instances for SAP in the subscription.",
+            "description": "The list of all Virtual Instances for SAP solutions resources in the Subscription.",
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstanceList"
             }
@@ -566,7 +572,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Get.json"
           }
         },
-        "description": "Gets the SAP Central Instance.",
+        "description": "Gets the SAP Central Services Instance resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -586,7 +592,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
@@ -616,7 +622,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Create.json"
           }
         },
-        "description": "Puts the SAP Central Instance. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
+        "description": "Creates the SAP Central Services Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -636,7 +642,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Central Server instance request body.",
+            "description": "The SAP Central Services Instance request body.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
@@ -644,13 +650,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the created SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource created.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
@@ -680,7 +686,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Update.json"
           }
         },
-        "description": "Updates the SAP Central Instance. <br><br>This can be used to update tags.",
+        "description": "Updates the SAP Central Services Instance resource. <br><br>This can be used to update tags on the resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -700,7 +706,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Central Server instance request body.",
+            "description": "The SAP Central Services Instance resource request body.",
             "schema": {
               "$ref": "#/definitions/UpdateSAPCentralInstanceRequest"
             }
@@ -708,13 +714,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the created SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource created.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource created.",
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
             }
@@ -744,7 +750,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Delete.json"
           }
         },
-        "description": "Deletes the SAP Central Instance. <br><br>This will be used by service only. Delete by end user will return a Bad Request error.",
+        "description": "Deletes the SAP Central Services Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for SAP solutions resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -798,7 +804,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Lists the SAP Central Instances in an SVI.",
+        "description": "Lists the SAP Central Services Instance resource for the given Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -815,7 +821,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Central Server Instance.",
+            "description": "Describes the SAP Central Services Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPCentralInstanceList"
             }
@@ -840,7 +846,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Get.json"
           }
         },
-        "description": "Gets the SAP Database Instance.",
+        "description": "Gets the SAP Database Instance resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -860,7 +866,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource associated with the SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
@@ -890,7 +896,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create.json"
           }
         },
-        "description": "Puts the SAP Database Instance. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
+        "description": "Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -910,7 +916,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Database Server instance request body.",
+            "description": "Request body of Database resource of a SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
@@ -918,13 +924,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource of the SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource of the SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
@@ -954,7 +960,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Update.json"
           }
         },
-        "description": "Puts the SAP Database Instance.",
+        "description": "Updates the Database resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -974,7 +980,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Database Server instance request body.",
+            "description": "Database resource update request body.",
             "schema": {
               "$ref": "#/definitions/UpdateSAPDatabaseInstanceRequest"
             }
@@ -982,13 +988,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource of the SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource of the SAP system.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
             }
@@ -1018,7 +1024,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Delete.json"
           }
         },
-        "description": "Deletes the SAP Database Instance. <br><br>This will be used by service only. Delete by end user will return a Bad Request error.",
+        "description": "Deletes the Database resource corresponding to a Virtual Instance for SAP solutions resource. <br><br>This will be used by service only. Delete by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1072,7 +1078,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Lists the SAP Database Instances in an SVI.",
+        "description": "Lists the Database resources associated with a Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1089,7 +1095,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Database Instance.",
+            "description": "Describes the Database resource corresponding to a Virtual Instance for SAP solutions resource.",
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstanceList"
             }
@@ -1114,7 +1120,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Get.json"
           }
         },
-        "description": "Gets the SAP Application Server Instance.",
+        "description": "Gets the SAP Application Server Instance corresponding to the Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1164,7 +1170,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create.json"
           }
         },
-        "description": "Puts the SAP Application Server Instance. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
+        "description": "Puts the SAP Application Server Instance resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1184,7 +1190,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Application Server instance request body.",
+            "description": "The SAP Application Server Instance resource request body.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
             }
@@ -1192,13 +1198,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the SAP Application Server Instance.",
+            "description": "Describes the SAP Application Server Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Application Server Instance.",
+            "description": "Describes the SAP Application Server Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
             }
@@ -1228,7 +1234,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Update.json"
           }
         },
-        "description": "Puts the SAP Application Server Instance.",
+        "description": "Puts the SAP Application Server Instance resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1248,7 +1254,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The SAP Application Server instance request body.",
+            "description": "The SAP Application Server Instance resource request body.",
             "schema": {
               "$ref": "#/definitions/UpdateSAPApplicationInstanceRequest"
             }
@@ -1256,13 +1262,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Describes the SAP Application Server Instance.",
+            "description": "Describes the SAP Application Server Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
             }
           },
           "200": {
-            "description": "Describes the SAP Application Server Instance.",
+            "description": "Describes the SAP Application Server Instance resource.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
             }
@@ -1292,7 +1298,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Delete.json"
           }
         },
-        "description": "Deletes the SAP Application Server Instance. <br><br>This operation will be used by service only. Delete by end user will return a Bad Request error.",
+        "description": "Deletes the SAP Application Server Instance resource. <br><br>This operation will be used by service only. Delete by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1346,7 +1352,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Lists the SAP Application server Instances in an SVI.",
+        "description": "Lists the SAP Application Server Instance resources for a given Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1363,7 +1369,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Application Instance list.",
+            "description": "List of SAP Application Server Instance resources.",
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstanceList"
             }
@@ -1395,7 +1401,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start.json"
           }
         },
-        "description": "Starts the SAP System.",
+        "description": "Starts the SAP application, that is the Central Services instance and Application server instances.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1447,7 +1453,7 @@
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop.json"
           }
         },
-        "description": "Stops the SAP System.",
+        "description": "Stops the SAP Application, that is the Application server instances and Central Services instance.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1464,7 +1470,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The Virtual Instances for SAP stop request body.",
+            "description": "The Virtual Instance for SAP solutions resource stop request body.",
             "schema": {
               "$ref": "#/definitions/StopRequest"
             }
@@ -1492,7 +1498,7 @@
   },
   "definitions": {
     "HealthState": {
-      "description": "Defines the SAP Instance health.",
+      "description": "Defines the health of SAP Instances.",
       "enum": [
         "Unknown",
         "Healthy",
@@ -1506,7 +1512,7 @@
       }
     },
     "DeploymentType": {
-      "description": "The deployment Type.",
+      "description": "The type of SAP deployment, single server or Three tier.",
       "enum": [
         "SingleServer",
         "ThreeTier"
@@ -2700,7 +2706,7 @@
       "discriminator": "configurationType"
     },
     "CentralServerVmDetails": {
-      "description": "The Central Server VM Details.",
+      "description": "The SAP Central Services Instance VM details.",
       "type": "object",
       "properties": {
         "type": {
@@ -2714,7 +2720,7 @@
       }
     },
     "DatabaseVmDetails": {
-      "description": "The Database VM Details.",
+      "description": "Database VM details.",
       "type": "object",
       "properties": {
         "virtualMachineId": {
@@ -2738,7 +2744,7 @@
       }
     },
     "SAPVirtualInstanceProperties": {
-      "description": "Defines the Virtual Instance for SAP properties.",
+      "description": "Defines the Virtual Instance for SAP solutions resource properties.",
       "type": "object",
       "required": [
         "environment",
@@ -2761,7 +2767,7 @@
           ]
         },
         "configuration": {
-          "description": "Defines if an existing SAP system is being registered or a new SAP system is being created",
+          "description": "Defines if the SAP system is being created using Azure Center for SAP solutions (ACSS) or if an existing SAP system is being registered with ACSS",
           "$ref": "#/definitions/SAPConfiguration"
         },
         "managedResourceGroupConfiguration": {
@@ -2785,14 +2791,14 @@
           "readOnly": true
         },
         "errors": {
-          "description": "Defines the Virtual Instance for SAP errors.",
+          "description": "Indicates any errors on the Virtual Instance for SAP solutions resource.",
           "$ref": "#/definitions/SAPVirtualInstanceError",
           "readOnly": true
         }
       }
     },
     "SAPVirtualInstance": {
-      "description": "Define the Virtual Instance for SAP.",
+      "description": "Define the Virtual Instance for SAP solutions resource.",
       "type": "object",
       "allOf": [
         {
@@ -2813,11 +2819,11 @@
       ]
     },
     "SAPVirtualInstanceList": {
-      "description": "Defines the collection of Virtual Instance for SAP.",
+      "description": "Defines the collection of Virtual Instance for SAP solutions resources.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets the list of Virtual Instances for SAP.",
+          "description": "Gets the list of Virtual Instances for SAP solutions resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPVirtualInstance"
@@ -2831,11 +2837,11 @@
       }
     },
     "SAPCentralInstanceList": {
-      "description": "Defines the collection of SAP Central Instances.",
+      "description": "Defines the collection of SAP Central Services Instance resources.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets the list of SAP central instances.",
+          "description": "Gets the list of SAP central services instance resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPCentralServerInstance"
@@ -2867,11 +2873,11 @@
       }
     },
     "SAPApplicationServerInstanceList": {
-      "description": "Defines the collection of SAP Application Server Instances.",
+      "description": "Defines the collection of SAP Application Server Instance resources.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets the list of SAP Application Server instances.",
+          "description": "Gets the list of SAP Application Server instance resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPApplicationServerInstance"
@@ -2885,57 +2891,57 @@
       }
     },
     "SAPApplicationServerProperties": {
-      "description": "Defines the SAP Application Server properties.",
+      "description": "Defines the SAP Application Server instance properties.",
       "type": "object",
       "properties": {
         "instanceNo": {
           "type": "string",
-          "description": "The application server instance id.",
+          "description": "Application server Instance Number.",
           "readOnly": true
         },
         "subnet": {
           "type": "string",
-          "description": "The application server subnet.",
+          "description": "Application server Subnet.",
           "readOnly": true
         },
         "hostname": {
           "type": "string",
-          "description": "The application server SAP host name.",
+          "description": "Application server instance SAP hostname.",
           "readOnly": true
         },
         "kernelVersion": {
           "type": "string",
-          "description": "The application server SAP kernel version.",
+          "description": " Application server instance SAP Kernel Version.",
           "readOnly": true
         },
         "kernelPatch": {
           "type": "string",
-          "description": "The application server SAP kernel patch.",
+          "description": "Application server instance SAP Kernel Patch level.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The application server SAP IP Address.",
+          "description": " Application server instance SAP IP Address.",
           "readOnly": true
         },
         "gatewayPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server gateway Port.",
+          "description": "Application server instance gateway Port.",
           "readOnly": true,
           "x-nullable": true
         },
         "icmHttpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server ICM HTTP Port.",
+          "description": "Application server instance ICM HTTP Port.",
           "readOnly": true,
           "x-nullable": true
         },
         "icmHttpsPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server ICM HTTPS Port.",
+          "description": "Application server instance ICM HTTPS Port.",
           "readOnly": true,
           "x-nullable": true
         },
@@ -2964,7 +2970,7 @@
       }
     },
     "SAPApplicationServerInstance": {
-      "description": "Define the SAP Application Server Instance.",
+      "description": "Define the SAP Application Server Instance resource.",
       "type": "object",
       "allOf": [
         {
@@ -2979,45 +2985,45 @@
       }
     },
     "MessageServerProperties": {
-      "description": "Defines the SAP message server properties.",
+      "description": "Defines the SAP Message Server properties.",
       "type": "object",
       "properties": {
         "msPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The message server port.",
+          "description": "Message Server port.",
           "readOnly": true,
           "x-nullable": true
         },
         "internalMsPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The message server internal MS port.",
+          "description": "Message Server internal MS port.",
           "readOnly": true,
           "x-nullable": true
         },
         "httpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The message server http port.",
+          "description": "Message Server HTTP Port.",
           "readOnly": true,
           "x-nullable": true
         },
         "httpsPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The message server https port.",
+          "description": "Message Server HTTPS Port.",
           "readOnly": true,
           "x-nullable": true
         },
         "hostname": {
           "type": "string",
-          "description": "The message server SAP host name.",
+          "description": "Message Server SAP Hostname.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The message server IP Address.",
+          "description": "Message server IP Address.",
           "readOnly": true
         },
         "health": {
@@ -3027,23 +3033,23 @@
       }
     },
     "EnqueueServerProperties": {
-      "description": "Defines the SAP enqueue server properties.",
+      "description": "Defines the SAP Enqueue Server properties.",
       "type": "object",
       "properties": {
         "hostname": {
           "type": "string",
-          "description": "The enqueue server SAP host name.",
+          "description": "Enqueue Server SAP Hostname.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The enqueue server SAP IP Address.",
+          "description": "Enqueue Server SAP IP Address.",
           "readOnly": true
         },
         "port": {
           "type": "integer",
           "format": "int64",
-          "description": "The enqueue server Port.",
+          "description": "Enqueue Server Port.",
           "readOnly": true,
           "x-nullable": true
         },
@@ -3060,7 +3066,7 @@
         "port": {
           "type": "integer",
           "format": "int64",
-          "description": "The gateway Port.",
+          "description": "Gateway Port.",
           "readOnly": true,
           "x-nullable": true
         },
@@ -3071,7 +3077,7 @@
       }
     },
     "EnqueueReplicationServerProperties": {
-      "description": "Defines the SAP ERS Server properties.",
+      "description": "Defines the SAP Enqueue Replication Server (ERS) properties.",
       "type": "object",
       "properties": {
         "ersVersion": {
@@ -3080,27 +3086,27 @@
         },
         "instanceNo": {
           "type": "string",
-          "description": "The ERS server instance id.",
+          "description": "ERS Instance Number.",
           "readOnly": true
         },
         "hostname": {
           "type": "string",
-          "description": "The ERS server SAP host name.",
+          "description": "ERS SAP Hostname.",
           "readOnly": true
         },
         "kernelVersion": {
           "type": "string",
-          "description": "The ERS server SAP kernel version.",
+          "description": "ERS SAP Kernel Version.",
           "readOnly": true
         },
         "kernelPatch": {
           "type": "string",
-          "description": "The ERS server SAP kernel patch.",
+          "description": "ERS SAP Kernel Patch level.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The ERS server SAP IP Address.",
+          "description": "ERS SAP IP Address.",
           "readOnly": true
         },
         "health": {
@@ -3110,17 +3116,17 @@
       }
     },
     "SAPCentralServerProperties": {
-      "description": "Defines the SAP Central Server properties.",
+      "description": "Defines the SAP Central Services Instance properties.",
       "type": "object",
       "properties": {
         "instanceNo": {
           "type": "string",
-          "description": "The central server instance id.",
+          "description": "The central services instance number.",
           "readOnly": true
         },
         "subnet": {
           "type": "string",
-          "description": "The central server subnet.",
+          "description": "The central services instance subnet.",
           "readOnly": true
         },
         "messageServerProperties": {
@@ -3137,18 +3143,18 @@
         },
         "kernelVersion": {
           "type": "string",
-          "description": "The central server kernel version.",
+          "description": "The central services instance Kernel Version.",
           "readOnly": true,
           "x-nullable": true
         },
         "kernelPatch": {
           "type": "string",
-          "description": "The central server kernel patch.",
+          "description": "The central services instance Kernel Patch level.",
           "readOnly": true,
           "x-nullable": true
         },
         "vmDetails": {
-          "description": "The list of virtual machines.",
+          "description": "The list of virtual machines corresponding to the Central Services instance.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CentralServerVmDetails"
@@ -3169,14 +3175,14 @@
           "readOnly": true
         },
         "errors": {
-          "description": "Defines the Central Instance errors.",
+          "description": "Defines the errors related to SAP Central Services Instance resource.",
           "readOnly": true,
           "$ref": "#/definitions/SAPVirtualInstanceError"
         }
       }
     },
     "SAPCentralServerInstance": {
-      "description": "Define the SAP Central Server Instance.",
+      "description": "Define the SAP Central Services Instance resource.",
       "type": "object",
       "allOf": [
         {
@@ -3191,31 +3197,31 @@
       }
     },
     "SAPDatabaseProperties": {
-      "description": "Defines the SAP Database properties.",
+      "description": "Defines the Database properties.",
       "type": "object",
       "properties": {
         "subnet": {
           "type": "string",
-          "description": "The database subnet.",
+          "description": "Database subnet.",
           "readOnly": true
         },
         "databaseSid": {
           "type": "string",
-          "description": "The database SID.",
+          "description": "Database SID name.",
           "readOnly": true
         },
         "databaseType": {
           "type": "string",
-          "description": "The SAP database type.",
+          "description": "Database type, that is if the DB is HANA, DB2, Oracle, SAP ASE, Max DB or MS SQL Server.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The database IP Address.",
+          "description": "Database IP Address.",
           "readOnly": true
         },
         "vmDetails": {
-          "description": "The list of virtual machines.",
+          "description": "The list of virtual machines corresponding to the Database resource.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatabaseVmDetails"
@@ -3232,14 +3238,14 @@
           "readOnly": true
         },
         "errors": {
-          "description": "Defines the Database Instance errors.",
+          "description": "Defines the errors related to Database resource.",
           "readOnly": true,
           "$ref": "#/definitions/SAPVirtualInstanceError"
         }
       }
     },
     "SAPDatabaseInstance": {
-      "description": "Define the SAP Database Instance.",
+      "description": "Define the Database resource.",
       "type": "object",
       "allOf": [
         {
@@ -3254,12 +3260,12 @@
       }
     },
     "NetworkConfiguration": {
-      "description": "Defines the network configuration for SAP infrastructure",
+      "description": "Defines the network configuration type for SAP system infrastructure that is being deployed ",
       "type": "object",
       "properties": {
         "isSecondaryIpEnabled": {
           "type": "boolean",
-          "description": "Specifies whether a secondary IP address should be added to the network interface on all VMs",
+          "description": "Specifies whether a secondary IP address should be added to the network interface on all VMs of the SAP system being deployed",
           "default": false
         }
       }
@@ -3296,7 +3302,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Virtual Instances for SAP.",
+      "description": "The name of the Virtual Instances for SAP solutions resource",
       "x-ms-parameter-location": "method"
     },
     "SAPApplicationInstanceNameParameter": {
@@ -3304,7 +3310,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of SAP Application Server instance.",
+      "description": "The name of SAP Application Server instance resource.",
       "x-ms-parameter-location": "method"
     },
     "DatabaseNameParameter": {
@@ -3312,7 +3318,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Database Instance string modeled as parameter for auto generation to work correctly.",
+      "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
       "x-ms-parameter-location": "method"
     },
     "CentralInstanceNameParameter": {
@@ -3320,7 +3326,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Central Instance name string modeled as parameter for auto generation to work correctly.",
+      "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
       "x-ms-parameter-location": "method"
     }
   }
