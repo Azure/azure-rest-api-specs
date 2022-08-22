@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  privateZoneName: scenario_privatezone
+
+prepareSteps:
+  - step: PrivateZone_Create
+    exampleFile: ../examples/PrivateZonePut.json
+
+scenarios:
+  - scenario: PrivateZone
+    description: Microsoft.Network/privateDnsZones
+    steps:
+      - step: PrivateZone_Update
+        exampleFile: ../examples/PrivateZonePatch.json
+      - step: PrivateZone_Get
+        exampleFile: ../examples/PrivateZoneGet.json
+      - step: PrivateZone_ListBySubscription
+        exampleFile: ../examples/PrivateZoneListInSubscription.json
+      - step: PrivateZone_ListByResourceGroup
+        exampleFile: ../examples/PrivateZoneListInResourceGroup.json
+
+  - scenario: RecordSet
+    description: Microsoft.Network/privateDnsZones/{recordType}/{relativeRecordSetName}
+    variables: 
+      relativeRecordSetName: scenario_recordset
+    steps:
+      - step: RecordSet_Create
+        exampleFile: ../examples/RecordSetAPut.json
+      - step: RecordSet_Update
+        exampleFile: ../examples/RecordSetAPatch.json
+      - step: RecordSet_Get
+        exampleFile: ../examples/RecordSetAGet.json
+      - step: RecordSet_ListByType
+        exampleFile: ../examples/RecordSetAList.json
+      - step: RecordSet_List
+        exampleFile: ../examples/RecordSetALLList.json
+      - step: RecordSet_Delete
+        exampleFile: ../examples/RecordSetADelete.json
+
+  - scenario: VirtualNetworkLink
+    description: Microsoft.Network/privateDnsZones/virtualNetworkLinks
+    variables:
+      virtualNetworkLinkName: scenario_vnetlink
+    steps:
+      - step: NetworkAndSubnet_Create
+        armTemplate: armtemplate/Create_NetworkAndSubnet.json
+      - step: VirtualNetworkLink_Create
+        exampleFile: ../examples/VirtualNetworkLinkPut.json
+        requestUpdate:
+          - replace: /parameters/properties/virtualNetwork/id
+            value: $(subnetId)
+      - step: VirtualNetworkLink_Update
+        exampleFile: ../examples/VirtualNetworkLinkPatch.json
+      - step: VirtualNetworkLink_Get
+        exampleFile: ../examples/VirtualNetworkLinkGet.json
+      - step: VirtualNetworkLink_List
+        exampleFile: ../examples/VirtualNetworkLinkList.json
+      - step: VirtualNetworkLink_Delete
+        exampleFile: ../examples/VirtualNetworkLinkDelete.json
+
+cleanUpSteps:
+  - step: PrivateZone_Delete
+    exampleFile: ../examples/PrivateZoneDelete.json
