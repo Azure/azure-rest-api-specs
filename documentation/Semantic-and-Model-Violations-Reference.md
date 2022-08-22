@@ -95,6 +95,7 @@ This document lists the set of automated rules that can be validated against swa
 | [INTERNAL_ERROR](#INTERNAL_ERROR) | [OAV100](#INTERNAL_ERROR) |
 | [REQUEST_VALIDATION_ERROR](#REQUEST_VALIDATION_ERROR) | [OAV109](#REQUEST_VALIDATION_ERROR) |
 | [RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) | [OAV111](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) |
+| [ROUNDTRIP_VALIDATION_ERROR](#ROUNDTRIP_VALIDATION_ERROR) | [OAV135](#ROUNDTRIP_VALIDATION_ERROR) |
 | [ROUNDTRIP_INCONSISTENT_PROPERTY](#ROUNDTRIP_INCONSISTENT_PROPERTY) | |
 | [ROUNDTRIP_MISSING_PROPERTY](#ROUNDTRIP_MISSING_PROPERTY) | |
 | [ROUNDTRIP_ADDITIONAL_PROPERTY](#ROUNDTRIP_ADDITIONAL_PROPERTY) | |
@@ -841,6 +842,13 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove this property from the response in example or in traffic payload.
 
+### <a name="ROUNDTRIP_VALIDATION_ERROR" />ROUNDTRIP_VALIDATION_ERROR
+
+**Output Message**: The OperationLoader should be initialized before calling validateRoundTrip or invalid request-response pair is provided.
+
+**Description**: The OperationLoader should be initialized before calling validateRoundTrip or invalid request-response pair is provided.
+
+**How to fix the violation**: Initialize the operatinLoader before validating request-response against RoundTrip rules.
 
 ### <a name="ROUNDTRIP_INCONSISTENT_PROPERTY" />ROUNDTRIP_INCONSISTENT_PROPERTY
 
