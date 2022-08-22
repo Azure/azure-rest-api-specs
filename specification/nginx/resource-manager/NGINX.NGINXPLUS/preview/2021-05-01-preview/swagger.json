@@ -4,6 +4,16 @@
     "title": "Nginx.NginxPlus",
     "version": "2021-05-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -885,7 +895,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
         },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage"
@@ -962,7 +980,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1074,13 +1093,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxPublicIPAddress"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "privateIPAddresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxPrivateIPAddress"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1289,7 +1310,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
