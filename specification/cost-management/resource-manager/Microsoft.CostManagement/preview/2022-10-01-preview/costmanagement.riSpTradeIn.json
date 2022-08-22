@@ -1,0 +1,380 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "version": "2022-10-01-preview"
+  },
+  "tags": [
+    {
+      "name": "RISPTradeIn",
+      "description": "An API for calculating hourly commitment for the benefits to be exchanged"
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.CostManagement/calculateBenefitTradeInAmount": {
+      "post": {
+        "tags": [
+          "RISPTradeIn"
+        ],
+        "operationId": "RISPTradeIn_CalculateBenefitTradeInAmount",
+        "description": "Calculates the trade in amount for the benefits to be exchanged",
+        "x-ms-examples": {
+          "BenefitTradeIn": {
+            "$ref": "./examples/CalculateBenefitTradeIn.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "BenefitTradeInRequest",
+            "description": "Benefit source and destination for the trade-in",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitTradeInRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of benefit trade-in calculation.",
+            "schema": {
+              "$ref": "#/definitions/BenefitTradeInResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BenefitTradeInRequest": {
+      "type": "object",
+      "description": "The calculate benefit trade-in API request",
+      "properties": {
+        "source": {
+          "type": "object",
+          "description": "Source benefit for which the trade in needs to be calculated",
+          "$ref": "#/definitions/BenefitTradeInRequestSource"
+        },
+        "destination": {
+          "type": "object",
+          "description": "Destination benefit for which the trade in needs to be calculated",
+          "$ref": "#/definitions/BenefitTradeInRequestDestination"
+        }
+      }
+    },
+    "BenefitTradeInResponse": {
+      "type": "object",
+      "description": "The calculate benefit trade-in API response",      
+      "properties": {
+        "responses": {
+          "type": "array",
+          "description": "The calculate benefit trade-in API response array ",
+          "items": {
+            "$ref": "#/definitions/BenefitTradeInResponseItem"
+          }
+        }
+      }
+    },
+    "BenefitTradeInRequestSource": {
+      "description": "The benefit Trade in request source property",
+      "properties": {
+        "benefitType": {
+          "$ref": "#/definitions/BenefitType",
+          "description": "The type of benefit to be traded in"
+        },
+        "benefitsToTradeIn": {
+          "type": "object",
+          "$ref": "#/definitions/BenefitsToTradeIn",
+          "description": "The benefits that are to be traded in"
+        },        
+        "lookBackPeriod": {
+          "$ref": "#/definitions/LookBackPeriod",
+          "description": "The lookback period for the benefits to be traded in"
+
+        }
+      }
+    },
+    "BenefitTradeInResponseItem": {
+      "description": "The benefit Trade in response item",
+      "properties": {
+        "benefitType": {
+          "$ref": "#/definitions/BenefitType",
+          "description": "The type of benefit for the requested trade in"
+        },
+        "commitmentGranularity": {
+          "$ref": "#/definitions/CommitmentGranularity",
+          "description": "The granularity for which the commitment amount is applicable"
+        },
+        "benefitId": {
+          "type": "string",
+          "description": "The fully qualified benefit Id"
+        },
+        "commitmentBasedOnUnitPrice": {
+          "type": "decimal",
+          "description": "The commitment amount calculated based on unit price of requested benefit"
+        },
+        "commitmentsBasedOnUtilization": {
+          "type": "array",
+          "description": "The commitment amounts calculated based on utilizations.",
+          "items": {
+            "$ref": "#/definitions/CommitmentsBasedOnUtilization"
+          }
+        }
+      }
+    },
+    "BenefitTradeInRequestDestination": {
+      "description": "The benefit Trade in request destination property",
+      "properties": {
+        "benefitType": {
+          "$ref": "#/definitions/BenefitType",
+          "description": "The type of benefit to be traded in"
+        },
+        "armSkuName": {
+          "type": "string",
+          "description": "The ARM SKU Name for the destination benefit. Ex: Compute_Savings_Plan"
+        },
+        "benefitTerm": {
+          "$ref": "#/definitions/BenefitTerm",
+          "description": "The term of benefit. Ex: P1Y"
+        }
+      }
+    },
+    "BenefitType": {
+      "type": "string",
+      "description": "Type of benefit.",
+      "enum": [
+        "Reservation",
+        "SavingsPlan"
+      ],
+      "x-ms-enum": {
+        "name": "BenefitType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Reservation",
+            "description": "Reservation benefit type.",
+            "name": "Reservation"
+          },
+          {
+            "value": "SavingsPlan",
+            "description": "SavingsPlan benefit type.",
+            "name": "SavingsPlan"
+          }
+        ]
+      }
+    },
+    "BenefitTerm": {
+      "type": "string",
+      "description": "The term of the benefit.",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "BenefitTerm",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "P1Y",
+            "description": "One year term",
+            "name": "P1Y"
+          },
+          {
+            "value": "P3Y",
+            "description": "Three year term",
+            "name": "P3Y"
+          }
+        ]
+      }
+    },
+    "LookBackPeriod": {
+      "type": "string",
+      "description": "The lookback period of the source benefit. This is optional",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "LookBackPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "7 days look back period",
+            "name": "Last7Days"
+          },
+          {
+            "value": "Last30Days",
+            "description": "30 days look back period",
+            "name": "Last30Days"
+          },
+          {
+            "value": "Last60Days",
+            "description": "60 days look back period",
+            "name": "Last60Days"
+          }
+        ]
+      }
+    },
+    "CommitmentGranularity": {
+      "type": "string",
+      "description": "The commitment granularity for the recommended commitment amount",
+      "enum": [
+        "Hourly",
+        "Daily",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "CommitmentGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Hourly",
+            "description": "Hour granularity",
+            "name": "Hourly"
+          },
+          {
+            "value": "Daily",
+            "description": "Day granularity",
+            "name": "Daily"
+          }
+        ]
+      }
+    },
+    "Currency": {
+      "type": "string",
+      "description": "The currency for the recommended commitment amount",
+      "enum": [
+        "USD"
+      ],
+      "x-ms-enum": {
+        "name": "Currency",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "USD",
+            "description": "United States Dollars",
+            "name": "USD"
+          }
+        ]
+      }
+    },     
+    "BenefitsToTradeIn": {
+      "description": "The benefits that are to be traded in",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BenefitItem"
+      }
+    },
+    "BenefitItem": {
+      "description": "The details of the benefit to be traded in",
+      "properties": {
+        "benefitId": {
+          "type": "string",
+          "description": "The fully qualified benefit Id"
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "The quantity of benefits to be traded in"
+        }
+      }
+    },
+    "CommitmentsBasedOnUtilization": {
+      "description": "The details of the recommended commitments based on Utilization",
+      "properties": {
+        "lookBackPeriod": {
+          "$ref": "#/definitions/LookBackPeriod",
+          "description": "The lookback period for the benefits to be traded in"
+        },
+        "maxUtilizationBasedCommitment": {
+          "type": "decimal",
+          "description": "The commitment amount calculated including the maximum utilization"
+        },
+        "minUtilizationBasedCommitment": {
+          "type": "decimal",
+          "description": "The commitment amount calculated including the minimum utilization"
+        },
+        "maxUtilizationPercentage": {
+          "type": "decimal",
+          "description": "The max utilization percentage used for the commitment calculation"
+        },
+        "minUtilizationPercentage": {
+          "type": "decimal",
+          "description": "The min utilization percentage used for the commitment calculation"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request (e.g. '2022-10-01-preview')."
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "benefitTradeInRequest": {
+      "source": {
+        "benefitType": "Reservation",
+        "benefitsToTradeIn": [
+          {
+            "benefitId": "/providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000001",
+            "quantity": 10
+          },
+          {
+            "benefitId": "/providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000002",
+            "quantity": 20
+          }
+        ],
+        "lookBackPeriod": "Last7Days"
+      },
+      "destination": {
+        "benefitType": "SavingsPlan",
+        "armSkuName": "compute_savings_plan",
+        "benefitTerm": "P1Y"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "responses": [
+          {
+            "benefitType": "SavingsPlan",
+            "commitmentGranularity": "Hourly",
+            "currency": "USD",
+            "benefitId": "/providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000001",
+            "commitmentWithoutUtilization" : 36.30,
+            "commitmentsBasedOnUtilization": [
+              {
+                "lookBackPeriod": "Last7Days",
+                "maxUtilizationBasedCommitment": 32.67,
+                "minUtilizationBasedCommitment": 18.15,
+                "maxUtilizationPercentage": 90,
+                "minUtilizationPercentage": 50
+              },
+              {
+                "lookBackPeriod": "Last30Days",
+                "maxUtilizationBasedCommitment": 32.67,
+                "minUtilizationBasedCommitment": 18.15,
+                "maxUtilizationPercentage": 90,
+                "minUtilizationPercentage": 50
+              }
+            ]
+          },
+          {
+            "benefitType": "SavingsPlan",
+            "commitmentGranularity": "Hourly",
+            "currency": "USD",
+            "benefitId": "/providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000002",
+            "commitmentWithoutUtilization" : 36.30,
+            "commitmentsBasedOnUtilization": [
+              {
+                "lookBackPeriod": "Last7Days",
+                "maxUtilizationBasedCommitment": 36.30,
+                "minUtilizationBasedCommitment": 9.07,
+                "maxUtilizationPercentage": 100,
+                "minUtilizationPercentage": 25
+              },
+              {
+                "lookBackPeriod": "Last30Days",
+                "maxUtilizationBasedCommitment": 36.30,
+                "minUtilizationBasedCommitment": 9.07,
+                "maxUtilizationPercentage": 100,
+                "minUtilizationPercentage": 25
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
