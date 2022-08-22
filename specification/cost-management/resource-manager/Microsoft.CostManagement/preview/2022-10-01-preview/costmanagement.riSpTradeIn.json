@@ -120,9 +120,11 @@
           "description": "The type of benefit to be traded in"
         },
         "benefitsToTradeIn": {
-          "type": "object",
-          "$ref": "#/definitions/BenefitsToTradeIn",
-          "description": "The benefits that are to be traded in"
+          "type": "array",          
+          "description": "The benefits that are to be traded in",
+          "items": {
+            "$ref": "#/definitions/BenefitItem"
+          }
         },        
         "lookBackPeriod": {
           "$ref": "#/definitions/LookBackPeriod",
@@ -142,12 +144,17 @@
           "$ref": "#/definitions/CommitmentGranularity",
           "description": "The granularity for which the commitment amount is applicable"
         },
+        "currency": {
+          "type": "string",
+          "description": "An ISO 4217 currency code identifier for the costs and savings."
+        },        
         "benefitId": {
           "type": "string",
           "description": "The fully qualified benefit Id"
         },
         "commitmentBasedOnUnitPrice": {
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "description": "The commitment amount calculated based on unit price of requested benefit"
         },
         "commitmentsBasedOnUtilization": {
@@ -279,31 +286,6 @@
         ]
       }
     },
-    "Currency": {
-      "type": "string",
-      "description": "The currency for the recommended commitment amount",
-      "enum": [
-        "USD"
-      ],
-      "x-ms-enum": {
-        "name": "Currency",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "USD",
-            "description": "United States Dollars",
-            "name": "USD"
-          }
-        ]
-      }
-    },     
-    "BenefitsToTradeIn": {
-      "description": "The benefits that are to be traded in",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/BenefitItem"
-      }
-    },
     "BenefitItem": {
       "description": "The details of the benefit to be traded in",
       "properties": {
@@ -325,19 +307,23 @@
           "description": "The lookback period for the benefits to be traded in"
         },
         "maxUtilizationBasedCommitment": {
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "description": "The commitment amount calculated including the maximum utilization"
         },
         "minUtilizationBasedCommitment": {
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "description": "The commitment amount calculated including the minimum utilization"
         },
         "maxUtilizationPercentage": {
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "description": "The max utilization percentage used for the commitment calculation"
         },
         "minUtilizationPercentage": {
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "description": "The min utilization percentage used for the commitment calculation"
         }
       }

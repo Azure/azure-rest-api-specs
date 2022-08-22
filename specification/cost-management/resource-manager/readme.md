@@ -31,6 +31,14 @@ azure-validator: false
 ```
 
 ---
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.CostManagement/preview/2022-10-01/costmanagement.riSpTradeIn.json
+```
 
 ### Tag: package-2022-05
 
