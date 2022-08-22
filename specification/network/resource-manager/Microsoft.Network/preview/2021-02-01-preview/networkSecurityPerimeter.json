@@ -587,6 +587,9 @@
         },
         {
           "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
@@ -855,9 +858,8 @@
           "description": "The network security perimeter properties"
         },
         "location": {
-          "readOnly": true,
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "The location in which NSP is created."
         },
         "name": {
           "type": "string",
@@ -907,6 +909,7 @@
           "description": "The provisioning state of the scope assignment resource."
         },
         "perimeterGuid": {
+          "readOnly":  true,
           "type": "string",
           "description": "perimeter guid of the network security perimeter."
         }
@@ -1052,12 +1055,22 @@
           },
           "description": "Outbound rules fully qualified domain name format."
         },
+        "SubscriptionId": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Subscription id in the ARM id format."
+            }
+          }
+        },
         "subscriptions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SubscriptionId"
           },
-          "description": "Subscription id in the ARM id format."
+          "description": "List of subscription ids"
         },
         "networkSecurityPerimeters": {
           "type": "array",
