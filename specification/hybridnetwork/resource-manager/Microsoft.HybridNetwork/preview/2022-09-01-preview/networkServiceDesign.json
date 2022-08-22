@@ -883,17 +883,37 @@
       "description": "The configuration definition resource element template details.",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the network function to apply the configuration to."
+        },
+        "nfAgentType": {
+          "type": "string",
+          "description": "The type of NF agent that should handle this configuration."
+        },
+        "configurationType": {
+          "type": "string",
+          "description": "The type of configuration to be handled by the NF agent."
+        },
         "configurationGenerationType": {
           "description": "The configuration generation type.",
           "$ref": "#/definitions/ConfigurationGenerationType"
         },
         "parameterValues": {
           "type": "string",
-          "description": "Name and value pairs that define the parameter values. It can be  a well formed escaped JSON string."
+          "description": "Name and value pairs that define the parameter values. It can be a well formed escaped JSON string."
         },
         "artifactProfile": {
           "$ref": "#/definitions/NSDArtifactProfile",
           "description": "Artifact profile properties."
+        },
+        "extraArtifactProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSDArtifactProfile"
+          },
+          "description": "List of extra artifact profiles required by the configuration.",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -922,13 +942,13 @@
           "$ref": "./common.json#/definitions/ReferencedResource",
           "description": "The artifact store resource id"
         },
-        "templateName": {
+        "artifactName": {
           "type": "string",
-          "description": "Template name name."
+          "description": "Artifact name."
         },
-        "templateVersion": {
+        "artifactVersion": {
           "type": "string",
-          "description": "Template version."
+          "description": "Artifact version."
         }
       }
     },

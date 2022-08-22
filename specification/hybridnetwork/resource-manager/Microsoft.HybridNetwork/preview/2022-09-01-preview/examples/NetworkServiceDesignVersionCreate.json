@@ -5,7 +5,7 @@
     "resourceGroupName": "rg",
     "publisherName": "TestPublisher",
     "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-    "networkServiceDesignVersionName": "TestNetworkServiceDesignVersionName",
+    "networkServiceDesignVersionName": "1.0.0",
     "parameters": {
       "location": "eastus",
       "properties": {
@@ -41,8 +41,8 @@
                 "artifactStoreReference": {
                   "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                 },
-                "templateName": "simplVMArmTemplate",
-                "templateVersion": "1.0.0"
+                "artifactName": "simplVMArmTemplate",
+                "artifactVersion": "1.0.0"
               }
             }
           },
@@ -61,8 +61,8 @@
                 "artifactStoreReference": {
                   "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                 },
-                "templateName": "simplVMArmTemplate",
-                "templateVersion": "1.0.0"
+                "artifactName": "simplVMArmTemplate",
+                "artifactVersion": "1.0.0"
               }
             }
           }
@@ -74,8 +74,8 @@
     "200": {
       "body": {
         "name": "TestVersion",
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/TestNetworkFunctionDefinitionVersionName",
-        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups/TestNetworkServiceDesignVersionName",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.0",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups/networkServiceDesignVersions",
         "location": "eastus",
         "properties": {
           "versionState": "Active",
@@ -110,8 +110,8 @@
                   "artifactStoreReference": {
                     "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                   },
-                  "templateName": "simplVMArmTemplate",
-                  "templateVersion": "1.0.0"
+                  "artifactName": "simplVMArmTemplate",
+                  "artifactVersion": "1.0.0"
                 }
               }
             },
@@ -124,15 +124,27 @@
                 ]
               },
               "configuration": {
+                "name": "Perimeta-SSC",
+                "nfAgentType": "simpl",
+                "configurationType": "sdf",
                 "configurationGenerationType": "HandlebarTemplate",
                 "parameterValues": "\"indexConfigurations\": \"{configurationparameters('perimetaConfiguration').resourceElementsIndexConfiguration}\",\r\n\t\t\t\t\t\t\t\t\"Comment: optional paramter required.\": \"\",\r\n\t\t\t\t\t\t\t\t\"international-interconnects\": \"{configurationparameters('interconnects').international-interconnects}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-groups\": \"{configurationparameters('interconnectgroups').interconnect-groups}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-group-assignments\": \"{configurationparameters('interconnectgroups').interconnect-group-assignments}\",\r\n\t\t\t\t\t\t\t\t\"domestic-interconnects\": \"{configurationparameters('interconnects').domestic-interconnects}\"",
                 "artifactProfile": {
                   "artifactStoreReference": {
                     "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                   },
-                  "templateName": "simplVMArmTemplate",
-                  "templateVersion": "1.0.0"
-                }
+                  "artifactName": "simplVMArmTemplate",
+                  "artifactVersion": "1.0.0"
+                },
+                "extraArtifactProfiles": [
+                  {
+                    "artifactStoreReference": {
+                      "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/Microsoft/artifactStoreReference/store1"
+                    },
+                    "artifactName": "PerimetaCSAR",
+                    "artifactVersion": "1.0.0"
+                  }
+                ]
               }
             }
           ]
@@ -142,7 +154,7 @@
     "201": {
       "body": {
         "name": "TestVersion",
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/TestNetworkFunctionDefinitionVersionName",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/1.0.0",
         "type": "Microsoft.HybridNetwork/publishers/networkFunctionDefinitionGroups/networkFunctionDefinitionVersions",
         "location": "eastus",
         "properties": {
@@ -178,8 +190,8 @@
                   "artifactStoreReference": {
                     "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                   },
-                  "templateName": "simplVMArmTemplate",
-                  "templateVersion": "1.0.0"
+                  "artifactName": "simplVMArmTemplate",
+                  "artifactVersion": "1.0.0"
                 }
               }
             },
@@ -192,15 +204,27 @@
                 ]
               },
               "configuration": {
+                "name": "Perimeta-SSC",
+                "nfAgentType": "simpl",
+                "configurationType": "sdf",
                 "configurationGenerationType": "HandlebarTemplate",
                 "parameterValues": "\"indexConfigurations\": \"{configurationparameters('perimetaConfiguration').resourceElementsIndexConfiguration}\",\r\n\t\t\t\t\t\t\t\t\"Comment: optional paramter required.\": \"\",\r\n\t\t\t\t\t\t\t\t\"international-interconnects\": \"{configurationparameters('interconnects').international-interconnects}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-groups\": \"{configurationparameters('interconnectgroups').interconnect-groups}\",\r\n\t\t\t\t\t\t\t\t\"interconnect-group-assignments\": \"{configurationparameters('interconnectgroups').interconnect-group-assignments}\",\r\n\t\t\t\t\t\t\t\t\"domestic-interconnects\": \"{configurationparameters('interconnects').domestic-interconnects}\"",
                 "artifactProfile": {
                   "artifactStoreReference": {
                     "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/BTGroup/artifactStoreReference/store1"
                   },
-                  "templateName": "simplVMArmTemplate",
-                  "templateVersion": "1.0.0"
-                }
+                  "artifactName": "simplVMArmTemplate",
+                  "artifactVersion": "1.0.0"
+                },
+                "extraArtifactProfiles": [
+                  {
+                    "artifactStoreReference": {
+                      "id": "/subscriptions/2e6a1160-c68f-4298-b9fec510912f8b3a/providers/Microsoft.HybridNetwork/publishers/Microsoft/artifactStoreReference/store1"
+                    },
+                    "artifactName": "PerimetaCSAR",
+                    "artifactVersion": "1.0.0"
+                  }
+                ]
               }
             }
           ]
