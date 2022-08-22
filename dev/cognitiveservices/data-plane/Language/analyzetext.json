@@ -2339,7 +2339,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/definitions/TaskParameters"
+            "$ref": "common.json#/definitions/PreBuiltTaskParameters"
           }
         ],
         "required": [
@@ -2381,28 +2381,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ZeroShotResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
         "documents"
-      ]
-    },
-    "ZeroShotResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        }
-      },
-      "required": [
-        "errors"
       ]
     },
     "AnalyzeTextJobState": {
