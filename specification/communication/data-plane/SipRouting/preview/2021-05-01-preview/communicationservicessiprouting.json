@@ -112,6 +112,59 @@
           }
         }
       }
+    },
+    "/sip/checkRouting/{targetNumber}": {
+      "get": {
+        "tags": [
+          "NumberRoutingValidation"
+        ],
+        "summary": "Gets the list of routes matching the target phone number, ordered by priority.",
+        "operationId": "CheckRoutingForNumber",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "targetNumber",
+            "description": "Phone number to test routing patterns against",
+            "required": true,
+            "type": "string",
+            "x-example": "+11234567890"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "This parameter can be used to select only specific fields of the TrunkRoute objects in the matchingRoutes array.",
+            "required": false,
+            "type": "string",
+            "x-example": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of matching routes",
+            "schema": {
+              "$ref": "#/definitions/RoutingForNumber"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Check target phone number routing": {
+            "$ref": "./examples/CheckRoutingForNumber.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -209,6 +262,24 @@
         },
         "routes": {
           "description": "Trunk routes for routing calls.",
+          "maxLength": 250,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrunkRoute"
+          }
+        }
+      }
+    },
+    "RoutingForNumber": {
+      "description": "Represents number routing validation details.",
+      "type": "object",
+      "properties": {
+        "targetNumber": {
+          "description": "A string in the E.164 format of a phone number, e.g. +11234567890.",
+          "type": "string"
+        },
+        "matchingRoutes": {
+          "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration. Only route names are displayed.",
           "maxLength": 250,
           "type": "array",
           "items": {
