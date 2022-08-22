@@ -5796,24 +5796,18 @@
         "target": {
           "type": "string"
         },
-        "value": {
-          "description": "Value details of the workspace connection.",
-          "type": "string"
-        },
-        "valueFormat": {
-          "description": "format for the workspace connection value",
-          "type": "string",
-          "enum": [
-            "JSON"
-          ],
-          "x-ms-enum": {
-            "name": "ValueFormat",
-            "modelAsString": true
+        "targetProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IValue"
           }
         }
       },
       "additionalProperties": false,
       "discriminator": "authType"
+    },
+    "IValue": {
+      "type": "object"
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
