@@ -122,11 +122,11 @@
           },
           {
             "in": "query",
-            "name": "$expand",
-            "description": "By default only the route names are returned. You can include other route parameters with $expand.",
+            "name": "$select",
+            "description": "This parameter can be used to select only specific fields of the TrunkRoute objects in the matchingRoutes array.",
             "required": false,
             "type": "string",
-            "x-example": "numberPattern,trunks"
+            "x-example": "name"
           }
         ],
         "responses": {
@@ -134,19 +134,6 @@
             "description": "A list of matching routes",
             "schema": {
               "$ref": "#/definitions/RoutingForNumber"
-            },
-            "examples": {
-              "application/json": {
-                "targetNumber": "+11234567890",
-                "matchingRoutes": [
-                  {
-                    "name": "Seattle"
-                  },
-                  {
-                    "name": "US"
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -361,7 +348,8 @@
     "TrunkRoute": {
       "description": "Represents a trunk route for routing calls.",
       "required": [
-        "name"
+        "name",
+        "numberPattern"
       ],
       "type": "object",
       "properties": {
