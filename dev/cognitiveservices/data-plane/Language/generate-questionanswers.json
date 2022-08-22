@@ -426,7 +426,7 @@
         },
         "qnas": {
           "type": "array",
-          "description": "The set of questions generated in the qna generation job.",
+          "description": "The set of question and answers generated in the qna generation job.",
           "items": {
             "$ref": "#/definitions/GeneratedQnAs"
           }
@@ -499,7 +499,7 @@
           "type": "boolean",
           "description": "Enable to fetch raw contents of document in the result."
         },
-        "isMarked": {
+        "useAnswerMarkedInContent": {
           "type": "boolean",
           "description": "Specify this as true - if the documents have marker tags &lt;s&gt; and &lt;/s&gt; for highlighted answers. Example: Satya Nadella was born in &lt;s&gt; Hyderabad &lt;/s&gt; of present-day Telangana, India into a Telugu-speaking Hindu family."
         },
@@ -508,14 +508,6 @@
           "description": "Maximum number of QnAs to be generated.",
           "format": "int32",
           "maximum": 30,
-          "minimum": 1
-        },
-        "maxNumQuestionsPerQnA": {
-          "type": "integer",
-          "description": "Maximum number of questions to be generated per QnA.",
-          "format": "int32",
-          "default": 1,
-          "maximum": 10,
           "minimum": 1
         }
       }
@@ -531,36 +523,27 @@
       "type": "object",
       "properties": {
         "questions": {
-          "type": "array",
-          "description": "An array of questions generated for a specific answer from a document in the job.",
-          "items": {
-            "$ref": "#/definitions/GeneratedQuestion"
-          }
+          "type": "string",
+          "description": "A question generated for a specific answer from a document in the job."
         },
         "answer": {
           "type": "string",
           "description": "Entity or phrase which is the answer to the generated question from a particular document in the job."
         },
-        "documentId": {
-          "type": "string",
-          "description": "A unique, non-empty document identifier, GUID will be assigned if user had not provided Id in job request."
-        }
-      },
-      "description": "Questions generated for an Answer."
-    },
-    "GeneratedQuestion": {
-      "type": "object",
-      "description": "A generated question with confidence score.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "A question generated for a specific answer from a document in the job."
-        },
         "score": {
           "type": "number",
           "description": "Confidence score of a question generated against the answer in the document's content."
-        }
-      }
+        },
+        "confidence": {
+          "type": "string",
+          "description": "Confidence bucket of a question generated against the answer in the document's content. Possible values &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;."
+        },
+        "documentId": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier, GUID will be assigned if user had not provided Id in job request."
+        }        
+      },
+      "description": "Questions generated for an Answer."
     },
     "JobMetadata": {
       "description": "Represents the job metadata.",
