@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.CostManagement/preview/2022-10-01/costmanagement.riSpTradeIn.json
+  - Microsoft.CostManagement\preview\2022-10-01-preview\costmanagement.riSpTradeIn.json
 ```
 
 ### Tag: package-2022-05
