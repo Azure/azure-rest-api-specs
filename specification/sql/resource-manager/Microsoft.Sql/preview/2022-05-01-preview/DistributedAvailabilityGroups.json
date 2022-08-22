@@ -281,42 +281,27 @@
         "operationId": "DistributedAvailabilityGroups_SetRole",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription ID.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource group name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "managedInstanceName",
-            "in": "path",
-            "description": "Managed instance name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "name": "distributedAvailabilityGroupName",
             "in": "path",
-            "description": "Distributed availability group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DistributedAvailabilityGroupSetRole"
             }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
