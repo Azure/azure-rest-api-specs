@@ -168,9 +168,6 @@
       "get": {
         "description": "**Geocoding**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.",
         "operationId": "Search_GetGeocoding",
-        "produces": [
-          "application/geo+json"
-        ],
         "x-ms-examples": {
           "Search detail address 15127 NE 24th Street, Redmond, WA": {
             "$ref": "./examples/ForwardGeocoding.json"
@@ -369,9 +366,6 @@
       "get": {
         "description": "**Reverse Geocode a point.**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Search_GetReverseGeocoding",
-        "produces": [
-          "application/geo+json"
-        ],
         "x-ms-examples": {
           "Search point -122.138681, 47.630358": {
             "$ref": "./examples/ReverseGeocoding.json"
