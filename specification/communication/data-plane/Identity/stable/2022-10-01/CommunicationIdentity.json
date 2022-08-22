@@ -286,7 +286,10 @@
         "expiresInMinutes": {
           "format": "int32",
           "description": "Optional custom validity period of the token within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 1440,
+          "default": 1440
         }
       }
     },
