@@ -16,49 +16,55 @@
           "key1": "value1"
         },
         "properties": {
-        "configurationEndpoints": ["abc.westus.trafficcontroller.azure.net"],
-        "frontends": [
-          {
-              "name": "publicIp1",
-              "type": "Microsoft.ServiceNetworking /trafficControllers/frontends",
-              "id": "resourceUriAsString",
-              "properties": {
-                  "mode": "public",
-                  "ipAddressType" : "IPv4",
-                  "publicIPAddress": {
-                      "id": "resourceUriAsString"
-                  },
-                  "provisioningState": "Succeeded"
-              }
-          }
-        ],
-        "associations": [
-          {
-              "name": "associatedvnet-1",
-              "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
-              "id": "resourceUriAsString  ",
-              "properties": {
-                  "associationType": "string",
-                  "subnet":
-                      {
-                          "id": "subnetFullRef"
-                      }
-              }
-          },
-          {
-              "name": "associatedvnet-2",
-              "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
-              "id": "resourceUriAsString",
-              "properties": {
-                  "associationType": "subnets",
-                  "subnet":
-                      {
-                          "id": "subnetFullRef"
-                      }
-              }
-          }
-        ],
-      "provisioningState": "Succeeded"
+          "configurationEndpoints": ["abc.westus.trafficcontroller.azure.net"],
+          "frontends": [
+            {
+                "name": "publicIp1",
+                "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+                "id": "resourceUriAsString",
+                "location": "West US",
+                "properties": {
+                    "mode": "public",
+                    "ipAddressType" : "IPv4",
+                    "publicIPAddress": {
+                        "id": "resourceUriAsString"
+                    },
+                    "provisioningState": "Succeeded"
+                }
+            }
+          ],
+          "associations": [
+            {
+                "name": "associatedvnet-1",
+                "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+                "id": "resourceUriAsString  ",
+                "location": "West US",
+                "properties": {
+                    "associationType": "subnets",
+                    "subnet":
+                        {
+                            "id": "subnetFullRef"
+                        },
+                    "provisioningState": "Succeeded"
+
+                }
+            },
+            {
+                "name": "associatedvnet-2",
+                "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+                "id": "resourceUriAsString",
+                "location": "West US",
+                "properties": {
+                    "associationType": "subnets",
+                    "subnet":
+                        {
+                            "id": "subnetFullRef"
+                        },
+                    "provisioningState": "Succeeded"
+                }
+            }
+          ],
+        "provisioningState": "Succeeded"
       }
     }
    }
