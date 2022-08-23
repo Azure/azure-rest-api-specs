@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 ```yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.Network/stable/2022-05-01/applicationGateway.json
-  - Microsoft.Network/stable/2022-05-01/applicationGatewayWafDynamicManifest.json
+  - Microsoft.Network/stable/2022-05-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2022-05-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2022-05-01/availableDelegations.json
   - Microsoft.Network/stable/2022-05-01/availableServiceAliases.json
@@ -100,17 +100,6 @@ input-file:
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2022-05-01/cloudServiceSwap.json
 ```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: applicationGateway.json
-    where: $.definitions.ApplicationGatewayFirewallRule.properties.s_ruleId
-    reason: The property is not violating the rules however the name triggers camml case error. this is already shipped and modifing this will require changes in sveral components
-```
-
 
 ### Tag: package-2022-01
 
