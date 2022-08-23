@@ -4424,6 +4424,7 @@
     "AnalyticsConnectorDataSource": {
       "type": "object",
       "description": "Data source for Analytics Connector. The target resource must be in the same workspace with the Analytics Connector.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
@@ -4448,6 +4449,7 @@
     "AnalyticsConnectorFhirServiceDataSource": {
       "type": "object",
       "description": "The FHIR service data source for Analytics Connector.",
+      "x-ms-discriminator-value": "fhirservice",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyticsConnectorDataSource"
@@ -4479,6 +4481,7 @@
     "AnalyticsConnectorMapping": {
       "type": "object",
       "description": "Data mapping configuration for Analytics Connector.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
@@ -4503,6 +4506,7 @@
     "AnalyticsConnectorFhirToParquetMapping": {
       "type": "object",
       "description": "FHIR Service data mapping configuration for Analytics Connector.",
+      "x-ms-discriminator-value": "fhirToParquet",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyticsConnectorMapping"
@@ -4530,6 +4534,7 @@
     "AnalyticsConnectorDataDestination": {
       "type": "object",
       "description": "Data destination configuration for Analytics Connector.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
@@ -4555,6 +4560,7 @@
     "AnalyticsConnectorDataLakeDataDestination": {
       "type": "object",
       "description": "The Data Lake data destination for Analytics Connector.",
+      "x-ms-discriminator-value": "datalake",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyticsConnectorDataDestination"
