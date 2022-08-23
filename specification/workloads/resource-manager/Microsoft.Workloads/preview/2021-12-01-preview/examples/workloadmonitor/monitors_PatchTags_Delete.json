@@ -4,8 +4,11 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "monitorName": "mySapMonitor",
-    "tagsParameter": {
-      "tags": {}
+    "body": {
+      "tags": {},
+      "identity": {
+        "type": "None"
+      }
     }
   },
   "responses": {
@@ -26,6 +29,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
+        "identity": {
+          "type": "None"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "errors": [
@@ -39,6 +45,7 @@
           ],
           "appLocation": "eastus",
           "routingPreference": "RouteAll",
+          "zoneRedundancyPreference": "ZoneRedundantApp",
           "managedResourceGroupConfiguration": {
             "name": "myManagedRg"
           },
