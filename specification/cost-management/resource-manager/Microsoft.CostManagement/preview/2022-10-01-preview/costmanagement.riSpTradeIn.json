@@ -42,7 +42,7 @@
     "/providers/Microsoft.CostManagement/calculateBenefitTradeInAmount": {
       "post": {
         "tags": [
-          "RISPTradeIn"
+          "BenefitsTradeIn"
         ],
         "operationId": "RISPTradeIn_CalculateBenefitTradeInAmount",
         "description": "Calculates the trade in amount for the benefits to be exchanged",
@@ -103,12 +103,13 @@
       "type": "object",
       "description": "The calculate benefit trade-in API response",      
       "properties": {
-        "responses": {
+        "value": {
           "type": "array",
           "description": "The calculate benefit trade-in API response array ",
           "items": {
             "$ref": "#/definitions/BenefitTradeInResponseItem"
-          }
+          },
+          "x-ms-identifiers":[]
         }
       }
     },
@@ -125,7 +126,8 @@
           "description": "The benefits that are to be traded in",
           "items": {
             "$ref": "#/definitions/BenefitItem"
-          }
+          },
+          "x-ms-identifiers":[]
         },        
         "lookBackPeriod": {
           "$ref": "#/definitions/LookBackPeriod",
@@ -163,8 +165,9 @@
           "type": "array",
           "description": "The commitment amounts calculated based on utilizations.",
           "items": {
-            "$ref": "#/definitions/CommitmentsBasedOnUtilization"
-          }
+            "$ref": "#/definitions/CommitmentsBasedOnUtilizationItem"
+          },
+          "x-ms-identifiers":[]
         }
       }
     },
@@ -304,7 +307,7 @@
         }
       }
     },
-    "CommitmentsBasedOnUtilization": {
+    "CommitmentsBasedOnUtilizationItem": {
       "type": "object",
       "description": "The details of the recommended commitments based on Utilization",
       "properties": {
@@ -333,7 +336,7 @@
           "description": "The min utilization percentage used for the commitment calculation"
         }
       }
-    },
+    },      
     "ErrorDetails": {
       "type": "object",
       "description": "The details of the error.",

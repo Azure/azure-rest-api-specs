@@ -296,7 +296,11 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
-    reason: 'false alarm ' 
+    reason: 'false alarm '
+  - suppress: OperationsApiResponseSchema
+    from: costmanagement.json
+    where: '$.paths["/providers/Microsoft.CostManagement/operations"]'
+    reason: The schema will be fixed in later version. The current version provides in this format.
 ```
 
 ### Tag: package-2018-08-preview
