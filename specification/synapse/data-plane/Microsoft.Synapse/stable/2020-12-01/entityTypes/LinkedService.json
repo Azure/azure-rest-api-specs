@@ -3251,6 +3251,43 @@
         "password"
       ]
     },
+    "GoogleSheetsLinkedService": {
+      "x-ms-discriminator-value": "GoogleSheets",
+      "description": "Linked service for GoogleSheets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "GoogleSheets linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleSheetsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleSheetsLinkedServiceTypeProperties": {
+      "description": "GoogleSheets linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the GoogleSheets source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    }
     "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
