@@ -57,6 +57,8 @@
     reviewers:
       - lirenhe
       - raych1
+    branches:
+      - network-
 
 
 - rule:
@@ -71,11 +73,18 @@
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker)/**"
+    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc)/**"
     reviewers:
       - raych1
       - xiaoxuqi-ms
 
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - raych1
+      - xiaoxuqi-ms
+    branches:
+      - dev-sql-
       
 - rule:
     paths:
@@ -128,10 +137,12 @@
 
 - rule:
     paths:
-      - "specification/@(resources|datafactory)/**"
+      - "specification/@(resources|datafactory|app)/**"
     reviewers:
       - leni-msft
-
+    branches:
+      - Microsoft.App-
+      
 - rule:
     paths:
       - "specification/storage/**"
