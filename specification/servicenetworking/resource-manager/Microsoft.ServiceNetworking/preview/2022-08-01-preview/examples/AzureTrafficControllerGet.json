@@ -15,7 +15,48 @@
         "tags": {
           "key1": "value1"
         },
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "configurationEndpoints": ["abc.westus.trafficcontroller.azure.net"],
+        "frontends": [
+          {
+              "name": "publicIp1",
+              "type": "Microsoft.ServiceNetworking /trafficControllers/frontends",
+              "id": "resourceUriAsString",
+              "properties": {
+                  "mode": "public",
+                  "ipAddressType" : "IPv4",
+                  "publicIPAddress": {
+                      "id": "resourceUriAsString"
+                  },
+                  "provisioningState": "Succeeded"
+              }
+          }
+        ],
+        "associations": [
+          {
+              "name": "associatedvnet-1",
+              "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+              "id": "resourceUriAsString  ",
+              "properties": {
+                  "associationType": "string",
+                  "subnet":
+                      {
+                          "id": "subnetFullRef"
+                      }
+              }
+          },
+          {
+              "name": "associatedvnet-2",
+              "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+              "id": "resourceUriAsString",
+              "properties": {
+                  "associationType": "subnets",
+                  "subnet":
+                      {
+                          "id": "subnetFullRef"
+                      }
+              }
+          }
+      ],
         "properties": {
           "provisioningState": "Succeeded"
         }
