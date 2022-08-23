@@ -13,7 +13,8 @@
           "targetRegions": [
             {
               "name": "West US",
-              "regionalReplicaCount": 1
+              "regionalReplicaCount": 1,
+              "excludeFromLatest": false
             }
           ],
           "replicationMode": "Shallow"
@@ -22,6 +23,9 @@
           "source": {
             "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
           }
+        },
+        "safetyProfile": {
+          "allowDeletionOfReplicatedLocations": false
         }
       }
     }
@@ -35,7 +39,8 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
               }
             ],
             "replicaCount": 1,
@@ -56,6 +61,16 @@
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
               }
             ]
           },
@@ -73,7 +88,8 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
               }
             ],
             "replicaCount": 1,
@@ -97,6 +113,16 @@
               }
             ]
           },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ]
+          },
           "provisioningState": "Creating"
         },
         "location": "West US",
@@ -111,7 +137,8 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
               }
             ],
             "replicaCount": 1,
@@ -132,6 +159,16 @@
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
               }
             ]
           },
