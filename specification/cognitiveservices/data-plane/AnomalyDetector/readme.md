@@ -123,3 +123,14 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - stable/2022-08-23/AnomalyDetector.json
+  - stable/2022-08-23/MultivariateAnomalyDetector.json
+  - stable/2022-08-23/RootCauseAnalysis.json
+```
+
