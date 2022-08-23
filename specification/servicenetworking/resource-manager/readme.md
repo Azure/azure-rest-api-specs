@@ -26,7 +26,7 @@ These are the global settings for the servicenetworking.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-08-01
+tag: package-2022-08-01-preview
 ```
 
 ### Tag: package-2022-08-01-preview
