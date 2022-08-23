@@ -1,0 +1,420 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: scenario_databaseaccount
+  clusterName: scenario_cassandracluster
+
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMax.json
+
+scenarios:
+  - scenario: DatabaseAccount
+    description: Microsoft.DocumentDB/databaseAccounts
+    steps:
+      - step: DatabaseAccount_CheckNameExists
+        exampleFile: ../examples/CosmosDBDatabaseAccountCheckNameExists.json
+      - step: DatabaseAccount_Update
+        exampleFile: ../examples/CosmosDBDatabaseAccountPatch.json
+      - step: DatabaseAccount_Get
+        exampleFile: ../examples/CosmosDBDatabaseAccountGet.json
+      - step: DatabaseAccount_List
+        exampleFile: ../examples/CosmosDBDatabaseAccountList.json
+      - step: DatabaseAccount_ListByResourceGroup
+        exampleFile: ../examples/CosmosDBDatabaseAccountListByResourceGroup.json
+      - step: DatabaseAccount_ListKeys
+        exampleFile: ../examples/CosmosDBDatabaseAccountListKeys.json
+      - step: DatabaseAccount_ListConnectionStrings
+        exampleFile: ../examples/CosmosDBDatabaseAccountListConnectionStrings.json
+      # - step: DatabaseAccount_GetReadOnlyKeys
+      #   exampleFile: ../examples/CosmosDBDatabaseAccountListReadOnlyKeys.json
+      # - step: DatabaseAccount_ListReadOnlyKeys
+      #   exampleFile: ../examples/CosmosDBDatabaseAccountListReadOnlyKeys.json  
+      - step: DatabaseAccount_ListMetrics
+        exampleFile: ../examples/CosmosDBDatabaseAccountGetMetrics.json
+      - step: DatabaseAccount_ListMetricDefinitions
+        exampleFile: ../examples/CosmosDBDatabaseAccountGetMetricDefinitions.json
+      - step: DatabaseAccount_ListUsages
+        exampleFile: ../examples/CosmosDBDatabaseAccountGetUsages.json
+
+      - step: DatabaseAccount_FailoverPriorityChange
+        exampleFile: ../examples/CosmosDBDatabaseAccountFailoverPriorityChange.json
+      - step: DatabaseAccount_OfflineRegion
+        exampleFile: ../examples/CosmosDBDatabaseAccountOfflineRegion.json
+      - step: DatabaseAccount_OnlineRegion
+        exampleFile: ../examples/CosmosDBDatabaseAccountOnlineRegion.json
+      - step: DatabaseAccount_RegenerateKey
+        exampleFile: ../examples/CosmosDBDatabaseAccountRegenerateKey.json        
+
+  - scenario: CassandraResources
+    description: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces
+    steps:
+      - step: CassandraResources_CreateCassandraKeyspace
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceCreateUpdate.json
+      - step: CassandraResources_GetCassandraKeyspace
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceGet.json
+      - step: CassandraResources_ListCassandraKeyspaces
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceList.json
+      - step: CassandraResources_UpdateCassandraKeyspaceThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceThroughputUpdate.json
+      - step: CassandraResources_GetCassandraKeyspaceThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceThroughputGet.json
+      - step: CassandraResources_MigrateCassandraKeyspaceToAutoscale
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceMigrateToAutoscale.json
+      - step: CassandraResources_MigrateCassandraKeyspaceToManualThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceMigrateToManualThroughput.json
+
+#     Cassandra Table
+      - step: CassandraResources_CreateCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableCreateUpdate.json
+      - step: CassandraResources_GetCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableGet.json
+      - step: CassandraResources_ListCassandraTables
+        exampleFile: ../examples/CosmosDBCassandraTableList.json
+      - step: CassandraResources_UpdateCassandraTableThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableThroughputUpdate.json
+      - step: CassandraResources_GetCassandraTableThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableThroughputGet.json
+      - step: CassandraResources_MigrateCassandraTableToAutoscale
+        exampleFile: ../examples/CosmosDBCassandraTableMigrateToAutoscale.json
+      - step: CassandraResources_MigrateCassandraTableToManualThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableMigrateToManualThroughput.json
+      - step: CassandraResources_DeleteCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableDelete.json
+
+#     Cassandra View
+      # - step: CassandraResources_CreateCassandraView
+      #   exampleFile: ../examples/CosmosDBCassandraViewCreateUpdate.json
+      # - step: CassandraResources_GetCassandraView
+      #   exampleFile: ../examples/CosmosDBCassandraViewGet.json
+      # - step: CassandraResources_ListCassandraViews
+      #   exampleFile: ../examples/CosmosDBCassandraViewList.json
+      # - step: CassandraResources_UpdateCassandraViewThroughput
+      #   exampleFile: ../examples/CosmosDBCassandraViewThroughputUpdate.json
+      # - step: CassandraResources_GetCassandraViewThroughput
+      #   exampleFile: ../examples/CosmosDBCassandraViewThroughputGet.json
+      # - step: CassandraResources_MigrateCassandraViewToAutoscale
+      #   exampleFile: ../examples/CosmosDBCassandraViewMigrateToAutoscale.json
+      # - step: CassandraResources_MigrateCassandraViewToManualThroughput
+      #   exampleFile: ../examples/CosmosDBCassandraViewMigrateToManualThroughput.json
+      # - step: CassandraResources_DeleteCassandraView
+      #   exampleFile: ../examples/CosmosDBCassandraViewDelete.json
+
+      - step: CassandraResources_DeleteCassandraKeyspace
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceDelete.json
+
+  - scenario: CassandraCluster
+    description: Microsoft.DocumentDB/cassandraClusters
+    steps:
+      - step: CassandraCluster_Create
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterCreate.json
+      - step: CassandraCluster_Update
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterPatch.json  
+      - step: CassandraCluster_Get
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterGet.json
+      - step: CassandraCluster_ListBySubscription
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterListBySubscription.json     
+      - step: CassandraCluster_ListByResourceGroup
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterListByResourceGroup.json
+      - step: CassandraCluster_InvokeCommand
+        exampleFile: ../examples/CosmosDBManagedCassandraCommand.json      
+      # - step: CassandraCluster_GetBackup
+      #   exampleFile: ../examples/CosmosDBManagedCassandraBackup.json
+      # - step: CassandraCluster_ListBackups
+      #   exampleFile: ../examples/CosmosDBManagedCassandraBackupsList.json      
+      - step: CassandraCluster_Start
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterStart.json
+      - step: CassandraCluster_Status
+        exampleFile: ../examples/CosmosDBManagedCassandraStatus.json
+      - step: CassandraCluster_Deallocate
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterDeallocate.json
+      - step: CassandraCluster_Delete
+        exampleFile: ../examples/CosmosDBManagedCassandraClusterDelete.json  
+
+  - scenario: CassandraDataCenter
+    description: Microsoft.DocumentDB/cassandraClusters/dataCenters
+    steps:
+      - step: CassandraDataCenter_Create
+        exampleFile: ../examples/CosmosDBManagedCassandraDataCenterCreate.json
+      - step: CassandraDataCenter_Update
+        exampleFile: ../examples/CosmosDBManagedCassandraDataCenterPatch.json
+      - step: CassandraDataCenter_Get
+        exampleFile: ../examples/CosmosDBManagedCassandraDataCenterGet.json
+      - step: CassandraDataCenter_List
+        exampleFile: ../examples/CosmosDBManagedCassandraDataCenterList.json
+      - step: CassandraDataCenter_Delete
+        exampleFile: ../examples/CosmosDBManagedCassandraDataCenterDelete.json
+
+  - scenario: GremlinResources
+    description: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases
+    variables:
+      databaseName: scenario_gremlindb
+    steps:
+    #   Gremlin Database
+      - step: GremlinResources_CreateGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseCreateUpdate.json
+      - step: GremlinResources_GetGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseGet.json
+      - step: GremlinResources_ListGremlinDatabases
+        exampleFile: ../examples/CosmosDBGremlinDatabaseList.json
+      - step: GremlinResources_UpdateGremlinDatabaseThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseThroughputUpdate.json
+      - step: GremlinResources_GetGremlinDatabaseThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseThroughputGet.json      
+      - step: GremlinResources_MigrateGremlinDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBGremlinDatabaseMigrateToAutoscale.json
+      - step: GremlinResources_MigrateGremlinDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseMigrateToManualThroughput.json
+
+    #   Gremlin Graph
+      - step: GremlinResources_CreateGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphCreateUpdate.json
+      - step: GremlinResources_GetGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphGet.json
+      - step: GremlinResources_ListGremlinGraphs
+        exampleFile: ../examples/CosmosDBGremlinGraphList.json
+      - step: GremlinResources_UpdateGremlinGraphThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphThroughputUpdate.json
+      - step: GremlinResources_GetGremlinGraphThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphThroughputGet.json
+      - step: GremlinResources_MigrateGremlinGraphToAutoscale
+        exampleFile: ../examples/CosmosDBGremlinGraphMigrateToAutoscale.json
+      - step: GremlinResources_MigrateGremlinGraphToManualThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphMigrateToManualThroughput.json
+      - step: GremlinResources_DeleteGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphDelete.json
+
+      - step: GremlinResources_DeleteGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseDelete.json
+
+  - scenario: MongoDBResources
+    description: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases
+    variables:
+      databaseName: scenario_mongodb
+      collectionName: mongodb_collection
+    steps:
+    #   MongoDB Database
+      - step: MongoDBResources_CreateMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseCreateUpdate.json
+      - step: MongoDBResources_GetMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseGet.json
+      - step: MongoDBResources_ListMongoDBDatabases
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseList.json
+      - step: MongoDBResources_UpdateMongoDBDatabaseThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseThroughputUpdate.json
+      - step: MongoDBResources_GetMongoDBDatabaseThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseThroughputGet.json
+      - step: MongoDBResources_MigrateMongoDBDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseMigrateToAutoscale.json
+      - step: MongoDBResources_MigrateMongoDBDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseMigrateToManualThroughput.json
+
+    #   MongoDB Collection
+      - step: MongoDBResources_CreateMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionCreateUpdate.json
+      - step: MongoDBResources_
+        exampleFile: ../examples/
+      - step: MongoDBResources_GetMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionGet.json
+      - step: MongoDBResources_ListMongoDBCollections
+        exampleFile: ../examples/CosmosDBMongoDBCollectionList.json
+      - step: MongoDBResources_UpdateMongoDBCollectionThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionThroughputUpdate.json
+      - step: MongoDBResources_GetMongoDBCollectionThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionThroughputGet.json
+      - step: MongoDBResources_MigrateMongoDBCollectionToAutoscale
+        exampleFile: ../examples/CosmosDBMongoDBCollectionMigrateToAutoscale.json
+      - step: MongoDBResources_MigrateMongoDBCollectionToManualThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionMigrateToManualThroughput.json
+      - step: MongoDBResources_RetrieveContinuousBackupInformation
+        exampleFile: ../examples/CosmosDBMongoDBCollectionBackupInformation.json      
+      - step: MongoDBResources_DeleteMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionDelete.json
+
+      - step: MongoDBResources_DeleteMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseDelete.json
+
+  - scenario: NotebookWorkspaces
+    description: Microsoft.DocumentDB/databaseAccounts/notebookWorkspaces
+    steps:
+      - step: NotebookWorkspaces_Create
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceCreate.json
+      - step: NotebookWorkspaces_Start
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceStart.json
+      - step: NotebookWorkspaces_Get
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceGet.json
+      - step: NotebookWorkspaces_ListByDatabaseAccount
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceList.json
+      - step: NotebookWorkspaces_ListConnectionInfo
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceListConnectionInfo.json
+      - step: NotebookWorkspaces_RegenerateAuthToken
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceRegenerateAuthToken.json
+      - step: NotebookWorkspaces_Delete
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceDelete.json
+
+  - scenario: PrivateEndpointConnection
+    description: Microsoft.DocumentDB/databaseAccounts/privateEndpointConnections
+    steps:
+      - step: PrivateEndpointConnection_Create
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionUpdate.json
+      - step: PrivateEndpointConnection_Get
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionGet.json
+      - step: PrivateEndpointConnection_ListByDatabaseAccount
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionListGet.json
+      - step: PrivateEndpointConnection_Delete
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionDelete.json
+
+  - scenario: Service
+    description: Microsoft.DocumentDB/databaseAccounts/services
+    steps:
+      - step: Service_CreateDataTransferService
+        exampleFile: ../examples/CosmosDBDataTransferServiceCreate.json
+      - step: Service_GetDataTransferService
+        exampleFile: ../examples/CosmosDBDataTransferServiceGet.json
+      - step: Service_Delete_dataTransferService
+        exampleFile: ../examples/CosmosDBDataTransferServiceDelete.json
+
+      - step: Service_CreateGraphApiComputeService
+        exampleFile: ../examples/CosmosDBGraphAPIComputeServiceCreate.json
+      - step: Service_GetGraphApiComputeService
+        exampleFile: ../examples/CosmosDBGraphAPIComputeServiceGet.json
+      - step: Service_DeleteGraphApiComputeService
+        exampleFile: ../examples/CosmosDBGraphAPIComputeServiceDelete.json
+
+      - step: Service_CreateMaterializedViewsBuilderService
+        exampleFile: ../examples/CosmosDBMaterializedViewsBuilderServiceCreate.json
+      - step: Service_GetMaterializedViewsBuilderService
+        exampleFile: ../examples/CosmosDBMaterializedViewsBuilderServiceGet.json
+      - step: Service_DeleteMaterializedViewsBuilderService
+        exampleFile: ../examples/CosmosDBMaterializedViewsBuilderServiceDelete.json
+
+      - step: Service_CreateSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceCreate.json
+      - step: Service_GetSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceGet.json
+      - step: Service_DeleteSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceDelete.json
+
+      - step: Service_List
+        exampleFile: ../examples/CosmosDBServicesList.json
+
+  - scenario: SQLResources
+    description: Microsoft.DocumentDB/databaseAccounts/sqlDatabases
+    variables:
+      databaseName: cosmos_sql
+      containerName: cosmos_sqlcontainer
+    steps:
+    #   SQL Database
+      - step: SQLResources_CreateSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseCreateUpdate.json
+      - step: SQLResources_GetSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseGet.json
+      - step: SQLResources_ListSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseList.json
+      - step: SQLResources_UpdateSQLDatabaseThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseThroughputUpdate.json
+      - step: SQLResources_GetSQLDatabaseThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseThroughputGet.json
+      - step: SQLResources_MigrateSQLDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBSqlDatabaseMigrateToAutoscale.json
+      - step: SQLResources_MigrateSQLDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json
+
+    #   SQL Container
+      - step: SQLResources_CreateSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerCreateUpdate.json
+      - step: SQLResources_GetSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerGet.json
+      - step: SQLResources_ListSQLContainers
+        exampleFile: ../examples/CosmosDBSqlContainerList.json
+      - step: SQLResources_UpdateSQLContainerThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerThroughputUpdate.json
+      - step: SQLResources_GetSQLContainerThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerThroughputGet.json
+      - step: SQLResources_MigrateSQLContainerToAutoscale
+        exampleFile: ../examples/CosmosDBSqlContainerMigrateToAutoscale.json
+      - step: SQLResources_MigrateSQLContainerToManualThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerMigrateToManualThroughput.json
+
+    #   SQL Stored Procedure
+      - step: SQLResources_CreateSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureCreateUpdate.json
+      - step: SQLResources_GetSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureGet.json
+      - step: SQLResources_ListSQLStoredProcedures
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureList.json
+      - step: SQLResources_DeleteSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureDelete.json
+
+    #   SQL User Defined Function
+      - step: SQLResources_CreateSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionCreateUpdate.json
+      - step: SQLResources_GetSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionGet.json
+      - step: SQLResources_ListSQLUserDefinedFunctions
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionList.json
+      - step: SQLResources_DeleteSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionDelete.json
+
+    #   SQL Trigger
+      - step: SQLResources_CreateSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerCreateUpdate.json
+      - step: SQLResources_GetSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerGet.json
+      - step: SQLResources_ListSQLTriggers
+        exampleFile: ../examples/CosmosDBSqlTriggerList.json
+      - step: SQLResources_DeleteSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerDelete.json
+
+    #   SQL Role Definition
+      - step: SQLResources_CreateUpdateSQLRoleDefinition
+        exampleFile: ../examples/CosmosDBSqlRoleDefinitionCreateUpdate.json
+      - step: SQLResources_GetSQLRoleDefinition
+        exampleFile: ../examples/CosmosDBSqlRoleDefinitionGet.json
+      - step: SQLResources_ListSQLRoleDefinitions
+        exampleFile: ../examples/CosmosDBSqlRoleDefinitionList.json
+      - step: SQLResources_DeleteSQLRoleDefinition
+        exampleFile: ../examples/CosmosDBSqlRoleDefinitionDelete.json
+
+    #   SQL Role Assignment
+      - step: SQLResources_CreateSQLRoleAssignment
+        exampleFile: ../examples/CosmosDBSqlRoleAssignmentCreateUpdate.json
+      - step: SQLResources_GetSQLRoleAssignment
+        exampleFile: ../examples/CosmosDBSqlRoleAssignmentGet.json
+      - step: SQLResources_ListSQLRoleAssignments
+        exampleFile: ../examples/CosmosDBSqlRoleAssignmentList.json   
+      - step: SQLResources_DeleteSQLRoleAssignment
+        exampleFile: ../examples/CosmosDBSqlRoleAssignmentDelete.json
+   
+      - step: SQLResources_RetrieveContinuousBackupInformation
+        exampleFile: ../examples/CosmosDBSqlContainerBackupInformation.json
+      - step: SQLResources_DeleteSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerDelete.json
+      - step: SQLResources_DeleteSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseDelete.json
+
+  - scenario: TableResources
+    description: Microsoft.DocumentDB/databaseAccounts/tables
+    steps:
+      - step: TableResources_CreateTable
+        exampleFile: ../examples/CosmosDBTableCreateUpdate.json
+      - step: TableResources_GetTable
+        exampleFile: ../examples/CosmosDBTableGet.json
+      - step: TableResources_ListTables
+        exampleFile: ../examples/CosmosDBTableList.json
+      - step: TableResources_UpdateTableThroughput
+        exampleFile: ../examples/CosmosDBTableThroughputUpdate.json
+      - step: TableResources_GetTableThroughput
+        exampleFile: ../examples/CosmosDBTableThroughputGet.json
+      - step: TableResources_MigrateTableToAutoscale
+        exampleFile: ../examples/CosmosDBTableMigrateToAutoscale.json
+      - step: TableResources_MigrateTableToManualThroughput
+        exampleFile: ../examples/CosmosDBTableMigrateToManualThroughput.json
+      - step: TableResources_DeleteTable
+        exampleFile: ../examples/CosmosDBTableDelete.json
+
+cleanUpSteps:
+  - step: DatabaseAccount_Delete
+    exampleFile: ../examples/CosmosDBDatabaseAccountDelete.json
