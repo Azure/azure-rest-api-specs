@@ -2277,7 +2277,8 @@
       "required": [
         "name",
         "iso6391Name",
-        "confidenceScore"
+        "confidenceScore",
+        "script"
       ],
       "properties": {
         "name": {
@@ -2292,6 +2293,18 @@
           "type": "number",
           "format": "double",
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        },
+        "script": {
+          "type": "string",
+          "description": "Identifies the script of the input document.",
+          "enum": [
+            "Default",
+            "Latin"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptValue",
+            "modelAsString": true
+          }
         }
       }
     },
