@@ -1,0 +1,289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.HpcWorkbench",
+    "description": "Microsoft.HpcWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests/{requestName}": {
+      "get": {
+        "tags": [
+          "fileRequests_Get"
+        ],
+        "operationId": "fileRequests_Get",
+        "summary": "Operation to get fileRequests",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "requestName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-examples": {
+          "Request Get": {
+            "$ref": "./examples/fileRequestsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests": {
+      "get": {
+        "tags": [
+          "fileRequests_List"
+        ],
+        "operationId": "fileRequests_List",
+        "description": "Lists all fileRequests.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all files",
+            "schema": {
+              "$ref": "#/definitions/RequestPageableList"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all files": {
+            "$ref": "./examples/RequestList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RequestPageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Request"
+          }
+        }
+      }
+    },
+    "RequestPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for the resource creation."
+        },
+        "fileId": {
+          "type": "string",
+          "description": "FileId for the operation"
+        },
+        "requestUserId": {
+          "type": "string",
+          "description": "Specifies the principal ID of Azure Active Directory User who requested to download."
+        },
+        "linuxUsername": {
+          "type": "string",
+          "description": "The HPC Workbench chamber workloads local username used when login."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of HPC Workbench chamber data pipeline request."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the operation"
+        },
+        "approve": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The globally unique identifier for the approval."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of approval"
+            },
+            "userId": {
+              "type": "string",
+              "description": "Specifies the principal ID of Azure Active Directory User who approved to download."
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp for the approval"
+            }
+          }
+        },
+        "download": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "Download destination location."
+            },
+            "startTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp for the start of download."
+            },
+            "completeTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp for the completion of download."
+            }
+          }
+        },
+        "internalMetadata": {
+          "type": "object",
+          "properties": {
+            "sasUriId": {
+              "type": "string",
+              "description": "sas uri id"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "./hpcworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the request at the time the operation was called"
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RequestPropertiesFormat",
+          "description": "Request properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./hpcworkbench.json#/definitions/Resource"
+        }
+      ],
+      "description": "Request resource"
+    }
+  }
+}

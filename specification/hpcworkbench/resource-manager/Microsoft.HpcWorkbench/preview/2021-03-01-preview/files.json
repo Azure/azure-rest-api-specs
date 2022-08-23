@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.HpcWorkbench",
+    "description": "Microsoft.HpcWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/files/{fileName}": {
+      "get": {
+        "tags": [
+          "files_Get"
+        ],
+        "summary": "Operation to get files",
+        "operationId": "files_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "fileName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-examples": {
+          "Files Get": {
+            "$ref": "./examples/FilesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/files": {
+      "get": {
+        "tags": [
+          "files_List"
+        ],
+        "summary": "Lists all files",
+        "operationId": "files_List",
+        "description": "Lists all files.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all files",
+            "schema": {
+              "$ref": "#/definitions/FilePageableList"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all files": {
+            "$ref": "./examples/FileList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FilePageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/File"
+          }
+        }
+      }
+    },
+    "FilePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./hpcworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the file at the time the operation was called"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modified timestamp of the file."
+        },
+        "dataPipeline": {
+          "type": "string",
+          "description": "The direction of HPC Workbench chamber data pipeline where the file located."
+        },
+        "requested": {
+          "title": "requested",
+          "description": "If the file is requested to download.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "requested",
+            "modelAsString": true
+          }
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The resource ID of HPC Workbench chamber data pipeline request Works and required only if requested is true."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The Linux File System path for the HPC Workbench chamber data pipeline file."
+        }
+      },
+      "description": "File properties."
+    },
+    "File": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FilePropertiesFormat",
+          "description": "File properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./hpcworkbench.json#/definitions/Resource"
+        }
+      ],
+      "description": "File resource"
+    }
+  }
+}
