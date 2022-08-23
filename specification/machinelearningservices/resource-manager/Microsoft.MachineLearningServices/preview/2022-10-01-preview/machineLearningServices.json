@@ -5289,12 +5289,41 @@
     "ComputeStartStopSchedule": {
       "type": "object",
       "description": "Compute start stop schedule properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "A system assigned id for the schedule.",
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "provisioningStatus": {
+          "description": "The current deployment state of schedule.",
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed"
+              },
+              {
+                "value": "Provisioning"
+              },
+              {
+                "value": "Failed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleStatus"
+        },
         "action": {
           "$ref": "#/definitions/ComputePowerAction"
         },
@@ -5306,6 +5335,10 @@
         },
         "cron": {
           "$ref": "#/definitions/Cron"
+        },
+        "schedule": {
+          "description": "[Deprecated] Not used any more.",
+          "$ref": "#/definitions/ScheduleBase"
         }
       }
     },
@@ -5313,9 +5346,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Schedule id.",
+          "description": "A system assigned id for the schedule.",
           "type": "string",
-          "readOnly": true,
           "x-nullable": true
         },
         "provisioningStatus": {
@@ -5333,6 +5365,7 @@
         "Provisioning",
         "Failed"
       ],
+      "description": "The current deployment state of schedule.",
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduleProvisioningState",
@@ -5349,15 +5382,14 @@
           }
         ]
       },
-      "additionalProperties": false,
-      "readOnly": true,
-      "description": "The current deployment state of schedule."
+      "additionalProperties": false
     },
     "ScheduleStatus": {
       "enum": [
         "Enabled",
         "Disabled"
       ],
+      "description": "Is the schedule enabled or disabled?",
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduleStatus",
@@ -5375,7 +5407,7 @@
     },
     "ComputePowerAction": {
       "type": "string",
-      "description": "The compute power action.",
+      "description": "[Required] The compute power action.",
       "enum": [
         "Start",
         "Stop"
@@ -5390,22 +5422,26 @@
       "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
       "properties": {
         "frequency": {
+          "description": "[Required] The frequency to trigger schedule.",
           "$ref": "./mfe.json#/definitions/RecurrenceFrequency"
         },
         "interval": {
+          "description": "[Required] Specifies schedule interval in conjunction with frequency",
           "type": "integer",
-          "format": "int32",
-          "description": "The interval."
+          "format": "int32"
         },
         "startTime": {
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
           "type": "string",
-          "description": "The start time."
+          "x-nullable": true
         },
         "timeZone": {
-          "type": "string",
-          "description": "The time zone."
+          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
+          "default": "UTC",
+          "type": "string"
         },
         "schedule": {
+          "description": "[Required] The recurrence schedule.",
           "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
         }
       }
@@ -5415,16 +5451,18 @@
       "description": "The workflow trigger cron for ComputeStartStop schedule type.",
       "properties": {
         "startTime": {
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
           "type": "string",
-          "description": "The start time."
+          "x-nullable": true
         },
         "timeZone": {
+          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
           "type": "string",
-          "description": "The time zone."
+          "default": "UTC"
         },
         "expression": {
-          "type": "string",
-          "description": "The cron expression."
+          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
+          "type": "string"
         }
       }
     },
