@@ -4889,12 +4889,42 @@
     "ComputeStartStopSchedule": {
       "type": "object",
       "description": "Compute start stop schedule properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "A system assigned id for the schedule.",
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "provisioningStatus": {
+          "description": "The current deployment state of schedule.",
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed"
+              },
+              {
+                "value": "Provisioning"
+              },
+              {
+                "value": "Failed"
+              }
+            ]
+          },
+          "readOnly": true,
+          "additionalProperties": false
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleStatus"
+        },
         "action": {
           "$ref": "#/definitions/ComputePowerAction"
         },
