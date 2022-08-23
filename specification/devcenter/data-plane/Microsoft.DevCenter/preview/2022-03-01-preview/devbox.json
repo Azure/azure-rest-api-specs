@@ -67,7 +67,7 @@
           }
         ],
         "description": "Lists available pools",
-        "operationId": "Pool_List",
+        "operationId": "Pools_List",
         "responses": {
           "200": {
             "description": "OK",
@@ -116,7 +116,7 @@
           }
         ],
         "description": "Gets a pool",
-        "operationId": "Pool_Get",
+        "operationId": "Pools_Get",
         "responses": {
           "200": {
             "description": "OK",
@@ -167,7 +167,7 @@
           }
         ],
         "description": "Lists available schedules for a pool.",
-        "operationId": "Schedule_List",
+        "operationId": "Schedules_List",
         "responses": {
           "200": {
             "description": "OK",
@@ -219,7 +219,7 @@
           }
         ],
         "description": "Gets a schedule.",
-        "operationId": "Schedule_Get",
+        "operationId": "Schedules_Get",
         "responses": {
           "200": {
             "description": "OK",
@@ -242,7 +242,7 @@
         },
         "x-ms-examples": {
           "Schedule_Get": {
-            "$ref": "./examples/Schedule_Get.json"
+            "$ref": "./examples/Schedules_Get.json"
           }
         }
       }
@@ -264,7 +264,7 @@
           }
         ],
         "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
-        "operationId": "DevBox_List",
+        "operationId": "DevBoxes_List",
         "responses": {
           "200": {
             "description": "OK",
@@ -287,7 +287,7 @@
         },
         "x-ms-examples": {
           "DevBox_List": {
-            "$ref": "./examples/DevBox_List.json"
+            "$ref": "./examples/DevBoxes_List.json"
           }
         },
         "x-ms-pageable": {
@@ -316,7 +316,7 @@
           }
         ],
         "description": "Lists Dev Boxes in the Dev Center for a particular user.",
-        "operationId": "DevBox_ListByUser",
+        "operationId": "DevBoxes_ListByUser",
         "responses": {
           "200": {
             "description": "OK",
@@ -339,7 +339,7 @@
         },
         "x-ms-examples": {
           "DevBox_ListByUserByProject": {
-            "$ref": "./examples/DevBox_ListByUserByProject.json"
+            "$ref": "./examples/DevBoxes_ListByUserByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -371,7 +371,7 @@
           }
         ],
         "description": "Lists Dev Boxes in the project for a particular user.",
-        "operationId": "DevBox_ListByProject",
+        "operationId": "DevBoxes_ListByProject",
         "responses": {
           "200": {
             "description": "OK",
@@ -394,7 +394,7 @@
         },
         "x-ms-examples": {
           "DevBox_ListByUserByProject": {
-            "$ref": "./examples/DevBox_ListByUserByProject.json"
+            "$ref": "./examples/DevBoxes_ListByUserByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -423,7 +423,7 @@
           }
         ],
         "description": "Gets a Dev Box",
-        "operationId": "DevBox_Get",
+        "operationId": "DevBoxes_Get",
         "responses": {
           "200": {
             "description": "OK",
@@ -446,7 +446,7 @@
         },
         "x-ms-examples": {
           "getDevBoxForUser": {
-            "$ref": "./examples/DevBox_Get.json"
+            "$ref": "./examples/DevBoxes_Get.json"
           }
         }
       },
@@ -478,7 +478,7 @@
           }
         ],
         "description": "Creates or updates a Dev Box.",
-        "operationId": "DevBox_Create",
+        "operationId": "DevBoxes_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -511,7 +511,7 @@
         },
         "x-ms-examples": {
           "createDevBox": {
-            "$ref": "./examples/DevBox_Create.json"
+            "$ref": "./examples/DevBoxes_Create.json"
           }
         }
       },
@@ -534,7 +534,7 @@
           }
         ],
         "description": "Deletes a Dev Box.",
-        "operationId": "DevBox_Delete",
+        "operationId": "DevBoxes_Delete",
         "x-ms-long-running-operation": true,
         "responses": {
           "200": {
@@ -570,7 +570,7 @@
         },
         "x-ms-examples": {
           "deleteDevBox": {
-            "$ref": "./examples/DevBox_Delete.json"
+            "$ref": "./examples/DevBoxes_Delete.json"
           }
         }
       }
@@ -595,7 +595,7 @@
           }
         ],
         "description": "Starts a Dev Box",
-        "operationId": "DevBox_Start",
+        "operationId": "DevBoxes_Start",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -631,7 +631,7 @@
         },
         "x-ms-examples": {
           "startDevBoxForUser": {
-            "$ref": "./examples/DevBox_Start.json"
+            "$ref": "./examples/DevBoxes_Start.json"
           }
         }
       }
@@ -656,7 +656,7 @@
           }
         ],
         "description": "Stops a Dev Box",
-        "operationId": "DevBox_Stop",
+        "operationId": "DevBoxes_Stop",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -692,7 +692,7 @@
         },
         "x-ms-examples": {
           "stopDevBoxForUser": {
-            "$ref": "./examples/DevBox_Stop.json"
+            "$ref": "./examples/DevBoxes_Stop.json"
           }
         }
       }
@@ -717,7 +717,7 @@
           }
         ],
         "description": "Gets RDP Connection info",
-        "operationId": "DevBox_GetRemoteConnection",
+        "operationId": "DevBoxes_GetRemoteConnection",
         "responses": {
           "200": {
             "description": "The request completed successfully.",
@@ -740,7 +740,7 @@
         },
         "x-ms-examples": {
           "DevBox_GetRemoteConnection": {
-            "$ref": "./examples/DevBox_GetRemoteConnection.json"
+            "$ref": "./examples/DevBoxes_GetRemoteConnection.json"
           }
         }
       }
