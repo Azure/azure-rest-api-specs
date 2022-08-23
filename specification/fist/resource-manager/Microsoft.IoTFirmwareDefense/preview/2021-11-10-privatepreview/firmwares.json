@@ -1210,6 +1210,12 @@
     "CveSummary": {
       "type": "object",
       "properties": {
+        "critical": {
+          "description": "The total number of critical severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
         "high": {
           "description": "The total number of high severity CVEs detected",
           "type": "integer",
@@ -1224,6 +1230,12 @@
         },
         "low": {
           "description": "The total number of low severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "unknown": {
+          "description": "The total number of unknown severity CVEs detected",
           "type": "integer",
           "format": "int64",
           "x-nullable": true
