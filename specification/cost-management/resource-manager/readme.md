@@ -297,10 +297,10 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm '
-  - suppress: OperationsApiResponseSchema
-    from: costmanagement.json
-    where: '$.paths["/providers/Microsoft.CostManagement/operations"]'
-    reason: The schema will be fixed in later version. The current version provides in this format.
+  - suppress: R3023
+    from: costmanagement.riSpTradeIn.json
+    where: $.paths
+    reason: operations API for Microsoft.CostManagement are defined in costManagement.json
 ```
 
 ### Tag: package-2018-08-preview
