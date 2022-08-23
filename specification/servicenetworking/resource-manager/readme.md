@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2022-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
-  - Microsoft.ServiceNetwork/preview/2022-08-01-preview/AzureTrafficController.json
+  - Microsoft.ServiceNetworking/preview/2022-08-01-preview/AzureTrafficController.json
 ```
