@@ -1,0 +1,68 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+using OpenAPI;
+using Autorest;
+using Azure.Core;
+
+@doc("An Azure Sphere Catalog.")
+model Catalog is TrackedResource<CatalogProperties> {
+  @doc("Name of the catalog")
+  @key("catalogName")
+  @segment("catalogs")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("The properties of Azure Sphere Catalog.")
+model CatalogProperties is ResourceProperties {
+  @doc("Catalog level policies configuration.")
+  policies?: Policies
+}
+
+@doc("Catalog level policies.")
+model Policies {
+  @doc("Policy if device attestation is required before delivering a certificate.")
+  @visibility("read", "write")
+  attestation: AttestationPolicy;
+}
+
+@doc("Options for values on attestation policy.")
+enum AttestationPolicy {
+  Enforce,
+  Ignore
+}
+
+@armResourceOperations
+interface Catalogs extends ResourceOperations<Catalog, CatalogProperties> {
+    @post
+    @doc("Bulk activation of devices.")
+    @segment("startDevicesActivation")
+    @extension("x-ms-long-running-operation", true)
+    @asyncOperationOptions("azure-async-operation")
+    op StartDevicesActivation(
+        ...ResourceInstanceParameters<Catalog>,
+        @doc("Request parameters to start a devices activation process.")
+        @body request: StartDevicesActivationActionRequest
+    ): StartDevicesActivationActionResponse | ErrorResponse;
+}
+
+// Action types:
+
+@doc("Start bulk activation of devices request.")
+model StartDevicesActivationActionRequest {
+    @doc("URI with the location of the activation package.")
+    packageLocation: string;
+}
+
+@doc("Start bulk activation of devices response.")
+model StartDevicesActivationActionResponse {
+    @doc("The status code.")
+    @statusCode
+    statusCode: 202;
+    ...Azure.Core.Foundations.RetryAfterHeader;
+}

@@ -1,0 +1,57 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("An Azure Sphere device registration.")
+@parentResource(Catalog)
+model DeviceRegistration is TrackedResource<DeviceRegistrationProperties> {
+  @doc("Network device identifier.")
+  @key("networkDeviceIdentifier")
+  @segment("deviceRegistrations")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("The properties of DeviceRegistration.")
+model DeviceRegistrationProperties is ResourceProperties {
+  @doc("Provisioning package name.")
+  @visibility("read", "write")
+  provisioningPackageName: string;
+
+  @doc("Attestation public key of the device.")
+  @visibility("read", "write")
+  attestationPublicKey: string;
+
+  @doc("Signed proof of possession challenge.")
+  @visibility("write")
+  signedChallenge?: string;
+
+  @doc("Type of device")
+  @visibility("read", "write")
+  deviceType: string;
+}
+
+@armResourceOperations
+interface DeviceRegistrations extends ResourceOperations<DeviceRegistration, DeviceRegistrationProperties> {
+  @post
+  @doc("Generates an authentication JWT token.")
+  @segment("generateAuthToken")
+  op GenerateAuthToken(
+    ...ResourceInstanceParameters<DeviceRegistration>
+  ): ArmResponse<DeviceRegistrationGenerateAuthTokenResponse> | ErrorResponse;
+}
+
+// Action types:
+
+@doc("Parameters of the generate auth token request.")
+model DeviceRegistrationGenerateAuthTokenRequest {
+}
+
+@doc("Output values of the generate auth token response.")
+model DeviceRegistrationGenerateAuthTokenResponse {
+    @doc("Base64 encoded device authentication JWT token.")
+    token: string;
+}

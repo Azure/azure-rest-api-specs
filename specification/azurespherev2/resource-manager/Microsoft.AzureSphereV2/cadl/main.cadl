@@ -1,0 +1,36 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+import "./catalog.cadl";
+import "./provisioningPackage.cadl";
+import "./certificate.cadl";
+import "./deviceRegistration.cadl";
+
+@armNamespace
+@serviceTitle("Azure Sphere V2 Management")
+@serviceVersion("2022-09-01-privatepreview")
+@doc("Use these APIs to manage Azure Sphere V2 in your Azure subscription.")
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+
+// Common elements:
+
+@doc("Provisioning state of the resource.")
+enum ProvisioningState {
+  Succeeded, Failed, Canceled, Provisioning, Updating, Deleting, Accepted
+}
+
+@doc("General resource properties.")
+model ResourceProperties {
+	@doc("Resource provisioning state.")
+	@visibility("read")
+	provisioningState?: ProvisioningState;
+}
