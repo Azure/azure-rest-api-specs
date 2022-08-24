@@ -126,7 +126,7 @@
         "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "description": "List TrafficController resources by resource group",
         "x-ms-examples" : {
-          "Get Traffic Controller" : {
+          "Get Traffic Controllers" : {
             "$ref": "./examples/TrafficControllersGet.json"
           }
         },
@@ -207,6 +207,11 @@
         ],
         "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "description": "Create a TrafficController",
+        "x-ms-examples" : {
+          "Put Traffic Controller" : {
+            "$ref": "./examples/TrafficControllerPut.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -704,6 +709,11 @@
         ],
         "operationId": "AssociationsInterface_CreateOrUpdate",
         "description": "Create a Association",
+        "x-ms-examples" : {
+          "Put Association" : {
+            "$ref": "./examples/AssociationPut.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -926,8 +936,7 @@
       },
       "description": "Association Properties",
       "required": [
-        "associationType",
-        "provisioningState"
+        "associationType"
       ]
     },
     "AssociationSubnet": {
