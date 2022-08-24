@@ -367,6 +367,9 @@
           },
           "Put a DigitalTwinsEndpoint resource with identity": {
             "$ref": "./examples/DigitalTwinsEndpointPut_WithIdentity_example.json"
+          },
+          "Put a DigitalTwinsEndpoint resource with user assigned identity": {
+            "$ref": "./examples/DigitalTwinsEndpointPut_WithUserIdentity_example.json"
           }
         },
         "parameters": [
@@ -1063,6 +1066,9 @@
         "x-ms-examples": {
           "Create or replace a time series database connection for a DigitalTwins instance.": {
             "$ref": "./examples/TimeSeriesDatabaseConnectionsPut_example.json"
+          },
+          "Create or replace a time series database connection for a DigitalTwins instance with user assigned identity.": {
+            "$ref": "./examples/TimeSeriesDatabaseConnectionsPut_WithUserIdentity_example.json"
           }
         }
       },
@@ -1340,6 +1346,7 @@
     },
     "UserAssignedIdentity": {
       "description": "The information about the user assigned identity.",
+      "type": "object",
       "properties": {
         "clientId": {
           "readOnly": true,
