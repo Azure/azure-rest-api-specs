@@ -97,7 +97,7 @@
           "200": {
             "description": "Request successful. Returns the regional application gateway waf manifest",
             "schema": {
-              "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
+              "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResultList"
             }
           },
           "default": {
@@ -116,19 +116,40 @@
     }
   },
   "definitions": {
+    "ApplicationGatewayWafDynamicManifestResultList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
+          },
+          "description": "The list of application gateway waf manifest."
+        }
+      },
+      "description": "Response for ApplicationGatewayWafDynamicManifests API service call."
+    },
     "ApplicationGatewayWafDynamicManifestResult": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestPropertiesResult",
           "description": "Properties of the ApplicationGatewayWafDynamicManifest ."
         }
       },
-      "allOf": [
-        {
-          "$ref": "network.json#/definitions/Resource"
-        }
-      ],
       "type": "object",
       "description": "Response for ApplicationGatewayWafDynamicManifest API service call."
     },
