@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2018-06-30",
+    "version": "2022-06-30-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -48,7 +48,7 @@
         },
         "x-ms-examples": {
           "Get runbook draft content": {
-            "$ref": "./examples/getRunbookDraftContent.json"
+            "$ref": "./examples/runbook/getRunbookDraftContent.json"
           }
         },
         "produces": [
@@ -101,7 +101,7 @@
         },
         "x-ms-examples": {
           "Create or update runbook draft": {
-            "$ref": "./examples/replaceRunbookDraftContent.json"
+            "$ref": "./examples/runbook/replaceRunbookDraftContent.json"
           }
         },
         "consumes": [
@@ -176,7 +176,7 @@
         },
         "x-ms-examples": {
           "Get runbook draft": {
-            "$ref": "./examples/getRunbookDraft.json"
+            "$ref": "./examples/runbook/getRunbookDraft.json"
           }
         },
         "parameters": [
@@ -228,7 +228,7 @@
         },
         "x-ms-examples": {
           "Publish runbook draft": {
-            "$ref": "./examples/publishRunbook.json"
+            "$ref": "./examples/runbook/publishRunbook.json"
           }
         },
         "parameters": [
@@ -284,7 +284,7 @@
         },
         "x-ms-examples": {
           "Undo draft edit to last known published state": {
-            "$ref": "./examples/undoDraftEditToLastKnownPublishedState.json"
+            "$ref": "./examples/runbook/undoDraftEditToLastKnownPublishedState.json"
           }
         },
         "parameters": [
@@ -336,7 +336,7 @@
         },
         "x-ms-examples": {
           "Get runbook content": {
-            "$ref": "./examples/getRunbookContent.json"
+            "$ref": "./examples/runbook/getRunbookContent.json"
           }
         },
         "produces": [
@@ -391,7 +391,7 @@
         },
         "x-ms-examples": {
           "Get runbook": {
-            "$ref": "./examples/getRunbook.json"
+            "$ref": "./examples/runbook/getRunbook.json"
           }
         },
         "parameters": [
@@ -441,10 +441,10 @@
         },
         "x-ms-examples": {
           "Create or update runbook and publish it": {
-            "$ref": "./examples/createOrUpdateRunbook.json"
+            "$ref": "./examples/runbook/createOrUpdateRunbook.json"
           },
           "Create runbook as draft": {
-            "$ref": "./examples/createRunbookAsDraft.json"
+            "$ref": "./examples/runbook/createRunbookAsDraft.json"
           }
         },
         "parameters": [
@@ -509,7 +509,7 @@
         },
         "x-ms-examples": {
           "Update runbook": {
-            "$ref": "./examples/updateRunbook.json"
+            "$ref": "./examples/runbook/updateRunbook.json"
           }
         },
         "parameters": [
@@ -568,7 +568,7 @@
         },
         "x-ms-examples": {
           "Delete a runbook": {
-            "$ref": "./examples/deleteRunbook.json"
+            "$ref": "./examples/runbook/deleteRunbook.json"
           }
         },
         "parameters": [
@@ -620,7 +620,7 @@
         },
         "x-ms-examples": {
           "List runbooks by automation account": {
-            "$ref": "./examples/listRunbooksByAutomationAccount.json"
+            "$ref": "./examples/runbook/listRunbooksByAutomationAccount.json"
           }
         },
         "parameters": [
@@ -668,7 +668,7 @@
         },
         "x-ms-examples": {
           "Get test job stream": {
-            "$ref": "./examples/getTestJobStream.json"
+            "$ref": "./examples/runbook/getTestJobStream.json"
           }
         },
         "parameters": [
@@ -727,7 +727,7 @@
         },
         "x-ms-examples": {
           "List job streams by job name": {
-            "$ref": "./examples/listTestJobStreamsByJob.json"
+            "$ref": "./examples/runbook/listTestJobStreamsByJob.json"
           }
         },
         "parameters": [
@@ -789,7 +789,7 @@
         },
         "x-ms-examples": {
           "Create test job": {
-            "$ref": "./examples/createTestJob.json"
+            "$ref": "./examples/runbook/createTestJob.json"
           }
         },
         "parameters": [
@@ -848,7 +848,7 @@
         },
         "x-ms-examples": {
           "Get test job": {
-            "$ref": "./examples/getTestJob.json"
+            "$ref": "./examples/runbook/getTestJob.json"
           }
         },
         "parameters": [
@@ -900,7 +900,7 @@
         },
         "x-ms-examples": {
           "Resume test job": {
-            "$ref": "./examples/resumeTestJob.json"
+            "$ref": "./examples/runbook/resumeTestJob.json"
           }
         },
         "parameters": [
@@ -949,7 +949,7 @@
         },
         "x-ms-examples": {
           "Stop test job": {
-            "$ref": "./examples/stopTestJob.json"
+            "$ref": "./examples/runbook/stopTestJob.json"
           }
         },
         "parameters": [
@@ -998,7 +998,7 @@
         },
         "x-ms-examples": {
           "Suspend test job": {
-            "$ref": "./examples/suspendTestJob.json"
+            "$ref": "./examples/runbook/suspendTestJob.json"
           }
         },
         "parameters": [
@@ -1038,6 +1038,7 @@
   },
   "definitions": {
     "JobStream": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1052,6 +1053,7 @@
       "description": "Definition of the job stream."
     },
     "JobStreamProperties": {
+      "type": "object",
       "properties": {
         "jobStreamId": {
           "type": "string",
@@ -1100,6 +1102,7 @@
       "description": "Definition of the job stream."
     },
     "JobStreamListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1116,6 +1119,7 @@
       "description": "The response model for the list job stream operation."
     },
     "ContentHash": {
+      "type": "object",
       "properties": {
         "algorithm": {
           "type": "string",
@@ -1133,6 +1137,7 @@
       "description": "Definition of the runbook property type."
     },
     "ContentLink": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
@@ -1150,6 +1155,7 @@
       "description": "Definition of the content link."
     },
     "RunbookProperties": {
+      "type": "object",
       "properties": {
         "runbookType": {
           "type": "string",
@@ -1162,12 +1168,17 @@
             "GraphPowerShellWorkflow",
             "GraphPowerShell",
             "Python2",
-            "Python3"
+            "Python3",
+            "Python"
           ],
           "x-ms-enum": {
             "name": "RunbookTypeEnum",
             "modelAsString": true
           }
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Gets or sets fully qualified resource id of runtime of the runbook."
         },
         "publishContentLink": {
           "$ref": "#/definitions/ContentLink",
@@ -1257,6 +1268,7 @@
       "description": "Definition of the runbook property type."
     },
     "Runbook": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookProperties",
@@ -1276,6 +1288,7 @@
       "description": "Definition of the runbook type."
     },
     "RunbookListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1292,6 +1305,7 @@
       "description": "The response model for the list runbook operation."
     },
     "RunbookCreateOrUpdateProperties": {
+      "type": "object",
       "properties": {
         "logVerbose": {
           "type": "boolean",
@@ -1312,12 +1326,17 @@
             "GraphPowerShellWorkflow",
             "GraphPowerShell",
             "Python2",
-            "Python3"
+            "Python3",
+            "Python"
           ],
           "x-ms-enum": {
             "name": "RunbookTypeEnum",
             "modelAsString": true
           }
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Gets or sets fully qualified resource id of runtime of the runbook."
         },
         "draft": {
           "$ref": "#/definitions/RunbookDraft",
@@ -1343,6 +1362,7 @@
       "description": "The parameters supplied to the create or update runbook properties."
     },
     "RunbookCreateOrUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookCreateOrUpdateProperties",
@@ -1371,7 +1391,31 @@
       "description": "The parameters supplied to the create or update runbook operation."
     },
     "RunbookUpdateProperties": {
+      "type": "object",
       "properties": {
+        "runbookType": {
+          "type": "string",
+          "description": "Gets or sets the type of the runbook.",
+          "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
+            "PowerShell",
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell",
+            "Python2",
+            "Python3",
+            "Python"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Gets or sets fully qualified resource id of runtime of the runbook."
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description of the runbook."
@@ -1393,6 +1437,7 @@
       "description": "The parameters supplied to the update runbook properties."
     },
     "RunbookUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookUpdateProperties",
@@ -1418,6 +1463,7 @@
       "description": "The parameters supplied to the update runbook operation."
     },
     "RunbookDraftUndoEditResult": {
+      "type": "object",
       "properties": {
         "statusCode": {
           "type": "string",
@@ -1482,6 +1528,7 @@
       "description": "The response model for the undo edit runbook operation."
     },
     "RunbookDraft": {
+      "type": "object",
       "properties": {
         "inEdit": {
           "type": "boolean",
@@ -1520,6 +1567,7 @@
       }
     },
     "RunbookParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1542,6 +1590,7 @@
       "description": "Definition of the runbook parameter type."
     },
     "TestJobCreateParameters": {
+      "type": "object",
       "properties": {
         "parameters": {
           "type": "object",
@@ -1558,6 +1607,7 @@
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {
+      "type": "object",
       "x-ms-mutability": [
         "read",
         "create"
@@ -1624,55 +1674,8 @@
       },
       "description": "Definition of the test job."
     },
-    "RunbookCreateOrUpdateDraftProperties": {
-      "properties": {
-        "logVerbose": {
-          "type": "boolean",
-          "description": "Gets or sets verbose log option."
-        },
-        "logProgress": {
-          "type": "boolean",
-          "description": "Gets or sets progress log option."
-        },
-        "runbookType": {
-          "type": "string",
-          "description": "Gets or sets the type of the runbook.",
-          "enum": [
-            "Script",
-            "Graph",
-            "PowerShellWorkflow",
-            "PowerShell",
-            "GraphPowerShellWorkflow",
-            "GraphPowerShell",
-            "Python2",
-            "Python3"
-          ],
-          "x-ms-enum": {
-            "name": "RunbookTypeEnum",
-            "modelAsString": true
-          }
-        },
-        "draft": {
-          "$ref": "#/definitions/RunbookDraft",
-          "description": "Gets or sets the draft runbook properties."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the runbook."
-        },
-        "logActivityTrace": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the activity-level tracing options of the runbook."
-        }
-      },
-      "required": [
-        "runbookType",
-        "draft"
-      ],
-      "description": "The parameters supplied to the create or update draft runbook properties."
-    },
     "RunbookCreateOrUpdateDraftParameters": {
+      "type": "object",
       "properties": {
         "runbookContent": {
           "type": "string",

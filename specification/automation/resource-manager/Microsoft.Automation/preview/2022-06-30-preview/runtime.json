@@ -1,0 +1,422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2022-06-30-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes/{runtimeName}": {
+      "delete": {
+        "tags": [
+          "Runtime"
+        ],
+        "operationId": "Runtime_Delete",
+        "description": "Delete a runtime.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Delete a runtime": {
+            "$ref": "./examples/deleteRuntime.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Runtime"
+        ],
+        "operationId": "Runtime_Get",
+        "description": "Retrieve a runtime.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Get a runtime": {
+            "$ref": "./examples/getRuntime.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Runtime"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Runtime"
+        ],
+        "operationId": "Runtime_Create",
+        "description": "Create a runtime.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Put a runtime": {
+            "$ref": "./examples/createRuntime.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "name": "RuntimeCreationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Runtime"
+            },
+            "description": "The create or update parameters for runtime."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Runtime"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Runtime"
+        ],
+        "operationId": "Runtime_Update",
+        "description": "Update a runtime.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Update a runtime": {
+            "$ref": "./examples/updateRuntime.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runtime name"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeUpdateProperties"
+            },
+            "description": "The runtime"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Runtime"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimes": {
+      "get": {
+        "tags": [
+          "Runtime"
+        ],
+        "operationId": "Runtime_ListByAutomationAccount",
+        "description": "Retrieve a list of runtimes.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "List runtime by Automation Account": {
+            "$ref": "./examples/listRuntimes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Runtime"
+      }
+    }
+  },
+  "definitions": {
+    "Runtime": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets the name of the runtime."
+        },
+        "properties": {
+          "$ref": "#/definitions/RuntimeProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the hybrid worker group properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "Definition of runtime."
+    },
+    "RuntimeProperties": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Gets or sets the language of the runtime.",
+          "enum": [
+            "PowerShell",
+            "Python",
+            "PowerShellWorkflow",
+            "GraphPowerShell",
+            "GraphPowerShellWorkflow"
+          ],
+          "x-ms-enum": {
+            "name": "RuntimeLanguage",
+            "modelAsString": true
+          }
+        },
+        "languageVersion": {
+          "type": "string",
+          "description": "Gets or sets the language version of the runtime."
+        },
+        "builtInDependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the built in dependencies of the runtime."
+        }
+      },
+      "description": "Runtime properties"
+    },
+    "RuntimeListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Runtime"
+          },
+          "description": "Gets or sets a list of runtimes."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list runtimes."
+    },
+    "RuntimeUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeUpdateParameters",
+          "description": "Gets or sets the runtime update properties."
+        }
+      },
+      "description": "Runtime patch dependencies property"
+    },
+    "RuntimeUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "builtInDependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the built in dependencies of the runtime."
+        }
+      },
+      "description": "Runtime update properties"
+    }
+  },
+  "parameters": {}
+}

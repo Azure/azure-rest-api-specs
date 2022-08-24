@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2022-02-22
+tag: package-2022-06-30-preview
 ```
 
 ### Tag: package-2015-10
@@ -386,15 +386,12 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 - Microsoft.Automation/stable/2022-02-22/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/preview/2022-06-30-preview/job.json
 - Microsoft.Automation/preview/2022-06-30-preview/runbook.json
 - Microsoft.Automation/preview/2022-06-30-preview/runtime.json
-- Microsoft.Automation/preview/2022-06-30-preview/dependency.json
 ```
 
 ---
@@ -439,6 +436,12 @@ directive:
     reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: deletedAutomationAccount.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: runbook.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: runtime.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
