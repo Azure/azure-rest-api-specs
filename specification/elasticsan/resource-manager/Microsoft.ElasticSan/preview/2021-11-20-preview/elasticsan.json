@@ -1320,30 +1320,38 @@
           "description": "List of ResourceType Sku",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceTypeSku"
+            "$ref": "#/definitions/SkuInformation"
           },
           "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Links to the next set of results",
-          "type": "string",
           "readOnly": true
         }
       }
     },
-    "ResourceTypeSku": {
-      "description": "SkuInformation object",
+    "SkuInformation": {
+      "description": "ElasticSAN SKU and its properties",
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
-        "sku": {
-          "description": "The Sku tier",
+        "name": {
+          "$ref": "#/definitions/Sku/properties/name"
+        },
+        "tier": {
+          "$ref": "#/definitions/Sku/properties/tier"
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "locations": {
+          "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "type": "string"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
         },
         "locationInfo": {
           "description": "Availability of the SKU for the location/zone",
@@ -1354,124 +1362,31 @@
           "x-ms-identifiers": [],
           "readOnly": true
         },
-        "elasticSan": {
-          "description": "Scalability targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/SanTierInfo"
-        },
-        "volumeGroup": {
-          "description": "Volume Group targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/VolumeGroupTierInfo"
-        },
-        "volume": {
-          "description": "Volume targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/VolumeTierInfo"
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "description": "The capability information in the specified SKU."
         }
       }
     },
-    "SanTierInfo": {
-      "description": "San scalability target",
-      "type": "object",
+    "SKUCapability": {
       "properties": {
-        "maxSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum San account capacity in TiB",
-          "readOnly": true
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of capability."
         },
-        "minSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum San account capacity in TiB",
-          "readOnly": true
-        },
-        "minIncrementSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Increment the San capacity in TiB",
-          "readOnly": true
-        },
-        "iopsPerBaseTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS per BaseTiB",
-          "readOnly": true
-        },
-        "mbpsPerBaseTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps per BaseTiB",
-          "readOnly": true
-        },
-        "maxMBps": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps",
-          "readOnly": true
-        },
-        "maxVolumeGroupCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of volume groups per San account",
-          "readOnly": true
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string value to indicate states of given capability."
         }
-      }
-    },
-    "VolumeGroupTierInfo": {
-      "description": "Volume Group scalability target",
-      "type": "object",
-      "properties": {
-        "maxVolumeCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of Volumes per Volume Groups per San account",
-          "readOnly": true
-        }
-      }
-    },
-    "VolumeTierInfo": {
-      "description": "Volume scalability target",
-      "type": "object",
-      "properties": {
-        "maxSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum volume capacity in GiB",
-          "readOnly": true
-        },
-        "minSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum volume capacity in GiB",
-          "readOnly": true
-        },
-        "minIncrementSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Increment volume capacity in GiB",
-          "readOnly": true
-        },
-        "iopsPerBaseGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS per GiB",
-          "readOnly": true
-        },
-        "maxIops": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS",
-          "readOnly": true
-        },
-        "maxMBps": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps",
-          "readOnly": true
-        }
-      }
+      },
+      "description": "The capability information in the specified SKU.",
+      "type": "object"
     },
     "SkuLocationInfo": {
       "description": "The location info.",
@@ -1617,6 +1532,10 @@
     "VolumeGroupProperties": {
       "type": "object",
       "description": "VolumeGroup response properties.",
+      "required": [
+        "protocolType",
+        "encryption"
+      ],
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
