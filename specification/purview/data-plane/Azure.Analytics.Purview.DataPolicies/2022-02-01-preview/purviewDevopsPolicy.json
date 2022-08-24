@@ -5,13 +5,13 @@
     "version": "2022-02-01-preview"
   },
   "paths": {
-    "/sqlDevopsPolicies/{policyName}": {
+    "/devopsPolicies/{policyName}": {
       "delete": {
         "tags": [
-          "SQLDevopsPolicy"
+          "DevopsPolicy"
         ],
-        "description": "Deletes a Sql Devops policy for a given policy name.",
-        "operationId": "SQLDevopsPolicy_Delete",
+        "description": "Deletes a devops policy for a given policy name.",
+        "operationId": "DevopsPolicy_Delete",
         "parameters": [
           {
             "in": "path",
@@ -25,8 +25,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "An error response received from the Policy Service",
@@ -42,19 +42,19 @@
           }
         },
         "x-ms-examples": {
-          "SQLDevopsPolicy_Delete": {
-            "$ref": "./examples/SQLDevopsPolicy_Delete.json"
+          "DevopsPolicy_Delete": {
+            "$ref": "./examples/DevopsPolicy_Delete.json"
           }
         }
       }
     },
-    "/sqlDevopsPolicies": {
+    "/devopsPolicies": {
       "put": {
         "tags": [
-          "DataPolicy"
+          "DevopsPolicy"
         ],
-        "description": "Creates/Updates a Sql Devops policy for a Purview data source and Purview data role.",
-        "operationId": "SQLDevopsPolicy_CreateOrUpdate",
+        "description": "Creates/Updates a Devops policy",
+        "operationId": "DevopsPolicy_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -68,24 +68,24 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The body of the SqlDevops policy which needs to be created or updated",
+            "description": "The body of the Devops policy which needs to be created or updated",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SqlDevOpsPolicy"
+              "$ref": "#/definitions/DevopsPolicy"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "The Sql DevOps Policy that has been created.",
+            "description": "Created a policy",
             "schema": {
-              "$ref": "#/definitions/SqlDevOpsPolicy"
+              "$ref": "#/definitions/DevopsPolicy"
             }
           },
           "200": {
-            "description": "The Sql DevOps Policy that has been updated.",
+            "description": "Updated a policy",
             "schema": {
-              "$ref": "#/definitions/SqlDevOpsPolicy"
+              "$ref": "#/definitions/DevopsPolicy"
             }
           },
           "default": {
@@ -102,17 +102,17 @@
           }
         },
         "x-ms-examples": {
-          "SQLDevopsPolicy_CreateOrUpdate": {
-            "$ref": "./examples/SQLDevopsPolicy_CreateOrUpdate.json"
+          "DevopsPolicy_CreateOrUpdate": {
+            "$ref": "./examples/DevopsPolicy_CreateOrUpdate.json"
           }
         }
       },
       "get": {
         "tags": [
-          "SQLDevopsPolicy"
+          "DevopsPolicy"
         ],
-        "description": "List SqlDevops policies",
-        "operationId": "SQLDevopsPolicy_List",
+        "description": "List Devops policies",
+        "operationId": "DevopsPolicy_List",
         "produces": [
           "application/json"
         ],
@@ -120,7 +120,7 @@
           {
             "in": "query",
             "name": "$filter",
-            "description": "A string to filter out the policies.",
+            "description": "Filter System.String.",
             "type": "string"
           },
           {
@@ -131,7 +131,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SqlDevOpsPolicyList"
+              "$ref": "#/definitions/DevopsPolicyList"
             }
           },
           "default": {
@@ -152,14 +152,25 @@
           "itemName": "values"
         },
         "x-ms-examples": {
-          "SQLDevopsPolicy_List": {
-            "$ref": "./examples/SQLDevopsPolicy_List.json"
+          "DevopsPolicy_List": {
+            "$ref": "./examples/DevopsPolicy_List.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "DataFabricPolicyContentDetails": {
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "type": "string"
+        },
+        "identificationHash": {
+          "type": "string"
+        }
+      }
+    },
     "ErrorModel": {
       "description": "The error model for policy",
       "required": [
@@ -179,7 +190,7 @@
           "type": "string"
         },
         "target": {
-          "description": "The error target. This describes the place in the request body where is causing the error.",
+          "description": "The error target",
           "type": "string"
         },
         "details": {
@@ -203,7 +214,7 @@
         }
       }
     },
-    "SqlDevOpsPolicy": {
+    "DevopsPolicy": {
       "required": [
         "decisionRules",
         "scope"
@@ -211,16 +222,16 @@
       "type": "object",
       "properties": {
         "policyName": {
-          "readOnly": true,
           "type": "string"
         },
         "id": {
-          "readOnly": true,
           "type": "string"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
+          "$ref": "#/definitions/SystemData"
+        },
+        "policyDetails": {
+          "$ref": "#/definitions/DataFabricPolicyContentDetails"
         },
         "version": {
           "format": "int32",
@@ -229,15 +240,15 @@
         "decisionRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlDevopsPolicyDecisionRule"
+            "$ref": "#/definitions/DevopsPolicyDecisionRule"
           }
         },
         "scope": {
-          "$ref": "#/definitions/SqlDevopsPolicyScope"
+          "$ref": "#/definitions/DevopsPolicyScope"
         }
       }
     },
-    "SqlDevOpsPolicyList": {
+    "DevopsPolicyList": {
       "required": [
         "value"
       ],
@@ -246,7 +257,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlDevOpsPolicy"
+            "$ref": "#/definitions/DevopsPolicy"
           }
         },
         "nextLink": {
@@ -254,7 +265,7 @@
         }
       }
     },
-    "SqlDevopsPolicyDecisionRule": {
+    "DevopsPolicyDecisionRule": {
       "required": [
         "effect",
         "purviewRoleName"
@@ -262,9 +273,12 @@
       "type": "object",
       "properties": {
         "effect": {
-          "description": "The decision effect that this policy should have. The supported values are: Permit.",
+          "description": "The effect for rule",
           "enum": [
-            "Permit"
+            "NotApplicable",
+            "Deny",
+            "Permit",
+            "Indeterminate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -273,7 +287,6 @@
           }
         },
         "purviewRoleName": {
-          "description": "The name of the Purview data role for which the access needs to be provided.",
           "minLength": 1,
           "type": "string"
         },
@@ -294,7 +307,7 @@
         }
       }
     },
-    "SqlDevopsPolicyScope": {
+    "DevopsPolicyScope": {
       "type": "object",
       "properties": {
         "type": {
@@ -345,7 +358,7 @@
     },
     "Endpoint": {
       "in": "path",
-      "name": "endpoint",
+      "name": "Endpoint",
       "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
       "required": true,
       "type": "string",
