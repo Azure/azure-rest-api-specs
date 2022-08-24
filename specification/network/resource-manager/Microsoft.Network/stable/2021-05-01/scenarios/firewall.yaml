@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario:  Firewall
+    description: Microsoft.Network/azureFirewalls
+    variables:
+      azureFirewallName: scenario_firewall
+    steps:
+      - step: Firewall_Create
+        exampleFile: ../examples/AzureFirewallPut.json
+        requestUpdate:
+          - remove: /parameters/properties/ipConfigurations
+      - step: Firewall_UpdateTag
+        exampleFile: ../examples/AzureFirewallUpdateTags.json
+      - step: Firewall_Get
+        exampleFile: ../examples/AzureFirewallGet.json
+      - step: Firewall_ListAll
+        exampleFile: ../examples/AzureFirewallListBySubscription.json
+      - step: Firewall_List
+        exampleFile: ../examples/AzureFirewallListByResourceGroup.json
+      - step: Firewall_Delete
+        exampleFile: ../examples/AzureFirewallDelete.json

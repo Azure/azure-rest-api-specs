@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: PublicIpAddress
+    description: Microsoft.Network/publicIPAddresses
+    variables:
+      publicIPName: test-ip
+    steps:
+      - step: PublicIpAddress_CreateDefaults
+        exampleFile: ../examples/PublicIpAddressCreateDefaults.json
+
+      - step: PublicIpAddress_CreateDns
+        exampleFile: ../examples/PublicIpAddressCreateDns.json
+
+      - step: PublicIpAddress_Get
+        exampleFile: ../examples/PublicIpAddressGet.json
+        requestUpdate:
+          - replace: /publicIpAddressName
+            value: $(publicIPName)
+
+      - step: PublicIpAddress_List
+        exampleFile: ../examples/PublicIpAddressList.json
+
+      - step: PublicIpAddress_ListAll
+        exampleFile: ../examples/PublicIpAddressListAll.json
+
+      - step: PublicIpAddress_UpdateTags
+        exampleFile: ../examples/PublicIpAddressUpdateTags.json
+
+      - step: PublicIpAddress_Delete
+        exampleFile: ../examples/PublicIpAddressDelete.json

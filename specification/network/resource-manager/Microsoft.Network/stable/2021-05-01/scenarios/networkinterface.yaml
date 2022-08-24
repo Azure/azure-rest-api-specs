@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  virtualNetworkName: scenarios_vn
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    outputVariables:
+      subnetID:
+        type: string
+        fromResponse: /properties/subnets/0/id
+  - step: PublicIpAddress_CreateDefaults
+    exampleFile: ../examples/PublicIpAddressCreateDefaults.json
+    outputVariables:
+      publicIP:
+        fromResponse: /id
+
+scenarios:
+  - scenario: VritualNetworkInterface
+    description: Microsoft.Network/Interface
+    variables:
+      networkInterfaceName: scenarios_nic
+    steps:
+      - step: NetworkInterface_Create
+        exampleFile: ../examples/NetworkInterfaceCreate.json
+        requestUpdate:
+          - replace: /location
+            value: westus
+          - replace: /parameters/properties/ipConfigurations/0/properties/publicIPAddress/id
+            value: $(publicIP)
+          - replace: /parameters/properties/ipConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+      - step: NetworkInterface_Get
+        exampleFile: ../examples/NetworkInterfaceGet.json
+      - step: NetworkInterface_List
+        exampleFile: ../examples/NetworkInterfaceList.json
+      - step: NetworkInterface_ListAll
+        exampleFile: ../examples/NetworkInterfaceListAll.json
+      - step: NetworkInterface_Delete
+        exampleFile: ../examples/NetworkInterfaceDelete.json

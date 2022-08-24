@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  virtualNetworkName1: scenario_vnet1
+  virtualNetworkName2: scenario_vnet2
+
+prepareSteps:
+  - step: VirtualNetworks_BeginCreateOrUpdate
+    exampleFile: ../examples/VirtualNetworkCreate.json
+    requestUpdate:
+      - replace: /virtualNetworkName
+        value: $(virtualNetworkName1)
+  - step: VirtualNetworks_BeginCreateOrUpdate2
+    exampleFile: ../examples/VirtualNetworkCreate.json
+    requestUpdate:
+      - replace: /virtualNetworkName
+        value: $(virtualNetworkName2)
+      - replace: /parameters/properties/addressSpace/addressPrefixes/0
+        value: 11.0.0.0/16
+    outputVariables:
+      vnetID2:
+        fromResponse: /id
+
+scenarios:
+  - scenario: Peering
+    description: Microsoft.Network/virtualNetworks
+    variables:
+      virtualNetworkPeeringName: scenario_vnetpeering
+    steps:
+      - step: Peering_Create
+        exampleFile: ../examples/VirtualNetworkPeeringCreate.json
+        requestUpdate:
+          - replace: /virtualNetworkName
+            value: $(virtualNetworkName1)
+          - replace: /VirtualNetworkPeeringParameters/properties/remoteVirtualNetwork/id
+            value: $(vnetID2)
+      - step: Peering_Get
+        exampleFile: ../examples/VirtualNetworkPeeringGet.json
+        requestUpdate:
+          - replace: /virtualNetworkName
+            value: $(virtualNetworkName1)
+      - step: Peering_List
+        exampleFile: ../examples/VirtualNetworkPeeringList.json
+        requestUpdate:
+          - replace: /virtualNetworkName
+            value: $(virtualNetworkName1)
+      - step: Peering_Delete
+        exampleFile: ../examples/VirtualNetworkPeeringDelete.json
+        requestUpdate:
+          - replace: /virtualNetworkName
+            value: $(virtualNetworkName1)

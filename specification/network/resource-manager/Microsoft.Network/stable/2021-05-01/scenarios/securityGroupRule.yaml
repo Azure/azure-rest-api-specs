@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: NetworkSecurityGroupRules
+    description: Microsoft.Network/securityRules
+    steps:
+      - step: SecurityGroups_BeginCreateOrUpdate
+        exampleFile: ../examples/NetworkSecurityGroupCreate.json
+
+      - step: SecurityGroupRules_Create
+        exampleFile: ../examples/NetworkSecurityGroupRuleCreate.json
+
+      - step: SecurityGroupRules_Get
+        exampleFile: ../examples/NetworkSecurityGroupRuleGet.json
+
+      - step: SecurityGroupRules_List
+        exampleFile: ../examples/NetworkSecurityGroupRuleList.json
+
+      - step: SecurityGroupRules_Delete
+        exampleFile: ../examples/NetworkSecurityGroupRuleDelete.json

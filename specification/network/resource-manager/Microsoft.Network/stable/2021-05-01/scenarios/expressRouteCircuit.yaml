@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  circuitName: scenario_circuit
+  peeringName: scenario_circuit_peering
+
+scenarios:
+  - scenario:  ExpressRouteCircuit
+    description: Microsoft.Network/expressRouteCircuits
+    steps:
+      - step: ExpressRouteCircuit_Create
+        exampleFile: ../examples/ExpressRouteCircuitCreate.json
+      - step: ExpressRouteCircuit_UpdateTags
+        exampleFile: ../examples/ExpressRouteCircuitUpdateTags.json
+      - step: ExpressRouteCircuit_Get
+        exampleFile: ../examples/ExpressRouteCircuitGet.json
+      - step: ExpressRouteCircuit_List
+        exampleFile: ../examples/ExpressRouteCircuitListByResourceGroup.json
+      - step: ExpressRouteCircuit_ListAll
+        exampleFile: ../examples/ExpressRouteCircuitListBySubscription.json
+      - step: ExpressRouteCircuit_GetStats
+        exampleFile: ../examples/ExpressRouteCircuitStats.json
+
+  - scenario: ExpressRouteCircuitAuthorization
+    description: Microsoft.Network/expressRouteCircuits/authorizations
+    variables:
+      authorizationName: scenario_circuit_auth
+    steps:
+      - step: ExpressRouteCircuitAuthorization_Create
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizationCreate.json
+      - step: ExpressRouteCircuitAuthorization_Get
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizationGet.json
+      - step: ExpressRouteCircuitAuthorization_List
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizationList.json
+      - step: ExpressRouteCircuitAuthorization_Delete
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizationDelete.json
+
+  - scenario: ExpressRouteCircuitPeering
+    description: Microsoft.Network/expressRouteCircuits/peerings
+    steps:
+      - step: ExpressRouteCircuitPeering_Create
+        exampleFile: ../examples/ExpressRouteCircuitPeeringCreate.json
+        requestUpdate:
+          - add: /peeringParameters/properties/peeringType
+            value: AzurePrivatePeering
+      - step: ExpressRouteCircuitPeering_Get
+        exampleFile: ../examples/ExpressRouteCircuitPeeringGet.json
+      - step: ExpressRouteCircuitPeering_List
+        exampleFile: ../examples/ExpressRouteCircuitPeeringList.json
+
+  - scenario: ExpressRouteCircuitConnection
+    description: Microsoft.Network/expressRouteCircuits/peerings/connections
+    variables:
+      connectionName: scenario_circuit_conn
+    steps:
+      - step: ExpressRouteCircuitConnection_Create
+        exampleFile: ../examples/ExpressRouteCircuitConnectionCreate.json
+      - step: ExpressRouteCircuitConnection_Get
+        exampleFile: ../examples/ExpressRouteCircuitConnectionGet.json
+      - step: ExpressRouteCircuitConnection_List
+        exampleFile: ../examples/ExpressRouteCircuitConnectionList.json
+      - step: ExpressRouteCircuitConnection_Delete
+        exampleFile: ../examples/ExpressRouteCircuitConnectionDelete.json
+
+cleanUpSteps:
+  - step: ExpressRouteCircuitPeering_Delete
+    exampleFile: ../examples/ExpressRouteCircuitPeeringDelete.json
+  - step: ExpressRouteCircuit_Delete
+    exampleFile: ../examples/ExpressRouteCircuitDelete.json

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    outputVariables:
+      subnetID:
+        fromResponse: /properties/subnets/0/id
+
+scenarios:
+  - scenario:  LoadBalancers
+    description: Microsoft.Network/loadBalancers
+    variables:
+      loadBalancerName: scenario_loadbalancer
+    steps:
+      - step: LoadBalancer_Create
+        exampleFile: ../examples/LoadBalancerCreate.json
+        requestUpdate:
+          - replace: /parameters/properties/frontendIPConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+      - step: LoadBalancer_UpdateTags
+        exampleFile: ../examples/LoadBalancerUpdateTags.json
+      - step: LoadBalancer_Get
+        exampleFile: ../examples/LoadBalancerGet.json
+      - step: LoadBalancer_List
+        exampleFile: ../examples/LoadBalancerList.json
+      - step: LoadBalancer_ListAll
+        exampleFile: ../examples/LoadBalancerListAll.json
+      - step: LoadBalancer_Delete
+        exampleFile: ../examples/LoadBalancerDelete.json
