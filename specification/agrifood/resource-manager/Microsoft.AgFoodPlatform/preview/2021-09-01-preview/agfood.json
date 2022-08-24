@@ -11,8 +11,11 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Install extension.",
-        "operationId": "Extensions_Create",
+        "description": "Install or Update extension.",
+        "operationId": "Extensions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -31,11 +34,25 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "description": "Extension resource request body.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstallationRequest"
+            }
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Extension"
             }
@@ -48,8 +65,8 @@
           }
         },
         "x-ms-examples": {
-          "Extensions_Create": {
-            "$ref": "./examples/Extensions_Create.json"
+          "Extensions_CreateOrUpdate": {
+            "$ref": "./examples/Extensions_CreateOrUpdate.json"
           }
         }
       },
@@ -96,52 +113,6 @@
         "x-ms-examples": {
           "Extensions_Get": {
             "$ref": "./examples/Extensions_Get.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Extensions"
-        ],
-        "description": "Upgrade to latest extension.",
-        "operationId": "Extensions_Update",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ExtensionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Extension"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Extensions_Update": {
-            "$ref": "./examples/Extensions_Update.json"
           }
         }
       },
@@ -1233,6 +1204,19 @@
     }
   },
   "definitions": {
+    "ApiProperties": {
+      "description": "Api properties.",
+      "type": "object",
+      "properties": {
+        "apiFreshnessWindow": {
+          "format": "int32",
+          "description": "Iterval in seconds for which the weather data for the api needs to be refreshed.",
+          "maximum": 3600,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
     "ExtensionProperties": {
       "description": "Extension resource properties.",
       "type": "object",
@@ -1289,6 +1273,29 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ExtensionInstallationRequest": {
+      "description": "Extension Installation Request Body.",
+      "required": [
+        "apiProperties"
+      ],
+      "type": "object",
+      "properties": {
+        "extensionVersion": {
+          "description": "Extension Version.",
+          "default": null,
+          "maxLength": 10,
+          "minLength": 3,
+          "type": "string"
+        },
+        "apiProperties": {
+          "description": "Api Properties.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          }
+        }
+      }
     },
     "ExtensionListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
