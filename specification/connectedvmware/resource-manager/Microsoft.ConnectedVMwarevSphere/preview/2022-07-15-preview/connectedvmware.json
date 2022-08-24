@@ -2134,7 +2134,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/start": {
@@ -2182,7 +2185,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/restart": {
@@ -2230,7 +2236,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines": {
@@ -3734,6 +3743,65 @@
           "Get all Machine Extensions": {
             "$ref": "./examples/LISTExtension.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/upgradeExtensions": {
+      "post": {
+        "tags": [
+          "MachineExtensions Upgrade"
+        ],
+        "operationId": "UpgradeExtensions",
+        "description": "The operation to Upgrade Machine Extensions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine containing the extension."
+          },
+          {
+            "name": "extensionUpgradeParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpgrade"
+            },
+            "description": "Parameters supplied to the Upgrade Extensions operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/Extensions_Upgrade.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -6799,6 +6867,39 @@
         }
       },
       "description": "Describes the Machine Extensions List Result."
+    },
+    "TargetVersion": {
+      "type": "string",
+      "description": "Extension Upgrade Target Version."
+    },
+    "ExtensionTargetProperties": {
+      "type": "object",
+      "properties": {
+        "targetVersion": {
+          "type": "object",
+          "$ref": "#/definitions/TargetVersion",
+          "description": "Properties for the specified Extension to Upgrade."
+        }
+      },
+      "description": "Describes the Machine Extension Target Version Properties"
+    },
+    "ExtensionTarget": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "$ref": "#/definitions/ExtensionTargetProperties"
+      },
+      "description": "Describes the Machine Extension Target Properties"
+    },
+    "MachineExtensionUpgrade": {
+      "type": "object",
+      "properties": {
+        "extensionTargets": {
+          "$ref": "#/definitions/ExtensionTarget",
+          "description": "Describes the Extension Target Properties."
+        }
+      },
+      "description": "Describes the Machine Extension Upgrade Properties"
     },
     "ProvisioningAction": {
       "description": "Defines the different types of operations for guest agent.",
