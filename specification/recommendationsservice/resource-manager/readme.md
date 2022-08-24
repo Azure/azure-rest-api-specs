@@ -45,11 +45,6 @@ input-file:
 ```yaml $(tag) == 'package-2022-03-01-preview'
 input-file:
   - Microsoft.RecommendationsService/preview/2022-03-01-preview/recommendationsservice.json
-directive:
-  - where:
-      - $.paths
-    suppress:
-      - OperationsAPIImplementation
 ```
 
 ---
