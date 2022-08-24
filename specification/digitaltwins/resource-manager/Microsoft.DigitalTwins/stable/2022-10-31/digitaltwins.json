@@ -1306,7 +1306,9 @@
           "type": "string",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "DigitalTwinsIdentityType",
@@ -1325,6 +1327,51 @@
           "type": "string",
           "x-nullable": true,
           "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "x-nullable": true,
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\r\n.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "The information about the user assigned identity.",
+      "properties": {
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of the User Assigned Identity Resource."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The object id of the User Assigned Identity Resource."
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "The properties of the Managed Identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user identity ARM resource id if the managed identity type is 'UserAssigned'.",
+          "type": "string"
         }
       }
     },
@@ -1689,6 +1736,11 @@
         "deadLetterUri": {
           "description": "Dead letter storage URL for identity-based authentication.",
           "type": "string",
+          "x-nullable": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Managed identity properties for the endpoint.",
           "x-nullable": true
         }
       }
@@ -2055,6 +2107,11 @@
             "name": "TimeSeriesDatabaseConnectionState",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Managed identity properties for the time series database connection resource.",
+          "x-nullable": true
         }
       }
     },
