@@ -1068,7 +1068,7 @@
         },
         "diskControllerType": {
           "$ref": "#/definitions/DiskControllerType",
-          "description": "Specifies the disk controller type configured for the VM. <br><br> Minimum api-version: 2022-08-01"
+          "description": "Specifies the disk controller type configured for the VM. <br><br>NOTE: This property will be set to the default disk controller type if not specified provided virtual machine is being created as a hyperVGeneration: V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. <br>You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. <br><br> Minimum api-version: 2022-08-01"
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
