@@ -437,6 +437,31 @@
               }
             ]
           }
+        },
+        "translateRequiredQueryParameters": {
+          "type": "string",
+          "description": "Strategy of translating required query parameters to template ones. By default has value 'template'. Possible values: 'template', 'query'",
+          "enum": [
+            "template",
+            "query"
+          ],
+          "x-ms-client-name": "TranslateRequiredQueryParametersConduct",
+          "x-ms-enum": {
+            "name": "TranslateRequiredQueryParametersConduct",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "template",
+                "description": "Translates required query parameters to template ones. Is a default value",
+                "name": "Template"
+              },
+              {
+                "value": "query",
+                "description": "Leaves required query parameters as they are (no translation done).",
+                "name": "Query"
+              }
+            ]
+          }
         }
       },
       "allOf": [
