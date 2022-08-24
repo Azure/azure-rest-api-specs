@@ -129,8 +129,7 @@ These settings apply only when `--tag=package-2022-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-08'
 input-file:
-  - stable/2022-08-23/AnomalyDetector.json
-  - stable/2022-08-23/MultivariateAnomalyDetector.json
-  - stable/2022-08-23/RootCauseAnalysis.json
+  - stable/v1.1/AnomalyDetector.json
+  - stable/v1.1/MultivariateAnomalyDetector.json
 ```
 
