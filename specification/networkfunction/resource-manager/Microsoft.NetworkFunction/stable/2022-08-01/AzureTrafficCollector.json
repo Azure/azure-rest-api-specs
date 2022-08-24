@@ -778,32 +778,6 @@
     "TrackedResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
         "systemData": {
           "allOf": [
             {
@@ -814,8 +788,12 @@
           "readOnly": true
         }
       },
-      "description": "Common resource representation.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Common resource representation."
     },
     "ResourceReference": {
       "type": "object",
