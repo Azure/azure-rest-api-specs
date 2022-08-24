@@ -68,7 +68,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a WAF manifest": {
+          "Gets WAF default manifest": {
             "$ref": "./examples/GetApplicationGatewayWafDynamicManifestsDefault.json"
           }
         }
@@ -108,7 +108,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a WAF manifest": {
+          "Gets WAF manifests": {
             "$ref": "./examples/GetApplicationGatewayWafDynamicManifests.json"
           }
         }
@@ -126,9 +126,10 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "network.json#/definitions/Resource"
         }
       ],
+      "type": "object",
       "description": "Response for ApplicationGatewayWafDynamicManifest API service call."
     },
     "ApplicationGatewayWafDynamicManifestPropertiesResult": {
