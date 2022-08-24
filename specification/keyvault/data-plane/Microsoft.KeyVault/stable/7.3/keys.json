@@ -567,7 +567,7 @@
         ],
         "operationId": "decrypt",
         "summary": "Decrypts a single block of encrypted data.",
-        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.",
         "parameters": [
           {
             "name": "key-name",
@@ -1248,12 +1248,13 @@
           "type": "boolean"
         },
         "data": {
-          "description": "Blob encoding the policy rules under which the key can be released.",
+          "description": "Blob encoding the policy rules under which the key can be released. Blob must be base64 URL encoded.",
           "type": "string",
           "format": "base64url",
           "x-ms-client-name": "encodedPolicy"
         }
-      }
+      },
+      "description": "The policy rules under which the key can be exported."
     },
     "JsonWebKey": {
       "properties": {
@@ -1473,7 +1474,7 @@
         },
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the 1st version of an exportable key."
         }
       },
       "description": "The attributes of a key managed by the key vault service."
@@ -1589,7 +1590,7 @@
       "properties": {
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the 1st version of an exportable key."
         },
         "kty": {
           "x-ms-client-name": "keyType",
@@ -1850,7 +1851,7 @@
         "iv": {
           "type": "string",
           "format": "base64url",
-          "description": "Initialization vector for symmetric algorithms."
+          "description": "Cryptographically random, non-repeating initialization vector for symmetric algorithms."
         },
         "aad": {
           "type": "string",

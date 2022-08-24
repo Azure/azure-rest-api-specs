@@ -18,9 +18,10 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 clear-output-folder: true
 batch:
-  - tag: package-flexibleserver-2021-06
+  - tag: package-flexibleserver-2022-01-preview
   - tag: package-2020-01-01
 ```
+
 
 ### Tag: package-flexibleserver-2022-01-preview and python
 
@@ -32,15 +33,6 @@ namespace: azure.mgmt.rdbms.postgresql_flexibleservers
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 ```
 
-### Tag: package-flexibleserver-2021-06 and python
-
-These settings apply only when `--tag=package-flexibleserver-2021-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-flexibleserver-2021-06' && $(python)
-namespace: azure.mgmt.rdbms.postgresql_flexibleservers
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
-```
 
 ### Tag: package-2020-01-01 and python
 

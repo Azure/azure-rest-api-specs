@@ -19,7 +19,7 @@ csharp:
 # remove DUMMY member of enum
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: ComputeRP/virtualMachineScaleSet.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
