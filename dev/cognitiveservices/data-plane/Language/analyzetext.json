@@ -1449,7 +1449,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/Entity"
+            "$ref": "#/definitions/EntityWithResolution"
           }
         }
       },
@@ -1498,6 +1498,23 @@
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
+        }
+      }
+    },
+    "EntityWithResolution": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "resolutions": {
+          "description": "The collection of entity resolution objects.",
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/definitions/BaseResolution"
+          }
         }
       }
     },
