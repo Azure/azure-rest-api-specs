@@ -417,6 +417,11 @@
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
         },
+        "isAutotuneEnabled": {
+          "type": "boolean",
+          "title": "Enable Autotune",
+          "description": "Whether autotune is required or not."
+        },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
           "description": "Whether session level packages enabled."
@@ -447,7 +452,7 @@
           "description": "List of custom libraries/packages associated with the spark pool.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LibraryInfo"
+            "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
           }
         },
         "sparkConfigProperties": {
@@ -555,45 +560,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of executors alloted"
-        }
-      }
-    },
-    "LibraryInfo": {
-      "type": "object",
-      "description": "Library/package information of a Big Data pool powered by Apache Spark",
-      "title": "Information about a library/package created at the workspace level.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the library."
-        },
-        "path": {
-          "type": "string",
-          "description": "Storage blob path of library."
-        },
-        "containerName": {
-          "type": "string",
-          "description": "Storage blob container name."
-        },
-        "uploadedTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last update time of the library.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the library."
-        },
-        "provisioningStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning status of the library/package."
-        },
-        "creatorId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Creator Id of the library/package."
         }
       }
     },
