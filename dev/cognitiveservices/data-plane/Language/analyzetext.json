@@ -251,7 +251,7 @@
         "KeyPhraseExtraction",
         "LanguageDetection",
         "EntityLinking",
-        "ZeroShotClassification"
+        "DynamicClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -289,7 +289,7 @@
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
         "EntityLinkingResults",
-        "ZeroShotClassificationResults"
+        "DynamicClassificationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -471,13 +471,13 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
-    "AnalyzeTextZeroShotClassificationInput": {
+    "AnalyzeTextDynamicClassificationInput": {
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
         },
         "parameters": {
-          "$ref": "#/definitions/ZeroShotClassificationTaskParameters"
+          "$ref": "#/definitions/DynamicClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -485,7 +485,7 @@
           "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
-      "x-ms-discriminator-value": "ZeroShotClassification"
+      "x-ms-discriminator-value": "DynamicClassification"
     },
     "AnalyzeTextJobsInput": {
       "properties": {
@@ -2313,7 +2313,7 @@
         }
       }
     },
-    "ZeroShotClassificationTaskParameters": {
+    "DynamicClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Zero Shot Classification task.",
       "properties": {
@@ -2347,11 +2347,11 @@
         ]
       }
     },
-    "ZeroShotClassificationTaskResult": {
+    "DynamicClassificationTaskResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/ZeroShotClassificationResult"
+          "$ref": "#/definitions/DynamicClassificationResult"
         }
       },
       "allOf": [
@@ -2362,9 +2362,9 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "ZeroShotClassificationResults"
+      "x-ms-discriminator-value": "DynamicClassificationResults"
     },
-    "ZeroShotClassificationResult": {
+    "DynamicClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
