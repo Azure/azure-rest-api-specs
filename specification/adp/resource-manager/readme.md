@@ -74,6 +74,7 @@ input-file:
 version: 2022-02-01-privatepreview
 version-with-underscores: 2022_05_01_privatepreview
 input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-02-01-privatepreview/workspaces.json
   - Microsoft.AutonomousDevelopmentPlatform/preview/2022-02-01-privatepreview/eventGridFilters.json
 ```
 

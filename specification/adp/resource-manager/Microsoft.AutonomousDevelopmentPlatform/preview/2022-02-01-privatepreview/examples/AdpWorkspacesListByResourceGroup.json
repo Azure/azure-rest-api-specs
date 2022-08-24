@@ -1,0 +1,29 @@
+{
+  "operationId": "workspaces_ListByResourceGroup",
+  "title": "List workspaces by resource group",
+  "parameters": {
+    "workspaceName": "sample-workspace",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2022-02-01-privatepreview",
+    "subscriptionId": "sample-subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/sample-workspace",
+            "name": "sample-workspace",
+            "type": "Microsoft.AutonomousDevelopmentPlatform/workspaces",
+            "location": "westeurope",
+            "properties": {
+              "provisioningState": "Success",
+              "endpoint": "https://sample-workspace.kqw2e.westeurope.adp.azure.com/"
+            }
+          }
+        ],
+        "nextLink": "link"
+      }
+    }
+  }
+}
