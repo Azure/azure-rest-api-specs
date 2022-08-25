@@ -778,6 +778,41 @@
     "TrackedResource": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "systemData": {
           "allOf": [
             {
@@ -788,12 +823,11 @@
           "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "location"
       ],
-      "description": "Common resource representation."
+      "description": "Common resource representation.",
+      "x-ms-azure-resource": true
     },
     "ResourceReference": {
       "type": "object",
