@@ -370,6 +370,12 @@
           },
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
+          },
+          "SearchCreateOrUpdateServiceAuthOptions": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceAuthOptions.json"
+          },
+          "SearchCreateOrUpdateServiceDisableLocalAuth": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceDisableLocalAuth.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -440,11 +446,17 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceToAllowAccessFromPublicCustomIPs": {
+          "SearchUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
-          "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
+          "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
+          },
+          "SearchUpdateServiceAuthOptions": {
+            "$ref": "./examples/SearchUpdateServiceAuthOptions.json"
+          },
+          "SearchUpdateServiceDisableLocalAuth": {
+            "$ref": "./examples/SearchUpdateServiceDisableLocalAuth.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -1410,6 +1422,49 @@
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
     },
+    "DataPlaneAuthOptions": {
+      "properties": {
+        "apiKeyOnly": {
+          "type": "object",
+          "properties": {},
+          "description": "Indicates that only the API key needs to be used for authentication."
+        },
+        "aadOrApiKey": {
+          "$ref": "#/definitions/DataPlaneAadOrApiKeyAuthOption",
+          "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+        }
+      },
+      "description": "Defines the options for how the data plane API of a Search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
+    },
+    "DataPlaneAadOrApiKeyAuthOption": {
+      "properties": {
+        "aadAuthFailureMode": {
+          "type": "string",
+          "description": "Describes what response the data plane API of a Search service would send for requests that failed authentication.",
+          "enum": [
+            "http403",
+            "http401WithBearerChallenge"
+          ],
+          "x-ms-enum": {
+            "name": "AadAuthFailureMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "http403",
+                "name": "Http403",
+                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden)."
+              },
+              {
+                "value": "http401WithBearerChallenge",
+                "name": "Http401WithBearerChallenge",
+                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 401 (Unauthorized) and present a Bearer Challenge."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+    },
     "PrivateEndpointConnection": {
       "properties": {
         "properties": {
@@ -1849,7 +1904,8 @@
             "deleting",
             "degraded",
             "disabled",
-            "error"
+            "error",
+            "stopped"
           ],
           "x-ms-enum": {
             "name": "SearchServiceStatus",
@@ -1933,7 +1989,16 @@
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
         },
-        "privateEndpointConnections": {
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined."
+        },
+        "authOptions": {
+          "$ref": "#/definitions/DataPlaneAuthOptions",
+          "description": "Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
+        },
+                "privateEndpointConnections": {
           "readOnly": true,
           "type": "array",
           "items": {
