@@ -123,11 +123,11 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-### Tag: package-v1.1
+### Tag: v1.1
 
-These settings apply only when `--tag=package-v1.1` is specified on the command line.
+These settings apply only when `--tag=v1.1` is specified on the command line.
 
-```yaml $(tag) == 'package-v1.1'
+```yaml $(tag) == 'v1.1'
 input-file:
   - stable/v1.1/AnomalyDetector.json
   - stable/v1.1/MultivariateAnomalyDetector.json
