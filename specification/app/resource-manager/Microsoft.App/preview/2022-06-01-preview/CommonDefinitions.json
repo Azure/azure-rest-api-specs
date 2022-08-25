@@ -899,6 +899,39 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
+    },
+    "AppLogsConfiguration": {
+      "description": "Configuration of application logs",
+      "type": "object",
+      "properties": {
+        "destination": {
+          "description": "Logs destination",
+          "type": "string"
+        },
+        "logAnalyticsConfiguration": {
+          "description": "Log Analytics configuration",
+          "$ref": "#/definitions/LogAnalyticsConfiguration"
+        }
+      }
+    },
+    "LogAnalyticsConfiguration": {
+      "description": "Log analytics configuration",
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "description": "Log analytics customer id",
+          "type": "string"
+        },
+        "sharedKey": {
+          "description": "Log analytics customer key",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
     }
   },
   "securityDefinitions": {

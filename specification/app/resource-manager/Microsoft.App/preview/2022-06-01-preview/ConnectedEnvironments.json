@@ -408,6 +408,10 @@
               "type": "string",
               "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
               "x-ms-secret": true
+            },
+            "appLogsConfiguration": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppLogsConfiguration",
+              "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"azure-monitor\" is\nsupported"
             }
           },
           "x-ms-client-flatten": true
