@@ -935,6 +935,55 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "get": {
+        "tags": [
+          "ScopePools"
+        ],
+        "operationId": "ScopePools_ListByWorkspace",
+        "description": "Gets a list of scope pools",
+        "x-ms-examples": {
+          "Get list of restorable dropped Sql pools": {
+            "$ref": "./examples/GetScopePoolsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScopePoolsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -1597,6 +1646,115 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopePoolsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopePools"
+          },
+          "description": "A list of Scope pools"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response to a list Scope pools request"
+    },
+
+    "ScopePools": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ScopePoolProperties",
+          "description": "The properties of a Scope pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Scope pool"
+    },
+
+    "ScopePoolProperties": {
+      "properties": {
+        "creationDate": {
+          "description": "The Creation Date for Scope Pool",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "maxQueuedJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum numbers of jobs that can queue up"
+        },
+        "maxRunningJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum number of jobs that can run simultaneously"
+        },
+        "maxTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max tokens per pool"
+        },
+        "maxEcoTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max ECO tokens per pool"
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Scope Pool Extended Properties",
+          "properties": {
+            "poolLimitAndPolicies": {
+              "type": "object",
+              "description": "Scope pool Limit And Policies",
+              "properties": {
+                "maxTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max Tokens Per Job"
+                },
+                "maxEcoTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max ECO Tokens Per Job"
+                }
+              }
+            }
+          }
+        },
+        "provisioningState": {
+          "enum": [
+            "Provisioning",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "DeleteError",
+            "UpdateError"
+          ],
+          "description": "Provisioning State of Scope Pool",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkspaceprovisioningState",
+            "modelAsString": true
+          }
         }
       }
     }
