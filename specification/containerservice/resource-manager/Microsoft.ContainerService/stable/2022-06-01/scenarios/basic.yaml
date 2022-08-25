@@ -11,7 +11,9 @@ variables:
     type: string
 
 scenarios:
-  - steps:
+  - scenario:  ContainserService
+    description: Microsoft.ContainerService/managedClusters
+    steps:
       - step: ManagedClusters_CreateOrUpdate
         exampleFile: ..\examples\ManagedClustersCreate_Update.json
         requestUpdate:
