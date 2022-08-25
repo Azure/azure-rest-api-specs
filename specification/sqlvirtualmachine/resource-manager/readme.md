@@ -28,15 +28,23 @@ These are the global settings for the SQL virtual machine API.
 title: SqlVirtualMachineManagementClient
 description: 'The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.'
 openapi-type: arm
-tag: package-2022-02
+tag: package-preview-2022-07
 ```
 
 
+### Tag: package-preview-2022-07
+
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-07'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-07-01-preview/sqlvm.json
+```
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
 ```
@@ -45,11 +53,10 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
 ```
-
 
 ### Tag: package-preview-2021-11
 
