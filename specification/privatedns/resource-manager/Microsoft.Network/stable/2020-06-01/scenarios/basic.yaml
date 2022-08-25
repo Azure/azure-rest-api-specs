@@ -2,12 +2,16 @@
 scope: ResourceGroup
 
 variables:
-  privateZoneName: scenario_privatezone
+  privateZoneName: scenario_privatezone.com
+  globalLocation: Global
 
 prepareSteps:
   - step: PrivateZone_Create
     exampleFile: ../examples/PrivateZonePut.json
-
+    requestUpdate:
+      - replace: /parameters/location
+        value: $(globalLocation)
+    
 scenarios:
   - scenario: PrivateZone
     description: Microsoft.Network/privateDnsZones
@@ -50,7 +54,9 @@ scenarios:
         exampleFile: ../examples/VirtualNetworkLinkPut.json
         requestUpdate:
           - replace: /parameters/properties/virtualNetwork/id
-            value: $(subnetId)
+            value: $(virtaulNetworkId)
+          - replace: /parameters/location
+            value: Global
       - step: VirtualNetworkLink_Update
         exampleFile: ../examples/VirtualNetworkLinkPatch.json
       - step: VirtualNetworkLink_Get
@@ -59,7 +65,3 @@ scenarios:
         exampleFile: ../examples/VirtualNetworkLinkList.json
       - step: VirtualNetworkLink_Delete
         exampleFile: ../examples/VirtualNetworkLinkDelete.json
-
-cleanUpSteps:
-  - step: PrivateZone_Delete
-    exampleFile: ../examples/PrivateZoneDelete.json
