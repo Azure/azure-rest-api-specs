@@ -59,6 +59,20 @@ batch:
   - tag: package-2022-06
   - tag: package-preview-2022-07
   - tag: package-2022-07
+  - tag: package-2022-08
+```
+
+### Tag: package-2022-08 and java
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_08_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2022-07 and java
