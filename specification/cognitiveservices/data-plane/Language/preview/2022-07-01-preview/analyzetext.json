@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-05-01"
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "version": "2022-07-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -44,7 +44,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ShowStats"
+            "$ref": "common.json#/parameters/ShowStats"
           },
           {
             "description": "Collection of documents to analyze and a single task to execute.",
@@ -72,22 +72,22 @@
         },
         "x-ms-examples": {
           "Successful Entity Linking Request": {
-            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
+            "$ref": "./examples/text/SuccessfulEntityLinkingRequest.json"
           },
           "Successful Entity Recognition Request": {
-            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
+            "$ref": "./examples/text/SuccessfulEntityRecognitionRequest.json"
           },
           "Successful Key Phrase Extraction Request": {
-            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
+            "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
           },
           "Successful PII Entity Recognition Request": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
+            "$ref": "./examples/text/SuccessfulPiiEntityRecognitionRequest.json"
           },
           "Successful Language Detection Request": {
-            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
+            "$ref": "./examples/text/SuccessfulLanguageDetectionRequest.json"
           },
           "Successful Sentiment Analysis Request": {
-            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
+            "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
           }
         }
       }
@@ -135,7 +135,10 @@
         },
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Healthcare Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -154,10 +157,10 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JobId"
+            "$ref": "common.json#/parameters/JobId"
           },
           {
-            "$ref": "#/parameters/ShowStats"
+            "$ref": "common.json#/parameters/ShowStats"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -182,7 +185,10 @@
         },
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Text Analysis Health Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
           }
         }
       }
@@ -200,7 +206,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JobId"
+            "$ref": "common.json#/parameters/JobId"
           }
         ],
         "responses": {
@@ -221,7 +227,7 @@
         },
         "x-ms-examples": {
           "Successful Job Delete Request": {
-            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
+            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -255,6 +261,7 @@
         "KeyPhraseExtraction",
         "EntityLinking",
         "Healthcare",
+        "ExtractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification"
@@ -290,6 +297,7 @@
         "KeyPhraseExtractionLROResults",
         "EntityLinkingLROResults",
         "HealthcareLROResults",
+        "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults"
@@ -300,6 +308,7 @@
       }
     },
     "MultiLanguageAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -310,6 +319,7 @@
       }
     },
     "LanguageDetectionAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -320,6 +330,7 @@
       }
     },
     "AnalyzeTextTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -331,6 +342,7 @@
       }
     },
     "AnalyzeTextLROTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -342,11 +354,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskIdentifier"
+          "$ref": "common.json#/definitions/TaskIdentifier"
         }
       ]
     },
     "AnalyzeTextTaskResult": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -358,6 +371,7 @@
       }
     },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -374,6 +388,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -390,6 +405,7 @@
       "x-ms-discriminator-value": "EntityRecognition"
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -406,6 +422,7 @@
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -422,6 +439,7 @@
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -438,6 +456,7 @@
       "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -454,9 +473,14 @@
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
+          "type": "string"
+        },
+        "defaultLanguage": {
+          "description": "Default language to use for records requesting automatic language detection.",
           "type": "string"
         },
         "analysisInput": {
@@ -475,78 +499,22 @@
         "tasks"
       ]
     },
-    "TaskIdentifier": {
-      "type": "object",
-      "description": "Base task object.",
-      "properties": {
-        "taskName": {
-          "type": "string"
-        }
-      }
-    },
-    "TaskParameters": {
-      "type": "object",
-      "description": "Base parameters object for a text analysis task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "default": false
-        }
-      }
-    },
-    "PreBuiltTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using pre-built models.",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "default": "latest"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ]
-    },
-    "PreBuiltResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
     "CustomTaskParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
+          "description": "This field indicates the project name for the model.",
+          "type": "string"
         },
         "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
+          "description": "This field indicates the deployment name for the model.",
+          "type": "string"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
+          "$ref": "common.json#/definitions/TaskParameters"
         }
       ],
       "required": [
@@ -555,6 +523,7 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -564,7 +533,7 @@
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "common.json#/definitions/RequestStatistics"
         },
         "projectName": {
           "type": "string",
@@ -620,6 +589,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -668,6 +640,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -747,13 +722,24 @@
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
+        "fhirVersion": {
+          "type": "string",
+          "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "enum": [
+            "4.0.1"
+          ],
+          "x-ms-enum": {
+            "name": "fhirVersion",
+            "modelAsString": true
+          }
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -787,7 +773,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -810,6 +796,11 @@
           "items": {
             "$ref": "#/definitions/HealthcareRelation"
           }
+        },
+        "fhirBundle": {
+          "type": "object",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -855,7 +846,7 @@
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
-            "ConditionQualifier",
+            "ConditionalQualifier",
             "MedicationClass",
             "MedicationName",
             "Dosage",
@@ -946,6 +937,11 @@
             "name": "relationType",
             "modelAsString": true
           }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         },
         "entities": {
           "description": "The entities in the relation.",
@@ -1048,7 +1044,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1077,6 +1073,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ],
       "required": [
@@ -1101,7 +1100,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1157,19 +1156,19 @@
       ],
       "properties": {
         "positive": {
+          "description": "Confidence score for positive sentiment",
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
+          "format": "double"
         },
         "neutral": {
+          "description": "Confidence score for neutral sentiment",
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
+          "format": "double"
         },
         "negative": {
+          "description": "Confidence score for negative sentiment",
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
+          "format": "double"
         }
       },
       "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
@@ -1363,17 +1362,17 @@
       ],
       "properties": {
         "positive": {
+          "description": "Confidence score for positive sentiment",
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
+          "format": "double"
         },
         "negative": {
+          "description": "Confidence score for negative sentiment",
           "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
+          "format": "double"
         }
       },
-      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
+      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
     },
     "EntitiesTaskParameters": {
       "type": "object",
@@ -1385,7 +1384,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1431,6 +1430,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1438,7 +1440,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1514,7 +1516,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1560,6 +1562,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1567,7 +1572,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1683,7 +1688,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1729,6 +1734,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1736,7 +1744,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1980,12 +1988,150 @@
       "type": "array",
       "uniqueItems": true
     },
+    "ExtractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Extractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "default": 3
+        },
+        "sortBy": {
+          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "ExtractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Extractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "ExtractiveSummarizationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "default": "Offset",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text.",
+            "value": "Offset"
+          },
+          {
+            "name": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.",
+            "value": "Rank"
+          }
+        ]
+      }
+    },
+    "ExtractedSummaryDocumentResult": {
+      "type": "object",
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "description": "A ranked list of sentences representing the extracted summary.",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "sentences"
+      ]
+    },
+    "ExtractedSummarySentence": {
+      "type": "object",
+      "required": [
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
     "KeyPhraseTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Key Phrase Extraction task.",
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -2031,6 +2177,9 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2038,7 +2187,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -2070,7 +2219,7 @@
       "description": "Supported parameters for a Language Detection task.",
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -2104,7 +2253,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -2154,7 +2303,7 @@
     "AnalyzeTextJobState": {
       "allOf": [
         {
-          "$ref": "#/definitions/JobState"
+          "$ref": "common.json#/definitions/JobState"
         },
         {
           "$ref": "#/definitions/TasksState"
@@ -2172,74 +2321,10 @@
       },
       "type": "object"
     },
-    "JobState": {
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "partiallyCompleted",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "State"
-          }
-        },
-        "errors": {
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          },
-          "type": "array"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "jobId",
-        "lastUpdatedDateTime",
-        "createdDateTime",
-        "status"
-      ]
-    },
-    "JobErrors": {
-      "properties": {
-        "errors": {
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "AnalyzeTextJobStatistics": {
       "properties": {
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "common.json#/definitions/RequestStatistics"
         }
       },
       "type": "object"
@@ -2281,33 +2366,6 @@
       ],
       "type": "object"
     },
-    "TaskState": {
-      "properties": {
-        "lastUpdateDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "State"
-          }
-        }
-      },
-      "required": [
-        "status",
-        "lastUpdateDateTime"
-      ],
-      "type": "object"
-    },
     "AnalyzeTextLROResult": {
       "type": "object",
       "discriminator": "kind",
@@ -2318,10 +2376,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskState"
+          "$ref": "common.json#/definitions/TaskState"
         },
         {
-          "$ref": "#/definitions/TaskIdentifier"
+          "$ref": "common.json#/definitions/TaskIdentifier"
         }
       ],
       "required": [
@@ -2430,6 +2488,23 @@
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
+    "ExtractiveSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
+    },
     "HealthcareLROResult": {
       "type": "object",
       "properties": {
@@ -2509,6 +2584,15 @@
         }
       }
     },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
     "DocumentError": {
       "type": "object",
       "required": [
@@ -2576,13 +2660,12 @@
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
     },
-    "RequestStatistics": {
+    "DocumentRequestStatistics": {
       "type": "object",
       "required": [
         "documentsCount",
         "validDocumentsCount",
-        "erroneousDocumentsCount",
-        "transactionsCount"
+        "erroneousDocumentsCount"
       ],
       "properties": {
         "documentsCount": {
@@ -2599,14 +2682,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        },
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of transactions for the request."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ],
+      "description": "if showStats=true was specified in the request this field will contain information about the document request payload."
     },
     "MultiLanguageInput": {
       "type": "object",
@@ -2626,7 +2709,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       }
     },
@@ -2650,23 +2733,5 @@
       }
     }
   },
-  "parameters": {
-    "ShowStats": {
-      "name": "showStats",
-      "in": "query",
-      "description": "(Optional) if set to true, response will contain request and document level statistics.",
-      "type": "boolean",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "JobId": {
-      "description": "Job ID",
-      "format": "uuid",
-      "in": "path",
-      "name": "jobId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

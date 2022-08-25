@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
@@ -316,6 +316,7 @@
       }
     },
     "MultiLanguageAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -326,6 +327,7 @@
       }
     },
     "LanguageDetectionAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -336,6 +338,7 @@
       }
     },
     "AnalyzeTextTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -347,6 +350,7 @@
       }
     },
     "AnalyzeTextLROTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -363,6 +367,7 @@
       ]
     },
     "AnalyzeTextTaskResult": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -374,6 +379,7 @@
       }
     },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -390,6 +396,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -406,6 +413,7 @@
       "x-ms-discriminator-value": "EntityRecognition"
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -422,6 +430,7 @@
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -438,6 +447,7 @@
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -454,6 +464,7 @@
       "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -470,6 +481,7 @@
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -519,6 +531,7 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -823,32 +836,32 @@
           "type": "string",
           "description": "Healthcare Entity Category.",
           "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
+            "BodyStructure",
+            "Age",
+            "Gender",
+            "ExaminationName",
+            "Date",
+            "Direction",
+            "Frequency",
+            "MeasurementValue",
+            "MeasurementUnit",
+            "RelationalOperator",
+            "Time",
+            "GeneOrProtein",
+            "Variant",
+            "AdministrativeEvent",
+            "CareEnvironment",
+            "HealthcareProfession",
+            "Diagnosis",
+            "SymptomOrSign",
+            "ConditionalQualifier",
+            "MedicationClass",
+            "MedicationName",
+            "Dosage",
+            "MedicationForm",
+            "MedicationRoute",
+            "FamilyRelation",
+            "TreatmentName"
           ]
         },
         "subcategory": {
