@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
-    "version": "2022-07-01-preview"
+    "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -132,6 +132,9 @@
           },
           "Successful Conversation Summarization Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
+          },
+          "Successful Conversation Summarization Task Submit": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -176,6 +179,9 @@
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Summarization Result": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
           }
         }
       }
@@ -873,21 +879,21 @@
           "description": "The entity resolution object kind.",
           "type": "string",
           "enum": [
-            "Boolean",
-            "DateTime",
-            "Number",
-            "Ordinal",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency",
-            "NumericRange",
-            "TemporalSpan"
+            "BooleanResolution",
+            "DateTimeResolution",
+            "NumberResolution",
+            "OrdinalResolution",
+            "SpeedResolution",
+            "WeightResolution",
+            "LengthResolution",
+            "VolumeResolution",
+            "AreaResolution",
+            "AgeResolution",
+            "InformationResolution",
+            "TemperatureResolution",
+            "CurrencyResolution",
+            "NumericRangeResolution",
+            "TemporalSpanResolution"
           ],
           "x-ms-enum": {
             "name": "ResolutionKind",
@@ -924,7 +930,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Age",
+      "x-ms-discriminator-value": "AgeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -957,7 +963,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Volume",
+      "x-ms-discriminator-value": "VolumeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1013,7 +1019,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Speed",
+      "x-ms-discriminator-value": "SpeedResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1055,7 +1061,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Area",
+      "x-ms-discriminator-value": "AreaResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1096,7 +1102,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Length",
+      "x-ms-discriminator-value": "LengthResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1141,7 +1147,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Information",
+      "x-ms-discriminator-value": "InformationResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1182,7 +1188,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Temperature",
+      "x-ms-discriminator-value": "TemperatureResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1215,7 +1221,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Weight",
+      "x-ms-discriminator-value": "WeightResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1259,7 +1265,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Currency",
+      "x-ms-discriminator-value": "CurrencyResolution",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -1288,7 +1294,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Boolean",
+      "x-ms-discriminator-value": "BooleanResolution",
       "properties": {
         "value": {
           "type": "boolean"
@@ -1306,7 +1312,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "DateTime",
+      "x-ms-discriminator-value": "DateTimeResolution",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -1348,7 +1354,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Number",
+      "x-ms-discriminator-value": "NumberResolution",
       "properties": {
         "numberKind": {
           "type": "string",
@@ -1384,7 +1390,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Ordinal",
+      "x-ms-discriminator-value": "OrdinalResolution",
       "properties": {
         "offset": {
           "type": "string",
@@ -1422,7 +1428,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpan",
+      "x-ms-discriminator-value": "TemporalSpanResolution",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -1447,7 +1453,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRange",
+      "x-ms-discriminator-value": "NumericRangeResolution",
       "properties": {
         "rangeKind": {
           "type": "string",
@@ -1772,7 +1778,7 @@
       "properties": {
         "itn": {
           "type": "string",
-          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft’s Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
+          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft's Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
         },
         "maskedItn": {
           "type": "string",
@@ -1786,12 +1792,16 @@
           "type": "string",
           "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
         },
-        "audioTimings": {
+        "wordLevelTimings": {
           "type": "array",
           "description": "The list of word level audio timing information",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
+        },
+        "conversationItemLevelTiming": {
+          "description": "Conversation item level audio timing. This still can help on AI quality if word level audio timings are not available.",
+          "$ref": "#/definitions/ConversationItemLevelTiming"
         }
       }
     },
@@ -2044,11 +2054,31 @@
             "type": "string",
             "enum": [
               "issue",
-              "resolution"
+              "resolution",
+              "chapterTitle",
+              "narrative"
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "issue",
+                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "resolution",
+                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "chapterTitle",
+                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
+                },
+                {
+                  "value": "narrative",
+                  "description": "A generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length and keeps the salient information."
+                }
+              ]
             }
           }
         }
@@ -2056,6 +2086,9 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        },
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
         }
       ]
     },
@@ -2129,6 +2162,13 @@
         },
         "text": {
           "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "#/definitions/ItemizedSummaryContext"
+          }
         }
       },
       "required": [
@@ -2289,6 +2329,33 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ]
+    },
+    "ConversationItemLevelTiming": {
+      "type": "object",
+      "description": "The conversation item level audio timing.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
+        }
+      ]
+    },
+    "ItemizedSummaryContext": {
+      "type": "object",
+      "description": "The context of the summary with conversation item id.",
+      "required": [
+        "conversationItemId"
+      ],
+      "properties": {
+        "conversationItemId": {
+          "type": "string",
+          "description": "Reference to the id of ConversationItem."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/SummaryContext"
         }
       ]
     }

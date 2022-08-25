@@ -27,6 +27,7 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
       - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
       - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
 
     where:
@@ -56,6 +57,15 @@ These settings apply only when `--tag=2022-08-01` is specified on the command li
 version-with-underscores: 2022_08_01
 input-file:
   - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
+```
+### Tag: package-2022-07-20-preview
+
+These settings apply only when `--tag=2022-07-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07-20-preview'
+version-with-underscores: 2022_07_20_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
 ```
 ### Tag: package-2022-04-13-preview
 
