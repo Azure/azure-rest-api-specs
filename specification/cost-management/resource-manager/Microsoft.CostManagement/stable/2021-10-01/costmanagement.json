@@ -2496,7 +2496,17 @@
       "properties": {
         "name": {
           "description": "The name of the column to aggregate.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "PreTaxCostUSD",
+            "Cost",
+            "CostUSD",
+            "PreTaxCost"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionName",
+            "modelAsString": true
+          }
         },
         "function": {
           "description": "The name of the aggregation function to use.",
@@ -2562,7 +2572,7 @@
             "In"
           ],
           "x-ms-enum": {
-            "name": "QueryOperatorType",
+            "name": "ForecastOperatorType",
             "modelAsString": true
           }
         },
