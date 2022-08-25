@@ -138,7 +138,12 @@
             "description": "The specified PrivateLinkScope does not exist."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An error occurred.",
@@ -517,7 +522,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An error occurred.",
@@ -565,7 +575,12 @@
             "description": "Successfully deleted private endpoint connection."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Private endpoint connection does not exist."
@@ -724,7 +739,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An error occurred.",
@@ -772,7 +792,12 @@
             "description": "Successfully deleted scoped resource."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Scoped resource does not exist."
@@ -878,6 +903,7 @@
     "TagsResourcePrivateLinkScope": {
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -914,6 +940,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "enum": ["Succeeded", "Failed", "Canceled"],
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
         },
@@ -950,6 +977,7 @@
         "exclusions": {
           "description": "List of exclusions that override the default access mode settings for specific private endpoint connections.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/AccessModeSettingsExclusion"
           }
@@ -995,6 +1023,7 @@
       "required": [
         "value"
       ],
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1037,6 +1066,7 @@
         }
       ],
       "properties": {
+        "type": "object",
         "properties": {
           "$ref": "#/definitions/ScopedResourceProperties",
           "description": "Resource properties.",
@@ -1060,6 +1090,7 @@
         "provisioningState": {
           "description": "State of the private endpoint connection.",
           "type": "string",
+          "enum": ["Succeeded", "Failed", "Canceled"],
           "readOnly": true
         }
       }
