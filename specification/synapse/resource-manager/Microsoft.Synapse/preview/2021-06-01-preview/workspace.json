@@ -1652,7 +1652,7 @@
     "ScopePoolsListResult": {
       "properties": {
         "value": {
-          "type": "array",
+          "type": "object",
           "items": {
             "$ref": "#/definitions/ScopePools"
           },
@@ -1668,7 +1668,7 @@
     "ScopePools": {
       "properties": {
         "location": {
-          "type": "string",
+          "type": "object",
           "readOnly": true,
           "description": "The geo-location where the resource lives"
         },
@@ -1690,7 +1690,7 @@
       "properties": {
         "creationDate": {
           "description": "The Creation Date for Scope Pool",
-          "type": "string",
+          "type": "object",
           "format": "date-time",
           "readOnly": true
         },
@@ -1719,11 +1719,11 @@
           "description": "The max ECO tokens per pool"
         },
         "extendedProperties": {
-          "type": "object",
+          "type": "string",
           "description": "Scope Pool Extended Properties",
           "properties": {
             "poolLimitAndPolicies": {
-              "type": "object",
+              "type": "string",
               "description": "Scope pool Limit And Policies",
               "properties": {
                 "maxTokensPerJob": {
@@ -1752,7 +1752,7 @@
           "description": "Provisioning State of Scope Pool",
           "type": "string",
           "x-ms-enum": {
-            "name": "WorkspaceprovisioningState",
+            "name": "Workspace provisioning State",
             "modelAsString": true
           }
         }
