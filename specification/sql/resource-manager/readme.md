@@ -159,6 +159,7 @@ input-file:
   - Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentScans.json
   - Microsoft.Sql/preview/2022-05-01-preview/SqlVulnerabilityAssessmentsSettings.json
   - Microsoft.Sql/preview/2022-05-01-preview/SubscriptionUsages.json
+  - Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
   - Microsoft.Sql/preview/2022-05-01-preview/SyncAgents.json
   - Microsoft.Sql/preview/2022-05-01-preview/SyncGroups.json
   - Microsoft.Sql/preview/2022-05-01-preview/SyncMembers.json
