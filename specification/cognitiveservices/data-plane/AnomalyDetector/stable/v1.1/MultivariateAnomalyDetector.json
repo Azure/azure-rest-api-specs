@@ -70,6 +70,50 @@
       }
     },
     "/multivariate/models": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Create and train a multivariate anomaly detection model.",
+            "headers": {
+              "Location": {
+                "description": "Location and ID of the model.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be in a single CSV file in which the first column is timestamp and the second column is value.",
+        "operationId": "TrainMultivariateModel",
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            },
+            "description": "Training request"
+          }
+        ],
+        "x-ms-examples": {
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
+          }
+        }
+      },
       "get": {
         "responses": {
           "200": {
@@ -121,17 +165,13 @@
           "nextLinkName": "nextLink",
           "itemName": "models"
         }
-      },
-      "post": {
+      }
+    },
+    "/multivariate/models/{modelId}": {
+      "delete": {
         "responses": {
-          "201": {
-            "description": "Create and train a multivariate anomaly detection model.",
-            "headers": {
-              "Location": {
-                "description": "Location and ID of the model.",
-                "type": "string"
-              }
-            }
+          "204": {
+            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
           },
           "default": {
             "description": "Error response.",
@@ -146,28 +186,25 @@
             }
           }
         },
-        "summary": "Train a Multivariate Anomaly Detection Model",
-        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be in a single CSV file in which the first column is timestamp and the second column is value.",
-        "operationId": "TrainMultivariateModel",
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
         "parameters": [
           {
-            "name": "body",
+            "name": "modelId",
+            "in": "path",
             "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ModelInfo"
-            },
-            "description": "Training request"
+            "type": "string",
+            "description": "Model identifier",
+            "format": "uuid"
           }
         ],
         "x-ms-examples": {
-          "Train Multivariate model": {
-            "$ref": "./examples/TrainModel.json"
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
           }
         }
-      }
-    },
-    "/multivariate/models/{modelId}": {
+      },
       "get": {
         "responses": {
           "200": {
@@ -205,43 +242,6 @@
         "x-ms-examples": {
           "Get multivariate model": {
             "$ref": "./examples/GetModel.json"
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Delete Multivariate Model",
-        "description": "Delete an existing multivariate model according to the modelId",
-        "operationId": "DeleteMultivariateModel",
-        "parameters": [
-          {
-            "name": "modelId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Model identifier",
-            "format": "uuid"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete multivariate model": {
-            "$ref": "./examples/DeleteModel.json"
           }
         }
       }
@@ -355,27 +355,15 @@
   "definitions": {
     "ModelInfo": {
       "required": [
+        "dataSource",
         "endTime",
-        "sourceFilePath",
-        "startTime",
-        "storageAccountName",
-        "storageEndpointSuffix"
+        "startTime"
       ],
       "properties": {
-        "storageAccountName": {
+        "dataSource": {
           "type": "string",
           "description": "Source link to the input variables. Each variable should be a csv file with two columns, `timestamp` and `value`. By default, the file name of the variable will be used as its variable name.",
-          "example": "multiadsample"
-        },
-        "storageEndpointSuffix": {
-          "type": "string",
-          "description": "",
-          "example": "blob.core.windows.net"
-        },
-        "sourceFilePath": {
-          "type": "string",
-          "description": "",
-          "example": "/data"
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
         },
         "dataSchema": {
           "$ref": "#/definitions/DataSchema"
@@ -424,7 +412,6 @@
       "description": "Training result of a model including its status, errors and diagnostics information."
     },
     "DataSchema": {
-      "description": "One table.",
       "enum": [
         "OneTable",
         "MultiTable"
@@ -809,32 +796,20 @@
     },
     "DetectionRequest": {
       "required": [
+        "dataSource",
         "endTime",
-        "sourceFilePath",
         "startTime",
-        "storageAccountName",
-        "storageEndpointSuffix",
         "topContributorCount"
       ],
       "properties": {
-        "storageAccountName": {
+        "dataSource": {
           "type": "string",
-          "description": "",
-          "example": "multiadsample"
-        },
-        "storageEndpointSuffix": {
-          "type": "string",
-          "description": "",
-          "example": "blob.core.windows.net"
-        },
-        "sourceFilePath": {
-          "type": "string",
-          "description": "",
-          "example": "/data"
+          "description": "Source link to the input variables. Each variable should be a csv with two columns, `timestamp` and `value`. The file name of the variable will be used as its name. The variables used in detection should be exactly the same with those used in the training phase.",
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
         },
         "topContributorCount": {
           "type": "integer",
-          "description": "",
+          "description": "Top contributor count.",
           "example": 10
         },
         "startTime": {
