@@ -127,7 +127,7 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 These settings apply only when `--tag=package-v1.1` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+```yaml $(tag) == 'package-v1.1'
 input-file:
   - stable/v1.1/AnomalyDetector.json
   - stable/v1.1/MultivariateAnomalyDetector.json
