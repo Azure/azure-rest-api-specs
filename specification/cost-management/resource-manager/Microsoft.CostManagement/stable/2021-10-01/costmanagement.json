@@ -2457,7 +2457,10 @@
         "aggregation": {
           "description": "Dictionary of aggregation expression to use in the forecast. The key of each item in the dictionary is the alias for the aggregated column. forecast can have up to 2 aggregation clauses.",
           "type": "object",
-          "$ref": "#/definitions/ForecastAggregation",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ForecastAggregation"
+          },
           "maxItems": 2
         },
         "filter": {
