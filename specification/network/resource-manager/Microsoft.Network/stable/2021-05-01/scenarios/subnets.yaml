@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: Subnets
+    description: Microsoft.Network/Subnet
+    variables:
+      virtualNetworkName: scenarios_vn
+      subnetName: scenarios_subnet
+    steps:
+      - step: VirtualNetwork_BeginCreateOrUpdat
+        exampleFile: ../examples/VirtualNetworkCreate.json
+
+      - step: Subnets_BeginCreateOrUpdate
+        exampleFile: ../examples/SubnetCreate.json
+
+      - step: Subnets_Get
+        exampleFile: ../examples/SubnetGet.json
+
+      - step: Subnets_List
+        exampleFile: ../examples/SubnetList.json
+
+      - step: Subnets_Delete
+        exampleFile: ../examples/SubnetDelete.json

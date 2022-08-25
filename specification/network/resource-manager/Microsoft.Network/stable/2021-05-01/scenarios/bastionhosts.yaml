@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+prepareSteps:
+  - step: VirtualNetworks_CreateWithSubnet
+    exampleFile: ../examples/VirtualNetworkCreateSubnet.json
+    requestUpdate:
+      - replace: /parameters/properties/subnets/0/name
+        value: AzureBastionSubnet
+    outputVariables:
+      subnetID:
+        fromResponse: /properties/subnets/0/id
+  - step: PublicIpAddress_CreateDefaults
+    exampleFile: ../examples/PublicIpAddressCreateDefaults.json
+    requestUpdate:
+      - add: /parameters/sku
+        value:
+          "name": "Standard"
+          "tier": "Regional"
+      - add: /parameters/properties
+        value: 
+          "publicIPAllocationMethod": "Static"
+    outputVariables:
+      publicIP:
+        fromResponse: /id
+
+scenarios:
+  - scenario:  BastionHost
+    description: Microsoft.Network/bastionHosts
+    variables:
+      bastionHostName: scenario_bastionhost
+    steps:
+      - step: BastionHost_Create
+        exampleFile: ../examples/BastionHostPut.json
+        requestUpdate:
+          - add: /parameters/location
+            value: eastus
+          - replace: /parameters/properties/ipConfigurations/0/properties/subnet/id
+            value: $(subnetID)
+          - replace: /parameters/properties/ipConfigurations/0/properties/publicIPAddress/id
+            value: $(publicIP)
+      - step: BastionHost_Update
+        exampleFile: ../examples/BastionHostPatch.json
+      - step: BastionHost_Get
+        exampleFile: ../examples/BastionHostGet.json
+      - step: BastionHost_List
+        exampleFile: ../examples/BastionHostListBySubscription.json
+      - step: BastionHost_ListByResourceGroup
+        exampleFile: ../examples/BastionHostListByResourceGroup.json
+      - step: BastionHost_Delete
+        exampleFile: ../examples/BastionHostDelete.json

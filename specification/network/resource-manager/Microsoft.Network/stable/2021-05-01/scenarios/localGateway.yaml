@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: LocalNetworkGateway
+    description: Microsoft.Network/localNetworkGateways CRUD
+    steps:
+      - step: LocalNetworkGateway_Create
+        exampleFile: ../examples/LocalNetworkGatewayCreate.json
+        requestUpdate:
+          - remove: /parameters/properties/fqdn
+#          - remove: /properties/gatewayIpAddress
+      - step: LocalNetworkGateway_UpdateTags
+        exampleFile: ../examples/LocalNetworkGatewayUpdateTags.json
+        requestUpdate:
+          - replace: /localNetworkGatewayName
+            value: localgw
+      - step: LocalNetworkGateway_Get
+        exampleFile: ../examples/LocalNetworkGatewayGet.json
+      - step: LocalNetworkGateway_List
+        exampleFile: ../examples/LocalNetworkGatewayList.json
+      - step: LocalNetworkGateway_Delete
+        exampleFile: ../examples/LocalNetworkGatewayDelete.json
