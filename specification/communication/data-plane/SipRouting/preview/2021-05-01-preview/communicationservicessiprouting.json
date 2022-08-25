@@ -113,20 +113,20 @@
         }
       }
     },
-    "/sip/checkRouting/{targetNumber}": {
+    "/sip:checkNumberRouting": {
       "get": {
         "tags": [
           "NumberRoutingValidation"
         ],
         "summary": "Gets the list of routes matching the target phone number, ordered by priority.",
-        "operationId": "CheckRoutingForNumber",
+        "operationId": "CheckNumberRouting",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "targetNumber",
+            "name": "targetPhoneNumber",
             "description": "Phone number to test routing patterns against",
             "required": true,
             "type": "string",
@@ -137,7 +137,7 @@
           },
           {
             "in": "query",
-            "name": "$select",
+            "name": "select",
             "description": "This parameter can be used to select only specific fields of the TrunkRoute objects in the matchingRoutes array.",
             "required": false,
             "type": "string",
@@ -148,7 +148,7 @@
           "200": {
             "description": "A list of matching routes",
             "schema": {
-              "$ref": "#/definitions/RoutingForNumber"
+              "$ref": "#/definitions/RoutesForNumber"
             }
           },
           "default": {
@@ -161,7 +161,7 @@
         },
         "x-ms-examples": {
           "Check target phone number routing": {
-            "$ref": "./examples/CheckRoutingForNumber.json"
+            "$ref": "./examples/CheckNumberRouting.json"
           }
         }
       }
@@ -270,16 +270,12 @@
         }
       }
     },
-    "RoutingForNumber": {
+    "RoutesForNumber": {
       "description": "Represents number routing validation details.",
       "type": "object",
       "properties": {
-        "targetNumber": {
-          "description": "A string in the E.164 format of a phone number, e.g. +11234567890.",
-          "type": "string"
-        },
         "matchingRoutes": {
-          "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration. Only route names are displayed.",
+          "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration.",
           "maxLength": 250,
           "type": "array",
           "items": {
