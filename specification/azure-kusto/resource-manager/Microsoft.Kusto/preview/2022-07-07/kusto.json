@@ -1,4 +1,3 @@
-
 {
   "swagger": "2.0",
   "info": {
@@ -1210,7 +1209,7 @@
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
-          },
+          },          
           {
             "name": "parameters",
             "in": "body",
@@ -1225,6 +1224,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/callerRoleParameter"
           }
         ],
         "responses": {
@@ -1290,6 +1292,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/callerRoleParameter"
           }
         ],
         "responses": {
@@ -6367,6 +6372,23 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
+    },
+    "callerRoleParameter": {
+      "name": "callerRole",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "Admin",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "callerRole",
+        "modelAsString": true
+      },
+      "default": "Admin",
+      "x-ms-parameter-location": "method",
+      "description": "By default, any user who run operation on a database become an Admin on it. This property allows the caller to exclude the caller from Admins list."
     }
   },
   "securityDefinitions": {
