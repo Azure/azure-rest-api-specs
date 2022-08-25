@@ -941,10 +941,10 @@
         "tags": [
           "ScopePools"
         ],
-        "operationId": "ScopePools_ListByWorkspace",
+        "operationId": "ScopePoolsListByWorkspace_Get",
         "description": "Gets a list of scope pools",
         "x-ms-examples": {
-          "Get list of restorable dropped Sql pools": {
+          "Get list of scope pools": {
             "$ref": "./examples/GetScopePoolsList.json"
           }
         },
@@ -1650,6 +1650,7 @@
       }
     },
     "ScopePoolsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "object",
@@ -1659,16 +1660,14 @@
           "description": "A list of Scope pools"
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The response to a list Scope pools request"
     },
-
     "ScopePools": {
+      "type": "object",
+      "title": "Scope Pools",
       "properties": {
         "location": {
-          "type": "object",
+          "type": "string",
           "readOnly": true,
           "description": "The geo-location where the resource lives"
         },
@@ -1683,14 +1682,13 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Scope pool"
+      "description": "Scope pool for workspace"
     },
-
     "ScopePoolProperties": {
       "properties": {
         "creationDate": {
           "description": "The Creation Date for Scope Pool",
-          "type": "object",
+          "type": "string",
           "format": "date-time",
           "readOnly": true
         },
