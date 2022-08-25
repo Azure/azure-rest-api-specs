@@ -7088,12 +7088,14 @@
         },
         "data": {
           "type": "array",
-          "$ref": "#/definitions/GuardrailsVersionUpgradeList"
+          "items": {
+            "$ref": "#/definitions/GuardrailsVersionUpgradeList"
+          }
         }
       }
     },
     "GuardrailsVersionUpgradeList": {
-      "type": "array",
+      "type": "object",
       "properties": {
         "isPreview": {
           "type": "boolean",
