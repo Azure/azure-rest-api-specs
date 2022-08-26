@@ -47,7 +47,7 @@
         "operationId": "GenerateQuestionAnswers_SubmitJob",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/GenerationRequest"
@@ -71,7 +71,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -83,13 +83,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/generate-questionanswers/SuccessfulSubmitQnAGenerationJob.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob.json"
           },
           "Successful query with marked documents": {
-            "$ref": "./examples/generate-questionanswers/SuccessfulSubmitQnAGenerationJob_useAnswerMarkedInContent.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob_useMarkedAnswer.json"
           },
           "Successful query with URL in a document": {
-            "$ref": "./examples/generate-questionanswers/SuccessfulSubmitQnAGenerationJob_URL.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob_URL.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -101,7 +101,7 @@
         "operationId": "GenerateQuestionAnswers_GetJobStatus",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/JobIdParameter"
@@ -135,7 +135,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/generate-questionanswers/SuccessfulQnAGenerationJobStatus.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus.json"
+          },
+          "Successful query with marked documents": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus_useMarkedAnswer.json"
+          },
+          "Successful query with URL in a document": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus_URL.json"
           }
         }
       }
@@ -151,37 +157,6 @@
       "format": "url",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
-    },
-    "TopParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The maximum number of resources to return from the collection.",
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "SkipParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "An offset into the collection of the first resource to be returned.",
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "MaxPageSizeParameter": {
-      "name": "maxpagesize",
-      "in": "query",
-      "description": "The maximum number of resources to include in a single response.",
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     },
     "JobIdParameter": {
       "name": "jobId",
@@ -204,115 +179,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "additionalProperties": false,
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "The error object.",
-      "additionalProperties": false,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/ErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "additionalProperties": false,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/InnerErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Error details."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "TooManyRequests",
-        "InternalServerError",
-        "ServiceUnavailable"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue"
-      ]
-    },
     "Language": {
       "type": "string",
       "description": "Language of the document content. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
@@ -334,27 +200,7 @@
           "$ref": "#/definitions/GenerationParameters"
         }
       }
-    },
-    "GenerationResult": {
-      "type": "object",
-      "description": "Result of question answer generation job.",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "The set of documents with processed raw contents.",
-          "items": {
-            "$ref": "#/definitions/Document"
-          }
-        },
-        "value": {
-          "type": "array",
-          "description": "The set of question and answers generated in the qna generation job.",
-          "items": {
-            "$ref": "#/definitions/GeneratedQAs"
-          }
-        }
-      }
-    },
+    },    
     "Document": {
       "type": "object",
       "required": [
@@ -430,8 +276,38 @@
           "minimum": 1
         }
       }
+    },    
+    "GenerationJobState": {
+      "description": "Generation Job state represents the job metadata and any errors and a result URL if job succeeded.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/JobState"
+        },
+        {
+          "$ref": "#/definitions/GenerationResult"
+        }
+      ]
     },
-    "GeneratedQAs": {
+    "GenerationResult": {
+      "type": "object",
+      "description": "Result of question answer generation job.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents with processed raw contents.",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "value": {
+          "type": "array",
+          "description": "The set of question and answers generated in the qna generation job.",
+          "items": {
+            "$ref": "#/definitions/GeneratedQAs"
+          }
+        }
+      }
+    },"GeneratedQAs": {
       "type": "array",
       "description": "An array of question answers generated from documents in the job.",
       "items": {
@@ -463,87 +339,6 @@
         }        
       },
       "description": "Question and Answer generated from the document."
-    },
-    "JobMetadata": {
-      "description": "Represents the job metadata.",
-      "properties": {
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus"
-        }
-      },
-      "required": [
-        "jobId",
-        "lastUpdatedDateTime",
-        "createdDateTime",
-        "status"
-      ],
-      "type": "object"
-    },
-    "JobStatus": {
-      "description": "Job Status.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling",
-        "partiallyCompleted"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "jobStatus"
-      }
-    },
-    "GenerationJobState": {
-      "description": "Generation Job state represents the job metadata and any errors and a result URL if job succeeded.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        },
-        {
-          "$ref": "#/definitions/GenerationResult"
-        }
-      ]
-    },
-    "JobState": {
-      "description": "Job state represents the job metadata and any errors.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobMetadata"
-        },
-        {
-          "$ref": "#/definitions/Errors"
-        }
-      ]
-    },
-    "Errors": {
-      "description": "Collection of Error types.",
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        }
-      }
     }
   }
 }
