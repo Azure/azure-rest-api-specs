@@ -940,7 +940,12 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "enum": ["Succeeded", "Failed", "Canceled", "Provisioning"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning"
+          ],
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
         },
@@ -977,7 +982,7 @@
         "exclusions": {
           "description": "List of exclusions that override the default access mode settings for specific private endpoint connections.",
           "type": "array",
-          "x-ms-identifiers":[],
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/AccessModeSettingsExclusion"
           }
@@ -1089,7 +1094,12 @@
         "provisioningState": {
           "description": "State of the private endpoint connection.",
           "type": "string",
-          "enum": ["Succeeded", "Failed", "Canceled", "Provisioning"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning"
+          ],
           "readOnly": true
         }
       }
