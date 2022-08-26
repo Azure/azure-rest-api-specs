@@ -117,7 +117,7 @@
           "200": {
             "description": "QnA generation job status.",
             "schema": {
-              "$ref": "#/definitions/JobState"
+              "$ref": "#/definitions/GenerationJobState"
             }
           },
           "default": {
@@ -192,7 +192,7 @@
           "type": "array",
           "description": "The set of documents to process as part of qna generation job.",
           "items": {
-            "$ref": "#/definitions/Document"
+            "$ref": "#/definitions/GenerationDocument"
           }
         },
         "parameters": {
@@ -201,7 +201,7 @@
         }
       }
     },    
-    "Document": {
+    "GenerationDocument": {
       "type": "object",
       "required": [
         "id",
@@ -217,9 +217,9 @@
           "type": "string",
           "description": "The input text, html or URL to process."
         },
-        "documentType": {
+        "documentKind": {
           "type": "string",
-          "$ref": "#/definitions/DocumentType"
+          "$ref": "#/definitions/DocumentKind"
         },
         "language": {
           "type": "string",
@@ -228,7 +228,7 @@
       },
       "description": "An input document to be processed for question answer generation."
     },
-    "DocumentType": {
+    "DocumentKind": {
       "type": "string",
       "description": "Document type.",
       "enum": [
@@ -238,7 +238,7 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "DocumentType",
+        "name": "DocumentKind",
         "values": [
           {
             "value": "Raw",
@@ -278,7 +278,7 @@
       }
     },    
     "GenerationJobState": {
-      "description": "Generation Job state represents the job metadata and any errors and a result URL if job succeeded.",
+      "description": "Generation Job state represents the job metadata and any errors and a result object if job succeeded.",
       "allOf": [
         {
           "$ref": "common.json#/definitions/JobState"
@@ -307,7 +307,8 @@
           }
         }
       }
-    },"GeneratedQAs": {
+    },
+    "GeneratedQAs": {
       "type": "array",
       "description": "An array of question answers generated from documents in the job.",
       "items": {
