@@ -540,10 +540,22 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentBaselines.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentExecuteScan.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentBaseline.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScanResult.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScans.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentsSettings.json
 
 
 # Needed when there is more than one input file
