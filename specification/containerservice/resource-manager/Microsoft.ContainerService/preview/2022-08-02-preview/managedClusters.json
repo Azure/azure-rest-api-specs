@@ -1112,6 +1112,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create Windows Agent Pool with disabling OutboundNAT": {
+            "$ref": "./examples/AgentPoolsCreate_WindowsDisableOutboundNAT.json"
+          },
           "Create Agent Pool with GPUMIG": {
             "$ref": "./examples/AgentPoolsCreate_GPUMIG.json"
           },
@@ -3483,6 +3486,10 @@
           },
           "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
           "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
+        },
+        "windowsProfile": {
+          "$ref": "#/definitions/AgentPoolWindowsProfile",
+          "description": "The Windows agent pool's specific profile."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -5778,6 +5785,17 @@
           "type": "integer",
           "format": "int32",
           "description": "The size in MB of a swap file that will be created on each node."
+        }
+      }
+    },
+    "AgentPoolWindowsProfile": {
+      "type": "object",
+      "description": "The Windows agent pool's specific profile.",
+      "properties": {
+        "disableOutboundNAT": {
+          "type": "boolean",
+          "title": "Whether each Windows node disables OutboundNAT",
+          "description": "The default value is false. Allow disabling OutboundNAT only if the cluster outbound type is NAT Gateway and the Windows agent pool doesn't have node public IP enabled."
         }
       }
     },
