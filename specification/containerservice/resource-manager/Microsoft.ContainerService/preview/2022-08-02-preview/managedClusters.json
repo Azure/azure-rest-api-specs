@@ -7048,17 +7048,10 @@
             "name": "level",
             "modelAsString": true
           },
-          "description": "The guardrails level to be used"
-        },
-        "includedNamespaces": {
-          "description": "Customer-specified list of namespaces that must be included in guardrails",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "description": "The guardrails level to be used. By default, Guardrails is enabled for all namespaces except those that AKS excludes via systemExcludedNamespaces"
         },
         "excludedNamespaces": {
-          "description": "Customer-specified list of namespaces that must be excluded from guardrails",
+          "description": "List of namespaces excluded from guardrails checks",
           "type": "array",
           "items": {
             "type": "string"
