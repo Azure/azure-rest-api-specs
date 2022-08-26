@@ -189,7 +189,7 @@
           "200": {
             "description": "Success.",
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourceReadOnly"
             }
           },
           "default": {
@@ -232,13 +232,13 @@
           "200": {
             "description": "Success. The response describes a AppComplianceAutomation report.",
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourceReadOnly"
             }
           },
           "201": {
             "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourceReadOnly"
             }
           },
           "default": {
@@ -285,13 +285,13 @@
           "200": {
             "description": "Success. The response describes a AppComplianceAutomation report.",
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourceReadOnly"
             }
           },
           "201": {
             "description": "Long running operation support.",
             "schema": {
-              "$ref": "#/definitions/ReportResource"
+              "$ref": "#/definitions/ReportResourceReadOnly"
             }
           },
           "default": {
@@ -538,9 +538,42 @@
         }
       }
     },
+    "ResourceMetadataReadOnly": {
+      "type": "object",
+      "description": "Single resource Id's metadata.",
+      "properties": {
+        "resourceId": {
+          "description": "Resource Id.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "resourceKind": {
+          "description": "Resource kind.",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource's tag type.",
+          "additionalProperties": {
+            "description": "Tag properties.",
+            "type": "string"
+          }
+        }
+      }
+    },
     "ResourceMetadata": {
       "type": "object",
       "description": "Single resource Id's metadata.",
+      "required": [
+        "resourceId"
+      ],
       "properties": {
         "resourceId": {
           "description": "Resource Id.",
@@ -571,6 +604,11 @@
     "ReportProperties": {
       "type": "object",
       "description": "Report's properties.",
+      "required": [
+        "timeZone",
+        "triggerTime",
+        "resources"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -658,6 +696,96 @@
         }
       }
     },
+    "ReportPropertiesReadOnly": {
+      "type": "object",
+      "description": "Report's properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Report id in database.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Report status.",
+          "enum": [
+            "Active",
+            "Failed",
+            "Disabled"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReportStatus",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Report's tenant id.",
+          "readOnly": true
+        },
+        "reportName": {
+          "description": "Report name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerGuid": {
+          "description": "Report offer Guid.",
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Report collection trigger time's time zone."
+        },
+        "triggerTime": {
+          "format": "date-time",
+          "description": "Report collection trigger time.",
+          "type": "string"
+        },
+        "nextTriggerTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Report next collection trigger time.",
+          "readOnly": true
+        },
+        "lastTriggerTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Report last collection trigger time.",
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of subscription Ids.",
+          "items": {
+            "type": "string",
+            "description": "Single subscription Id."
+          },
+          "readOnly": true
+        },
+        "resources": {
+          "type": "array",
+          "description": "List of resource data.",
+          "items": {
+            "description": "Single resource metadata.",
+            "$ref": "#/definitions/ResourceMetadataReadOnly"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "complianceStatus": {
+          "readOnly": true,
+          "description": "Report compliance status.",
+          "$ref": "#/definitions/ReportComplianceStatus"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Azure lifecycle management",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
     "ReportResource": {
       "type": "object",
       "description": "A class represent a AppComplianceAutomation report resource.",
@@ -670,6 +798,24 @@
         "properties": {
           "description": "Report property.",
           "$ref": "#/definitions/ReportProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ReportResourceReadOnly": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation report resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Report property.",
+          "$ref": "#/definitions/ReportPropertiesReadOnly"
         }
       },
       "required": [
@@ -961,7 +1107,7 @@
         "reportProperties": {
           "readOnly": true,
           "description": "The report essential info.",
-          "$ref": "#/definitions/ReportProperties"
+          "$ref": "#/definitions/ReportPropertiesReadOnly"
         },
         "reportSystemData": {
           "readOnly": true,
@@ -1004,7 +1150,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReportResource"
+            "$ref": "#/definitions/ReportResourceReadOnly"
           }
         },
         "nextLink": {
