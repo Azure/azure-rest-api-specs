@@ -372,6 +372,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/setServerCount": {
+      "post": {
+        "operationId": "Instances_Scale",
+        "description": "Scale-in SCOM monitoring instance",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The scale-in has completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The scale-in will complete asyncronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Instance_Scale.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -756,6 +810,17 @@
         }
       },
       "description": "Object containing updates for patch operations."
+    },
+    "ScalingProperties": {
+      "type": "object",
+      "description": "Properties for scale-in",
+      "properties": {
+        "serverCount": {
+          "description": "Required management server count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     }
   }
 }
