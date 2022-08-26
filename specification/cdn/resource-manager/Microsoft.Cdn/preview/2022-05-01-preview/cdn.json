@@ -424,6 +424,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/MigrateResult"
             }
@@ -470,7 +475,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
