@@ -58,6 +58,14 @@ input-file:
   - Microsoft.NetworkFunction/stable/2022-08-01/AzureTrafficCollector.json
 ```
 
+### Tag: package-2022-09-01
+
+These settings apply only when `--tag=package-2022-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-01'
+input-file:
+  - Microsoft.NetworkFunction/stable/2022-09-01/AzureTrafficCollector.json
+```
 ---
 
 # Code Generation

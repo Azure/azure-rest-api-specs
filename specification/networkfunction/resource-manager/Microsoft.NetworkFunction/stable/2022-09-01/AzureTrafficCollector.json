@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-08-01",
+    "version": "2022-09-01",
     "title": "Azure Traffic Collector",
     "description": "Azure Traffic Collector service",
     "license": {
@@ -795,6 +795,10 @@
         },
         "location": {
           "type": "string",
+		  "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "Resource location."
         },
         "tags": {
@@ -802,6 +806,11 @@
           "additionalProperties": {
             "type": "string"
           },
+		  "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags."
         },
         "systemData": {
@@ -814,6 +823,9 @@
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "Common resource representation.",
       "x-ms-azure-resource": true
     },
@@ -1021,7 +1033,8 @@
       "type": "string",
       "enum": [
         "2022-05-01",
-        "2022-08-01"
+        "2022-08-01",
+		"2022-09-01"
       ],
       "default": "2022-05-01",
       "x-ms-enum": {
