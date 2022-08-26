@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Generate Question and Answer pairs ",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection, question answering and qna generation. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection, question answering and question answers generation. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
     "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
@@ -83,13 +83,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob.json"
           },
           "Successful query with marked documents": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob_useMarkedAnswer.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob_useMarkedAnswer.json"
           },
           "Successful query with URL in a document": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQnAGenerationJob_URL.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob_URL.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -97,7 +97,7 @@
     },
     "/generate-questionanswers/jobs/{jobId}": {
       "get": {
-        "summary": "Gets the status of a QnA generation job.",
+        "summary": "Gets the status of a question answers generation job.",
         "operationId": "GenerateQuestionAnswers_GetJobStatus",
         "parameters": [
           {
@@ -115,7 +115,7 @@
         ],
         "responses": {
           "200": {
-            "description": "QnA generation job status.",
+            "description": "Question answers generation job status.",
             "schema": {
               "$ref": "#/definitions/GenerationJobState"
             }
@@ -135,13 +135,13 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus.json"
           },
           "Successful query with marked documents": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus_useMarkedAnswer.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus_useMarkedAnswer.json"
           },
           "Successful query with URL in a document": {
-            "$ref": "./examples/questionanswering/generate/SuccessfulQnAGenerationJobStatus_URL.json"
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus_URL.json"
           }
         }
       }
@@ -185,12 +185,12 @@
     },
     "GenerationRequest": {
       "type": "object",
-      "description": "QnA Generation job with documents and qnagenparameters.",
+      "description": "Question Answers Generation job with documents and parameters.",
       "additionalProperties": false,
       "properties": {
         "documents": {
           "type": "array",
-          "description": "The set of documents to process as part of qna generation job.",
+          "description": "The set of documents to process as part of question answers generation job.",
           "items": {
             "$ref": "#/definitions/GenerationDocument"
           }
@@ -257,7 +257,7 @@
     },
     "GenerationParameters": {
       "type": "object",
-      "description": "Parameters for configuring QnA Generation steps and limiting the output.",
+      "description": "Parameters for configuring question answers generation and limiting the output.",
       "additionalProperties": false,
       "properties": {
         "fetchRawContent": {
@@ -301,7 +301,7 @@
         },
         "value": {
           "type": "array",
-          "description": "The set of question and answers generated in the qna generation job.",
+          "description": "The set of question and answers generated in the generation job.",
           "items": {
             "$ref": "#/definitions/GeneratedQAs"
           }
