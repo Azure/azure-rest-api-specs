@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "mappingName": "cloud1protectionprofile1",
+    "protectionContainerName": "cloud_6d224fc6-f326-5d35-96de-fbf51efb3179",
+    "fabricName": "cloud1",
+    "api-version": "2021-10-01",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "updateInput": {
+      "properties": {
+        "providerSpecificInput": {
+          "instanceType": "A2A",
+          "agentAutoUpdateStatus": "Enabled",
+          "automationAccountArmId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/automationrg1/providers/Microsoft.Automation/automationAccounts/automationaccount1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectionContainerMappings/cloud1protectionprofile1",
+        "name": "cloud1protectionprofile1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings",
+        "properties": {
+          "targetProtectionContainerId": "Microsoft Azure",
+          "targetProtectionContainerFriendlyName": "Microsoft Azure",
+          "health": "Normal",
+          "healthErrorDetails": [],
+          "policyId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1",
+          "state": "Paired",
+          "sourceProtectionContainerFriendlyName": "cloud1",
+          "sourceFabricFriendlyName": "cloud1",
+          "targetFabricFriendlyName": "Microsoft Azure",
+          "policyFriendlyName": "protectionprofile1",
+          "providerSpecificDetails": {
+            "instanceType": "A2A",
+            "agentAutoUpdateStatus": "Enabled",
+            "automationAccountArmId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/automationrg1/providers/Microsoft.Automation/automationAccounts/automationaccount1",
+            "scheduleName": "cloud1protectionprofile1_a85ea38f-62a8-471b-93cc-69b74fd9578c",
+            "jobScheduleName": "ffd503ec-5f88-4b58-97c8-841466e7aa47"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

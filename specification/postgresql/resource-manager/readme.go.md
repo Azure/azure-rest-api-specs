@@ -10,7 +10,7 @@ go:
 
 ``` yaml $(go) && $(track2) && $(package-singleservers)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/postgresql/armpostgresql
+module-name: sdk/resourcemanager/postgresql/armpostgresql
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -18,7 +18,7 @@ azure-arm: true
 
 ``` yaml $(go) && $(track2) && $(package-flexibleservers)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/postgresql/armpostgresqlflexibleservers
+module-name: sdk/resourcemanager/postgresql/armpostgresqlflexibleservers
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -36,6 +36,18 @@ batch:
   - tag: package-2017-12-01-preview
   - tag: package-2017-12-01
 ```
+
+### Tag: package-flexibleserver-2022-03-privatepreview and go
+
+These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview' && $(go)
+rpname: postgresql
+namespace: postgresqlflexibleservers
+output-folder: $(go-sdk-folder)/services/$(rpname)/mgmt/2022-03-08-privatepreview/$(namespace)
+```
+
 
 ### Tag: package-flexibleserver-2021-06 and go
 

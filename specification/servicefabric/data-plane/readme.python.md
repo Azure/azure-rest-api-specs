@@ -9,7 +9,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 2
 namespace: azure.servicefabric
 package-name: azure-servicefabric
-package-version: 8.1.0.0
+package-version: 8.2.0.0
 add-credentials: true
 clear-output-folder: true
 use: "@microsoft.azure/autorest.python@~4.0.71"

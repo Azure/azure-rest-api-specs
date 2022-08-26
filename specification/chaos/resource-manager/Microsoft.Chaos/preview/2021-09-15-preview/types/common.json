@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Common Types",
+    "version": "2021-09-15-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "resourceIdentity": {
+      "type": "object",
+      "description": "The managed identity of a resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource identity type.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "description": "GUID that represents the principal ID of this resource identity.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "GUID that represents the tenant ID of this resource identity.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "url": {
+      "type": "string",
+      "description": "String that represents a URL.",
+      "maxLength": 2048,
+      "x-nullable": false
+    },
+    "urn": {
+      "type": "string",
+      "description": "String that represents a URN.",
+      "maxLength": 2048,
+      "x-nullable": false
+    },
+    "urlNullable": {
+      "type": "string",
+      "description": "Optional string that represents a URL.",
+      "maxLength": 2048,
+      "x-nullable": true
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "description": "String that sets the API version.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(|-preview)$",
+      "x-ms-parameter-location": "client"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "GUID that represents an Azure subscription ID.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "String that represents an Azure resource group.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.\\(\\)]*[a-zA-Z0-9_\\-\\(\\)]$",
+      "x-ms-parameter-location": "method"
+    },
+    "parentResourcePath": {
+      "name": "parentResourcePath",
+      "description": "String that represents the path to a parent resource starting with the providers segment.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "parentProviderNamespace": {
+      "name": "parentProviderNamespace",
+      "description": "String that represents a resource provider namespace.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "parentResourceType": {
+      "name": "parentResourceType",
+      "description": "String that represents a resource type.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "parentResourceName": {
+      "name": "parentResourceName",
+      "description": "String that represents a resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "targetName": {
+      "name": "targetName",
+      "description": "String that represents a Target resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "capabilityName": {
+      "name": "capabilityName",
+      "description": "String that represents a Capability resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$",
+      "x-ms-parameter-location": "method"
+    },
+    "targetTypeName": {
+      "name": "targetTypeName",
+      "description": "String that represents a Target Type resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "capabilityTypeName": {
+      "name": "capabilityTypeName",
+      "description": "String that represents a Capability Type resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$",
+      "x-ms-parameter-location": "method"
+    },
+    "locationName": {
+      "name": "locationName",
+      "description": "String that represents a Location resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "continuationToken": {
+      "name": "continuationToken",
+      "description": "String that sets the continuation token.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-nullable": false
+    }
+  }
+}

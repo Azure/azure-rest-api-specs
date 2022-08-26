@@ -26,18 +26,36 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-09
+tag: package-preview-2022-04-30
 ```
 
+### Tag: package-preview-2022-04-30
 
-### Tag: package-preview-2021-09
+These settings apply only when `--tag=package-preview-2022-04-30` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2022-04-30'
 input-file:
-  - Microsoft.Devices/preview/2021-09-01-preview/iothub.json
+  - Microsoft.Devices/preview/2022-04-30-preview/iothub.json
 ```
+
+### Tag: package-2021-07-02
+
+These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-02'
+input-file:
+  - Microsoft.Devices/stable/2021-07-02/iothub.json
+```
+
+### Tag: package-preview-2021-07-02
+
+These settings apply only when `--tag=package-preview-2021-07-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07-02'
+input-file:
+  - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
+```
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
@@ -256,8 +274,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -266,6 +285,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -293,3 +313,13 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    where: $.definitions.FallbackRouteProperties.properties.source
+    from: iothub.json
+    reason: Ensure non-breaking change.
+```

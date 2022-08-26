@@ -20,9 +20,96 @@
         }
       },
       "type": "object"
+    },
+    "ClientInfo": {
+      "description": "Information on the client (user or application) that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the client.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the client.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the client.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the client.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UserInfo": {
+      "description": "User information that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user.",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "Label": {
+      "description": "Label that will be used to tag and filter on.",
+      "type": "string"
+    },
+    "CloudError": {
+      "description": "Error response structure.",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data"
+        }
+      },
+      "type": "object"
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "OperationalInsightsResourceProvider": {
       "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
       "in": "path",

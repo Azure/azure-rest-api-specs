@@ -26,23 +26,41 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12
+tag: package-2022-05
 ```
 
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Cache/stable/2022-05-01/redis.json
+```
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Cache/stable/2021-06-01/redis.json
+```
 
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-12'
+``` yaml $(tag) == 'package-2020-12'
 input-file:
   - Microsoft.Cache/stable/2020-12-01/redis.json
 ```
+
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Cache/stable/2020-06-01/redis.json
 ```
@@ -51,7 +69,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07-preview'
+``` yaml $(tag) == 'package-2019-07-preview'
 input-file:
   - Microsoft.Cache/preview/2019-07-01/redis.json
 ```
@@ -112,11 +130,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -124,6 +141,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
   - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -241,6 +259,3 @@ directive:
     from: redis.json
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
-
-
-

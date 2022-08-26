@@ -14,9 +14,9 @@ clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/azure/maps/geolocation
+output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/azure/maps/geolocation/_generated
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation
+output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/
 ```

@@ -2053,14 +2053,15 @@
         "rebootSetting": {
           "type": "string",
           "enum": [
-            "NeverReboot",
-            "RebootIfRequired",
-            "AlwaysReboot"
+            "IfRequired",
+            "Never",
+            "Always"
           ],
           "x-ms-enum": {
             "name": "RebootOptions",
             "modelAsString": true
           },
+          "default": "IfRequired",
           "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed."
         },
         "windowsParameters": {
@@ -2147,7 +2148,8 @@
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "postTasks": {
           "type": "array",
@@ -2155,7 +2157,8 @@
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2262,7 +2265,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2324,7 +2330,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Update"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

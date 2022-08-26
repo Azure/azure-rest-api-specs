@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Sql.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for PostgreSQL, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,11 +15,13 @@ To build the SDK for PostgreSQL, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the PostgreSQL API.
 
 ``` yaml
@@ -35,6 +37,29 @@ tag: package-flexibleserver-2021-06
 
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
+```
+
+### Tag: package-flexibleserver-2022-03-privatepreview
+
+These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'flexibleserver-2022-03-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+```
+
+### Tag: package-flexibleserver-2022-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2022-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
 ```
 
 ### Tag: package-2021-06-15-privatepreview
@@ -65,7 +90,7 @@ These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
@@ -82,7 +107,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
-
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
@@ -94,11 +118,9 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
 
-
 ### Tag: package-2020-11-05-preview
 
 These settings apply only when `--tag=package-2020-11-05-preview` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2020-11-05-preview'
 input-file:
@@ -106,22 +128,18 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 ```
 
-
 ### Tag: package-2020-02-14-preview
 
 These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2020-02-14-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
 ```
 
-
 ### Tag: package-2020-02-14-privatepreview
 
 These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2020-02-14-privatepreview'
 input-file:
@@ -132,17 +150,14 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
 
-
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
-
 ### Tag: package-2020-01-01
 
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
@@ -153,11 +168,9 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
-
 ### Tag: package-2018-06-01-privatepreview
 
 These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
@@ -168,7 +181,6 @@ input-file:
 ### Tag: package-2018-06-01
 
 These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
@@ -181,22 +193,18 @@ input-file:
 
 ```
 
-
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2017-12-01-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
-
 ### Tag: package-2017-12-01
 
 These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
-
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
@@ -205,6 +213,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
@@ -212,8 +221,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -222,12 +231,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ### C#
@@ -259,50 +269,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-
-
-## Multi-API/Profile support for AutoRest v3 generators
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file:
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```

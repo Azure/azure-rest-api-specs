@@ -72,6 +72,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

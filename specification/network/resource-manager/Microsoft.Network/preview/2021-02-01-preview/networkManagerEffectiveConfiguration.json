@@ -47,20 +47,22 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-          },
-          "description": "Parameters supplied to list correct page."
         }
       ],
       "post": {
         "tags": [
           "NetworkManagerEffectiveConnectivityConfiguration"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
+          }
         ],
         "operationId": "EffectiveConnectivityConfigurations_List",
         "description": "List all effective connectivity configurations applied on a virtual network.",
@@ -98,20 +100,22 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-          },
-          "description": "Parameters supplied to list correct page."
         }
       ],
       "post": {
         "tags": [
           "NetworkManagerEffectiveSecurityAdminRules"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
+          }
         ],
         "operationId": "NetworkManagerEffectiveSecurityAdminRules_List",
         "description": "List all effective security admin rules applied on a virtual network.",
@@ -148,7 +152,7 @@
           },
           "description": "Gets a page of NetworkManagerEffectiveConnectivityConfiguration"
         },
-        "$skipToken": {
+        "skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
           "type": "string"
         }
@@ -165,7 +169,7 @@
           },
           "description": "Gets a page of NetworkManagerEffectiveSecurityAdminRules"
         },
-        "$skipToken": {
+        "skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
           "type": "string"
         }

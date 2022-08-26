@@ -28,15 +28,174 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2021-01
+tag: package-2021-08
 ```
 
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
+tag: package-2021-08
+```
+
+
+### Tag: package-preview-2021-12
+
+These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-12'
+input-file:
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalconfigs.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimschema.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/definitions.json
+```
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.ApiManagement/stable/2021-08-01/apimanagement.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimapis.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimapisByTags.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimauthorizationservers.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimbackends.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimcaches.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimcontenttypes.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimdeletedservices.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimdeployment.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimdiagnostics.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimemailtemplates.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimgateways.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimgroups.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimidentityprovider.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimissues.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimloggers.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimnamedvalues.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimnetworkstatus.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimnotifications.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimoutbounddependency.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimpolicies.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimportalrevisions.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimprivatelink.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimproducts.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimproductsByTags.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimquotas.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimregions.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimschema.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimsettings.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimskus.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimsubscriptions.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimtagresources.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimtags.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimtenant.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimusers.json
+  - Microsoft.ApiManagement/stable/2021-08-01/definitions.json
+```
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimschema.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/definitions.json
+```
 
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+``` yaml $(tag) == 'package-preview-2021-01'
 input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimapis.json
@@ -78,6 +237,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/definitions.json
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
@@ -476,10 +636,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -489,6 +647,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_api_management']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -516,10 +675,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## AZ
-
-See configuration in [readme.az.md](./readme.az.md)
 
 ## Suppression
 
@@ -598,6 +753,9 @@ directive:
     from: apimportalrevisions.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
+    from: apimschema.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
     from: apimsettings.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
@@ -611,5 +769,20 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimportalsettings.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimportalconfigs.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimpolicyfragments.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
 ```

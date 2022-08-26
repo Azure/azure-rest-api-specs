@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
@@ -13,6 +13,14 @@ go:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/hybridcompute/armhybridcompute
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ## Go multi-api

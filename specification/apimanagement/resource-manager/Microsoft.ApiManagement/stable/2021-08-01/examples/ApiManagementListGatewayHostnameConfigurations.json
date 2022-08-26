@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "gatewayId": "gw1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1/hostnameConfigurations/default",
+            "type": "Microsoft.ApiManagement/service/gateways/hostnameConfigurations",
+            "name": "default",
+            "properties": {
+              "hostname": "*",
+              "certificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
+              "negotiateClientCertificate": false
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1/hostnameConfigurations/hostname1",
+            "type": "Microsoft.ApiManagement/service/gateways/hostnameConfigurations",
+            "name": "default",
+            "properties": {
+              "hostname": "foo.bar.com",
+              "certificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert2",
+              "negotiateClientCertificate": true
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}
