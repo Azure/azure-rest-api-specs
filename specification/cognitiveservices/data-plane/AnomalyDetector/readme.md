@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview.2`.
+The current release is `release_1_1`.
 
 ``` yaml
-tag: release_1_1_preview.2
+tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -47,6 +47,15 @@ input-file:
   - preview/v1.1-preview.2/AnomalyDetector.json
   - preview/v1.1-preview.2/MultivariateAnomalyDetector.json
   - preview/v1.1-preview.2/RootCauseAnalysis.json
+```
+
+### Release 1.1
+These settings apply only when `--tag=release_1_1` is specified on the command line.
+
+```yaml $(tag) == 'release_1_1'
+input-file:
+  - stable/v1.1/UnivariateAnomalyDetector.json
+  - stable/v1.1/MultivariateAnomalyDetector.json
 ```
 
 ## Swagger to SDK
@@ -124,14 +133,5 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-
-### Release 1.1
-These settings apply only when `--tag=release_1_1` is specified on the command line.
-
-```yaml $(tag) == 'release_1_1'
-input-file:
-  - stable/v1.1/UnivariateAnomalyDetector.json
-  - stable/v1.1/MultivariateAnomalyDetector.json
 ```
 
