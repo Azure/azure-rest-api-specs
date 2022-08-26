@@ -612,6 +612,14 @@
         },
         "applicationGatewayBackendAddressPoolId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/applicationGateways/backendAddressPools"
+              }
+            ]
+          },
           "description": "The resource Id of application gateway backend address pool. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/applicationGateways/<applicationGatewayName>/backendAddressPools/<backendAddressPoolName>'."
         }
       },
@@ -909,6 +917,20 @@
         },
         "vmImageResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/images"
+              },
+              {
+                "type": "Microsoft.Compute/galleries/images"
+              },
+              {
+                "type": "Microsoft.Compute/galleries/images/versions"
+              }
+            ]
+          },
           "description": "Indicates the resource id of the vm image. This parameter is used for custom vm image."
         }
       },
