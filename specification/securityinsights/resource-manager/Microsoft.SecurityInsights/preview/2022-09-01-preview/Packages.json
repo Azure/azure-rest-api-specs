@@ -79,7 +79,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PackageList"
+              "$ref": "#/definitions/packageList"
             }
           },
           "default": {
@@ -240,7 +240,7 @@
     }
   },
   "definitions": {
-    "PackageList": {
+    "packageList": {
       "description": "List available packages.",
       "properties": {
         "nextLink": {
@@ -251,7 +251,7 @@
         "value": {
           "description": "Array of packages.",
           "items": {
-            "$ref": "#/definitions/Package"
+            "$ref": "#/definitions/packageModel"
           },
           "type": "array"
         }
@@ -261,7 +261,7 @@
       ],
       "type": "object"
     },
-    "Package": {
+    "packageModel": {
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
@@ -271,13 +271,13 @@
       "properties": {
         "properties": {
           "description": "package properties",
-          "$ref": "#/definitions/PackageProperties",
+          "$ref": "#/definitions/packageProperties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "PackageProperties": {
+    "packageProperties": {
       "description": "Describes package properties",
       "properties": {
         "packageId": {
@@ -286,15 +286,7 @@
         },
         "packageKind": {
           "description": "The package kind",
-          "enum": [
-            "Solution",
-            "Standalone"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "packageKind"
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataPackageKind"
         },
         "installedVersion": {
           "description": "The version of the installed version, null or absent means not installed.",
@@ -330,66 +322,47 @@
         },
         "source": {
           "description": "The source of the package",
-          "$ref": "#/definitions/PackageSource",
-          "type": "object"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataSource",
         },
         "author": {
           "description": "The author of the package",
-          "$ref": "#/definitions/Author",
-          "type": "object"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataAuthor",
         },
         "support": {
           "description": "The support tier of the package",
-          "$ref": "#/definitions/Support",
-          "type": "object"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataSupport",
         },
         "dependencies": {
           "description": "The support tier of the package",
-          "$ref": "#/definitions/Dependency",
-          "type": "object"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataDependencies",
         },
         "providers": {
-          "description": "The providers of the package.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "The name of the provider."
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataProviders",
+          "description": "Providers for the package item"
         },
         "firstPublishDate": {
-          "description": "The first publish date of the package",
-          "format": "date",
-          "type": "string"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataFirstPublishDate",
+          "description": "first publish date package item"
         },
         "lastPublishDate": {
-          "description": "The last publish date of the package",
-          "format": "date",
-          "type": "string"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataLastPublishDate",
+          "description": "last publish date for the package item"
         },
         "categories": {
           "description": "The categories of the package",
-          "$ref": "#/definitions/Category",
-          "type": "object"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataCategories",
         },
         "threatAnalysisTactics": {
-          "description": "Threat analysis tactics.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "One threat analysis tactic."
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataThreatAnalysisTactics",
+          "description": "the tactics the resource covers"
         },
         "threatAnalyticsTechniques": {
-          "description": "Threat analytics techniques.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "One threat analytics technique."
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataThreatAnalysisTechniques",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
         },
         "icon": {
-          "description": "The URL to the icon file.",
-          "type": "string"
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataIcon",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "packageContent": {
           "description": "The JSON string of the package.",
@@ -409,153 +382,12 @@
       "description": "Package installation properties.",
       "properties": {
         "packageKind": {
-          "description": "package kind.",
-          "enum": [
-            "Solution",
-            "Standalone"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "packageKind",
-            "modelAsString": true
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataPackageKind",
+          "description": "package kind."
         },
         "version": {
-          "description": "version of the package to be installed.",
-          "type": "string"
-        }
-      }
-    },
-    "PackageSource": {
-      "type": "object",
-      "description": "source of a package.",
-      "properties": {
-        "kind": {
-          "description": "Source kind.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Source name.",
-          "type": "string"
-        },
-        "sourceId": {
-          "description": "Source id.",
-          "type": "string"
-        }
-      }
-    },
-    "Author": {
-      "type": "object",
-      "description": "Author of a package.",
-      "properties": {
-        "name": {
-          "description": "Name of the author.",
-          "type": "string"
-        },
-        "email": {
-          "description": "email of the author.",
-          "type": "string"
-        },
-        "link": {
-          "description": "url to the web page of the author.",
-          "type": "string"
-        }
-      }
-    },
-    "Support": {
-      "type": "object",
-      "description": "Support tier of a package.",
-      "properties": {
-        "tier": {
-          "description": "Tier of the support.",
-          "enum": [
-            "Microsoft",
-            "Partner",
-            "Community"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "tier"
-          }
-        },
-        "name": {
-          "description": "email of the support.",
-          "type": "string"
-        },
-        "email": {
-          "description": "email of the support.",
-          "type": "string"
-        },
-        "link": {
-          "description": "url to the web page of the support.",
-          "type": "string"
-        }
-      }
-    },
-    "Dependency": {
-      "type": "object",
-      "description": "Dependencies of the package.",
-      "properties": {
-        "criteria": {
-          "type": "array",
-          "description": "Dependencies of the package.",
-          "items": {
-            "$ref": "#/definitions/Criteria"
-          },
-          "x-ms-identifiers": []
-        },
-        "operator": {
-          "description": "operator of the criteria.",
-          "enum": [
-            "AND",
-            "OR"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "operator"
-          }
-        }
-      }
-    },
-    "Criteria": {
-      "type": "object",
-      "description": "One criteria of dependency.",
-      "properties": {
-        "contentId": {
-          "description": "content id of the template.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "content kind of the template.",
-          "type": "string"
-        },
-        "version": {
-          "description": "version number of the template.",
-          "type": "string"
-        }
-      }
-    },
-    "Category": {
-      "type": "object",
-      "description": "Categories of the package.",
-      "properties": {
-        "domains": {
-          "description": "domains of the package.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "One domain."
-          }
-        },
-        "verticals": {
-          "description": "verticals of the package.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "One vertical."
-          }
+          "$ref": "./common/contentcommontypes.json#/definitions/metadataVersion",
+          "description": "version of the package to be installed."
         }
       }
     }
