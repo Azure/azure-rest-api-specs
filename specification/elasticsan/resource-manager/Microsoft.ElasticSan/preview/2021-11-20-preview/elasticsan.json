@@ -1335,10 +1335,14 @@
       ],
       "properties": {
         "name": {
-          "$ref": "#/definitions/Sku/properties/name"
+          "type": "string",
+          "description": "Sku Name",
+          "$ref": "#/definitions/SkuName"
         },
         "tier": {
-          "$ref": "#/definitions/Sku/properties/tier"
+          "type": "string",
+          "description": "Sku Tier",
+          "$ref": "#/definitions/SkuTier"
         },
         "resourceType": {
           "readOnly": true,
@@ -1415,46 +1419,52 @@
       ],
       "properties": {
         "name": {
-          "type": "string",
-          "enum": [
-            "Premium_LRS",
-            "Premium_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "name",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Premium_LRS",
-                "description": "Premium locally redundant storage"
-              },
-              {
-                "value": "Premium_ZRS",
-                "description": "Premium zone redundant storage"
-              }
-            ]
-          },
-          "description": "The sku name."
+          "$ref": "#/definitions/SkuName"
         },
         "tier": {
-          "type": "string",
-          "enum": [
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "tier",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Premium",
-                "description": "Premium Tier"
-              }
-            ]
-          },
-          "description": "The sku tier."
+          "$ref": "#/definitions/SkuTier"
         }
       },
       "description": "The SKU name. Required for account creation; optional for update."
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "Premium_LRS",
+        "Premium_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Premium_LRS",
+            "description": "Premium locally redundant storage"
+          },
+          {
+            "value": "Premium_ZRS",
+            "description": "Premium zone redundant storage"
+          }
+        ]
+      },
+      "description": "The sku name."
+    },
+    "SkuTier": {
+      "type": "string",
+      "enum": [
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Premium",
+            "description": "Premium Tier"
+          }
+        ]
+      },
+      "description": "The sku tier."
     },
     "IscsiTargetInfo": {
       "type": "object",
