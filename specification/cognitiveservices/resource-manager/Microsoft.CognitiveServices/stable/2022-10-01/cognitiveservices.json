@@ -1462,7 +1462,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2730,6 +2731,22 @@
         "scaleSettings": {
           "type": "object",
           "$ref": "#/definitions/DeploymentScaleSettings"
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The capabilities."
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of RAI policy."
+        },
+        "callRateLimit": {
+          "readOnly": true,
+          "$ref": "#/definitions/CallRateLimit"
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -2748,6 +2765,10 @@
         "version": {
           "type": "string",
           "description": "Deployment model version."
+        },
+        "callRateLimit": {
+          "readOnly": true,
+          "$ref": "#/definitions/CallRateLimit"
         }
       },
       "description": "Properties of Cognitive Services account deployment model."
