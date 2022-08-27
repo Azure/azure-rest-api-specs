@@ -652,6 +652,43 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/calculateRefund": {
+      "post": {
+        "summary": "Calculate the refund amount of a reservation order.",
+        "description": "Calculate price for returning `Reservations` if there are no policy errors.\n",
+        "operationId": "CalculateRefund_Post",
+        "x-ms-examples": {
+          "Purchase": {
+            "$ref": "./examples/CalculateRefund.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculateRefundRequestParameter"
+          }
+        ],
+        "tags": [
+          "CalculateRefund"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed refund info of a reservation",
+            "schema": {
+              "$ref": "#/definitions/CalculateRefundResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/calculateExchange": {
       "post": {
         "summary": "Calculates the refund amounts and price of the new purchases.",
@@ -945,7 +982,9 @@
         "FulfillmentTransientError",
         "FulfillmentError",
         "CalculatePriceFailed",
-        "AppliedScopesSameAsExisting"
+        "AppliedScopesSameAsExisting",
+        "SelfServiceRefundNotSupported",
+        "RefundLimitExceeded"
       ],
       "x-ms-enum": {
         "name": "ErrorResponseCode",
@@ -1066,6 +1105,30 @@
         }
       }
     },
+    "CalculateRefundRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified identifier of the reservation order being returned"
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculateRefundRequestProperties"
+        }
+      }
+    },
+    "CalculateRefundRequestProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The scope of the refund, e.g. Reservation"
+        },
+        "reservationToReturn": {
+          "$ref": "#/definitions/ReservationToReturn"
+        }
+      }
+    },
     "CalculateExchangeRequest": {
       "type": "object",
       "description": "Calculate exchange request",
@@ -1157,6 +1220,34 @@
       "type": "object",
       "description": "billing information",
       "properties": {
+        "billingCurrencyTotalPaidAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyProratedAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyRemainingCommitmentAmount": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "RefundBillingInformation": {
+      "type": "object",
+      "description": "billing information",
+      "properties": {
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "completedTransactions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of completed transactions in this reservation's payment"
+        },
+        "totalTransactions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total transactions in this reservation's payment"
+        },
         "billingCurrencyTotalPaidAmount": {
           "$ref": "#/definitions/Price"
         },
@@ -1732,6 +1823,44 @@
         }
       }
     },
+    "CalculateRefundResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified identifier of the reservation being returned"
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculateRefundResponseProperties"
+        }
+      }
+    },
+    "CalculateRefundResponseProperties": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Refund session identifier"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "pricingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "policyResult": {
+          "$ref": "#/definitions/RefundPolicyResult"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/RefundBillingInformation"
+        }
+      }
+    },
     "CalculateExchangeOperationResultResponse": {
       "type": "object",
       "description": "CalculateExchange operation result",
@@ -1884,6 +2013,39 @@
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
+        }
+      }
+    },
+    "RefundPolicyResult": {
+      "type": "object",
+      "description": "Refund policy result",
+      "properties": {
+        "properties": {
+          "consumedRefundsTotal": {
+            "$ref": "#/definitions/Price"
+          },
+          "maxRefundLimit": {
+            "$ref": "#/definitions/Price"
+          },
+          "policyErrors": {
+            "type": "array",
+            "description": "Refund Policy errors",
+            "items": {
+              "$ref": "#/definitions/RefundPolicyError"
+            }
+          }
+        }
+      }
+    },
+    "RefundPolicyError": {
+      "type": "object",
+      "description": "error details",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorResponseCode"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -2732,6 +2894,16 @@
     }
   },
   "parameters": {
+    "CalculateRefundRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed for calculating refund of a reservation order.",
+      "schema": {
+        "$ref": "#/definitions/CalculateRefundRequest"
+      }
+    },
     "CalculateExchangeRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
