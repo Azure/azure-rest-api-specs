@@ -6245,6 +6245,11 @@
           "type": "object",
           "$ref": "#/definitions/Capacity"
         },
+        "keysMetadata": {
+          "description": "The object that represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
+        },
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
           "type": "boolean"
@@ -6384,6 +6389,11 @@
           "description": "The object that represents all properties related to capacity enforcement on an account.",
           "type": "object",
           "$ref": "#/definitions/Capacity"
+        },
+        "keysMetadata": {
+          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
         },
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
@@ -6548,6 +6558,11 @@
           "description": "The object that represents all properties related to capacity enforcement on an account.",
           "type": "object",
           "$ref": "#/definitions/Capacity"
+        },
+        "keysMetadata": {
+          "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/DatabaseAccountKeysMetadata"
         },
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
@@ -8037,6 +8052,40 @@
       "x-ms-enum": {
         "name": "NetworkAclBypass",
         "modelAsString": false
+      }
+    },
+    "AccountKeyMetadata": {
+      "description": "The metadata related to an access key for a given database account.",
+      "type": "object",
+      "properties": {
+        "generationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Generation time in UTC of the key in ISO-8601 format. If the value is missing from the object, it means that the last key regeneration was triggered before 2022-06-18."
+        }
+      }
+    },
+    "DatabaseAccountKeysMetadata": {
+      "description": "The metadata related to each access key for the given Cosmos DB database account.",
+      "type": "object",
+      "properties": {
+        "primaryMasterKey": {
+          "description": "The metadata related to the Primary Read-Write Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "secondaryMasterKey": {
+          "description": "The metadata related to the Secondary Read-Write Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "primaryReadonlyMasterKey": {
+          "description": "The metadata related to the Primary Read-Only Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        },
+        "secondaryReadonlyMasterKey": {
+          "description": "The metadata related to the Secondary Read-Only Key for the given Cosmos DB database account.",
+          "$ref": "#/definitions/AccountKeyMetadata"
+        }
       }
     },
     "Operation": {
