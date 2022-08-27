@@ -27,14 +27,21 @@ These are the global settings for the vmwareApplication.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-04
+tag: package-preview-2022-08
 ```
 
 ``` yaml $(package-vmwareapplications)
-tag: package-preview-2022-04
+tag: package-preview-2022-08
 ```
 
+### Tag: package-preview-2022-08
 
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.BackupSolutions/preview/2022-08-01-preview/vmwareapplications.json
+```
 ### Tag: package-preview-2022-04
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
@@ -43,6 +50,7 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 input-file:
   - Microsoft.BackupSolutions/preview/2022-04-01-preview/vmwareapplications.json
 ```
+
 ### Tag: package-vmwareapplications-2021-02
 
 These settings apply only when `--tag=package-vmwareapplications-2021-02` is specified on the command line.
