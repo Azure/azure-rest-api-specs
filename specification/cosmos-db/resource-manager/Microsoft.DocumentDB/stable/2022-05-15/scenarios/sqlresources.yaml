@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountsql2
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+
+scenarios:
+  - scenario: SQLResources
+    description: Microsoft.DocumentDB/databaseAccounts/sqlDatabases
+    variables:
+      databaseName: cosmos_sql
+      containerName: cosmos_sqlcontainer
+    steps:
+      # SQL Database
+      - step: SQLResources_CreateSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseCreateUpdate.json
+        requestUpdate:
+          - add: /createUpdateSqlDatabaseParameters/properties/options/throughput
+            value: 2000
+      - step: SQLResources_GetSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseGet.json
+      - step: SQLResources_ListSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseList.json
+      - step: SQLResources_UpdateSQLDatabaseThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseThroughputUpdate.json
+      - step: SQLResources_GetSQLDatabaseThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseThroughputGet.json
+      - step: SQLResources_MigrateSQLDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBSqlDatabaseMigrateToAutoscale.json
+      - step: SQLResources_MigrateSQLDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json
+
+      # SQL Container
+      - step: SQLResources_CreateSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerCreateUpdate.json
+        requestUpdate:
+          - remove: /createUpdateSqlContainerParameters/properties/resource/defaultTtl
+          - add: /createUpdateSqlContainerParameters/properties/options/throughput
+            value: 2000
+      - step: SQLResources_GetSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerGet.json
+      - step: SQLResources_ListSQLContainers
+        exampleFile: ../examples/CosmosDBSqlContainerList.json
+
+      - step: SQLResources_UpdateSQLContainerThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerThroughputUpdate.json
+      - step: SQLResources_GetSQLContainerThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerThroughputGet.json
+      - step: SQLResources_MigrateSQLContainerToAutoscale
+        exampleFile: ../examples/CosmosDBSqlContainerMigrateToAutoscale.json
+      - step: SQLResources_MigrateSQLContainerToManualThroughput
+        exampleFile: ../examples/CosmosDBSqlContainerMigrateToManualThroughput.json
+
+      # SQL Stored Procedure
+      - step: SQLResources_CreateSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureCreateUpdate.json
+      - step: SQLResources_GetSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureGet.json
+      - step: SQLResources_ListSQLStoredProcedures
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureList.json
+      - step: SQLResources_DeleteSQLStoredProcedure
+        exampleFile: ../examples/CosmosDBSqlStoredProcedureDelete.json
+
+      # SQL User Defined Function
+      - step: SQLResources_CreateSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionCreateUpdate.json
+      - step: SQLResources_GetSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionGet.json
+      - step: SQLResources_ListSQLUserDefinedFunctions
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionList.json
+      - step: SQLResources_DeleteSQLUserDefinedFunction
+        exampleFile: ../examples/CosmosDBSqlUserDefinedFunctionDelete.json
+
+      # SQL Trigger
+      - step: SQLResources_CreateSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerCreateUpdate.json
+        requestUpdate:
+          - replace: /createUpdateSqlTriggerParameters/properties/resource/triggerType
+            value: Pre
+          - replace: /createUpdateSqlTriggerParameters/properties/resource/triggerOperation
+            value: All
+      - step: SQLResources_GetSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerGet.json
+      - step: SQLResources_ListSQLTriggers
+        exampleFile: ../examples/CosmosDBSqlTriggerList.json
+      - step: SQLResources_DeleteSQLTrigger
+        exampleFile: ../examples/CosmosDBSqlTriggerDelete.json
+   
+      - step: SQLResources_DeleteSQLContainer
+        exampleFile: ../examples/CosmosDBSqlContainerDelete.json
+      - step: SQLResources_DeleteSQLDatabase
+        exampleFile: ../examples/CosmosDBSqlDatabaseDelete.json

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountnotebook
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+      - add: /createUpdateParameters/kind
+        value: GlobalDocumentDB
+
+# 202 Accepted status: Enqueued
+scenarios:
+  - scenario: NotebookWorkspaces
+    description: Microsoft.DocumentDB/databaseAccounts/notebookWorkspaces
+    steps:
+      - step: NotebookWorkspaces_Create
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceCreate.json
+      - step: NotebookWorkspaces_Start
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceStart.json
+      - step: NotebookWorkspaces_Get
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceGet.json
+      - step: NotebookWorkspaces_ListByDatabaseAccount
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceList.json
+      - step: NotebookWorkspaces_ListConnectionInfo
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceListConnectionInfo.json
+      - step: NotebookWorkspaces_RegenerateAuthToken
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceRegenerateAuthToken.json
+      - step: NotebookWorkspaces_Delete
+        exampleFile: ../examples/CosmosDBNotebookWorkspaceDelete.json

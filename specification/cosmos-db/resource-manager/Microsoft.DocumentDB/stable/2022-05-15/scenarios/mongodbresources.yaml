@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountmongodb
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+      - add: /createUpdateParameters/kind
+        value: MongoDB
+
+scenarios:
+  - scenario: MongoDBResources
+    description: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases
+    variables:
+      databaseName: scenario_mongodb
+      collectionName: mongodb_collection
+    steps:
+    #   MongoDB Database
+      - step: MongoDBResources_CreateMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseCreateUpdate.json
+        requestUpdate:
+        - add: /createUpdateMongoDBDatabaseParameters/properties/options/throughput
+          value: 2000
+      - step: MongoDBResources_GetMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseGet.json
+      - step: MongoDBResources_ListMongoDBDatabases
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseList.json
+      - step: MongoDBResources_UpdateMongoDBDatabaseThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseThroughputUpdate.json
+      - step: MongoDBResources_GetMongoDBDatabaseThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseThroughputGet.json
+      - step: MongoDBResources_MigrateMongoDBDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseMigrateToAutoscale.json
+      - step: MongoDBResources_MigrateMongoDBDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseMigrateToManualThroughput.json
+
+    #   MongoDB Collection
+      - step: MongoDBResources_CreateMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionCreateUpdate.json
+        requestUpdate:
+        - add: /createUpdateMongoDBCollectionParameters/properties/options/throughput
+          value: 2000
+        - remove: /createUpdateMongoDBCollectionParameters/properties/resource/indexes
+      - step: MongoDBResources_GetMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionGet.json
+      - step: MongoDBResources_ListMongoDBCollections
+        exampleFile: ../examples/CosmosDBMongoDBCollectionList.json
+      - step: MongoDBResources_UpdateMongoDBCollectionThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionThroughputUpdate.json
+      - step: MongoDBResources_GetMongoDBCollectionThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionThroughputGet.json
+      - step: MongoDBResources_MigrateMongoDBCollectionToAutoscale
+        exampleFile: ../examples/CosmosDBMongoDBCollectionMigrateToAutoscale.json
+      - step: MongoDBResources_MigrateMongoDBCollectionToManualThroughput
+        exampleFile: ../examples/CosmosDBMongoDBCollectionMigrateToManualThroughput.json
+      - step: MongoDBResources_DeleteMongoDBCollection
+        exampleFile: ../examples/CosmosDBMongoDBCollectionDelete.json
+
+      - step: MongoDBResources_DeleteMongoDBDatabase
+        exampleFile: ../examples/CosmosDBMongoDBDatabaseDelete.json

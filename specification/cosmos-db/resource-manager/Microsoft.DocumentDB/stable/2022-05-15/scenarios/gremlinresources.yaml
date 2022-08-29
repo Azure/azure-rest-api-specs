@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountgremlin
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+      - add: /createUpdateParameters/properties/capabilities
+        value: [
+         "name": "EnableGremlin"
+        ]
+
+scenarios:
+  - scenario: GremlinResources
+    description: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases
+    variables:
+      databaseName: scenario_gremlindb
+    steps:
+    #   Gremlin Database
+      - step: GremlinResources_CreateGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseCreateUpdate.json
+        requestUpdate:
+        - add: /createUpdateGremlinDatabaseParameters/properties/options/throughput
+          value: 2000
+      - step: GremlinResources_GetGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseGet.json
+      - step: GremlinResources_ListGremlinDatabases
+        exampleFile: ../examples/CosmosDBGremlinDatabaseList.json
+      - step: GremlinResources_UpdateGremlinDatabaseThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseThroughputUpdate.json
+      - step: GremlinResources_GetGremlinDatabaseThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseThroughputGet.json      
+      - step: GremlinResources_MigrateGremlinDatabaseToAutoscale
+        exampleFile: ../examples/CosmosDBGremlinDatabaseMigrateToAutoscale.json
+      - step: GremlinResources_MigrateGremlinDatabaseToManualThroughput
+        exampleFile: ../examples/CosmosDBGremlinDatabaseMigrateToManualThroughput.json
+
+    #   Gremlin Graph
+      - step: GremlinResources_CreateGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphCreateUpdate.json
+        requestUpdate:
+        - add: /createUpdateGremlinGraphParameters/properties/options/throughput
+          value: 2000
+      - step: GremlinResources_GetGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphGet.json
+      - step: GremlinResources_ListGremlinGraphs
+        exampleFile: ../examples/CosmosDBGremlinGraphList.json
+      - step: GremlinResources_UpdateGremlinGraphThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphThroughputUpdate.json
+      - step: GremlinResources_GetGremlinGraphThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphThroughputGet.json
+      - step: GremlinResources_MigrateGremlinGraphToAutoscale
+        exampleFile: ../examples/CosmosDBGremlinGraphMigrateToAutoscale.json
+      - step: GremlinResources_MigrateGremlinGraphToManualThroughput
+        exampleFile: ../examples/CosmosDBGremlinGraphMigrateToManualThroughput.json
+      - step: GremlinResources_DeleteGremlinGraph
+        exampleFile: ../examples/CosmosDBGremlinGraphDelete.json
+
+      - step: GremlinResources_DeleteGremlinDatabase
+        exampleFile: ../examples/CosmosDBGremlinDatabaseDelete.json

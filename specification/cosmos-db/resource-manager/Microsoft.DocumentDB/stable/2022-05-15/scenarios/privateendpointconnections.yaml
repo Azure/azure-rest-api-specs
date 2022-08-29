@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountpec2
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+    outputVariables:
+      cosmosAccountId: 
+        type: string
+        fromResponse: /id
+  - step: PrivateEndpoint_Create
+    armTemplate: armtemplate/privateEndpoint.json
+
+scenarios:
+  - scenario: PrivateEndpointConnection
+    description: Microsoft.DocumentDB/databaseAccounts/privateEndpointConnections
+    steps:
+      - step: PrivateEndpointConnection_Create
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionUpdate.json
+        requestUpdate:
+          - add: /parameters/properties/privateEndpoint
+            value: {
+              "id": $(privateEndpointId)
+            }
+          - add: /parameters/properties/groupId
+            value: Sql
+          - add: /parameters/properties/provisioningState
+            value: Succeeded
+
+      - step: PrivateEndpointConnection_Get
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionGet.json
+      - step: PrivateEndpointConnection_ListByDatabaseAccount
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionListGet.json
+      - step: PrivateEndpointConnection_Delete
+        exampleFile: ../examples/CosmosDBPrivateEndpointConnectionDelete.json
+
+  - scenario: PrivateLinkResource
+    description: Microsoft.DocumentDB/databaseAccounts/privateLinkResources
+    steps:
+      - step: PrivateLinkResource_Get
+        exampleFile: ../examples/CosmosDBPrivateLinkResourceGet.json
+      - step: PrivateLinkResource_LisyByDabasebaseAccount
+        exampleFile: ../examples/CosmosDBPrivateLinkResourceListGet.json
+      

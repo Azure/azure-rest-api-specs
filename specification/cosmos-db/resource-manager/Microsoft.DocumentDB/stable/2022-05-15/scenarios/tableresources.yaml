@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccounttable
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+      - add: /createUpdateParameters/kind
+        value: GlobalDocumentDB
+      - add: /createUpdateParameters/properties/capabilities
+        value: [
+         "name": "EnableTable"
+        ]
+
+scenarios:
+  - scenario: TableResources
+    description: Microsoft.DocumentDB/databaseAccounts/tables
+    variables:
+      tableName: cosmos_table
+    steps:
+      - step: TableResources_CreateTable
+        exampleFile: ../examples/CosmosDBTableCreateUpdate.json
+      - step: TableResources_GetTable
+        exampleFile: ../examples/CosmosDBTableGet.json
+      - step: TableResources_ListTables
+        exampleFile: ../examples/CosmosDBTableList.json
+      - step: TableResources_UpdateTableThroughput
+        exampleFile: ../examples/CosmosDBTableThroughputUpdate.json
+      - step: TableResources_GetTableThroughput
+        exampleFile: ../examples/CosmosDBTableThroughputGet.json
+      - step: TableResources_MigrateTableToAutoscale
+        exampleFile: ../examples/CosmosDBTableMigrateToAutoscale.json
+      - step: TableResources_MigrateTableToManualThroughput
+        exampleFile: ../examples/CosmosDBTableMigrateToManualThroughput.json
+      - step: TableResources_DeleteTable
+        exampleFile: ../examples/CosmosDBTableDelete.json

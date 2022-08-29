@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountservice2
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+
+scenarios:
+  - scenario: Service
+    description: Microsoft.DocumentDB/databaseAccounts/services
+    steps:
+      - step: Service_CreateSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceCreate.json
+      - step: Service_GetSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceGet.json
+      - step: Service_List
+        exampleFile: ../examples/CosmosDBServicesList.json
+      - step: Service_DeleteSqlDedicatedGatewayService
+        exampleFile: ../examples/CosmosDBSqlDedicatedGatewayServiceDelete.json
