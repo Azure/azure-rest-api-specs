@@ -51,23 +51,6 @@ input-file:
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
 ```
-### Tag: package-2022-05
-
-These settings apply only when `--tag=package-2022-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-05'
-input-file:
-  - Microsoft.App/stable/2022-05-01/AuthConfigs.json
-  - Microsoft.App/stable/2022-05-01/CommonDefinitions.json
-  - Microsoft.App/stable/2022-05-01/ContainerApps.json
-  - Microsoft.App/stable/2022-05-01/ContainerAppsRevisions.json
-  - Microsoft.App/stable/2022-05-01/DaprComponents.json
-  - Microsoft.App/stable/2022-05-01/Diagnostics.json
-  - Microsoft.App/stable/2022-05-01/Global.json
-  - Microsoft.App/stable/2022-05-01/ManagedEnvironments.json
-  - Microsoft.App/stable/2022-05-01/ManagedEnvironmentsStorages.json
-  - Microsoft.App/stable/2022-05-01/SourceControls.json
-```
 
 ### Tag: package-2022-03
 
