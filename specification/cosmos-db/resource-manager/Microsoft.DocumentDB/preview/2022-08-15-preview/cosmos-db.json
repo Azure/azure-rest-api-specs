@@ -9010,6 +9010,14 @@
         "id": {
           "type": "string",
           "description": "Name of the Cosmos DB SQL database"
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore",
+          "$ref": "#/definitions/ResourceRestoreParameters"
+        },
+        "createMode": {
+          "description": "Enum to indicate the mode of resource creation.",
+          "$ref": "#/definitions/CreateMode"
         }
       },
       "required": [
@@ -9052,6 +9060,14 @@
           "type": "integer",
           "format": "int64",
           "description": "Analytical TTL."
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore",
+          "$ref": "#/definitions/ResourceRestoreParameters"
+        },
+        "createMode": {
+          "description": "Enum to indicate the mode of resource creation.",
+          "$ref": "#/definitions/CreateMode"
         }
       },
       "required": [
@@ -9467,6 +9483,14 @@
         "id": {
           "type": "string",
           "description": "Name of the Cosmos DB MongoDB database"
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore",
+          "$ref": "#/definitions/ResourceRestoreParameters"
+        },
+        "createMode": {
+          "description": "Enum to indicate the mode of resource creation.",
+          "$ref": "#/definitions/CreateMode"
         }
       },
       "required": [
@@ -9495,6 +9519,14 @@
         "analyticalStorageTtl": {
           "type": "integer",
           "description": "Analytical TTL."
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore",
+          "$ref": "#/definitions/ResourceRestoreParameters"
+        },
+        "createMode": {
+          "description": "Enum to indicate the mode of resource creation.",
+          "$ref": "#/definitions/CreateMode"
         }
       },
       "required": [
@@ -10494,15 +10526,6 @@
             "name": "RestoreMode"
           }
         },
-        "restoreSource": {
-          "type": "string",
-          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
-        },
-        "restoreTimestampInUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time to which the account has to be restored (ISO-8601 format)."
-        },
         "databasesToRestore": {
           "type": "array",
           "description": "List of specific databases available for restore.",
@@ -10524,7 +10547,44 @@
             "$ref": "#/definitions/TableName"
           }
         }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreParametersBase"
+        }
+      ]
+    },
+    "RestoreParametersBase": {
+      "type": "object",
+      "description": "Parameters to indicate the information about the restore.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "restoreSource": {
+          "type": "string",
+          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
+        },
+        "restoreTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time to which the account has to be restored (ISO-8601 format)."
+        }
       }
+    },
+    "ResourceRestoreParameters": {
+      "type": "object",
+      "description": "Parameters to indicate the information about the restore.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreParametersBase"
+        }
+      ]
     },
     "DatabaseRestoreResource": {
       "type": "object",
