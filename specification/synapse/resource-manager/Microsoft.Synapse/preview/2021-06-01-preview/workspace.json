@@ -941,7 +941,7 @@
         "tags": [
           "Workspaces, checkDefaultStorageAccountStatus"
         ],
-        "operationId": "WorkspaceCheckDefaultStorageAccountStatus",
+        "operationId": "WorkspaceCheckDefaultStorageAccountStatus_Create",
         "description": "Check Default Storage Account Status",
         "parameters": [
           {
@@ -971,14 +971,14 @@
         ],
         "responses": {
           "200": {
-          "description": "Workspace CheckDefault Storage Account Status.",
             "schema": {
               "type": "object",
               "items": {
                 "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
               }
-            }
-        },
+            },
+            "description": "OK"
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
