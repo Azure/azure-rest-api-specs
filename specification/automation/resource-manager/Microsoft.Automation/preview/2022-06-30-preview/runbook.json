@@ -1158,23 +1158,9 @@
       "type": "object",
       "properties": {
         "runbookType": {
-          "type": "string",
-          "description": "Gets or sets the type of the runbook.",
-          "enum": [
-            "Script",
-            "Graph",
-            "PowerShellWorkflow",
-            "PowerShell",
-            "GraphPowerShellWorkflow",
-            "GraphPowerShell",
-            "Python2",
-            "Python3",
-            "Python"
-          ],
-          "x-ms-enum": {
-            "name": "RunbookTypeEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RunbookTypeProperty",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook type."
         },
         "runtime": {
           "type": "string",
@@ -1316,23 +1302,9 @@
           "description": "Gets or sets progress log option."
         },
         "runbookType": {
-          "type": "string",
-          "description": "Gets or sets the type of the runbook.",
-          "enum": [
-            "Script",
-            "Graph",
-            "PowerShellWorkflow",
-            "PowerShell",
-            "GraphPowerShellWorkflow",
-            "GraphPowerShell",
-            "Python2",
-            "Python3",
-            "Python"
-          ],
-          "x-ms-enum": {
-            "name": "RunbookTypeEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RunbookTypeProperty",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook type."
         },
         "runtime": {
           "type": "string",
@@ -1394,23 +1366,9 @@
       "type": "object",
       "properties": {
         "runbookType": {
-          "type": "string",
-          "description": "Gets or sets the type of the runbook.",
-          "enum": [
-            "Script",
-            "Graph",
-            "PowerShellWorkflow",
-            "PowerShell",
-            "GraphPowerShellWorkflow",
-            "GraphPowerShell",
-            "Python2",
-            "Python3",
-            "Python"
-          ],
-          "x-ms-enum": {
-            "name": "RunbookTypeEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RunbookTypeProperty",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook type."
         },
         "runtime": {
           "type": "string",
@@ -1687,6 +1645,30 @@
         "runbookContent"
       ],
       "description": "The parameters supplied to the create or update runbook operation."
+    },
+    "RunbookTypeProperty": {
+      "type": "object",
+      "properties": {
+        "runbookType": {
+          "type": "string",
+          "description": "Content of the Runbook.",
+          "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
+            "PowerShell",
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell",
+            "Python2",
+            "Python3"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookTypeEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Gets or sets the type of the runbook."
     }
   },
   "parameters": {}
