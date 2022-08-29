@@ -707,6 +707,54 @@
         }
       }
     },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/generateConfigurations": {
+      "post": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_GenerateConfigurations",
+        "description": "Generate configurations for a Linker.",
+        "x-ms-examples": {
+          "GenerateConfiguration": {
+            "$ref": "./examples/LinkerGenerateConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Connection Info, including format, secret store, etc",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ServiceLinker/operations": {
       "get": {
         "tags": [
