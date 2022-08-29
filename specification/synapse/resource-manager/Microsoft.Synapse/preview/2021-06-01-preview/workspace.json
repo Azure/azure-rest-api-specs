@@ -935,6 +935,71 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/checkDefaultStorageAccountStatus": {
+      "post": {
+        "tags": [
+          "Workspaces, checkDefaultStorageAccountStatus"
+        ],
+        "operationId": "WorkspaceCheckDefaultStorageAccountStatus",
+        "description": "Check Default Storage Account Status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "name": "checkDefaultStorageAccountStatus",
+            "in": "body",
+            "description": "Check Default Storage Account Status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "description": "OK",
+            "201": {
+              "schema": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update trusted service by pass configuration": {
+            "$ref": "./examples/CheckDefaultStorageAccountStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1596,6 +1661,38 @@
               }
             }
           },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatusProperties": {
+      "description": "Properties of the Check Default Storage Account Status.",
+      "type": "object",
+      "properties": {
+        "isPrivateLinked": {
+          "description": "Is Storage Account Status Linked.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "privateEndpointResourceId": {
+          "description": "Endpoint ResourceId.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatus": {
+      "description": "Workspace Check Default Storage Account Status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CheckDefaultStorageAccountStatusProperties",
+          "description": "Workspace Check Default Storage Account Status Properties.",
           "x-ms-client-flatten": true
         }
       }
