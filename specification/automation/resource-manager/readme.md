@@ -383,6 +383,7 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/linkedWorkspace.json
 - Microsoft.Automation/stable/2022-08-08/module.json
 - Microsoft.Automation/stable/2022-08-08/python2package.json
+- Microsoft.Automation/stable/2022-08-08/python3package.json
 - Microsoft.Automation/stable/2022-08-08/runbook.json
 - Microsoft.Automation/stable/2022-08-08/schedule.json
 - Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationMachineRun.json
@@ -452,7 +453,7 @@ directive:
     from: connectionType.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
   - suppress: DefaultErrorResponseSchema
-    from: connection.json
+    from: credential.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.    
   - suppress: DefaultErrorResponseSchema
     from: dscConfiguration.json
@@ -465,6 +466,39 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
   - suppress: DefaultErrorResponseSchema
     from: jobSchedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: linkedWorkspace.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: module.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: runbook.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: schedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: softwareUpdateConfigurationMachineRun.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: softwareUpdateConfigurationRun.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControl.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControlSyncJob.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControlSyncJobStreams.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: variable.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
 ```
 
