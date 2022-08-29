@@ -987,7 +987,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Create or update trusted service by pass configuration": {
+          "Workspace check default storage account status": {
             "$ref": "./examples/CheckDefaultStorageAccountStatus.json"
           }
         }
@@ -1657,22 +1657,6 @@
         }
       }
     },
-    "CheckDefaultStorageAccountStatusProperties": {
-      "description": "Properties of the Check Default Storage Account Status.",
-      "type": "object",
-      "properties": {
-        "isPrivateLinked": {
-          "description": "Is Storage Account Status Linked.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "privateEndpointResourceId": {
-          "description": "Endpoint ResourceId.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "CheckDefaultStorageAccountStatus": {
       "description": "Workspace Check Default Storage Account Status.",
       "type": "object",
@@ -1682,14 +1666,19 @@
         }
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The geo-location where the resource lives"
-        },
+        "description": "Properties of the Check Default Storage Account Status.",
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/CheckDefaultStorageAccountStatusProperties",
-          "description": "Workspace Check Default Storage Account Status Properties.",
+          "isPrivateLinked": {
+            "description": "Is Storage Account Status Linked.",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "privateEndpointResourceId": {
+            "description": "Endpoint ResourceId.",
+            "type": "string",
+            "readOnly": true
+          },
           "x-ms-client-flatten": true
         }
       }
