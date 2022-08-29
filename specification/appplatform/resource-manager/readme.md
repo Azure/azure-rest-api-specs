@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-05
+tag: package-preview-2022-09
 ```
 
 ### Suppression
