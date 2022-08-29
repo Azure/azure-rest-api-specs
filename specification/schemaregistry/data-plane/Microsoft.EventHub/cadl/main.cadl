@@ -1,6 +1,6 @@
 // Original Swagger: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/schemaregistry/data-plane/Microsoft.EventHub/stable/2021-10/schemaregistry.json
 
-import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-core"; // TODO: use this and look into ResourceRead
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
@@ -12,6 +12,8 @@ using OpenAPI;
 using Cadl.Http;
 using Cadl.Versioning;
 
+// TODO: try to use cadl-azure-core
+
 ///////////////////////////////
 //  SWAGGER: "info" SECTION  //
 ///////////////////////////////
@@ -19,8 +21,8 @@ using Cadl.Versioning;
 @serviceVersion("2021-10")
 @doc("Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.")
 @server("{endpoint}", "Azure Schema Registry Service", Endpoint)
-@Cadl.Rest.produces("application/json"; "application/json; serialization=Avro")
-@Cadl.Rest.consumes("application/json; serialization=Avro")
+//@Cadl.Rest.produces("application/json"; "application/json; serialization=Avro")
+//@Cadl.Rest.consumes("application/json; serialization=Avro")
 namespace Azure.SchemaRegistry;
 
 ///////////////////////////////
@@ -32,37 +34,38 @@ namespace Azure.SchemaRegistry;
 ///////////////////////////////
 interface SchemaRegistry {
     @route("/$schemaGroups")
+    @operationId("SchemaGroups_List")
     @get
     @summary("Get list of schema groups.")
     @doc("Gets the list of schema groups user is authorized to access.")
     // TODO: example not working
-    @example("../stable/2021-10/examples/OperationSchema_GetSchemaGroups.json", "Get schema groups")
-    //// TODO: operationId
-    //// TODO: @Cadl.Rest.produces("application/json")
+    @example("./stable/2021-10/examples/OperationSchema_GetSchemaGroups.json", "Get schema groups")
     getSchemaGroups(
         ...ApiVersionParameter
     ): OkWithError<SchemaGroups>;
 
     @route("/$schemaGroups/$schemas/{id}")
+    @operationId("Schema_GetById")
     @get
     @summary("Get a registered schema by its unique ID reference.")
     @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
     // TODO: example not working
-    @example("../stable/2021-10/examples/OperationSchema_GetById.json", "Get schema by ID")
-    // TODO: operationId
     // TODO: @produces("application/json; serialization=Avro")
+    @example("./stable/2021-10/examples/OperationSchema_GetById.json", "Get schema by ID")
     getSchemaById(
-        ...SchemaId,     // TODO: should parameter for schema id be different from SchemaId
+        ...SchemaId,
         ...ApiVersionParameter
-    ): OkWithError<BinarySchema>;  // TODO: create more accurate response object for error
+    ): {
+        ...SchemaMetadata,
+        ...SchemaContent,
+       } | Error;  // TODO: Error should be in default response
 
     @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
+    @operationId("Schema_GetVersions")
     @get
     @summary("Get list schema versions.")
     @doc("Gets the list of all versions of one schema.")
-    // TODO: example not working
-    @example("../stable/2021-10/examples/OperationSchema_GetSchemaVersions.json", "Get schema versions")
-    // TODO: operationId
+    @example("./stable/2021-10/examples/OperationSchema_GetSchemaVersions.json", "Get schema versions")
     // TODO: @produces("application/json")
     getSchemaVersions(
         ...SchemaGroup, // TODO: should there be a separate parameter model?
@@ -71,12 +74,11 @@ interface SchemaRegistry {
     ): OkWithError<SchemaVersions>;  // TODO: create more accurate response object for error
 
     @route("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
+    @operationId("Schema_QueryIdByContent")
     @get
     @summary("Get ID for existing schema.")
     @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
-    // TODO: example not working
-    @example("../stable/2021-10/examples/OperationSchema_QueryIdByContent.json", "Get schema Id")
-    // TODO: operationId
+    @example("./stable/2021-10/examples/OperationSchema_QueryIdByContent.json", "Get schema Id")
     // TODO: @consumes("application/json; serialization=Avro")
     // TODO: @produces("application/json")
     getIdByContent(
@@ -85,7 +87,7 @@ interface SchemaRegistry {
         ...SchemaContent,
         ...ApiVersionParameter
     ): {
-        ...SchemaMetadataResponse
+        ...SchemaMetadataNoContent
     } | {
         // TODO: figure out how to get this description instead of Client Error
         @doc("Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.")
@@ -95,26 +97,26 @@ interface SchemaRegistry {
     } | Error;
 
     @route("/$schemaGroups/{groupName}/schemas/{schemaName}")
+    @operationId("Schema_Register")
     @put
     @summary("Register new schema")
     @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
-    // TODO: example not working
-    @example("../stable/2021-10/examples/OperationSchema_Register.json", "Register schema")
-    // TODO: operationId
+    @example("./stable/2021-10/examples/OperationSchema_Register.json", "Register schema")
     // TODO: @consumes("application/json; serialization=Avro")
     // TODO: @produces("application/json")
     registerSchema(
-        ...SchemaGroup, // TODO: should there be a separate parameter model?
+        ...SchemaGroup,
         ...SchemaName,
-        ...SchemaContent,   // TODO: figure out why body param is not showing up in openapi
+        ...SchemaContent,
         ...ApiVersionParameter
     ): {
-        ...SchemaMetadataResponse
+        ...SchemaMetadataNoContent
     } | {
         // TODO: figure out how to get this description instead of Client Error
         @doc("Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.")
         @statusCode statusCode: 415;
-        // TODO: "x-ms-error-response": true
+        @header
+        "x-ms-error-response": true;
         ...Error
     } | Error;
 }

@@ -32,8 +32,10 @@ model SchemaName {
 
 model SchemaContent {
   @doc("String representation (UTF-8) of the registered schema.")
+  @header
+  "contentType": "application/json; serialization=Avro";
   @body
-  schemaContent: string; // TODO: type string but format binary?
+  schemaContent: bytes; // TODO: check that bytes translates to swagger type:string, format: binary?
 }
 ////////////////////////////////////
 //        END "parameters"        //
@@ -45,6 +47,8 @@ model SchemaContent {
 @doc("Object received from the registry containing schema identifiers.")
 model SchemaId{
   @doc("Schema ID that uniquely identifies a schema in the registry namespace.")
+  @header
+  "contentType": "application/json";
   @path
   id: string;
 }
@@ -63,6 +67,8 @@ model SchemaGroups {
 
 @doc("Version number of specific schema.")
 model SchemaVersion {
+  @header
+  "contentType": "application/json";
   schemaVersion: int32; // TODO: check if int64
 }
 
@@ -99,16 +105,10 @@ model ErrorDetail {
 /////////////////////////////////////
 alias OkWithError<T> = OkResponse<T> | Error; // TODO: should 200 description be OK?
 
-@doc("Binary representation of the registered schema.")
-model BinarySchema is bytes;
-
-model SchemaMetadataResponse {
-  @statusCode
-  @doc("No Content")
-  statusCode: 204;
+model SchemaMetadata {
   @header
   @doc("URL location of schema, identified by schema group, schema name, and version.")
-  "Location": string;
+  "Location": string; // TODO: do headers need to be capitalized, b/c swagger doesn't?
   @header
   @doc("References specific schema in registry namespace.")
   "Schema-Id": string;
@@ -124,6 +124,13 @@ model SchemaMetadataResponse {
   @header
   @doc("Version of the returned schema.")
   "Schema-Version": int32;
+}
+
+model SchemaMetadataNoContent {
+  @statusCode
+  @doc("No Content")
+  statusCode: 204;
+  ...SchemaMetadata;
 }
 
 /////////////////////////////////////
