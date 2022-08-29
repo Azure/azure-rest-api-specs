@@ -49,6 +49,47 @@
         }
       }
     },
+    "/providers/Microsoft.Education/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],		
+        "operationId": "Operation Status",
+        "description": "Get operation status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed"
+          },
+          "202": {
+            "description": "Operation in progress",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },		
     "/providers/Microsoft.Education/grants": {
       "get": {
         "tags": [
@@ -173,6 +214,50 @@
             "description": "Grant detail",
             "schema": {
               "$ref": "#/definitions/GrantDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default/renew": {
+      "post": {
+        "tags": [
+          "Grants"
+        ],		
+        "operationId": "Grant_Renewal",
+        "description": "Request grant renewal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Grant renewal completed"
+          },
+          "202": {
+            "description": "Grant renewal accepted",
+            "headers": {
+              "Location": {
+                "description": "GET the URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1369,6 +1454,11 @@
       "description": "Grant detail properties",
       "type": "object",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Grant display name"
+        },			  
         "offerCap": {
           "$ref": "#/definitions/Amount",
           "description": "Offer Cap",
@@ -1622,7 +1712,15 @@
       "in": "query",
       "type": "boolean",
       "description": "set this flag to true if you want to update student count without generating a new invite code"
-    }
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation Id."
+    }	
   },
   "security": [
     {
