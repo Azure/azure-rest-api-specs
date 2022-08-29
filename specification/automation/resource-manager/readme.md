@@ -500,6 +500,39 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: variable.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+
+  - suppress: DeleteOperationResponses
+    from: credential.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DeleteOperationResponses
+    from: certificate.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: dscNodeConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: hybridRunbookWorkerGroup.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: module.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DeleteOperationResponses
+    from: schedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DeleteOperationResponses
+    from: sourceControl.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    
+  - suppress: DeleteOperationResponses
+    from: variable.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DeleteOperationResponses
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.      
+
 ```
 
 ---
