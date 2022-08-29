@@ -357,17 +357,6 @@ These settings apply only when `--tag=package-2022-08-08` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-08'
 input-file:
-- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
-- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
-- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
-- Microsoft.Automation/stable/2021-06-22/operations.json
-- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
-- Microsoft.Automation/stable/2018-06-30/runbook.json
-- Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 - Microsoft.Automation/stable/2022-08-08/python3package.json
 - Microsoft.Automation/stable/2022-08-08/account.json
 - Microsoft.Automation/stable/2022-08-08/certificate.json
@@ -525,7 +514,6 @@ directive:
   - suppress: DeleteOperationResponses
     from: sourceControl.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
-    
   - suppress: DeleteOperationResponses
     from: variable.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
