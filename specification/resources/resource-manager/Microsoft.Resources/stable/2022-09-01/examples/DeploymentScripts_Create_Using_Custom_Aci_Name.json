@@ -17,7 +17,15 @@
         "azPowerShellVersion": "1.7.0",
         "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
         "containerSettings": {
-          "containerGroupName": "contoso-aci"
+          "containerGroupName": "contoso-aci",
+          "subnetIds": [
+            {
+              "id": "subnetId_1"
+            },
+            {
+              "id": "subnetId_2"
+            }
+          ]
         },
         "arguments": "-Location 'westus' -Name \"*rg2\"",
         "supportingScriptUris": [
@@ -61,7 +69,15 @@
           "retentionInterval": "P7D",
           "timeout": "PT1H",
           "containerSettings": {
-            "containerGroupName": "contoso-aci"
+            "containerGroupName": "contoso-aci",
+            "subnetIds": [
+              {
+                "id": "subnetId_1"
+              },
+              {
+                "id": "subnetId_2"
+              }
+            ]
           },
           "cleanupPreference": "Always",
           "status": {
@@ -96,7 +112,15 @@
           "retentionInterval": "P7D",
           "timeout": "PT1H",
           "containerSettings": {
-            "containerGroupName": "contoso-aci"
+            "containerGroupName": "contoso-aci",
+            "subnetIds": [
+              {
+                "id": "subnetId_1"
+              },
+              {
+                "id": "subnetId_2"
+              }
+            ]
           },
           "cleanupPreference": "Always",
           "status": {
