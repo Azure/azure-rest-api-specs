@@ -1,0 +1,75 @@
+scope: ResourceGroup
+variables:
+  registryName:
+    type: string
+    prefix: registryna
+  agentPoolName:
+    type: string
+    prefix: agentpooln
+  taskRunName:
+    type: string
+    prefix: taskrunnam
+  taskName:
+    type: string
+    prefix: taskname
+  runId:
+    type: string
+    prefix: runid
+scenarios:
+  - steps:
+      - step: AgentPools_Create
+        exampleFile: ..\examples\AgentPoolsCreate.json
+      - step: AgentPools_List
+        exampleFile: ..\examples\AgentPoolsList.json
+      - step: AgentPools_Get
+        exampleFile: ..\examples\AgentPoolsGet.json
+      - step: AgentPools_Update
+        exampleFile: ..\examples\AgentPoolsUpdate.json
+      - step: AgentPools_GetQueueStatus
+        exampleFile: ..\examples\AgentPoolsGetQueueStatus.json
+
+      - step: Tasks_Create
+        exampleFile: ..\examples\TasksCreate.json
+      - step: Tasks_List
+        exampleFile: ..\examples\TasksList.json
+      - step: Tasks_Get
+        exampleFile: ..\examples\TasksGet.json
+      - step: Tasks_Update
+        exampleFile: ..\examples\TasksUpdate.json
+      - step: Tasks_GetDetails
+        exampleFile: ..\examples\TasksGetDetails.json
+
+      - step: TaskRuns_Create
+        exampleFile: ..\examples\TaskRunsCreate.json
+      - step: TaskRuns_List
+        exampleFile: ..\examples\TaskRunsList.json
+      - step: TaskRuns_Get
+        exampleFile: ..\examples\TaskRunsGet.json
+      - step: TaskRuns_Update
+        exampleFile: ..\examples\TaskRunsUpdate.json
+      - step: TaskRuns_GetDetails
+        exampleFile: ..\examples\TaskRunsGetDetails.json
+
+      - step: Registries_GetBuildSourceUploadUrl
+        exampleFile: ..\examples\RegistriesGetBuildSourceUploadUrl.json
+
+      - step: Runs_List
+        exampleFile: ..\examples\RunsList.json
+      - step: Runs_Get
+        exampleFile: ..\examples\RunsGet.json
+      - step: Runs_Update
+        exampleFile: ..\examples\RunsUpdate.json
+      - step: Runs_Cancel
+        exampleFile: ..\examples\RunsCancel.json
+      - step: Runs_GetLogSasUrl
+        exampleFile: ..\examples\RunsGetLogSasUrl.json
+
+      - step: Registries_ScheduleRun
+        exampleFile: ..\examples\RegistriesScheduleRun.json
+        
+      - step: TaskRuns_Delete
+        exampleFile: ..\examples\TaskRunsDelete.json
+      - step: Tasks_Delete
+        exampleFile: ..\examples\TasksDelete.json
+      - step: AgentPools_Delete
+        exampleFile: ..\examples\AgentPoolsDelete.json

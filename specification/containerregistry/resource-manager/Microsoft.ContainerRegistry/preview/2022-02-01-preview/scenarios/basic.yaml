@@ -1,0 +1,186 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  registryName:
+    type: string
+    prefix: registryna
+  webhookName:
+    type: string
+    prefix: webhooknam
+  connectedRegistryName:
+    type: string
+    prefix: connectedr
+  replicationName:
+    type: string
+    prefix: replicatio
+  scopeMapName:
+    type: string
+    prefix: scopemapna
+  tokenName:
+    type: string
+    prefix: tokenname
+  exportPipelineName:
+    type: string
+    prefix: exportpipe
+  importPipelineName:
+    type: string
+    prefix: importpipe
+  pipelineRunName:
+    type: string
+    prefix: pipelineru
+  privateEndpointConnectionName:
+    type: string
+    prefix: privateend
+
+scenarios:
+  - scenario: ContainerRegister
+    description: Microsoft.ContainerRegistry/registries
+    steps:
+      # Registry
+      - step: Registries_CheckNameAvailability
+        exampleFile: ..\examples\RegistryCheckNameAvailable.json
+      - step: Registries_Create
+        exampleFile: ..\examples\RegistryCreate.json
+      - step: Registries_List
+        exampleFile: ..\examples\RegistryList.json
+      - step: Registries_Get
+        exampleFile: ..\examples\RegistryGet.json
+      - step: Registries_ListByResourceGroup
+        exampleFile: ..\examples\RegistryListByResourceGroup.json
+      - step: Registries_ListUsages
+        exampleFile: ..\examples\RegistryListUsages.json
+
+
+        
+      - step: Registries_Update
+        exampleFile: ..\examples\RegistryUpdate.json
+      - step: Registries_GenerateCredentials
+        exampleFile: ..\examples\RegistryGenerateCredentials.json
+      - step: Registries_ImportImage
+        exampleFile: ..\examples\ImportImageByTag.json
+      - step: Registries_RegenerateCredential
+        exampleFile: ..\examples\RegistryRegenerateCredential.json
+      - step: Registries_ListCredentials
+        exampleFile: ..\examples\RegistryListCredentials.json
+
+      # Webhook
+      - step: Webhooks_Create
+        exampleFile: ..\examples\WebhookCreate.json
+      - step: Webhooks_List
+        exampleFile: ..\examples\WebhookList.json
+      - step: Webhooks_Get
+        exampleFile: ..\examples\WebhookGet.json
+      - step: Webhooks_Update
+        exampleFile: ..\examples\WebhookUpdate.json
+      - step: Webhooks_GetCallbackConfig
+        exampleFile: ..\examples\WebhookGetCallbackConfig.json
+      - step: Webhooks_Ping
+        exampleFile: ..\examples\WebhookPing.json
+      - step: Webhooks_ListEvents
+        exampleFile: ..\examples\WebhookListEvents.json
+
+      # Connection Registry
+      - step: ConnectedRegistries_Create
+        exampleFile: ..\examples\ConnectedRegistryCreate.json
+      - step: ConnectedRegistries_List
+        exampleFile: ..\examples\ConnectedRegistryList.json
+      - step: ConnectedRegistries_Get
+        exampleFile: ..\examples\ConnectedRegistryGet.json
+      - step: ConnectedRegistries_Update
+        exampleFile: ..\examples\ConnectedRegistryUpdate.json
+      - step: ConnectedRegistries_Deactivate
+        exampleFile: ..\examples\ConnectedRegistryDeactivate.json
+
+      # Replication
+      - step: Replications_Create
+        exampleFile: ..\examples\ReplicationCreate.json
+      - step: Replications_List
+        exampleFile: ..\examples\ReplicationList.json
+      - step: Replications_Get
+        exampleFile: ..\examples\ReplicationGet.json
+      - step: Replications_Update
+        exampleFile: ..\examples\ReplicationUpdate.json
+
+      # Token
+      - step: Tokens_Create
+        exampleFile: ..\examples\TokenCreate.json
+      - step: Tokens_List
+        exampleFile: ..\examples\TokenList.json
+      - step: Tokens_Get
+        exampleFile: ..\examples\TokenGet.json
+      - step: Tokens_Update
+        exampleFile: ..\examples\TokenUpdate.json
+
+      # ScopeMaps
+      - step: ScopeMaps_Create
+        exampleFile: ..\examples\ScopeMapCreate.json
+      - step: ScopeMaps_List
+        exampleFile: ..\examples\ScopeMapList.json
+      - step: ScopeMaps_Get
+        exampleFile: ..\examples\ScopeMapGet.json
+      - step: ScopeMaps_Update
+        exampleFile: ..\examples\ScopeMapUpdate.json
+
+      # ExportPipeline
+      - step: ExportPipelines_Create
+        exampleFile: ..\examples\ExportPipelineCreate.json
+      - step: ExportPipelines_List
+        exampleFile: ..\examples\ExportPipelineList.json
+      - step: ExportPipelines_Get
+        exampleFile: ..\examples\ExportPipelineGet.json
+      
+      # ImportPipeline
+      - step: ImportPipelines_Create
+        exampleFile: ..\examples\ImportPipelineCreate.json
+      - step: ImportPipelines_List
+        exampleFile: ..\examples\ImportPipelineList.json
+      - step: ImportPipelines_Get
+        exampleFile: ..\examples\ImportPipelineGet.json
+      
+      # PipelineRun
+      - step: PipelineRuns_Create
+        exampleFile: ..\examples\PipelineRunCreate_Export.json
+      - step: PipelineRuns_List
+        exampleFile: ..\examples\PipelineRunList.json
+      - step: PipelineRuns_Get
+        exampleFile: ..\examples\PipelineRunGet.json
+
+      # PrivateEndpointConnection
+      - step: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ..\examples\PrivateEndpointConnectionCreateOrUpdate.json
+      - step: PrivateEndpointConnections_List
+        exampleFile: ..\examples\PrivateEndpointConnectionList.json
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ..\examples\PrivateEndpointConnectionGet.json
+      - step: Operations_List
+        exampleFile: ..\examples\OperationList.json
+      - step: PrivateEndpointConnections_Delete
+        exampleFile: ..\examples\PrivateEndpointConnectionDelete.json
+      - step: Registries_ListPrivateLinkResources
+        exampleFile: ..\examples\RegistryListPrivateLinkResources.json
+      - step: Registries_GetPrivateLinkResource
+        exampleFile: ..\examples\RegistryGetPrivateLinkResource.json
+        requestUpdate:
+          - replace: /groupName
+            value: registry ### privateendpoint groupId testing
+      
+      # Delete Resource
+      - step: PipelineRuns_Delete
+        exampleFile: ..\examples\PipelineRunDelete.json
+      - step: ImportPipelines_Delete
+        exampleFile: ..\examples\ImportPipelineDelete.json
+      - step: ExportPipelines_Delete
+        exampleFile: ..\examples\ExportPipelineDelete.json
+      - step: ScopeMaps_Delete
+        exampleFile: ..\examples\ScopeMapDelete.json
+      - step: Tokens_Delete
+        exampleFile: ..\examples\TokenDelete.json
+      - step: Replications_Delete
+        exampleFile: ..\examples\ReplicationDelete.json
+      - step: ConnectedRegistries_Delete
+        exampleFile: ..\examples\ConnectedRegistryDelete.json
+      - step: Webhooks_Delete
+        exampleFile: ..\examples\WebhookDelete.json
+      - step: Registries_Delete
+        exampleFile: ..\examples\RegistryDelete.json
