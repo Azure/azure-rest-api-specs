@@ -2894,6 +2894,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/guardrailsversions": {
+      "get": {
+        "tags": [
+          "guardrailsVersions"
+        ],
+        "operationId": "GuardrailsVersions_List",
+        "summary": "List available guardrails versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListGuardrailsVersionsResponse"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Guardrails versions": {
+            "$ref": "./examples/GuardrailsVersions_List.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7064,6 +7106,65 @@
       "required": [
         "enabled"
       ]
+    },
+    "GuardrailsProfile": {
+      "type": "object",
+      "properties": {
+        "systemExcludedNamespaces": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of namespaces specified by AKS to be excluded from Guardrails",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of constraints to use"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Off",
+            "Warning",
+            "Enforcement"
+          ],
+          "x-ms-enum": {
+            "name": "level",
+            "modelAsString": true
+          },
+          "description": "The guardrails level to be used. By default, Guardrails is enabled for all namespaces except those that AKS excludes via systemExcludedNamespaces"
+        },
+        "excludedNamespaces": {
+          "description": "List of namespaces excluded from guardrails checks",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "level",
+        "version"
+      ],
+      "description": "The Guardrails profile."
+    },
+    "ListGuardrailsVersionsResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Describes whether this version is in preview"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Describes whether this version is default"
+        }
+      }
     }
   },
   "parameters": {
