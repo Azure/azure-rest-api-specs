@@ -1702,6 +1702,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Relocate volume request",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/relocateVolumeRequest"
+            }
           }
         ],
         "responses": {
@@ -4517,6 +4526,12 @@
         "encryption": {
           "description": "Encryption settings",
           "$ref": "#/definitions/accountEncryption"
+        },
+        "disableShowmount": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Shows the status of disableShowmount for all volumes under the subscription, null equals false"
         }
       }
     },
@@ -5116,19 +5131,17 @@
           "type": "string",
           "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "deleteBaseSnapshot": {
+          "type": "boolean",
+          "description": "If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false"
         },
         "backupId": {
           "title": "Backup ID",
           "type": "string",
           "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Backup.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "baremetalTenantId": {
@@ -5282,6 +5295,54 @@
           "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later",
           "example": false,
           "default": false
+        },
+        "smbAccessBasedEnumeration": {
+          "title": "smbAccessBasedEnumeration",
+          "type": "string",
+          "description": "Enables access based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "smbAccessBasedEnumeration",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "smbAccessBasedEnumeration share setting is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "smbAccessBasedEnumeration share setting is enabled"
+              }
+            ]
+          },
+          "example": "Enabled"
+        },
+        "smbNonBrowsable": {
+          "title": "smbNonBrowsable",
+          "type": "string",
+          "description": "Enables non browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "smbNonBrowsable",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "smbNonBrowsable share setting is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "smbNonBrowsable share setting is enabled"
+              }
+            ]
+          },
+          "example": "Enabled"
         },
         "smbContinuouslyAvailable": {
           "type": "boolean",
@@ -6376,6 +6437,16 @@
         }
       }
     },
+    "relocateVolumeRequest": {
+      "description": "Relocate volume request",
+      "type": "object",
+      "properties": {
+        "creationToken": {
+          "type": "string",
+          "description": "New creation token for the volume that controls the mount point name"
+        }
+      }
+    },
     "poolChangeRequest": {
       "description": "Pool change request",
       "type": "object",
@@ -6743,18 +6814,9 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
-        "location",
         "properties"
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "id": {
           "type": "string",
           "readOnly": true,

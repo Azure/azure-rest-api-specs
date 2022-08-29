@@ -5055,9 +5055,6 @@
           "type": "string",
           "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "backupId": {
@@ -5065,11 +5062,9 @@
           "type": "string",
           "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Backup.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
+
         "baremetalTenantId": {
           "title": "Baremetal Tenant ID",
           "type": "string",
@@ -6646,18 +6641,9 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
-        "location",
         "properties"
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "id": {
           "type": "string",
           "readOnly": true,
