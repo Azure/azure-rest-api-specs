@@ -14,7 +14,8 @@ package-version: 1.0.0b1
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2018-05
