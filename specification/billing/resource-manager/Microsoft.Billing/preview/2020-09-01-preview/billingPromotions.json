@@ -47,7 +47,7 @@
           "Promotion, Activate"
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "The resource has been created",
             "schema": {
               "$ref": "#/definitions/PromotionResponse"
@@ -308,6 +308,15 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PromotionCheckEligibilityResponsePromptionProperties"
+        }
+      }
+    },
+    "PromotionCheckEligibilityResponsePromptionProperties": {
+      "type": "object",
+      "properties": {
+        "promotion": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PromotionCheckEligibilityResponseProperties"
         }
       }
@@ -330,6 +339,10 @@
         "reason": {
           "type": "string",
           "description": "Reason in case the subscription is not eligible for promotion."
+        },
+        "details": {
+          "type": "string",
+          "description": "Details in case the subscription is not eligible for promotion."
         },
         "eligibilitySubscriptionId": {
           "type": "string",
@@ -354,6 +367,7 @@
     },
     "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Error code.",
@@ -402,6 +416,13 @@
     }
   },
   "parameters": {
+    "versionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The version of the API to be used with the client request. The current version is  2020-05-01."
+    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",

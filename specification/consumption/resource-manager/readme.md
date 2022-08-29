@@ -26,18 +26,27 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-2021-10
 ```
 
 
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.Consumption/stable/2021-10-01/consumption.json
+```
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
   - Microsoft.Consumption/stable/2021-05-01/consumption.json
 ```
+
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
@@ -238,6 +247,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -435,7 +445,6 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
 
 ## Python
 

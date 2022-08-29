@@ -1,0 +1,819 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Gets a long term retention backup for a managed database.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_Get",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup of a managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_Delete",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists all long term retention backups for a managed database.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByDatabase",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists the long term retention backups for a given managed instance.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByInstance",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the managed instance.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupListByInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists the long term retention backups for managed databases in a given location.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Gets a long term retention backup for a managed database.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_GetByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_DeleteByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists all long term retention backups for a managed database.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByResourceGroupDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists the long term retention backups for a given managed instance.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByResourceGroupInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the managed instance.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupListByInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstanceBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lists the long term retention backups for managed databases in a given location.",
+        "operationId": "LongTermRetentionManagedInstanceBackups_ListByResourceGroupLocation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceLongTermRetentionBackupProperties": {
+      "description": "Properties of a long term retention backup",
+      "type": "object",
+      "properties": {
+        "managedInstanceName": {
+          "description": "The managed instance that the backup database belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "managedInstanceCreateTime": {
+          "format": "date-time",
+          "description": "The create time of the instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "The name of the database the backup belong to",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseDeletionTime": {
+          "format": "date-time",
+          "description": "The delete time of the database",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupTime": {
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupExpirationTime": {
+          "format": "date-time",
+          "description": "The time the long term retention backup will expire.",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "description": "The storage redundancy type of the backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ManagedInstanceLongTermRetentionBackup": {
+      "description": "A long term retention backup for a managed database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstanceLongTermRetentionBackupListResult": {
+      "description": "A list of long term retention backups for managed database(s).",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

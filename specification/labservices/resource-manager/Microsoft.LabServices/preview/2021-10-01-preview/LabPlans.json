@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services lab plans."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labPlans": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Get all lab plans for a subscription.",
+        "description": "Returns a list of all lab plans within a subscription",
+        "operationId": "LabPlans_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all Lab Plans for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabPlans"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listLabPlans": {
+            "$ref": "./examples/LabPlans/listLabPlans.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Get all lab plans for a subscription and resource group.",
+        "description": "Returns a list of all lab plans for a subscription and resource group.",
+        "operationId": "LabPlans_ListByResourceGroup",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all Lab Plans for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabPlans"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listResourceGroupLabPlans": {
+            "$ref": "./examples/LabPlans/listResourceGroupLabPlans.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LabPlanNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Retrieves a Lab Plan resource.",
+        "description": "Retrieves the properties of a Lab Plan.",
+        "operationId": "LabPlans_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getLabPlan": {
+            "$ref": "./examples/LabPlans/getLabPlan.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Updates or creates a Lab Plan resource.",
+        "description": "Operation to create or update a Lab Plan resource.",
+        "operationId": "LabPlans_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update was successful; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "201": {
+            "description": "The create was successful; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "202": {
+            "description": "The update was successful and has a long running operation; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "putLabPlan": {
+            "$ref": "./examples/LabPlans/putLabPlan.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Updates a Lab Plan resource.",
+        "description": "Operation to update a Lab Plan resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "LabPlans_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabPlanUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update was successful; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "202": {
+            "description": "The update was successful and has a long running operation; response contains the Lab Plan.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "patchLabPlan": {
+            "$ref": "./examples/LabPlans/patchLabPlan.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LabPlan"
+        ],
+        "summary": "Deletes a Lab Plan resource.",
+        "description": "Operation to delete a Lab Plan resource. Deleting a lab plan does not delete labs associated with a lab plan, nor does it delete shared images added to a gallery via the lab plan permission container.",
+        "operationId": "LabPlans_Delete",
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "204": {
+            "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "deleteLabPlan": {
+            "$ref": "./examples/LabPlans/deleteLabPlan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/saveImage": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LabPlanNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Save an image from a lab VM to the attached shared image gallery.",
+        "description": "Saves an image from a lab VM to the attached shared image gallery.",
+        "operationId": "LabPlans_SaveImage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveImageBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "saveImageVirtualMachine": {
+            "$ref": "./examples/LabPlans/saveImageVirtualMachine.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LabPlan": {
+      "description": "Lab Plans act as a permission container for creating labs via labs.azure.com. Additionally, they can provide a set of default configurations that will apply at the time of creating a lab, but these defaults can still be overwritten.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the lab plan.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Lab plan resource properties",
+          "$ref": "#/definitions/LabPlanProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedLabPlans": {
+      "description": "Paged list of lab plans.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of lab plans.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabPlan"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of lab plan results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabPlanNetworkProfile": {
+      "description": "Profile for how to handle networking for Lab Plans.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The external subnet resource id",
+          "$ref": "LabServices.json#/definitions/url"
+        }
+      }
+    },
+    "LabPlanUpdate": {
+      "description": "Contains lab configuration and default settings. This variant is used for PATCH.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "LabServices.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Lab plan resource update properties",
+          "$ref": "#/definitions/LabPlanUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LabPlanUpdateProperties": {
+      "description": "Lab plan resource properties for updates",
+      "type": "object",
+      "properties": {
+        "defaultConnectionProfile": {
+          "description": "The default lab connection profile. This can be changed on a lab resource and only provides a default profile.",
+          "$ref": "LabServices.json#/definitions/ConnectionProfile"
+        },
+        "defaultAutoShutdownProfile": {
+          "description": "The default lab shutdown profile. This can be changed on a lab resource and only provides a default profile.",
+          "$ref": "LabServices.json#/definitions/AutoShutdownProfile"
+        },
+        "defaultNetworkProfile": {
+          "description": "The lab plan network profile. To enforce lab network policies they must be defined here and cannot be changed when there are existing labs associated with this lab plan.",
+          "$ref": "#/definitions/LabPlanNetworkProfile"
+        },
+        "allowedRegions": {
+          "description": "The allowed regions for the lab creator to use when creating labs using this lab plan.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sharedGalleryId": {
+          "description": "Resource ID of the Shared Image Gallery attached to this lab plan. When saving a lab template virtual machine image it will be persisted in this gallery. Shared images from the gallery can be made available to use when creating new labs.",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "supportInfo": {
+          "description": "Support contact information and instructions for users of the lab plan. This information is displayed to lab owners and virtual machine users for all labs in the lab plan.",
+          "$ref": "#/definitions/SupportInfo"
+        },
+        "linkedLmsInstance": {
+          "description": "Base Url of the lms instance this lab plan can link lab rosters against.",
+          "$ref": "LabServices.json#/definitions/url"
+        }
+      }
+    },
+    "LabPlanProperties": {
+      "description": "Lab plan resource properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabPlanUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the lab plan.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportInfo": {
+      "description": "Support contact information and instructions.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Support web address.",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "email": {
+          "description": "Support contact email address.",
+          "$ref": "LabServices.json#/definitions/emailAddress"
+        },
+        "phone": {
+          "description": "Support contact phone number.",
+          "$ref": "LabServices.json#/definitions/phoneNumber"
+        },
+        "instructions": {
+          "description": "Support instructions.",
+          "type": "string"
+        }
+      }
+    },
+    "SaveImageBody": {
+      "description": "Body for the save image POST",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name for the image we create.",
+          "type": "string"
+        },
+        "labVirtualMachineId": {
+          "description": "The ID of the lab virtual machine you want to save an image from.",
+          "$ref": "LabServices.json#/definitions/url"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LabPlanNameParameter": {
+      "name": "labPlanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

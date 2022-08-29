@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance1",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "SapHana",
+                "hostname": "name",
+                "dbName": "db",
+                "sqlPort": "0000",
+                "instanceNumber": "00",
+                "dbUsername": "user",
+                "dbPasswordUri": "",
+                "sslHostNameInCertificate": "xyz.domain.com",
+                "dbSslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance2",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "SapNetWeaver",
+                "sapSid": "SID",
+                "sapHostname": "name",
+                "sapInstanceNr": "00",
+                "sapHostFileEntries": [
+                  "127.0.0.1 name fqdn"
+                ],
+                "sapUsername": "username",
+                "sapPasswordUri": "",
+                "sapPortNumber": "1234",
+                "sapClientId": "111",
+                "sapSslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance4",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "MsSqlServer",
+                "dbUsername": "user",
+                "dbPort": "5912",
+                "hostname": "hostname",
+                "sapSid": "sid"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "PrometheusOS",
+                "prometheusUrl": "http://192.168.0.0:9090/metrics"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "PrometheusHaCluster",
+                "prometheusUrl": "http://192.168.0.0:9090/metrics",
+                "hostname": "hostname",
+                "sid": "sid",
+                "clusterName": "clusterName"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

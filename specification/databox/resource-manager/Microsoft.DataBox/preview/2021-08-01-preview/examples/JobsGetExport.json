@@ -1,0 +1,135 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg8091",
+    "jobName": "SdkJob6429",
+    "api-version": "2021-08-01-preview",
+    "$expand": "details",
+    "x-ms-client-request-id": [
+      "b3739c7c-02b6-46c2-a04c-da6f8bca279c"
+    ],
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.29017.01",
+      "OSName/Windows",
+      "OSVersion/Microsoft.Windows.10.0.18363.",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ExportFromAzure",
+          "isCancellable": false,
+          "isDeletable": true,
+          "isShippingAddressEditable": false,
+          "isPrepareToShipEnabled": true,
+          "status": "Cancelled",
+          "startTime": "2020-08-07T10:49:08.7195419+05:30",
+          "details": {
+            "copyProgress": [
+              {
+                "storageAccountName": "aaaaaa2",
+                "transferType": "ExportFromAzure",
+                "dataAccountType": "StorageAccount",
+                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat/providers/Microsoft.Storage/storageAccounts/aaaaaa2",
+                "bytesProcessed": 0,
+                "totalBytesToProcess": 0,
+                "isEnumerationInProgress": false
+              }
+            ],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:49:12.7675644+05:30"
+              },
+              {
+                "stageName": "Cancelled",
+                "displayName": "Canceled",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:49:57.2572438+05:30"
+              }
+            ],
+            "contactDetails": {
+              "contactName": " ",
+              "emailList": [],
+              "phone": "1234567890",
+              "phoneExtension": "1234",
+              "notificationPreference": []
+            },
+            "shippingAddress": {
+              "streetAddress1": "16 TOWNSEND ST",
+              "streetAddress2": "Unit 1",
+              "city": "San Francisco",
+              "stateOrProvince": "CA",
+              "country": "US",
+              "postalCode": "94107",
+              "companyName": "Microsoft",
+              "addressType": "Commercial"
+            },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "dataImportDetails": [],
+            "dataExportDetails": [
+              {
+                "transferConfiguration": {
+                  "transferConfigurationType": "TransferAll",
+                  "transferFilterDetails": {},
+                  "transferAllDetails": {
+                    "include": {
+                      "dataAccountType": "StorageAccount",
+                      "transferAllBlobs": true,
+                      "transferAllFiles": true
+                    }
+                  }
+                },
+                "logCollectionLevel": "Error",
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat/providers/Microsoft.Storage/storageAccounts/aaaaaa2",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": [],
+            "reverseShipmentLabelSasKey": "https://wusbeta.blob.core.windows.net/customer-reverse-shipment-instructions/CustomerShipmentInstructions_MicrosoftManaged.PDF?sv=2018-03-28&sr=b&sig=04aL%2FTe7998qQJlhmGI3C0Q%2FxsCVo1t0B4uQUIx7TmQ%3D&st=2020-08-07T05%3A10%3A05Z&se=2020-08-08T05%3A20%3A05Z&sp=r",
+            "chainOfCustodySasKey": "https://wusbeta.blob.core.windows.net/chainofcustody/9a6ee052-bcff-4b5e-a478-7dcbfb86e9fb.txt?sv=2018-03-28&sr=b&sig=JbBBXZKharvfg35ZfmrhowO1DuOpzcZCNUdeFzklvWs%3D&st=2020-08-07T05%3A10%3A05Z&se=2020-08-07T05%3A40%3A05Z&sp=r",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            }
+          },
+          "cancellationReason": "CancelTest",
+          "deliveryType": "NonScheduled",
+          "deliveryInfo": {
+            "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+          },
+          "isCancellableWithoutFee": false
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "SdkJob6429",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg8091/providers/Microsoft.DataBox/jobs/SdkJob6429",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

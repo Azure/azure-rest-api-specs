@@ -325,7 +325,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -391,7 +392,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AssociatedWorkspace"
-          }
+          },
+          "x-ms-identifiers": [
+            "workspaceId"
+          ]
         },
         "capacityReservationProperties": {
           "$ref": "#/definitions/CapacityReservationProperties",
@@ -524,7 +528,16 @@
         "capacity": {
           "description": "The capacity value",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "enum": [
+            500,
+            1000,
+            2000,
+            5000
+          ],
+          "x-ms-enum": {
+            "name": "Capacity"
+          }
         },
         "name": {
           "type": "string",
@@ -632,18 +645,6 @@
           "description": "Minimum CapacityReservation value in GB.",
           "type": "integer",
           "format": "int64"
-        },
-        "capacityReservationLevel": {
-          "readOnly": true,
-          "description": "The capacity reservation level for this cluster in GB",
-          "type": "integer",
-          "format": "int32",
-          "enum": [
-            500,
-            1000,
-            2000,
-            5000
-          ]
         }
       }
     }

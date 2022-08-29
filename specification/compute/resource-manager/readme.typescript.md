@@ -10,9 +10,12 @@ typescript:
   azure-arm: true
   generate-metadata: true
 
+modelerfour:
+  treat-type-object-as-anything: true
+
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
@@ -30,7 +33,6 @@ directive:
 ``` yaml $(typescript) && !$(profile-content)
   package-name: "@azure/arm-compute"
   output-folder: "$(typescript-sdks-folder)/sdk/compute/arm-compute"
-  clear-output-folder: true
   
 ```
 
@@ -54,7 +56,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-compute-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/compute/arm-compute-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:

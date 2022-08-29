@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "resourceGroupName": "examplerg",
+    "systemTopicName": "exampleSystemTopic1",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1",
+              "provisioningState": "Succeeded",
+              "destination": {
+                "properties": {
+                  "resourceId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/testtrackedsource",
+                  "queueName": "que"
+                },
+                "endpointType": "StorageQueue"
+              },
+              "filter": {
+                "subjectBeginsWith": "",
+                "subjectEndsWith": ""
+              },
+              "labels": [],
+              "eventDeliverySchema": "EventGridSchema",
+              "retryPolicy": {
+                "maxDeliveryAttempts": 10,
+                "eventTimeToLiveInMinutes": 1440
+              }
+            },
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1/eventSubscriptions/examplesubscription1",
+            "name": "examplesubscription1",
+            "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions"
+          },
+          {
+            "properties": {
+              "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1",
+              "provisioningState": "Succeeded",
+              "destination": {
+                "properties": {
+                  "resourceId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/testtrackedsource",
+                  "queueName": "que"
+                },
+                "endpointType": "StorageQueue"
+              },
+              "filter": {
+                "isSubjectCaseSensitive": false,
+                "subjectBeginsWith": "ExamplePrefix",
+                "subjectEndsWith": "ExampleSuffix",
+                "includedEventTypes": [
+                  "Microsoft.Storage.BlobCreated",
+                  "Microsoft.Storage.BlobDeleted"
+                ]
+              },
+              "labels": [
+                "label1",
+                "label2"
+              ],
+              "eventDeliverySchema": "EventGridSchema",
+              "retryPolicy": {
+                "maxDeliveryAttempts": 30,
+                "eventTimeToLiveInMinutes": 1440
+              }
+            },
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1/eventSubscriptions/examplesubscription2",
+            "name": "examplesubscription2",
+            "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions"
+          }
+        ]
+      }
+    }
+  }
+}

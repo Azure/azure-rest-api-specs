@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2021-06-15-preview",
+    "callRequest": {
+      "source": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_da7be3a9-8788-42a6-85c6-56b2cf784fce"
+        }
+      },
+      "targets": [
+        {
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_0f50d091-5bd3-448b-884d-44be7037d9b9"
+          }
+        },
+        {
+          "phoneNumber": {
+            "value": "+14250123456"
+          }
+        }
+      ],
+      "alternateCallerId": {
+        "value": "+18440123456"
+      },
+      "subject": "Reminder call",
+      "callbackUri": "https://app.contoso.com/callback",
+      "requestedMediaTypes": [
+        "audio",
+        "video"
+      ],
+      "requestedCallEvents": [
+        "dtmfReceived",
+        "participantsUpdated"
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "The request contains invalid data."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "401",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "403",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}

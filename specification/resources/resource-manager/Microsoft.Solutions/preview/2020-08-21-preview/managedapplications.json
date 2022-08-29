@@ -248,6 +248,11 @@
         ],
         "operationId": "Applications_Update",
         "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
+        "x-ms-examples": {
+          "Create or update managed application": {
+            "$ref": "./examples/updateApplication.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -289,6 +294,9 @@
             "schema": {
               "$ref": "#/definitions/Application"
             }
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1931,6 +1939,13 @@
             "type": "string"
           },
           "description": "The deny assignment excluded actions."
+        },
+        "allowedDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The deny assignment excluded data actions."
         }
       },
       "description": "Managed application locking policy."

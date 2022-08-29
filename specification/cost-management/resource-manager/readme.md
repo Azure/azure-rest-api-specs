@@ -26,23 +26,88 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2022-05
 azure-validator: false
 ```
 
 ---
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
+```
+
+### Tag: package-preview-2020-08
+
+These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-08'
+input-file:
+  - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.insights.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/preview/2022-06-01-preview/scheduledActions.json
+```
+
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.CostManagement/preview/2022-06-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.CostManagement/preview/2022-04-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+```
 
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.CostManagement/stable/2021-01-01/costmanagement.exports.json
   - Microsoft.CostManagement/stable/2021-01-01/costmanagement.generatedetailedcostreport.json
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 ```
+
 ### Tag: package-preview-2020-12
 
 These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
@@ -142,6 +207,44 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4011
+    from: costmanagement.exports.json
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+  - suppress: R3023
+    from: costmanagement.generatedetailedcostreport.json    
+    reason: 'API change needed, Operations API must be implemented for operations'
+  - suppress: R4018
+    from: costmanagement.json    
+    reason: 'API change needed, Response schema of OperatioAPI does not match Arm Schema'
+  - suppress: R4037
+    from: costmanagement.generatedetailedcostreport.json
+    reason: 'This needs api change - MissingTypeObject' 
+  - suppress: R4009
+    from: costmanagement.exports.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: R4009
+    from: costmanagement.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.exports.json
+    where: $.definitions.CommonExportProperties.properties.partitionData
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.filterEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.groupingEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeFreshPartialCost
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeActualCost
+    reason: 'API change needed'    
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
@@ -235,6 +338,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_costmanagement']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -361,5 +465,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-

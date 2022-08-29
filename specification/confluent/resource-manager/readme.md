@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Confluent.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Confluent, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,38 @@ To build the SDK for Confluent, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Confluent API.
 
 ``` yaml
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-03-01-preview
+tag: package-2021-12-01
+```
+
+
+### Tag: package-2021-12-01
+
+These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12-01'
+input-file:
+  - Microsoft.Confluent/stable/2021-12-01/confluent.json
+```
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.Confluent/preview/2021-09-01-preview/confluent.json
 ```
 
 ### Tag: package-2020-03-01
@@ -78,6 +96,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_confluent']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -107,4 +126,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-

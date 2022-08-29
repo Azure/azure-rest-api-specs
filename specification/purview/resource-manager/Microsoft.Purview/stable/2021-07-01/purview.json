@@ -1019,8 +1019,13 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "description": "Gets or sets the Sku."
+          "description": "Gets or sets the Sku.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountSku"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1030,7 +1035,7 @@
       "properties": {
         "capacity": {
           "format": "int32",
-          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
+          "description": "Gets or sets the sku capacity.",
           "type": "integer"
         },
         "name": {
@@ -1163,12 +1168,21 @@
         "type": {
           "description": "Identity Type",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -1232,6 +1246,7 @@
       }
     },
     "CloudConnectors": {
+      "description": "External Cloud Service connectors",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1294,6 +1309,22 @@
         },
         "storageAccount": {
           "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Uses client ID and Principal ID",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Gets or Sets Client ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Gets or Sets Principal ID",
           "type": "string",
           "readOnly": true
         }
@@ -1388,6 +1419,9 @@
           "items": {
             "$ref": "#/definitions/ErrorModel"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         },
         "message": {
@@ -1406,6 +1440,10 @@
       "description": "The account update properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity related info to add/remove userAssignedIdentities."
+        },
         "properties": {
           "$ref": "#/definitions/AccountProperties",
           "description": "The account properties."
@@ -1424,10 +1462,12 @@
       "type": "object",
       "properties": {
         "atlasKafkaPrimaryEndpoint": {
+          "x-ms-secret": true,
           "description": "Gets or sets the primary connection string.",
           "type": "string"
         },
         "atlasKafkaSecondaryEndpoint": {
+          "x-ms-secret": true,
           "description": "Gets or sets the secondary connection string.",
           "type": "string"
         }
@@ -1503,7 +1543,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1576,7 +1619,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "metric specifications for the operation",
@@ -1584,7 +1630,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1602,7 +1651,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "displayDescription": {
           "description": "description of the metric",
@@ -1914,13 +1966,12 @@
       "required": true,
       "type": "string"
     },
-    "accountName": {
-      "name": "accountName",
-      "in": "path",
-      "description": "The name of the account.",
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
@@ -1930,12 +1981,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "tempgroup",
+    "parameters": {
+      "properties": {
+        "displayName": "Swagger Petstore",
+        "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+        "serviceUrl": "http://petstore.swagger.io/v2",
+        "path": "petstore",
+        "protocols": [
+          "https"
+        ],
+        "authenticationSettings": {
+          "openid": {
+            "openidProviderId": "testopenid",
+            "bearerTokenSendingMethods": [
+              "authorizationHeader"
+            ]
+          }
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/58da4c4ccdae970a08121230",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "58da4c4ccdae970a08121230",
+        "properties": {
+          "displayName": "Swagger Petstore",
+          "apiRevision": "1",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+          "serviceUrl": "http://petstore.swagger.io/v2",
+          "path": "petstore",
+          "protocols": [
+            "https"
+          ],
+          "authenticationSettings": {
+            "openid": {
+              "openidProviderId": "testopenid",
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ]
+            }
+          },
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-04-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/58da4c4ccdae970a08121230",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "58da4c4ccdae970a08121230",
+        "properties": {
+          "displayName": "Swagger Petstore",
+          "apiRevision": "1",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+          "serviceUrl": "http://petstore.swagger.io/v2",
+          "path": "petstore",
+          "protocols": [
+            "https"
+          ],
+          "authenticationSettings": {
+            "openid": {
+              "openidProviderId": "testopenid",
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ]
+            }
+          },
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    }
+  }
+}

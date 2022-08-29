@@ -1307,6 +1307,9 @@
       "items": {
         "$ref": "#/definitions/ServerRoleGroup"
       },
+      "x-ms-identifiers": [
+        "name"
+      ],
       "minItems": 1,
       "maxItems": 2,
       "uniqueItems": true
@@ -1338,6 +1341,9 @@
           "items": {
             "$ref": "#/definitions/ServerNameItem"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true,
           "uniqueItems": true
         }
@@ -1796,6 +1802,7 @@
           "items": {
             "$ref": "#/definitions/ServerRoleGroupConfiguration"
           },
+          "x-ms-identifiers": [],
           "uniqueItems": true
         }
       },
@@ -2109,7 +2116,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2194,7 +2204,10 @@
           "description": "A list of additional details about the error.",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     }
