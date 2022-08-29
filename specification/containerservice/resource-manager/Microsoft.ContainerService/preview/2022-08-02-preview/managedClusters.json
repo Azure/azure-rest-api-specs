@@ -3917,7 +3917,7 @@
               },
               "description": "Specify which proxy mode to use ('IPTABLES' or 'IPVS')"
             },
-            "ipvsConfig" {
+            "ipvsConfig": {
                 "type": "object",
                 "properties": {
                     "scheduler": {
@@ -3943,15 +3943,18 @@
                       "description": "IPVS scheduler, for more information please see http://www.linuxvirtualserver.org/docs/scheduling.html."
                     },
                     "TCPTimeoutSeconds": {
-                        "type": "int",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "The timeout value used for idle IPVS TCP sessions in seconds. Must be a positive integer value."
                     },
                     "TCPFINTimeoutSeconds": {
-                        "type": "int",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "The timeout value used for IPVS TCP sessions after receiving a FIN in seconds. Must be a positive integer value."
                     },
                     "UDPTimeoutSeconds": {
-                        "type": "int",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "The timeout value used for IPVS UDP packets in seconds. Must be a positive integer value."
                     }
                 },
