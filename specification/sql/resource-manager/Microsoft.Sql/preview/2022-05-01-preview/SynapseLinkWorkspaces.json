@@ -81,10 +81,6 @@
     },
     "SynapseLinkWorkspaceInfoProperties": {
       "description": "Properties of a Synapse link workspaces",
-      "required": [
-        "workspaceId",
-        "linkConnectionName"
-      ],
       "type": "object",
       "properties": {
         "workspaceId": {
@@ -121,6 +117,7 @@
       "type": "object",
       "properties": {
         "workspaces": {
+          "description": "List of all synapselink workspaces",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SynapseLinkWorkspaceInfoProperties"
