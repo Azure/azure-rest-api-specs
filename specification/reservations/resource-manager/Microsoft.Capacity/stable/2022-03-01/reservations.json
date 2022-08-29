@@ -708,11 +708,16 @@
           }
         ],
         "tags": [
-          "Refurn"
+          "Return"
         ],
         "responses": {
           "202": {
             "description": "Detailed refund info of a reservation",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/RefundResponse"
             }
@@ -2098,19 +2103,27 @@
       "description": "Refund policy result",
       "properties": {
         "properties": {
-          "consumedRefundsTotal": {
-            "$ref": "#/definitions/Price"
+          "$ref": "#/definitions/RefundPolicyResultProperty"
+        }
+      }
+    },
+    "RefundPolicyResultProperty": {
+      "type": "object",
+      "description": "Refund policy result property",
+      "properties": {
+        "consumedRefundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "maxRefundLimit": {
+          "$ref": "#/definitions/Price"
+        },
+        "policyErrors": {
+          "type": "array",
+          "description": "Refund Policy errors",
+          "items": {
+            "$ref": "#/definitions/RefundPolicyError"
           },
-          "maxRefundLimit": {
-            "$ref": "#/definitions/Price"
-          },
-          "policyErrors": {
-            "type": "array",
-            "description": "Refund Policy errors",
-            "items": {
-              "$ref": "#/definitions/RefundPolicyError"
-            }
-          }
+          "x-ms-identifiers": []
         }
       }
     },
