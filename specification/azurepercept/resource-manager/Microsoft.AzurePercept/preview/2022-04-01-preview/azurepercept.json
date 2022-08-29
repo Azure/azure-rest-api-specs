@@ -292,11 +292,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Azure Percept account was successfully updated",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
+          "202": {
+            "description": "Azure Percept account was successfully updated"
           },
           "200": {
             "description": "Azure Percept account was successfully updated",
@@ -448,6 +445,10 @@
         ],
         "summary": "Link a new device to the Azure Percept account under a specific name or update an existing one.",
         "operationId": "Devices_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Devices_CreateOrUpdate": {
             "$ref": "./examples/Devices_CreateOrUpdate.json"
@@ -486,6 +487,12 @@
               "$ref": "#/definitions/Device"
             }
           },
+          "201": {
+            "description": "The device was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -500,6 +507,10 @@
         ],
         "summary": "Partially update an existing device inside an Azure Percept account.",
         "operationId": "Devices_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Devices_Update": {
             "$ref": "./examples/Devices_Update.json"
@@ -537,6 +548,9 @@
             "schema": {
               "$ref": "#/definitions/Device"
             }
+          },
+          "202": {
+            "description": "The device inside the Azure Percept account was accepted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1370,11 +1384,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            }
+          "202": {
+            "description": "The SolutionInstance inside the Azure Percept account was successfully updated."
           },
           "200": {
             "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
