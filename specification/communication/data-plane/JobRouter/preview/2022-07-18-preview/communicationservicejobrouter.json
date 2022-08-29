@@ -1885,54 +1885,10 @@
       "properties": {}
     },
     "CommunicationError": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error target."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true,
-          "description": "Further details about specific errors that led to this error."
-        },
-        "innererror": {
-          "x-ms-client-name": "innerError",
-          "readOnly": true,
-          "$ref": "#/definitions/CommunicationError",
-          "description": "The inner error if any."
-        }
-      }
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "error"
-      ],
-      "properties": {
-        "error": {
-          "description": "The Communication Services error.",
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
     },
     "CompleteJobRequest": {
       "description": "Request payload for completing jobs",
