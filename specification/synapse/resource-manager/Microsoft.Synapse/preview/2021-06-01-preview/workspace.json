@@ -972,9 +972,12 @@
         "responses": {
           "200": {
           "description": "Workspace CheckDefault Storage Account Status.",
-          "schema": {
-            "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
-          }
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            }
         },
           "default": {
             "schema": {
@@ -1657,6 +1660,21 @@
         }
       }
     },
+    "CheckDefaultStorageAccountStatusProperties": {
+      "description": "Properties of the Check Default Storage Account Status.",
+      "properties": {
+        "isPrivateLinked": {
+          "description": "Is Storage Account Status Linked.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "privateEndpointResourceId": {
+          "description": "Endpoint ResourceId.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CheckDefaultStorageAccountStatus": {
       "description": "Workspace Check Default Storage Account Status.",
       "type": "object",
@@ -1666,19 +1684,14 @@
         }
       ],
       "properties": {
-        "description": "Properties of the Check Default Storage Account Status.",
-        "type": "object",
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
         "properties": {
-          "isPrivateLinked": {
-            "description": "Is Storage Account Status Linked.",
-            "type": "boolean",
-            "readOnly": true
-          },
-          "privateEndpointResourceId": {
-            "description": "Endpoint ResourceId.",
-            "type": "string",
-            "readOnly": true
-          },
+          "$ref": "#/definitions/CheckDefaultStorageAccountStatusProperties",
+          "description": "Workspace Check Default Storage Account Status Properties.",
           "x-ms-client-flatten": true
         }
       }
