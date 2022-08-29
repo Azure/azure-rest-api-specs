@@ -437,12 +437,6 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: deletedAutomationAccount.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
-  - suppress: DefaultErrorResponseSchema
-    from: runbook.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
-  - suppress: DefaultErrorResponseSchema
-    from: runtime.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
 ---
