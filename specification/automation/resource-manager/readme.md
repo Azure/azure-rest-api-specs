@@ -460,6 +460,33 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: python3package.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: account.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DefaultErrorResponseSchema
+    from: certificate.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: connection.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: connectionType.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DefaultErrorResponseSchema
+    from: connection.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.    
+  - suppress: DefaultErrorResponseSchema
+    from: dscConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: dscNodeConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: job.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: jobSchedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
 ```
 
 ---

@@ -891,19 +891,7 @@
           "type": "object",
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
+            "$ref": "#/definition/UserAssignedIdentitiesProperties"
           }
         }
       }
@@ -953,6 +941,25 @@
         "keyVersion": {
           "description": "The key version of the key used to encrypt data.",
           "type": "string"
+        }
+      }
+    },
+    "UserAssignedIdentitiesProperties": {
+      "type": "object",
+      "description": "Settings concerning key vault encryption for a configuration store.",
+      "properties": {
+        "type": "object",
+        "properties": {
+          "principalId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The principal id of user assigned identity."
+          },
+          "clientId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The client id of user assigned identity."
+          }
         }
       }
     }
