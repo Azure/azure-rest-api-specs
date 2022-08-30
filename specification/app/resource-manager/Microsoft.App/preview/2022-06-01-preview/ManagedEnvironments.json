@@ -646,6 +646,30 @@
     }
   },
   "definitions": {
+    "ManagedEnvironmentOutboundSettings": {
+      "type": "object",
+      "description": "Configuration used to control the Environment Egress outbound traffic",
+      "properties": {
+        "outBoundType": {
+          "$ref": "#/definitions/ManagedEnvironmentOutBoundType"
+        },
+        "virtualNetworkApplianceIP": {
+          "description": "Virtual Appliance IP used as the Egress controller for the Environment",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedEnvironmentOutBoundType": {
+      "enum": [
+        "loadBalancer",
+        "userDefinedRouting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedEnvironmentOutBoundType",
+        "modelAsString": true
+      }
+    },
     "AppLogsConfiguration": {
       "description": "Configuration of application logs",
       "type": "object",
@@ -711,6 +735,10 @@
             "create",
             "read"
           ]
+        },
+        "OutboundSettings": {
+          "$ref": "#/definitions/ManagedEnvironmentOutboundSettings",
+          "description": "Configuration used to control the Environment Egress outbound traffic"
         }
       }
     },
