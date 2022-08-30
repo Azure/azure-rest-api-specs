@@ -526,7 +526,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/SyncMembers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
@@ -562,6 +561,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseMoveOperations.json
+- ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 
 
 # Needed when there is more than one input file
