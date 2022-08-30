@@ -127,12 +127,15 @@
     },
     "OperationPropertiesFormat": {
       "description": "Description of operation properties format.",
+      "type": "object",
       "properties": {
         "serviceSpecification": {
           "description": "Specification of the service.",
+          "type": "object",
           "properties": {
             "metricSpecifications": {
               "type": "array",
+              "x-ms-identifiers": [],
               "items": {
                 "$ref": "#/definitions/MetricSpecification"
               },
@@ -140,6 +143,7 @@
             },
             "logSpecifications": {
               "type": "array",
+              "x-ms-identifiers": [],
               "items": {
                 "$ref": "#/definitions/LogSpecification"
               },
@@ -151,6 +155,7 @@
     },
     "LogSpecification": {
       "description": "Description of logging specification.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -168,6 +173,7 @@
     },
     "MetricSpecification": {
       "description": "Description of metrics specification.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -191,6 +197,7 @@
         },
         "dimensions": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/Dimension"
           },
@@ -200,6 +207,7 @@
     },
     "Dimension": {
       "description": "Dimension of the metric.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
