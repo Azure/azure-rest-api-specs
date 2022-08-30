@@ -49,7 +49,7 @@
 			"description": "Detailed information for the routeset.",
 			"type": "object",
 			"properties": {
-				"routesetid": {
+				"routesetId": {
 					"description": "The unique ID of the routeset.",
 					"type": "string",
 					"readOnly": true
@@ -88,7 +88,13 @@
 			}
 		}
 	},
-	"responses": {},
+	"responses": {
+		"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
+		"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
+		"403": { "description": "Permission, capacity, or authentication issues." },
+		"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
+		"500": { "description": "An error occurred while processing the request. Please try again later." }
+},
 	"parameters": {
 		"ApiVersion": {
 			"name": "api-version",
@@ -124,7 +130,7 @@
 		},
 		"SubscriptionKey": {
 			"name": "subscription-key",
-			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
+			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](https://docs.microsoft.com/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
 			"type": "string",
 			"in": "query",
 			"required": true,
@@ -142,14 +148,14 @@
 	"paths": {
 		"/routesets": {
 			"post": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create routes that are consumed by the Azure Maps Wayfinding service to create paths within facilities.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create special data structures consumed by the Azure Maps Wayfinding service to discover the shortest paths within a facility.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
 				"operationId": "routesetCreate",
 				"x-ms-long-running-operation": true,
 				"x-ms-long-running-operation-options": {
 				  "final-state-via": "location"
 				},
 				"x-ms-examples": {
-				  "Create a routeset from a previously created rdataset ": {
+				  "Create a routeset from a previously created dataset ": {
 					"$ref": "./examples/Routeset_Create.json"
 				  }
 				},
@@ -162,11 +168,11 @@
 				],
 				"responses": {
 					"202": { "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2" },
-					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
-					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
-					"403": { "description": "Permission, capacity, or authentication issues." },
-					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
-					"500": { "description": "An error occurred while processing the request. Please try again later." }
+					"400": { "$ref": "#/responses/400" },
+					"401": { "$ref": "#/responses/401" },
+					"403": { "$ref": "#/responses/403" },
+					"404": { "$ref": "#/responses/404" },
+					"500": { "$ref": "#/responses/500" }
 				}
 			},
 			"get": {
@@ -182,11 +188,11 @@
 						"description": "List routeset request completed successfully. The response body contains a list of all routesets.",
 						"schema": { "$ref": "#/definitions/Routeset" }
 					},
-					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
-					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
-					"403": { "description": "Permission, capacity, or authentication issues." },
-					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
-					"500": { "description": "An error occurred while processing the request. Please try again later." }
+					"400": { "$ref": "#/responses/400" },
+					"401": { "$ref": "#/responses/401" },
+					"403": { "$ref": "#/responses/403" },
+					"404": { "$ref": "#/responses/404" },
+					"500": { "$ref": "#/responses/500" }
 				}
 			}
 		},
@@ -210,12 +216,12 @@
 					"description": "The get routeset request completed successfully.",
 					"schema": { "$ref": "#/definitions/Routeset" }
 				  },
-				  "400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
-				  "401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
-				  "403": { "description": "Permission, capacity, or authentication issues." },
-				  "404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
-				  "500": { "description": "An error occurred while processing the request. Please try again later." }
-				}
+				  "400": { "$ref": "#/responses/400" },
+				  "401": { "$ref": "#/responses/401" },
+				  "403": { "$ref": "#/responses/403" },
+				  "404": { "$ref": "#/responses/404" },
+				  "500": { "$ref": "#/responses/500" }
+			  }
 			},
 			"delete": {
 				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
@@ -233,11 +239,11 @@
 				  ],
 				"responses": {
 					"204": { "description": "Routeset delete request completed successfully." },
-					"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
-					"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
-					"403": { "description": "Permission, capacity, or authentication issues." },
-					"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
-					"500": { "description": "An error occurred while processing the request. Please try again later." }
+					"400": { "$ref": "#/responses/400" },
+					"401": { "$ref": "#/responses/401" },
+					"403": { "$ref": "#/responses/403" },
+					"404": { "$ref": "#/responses/404" },
+					"500": { "$ref": "#/responses/500" }
 				}
 			}
 		},
@@ -250,20 +256,14 @@
 				"Get the status of an operation which has finished successfully": { "$ref": "./examples/Routeset_GetOperation.json" }
 			  },
 			  "parameters": [
-				{
-				  "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-				},
-				{
-				  "$ref": "#/parameters/ApiVersion"
-				},
-				{
-				  "$ref": "#/parameters/RoutesetOperationId"
-				}
+				{ "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId" },
+				{ "$ref": "#/parameters/ApiVersion" },
+				{ "$ref": "#/parameters/RoutesetOperationId" }
 			  ],
 			  "responses": {
 				"200": { "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2" },
-				"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." }
-			  }
+				"400": { "$ref": "#/responses/400" }
+				}
 			}
 		}
 	}

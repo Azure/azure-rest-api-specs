@@ -11,7 +11,7 @@
 	"paths": {
 		"/wayfinding/path": {
 			"get": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one point in a facility to another.",
+				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one location in a facility to another.",
 				"operationId": "wayfindingGetPath",
 				"parameters": [
 					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
@@ -76,17 +76,17 @@
 			"default": "2022-09-01",
 			"x-ms-parameter-location": "client"
 		},
-		"RoutesetId": {
-			"name": "routesetId",
-			"description": "The identifier for the routeset to query from.",
+		"SubscriptionKey": {
+			"name": "subscription-key",
+			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
 			"type": "string",
 			"in": "query",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
-		"SubscriptionKey": {
-			"name": "subscription-key",
-			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
+		"RoutesetId": {
+			"name": "routesetId",
+			"description": "The identifier of the routeset containing the facility where to find the path.",
 			"type": "string",
 			"in": "query",
 			"required": true,
@@ -96,7 +96,7 @@
 			"name": "facilityId",
 			"type": "string",
 			"in": "query",
-			"description": "The identifier of the facility in which to search for the Wayfinding path.",
+			"description": "The identifier of the facility within the routeset where to find the path.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
@@ -104,7 +104,7 @@
 			"name": "from",
 			"type": "string",
 			"in": "query",
-			"description": "The origin of the path you are searching for in a facility. The `From` parameter is represented by its latitude, longitude and a level ordinal. The required format is as follows: {fromLat},{fromLon},{fromLevelOrdinal}.",
+			"description": "The path origin in the following format: {latitude},{longitude},{levelOrdinal}.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
@@ -112,20 +112,20 @@
 			"name": "to",
 			"type": "string",
 			"in": "query",
-			"description": "The destination of the path you are searching for in a facility. The `To` parameter is represented by its latitude, longitude and a level ordinal. The required format is as follows: {toLat},{toLon},{toLevelOrdinal}.",
+			"description": "The path destination in the following format: {latitude},{longitude},{levelOrdinal}.",
 			"required": true,
 			"x-ms-parameter-location": "client"
 		},
 		"Avoid": {
 			"name": "avoid",
-			"description": "Use when you need to avoid using elevators, escalators, or stairs in your route. Valid values are: 'elevators', 'escalators' and 'stairs'. Multiple values can be selected.",			"type": "array",
+			"description": "To avoid certain types of connectors in the resulting path. Valid values are: 'elevators' and 'stairs'. Multiple comma separated values can be selected.", "type": "array",
 			"items": { "type": "string" },
 			"in": "query",
 			"x-ms-parameter-location": "client"
 		},
 		"Width": {
 			"name": "width",
-			"description": "The minimum width (in meters) of openings within the building that can be used in a wayfinding route. For example, if you specified a width of 2.0, the calculated wayfinding path will be plotted along a route that avoids any opening less than 2.0 meters wide. The default width is 0.0.",			"type": "number",
+			"description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a width of 2.0, the searched path will avoid openings less than 2.0 meters wide. The default width is 0.0.",	"type": "number",
 			"in": "query",
 			"x-ms-parameter-location": "client"
 		}
@@ -139,31 +139,31 @@
 			}
         },
         "Leg": {
-            "description": "A section of the route.",
+            "description": "A section of the overall path.",
             "type": "object",
             "properties": {
-                "travelMode": { "type": "string", "description": "The mode of travel can be walking (default), elevators, escalators or stairs."},
-                "lengthInMeters": { "type": "number", "description": "The length, in meters, of this leg of the route."},
-                "travelTimeInSeconds": { "type": "integer", "description": "The travel time, in seconds, for this leg of the route."},
-                "startLevel": { "type": "integer", "description": "The floor where this leg of the route starts."},
-                "endLevel": { "type": "integer", "description": "The floor where this leg of the route ends."},
-                "points": { "description": "The leg shape points. Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second point is at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
+                "mode": { "type": "string", "description": "The leg mode of traversal for this leg. It can be default (all on the same level), elevators or stairs when moving vertically between levels."},
+                "lengthInMeters": { "type": "number", "description": "The leg length, in meters, of this leg."},
+                "timeInSeconds": { "type": "integer", "description": "The leg travel time, in seconds, to travel between the first and last point of this leg."},
+                "startLevel": { "type": "integer", "description": "The floor where this leg starts."},
+                "endLevel": { "type": "integer", "description": "The floor where this leg ends."},
+                "points": { "description": "The leg shape points. Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second at endLevel.", "type": "array", "items": { "$ref": "#/definitions/Point" } }
             }
         },
 		"Path": {
-            "description": "The directions given to travel between the origin and destination.",
+            "description": "The details about a particular path between the origin and destination. It can be made up of one or more legs.",
             "type": "object",
             "properties": {
-				"totalLengthInMeters": { "type": "number", "description": "The length, in meters, of the entire route."},
-                "totalTravelTimeInSeconds": { "type": "integer", "description": "The total amount of time, in seconds, to complete the entire route."},
-                "legs": { "description": "The different travel modes in this route.", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
+				"lengthInMeters": { "type": "number", "description": "The path length, in meters, of the entire path."},
+                "timeInSeconds": { "type": "integer", "description": "The path total time, in seconds, to travel between the orginin and the destination when following this path."},
+                "legs": { "description": "The different travel sections of this path.", "type": "array", "items": { "$ref": "#/definitions/Leg" } }
             }
 		},
 		"WayfindResult": {
 			"description": "The object returned by this Wayfinding Path request.",
 			"type": "object",
 			"properties": {
-				"noResultsExplanation": {"type":"string", "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, the `noResultsExplanation` property will provide an explanation why."},
+				"noResultsExplanation": {"type":"string", "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why."},
 				"paths": {
 					"description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
 					"type": "array",
