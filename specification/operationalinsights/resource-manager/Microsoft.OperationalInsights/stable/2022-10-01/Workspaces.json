@@ -633,24 +633,10 @@
           "description": "The tenant ID of resource."
         },
         "type": {
-          "type": "string",
-          "description": "Type of managed service identity.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": false
-          }
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentityType"
         },
         "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
         }
       },
       "required": [
@@ -658,22 +644,6 @@
       ],
       "type": "object",
       "description": "Identity for the resource."
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "description": "User assigned identity properties.",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "readOnly": true,
-          "description": "The client id of user assigned identity.",
-          "type": "string"
-        }
-      }
     },
     "PrivateLinkScopedResource": {
       "properties": {
