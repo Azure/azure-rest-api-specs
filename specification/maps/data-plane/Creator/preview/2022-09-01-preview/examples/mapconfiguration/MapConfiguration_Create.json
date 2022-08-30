@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-01-01-preview",
+    "alias": "sample-alias",
+    "description": "This is my first map configuration.",
+    "MapConfiguration": {
+      "version": 1.0,
+      "description": "This is Microsoft default indoor map configuration",
+      "defaultStyle": "microsoft_light",
+      "styles": [
+        {
+          "name": "indoor_light",
+          "displayName": "Indoor light",
+          "description": "A base style for Azure Maps.",
+          "theme": "light",
+          "baseMap": "microsoft_light",
+          "layers": [
+            {
+              "tilesetId": "b7485951-f6d9-e5ba-a332-8adb08fc7fb7",
+              "styleId": "microsoft-maps:indoor_2022-01-01"
+            }
+          ]
+        },
+        {
+          "name": "indoor_dark",
+          "displayName": "Indoor dark",
+          "description": "A base style for Azure Maps.",
+          "theme": "dark",
+          "baseMap": "microsoft_dark",
+          "layers": [
+            {
+              "tilesetId": "b7485951-f6d9-e5ba-a332-8adb08fc7fb7",
+              "styleId": "microsoft-maps:indoor_dark_2022-01-01"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/styles/mapConfigurations/operations/{operationId}?api-version=2022-01-01-preview",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    }
+  }
+}
