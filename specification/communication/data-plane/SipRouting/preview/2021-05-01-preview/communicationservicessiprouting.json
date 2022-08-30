@@ -113,7 +113,7 @@
         }
       }
     },
-    "/sip:checkNumberRouting": {
+    "/sip/checkNumberRouting": {
       "get": {
         "tags": [
           "NumberRoutingValidation"
@@ -125,7 +125,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
+            "in": "query",
             "name": "targetPhoneNumber",
             "description": "Phone number to test routing patterns against",
             "required": true,
@@ -276,7 +276,6 @@
       "properties": {
         "matchingRoutes": {
           "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration.",
-          "maxLength": 250,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrunkRoute"
