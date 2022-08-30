@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-10-01-preview",
+    "jobId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "qnaGenerationRequestBody": {
+      "Documents": [
+        {
+          "identifier": "1",
+          "documentKind": "raw",
+          "content": "<s>Photosynthesis is how plants and some microorganisms make carbohydrates.</s> It is an endothermic (takes in heat) chemical process which uses sunlight to turn carbon dioxide into sugars. The sugars are used by the cell as energy, and to build other kinds of molecules. Fundamentally, photosynthesis converts light energy into chemical energy. Photosynthesis is vital for life on Earth. Before photosynthesis Earth had no free oxygen in its atmosphere.Green plants build themselves using photosynthesis. Algae, protists and some bacteria also use it. ",
+          "language": "en"
+        }
+      ],
+      "QnAGenerationParameters": {
+        "useAnswerMarkedInContent": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the gna generation job.",
+      "headers": {
+        "Operation-Location": "{Endpoint}:443/language/generate-questionanswers/jobs/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee?api-version=2022-10-01-preview"
+      }
+    }
+  }
+}
