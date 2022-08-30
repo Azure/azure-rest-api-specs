@@ -371,6 +371,7 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/jobSchedule.json
 - Microsoft.Automation/stable/2022-08-08/linkedWorkspace.json
 - Microsoft.Automation/stable/2022-08-08/module.json
+- Microsoft.Automation/stable/2022-08-08/operations.json
 - Microsoft.Automation/stable/2022-08-08/python2package.json
 - Microsoft.Automation/stable/2022-08-08/python3package.json
 - Microsoft.Automation/stable/2022-08-08/runbook.json

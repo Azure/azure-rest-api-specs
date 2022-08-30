@@ -83,6 +83,33 @@
         }
       },
       "description": "The response model for the list of Automation operations"
+    },
+    "Operation": {
+      "description": "Automation REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          },
+          "description": "Provider, Resource and Operation values"
+        }
+      }
     }
   }
 }
