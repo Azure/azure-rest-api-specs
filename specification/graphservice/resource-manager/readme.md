@@ -27,7 +27,17 @@ These are the global settings for the graphservice.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-18-preview
+tag: package-2022-07-29-preview
+```
+
+### Tag: package-2022-07-29-preview
+
+These settings apply only when `--tag=package-2022-07-29-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07-29-preview'
+version: 2022-07-29-preview
+input-file:
+  - Microsoft.Graph/preview/2022-07-29-preview/graphservice.json
 ```
 
 ### Tag: package-2021-07-19-preview
@@ -35,6 +45,8 @@ tag: package-2022-04-18-preview
 These settings apply only when `--tag=package-2021-07-19-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-07-19-preview'
+version: 2021-07-19-preview
+
 input-file:
   - Microsoft.Graph/preview/2021-07-19-preview/graphservice.json
 ```
@@ -44,6 +56,7 @@ input-file:
 These settings apply only when `--tag=package-2022-04-18-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-18-preview'
+version: 2022-04-18-preview
 input-file:
   - Microsoft.Graph/preview/2022-04-18-preview/graphservice.json
 ```
