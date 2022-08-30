@@ -878,6 +878,63 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/trustedServiceByPassConfiguration/default": {
+      "put": {
+        "operationId": "WorkspaceTrustedServiceByPassConfiguration_CreateOrUpdate",
+        "summary": "Create or update Trusted Service By Pass Configuration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
+            },
+            "name": "trustedServiceByPassConfiguration",
+            "in": "body",
+            "description": "Trusted Service By Pass Configuration",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update trusted service by pass configuration": {
+            "$ref": "./examples/CreateOrUpdateTrustedServiceByPassConfiguration.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1512,6 +1569,36 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
+    },
+    "TrustedServiceByPassConfiguration": {
+      "type": "object",
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "Trusted Service By Pass Configuration",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "Trusted Service By Pass Configuration properties",
+          "description": "Trusted Service By Pass Configuration properties",
+          "type": "object",
+          "properties": {
+            "trustedServiceBypassConfigurationInfo": {
+              "description": "Trusted Service By pass Configuration Info",
+              "type": "object",
+              "properties": {
+                "trustedServiceBypassEnabled": {
+                  "description": "Trusted Service By pass Enabled",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
     }
   }
 }
