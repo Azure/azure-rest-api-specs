@@ -281,16 +281,24 @@
       "description": "Describes package properties",
       "properties": {
         "packageId": {
-          "description": "The package id",
-          "type": "string"
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "The package id"
         },
         "packageKind": {
-          "description": "The package kind",
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind"
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+          "description": "The package kind"
         },
         "installedVersion": {
-          "description": "The version of the installed version, null or absent means not installed.",
-          "type": "string"
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "description": "The version of the installed package, null or absent means not installed.",
+        },
+        "contentSchemaVersion": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "description": "The version of the content schema."
+        },
+        "resourceId": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "The metadata resource id."
         },
         "isNew": {
           "description": "Flag indicates if this is a newly published package.",
