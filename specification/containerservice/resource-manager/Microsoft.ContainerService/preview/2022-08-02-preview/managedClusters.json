@@ -4280,6 +4280,29 @@
         "enableMultipleStandardLoadBalancers": {
           "type": "boolean",
           "description": "Enable multiple standard load balancers per AKS cluster or not."
+        },
+        "backendPoolType": {
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackendPoolType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NodeIPConfiguration",
+                "description": "The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
+              },
+              {
+                "value": "NodeIP",
+                "description": "The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
+              }
+            ]
+          },
+          "enum": [
+            "NodeIPConfiguration",
+            "NodeIP"
+          ],
+          "description": "The type of the managed inbound Load Balancer BackendPool.",
+          "default": "NodeIPConfiguration"
         }
       },
       "description": "Profile of the managed cluster load balancer."
