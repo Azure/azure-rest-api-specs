@@ -822,6 +822,9 @@
           "Create an ComputeInstance Compute": {
             "$ref": "./examples/Compute/createOrUpdate/ComputeInstance.json"
           },
+          "Create an ComputeInstance Compute with Schedules": {
+            "$ref": "./examples/Compute/createOrUpdate/ComputeInstanceWithSchedules.json"
+          },
           "Create an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/BasicAKSCompute.json"
           },
@@ -1314,6 +1317,56 @@
         ],
         "responses": {
           "202": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateSchedules": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_UpdateSchedules",
+        "description": "Updates schedules of a compute instance",
+        "x-ms-examples": {
+          "Update schedules of ComputeInstance": {
+            "$ref": "./examples/Compute/updateSchedules.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for updating schedules of specified ComputeInstance.",
+            "schema": {
+              "$ref": "#/definitions/ComputeSchedules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "Success."
           },
           "default": {
@@ -5238,11 +5291,13 @@
       "description": "Compute start stop schedule properties",
       "properties": {
         "id": {
-          "description": "Schedule id.",
-          "readOnly": true,
-          "type": "string"
+          "description": "A system assigned id for the schedule.",
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
         },
         "provisioningStatus": {
+          "description": "The current deployment state of schedule.",
           "type": "string",
           "enum": [
             "Completed",
@@ -5251,15 +5306,38 @@
           ],
           "x-ms-enum": {
             "name": "provisioningStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed"
+              },
+              {
+                "value": "Provisioning"
+              },
+              {
+                "value": "Failed"
+              }
+            ]
           },
-          "readOnly": true,
-          "description": "The current deployment state of schedule."
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleStatus"
         },
         "action": {
           "$ref": "#/definitions/ComputePowerAction"
         },
+        "triggerType": {
+          "$ref": "./mfe.json#/definitions/TriggerType"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence"
+        },
+        "cron": {
+          "$ref": "#/definitions/Cron"
+        },
         "schedule": {
+          "description": "[Deprecated] Not used any more.",
           "$ref": "#/definitions/ScheduleBase"
         }
       }
@@ -5268,6 +5346,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "A system assigned id for the schedule.",
           "type": "string",
           "x-nullable": true
         },
@@ -5286,6 +5365,7 @@
         "Provisioning",
         "Failed"
       ],
+      "description": "The current deployment state of schedule.",
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduleProvisioningState",
@@ -5309,6 +5389,7 @@
         "Enabled",
         "Disabled"
       ],
+      "description": "Is the schedule enabled or disabled?",
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduleStatus",
@@ -5326,7 +5407,7 @@
     },
     "ComputePowerAction": {
       "type": "string",
-      "description": "The compute power action.",
+      "description": "[Required] The compute power action.",
       "enum": [
         "Start",
         "Stop"
@@ -5334,6 +5415,55 @@
       "x-ms-enum": {
         "name": "ComputePowerAction",
         "modelAsString": true
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
+      "properties": {
+        "frequency": {
+          "description": "[Required] The frequency to trigger schedule.",
+          "$ref": "./mfe.json#/definitions/RecurrenceFrequency"
+        },
+        "interval": {
+          "description": "[Required] Specifies schedule interval in conjunction with frequency",
+          "type": "integer",
+          "format": "int32"
+        },
+        "startTime": {
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeZone": {
+          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
+          "default": "UTC",
+          "type": "string"
+        },
+        "schedule": {
+          "description": "[Required] The recurrence schedule.",
+          "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
+        }
+      }
+    },
+    "Cron": {
+      "type": "object",
+      "description": "The workflow trigger cron for ComputeStartStop schedule type.",
+      "properties": {
+        "startTime": {
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeZone": {
+          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
+          "type": "string",
+          "default": "UTC"
+        },
+        "expression": {
+          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
+          "type": "string"
+        }
       }
     },
     "ComputeInstanceDataMount": {
