@@ -115,8 +115,99 @@
           "description": "Provider, Resource and Operation values"
         },
         "origin": {
-          "description": "Origin System Name",
+          "description": "Origin of the operation.",
           "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationPropertiesFormat",
+          "description": "Operation properties format."
+        }
+      }
+    },
+    "OperationPropertiesFormat": {
+      "description": "Description of operation properties format.",
+      "properties": {
+        "serviceSpecification": {
+          "description": "Specification of the service.",
+          "properties": {
+            "metricSpecifications": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MetricSpecification"
+              },
+              "description": "Operation service specification."
+            },
+            "logSpecifications": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LogSpecification"
+              },
+              "description": "Operation log specification."
+            }
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Description of logging specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the blob."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Description of metrics specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Units the metric to be displayed in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "description": "List of dimensions."
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of the metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the dimension."
         }
       }
     }

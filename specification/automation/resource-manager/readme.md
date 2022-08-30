@@ -359,6 +359,7 @@ These settings apply only when `--tag=package-2022-08-08` is specified on the co
 input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
 - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
