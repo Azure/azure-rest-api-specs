@@ -138,10 +138,15 @@
           {
             "in": "query",
             "name": "select",
-            "description": "This parameter can be used to select only specific fields of the TrunkRoute objects in the matchingRoutes array.",
+            "description": "This parameter can be used to select only specific fields of the TrunkRoute objects in the matchingRoutes array.\r\nThe select array is formatted as a csv.",
             "required": false,
-            "type": "string",
-            "x-example": "name"
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "x-example": ["name"]
           }
         ],
         "responses": {
