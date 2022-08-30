@@ -14,6 +14,9 @@
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
+            "sku": {
+              "name": "Premium"
+            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,
@@ -27,7 +30,24 @@
                 "subjectName": "CN=www.my-name.com",
                 "expirationDate": "2022-11-06T04:00:00Z",
                 "thumbprint": "CERTIFICATE_THUMBPRINT"
-              }
+              },
+              "workloadProfiles": [
+                {
+                  "workloadProfileType": "GeneralPurpose",
+                  "minimumCount": 3,
+                  "maximumCount": 12
+                },
+                {
+                  "workloadProfileType": "MemoryOptimized",
+                  "minimumCount": 3,
+                  "maximumCount": 6
+                },
+                {
+                  "workloadProfileType": "ComputeOptimized",
+                  "minimumCount": 3,
+                  "maximumCount": 6
+                }
+              ]
             }
           },
           {
@@ -36,6 +56,9 @@
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
+            "sku": {
+              "name": "Consumption"
+            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,

@@ -6,6 +6,9 @@
     "api-version": "2022-06-01-preview",
     "environmentEnvelope": {
       "location": "East US",
+      "sku": {
+        "name": "Premium"
+      },
       "properties": {
         "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
         "appLogsConfiguration": {
@@ -19,7 +22,24 @@
           "dnsSuffix": "www.my-name.com",
           "certificateValue": "PFX-or-PEM-blob",
           "certificatePassword": "private key password"
-        }
+        },
+        "workloadProfiles": [
+          {
+            "workloadProfileType": "GeneralPurpose",
+            "minimumCount": 3,
+            "maximumCount": 12
+          },
+          {
+            "workloadProfileType": "MemoryOptimized",
+            "minimumCount": 3,
+            "maximumCount": 6
+          },
+          {
+            "workloadProfileType": "ComputeOptimized",
+            "minimumCount": 3,
+            "maximumCount": 6
+          }
+        ]
       }
     }
   },
@@ -30,6 +50,9 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "deploymentErrors": null,
@@ -47,7 +70,24 @@
             "subjectName": "CN=www.my-name.com",
             "expirationDate": "2022-11-06T04:00:00Z",
             "thumbprint": "CERTIFICATE_THUMBPRINT"
-          }
+          },
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            }
+          ]
         }
       }
     },
@@ -57,6 +97,9 @@
         "name": "testcontainerenv",
         "type": "Microsoft.App/managedEnvironments",
         "location": "East US",
+        "sku": {
+          "name": "Premium"
+        },
         "properties": {
           "provisioningState": "InitializationInProgress",
           "deploymentErrors": null,
@@ -74,7 +117,24 @@
             "subjectName": "CN=www.my-name.com",
             "expirationDate": "2022-11-06T04:00:00Z",
             "thumbprint": "CERTIFICATE_THUMBPRINT"
-          }
+          },
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            }
+          ]
         }
       }
     }
