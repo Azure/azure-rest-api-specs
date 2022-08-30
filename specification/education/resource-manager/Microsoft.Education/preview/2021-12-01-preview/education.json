@@ -58,10 +58,10 @@
           "OperationStatus200": {
             "$ref": "./examples/OperationStatus200.json"
           },
-		  "OperationStatus202": {
+          "OperationStatus202": {
             "$ref": "./examples/OperationStatus202.json"
           }
-        },		
+        },
         "operationId": "Operation_Status",
         "description": "Get operation status",
         "parameters": [
@@ -97,7 +97,7 @@
           }
         }
       }
-    },		
+    },
     "/providers/Microsoft.Education/grants": {
       "get": {
         "tags": [
@@ -244,8 +244,8 @@
           },
           "GrantRenew202": {
             "$ref": "./examples/GrantRenew202.json"
-          }		  
-        },		
+          }
+        },
         "operationId": "Grant_Renewal",
         "description": "Request grant renewal",
         "parameters": [
@@ -509,14 +509,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Accepted. Lab details.",
+          "200": {
+            "description": "Normal response to get lab details.",
             "schema": {
               "$ref": "#/definitions/LabDetails"
             }
           },
-          "200": {
-            "description": "Normal response to get lab details.",
+          "201": {
+            "description": "Accepted. Lab details.",
             "schema": {
               "$ref": "#/definitions/LabDetails"
             }
@@ -973,14 +973,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Successfully created student detail.",
+          "200": {
+            "description": "Successfully updated student detail.",
             "schema": {
               "$ref": "#/definitions/StudentDetails"
             }
           },
-          "200": {
-            "description": "Successfully updated student detail.",
+          "201": {
+            "description": "Successfully created student detail.",
             "schema": {
               "$ref": "#/definitions/StudentDetails"
             }
@@ -1474,7 +1474,7 @@
           "type": "string",
           "readOnly": true,
           "description": "Grant display name"
-        },			  
+        },
         "offerCap": {
           "$ref": "#/definitions/Amount",
           "description": "Offer Cap",
@@ -1736,7 +1736,7 @@
       "required": true,
       "type": "string",
       "description": "Operation Id."
-    }	
+    }
   },
   "security": [
     {
