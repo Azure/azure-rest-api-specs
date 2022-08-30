@@ -5,7 +5,12 @@
     "workspaceName": "my-aml-workspace",
     "api-version": "2022-10-01-preview",
     "$skipToken": "string",
-    "count": 1
+    "name": "string",
+    "count": 1,
+    "computeType": "Managed",
+    "tags": "string",
+    "properties": "string",
+    "orderBy": "CreatedAtDesc"
   },
   "responses": {
     "200": {
@@ -24,8 +29,10 @@
               "scoringUri": "https://www.contoso.com/example",
               "swaggerUri": "https://www.contoso.com/example",
               "authMode": "AMLToken",
-              "defaults": {
-                "deploymentName": "string"
+              "provisioningState": "Creating",
+              "compute": "string",
+              "traffic": {
+                "string": 1
               }
             },
             "systemData": {
