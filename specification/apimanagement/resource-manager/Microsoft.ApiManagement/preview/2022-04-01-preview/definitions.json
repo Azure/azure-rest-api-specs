@@ -965,7 +965,25 @@
             "Segment",
             "Query",
             "Header"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "versioningScheme",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Segment",
+                "description": "The API Version is passed in a path segment."
+              },
+              {
+                "value": "Query",
+                "description": "The API Version is passed in a query parameter."
+              },
+              {
+                "value": "Header",
+                "description": "The API Version is passed in a HTTP header."
+              }
+            ]
+          }
         },
         "versionQueryName": {
           "type": "string",
@@ -7177,7 +7195,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Deleted API Management Service information."
