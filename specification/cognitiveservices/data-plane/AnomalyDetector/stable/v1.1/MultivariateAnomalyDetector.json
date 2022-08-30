@@ -50,7 +50,7 @@
           }
         },
         "summary": "Get Multivariate Anomaly Detection Result",
-        "description": "Get multivariate anomaly detection result based on resultId returned by the DetectAnomalyAsync api",
+        "description": "Get multivariate anomaly detection result based on resultId returned by the /models/<string:modelId>/entire/detect api",
         "operationId": "GetDetectionResult",
         "parameters": [
           {
@@ -70,6 +70,58 @@
       }
     },
     "/multivariate/models": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Succeed to get the list of models.",
+            "schema": {
+              "$ref": "#/definitions/ModelList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "List Multivariate Models",
+        "description": "List models of a resource",
+        "operationId": "ListMultivariateModel",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 0,
+            "required": false,
+            "description": "$skip indicates how many models will be skipped.",
+            "name": "$skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "default": 10,
+            "required": false,
+            "description": "$top indicates how many models will be fetched.",
+            "name": "$top",
+            "in": "query"
+          }
+        ],
+        "x-ms-examples": {
+          "List Multivariate model": {
+            "$ref": "./examples/ListModel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "models"
+        }
+      },
       "post": {
         "responses": {
           "201": {
@@ -112,58 +164,6 @@
           "Train Multivariate model": {
             "$ref": "./examples/TrainModel.json"
           }
-        }
-      },
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Succeed to get the list of models.",
-            "schema": {
-              "$ref": "#/definitions/ModelList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "List Multivariate Models",
-        "description": "List models of a subscription",
-        "operationId": "ListMultivariateModel",
-        "parameters": [
-          {
-            "type": "integer",
-            "default": 0,
-            "required": false,
-            "description": "$skip indicates how many models will be skipped.",
-            "name": "$skip",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 10,
-            "required": false,
-            "description": "$top indicates how many models will be fetched.",
-            "name": "$top",
-            "in": "query"
-          }
-        ],
-        "x-ms-examples": {
-          "List Multivariate model": {
-            "$ref": "./examples/ListModel.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "models"
         }
       }
     },
@@ -322,7 +322,7 @@
             }
           }
         },
-        "summary": "Detect anomalies in the last a few points of the request body",
+        "summary": "Detect anomalies in the last point of the request body",
         "description": "Synchronized API for anomaly detection.",
         "operationId": "LastDetectAnomaly",
         "parameters": [
@@ -412,6 +412,7 @@
       "description": "Training result of a model including its status, errors and diagnostics information."
     },
     "DataSchema": {
+      "description": "Data schema for input data source: OneTable or MultiTable.",
       "enum": [
         "OneTable",
         "MultiTable"
@@ -458,8 +459,7 @@
         "Subsequent",
         "Linear",
         "Zero",
-        "Fixed",
-        "NotFill"
+        "Fixed"
       ],
       "example": "Linear",
       "type": "string",
@@ -678,12 +678,12 @@
         "firstTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "First timestamp of the variable."
+          "description": "First valid timestamp of the variable."
         },
         "lastTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Last timestamp of the variable."
+          "description": "Last valid timestamp of the variable."
         }
       },
       "type": "object"
