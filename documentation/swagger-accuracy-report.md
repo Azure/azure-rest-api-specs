@@ -73,7 +73,7 @@ Test the API using the exact command line taken from the _TrafficValidation_ ste
 
 #### 3. Upload the modified restler configuration file so the PR pipeline can use it and re-run the Service Contract Accuracy report
 
-After you have debug restler locally and improved API coverage, you can upload the modified configuration files to the swagger repo so the pipeline can use them. For a specific resource provider, the restler config files is located at `restler` under the api-version folder. In swagger pipeline, the traffic validation check will load the customized restler config from the api-version folder and then run the restler test. 
+After you have debug restler locally and improved API coverage, you can upload the modified configuration files to the azure-rest-api-specs repo so the pipeline can use them. For a specific resource provider, the restler config files is located at `restler` under the api-version folder. In swagger pipeline, the traffic validation check will load the customized restler config from the api-version folder and then run the restler test. 
 
 ![](./images/check-in-restler-config.png)
 
