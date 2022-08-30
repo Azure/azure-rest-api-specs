@@ -2,31 +2,75 @@
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "environmentName": "jlaw-demo1",
     "api-version": "2022-06-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
-        "name": "jlaw-demo1",
-        "type": "Microsoft.App/managedEnvironments",
-        "location": "North Central US",
-        "tags": {},
-        "properties": {
-          "provisioningState": "Succeeded",
-          "deploymentErrors": null,
-          "defaultDomain": "jlaw-demo1.k4apps.io",
-          "staticIp": "20.42.33.145",
-          "zoneRedundant": true,
-          "customDomainConfiguration": {
-            "customDomainVerificationId": "custom domain verification id",
-            "dnsSuffix": "www.my-name.com",
-            "subjectName": "CN=www.my-name.com",
-            "expirationDate": "2022-11-06T04:00:00Z",
-            "thumbprint": "CERTIFICATE_THUMBPRINT"
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
+            "name": "jlaw-demo1",
+            "type": "Microsoft.App/managedEnvironments",
+            "location": "North Central US",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "deploymentErrors": null,
+              "defaultDomain": "jlaw-demo1.k4apps.io",
+              "staticIp": "20.42.33.145",
+              "appLogsConfiguration": null,
+              "zoneRedundant": true,
+              "VnetConfiguration" {
+                "platformReservedCidr": "12.0.0.0/16",
+                "platformReservedDnsIp": "12.0.0.2",
+                "dockerBridgeCidr": "172.17.0.1/16",
+                "OutboundSettings": {
+                  "outBoundType": "userDefinedRouting",
+                  "virtualNetworkApplianceIP": "192.168.1.20"
+                }
+              },
+              "customDomainConfiguration": {
+                "customDomainVerificationId": "custom domain verification id",
+                "dnsSuffix": "www.my-name.com",
+                "subjectName": "CN=www.my-name.com",
+                "expirationDate": "2022-11-06T04:00:00Z",
+                "thumbprint": "CERTIFICATE_THUMBPRINT"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/demo1",
+            "name": "demo1",
+            "type": "Microsoft.App/managedEnvironments",
+            "location": "North Central US",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "deploymentErrors": null,
+              "defaultDomain": "demo1.k4apps.io",
+              "staticIp": "52.142.21.61",
+              "appLogsConfiguration": null,
+              "zoneRedundant": true,
+              "customDomainConfiguration": {
+                "customDomainVerificationId": "custom domain verification id",
+                "dnsSuffix": "www.my-name2.com",
+                "subjectName": "CN=www.my-name2.com",
+                "expirationDate": "2022-11-06T04:00:00Z",
+                "thumbprint": "CERTIFICATE_THUMBPRINT"
+              },
+              "VnetConfiguration" {
+                "platformReservedCidr": "12.0.0.0/16",
+                "platformReservedDnsIp": "12.0.0.2",
+                "dockerBridgeCidr": "172.17.0.1/16",
+                "OutboundSettings": {
+                  "outBoundType": "userDefinedRouting",
+                  "virtualNetworkApplianceIP": "192.168.1.20"
+                }
+              }
+            }
           }
-        }
+        ]
       }
     }
   }
