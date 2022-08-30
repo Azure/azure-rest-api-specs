@@ -155,6 +155,9 @@
         ],
         "responses": {
           "200": {
+            "schema": {
+              "$ref": "#/definitions/Key"
+            },
             "description": "Workspace Key resource details"
           },
           "default": {
@@ -273,8 +276,7 @@
         },
         "keyVaultUrl": {
           "type": "string",
-          "description": "The Key Vault Url of the workspace key.",
-          "x-ms-mutability": [ "create", "read" ]
+          "description": "The Key Vault Url of the workspace key."
         }
       }
     }
