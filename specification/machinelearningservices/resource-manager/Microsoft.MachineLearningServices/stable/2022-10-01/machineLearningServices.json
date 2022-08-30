@@ -4925,15 +4925,19 @@
           "$ref": "#/definitions/ScheduleStatus"
         },
         "action": {
+          "description": "[Required] The compute power action.",
           "$ref": "#/definitions/ComputePowerAction"
         },
         "triggerType": {
+          "description": "[Required] The schedule trigger type.",
           "$ref": "#/definitions/TriggerType"
         },
         "recurrence": {
+          "description": "Required if triggerType is Recurrence.",
           "$ref": "#/definitions/Recurrence"
         },
         "cron": {
+          "description": "Required if triggerType is Cron.",
           "$ref": "#/definitions/Cron"
         },
         "schedule": {
@@ -5007,7 +5011,7 @@
     },
     "ComputePowerAction": {
       "type": "string",
-      "description": "[Required] The compute power action.",
+      "description": "The compute power action.",
       "enum": [
         "Start",
         "Stop"
@@ -5019,7 +5023,7 @@
     },
     "TriggerType": {
       "type": "string",
-      "description": "[Required] The schedule trigger type.",
+      "description": "The schedule trigger type.",
       "enum": [
         "Recurrence",
         "Cron"
