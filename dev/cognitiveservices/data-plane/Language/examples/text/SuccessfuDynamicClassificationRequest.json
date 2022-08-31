@@ -4,7 +4,7 @@
     "api-version": "2022-10-01-preview",
     "Endpoint": "{Endpoint}",
     "body": {
-      "kind": "ZeroShotClassification",
+      "kind": "DynamicClassification",
       "parameters": {
         "categories": ["Health", "Politics", "Music", "Sports"],
         "classificationType" : "Multi"
@@ -29,7 +29,7 @@
     "200": {
       "headers": {},
       "body": {
-        "kind": "ZeroShotClassificationResults",
+        "kind": "DynamicClassificationResults",
         "results": {
           "documents": [
             {
@@ -41,7 +41,15 @@
                 },
                 {
                   "category": "Politics",
-                  "confidenceScore": 0.9
+                  "confidenceScore": 0.8
+                },
+                {
+                  "category": "Music",
+                  "confidenceScore": 0.7
+                },
+                {
+                  "category": "Sports",
+                  "confidenceScore": 0.6
                 }
               ],
               "warnings": []
@@ -50,8 +58,20 @@
               "id": "2",
               "class": [
                 {
-                  "category": "Sports",
+                  "category": "Health",
                   "confidenceScore": 0.9
+                },
+                {
+                  "category": "Politics",
+                  "confidenceScore": 0.8
+                },
+                {
+                  "category": "Music",
+                  "confidenceScore": 0.7
+                },
+                {
+                  "category": "Sports",
+                  "confidenceScore": 0.6
                 }
               ],
               "warnings": []
