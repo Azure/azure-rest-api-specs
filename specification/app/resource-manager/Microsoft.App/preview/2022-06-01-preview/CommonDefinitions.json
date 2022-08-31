@@ -905,6 +905,7 @@
       }
     },
     "BillingMeter": {
+      "description": "A premium billing meter.",
       "type": "object",
       "properties": {
         "meterId":{
@@ -912,21 +913,29 @@
             "description": "Billing meter id."
         },
         "category":{
+          "description": "Used to map workload profile types to billing meter.",
           "type": "string",
           "enum": [
             "PremiumSkuGeneralCompute",
             "PremiumSkuMemoryOptimized",
             "PremiumSkuComputeOptimized"
           ],
-          "description": "Used to map workload profile types to billing meter."
+          "x-ms-enum": {
+            "name": "Category",
+            "modelAsString": true
+          }
         },
         "type":{
+          "description": "Compute type.",
           "type": "string",
           "enum": [
             "Memory",
             "CPU"
           ],
-          "description": "Compute type."
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true
+          }
         },
         "shortName":{
             "type": "string",
