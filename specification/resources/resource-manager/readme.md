@@ -437,7 +437,7 @@ These settings apply only when `--tag=package-resources-2022-09` is specified on
 
 ``` yaml $(tag) == 'package-resources-2022-09'
 input-file:
-- Microsoft.Resources/stable/20212-09-01/resources.json
+- Microsoft.Resources/stable/2022-09-01/resources.json
 ```
 
 ### Tag: package-resources-2021-01
