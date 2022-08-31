@@ -46,7 +46,7 @@ tag: package-policy-2021-06
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2021-04
+tag: package-resources-2022-09
 ```
 
 ``` yaml $(package-subscriptions)
@@ -128,14 +128,14 @@ input-file:
 ```
 
 
-### Tag: package-resources-2021-04
+### Tag: package-resources-2022-09
 
 
-These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
+These settings apply only when `--tag=package-resources-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2021-04'
+``` yaml $(tag) == 'package-resources-2022-09'
 input-file:
-- Microsoft.Resources/stable/2021-04-01/resources.json
+- Microsoft.Resources/stable/2022-09-01/resources.json
 ```
 
 ### Tag: package-policy-2020-09
@@ -429,6 +429,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2022-09
+
+These settings apply only when `--tag=package-resources-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2022-09'
+input-file:
+- Microsoft.Resources/stable/20212-09-01/resources.json
 ```
 
 ### Tag: package-resources-2021-01
