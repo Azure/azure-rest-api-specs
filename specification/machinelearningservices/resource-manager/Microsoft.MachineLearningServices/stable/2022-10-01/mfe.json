@@ -3325,6 +3325,9 @@
           "List Command Job.": {
             "$ref": "./examples/Job/CommandJob/list.json"
           },
+          "List AutoML Job.": {
+            "$ref": "./examples/Job/AutoMLJob/list.json"
+          },
           "List Sweep Job.": {
             "$ref": "./examples/Job/SweepJob/list.json"
           },
@@ -3458,6 +3461,9 @@
           "Get Command Job.": {
             "$ref": "./examples/Job/CommandJob/get.json"
           },
+          "Get AutoML Job.": {
+            "$ref": "./examples/Job/AutoMLJob/get.json"
+          },
           "Get Sweep Job.": {
             "$ref": "./examples/Job/SweepJob/get.json"
           },
@@ -3532,6 +3538,9 @@
         "x-ms-examples": {
           "CreateOrUpdate Command Job.": {
             "$ref": "./examples/Job/CommandJob/createOrUpdate.json"
+          },
+          "CreateOrUpdate AutoML Job.": {
+            "$ref": "./examples/Job/AutoMLJob/createOrUpdate.json"
           },
           "CreateOrUpdate Sweep Job.": {
             "$ref": "./examples/Job/SweepJob/createOrUpdate.json"
@@ -5320,6 +5329,289 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "List schedules in specified workspace.",
+        "operationId": "Schedules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "Status filter for schedule.",
+            "type": "string",
+            "default": "EnabledOnly",
+            "enum": [
+              "EnabledOnly",
+              "DisabledOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ScheduleListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "EnabledOnly"
+                },
+                {
+                  "value": "DisabledOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Schedules.": {
+            "$ref": "./examples/Schedule/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}": {
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Delete schedule.",
+        "operationId": "Schedules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Schedule.": {
+            "$ref": "./examples/Schedule/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get schedule.",
+        "operationId": "Schedules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Schedule.": {
+            "$ref": "./examples/Schedule/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Create or update schedule.",
+        "operationId": "Schedules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Schedule definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ScheduleResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Schedule.": {
+            "$ref": "./examples/Schedule/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -5504,6 +5796,157 @@
         }
       },
       "discriminator": "referenceType"
+    },
+    "AutoForecastHorizon": {
+      "description": "Forecast horizon determined automatically by system.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ForecastHorizon"
+        }
+      ],
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AutoMLJob": {
+      "description": "AutoMLJob class.\r\nUse this class for executing AutoML tasks like Classification/Regression etc.\r\nSee TaskType enum for all the tasks supported.",
+      "required": [
+        "taskDetails"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "environmentId": {
+          "description": "The ARM resource ID of the Environment specification for the job.\r\nThis is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "outputs": {
+          "description": "Mapping of output data bindings used in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Job output definition container information on where to find job output/logs.",
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "resources": {
+          "description": "Compute Resource configuration for the job.",
+          "default": "{}",
+          "$ref": "#/definitions/JobResourceConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "taskDetails": {
+          "description": "[Required] This represents scenario which can be one of Tables/NLP/Image",
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      },
+      "x-ms-discriminator-value": "AutoML",
+      "additionalProperties": false
+    },
+    "AutoMLVertical": {
+      "description": "AutoML vertical class.\r\nBase class for AutoML verticals - TableVertical/ImageVertical/NLPVertical",
+      "required": [
+        "taskType",
+        "trainingData"
+      ],
+      "type": "object",
+      "properties": {
+        "logVerbosity": {
+          "description": "Log verbosity for the job.",
+          "default": "Info",
+          "$ref": "#/definitions/LogVerbosity"
+        },
+        "targetColumnName": {
+          "description": "Target column name: This is prediction values column.\r\nAlso known as label column name in context of classification tasks.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "taskType": {
+          "description": "[Required] Task type for AutoMLJob.",
+          "$ref": "#/definitions/TaskType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "trainingData": {
+          "description": "[Required] Training data input.",
+          "$ref": "#/definitions/MLTableJobInput"
+        }
+      },
+      "discriminator": "taskType"
+    },
+    "AutoNCrossValidations": {
+      "description": "N-Cross validations determined automatically.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NCrossValidations"
+        }
+      ],
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AutoSeasonality": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Seasonality"
+        }
+      ],
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AutoTargetLags": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetLags"
+        }
+      ],
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AutoTargetRollingWindowSize": {
+      "description": "Target lags rolling window determined automatically.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetRollingWindowSize"
+        }
+      ],
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
     },
     "AzureBlobDatastore": {
       "description": "Azure Blob datastore configuration.",
@@ -5814,7 +6257,7 @@
         },
         "resources": {
           "description": "Indicates compute configuration for the job.\r\nIf not provided, will default to the defaults defined in ResourceConfiguration.",
-          "$ref": "#/definitions/ResourceConfiguration",
+          "$ref": "#/definitions/DeploymentResourceConfiguration",
           "x-nullable": true
         },
         "retrySettings": {
@@ -6040,6 +6483,69 @@
       "x-ms-discriminator-value": "Bayesian",
       "additionalProperties": false
     },
+    "BlockedTransformers": {
+      "description": "Enum for all classification models supported by AutoML.",
+      "enum": [
+        "TextTargetEncoder",
+        "OneHotEncoder",
+        "CatTargetEncoder",
+        "TfIdf",
+        "WoETargetEncoder",
+        "LabelEncoder",
+        "WordEmbedding",
+        "NaiveBayes",
+        "CountVectorizer",
+        "HashOneHotEncoder"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BlockedTransformers",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TextTargetEncoder",
+            "description": "Target encoding for text data."
+          },
+          {
+            "value": "OneHotEncoder",
+            "description": "Ohe hot encoding creates a binary feature transformation."
+          },
+          {
+            "value": "CatTargetEncoder",
+            "description": "Target encoding for categorical data."
+          },
+          {
+            "value": "TfIdf",
+            "description": "Tf-Idf stands for, term-frequency times inverse document-frequency. This is a common term weighting scheme for identifying information from documents."
+          },
+          {
+            "value": "WoETargetEncoder",
+            "description": "Weight of Evidence encoding is a technique used to encode categorical variables. It uses the natural log of the P(1)/P(0) to create weights."
+          },
+          {
+            "value": "LabelEncoder",
+            "description": "Label encoder converts labels/categorical variables in a numerical form."
+          },
+          {
+            "value": "WordEmbedding",
+            "description": "Word embedding helps represents words or phrases as a vector, or a series of numbers."
+          },
+          {
+            "value": "NaiveBayes",
+            "description": "Naive Bayes is a classified that is used for classification of discrete features that are categorically distributed."
+          },
+          {
+            "value": "CountVectorizer",
+            "description": "Count Vectorizer converts a collection of text documents to a matrix of token counts."
+          },
+          {
+            "value": "HashOneHotEncoder",
+            "description": "Hashing One Hot Encoder can turn categorical variables into a limited number of new features. This is often used for high-cardinality categorical features."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "BuildContext": {
       "description": "Configuration settings for Docker build context",
       "required": [
@@ -6139,6 +6645,224 @@
         }
       },
       "x-ms-discriminator-value": "Certificate",
+      "additionalProperties": false
+    },
+    "Classification": {
+      "description": "Classification task in AutoML Table vertical.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "positiveLabel": {
+          "description": "Positive label for binary metrics calculation.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "primaryMetric": {
+          "description": "Primary metric for the task.",
+          "default": "AUCWeighted",
+          "$ref": "#/definitions/ClassificationPrimaryMetrics"
+        },
+        "trainingSettings": {
+          "description": "Inputs for training phase for an AutoML Job.",
+          "$ref": "#/definitions/ClassificationTrainingSettings",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Classification",
+      "additionalProperties": false
+    },
+    "ClassificationModels": {
+      "description": "Enum for all classification models supported by AutoML.",
+      "enum": [
+        "LogisticRegression",
+        "SGD",
+        "MultinomialNaiveBayes",
+        "BernoulliNaiveBayes",
+        "SVM",
+        "LinearSVM",
+        "KNN",
+        "DecisionTree",
+        "RandomForest",
+        "ExtremeRandomTrees",
+        "LightGBM",
+        "GradientBoosting",
+        "XGBoostClassifier"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ClassificationModels",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LogisticRegression",
+            "description": "Logistic regression is a fundamental classification technique.\nIt belongs to the group of linear classifiers and is somewhat similar to polynomial and linear regression.\nLogistic regression is fast and relatively uncomplicated, and it's convenient for you to interpret the results.\nAlthough it's essentially a method for binary classification, it can also be applied to multiclass problems."
+          },
+          {
+            "value": "SGD",
+            "description": "SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications\nto find the model parameters that correspond to the best fit between predicted and actual outputs."
+          },
+          {
+            "value": "MultinomialNaiveBayes",
+            "description": "The multinomial Naive Bayes classifier is suitable for classification with discrete features (e.g., word counts for text classification).\nThe multinomial distribution normally requires integer feature counts. However, in practice, fractional counts such as tf-idf may also work."
+          },
+          {
+            "value": "BernoulliNaiveBayes",
+            "description": "Naive Bayes classifier for multivariate Bernoulli models."
+          },
+          {
+            "value": "SVM",
+            "description": "A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.\nAfter giving an SVM model sets of labeled training data for each category, they're able to categorize new text."
+          },
+          {
+            "value": "LinearSVM",
+            "description": "A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.\nAfter giving an SVM model sets of labeled training data for each category, they're able to categorize new text.\nLinear SVM performs best when input data is linear, i.e., data can be easily classified by drawing the straight line between classified values on a plotted graph."
+          },
+          {
+            "value": "KNN",
+            "description": "K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints\nwhich further means that the new data point will be assigned a value based on how closely it matches the points in the training set."
+          },
+          {
+            "value": "DecisionTree",
+            "description": "Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.\nThe goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features."
+          },
+          {
+            "value": "RandomForest",
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+          },
+          {
+            "value": "ExtremeRandomTrees",
+            "description": "Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm."
+          },
+          {
+            "value": "LightGBM",
+            "description": "LightGBM is a gradient boosting framework that uses tree based learning algorithms."
+          },
+          {
+            "value": "GradientBoosting",
+            "description": "The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution."
+          },
+          {
+            "value": "XGBoostClassifier",
+            "description": "XGBoost: Extreme Gradient Boosting Algorithm. This algorithm is used for structured data where target column values can be divided into distinct class values."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ClassificationMultilabelPrimaryMetrics": {
+      "description": "Primary metrics for classification multilabel tasks.",
+      "enum": [
+        "AUCWeighted",
+        "Accuracy",
+        "NormMacroRecall",
+        "AveragePrecisionScoreWeighted",
+        "PrecisionScoreWeighted",
+        "IOU"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ClassificationMultilabelPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AUCWeighted",
+            "description": "AUC is the Area under the curve.\nThis metric represents arithmetic mean of the score for each class,\nweighted by the number of true instances in each class."
+          },
+          {
+            "value": "Accuracy",
+            "description": "Accuracy is the ratio of predictions that exactly match the true class labels."
+          },
+          {
+            "value": "NormMacroRecall",
+            "description": "Normalized macro recall is recall macro-averaged and normalized, so that random\nperformance has a score of 0, and perfect performance has a score of 1."
+          },
+          {
+            "value": "AveragePrecisionScoreWeighted",
+            "description": "The arithmetic mean of the average precision score for each class, weighted by\nthe number of true instances in each class."
+          },
+          {
+            "value": "PrecisionScoreWeighted",
+            "description": "The arithmetic mean of precision for each class, weighted by number of true instances in each class."
+          },
+          {
+            "value": "IOU",
+            "description": "Intersection Over Union. Intersection of predictions divided by union of predictions."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ClassificationPrimaryMetrics": {
+      "description": "Primary metrics for classification tasks.",
+      "enum": [
+        "AUCWeighted",
+        "Accuracy",
+        "NormMacroRecall",
+        "AveragePrecisionScoreWeighted",
+        "PrecisionScoreWeighted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ClassificationPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AUCWeighted",
+            "description": "AUC is the Area under the curve.\nThis metric represents arithmetic mean of the score for each class,\nweighted by the number of true instances in each class."
+          },
+          {
+            "value": "Accuracy",
+            "description": "Accuracy is the ratio of predictions that exactly match the true class labels."
+          },
+          {
+            "value": "NormMacroRecall",
+            "description": "Normalized macro recall is recall macro-averaged and normalized, so that random\nperformance has a score of 0, and perfect performance has a score of 1."
+          },
+          {
+            "value": "AveragePrecisionScoreWeighted",
+            "description": "The arithmetic mean of the average precision score for each class, weighted by\nthe number of true instances in each class."
+          },
+          {
+            "value": "PrecisionScoreWeighted",
+            "description": "The arithmetic mean of precision for each class, weighted by number of true instances in each class."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ClassificationTrainingSettings": {
+      "description": "Classification Training related configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrainingSettings"
+        }
+      ],
+      "properties": {
+        "allowedTrainingAlgorithms": {
+          "description": "Allowed models for classification task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationModels"
+          },
+          "x-nullable": true
+        },
+        "blockedTrainingAlgorithms": {
+          "description": "Blocked models for classification task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationModels"
+          },
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "CodeConfiguration": {
@@ -6276,6 +7000,26 @@
       },
       "additionalProperties": false
     },
+    "ColumnTransformer": {
+      "description": "Column transformer parameters.",
+      "type": "object",
+      "properties": {
+        "fields": {
+          "description": "Fields to apply transformer logic on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "parameters": {
+          "description": "Different properties to be passed to transformer.\r\nInput expected is dictionary of key,value pairs in JSON format.",
+          "type": "object",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "CommandJob": {
       "description": "Command job definition.",
       "required": [
@@ -6388,7 +7132,7 @@
         "resources": {
           "description": "Compute Resource configuration for the job.",
           "default": "{}",
-          "$ref": "#/definitions/ResourceConfiguration",
+          "$ref": "#/definitions/JobResourceConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6621,6 +7365,47 @@
       },
       "additionalProperties": false
     },
+    "CronTrigger": {
+      "required": [
+        "expression"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggerBase"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Cron",
+      "additionalProperties": false
+    },
+    "CustomForecastHorizon": {
+      "description": "The desired maximum forecast horizon in units of time-series frequency.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ForecastHorizon"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "int32",
+          "description": "[Required] Forecast horizon value.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
+      "additionalProperties": false
+    },
     "CustomModelJobInput": {
       "type": "object",
       "allOf": [
@@ -6645,6 +7430,90 @@
         }
       ],
       "x-ms-discriminator-value": "custom_model",
+      "additionalProperties": false
+    },
+    "CustomNCrossValidations": {
+      "description": "N-Cross validations are specified by user.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NCrossValidations"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "int32",
+          "description": "[Required] N-Cross validations value.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
+      "additionalProperties": false
+    },
+    "CustomSeasonality": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Seasonality"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "int32",
+          "description": "[Required] Seasonality value.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
+      "additionalProperties": false
+    },
+    "CustomTargetLags": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetLags"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "[Required] Set target lags values.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
+      "additionalProperties": false
+    },
+    "CustomTargetRollingWindowSize": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetRollingWindowSize"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "int32",
+          "description": "[Required] TargetRollingWindowSize value.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
       "additionalProperties": false
     },
     "DataContainer": {
@@ -6907,7 +7776,7 @@
           ]
         },
         "dataUri": {
-          "description": "[Required] Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20220501.Assets.DataVersionBase.DataType",
+          "description": "[Required] Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20221001.Assets.DataVersionBase.DataType",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -7034,6 +7903,15 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "DeploymentResourceConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceConfiguration"
+        }
+      ],
       "additionalProperties": false
     },
     "DistributionConfiguration": {
@@ -7367,6 +8245,37 @@
       },
       "additionalProperties": false
     },
+    "EndpointScheduleAction": {
+      "required": [
+        "actionType",
+        "endpointInvocationDefinition"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleActionBase"
+        }
+      ],
+      "properties": {
+        "endpointInvocationDefinition": {
+          "description": "[Required] Defines Schedule action definition details.\r\n<see href=\"TBD\" />",
+          "type": "object",
+          "example": {
+            "endpoint": "azureml:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/hello-pipeline",
+            "inputs": {
+              "create_time": "${{creation_context.trigger_time}}"
+            }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "InvokeBatchEndpoint",
+      "additionalProperties": false
+    },
     "EnvironmentContainer": {
       "description": "Container for environment specification versions.",
       "type": "object",
@@ -7538,6 +8447,69 @@
       },
       "additionalProperties": false
     },
+    "FeatureLags": {
+      "description": "Flag for generating lags for the numeric features.",
+      "enum": [
+        "None",
+        "Auto"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureLags",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No feature lags generated."
+          },
+          {
+            "value": "Auto",
+            "description": "System auto-generates feature lags."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeaturizationMode": {
+      "description": "Featurization mode - determines data featurization mode.",
+      "enum": [
+        "Auto",
+        "Custom",
+        "Off"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeaturizationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Auto mode, system performs featurization without any custom featurization inputs."
+          },
+          {
+            "value": "Custom",
+            "description": "Custom featurization."
+          },
+          {
+            "value": "Off",
+            "description": "Featurization off. 'Forecasting' task cannot use this value."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeaturizationSettings": {
+      "description": "Featurization Configuration.",
+      "type": "object",
+      "properties": {
+        "datasetLanguage": {
+          "description": "Dataset language, useful for the text data.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "FlavorData": {
       "type": "object",
       "properties": {
@@ -7547,6 +8519,323 @@
           "additionalProperties": {
             "type": "string",
             "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ForecastHorizon": {
+      "description": "The desired maximum forecast horizon in units of time-series frequency.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "[Required] Set forecast horizon value selection mode.",
+          "$ref": "#/definitions/ForecastHorizonMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "mode"
+    },
+    "ForecastHorizonMode": {
+      "description": "Enum to determine forecast horizon selection mode.",
+      "enum": [
+        "Auto",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ForecastHorizonMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Forecast horizon to be determined automatically."
+          },
+          {
+            "value": "Custom",
+            "description": "Use the custom forecast horizon."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "Forecasting": {
+      "description": "Forecasting task in AutoML Table vertical.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "forecastingSettings": {
+          "description": "Forecasting task specific inputs.",
+          "$ref": "#/definitions/ForecastingSettings",
+          "x-nullable": true
+        },
+        "primaryMetric": {
+          "description": "Primary metric for forecasting task.",
+          "default": "NormalizedRootMeanSquaredError",
+          "$ref": "#/definitions/ForecastingPrimaryMetrics"
+        },
+        "trainingSettings": {
+          "description": "Inputs for training phase for an AutoML Job.",
+          "$ref": "#/definitions/ForecastingTrainingSettings",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Forecasting",
+      "additionalProperties": false
+    },
+    "ForecastingModels": {
+      "description": "Enum for all forecasting models supported by AutoML.",
+      "enum": [
+        "AutoArima",
+        "Prophet",
+        "Naive",
+        "SeasonalNaive",
+        "Average",
+        "SeasonalAverage",
+        "ExponentialSmoothing",
+        "Arimax",
+        "TCNForecaster",
+        "ElasticNet",
+        "GradientBoosting",
+        "DecisionTree",
+        "KNN",
+        "LassoLars",
+        "SGD",
+        "RandomForest",
+        "ExtremeRandomTrees",
+        "LightGBM",
+        "XGBoostRegressor"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ForecastingModels",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AutoArima",
+            "description": "Auto-Autoregressive Integrated Moving Average (ARIMA) model uses time-series data and statistical analysis to interpret the data and make future predictions.\nThis model aims to explain data by using time series data on its past values and uses linear regression to make predictions."
+          },
+          {
+            "value": "Prophet",
+            "description": "Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects.\nIt works best with time series that have strong seasonal effects and several seasons of historical data. Prophet is robust to missing data and shifts in the trend, and typically handles outliers well."
+          },
+          {
+            "value": "Naive",
+            "description": "The Naive forecasting model makes predictions by carrying forward the latest target value for each time-series in the training data."
+          },
+          {
+            "value": "SeasonalNaive",
+            "description": "The Seasonal Naive forecasting model makes predictions by carrying forward the latest season of target values for each time-series in the training data."
+          },
+          {
+            "value": "Average",
+            "description": "The Average forecasting model makes predictions by carrying forward the average of the target values for each time-series in the training data."
+          },
+          {
+            "value": "SeasonalAverage",
+            "description": "The Seasonal Average forecasting model makes predictions by carrying forward the average value of the latest season of data for each time-series in the training data."
+          },
+          {
+            "value": "ExponentialSmoothing",
+            "description": "Exponential smoothing is a time series forecasting method for univariate data that can be extended to support data with a systematic trend or seasonal component."
+          },
+          {
+            "value": "Arimax",
+            "description": "An Autoregressive Integrated Moving Average with Explanatory Variable (ARIMAX) model can be viewed as a multiple regression model with one or more autoregressive (AR) terms and/or one or more moving average (MA) terms.\nThis method is suitable for forecasting when data is stationary/non stationary, and multivariate with any type of data pattern, i.e., level/trend /seasonality/cyclicity."
+          },
+          {
+            "value": "TCNForecaster",
+            "description": "TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro."
+          },
+          {
+            "value": "ElasticNet",
+            "description": "Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions."
+          },
+          {
+            "value": "GradientBoosting",
+            "description": "The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution."
+          },
+          {
+            "value": "DecisionTree",
+            "description": "Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.\nThe goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features."
+          },
+          {
+            "value": "KNN",
+            "description": "K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints\nwhich further means that the new data point will be assigned a value based on how closely it matches the points in the training set."
+          },
+          {
+            "value": "LassoLars",
+            "description": "Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer."
+          },
+          {
+            "value": "SGD",
+            "description": "SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications\nto find the model parameters that correspond to the best fit between predicted and actual outputs.\nIt's an inexact but powerful technique."
+          },
+          {
+            "value": "RandomForest",
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+          },
+          {
+            "value": "ExtremeRandomTrees",
+            "description": "Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm."
+          },
+          {
+            "value": "LightGBM",
+            "description": "LightGBM is a gradient boosting framework that uses tree based learning algorithms."
+          },
+          {
+            "value": "XGBoostRegressor",
+            "description": "XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ForecastingPrimaryMetrics": {
+      "description": "Primary metrics for Forecasting task.",
+      "enum": [
+        "SpearmanCorrelation",
+        "NormalizedRootMeanSquaredError",
+        "R2Score",
+        "NormalizedMeanAbsoluteError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ForecastingPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SpearmanCorrelation",
+            "description": "The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation."
+          },
+          {
+            "value": "NormalizedRootMeanSquaredError",
+            "description": "The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales."
+          },
+          {
+            "value": "R2Score",
+            "description": "The R2 score is one of the performance evaluation measures for forecasting-based machine learning models."
+          },
+          {
+            "value": "NormalizedMeanAbsoluteError",
+            "description": "The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ForecastingSettings": {
+      "description": "Forecasting specific parameters.",
+      "type": "object",
+      "properties": {
+        "countryOrRegionForHolidays": {
+          "description": "Country or region for holidays for forecasting tasks.\r\nThese should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvStepSize": {
+          "format": "int32",
+          "description": "Number of periods between the origin time of one CV fold and the next fold. For\r\nexample, if `CVStepSize` = 3 for daily data, the origin time for each fold will be\r\nthree days apart.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "featureLags": {
+          "description": "Flag for generating lags for the numeric features with 'auto' or null.",
+          "default": "None",
+          "$ref": "#/definitions/FeatureLags"
+        },
+        "forecastHorizon": {
+          "description": "The desired maximum forecast horizon in units of time-series frequency.",
+          "default": "{\"Mode\": \"Custom\", \"Value\": 1}",
+          "$ref": "#/definitions/ForecastHorizon"
+        },
+        "frequency": {
+          "description": "When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "seasonality": {
+          "description": "Set time series seasonality as an integer multiple of the series frequency.\r\nIf seasonality is set to 'auto', it will be inferred.",
+          "default": "{\"Mode\": \"Auto\"}",
+          "$ref": "#/definitions/Seasonality"
+        },
+        "shortSeriesHandlingConfig": {
+          "description": "The parameter defining how if AutoML should handle short time series.",
+          "default": "Auto",
+          "$ref": "#/definitions/ShortSeriesHandlingConfiguration"
+        },
+        "targetAggregateFunction": {
+          "description": "The function to be used to aggregate the time series target column to conform to a user specified frequency.\r\nIf the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: \"sum\", \"max\", \"min\" and \"mean\".",
+          "default": "None",
+          "$ref": "#/definitions/TargetAggregationFunction"
+        },
+        "targetLags": {
+          "description": "The number of past periods to lag from the target column.",
+          "$ref": "#/definitions/TargetLags",
+          "x-nullable": true
+        },
+        "targetRollingWindowSize": {
+          "description": "The number of past periods used to create a rolling window average of the target column.",
+          "$ref": "#/definitions/TargetRollingWindowSize",
+          "x-nullable": true
+        },
+        "timeColumnName": {
+          "description": "The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeSeriesIdColumnNames": {
+          "description": "The names of columns used to group a timeseries. It can be used to create multiple series.\r\nIf grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "useStl": {
+          "description": "Configure STL Decomposition of the time-series target column.",
+          "default": "None",
+          "$ref": "#/definitions/UseStl"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ForecastingTrainingSettings": {
+      "description": "Forecasting Training related configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrainingSettings"
+        }
+      ],
+      "properties": {
+        "allowedTrainingAlgorithms": {
+          "description": "Allowed models for forecasting task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastingModels"
+          },
+          "x-nullable": true
+        },
+        "blockedTrainingAlgorithms": {
+          "description": "Blocked models for forecasting task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastingModels"
           },
           "x-nullable": true
         }
@@ -7649,6 +8938,827 @@
       },
       "additionalProperties": false
     },
+    "ImageClassification": {
+      "description": "Image Classification. Multi-class image classification is used when an image is classified with only a single label\r\nfrom a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageClassificationBase"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric to optimize for this task.",
+          "default": "Accuracy",
+          "$ref": "#/definitions/ClassificationPrimaryMetrics"
+        }
+      },
+      "x-ms-discriminator-value": "ImageClassification",
+      "additionalProperties": false
+    },
+    "ImageClassificationBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageVertical"
+        }
+      ],
+      "properties": {
+        "modelSettings": {
+          "description": "Settings used for training the model.",
+          "$ref": "#/definitions/ImageModelSettingsClassification",
+          "x-nullable": true
+        },
+        "searchSpace": {
+          "description": "Search space for sampling different combinations of models and their hyperparameters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
+          },
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageClassificationMultilabel": {
+      "description": "Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels\r\nfrom a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageClassificationBase"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric to optimize for this task.",
+          "default": "IOU",
+          "$ref": "#/definitions/ClassificationMultilabelPrimaryMetrics"
+        }
+      },
+      "x-ms-discriminator-value": "ImageClassificationMultilabel",
+      "additionalProperties": false
+    },
+    "ImageInstanceSegmentation": {
+      "description": "Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,\r\ndrawing a polygon around each object in the image.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageObjectDetectionBase"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric to optimize for this task.",
+          "default": "MeanAveragePrecision",
+          "$ref": "#/definitions/InstanceSegmentationPrimaryMetrics"
+        }
+      },
+      "x-ms-discriminator-value": "ImageInstanceSegmentation",
+      "additionalProperties": false
+    },
+    "ImageLimitSettings": {
+      "description": "Limit settings for the AutoML job.",
+      "type": "object",
+      "properties": {
+        "maxConcurrentTrials": {
+          "format": "int32",
+          "description": "Maximum number of concurrent AutoML iterations.",
+          "default": 1,
+          "type": "integer"
+        },
+        "maxTrials": {
+          "format": "int32",
+          "description": "Maximum number of AutoML iterations.",
+          "default": 1,
+          "type": "integer"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "AutoML job timeout.",
+          "default": "P7D",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelDistributionSettings": {
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nAll distributions can be specified as distribution_name(min, max) or choice(val1, val2, ..., valn)\r\nwhere distribution name can be: uniform, quniform, loguniform, etc\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "properties": {
+        "amsGradient": {
+          "description": "Enable AMSGrad when optimizer is 'adam' or 'adamw'.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "augmentations": {
+          "description": "Settings for using Augmentations.",
+          "type": "string",
+          "example": "choice('hflip;mosaic;random_crop', 'mosaic')",
+          "x-nullable": true
+        },
+        "beta1": {
+          "description": "Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0, 1)",
+          "x-nullable": true
+        },
+        "beta2": {
+          "description": "Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0, 1)",
+          "x-nullable": true
+        },
+        "distributed": {
+          "description": "Whether to use distributer training.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "earlyStopping": {
+          "description": "Enable early stopping logic during training.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "earlyStoppingDelay": {
+          "description": "Minimum number of epochs or validation evaluations to wait before primary metric improvement\r\nis tracked for early stopping. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 5)",
+          "x-nullable": true
+        },
+        "earlyStoppingPatience": {
+          "description": "Minimum number of epochs or validation evaluations with no primary metric improvement before\r\nthe run is stopped. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 5)",
+          "x-nullable": true
+        },
+        "enableOnnxNormalization": {
+          "description": "Enable normalization when exporting ONNX model.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "evaluationFrequency": {
+          "description": "Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 5)",
+          "x-nullable": true
+        },
+        "gradientAccumulationStep": {
+          "description": "Gradient accumulation means running a configured number of \"GradAccumulationStep\" steps without\r\nupdating the model weights while accumulating the gradients of those steps, and then using\r\nthe accumulated gradients to compute the weight updates. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 5)",
+          "x-nullable": true
+        },
+        "layersToFreeze": {
+          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models supported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "type": "string",
+          "example": "choice(1, 2)",
+          "x-nullable": true
+        },
+        "learningRate": {
+          "description": "Initial learning rate. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0.0005, 0.005)",
+          "x-nullable": true
+        },
+        "learningRateScheduler": {
+          "description": "Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.",
+          "type": "string",
+          "example": "choice('warmup_cosine', 'step')",
+          "x-nullable": true
+        },
+        "modelName": {
+          "description": "Name of the model to use for training.\r\nFor more information on the available models please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "type": "string",
+          "example": "choice('seresnext', 'resnest50')",
+          "x-nullable": true
+        },
+        "momentum": {
+          "description": "Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "quniform(0, 1)",
+          "x-nullable": true
+        },
+        "nesterov": {
+          "description": "Enable nesterov when optimizer is 'sgd'.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "numberOfEpochs": {
+          "description": "Number of training epochs. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(15, 30)",
+          "x-nullable": true
+        },
+        "numberOfWorkers": {
+          "description": "Number of data loader workers. Must be a non-negative integer.",
+          "type": "string",
+          "example": "uniform(8, 16)",
+          "x-nullable": true
+        },
+        "optimizer": {
+          "description": "Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'.",
+          "type": "string",
+          "example": "choice('sgd', 'adam', 'adamw')",
+          "x-nullable": true
+        },
+        "randomSeed": {
+          "description": "Random seed to be used when using deterministic training.",
+          "type": "string",
+          "example": "loguniform(0, 1)",
+          "x-nullable": true
+        },
+        "stepLRGamma": {
+          "description": "Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "choice(0.1, 0.2, 0.25)",
+          "x-nullable": true
+        },
+        "stepLRStepSize": {
+          "description": "Value of step size when learning rate scheduler is 'step'. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 2, 3)",
+          "x-nullable": true
+        },
+        "trainingBatchSize": {
+          "description": "Training batch size. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 2, 3)",
+          "x-nullable": true
+        },
+        "validationBatchSize": {
+          "description": "Validation batch size. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 2, 3)",
+          "x-nullable": true
+        },
+        "warmupCosineLRCycles": {
+          "description": "Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0, 1)",
+          "x-nullable": true
+        },
+        "warmupCosineLRWarmupEpochs": {
+          "description": "Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(1, 2, 3)",
+          "x-nullable": true
+        },
+        "weightDecay": {
+          "description": "Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].",
+          "type": "string",
+          "example": "uniform(0, 1)",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelDistributionSettingsClassification": {
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageModelDistributionSettings"
+        }
+      ],
+      "properties": {
+        "trainingCropSize": {
+          "description": "Image crop size that is input to the neural network for the training dataset. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(224, 360)",
+          "x-nullable": true
+        },
+        "validationCropSize": {
+          "description": "Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(224, 360)",
+          "x-nullable": true
+        },
+        "validationResizeSize": {
+          "description": "Image size to which to resize before cropping for validation dataset. Must be a positive integer.",
+          "type": "string",
+          "example": "choice(128, 256)",
+          "x-nullable": true
+        },
+        "weightedLoss": {
+          "description": "Weighted loss. The accepted values are 0 for no weighted loss.\r\n1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.",
+          "type": "string",
+          "example": "choice(0, 1, 2)",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelDistributionSettingsObjectDetection": {
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageModelDistributionSettings"
+        }
+      ],
+      "properties": {
+        "boxDetectionsPerImage": {
+          "description": "Maximum number of detections per image, for all classes. Must be a positive integer.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice(50, 100)",
+          "x-nullable": true
+        },
+        "boxScoreThreshold": {
+          "description": "During inference, only return proposals with a classification score greater than\r\nBoxScoreThreshold. Must be a float in the range[0, 1].",
+          "type": "string",
+          "example": "uniform(0.1, 0.2)",
+          "x-nullable": true
+        },
+        "imageSize": {
+          "description": "Image size for train and validation. Must be a positive integer.\r\nNote: The training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice(224, 640)",
+          "x-nullable": true
+        },
+        "maxSize": {
+          "description": "Maximum size of the image to be rescaled before feeding it to the backbone.\r\nMust be a positive integer. Note: training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice(640, 1333)",
+          "x-nullable": true
+        },
+        "minSize": {
+          "description": "Minimum size of the image to be rescaled before feeding it to the backbone.\r\nMust be a positive integer. Note: training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice(300, 600)",
+          "x-nullable": true
+        },
+        "modelSize": {
+          "description": "Model size. Must be 'small', 'medium', 'large', or 'xlarge'.\r\nNote: training run may get into CUDA OOM if the model size is too big.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice('small', 'medium', 'large', 'xlarge')",
+          "x-nullable": true
+        },
+        "multiScale": {
+          "description": "Enable multi-scale image by varying image size by +/- 50%.\r\nNote: training run may get into CUDA OOM if no sufficient GPU memory.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice(true, false)",
+          "x-nullable": true
+        },
+        "nmsIouThreshold": {
+          "description": "IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0.1, 0.2)",
+          "x-nullable": true
+        },
+        "tileGridSize": {
+          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A string containing two integers in mxn format.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "choice('3x2', '2x2')",
+          "x-nullable": true
+        },
+        "tileOverlapRatio": {
+          "description": "Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "uniform(0.1, 0.2)",
+          "x-nullable": true
+        },
+        "tilePredictionsNmsThreshold": {
+          "description": "The IOU threshold to use to perform NMS while merging predictions from tiles and image.\r\nUsed in validation/ inference. Must be float in the range [0, 1].\r\nNote: This settings is not supported for the 'yolov5' algorithm.\r\nNMS: Non-maximum suppression",
+          "type": "string",
+          "example": "uniform(0.2, 0.3)",
+          "x-nullable": true
+        },
+        "validationIouThreshold": {
+          "description": "IOU threshold to use when computing validation metric. Must be float in the range [0, 1].",
+          "type": "string",
+          "example": "uniform(0.2, 0.3)",
+          "x-nullable": true
+        },
+        "validationMetricType": {
+          "description": "Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.",
+          "type": "string",
+          "example": "choice('none', 'coco', 'voc', 'coco_voc')",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelSettings": {
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "properties": {
+        "advancedSettings": {
+          "description": "Settings for advanced scenarios.",
+          "type": "string",
+          "example": "key1:val1;key2;key3:val3;key4",
+          "x-nullable": true
+        },
+        "amsGradient": {
+          "description": "Enable AMSGrad when optimizer is 'adam' or 'adamw'.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "augmentations": {
+          "description": "Settings for using Augmentations.",
+          "type": "string",
+          "example": "hflip;mosaic;random_crop",
+          "x-nullable": true
+        },
+        "beta1": {
+          "format": "float",
+          "description": "Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "beta2": {
+          "format": "float",
+          "description": "Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "checkpointFrequency": {
+          "format": "int32",
+          "description": "Frequency to store model checkpoints. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "checkpointModel": {
+          "description": "The pretrained checkpoint model for incremental training.",
+          "$ref": "#/definitions/MLFlowModelJobInput",
+          "x-nullable": true
+        },
+        "checkpointRunId": {
+          "description": "The id of a previous run that has a pretrained checkpoint for incremental training.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "distributed": {
+          "description": "Whether to use distributed training.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "earlyStopping": {
+          "description": "Enable early stopping logic during training.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "earlyStoppingDelay": {
+          "format": "int32",
+          "description": "Minimum number of epochs or validation evaluations to wait before primary metric improvement\r\nis tracked for early stopping. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "earlyStoppingPatience": {
+          "format": "int32",
+          "description": "Minimum number of epochs or validation evaluations with no primary metric improvement before\r\nthe run is stopped. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "enableOnnxNormalization": {
+          "description": "Enable normalization when exporting ONNX model.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "evaluationFrequency": {
+          "format": "int32",
+          "description": "Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "gradientAccumulationStep": {
+          "format": "int32",
+          "description": "Gradient accumulation means running a configured number of \"GradAccumulationStep\" steps without\r\nupdating the model weights while accumulating the gradients of those steps, and then using\r\nthe accumulated gradients to compute the weight updates. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "layersToFreeze": {
+          "format": "int32",
+          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models supported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "learningRate": {
+          "format": "float",
+          "description": "Initial learning rate. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "learningRateScheduler": {
+          "description": "Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.",
+          "default": "None",
+          "$ref": "#/definitions/LearningRateScheduler"
+        },
+        "modelName": {
+          "description": "Name of the model to use for training.\r\nFor more information on the available models please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "momentum": {
+          "format": "float",
+          "description": "Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "nesterov": {
+          "description": "Enable nesterov when optimizer is 'sgd'.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "numberOfEpochs": {
+          "format": "int32",
+          "description": "Number of training epochs. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "Number of data loader workers. Must be a non-negative integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "optimizer": {
+          "description": "Type of optimizer.",
+          "default": "None",
+          "$ref": "#/definitions/StochasticOptimizer"
+        },
+        "randomSeed": {
+          "format": "int32",
+          "description": "Random seed to be used when using deterministic training.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "stepLRGamma": {
+          "format": "float",
+          "description": "Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "stepLRStepSize": {
+          "format": "int32",
+          "description": "Value of step size when learning rate scheduler is 'step'. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "trainingBatchSize": {
+          "format": "int32",
+          "description": "Training batch size. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "validationBatchSize": {
+          "format": "int32",
+          "description": "Validation batch size. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "warmupCosineLRCycles": {
+          "format": "float",
+          "description": "Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "warmupCosineLRWarmupEpochs": {
+          "format": "int32",
+          "description": "Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "weightDecay": {
+          "format": "float",
+          "description": "Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].",
+          "type": "number",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelSettingsClassification": {
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageModelSettings"
+        }
+      ],
+      "properties": {
+        "trainingCropSize": {
+          "format": "int32",
+          "description": "Image crop size that is input to the neural network for the training dataset. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "validationCropSize": {
+          "format": "int32",
+          "description": "Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "validationResizeSize": {
+          "format": "int32",
+          "description": "Image size to which to resize before cropping for validation dataset. Must be a positive integer.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "weightedLoss": {
+          "format": "int32",
+          "description": "Weighted loss. The accepted values are 0 for no weighted loss.\r\n1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.",
+          "type": "integer",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageModelSettingsObjectDetection": {
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageModelSettings"
+        }
+      ],
+      "properties": {
+        "boxDetectionsPerImage": {
+          "format": "int32",
+          "description": "Maximum number of detections per image, for all classes. Must be a positive integer.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "boxScoreThreshold": {
+          "format": "float",
+          "description": "During inference, only return proposals with a classification score greater than\r\nBoxScoreThreshold. Must be a float in the range[0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "imageSize": {
+          "format": "int32",
+          "description": "Image size for train and validation. Must be a positive integer.\r\nNote: The training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "maxSize": {
+          "format": "int32",
+          "description": "Maximum size of the image to be rescaled before feeding it to the backbone.\r\nMust be a positive integer. Note: training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "minSize": {
+          "format": "int32",
+          "description": "Minimum size of the image to be rescaled before feeding it to the backbone.\r\nMust be a positive integer. Note: training run may get into CUDA OOM if the size is too big.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "modelSize": {
+          "description": "Model size. Must be 'small', 'medium', 'large', or 'xlarge'.\r\nNote: training run may get into CUDA OOM if the model size is too big.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "default": "None",
+          "$ref": "#/definitions/ModelSize"
+        },
+        "multiScale": {
+          "description": "Enable multi-scale image by varying image size by +/- 50%.\r\nNote: training run may get into CUDA OOM if no sufficient GPU memory.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "nmsIouThreshold": {
+          "format": "float",
+          "description": "IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "tileGridSize": {
+          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A string containing two integers in mxn format.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "string",
+          "example": "3x2",
+          "x-nullable": true
+        },
+        "tileOverlapRatio": {
+          "format": "float",
+          "description": "Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "number",
+          "x-nullable": true
+        },
+        "tilePredictionsNmsThreshold": {
+          "format": "float",
+          "description": "The IOU threshold to use to perform NMS while merging predictions from tiles and image.\r\nUsed in validation/ inference. Must be float in the range [0, 1].\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "type": "number",
+          "x-nullable": true
+        },
+        "validationIouThreshold": {
+          "format": "float",
+          "description": "IOU threshold to use when computing validation metric. Must be float in the range [0, 1].",
+          "type": "number",
+          "x-nullable": true
+        },
+        "validationMetricType": {
+          "description": "Metric computation method to use for validation metrics.",
+          "default": "None",
+          "$ref": "#/definitions/ValidationMetricType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageObjectDetection": {
+      "description": "Image Object Detection. Object detection is used to identify objects in an image and locate each object with a\r\nbounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageObjectDetectionBase"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric to optimize for this task.",
+          "default": "MeanAveragePrecision",
+          "$ref": "#/definitions/ObjectDetectionPrimaryMetrics"
+        }
+      },
+      "x-ms-discriminator-value": "ImageObjectDetection",
+      "additionalProperties": false
+    },
+    "ImageObjectDetectionBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageVertical"
+        }
+      ],
+      "properties": {
+        "modelSettings": {
+          "description": "Settings used for training the model.",
+          "$ref": "#/definitions/ImageModelSettingsObjectDetection",
+          "x-nullable": true
+        },
+        "searchSpace": {
+          "description": "Search space for sampling different combinations of models and their hyperparameters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageModelDistributionSettingsObjectDetection"
+          },
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageSweepSettings": {
+      "description": "Model sweeping and hyperparameter sweeping related settings.",
+      "required": [
+        "samplingAlgorithm"
+      ],
+      "type": "object",
+      "properties": {
+        "earlyTermination": {
+          "description": "Type of early termination policy.",
+          "$ref": "#/definitions/EarlyTerminationPolicy",
+          "x-nullable": true
+        },
+        "samplingAlgorithm": {
+          "description": "[Required] Type of the hyperparameter sampling algorithms.",
+          "$ref": "#/definitions/SamplingAlgorithmType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageVertical": {
+      "description": "Abstract class for AutoML tasks that train image (computer vision) models -\r\nsuch as Image Classification / Image Classification Multilabel / Image Object Detection / Image Instance Segmentation.",
+      "required": [
+        "limitSettings"
+      ],
+      "type": "object",
+      "properties": {
+        "limitSettings": {
+          "description": "[Required] Limit settings for the AutoML job.",
+          "$ref": "#/definitions/ImageLimitSettings"
+        },
+        "sweepSettings": {
+          "description": "Model sweeping and hyperparameter sweeping related settings.",
+          "$ref": "#/definitions/ImageSweepSettings",
+          "x-nullable": true
+        },
+        "validationData": {
+          "description": "Validation data inputs.",
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
+        },
+        "validationDataSize": {
+          "format": "double",
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\r\nValues between (0.0 , 1.0)\r\nApplied when validation dataset is not provided.",
+          "type": "number",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "InferenceContainerProperties": {
       "type": "object",
       "properties": {
@@ -7704,6 +9814,24 @@
       },
       "additionalProperties": false
     },
+    "InstanceSegmentationPrimaryMetrics": {
+      "description": "Primary metrics for InstanceSegmentation tasks.",
+      "enum": [
+        "MeanAveragePrecision"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InstanceSegmentationPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "MeanAveragePrecision",
+            "description": "Mean Average Precision (MAP) is the average of AP (Average Precision).\nAP is calculated for each class and averaged to get the MAP."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "JobBase": {
       "description": "Base definition for a job.",
       "required": [
@@ -7716,6 +9844,15 @@
         }
       ],
       "properties": {
+        "componentId": {
+          "description": "ARM resource ID of the component resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "computeId": {
           "description": "ARM resource ID of the compute resource.",
           "type": "string",
@@ -8000,6 +10137,61 @@
       },
       "additionalProperties": false
     },
+    "JobResourceConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceConfiguration"
+        }
+      ],
+      "properties": {
+        "dockerArgs": {
+          "description": "Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "shmSize": {
+          "description": "Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).",
+          "default": "2g",
+          "pattern": "\\d+[bBkKmMgG]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobScheduleAction": {
+      "required": [
+        "actionType",
+        "jobDefinition"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleActionBase"
+        }
+      ],
+      "properties": {
+        "jobDefinition": {
+          "description": "[Required] Defines Schedule action definition details.",
+          "$ref": "#/definitions/JobBase",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "CreateJob",
+      "additionalProperties": false
+    },
     "JobService": {
       "description": "Job endpoint definition",
       "type": "object",
@@ -8148,6 +10340,7 @@
     "JobType": {
       "description": "Enum to determine the type of job.",
       "enum": [
+        "AutoML",
         "Command",
         "Sweep",
         "Pipeline"
@@ -8157,6 +10350,9 @@
         "name": "JobType",
         "modelAsString": true,
         "values": [
+          {
+            "value": "AutoML"
+          },
           {
             "value": "Command"
           },
@@ -8208,6 +10404,34 @@
       "x-ms-discriminator-value": "Kubernetes",
       "additionalProperties": false
     },
+    "LearningRateScheduler": {
+      "description": "Learning rate scheduler enum.",
+      "enum": [
+        "None",
+        "WarmupCosine",
+        "Step"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LearningRateScheduler",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No learning rate scheduler selected."
+          },
+          {
+            "value": "WarmupCosine",
+            "description": "Cosine Annealing With Warmup."
+          },
+          {
+            "value": "Step",
+            "description": "Step learning rate scheduler."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "ListViewType": {
       "enum": [
         "ActiveOnly",
@@ -8251,6 +10475,49 @@
         }
       },
       "x-ms-discriminator-value": "literal",
+      "additionalProperties": false
+    },
+    "LogVerbosity": {
+      "description": "Enum for setting log verbosity.",
+      "enum": [
+        "NotSet",
+        "Debug",
+        "Info",
+        "Warning",
+        "Error",
+        "Critical"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LogVerbosity",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotSet",
+            "description": "No logs emitted."
+          },
+          {
+            "value": "Debug",
+            "description": "Debug and above log statements logged."
+          },
+          {
+            "value": "Info",
+            "description": "Info and above log statements logged."
+          },
+          {
+            "value": "Warning",
+            "description": "Warning and above log statements logged."
+          },
+          {
+            "value": "Error",
+            "description": "Error and above log statements logged."
+          },
+          {
+            "value": "Critical",
+            "description": "Only critical statements logged."
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "ManagedIdentity": {
@@ -8442,6 +10709,44 @@
       },
       "additionalProperties": false
     },
+    "ModelSize": {
+      "description": "Image model size.",
+      "enum": [
+        "None",
+        "Small",
+        "Medium",
+        "Large",
+        "ExtraLarge"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No value selected."
+          },
+          {
+            "value": "Small",
+            "description": "Small size."
+          },
+          {
+            "value": "Medium",
+            "description": "Medium size."
+          },
+          {
+            "value": "Large",
+            "description": "Large size."
+          },
+          {
+            "value": "ExtraLarge",
+            "description": "Extra large size."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "ModelVersion": {
       "description": "Model asset version details.",
       "type": "object",
@@ -8540,6 +10845,102 @@
       "x-ms-discriminator-value": "Mpi",
       "additionalProperties": false
     },
+    "NCrossValidations": {
+      "description": "N-Cross validations value.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "[Required] Mode for determining N-Cross validations.",
+          "$ref": "#/definitions/NCrossValidationsMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "mode"
+    },
+    "NCrossValidationsMode": {
+      "description": "Determines how N-Cross validations value is determined.",
+      "enum": [
+        "Auto",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NCrossValidationsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task."
+          },
+          {
+            "value": "Custom",
+            "description": "Use custom N-Cross validations value."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "NlpVertical": {
+      "description": "Abstract class for NLP related AutoML tasks.\r\nNLP - Natural Language Processing.",
+      "type": "object",
+      "properties": {
+        "featurizationSettings": {
+          "description": "Featurization inputs needed for AutoML job.",
+          "$ref": "#/definitions/NlpVerticalFeaturizationSettings",
+          "x-nullable": true
+        },
+        "limitSettings": {
+          "description": "Execution constraints for AutoMLJob.",
+          "$ref": "#/definitions/NlpVerticalLimitSettings",
+          "x-nullable": true
+        },
+        "validationData": {
+          "description": "Validation data inputs.",
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "NlpVerticalFeaturizationSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeaturizationSettings"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "NlpVerticalLimitSettings": {
+      "description": "Job execution constraints.",
+      "type": "object",
+      "properties": {
+        "maxConcurrentTrials": {
+          "format": "int32",
+          "description": "Maximum Concurrent AutoML iterations.",
+          "default": 1,
+          "type": "integer"
+        },
+        "maxTrials": {
+          "format": "int32",
+          "description": "Number of AutoML iterations.",
+          "default": 1,
+          "type": "integer"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "AutoML job timeout.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "NoneDatastoreCredentials": {
       "description": "Empty/none datastore credentials.",
       "type": "object",
@@ -8549,6 +10950,24 @@
         }
       ],
       "x-ms-discriminator-value": "None",
+      "additionalProperties": false
+    },
+    "ObjectDetectionPrimaryMetrics": {
+      "description": "Primary metrics for Image ObjectDetection task.",
+      "enum": [
+        "MeanAveragePrecision"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ObjectDetectionPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "MeanAveragePrecision",
+            "description": "Mean Average Precision (MAP) is the average of AP (Average Precision).\nAP is calculated for each class and averaged to get the MAP."
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "Objective": {
@@ -9095,6 +11514,15 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "sourceJobId": {
+          "description": "ARM resource ID of source job.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Pipeline",
@@ -9201,6 +11629,117 @@
       },
       "additionalProperties": false
     },
+    "RecurrenceFrequency": {
+      "description": "Enum to describe the frequency of a recurrence schedule",
+      "enum": [
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Minute",
+            "description": "Minute frequency"
+          },
+          {
+            "value": "Hour",
+            "description": "Hour frequency"
+          },
+          {
+            "value": "Day",
+            "description": "Day frequency"
+          },
+          {
+            "value": "Week",
+            "description": "Week frequency"
+          },
+          {
+            "value": "Month",
+            "description": "Month frequency"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "RecurrenceSchedule": {
+      "required": [
+        "hours",
+        "minutes"
+      ],
+      "type": "object",
+      "properties": {
+        "hours": {
+          "description": "[Required] List of hours for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "minutes": {
+          "description": "[Required] List of minutes for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "monthDays": {
+          "description": "List of month days for the schedule",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-nullable": true
+        },
+        "weekDays": {
+          "description": "List of days for the schedule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RecurrenceTrigger": {
+      "required": [
+        "frequency",
+        "interval"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggerBase"
+        }
+      ],
+      "properties": {
+        "frequency": {
+          "description": "[Required] The frequency to trigger schedule.",
+          "$ref": "#/definitions/RecurrenceFrequency"
+        },
+        "interval": {
+          "format": "int32",
+          "description": "[Required] Specifies schedule interval in conjunction with frequency",
+          "type": "integer"
+        },
+        "schedule": {
+          "description": "The recurrence schedule.",
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Recurrence",
+      "additionalProperties": false
+    },
     "ReferenceType": {
       "description": "Enum to determine which reference method to use for an asset.",
       "enum": [
@@ -9240,6 +11779,156 @@
         "keyValue": {
           "description": "The value the key is set to.",
           "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Regression": {
+      "description": "Regression task in AutoML Table vertical.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric for regression task.",
+          "default": "NormalizedRootMeanSquaredError",
+          "$ref": "#/definitions/RegressionPrimaryMetrics"
+        },
+        "trainingSettings": {
+          "description": "Inputs for training phase for an AutoML Job.",
+          "$ref": "#/definitions/RegressionTrainingSettings",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Regression",
+      "additionalProperties": false
+    },
+    "RegressionModels": {
+      "description": "Enum for all Regression models supported by AutoML.",
+      "enum": [
+        "ElasticNet",
+        "GradientBoosting",
+        "DecisionTree",
+        "KNN",
+        "LassoLars",
+        "SGD",
+        "RandomForest",
+        "ExtremeRandomTrees",
+        "LightGBM",
+        "XGBoostRegressor"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RegressionModels",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ElasticNet",
+            "description": "Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions."
+          },
+          {
+            "value": "GradientBoosting",
+            "description": "The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution."
+          },
+          {
+            "value": "DecisionTree",
+            "description": "Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.\nThe goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features."
+          },
+          {
+            "value": "KNN",
+            "description": "K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints\nwhich further means that the new data point will be assigned a value based on how closely it matches the points in the training set."
+          },
+          {
+            "value": "LassoLars",
+            "description": "Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer."
+          },
+          {
+            "value": "SGD",
+            "description": "SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications\nto find the model parameters that correspond to the best fit between predicted and actual outputs.\nIt's an inexact but powerful technique."
+          },
+          {
+            "value": "RandomForest",
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+          },
+          {
+            "value": "ExtremeRandomTrees",
+            "description": "Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm."
+          },
+          {
+            "value": "LightGBM",
+            "description": "LightGBM is a gradient boosting framework that uses tree based learning algorithms."
+          },
+          {
+            "value": "XGBoostRegressor",
+            "description": "XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "RegressionPrimaryMetrics": {
+      "description": "Primary metrics for Regression task.",
+      "enum": [
+        "SpearmanCorrelation",
+        "NormalizedRootMeanSquaredError",
+        "R2Score",
+        "NormalizedMeanAbsoluteError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RegressionPrimaryMetrics",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SpearmanCorrelation",
+            "description": "The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation."
+          },
+          {
+            "value": "NormalizedRootMeanSquaredError",
+            "description": "The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales."
+          },
+          {
+            "value": "R2Score",
+            "description": "The R2 score is one of the performance evaluation measures for forecasting-based machine learning models."
+          },
+          {
+            "value": "NormalizedMeanAbsoluteError",
+            "description": "The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "RegressionTrainingSettings": {
+      "description": "Regression Training related configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrainingSettings"
+        }
+      ],
+      "properties": {
+        "allowedTrainingAlgorithms": {
+          "description": "Allowed models for regression task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegressionModels"
+          },
+          "x-nullable": true
+        },
+        "blockedTrainingAlgorithms": {
+          "description": "Blocked models for regression task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegressionModels"
+          },
           "x-nullable": true
         }
       },
@@ -9433,6 +12122,245 @@
       },
       "additionalProperties": false
     },
+    "Schedule": {
+      "description": "Base definition of a schedule",
+      "required": [
+        "action",
+        "trigger"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "action": {
+          "description": "[Required] Specifies the action of the schedule",
+          "$ref": "#/definitions/ScheduleActionBase",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "displayName": {
+          "description": "Display name of schedule.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "isEnabled": {
+          "description": "Is the schedule enabled?",
+          "default": true,
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the schedule.",
+          "$ref": "#/definitions/ScheduleProvisioningStatus",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "trigger": {
+          "description": "[Required] Specifies the trigger details",
+          "$ref": "#/definitions/TriggerBase",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "x-ms-client-name": "ScheduleProperties",
+      "additionalProperties": false
+    },
+    "ScheduleActionBase": {
+      "required": [
+        "actionType"
+      ],
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "[Required] Specifies the action type of the schedule",
+          "$ref": "#/definitions/ScheduleActionType",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "discriminator": "actionType"
+    },
+    "ScheduleActionType": {
+      "enum": [
+        "CreateJob",
+        "InvokeBatchEndpoint"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CreateJob"
+          },
+          {
+            "value": "InvokeBatchEndpoint"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ScheduleListViewType": {
+      "enum": [
+        "EnabledOnly",
+        "DisabledOnly",
+        "All"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleListViewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EnabledOnly"
+          },
+          {
+            "value": "DisabledOnly"
+          },
+          {
+            "value": "All"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ScheduleProvisioningStatus": {
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleProvisioningStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Creating"
+          },
+          {
+            "value": "Updating"
+          },
+          {
+            "value": "Deleting"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ScheduleResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/Schedule"
+        }
+      },
+      "x-ms-client-name": "Schedule",
+      "additionalProperties": false
+    },
+    "ScheduleResourceArmPaginatedResult": {
+      "description": "A paginated list of Schedule entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Schedule objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type Schedule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Seasonality": {
+      "description": "Forecasting seasonality.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "[Required] Seasonality mode.",
+          "$ref": "#/definitions/SeasonalityMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "mode"
+    },
+    "SeasonalityMode": {
+      "description": "Forecasting seasonality mode.",
+      "enum": [
+        "Auto",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SeasonalityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Seasonality to be determined automatically."
+          },
+          {
+            "value": "Custom",
+            "description": "Use the custom seasonality value."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "SecretsType": {
       "description": "Enum to determine the datastore secrets type.",
       "enum": [
@@ -9552,6 +12480,39 @@
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal",
+      "additionalProperties": false
+    },
+    "ShortSeriesHandlingConfiguration": {
+      "description": "The parameter defining how if AutoML should handle short time series.",
+      "enum": [
+        "None",
+        "Auto",
+        "Pad",
+        "Drop"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ShortSeriesHandlingConfiguration",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "Represents no/null value."
+          },
+          {
+            "value": "Auto",
+            "description": "Short series will be padded if there are no long series, otherwise short series will be dropped."
+          },
+          {
+            "value": "Pad",
+            "description": "All the short series will be padded."
+          },
+          {
+            "value": "Drop",
+            "description": "All the short series will be dropped."
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "SkuCapacity": {
@@ -9677,6 +12638,111 @@
       },
       "additionalProperties": false
     },
+    "StackEnsembleSettings": {
+      "description": "Advances setting to customize StackEnsemble run.",
+      "type": "object",
+      "properties": {
+        "stackMetaLearnerKWargs": {
+          "description": "Optional parameters to pass to the initializer of the meta-learner.",
+          "type": "object",
+          "x-nullable": true
+        },
+        "stackMetaLearnerTrainPercentage": {
+          "format": "double",
+          "description": "Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2.",
+          "default": 0.2,
+          "type": "number"
+        },
+        "stackMetaLearnerType": {
+          "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.",
+          "default": "None",
+          "$ref": "#/definitions/StackMetaLearnerType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StackMetaLearnerType": {
+      "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.\r\nDefault meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).\r\nThis parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression",
+      "enum": [
+        "None",
+        "LogisticRegression",
+        "LogisticRegressionCV",
+        "LightGBMClassifier",
+        "ElasticNet",
+        "ElasticNetCV",
+        "LightGBMRegressor",
+        "LinearRegression"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StackMetaLearnerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None"
+          },
+          {
+            "value": "LogisticRegression",
+            "description": "Default meta-learners are LogisticRegression for classification tasks."
+          },
+          {
+            "value": "LogisticRegressionCV",
+            "description": "Default meta-learners are LogisticRegression for classification task when CV is on."
+          },
+          {
+            "value": "LightGBMClassifier"
+          },
+          {
+            "value": "ElasticNet",
+            "description": "Default meta-learners are LogisticRegression for regression task."
+          },
+          {
+            "value": "ElasticNetCV",
+            "description": "Default meta-learners are LogisticRegression for regression task when CV is on."
+          },
+          {
+            "value": "LightGBMRegressor"
+          },
+          {
+            "value": "LinearRegression"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "StochasticOptimizer": {
+      "description": "Stochastic optimizer for image models.",
+      "enum": [
+        "None",
+        "Sgd",
+        "Adam",
+        "Adamw"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StochasticOptimizer",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No optimizer selected."
+          },
+          {
+            "value": "Sgd",
+            "description": "Stochastic Gradient Descent optimizer."
+          },
+          {
+            "value": "Adam",
+            "description": "Adam is algorithm the optimizes stochastic objective functions based on adaptive estimates of moments"
+          },
+          {
+            "value": "Adamw",
+            "description": "AdamW is a variant of the optimizer Adam that has an improved implementation of weight decay."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "SweepJob": {
       "description": "Sweep job definition.",
       "required": [
@@ -9785,6 +12851,279 @@
       "x-ms-discriminator-value": "Sweep",
       "additionalProperties": false
     },
+    "TableVertical": {
+      "description": "Abstract class for AutoML tasks that use table dataset as input - such as Classification/Regression/Forecasting.",
+      "type": "object",
+      "properties": {
+        "cvSplitColumnNames": {
+          "description": "Columns to use for CVSplit data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "featurizationSettings": {
+          "description": "Featurization inputs needed for AutoML job.",
+          "$ref": "#/definitions/TableVerticalFeaturizationSettings",
+          "x-nullable": true
+        },
+        "limitSettings": {
+          "description": "Execution constraints for AutoMLJob.",
+          "$ref": "#/definitions/TableVerticalLimitSettings",
+          "x-nullable": true
+        },
+        "nCrossValidations": {
+          "description": "Number of cross validation folds to be applied on training dataset\r\nwhen validation dataset is not provided.",
+          "$ref": "#/definitions/NCrossValidations",
+          "x-nullable": true
+        },
+        "testData": {
+          "description": "Test data input.",
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
+        },
+        "testDataSize": {
+          "format": "double",
+          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\r\nValues between (0.0 , 1.0)\r\nApplied when validation dataset is not provided.",
+          "type": "number",
+          "x-nullable": true
+        },
+        "validationData": {
+          "description": "Validation data inputs.",
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
+        },
+        "validationDataSize": {
+          "format": "double",
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\r\nValues between (0.0 , 1.0)\r\nApplied when validation dataset is not provided.",
+          "type": "number",
+          "x-nullable": true
+        },
+        "weightColumnName": {
+          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "TableVerticalFeaturizationSettings": {
+      "description": "Featurization Configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeaturizationSettings"
+        }
+      ],
+      "properties": {
+        "blockedTransformers": {
+          "description": "These transformers shall not be used in featurization.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockedTransformers"
+          },
+          "x-nullable": true
+        },
+        "columnNameAndTypes": {
+          "description": "Dictionary of column name and its type (int, float, string, datetime etc).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "enableDnnFeaturization": {
+          "description": "Determines whether to use Dnn based featurizers for data featurization.",
+          "default": false,
+          "type": "boolean"
+        },
+        "mode": {
+          "description": "Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.\r\nIf 'Off' is selected then no featurization is done.\r\nIf 'Custom' is selected then user can specify additional inputs to customize how featurization is done.",
+          "default": "Auto",
+          "$ref": "#/definitions/FeaturizationMode"
+        },
+        "transformerParams": {
+          "description": "User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ColumnTransformer"
+            },
+            "x-nullable": true,
+            "x-ms-identifiers": []
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "TableVerticalLimitSettings": {
+      "description": "Job execution constraints.",
+      "type": "object",
+      "properties": {
+        "enableEarlyTermination": {
+          "description": "Enable early termination, determines whether or not if AutoMLJob will terminate early if there is no score improvement in last 20 iterations.",
+          "default": true,
+          "type": "boolean"
+        },
+        "exitScore": {
+          "format": "double",
+          "description": "Exit score for the AutoML job.",
+          "type": "number",
+          "x-nullable": true
+        },
+        "maxConcurrentTrials": {
+          "format": "int32",
+          "description": "Maximum Concurrent iterations.",
+          "default": 1,
+          "type": "integer"
+        },
+        "maxCoresPerTrial": {
+          "format": "int32",
+          "description": "Max cores per iteration.",
+          "default": -1,
+          "type": "integer"
+        },
+        "maxTrials": {
+          "format": "int32",
+          "description": "Number of iterations.",
+          "default": 1000,
+          "type": "integer"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "AutoML job timeout.",
+          "default": "PT6H",
+          "type": "string"
+        },
+        "trialTimeout": {
+          "format": "duration",
+          "description": "Iteration timeout.",
+          "default": "PT30M",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TargetAggregationFunction": {
+      "description": "Target aggregate function.",
+      "enum": [
+        "None",
+        "Sum",
+        "Max",
+        "Min",
+        "Mean"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TargetAggregationFunction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "Represent no value set."
+          },
+          {
+            "value": "Sum"
+          },
+          {
+            "value": "Max"
+          },
+          {
+            "value": "Min"
+          },
+          {
+            "value": "Mean"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "TargetLags": {
+      "description": "The number of past periods to lag from the target column.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "[Required] Set target lags mode - Auto/Custom",
+          "$ref": "#/definitions/TargetLagsMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "mode"
+    },
+    "TargetLagsMode": {
+      "description": "Target lags selection modes.",
+      "enum": [
+        "Auto",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TargetLagsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Target lags to be determined automatically."
+          },
+          {
+            "value": "Custom",
+            "description": "Use the custom target lags."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "TargetRollingWindowSize": {
+      "description": "Forecasting target rolling window size.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "[Required] TargetRollingWindowSiz detection mode.",
+          "$ref": "#/definitions/TargetRollingWindowSizeMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "mode"
+    },
+    "TargetRollingWindowSizeMode": {
+      "description": "Target rolling windows size mode.",
+      "enum": [
+        "Auto",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TargetRollingWindowSizeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Determine rolling windows size automatically."
+          },
+          {
+            "value": "Custom",
+            "description": "Use the specified rolling window size."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "TargetUtilizationScaleSettings": {
       "type": "object",
       "allOf": [
@@ -9821,6 +13160,69 @@
       "x-ms-discriminator-value": "TargetUtilization",
       "additionalProperties": false
     },
+    "TaskType": {
+      "description": "AutoMLJob Task type.",
+      "enum": [
+        "Classification",
+        "Regression",
+        "Forecasting",
+        "ImageClassification",
+        "ImageClassificationMultilabel",
+        "ImageObjectDetection",
+        "ImageInstanceSegmentation",
+        "TextClassification",
+        "TextClassificationMultilabel",
+        "TextNER"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Classification",
+            "description": "Classification in machine learning and statistics is a supervised learning approach in which\nthe computer program learns from the data given to it and make new observations or classifications."
+          },
+          {
+            "value": "Regression",
+            "description": "Regression means to predict the value using the input data. Regression models are used to predict a continuous value."
+          },
+          {
+            "value": "Forecasting",
+            "description": "Forecasting is a special kind of regression task that deals with time-series data and creates forecasting model\nthat can be used to predict the near future values based on the inputs."
+          },
+          {
+            "value": "ImageClassification",
+            "description": "Image Classification. Multi-class image classification is used when an image is classified with only a single label\nfrom a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'."
+          },
+          {
+            "value": "ImageClassificationMultilabel",
+            "description": "Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels\nfrom a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'."
+          },
+          {
+            "value": "ImageObjectDetection",
+            "description": "Image Object Detection. Object detection is used to identify objects in an image and locate each object with a\nbounding box e.g. locate all dogs and cats in an image and draw a bounding box around each."
+          },
+          {
+            "value": "ImageInstanceSegmentation",
+            "description": "Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,\ndrawing a polygon around each object in the image."
+          },
+          {
+            "value": "TextClassification",
+            "description": "Text classification (also known as text tagging or text categorization) is the process of sorting texts into categories.\nCategories are mutually exclusive."
+          },
+          {
+            "value": "TextClassificationMultilabel",
+            "description": "Multilabel classification task assigns each sample to a group (zero or more) of target labels."
+          },
+          {
+            "value": "TextNER",
+            "description": "Text Named Entity Recognition a.k.a. TextNER.\nNamed Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "TensorFlow": {
       "description": "TensorFlow distribution configuration.",
       "type": "object",
@@ -9852,6 +13254,112 @@
         }
       },
       "x-ms-discriminator-value": "TensorFlow",
+      "additionalProperties": false
+    },
+    "TextClassification": {
+      "description": "Text Classification task in AutoML NLP vertical.\r\nNLP - Natural Language Processing.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NlpVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric for Text-Classification task.",
+          "default": "Accuracy",
+          "$ref": "#/definitions/ClassificationPrimaryMetrics"
+        }
+      },
+      "x-ms-discriminator-value": "TextClassification",
+      "additionalProperties": false
+    },
+    "TextClassificationMultilabel": {
+      "description": "Text Classification Multilabel task in AutoML NLP vertical.\r\nNLP - Natural Language Processing.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NlpVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric for Text-Classification-Multilabel task.\r\nCurrently only Accuracy is supported as primary metric, hence user need not set it explicitly.",
+          "$ref": "#/definitions/ClassificationMultilabelPrimaryMetrics",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "TextClassificationMultilabel",
+      "additionalProperties": false
+    },
+    "TextNer": {
+      "description": "Text-NER task in AutoML NLP vertical.\r\nNER - Named Entity Recognition.\r\nNLP - Natural Language Processing.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NlpVertical"
+        },
+        {
+          "$ref": "#/definitions/AutoMLVertical"
+        }
+      ],
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary metric for Text-NER task.\r\nOnly 'Accuracy' is supported for Text-NER, so user need not set this explicitly.",
+          "$ref": "#/definitions/ClassificationPrimaryMetrics",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "TextNER",
+      "additionalProperties": false
+    },
+    "TrainingSettings": {
+      "description": "Training related configuration.",
+      "type": "object",
+      "properties": {
+        "enableDnnTraining": {
+          "description": "Enable recommendation of DNN models.",
+          "default": false,
+          "type": "boolean"
+        },
+        "enableModelExplainability": {
+          "description": "Flag to turn on explainability on best model.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enableOnnxCompatibleModels": {
+          "description": "Flag for enabling onnx compatible models.",
+          "default": false,
+          "type": "boolean"
+        },
+        "enableStackEnsemble": {
+          "description": "Enable stack ensemble run.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enableVoteEnsemble": {
+          "description": "Enable voting ensemble run.",
+          "default": true,
+          "type": "boolean"
+        },
+        "ensembleModelDownloadTimeout": {
+          "format": "duration",
+          "description": "During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.\r\nConfigure this parameter with a higher value than 300 secs, if more time is needed.",
+          "default": "PT5M",
+          "type": "string"
+        },
+        "stackEnsembleSettings": {
+          "description": "Stack ensemble settings for stack ensemble run.",
+          "$ref": "#/definitions/StackEnsembleSettings",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "TrialComponent": {
@@ -9911,12 +13419,65 @@
         "resources": {
           "description": "Compute Resource configuration for the job.",
           "default": "{}",
-          "$ref": "#/definitions/ResourceConfiguration",
+          "$ref": "#/definitions/JobResourceConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         }
+      },
+      "additionalProperties": false
+    },
+    "TriggerBase": {
+      "required": [
+        "triggerType"
+      ],
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "description": "Specifies end time of schedule in ISO 8601, but without a UTC offset. Refer https://en.wikipedia.org/wiki/ISO_8601.\r\nRecommented format would be \"2022-06-01T00:00:01\"\r\nIf not present, the schedule will run indefinitely",
+          "type": "string",
+          "x-nullable": true
+        },
+        "startTime": {
+          "description": "Specifies start time of schedule in ISO 8601 format, but without a UTC offset.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeZone": {
+          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
+          "default": "UTC",
+          "type": "string"
+        },
+        "triggerType": {
+          "description": "[Required] ",
+          "$ref": "#/definitions/TriggerType",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "discriminator": "triggerType"
+    },
+    "TriggerType": {
+      "enum": [
+        "Recurrence",
+        "Cron"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Recurrence"
+          },
+          {
+            "value": "Cron"
+          }
+        ]
       },
       "additionalProperties": false
     },
@@ -10048,6 +13609,113 @@
         }
       ],
       "x-ms-discriminator-value": "UserIdentity",
+      "additionalProperties": false
+    },
+    "UseStl": {
+      "description": "Configure STL Decomposition of the time-series target column.",
+      "enum": [
+        "None",
+        "Season",
+        "SeasonTrend"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "UseStl",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No stl decomposition."
+          },
+          {
+            "value": "Season"
+          },
+          {
+            "value": "SeasonTrend"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ValidationMetricType": {
+      "description": "Metric computation method to use for validation metrics in image tasks.",
+      "enum": [
+        "None",
+        "Coco",
+        "Voc",
+        "CocoVoc"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ValidationMetricType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No metric."
+          },
+          {
+            "value": "Coco",
+            "description": "Coco metric."
+          },
+          {
+            "value": "Voc",
+            "description": "Voc metric."
+          },
+          {
+            "value": "CocoVoc",
+            "description": "CocoVoc metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "WeekDay": {
+      "description": "Enum of weekday",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Monday",
+            "description": "Monday weekday"
+          },
+          {
+            "value": "Tuesday",
+            "description": "Tuesday weekday"
+          },
+          {
+            "value": "Wednesday",
+            "description": "Wednesday weekday"
+          },
+          {
+            "value": "Thursday",
+            "description": "Thursday weekday"
+          },
+          {
+            "value": "Friday",
+            "description": "Friday weekday"
+          },
+          {
+            "value": "Saturday",
+            "description": "Saturday weekday"
+          },
+          {
+            "value": "Sunday",
+            "description": "Sunday weekday"
+          }
+        ]
+      },
       "additionalProperties": false
     }
   },
