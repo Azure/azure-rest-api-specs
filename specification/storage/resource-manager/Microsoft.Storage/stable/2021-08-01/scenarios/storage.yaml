@@ -1,0 +1,153 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: scenarioaccount
+
+prepareSteps:
+  - step: StorageAccount_Create
+    exampleFile: ../examples/StorageAccountCreate.json
+    requestUpdate:
+      - replace: /parameters/kind
+        value: StorageV2
+      - remove: /parameters/extendedLocation
+
+scenarios:
+  - scenario: StorageAccount
+    description: Microsoft.Storage/storageAccounts
+    steps:
+      - step: StorageAccount_CheckNameAvailability
+        exampleFile: ../examples/StorageAccountCheckNameAvailability.json
+        requestUpdate:
+          - replace: /accountName/name
+            value: $(accountName)
+      - step: StorageAccount_Update
+        exampleFile: ../examples/StorageAccountEnableAD.json
+      - step: StorageAccount_GetProperties
+        exampleFile: ../examples/StorageAccountGetProperties.json
+      - step: StorageAccount_List
+        exampleFile: ../examples/StorageAccountList.json
+      - step: StorageAccount_ListByResourceGroup
+        exampleFile: ../examples/StorageAccountListByResourceGroup.json
+      - step: StorageAccount_ListKeys
+        exampleFile: ../examples/StorageAccountListKeys.json
+      - step: StorageAccount_RegenerateKey
+        exampleFile: ../examples/StorageAccountRegenerateKerbKey.json
+      - step: StorageAccount_RevokeUserDelegationKeys
+        exampleFile: ../examples/StorageAccountRevokeUserDelegationKeys.json
+
+  - scenario: BlobContainer
+    description: Microsoft.Storage/storageAccounts/blobServices/default/containers
+    variables:
+      containerName: scenarioblob
+    steps:
+      - step: BlobContainer_Create
+        exampleFile: ../examples/BlobContainersPut.json
+      - step: BlobContainer_Update
+        exampleFile: ../examples/BlobContainersPatch.json
+        requestUpdate:
+          - replace: /blobContainer/properties/publicAccess
+            value: None
+      - step: BlobContainer_Get
+        exampleFile: ../examples/BlobContainersGetWithAllowProtectedAppendWritesAll.json
+      - step: BlobContainer_List
+        exampleFile: ../examples/BlobContainersList.json
+      - step: BlobContainer_SetLegalHold
+        exampleFile: ../examples/BlobContainersSetLegalHold.json
+      - step: BlobContainer_ClearLegalHold
+        exampleFile: ../examples/BlobContainersClearLegalHold.json
+      - step: BlobContainer_Delete
+        exampleFile: ../examples/BlobContainersDelete.json
+
+  - scenario: FileShare
+    description: Microsoft.Storage/storageAccounts/fileServices/default/shares
+    variables:
+      shareName: scenariofile
+    steps:
+      - step: FileShare_Create
+        exampleFile: ../examples/FileSharesPut.json
+      - step: FileShare_Update
+        exampleFile: ../examples/FileSharesPatch.json
+      - step: FileShare_Get
+        exampleFile: ../examples/FileSharesGet_Stats.json
+      - step: FileShare_List
+        exampleFile: ../examples/DeletedFileSharesList.json
+      - step: FileShare_LeaseAcquire
+        exampleFile: ../examples/FileSharesLease_Acquire.json
+        outputVariables:
+          leaseId:
+            fromResponse: /leaseId
+      - step: FileShare_LeaseBreak
+        exampleFile: ../examples/FileSharesLease_Break.json
+        requestUpdate:
+          - replace: /parameters/leaseId
+            value: $(leaseId)
+      - step: FileShare_Delete
+        exampleFile: ../examples/FileSharesDelete.json
+
+  - scenario: Queue
+    description: Microsoft.Storage/storageAccounts/queueServices/default/queues
+    variables:
+      queueName: scenarioqueue
+    steps:
+      - step: Queue_Create
+        exampleFile: ../examples/QueueOperationPut.json
+      - step: Queue_Update
+        exampleFile: ../examples/QueueOperationPatch.json
+      - step: Queue_Get
+        exampleFile: ../examples/QueueOperationGet.json
+      - step: Queue_List
+        exampleFile: ../examples/QueueOperationList.json
+      - step: Queue_Delete
+        exampleFile: ../examples/QueueOperationDelete.json
+
+  - scenario: Table
+    description: Microsoft.Storage/storageAccounts/tableServices/default/tables
+    variables:
+      tableName: scenariotable
+    steps:
+      - step: Table_Create
+        exampleFile: ../examples/TableOperationPut.json
+      - step: Table_Update
+        exampleFile: ../examples/TableOperationPatch.json
+      - step: Table_Get
+        exampleFile: ../examples/TableOperationGet.json
+      - step: Table_List
+        exampleFile: ../examples/TableOperationList.json
+      - step: Table_Delete
+        exampleFile: ../examples/TableOperationDelete.json
+
+  - scenario: ManagementPolicy
+    description: Microsoft.Storage/storageAccounts/managementPolicies
+    steps:
+      - step: ManagementPolicy_Create
+        exampleFile: ../examples/StorageAccountSetManagementPolicy.json
+      - step: ManagementPolicy_Get
+        exampleFile: ../examples/StorageAccountGetManagementPolicy.json
+      - step: ManagementPolicy_Delete
+        exampleFile: ../examples/StorageAccountDeleteManagementPolicy.json
+
+  - scenario: LocalUser
+    description: Microsoft.Storage/storageAccounts/managementPolicies
+    variables:
+      username: scenariouser
+    steps:
+      - step: LocalUser_Create
+        exampleFile: ../examples/LocalUserCreate.json
+      - step: LocalUser_Update
+        exampleFile: ../examples/LocalUserUpdate.json
+      - step: LocalUser_RegeneratePassword
+        exampleFile: ../examples/LocalUserRegeneratePassword.json
+      - step: LocalUser_Get
+        exampleFile: ../examples/LocalUserGet.json        
+      - step: LocalUser_List
+        exampleFile: ../examples/LocalUsersList.json
+      - step: LocalUser_ListKeys
+        exampleFile: ../examples/LocalUserListKeys.json
+      - step: LocalUser_Delete
+        exampleFile: ../examples/LocalUserDelete.json
+
+
+cleanUpSteps:
+  - step: StorageAccount_Delete
+    exampleFile: ../examples/StorageAccountDelete.json
