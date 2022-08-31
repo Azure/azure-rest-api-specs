@@ -26,15 +26,23 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-07-02
+tag: package-preview-2022-04-30
 ```
 
+### Tag: package-preview-2022-04-30
+
+These settings apply only when `--tag=package-preview-2022-04-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04-30'
+input-file:
+  - Microsoft.Devices/preview/2022-04-30-preview/iothub.json
+```
 
 ### Tag: package-2021-07-02
 
 These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-02'
+``` yaml $(tag) == 'package-2021-07-02'
 input-file:
   - Microsoft.Devices/stable/2021-07-02/iothub.json
 ```
@@ -43,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-07-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07-02'
+``` yaml $(tag) == 'package-preview-2021-07-02'
 input-file:
   - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
 ```
@@ -305,3 +313,13 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    where: $.definitions.FallbackRouteProperties.properties.source
+    from: iothub.json
+    reason: Ensure non-breaking change.
+```
