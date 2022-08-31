@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "vmware"
-  output-folder: "$(typescript-sdks-folder)/packages/connectedvmware"
+  package-name: "@azure/arm-connectedvmware"
+  output-folder: "$(typescript-sdks-folder)/sdk/connectedvmware/arm-connectedvmware"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
