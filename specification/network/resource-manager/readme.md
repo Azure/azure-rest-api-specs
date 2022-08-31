@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 ```yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.Network/stable/2022-05-01/applicationGateway.json
+  - Microsoft.Network/stable/2022-05-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2022-05-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2022-05-01/availableDelegations.json
   - Microsoft.Network/stable/2022-05-01/availableServiceAliases.json
@@ -99,6 +100,7 @@ input-file:
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2022-05-01/cloudServiceSwap.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
