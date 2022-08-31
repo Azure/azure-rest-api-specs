@@ -122,6 +122,26 @@
         ]
       }
     },
+    "metadataTrueFalseFlag": {
+      "type": "string",
+      "description": "The boolean value the metadata is for.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "flag",
+        "values": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ]
+      }
+    },
     "metadataSource": {
       "description": "The original source of the content item, where it comes from.",
       "type": "object",
@@ -276,7 +296,10 @@
           "items": {
             "$ref": "#/definitions/metadataDependencies",
             "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-          }
+          },
+          "x-ms-identifiers": [
+            "contentId"
+          ]
         }
       }
     },

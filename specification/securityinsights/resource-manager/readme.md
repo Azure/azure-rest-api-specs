@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 input-file:
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/Packages.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/Templates.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/operations.json
 ```
 ### Tag: package-preview-2022-08
 
