@@ -903,6 +903,60 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
+    },
+    "BillingMeter": {
+      "type": "object",
+      "properties": {
+        "meterId":{
+            "type": "string",
+            "description": "Billing meter id."
+        },
+        "category":{
+          "type": "string",
+          "enum": [
+            "PremiumSkuGeneralCompute",
+            "PremiumSkuMemoryOptimized",
+            "PremiumSkuComputeOptimized"
+          ],
+          "description": "Used to map workload profile types to billing meter."
+        },
+        "type":{
+          "type": "string",
+          "enum": [
+            "Memory",
+            "CPU"
+          ],
+          "description": "Compute type."
+        },
+        "shortName":{
+            "type": "string",
+            "description": "Unique short name for the meter."
+        },
+        "friendlyName":{
+            "type": "string",
+            "description": "The everyday name of the billing meter."
+        },
+        "billingLocation":{
+            "type": "string",
+            "description": "Region for the billing meter."
+        }
+      }
+    },
+    "BillingMeterCollection": {
+      "description": "Collection of premium workload billing meters.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of billing meters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeter"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
