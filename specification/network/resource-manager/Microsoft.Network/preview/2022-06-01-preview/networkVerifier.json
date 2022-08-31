@@ -102,7 +102,7 @@
           "404": {
             "description": "analysisIntent Not Found",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -174,14 +174,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "analysisIntent already exists and cannot be updated",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -369,7 +362,7 @@
           "404": {
             "description": "AnalysisRun Not Found",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -448,14 +441,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "AnalysisRun already exists and cannot be updated",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -636,7 +622,7 @@
           "404": {
             "description": "ConfigurationSnapshot Not Found",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -708,14 +694,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "ConfigurationSnapshot already exists and cannot be updated",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -917,7 +896,7 @@
           "404": {
             "description": "NetworkVerifier Not Found",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorDetails"
             },
             "x-ms-error-response": true
           },
@@ -1058,31 +1037,15 @@
       ],
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/AnalysisIntentProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "AnalysisIntentList": {
       "type": "object",
@@ -1131,31 +1094,15 @@
     "AnalysisRun": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/AnalysisRunProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "AnalysisRunList": {
       "type": "object",
@@ -1198,31 +1145,15 @@
       ],
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ConfigurationSnapshotProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ConfigurationSnapshotList": {
       "type": "object",
@@ -1250,7 +1181,7 @@
           "items": {
             "$ref": "#/definitions/ConfigurationSnapshotScope"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "createTime": {
           "type": "string"
@@ -1271,50 +1202,18 @@
         }
       }
     },
-    "Error": {
+    "ErrorDetails": {
       "description": "Common error representation.",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Error target.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        },
         "innerError": {
-          "description": "Inner error message.",
           "type": "string"
         }
-      }
-    },
-    "ErrorDetails": {
-      "description": "Common error details representation.",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Error target.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorDetail"
         }
-      }
+      ]
     },
     "ErrorResponseBody": {
       "type": "object",
@@ -1333,7 +1232,7 @@
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
       }
     },
@@ -1384,32 +1283,16 @@
     "NetworkVerifier": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/NetworkVerifierProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "NetworkVerifierList": {
       "type": "object",
