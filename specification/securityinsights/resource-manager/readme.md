@@ -26,12 +26,21 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-08
+tag: package-preview-2022-11
 ```
 
 ---
 
 
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/Packages.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/Templates.json
+```
 ### Tag: package-preview-2022-08
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
