@@ -316,18 +316,34 @@
   "definitions": {
     "Runtime": {
       "type": "object",
-      "description": "Definition of runtime.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "$ref": "#/definitions/RuntimeProperties",
-        "x-ms-client-flatten": true,
-        "description": "Gets or sets the runtime properties."
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets the name of the runtime."
+        },
+        "properties": {
+          "$ref": "#/definitions/RuntimeProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the hybrid worker group properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "Definition of runtime."
     },
     "RuntimeProperties": {
       "type": "object",
