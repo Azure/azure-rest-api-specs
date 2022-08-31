@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Moderator Client",
+    "version": "1.1-preview",
+    "description": "[Description]"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/contentmoderator/moderate/v1.1-preview.1/Text/Detect": {
+      "post": {
+        "tags": [
+          "TextModeration"
+        ],
+        "summary": "[Summary]",
+        "description": "[Description]",
+        "operationId": "TextModeration_Detect",
+        "parameters": [
+          {
+            "$ref": "#/parameters/textLanguage"
+          },
+          {
+            "$ref": "#/parameters/textRegion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "[Description]",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabelRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/LabelResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/LabelError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+  },
+  "definitions": {
+    "LabelRequest": {
+      "description": "[Description]",
+      "type": "object",
+      "required": [
+        "Text"
+      ],
+      "properties": {
+        "Text": {
+          "type": "string"
+        },
+        "LabelCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/LabelCategory"
+          }
+        }
+      }
+    },
+    "LabelCategory":{
+      "type": "object",
+      "required":[
+        "Category"
+      ],
+      "properties": {
+        "Category": {
+          "$ref": "#definitions/Category"
+        },
+        "SubCategory": {
+          "$ref": "#definitions/SubCategory"
+        }
+      }
+    },
+    "Category": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Sexual",
+        "SelfHarm",
+        "Violance"
+      ]
+    },
+    "SubCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Gun",
+        "Fight"
+      ]
+    },
+    "LabelResponse": {
+      "type": "object",
+      "required": ["Results"],
+      "properties": {
+        "Results": {
+          "type": "array",
+          "items": {
+              "$ref": "#definitions/LabelResult"
+            }
+        }
+      }
+    },
+    "LabelResult": {
+      "type": "object",
+      "required": ["Category", "Labeled"],
+      "properties": {
+        "Category": {
+          "$ref": "#definitions/Category"
+        },
+        "SubCategory": {
+          "$ref": "#definitions/SubCategory"
+        },
+        "Labeled": {
+          "type": "boolean"
+        },
+        "Score": {
+          "type": "number",
+          "format": "float"
+        },
+        "ModelOutputDetail": {
+          "$ref": "#definitions/ModelOutputDetail"
+        }
+      }
+    },
+    "ModelOutputDetail": {
+      "type": "array",
+      "items": {
+        "$ref": "#definitions/ModelOutputDetailKVPair"
+      }
+    },
+    "ModelOutputDetailKVPair": {
+      "type": "object",
+      "required": [
+        "Key", 
+        "Value"
+        ],
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        },
+        "ValueType": {
+          "type": "string"
+        }
+      }
+    },
+    "LabelError": {}
+  },
+  "parameters": {
+    "textLanguage": {
+      "name": "language",
+      "in": "query",
+      "description": "Language of the text, by default English.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "textRegion": {
+      "name": "region",
+      "in": "query",
+      "description": "Region setting, by default UnitedStates.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
