@@ -11,4 +11,6 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/agrifood/arm-agrifood"
   payload-flattening-threshold: 1
   generate-metadata: true
+  
+title: AgriFoodMgmtClient
 ```
