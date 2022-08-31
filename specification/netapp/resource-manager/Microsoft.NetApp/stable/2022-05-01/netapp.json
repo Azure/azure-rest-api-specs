@@ -568,6 +568,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/renewCredentials": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_RenewCredentials",
+        "summary": "Renew identity credentials",
+        "description": "Renew identity credentials that are used to authenticate to key vault, for customer-managed key encryption. If encryption.identity.principalId does not match identity.principalId, running this operation will fix it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Accounts_RenewCredentials": {
+            "$ref": "examples/Accounts_RenewCredentials.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
       "get": {
         "summary": "Describe all Capacity Pools",
@@ -4466,8 +4507,66 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of the identity."
+        }
+      },
+      "description": "UserAssignedIdentity for the resource."
     },
     "netAppAccountPatch": {
       "description": "NetApp account patch resource",
@@ -4735,7 +4834,119 @@
       "properties": {
         "keySource": {
           "type": "string",
-          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'."
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.NetApp",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Microsoft.NetApp",
+                "description": "Microsoft-managed key encryption"
+              },
+              {
+                "value": "Microsoft.KeyVault",
+                "description": "Customer-managed key encryption"
+              }
+            ]
+          },
+          "default": "Microsoft.NetApp"
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties provided by KeVault. Applicable if keySource is 'Microsoft.KeyVault'."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'."
+        }
+      }
+    },
+    "KeyVaultProperties": {
+      "description": "Properties of key vault.",
+      "type": "object",
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "keyVaultResourceId"
+      ],
+      "properties": {
+        "keyVaultId": {
+          "type": "string",
+          "description": "UUID v4 used to identify the Azure Key Vault configuration",
+          "readOnly": true,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of KeyVault."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of KeyVault key."
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "The resource ID of KeyVault."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the KeyVault connection.",
+          "readOnly": true,
+          "enum": [
+            "Created",
+            "Updating",
+            "InUse",
+            "Deleted",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "KeyVaultStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Created",
+                "description": "KeyVault connection created but not in use"
+              },
+              {
+                "value": "InUse",
+                "description": "KeyVault connection in use by SMB Volume"
+              },
+              {
+                "value": "Deleted",
+                "description": "KeyVault connection Deleted"
+              },
+              {
+                "value": "Error",
+                "description": "Error with the KeyVault connection"
+              },
+              {
+                "value": "Updating",
+                "description": "KeyVault connection Updating"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "EncryptionIdentity": {
+      "description": "Identity used to authenticate with key vault.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID (object ID) of the identity used to authenticate with key vault. Read-only.",
+          "readOnly": true
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities."
         }
       }
     },
