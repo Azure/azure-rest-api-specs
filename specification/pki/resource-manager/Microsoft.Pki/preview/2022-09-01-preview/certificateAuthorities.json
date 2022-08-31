@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MicrosoftPki",
+    "description": "Describes a certificate authority resource and operations.",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/certificateAuthorities/{caName}": {
+      "get": {
+        "operationId": "CertificateAuthority_Get",
+        "description": "Gets the specified certificate authority.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
+          },
+          {
+            "name": "caName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate authority resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The definition of the requested certificate authority resource is returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/ApiCa"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a certificate authority": {
+            "$ref": "./examples/CertificateAuthorities_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CertificateAuthority_Create",
+        "description": "Creates or updates a certificate authority.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
+          },
+          {
+            "name": "caName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate authority resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCa"
+            },
+            "description": "The requested definition of the certificate authority resource being created or updated."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified resource was created or updated and its definition is returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/ApiCa"
+            }
+          },
+          "201": {
+            "description": "The request has been accepted. The response contains an operation URI that can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/ApiCa"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new certificate authority or update an existing one": {
+            "$ref": "./examples/CertificateAuthorities_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "CertificateAuthority_Update",
+        "description": "Updates some properties of a certificate authority, while not touching other properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
+          },
+          {
+            "name": "caName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate authority."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCa_Patch"
+            },
+            "description": "The requested definition of the certificate authority being patched. Properties that are not being modified must be absent or null."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified resource was created or updated and its definition is returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/ApiCa"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update properties of an existing certificate authority": {
+            "$ref": "./examples/CertificateAuthorities_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      },
+      "delete": {
+        "operationId": "CertificateAuthority_Delete",
+        "description": "Deletes the specified certificate authority.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
+          },
+          {
+            "name": "caName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate authority."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource with the specified name was deleted."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource with the specified name was deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an existing certificate authority": {
+            "$ref": "./examples/CertificateAuthorities_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/certificateAuthorities": {
+      "get": {
+        "operationId": "CertificateAuthority_ListByPki",
+        "description": "Lists all the certificate authorities in a PKI resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of certificate authorities is returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/ApiCaList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List certificate authorities by PKI": {
+            "$ref": "./examples/CertificateAuthorities_ListByPki.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiCa": {
+      "description": "Represents a certificate authority.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Resource system data."
+        },
+        "properties": {
+          "$ref": "#/definitions/ApiCaProperties",
+          "description": "Free-text description of this certificate authority."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiCa_Patch": {
+      "description": "Contains the properties that must be updated in a certificate authority.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiCaProperties",
+          "description": "Free-text description of this certificate authority."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ApiCaProperties": {
+      "description": "Represents the properties of a certificate authority.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Free-text description of this certificate authority."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of this PKI resource",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "crlUri": {
+          "type": "string",
+          "description": "The URI that hosts the CRL (Certificate Revocation List) of this CA.",
+          "readOnly": true
+        },
+        "issuerResource": {
+          "type": "string",
+          "description": "The resource identifier of the CA that have issued this CA, in case this is an intermediate (i.e. non-root) CA. If this is a root CA, this must be null. If specified, the format must be /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/certificateAuthorities/{caName}."
+        },
+        "certificateProperties": {
+          "$ref": "#/definitions/ApiCaCertificateProperties",
+          "description": "The properties of the CA certificate."
+        },
+        "crlProperties": {
+          "$ref": "#/definitions/ApiCaCrlProperties",
+          "description": "The CA's CRL properties."
+        },
+        "banners": {
+          "type": "array",
+          "description": "The list of active banners for this CA.",
+          "readOnly": true,
+          "items": {
+            "$ref": "definitions.json#/definitions/ResourceBanner"
+          },
+          "maxItems": 100,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ApiCaCertificateProperties": {
+      "description": "Define properties of the CA certificate.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the CA certificate.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "NotIssued",
+              "PendingEnrollment",
+              "Issued"
+            ],
+            "x-ms-enum": {
+              "name": "CertificateState",
+              "modelAsString": true
+            }
+          },
+          "maxItems": 100
+        },
+        "issuer": {
+          "type": "string",
+          "description": "The issuer CA subject. This value is read-only and provided for informative purposes. In case the current certificate is self-signed (i.e. this is a root CA), then this value will be null.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "The CA subject. This represents the CA primary identity. This is in format \"<attribute1>=<value1>, <attribute2>=<value2>, ...\"."
+        },
+        "subjectAlternativeNames": {
+          "type": "array",
+          "description": "The subject alternative names (SANs) of the CA certificate. If specified, each entry must be in format \"<attribute>=<value>\".",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 500
+        },
+        "keyUsage": {
+          "type": "array",
+          "description": "The key usages specified in the CA certificate.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "EncipherOnly",
+              "CrlSign",
+              "KeyCertSign",
+              "KeyAgreement",
+              "DataEncipherment",
+              "KeyEncipherment",
+              "NonRepudiation",
+              "DigitalSignature",
+              "DecipherOnly"
+            ],
+            "x-ms-enum": {
+              "name": "KeyUsage",
+              "modelAsString": true
+            }
+          },
+          "maxItems": 100
+        },
+        "extendedKeyUsage": {
+          "type": "array",
+          "description": "The key usages specified in the CA certificate.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ServerAuth",
+              "ClientAuth",
+              "CodeSigning",
+              "EmailProtection",
+              "IpsecEndSystem",
+              "IpsecTunnel",
+              "IpsecUser",
+              "TimeStamping",
+              "OcspSigning",
+              "SmartcardLogon",
+              "MacAddress"
+            ],
+            "x-ms-enum": {
+              "name": "ExtendedKeyUsage",
+              "modelAsString": true
+            }
+          },
+          "maxItems": 100
+        },
+        "validityNotBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of validity period, in UTC."
+        },
+        "validityNotAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of validity period, in UTC."
+        },
+        "keyPlatform": {
+          "type": "string",
+          "description": "The type of platform that will host the certificate authority private key.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Software",
+              "Hardware",
+              "UserKeyVault",
+              "External"
+            ],
+            "x-ms-enum": {
+              "name": "KeyPlatformType",
+              "modelAsString": true
+            }
+          },
+          "maxItems": 100
+        },
+        "keyTypeOid": {
+          "type": "string",
+          "description": "The key algorithm object identifier. Typical values are \"1.2.840.113549.1.1.1\" (RSA) and \"1.2.840.10045.2.1\" (Elliptic Curve)."
+        },
+        "keySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The key size in bits, if required by the key algorithm. Typical values for RSA are 2048, 3072 and 4096. If the key algorithm does not require a key size, this property must be null."
+        },
+        "curveOid": {
+          "type": "string",
+          "description": "The elliptic curve object identifier, if required by the key algorithm. Typical values are \"1.2.840.10045.3.1.7\" (P-256) and \"1.3.132.0.34\" (P-384). If the key algorithm does not require an elliptic curve, this property must be null."
+        },
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the CA certificate was issued, in UTC.",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the CA certificate.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiCaCrlProperties": {
+      "description": "Define CRL properties for this CA.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "true if this CA uses CRL to maintain certificate revocation status, false otherwise."
+        },
+        "validityPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The validity period in days for the CRL generated for this CA. This value can be null if the enabled flag is false."
+        },
+        "includeExpiredCertificates": {
+          "type": "boolean",
+          "description": "true if expired certificates are to remain part of the CRL for this CA, false otherwise."
+        }
+      }
+    },
+    "ApiCaList": {
+      "description": "The response of a list certificate authorities operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCa"
+          },
+          "description": "A list of certificate authorities.",
+          "maxItems": 100
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results.",
+          "maxLength": 1000
+        }
+      }
+    }
+  }
+}
