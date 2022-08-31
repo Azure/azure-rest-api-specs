@@ -2,8 +2,7 @@
   "parameters": {
     "api-version": "2022-10-01-preview",
     "endpoint": "https://resourcename.communication.azure.com/",
-    "targetNumber": "+11234567890",
-    "select": "name"
+    "targetPhoneNumber": "+11234567890"
   },
   "responses": {
     "200": {
@@ -11,10 +10,27 @@
       "body": {
         "matchingRoutes": [
           {
-            "name": "Seattle"
+            "name": "Seattle",
+            "description": "Seattle local route",
+            "numberPattern": "^\\+1(123|234)\\d{7}",
+            "trunks": []
           },
           {
-            "name": "US"
+            "name": "US",
+            "description": "Route for US",
+            "numberPattern": "^\\+1\\d+$",
+            "trunks": [
+              "us1.contoso.com",
+              "us2.contoso.com"
+            ]
+          },
+          {
+            "name": "Fallback",
+            "description": "Matches everything",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "fallback.contoso.com"
+            ]
           }
         ]
       }
