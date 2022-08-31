@@ -1,15 +1,43 @@
 {
   "parameters": {
-    "api-version": "2022-04-30-preview",
+    "api-version": "2022-09-13-preview",
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResGroup",
     "instanceName": "myInstace",
     "MonitoringInstance": {
-      "tags": {
-        "additionalProp1": "string",
-        "additionalProp2": "string",
-        "additionalProp3": "string"
-      }
+      "location": "eastus2",
+      "properties": {
+        "productVersion": "2019",
+        "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
+        "databaseInstance": {
+          "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
+        },
+        "domainController": {
+          "domainName": "domain.com",
+          "dnsServer": "10.10.10.10"
+        },
+        "domainUserCredentials": {
+          "userName": "domain.com\\domainuser"
+        },
+        "gmsaDetails": {
+          "loadBalancerIP": "10.10.10.10",
+          "gmsaAccount": "vmsslb2$",
+          "managementServerGroupName": "servergroup",
+          "dnsName": "dnsname.com"
+        },
+        "azureHybridBenefit": {
+          "scomLicenseType": "None",
+          "windowsServerLicenseType": "None",
+          "sqlServerLicenseType": "None"
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "tags": {}
     }
   },
   "responses": {
@@ -20,7 +48,7 @@
         "type": "Microsoft.SCOM/managedInstances",
         "location": "eastus2",
         "identity": {
-          "type": "UserAssigned",
+          "type": "SystemAssigned,UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
               "principalId": "principalId1",
@@ -40,6 +68,12 @@
           },
           "domainUserCredentials": {
             "userName": "domain.com\\domainuser"
+          },
+          "gmsaDetails": {
+            "loadBalancerIP": "10.10.10.10",
+            "gmsaAccount": "vmsslb2$",
+            "managementServerGroupName": "servergroup",
+            "dnsName": "dnsname.com"
           },
           "azureHybridBenefit": {
             "scomLicenseType": "None",
@@ -56,7 +90,7 @@
         "type": "Microsoft.SCOM/managedInstances",
         "location": "eastus2",
         "identity": {
-          "type": "UserAssigned",
+          "type": "SystemAssigned,UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
               "principalId": "principalId1",
@@ -76,6 +110,12 @@
           },
           "domainUserCredentials": {
             "userName": "domain.com\\domainuser"
+          },
+          "gmsaDetails": {
+            "loadBalancerIP": "10.10.10.10",
+            "gmsaAccount": "vmsslb2$",
+            "managementServerGroupName": "servergroup",
+            "dnsName": "dnsname.com"
           },
           "azureHybridBenefit": {
             "scomLicenseType": "None",

@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure API for managing SCOM monitoring instances",
     "description": "SCOM monitoring instance management APIs",
-    "version": "2022-04-30-preview",
+    "version": "2022-09-13-preview",
     "x-ms-code-generation-settings": {
       "name": "scomClient"
     }
@@ -372,6 +372,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/setServerCount": {
+      "post": {
+        "operationId": "Instances_Scale",
+        "description": "Scale-in SCOM monitoring instance",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The scale-in has completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The scale-in will complete asyncronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Instance_Scale.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -507,6 +561,10 @@
           "description": "Domain user which will be used to join VMs to domain and login to VMs",
           "$ref": "#/definitions/DomainUserCredentials"
         },
+        "gmsaDetails": {
+          "description": "Gmsa Details for load balancer and vmss",
+          "$ref": "#/definitions/GmsaDetails"
+        },
         "azureHybridBenefit": {
           "description": "The properties to enable Azure Hybrid benefit for various SCOM infrastructure license",
           "$ref": "#/definitions/AzureHybridBenefitProperties"
@@ -579,6 +637,28 @@
         }
       }
     },
+    "GmsaDetails": {
+      "description": "Gmsa Details",
+      "type": "object",
+      "properties": {
+        "loadBalancerIP": {
+          "description": "Frontend IP configuration for Load Balancer, which should be an available IP in customer VNet",
+          "type": "string"
+        },
+        "gmsaAccount": {
+          "description": "gMSA account under which context all Management Server services will run",
+          "type": "string"
+        },
+        "managementServerGroupName": {
+          "description": "OnPrem AD Computer Group where we will join VMs for ease of management",
+          "type": "string"
+        },
+        "dnsName": {
+          "description": "Frontend DNS name for Load Balancer which will be used by Agents to initiate communication",
+          "type": "string"
+        }
+      }
+    },
     "DatabaseInstanceProperties": {
       "description": "The properties of database instance",
       "type": "object",
@@ -586,6 +666,16 @@
         "databaseInstanceId": {
           "description": "Resource Id of existing database instance",
           "type": "string"
+        },
+        "databaseFqdn": {
+          "description": "Fully qualified domain name of existing database instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "dwDatabaseName": {
+          "description": "Name of warehouse database on database instance",
+          "type": "string",
+          "readOnly": true
         },
         "operationalDatabaseId": {
           "description": "Resource Id of operational database on database instance",
@@ -623,13 +713,21 @@
           "description": "The identity type",
           "enum": [
             "None",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedIdentityType",
             "modelAsString": true
           }
+        },
+        "principalId": {
+          "format": "uuid",
+          "description": "System Assigned Identity ObjectId.",
+          "type": "string",
+          "readOnly": true
         },
         "tenantId": {
           "description": "The Azure Active Directory tenant id.",
@@ -712,6 +810,17 @@
         }
       },
       "description": "Object containing updates for patch operations."
+    },
+    "ScalingProperties": {
+      "type": "object",
+      "description": "Properties for scale-in",
+      "properties": {
+        "serverCount": {
+          "description": "Required management server count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     }
   }
 }

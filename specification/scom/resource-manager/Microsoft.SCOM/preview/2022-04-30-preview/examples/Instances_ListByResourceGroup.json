@@ -14,7 +14,7 @@
             "type": "Microsoft.SCOM/managedInstances",
             "location": "eastus2",
             "identity": {
-              "type": "SystemAssigned,UserAssigned",
+              "type": "UserAssigned",
               "userAssignedIdentities": {
                 "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
                   "principalId": "principalId1",
@@ -26,9 +26,7 @@
               "productVersion": "2019",
               "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
               "databaseInstance": {
-                "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1",
-                "databaseFqdn": "testinstance.1b4e2caff2530.database.windows.net",
-                "dwDatabaseName": "inst1DW"
+                "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
               },
               "domainController": {
                 "domainName": "domain.com",
@@ -36,12 +34,6 @@
               },
               "domainUserCredentials": {
                 "userName": "domain.com\\domainuser"
-              },
-              "gmsaDetails": {
-                "loadBalancerIP": "10.10.10.10",
-                "gmsaAccount": "vmsslb2$",
-                "managementServerGroupName": "servergroup",
-                "dnsName": "dnsname.com"
               },
               "azureHybridBenefit": {
                 "scomLicenseType": "None",
