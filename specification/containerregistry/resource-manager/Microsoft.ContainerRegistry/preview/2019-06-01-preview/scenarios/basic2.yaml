@@ -1,4 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
+
 variables:
   registryName:
     type: string
@@ -12,11 +14,23 @@ variables:
   taskName:
     type: string
     prefix: taskname
-  runId:
-    type: string
-    prefix: runid
+
+prepareSteps:
+  - step: Registries_Create2
+    description: Create Container Registry
+    operationId: Registries_Create
+    parameters:
+      registry:
+        location: $(location)
+        sku:
+          name: Premium
+        properties:
+          adminUserEnabled: true
+
 scenarios:
-  - steps:
+  - scenario: ContainerRegister_Build
+    steps:
+    # Agent Pool
       - step: AgentPools_Create
         exampleFile: ..\examples\AgentPoolsCreate.json
       - step: AgentPools_List
@@ -27,20 +41,48 @@ scenarios:
         exampleFile: ..\examples\AgentPoolsUpdate.json
       - step: AgentPools_GetQueueStatus
         exampleFile: ..\examples\AgentPoolsGetQueueStatus.json
-
+      
+      # Task
       - step: Tasks_Create
         exampleFile: ..\examples\TasksCreate.json
+        requestUpdate:
+          - remove: /taskCreateParameters/identity
+          - remove: /taskCreateParameters/properties/step/arguments
+          - remove: /taskCreateParameters/properties/logTemplate
+          - remove: /taskCreateParameters/properties/trigger/timerTriggers
+          - remove: /taskCreateParameters/properties/trigger/sourceTriggers
+          - remove: /taskCreateParameters/properties/trigger/baseImageTrigger
+          - add: /taskCreateParameters/properties/trigger/baseImageTrigger
+            value: {
+              "name": "myBaseImageTrigger",
+              "baseImageTriggerType": "Runtime",
+              "updateTriggerPayloadType": "Default",
+              "status": "Enabled"
+            }
+          - replace: /taskCreateParameters/properties/step/imageNames/0
+            value: testtask:v1
+          - replace: /taskCreateParameters/properties/step/dockerFilePath
+            value: DockerFile
+          - replace: /taskCreateParameters/properties/step/contextPath
+            value: https://github.com/SteveLasker/node-helloworld
       - step: Tasks_List
         exampleFile: ..\examples\TasksList.json
       - step: Tasks_Get
         exampleFile: ..\examples\TasksGet.json
       - step: Tasks_Update
-        exampleFile: ..\examples\TasksUpdate.json
+        exampleFile: ..\examples\TasksUpdate_QuickTask.json
+        requestUpdate:
+          - remove: /taskUpdateParameters/properties
       - step: Tasks_GetDetails
         exampleFile: ..\examples\TasksGetDetails.json
 
+      # Task Run
       - step: TaskRuns_Create
         exampleFile: ..\examples\TaskRunsCreate.json
+        outputVariables:
+          runId:
+            type: string
+            fromResponse: /properties/runResult/properties/runId
       - step: TaskRuns_List
         exampleFile: ..\examples\TaskRunsList.json
       - step: TaskRuns_Get
@@ -49,26 +91,27 @@ scenarios:
         exampleFile: ..\examples\TaskRunsUpdate.json
       - step: TaskRuns_GetDetails
         exampleFile: ..\examples\TaskRunsGetDetails.json
-
       - step: Registries_GetBuildSourceUploadUrl
         exampleFile: ..\examples\RegistriesGetBuildSourceUploadUrl.json
 
+      # Runs
       - step: Runs_List
         exampleFile: ..\examples\RunsList.json
+        requestUpdate:
+          - remove: /$filter
       - step: Runs_Get
         exampleFile: ..\examples\RunsGet.json
-      - step: Runs_Update
-        exampleFile: ..\examples\RunsUpdate.json
       - step: Runs_Cancel
         exampleFile: ..\examples\RunsCancel.json
       - step: Runs_GetLogSasUrl
         exampleFile: ..\examples\RunsGetLogSasUrl.json
-
       - step: Registries_ScheduleRun
         exampleFile: ..\examples\RegistriesScheduleRun.json
         
       - step: TaskRuns_Delete
         exampleFile: ..\examples\TaskRunsDelete.json
+      - step: Runs_Update
+        exampleFile: ..\examples\RunsUpdate.json
       - step: Tasks_Delete
         exampleFile: ..\examples\TasksDelete.json
       - step: AgentPools_Delete
