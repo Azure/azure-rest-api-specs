@@ -1923,6 +1923,78 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/afssharemetadatacertificatepublickeys": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_afssharemetadatacertificatepublickeys",
+        "description": "Get the AFS file share metadata signing certificate public keys.",
+        "x-ms-examples": {
+          "CloudEndpoints_afssharemetadatacertificatepublickeys": {
+            "$ref": "./examples/CloudEndpoints_afssharemetadatacertificatepublickeys.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AFS file share metadata signing certificate public keys.",
+            "schema": {
+              "$ref": "#/definitions/CloudEndpointAfsShareMetadataCertificatePublicKeys"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}": {
       "put": {
         "parameters": [
@@ -5539,6 +5611,22 @@
       "x-ms-enum": {
         "name": "CloudEndpointChangeEnumerationTotalCountsState",
         "modelAsString": true
+      }
+    },
+    "CloudEndpointAfsShareMetadataCertificatePublicKeys": {
+      "type": "object",
+      "description": "Cloud endpoint AFS file share metadata signing certificate public keys.",
+      "properties": {
+        "firstKey": {
+          "type": "string",
+          "description": "The first public key.",
+          "readOnly": true
+        },
+        "secondKey": {
+          "type": "string",
+          "description": "The second public key.",
+          "readOnly": true
+        }
       }
     }
   },
