@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-06-01-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/billingMeters": {
+      "get": {
+        "tags": [
+          "BillingMeters"
+        ],
+        "summary": "Get billing meters by location.",
+        "description": "Get all billingMeters for a location.",
+        "operationId": "BillingMeters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingMeterCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List billing meters by location": {
+            "$ref": "./examples/BillingMeters_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingMeter": {
+      "description": "A premium billing meter.",
+      "type": "object",
+      "properties": {
+        "id":{
+            "type": "string",
+            "description": "Billing meter id."
+        },
+        "category":{
+          "description": "Used to map workload profile types to billing meter.",
+          "type": "string",
+          "enum": [
+            "PremiumSkuGeneralCompute",
+            "PremiumSkuMemoryOptimized",
+            "PremiumSkuComputeOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "Category",
+            "modelAsString": true
+          }
+        },
+        "type":{
+          "description": "Compute type.",
+          "type": "string",
+          "enum": [
+            "Memory",
+            "CPU"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true
+          }
+        },
+        "shortName":{
+            "type": "string",
+            "description": "Unique short name for the meter."
+        },
+        "friendlyName":{
+            "type": "string",
+            "description": "The everyday name of the billing meter."
+        },
+        "billingLocation":{
+            "type": "string",
+            "description": "Region for the billing meter."
+        }
+      }
+    },
+    "BillingMeterCollection": {
+      "description": "Collection of premium workload billing meters.",
+      "required": [
+        "value",
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of billing meters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeter"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+            "user_impersonation": "impersonate your user account"
+        }
+    }
+  }
+}
