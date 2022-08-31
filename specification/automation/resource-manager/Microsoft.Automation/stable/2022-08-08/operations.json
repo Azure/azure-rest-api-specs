@@ -71,6 +71,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/convertGraphRunbookContent": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Post operation to serialize or deserialize GraphRunbookContent",
+        "operationId": "convertGraphRunbookContent",
+        "x-ms-examples": {
+          "Get Graphical raw runbook content from graphical runbook JSON object": {
+            "$ref": "./examples/serializeGraphRunbookContent.json"
+          },
+          "Get Graphical runbook content from raw content": {
+            "$ref": "./examples/deserializeGraphRunbookContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Input data describing the graphical runbook.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GraphicalRunbookContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GraphicalRunbookContent"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -220,6 +274,48 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the dimension."
+        }
+      }
+    },
+    "GraphicalRunbookContent": {
+      "type": "object",
+      "description": "Graphical Runbook Content",
+      "properties": {
+        "rawContent": {
+          "x-nullable": true,
+          "description": "Raw graphical Runbook content.",
+          "$ref": "#/definitions/RawGraphicalRunbookContent"
+        },
+        "graphRunbookJson": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Graphical Runbook content as JSON"
+        }
+      }
+    },
+    "RawGraphicalRunbookContent": {
+      "type": "object",
+      "description": "Raw Graphical Runbook content",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Schema version of the serializer."
+        },
+        "runbookDefinition": {
+          "type": "string",
+          "description": "Serialized Graphical runbook"
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Runbook Type",
+          "enum": [
+            "GraphPowerShell",
+            "GraphPowerShellWorkflow"
+          ],
+          "x-ms-enum": {
+            "name": "GraphRunbookType",
+            "modelAsString": true
+          }
         }
       }
     }
