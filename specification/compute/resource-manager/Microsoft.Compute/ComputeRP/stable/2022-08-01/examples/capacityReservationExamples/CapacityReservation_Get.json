@@ -4,12 +4,14 @@
     "resourceGroupName": "myResourceGroup",
     "api-version": "2022-08-01",
     "capacityReservationGroupName": "myCapacityReservationGroup",
-    "capacityReservationName": "myCapacityReservation"
+    "capacityReservationName": "myCapacityReservation",
+    "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
+          "platformFaultDomainCount": 3,
           "reservationId": "{GUID}",
           "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
           "virtualMachinesAssociated": [
@@ -26,6 +28,7 @@
           "provisioningState": "Succeeded",
           "instanceView": {
             "utilizationInfo": {
+              "currentCapacity": 5,
               "virtualMachinesAllocated": [
                 {
                   "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"

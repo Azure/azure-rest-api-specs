@@ -4,7 +4,7 @@
     "resourceGroupName": "myResourceGroup",
     "api-version": "2022-08-01",
     "capacityReservationGroupName": "myCapacityReservationGroup",
-    "expand": "instanceView"
+    "$expand": "instanceView"
   },
   "responses": {
     "200": {
@@ -23,6 +23,7 @@
               {
                 "name": "myCapacityReservation1",
                 "utilizationInfo": {
+                  "currentCapacity": 5,
                   "virtualMachinesAllocated": [
                     {
                       "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
@@ -43,6 +44,7 @@
               {
                 "name": "myCapacityReservation2",
                 "utilizationInfo": {
+                  "currentCapacity": 5,
                   "virtualMachinesAllocated": [
                     {
                       "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
