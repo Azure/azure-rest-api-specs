@@ -1280,6 +1280,10 @@
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
           "description": "Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell."
+        },
+        "enableVMAgentPlatformUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether VMAgent Platform Updates is enabled for the Windows virtual machine. Default value is false."
         }
       },
       "description": "Specifies Windows operating system settings on the virtual machine."
@@ -1329,6 +1333,10 @@
         "patchSettings": {
           "$ref": "#/definitions/LinuxPatchSettings",
           "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Linux."
+        },
+        "enableVMAgentPlatformUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false."
         }
       },
       "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
