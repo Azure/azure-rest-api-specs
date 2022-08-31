@@ -156,7 +156,7 @@
 				},
 				"x-ms-examples": {
 				  "Create a routeset from a previously created dataset ": {
-					"$ref": "./examples/Routeset_Create.json"
+					"$ref": "./examples/wayfind/Routeset_Create.json"
 				  }
 				},
 				"parameters": [
@@ -202,7 +202,7 @@
 				"operationId": "routesetGet",
 				"x-ms-examples": {
 				  "Get details for a previously created dataset": {
-					"$ref": "./examples/Routeset_GetDetails.json"
+					"$ref": "./examples/wayfind/Routeset_GetDetails.json"
 				  }
 				},
 				"parameters": [
@@ -228,7 +228,7 @@
 				"operationId": "routesetDelete",
 				"x-ms-examples": {
 					"Delete an existing routeset": {
-					  "$ref": "./examples/Routeset_Delete.json"
+					  "$ref": "./examples/wayfind/Routeset_Delete.json"
 					}
 				  },
 				  "parameters": [
@@ -252,8 +252,8 @@
 			  "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
 			  "operationId": "routesetGetOperation",
 			  "x-ms-examples": {
-				"Get the status of an operation which is still running": { "$ref": "./examples/Routeset_GetOperationStillRunning.json" },
-				"Get the status of an operation which has finished successfully": { "$ref": "./examples/Routeset_GetOperation.json" }
+				"Get the status of an operation which is still running": { "$ref": "./examples/wayfind/Routeset_GetOperationStillRunning.json" },
+				"Get the status of an operation which has finished successfully": { "$ref": "./examples/wayfind/Routeset_GetOperation.json" }
 			  },
 			  "parameters": [
 				{ "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId" },
