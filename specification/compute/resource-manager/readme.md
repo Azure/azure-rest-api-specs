@@ -241,7 +241,7 @@ These settings apply only when `--tag=package-2022-07-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-02'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/common.json
+  - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
@@ -276,7 +276,7 @@ These settings apply only when `--tag=package-2022-07-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-07-02-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/common.json
+  - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
   - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
   - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
