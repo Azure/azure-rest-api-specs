@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/availableServiceTiers": {
+      "get": {
+        "tags": [
+          "AvailableServiceTiers"
+        ],
+        "x-ms-examples": {
+          "AvailableServiceTiers": {
+            "$ref": "./examples/WorkspacesAvailableServiceTiers.json"
+          }
+        },
+        "operationId": "AvailableServiceTiers_ListByWorkspace",
+        "description": "Gets the available service tiers for the workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailableServiceTier"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableServiceTier": {
+      "description": "Service Tier details.",
+      "properties": {
+        "serviceTier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the Service Tier.",
+          "enum": [
+            "Free",
+            "Standard",
+            "Premium",
+            "PerNode",
+            "PerGB2018",
+            "Standalone",
+            "CapacityReservation"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        },
+        "enabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "True if the Service Tier is enabled for the workspace."
+        },
+        "minimumRetention": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum retention for the Service Tier, in days."
+        },
+        "maximumRetention": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum retention for the Service Tier, in days."
+        },
+        "defaultRetention": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The default retention for the Service Tier, in days."
+        },
+        "capacityReservationLevel": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The capacity reservation level in GB per day. Returned for the Capacity Reservation Service Tier."
+        },
+        "lastSkuUpdate": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time when the sku was last updated for the workspace. Returned for the Capacity Reservation Service Tier."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

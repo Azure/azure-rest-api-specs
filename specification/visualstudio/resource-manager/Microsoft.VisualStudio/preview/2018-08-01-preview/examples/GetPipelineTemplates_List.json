@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "null",
+            "type": "microsoft.visualstudio/pipelineTemplate",
+            "properties": {
+              "id": "ms-portal-extension-nodejsAppOnWindowsWebApp",
+              "description": "Template to configure CI/CD pipeline for deploying Nodejs application to Azure windows app service",
+              "inputs": [
+                {
+                  "id": "webAppName",
+                  "description": "Name of the app service",
+                  "type": "string"
+                },
+                {
+                  "id": "servicePlanTier",
+                  "description": "Pricing tier to use for creating app service plan.",
+                  "type": "string",
+                  "possibleValues": [
+                    {
+                      "value": "P1 Premium",
+                      "DisplayValue": "P1 Premium (1 Core, 1.75 GB RAM)"
+                    },
+                    {
+                      "value": "S1 Standard",
+                      "DisplayValue": "S1 Standard (1 Core, 1.75 GB RAM)"
+                    },
+                    {
+                      "value": "B1 Basic",
+                      "DisplayValue": "B1 Basic (1 Core, 1.75 GB RAM)"
+                    }
+                  ]
+                },
+                {
+                  "id": "azureAuth",
+                  "description": "SPN details for authorization",
+                  "type": "authorization"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

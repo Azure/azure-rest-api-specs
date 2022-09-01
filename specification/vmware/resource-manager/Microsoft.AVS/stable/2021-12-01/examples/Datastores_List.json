@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "clusterName": "cluster1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore1",
+            "name": "datastore1",
+            "properties": {
+              "netAppVolume": {
+                "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/ResourceGroup1/providers/Microsoft.NetApp/netAppAccounts/NetAppAccount1/capacityPools/CapacityPool1/volumes/NFSVol1"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Accessible"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore2",
+            "name": "datastore2",
+            "properties": {
+              "diskPoolVolume": {
+                "targetId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/ResourceGroup1/providers/Microsoft.StoragePool/diskPools/DiskPool1/targets/Target1",
+                "lunName": "lun0",
+                "mountOption": "MOUNT",
+                "path": "/vmfs/devices/disks/naa.6001405f75f6bdf7f6f49db8b4b21723"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Accessible"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+          }
+        ]
+      }
+    }
+  }
+}

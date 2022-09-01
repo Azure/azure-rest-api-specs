@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "clusterName": "cluster1",
+    "placementPolicyName": "policy1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/placementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.AVS/privateClouds/clusters/placementPolicies",
+        "properties": {
+          "displayName": "policy1",
+          "type": "VmHost",
+          "state": "Enabled",
+          "vmMembers": [
+            "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-128",
+            "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-256"
+          ],
+          "hostMembers": [
+            "fakehost22.nyc1.kubernetes.center",
+            "fakehost23.nyc1.kubernetes.center",
+            "fakehost24.nyc1.kubernetes.center"
+          ],
+          "affinityType": "AntiAffinity",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

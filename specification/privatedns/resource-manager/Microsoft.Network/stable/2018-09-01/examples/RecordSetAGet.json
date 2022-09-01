@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "A",
+    "relativeRecordSetName": "recordA",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recorda",
+        "type": "Microsoft.Network/privateDnsZones/A",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recorda.privatezone1.com.",
+          "isAutoRegistered": false,
+          "aRecords": [
+            {
+              "ipv4Address": "1.2.3.4"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

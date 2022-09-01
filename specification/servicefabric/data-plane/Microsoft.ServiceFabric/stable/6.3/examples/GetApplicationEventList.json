@@ -1,0 +1,27 @@
+{
+  "operationId": "GetApplicationEventList",
+  "description": "This example shows how to get all application-related events during a certain time window.",
+  "parameters": {
+    "applicationId": "app1",
+    "api-version": "6.2-preview",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "ApplicationCreated",
+          "ApplicationTypeName": "App1Type",
+          "ApplicationTypeVersion": "1.0.1",
+          "ApplicationDefinitionKind": "ServiceFabricApplicationDescription",
+          "ApplicationId": "app1",
+          "EventInstanceId": "8a7a0c42-67ca-4cd3-9160-edcdb822db10",
+          "TimeStamp": "2018-04-03T20:21:23.5774199Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}

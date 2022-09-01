@@ -1,0 +1,31 @@
+{
+  "operationId": "GetCorrelatedEventList",
+  "description": "This example shows how to get all correlated events for a given eventInstanceId.",
+  "parameters": {
+    "eventInstanceId": "e00fa5b7-f747-40dd-9e09-f5a031e96de4",
+    "api-version": "6.2-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "PartitionPrimaryMoveAnalysis",
+          "WhenMoveCompleted": "2018-04-03T20:06:55.966073Z",
+          "PreviousNode": "node3(b9d52c016a15a8f57673d3b8041e2d35)",
+          "CurrentNode": "node1(cf68563e16a44f808e86197a9cf83de5)",
+          "MoveReason": "ApplicationHostDown",
+          "RelevantTraces": "",
+          "PartitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+          "EventInstanceId": "59dde2bc-a833-412e-a56d-8f6ada0c7963",
+          "TimeStamp": "2018-04-03T20:07:55.966073Z",
+          "HasCorrelatedEvents": true,
+          "Metadata": {
+            "Delay": "00:00:20",
+            "Duration": "00:01:59"
+          }
+        }
+      ]
+    }
+  }
+}

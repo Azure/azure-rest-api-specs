@@ -1,0 +1,344 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
+      "put": {
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-examples": {
+          "DataSourcesCreate": {
+            "$ref": "./examples/DataSourcesCreate.json"
+          }
+        },
+        "operationId": "DataSources_CreateOrUpdate",
+        "description": "Create or update a data source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the datasource resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "description": "The parameters required to create or update a datasource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-examples": {
+          "DataSourcesDelete": {
+            "$ref": "./examples/DataSourcesDelete.json"
+          }
+        },
+        "operationId": "DataSources_Delete",
+        "description": "Deletes a data source instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the datasource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-examples": {
+          "DataSourcesGet": {
+            "$ref": "./examples/DataSourcesGet.json"
+          }
+        },
+        "operationId": "DataSources_Get",
+        "description": "Gets a datasource instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the datasource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources": {
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-examples": {
+          "DataSourcesListByWorkspace": {
+            "$ref": "./examples/DataSourcesListByWorkspace.json"
+          }
+        },
+        "operationId": "DataSources_ListByWorkspace",
+        "description": "Gets the first page of data source instances in a workspace with the link to the next page.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Starting point of the collection of data source instances."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataSourceFilter"
+      }
+    }
+  },
+  "definitions": {
+    "DataSourceKind": {
+      "type": "string",
+      "enum": [
+        "WindowsEvent",
+        "WindowsPerformanceCounter",
+        "IISLogs",
+        "LinuxSyslog",
+        "LinuxSyslogCollection",
+        "LinuxPerformanceObject",
+        "LinuxPerformanceCollection",
+        "CustomLog",
+        "CustomLogCollection",
+        "AzureAuditLog",
+        "AzureActivityLog",
+        "GenericDataSource",
+        "ChangeTrackingCustomPath",
+        "ChangeTrackingPath",
+        "ChangeTrackingServices",
+        "ChangeTrackingDataTypeConfiguration",
+        "ChangeTrackingDefaultRegistry",
+        "ChangeTrackingRegistry",
+        "ChangeTrackingLinuxPath",
+        "LinuxChangeTrackingPath",
+        "ChangeTrackingContentLocation",
+        "WindowsTelemetry",
+        "Office365",
+        "SecurityWindowsBaselineConfiguration",
+        "SecurityCenterSecurityWindowsBaselineConfiguration",
+        "SecurityEventCollectionConfiguration",
+        "SecurityInsightsSecurityEventCollectionConfiguration",
+        "ImportComputerGroup",
+        "NetworkMonitoring",
+        "Itsm",
+        "DnsAnalytics",
+        "ApplicationInsights",
+        "SqlDataClassification"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceKind",
+        "modelAsString": true
+      },
+      "description": "The kind of the DataSource."
+    },
+    "DataSource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Object",
+          "description": "The data source properties in raw json format, each kind of data source have it's own schema."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the data source."
+        },
+        "kind": {
+          "$ref": "#/definitions/DataSourceKind"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "kind",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Datasources under OMS Workspace."
+    },
+    "DataSourceFilter": {
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataSourceKind"
+        }
+      },
+      "description": "DataSource filter. Right now, only filter by kind is supported."
+    },
+    "DataSourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "description": "A list of datasources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of datasources."
+        }
+      },
+      "description": "The list data source by workspace operation response."
+    },
+    "Object": {
+      "type": "object",
+      "properties": {},
+      "description": "JSON object"
+    }
+  },
+  "parameters": {}
+}

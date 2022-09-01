@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "eaee6a92-e973-4922-9471-3a0a6abf81cd",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-03-01",
+    "parameters": {
+      "resources": [
+        "/subscriptions/eaee6a92-e973-4922-9471-3a0a6abf81cd/resourceGroups/myResourceGroup/providers/My.RP/myResourceType/myFirstResource"
+      ],
+      "options": "SkipResourceNameParameterization"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "myResourceType_myFirstResource_secret": {
+              "defaultValue": null,
+              "type": "SecureString"
+            }
+          },
+          "variables": {},
+          "resources": [
+            {
+              "type": "My.RP/myResourceType",
+              "apiVersion": "2019-01-01",
+              "name": "myFirstResource",
+              "location": "West US",
+              "properties": {
+                "secret": "[parameters('myResourceType_myFirstResource_secret')]"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteGateways": {
+      "get": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_ListBySubscription",
+        "x-ms-examples": {
+          "ExpressRouteGatewayListBySubscription": {
+            "$ref": "./examples/ExpressRouteGatewayListBySubscription.json"
+          }
+        },
+        "description": "Lists ExpressRoute gateways under a given subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGatewayList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways": {
+      "get": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_ListByResourceGroup",
+        "x-ms-examples": {
+          "ExpressRouteGatewayListByResourceGroup": {
+            "$ref": "./examples/ExpressRouteGatewayListByResourceGroup.json"
+          }
+        },
+        "description": "Lists ExpressRoute gateways in a given resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGatewayList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}": {
+      "put": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_CreateOrUpdate",
+        "x-ms-examples": {
+          "ExpressRouteGatewayCreate": {
+            "$ref": "./examples/ExpressRouteGatewayCreate.json"
+          }
+        },
+        "description": "Creates or updates a ExpressRoute gateway in a specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "name": "putExpressRouteGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            },
+            "description": "Parameters required in an ExpressRoute gateway PUT operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRoute gateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting ExpressRoute gateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_Get",
+        "x-ms-examples": {
+          "ExpressRouteGatewayGet": {
+            "$ref": "./examples/ExpressRouteGatewayGet.json"
+          }
+        },
+        "description": "Fetches the details of a ExpressRoute gateway in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded. The operation returns the ExpressRoute gateway.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_Delete",
+        "x-ms-examples": {
+          "ExpressRouteGatewayDelete": {
+            "$ref": "./examples/ExpressRouteGatewayDelete.json"
+          }
+        },
+        "description": "Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}": {
+      "put": {
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "operationId": "ExpressRouteConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "ExpressRouteConnectionCreate": {
+            "$ref": "./examples/ExpressRouteConnectionCreate.json"
+          }
+        },
+        "description": "Creates a connection between an ExpressRoute gateway and an ExpressRoute circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection subresource."
+          },
+          {
+            "name": "putExpressRouteConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            },
+            "description": "Parameters required in an ExpressRouteConnection PUT operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the ExpressRouteConnection.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the ExpressRouteConnection.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "operationId": "ExpressRouteConnections_Get",
+        "x-ms-examples": {
+          "ExpressRouteConnectionGet": {
+            "$ref": "./examples/ExpressRouteConnectionGet.json"
+          }
+        },
+        "description": "Gets the specified ExpressRouteConnection.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the ExpressRouteConnection.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "operationId": "ExpressRouteConnections_Delete",
+        "x-ms-examples": {
+          "ExpressRouteConnectionDelete": {
+            "$ref": "./examples/ExpressRouteConnectionDelete.json"
+          }
+        },
+        "description": "Deletes a connection to a ExpressRoute circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection subresource."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted, and the operation will continue asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections": {
+      "get": {
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "operationId": "ExpressRouteConnections_List",
+        "x-ms-examples": {
+          "ExpressRouteConnectionList": {
+            "$ref": "./examples/ExpressRouteConnectionList.json"
+          }
+        },
+        "description": "Lists ExpressRouteConnections.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ExpressRoute gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnectionList"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualHubId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource URI for the Virtual Hub where the ExpressRoute gateway is or will be deployed. The Virtual Hub resource and the ExpressRoute gateway resource reside in the same subscription."
+        }
+      },
+      "description": "Virtual Hub identifier."
+    },
+    "ExpressRouteCircuitPeeringId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the ExpressRoute circuit peering."
+        }
+      },
+      "description": "ExpressRoute circuit peering identifier."
+    },
+    "ExpressRouteConnectionId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the ExpressRouteConnection."
+        }
+      },
+      "description": "The ID of the ExpressRouteConnection."
+    },
+    "ExpressRouteGatewayProperties": {
+      "required": [
+        "virtualHub"
+      ],
+      "properties": {
+        "autoScaleConfiguration": {
+          "properties": {
+            "bounds": {
+              "properties": {
+                "min": {
+                  "type": "integer",
+                  "description": "Minimum number of scale units deployed for ExpressRoute gateway."
+                },
+                "max": {
+                  "type": "integer",
+                  "description": "Maximum number of scale units deployed for ExpressRoute gateway."
+                }
+              },
+              "description": "Minimum and maximum number of scale units to deploy."
+            }
+          },
+          "description": "Configuration for auto scaling."
+        },
+        "expressRouteConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of ExpressRoute connections to the ExpressRoute gateway.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnection"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the express route gateway resource."
+        },
+        "virtualHub": {
+          "$ref": "#/definitions/VirtualHubId",
+          "description": "The Virtual Hub where the ExpressRoute gateway is or will be deployed."
+        }
+      },
+      "description": "ExpressRoute gateway resource properties."
+    },
+    "ExpressRouteGateway": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteGatewayProperties",
+          "description": "Properties of the express route gateway."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "ExpressRoute gateway resource."
+    },
+    "ExpressRouteGatewayList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteGateway"
+          },
+          "description": "List of ExpressRoute gateways."
+        }
+      },
+      "description": "List of ExpressRoute gateways."
+    },
+    "ExpressRouteConnectionProperties": {
+      "required": [
+        "expressRouteCircuitPeering"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the express route connection resource."
+        },
+        "expressRouteCircuitPeering": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringId",
+          "description": "The ExpressRoute circuit peering."
+        },
+        "authorizationKey": {
+          "type": "string",
+          "description": "Authorization key to establish the connection."
+        },
+        "routingWeight": {
+          "type": "integer",
+          "description": "The routing weight associated to the connection."
+        }
+      },
+      "description": "Properties of the ExpressRouteConnection subresource."
+    },
+    "ExpressRouteConnection": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteConnectionProperties",
+          "description": "Properties of the express route connection."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "ExpressRouteConnection resource."
+    },
+    "ExpressRouteConnectionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnection"
+          },
+          "description": "The list of ExpressRoute connections."
+        }
+      },
+      "description": "ExpressRouteConnection list."
+    }
+  }
+}

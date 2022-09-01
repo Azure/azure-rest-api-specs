@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "environmentName": "env1",
+    "api-version": "2021-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1/eventSources/es1",
+            "location": "West US",
+            "name": "es1",
+            "type": "Microsoft.TimeSeriesInsights/Environments/EventSources",
+            "tags": {},
+            "kind": "Microsoft.EventHub",
+            "properties": {
+              "eventSourceResourceId": "somePathInArm",
+              "serviceBusNamespace": "sbn",
+              "consumerGroupName": "cgn",
+              "eventHubName": "ehn",
+              "keyName": "managementKey",
+              "provisioningState": "Succeeded",
+              "creationTime": "2017-04-18T19:20:33.2288820Z",
+              "localTimestamp": {
+                "format": "TimeSpan",
+                "timeZoneOffset": {
+                  "propertyName": "someEventPropertyName"
+                }
+              },
+              "ingressStartAt": {
+                "type": "EarliestAvailable"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

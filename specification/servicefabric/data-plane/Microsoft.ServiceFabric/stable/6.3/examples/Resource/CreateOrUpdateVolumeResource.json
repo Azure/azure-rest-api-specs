@@ -1,0 +1,24 @@
+{
+  "operationId": "CreateVolumeResource",
+  "description": "This example shows how to create or update an volume resource.",
+  "parameters": {
+    "api-version": "6.3-preview",
+    "volumeResourceName": "meshDemoVolume",
+    "volumeResourceDescription": {
+      "volumeResourceName": "meshDemoVolume",
+      "properties": {
+        "description": "File share backed by Azure Files storage.",
+        "provider": "SFAzureFile",
+        "azureFileParameters": {
+          "accountName": "sbzdemoaccount",
+          "accountKey": "provide-account-key-here",
+          "shareName": "sharel"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {},
+    "202": {}
+  }
+}

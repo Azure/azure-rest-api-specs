@@ -1,0 +1,69 @@
+{
+  "title": "Cross Workspace Query",
+  "description": "A cross workspace query that the type and count of each row per workspace.",
+  "parameters": {
+    "subscriptionId": "c512b59c-4005-40e2-b13d-ac29cfb46af4",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "azure-insights",
+    "apiVersion": "2017-10-01",
+    "query": "union * | where TimeGenerated > ago(1h) | summarize count() by Type, TenantId",
+    "workspaces": "draft-test,draft-test-2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tables": [
+          {
+            "name": "PrimaryResult",
+            "columns": [
+              {
+                "name": "Type",
+                "type": "string"
+              },
+              {
+                "name": "TenantId",
+                "type": "string"
+              },
+              {
+                "name": "count_",
+                "type": "long"
+              }
+            ],
+            "rows": [
+              [
+                "Usage",
+                "63613592-b6f7-4c3d-a390-22ba13102111",
+                "1"
+              ],
+              [
+                "Usage",
+                "d436f322-a9f4-4aad-9a7d-271fbf66001c",
+                "1"
+              ],
+              [
+                "BillingFact",
+                "63613592-b6f7-4c3d-a390-22ba13102111",
+                "1"
+              ],
+              [
+                "BillingFact",
+                "d436f322-a9f4-4aad-9a7d-271fbf66001c",
+                "1"
+              ],
+              [
+                "Operation",
+                "63613592-b6f7-4c3d-a390-22ba13102111",
+                "7"
+              ],
+              [
+                "Operation",
+                "d436f322-a9f4-4aad-9a7d-271fbf66001c",
+                "5"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

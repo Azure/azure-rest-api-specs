@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/bigDataPools": {
+      "get": {
+        "tags": [
+          "BigDataPools"
+        ],
+        "operationId": "BigDataPools_List",
+        "description": "List Big Data Pools",
+        "x-ms-examples": {
+          "List Big Data Pools": {
+            "$ref": "./examples/BigDataPools_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfoListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/bigDataPools/{bigDataPoolName}": {
+      "get": {
+        "tags": [
+          "BigDataPools"
+        ],
+        "operationId": "BigDataPools_Get",
+        "description": "Get Big Data Pool",
+        "x-ms-examples": {
+          "Get Big Data Pool": {
+            "$ref": "./examples/BigDataPools_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BigDataPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "BigDataPoolNameParameter": {
+      "name": "bigDataPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Big Data Pool name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

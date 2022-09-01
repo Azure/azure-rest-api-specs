@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "rg1",
+    "resourceNamespace": "Microsoft.Compute",
+    "resourceType": "virtualMachines",
+    "resourceName": "vm1",
+    "adaptiveNetworkHardeningResourceName": "default",
+    "adaptiveNetworkHardeningEnforceAction": "enforce",
+    "body": {
+      "rules": [
+        {
+          "name": "rule1",
+          "direction": "Inbound",
+          "destinationPort": 3389,
+          "protocols": [
+            "TCP"
+          ],
+          "ipAddresses": [
+            "100.10.1.1",
+            "200.20.2.2",
+            "81.199.3.0/24"
+          ]
+        },
+        {
+          "name": "rule2",
+          "direction": "Inbound",
+          "destinationPort": 22,
+          "protocols": [
+            "TCP"
+          ],
+          "ipAddresses": []
+        }
+      ],
+      "networkSecurityGroups": [
+        "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+        "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "OK."
+    },
+    "202": {
+      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+    }
+  }
+}

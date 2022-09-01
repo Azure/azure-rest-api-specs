@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/getGitHubAccessToken": {
+      "post": {
+        "tags": [
+          "WorkspaceGitRepoManagement"
+        ],
+        "operationId": "WorkspaceGitRepoManagement_getGitHubAccessToken",
+        "description": "Get the GitHub access token.",
+        "x-ms-examples": {
+          "Get SOL job query string": {
+            "$ref": "./examples/WorkspaceGitRepoManagement_getGitHubAccessToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-ms-client-request-id",
+            "x-ms-client-name": "ClientRequestId",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gitHubAccessTokenRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GitHubAccessTokenRequest": {
+      "type": "object",
+      "properties": {
+        "gitHubClientId": {
+          "description": "The GitHub Client Id.",
+          "type": "string"
+        },
+        "gitHubAccessCode": {
+          "description": "The GitHub Access code.",
+          "type": "string"
+        },
+        "gitHubAccessTokenBaseUrl": {
+          "description": "The GitHub access token base URL.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gitHubClientId",
+        "gitHubAccessCode",
+        "gitHubAccessTokenBaseUrl"
+      ]
+    },
+    "GitHubAccessTokenResponse": {
+      "type": "object",
+      "properties": {
+        "gitHubAccessToken": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    }
+  }
+}

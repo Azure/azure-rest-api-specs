@@ -1,0 +1,142 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg7",
+    "jobName": "sj9093",
+    "functionName": "function588",
+    "function": {
+      "properties": {
+        "type": "Scalar",
+        "properties": {
+          "inputs": [
+            {
+              "dataType": "nvarchar(max)"
+            }
+          ],
+          "output": {
+            "dataType": "nvarchar(max)"
+          },
+          "binding": {
+            "type": "Microsoft.MachineLearning/WebService",
+            "properties": {
+              "endpoint": "someAzureMLEndpointURL",
+              "apiKey": "someApiKey==",
+              "inputs": {
+                "name": "input1",
+                "columnNames": [
+                  {
+                    "name": "tweet",
+                    "dataType": "string",
+                    "mapTo": 0
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "name": "Sentiment",
+                  "dataType": "string"
+                }
+              ],
+              "batchSize": 1000
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "dac52a15-66be-4aa7-8a18-20c5409983df"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg7/providers/Microsoft.StreamAnalytics/streamingjobs/sj9093/functions/function588",
+        "name": "function588",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+        "properties": {
+          "type": "Scalar",
+          "properties": {
+            "inputs": [
+              {
+                "dataType": "nvarchar(max)"
+              }
+            ],
+            "output": {
+              "dataType": "nvarchar(max)"
+            },
+            "binding": {
+              "type": "Microsoft.MachineLearning/WebService",
+              "properties": {
+                "endpoint": "someAzureMLEndpointURL",
+                "inputs": {
+                  "name": "input1",
+                  "columnNames": [
+                    {
+                      "name": "tweet",
+                      "dataType": "string",
+                      "mapTo": 0
+                    }
+                  ]
+                },
+                "outputs": [
+                  {
+                    "name": "Sentiment",
+                    "dataType": "string"
+                  }
+                ],
+                "batchSize": 1000
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "dac52a15-66be-4aa7-8a18-20c5409983df"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg7/providers/Microsoft.StreamAnalytics/streamingjobs/sj9093/functions/function588",
+        "name": "function588",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+        "properties": {
+          "type": "Scalar",
+          "properties": {
+            "inputs": [
+              {
+                "dataType": "nvarchar(max)"
+              }
+            ],
+            "output": {
+              "dataType": "nvarchar(max)"
+            },
+            "binding": {
+              "type": "Microsoft.MachineLearning/WebService",
+              "properties": {
+                "endpoint": "someAzureMLEndpointURL",
+                "inputs": {
+                  "name": "input1",
+                  "columnNames": [
+                    {
+                      "name": "tweet",
+                      "dataType": "string",
+                      "mapTo": 0
+                    }
+                  ]
+                },
+                "outputs": [
+                  {
+                    "name": "Sentiment",
+                    "dataType": "string"
+                  }
+                ],
+                "batchSize": 1000
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

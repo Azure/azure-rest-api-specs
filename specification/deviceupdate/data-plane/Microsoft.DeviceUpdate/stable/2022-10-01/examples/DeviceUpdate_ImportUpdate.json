@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "api-version": "2022-10-01",
+    "updateToImport": [
+      {
+        "importManifest": {
+          "url": "http://test.blob.core.windows.net/test/uploadimportMan.json",
+          "sizeInBytes": 816,
+          "hashes": {
+            "sha256": "O19LyyncPe1AGstOdkcmozLV8pSbBdqrE18HdYVohRc="
+          }
+        },
+        "files": [
+          {
+            "filename": "file1.bin",
+            "url": "http://test.blob.core.windows.net/test/upload1v5uww1q"
+          },
+          {
+            "filename": "file2.bin",
+            "url": "http://test.blob.core.windows.net/test/uploadkrmn5yw0"
+          },
+          {
+            "filename": "file3.bin",
+            "url": "http://test.blob.core.windows.net/test/uploaddq52ky5m"
+          }
+        ]
+      }
+    ]
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "/deviceUpdate/blue/updates/operations/e4491c54-916f-443d-9094-bcca546ace2f?api-version=2022-10-01"
+      }
+    }
+  }
+}

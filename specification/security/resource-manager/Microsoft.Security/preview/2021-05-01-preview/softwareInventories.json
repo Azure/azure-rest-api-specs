@@ -1,0 +1,307 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/softwareInventories": {
+      "get": {
+        "description": "Gets the software inventory of the virtual machine.",
+        "operationId": "SoftwareInventories_ListByExtendedResource",
+        "x-ms-examples": {
+          "Gets the software inventory of the virtual machine": {
+            "$ref": "./examples/SoftwareInventories/ListByExtendedResourceSoftwareInventories_example.json"
+          }
+        },
+        "tags": [
+          "softwareInventories"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SoftwaresList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/softwareInventories": {
+      "get": {
+        "description": "Gets the software inventory of all virtual machines in the subscriptions.",
+        "operationId": "SoftwareInventories_ListBySubscription",
+        "x-ms-examples": {
+          "Gets the software inventory of all virtual machines in the subscriptions": {
+            "$ref": "./examples/SoftwareInventories/ListBySubscriptionSoftwareInventories_example.json"
+          }
+        },
+        "tags": [
+          "softwareInventories"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SoftwaresList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/softwareInventories/{softwareName}": {
+      "get": {
+        "description": "Gets a single software data of the virtual machine.",
+        "operationId": "SoftwareInventories_Get",
+        "x-ms-examples": {
+          "Gets a single software data of the virtual machine": {
+            "$ref": "./examples/SoftwareInventories/GetSoftware_example.json"
+          }
+        },
+        "tags": [
+          "softwareInventories"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "softwareName",
+            "in": "path",
+            "description": "Name of the installed software.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Software"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SoftwaresList": {
+      "type": "object",
+      "description": "Represents the software inventory of the virtual machine.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Software"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "Software": {
+      "type": "object",
+      "description": "Represents a software data",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of the Software Inventory resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SoftwareProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SoftwareProperties": {
+      "description": "Software Inventory resource properties",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Unique identifier for the virtual machine in the service."
+        },
+        "osPlatform": {
+          "type": "string",
+          "description": "Platform of the operating system running on the device."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Name of the software vendor."
+        },
+        "softwareName": {
+          "type": "string",
+          "description": "Name of the software product."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version number of the software product."
+        },
+        "endOfSupportStatus": {
+          "type": "string",
+          "description": "End of support status.",
+          "enum": [
+            "None",
+            "noLongerSupported",
+            "versionNoLongerSupported",
+            "upcomingNoLongerSupported",
+            "upcomingVersionNoLongerSupported"
+          ],
+          "x-ms-enum": {
+            "name": "EndOfSupportStatus",
+            "modelAsString": true
+          }
+        },
+        "endOfSupportDate": {
+          "type": "string",
+          "description": "The end of support date in case the product is upcoming end of support."
+        },
+        "numberOfKnownVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of weaknesses."
+        },
+        "firstSeenAt": {
+          "type": "string",
+          "description": "First time that the software was seen in the device."
+        }
+      }
+    }
+  }
+}

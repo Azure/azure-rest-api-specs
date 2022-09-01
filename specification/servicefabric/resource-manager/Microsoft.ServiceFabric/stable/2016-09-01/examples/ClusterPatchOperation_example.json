@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2016-09-01",
+    "parameters": {
+      "properties": {
+        "nodeTypes": [
+          {
+            "name": "n1",
+            "clientConnectionEndpointPort": 19000,
+            "httpGatewayEndpointPort": 19080,
+            "durabilityLevel": "Silver",
+            "applicationPorts": {
+              "startPort": 20000,
+              "endPort": 30000
+            },
+            "ephemeralPorts": {
+              "startPort": 49152,
+              "endPort": 65534
+            },
+            "isPrimary": true,
+            "vmInstanceCount": 5,
+            "reverseProxyEndpointPort": 9998
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/clusters",
+        "location": "southcentralus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "name": "myCluster",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterId": "8d566293-3508-4d62-ba7b-056fa710c3c9",
+          "clusterCodeVersion": "5.5.216.0",
+          "clusterState": "Ready",
+          "managementEndpoint": "http://myCluster.southcentralus.cloudapp.azure.com:19080",
+          "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/8d566293-3508-4d62-ba7b-056fa710c3c9",
+          "clientCertificateThumbprints": [],
+          "clientCertificateCommonNames": [],
+          "fabricSettings": [],
+          "upgradeDescription": {
+            "overrideUserUpgradePolicy": false,
+            "forceRestart": true,
+            "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
+            "healthCheckWaitDuration": "00:00:01",
+            "healthCheckStableDuration": "00:00:01",
+            "healthCheckRetryTimeout": "00:00:01",
+            "upgradeTimeout": "12:00:00",
+            "upgradeDomainTimeout": "02:00:00",
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 100,
+              "maxPercentUnhealthyApplications": 100
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
+              "maxPercentDeltaUnhealthyApplications": 0
+            }
+          },
+          "diagnosticsStorageAccountConfig": {
+            "storageAccountName": "sflogssdktest5486",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "blobEndpoint": "https://sflogssdktest5486.blob.core.windows.net/",
+            "queueEndpoint": "https://sflogssdktest5486.queue.core.windows.net/",
+            "tableEndpoint": "https://sflogssdktest5486.table.core.windows.net/"
+          },
+          "nodeTypes": [
+            {
+              "name": "n1",
+              "clientConnectionEndpointPort": 19000,
+              "httpGatewayEndpointPort": 19080,
+              "applicationPorts": {
+                "startPort": 20000,
+                "endPort": 30000
+              },
+              "ephemeralPorts": {
+                "startPort": 49152,
+                "endPort": 65534
+              },
+              "isPrimary": true,
+              "vmInstanceCount": 5,
+              "reverseProxyEndpointPort": 9998,
+              "durabilityLevel": "Silver"
+            }
+          ],
+          "vmImage": "Windows",
+          "reliabilityLevel": "Bronze",
+          "upgradeMode": "Automatic",
+          "availableClusterVersions": [
+            {
+              "codeVersion": "5.4.145.9494",
+              "supportExpiryUtc": "2017-05-10T00:00:00",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.164.9494",
+              "supportExpiryUtc": "2017-05-10T00:00:00",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.5.216.0",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

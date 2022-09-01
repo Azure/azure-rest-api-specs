@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg1637",
+    "jobName": "sj8653"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg1637/providers/Microsoft.StreamAnalytics/streamingjobs/sj8653/functions/function588",
+            "name": "function588",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+            "properties": {
+              "type": "Scalar",
+              "properties": {
+                "inputs": [
+                  {
+                    "dataType": "nvarchar(max)"
+                  }
+                ],
+                "output": {
+                  "dataType": "nvarchar(max)"
+                },
+                "binding": {
+                  "type": "Microsoft.MachineLearning/WebService",
+                  "properties": {
+                    "endpoint": "someAzureMLEndpointURL",
+                    "inputs": {
+                      "name": "input1",
+                      "columnNames": [
+                        {
+                          "name": "tweet",
+                          "dataType": "string",
+                          "mapTo": 0
+                        }
+                      ]
+                    },
+                    "outputs": [
+                      {
+                        "name": "Sentiment",
+                        "dataType": "string"
+                      }
+                    ],
+                    "batchSize": 5000
+                  }
+                }
+              },
+              "etag": "281cbf11-cd50-4a44-b833-cf170ce74748"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg1637/providers/Microsoft.StreamAnalytics/streamingjobs/sj8653/functions/function8197",
+            "name": "function8197",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+            "properties": {
+              "type": "Scalar",
+              "properties": {
+                "inputs": [
+                  {
+                    "dataType": "Any"
+                  }
+                ],
+                "output": {
+                  "dataType": "Any"
+                },
+                "binding": {
+                  "type": "Microsoft.StreamAnalytics/JavascriptUdf",
+                  "properties": {
+                    "script": "function (a, b) { return a * b; }"
+                  }
+                }
+              },
+              "etag": "94a512d5-2f59-4e39-b9c8-bca4abd74b7e"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

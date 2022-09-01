@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2016-09-01",
+    "parameters": {
+      "properties": {
+        "clusterCodeVersion": "5.5.149.9494",
+        "reliabilityLevel": "Silver",
+        "upgradeMode": "Automatic",
+        "managementEndpoint": "https://myCluster.southcentralus.cloudapp.azure.com:19080",
+        "nodeTypes": [
+          {
+            "name": "nt1vm",
+            "clientConnectionEndpointPort": 19000,
+            "httpGatewayEndpointPort": 19080,
+            "durabilityLevel": "Bronze",
+            "applicationPorts": {
+              "startPort": 20000,
+              "endPort": 30000
+            },
+            "ephemeralPorts": {
+              "startPort": 49152,
+              "endPort": 65534
+            },
+            "isPrimary": true,
+            "vmInstanceCount": 5
+          }
+        ],
+        "provisioningState": "Succeeded",
+        "vmImage": "Windows",
+        "diagnosticsStorageAccountConfig": {
+          "storageAccountName": "7623qfhwmnstw2",
+          "protectedAccountKeyName": "StorageAccountKey1",
+          "blobEndpoint": "https://7623qfhwmnstw2.blob.core.windows.net/",
+          "queueEndpoint": "https://7623qfhwmnstw2.queue.core.windows.net/",
+          "tableEndpoint": "https://7623qfhwmnstw2.table.core.windows.net/"
+        }
+      },
+      "location": "southcentralus",
+      "tags": {
+        "resourceType": "Service Fabric",
+        "clusterName": "myCluster"
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/clusters",
+        "location": "southcentralus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "name": "myCluster",
+        "tags": {
+          "resourceType": "Service Fabric",
+          "clusterName": "myCluster"
+        },
+        "properties": {
+          "provisioningState": "Updating",
+          "clusterId": "466e7604-b8ae-4696-a91d-d7b5fcc63628",
+          "clusterCodeVersion": "5.5.149.9494",
+          "clusterState": "UpdatingUserConfiguration",
+          "managementEndpoint": "https://myCluster.southcentralus.cloudapp.azure.com:19080",
+          "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/466e7604-b8ae-4696-a91d-d7b5fcc63628",
+          "certificate": {
+            "thumbprint": "483B5DE52ECA35147B94C5E116FA7B2E34BB68F9",
+            "x509StoreName": "My"
+          },
+          "clientCertificateThumbprints": [],
+          "clientCertificateCommonNames": [],
+          "fabricSettings": [],
+          "upgradeDescription": {
+            "overrideUserUpgradePolicy": false,
+            "forceRestart": true,
+            "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
+            "healthCheckWaitDuration": "00:05:00",
+            "healthCheckStableDuration": "00:05:00",
+            "healthCheckRetryTimeout": "00:45:00",
+            "upgradeTimeout": "12:00:00",
+            "upgradeDomainTimeout": "02:00:00",
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 100,
+              "maxPercentUnhealthyApplications": 100
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
+              "maxPercentDeltaUnhealthyApplications": 0
+            }
+          },
+          "diagnosticsStorageAccountConfig": {
+            "storageAccountName": "ba3wzulspn67w2",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "blobEndpoint": "https://ba3wzulspn67w2.blob.core.windows.net/",
+            "queueEndpoint": "https://ba3wzulspn67w2.queue.core.windows.net/",
+            "tableEndpoint": "https://ba3wzulspn67w2.table.core.windows.net/"
+          },
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "clientConnectionEndpointPort": 19000,
+              "httpGatewayEndpointPort": 19080,
+              "applicationPorts": {
+                "startPort": 20000,
+                "endPort": 30000
+              },
+              "ephemeralPorts": {
+                "startPort": 49152,
+                "endPort": 65534
+              },
+              "isPrimary": true,
+              "vmInstanceCount": 5,
+              "durabilityLevel": "Bronze"
+            }
+          ],
+          "vmImage": "Windows",
+          "reliabilityLevel": "Silver",
+          "upgradeMode": "Automatic",
+          "availableClusterVersions": [
+            {
+              "codeVersion": "5.1.158.9590",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.2.0.100",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.2.207.9590",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.3.121.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.3.311.9590",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.30.100",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.35.100",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.38.100",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.118.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.132.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.145.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.4.164.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.5.67.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            },
+            {
+              "codeVersion": "5.5.149.9494",
+              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "environment": "Windows"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
